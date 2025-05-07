@@ -1,49 +1,76 @@
-# Script to migrate Discord messages from an old JSON format to a new structured format
 # migrate_messages.py
 
 import json
-from collections import defaultdict
 from models import DiscordMessage
+from collections import defaultdict
 
-# 1. Load your old JSON extract
-with open("discord_messages.json", "r", encoding="utf-8") as f:
-    old_messages = json.load(f)
+def transform_raw(raw: dict) -> dict:
+    """
+    Extract and convert fields from the old Discord export to our new schema.
+    """
+    return {
+        "guild_id": int(raw["guild_id"]),
+        "channel_id": int(raw["channel_id"]),
+        "message_id": int(raw.get("message_id") or raw.get("id")),
+        "content": raw.get("content", ""),
+        "timestamp": raw["timestamp"],  # Pydantic will parse the ISO string
+        "author": {
+            "id": int(raw["author"]["id"]),
+            "username": raw["author"]["name"],
+            "discriminator": raw["author"].get("discriminator")
+        },
+        "mention_ids": [int(mid) for mid in raw.get("mentions", [])],
+        "reactions": [
+            {"emoji": r["emoji"], "count": r["count"]}
+            for r in raw.get("reactions", [])
+        ],
+        "jump_url": raw.get("jump_url")
+    }
 
-# 2. Prepare the new structure
-new_data = {"guilds": {}}
+def main():
+    # 1. Load your old JSON, which is a dict of guild_name → channel_name → [messages]
+    with open("discord_messages.json", "r", encoding="utf-8") as f:
+        old_data = json.load(f)
 
-for raw in old_messages:
-    try:
-        # 3. Validate & parse with Pydantic
-        msg = DiscordMessage.parse_obj(raw)
-    except Exception as e:
-        print(f"Skipping invalid record: {e}")
-        continue
+    # 2. Prepare the new ID-first structure
+    new_data = {"guilds": {}}
 
-    gid = str(msg.guild_id)
-    cid = str(msg.channel_id)
+    for guild_name, channels in old_data.items():
+        for channel_name, messages in channels.items():
+            for raw in messages:
+                try:
+                    # 3. Transform fields and validate with Pydantic
+                    clean = transform_raw(raw)
+                    msg = DiscordMessage.model_validate(clean)
+                except Exception as e:
+                    print(f"Skipping invalid record (guild={guild_name}, channel={channel_name}): {e}")
+                    continue
 
-    # 4. Ensure guild entry exists
-    if gid not in new_data["guilds"]:
-        # Attempt to capture guild name if it was in the raw data
-        guild_name = raw.get("guild_name") or raw.get("guild") or ""
-        new_data["guilds"][gid] = {"name": guild_name, "channels": {}}
+                gid = str(msg.guild_id)
+                cid = str(msg.channel_id)
 
-    # 5. Ensure channel entry exists
-    if cid not in new_data["guilds"][gid]["channels"]:
-        channel_name = raw.get("channel_name") or raw.get("channel") or ""
-        new_data["guilds"][gid]["channels"][cid] = {
-            "name": channel_name,
-            "messages": []
-        }
+                # 4. Ensure guild entry
+                guild_entry = new_data["guilds"].setdefault(gid, {
+                    "name": guild_name,
+                    "channels": {}
+                })
 
-    # 6. Append the full, validated dict
-    new_data["guilds"][gid]["channels"][cid]["messages"].append(
-        msg.dict()
-    )
+                # 5. Ensure channel entry
+                channel_entry = guild_entry["channels"].setdefault(cid, {
+                    "name": channel_name,
+                    "messages": []
+                })
 
-# 7. Write out the migrated JSON
-with open("discord_messages_v2.json", "w", encoding="utf-8") as f:
-    json.dump(new_data, f, ensure_ascii=False, indent=2)
+                # 6. Append validated message dict
+                channel_entry["messages"].append(msg.model_dump())
 
-print("Migration complete: discord_messages_v2.json created.")
+    # 7. Write out the migrated JSON
+    with open("discord_messages_v2.json", "w", encoding="utf-8") as f:
+        json.dump(new_data, f, ensure_ascii=False, indent=2, default=str)
+
+    # 8. Print summary
+
+    print("Migration complete: discord_messages_v2.json created.")
+
+if __name__ == "__main__":
+    main()
