@@ -39,13 +39,15 @@ def get_top_k_matches(
     if channel_id is not None:
         filter_kwargs["channel_id"] = str(channel_id)
 
-    # Prepare search kwargs including filter
-    search_kwargs = {"k": k}
+    # Perform retrieval with or without filters
     if filter_kwargs:
-        search_kwargs["filter"] = filter_kwargs
-
-    # Perform retrieval
-    retriever = store.as_retriever(search_kwargs=search_kwargs)
+        retriever = store.as_retriever(
+            search_kwargs={"k": k},
+            filter=filter_kwargs
+        )
+    else:
+        retriever = store.as_retriever(search_kwargs={"k": k})
+    
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
