@@ -32,24 +32,29 @@ def get_top_k_matches(
     channel_id: Optional[int] = None
 ) -> List[Dict[str, Any]]:
     """
-    Retrieve the top-k FAISS matches for 'query'.
-    Optionally scope by guild_id and/or channel_id by manual post-filtering.
+    Retrieve the top-k FAISS matches for 'query',
+    optionally scoped to a guild and/or channel.
     """
     store = load_vectorstore()
-    # Fetch extra candidates to allow filtering
-    fetch_k = k * 5
-    retriever = store.as_retriever(search_kwargs={"k": fetch_k})
-    docs = retriever.invoke(query)
-    metas = [doc.metadata for doc in docs]
-
-    # Manual filtering
+    # Build metadata filters as strings
+    filter_kwargs: Dict[str, str] = {}
     if guild_id is not None:
-        metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+        filter_kwargs["guild_id"] = str(guild_id)
     if channel_id is not None:
-        metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
+        filter_kwargs["channel_id"] = str(channel_id)
 
-    # Return top k after filtering
-    return metas[:k]
+    # Create retriever with or without filters
+    if filter_kwargs:
+        retriever = store.as_retriever(
+            search_kwargs={"k": k},
+            filter=filter_kwargs
+        )
+    else:
+        retriever = store.as_retriever(search_kwargs={"k": k})
+
+    # Use get_relevant_documents to apply filters correctly
+    docs = retriever.get_relevant_documents(query)
+    return [doc.metadata for doc in docs]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
@@ -121,7 +126,7 @@ def get_answer(
     Returns either a string or (answer, matches) if return_matches=True.
     """
     try:
-        matches = get_top_k_matches(query, k, guild_id=None, channel_id=None) if not return_matches else get_top_k_matches(query, k)
+        matches = get_top_k_matches(query, k) if not return_matches else get_top_k_matches(query, k)
         if not matches and not return_matches:
             return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
 
