@@ -1,3 +1,4 @@
+# fetch_messages.py
 import os
 import json
 import asyncio
@@ -17,14 +18,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
 intents.messages = True
-
-def extract_emojis(text):
-    unicode_emojis = re.findall(r'[\U00010000-\U0010ffff]', text)
-    custom_emojis = re.findall(r'<a?:\w+:\d+>', text)
-    return {
-        'unicode_emojis': unicode_emojis,
-        'custom_emojis': custom_emojis
-    }
 
 class DiscordFetcher(discord.Client):
     def __init__(self, **kwargs):
@@ -50,15 +43,20 @@ class DiscordFetcher(discord.Client):
             for channel in guild.text_channels:
                 if channel.name in SKIP_CHANNEL_NAMES:
                     print(f"  🚫 Skipping test channel #{channel.name}")
+                    self.sync_log_entry["channels_skipped"].append({
+                        "guild_name": guild.name,
+                        "channel_name": channel.name,
+                        "channel_id": str(channel.id),
+                        "reason": "Skipped by name"
+                    })
                     continue
-                print(f"  📄 Channel: #{channel.name} (ID: {channel.id})")
 
-                last_message_id = None  # No JSON store; sync all or implement your own checkpoint
+                print(f"  📄 Channel: #{channel.name} (ID: {channel.id})")
                 new_messages = []
                 try:
                     async for message in channel.history(
                         limit=None,
-                        after=discord.Object(id=last_message_id) if last_message_id else None,
+                        after=None,
                         oldest_first=True
                     ):
                         new_messages.append({
@@ -68,7 +66,6 @@ class DiscordFetcher(discord.Client):
                             'guild_id': str(guild.id),
                             'content': message.content.replace('\u2028', ' ').replace('\u2029', ' ').strip(),
                             'timestamp': message.created_at.isoformat(),
-                            'edited_timestamp': message.edited_at.isoformat() if message.edited_at else None,
                             'jump_url': message.jump_url,
                             'author': {
                                 'id': str(message.author.id),
@@ -80,10 +77,7 @@ class DiscordFetcher(discord.Client):
                             },
                             'mentions': [str(user.id) for user in message.mentions],
                             'reactions': [
-                                {
-                                    'emoji': str(reaction.emoji),
-                                    'count': reaction.count
-                                } for reaction in message.reactions
+                                {'emoji': str(r.emoji), 'count': r.count} for r in message.reactions
                             ],
                         })
                 except discord.Forbidden:
@@ -104,7 +98,6 @@ class DiscordFetcher(discord.Client):
                     print(f"    ✅ {len(new_messages)} new message(s)")
                     self.sync_log_entry["total_messages_synced"] += len(new_messages)
 
-                    # Upsert each message into the SQLite DB
                     db = SessionLocal()
                     for m in new_messages:
                         ts = datetime.fromisoformat(m['timestamp'])
@@ -125,13 +118,20 @@ class DiscordFetcher(discord.Client):
                 else:
                     print(f"    📫 No new messages")
 
-        await self.close()
-
+# Top-level runner
 async def update_discord_messages():
     print("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
-    await client.start(DISCORD_TOKEN)
+    try:
+        await client.start(DISCORD_TOKEN)
+    finally:
+        # Ensure HTTP session and client are properly closed
+        try:
+            await client.http.session.close()
+        except Exception:
+            pass
+        await client.close()
+        print("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
     asyncio.run(update_discord_messages())
-    print("🔌 Disconnecting from Discord...")
