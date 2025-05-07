@@ -1,79 +1,70 @@
 import os
 import json
 from dotenv import load_dotenv
-from typing import List, Tuple
-import copy
-from langchain_openai import OpenAIEmbeddings
+from typing import List, Tuple, Any
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
 load_dotenv()
-DATA_FILE = "discord_messages.json"
+DATA_FILE = "discord_messages_v2.json"  # use migrated ID-first file
 INDEX_DIR = "index_faiss"
 
+
 def flatten_messages(json_path: str) -> List[Tuple[str, dict]]:
+    """
+    Flatten the v2 JSON structure (guilds → channels → messages) into a list of (content, full_metadata).
+    Extracts all fields from each message to preserve comprehensive metadata.
+    """
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    texts_and_meta = []
-    for guild, channels in data.items():
-        for channel, messages in channels.items():
-            for msg in messages:
-                content = msg["content"].strip()
+    results: List[Tuple[str, dict]] = []
+    guilds = data.get("guilds", {})
+    for gid, guild in guilds.items():
+        for cid, channel in guild.get("channels", {}).items():
+            for msg in channel.get("messages", []):
+                content = msg.get("content", "").strip()
                 if not content:
                     continue
 
-                # Extract IDs
-                message_id = msg.get("message_id") or msg.get("id")
-                channel_id = msg.get("channel_id")
-                guild_id = msg.get("guild_id")
+                # Prepare full metadata by copying the message dict
+                full_meta: dict = dict(msg)
 
-                # Guard against corrupted or missing IDs
-                if not all([guild_id, channel_id, message_id]) or not all(str(x).isdigit() for x in [guild_id, channel_id, message_id]):
-                    print("⛔ Skipping message with invalid IDs:", {
-                        "guild_id": guild_id,
-                        "channel_id": channel_id,
-                        "message_id": message_id
-                    })
-                    continue
+                # Ensure IDs are strings
+                for key in ["guild_id", "channel_id", "message_id"]:
+                    if key in full_meta:
+                        full_meta[key] = str(full_meta[key])
 
-                jump_url = msg.get("jump_url") or f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
+                # Default jump_url if missing
+                if not full_meta.get("jump_url"):
+                    g = full_meta.get("guild_id")
+                    c = full_meta.get("channel_id")
+                    m_id = full_meta.get("message_id")
+                    full_meta["jump_url"] = f"https://discord.com/channels/{g}/{c}/{m_id}"
 
-                metadata = {
-                    "guild": guild,
-                    "channel": channel,
-                    "author": copy.deepcopy(msg.get("author")),
-                    "timestamp": msg["timestamp"],
-                    "message_id": message_id,
-                    "guild_id": guild_id,
-                    "channel_id": channel_id,
-                    "jump_url": jump_url,
-                    "content": content,
-                    "reactions": copy.deepcopy(msg.get("reactions")),
-                    "mentions": msg.get("mentions"),
-                    "mention_everyone": msg.get("mention_everyone"),
-                    "mention_roles": msg.get("mention_roles"),
-                    "attachments": msg.get("attachments"),
-                    "embeds": msg.get("embeds"),
-                    "pinned": msg.get("pinned"),
-                    "flags": msg.get("flags"),
-                    "type": msg.get("type")
-                }
-                texts_and_meta.append((content, metadata))
-    return texts_and_meta
+                # Attach channel and guild names
+                full_meta["channel_name"] = channel.get("name")
+                full_meta["guild_name"] = guild.get("name")
+
+                results.append((content, full_meta))
+    return results
+
 
 def build_langchain_faiss_index():
-    print("📚 Loading messages...")
+    print("📚 Loading messages with full metadata...")
     texts_and_metadata = flatten_messages(DATA_FILE)
-    texts = [t[0] for t in texts_and_metadata]
-    metadatas = [t[1] for t in texts_and_metadata]
+    texts = [t for t, _ in texts_and_metadata]
+    metadatas = [m for _, m in texts_and_metadata]
 
     print(f"🧠 Embedding {len(texts)} messages with OpenAI...")
     embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
     vectorstore = FAISS.from_texts(texts=texts, embedding=embedding_model, metadatas=metadatas)
 
+    os.makedirs(INDEX_DIR, exist_ok=True)
     print(f"💾 Saving index to {INDEX_DIR}/")
     vectorstore.save_local(INDEX_DIR)
     print("✅ Index saved.")
+
 
 if __name__ == "__main__":
     build_langchain_faiss_index()
