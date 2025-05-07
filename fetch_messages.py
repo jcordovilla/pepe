@@ -17,7 +17,7 @@ intents.message_content = True
 intents.guilds = True
 intents.messages = True
 
-PAGE_SIZE = 100  # Number of messages per page when paginating history
+PAGE_SIZE = 100  # Number of messages to fetch per batch
 
 class DiscordFetcher(discord.Client):
     def __init__(self, **kwargs):
@@ -60,22 +60,24 @@ class DiscordFetcher(discord.Client):
                       .first()
                 )
                 db.close()
-                last_id = last_msg.message_id if last_msg else None
+                after_id = last_msg.message_id if last_msg else None
 
-                print(f"  📄 Channel: #{channel.name} | after={last_id}")
+                print(f"  📄 Channel: #{channel.name} | after={after_id}")
                 fetched = []
                 try:
-                    # Paginate history in fixed-size pages
-                    after_id = last_id
+                    # Paginate history in fixed-size batches
                     while True:
-                        history = await channel.history(
+                        batch = []
+                        async for message in channel.history(
                             limit=PAGE_SIZE,
                             after=discord.Object(id=after_id) if after_id else None,
                             oldest_first=True
-                        ).flatten()
-                        if not history:
+                        ):
+                            batch.append(message)
+                        if not batch:
                             break
-                        for message in history:
+                        # Collect fetched messages
+                        for message in batch:
                             fetched.append({
                                 'message_id': str(message.id),
                                 'channel_id': str(channel.id),
@@ -93,7 +95,8 @@ class DiscordFetcher(discord.Client):
                                     {'emoji': str(r.emoji), 'count': r.count} for r in message.reactions
                                 ],
                             })
-                        after_id = history[-1].id  # update cursor
+                        # Update cursor to last message of this batch
+                        after_id = batch[-1].id
                 except discord.Forbidden:
                     print(f"    🚫 Skipped channel #{channel.name}: insufficient permissions")
                     self.sync_log_entry["channels_skipped"].append({
