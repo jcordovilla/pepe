@@ -5,6 +5,7 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import build_jump_url
+from typing import Optional
 
 # Load environment variables
 load_dotenv()
@@ -20,15 +21,32 @@ openai_client = OpenAI(api_key=OPENAI_API_KEY)
 def load_vectorstore():
     return FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
 
-# ✅ Retrieve top k matching messages from FAISS
-def get_top_k_matches(query: str, k: int = 5):
+# ✅ Retrieve top k matching messages from FAISS with optional filters
+def get_top_k_matches(
+    query: str,
+    k: int = 5,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None
+):
     store = load_vectorstore()
-    retriever = store.as_retriever(search_kwargs={"k": k})
+    # Build filter kwargs if provided
+    filter_kwargs = {}
+    if guild_id is not None:
+        filter_kwargs["guild_id"] = guild_id
+    if channel_id is not None:
+        filter_kwargs["channel_id"] = channel_id
+
+    # Prepare search kwargs
+    search_kwargs = {"k": k}
+    if filter_kwargs:
+        search_kwargs["filter"] = filter_kwargs
+
+    # Perform retrieval
+    retriever = store.as_retriever(search_kwargs=search_kwargs)
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
 # Helper to safely build jump URLs
-
 def safe_jump_url(metadata: dict) -> str:
     """
     Return a valid Discord jump URL or empty string.
