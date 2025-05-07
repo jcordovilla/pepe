@@ -7,7 +7,7 @@ import dateparser
 from zoneinfo import ZoneInfo
 
 
-def parse_timeframe(text: str, timezone: str = "Europe/Madrid") -> tuple[datetime, datetime]:
+def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = None) -> tuple[datetime, datetime]:
     """
     Parse a natural-language timeframe into (start, end) datetimes in the given timezone.
 
@@ -25,19 +25,24 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid") -> tuple[datetim
     """
     lower = text.lower().strip()
     tzinfo = ZoneInfo(timezone)
-    now = datetime.now(tzinfo)
+    if now is None:
+        now_dt = datetime.now(tzinfo)
+    else:
+        now_dt = now if now.tzinfo else now.replace(tzinfo=tzinfo)
 
     # Explicit calendar last week: previous Monday → Sunday
     if lower == "last week":
-        # Calculate start of this week (Monday)
-        this_week_start = (now - timedelta(days=now.weekday()))
-        # Last week start is one week before
+        this_week_start = (now_dt - timedelta(days=now_dt.weekday())).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
         last_week_start = this_week_start - timedelta(weeks=1)
-        # Last week end is day before this week's start (Sunday)
-        last_week_end = this_week_start - timedelta(days=1)
-        # Normalize times
-        start = last_week_start.replace(hour=0, minute=0, second=0, microsecond=0)
-        end = last_week_end.replace(hour=23, minute=59, second=59, microsecond=999999)
+        last_week_end = this_week_start - timedelta(seconds=1)
+        return last_week_start, last_week_end
+
+    # Past week as simple 7-day window ending now
+    if lower == "past week":
+        start = now_dt - timedelta(days=7)
+        end = now_dt
         return start, end
 
     settings = {
@@ -61,19 +66,18 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid") -> tuple[datetim
         raise ValueError(f"Could not parse timeframe: '{text}'")
 
     # Infer ranges for non-explicit calendar weeks
+    lower = lower
     if "hour" in lower:
         delta_hours = int(''.join(filter(str.isdigit, lower))) or 1
         start = dt - timedelta(hours=delta_hours)
         end = dt
-    elif "day" in lower or "yesterday" in lower or "today" in lower:
+    elif any(x in lower for x in ["day", "yesterday", "today"]):
         start = dt.replace(hour=0, minute=0, second=0, microsecond=0)
         end = dt.replace(hour=23, minute=59, second=59, microsecond=999999)
     elif "week" in lower:
-        # Past week as last 7 days ending at dt
         start = dt - timedelta(days=7)
         end = dt
     else:
-        # Default 24-hour window ending at dt
         start = dt - timedelta(days=1)
         end = dt
 

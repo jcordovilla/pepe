@@ -3,7 +3,7 @@
 from sqlalchemy import (
     Column, Integer, String, Text, DateTime, JSON, create_engine
 )
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # 1. Engine points to a local SQLite file
