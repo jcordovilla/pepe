@@ -36,19 +36,17 @@ def get_top_k_matches(
     Metadata fields must be strings for filtering.
     """
     store = load_vectorstore()
-    # Build metadata filter as strings
-    filter_kwargs: Dict[str, str] = {}
+    # Prepare search kwargs
+    search_kwargs: Dict[str, Any] = {"k": k}
+    filter_dict: Dict[str, str] = {}
     if guild_id is not None:
-        filter_kwargs["guild_id"] = str(guild_id)
+        filter_dict["guild_id"] = str(guild_id)
     if channel_id is not None:
-        filter_kwargs["channel_id"] = str(channel_id)
+        filter_dict["channel_id"] = str(channel_id)
+    if filter_dict:
+        search_kwargs["filter"] = filter_dict
 
-    # Choose correct retriever signature
-    if filter_kwargs:
-        retriever = store.as_retriever(search_kwargs={"k": k}, filter=filter_kwargs)
-    else:
-        retriever = store.as_retriever(search_kwargs={"k": k})
-
+    retriever = store.as_retriever(search_kwargs=search_kwargs)
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
