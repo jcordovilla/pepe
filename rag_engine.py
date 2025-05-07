@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
+from utils import build_jump_url
 
 # Load environment variables
 load_dotenv()
@@ -26,24 +27,38 @@ def get_top_k_matches(query: str, k: int = 5):
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
+# Helper to safely build jump URLs
+
+def safe_jump_url(metadata: dict) -> str:
+    """
+    Return a valid Discord jump URL or empty string.
+    """
+    url = metadata.get("jump_url")
+    gid = metadata.get("guild_id")
+    cid = metadata.get("channel_id")
+    mid = metadata.get("message_id") or metadata.get("id")
+
+    if not url and all(v is not None for v in (gid, cid, mid)):
+        try:
+            url = build_jump_url(int(gid), int(cid), int(mid))
+        except ValueError:
+            url = ""
+    return url or ""
+
 # ✅ Build prompt for OpenAI (used for RAG re-answering)
 def build_prompt(matches, question: str, as_json: bool) -> list:
-    def safe_jump_url(m):
-        url = m.get("jump_url")
-        gid = m.get("guild_id")
-        cid = m.get("channel_id")
-        mid = m.get("message_id") or m.get("id")
-        # Only use fallback if all are present and look like IDs
-        if not url and all([gid, cid, mid]) and all(str(x).isdigit() for x in [gid, cid, mid]):
-            url = f"https://discord.com/channels/{gid}/{cid}/{mid}"
-        return url or "https://discord.com"  # fallback to root if nothing valid
-
-    context = "\n\n".join(
-        f"**{m['author']}** (_{m['timestamp']}_ in **#{m['channel']}**)\n"
-        f"{m['content']}\n"
-        f"[🔗 View Message]({safe_jump_url(m)})"
-        for m in matches
-    )
+    context = []
+    for m in matches:
+        author = m.get("author")
+        ts = m.get("timestamp")
+        channel = m.get("channel")
+        content = m.get("content")
+        url = safe_jump_url(m)
+        line = f"**{author}** (_{ts}_ in **#{channel}**):\n{content}"
+        if url:
+            line += f"\n[🔗 View Message]({url})"
+        context.append(line)
+    context_str = "\n\n".join(context)
 
     instructions = (
         "You are a knowledgeable and versatile assistant specialized in analyzing Discord server data.\n\n"
@@ -64,8 +79,7 @@ def build_prompt(matches, question: str, as_json: bool) -> list:
     if as_json:
         instructions += "\nReturn the results as a JSON array with those fields."
 
-    prompt = f"{instructions}\n\nContext:\n{context}\n\nUser's question: {question}\n"
-
+    prompt = f"{instructions}\n\nContext:\n{context_str}\n\nUser's question: {question}\n"
     return [
         {"role": "system", "content": "You are a Discord message analyst."},
         {"role": "user", "content": prompt}
@@ -77,10 +91,9 @@ def get_answer(query: str, k: int = 5, as_json: bool = False, return_matches: bo
         matches = get_top_k_matches(query, k)
         print("🧪 Retrieved matches:")
         for i, m in enumerate(matches):
-            print(f"[{i}] message_id: {m.get('message_id')} | channel_id: {m.get('channel_id')} | guild_id: {m.get('guild_id')} | jump_url: {m.get('jump_url')}")
+            print(f"[{i}] message_id: {m.get('message_id')} | channel_id: {m.get('channel_id')} | guild_id: {m.get('guild_id')} | jump_url: {safe_jump_url(m)}")
 
         messages = build_prompt(matches, query, as_json)
-
         response = openai_client.chat.completions.create(
             model=gpt_model,
             messages=messages,
@@ -90,14 +103,11 @@ def get_answer(query: str, k: int = 5, as_json: bool = False, return_matches: bo
         )
 
         answer = response.choices[0].message.content
-
-        # ✅ Insert friendly fallback if no good matches
         if not matches:
-            fallback_message = "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
-            return (fallback_message, []) if return_matches else fallback_message
+            fallback = "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
+            return (fallback, []) if return_matches else fallback
 
         return (answer, matches) if return_matches else answer
-
     except Exception as e:
         error_msg = f"❌ Error during RAG retrieval: {e}"
         return (error_msg, []) if return_matches else error_msg

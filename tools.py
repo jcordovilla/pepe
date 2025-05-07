@@ -2,16 +2,7 @@ import json
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from typing import Literal
-
-def build_jump_url(msg):
-    """Safely construct a valid Discord jump URL."""
-    gid = msg.get("guild_id")
-    cid = msg.get("channel_id")
-    mid = msg.get("message_id") or msg.get("id")
-
-    if all(id and id.isdigit() for id in [gid, cid, mid]):
-        return f"https://discord.com/channels/{gid}/{cid}/{mid}"
-    return None
+from utils import build_jump_url  # use centralized utility
 
 DATA_FILE = "discord_messages.json"
 
@@ -104,7 +95,7 @@ def get_most_reacted_messages(output_format: Literal["text", "json"] = "text", t
     for guild, channels in data.items():
         for channel, messages in channels.items():
             for msg in messages:
-                total_reactions = len(msg.get("reactions", []))
+                total_reactions = sum(r.get("count", 0) for r in msg.get("reactions", []))
                 if total_reactions > 0:
                     reactions.append({
                         "guild": guild,
@@ -222,14 +213,6 @@ def find_messages_with_keywords(keywords: list, output_format: Literal["text", "
 def find_users_by_skill(skill_query: str, output_format: Literal["text", "json"] = "text", top_n: int = 10):
     """
     Search for users who mention specific skills, expertise, or interests in their messages.
-    
-    Args:
-        skill_query (str): The skill or keyword to search for.
-        output_format (str): "text" or "json" format for output.
-        top_n (int): Maximum number of user matches to return.
-
-    Returns:
-        str or JSON: List of matching users and sample messages.
     """
     data = load_messages()
     matches = []
@@ -246,8 +229,12 @@ def find_users_by_skill(skill_query: str, output_format: Literal["text", "json"]
                         "channel": channel,
                         "author": msg["author"],
                         "author_id": msg.get("author_id"),
+                        "message_id": msg.get("message_id"),
+                        "guild_id": msg.get("guild_id"),
+                        "channel_id": msg.get("channel_id"),
                         "timestamp": msg["timestamp"],
-                        "content": msg["content"]
+                        "content": msg["content"],
+                        "jump_url": msg.get("jump_url")
                     })
 
     # Deduplicate users but allow multiple relevant messages per user if needed
@@ -269,12 +256,12 @@ def find_users_by_skill(skill_query: str, output_format: Literal["text", "json"]
 
     lines = []
     for m in result_list:
-        jump_url = m.get("jump_url") or build_jump_url(m)
+        # Use centralized URL builder
+        url = m.get("jump_url") or build_jump_url(int(m["guild_id"]), int(m["channel_id"]), int(m["message_id"]))
         lines.append(
-            f"👤 {m['author']} (ID: {m.get('author_id', '?')})\n"
+            f"👤 {m['author']} (ID: {m['author_id']})\n"
             f"🕓 {m['timestamp']} in {m['guild']}/#{m['channel']}\n"
             f"📝 {m['content']}"
-            + (f"\n🔗 [Jump to message]({jump_url})" if jump_url else "")
+            + (f"\n🔗 Jump to message: {url}" if url else "")
         )
     return "\n\n".join(lines)
-
