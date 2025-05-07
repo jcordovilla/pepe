@@ -33,28 +33,24 @@ def get_top_k_matches(
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally scoped to a guild and/or channel.
+    optionally scoped to a guild and/or channel via manual post-filtering.
     """
     store = load_vectorstore()
-    # Build metadata filters as strings
-    filter_kwargs: Dict[str, str] = {}
-    if guild_id is not None:
-        filter_kwargs["guild_id"] = str(guild_id)
-    if channel_id is not None:
-        filter_kwargs["channel_id"] = str(channel_id)
-
-    # Create retriever with or without filters
-    if filter_kwargs:
-        retriever = store.as_retriever(
-            search_kwargs={"k": k},
-            filter=filter_kwargs
-        )
-    else:
-        retriever = store.as_retriever(search_kwargs={"k": k})
-
-    # Use get_relevant_documents to apply filters correctly
+    # Request more candidates for robust filtering
+    fetch_k = k * 10
+    retriever = store.as_retriever(search_kwargs={"k": fetch_k})
+    # Use get_relevant_documents for standard retrieval
     docs = retriever.get_relevant_documents(query)
-    return [doc.metadata for doc in docs]
+    metas = [doc.metadata for doc in docs]
+
+    # Manual metadata-based filtering
+    if guild_id is not None:
+        metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+    if channel_id is not None:
+        metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
+
+    # Return top k after filtering
+    return metas[:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
