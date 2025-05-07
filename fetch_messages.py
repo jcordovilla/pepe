@@ -1,6 +1,5 @@
 # fetch_messages.py
 import os
-import json
 import asyncio
 import re
 from datetime import datetime
@@ -51,16 +50,26 @@ class DiscordFetcher(discord.Client):
                     })
                     continue
 
-                print(f"  📄 Channel: #{channel.name} (ID: {channel.id})")
+                # Determine last synced message for this channel to avoid refetching
+                db = SessionLocal()
+                last_msg = (
+                    db.query(Message)
+                      .filter_by(guild_id=guild.id, channel_id=channel.id)
+                      .order_by(Message.message_id.desc())
+                      .first()
+                )
+                db.close()
+                last_message_id = last_msg.message_id if last_msg else None
+
+                print(f"  📄 Channel: #{channel.name} (ID: {channel.id}) | after={last_message_id}")
                 new_messages = []
                 try:
                     async for message in channel.history(
                         limit=None,
-                        after=None,
+                        after=discord.Object(id=last_message_id) if last_message_id else None,
                         oldest_first=True
                     ):
                         new_messages.append({
-                            'id': str(message.id),
                             'message_id': str(message.id),
                             'channel_id': str(channel.id),
                             'guild_id': str(guild.id),
@@ -69,11 +78,8 @@ class DiscordFetcher(discord.Client):
                             'jump_url': message.jump_url,
                             'author': {
                                 'id': str(message.author.id),
-                                'name': message.author.name,
+                                'username': message.author.name,
                                 'discriminator': message.author.discriminator,
-                                'display_name': getattr(message.author, "display_name", message.author.name),
-                                'is_bot': message.author.bot,
-                                'avatar_url': str(message.author.avatar.url) if message.author.avatar else None,
                             },
                             'mentions': [str(user.id) for user in message.mentions],
                             'reactions': [
@@ -90,7 +96,7 @@ class DiscordFetcher(discord.Client):
                     })
                     continue
                 except Exception as e:
-                    print(f"    ❌ Error fetching channel #{channel.name}: {str(e)}")
+                    print(f"    ❌ Error fetching channel #{channel.name}: {e}")
                     self.sync_log_entry["errors"].append(str(e))
                     continue
 
@@ -119,19 +125,13 @@ class DiscordFetcher(discord.Client):
                     print(f"    📫 No new messages")
 
 # Top-level runner
-async def update_discord_messages():
+def create_and_run():
     print("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
     try:
-        await client.start(DISCORD_TOKEN)
+        asyncio.run(client.start(DISCORD_TOKEN))
     finally:
-        # Ensure HTTP session and client are properly closed
-        try:
-            await client.http.session.close()
-        except Exception:
-            pass
-        await client.close()
         print("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
-    asyncio.run(update_discord_messages())
+    create_and_run()
