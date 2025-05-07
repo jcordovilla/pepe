@@ -32,9 +32,11 @@ def get_top_k_matches(
     # Build filter kwargs if provided
     filter_kwargs = {}
     if guild_id is not None:
-        filter_kwargs["guild_id"] = guild_id
+        # Metadata stores IDs as strings, so convert here
+        filter_kwargs["guild_id"] = str(guild_id)
     if channel_id is not None:
-        filter_kwargs["channel_id"] = channel_id
+        # Metadata stores IDs as strings, so convert here
+        filter_kwargs["channel_id"] = str(channel_id)
 
     # Prepare search kwargs
     search_kwargs = {"k": k}
