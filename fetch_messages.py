@@ -1,7 +1,6 @@
 # fetch_messages.py
 import os
 import asyncio
-import re
 from datetime import datetime
 from db import SessionLocal, Message
 from dotenv import load_dotenv
@@ -17,6 +16,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
 intents.messages = True
+
+PAGE_SIZE = 100  # Number of messages per page when paginating history
 
 class DiscordFetcher(discord.Client):
     def __init__(self, **kwargs):
@@ -50,62 +51,69 @@ class DiscordFetcher(discord.Client):
                     })
                     continue
 
-                # Determine last synced message for this channel to avoid refetching
+                # Determine last synced message for this channel
                 db = SessionLocal()
                 last_msg = (
                     db.query(Message)
-                     .filter_by(guild_id=guild.id, channel_id=channel.id)
-                     .order_by(Message.message_id.desc())
-                     .first()
+                      .filter_by(guild_id=guild.id, channel_id=channel.id)
+                      .order_by(Message.message_id.desc())
+                      .first()
                 )
                 db.close()
-                last_message_id = last_msg.message_id if last_msg else None
+                last_id = last_msg.message_id if last_msg else None
 
-                print(f"  📄 Channel: #{channel.name} (ID: {channel.id}) | after={last_message_id}")
-                new_messages = []
+                print(f"  📄 Channel: #{channel.name} | after={last_id}")
+                fetched = []
                 try:
-                    async for message in channel.history(
-                        limit=None,
-                        after=discord.Object(id=last_message_id) if last_message_id else None,
-                        oldest_first=True
-                    ):
-                        new_messages.append({
-                            'message_id': str(message.id),
-                            'channel_id': str(channel.id),
-                            'guild_id': str(guild.id),
-                            'content': message.content.replace('\u2028', ' ').replace('\u2029', ' ').strip(),
-                            'timestamp': message.created_at.isoformat(),
-                            'jump_url': message.jump_url,
-                            'author': {
-                                'id': str(message.author.id),
-                                'username': message.author.name,
-                                'discriminator': message.author.discriminator,
-                            },
-                            'mentions': [str(user.id) for user in message.mentions],
-                            'reactions': [
-                                {'emoji': str(r.emoji), 'count': r.count} for r in message.reactions
-                            ],
-                        })
+                    # Paginate history in fixed-size pages
+                    after_id = last_id
+                    while True:
+                        history = await channel.history(
+                            limit=PAGE_SIZE,
+                            after=discord.Object(id=after_id) if after_id else None,
+                            oldest_first=True
+                        ).flatten()
+                        if not history:
+                            break
+                        for message in history:
+                            fetched.append({
+                                'message_id': str(message.id),
+                                'channel_id': str(channel.id),
+                                'guild_id': str(guild.id),
+                                'content': message.content.replace('\u2028', ' ').replace('\u2029', ' ').strip(),
+                                'timestamp': message.created_at.isoformat(),
+                                'jump_url': message.jump_url,
+                                'author': {
+                                    'id': str(message.author.id),
+                                    'username': message.author.name,
+                                    'discriminator': message.author.discriminator,
+                                },
+                                'mentions': [str(user.id) for user in message.mentions],
+                                'reactions': [
+                                    {'emoji': str(r.emoji), 'count': r.count} for r in message.reactions
+                                ],
+                            })
+                        after_id = history[-1].id  # update cursor
                 except discord.Forbidden:
                     print(f"    🚫 Skipped channel #{channel.name}: insufficient permissions")
                     self.sync_log_entry["channels_skipped"].append({
                         "guild_name": guild.name,
                         "channel_name": channel.name,
                         "channel_id": str(channel.id),
-                        "reason": "Forbidden - missing read permissions"
+                        "reason": "Forbidden"
                     })
                     continue
                 except Exception as e:
-                    print(f"    ❌ Error fetching channel #{channel.name}: {e}")
+                    print(f"    ❌ Error in channel {channel.name}: {e}")
                     self.sync_log_entry["errors"].append(str(e))
                     continue
 
-                if new_messages:
-                    print(f"    ✅ {len(new_messages)} new message(s)")
-                    self.sync_log_entry["total_messages_synced"] += len(new_messages)
+                if fetched:
+                    print(f"    ✅ Fetched {len(fetched)} new messages")
+                    self.sync_log_entry["total_messages_synced"] += len(fetched)
 
                     db = SessionLocal()
-                    for m in new_messages:
+                    for m in fetched:
                         ts = datetime.fromisoformat(m['timestamp'])
                         db_msg = Message(
                             guild_id=int(m['guild_id']),
@@ -124,18 +132,16 @@ class DiscordFetcher(discord.Client):
                 else:
                     print(f"    📫 No new messages")
 
+        print("🔌 Sync complete, closing connection...")
+        await self.close()
+
 async def main():
     print("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
     try:
         await client.start(DISCORD_TOKEN)
     finally:
-        # Ensure client and HTTP session are closed
         await client.close()
-        try:
-            await client.http.session.close()
-        except Exception:
-            pass
         print("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
