@@ -54,9 +54,9 @@ class DiscordFetcher(discord.Client):
                 db = SessionLocal()
                 last_msg = (
                     db.query(Message)
-                      .filter_by(guild_id=guild.id, channel_id=channel.id)
-                      .order_by(Message.message_id.desc())
-                      .first()
+                     .filter_by(guild_id=guild.id, channel_id=channel.id)
+                     .order_by(Message.message_id.desc())
+                     .first()
                 )
                 db.close()
                 last_message_id = last_msg.message_id if last_msg else None
@@ -124,16 +124,19 @@ class DiscordFetcher(discord.Client):
                 else:
                     print(f"    📫 No new messages")
 
-        # After processing all guilds and channels, close the client
-        print("🔌 Sync complete, closing connection...")
-        await self.close()
-
-# Top-level runner
-def create_and_run():
+async def main():
     print("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
-    asyncio.run(client.start(DISCORD_TOKEN))
-    print("🔌 Disconnected from Discord.")
+    try:
+        await client.start(DISCORD_TOKEN)
+    finally:
+        # Ensure client and HTTP session are closed
+        await client.close()
+        try:
+            await client.http.session.close()
+        except Exception:
+            pass
+        print("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
-    create_and_run()
+    asyncio.run(main())
