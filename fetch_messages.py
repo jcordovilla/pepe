@@ -124,14 +124,16 @@ class DiscordFetcher(discord.Client):
                 else:
                     print(f"    📫 No new messages")
 
+        # After processing all guilds and channels, close the client
+        print("🔌 Sync complete, closing connection...")
+        await self.close()
+
 # Top-level runner
 def create_and_run():
     print("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
-    try:
-        asyncio.run(client.start(DISCORD_TOKEN))
-    finally:
-        print("🔌 Disconnected from Discord.")
+    asyncio.run(client.start(DISCORD_TOKEN))
+    print("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
     create_and_run()
