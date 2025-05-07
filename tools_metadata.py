@@ -7,7 +7,8 @@ from tools import (
     get_pinned_messages,
     analyze_message_types,
     find_messages_with_keywords,
-    find_users_by_skill
+    find_users_by_skill,
+    summarize_messages_in_range
 )
 
 TOOLS_METADATA = [
@@ -55,5 +56,13 @@ TOOLS_METADATA = [
         "name": "FindUsersBySkill",
         "function": find_users_by_skill,
         "description": "Searches Discord messages to find users mentioning specific skills, expertise, or introductions. Use for queries like 'Who knows Python?' or 'Find experts in ML.'"
+    },
+        {
+        "name": "SummarizeMessagesInRange",
+        "function": summarize_messages_in_range,
+        "description": (
+            "Summarizes messages sent between start_iso and end_iso. "
+            "Optionally filter by guild_id and/or channel_id to scope the summary."
+        ),
     }
 ]
