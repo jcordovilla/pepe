@@ -13,51 +13,47 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 INDEX_DIR = "index_faiss"
 gpt_model = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
 
-# Load OpenAI client and embedding model
+# Load embedding model and client
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
-# ✅ Load FAISS vector store
+# Load FAISS vector store
 def load_vectorstore():
     return FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
 
-# ✅ Retrieve top k matching messages from FAISS with optional filters
+# Retrieve top k matching messages from FAISS with optional filters
 def get_top_k_matches(
     query: str,
     k: int = 5,
     guild_id: Optional[int] = None,
     channel_id: Optional[int] = None
 ):
+    """
+    Retrieve top k matching messages with optional guild and channel filters via FAISS.
+    """
     store = load_vectorstore()
-    # Build filter kwargs if provided
     filter_kwargs = {}
     if guild_id is not None:
-        # Metadata stores IDs as strings, so convert here
         filter_kwargs["guild_id"] = str(guild_id)
     if channel_id is not None:
-        # Metadata stores IDs as strings, so convert here
         filter_kwargs["channel_id"] = str(channel_id)
 
-    # Prepare search kwargs
     search_kwargs = {"k": k}
+    # Use separate filter param, not inside search_kwargs
     if filter_kwargs:
-        search_kwargs["filter"] = filter_kwargs
+        retriever = store.as_retriever(search_kwargs=search_kwargs, filter=filter_kwargs)
+    else:
+        retriever = store.as_retriever(search_kwargs=search_kwargs)
 
-    # Perform retrieval
-    retriever = store.as_retriever(search_kwargs=search_kwargs)
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
 # Helper to safely build jump URLs
 def safe_jump_url(metadata: dict) -> str:
-    """
-    Return a valid Discord jump URL or empty string.
-    """
     url = metadata.get("jump_url")
     gid = metadata.get("guild_id")
     cid = metadata.get("channel_id")
     mid = metadata.get("message_id") or metadata.get("id")
-
     if not url and all(v is not None for v in (gid, cid, mid)):
         try:
             url = build_jump_url(int(gid), int(cid), int(mid))
@@ -65,13 +61,13 @@ def safe_jump_url(metadata: dict) -> str:
             url = ""
     return url or ""
 
-# ✅ Build prompt for OpenAI (used for RAG re-answering)
+# Build prompt for OpenAI
 def build_prompt(matches, question: str, as_json: bool) -> list:
     context = []
     for m in matches:
         author = m.get("author")
         ts = m.get("timestamp")
-        channel = m.get("channel")
+        channel = m.get("channel_name")
         content = m.get("content")
         url = safe_jump_url(m)
         line = f"**{author}** (_{ts}_ in **#{channel}**):\n{content}"
@@ -91,11 +87,8 @@ def build_prompt(matches, question: str, as_json: bool) -> list:
         "When presenting answers:\n"
         "- Respond in concise, clear natural language unless specifically asked for a JSON output.\n"
         "- If quoting messages, include key fields: author, timestamp, channel, and a brief message snippet.\n"
-        "- Group or summarize information when appropriate.\n"
         "- Include clickable links (jump_url) when available.\n\n"
-        "If no direct answer is possible, summarize findings or suggest a more specific query."
     )
-
     if as_json:
         instructions += "\nReturn the results as a JSON array with those fields."
 
@@ -105,14 +98,10 @@ def build_prompt(matches, question: str, as_json: bool) -> list:
         {"role": "user", "content": prompt}
     ]
 
-# ✅ Main RAG-based answering function
+# Main RAG function
 def get_answer(query: str, k: int = 5, as_json: bool = False, return_matches: bool = False):
     try:
         matches = get_top_k_matches(query, k)
-        print("🧪 Retrieved matches:")
-        for i, m in enumerate(matches):
-            print(f"[{i}] message_id: {m.get('message_id')} | channel_id: {m.get('channel_id')} | guild_id: {m.get('guild_id')} | jump_url: {safe_jump_url(m)}")
-
         messages = build_prompt(matches, query, as_json)
         response = openai_client.chat.completions.create(
             model=gpt_model,
@@ -121,13 +110,7 @@ def get_answer(query: str, k: int = 5, as_json: bool = False, return_matches: bo
             max_tokens=1000,
             **({"response_format": {"type": "json_object"}} if as_json else {})
         )
-
         answer = response.choices[0].message.content
-        if not matches:
-            fallback = "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
-            return (fallback, []) if return_matches else fallback
-
         return (answer, matches) if return_matches else answer
     except Exception as e:
-        error_msg = f"❌ Error during RAG retrieval: {e}"
-        return (error_msg, []) if return_matches else error_msg
+        return (f"❌ Error during RAG retrieval: {e}", []) if return_matches else f"❌ Error during RAG retrieval: {e}"
