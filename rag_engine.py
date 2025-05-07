@@ -32,23 +32,24 @@ def get_top_k_matches(
     channel_id: Optional[int] = None
 ) -> List[Dict[str, Any]]:
     """
-    Retrieve the top-k FAISS matches for 'query', optionally scoped to a guild and/or channel.
-    Metadata fields must be strings for filtering.
+    Retrieve the top-k FAISS matches for 'query'.
+    Optionally scope by guild_id and/or channel_id by manual post-filtering.
     """
     store = load_vectorstore()
-    # Prepare search kwargs
-    search_kwargs: Dict[str, Any] = {"k": k}
-    filter_dict: Dict[str, str] = {}
-    if guild_id is not None:
-        filter_dict["guild_id"] = str(guild_id)
-    if channel_id is not None:
-        filter_dict["channel_id"] = str(channel_id)
-    if filter_dict:
-        search_kwargs["filter"] = filter_dict
-
-    retriever = store.as_retriever(search_kwargs=search_kwargs)
+    # Fetch extra candidates to allow filtering
+    fetch_k = k * 5
+    retriever = store.as_retriever(search_kwargs={"k": fetch_k})
     docs = retriever.invoke(query)
-    return [doc.metadata for doc in docs]
+    metas = [doc.metadata for doc in docs]
+
+    # Manual filtering
+    if guild_id is not None:
+        metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+    if channel_id is not None:
+        metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
+
+    # Return top k after filtering
+    return metas[:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
@@ -78,7 +79,7 @@ def build_prompt(
     context_lines: List[str] = []
     for m in matches:
         author = m.get("author", {})
-        author_name = author.get("display_name") or author.get("name") or str(author)
+        author_name = author.get("display_name") or author.get("username") or str(author)
         ts = m.get("timestamp")
         channel_name = m.get("channel_name") or m.get("channel_id")
         content = m.get("content", "").replace("\n", " ")
@@ -120,7 +121,7 @@ def get_answer(
     Returns either a string or (answer, matches) if return_matches=True.
     """
     try:
-        matches = get_top_k_matches(query, k)
+        matches = get_top_k_matches(query, k, guild_id=None, channel_id=None) if not return_matches else get_top_k_matches(query, k)
         if not matches and not return_matches:
             return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
 
