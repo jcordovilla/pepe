@@ -32,19 +32,20 @@ def get_top_k_matches(
     Retrieve top k matching messages with optional guild and channel filters via FAISS.
     """
     store = load_vectorstore()
+    # Build filter kwargs
     filter_kwargs = {}
     if guild_id is not None:
         filter_kwargs["guild_id"] = str(guild_id)
     if channel_id is not None:
         filter_kwargs["channel_id"] = str(channel_id)
 
+    # Prepare search kwargs including filter
     search_kwargs = {"k": k}
-    # Use separate filter param, not inside search_kwargs
     if filter_kwargs:
-        retriever = store.as_retriever(search_kwargs=search_kwargs, filter=filter_kwargs)
-    else:
-        retriever = store.as_retriever(search_kwargs=search_kwargs)
+        search_kwargs["filter"] = filter_kwargs
 
+    # Perform retrieval
+    retriever = store.as_retriever(search_kwargs=search_kwargs)
     docs = retriever.invoke(query)
     return [doc.metadata for doc in docs]
 
