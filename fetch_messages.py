@@ -3,6 +3,7 @@ import json
 import asyncio
 import re
 from datetime import datetime
+from db import SessionLocal, Message
 from dotenv import load_dotenv
 import discord
 
@@ -26,10 +27,8 @@ def extract_emojis(text):
     }
 
 class DiscordFetcher(discord.Client):
-    def __init__(self, data_store, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.data_store = data_store
-        self.new_data = {}
         self.sync_log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
             "guilds_synced": [],
@@ -43,7 +42,6 @@ class DiscordFetcher(discord.Client):
 
         for guild in self.guilds:
             print(f"\n📂 Guild: {guild.name} (ID: {guild.id})")
-            self.new_data.setdefault(guild.name, {})
             self.sync_log_entry["guilds_synced"].append({
                 "guild_name": guild.name,
                 "guild_id": str(guild.id)
@@ -55,9 +53,7 @@ class DiscordFetcher(discord.Client):
                     continue
                 print(f"  📄 Channel: #{channel.name} (ID: {channel.id})")
 
-                existing_msgs = self.data_store.get(guild.name, {}).get(channel.name, [])
-                last_message_id = existing_msgs[-1]['id'] if existing_msgs else None
-
+                last_message_id = None  # No JSON store; sync all or implement your own checkpoint
                 new_messages = []
                 try:
                     async for message in channel.history(
@@ -82,55 +78,13 @@ class DiscordFetcher(discord.Client):
                                 'is_bot': message.author.bot,
                                 'avatar_url': str(message.author.avatar.url) if message.author.avatar else None,
                             },
-                            'user_presence': {
-                                'status': str(message.author.status),
-                                'activity': str(message.author.activity.name) if message.author.activity else None,
-                            } if isinstance(message.author, discord.Member) else None,
-                            'guild': {
-                                'id': str(guild.id),
-                                'name': guild.name,
-                                'member_count': guild.member_count,
-                            } if guild else None,
-                            'channel': {
-                                'id': str(channel.id),
-                                'name': channel.name,
-                                'type': str(channel.type),
-                                'topic': getattr(channel, 'topic', None),
-                            },
-                            'thread': {
-                                'id': str(message.thread.id),
-                                'name': message.thread.name
-                            } if message.thread else None,
                             'mentions': [str(user.id) for user in message.mentions],
-                            'mention_everyone': message.mention_everyone,
-                            'mention_roles': [str(role.id) for role in message.role_mentions],
-                            'referenced_message_id': str(message.reference.message_id) if message.reference else None,
-                            'attachments': [
-                                {
-                                    'url': att.url,
-                                    'filename': att.filename,
-                                    'size': att.size,
-                                    'content_type': att.content_type
-                                } for att in message.attachments
-                            ],
-                            'embeds': [embed.to_dict() for embed in message.embeds],
                             'reactions': [
                                 {
                                     'emoji': str(reaction.emoji),
-                                    'count': reaction.count,
-                                    'me': reaction.me
+                                    'count': reaction.count
                                 } for reaction in message.reactions
                             ],
-                            'emoji_stats': extract_emojis(message.content),
-                            'pinned': message.pinned,
-                            'flags': message.flags.value if message.flags else None,
-                            'nonce': message.nonce,
-                            'type': str(message.type),
-                            'is_system': message.is_system(),
-                            'mentions_everyone': message.mention_everyone,
-                            'message_type': str(message.type),
-                            'has_reactions': bool(message.reactions),
-                            'is_pinned': message.pinned
                         })
                 except discord.Forbidden:
                     print(f"    🚫 Skipped channel #{channel.name}: insufficient permissions")
@@ -149,50 +103,35 @@ class DiscordFetcher(discord.Client):
                 if new_messages:
                     print(f"    ✅ {len(new_messages)} new message(s)")
                     self.sync_log_entry["total_messages_synced"] += len(new_messages)
-                    self.new_data[guild.name].setdefault(channel.name, []).extend(new_messages)
+
+                    # Upsert each message into the SQLite DB
+                    db = SessionLocal()
+                    for m in new_messages:
+                        ts = datetime.fromisoformat(m['timestamp'])
+                        db_msg = Message(
+                            guild_id=int(m['guild_id']),
+                            channel_id=int(m['channel_id']),
+                            message_id=int(m['message_id']),
+                            content=m['content'],
+                            timestamp=ts,
+                            author=m['author'],
+                            mention_ids=[int(mid) for mid in m['mentions']],
+                            reactions=[{'emoji': r['emoji'], 'count': r['count']} for r in m['reactions']],
+                            jump_url=m.get('jump_url')
+                        )
+                        db.merge(db_msg)
+                    db.commit()
+                    db.close()
                 else:
                     print(f"    📫 No new messages")
 
         await self.close()
 
-def load_existing_data(path='discord_messages.json'):
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return {}
-
-def save_combined_data(existing, new_data, path='discord_messages.json'):
-    for guild, channels in new_data.items():
-        existing.setdefault(guild, {})
-        for channel, messages in channels.items():
-            existing[guild].setdefault(channel, [])
-            existing[guild][channel].extend(messages)
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(existing, f, ensure_ascii=False, indent=2)
-
-def save_sync_log(sync_log_entry):
-    os.makedirs("logs", exist_ok=True)
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
-    log_path = os.path.join("logs", f"sync_log_{date_str}.jsonl")
-    with open(log_path, 'a', encoding='utf-8') as log_f:
-        log_f.write(json.dumps(sync_log_entry) + '\n')
-
-def update_discord_messages():
+async def update_discord_messages():
     print("🔌 Connecting to Discord...")
-    data_store = load_existing_data()
-    client = DiscordFetcher(data_store=data_store, intents=intents)
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(client.start(DISCORD_TOKEN))
-
-    if client.new_data:
-        save_combined_data(data_store, client.new_data)
-        save_sync_log(client.sync_log_entry)
-        print("\n📂 Data updated.")
-        print(f"📝 Total messages synced: {client.sync_log_entry['total_messages_synced']}")
-    else:
-        print("\n✅ No new messages found.")
+    client = DiscordFetcher(intents=intents)
+    await client.start(DISCORD_TOKEN)
 
 if __name__ == "__main__":
-    update_discord_messages()
+    asyncio.run(update_discord_messages())
     print("🔌 Disconnecting from Discord...")
