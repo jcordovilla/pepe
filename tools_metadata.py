@@ -57,12 +57,19 @@ TOOLS_METADATA = [
         "function": find_users_by_skill,
         "description": "Searches Discord messages to find users mentioning specific skills, expertise, or introductions. Use for queries like 'Who knows Python?' or 'Find experts in ML.'"
     },
-        {
-        "name": "SummarizeMessagesInRange",
-        "function": summarize_messages_in_range,
-        "description": (
-            "Summarizes messages sent between start_iso and end_iso. "
-            "Optionally filter by guild_id and/or channel_id to scope the summary."
-        ),
+    {
+        "name": "summarize_messages",
+        "description": "Summarize messages between two ISO datetimes, optionally by guild/channel.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+            "start_iso":  { "type": "string", "format": "date-time" },
+            "end_iso":    { "type": "string", "format": "date-time" },
+            "guild_id":   { "type": "integer" },
+            "channel_id": { "type": "integer" },
+            "as_json":    { "type": "boolean", "default": False }
+            },
+            "required": ["start_iso", "end_iso"]
+        }
     }
 ]
