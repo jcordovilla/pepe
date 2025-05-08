@@ -6,6 +6,8 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import build_jump_url
+from rapidfuzz import process, fuzz
+from typing import Optional
 
 # Load environment variables and initialize clients
 load_dotenv()
@@ -17,12 +19,47 @@ INDEX_DIR = "index_faiss"
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
+# Fuzzy string matching
+def find_author_id(name_query: str) -> Optional[int]:
+    """
+    Fuzzy‐match a user’s input against known author usernames
+    and return the best matching author_id (or None if no good match).
+    """
+    # Load all message metadata
+    from embed_store import flatten_messages
+    all_msgs = flatten_messages("discord_messages_v2.json")
+
+    # Build a map: username → author_id
+    author_map: Dict[str, int] = {}
+    for _, meta in all_msgs:
+        author = meta.get("author", {})
+        uname = author.get("username")
+        aid   = author.get("id")
+        if uname and aid and uname not in author_map:
+            author_map[uname] = aid
+
+    if not author_map:
+        return None
+
+    # Fuzzy‐match the query against those usernames
+    best, score, _ = process.extractOne(
+        name_query,
+        list(author_map.keys()),
+        scorer=fuzz.WRatio
+    )
+    # You can tweak this threshold; 60 is a reasonable start
+    if score < 60:
+        return None
+
+    return author_map[best]
+
 def search_messages(
     query: str,
-    keyword: Optional[str] = None,
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None,
-    k: int = 5
+    keyword: Optional[str]     = None,
+    guild_id: Optional[int]     = None,
+    channel_id: Optional[int]   = None,
+    author_name: Optional[str]  = None,
+    k: int                      = 5
 ) -> List[Dict[str, Any]]:
     """
     Hybrid search:
@@ -38,12 +75,20 @@ def search_messages(
     # 2) Keyword & metadata filter
     candidates = []
     for text, meta in all_msgs:
+        # 1) keyword filter (if any)
         if keyword and keyword.lower() not in text.lower():
             continue
-        if guild_id is not None and meta.get("guild_id") != str(guild_id):
+        # 2) guild/channel scope
+        if guild_id and meta["guild_id"] != str(guild_id):
             continue
-        if channel_id is not None and meta.get("channel_id") != str(channel_id):
+        if channel_id and meta["channel_id"] != str(channel_id):
             continue
+        # 3) fuzzy author filter
+        if author_name:
+            matched_id = find_author_id(author_name)
+            if matched_id is None or meta["author"]["id"] != matched_id:
+                continue
+
         candidates.append((text, meta))
 
     if not candidates:
