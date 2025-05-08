@@ -5,6 +5,11 @@ from datetime import datetime
 from db import SessionLocal, Message
 from dotenv import load_dotenv
 import discord
+from utils.logger import setup_logging
+setup_logging()
+
+import logging
+log = logging.getLogger(__name__)
 
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
@@ -31,10 +36,10 @@ class DiscordFetcher(discord.Client):
         }
 
     async def on_ready(self):
-        print(f"✅ Logged in as: {self.user} (ID: {self.user.id})")
+        log.info(f"✅ Logged in as: {self.user} (ID: {self.user.id})")
 
         for guild in self.guilds:
-            print(f"\n📂 Guild: {guild.name} (ID: {guild.id})")
+            log.info(f"\n📂 Guild: {guild.name} (ID: {guild.id})")
             self.sync_log_entry["guilds_synced"].append({
                 "guild_name": guild.name,
                 "guild_id": str(guild.id)
@@ -42,7 +47,7 @@ class DiscordFetcher(discord.Client):
 
             for channel in guild.text_channels:
                 if channel.name in SKIP_CHANNEL_NAMES:
-                    print(f"  🚫 Skipping test channel #{channel.name}")
+                    log.info(f"  🚫 Skipping test channel #{channel.name}")
                     self.sync_log_entry["channels_skipped"].append({
                         "guild_name": guild.name,
                         "channel_name": channel.name,
@@ -62,7 +67,7 @@ class DiscordFetcher(discord.Client):
                 db.close()
                 after_id = last_msg.message_id if last_msg else None
 
-                print(f"  📄 Channel: #{channel.name} | after={after_id}")
+                log.info(f"  📄 Channel: #{channel.name} | after={after_id}")
                 fetched = []
                 try:
                     # Paginate history in fixed-size batches
@@ -98,7 +103,7 @@ class DiscordFetcher(discord.Client):
                         # Update cursor to last message of this batch
                         after_id = batch[-1].id
                 except discord.Forbidden:
-                    print(f"    🚫 Skipped channel #{channel.name}: insufficient permissions")
+                    log.info(f"    🚫 Skipped channel #{channel.name}: insufficient permissions")
                     self.sync_log_entry["channels_skipped"].append({
                         "guild_name": guild.name,
                         "channel_name": channel.name,
@@ -107,12 +112,12 @@ class DiscordFetcher(discord.Client):
                     })
                     continue
                 except Exception as e:
-                    print(f"    ❌ Error in channel {channel.name}: {e}")
+                    log.error(f"    ❌ Error in channel {channel.name}: {e}")
                     self.sync_log_entry["errors"].append(str(e))
                     continue
 
                 if fetched:
-                    print(f"    ✅ Fetched {len(fetched)} new messages")
+                    log.info(f"    ✅ Fetched {len(fetched)} new messages")
                     self.sync_log_entry["total_messages_synced"] += len(fetched)
 
                     db = SessionLocal()
@@ -133,19 +138,19 @@ class DiscordFetcher(discord.Client):
                     db.commit()
                     db.close()
                 else:
-                    print(f"    📫 No new messages")
+                    log.info(f"    📫 No new messages")
 
-        print("🔌 Sync complete, closing connection...")
+        log.info("🔌 Sync complete, closing connection...")
         await self.close()
 
 async def main():
-    print("🔌 Connecting to Discord...")
+    log.info("🔌 Connecting to Discord...")
     client = DiscordFetcher(intents=intents)
     try:
         await client.start(DISCORD_TOKEN)
     finally:
         await client.close()
-        print("🔌 Disconnected from Discord.")
+        log.info("🔌 Disconnected from Discord.")
 
 if __name__ == "__main__":
     asyncio.run(main())
