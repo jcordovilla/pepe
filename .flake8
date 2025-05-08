@@ -1,30 +1,6 @@
 [flake8]
-# Ignore these error codes project-wide
-[flake8]
-# Ignore these error codes project-wide
-ignore = 
-    E501,  # line too long
-    F401,  # imported but unused
-    E302,  # expected 2 blank lines
-    E305,  # expected 2 blank lines after class or function
-    E131,  # continuation line unaligned
-    E402,  # module level import not at top
-    E722,  # do not use bare except
-    E272,  # multiple spaces before keyword
-    W292,  # no newline at end of file
-    F541,  # f-string missing placeholders
-    F811,  # redefinition of unused name
-    E221,  # multiple spaces before operator
-    E241,  # multiple spaces after ','
-    W293,  # blank line contains whitespace
-    W391,  # blank line at end of file
-    E231   # missing whitespace after ','
-
-
-# Allow slightly longer lines
+ignore = E501, F401, E302, E305, E131, E402, E722, E272, W292, F541, F811, E221, E241, W293, W391, E231
 max-line-length = 100
-
-# Exclude virtualenv, Git metadata, and your data files
 exclude =
     venv/,
     .git/,
