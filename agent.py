@@ -1,135 +1,118 @@
 import os
 from dotenv import load_dotenv
-from langchain_community.chat_models import ChatOpenAI
-from langchain.agents import AgentExecutor
-from langchain.agents.openai_functions_agent.agent_token_buffer_memory import AgentTokenBufferMemory
-from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from tools_metadata import TOOLS_METADATA
-from rag_engine import get_answer
-from pydantic import BaseModel
+from typing import Optional, List, Dict, Any
+from pydantic import BaseModel, Field
+from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
-import dateparser
-from datetime import datetime, timezone
-import re
+from langchain.agents import initialize_agent, AgentType
 
+from tools import (
+    summarize_messages,
+    search_messages,
+    get_most_reacted_messages,
+    find_users_by_skill
+)
+from rag_engine import get_answer
+from time_parser import parse_timeframe
+
+# Load environment variables
 load_dotenv()
+API_KEY = os.getenv("OPENAI_API_KEY")
+MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
 
-def normalize_timeframe_phrases(prompt: str) -> str:
-    now = datetime.now(timezone.utc)
+# Initialize LLM with function-calling support
+llm = ChatOpenAI(
+    model_name=MODEL_NAME,
+    openai_api_key=API_KEY,
+    temperature=0
+)
 
-    def safe_parse(expression, default_text=None, date_only=False):
-        dt = dateparser.parse(expression, settings={"RELATIVE_BASE": now})
-        if dt:
-            return dt.date().isoformat() if date_only else dt.isoformat()
-        else:
-            print(f"⚠️ Could not parse time expression: '{expression}'")
-            return default_text or expression  # fallback: keep the original string
+# --- Define argument schemas for tools ---
+class ParseTimeframeSchema(BaseModel):
+    text: str = Field(..., description="Natural-language timeframe, e.g. 'last week', 'April 1-7'")
 
-    patterns = [
-        (r"\blast\s+(\d+)\s*(hours?|days?)\b", lambda m:
-            f"since {safe_parse(m.group(0), default_text='an unspecified recent time')}"),
-        (r"\bthis\s+week\b", lambda m:
-            f"since {safe_parse('monday this week', default_text='monday this week')}"),
-        (r"\byesterday\b", lambda m:
-            f"on {safe_parse('yesterday', default_text='yesterday', date_only=True)}"),
-        (r"\btoday\b", lambda m:
-            f"on {safe_parse('today', default_text='today', date_only=True)}"),
-        (r"\bthis\s+month\b", lambda m:
-            f"since {safe_parse('first day of this month', default_text='the start of this month')}"),
-        (r"\bfrom\s+(.+?)\s+to\s+(.+?)\b", lambda m:
-            f"from {safe_parse(m.group(1), m.group(1))} to {safe_parse(m.group(2), m.group(2))}")
-    ]
-
-    updated = prompt
-    for pattern, repl in patterns:
-        updated = re.sub(pattern, repl, updated, flags=re.IGNORECASE)
-    print("🔍 Normalized prompt:", updated)
-    return updated
-
-# 🔧 System prompt for the OpenAI agent
-SYSTEM_MESSAGE = """
-You are GenAI Pathfinder Assistant, a versatile AI designed to help users explore, summarize, and analyze Discord community conversations.
-
-You can:
-- Retrieve and summarize relevant Discord messages (RAG).
-- Call specialized tools to calculate server statistics, extract feedback, find users with skills, highlight pinned messages, and more.
-
-Behavior guidelines:
-- Prefer using tools when a matching capability is available.
-- If needed, perform direct semantic search using the message database.
-- Always answer concisely and clearly unless JSON output is explicitly requested.
-- When quoting messages, include: author, timestamp, channel, short snippet, and link (jump_url).
-- Group, summarize, and explain findings when possible.
-- If uncertain or insufficient context, suggest clarifying questions.
-
-Goal:
-Maximize clarity, utility, and actionable insights for the user — whether the request is simple or complex.
-"""
-
-# 🔧 Set up LLM
-gpt_model = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
-llm = ChatOpenAI(model=gpt_model, temperature=0)
-
-# 🔧 Structured input for DiscordRAGSearch
 class RAGSearchInput(BaseModel):
-    query: str
-    k: int = 5
-    as_json: bool = False
-    return_matches: bool = False
+    query: str = Field(..., description="Natural-language question for RAG search")
+    k: int = Field(5, description="Number of top context matches to retrieve")
+    as_json: bool = Field(False, description="Return raw JSON answer if True")
+    return_matches: bool = Field(False, description="Include context matches list if True")
 
-# 🔧 Register tools from tools_metadata
-from langchain.agents import Tool
+class SummarizeSchema(BaseModel):
+    start_iso: str = Field(..., description="ISO 8601 start datetime for summary range")
+    end_iso: str = Field(..., description="ISO 8601 end datetime for summary range")
+    guild_id: Optional[int] = Field(None, description="Discord guild ID filter (optional)")
+    channel_id: Optional[int] = Field(None, description="Discord channel ID filter (optional)")
+    as_json: bool = Field(False, description="Return JSON object if True")
+
+class SearchSchema(BaseModel):
+    query: str = Field(..., description="Search query string")
+    keyword: Optional[str] = Field(None, description="Exact keyword pre-filter, optional")
+    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
+    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
+    author_name: Optional[str] = Field(None, description="Fuzzy-match author username, optional")
+    k: int = Field(5, description="Number of top results to return")
+
+class MostReactedSchema(BaseModel):
+    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
+    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
+    top_n: int = Field(5, description="Number of top messages by reaction count to return")
+
+class FindUsersSchema(BaseModel):
+    skill: str = Field(..., description="Skill keyword to search in message content")
+    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
+    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
+
+# --- Register tools ---
 tools = [
-    Tool(
-        name=tool["name"],
-        func=tool["function"],
-        description=tool["description"]
-    )
-    for tool in TOOLS_METADATA
-]
-
-# 🔧 Add structured RAG search tool
-tools.append(
     StructuredTool.from_function(
-        name="DiscordRAGSearch",
-        func=get_answer,
-        description="Searches Discord messages using GPT-powered semantic search. Use for questions like 'Who mentioned onboarding last week?'",
+        parse_timeframe,
+        name="parse_timeframe",
+        description="Convert a natural-language timeframe into a start and end ISO datetime.",
+        args_schema=ParseTimeframeSchema
+    ),
+    StructuredTool.from_function(
+        summarize_messages,
+        name="summarize_messages",
+        description="Summarize Discord messages between two ISO datetimes, optionally scoped by guild/channel.",
+        args_schema=SummarizeSchema
+    ),
+    StructuredTool.from_function(
+        search_messages,
+        name="search_messages",
+        description="Hybrid keyword + semantic search over Discord messages with optional filters.",
+        args_schema=SearchSchema
+    ),
+    StructuredTool.from_function(
+        get_most_reacted_messages,
+        name="get_most_reacted_messages",
+        description="Return the top N messages by reaction count, optionally scoped by guild/channel.",
+        args_schema=MostReactedSchema
+    ),
+    StructuredTool.from_function(
+        find_users_by_skill,
+        name="find_users_by_skill",
+        description="Identify authors whose messages mention a given skill keyword, with example message and URL.",
+        args_schema=FindUsersSchema
+    ),
+    StructuredTool.from_function(
+        get_answer,
+        name="discord_rag_search",
+        description="Retrieve and answer questions using GPT-powered RAG over Discord messages.",
         args_schema=RAGSearchInput
     )
-)
+]
 
-# 🔧 (Optional) tool startup test
-def test_registered_tools():
-    failures = []
-    for tool in tools:
-        try:
-            tool.func("test")  # Works for single-arg tools
-        except Exception as e:
-            failures.append((tool.name, str(e)))
-
-    if failures:
-        print("❌ Tool errors detected during startup:")
-        for name, error in failures:
-            print(f"- {name}: {error}")
-    else:
-        print("✅ All tools passed basic startup test.")
-
-# 🔧 Create agent with OpenAI Functions support
-agent = OpenAIFunctionsAgent.from_llm_and_tools(
-    llm=llm,
-    tools=tools,
-    system_message=SYSTEM_MESSAGE,
-)
-
-agent_executor = AgentExecutor.from_agent_and_tools(
-    agent=agent,
-    tools=tools,
+# --- Initialize agent ---
+agent = initialize_agent(
+    tools,
+    llm,
+    agent=AgentType.OPENAI_FUNCTIONS,
     verbose=True
 )
 
-# ✅ Main function called by your bot or app
+# --- Expose main entrypoint ---
 def get_agent_answer(query: str) -> str:
-    normalized = normalize_timeframe_phrases(query)
-    return agent_executor.run(normalized)
+    """
+    Send a user query to the agent and return the response.
+    """
+    return agent.run(query)
