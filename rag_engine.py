@@ -8,6 +8,11 @@ from openai import OpenAI
 from utils import build_jump_url
 from rapidfuzz import process, fuzz
 from typing import Optional
+from utils.logger import setup_logging
+setup_logging()
+
+import logging
+log = logging.getLogger(__name__)
 
 # Load environment variables and initialize clients
 load_dotenv()
@@ -149,9 +154,9 @@ def get_top_k_matches(
     docs = retriever.get_relevant_documents(query)
 
     # Debug print: show what metadata was retrieved
-    print("🔍 Retrieved metadata from FAISS:")
+    log.debug("🔍 Retrieved metadata from FAISS:")
     for doc in docs:
-        print(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')}")
+        log.debug(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')}")
 
     # Return top-k filtered metadata entries
     return [doc.metadata for doc in docs][:k]
@@ -248,5 +253,5 @@ from typing import List, Dict, Any, Optional
 
 if __name__ == "__main__":
     # Quick local test (adjust guild_id/channel_id as needed)
-    print(search_messages("ethics", guild_id=1353058864810950737, channel_id=1364361051830747156))
+    log.info(search_messages("ethics", guild_id=1353058864810950737, channel_id=1364361051830747156))
 
