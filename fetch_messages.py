@@ -6,6 +6,7 @@ from db import SessionLocal, Message
 from dotenv import load_dotenv
 import discord
 from utils.logger import setup_logging
+
 setup_logging()
 
 import logging
