@@ -148,48 +148,18 @@ def get_answer(
         error_msg = f"❌ Error during RAG retrieval: {e}"
         return (error_msg, []) if return_matches else error_msg
     
+from typing import List, Dict, Any, Optional
+
 def search_messages(
     query: str,
-    keyword: Optional[str] = None,
     guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     k: int = 5
 ) -> List[Dict[str, Any]]:
     """
-    Hybrid search: exact keyword pre‐filter, then semantic FAISS rerank.
+    Tool‐compatible entrypoint for searching Discord messages.
+    Wraps our existing get_top_k_matches under the name 'search_messages'.
     """
-    # 1️⃣ Load raw messages + metadata
-    from embed_store import flatten_messages
-    all_msgs = flatten_messages("discord_messages_v2.json")
+    # Simply forward to our RAG retriever
+    return get_top_k_matches(query=query, k=k, guild_id=guild_id, channel_id=channel_id)
 
-    # 2️⃣ Pre‐filter by keyword & scope
-    candidates = []
-    for text, meta in all_msgs:
-        if keyword and keyword.lower() not in text.lower():
-            continue
-        if guild_id is not None and meta.get("guild_id") != str(guild_id):
-            continue
-        if channel_id is not None and meta.get("channel_id") != str(channel_id):
-            continue
-        candidates.append((text, meta))
-
-    if not candidates:
-        return []
-
-    # 3️⃣ Split texts & metadatas
-    texts, metadatas = zip(*candidates)
-
-    # 4️⃣ Build a temp FAISS index on these
-    from langchain_community.vectorstores import FAISS as _FAISS
-    temp_store = _FAISS.from_texts(
-        texts=list(texts),
-        embedding=embedding_model,
-        metadatas=list(metadatas)
-    )
-
-    # 5️⃣ Rerank semantically
-    retriever = temp_store.as_retriever(search_kwargs={"k": k})
-    docs = retriever.get_relevant_documents(query)
-
-    # 6️⃣ Return their metadata
-    return [doc.metadata for doc in docs]
