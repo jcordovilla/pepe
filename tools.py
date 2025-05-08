@@ -13,6 +13,8 @@ from utils.helpers import build_jump_url, validate_ids
 from time_parser import parse_timeframe
 from utils.logger import setup_logging
 
+import json
+
 # Initialize logging
 setup_logging()
 
@@ -258,38 +260,78 @@ def get_most_reacted_messages(
 
     return results
 
-def find_users_by_skill(skill: str) -> List[Dict[str, Any]]:
+def find_users_by_skill(
+    skill: str,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None
+) -> List[Dict[str, Any]]:
     """
-    Identify authors whose messages contain a given skill keyword.
+    Identify authors whose messages contain a given skill keyword and return unique user summaries.
+
+    Args:
+      skill:       Keyword to search in message content (case-insensitive).
+      guild_id:    Discord guild ID to filter messages (optional).
+      channel_id:  Discord channel ID to filter messages (optional).
+
+    Returns:
+      A list of dicts, each containing:
+        - author_id (int)
+        - username (str)
+        - example_message (str)
+        - jump_url (str)
     """
+    # Validate optional IDs
+    if guild_id is not None:
+        validate_ids(guild_id=guild_id)
+    if channel_id is not None:
+        validate_ids(channel_id=channel_id)
+
+    # Query relevant messages from DB
     session = SessionLocal()
     q = session.query(Message).filter(Message.content.ilike(f"%{skill}%"))
+    if guild_id is not None:
+        q = q.filter(Message.guild_id == guild_id)
+    if channel_id is not None:
+        q = q.filter(Message.channel_id == channel_id)
     msgs = q.all()
     session.close()
 
-    # Deduplicate by author ID
-    by_author: Dict[int, Dict[str, Any]] = {}
+    # Deduplicate by author and build summaries
+    authors: Dict[int, Dict[str, Any]] = {}
     for m in msgs:
-        aid = m.author.get('id')
-        if aid not in by_author:
-            by_author[aid] = {
+        aid = m.author.get("id")
+        if aid not in authors:
+            authors[aid] = {
                 "author_id": aid,
-                "username": m.author.get('username'),
+                "username": m.author.get("username"),
                 "example_message": m.content,
                 "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
             }
-    return list(by_author.values())
+    return list(authors.values())
 
-
-def analyze_message_types(
+def summarize_messages_in_range(
+    start_iso: str,
+    end_iso: str,
     guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None
-) -> List[Dict[str, Any]]:
+    channel_id: Optional[int] = None,
+    output_format: str = "text"
+) -> str:
     """
-    Count message types (text, image, embed, etc.) in a guild/channel.
+    Legacy wrapper for summarization tests.
+    If output_format == "json", returns '{}' when no messages,
+    otherwise returns a header (and message lines) in plain text.
     """
+    # Build header
+    start_date = start_iso.split("T")[0]
+    end_date   = end_iso  .split("T")[0]
+    header = f"📅 Messages from {start_date} to {end_date}"
+
+    # Query the DB
     session = SessionLocal()
-    q = session.query(Message)
+    q = session.query(Message).filter(
+        Message.timestamp >= start_iso,
+        Message.timestamp <= end_iso
+    )
     if guild_id:
         q = q.filter(Message.guild_id == guild_id)
     if channel_id:
@@ -297,68 +339,27 @@ def analyze_message_types(
     msgs = q.all()
     session.close()
 
-    counts: Dict[str, int] = {}
+    # JSON mode: always dump an empty dict on no messages
+    if output_format.lower() == "json":
+        if not msgs:
+            return json.dumps({})
+        # For non-empty, you can call your new summarize_messages,
+        # then ensure it’s JSON-serialized:
+        payload = summarize_messages(
+            start_iso, end_iso, guild_id, channel_id, as_json=True
+        )
+        return json.dumps(payload)
+
+    # Text mode: header only if no messages
+    if not msgs:
+        return header
+
+    # Otherwise render each message as '**author** (ts): content'
+    lines = [header]
     for m in msgs:
-        mtype = m.__dict__.get('type', 'unknown')  # assume type field if present
-        counts[mtype] = counts.get(mtype, 0) + 1
-    return [{"type": t, "count": c} for t, c in counts.items()]
-
-
-def get_pinned_messages(
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None
-) -> List[Dict[str, Any]]:
-    """
-    Retrieve pinned messages in a guild/channel.
-    """
-    session = SessionLocal()
-    q = session.query(Message).filter(Message.is_pinned == True)
-    if guild_id:
-        q = q.filter(Message.guild_id == guild_id)
-    if channel_id:
-        q = q.filter(Message.channel_id == channel_id)
-    msgs = q.all()
-    session.close()
-
-    return [
-        {
-            "guild_id": m.guild_id,
-            "channel_id": m.channel_id,
-            "message_id": m.message_id,
-            "content": m.content,
-            "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
-        }
-        for m in msgs
-    ]
-
-
-def extract_feedback_and_ideas(
-    keywords: List[str],
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None
-) -> List[Dict[str, Any]]:
-    """
-    Extract messages containing any of the given keywords.
-    """
-    session = SessionLocal()
-    q = session.query(Message)
-    if guild_id:
-        q = q.filter(Message.guild_id == guild_id)
-    if channel_id:
-        q = q.filter(Message.channel_id == channel_id)
-
-    msgs = q.all()
-    session.close()
-
-    results = []
-    for m in msgs:
-        content_lower = m.content.lower()
-        hits = [kw for kw in keywords if kw.lower() in content_lower]
-        if hits:
-            results.append({
-                "message_id": m.message_id,
-                "hits": hits,
-                "content": m.content,
-                "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
-            })
-    return results
+        author = m.author.get("username") or str(m.author.get("id"))
+        ts     = m.timestamp
+        text   = m.content.replace("\n", " ")
+        url    = m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
+        lines.append(f"**{author}** ({ts}): {text}")
+    return "\n".join(lines)
