@@ -1,8 +1,8 @@
 import os
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional
 from datetime import datetime
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field
 from rapidfuzz import process
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -28,21 +28,6 @@ def load_vectorstore() -> FAISS:
     """
     return FAISS.load_local(INDEX_DIR, EMBED_MODEL, allow_dangerous_deserialization=True)
 
-class SummarizeParams(BaseModel):
-    start_iso: str = Field(..., description="ISO start datetime")
-    end_iso: str = Field(..., description="ISO end datetime")
-    guild_id: Optional[int] = Field(None, description="Discord guild ID")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID")
-    as_json: bool = Field(False, description="Return JSON object if True")
-
-class SearchParams(BaseModel):
-    query: str = Field(..., description="Search query string")
-    keyword: Optional[str] = Field(None, description="Exact keyword pre-filter")
-    guild_id: Optional[int] = Field(None, description="Discord guild ID filter")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID filter")
-    author_name: Optional[str] = Field(None, description="Fuzzy author name filter")
-    k: int = Field(5, description="Number of top results to return")
-
 # Tool implementations
 
 def summarize_messages(
@@ -54,16 +39,6 @@ def summarize_messages(
 ) -> Any:
     """
     Summarize Discord messages between two ISO datetimes, optionally scoped by guild and/or channel.
-    
-    Args:
-      start_iso: ISO 8601 start timestamp (inclusive).
-      end_iso:   ISO 8601 end   timestamp (inclusive).
-      guild_id:  Discord guild ID to filter (optional).
-      channel_id: Discord channel ID to filter (optional).
-      as_json:   If True, returns a JSON object; otherwise a plain-text summary.
-    
-    Returns:
-      A string summary, or if as_json=True, the parsed JSON object from the LLM.
     """
     # Validate IDs
     if guild_id is not None:
@@ -113,9 +88,9 @@ def summarize_messages(
 
     answer = response.choices[0].message.content
     if as_json:
-        # parse string into JSON object
         return json.loads(answer)
     return answer
+
 
 def search_messages(
     query: str,
@@ -127,32 +102,14 @@ def search_messages(
 ) -> List[Dict[str, Any]]:
     """
     Hybrid keyword + semantic search over Discord messages.
-
-    Args:
-      query:       The natural-language query to embed/rerank.
-      keyword:     Exact keyword to pre-filter messages (case-insensitive).
-      guild_id:    Discord guild ID to restrict search (optional).
-      channel_id:  Discord channel ID to restrict search (optional).
-      author_name: Fuzzy‐match display name or username to filter by author (optional).
-      k:           Number of top results to return.
-
-    Returns:
-      A list of up to k message dicts, each containing:
-        - guild_id (int)
-        - channel_id (int)
-        - message_id (int)
-        - author (dict)
-        - content (str)
-        - timestamp (str)
-        - jump_url (str)
     """
-    # 1) Validate IDs
+    # Validate IDs
     if guild_id is not None:
         validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
-    # 2) Pre‐filter with SQLite
+    # Pre-filter with SQLite
     db = SessionLocal()
     q = db.query(Message)
     if keyword:
@@ -167,18 +124,18 @@ def search_messages(
     if not candidates:
         return []
 
-    # 3) Build temp FAISS index for these candidates
+    # Build temp FAISS index
     texts = [m.content for m in candidates]
-    metadatas: List[Dict[str,Any]] = []
+    metadatas: List[Dict[str, Any]] = []
     for m in candidates:
         metadatas.append({
-            "guild_id":    m.guild_id,
-            "channel_id":  m.channel_id,
-            "message_id":  m.message_id,
-            "author":      m.author,
-            "content":     m.content,
-            "timestamp":   str(m.timestamp),
-            "jump_url":    m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
+            "guild_id": m.guild_id,
+            "channel_id": m.channel_id,
+            "message_id": m.message_id,
+            "author": m.author,
+            "content": m.content,
+            "timestamp": str(m.timestamp),
+            "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
         })
 
     temp_store = FAISS.from_texts(texts=texts, embedding=EMBED_MODEL, metadatas=metadatas)
@@ -186,14 +143,11 @@ def search_messages(
     docs = retriever.get_relevant_documents(query)
     results = [d.metadata for d in docs]
 
-    # 4) Fuzzy‐filter by author if requested
     if author_name:
-        # build list of candidate author names
         names = [md["author"].get("username", "") for md in results]
         match, score, idx = process.extractOne(author_name, names)
         results = [r for r in results if r["author"].get("username") == match]
 
-    # 5) Return the top‐k
     return results[:k]
 
 
@@ -203,31 +157,13 @@ def get_most_reacted_messages(
     top_n: int = 5
 ) -> List[Dict[str, Any]]:
     """
-    Return the top N messages by total reaction count, optionally scoped to a guild and/or channel.
-
-    Args:
-      guild_id:   Discord guild ID to filter (optional).
-      channel_id: Discord channel ID to filter (optional).
-      top_n:      Number of messages to return (default 5).
-
-    Returns:
-      A list of up to top_n dicts, each containing:
-        - guild_id (int)
-        - channel_id (int)
-        - message_id (int)
-        - author (dict)
-        - content (str)
-        - timestamp (str)
-        - jump_url (str)
-        - total_reactions (int)
+    Return the top N messages by total reaction count.
     """
-    # 1) Validate IDs
     if guild_id is not None:
         validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
-    # 2) Fetch from DB
     session = SessionLocal()
     q = session.query(Message)
     if guild_id is not None:
@@ -237,28 +173,27 @@ def get_most_reacted_messages(
     msgs = q.all()
     session.close()
 
-    # 3) Compute reaction totals and sort
     scored = []
     for m in msgs:
         total = sum(r.get("count", 0) for r in m.reactions)
         scored.append((total, m))
     scored.sort(key=lambda x: x[0], reverse=True)
 
-    # 4) Build result list
     results: List[Dict[str, Any]] = []
     for total, m in scored[:top_n]:
         results.append({
-            "guild_id":       m.guild_id,
-            "channel_id":     m.channel_id,
-            "message_id":     m.message_id,
-            "author":         m.author,
-            "content":        m.content,
-            "timestamp":      str(m.timestamp),
-            "jump_url":       m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id),
+            "guild_id": m.guild_id,
+            "channel_id": m.channel_id,
+            "message_id": m.message_id,
+            "author": m.author,
+            "content": m.content,
+            "timestamp": str(m.timestamp),
+            "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id),
             "total_reactions": total
         })
 
     return results
+
 
 def find_users_by_skill(
     skill: str,
@@ -266,27 +201,13 @@ def find_users_by_skill(
     channel_id: Optional[int] = None
 ) -> List[Dict[str, Any]]:
     """
-    Identify authors whose messages contain a given skill keyword and return unique user summaries.
-
-    Args:
-      skill:       Keyword to search in message content (case-insensitive).
-      guild_id:    Discord guild ID to filter messages (optional).
-      channel_id:  Discord channel ID to filter messages (optional).
-
-    Returns:
-      A list of dicts, each containing:
-        - author_id (int)
-        - username (str)
-        - example_message (str)
-        - jump_url (str)
+    Identify authors whose messages contain a given skill keyword.
     """
-    # Validate optional IDs
     if guild_id is not None:
         validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
-    # Query relevant messages from DB
     session = SessionLocal()
     q = session.query(Message).filter(Message.content.ilike(f"%{skill}%"))
     if guild_id is not None:
@@ -296,7 +217,6 @@ def find_users_by_skill(
     msgs = q.all()
     session.close()
 
-    # Deduplicate by author and build summaries
     authors: Dict[int, Dict[str, Any]] = {}
     for m in msgs:
         aid = m.author.get("id")
@@ -309,6 +229,7 @@ def find_users_by_skill(
             }
     return list(authors.values())
 
+
 def summarize_messages_in_range(
     start_iso: str,
     end_iso: str,
@@ -318,15 +239,11 @@ def summarize_messages_in_range(
 ) -> str:
     """
     Legacy wrapper for summarization tests.
-    If output_format == "json", returns '{}' when no messages,
-    otherwise returns a header (and message lines) in plain text.
     """
-    # Build header
     start_date = start_iso.split("T")[0]
-    end_date   = end_iso  .split("T")[0]
+    end_date = end_iso.split("T")[0]
     header = f"📅 Messages from {start_date} to {end_date}"
 
-    # Query the DB
     session = SessionLocal()
     q = session.query(Message).filter(
         Message.timestamp >= start_iso,
@@ -339,27 +256,21 @@ def summarize_messages_in_range(
     msgs = q.all()
     session.close()
 
-    # JSON mode: always dump an empty dict on no messages
     if output_format.lower() == "json":
         if not msgs:
             return json.dumps({})
-        # For non-empty, you can call your new summarize_messages,
-        # then ensure it’s JSON-serialized:
         payload = summarize_messages(
             start_iso, end_iso, guild_id, channel_id, as_json=True
         )
         return json.dumps(payload)
 
-    # Text mode: header only if no messages
     if not msgs:
         return header
 
-    # Otherwise render each message as '**author** (ts): content'
     lines = [header]
     for m in msgs:
         author = m.author.get("username") or str(m.author.get("id"))
-        ts     = m.timestamp
-        text   = m.content.replace("\n", " ")
-        url    = m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
+        ts = m.timestamp
+        text = m.content.replace("\n", " ")
         lines.append(f"**{author}** ({ts}): {text}")
     return "\n".join(lines)

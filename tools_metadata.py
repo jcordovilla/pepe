@@ -13,12 +13,12 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "query":       { "type": "string" },
-                "keyword":     { "type": "string" },
-                "guild_id":    { "type": "integer" },
-                "channel_id":  { "type": "integer" },
-                "author_name": { "type": "string" },
-                "k":           { "type": "integer", "default": 5 }
+                "query": {"type": "string"},
+                "keyword": {"type": "string"},
+                "guild_id": {"type": "integer"},
+                "channel_id": {"type": "integer"},
+                "author_name": {"type": "string"},
+                "k": {"type": "integer", "default": 5}
             },
             "required": ["query"]
         }
@@ -29,9 +29,9 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "guild_id":   { "type": "integer" },
-                "channel_id": { "type": "integer" },
-                "top_n":      { "type": "integer", "default": 5 }
+                "guild_id": {"type": "integer"},
+                "channel_id": {"type": "integer"},
+                "top_n": {"type": "integer", "default": 5}
             },
             "required": []
         }
@@ -42,9 +42,9 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "skill":      { "type": "string" },
-                "guild_id":   { "type": "integer" },
-                "channel_id": { "type": "integer" }
+                "skill": {"type": "string"},
+                "guild_id": {"type": "integer"},
+                "channel_id": {"type": "integer"}
             },
             "required": ["skill"]
         }
@@ -55,11 +55,11 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "start_iso": { "type": "string", "format": "date-time" },
-                "end_iso":   { "type": "string", "format": "date-time" },
-                "guild_id":  { "type": "integer" },
-                "channel_id":{ "type": "integer" },
-                "as_json":   { "type": "boolean", "default": false }
+                "start_iso": {"type": "string", "format": "date-time"},
+                "end_iso": {"type": "string", "format": "date-time"},
+                "guild_id": {"type": "integer"},
+                "channel_id": {"type": "integer"},
+                "as_json": {"type": "boolean", "default": False}
             },
             "required": ["start_iso", "end_iso"]
         }
@@ -70,11 +70,11 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "start_iso":     { "type": "string", "format": "date-time" },
-                "end_iso":       { "type": "string", "format": "date-time" },
-                "guild_id":      { "type": "integer" },
-                "channel_id":    { "type": "integer" },
-                "output_format": { "type": "string", "enum": ["text", "json"], "default": "text" }
+                "start_iso": {"type": "string", "format": "date-time"},
+                "end_iso": {"type": "string", "format": "date-time"},
+                "guild_id": {"type": "integer"},
+                "channel_id": {"type": "integer"},
+                "output_format": {"type": "string", "enum": ["text", "json"], "default": "text"}
             },
             "required": ["start_iso", "end_iso"]
         }
