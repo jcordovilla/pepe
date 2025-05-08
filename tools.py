@@ -229,25 +229,30 @@ def find_users_by_skill(
             }
     return list(authors.values())
 
-
 def summarize_messages_in_range(
     start_iso: str,
-    end_iso: str,
-    guild_id: Optional[int] = None,
+    end_iso:   str,
+    guild_id:  Optional[int] = None,
     channel_id: Optional[int] = None,
     output_format: str = "text"
 ) -> str:
     """
     Legacy wrapper for summarization tests.
+    If output_format == "json", returns '{}' when no messages,
+    otherwise returns a header (and message lines) in plain text.
     """
-    start_date = start_iso.split("T")[0]
-    end_date = end_iso.split("T")[0]
-    header = f"📅 Messages from {start_date} to {end_date}"
+    # 1) Parse the ISO‐strings into real datetimes
+    start_dt = datetime.fromisoformat(start_iso)
+    end_dt   = datetime.fromisoformat(end_iso)
 
+    # 2) Build header
+    header = f"📅 Messages from {start_dt.date()} to {end_dt.date()}"
+
+    # 3) Query the DB with proper datetime filters
     session = SessionLocal()
     q = session.query(Message).filter(
-        Message.timestamp >= start_iso,
-        Message.timestamp <= end_iso
+        Message.timestamp >= start_dt,
+        Message.timestamp <= end_dt
     )
     if guild_id:
         q = q.filter(Message.guild_id == guild_id)
@@ -256,21 +261,25 @@ def summarize_messages_in_range(
     msgs = q.all()
     session.close()
 
+    # 4) JSON mode: always return '{}' if empty
     if output_format.lower() == "json":
         if not msgs:
             return json.dumps({})
-        payload = summarize_messages(
-            start_iso, end_iso, guild_id, channel_id, as_json=True
+        # delegate to your new summarizer for non‐empty
+        return json.dumps(
+            summarize_messages(start_iso, end_iso, guild_id, channel_id, as_json=True)
         )
-        return json.dumps(payload)
 
+    # 5) Text mode: just header if no messages
     if not msgs:
         return header
 
+    # 6) Otherwise render each message
     lines = [header]
     for m in msgs:
         author = m.author.get("username") or str(m.author.get("id"))
-        ts = m.timestamp
-        text = m.content.replace("\n", " ")
+        ts     = m.timestamp.isoformat()
+        text   = m.content.replace("\n", " ")
+        url    = m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
         lines.append(f"**{author}** ({ts}): {text}")
     return "\n".join(lines)
