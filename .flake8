@@ -1,0 +1,21 @@
+[flake8]
+# Ignore “line too long”, unused imports, blank‐line, import‐position, bare‐except, etc.
+ignore =
+  E501,  # line too long
+  F401,  # imported but unused
+  E302,  # expected 2 blank lines
+  E305,  # expected 2 blank lines after class or function
+  E131,  # continuation line unaligned
+  E402,  # module level import not at top
+  E722,  # do not use bare except
+  E272,  # multiple spaces before keyword
+  W292   # no newline at end of file
+
+max-line-length = 100
+exclude =
+  venv/,
+  .git/,
+  discord_messages.json,
+  discord-messages-extract.json,
+  discord_messages_v2.json,
+  discord_messages.db
