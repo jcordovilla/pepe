@@ -41,16 +41,16 @@ jobs:
         run: flake8 .
 
       # 7) Smoke-test rag_engine
-      - name: Smoke-test RAG search
+      - name: Smoke-test RAG retrieval
         run: |
           python - << 'EOF'
-          from rag_engine import search_messages
-          # Expect at least one result for 'ethics' in the known guild
-          results = search_messages(
+          from rag_engine import get_top_k_matches
+          # Use get_top_k_matches to avoid new embeddings
+          results = get_top_k_matches(
             "ethics",
             guild_id=1353058864810950737,
             channel_id=1353448986408779877,
             k=1
           )
-          print("Smoke-test returned", len(results), "result(s)")
+          print("Smoke-test get_top_k_matches returned", len(results), "result(s)")
           EOF
