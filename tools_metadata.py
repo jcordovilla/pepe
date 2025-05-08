@@ -1,5 +1,4 @@
 from tools import (
-    search_messages,
     summarize_weekly_activity,
     get_server_stats,
     extract_feedback_and_ideas,
@@ -65,24 +64,5 @@ TOOLS_METADATA = [
             "Summarizes messages sent between start_iso and end_iso. "
             "Optionally filter by guild_id and/or channel_id to scope the summary."
         ),
-    },
-        {
-        "name": "search_messages",
-        "function": search_messages,
-        "description": (
-            "Search messages by keywords, then rerank semantically. "
-            "Supports optional guild_id, channel_id, and author_id filters."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "query":      {"type": "string", "description": "Text to search for"},
-                "guild_id":   {"type": "integer", "description": "Filter by guild ID"},
-                "channel_id": {"type": "integer", "description": "Filter by channel ID"},
-                "author_id":  {"type": "integer", "description": "Filter by author ID"},
-                "top_n":      {"type": "integer", "description": "Number of results to return"}
-            },
-            "required": ["query"]
-        }
     }
 ]
