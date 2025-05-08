@@ -33,34 +33,33 @@ def get_top_k_matches(
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally filtered by guild_id and/or channel_id using metadata.
+    optionally filtered by guild and/or channel metadata.
     """
     store = load_vectorstore()
 
-    # Build metadata filter — keys must match exactly and be strings
+    # Prepare metadata filters as strings
     filters = {}
     if guild_id is not None:
         filters["guild_id"] = str(guild_id)
     if channel_id is not None:
         filters["channel_id"] = str(channel_id)
 
-    # Apply metadata filter at retrieval time (not post-filtering)
+    # Apply filters directly in retriever
     retriever = store.as_retriever(search_kwargs={
-        "k": k * 10,  # fetch more to ensure we get enough filtered hits
-        "filter": filters if filters else None
+        "k": k * 10,  # fetch more to allow reranking
+        "filter": filters
     })
 
-    # Retrieve and return top matches
+    # Retrieve results from FAISS
     docs = retriever.get_relevant_documents(query)
 
-    # Debug print: see what was matched
-    print(f"\n🔍 Query: {query}")
-    print(f"📎 Filter: {filters}")
-    for doc in docs[:k]:
-        md = doc.metadata
-        print(f"  ➤ Match: guild={md.get('guild_id')} | channel={md.get('channel_id')} | msg={md.get('message_id')}")
+    # Debug print: show what metadata was retrieved
+    print("🔍 Retrieved metadata from FAISS:")
+    for doc in docs:
+        print(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')}")
 
-    return [doc.metadata for doc in docs[:k]]
+    # Return top-k filtered metadata entries
+    return [doc.metadata for doc in docs][:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
@@ -120,7 +119,6 @@ def build_prompt(
         {"role": "user",   "content": prompt}
     ]
 
-
 def get_answer(
     query: str,
     k: int = 5,
@@ -149,3 +147,49 @@ def get_answer(
     except Exception as e:
         error_msg = f"❌ Error during RAG retrieval: {e}"
         return (error_msg, []) if return_matches else error_msg
+    
+def search_messages(
+    query: str,
+    keyword: Optional[str] = None,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
+    k: int = 5
+) -> List[Dict[str, Any]]:
+    """
+    Hybrid search: exact keyword pre‐filter, then semantic FAISS rerank.
+    """
+    # 1️⃣ Load raw messages + metadata
+    from embed_store import flatten_messages
+    all_msgs = flatten_messages("discord_messages_v2.json")
+
+    # 2️⃣ Pre‐filter by keyword & scope
+    candidates = []
+    for text, meta in all_msgs:
+        if keyword and keyword.lower() not in text.lower():
+            continue
+        if guild_id is not None and meta.get("guild_id") != str(guild_id):
+            continue
+        if channel_id is not None and meta.get("channel_id") != str(channel_id):
+            continue
+        candidates.append((text, meta))
+
+    if not candidates:
+        return []
+
+    # 3️⃣ Split texts & metadatas
+    texts, metadatas = zip(*candidates)
+
+    # 4️⃣ Build a temp FAISS index on these
+    from langchain_community.vectorstores import FAISS as _FAISS
+    temp_store = _FAISS.from_texts(
+        texts=list(texts),
+        embedding=embedding_model,
+        metadatas=list(metadatas)
+    )
+
+    # 5️⃣ Rerank semantically
+    retriever = temp_store.as_retriever(search_kwargs={"k": k})
+    docs = retriever.get_relevant_documents(query)
+
+    # 6️⃣ Return their metadata
+    return [doc.metadata for doc in docs]
