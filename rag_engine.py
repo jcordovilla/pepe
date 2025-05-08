@@ -17,6 +17,56 @@ INDEX_DIR = "index_faiss"
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
+def search_messages(
+    query: str,
+    keyword: Optional[str] = None,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
+    k: int = 5
+) -> List[Dict[str, Any]]:
+    """
+    Hybrid search:
+      1) Pre-filter messages containing `keyword` (exact, case-insensitive)
+      2) Optionally scope by guild_id & channel_id
+      3) Rerank the survivors semantically via FAISS
+      4) Return top-k metadata dicts
+    """
+    # 1) Load all raw texts+metadata
+    from embed_store import flatten_messages
+    all_msgs = flatten_messages("discord_messages_v2.json")
+
+    # 2) Keyword & metadata filter
+    candidates = []
+    for text, meta in all_msgs:
+        if keyword and keyword.lower() not in text.lower():
+            continue
+        if guild_id is not None and meta.get("guild_id") != str(guild_id):
+            continue
+        if channel_id is not None and meta.get("channel_id") != str(channel_id):
+            continue
+        candidates.append((text, meta))
+
+    if not candidates:
+        return []
+
+    # 3) Split texts & metadatas
+    texts, metadatas = zip(*candidates)
+
+    # 4) Build a temporary FAISS index on these candidates
+    from langchain_community.vectorstores import FAISS as _FAISS
+    temp_store = _FAISS.from_texts(
+        texts=list(texts),
+        embedding=embedding_model,
+        metadatas=list(metadatas)
+    )
+
+    # 5) Semantic rerank
+    retriever = temp_store.as_retriever(search_kwargs={"k": k})
+    docs = retriever.get_relevant_documents(query)
+
+    # 6) Return metadata only
+    return [doc.metadata for doc in docs]
+
 
 def load_vectorstore() -> FAISS:
     """
@@ -150,16 +200,8 @@ def get_answer(
     
 from typing import List, Dict, Any, Optional
 
-def search_messages(
-    query: str,
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None,
-    k: int = 5
-) -> List[Dict[str, Any]]:
-    """
-    Tool‐compatible entrypoint for searching Discord messages.
-    Wraps our existing get_top_k_matches under the name 'search_messages'.
-    """
-    # Simply forward to our RAG retriever
-    return get_top_k_matches(query=query, k=k, guild_id=guild_id, channel_id=channel_id)
+
+if __name__ == "__main__":
+    # Quick local test (adjust guild_id/channel_id as needed)
+    print(search_messages("ethics", guild_id=1353058864810950737, channel_id=1364361051830747156))
 
