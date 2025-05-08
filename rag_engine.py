@@ -5,10 +5,11 @@ from typing import Optional, List, Dict, Any
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
-from utils import build_jump_url
+from utils import build_jump_url, validate_ids
 from rapidfuzz import process, fuzz
 from typing import Optional
 from utils.logger import setup_logging
+
 setup_logging()
 
 import logging
