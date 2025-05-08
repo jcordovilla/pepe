@@ -24,8 +24,7 @@ if st.sidebar.button("🧰 Run Full Pipeline"):
 guild_input = st.sidebar.text_input("Guild ID (optional)")
 channel_input = st.sidebar.text_input("Channel ID (optional)")
 author_input = st.sidebar.text_input("Author name filter (optional)")
-keyword_input = st.sidebar.text_input("Keyword filter (optional)
-", help="Exact keyword pre-filter before semantic rerank")
+keyword_input = st.sidebar.text_input("Keyword filter (optional)", help="Exact keyword pre-filter before semantic rerank")
 
 # Main tabs
 tab1, tab2, tab3 = st.tabs(["💬 Ask", "🔍 Search", "📚 History"])
