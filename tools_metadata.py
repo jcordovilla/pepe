@@ -2,8 +2,7 @@ from tools import (
     search_messages,
     get_most_reacted_messages,
     find_users_by_skill,
-    summarize_messages,
-    summarize_messages_in_range
+    summarize_messages
 )
 
 TOOLS_METADATA = [
@@ -13,13 +12,13 @@ TOOLS_METADATA = [
         "parameters": {
             "type": "object",
             "properties": {
-                "query":         {"type": "string"},
-                "keyword":       {"type": "string"},
-                "guild_id":      {"type": "integer"},
-                "channel_id":    {"type": "integer"},
-                "channel_name":  {"type": "string"},
-                "author_name":   {"type": "string"},
-                "k":             {"type": "integer", "default": 5}
+                "query":        {"type": "string"},
+                "keyword":      {"type": "string"},
+                "guild_id":     {"type": "integer"},
+                "channel_id":   {"type": "integer"},
+                "channel_name": {"type": "string"},
+                "author_name":  {"type": "string"},
+                "k":            {"type": "integer", "default": 5}
             },
             "required": ["query"]
         }
@@ -68,7 +67,7 @@ TOOLS_METADATA = [
             "required": ["start_iso", "end_iso"]
         }
     },
-    {
+        {
         "name": "summarize_messages_in_range",
         "description": "Legacy wrapper: summarize messages between two ISO datetimes, scoped by guild and/or channel (by ID or name). Returns text or JSON based on output_format.",
         "parameters": {
