@@ -3,8 +3,8 @@ from db import SessionLocal, Message
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-# Directory where FAISS index will be stored\ nINDEX_DIR = "index_faiss"
-
+# Directory where FAISS index will be stored
+INDEX_DIR = "index_faiss"
 
 def build_langchain_faiss_index():
     """
