@@ -64,9 +64,9 @@ def search_messages(
     from embed_store import flatten_messages
     from langchain_community.vectorstores import FAISS
 
-    # Load the FAISS index from disk
+    # Load the FAISS index from disk with dangerous deserialization enabled
     print("📂 Loading FAISS index...")
-    vectorstore = FAISS.load_local(INDEX_DIR, embedding_model)
+    vectorstore = FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
 
     # Filter messages based on optional parameters
     all_msgs = flatten_messages("discord_messages_v2.json")
