@@ -80,7 +80,28 @@ def _with_prefix(query: str) -> str:
 # Main entrypoint
 def get_agent_answer(query: str) -> Any:
     """
-    Send a user query through the agent, with a guiding prefix if needed.
+    Entrypoint: if the user asks to summarize messages in natural language,
+    manually parse the timeframe and call summarize_messages.
+    Otherwise, delegate to the agent.
     """
-    prompt = _with_prefix(query)
-    return agent.run(prompt)
+    q = query.strip().lower()
+    # Detect natural-language summary requests
+    if q.startswith("summarize messages"):
+        # e.g. "Summarize messages from last week in #non-coders-learning"
+        # extract the phrase between "from" and "in"
+        import re
+
+        m = re.search(r"from (.?) in", q)
+        if not m:
+            return "⚠️ Please specify a timeframe, e.g. 'from last week in #channel'."
+        timeframe = m.group(1)
+        # parse range
+        start_dt, end_dt = parse_timeframe(timeframe)
+        # now call the summarizer directly
+        return summarize_messages(
+            start_dt.isoformat(),
+            end_dt.isoformat(),
+            # you can hard-code guild/channel if you prefer, or let the user supply IDs
+        )
+    # fallback to general agent for everything else
+    return agent.run(_with_prefix(query))
