@@ -2,9 +2,16 @@ import os
 from dotenv import load_dotenv
 from typing import Optional, List, Dict, Any
 from pydantic import BaseModel, Field
+from datetime import datetime
+
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
+from langchain.prompts import (
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+    ChatPromptTemplate
+)
 
 from tools import (
     summarize_messages,
@@ -21,7 +28,7 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
 
 # Initialize LLM with function-calling support
-llm = ChatOpenAI(
+temp_llm = ChatOpenAI(
     model_name=MODEL_NAME,
     openai_api_key=API_KEY,
     temperature=0
@@ -30,12 +37,6 @@ llm = ChatOpenAI(
 # --- Define argument schemas for tools ---
 class ParseTimeframeSchema(BaseModel):
     text: str = Field(..., description="Natural-language timeframe, e.g. 'last week', 'April 1-7'")
-
-class RAGSearchInput(BaseModel):
-    query: str = Field(..., description="Natural-language question for RAG search")
-    k: int = Field(5, description="Number of top context matches to retrieve")
-    as_json: bool = Field(False, description="Return raw JSON answer if True")
-    return_matches: bool = Field(False, description="Include context matches list if True")
 
 class SummarizeSchema(BaseModel):
     start_iso: str = Field(..., description="ISO 8601 start datetime for summary range")
@@ -61,6 +62,12 @@ class FindUsersSchema(BaseModel):
     skill: str = Field(..., description="Skill keyword to search in message content")
     guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
     channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
+
+class RAGSearchInput(BaseModel):
+    query: str = Field(..., description="Natural-language question for RAG search")
+    k: int = Field(5, description="Number of top context matches to retrieve")
+    as_json: bool = Field(False, description="Return raw JSON answer if True")
+    return_matches: bool = Field(False, description="Include context matches list if True")
 
 # --- Register tools ---
 tools = [
@@ -102,16 +109,29 @@ tools = [
     )
 ]
 
-# --- Initialize agent ---
+# --- Custom system prompt to guide function chaining ---
+prefix = (
+    "You are a Discord assistant.\n"
+    "When the user asks to summarize messages in a natural-language timeframe (e.g. 'last week', 'April 28–May 4') within a channel, you MUST:\n"
+    "1) Call the `parse_timeframe` tool with their phrase.\n"
+    "2) Call the `summarize_messages` tool with the resulting start_iso, end_iso, guild_id, and channel_id.\n"
+    "Do NOT try to summarize directly in your response; always use these functions for summaries."
+)
+system_msg = SystemMessagePromptTemplate.from_template(prefix)
+human_msg = HumanMessagePromptTemplate.from_template("{input}")
+chat_prompt = ChatPromptTemplate.from_messages([system_msg, human_msg])
+
+# --- Initialize agent with custom prompt ---
 agent = initialize_agent(
     tools,
-    llm,
+    temp_llm,
     agent=AgentType.OPENAI_FUNCTIONS,
-    verbose=True
+    verbose=True,
+    agent_kwargs={"prompt": chat_prompt}
 )
 
 # --- Expose main entrypoint ---
-def get_agent_answer(query: str) -> str:
+def get_agent_answer(query: str) -> Any:
     """
     Send a user query to the agent and return the response.
     """
