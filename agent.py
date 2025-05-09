@@ -13,9 +13,9 @@ from tools import (
     summarize_messages,
     search_messages,
     get_most_reacted_messages,
-    find_users_by_skill,
-    get_answer
+    find_users_by_skill
 )
+from rag_engine import get_answer as discord_rag_search
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -109,15 +109,16 @@ tools = [
     StructuredTool.from_function(
         find_users_by_skill,
         name="find_users_by_skill",
-        description="Find users mentioning a specific skill in messages.",
+        description="Find authors whose messages mention a specific skill keyword.",
         args_schema=FindUsersSchema
     ),
+    # RAG-based search over Discord messages
     StructuredTool.from_function(
-        get_answer,
+        discord_rag_search,
         name="discord_rag_search",
         description="Run a GPT-powered RAG query over Discord messages.",
         args_schema=RAGSearchInput
-    )
+    ),
 ]
 
 # --- Create the agent using OPENAI_FUNCTIONS mode ---
