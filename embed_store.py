@@ -47,9 +47,9 @@ def build_langchain_faiss_index():
     vectorstore.save_local(INDEX_DIR)
     print("✅ Index saved.")
 
-def flatten_messages(db_path: str) -> List[Dict[str, Any]]:
+def flatten_messages(db_path: str) -> List[tuple]:
     """
-    Load all messages from the SQLite database and return them as a list of dictionaries.
+    Load all messages from the SQLite database and return them as a list of (text, metadata) tuples.
     """
     print(f"📂 Loading messages from {db_path}...")
     session = SessionLocal()
@@ -58,8 +58,8 @@ def flatten_messages(db_path: str) -> List[Dict[str, Any]]:
 
     messages = []
     for m in rows:
-        messages.append({
-            "content": m.content,
+        text = m.content
+        meta = {
             "guild_id": m.guild_id,
             "channel_id": m.channel_id,
             "channel_name": m.channel_name,
@@ -68,8 +68,9 @@ def flatten_messages(db_path: str) -> List[Dict[str, Any]]:
             "author": m.author,
             "mention_ids": m.mention_ids,
             "reactions": m.reactions,
-            "jump_url": m.jump_url
-        })
+            "jump_url": m.jump_url,
+        }
+        messages.append((text, meta))  # Return as a tuple (text, metadata)
     return messages
 
 if __name__ == "__main__":

@@ -51,17 +51,24 @@ def find_author_id(name_query: str) -> Optional[int]:
 
 def search_messages(
     query: str,
-    keyword: Optional[str]    = None,
-    guild_id: Optional[int]    = None,
-    channel_id: Optional[int]  = None,
-    channel_name: Optional[str]= None,
+    keyword: Optional[str] = None,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
+    channel_name: Optional[str] = None,
     author_name: Optional[str] = None,
-    k: int                     = 5
+    k: int = 5
 ) -> List[Dict[str, Any]]:
     """
     Hybrid search: optional keyword, guild/channel (id or name), author filter, then semantic rerank.
     """
     from embed_store import flatten_messages
+    from langchain_community.vectorstores import FAISS
+
+    # Load the FAISS index from disk
+    print("📂 Loading FAISS index...")
+    vectorstore = FAISS.load_local(INDEX_DIR, embedding_model)
+
+    # Filter messages based on optional parameters
     all_msgs = flatten_messages("discord_messages_v2.json")
     candidates = []
     for text, meta in all_msgs:
@@ -78,11 +85,13 @@ def search_messages(
             if not aid or meta.get("author", {}).get("id") != aid:
                 continue
         candidates.append((text, meta))
+
     if not candidates:
         return []
+
+    # Perform semantic search using the FAISS index
     texts, metadatas = zip(*candidates)
-    from langchain_community.vectorstores import FAISS as _FAISS
-    temp_store = _FAISS.from_texts(
+    temp_store = FAISS.from_texts(
         texts=list(texts),
         embedding=embedding_model,
         metadatas=list(metadatas)
