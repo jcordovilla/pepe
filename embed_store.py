@@ -4,6 +4,7 @@ import os
 from db import SessionLocal, Message
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
+from typing import List, Dict, Any
 
 INDEX_DIR = "index_faiss"
 
@@ -45,6 +46,31 @@ def build_langchain_faiss_index():
     print(f"💾 Saving index to {INDEX_DIR}/")
     vectorstore.save_local(INDEX_DIR)
     print("✅ Index saved.")
+
+def flatten_messages(db_path: str) -> List[Dict[str, Any]]:
+    """
+    Load all messages from the SQLite database and return them as a list of dictionaries.
+    """
+    print(f"📂 Loading messages from {db_path}...")
+    session = SessionLocal()
+    rows = session.query(Message).all()
+    session.close()
+
+    messages = []
+    for m in rows:
+        messages.append({
+            "content": m.content,
+            "guild_id": m.guild_id,
+            "channel_id": m.channel_id,
+            "channel_name": m.channel_name,
+            "message_id": m.message_id,
+            "timestamp": m.timestamp.isoformat(),
+            "author": m.author,
+            "mention_ids": m.mention_ids,
+            "reactions": m.reactions,
+            "jump_url": m.jump_url
+        })
+    return messages
 
 if __name__ == "__main__":
     build_langchain_faiss_index()
