@@ -61,18 +61,21 @@ def search_messages(
     """
     Hybrid search: optional keyword, guild/channel (id or name), author filter, then semantic rerank.
     """
-    from embed_store import flatten_messages
     from langchain_community.vectorstores import FAISS
 
-    # Load the FAISS index from disk with dangerous deserialization enabled
+    # Load the FAISS index from disk
     print("📂 Loading FAISS index...")
     vectorstore = FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
 
-    # Filter messages based on optional parameters
-    all_msgs = flatten_messages("discord_messages_v2.json")
-    candidates = []
-    for text, meta in all_msgs:
-        if keyword and keyword.lower() not in text.lower():
+    # Perform semantic search using the FAISS index
+    retriever = vectorstore.as_retriever(search_kwargs={"k": k})
+    docs = retriever.get_relevant_documents(query)
+
+    # Filter results based on optional parameters
+    results = []
+    for doc in docs:
+        meta = doc.metadata
+        if keyword and keyword.lower() not in meta.get("content", "").lower():
             continue
         if guild_id and meta.get("guild_id") != str(guild_id):
             continue
@@ -81,24 +84,15 @@ def search_messages(
         if channel_name and meta.get("channel_name") != channel_name.lstrip("#"):
             continue
         if author_name:
-            aid = find_author_id(author_name)
-            if not aid or meta.get("author", {}).get("id") != aid:
+            author = meta.get("author", {})
+            if author.get("username") != author_name:
                 continue
-        candidates.append((text, meta))
+        results.append(meta)
 
-    if not candidates:
-        return []
+    log.info(f"Retrieved {len(docs)} documents from FAISS index.")
+    log.info(f"Filtered down to {len(results)} results based on query parameters.")
 
-    # Perform semantic search using the FAISS index
-    texts, metadatas = zip(*candidates)
-    temp_store = FAISS.from_texts(
-        texts=list(texts),
-        embedding=embedding_model,
-        metadatas=list(metadatas)
-    )
-    retriever = temp_store.as_retriever(search_kwargs={"k": k})
-    docs = retriever.get_relevant_documents(query)
-    return [doc.metadata for doc in docs]
+    return results
 
 
 def load_vectorstore() -> FAISS:
