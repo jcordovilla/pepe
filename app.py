@@ -71,7 +71,7 @@ with tab1:
                 'answer': answer
             }
             with open('chat_history.jsonl', 'a', encoding='utf-8') as f:
-                f.write(json.dumps(record) + '')
+                f.write(json.dumps(record) + '\n')
 
         except Exception as e:
             st.error(f"❌ Error processing request: {e}")
@@ -126,8 +126,11 @@ with tab3:
         with open('chat_history.jsonl', 'r', encoding='utf-8') as f:
             lines = f.readlines()
         for entry in reversed(lines[-20:]):
-            rec = json.loads(entry)
-            st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
-            st.markdown(f"**A:** {rec['answer']}")
+            try:
+                rec = json.loads(entry)
+                st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
+                st.markdown(f"**A:** {rec['answer']}")
+            except json.JSONDecodeError:
+                st.warning("⚠️ Skipping malformed history entry.")
     except FileNotFoundError:
         st.info("No history available yet.")
