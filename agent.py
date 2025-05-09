@@ -13,7 +13,8 @@ from tools import (
     summarize_messages,
     search_messages,
     get_most_reacted_messages,
-    find_users_by_skill
+    find_users_by_skill,
+    get_answer
 )
 
 load_dotenv()
@@ -72,6 +73,13 @@ class FindUsersSchema(BaseModel):
     guild_id:   Optional[int]    = Field(None, description="Discord guild ID filter.")
     channel_id: Optional[int]    = Field(None, description="Discord channel ID filter.")
 
+class RAGSearchInput(BaseModel):
+    query: str = Field(..., description="Search query string.")
+    k: Optional[int] = Field(5, description="Number of top results to return.")
+    guild_id: Optional[int] = Field(None, description="Discord guild ID filter.")
+    channel_id: Optional[int] = Field(None, description="Discord channel ID filter.")
+    channel_name: Optional[str] = Field(None, description="Discord channel name filter (e.g., 'general').")
+
 # --- Wrap each function as a StructuredTool ---
 tools = [
     StructuredTool.from_function(
@@ -104,6 +112,12 @@ tools = [
         description="Find users mentioning a specific skill in messages.",
         args_schema=FindUsersSchema
     ),
+    StructuredTool.from_function(
+        get_answer,
+        name="discord_rag_search",
+        description="Run a GPT-powered RAG query over Discord messages.",
+        args_schema=RAGSearchInput
+    )
 ]
 
 # --- Create the agent using OPENAI_FUNCTIONS mode ---

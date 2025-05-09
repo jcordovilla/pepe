@@ -130,24 +130,27 @@ def get_top_k_matches(
     query: str,
     k: int = 5,
     guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None
+    channel_id: Optional[int] = None,
+    channel_name: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally filtered by guild and/or channel metadata.
+    optionally filtered by guild, channel metadata, or channel name.
     """
     store = load_vectorstore()
 
-    # Prepare metadata filters as strings
-    filters = {}
+    # Prepare metadata filters as strings (FAISS will match on any metadata field)
+    filters: Dict[str, str] = {}
     if guild_id is not None:
         filters["guild_id"] = str(guild_id)
     if channel_id is not None:
         filters["channel_id"] = str(channel_id)
+    if channel_name is not None:
+        filters["channel_name"] = channel_name
 
     # Apply filters directly in retriever
     retriever = store.as_retriever(search_kwargs={
-        "k": k * 10,  # fetch more to allow reranking
+        "k": k * 10,   # fetch more for robust filtering
         "filter": filters
     })
 
@@ -157,7 +160,7 @@ def get_top_k_matches(
     # Debug print: show what metadata was retrieved
     log.debug("🔍 Retrieved metadata from FAISS:")
     for doc in docs:
-        log.debug(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')}")
+        log.debug(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')} | channel_name={doc.metadata.get('channel_name')}")
 
     # Return top-k filtered metadata entries
     return [doc.metadata for doc in docs][:k]
