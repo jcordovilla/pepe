@@ -1,17 +1,10 @@
 import os
 from dotenv import load_dotenv
-from typing import Optional, List, Dict, Any
-from pydantic import BaseModel, Field
-from datetime import datetime
+from typing import Any
 
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
-from langchain.prompts import (
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-    ChatPromptTemplate
-)
 
 from tools import (
     summarize_messages,
@@ -19,7 +12,7 @@ from tools import (
     get_most_reacted_messages,
     find_users_by_skill
 )
-from rag_engine import get_answer
+from rag_engine import get_answer as discord_rag_search
 from time_parser import parse_timeframe
 
 # Load environment variables
@@ -27,101 +20,47 @@ load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
 
-# Initialize LLM with function-calling support
+# Initialize LLM
 temp_llm = ChatOpenAI(
     model_name=MODEL_NAME,
     openai_api_key=API_KEY,
-    temperature=0
+    temperature=0.0
 )
 
-# --- Define argument schemas for tools ---
-class ParseTimeframeSchema(BaseModel):
-    text: str = Field(..., description="Natural-language timeframe, e.g. 'last week', 'April 1-7'")
-
-class SummarizeSchema(BaseModel):
-    start_iso: str = Field(..., description="ISO 8601 start datetime for summary range")
-    end_iso: str = Field(..., description="ISO 8601 end datetime for summary range")
-    guild_id: Optional[int] = Field(None, description="Discord guild ID filter (optional)")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID filter (optional)")
-    as_json: bool = Field(False, description="Return JSON object if True")
-
-class SearchSchema(BaseModel):
-    query: str = Field(..., description="Search query string")
-    keyword: Optional[str] = Field(None, description="Exact keyword pre-filter, optional")
-    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
-    author_name: Optional[str] = Field(None, description="Fuzzy-match author username, optional")
-    k: int = Field(5, description="Number of top results to return")
-
-class MostReactedSchema(BaseModel):
-    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
-    top_n: int = Field(5, description="Number of top messages by reaction count to return")
-
-class FindUsersSchema(BaseModel):
-    skill: str = Field(..., description="Skill keyword to search in message content")
-    guild_id: Optional[int] = Field(None, description="Discord guild ID filter, optional")
-    channel_id: Optional[int] = Field(None, description="Discord channel ID filter, optional")
-
-class RAGSearchInput(BaseModel):
-    query: str = Field(..., description="Natural-language question for RAG search")
-    k: int = Field(5, description="Number of top context matches to retrieve")
-    as_json: bool = Field(False, description="Return raw JSON answer if True")
-    return_matches: bool = Field(False, description="Include context matches list if True")
-
-# --- Register tools ---
+# Register tools
 tools = [
     StructuredTool.from_function(
         parse_timeframe,
         name="parse_timeframe",
-        description="Convert a natural-language timeframe into a start and end ISO datetime.",
-        args_schema=ParseTimeframeSchema
+        description="Parse a natural-language timeframe into start and end ISO datetimes.",
     ),
     StructuredTool.from_function(
         summarize_messages,
         name="summarize_messages",
-        description="Summarize Discord messages between two ISO datetimes, optionally scoped by guild/channel.",
-        args_schema=SummarizeSchema
+        description="Summarize messages between two ISO datetimes, optionally scoped by guild/channel.",
     ),
     StructuredTool.from_function(
         search_messages,
         name="search_messages",
-        description="Hybrid keyword + semantic search over Discord messages with optional filters.",
-        args_schema=SearchSchema
+        description="Perform hybrid keyword and semantic search over Discord messages with filters.",
     ),
     StructuredTool.from_function(
         get_most_reacted_messages,
         name="get_most_reacted_messages",
-        description="Return the top N messages by reaction count, optionally scoped by guild/channel.",
-        args_schema=MostReactedSchema
+        description="Get top N messages by reaction count, with optional filters.",
     ),
     StructuredTool.from_function(
         find_users_by_skill,
         name="find_users_by_skill",
-        description="Identify authors whose messages mention a given skill keyword, with example message and URL.",
-        args_schema=FindUsersSchema
+        description="Find authors whose messages mention a skill keyword, with example and URL.",
     ),
     StructuredTool.from_function(
-        get_answer,
+        discord_rag_search,
         name="discord_rag_search",
-        description="Retrieve and answer questions using GPT-powered RAG over Discord messages.",
-        args_schema=RAGSearchInput
+        description="Run a GPT-powered RAG query over Discord messages.",
     )
 ]
 
-# --- Custom system prompt to guide function chaining ---
-prefix = (
-    "You are a Discord assistant.\n"
-    "When the user asks to summarize messages in a natural-language timeframe (e.g. 'last week', 'April 28–May 4') within a channel, you MUST:\n"
-    "1) Call the `parse_timeframe` tool with their phrase.\n"
-    "2) Call the `summarize_messages` tool with the resulting start_iso, end_iso, guild_id, and channel_id.\n"
-    "Do NOT try to summarize directly in your response; always use these functions for summaries."
-)
-system_msg = SystemMessagePromptTemplate.from_template(prefix)
-human_msg = HumanMessagePromptTemplate.from_template("{input}")
-chat_prompt = ChatPromptTemplate.from_messages([system_msg, human_msg])
-
-# --- Initialize agent with custom prompt ---
 # Initialize agent with function-calling
 agent = initialize_agent(
     tools,
@@ -130,17 +69,18 @@ agent = initialize_agent(
     verbose=True
 )
 
-# Override the default prompt to guide function chaining
-# Attach our custom ChatPromptTemplate to the agent's llm chain
-try:
-    agent.agent.llm_chain.prompt = chat_prompt
-except Exception:
-    # For older LangChain versions where attribute path may differ
-    agent.llm_chain.prompt = chat_prompt
+# Prefix to guide summary chaining
+def _with_prefix(query: str) -> str:
+    return (
+        "Summarize messages command:\n"
+        "When asking to summarize by natural language timeframe, first use parse_timeframe, then summarize_messages.\n"
+        f"User: {query}"
+    )
 
-# --- Expose main entrypoint ---
+# Main entrypoint
 def get_agent_answer(query: str) -> Any:
     """
-    Send a user query to the agent and return the response.
+    Send a user query through the agent, with a guiding prefix if needed.
     """
-    return agent.run(query)
+    prompt = _with_prefix(query)
+    return agent.run(prompt)
