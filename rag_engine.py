@@ -7,11 +7,10 @@ from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import build_jump_url, validate_ids
 from rapidfuzz import process, fuzz
-from typing import Optional
 from utils.logger import setup_logging
 
+# Initialize logging
 setup_logging()
-
 import logging
 log = logging.getLogger(__name__)
 
@@ -25,97 +24,71 @@ INDEX_DIR = "index_faiss"
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
-# Fuzzy string matching
+
 def find_author_id(name_query: str) -> Optional[int]:
     """
-    Fuzzy‐match a user’s input against known author usernames
-    and return the best matching author_id (or None if no good match).
+    Fuzzy-match a user’s input against known author usernames
+    and return the best matching author_id (or None).
     """
-    # Load all message metadata
     from embed_store import flatten_messages
     all_msgs = flatten_messages("discord_messages_v2.json")
-
-    # Build a map: username → author_id
     author_map: Dict[str, int] = {}
     for _, meta in all_msgs:
         author = meta.get("author", {})
         uname = author.get("username")
-        aid   = author.get("id")
+        aid = author.get("id")
         if uname and aid and uname not in author_map:
             author_map[uname] = aid
-
     if not author_map:
         return None
-
-    # Fuzzy‐match the query against those usernames
     best, score, _ = process.extractOne(
         name_query,
         list(author_map.keys()),
         scorer=fuzz.WRatio
     )
-    # You can tweak this threshold; 60 is a reasonable start
-    if score < 60:
-        return None
+    return author_map[best] if score >= 60 else None
 
-    return author_map[best]
 
 def search_messages(
     query: str,
-    keyword: Optional[str]     = None,
-    guild_id: Optional[int]     = None,
-    channel_id: Optional[int]   = None,
-    author_name: Optional[str]  = None,
-    k: int                      = 5
+    keyword: Optional[str]    = None,
+    guild_id: Optional[int]    = None,
+    channel_id: Optional[int]  = None,
+    channel_name: Optional[str]= None,
+    author_name: Optional[str] = None,
+    k: int                     = 5
 ) -> List[Dict[str, Any]]:
     """
-    Hybrid search:
-      1) Pre-filter messages containing `keyword` (exact, case-insensitive)
-      2) Optionally scope by guild_id & channel_id
-      3) Rerank the survivors semantically via FAISS
-      4) Return top-k metadata dicts
+    Hybrid search: optional keyword, guild/channel (id or name), author filter, then semantic rerank.
     """
-    # 1) Load all raw texts+metadata
     from embed_store import flatten_messages
     all_msgs = flatten_messages("discord_messages_v2.json")
-
-    # 2) Keyword & metadata filter
     candidates = []
     for text, meta in all_msgs:
-        # 1) keyword filter (if any)
         if keyword and keyword.lower() not in text.lower():
             continue
-        # 2) guild/channel scope
-        if guild_id and meta["guild_id"] != str(guild_id):
+        if guild_id and meta.get("guild_id") != str(guild_id):
             continue
-        if channel_id and meta["channel_id"] != str(channel_id):
+        if channel_id and meta.get("channel_id") != str(channel_id):
             continue
-        # 3) fuzzy author filter
+        if channel_name and meta.get("channel_name") != channel_name.lstrip("#"):
+            continue
         if author_name:
-            matched_id = find_author_id(author_name)
-            if matched_id is None or meta["author"]["id"] != matched_id:
+            aid = find_author_id(author_name)
+            if not aid or meta.get("author", {}).get("id") != aid:
                 continue
-
         candidates.append((text, meta))
-
     if not candidates:
         return []
-
-    # 3) Split texts & metadatas
     texts, metadatas = zip(*candidates)
-
-    # 4) Build a temporary FAISS index on these candidates
     from langchain_community.vectorstores import FAISS as _FAISS
     temp_store = _FAISS.from_texts(
         texts=list(texts),
         embedding=embedding_model,
         metadatas=list(metadatas)
     )
-
-    # 5) Semantic rerank
     retriever = temp_store.as_retriever(search_kwargs={"k": k})
     docs = retriever.get_relevant_documents(query)
-
-    # 6) Return metadata only
     return [doc.metadata for doc in docs]
 
 
@@ -129,47 +102,34 @@ def load_vectorstore() -> FAISS:
 def get_top_k_matches(
     query: str,
     k: int = 5,
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None,
-    channel_name: Optional[str] = None,
+    guild_id: Optional[int]    = None,
+    channel_id: Optional[int]  = None,
+    channel_name: Optional[str]= None
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally filtered by guild, channel metadata, or channel name.
+    optionally filtered by guild, channel_id, or channel_name.
     """
     store = load_vectorstore()
-
-    # Prepare metadata filters as strings (FAISS will match on any metadata field)
     filters: Dict[str, str] = {}
     if guild_id is not None:
         filters["guild_id"] = str(guild_id)
     if channel_id is not None:
         filters["channel_id"] = str(channel_id)
     if channel_name is not None:
-        filters["channel_name"] = channel_name
-
-    # Apply filters directly in retriever
+        filters["channel_name"] = channel_name.lstrip("#")
     retriever = store.as_retriever(search_kwargs={
-        "k": k * 10,   # fetch more for robust filtering
+        "k": k * 10,
         "filter": filters
     })
-
-    # Retrieve results from FAISS
     docs = retriever.get_relevant_documents(query)
-
-    # Debug print: show what metadata was retrieved
     log.debug("🔍 Retrieved metadata from FAISS:")
     for doc in docs:
         log.debug(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')} | channel_name={doc.metadata.get('channel_name')}")
-
-    # Return top-k filtered metadata entries
     return [doc.metadata for doc in docs][:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
-    """
-    Ensure the metadata contains a valid jump_url, constructing one if missing.
-    """
     url = metadata.get("jump_url")
     if url:
         return url
@@ -187,23 +147,19 @@ def build_prompt(
     question: str,
     as_json: bool
 ) -> List[Dict[str, str]]:
-    """
-    Build a ChatML prompt given matched messages and the user question.
-    """
     context_lines: List[str] = []
     for m in matches:
         author = m.get("author", {})
         author_name = author.get("display_name") or author.get("username") or str(author)
         ts = m.get("timestamp")
-        channel_name = m.get("channel_name") or m.get("channel_id")
+        ch_name = m.get("channel_name") or m.get("channel_id")
         content = m.get("content", "").replace("\n", " ")
         url = safe_jump_url(m)
-        line = f"**{author_name}** (_{ts}_ in **#{channel_name}**):\n{content}"
+        line = f"**{author_name}** (_{ts}_ in **#{ch_name}**):\n{content}"
         if url:
             line += f"\n[🔗 View Message]({url})"
         context_lines.append(line)
     context = "\n\n".join(context_lines)
-
     instructions = (
         "You are a knowledgeable and versatile assistant specialized in analyzing Discord server data.\n\n"
         "Based on the user’s query, you can:\n"
@@ -216,12 +172,12 @@ def build_prompt(
     )
     if as_json:
         instructions += "\nReturn the results as a JSON array with those fields."
-
     prompt = f"{instructions}\n\nContext:\n{context}\n\nUser's question: {question}\n"
     return [
         {"role": "system", "content": "You are a Discord message analyst."},
         {"role": "user",   "content": prompt}
     ]
+
 
 def get_answer(
     query: str,
@@ -229,15 +185,10 @@ def get_answer(
     as_json: bool = False,
     return_matches: bool = False
 ) -> Any:
-    """
-    Run a RAG-based answer: retrieve matches, build a prompt, and ask OpenAI.
-    Returns either a string or (answer, matches) if return_matches=True.
-    """
     try:
         matches = get_top_k_matches(query, k) if not return_matches else get_top_k_matches(query, k)
         if not matches and not return_matches:
             return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
-
         chat_messages = build_prompt(matches, query, as_json)
         response = openai_client.chat.completions.create(
             model=GPT_MODEL,
@@ -251,11 +202,8 @@ def get_answer(
     except Exception as e:
         error_msg = f"❌ Error during RAG retrieval: {e}"
         return (error_msg, []) if return_matches else error_msg
-    
-from typing import List, Dict, Any, Optional
 
 
 if __name__ == "__main__":
-    # Quick local test (adjust guild_id/channel_id as needed)
-    log.info(search_messages("ethics", guild_id=1353058864810950737, channel_id=1364361051830747156))
-
+    # Quick local smoke test
+    log.info(get_top_k_matches("ethics", guild_id=1353058864810950737, channel_name="non-coders-learning"))
