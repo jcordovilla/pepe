@@ -127,6 +127,7 @@ class DiscordFetcher(discord.Client):
                         db_msg = Message(
                             guild_id=int(m['guild_id']),
                             channel_id=int(m['channel_id']),
+                            channel_name=channel.name,  # <<< add this
                             message_id=int(m['message_id']),
                             content=m['content'],
                             timestamp=ts,
