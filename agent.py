@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from typing import Any
+from typing import Any, Optional
 
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
@@ -17,13 +17,13 @@ from time_parser import parse_timeframe
 
 # Load environment variables
 load_dotenv()
-API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
 
 # Initialize LLM
-temp_llm = ChatOpenAI(
+llm = ChatOpenAI(
     model_name=MODEL_NAME,
-    openai_api_key=API_KEY,
+    openai_api_key=OPENAI_API_KEY,
     temperature=0.0
 )
 
@@ -65,11 +65,12 @@ tools = [
 SYSTEM_MESSAGE = '''
 You are a Discord assistant that must always use the provided tools to answer user questions about Discord data.
 Do NOT rely on your internal knowledge or mention any knowledge cutoff. Instead:
-- For time-based summaries, call `parse_timeframe` then `summarize_messages` or `summarize_messages_in_range`.
+- For time-based summaries, call `parse_timeframe` then `summarize_messages`.
 - For searches, call `search_messages` with query, guild_id or channel_name.
 - For reaction stats, call `get_most_reacted_messages`.
 - For skill lookups, call `find_users_by_skill`.
-Always invoke the tools via function calling; do not produce your own summaries or say you cannot access data.
+- For RAG queries, call `discord_rag_search`.
+Always invoke the tools via function calling; do not produce your own summaries.
 '''
 
 # Initialize agent with function-calling and custom system message
