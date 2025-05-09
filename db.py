@@ -21,6 +21,7 @@ class Message(Base):
     id = Column(Integer, primary_key=True, index=True)
     guild_id = Column(Integer, index=True, nullable=False)
     channel_id = Column(Integer, index=True, nullable=False)
+    channel_name = Column(String, nullable=False)
     message_id = Column(Integer, unique=True, index=True, nullable=False)
     content = Column(Text, nullable=False)
     timestamp = Column(DateTime, nullable=False)
