@@ -122,13 +122,21 @@ human_msg = HumanMessagePromptTemplate.from_template("{input}")
 chat_prompt = ChatPromptTemplate.from_messages([system_msg, human_msg])
 
 # --- Initialize agent with custom prompt ---
+# Initialize agent with function-calling
 agent = initialize_agent(
     tools,
     temp_llm,
     agent=AgentType.OPENAI_FUNCTIONS,
-    verbose=True,
-    agent_kwargs={"prompt": chat_prompt}
+    verbose=True
 )
+
+# Override the default prompt to guide function chaining
+# Attach our custom ChatPromptTemplate to the agent's llm chain
+try:
+    agent.agent.llm_chain.prompt = chat_prompt
+except Exception:
+    # For older LangChain versions where attribute path may differ
+    agent.llm_chain.prompt = chat_prompt
 
 # --- Expose main entrypoint ---
 def get_agent_answer(query: str) -> Any:
