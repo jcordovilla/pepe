@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Literal
 from datetime import datetime
 
 from pydantic import BaseModel, Field
@@ -97,9 +97,15 @@ def search_messages(
     keyword: Optional[str] = None,
     guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
+    channel_name: Optional[str] = None,
     author_name: Optional[str] = None,
     k: int = 5
 ) -> List[Dict[str, Any]]:
+    # If user passed channel_name but not channel_id, resolve it
+    if channel_name and not channel_id:
+        channel_id = resolve_channel_name(channel_name, guild_id)
+        if not channel_id:
+            raise ValueError(f"Unknown channel: {channel_name}")
     """
     Hybrid keyword + semantic search over Discord messages.
     """
@@ -231,11 +237,17 @@ def find_users_by_skill(
 
 def summarize_messages_in_range(
     start_iso: str,
-    end_iso:   str,
-    guild_id:  Optional[int] = None,
+    end_iso: str,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
-    output_format: str = "text"
-) -> str:
+    channel_name: Optional[str] = None,
+    output_format: Literal["text","json"]="text"
+):
+    # If user passed channel_name but not channel_id, resolve it
+    if channel_name and not channel_id:
+        channel_id = resolve_channel_name(channel_name, guild_id)
+        if not channel_id:
+            raise ValueError(f"Unknown channel: {channel_name}")
     """
     Legacy wrapper for summarization tests.
     If output_format == "json", returns '{}' when no messages,
@@ -283,3 +295,23 @@ def summarize_messages_in_range(
         url    = m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id)
         lines.append(f"**{author}** ({ts}): {text}")
     return "\n".join(lines)
+
+from db import SessionLocal, Message
+
+def resolve_channel_name(
+    channel_name: str,
+    guild_id: Optional[int] = None
+) -> Optional[int]:
+    """
+    Look up a channel_id by its name (and optional guild).
+    Returns the first matching channel_id or None if not found.
+    """
+    session = SessionLocal()
+    q = session.query(Message.channel_id, Message.channel_name).distinct()
+    if guild_id:
+        q = q.filter(Message.guild_id == guild_id)
+    # Case-insensitive match
+    q = q.filter(Message.channel_name.ilike(channel_name.strip("#")))
+    result = q.first()
+    session.close()
+    return result[0] if result else None

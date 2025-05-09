@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from typing import Any, Optional
+from re import findall
 
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
@@ -82,9 +83,25 @@ agent = initialize_agent(
     system_message=SYSTEM_MESSAGE
 )
 
+def extract_channel_name(text: str) -> Optional[str]:
+    """
+    Extract the last channel name (e.g., #channel-name) from the input text.
+    """
+    m = findall(r"#([\w\-]+)", text)
+    return m[-1] if m else None
+
 # Expose main entrypoint
 def get_agent_answer(query: str) -> Any:
     """
     Main entry point for your app or REPL. Queries are sent directly to the agent.
+    Preprocesses the query to extract channel names or other tokens.
     """
+    # Extract channel name from the query
+    channel_name = extract_channel_name(query)
+
+    # Optionally, pass the extracted channel name into the agent's tools
+    if channel_name:
+        # Example: Modify the query or pass channel_name to a specific tool
+        query = f"{query} (channel: {channel_name})"
+
     return agent.run(query)
