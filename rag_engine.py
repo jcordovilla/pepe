@@ -104,29 +104,36 @@ def get_top_k_matches(
     k: int = 5,
     guild_id: Optional[int]    = None,
     channel_id: Optional[int]  = None,
-    channel_name: Optional[str]= None
+    channel_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally filtered by guild, channel_id, or channel_name.
+    optionally scoped to a guild, channel_id, or channel_name
+    via manual post-filtering.
     """
     store = load_vectorstore()
-    filters: Dict[str, str] = {}
-    if guild_id is not None:
-        filters["guild_id"] = str(guild_id)
-    if channel_id is not None:
-        filters["channel_id"] = str(channel_id)
-    if channel_name is not None:
-        filters["channel_name"] = channel_name.lstrip("#")
-    retriever = store.as_retriever(search_kwargs={
-        "k": k * 10,
-        "filter": filters
-    })
+
+    # 1) Pull back more candidates for local filtering
+    fetch_k = k * 10
+    retriever = store.as_retriever(search_kwargs={"k": fetch_k})
     docs = retriever.get_relevant_documents(query)
-    log.debug("🔍 Retrieved metadata from FAISS:")
-    for doc in docs:
-        log.debug(f"📎 guild_id={doc.metadata.get('guild_id')} | channel_id={doc.metadata.get('channel_id')} | channel_name={doc.metadata.get('channel_name')}")
-    return [doc.metadata for doc in docs][:k]
+    metas = [doc.metadata for doc in docs]
+
+    # 2) Manually filter by guild_id
+    if guild_id is not None:
+        metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+
+    # 3) Manually filter by channel_id
+    if channel_id is not None:
+        metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
+
+    # 4) Manually filter by human channel_name
+    if channel_name is not None:
+        name = channel_name.lstrip("#")
+        metas = [m for m in metas if m.get("channel_name") == name]
+
+    # 5) Return the top-k of whatever remains
+    return metas[:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
