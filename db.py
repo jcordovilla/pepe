@@ -28,6 +28,7 @@ class Message(Base):
     mention_ids = Column(JSON, nullable=False)  # list of ints
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
+    channel_name = Column(String, index=True, nullable=True)  # <<< add this
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)
