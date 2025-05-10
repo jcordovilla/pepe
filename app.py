@@ -6,17 +6,8 @@ from rag_engine import get_answer, search_messages, safe_jump_url
 from db import SessionLocal, Message  # Import the database session and model
 
 # Streamlit page configuration
-st.set_page_config(page_title="GenAI Discord RAG", layout="wide")
-st.title("📡 GenAI Pathfinder Discord Bot - v1.0")
-
-# Sidebar: Data refresh instructions
-st.sidebar.info(
-    "To refresh data, run in your terminal:"
-    "```bash"
-    "python fetch_messages.py"
-    "python embed_store.py"
-    "```"
-)
+st.set_page_config(page_title="GenAI Discord Bot", layout="wide")
+st.title("📡 Pathfinder - GenAI Discord Bot v2.0")
 
 # Function to fetch distinct channels
 def get_channels():
