@@ -58,6 +58,7 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = 
             start = dateparser.parse(start_str, settings=settings)
             end = dateparser.parse(end_str, settings=settings)
             if start and end:
+                print(f"DEBUG: Parsed timeframe '{text}' -> Start: {start}, End: {end}")
                 return start, end
 
     # Single-point parse and infer range
@@ -81,4 +82,5 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = 
         start = dt - timedelta(days=1)
         end = dt
 
+    print(f"DEBUG: Parsed timeframe '{text}' -> Start: {start}, End: {end}")
     return start, end
