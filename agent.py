@@ -99,9 +99,20 @@ def get_agent_answer(query: str) -> Any:
     # Extract channel name from the query
     channel_name = extract_channel_name(query)
 
+    # Detect time references in the query
+    time_keywords = ["week", "day", "month", "yesterday", "today", "past", "last"]
+    if any(keyword in query.lower() for keyword in time_keywords):
+        try:
+            # Attempt to parse the timeframe
+            start, end = parse_timeframe(query)
+            print(f"DEBUG: Parsed timeframe -> Start: {start}, End: {end}")
+            # Modify the query to include the parsed timeframe
+            query = f"{query} (timeframe: {start.isoformat()} to {end.isoformat()})"
+        except ValueError as e:
+            print(f"DEBUG: Failed to parse timeframe: {e}")
+
     # Optionally, pass the extracted channel name into the agent's tools
     if channel_name:
-        # Example: Modify the query or pass channel_name to a specific tool
         query = f"{query} (channel: {channel_name})"
 
     return agent.run(query)

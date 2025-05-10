@@ -37,9 +37,9 @@ def summarize_messages(
     channel_id: Optional[int] = None,
     as_json: bool = False
 ) -> Any:
-    """
-    Summarize Discord messages between two ISO datetimes, optionally scoped by guild and/or channel.
-    """
+    # Debug logging for input parameters
+    print(f"DEBUG: summarize_messages called with start_iso={start_iso}, end_iso={end_iso}, guild_id={guild_id}, channel_id={channel_id}")
+
     # Validate IDs
     if guild_id is not None:
         validate_ids(guild_id=guild_id)
@@ -58,6 +58,9 @@ def summarize_messages(
         query = query.filter(Message.channel_id == channel_id)
     msgs = query.all()
     session.close()
+
+    # Debug logging for query results
+    print(f"DEBUG: Retrieved {len(msgs)} messages from the database.")
 
     # Build context snippets
     context_lines = []
