@@ -57,11 +57,11 @@ def get_period_start(period: str, number: int = 1) -> datetime:
 
 def parse_timeframe(
     text: str,
-    timezone: str = "Europe/Madrid",
+    timezone: str = "UTC",
     now: datetime = None
 ) -> tuple[datetime, datetime]:
     """
-    Parse a natural-language timeframe into (start, end) datetimes in the given timezone.
+    Parse a natural-language timeframe into (start, end) datetimes in UTC.
 
     Supports:
       - "last week" (previous calendar week: Monday → Sunday)
@@ -78,7 +78,7 @@ def parse_timeframe(
       - "during X" (e.g., "during last week", "during this month")
 
     Returns:
-      (start_dt, end_dt)
+      (start_dt, end_dt) in UTC
     Raises:
       ValueError if parsing fails.
     """

@@ -1,31 +1,31 @@
 {
-  "timestamp": "2025-05-10T22:35:07.086871",
-  "total_queries": 120,
-  "successful_queries": 120,
+  "timestamp": "2025-05-11T01:35:41.920358",
+  "total_queries": 17,
+  "successful_queries": 17,
   "failed_queries": 0,
-  "average_duration": 4.411738500000002,
+  "average_duration": 2.923304117647059,
   "results": [
     {
       "query": "Show me messages from the last 3 hours",
       "channel_id": null,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001411,
+      "duration": 0.002636,
       "success": true,
       "error": null
     },
     {
       "query": "List messages from the past 2 days",
       "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10):**\n\n---\n\n### 1. nikhil_34309 (2025-05-08 22:26:19.366000)\n- Reminds users to check if they\u2019ve been assigned to a buddy group and VC channel.\n- Asks for feedback if there are access issues.\n\n### 2. oscarsan.chez (2025-05-08 22:29:56.138000)\n- Acknowledges previous message with \"Will do!\"\n\n### 3. ash.mikhail (2025-05-08 22:35:26.722000)\n- Asks a question from Buddy Group 11:\n    - Seeks pros and cons of enabling GPU clusters on each EDGE node in an AI/ML platform.\n\n### 4. oscarsan.chez (2025-05-08 22:36:57.810000)\n- Announces this week\u2019s Q&A will be on LinkedIn instead of Zoom.\n- Shares LinkedIn event link; time changed to 11:00 AM for this week only.\n- Top six questions will be answered; \u201cMember of the Week\u201d announced.\n- Explains this is a beta test; future Q&As will be on Gen AI Global LinkedIn.\n- Zoom Q&As will resume next week, also broadcast to LinkedIn.\n- Celebrates reaching 1,000+ LinkedIn followers.\n- Mentions Gen AI Global 2.0 relaunch at the end of May.\n- Reminds about Saturday\u2019s informational session (1 PM, Zoom link provided).\n\n### 5. ash.mikhail (2025-05-08 22:49:53.696000)\n- Says thanks.\n\n### 6. ireney_67517 (2025-05-08 22:52:44.569000)\n- Praises shared resource, says it\u2019ll be added to non-coder learning assets and referenced in discussions.\n\n### 7. nikhil_34309 (2025-05-08 22:58:10.813000)\n- (empty message, possibly a system artifact)\n\n### 8. darkgago (2025-05-08 22:59:47.253000)\n- Expresses concern about someone claiming to be former MIT faculty; asks if there\u2019s a way to verify.\n\n### 9. nikhil_34309 (2025-05-08 23:02:39.240000)\n- Invites everyone to vote on which questions Dr. Sanchez should ask at the LinkedIn Q&A.\n- Shares poll and list of questions, emphasizing thoughtful discussion.\n\n### 10. nikhil_34309 (2025-05-08 23:02:59.247000 & 23:03:01.297000)\n- Lists 10 potential Q&A topics, covering open source, multilingual AI, governance, autonomous agents, agentic value, AI coding tools, AI vs human judgment, IBM/Amazon agents, digital divide, and open source security.\n\n### 11. boozeena_49785 (2025-05-08 23:05:44.789000)\n- Responds to Oscar\u2019s report of an unverified member.\n- Recommends caution due to a rise in fake profiles.\n- Advises vigilance, especially on WhatsApp, and to report suspicious activity.\n\n### 12. nikhil_34309 (2025-05-08 23:24:34.291000)\n- Announces voting closes at 11pm EST.\n\n### 13. chiarapassuello (2025-05-08 23:25:50.570000)\n- Thanks everyone (esp. Melinda), apologizes for late response due to personal reasons.\n\n### 14. ash.mikhail (202",
-      "duration": 8.338988,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000432,
       "success": true,
       "error": null
     },
     {
       "query": "What happened during last week",
       "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-04-28 to 2025-05-04)**\n\n---\n\n### 1. Community Structure & Onboarding\n- **Buddy Groups Launched:** Members were divided into buddy groups by time zone and interest, each with admin/Conversational Leader support. Private text and voice channels for groups were enabled. (oscarsan.chez, 2025-04-28, 13:30)\n- **Onboarding Process:** New members introduced themselves, shared goals, and were guided to channels and resources. Dedicated onboarding sessions and support channels were provided. (peterparkerdata, 2025-05-01, 00:58)\n- **Admin/Leader Roles Clarified:** Admins manage group structure, support, and moderate. Conversational Leaders facilitate, but are not meant to micromanage. (oscarsan.chez, 2025-04-30, 22:33)\n- **Channel Usage & Posting Guidelines:** Discussions about the high message volume and content organization led to suggestions for using threads, limiting daily posts, rotating posting responsibilities, and focusing on deeper engagement. (laura.neder, 2025-04-28, 18:08; ash.mikhail, 2025-04-29, 04:45)\n- **Technical Issues:** Some users encountered issues with voice channels, group assignments, and poll creation, which admins actively worked to resolve. (oscarsan.chez, 2025-04-29, 17:42)\n\n---\n\n### 2. Knowledge Sharing & Learning Initiatives\n- **Daily/Weekly Themed Posts:** Members contributed to Motivation Monday, Tech Tip Tuesday, and Midweek Discussions with curated articles, case studies, and thought-provoking questions. Topics included AI in healthcare, business productivity, ethics, and technical tips. (marie007532, melindamelcher, eduardofadanelli, imkprabhat, etc.)\n- **Resource Repositories:** Google Drive and Notion workspaces were set up for shared resources and knowledge management, with plans for more structured repositories and tool assessments. (ireney_67517, 2025-04-28, 16:19)\n- **Workshops & Demos:** Live and recorded workshops were organized, including a notable non-coder-friendly RAG bot-building session, with materials shared post-event. (julioverne74, 2025-05-04, 20:46)\n- **Non-Coder Learning Group:** Initiative for non-coders to collaborate, upskill, and explore AI tools together, including hands-on sessions, collaborative boards, and peer-led demos. (ireney_67517, 2025-04-28, 15:23)\n- **Tool Recommendations:** Frequent sharing and reviews of AI tools for prompting, summarization, workflow automation, and knowledge management. (fcastrosantos, 2025-04-29, 05:33; megrosed_65608, 2025-04-29, 16:27)\n\n---\n\n### 3. Key Discussions & Debates\n- **AI Ethics & Governance:** Major discussions on OpenAI's for-profit transition, the balance of profit vs. principle, the need for regulatory standards, and the societal impact of AI. (marie007532, 2025-04-30, 11:28; sfrancois, 2025-04-30, 12:59)\n- **AI in Business & Society:** Members explored how AI is transforming industries (e.g., healthcare, marketing, finance, legal), the importance of practical ROI, and the shift towards skills-based hiring. (lauregolly, 2025-05-02, 07:33; antoine789, 2025-04-30, 15:43)\n- **Technical Deep D",
-      "duration": 16.75733,
+      "result": "\u274c Error processing query: Unterminated string starting at: line 86 column 9 (char 3048)",
+      "duration": 20.055489,
       "success": true,
       "error": null
     },
@@ -33,55 +33,7 @@
       "query": "Show activity since yesterday",
       "channel_id": null,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.05607,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages from 5 hours ago",
-      "channel_id": null,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.000577,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity during this month",
-      "channel_id": null,
-      "result": "**Discord Summary: Gen AI Global Community (2025-05-01 to 2025-05-10)**\n\n---\n\n### Major Themes & Updates\n\n#### 1. **Community Growth & Structure**\n- **Expansion:** Gen AI Global 2.0 launches, with plans to onboard previous cohorts and scale up operations.\n- **New Departments:** Content Creation, Cybersecurity, IT, Onboarding/HR, Agent Development, and Server Governance Unit (SGU) announced.\n- **Leadership & Roles:** New department heads and VPs introduced; calls for applications for LinkedIn Content Curators and Discord Managers 2.0.\n- **Buddy Groups:** Ongoing formation, scheduling, and onboarding; emphasis on collaborative learning and Q&A preparation.\n\n#### 2. **Learning & Development**\n- **Workshops & Events:** Regular sync meetings, Q&A sessions (now transitioning to LinkedIn Live), and workshops on building AI agents (e.g., Jose\u2019s RAG bot session).\n- **Tool Dives:** Groups selecting and deep-diving into AI tools (e.g., CustomGPT, Cursor, Midjourney, n8n, PowerAutomate, NotebookLM).\n- **Knowledge Sharing:** Creation of shared repositories, knowledge assets, and a \u201cNonCoder\u201d group for curated, non-technical AI learning.\n\n#### 3. **Key Discussions**\n- **Ethics & Governance:** Ongoing debate on AI ethics, ISO/IEC 42001 certification, OpenAI\u2019s governance model, and the proposal for a Global Charter for Ethical AI.\n- **AI Use Cases:** Early detection of autism, agentic AI in enterprise, agent deployment/cost optimization, financial services applications, personalized learning for the visually impaired.\n- **Prompt Engineering:** Sharing advanced techniques, role assignment, and responsible prompt design.\n\n#### 4. **Notable Achievements**\n- **Member Recognition:** Jose Cordovilla (julioverne74) nominated as Member of the Week for his workshop and community contributions.\n- **Community Engagement:** LinkedIn presence rapidly growing (400 to 1,000+ followers). New content creation team driving external visibility.\n- **Collaborative Projects:** Initiatives like the AI tool \u201cMagic Quadrant\u201d for non-coders, web scraping for knowledge repositories, and brainstorming for agentic AI governance.\n\n#### 5. **Open Questions & Polls**\n- **Q&A Submissions:** Weekly voting on questions for Dr. Sanchez, covering topics like open source guardrails, multilingual AI, governance, agent orchestration, digital divide, and future of AI development tools.\n- **Group Reflections:** Encouragement of personal growth reflection and feedback on learning journeys.\n\n---\n\n### Representative Key Points by Day\n\n#### May 1\u20132\n- **Welcome & Onboarding:** Dr. Sanchez congratulates on onboarding and invites testimonials.\n- **Metrics & KPIs:** Discussion on actionable Discord community metrics.\n- **Ethics & Business:** Deep debate on balancing profit, ethics, and open vs. proprietary AI models.\n- **Tool Sharing:** Links to AI startup resources, LinkedIn offers, and articles on AI development.\n\n#### May 3\u20135\n- **Workshops:** Recording and summary of Q&A with Dr. Sanchez shared. Jose\u2019s hands-on RAG bot workshop held.\n- **Motivational Monday:** Focus on neural networks, applications in education, and inspirational AI success stories.\n- **Content Team Launch:** LinkedIn Content Creation team operational; onboarding applications open.\n\n#### May 6\u20137\n- **Tech Tip Tuesday:** Guides on prompt engineering, open-source AI, and SME adoption of AI agents.\n- **ISO/IEC 42001:** In-depth group discussion on scaling ethics and governance through voluntary frameworks.\n- **Portfolio Building:** Discussion on leveraging Gen AI Global experience for professional growth.\n\n#### May 8\u201310\n- **Q&A Moves to LinkedIn:** Weekly Q&A session beta-tested on LinkedIn Live, with John",
-      "duration": 21.951703,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Posts from yesterday to today",
-      "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-05-09 to 2025-05-09):**\n\n- **Author:** ash.mikhail  \n- **Timestamp:** 2025-05-09 00:05:29.682000  \n- **Key Points:**  \n  - Shared a Discord event link: https://discord.com/events/1353058864810950737/1370189646428110979  \n  - No additional context or commentary provided.",
-      "duration": 1.654758,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages since last week",
-      "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-10)**\n\n---\n\n### Key Community & Organizational Updates\n\n#### Gen AI Global 2.0 Launch & Scaling\n- **OscarSan.Chez** (multiple messages, e.g., 2025-05-05 21:36): Announced Gen AI Global 2.0, reopening admissions to past cohorts, launching new community structure with departments: Content Creation, IT, Cybersecurity, Agent Development (formerly Discord Managers), and new onboarding processes. Introduced SGU (Server Governance Unit) for advanced admin/manager training.\n- **Dr. Sanchez** (peterparkerdata, 2025-05-07 00:27): Praised the progress, highlighted the upcoming Saturday session covering new departments, and noted the soon-to-expand member base.\n\n#### Content Creation & Recognition\n- **OscarSan.Chez** (2025-05-05 21:36): Kicked off Content Creation Team (LinkedIn spotlighting), new rhythms for content sharing, and recognition for contributors.\n- **Remarkable_Sparrow_25173** (2025-05-05 23:02): Announced first LinkedIn post for Gen AI Global 2.0, urging community engagement.\n- **OscarSan.Chez** (2025-05-08 13:34): Recognized <@673901899837341736> (Jose) as \"Member of the Week\" for workshop contributions. LinkedIn followers grew from 400 to 1,000+ in two days.\n\n#### IT, Cybersecurity, and Onboarding\n- **OscarSan.Chez** (2025-05-05 21:36): Detailed IT Department\u2019s mission to automate routine tasks and support onboarding, plus the launch of a Cybersecurity Department to preempt scams and threats.\n- **Boozeena_49785** & **OscarSan.Chez** (various): Coordinated on onboarding, security, and reporting of a possible impersonator incident (2025-05-08 16:55).\n\n---\n\n### Learning, Workshops & Events\n\n#### Workshops & Presentations\n- **Julioverne74 (Jose)** (2025-05-04 19:07, 19:39, 20:46): Delivered an inspiring AI agent-building workshop for non-coders; shared recording, transcript, and presentation links.\n- **Community (multiple)**: Numerous participants praised the session, nominated Jose for \"Member of the Week,\" and discussed the impact of learning by doing.\n- **Georgi8865** (2025-05-07 16:31, 17:42): Announced and shared a cost estimation workshop for LLM deployment, slides provided.\n\n#### Upcoming Events\n- **OscarSan.Chez** (2025-05-05 11:50): Announced a session on AI Agent Deployment & Cost Optimization for May 8.\n- **OscarSan.Chez** (2025-05-08 22:36): Noted the weekly Q&A with Dr. Sanchez would move to LinkedIn (with John Williams guest), and that standard Q&A will return to Zoom after this trial.\n\n#### Learning Groups & Buddy System\n- **Nikhil_34309** (multiple): Managed buddy group assignments, onboarding, and troubleshooting for new members.\n- **Ireney_67517** (multiple): Led NonCoder Group, coordinating tool exploration, learning artifact creation, and knowledge curation.\n- **Laura Neder** and others: Discussed and organized tool sign-ups, learning sessions, and collaborative development.\n\n---\n\n### Technical & Industry Discussions\n\n#### AI Tools and Coding\n- **Rad.AI** (2025-05-07 11:36): Shared news on OpenAI's $3B acquisition of Windsurf, analyzing implications for the AI coding tool market",
-      "duration": 13.82679,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity until tomorrow",
-      "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-11)**\n\n---\n\n### 1. Community & Governance Updates\n\n**Gen AI Global 2.0 Launch**\n- **Oscar (oscarsan.chez)** announced a major community upgrade: reopening admissions to all past cohorts, scaling infrastructure, and new department launches (Content Creation, IT, Cybersecurity, Agent Development).\n- New roles and teams were introduced, e.g., LinkedIn Content Curators, Discord Managers 2.0, and an Onboarding Team led by Amber.\n- **SGU (Server Governance Unit):** Task force to optimize Discord operations, manage daily sessions, and mentor new members.\n- Weekly sync and Q&A sessions are now scheduled, with a move to LinkedIn for broader engagement.\n\n---\n\n### 2. Workshops, Presentations & Recordings\n\n**Workshops & Demos**\n- **Jose Cordovilla (julioverne74)** gave a popular workshop on building an AI agent for Discord, inspiring many, especially non-coders. Links to the recording, slides, and transcript were provided.\n- **Rodrigo Reyes Jara** and others praised Jose\u2019s hands-on approach and proposed follow-up sessions on building AI portfolios and upskilling.\n- **Cursor AI & Vibe Coding:** Multiple members shared experiences with AI coding copilots (Cursor, Copilot, etc.), highlighting \"vibe coding\" (letting AI generate code from high-level descriptions), and the need for human QA and debugging.\n\n---\n\n### 3. Knowledge Sharing & Resources\n\n**Regular Knowledge-Sharing Posts:**\n- \"Motivational Mondays\" and \"Tech Tip Tuesdays\" featured articles and tips on AI in finance, education, prompt engineering, building generative AI apps, and more.\n- Notable resources:\n  - Stanford AI Index Report 2025, Microsoft\u2019s 21-lesson GitHub course, OpenAI\u2019s acquisition of Windsurf, and KPMG\u2019s global study on AI trust.\n  - Advanced prompt engineering techniques and practical guides for both coders and non-coders.\n  - Discussions on ISO/IEC 42001 (AI governance framework) and its impact on responsible AI.\n\n---\n\n### 4. Q&A & Buddy Group System\n\n**Buddy Groups:**\n- Members introduced themselves, formed teams, and coordinated to submit weekly questions for Q&A with Dr. Sanchez.\n- Example Q&A topics:\n  - Open-source model adoption in enterprises\n  - Multilingual AI inclusion\n  - ISO-like governance frameworks vs. innovation\n  - AI agent integration and workflow adaptation\n  - The AI coding tools arms race (Cursor, Windsurf, etc.)\n  - Generative AI vs. human judgment in high-stakes industries\n  - AI and the digital divide\n\n**Voting and Discussion:**\n- Members voted on which questions to submit. Q&A sessions moved from Zoom to LinkedIn for greater reach.\n\n---\n\n### 5. Community Initiatives & Learning Projects\n\n**Learning Initiatives:**\n- Non-coder group projects: Members select, learn, and present on various AI tools (Custom GPTs, Midjourney, Langchain, etc.), with documentation and learning sessions.\n- Plans to develop a \"Magic Quadrant\" for non-coder AI tools (ease of use, functionality, etc.).\n- Calls for volunteers to organize, lead, and document sessions; mentoring encouraged.\n\n**Security & Safety:**\n- Cybersecurity department established; members advised to report impersonation/fake profiles.\n\n---\n\n### 6. Key Themes & Discussions\n\n**Major Discussion Themes:**\n- AI ethics, global charters, and the need for voluntary, adaptable governance frameworks.\n- The future of coding: AI copilots, vibe coding, and the shifting role of human developers.\n- The challenge of AI literacy, workforce upskilling, and inclusion (multilingualism, digital divide).\n- The need for practical, hands-on",
-      "duration": 14.028767,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 30 minutes",
-      "channel_id": null,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002263,
+      "duration": 0.002935,
       "success": true,
       "error": null
     },
@@ -89,727 +41,79 @@
       "query": "Show me messages from the last 3 hours in the \ud83c\udfd8general-chat channel",
       "channel_id": 1353058864810950740,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001097,
+      "duration": 0.001503,
       "success": true,
       "error": null
     },
     {
-      "query": "List messages from the past 2 days in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10):**\n\n---\n\n1. **oscarsan.chez** (2025-05-08 22:29:56.138000)  \n   - Confirmed willingness to take on a task (\"Will do!\").\n\n2. **ash.mikhail** (2025-05-08 22:35:26.722000)  \n   - Asked about pros and cons of enabling GPU clusters on each edge node for AI/ML platforms.\n\n3. **oscarsan.chez** (2025-05-08 22:36:57.810000)  \n   - Announced Q&A will be on LinkedIn (not Zoom) this week, featuring John Williams, with a new time (11:00 AM).\n   - LinkedIn event link provided.\n   - \u201cMember of the Week\u201d announced.\n   - Future Q&As will transition to LinkedIn for greater visibility; Zoom will be used and streamed to LinkedIn.\n   - Celebrated reaching 1,000+ LinkedIn followers.\n   - Announced Gen AI Global 2.0 launch at the end of May with expansion to all cohorts.\n   - Reminded about Saturday's informational session at 1 PM (Zoom link provided).\n\n4. **ash.mikhail** (2025-05-08 22:49:53.696000)  \n   - Expressed thanks.\n\n5. **ireney_67517** (2025-05-08 22:52:44.569000)  \n   - Praised a shared resource and suggested adding it to learning materials for non-coders.\n\n6. **nikhil_34309** (2025-05-08 22:58:10.813000)  \n   - [No message content, possibly a placeholder.]\n\n7. **darkgago** (2025-05-08 22:59:47.253000)  \n   - Asked how to verify if someone claiming to be a former MIT faculty member is genuine.\n\n8. **nikhil_34309** (2025-05-08 23:02:39.240000)  \n   - Invited everyone to vote on questions for the LinkedIn Q&A.\n   - Provided event link and instructions.\n\n9. **nikhil_34309** (2025-05-08 23:02:59.247000 & 23:03:01.297000)  \n   - Listed ten detailed questions for the Q&A, covering topics such as open source in enterprises, multilingual AI, AI governance, AI agents, value in agentic systems, AI coding tools, generative AI in decision-making, recent AI agent trends, digital divide concerns, and open source security.\n\n10. **boozeena_49785** (2025-05-08 23:05:44.789000)  \n    - Advised caution regarding unverified individuals on WhatsApp/LinkedIn due to potential fake profiles and bots, per cybersecurity team recommendations.\n\n11. **nikhil_34309** (2025-05-08 23:24:34.291000)  \n    - Announced voting deadline (11pm EST).\n\n12. **chiarapassuello** (2025-05-08 23:25:50.570000)  \n    - Thanked the group and Melinda, apologized for late response due to personal reasons.\n\n13. **ash.mikhail** (2025-05-09 00:05:29.682000)  \n    - Shared a Discord event link.\n\n---\n\nIf you need the summary in JSON, let me know!",
-      "duration": 10.029485,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What happened during last week in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "Below is a summary of the Discord messages from 2025-04-28 to 2025-05-04, organized by key themes, major events, and recurring discussion points. Each entry includes the author, timestamp, and key points.\n\n---\n\n### 1. Community Organization & Buddy Groups\n\n**oscarsan.chez** (Apr 28, 13:30, Apr 29, 13:57, Apr 30, 21:31)\n- Launched \"Buddy Groups\" to facilitate smaller collaborative cohorts by timezone and interests.\n- Each group has its own private channel and admin(s)/conversational leader(s).\n- Voice channels with video/screen-sharing were enabled for each group.\n- Admins/Leaders are meant as light facilitators, not managers.\n- Ongoing improvements to group visibility and management features.\n\n**eduardofadanelli** (Apr 28, 01:27 & 01:30)\n- Asked for clarification about posting activities and group assignments; received instructions from Oscar.\n\n**oscarsan.chez** (Apr 28, 01:49)\n- Detailed instructions on posting weekly activities (Motivation Monday, Tech-Tip Tuesday, Mid-Week Discussion).\n- Explained the new buddy-group system, pairing, and admin roles.\n\n**laura.neder** (Apr 28, 18:08)\n- Suggested limiting daily posts to avoid overwhelming members, focusing on deeper conversations.\n- Discussed feedback from WhatsApp users and the impact of structured themes on participation.\n\n**darkgago** / **georgi8865** (throughout week)\n- Discussed improving content organization, leveraging threads, and potential for content curation roles.\n\n---\n\n### 2. Knowledge Sharing & Tech Tools\n\n**Notion, Trello, Mural, Google Drive**\n- Multiple users (ireney_67517, megrosed_65608, sandraf1230, apoorvgarg88) discussed using Notion for knowledge management, Trello for project tracking, and Mural for brainstorming.\n- Google Drive used as a temporary shared resource repository.\n- Ongoing experiments in collaborative note-taking and knowledge base creation.\n\n**AI Tool Demos & Sharing**\n- Members frequently shared resources, tutorials, and news articles on recent AI developments.\n- Examples: Vertex AI speech-to-text, Meta AI App, Mastercard Agent Pay, OpenAI/Anthropic/Gemini platform updates, AWS Outposts for GenAI workloads.\n- Members like fcastrosantos and julioverne74 shared their experiences building AI agents/bots (RAG, Discord bots, etc.), inspiring others to try \"vibe-coding\".\n\n---\n\n### 3. Weekly Themes & Community Engagement\n\n- **Motivational Monday**: Members shared inspiring AI news (e.g., AI in healthcare, life-saving AI applications, environmental impact).\n- **Tech-Tip Tuesday**: Shared practical AI tips (prompt engineering, fine-tuning LLMs, new tools for SMEs).\n- **Mid-Week Discussion**: Topics included digital inclusion, OpenAI\u2019s business model shift, multilingual AI, and AI ethics.\n\n**Key Discussion Points:**\n- The challenge of balancing content quantity with meaningful engagement.\n- The need for rotating posting responsibilities and better use of threads.\n- Calls for community charters or manifestos (inspired by Agile), and the importance of ethics in AI.\n\n**ash.mikhail** (Apr 29, 04:45)\n- Suggested a structured rotation for posting and deep dives in specific channels.\n\n**jhorden2211** (Apr 29\u201330)\n- Proposed an AI manifesto modeled after the Agile Manifesto.\n\n---\n\n### 4. Q&A and Community Learning Events\n\n**Q&A with Dr. Sanchez**\n- Each buddy group submits a weekly question for Dr. Sanchez\u2019s Friday Q&A.\n- Topics included: AI ethics, governance, agentic AI, impact of domain-specific AI,",
-      "duration": 14.734833,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show activity since yesterday in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.004639,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages from 5 hours ago in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001026,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity during this month in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Discord Messages (2025-05-01 to 2025-05-10):**\n\n---\n\n### General Community Updates & Initiatives\n\n- **Gen AI Global Onboarding Completion:**  \n  *Dr. Abel Sanchez* (2025-05-01) congratulated members for completing onboarding. Announced testimonial collection for MIT Professional Education (link provided). Shared that SGU (Server Governance Unit) and Content Creation Teams are upcoming, with application info to be shared on Tuesday.  \n  _Special thanks to Network Architects and Oscar for their efforts._\n\n- **New Roles & Departments:**  \n  *Oscar (oscarsan.chez)* (2025-05-05, 2025-05-07) detailed the launch of new teams:  \n  - Content Creation Team (spotlighting community expertise on LinkedIn)\n  - Discord Managers 2.0 (new learning track)\n  - IT Department (routine management tasks and support)\n  - Cybersecurity Department (community safety)\n  - Onboarding Team (talent sourcing and integration)\n  - SGU Team (Server Governance Unit, advanced Discord management)\n  - All departments to be explained in upcoming informational sessions.\n\n- **Community Growth:**  \n  Plans to reopen admissions for past cohorts at the end of May (Gen AI Global 2.0), scaling the community further.\n\n---\n\n### Key Discussions & Themes\n\n- **AI Ethics & Governance:**  \n  - Ongoing debate about balancing profit and ethics in AI (OpenAI\u2019s governance, Microsoft\u2019s influence, the need for strong rules and open foundations).\n  - Initiatives to draft a \u201cGlobal Charter for Ethical AI\u201d (inspired by UN/Salzburg frameworks).\n  - ISO/IEC 42001 certification highlighted (Anthropic achieved it; discussion on its real-world impact and flexibility).\n  - Importance of transparency, accountability, and periodic review in AI systems.\n\n- **AI Applications & Industry Impact:**  \n  - AI\u2019s role in early autism detection, healthcare, and finance.\n  - JP Morgan\u2019s use of \u201cCoach AI\u201d to boost sales and client engagement.\n  - Norway\u2019s wealth fund using ML to cut trading costs.\n  - Bain & Company: GenAI outperforming in marketing, especially in content creation and personalization.\n  - Anthropic\u2019s Claude, IBM\u2019s HR AI, AWS Outposts for GenAI at the edge, and Canva\u2019s new AI features discussed.\n\n- **AI Agents, Coding, and Tools:**  \n  - Rise of agentic AI for automation, workflow integration, and code generation (IBM, Amazon Kiro, OpenAI\u2019s Windsurf acquisition, Cursor, Replit, Lovable, etc.).\n  - \u201cVibe coding\u201d and \u201cvibe writing\u201d as community trends\u2014using AI to accelerate creative output.\n  - Workshops and guides on building RAG bots, prompt engineering, and using tools like Cursor, LangChain, and CustomGPTs.\n  - Tool curation and learning groups, especially for non-coders (matrix of tools, best practices, hands-on demos).\n\n- **AI in Business & Workforce:**  \n  - Preparing teams and organizations for AI adoption.\n  - Upskilling, AI literacy, and need for generalist skills (vs. hyper-specialization).\n  - Managing workforce anxiety and redefining roles as AI transforms industries.\n  - Inclusion: AI for accessibility (Audemy for blind students, plain-language tools).\n\n- **Open Source & Security:**  \n  - Debates on open-source adoption in enterprises, security concerns, and licensing risks.\n  - Role of proprietary vs. open-source models for innovation, safety, and governance.\n\n---\n\n### Community Activities & Events\n\n- **Q&A Sessions:**  \n  Weekly Q&A with Dr. Sanchez (moved to LinkedIn for visibility).  \n  Questions submitted and voted on by buddy groups, covering topics like:  \n  - AI governance and ISO 42001\n  - Agentic AI\u2019s future value",
-      "duration": 14.545431,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Posts from yesterday to today in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary:**\n\n- **Author:** ash.mikhail  \n- **Timestamp:** 2025-05-09 00:05:29.682000  \n- **Key point:** Shared a Discord event link (https://discord.com/events/1353058864810950737/1370189646428110979). No additional context or discussion provided in the message.",
-      "duration": 1.236776,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages since last week in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Key Discord Activity (2025-05-03 to 2025-05-10):**\n\n---\n\n### Major Themes\n\n1. **Community Growth & Structure**\n   - Expansion of Gen AI Global, onboarding new members, and relaunching programs (\"Gen AI Global 2.0\").\n   - Creation of new departments: Content Creation, IT, Cybersecurity, Onboarding/HR, Fundraising, Marketing, Agent Development.\n   - Launch of the SGU (Server Governance Unit) for advanced Discord managers and process optimization.\n   - New onboarding processes and learning paths for Discord Managers, with clear role delineation and coaching tracks.\n   - Numerous new member introductions, outlining roles, expertise, and goals.\n\n2. **Events & Workshops**\n   - Multiple workshops and learning sessions (AI Agent Deployment, Ethical AI Charter, Coding with AI tools, etc.).\n   - Weekly and daily syncs established for different groups/cohorts.\n   - Workshop recordings and resources (e.g., for Jose\u2019s AI agent-building session) shared widely.\n   - Motivational Monday/Tech Tip Tuesday/Midweek Discussion posts encourage sharing and reflection.\n\n3. **Recognition & Nominations**\n   - Frequent nominations and congratulations for active contributors, especially for workshop hosts and those helping non-coders.\n   - <@673901899837341736> (\"Jose\") widely nominated and awarded member of the week for running a successful workshop and community contributions.\n\n4. **AI Tools & Coding Discussions**\n   - Intense interest in AI coding copilots (Cursor, Windsurf, GitHub Copilot, Replit) and their impact on coding workflows.\n   - OpenAI\u2019s acquisition of Windsurf discussed in depth, with predictions about the \"arms race\" in AI coding tools.\n   - Practical experiences and tips exchanged around using AI for coding (including pitfalls and best practices).\n   - Custom GPTs, AI agents, RAG apps, and prompt engineering are recurring technical topics.\n\n5. **Ethics, Governance, & Regulation**\n   - Ongoing work on a \"Global Charter for Ethical AI,\" with session recaps, collaborative planning, and community feedback.\n   - ISO/IEC 42001 (AI governance standard) and its application discussed, including its advantages and challenges.\n   - Open source model adoption, security, and corporate guardrails are frequent Q&A topics.\n   - Debates on AI\u2019s societal impact: digital divide, multilingualism, AI literacy, and the future of work.\n\n6. **Knowledge Sharing & Resources**\n   - Numerous articles, reports, and research papers shared (Stanford AI Index, KPMG AI trust study, IBM/AI in HR, etc.).\n   - Tech tips provided on LLM deployment, prompt engineering, session recording, token cost tracking, and tool selection.\n   - Community projects: building a learning asset repository, knowledge curation, and a Magic Quadrant for NonCoder AI tools.\n\n7. **Buddy Groups & Collaboration**\n   - Buddy groups organize weekly Q&A submissions, tool exploration, and collaborative learning projects.\n   - Voting systems for group questions; group syncs scheduled.\n   - Non-coder group especially active, with plans for joint deep-dives on AI tools and learning artifact creation.\n\n8. **Operational Improvements**\n   - Discussions about Discord event/calendar management, channel organization, and feedback loops.\n   - Ongoing refinement of Trello boards for workflow, feedback, and project management.\n\n---\n\n### Example Key Messages\n\n#### Community & Program Updates\n- **oscarsan.chez** (2025-05-05): Announced new departments, upcoming events, and onboarding processes for scaling Gen AI Global.\n- **peterparkerdata** (2025-05-07): Highlighted the importance of upcoming Saturday\u2019s info session for Gen AI Global 2.0.\n\n#### Recognition\n- **boozeena_49785, shabana_39556, sudalai22, etc.**",
-      "duration": 14.334772,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity until tomorrow in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-11)**\n\n---\n\n### 1. **Community Highlights & Events**\n\n- **Gen AI Global 2.0 Launch & Scaling**\n  - [oscarsan.chez, 2025-05-05/08] Announced Gen AI Global 2.0, including new departments (Content Creation, IT, Cybersecurity, Onboarding, Agent Development) to support a surge in members as admissions reopen for past cohorts.\n  - New roles and structured onboarding for content curation, Discord management, and cybersecurity.\n  - Weekly meetings and info sessions scheduled for onboarding, agent development, and community Q&A.\n\n- **Workshops & Presentations**\n  - [julioverne74, rodrigoreyesjara, 2025-05-04/05] Jos\u00e9 presented a workshop on building a Gen AI Discord bot as a non-coder, inspiring others to experiment with vibe coding and AI agents. Materials and recordings shared.\n  - [georgi8865, 2025-05-08] Ran a workshop on LLM cost estimation and deployment, with slide decks and plans for follow-up sessions.\n\n- **Motivational & Tech Tips**\n  - Weekly \"Motivational Monday\" and \"Tech Tip Tuesday\" posts share articles, AI applications (e.g., AI for inclusion, automated detection writing, prompt engineering), and resources (e.g., Microsoft\u2019s 21-lesson GitHub course).\n  - Members share personal learning journeys, successes, and failures with AI tools (Cursor, Copilot, LangChain, Custom GPTs, Canva, n8n, etc.).\n\n---\n\n### 2. **Key Discussions & Themes**\n\n- **Vibe Coding & AI Agents**\n  - [rad.ai, julioverne74, jhorden2211, Others] Lively discussion about \"vibe coding\"\u2014using AI copilots to rapidly prototype and build projects, with both optimism and warnings about resulting messy codebases and debugging challenges.\n  - Recommendations to try tools like Cursor, Windsurf, and Custom GPTs, and to experiment hands-on for learning.\n\n- **Ethics, Governance, and Inclusion**\n  - [andreahickethier, imkprabhat, marie007532, silkefinken, Others]\n    - Recaps and ongoing discussions in the AI Philosophy & Ethics channel covering:\n      - Global AI Ethics Charter initiative (working towards a non-binding, UN-style open-source AI charter).\n      - Debates around open source in enterprise, regulatory compliance, ISO/IEC 42001 governance, and the role of voluntary certifications (Anthropic as first certified company).\n      - Concerns about inclusion, digital divide, responsible AI, privacy, and transparency.\n      - AI's impact on job roles, need for continuous upskilling, and the challenges of AI literacy.\n\n- **Q&A & Knowledge Exchange**\n  - Buddy groups aggregate and submit weekly questions for Dr. Sanchez Q&A sessions (now also on LinkedIn Live), focusing on technical, ethical, and practical AI topics.\n  - Example question themes: open-source enterprise adoption, ISO-like governance, multilingual AI, agent value, AI coding tool landscape, human-AI judgment balance, digital divide.\n\n---\n\n### 3. **Operational Updates & Process Improvements**\n\n- **Buddy Groups & Non-Coder Learning**\n  - [ireney_67517, minsunnie, Others] Non-coder group organizes collaborative learning: members sign up to lead/teach AI tools, create learning artifacts, and host demos. Focus on peer learning and building a self-service knowledge base.\n  - Initiatives to organize content, create a Magic Quadrant for tools, and streamline event/calendar management.\n\n- **SGU (Server Governance Unit) and Automation**\n  - [oscarsan.chez, julioverne74, Team] New SGU formed",
-      "duration": 11.36633,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 30 minutes in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002806,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 3 hours in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001275,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List messages from the past 2 days in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10)**\n\n---\n\n**1. oscarsan.chez**  \n*2025-05-08 22:29:56.138000*  \n- Acknowledges a request: \"Will do!\"\n\n---\n\n**2. ash.mikhail**  \n*2025-05-08 22:35:26.722000*  \n- Buddy Group 11 asks: What are the pros and cons of enabling GPU clusters on each EDGE node for an AI/ML Platform?\n\n---\n\n**3. oscarsan.chez**  \n*2025-05-08 22:36:57.810000*  \n- Announces Q&A session will be hosted on LinkedIn (not Zoom) this week, with guest John Williams.\n- Time change: Q&A moved to 11:00 AM (from 11:30 AM) for this week only.\n- Top six questions will be answered; \u201cMember of the Week\u201d will be announced.\n- This week\u2019s Q&A is a beta test on Dr. Sanchez\u2019s LinkedIn; future sessions will move to the Gen AI Global LinkedIn page to increase visibility.\n- Zoom Q&As will resume next week, but also be broadcast on LinkedIn.\n- Community milestone: over 1,000 LinkedIn followers, approaching 1,100.\n- Gen AI Global 2.0 will launch at end of May, inviting all prior and current cohorts.\n- Reminder: Informational session on Saturday at 1 PM (Zoom link provided).\n\n---\n\n**4. ash.mikhail**  \n*2025-05-08 22:49:53.696000*  \n- Expresses thanks.\n\n---\n\n**5. ireney_67517**  \n*2025-05-08 22:52:44.569000*  \n- Praises a shared resource; will add it to NonCoders' learning assets and ongoing discussions.\n\n---\n\n**6. nikhil_34309**  \n*2025-05-08 22:58:10.813000*  \n- No substantive message (blank message).\n\n---\n\n**7. darkgago**  \n*2025-05-08 22:59:47.253000*  \n- Asks for verification of someone claiming to be a former MIT Faculty member.\n\n---\n\n**8. nikhil_34309**  \n*2025-05-08 23:02:39.240000*  \n- Invites everyone to vote for Q&A questions for Dr. Sanchez on LinkedIn (link shared).\n- Mentions that questions are provided below and encourages thoughtful participation.\n\n---\n\n**9. nikhil_34309**  \n*2025-05-08 23:02:59.247000*  \n- Lists detailed Q&A topics (1-10), including open source in enterprises, multilingual AI, ISO-like governance, autonomous agents, value in agent-based systems, AI coding tools, generative AI in healthcare/finance, IBM/Amazon AI agent announcements, AI and the digital divide, and open source security.\n\n---\n\n**10. boozeena_49785**  \n*2025-05-08 23:05:44.789000*  \n- Thanks Oscar for reporting a suspicious profile.\n- Advises caution with unverified individuals, noting rise in fake profiles on LinkedIn/WhatsApp.\n- Encourages ongoing vigilance and reporting of suspicious activity.\n\n---\n\n**11. nikhil_34309**  \n*2025-05-08 23:24:34.291000*  \n- Announces that voting for Q&A questions closes at 11pm EST.\n\n---\n\n**12. chiarapassuello**  \n*2025-05-08 23:25:50.570000*  \n- Thanks the group (and Melinda specifically).\n- Expl",
-      "duration": 14.088568,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What happened during last week in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-04-28 to 2025-05-04)**\n\n---\n\n### Key Community Themes\n\n1. **Buddy Groups Launched & Onboarding**\n   - New buddy groups (sorted by time zone) are live, each with dedicated admins and private channels for collaboration.\n   - Members introduced themselves, shared goals, and began organizing regular syncs.\n   - Conversational Leaders serve as light facilitators (not admins), helping with Q&A and sharing resources.\n   - Technical fixes and clarifications (channel visibility, poll creation, voice/video channels) rolled out by Oscar and team.\n\n2. **Daily/Weekly Activities and Engagement**\n   - Motivational Monday, Tech Tip Tuesday, and Midweek Discussion themes continued with curated news, tech tips, and ethical debate prompts.\n   - Discussion on limiting daily posts for deeper engagement vs. content overload\u2014proposals for rotating posters, using threads, and weekly digests.\n   - Calls for feedback on how to best facilitate inclusive, high-value conversation as the community scales.\n\n3. **Knowledge Management & Tooling**\n   - Strong interest in using Notion, Mural, Trello, and Google Drive for organizing resources, learning journeys, and collaborative projects.\n   - Multiple sessions planned/delivered for demoing Notion-based \u201cAI Tutor\u201d and other productivity workflows.\n   - Ongoing debate on best platforms for managing knowledge, balancing Discord\u2019s limited search/storage with external tools.\n\n4. **Showcasing AI Projects, Demos & Industry News**\n   - Community members shared use cases and tutorials for AI in healthcare, finance, education, and business (e.g., RFP-answering bots, voice-to-text, agentic payments).\n   - Highlights of new tools (Meta AI App, Google AI Studio Live, Mastercard Agent Pay, Anthropic Claude integrations, AWS Outposts for GenAI, etc.).\n   - Members recapped Q&A takeaways and encouraged \u201cvibe coding/writing\u201d (iterative, collaborative AI development).\n   - Community events: workshop on building RAG bots (recordings/transcripts shared), with more demos scheduled.\n\n5. **Ethics, Governance, and Industry Debate**\n   - Lively discussions about ethics, AI governance, OpenAI\u2019s for-profit transition, minimum standards for agentic AI, and regulatory challenges.\n   - Questions for the weekly Q&A with Dr. Sanchez covered topics such as agent standards, technical enforcement of AI regulation, the evolution of teams with AI, and balancing profit/principle.\n   - Proposals for an \u201cAI Manifesto\u201d and reference to frameworks like the Salzburg Charter for AI Ethics.\n\n6. **Member Intros, Networking & Collaboration**\n   - Dozens of detailed introductions from members worldwide, spanning tech, finance, healthcare, education, and more.\n   - Many expressed interest in cross-disciplinary learning, upskilling, and applying AI in their domains.\n   - Calls for collaboration on opinion papers, tool evaluations, and project-based learning.\n\n7. **Operational/Architectural Updates**\n   - Oscar shared upcoming structural changes: End-to-end workflow (Discord Managers \u2192 SGU \u2192 DEVS/IT Ops), new departments, and leadership handoff plans for scaling.\n   - Efforts underway to automate channel management, aggregate analytics, and streamline onboarding.\n\n8. **Recognition & Community Culture**\n   - Regular calls for testimonials, \u201cmember of the week\u201d nominations, and gratitude for volunteer efforts.\n   - A focus on inclusivity (multilingual access, non-coder learning track, diverse backgrounds).\n   - Emphasis on peer learning, mutual support, and celebrating progress over perfection.\n\n---\n\n### Representative Messages / Highlights\n\n#### Buddy Groups & Onboarding\n\n- **oscarsan.chez** (2025-04-28 13:30 UTC): Announced buddy group assignments, private channels, and next steps. Emphasized collaborative Q&A.\n- **eduardofadanelli** (",
-      "duration": 18.266291,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show activity since yesterday in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.005134,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages from 5 hours ago in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001076,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity during this month in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Discord Community Summary (2025-05-01 to 2025-05-10)**\n\n---\n**Key Themes:**\n- Gen AI Global community onboarding and expansion (launching new teams, agent development class, new member intake)\n- Intense discussions on AI ethics, governance (ISO/IEC 42001, global charter), and practical use in business, education, and society\n- Tool sharing, technical deep-dives, and peer learning (Cursor, Windsurf, CustomGPTs, n8n, Make, LangChain, etc.)\n- Emphasis on inclusion, digital divide, ethical AI, and upskilling for non-coders\n- Multiple recurring events: Q&As, workshops, group meetings, calendar/test management\n\n---\n\n### Community/Program Announcements\n\n**peterparkerdata (2025-05-01, 00:58)**\n- Congratulates community on onboarding\n- Announces upcoming launch of SGU and Content Creation Team (details coming Tuesday)\n- Requests testimonials for MIT Professional Education (link provided)\n- Thanks Network Architects and Oscar for their support\n\n**oscarsan.chez (various)**\n- Shares testimonial prompts for MIT PE\n- Announces new workflow for Discord Managers \u2192 SGU \u2192 DEVS\n- Unveils upcoming events: cost-optimization workshop, Discord Manager 2.0 (Agent Dev Class), new Cybersecurity, IT, and Onboarding departments\n- Announces move to scale up community (Gen AI Global 2.0), LinkedIn push, and new member intake at end of May\n- Informs about changes to Q&A format (hosted on LinkedIn for visibility)\n- Provides links to recordings, Trello boards, session schedules\n\n**Community Updates (2025-05-01, 18:04)**\n- Channel now receives official Discord announcements\n\n---\n\n### Key Discussion Topics\n\n- **AI Agent Development:** Workshops and presentations (notably by julioverne74 and others) on building RAG apps, agentic AI, practical coding with little/no background, and integrating with tools like LangChain, VSCode, Cursor.\n- **AI Ethics & Governance:** \n    - Deep dives on ISO/IEC 42001, voluntary vs regulatory frameworks, balancing innovation with trust, and the \u201cglobal charter for ethical AI\u201d.\n    - Discussions about OpenAI\u2019s mission, governance, for-profit structure, and recent news/events (e.g., OpenAI remains under nonprofit control, Windsurf acquisition).\n    - Concerns about digital divide, inclusion, ethical upskilling, bias, transparency, and responsible deployment.\n- **Tool Sharing & Peer Learning:**\n    - Intense focus on practical tool usage: CustomGPTs, Cursor, Make, n8n, Canva, LangChain, PowerAutomate, AI Studio, etc.\n    - NonCoder group created to facilitate tool-based learning for non-technical members, with sign-up sheets, session facilitation, and artifact creation.\n    - Frequent sharing of articles, technical tips, prompt engineering best practices, and event recordings.\n- **Content Creation & External Impact:**\n    - Launch of LinkedIn Content Creation Team (roles, process, recognition)\n    - Push to amplify community impact, spotlight members, and share knowledge externally\n    - \u201cMember of the Week\u201d and recognition of outstanding contributors (notably, julioverne74)\n- **Events & Group Organization:**\n    - Multiple buddy groups, recurring meetings, onboarding sessions, syncs, and Q&A formats evolving\n    - Emphasis on collaborative project work, group leadership, and community-driven learning\n\n---\n\n### Example Notable Messages\n\n- **andreahickethier (2025-05-02, 18:10)**: Q&A Recap \u2014 10 key takeaways from MIT\u2019s GenAI program: ethics as culture, start with measurable ROI, importance of small models, agent memory, regulation vs culture, open source",
-      "duration": 15.144298,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Posts from yesterday to today in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**ash.mikhail** (_2025-05-09 00:05:29.682000_):  \n- Shared a link to a Discord event: https://discord.com/events/1353058864810950737/1370189646428110979  \n- No additional context or message was provided.  \n- Key point: Announcement or sharing of a specific Discord event.",
-      "duration": 2.004776,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages since last week in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Discord Summary: May 3\u201310, 2025**\n\n---\n\n### Community & Organizational Updates\n\n- **Gen AI Global 2.0** is launching with a new admin structure, new departments (Content Creation, Cybersecurity, IT, Onboarding), and an expanded buddy group system to support a surge in members (OscarSan.Chez, multiple posts May 4\u20138).\n- **SGU (Server Governance Unit)** and Discord Managers 2.0 are being rolled out, with info sessions and a structured approach for onboarding and scaling. The goal is to ensure smooth operations as the community grows.\n- **Agent Development Class** (formerly Discord Managers) will start soon, targeting both admin and general members with 0 coding background. Led by Dr. Sanchez and CS professionals (OscarSan.Chez, May 8).\n- **Cybersecurity department** is now live; a #cyber-report-desk channel is available for reporting concerns.\n\n---\n\n### Key Events & Workshops\n\n- **Jose\u2019s Workshop:** Jose (JulioVerne74) presented his journey building an AI agent for Discord, inspiring non-coders and highlighting the value of \u201cvibe coding.\u201d Resources (video, summary, slides) were shared and well received (May 4).\n- **Motivational Monday/Tech Tip Tuesday:** Regular sharing of AI news, articles, and practical tips, including:\n  - AI\u2019s impact on finance (JPMorgan), inclusion (Audemy for BVI students), and the evolving AI tools landscape (Windsurf, Cursor).\n  - Advanced prompt engineering, cost tracking with LangChain, and Microsoft\u2019s GitHub course for generative AI beginners.\n- **Upcoming Sessions:** \n  - \u201cNavigating AI Agent Deployment & Cost Optimization\u201d (May 8, led by Georgi8865).\n  - \u201cTowards a Global Charter for Ethical AI\u201d (Multiple sessions, led by ImkPrabhat & Marie007532).\n  - Regular Q&A with Dr. Sanchez, now hosted on LinkedIn for greater reach.\n\n---\n\n### Member Recognition\n\n- **JulioVerne74 (Jose)** was widely nominated and chosen as \u201cMember of the Week\u201d for his workshop and ongoing community support (multiple nominations).\n- Multiple new members introduced themselves, sharing backgrounds in law, engineering, data science, AI, and more.\n\n---\n\n### Notable Discussions & Threads\n\n- **AI tool comparisons:** Lively debate on Windsurf vs. Cursor vs. Replit, with hands-on experiences, adoption tips, and technical insights (multiple users, May 7\u20138).\n- **Ethics & Governance:** \n  - Ongoing work to draft a \u201cGlobal Charter for Ethical AI\u201d (inspired by UN/Salzburg charters), including how to balance openness, innovation, and accountability.\n  - Discussion of ISO/IEC 42001 as a practical AI governance standard, especially after Anthropic\u2019s certification.\n- **AI Literacy & Inclusion:** \n  - Efforts to build learning resources for non-coders (NonCoder Group).\n  - Initiatives to track and evaluate AI tools for accessibility, ease of use, and best fit for various skill levels.\n  - Emphasis on multilingualism, digital inclusion, and upskilling in the AI-first era.\n- **Q&A Preparation:** Each buddy group collaborates weekly to propose questions for Dr. Sanchez\u2019s Q&A\u2014topics have included open source guardrails, digital divide, ISO-like governance, the evolving role of human judgment, and the future of agentic AI systems.\n\n---\n\n### Security & Safety\n\n- Cybersecurity team flagged an impersonation attempt; members reminded to be vigilant, especially with LinkedIn/WhatsApp contacts (ApoorvGarg88, Boozeena_49785, May 8).\n\n---\n\n### Community Operations\n\n- Infrastructure improvements: Calendar integration, channel organization, and efforts to reduce Discord channel clutter.\n- New onboarding and team-matching processes, with",
-      "duration": 12.818312,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity until tomorrow in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-11)**\n\n---\n\n**1. Community Growth & Structure**\n- **Oscar (oscarsan.chez)** and leaders unveiled major upgrades to community structure: Gen AI Global 2.0, with new departments (Content Creation, IT, Cybersecurity, Onboarding, Agent Development). Onboarding of past cohorts is planned, requiring scalable systems and new leadership roles.\n- Launch of Content Creation Team, IT Department, Cybersecurity Department, and Onboarding Team. Cybersecurity team will proactively handle threats. IT team to manage routine tasks and channel hygiene.\n- Announced new SGU (Server Governance Unit) for optimizing Discord management.\n- New \u201cAgents Development Class\u201d is the evolved Discord Manager Program, open first to admins, will be taught by CS pros and MIT alumni.\n- Regular syncs, info sessions, and onboarding sessions are being scheduled and coordinated across time zones.\n\n**2. Events, Workshops, and Resources**\n- **Jose (julioverne74)** led a well-received workshop on building a Discord AI agent with little coding background, inspiring non-coders to experiment. Video, transcript, and presentation shared (links provided).\n- **Community members** nominated Jose as Member of the Week for his contributions.\n- **Upcoming events:** AI Agent Deployment & Cost Optimization (led by Georgi), Global Charter for Ethical AI (Prabhat & Amber), SGU and Discord Managers info sessions, Conversational session on professional upskilling (Rodrigo).\n- Multiple \u201cMotivational Monday\u201d and \u201cTech Tip Tuesday\u201d posts shared, highlighting AI in finance, neural networks, prompt engineering, new Microsoft GitHub course, and more.\n- Shared links to key resources: Stanford AI Index 2025, KPMG trust in AI study, McKinsey innovation report, articles about regulatory/compliance, and prompt engineering.\n\n**3. Technical Discussions & Tools**\n- \u201cVibe coding\u201d (letting AI generate most code) discussed: fast for prototyping, but can lead to messy codebases. Tools: Cursor, Windsurf, Replit, GitHub Copilot, Langchain, LangSmith, Cypress, CustomGPT, Midjourney, n8n, PowerAutomate, Canva.\n- OpenAI\u2019s $3B acquisition of Windsurf and the AI coding tool \u201carms race\u201d analyzed. Cursor and Windsurf praised for their context handling and UX.\n- Shared tips and guides on prompt engineering, tracking LLM token costs, automating detection writing, and getting started with AI for non-coders.\n- Many non-coders and learners are forming teams to explore and present on AI tools, create learning artifacts, and lead sessions.\n\n**4. AI Ethics, Governance, and Inclusion**\n- Ongoing discussion on building a Global Charter for Ethical Open Source AI, with streams on ethics, validation, monitoring, governance, and coordination, aiming for a UN-style framework.\n- Deep dives into ISO/IEC 42001 (AI governance standard), Anthropic\u2019s certification, and the challenge of balancing innovation with certifiability.\n- Questions raised: How to ensure AI serves inclusion (multilingualism, digital divide), how to build trust and responsible AI, how to embed ethical principles in rapidly evolving environments.\n- Shared articles on regulatory, KYC compliance, legal discovery, and the risks of open source and RAG with LLMs.\n\n**5. Community Q&A and Feedback**\n- Weekly Q&A sessions with Dr. Sanchez, with buddy groups submitting questions and voting. Questions cover: open source guardrails, ISO-like governance, value in agent-based systems, AI coding tool trends, AI\u2019s impact on the digital divide, and more.\n- Community requests for better Discord channel organization to handle scale, feedback on meetings structure, and suggestions for improving onboarding and knowledge sharing.\n- Reports of attempted impersonation/fraud in community; Cybersecurity department alerted and",
-      "duration": 13.147235,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 30 minutes in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002388,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 3 hours in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001088,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List messages from the past 2 days in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10):**\n\n---\n\n1. **oscarsan.chez** (2025-05-08 22:29:56.138000)\n   - Acknowledges a previous request with \"Will do!\"\n\n2. **ash.mikhail** (2025-05-08 22:35:26.722000)\n   - Asks about pros and cons of enabling GPU clusters on each EDGE node in an AI/ML platform.\n\n3. **oscarsan.chez** (2025-05-08 22:36:57.810000)\n   - Announces the weekly Q&A will be held on LinkedIn (not Zoom) with guest John Williams; new time is 11:00 AM (for this week only).\n   - Top six questions will be answered; \u201cMember of the Week\u201d announced.\n   - Q&A sessions will return to Zoom but be broadcast to LinkedIn starting next week.\n   - Celebrates surpassing 1,000 LinkedIn followers.\n   - Announces Gen AI Global 2.0 with new cohort invitations at the end of May.\n   - Mentions info session on Saturday at 1 PM (Zoom link included).\n\n4. **ash.mikhail** (2025-05-08 22:49:53.696000)\n   - Expresses thanks.\n\n5. **ireney_67517** (2025-05-08 22:52:44.569000)\n   - Praises a resource and plans to add it to learning assets for NonCoders group.\n\n6. **nikhil_34309** (2025-05-08 22:58:10.813000)\n   - *(No message content, likely placeholder or accidental send.)*\n\n7. **darkgago** (2025-05-08 22:59:47.253000)\n   - Expresses concern about a new member claiming to be a former MIT faculty member; asks for verification methods.\n\n8. **nikhil_34309** (2025-05-08 23:02:39.240000)\n   - Invites everyone to vote on questions for the LinkedIn Q&A; links the event; mentions thought-provoking questions.\n\n9. **nikhil_34309** (2025-05-08 23:02:59.247000) & (2025-05-08 23:03:01.297000)\n   - Lists ten detailed Q&A question topics, including open source in enterprises, multilingual AI, AI governance, agentic value, coding tools, generative AI vs human judgment, enterprise AI agent shifts, digital divide, and open source security.\n\n10. **boozeena_49785** (2025-05-08 23:05:44.789000)\n    - Responds to Oscar\u2019s security concern; advises caution with unverified individuals due to fake profiles.\n\n11. **nikhil_34309** (2025-05-08 23:24:34.291000)\n    - Announces voting deadline (11pm EST).\n\n12. **chiarapassuello** (2025-05-08 23:25:50.570000)\n    - Thanks the group, especially Melinda; apologizes for late response due to personal reasons.\n\n13. **ash.mikhail** (2025-05-09 00:05:29.682000)\n    - Shares a Discord event link.\n\n---\n\n**Key Points:**\n- Q&A event moved to LinkedIn temporarily, with new schedule and guest.\n- Continued focus on community growth and engagement (LinkedIn followers, Gen AI Global 2.0).\n- Voting and discussion around advanced AI/ML topics for Q&A.\n- Security reminders regarding fake profiles.\n- Collaboration and appreciation among group members.\n",
-      "duration": 12.912514,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What happened during last week in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Discord Community Summary: 2025-04-28 to 2025-05-04**\n\n---\n\n### 1. **Community Structure & Onboarding**\n- **Buddy Groups:** Oscar Sanchez (oscarsan.chez) rolled out buddy groups, pairing members by timezone and goals, with admins assigned to each (2025-04-28). Private channels and voice/video calls were enabled for each group.\n- **Roles & Responsibilities:** Conversational Leaders were instructed to act as light-touch facilitators, not full admins. Admin-only buddy groups and Community Coordinator groups are on hold until the general groups stabilize.\n- **Tooling:** Notion, Mural, Trello, and Google Drive were discussed as knowledge management and collaboration tools. Zoom and Discord voice channels were used for meetings. Technical support was given for Discord features (threads, polls, permissions).\n\n---\n\n### 2. **Key Discussions & Themes**\n- **Content Overload & Engagement:** Multiple members (e.g., laura.neder, darkgago) raised concerns about too many daily posts and not enough engagement. Suggestions included limiting daily posts, using threads, rotating posting duties, and weekly digests.\n- **AI Ethics & Governance:** In-depth debates on OpenAI\u2019s for-profit pivot, balancing ethics with profit, and the importance of transparent governance (marie007532, sfrancois, imkprabhat, lauregolly). The Linux/Red Hat model and Apache Spark used as examples.\n- **AI Practical Applications:** Members shared real-world AI deployments (e.g., RFP Copilot, AI for small businesses, AI in healthcare and marketing). Workshops on building RAG agents (retrieval-augmented generation) without coding were scheduled (julioverne74).\n- **Regulation & Standards:** Discussions on EU AI Act enforcement, the need for technical and organizational standards (especially for sensitive domains), and Mastercard/Visa AI payment agent innovations.\n- **Multilingual & Inclusive AI:** Emphasis on language inclusivity, open multilingual datasets, and building collaborative, diverse communities.\n- **AI for Non-Coders:** Formation of a Non-Coder Learning Group with a focus on no-code tools, practical upskilling, and peer learning (ireney_67517).\n- **Metrics & Community Health:** Rodrigo Reyes Jara and others coordinated on developing engagement metrics, suggesting KPIs like activity rates, onboarding completion, and event metrics.\n\n---\n\n### 3. **Featured News & Resources**\n- **Motivational & Tech News:** Regular \u201cMotivational Monday\u201d and \u201cTech Tip Tuesday\u201d posts featured AI\u2019s impact in health, business, and society. Notable links included the launch of Meta AI App, Microsoft\u2019s AI in real-world businesses, and AWS Outposts for SLMs.\n- **Workshops & Demos:** Announced and/or held on topics like RAG agent building (julioverne74), vibe coding/writing, and leveraging AI for process automation.\n- **Learning Assets:** Links to AI news, research (e.g., VisionMD for Parkinson\u2019s, Mastercard Agent Pay), practical guides (prompt engineering, fine-tuning LLMs), and curated tool lists.\n\n---\n\n### 4. **Collaboration & Brainstorming**\n- **Q&A Submissions:** Each buddy group collaborates weekly to submit a question for the Friday Q&A with Dr. Sanchez.\n- **Knowledge Sharing:** Members encouraged to share ideas, resources, and brainstorm community improvements, with ongoing feedback on Discord structure and content strategies.\n- **Testimonial Requests:** Community members were asked to submit testimonials for MIT PE, with prompts provided to guide responses.\n\n---\n\n### 5. **Member Intros & Networking**\n- **Diverse Backgrounds:** Many members introduced themselves, sharing professional backgrounds (tech, health, finance, education, consulting), locations (global), and learning goals.\n- **Networking:** Members actively sought collaboration, knowledge exchange, and support for",
-      "duration": 14.825742,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show activity since yesterday in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.005061,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages from 5 hours ago in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.000993,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity during this month in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Discord Summary: 2025-05-01 to 2025-05-10**\n\n---\n\n### 1. Community & Program Updates\n**Authors:** peterparkerdata, oscarsan.chez, Dr. Abel Sanchez, Community leaders  \n**Key Points:**\n- Celebrations for onboarding completion and milestone achievements.\n- Launch of new teams: SGU (Server Governance Unit), Content Creation Team, Discord Managers 2.0, Cybersecurity, IT, Agent Development.\n- New admin/organizational structure to support scaling as Gen AI Global reopens to previous cohorts.\n- Calls for testimonials for MIT Professional Education and prompts provided.\n- Announcements for upcoming info sessions, workshops, and Q&A sessions (migrated from Zoom to LinkedIn temporarily).\n- Recognition of member contributions (e.g., Member of the Week) and active nomination/voting.\n\n---\n\n### 2. Knowledge Sharing & Learning Resources\n**Authors:** Many (imkprabhat, lauregolly, andreahickethier, sandraf1230, georgi8865, markvenn_30910, others)  \n**Key Points:**\n- Active sharing of articles, infographics, webinars, and technical resources (e.g., Bain on GenAI in marketing, Stanford AI Index, Microsoft\u2019s GitHub GenAI course, ISO 42001, prompt engineering guides).\n- Community digests and recaps provided on AI ethics, governance, deployment, and best practices.\n- Promotion of open source, agentic AI, and practical frameworks (e.g., ISO/IEC 42001, Reflexive Prompt Engineering).\n- Peer-to-peer tool recommendations and technical Q&A on tools such as Cursor, Windsurf, LangChain, Midjourney, n8n, Make, CustomGPT, PowerAutomate, Canva, etc.\n- Multiple offers for collaborative hands-on learning and mini-workshops (e.g., RAG bot building, portfolio development, CustomGPT team, NonCoder Group learning roadmap).\n\n---\n\n### 3. Thematic Discussions\n**Authors:** marie007532, apoorvgarg88, lauregolly, sandraf1230, andreahickethier, shabana_39556, others  \n**Key Points:**\n- Deep dives into AI ethics, responsible innovation, hybrid governance, and balancing profit with principle.\n- Practical challenges in AI adoption\u2014job transformation, upskilling, education, inclusion, and the digital divide.\n- Governance and regulation: OpenAI\u2019s nonprofit status, EU AI Act, regulatory frameworks, and industry standards.\n- Technical topics: AI agent architecture, memory and reasoning, energy/sustainability, agent orchestration, open source vs. proprietary, risks and security.\n- Debates on the evolving role of generalists vs. specialists in AI-driven workplaces.\n\n---\n\n### 4. Buddy Groups & Group Organization\n**Authors:** Multiple (ash.mikhail, sandraf1230, ireney_67517, laura.neder, biseraferrero, others)  \n**Key Points:**\n- Structured buddy groups formed for collaboration, with regular calls, Q&A preparation, and skill sharing.\n- Each group proposes and votes on weekly questions for community-wide Q&A with Dr. Sanchez and guests.\n- Encouragement for each member to lead or co-lead on AI tool exploration and share learnings with the group.\n- Central repositories and knowledge bases being built (e.g., sign-up sheets, Mural boards, Google Drive, Trello, meeting recordings).\n- Introduction of new members, sharing of backgrounds and learning goals.\n\n---\n\n### 5. Q&A and Event Highlights\n**Authors:** oscarsan.chez, julioverne74, Dr. Sanchez, group admins  \n**Key Points:**\n- Weekly Q&A sessions: Questions sourced from buddy groups, covering technical, ethical, and practical aspects of GenAI.\n- Community, member, and event highlights showcased on",
-      "duration": 11.930635,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Posts from yesterday to today in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary:**\n\n- **Author:** ash.mikhail\n- **Timestamp:** 2025-05-09 00:05:29.682000\n- **Key Points:**\n  - Shared a Discord event link: https://discord.com/events/1353058864810950737/1370189646428110979\n  - No additional context or message content provided. The message appears to be an invitation or reference to a specific Discord event.",
-      "duration": 1.780306,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Messages since last week in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-10)**\n\n---\n\n### Community Highlights & Announcements\n\n- **Gen AI Global 2.0 Launch**\n  - **Oscar (oscarsan.chez)** announced major upgrades to Gen AI Global, introducing new departments (Content Creation, IT, Cybersecurity, Agent Development), new onboarding systems, and scaling plans for incoming cohorts.\n  - New teams will streamline content, support, security, and onboarding, aiming for smooth community scaling.\n  - Informational sessions and meetings scheduled for onboarding and Q&A (e.g., Saturday 1 PM EST).\n  - Dr. Sanchez remains engaged as a leader and will host Q&A and learning sessions.\n\n- **Member Recognitions**\n  - **Jos\u00e9 Cordovilla (julioverne74)** was repeatedly nominated and awarded \"Member of the Week\" for leading a successful workshop on building AI agents as a non-coder and for ongoing community contributions.\n\n- **Workshops, Events, and Recordings**\n  - Several technical and motivational workshops were hosted, covering AI agent deployment, cost optimization, vibe coding, and portfolio-building.\n  - Recordings, transcripts, and session summaries shared in Google Drive or Discord channels.\n  - LinkedIn used to amplify events and recognize member contributions.\n\n---\n\n### Learning & Collaboration\n\n- **Buddy Groups & Syncs**\n  - Multiple \"buddy groups\" were formed for focused learning, tool exploration, and submitting weekly Q&A questions for Dr. Sanchez sessions.\n  - Groups coordinated on meeting times, tool sign-ups, and collaborative projects (e.g., creating learning artifacts, mini-workshops).\n  - Non-coders group actively organized around collaborative tool learning, curating resources, and building a knowledge repository.\n\n- **Key Topics & Tech Tips**\n  - **Vibe Coding**: Many shared experiences with Cursor, Windsurf, GitHub Copilot, discussing pros/cons, debugging, and collaborative coding approaches.\n  - **AI Tools & Agent Development**: Tutorials, tech tips, and articles shared on generative AI tools (e.g., LangChain, CustomGPT, n8n, Midjourney, PowerAutomate, Google Gemini, ChatGPT Plus).\n  - **Prompt Engineering**: Advanced techniques and frameworks for effective, ethical AI interaction discussed.\n  - **Portfolio Building**: Ongoing discussion on how to turn GenAI learnings into professional portfolios for employability.\n  - **Cost Optimization**: Workshops and guides on tracking and reducing LLM deployment costs (e.g., LangChain, LangSmith).\n\n- **AI Governance, Ethics, and Inclusion**\n  - **Global Charter for Ethical AI**: Community initiative launched to draft a UN-style, non-binding charter for open-source AI ethics, with streams on ethics, validation, monitoring, and governance.\n  - Discussions on ISO/IEC 42001 as a framework for responsible AI, voluntary certifications (e.g., Anthropic), and balancing standardization vs. agility.\n  - Debates on open-source adoption in enterprises, digital inclusion, multilingualism, and the digital divide.\n  - Reports and papers shared on AI trust, regulation, and responsible scaling (e.g., KPMG, Stanford AI Index, regulatory assessments).\n\n---\n\n### Q&A and Community Polls\n\n- **Weekly Q&A with Dr. Sanchez**\n  - Each buddy group submitted thoughtful questions on topics like:\n    - Open source model guardrails in enterprise\n    - Multilingual and digital inclusion in AI\n    - ISO 42001 and governance without stifling innovation\n    - Value in agent-based systems (orchestration, context, proprietary data)\n    - Generative AI\u2019s impact on human judgment in high-stakes fields\n    - AI coding tools \u201carms race\u201d (Cursor, Windsurf, etc.)\n    - Implications of IBM/Amazon\u2019s agent announcements for developers\n    - Digital divide and risk of an \u201cAI Dividend",
-      "duration": 10.304457,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Activity until tomorrow in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary of Discord Messages (2025-05-03 to 2025-05-11)**\n\n---\n\n### Key Themes & Developments\n\n#### 1. **Community Growth & Structure**\n- **Gen AI Global 2.0** launch, scaling up for new and previous cohorts.\n- Creation of new departments: Content Creation, IT, Cybersecurity, Agent Development (Discord Managers 2.0).\n- Launch and onboarding of Content Creation and Onboarding Teams, with new roles and responsibilities.\n- Buddy groups and NonCoder groups actively forming, organizing meetings, and collaborating on tool learning and Q&A submissions.\n- SGU (Server Governance Unit) established for process/system optimization and daily session planning.\n\n#### 2. **Events, Workshops & Initiatives**\n- Multiple workshops held, including a standout session by **Jos\u00e9 (julioverne74)** on building Discord AI agents as a non-coder, receiving widespread acclaim and \"Member of the Week\" honors.\n- Announcement and scheduling of regular syncs, Q&A sessions with Dr. Sanchez, and a major upcoming event on AI Agent Deployment & Cost Optimization.\n- New agent development course (for Discord managers/admins) launched under Dr. Sanchez, open to admins with a 0-coding background assumption.\n- Q&A sessions moved to LinkedIn for broader reach; future sessions to be simulcast on Zoom and LinkedIn.\n\n#### 3. **Knowledge Sharing & Discussions**\n- **Tech Tips**, articles, and resource sharing on:\n  - AI prompt engineering\n  - Microsoft\u2019s 21-lesson GitHub course\n  - Neural networks & deep learning\n  - Regulatory and compliance (KYC, ISO/IEC 42001)\n  - Token usage tracking and cost optimization\n  - AI\u2019s impact on inclusion, education, financial services, and industry disruption\n- Discussion of major industry news: OpenAI\u2019s Windsurf acquisition, Cursor\u2019s rise, AI agent arms race, and implications for coding and software development.\n- Ongoing reflection on AI ethics, governance, digital divide, open source adoption, multilingualism, and digital inclusion.\n\n#### 4. **Collaborative Projects & Tool Learning**\n- Teams forming around learning and demoing tools such as Cursor, Custom GPTs, Midjourney, Langchain, Canva, n8n, PowerAutomate, Sora, GoogleLM, etc.\n- Creation of shared learning assets, repositories, and plans for a \u201cMagic Quadrant\u201d of AI tools for non-coders.\n- Emphasis on practical learning, hands-on workshops, and knowledge transfer within the community.\n\n#### 5. **Recognition & Community Engagement**\n- Multiple members nominated and recognized for contributions, especially Jos\u00e9 (julioverne74).\n- Strong culture of peer support, feedback, and encouragement for experimentation, learning, and upskilling.\n- Community members encouraged to propose and vote on Q&A questions, contribute to open-source ethics charter, and participate in collaborative sessions.\n\n#### 6. **Administrative & Technical Updates**\n- Efforts to streamline Discord channel organization, event/calendar management, and onboarding processes.\n- Addressing technical and security issues (e.g., impersonation, channel permissions, calendar sync, time zone confusion).\n- IT and Cybersecurity departments tasked with managing routine operations and safeguarding the community.\n\n---\n\n### Notable Questions & Polls for Q&A Sessions\n\n1. **Open source in enterprises:** Guardrails and prerequisites for adoption.\n2. **Multilingual AI inclusion:** Ensuring inclusion and diversity from the start.\n3. **ISO-like governance:** Balancing certifiability and agility.\n4. **AI agents in workflows:** Considerations for adaptive, collaborative agents.\n5. **Agentic value:** Where does the defensible value lie as models level out?\n6. **AI coding tools arms race:** Which tools to watch post-Windsurf/Cursor.\n7. **Generative AI and human judgment:** Impacts and priorities in high-stakes sectors",
-      "duration": 12.06225,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from the last 30 minutes in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002927,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's new in the announcements channel in the past day",
+      "query": "What's new in the announcements channel",
       "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What's new in the announcements channel in the past day'",
-      "duration": 0.78689,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000976,
       "success": true,
       "error": null
     },
     {
       "query": "Show me the latest messages from the papers-and-publications channel",
       "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me the latest messages from the papers-and-publications channel'",
-      "duration": 0.01442,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000718,
       "success": true,
       "error": null
     },
     {
-      "query": "List all messages from the discord-managers channel in the last week",
-      "channel_id": null,
-      "result": "**Discord Summary: 2025-04-28 to 2025-05-04**\n\n---\n\n### Key Themes:\n- **Buddy Group Formation & Structure:** \n  - New buddy groups launched, each with members and admin leaders.\n  - Channels and voice/video calls set up for collaboration.\n  - Focus on introductions, group Q&A, and weekly submissions for Friday Q&A.\n  - Some confusion over group visibility and admin vs. member roles, but resolved by Oscar.\n\n- **Community Onboarding & Engagement:**\n  - Onboarding completed for general members.\n  - Testimonials for MIT Professional Education solicited.\n  - SGU and Content Creation Teams announced (launching soon).\n  - Discussions on managing content overload, post frequency, and using threads for organization.\n  - Experiments with rotating posting schedules and focusing on deeper discussions.\n\n- **Learning Tools & Resources:**\n  - Strong interest in Notion, Trello, Mural, and Google Drive for knowledge management.\n  - Multiple sessions on tool demos, with plans for deeper dives and sharing best practices.\n  - Sharing and adoption of AI tools like FlowiseAI, ChatGPT APIs, LangChain, and browser extensions.\n  - Requests for a summary tool for Discord content (one in beta).\n\n- **Tech Tips, Motivational Posts, & News:**\n  - Daily/weekly themed posts (Motivational Monday, Tech-Tip Tuesday, Midweek Discussion).\n  - News shared about AI in healthcare, business, ethics, and regulation (e.g., AI-driven healthcare advancements, Mastercard Agent Pay, OpenAI's business structure, AWS Outposts for GenAI).\n  - Key articles and reports discussed, including AI agent standards, model context protocol, and ethical frameworks.\n\n- **Workshops & Knowledge Sharing:**\n  - Workshop on building a RAG AI agent for Discord by Jose (recording/transcript shared).\n  - Recap of MIT Q&A sessions with key takeaways (ethics, ROI, small models, regulation, no-code, copyright).\n  - Discussions on AI in RFP automation, agentic AI, and practical applications in various industries.\n\n- **Governance & Ethics:**\n  - Intense debate on OpenAI\u2019s nonprofit-to-profit shift and how to balance ethics, governance, and profit.\n  - Calls for hybrid models, transparency, and regulatory safeguards.\n  - Exploration of standards for AI agents, especially in sensitive domains.\n\n- **Community Operations & Future Plans:**\n  - Detailed planning on metrics to track engagement, growth, and health of the community.\n  - Workflow outlined for Discord Managers \u2192 SGU \u2192 DEVS, including leadership handoffs.\n  - Ongoing improvements to Discord features (polls, permissions, thread visibility, channel access).\n  - Plans for more team roles (cybersecurity, fundraising, marketing, onboarding, IT, agent development).\n\n### Selected Notable Messages & Authors:\n\n- **Oscar (oscarsan.chez):** (Multiple timestamps)\n  - Organized buddy groups, resolved technical issues, provided onboarding guidance.\n  - Shared workflow plans, managed permissions, and led operational updates.\n  - Announced upcoming team launches, metrics, and Q&A reminders.\n\n- **Irene (ireney_67517):**\n  - Led Non-Coder Learning Group, advocated for hands-on learning, tool adoption, and collaborative sessions.\n  - Facilitated meetings, shared resources, and encouraged using threads and Mural for organization.\n\n- **Jose (julioverne74):**\n  - Hosted RAG workshop, shared personal learning journey and resources.\n  - Actively contributed to discussions on bot development and technical troubleshooting.\n\n- **Marie (marie007532):**\n  - Led philosophical and ethical discussions, especially on OpenAI\u2019s structure.\n  - Encouraged debate on governance, ethics, and community values.\n\n- **Andrea (andreahickethier):**\n  - Summarized MIT Q&A sessions, highlighted",
-      "duration": 15.126595,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's been discussed in the introductions channel today",
+      "query": "List all messages from the discord-managers channel",
       "channel_id": null,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002044,
+      "duration": 0.000843,
       "success": true,
       "error": null
     },
     {
-      "query": "Show me activity in the general channel from the past 3 hours",
-      "channel_id": null,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.0013,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's new in the announcements channel in the past day in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What's new in the announcements channel in the past day in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.034268,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me the latest messages from the papers-and-publications channel in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me the latest messages from the papers-and-publications channel in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.023503,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all messages from the discord-managers channel in the last week in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "Here is a summary of the Discord messages from 2025-04-28 to 2025-05-04, focusing on key points, authors, and timestamps.\n\n---\n\n## Week Overview (2025-04-28 to 2025-05-04):\n\n### 1. **Community Organization & Buddy Groups**\n- **Oscar Sanchez** (oscarsan.chez, multiple timestamps): \n  - Announced launch of buddy groups, described group compositions, time zones, and admin assignments.\n  - Provided instructions for posting weekly activities (Motivation Monday, Tech-Tip Tuesday, Mid-Week Discussion).\n  - Clarified differences between general member and admin buddy groups and their purposes.\n  - Provided ongoing technical support, updates, and fixes for Discord features (polls, group visibility, permissions).\n  - Shared links to resources (Trello, Zoom, meeting recordings).\n  - Outlined future plans for scaling the community, including leadership handoffs and departmental structure.\n- **Buddy Groups**: Members introduced themselves, coordinated meeting times, and discussed group Q&A submissions for Friday sessions.\n\n### 2. **Content Sharing and Discussion**\n- **Motivation Monday & Tech-Tip Tuesday**: \n  - Members (e.g., marie007532, melindamelcher, eduardofadanelli, rad.ai, shabana_39556, nura775) regularly shared AI news and motivational content, such as AI applications in healthcare, business efficiency, prompt engineering, and ethical concerns.\n  - Action steps encouraged practical application, like identifying tasks to automate or reflecting on ethical AI design.\n- **Mid-Week & Q&A Discussions**: \n  - Topics included AI ethics, OpenAI\u2019s for-profit transition, governance frameworks, inclusivity in AI, and agentic AI in sensitive domains.\n  - Members brainstormed questions for Dr. Sanchez\u2019s Friday Q&A, voting on key issues (e.g., regulation, agent standards, technical enforcement, team definitions in AI contexts).\n\n### 3. **Tools, Knowledge Management & Learning**\n- **Notion, Trello, Mural, Perplexity**: \n  - Members such as ireney_67517, megrosed_65608, and others discussed the best tools for knowledge management and collaboration.\n  - Demo sessions and working groups were organized to explore Notion and other tools.\n  - Google Drive and Mural boards used for resource sharing, personas, and learning journeys.\n- **AI Projects & Demos**: \n  - **fcastrosantos** shared a detailed build of an AI Sales Copilot using GPT-4, Pinecone, Discord, and FastAPI.\n  - **julioverne74** hosted a workshop on building a RAG bot for Discord with LangChain and OpenAI, aimed at non-coders.\n  - Members discussed using coding copilots, AI summarizers, and APIs for productivity and learning.\n\n### 4. **Community Feedback & Process Improvements**\n- **Managing Content Volume**: \n  - Members (laura.neder, darkgago, imkprabhat) discussed the challenge of high message volume and proposed limiting daily posts, using threads, and focusing on deeper conversations.\n  - Oscar and others responded with ongoing technical improvements (voice channels, event scheduling, thread management).\n- **Onboarding & Orientation**: \n  - Continued onboarding of new members and troubleshooting Discord features.\n  - Tips for using Discord, group coordination, and knowledge sharing (e.g., how to use threads, polls, and voice calls).\n\n### 5. **Ethics, Governance, and Industry Trends**\n- **AI Governance**: \n  - Multiple discussions on the need for standards, regulation (e.g., EU AI Act), and balancing profit with ethical principles.\n  - Members referenced real-world examples (Mastercard Agent Pay, Meta AI, Paypal Agent Toolkit) and debated whether for-profit models can",
-      "duration": 14.084886,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's been discussed in the introductions channel today in the \ud83c\udfd8general-chat channel",
+      "query": "What's new in the announcements channel in the \ud83c\udfd8general-chat channel",
       "channel_id": 1353058864810950740,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002413,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity in the general channel from the past 3 hours in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.000884,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's new in the announcements channel in the past day in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What's new in the announcements channel in the past day in the \ud83d\udce2announcements channel'",
-      "duration": 0.01495,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me the latest messages from the papers-and-publications channel in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me the latest messages from the papers-and-publications channel in the \ud83d\udce2announcements channel'",
-      "duration": 0.024141,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all messages from the discord-managers channel in the last week in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-04-28 to 2025-05-04)**\n\n---\n\n### 1. **Community Structure & Onboarding**\n- **Authors:** oscarsan.chez, ireney_67517, eduardofadanelli, peterparkerdata, rodrigoreyesjara, others\n- **Key Points:**\n  - Buddy groups were launched, each with a mix of members and conversational leaders/admins, organized by time zone and interests. (oscarsan.chez, 2025-04-28 13:30)\n  - Detailed instructions were posted for onboarding, group assignments, and weekly activities (Motivation Monday, Tech Tip Tuesday, Mid-Week Discussion).\n  - Voice and video channels were added for live group collaboration.\n  - Admin and conversational leader roles clarified: leaders are to provide light support, not micromanage.\n  - Upcoming: Community Coordinator buddy group chats will launch after general group stabilization.\n  - New teams (SGU, Content Creation) will be announced soon. (peterparkerdata, 2025-05-01 00:58)\n\n---\n\n### 2. **Knowledge Sharing & Learning Tools**\n- **Authors:** ireney_67517, megrosed_65608, imkprabhat, melindamelcher, sandraf1230, others\n- **Key Points:**\n  - Non-coder learning group formed for hands-on, collaborative upskilling with Notion, Mural, Trello, and other tools.\n  - Repositories for resources established via Google Drive and Notion; discussions on knowledge management and tool selection.\n  - Multiple articles, case studies, and tech tips shared (e.g., AI in healthcare, prompt engineering, AI-powered business tools).\n  - Community favors structured, thematic posting but is experimenting with threads and digest formats to prevent overload.\n  - Members encouraged to document learning goals, join workshops, and contribute to tool/skills matrices.\n\n---\n\n### 3. **Workshops & Events**\n- **Authors:** julioverne74, oscarsan.chez, andreahickethier, others\n- **Key Points:**\n  - Regular workshops held on AI topics (e.g., building RAG bots, prompt engineering, deploying AI agents in business).\n  - Q&A sessions with Dr. Sanchez and professors\u2014groups submit weekly questions, vote, and discuss key takeaways.\n  - Workshop on building a Discord RAG bot (julioverne74, 2025-05-04 20:46): recording, transcript, and summary shared.\n  - Testimonials and feedback are being collected for MIT Professional Education.\n\n---\n\n### 4. **Discussion Themes & Community Feedback**\n- **Authors:** laura.neder, imkprabhat, darkgago, ash.mikhail, andreahickethier, others\n- **Key Points:**\n  - Debates around the volume and format of posts: suggestions to limit daily posts, use threads, and focus on deeper discussion.\n  - Proposal and implementation of rotating posting assignments, weekly digests, and topic-based channels.\n  - Threads are being trialed but present challenges (hidden after inactivity, discoverability).\n  - Community is iterating on best practices for engagement and content curation (e.g., curator roles, content digests).\n\n---\n\n### 5. **Ethics, Governance, and Industry Updates**\n- **Authors:** marie007532, ash.mikhail, silke finken, andreahickethier, others\n- **Key Points:**\n  - Extensive discussion on AI ethics, governance of for-profit AI (e.g., OpenAI\u2019s transition), regulatory standards, and the impact of profit motives.\n  - News shared on Mastercard\u2019s Agent Pay, Meta AI App, AWS Outposts for GenAI, and integration of AI in business.\n  - Questions",
-      "duration": 15.300856,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's been discussed in the introductions channel today in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.003059,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity in the general channel from the past 3 hours in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.000975,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's new in the announcements channel in the past day in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What's new in the announcements channel in the past day in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.013062,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me the latest messages from the papers-and-publications channel in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me the latest messages from the papers-and-publications channel in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.02287,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all messages from the discord-managers channel in the last week in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Discord Summary: Gen AI Global Community (2025-04-28 to 2025-05-04)**\n\n---\n\n**1. Community Organization & Onboarding**\n\n- **Buddy Groups Launched**: Members were sorted into buddy groups by time zone and interests. Each buddy group has dedicated text/voice channels for collaboration and will submit weekly Q&A questions for Friday sessions with Dr. Abel Sanchez.\n    - *Oscar Sanchez* (oscarsan.chez) coordinated group assignments, onboarding, and troubleshooting channel visibility. He announced that Conversational Leaders are light facilitators, not managers.\n    - Admin/buddy group structure and visibility clarified: Managers see all groups; Conversational Leaders see their group; General members see their own.\n\n- **Non-Coder Learning Group**: *Irene Yang* (ireney_67517) invited non-coders to a focused learning group for hands-on upskilling with AI assistants, no-code tools, and collaborative workshops.\n    - Leveraging tools: Notion (for knowledge management, demo planned), Trello, Mural, Google Drive.\n    - Ongoing discussions about knowledge organization and reducing content overload.\n\n- **Daily/Weekly Themes**: Motivation Monday, Tech Tip Tuesday, and Midweek Discussion remain, but members raised concerns about content overload and lack of deeper engagement. Suggestions included:\n    - Limiting daily posts, rotating who posts, focusing on threads, digests, and more structured knowledge sharing.\n    - Ongoing feedback loop to improve engagement and manage volume.\n\n---\n\n**2. Key Topics & Discussions**\n\n- **AI for Social Good & Industry Updates**:\n    - Members shared news on AI applications in healthcare (NICU nutrition, Parkinson\u2019s diagnostics, life-saving interventions, AI-enabled drug trials), business transformation, carbon removal, and agentic commerce (Mastercard Agent Pay, OpenAI, Paypal/Visa agent toolkits).\n    - Emphasis on responsible AI, ethical oversight, and the challenges of scaling AI ethically.\n\n- **Ethics & Governance**:\n    - Major debate on OpenAI\u2019s shift from nonprofit to for-profit: Can ethics and profit co-exist? What models best preserve public good (hybrid, open-source, foundation + abstraction layer)?\n    - Governance frameworks, standards for AI agents (in sensitive sectors), and the need for external audits and regulation (EU AI Act enforcement, minimum standards for agents).\n    - Threaded discussions on transparency, fairness, accountability, and the impact of concentrated power (e.g., Microsoft\u2019s investment in OpenAI).\n\n- **AI Tools, Agents & Practical Solutions**:\n    - Active sharing of practical guides and experiences implementing AI:\n        - Prompt engineering tips (chain of draft, role-assignment, iterative refinement)\n        - Building RAG (Retrieval Augmented Generation) bots for sales, Discord, and business workflows (notably by fcastrosantos, julioverne74)\n        - No-code/low-code agent creation (LangChain, OpenAI, Claude integrations, etc.)\n        - Group and member-led workshops (e.g., Jose\u2019s session on building a Discord RAG bot, recording shared)\n    - Discussions on tool mapping, knowledge repositories, and using AI to summarize/chat with documents.\n\n- **Inclusion & Multilingual AI**:\n    - Midweek discussion highlighted digital inclusion: challenges for non-English speakers, need for multilingual datasets, and local partnerships.\n    - Group celebrated its own diversity and the importance of building inclusive, accessible AI.\n\n---\n\n**3. Community Operations & Technical Improvements**\n\n- **Channel & Thread Use**: Push to use Discord threads for focused topics, but concern about discoverability and retention (threads auto-hide after inactivity). Managers are optimizing structures and seeking best practices.\n\n- **Metrics & Reporting**: Community leaders (rodrigoreyesjara, saak123456, julioverne74) proposed tracking engagement, growth, event attendance, content trends, and automation metrics. Pathfinder bot and",
-      "duration": 15.997667,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What's been discussed in the introductions channel today in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.001108,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity in the general channel from the past 3 hours in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.000633,
+      "duration": 0.000488,
       "success": true,
       "error": null
     },
     {
       "query": "Find messages about AI tools",
       "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find messages about AI tools'",
-      "duration": 0.00712,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000689,
       "success": true,
       "error": null
     },
     {
       "query": "Show me discussions about meetings",
       "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about meetings'",
-      "duration": 0.006271,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000622,
       "success": true,
       "error": null
     },
     {
       "query": "List messages mentioning Zoom",
       "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List messages mentioning Zoom'",
-      "duration": 0.005342,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about learning resources",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find posts about learning resources'",
-      "duration": 0.005773,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about Notion",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about Notion'",
-      "duration": 0.005693,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000823,
       "success": true,
       "error": null
     },
     {
       "query": "Find messages about AI tools in the \ud83c\udfd8general-chat channel",
       "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find messages about AI tools in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.017517,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about meetings in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about meetings in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.016162,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List messages mentioning Zoom in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List messages mentioning Zoom in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.014144,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about learning resources in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find posts about learning resources in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.01437,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about Notion in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about Notion in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.014231,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find messages about AI tools in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find messages about AI tools in the \ud83d\udce2announcements channel'",
-      "duration": 0.005925,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about meetings in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about meetings in the \ud83d\udce2announcements channel'",
-      "duration": 0.005742,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List messages mentioning Zoom in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List messages mentioning Zoom in the \ud83d\udce2announcements channel'",
-      "duration": 0.005603,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about learning resources in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find posts about learning resources in the \ud83d\udce2announcements channel'",
-      "duration": 0.006316,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about Notion in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about Notion in the \ud83d\udce2announcements channel'",
-      "duration": 0.005776,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find messages about AI tools in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find messages about AI tools in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.005871,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about meetings in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about meetings in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.005813,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List messages mentioning Zoom in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List messages mentioning Zoom in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.005281,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about learning resources in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Find posts about learning resources in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.006,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me discussions about Notion in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me discussions about Notion in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.006118,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has oscarsan.chez posted in the last day",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has oscarsan.chez posted in the last day'",
-      "duration": 0.004531,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from laura.neder",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me messages from laura.neder'",
-      "duration": 0.004025,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by ireney_67517 in the past week",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List all posts by ireney_67517 in the past week'",
-      "duration": 0.0068,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has rad.ai shared recently",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has rad.ai shared recently'",
-      "duration": 0.00364,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity from darkgago",
-      "channel_id": null,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me activity from darkgago'",
-      "duration": 0.004044,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has oscarsan.chez posted in the last day in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has oscarsan.chez posted in the last day in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.015088,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from laura.neder in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me messages from laura.neder in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.013937,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by ireney_67517 in the past week in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List all posts by ireney_67517 in the past week in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.018321,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has rad.ai shared recently in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has rad.ai shared recently in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.013297,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity from darkgago in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me activity from darkgago in the \ud83c\udfd8general-chat channel'",
-      "duration": 0.013726,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has oscarsan.chez posted in the last day in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has oscarsan.chez posted in the last day in the \ud83d\udce2announcements channel'",
-      "duration": 0.006262,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from laura.neder in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me messages from laura.neder in the \ud83d\udce2announcements channel'",
-      "duration": 0.00607,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by ireney_67517 in the past week in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List all posts by ireney_67517 in the past week in the \ud83d\udce2announcements channel'",
-      "duration": 0.008294,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has rad.ai shared recently in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has rad.ai shared recently in the \ud83d\udce2announcements channel'",
-      "duration": 0.005798,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity from darkgago in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me activity from darkgago in the \ud83d\udce2announcements channel'",
-      "duration": 0.005688,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has oscarsan.chez posted in the last day in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has oscarsan.chez posted in the last day in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.006595,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages from laura.neder in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me messages from laura.neder in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.006006,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by ireney_67517 in the past week in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'List all posts by ireney_67517 in the past week in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.00817,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has rad.ai shared recently in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'What has rad.ai shared recently in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.005544,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me activity from darkgago in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u274c Error processing query: Could not parse timeframe: 'Show me activity from darkgago in the \ud83d\udc4bintroductions channel'",
-      "duration": 0.005602,
+      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
+      "duration": 0.000566,
       "success": true,
       "error": null
     },
     {
       "query": "Show me messages about AI tools in the papers-and-publications channel from the last week",
       "channel_id": null,
-      "result": "**Discord Summary: 2025-04-28 to 2025-05-04**\n\n---\n\n### 1. **Community Structure, Onboarding & Groups**\n\n- **Buddy Groups Launched:** Community split into small groups (\"buddy groups\") for collaboration, Q&A submissions, and networking. Each group has admins for light facilitation. [oscarsan.chez, 2025-04-28 13:30]\n- **Onboarding:** Multiple onboarding meetings, guides, and resources provided. Google Drive and Notion used for shared knowledge; Mural for personas and group goals. [ireney_67517, 2025-04-28 16:19, 2025-05-02 15:12]\n- **Voice/Video Channels:** Dedicated voice/video channels set up for live calls and group meetings. [oscarsan.chez, 2025-04-29 13:57]\n- **Admin/Manager Roles:** Discord managers see all groups; Conversational Leaders only their group; general members just their own. [oscarsan.chez, 2025-04-30 19:31]\n- **Manager Program Roadmap:** Workflow presented for scaling\u2014Discord Managers \u2192 SGU \u2192 Devs + IT Ops. New departments (cybersecurity, onboarding, fundraising, etc.) planned. [oscarsan.chez, 2025-05-04 03:57]\n- **Testimonial Collection:** Members invited to submit testimonials for MIT Professional Education. [peterparkerdata, 2025-05-01 00:58]\n\n---\n\n### 2. **Content & Knowledge Sharing**\n\n- **Daily Themes:** Motivation Monday, Tech-Tip Tuesday, Midweek Discussion. Themes encourage sharing news, tips, and debates (links to news, research, practical applications). [marie007532, melindamelcher, eduardofadanelli, etc.]\n- **Information Overload:** Concerns raised about content volume, with suggestions for post limits, curated threads, weekly digests, rotation of posting duties, and leveraging Discord's thread feature. [laura.neder, darkgago, imkprabhat]\n- **Tool Demos & Knowledge Repos:** Notion, Trello, Mural, and Google Drive used for organizing resources, demos, and project management. [ireney_67517, megrosed_65608, oscarsan.chez]\n- **Workshops:** Announcement and recording of AI agent/RAG workshop for non-coders by Jose, with plans to add to knowledge library. [julioverne74, 2025-05-04 20:46]\n- **Summarization/AI Tools:** Discussion around building Discord summarizers, using ChatGPT for summarization, and evaluating Chrome extensions/APIs. [carladomingo33, ireney_67517, jhorden2211]\n\n---\n\n### 3. **Key AI Topics & News**\n\n- **AI in Healthcare:** Multiple stories about AI-driven advances in NICU nutrition, cancer treatment, Parkinson's disease assessment, and emergency diagnosis (e.g., ChatGPT saves pregnant woman). [marie007532, imkprabhat, rad.ai, biseraferrero, apoorvgarg88]\n- **AI in Business/Industry:** Practical use cases discussed\u2014AI for SMEs, AI agents in sales, automation in supply chain, AI-powered test engineers, agentic commerce/payments (Mastercard, PayPal, Visa). [melindamelcher, fcastrosantos, markvenn_30910, silkefinken, marie007532]\n- **Ethics & Governance:** Debates on OpenAI's for-profit shift, calls for AI ethics charters, need for standards/criteria for AI agents, risk of ethical drift, and balancing profit and principle. [marie007532",
-      "duration": 29.920541,
+      "result": "\u274c Error processing query: Unterminated string starting at: line 59 column 18 (char 3285)",
+      "duration": 21.986766,
       "success": true,
       "error": null
     },
@@ -817,151 +121,23 @@
       "query": "List all posts by oscarsan.chez in the announcements channel today",
       "channel_id": null,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002223,
+      "duration": 0.002221,
       "success": true,
       "error": null
     },
     {
       "query": "What has been discussed about meetings in the general channel in the past 2 days",
       "channel_id": null,
-      "result": "**Summary of Discord messages (2025-05-08 to 2025-05-10):**\n\n---\n\n**ash.mikhail** (2025-05-08 22:35:26.722000)  \n- Question posed for Buddy Group 11 about AI/ML platforms: pros and cons of enabling GPU clusters on each EDGE node.\n\n**oscarsan.chez** (2025-05-08 22:36:57.810000)  \n- Announced this week\u2019s Q&A will be on LinkedIn with guest John Williams, not Zoom.\n- Time changed from 11:30 AM to 11:00 AM for this week only.\n- Top six questions will be answered; \u201cMember of the Week\u201d to be announced.\n- This week is a beta test; future Q&As will move to the Gen AI Global LinkedIn page for more visibility.\n- Next week, Q&As will return to Zoom but broadcast to LinkedIn.\n- Gen AI Global LinkedIn reached over 1,000 followers; approaching 1,100.\n- Gen AI Global 2.0 to launch at end of May, inviting all cohorts.\n- Informational session scheduled for Saturday at 1 PM.\n\n**ash.mikhail** (2025-05-08 22:49:53.696000)  \n- Expressed thanks.\n\n**ireney_67517** (2025-05-08 22:52:44.569000)  \n- Appreciated shared resource and plans to add it to NonCoders learning assets and ongoing discussions.\n\n**nikhil_34309** (2025-05-08 22:58:10.813000)  \n- (No content provided.)\n\n**darkgago** (2025-05-08 22:59:47.253000)  \n- Asked about verifying someone claiming to be a former MIT faculty member.\n\n**nikhil_34309** (2025-05-08 23:02:39.240000)  \n- Asked everyone to vote for questions for the upcoming Gen AI Global Q&A on LinkedIn.\n\n**nikhil_34309** (2025-05-08 23:02:59.247000 & 23:03:01.297000)  \n- Listed 10 potential Q&A questions, topics include: open source in enterprises, multilingual AI, ISO-like governance, autonomous AI agents, value in agent-based systems, AI coding tools competition, generative AI vs. human judgment, IBM/Amazon agent news, AI and digital divide, and open source security.\n\n**boozeena_49785** (2025-05-08 23:05:44.789000)  \n- Thanked Oscar for reporting a concern; emphasized caution with unverified individuals due to fake profiles/bots, especially on LinkedIn and WhatsApp.\n\n**nikhil_34309** (2025-05-08 23:24:34.291000)  \n- Announced voting deadline: 11 PM EST.\n\n**chiarapassuello** (2025-05-08 23:25:50.570000)  \n- Thanked everyone, especially Melinda; apologized for delayed response due to personal reasons.\n\n**ash.mikhail** (2025-05-09 00:05:29.682000)  \n- Shared a Discord event link.\n\n---\n\nLet me know if you want this in JSON format.",
-      "duration": 7.371459,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about learning resources from laura.neder in the last 3 days",
-      "channel_id": null,
-      "result": "**Summary of Discord Messages (2025-05-07 to 2025-05-10):**\n\n---\n\n### 1. NonCoder Group Initiatives\n\n- **Ireney_67517** (May 7, 22:36): Announces a mini-project in the NonCoder group for web-scraping and organizing learning content; Amber Bellou joins as a data scientist. Seeking more volunteers to operationalize efforts quickly.\n- **Ireney_67517** (May 8, 02:54, 03:11, 16:10, 22:52): Adds more to NonCoder Group efforts, including a Magic Quadrant for evaluating AI tools for non-coders, with criteria for classification and ongoing refinement. Encourages collective learning and tool prioritization.\n- **Biseraferrero** (May 8, 08:48, 09:17): Thanks Irene for organizing, shares challenges of tool overload.\n- **Malinhaag_13259** (May 8, 10:14): Volunteers to join the NonCoder project.\n- **Rad.ai** (May 8, 03:03): Requests to be added to the NonCoder group.\n\n---\n\n### 2. Buddy Groups & Community Introductions\n\n- **Nikhil_34309** (Multiple times): Welcomes members to buddy groups, assigns VC channels, lists group admins, checks for access issues, and facilitates group communication.\n- **Fijop_** (May 7, 22:53): Introduces himself (Francisco Pizano), shares background and LinkedIn.\n- **Internationalcio** (May 8, 13:05, 13:22): Introduces himself (Miguel \u00c1ngel S\u00e1nchez Rodr\u00edguez), shares background, role, and LinkedIn.\n- **Saurabhtyagi24, Dhilipsr, Mightymilo23, Chiarapassuello, Shabana_39556, Others**: Greetings and brief intros.\n- **Imkprabhat** (May 8, 07:28): Shares expertise in ChatGPT, Cursor, Langchain, Canva, and n8n; offers to host learning sessions.\n\n---\n\n### 3. Meetings & Scheduling\n\n- **Bozeena_49785, Minsunnie, Others**: Coordinate meeting times for calls, discuss availability, agree on morning and evening slots, pin recurring meetings.\n- **Sesh Bot**: Sends numerous @everyone reminders for events and meetings.\n- **Pabloallois_87684, Julioverne74, Diell_zaa**: Discuss calendar configurations and time zone issues, propose Trello task for time zone management.\n\n---\n\n### 4. Q&A Sessions & Buddy Group Questions\n\n- **Ash.mikhail** (May 8, 03:28, 16:08, 22:35): Announces first buddy group meeting, calls for Q&A questions, proposes technical questions (e.g., GPU clusters on edge nodes).\n- **Darkgago, Markvenn_30910, SilkeFinken, Antione789, Melindamelcher, Apoorvgarg88, Minsunnie, Others**: Propose, refine, and vote on Q&A questions for Dr. Abel Sanchez\u2019s Friday session. Questions cover: AI tool selection, digital divide, multilingual inclusion, open-source adoption, AI governance, agentic value, generative AI & human judgment, IBM/Amazon agent developments.\n- **Nikhil_34309** (May 8-9): Posts full list of the week\u2019s top Q&A questions and opens voting.\n- **Oscarsan.chez** (May 8, 22:36): Announces this week\u2019s Q&A will be on LinkedIn with guest John Williams, lists changes in session time and format.\n\n---\n\n### 5. Community Announcements &",
-      "duration": 17.921719,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about Notion in the discord-managers channel since yesterday",
-      "channel_id": null,
       "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.007317,
+      "duration": 0.001117,
       "success": true,
       "error": null
     },
     {
       "query": "Show me messages about AI tools in the papers-and-publications channel from the last week in the \ud83c\udfd8general-chat channel",
       "channel_id": 1353058864810950740,
-      "result": "**Discord Community Weekly Summary (2025-04-28 to 2025-05-04)**\n\n---\n\n### 1. **Community Structure & Buddy Groups**\n- Community scaled up, adding 100+ new members, now divided into buddy groups based on interests, time zones, and learning goals.\n- **Buddy Group assignments** and admin roles (Conversational Leaders) were clarified, with Oscar Sanchez and team actively managing group creation, troubleshooting, and onboarding.\n- Dedicated text and voice channels were launched for each group, with technical fixes and feature rollouts (e.g., polls, permission management, scheduling).\n- **Admin/manager-only groups** to be launched after stabilizing member groups.\n\n### 2. **Daily/Weekly Activities & Content Themes**\n- Weekly content schedule: Motivation Monday, Tech Tip Tuesday, Mid-Week Discussion, group Q&A prep for Friday.\n- **Motivation Monday**: Shared AI news impacting healthcare, business, and society (e.g., AI in NICU nutrition, AI agents\u2019 risks, AI-driven carbon capture, real-world business case studies).\n- **Tech Tip Tuesday**: Advanced prompt engineering, fine-tuning LLMs, AI for SMEs, prompt best practices, and iterative prompt refinement (\u201cChain of Draft\u201d).\n- **Mid-Week Discussion**: Topics on inclusion, multilingual AI, OpenAI\u2019s business model/ethics, agent standards, AI in regulated environments, and the evolving definition of teams in AI contexts.\n- Community feedback suggests slowing the posting pace, focusing on fewer, higher-quality posts, and more back-and-forth discussion.\n\n### 3. **Knowledge Sharing, Tools, and Learning**\n- Members actively share articles, case studies, and tools (Notion, Trello, Mural, Perplexity, Google Drive, Discord bots).\n- **Non-coder Learning Group**: Led by Irene Yang, collaborates on no-code AI, tool demos, and knowledge repository structure; calls for more role-sharing to prevent burnout.\n- **Workshops & Demos**: Community-run sessions on building RAG bots, agentic AI, and practical AI implementations (recordings and resources shared for those who can\u2019t attend live).\n- Multiple members (notably Francisco, Megan, Jonathan) discuss hands-on projects (e.g., Discord AI sales bot, Notion knowledge base, custom GPT tutors).\n- Suggestions to map AI tools to use cases for non-coders and to run tool comparison studies.\n\n### 4. **Community Operations & Technical Improvements**\n- Frequent troubleshooting and improvements by Oscar and team: permissions, poll features, voice channel issues, thread visibility, bot integrations, and onboarding clarifications.\n- Feedback on Discord structure (threads, channels, digest/calendars, content curation, role/goal visibility) led to ongoing improvements and plans for better content management and search.\n- Metrics/KPIs for community health and engagement being defined (growth, activity, onboarding, participation, sentiment, etc.).\n\n### 5. **Governance, Ethics, and Industry Debates**\n- Lively debate on OpenAI\u2019s for-profit transition, ethics in AI development, agent standards (especially in regulated sectors), and balancing innovation with responsibility.\n- Key questions posed for Q&A: agent standards, enforcement of AI regulation, governance frameworks, future of domain-specific GenAI, AI\u2019s impact on team structures, and sustainability.\n- Emphasis on hybrid/open governance, ethical design, and scalable oversight as GenAI adoption grows.\n\n### 6. **Networking, Intros, and Member Engagement**\n- Dozens of new member intros, spanning diverse backgrounds (tech, business, healthcare, finance, education, etc.) and geographies (Americas, Europe, Middle East, Asia).\n- Networking facilitated by LinkedIn shares, group meetups (Discord/Zoom), and encouragement of multilingual participation.\n- Members share personal learning goals, offer to mentor, and seek collaboration on AI projects and knowledge sharing.\n\n",
-      "duration": 11.996612,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by oscarsan.chez in the announcements channel today in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002987,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has been discussed about meetings in the general channel in the past 2 days in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10)**\n\n---\n\n### 1. ash.mikhail (2025-05-08 22:35:26.722000)\n- Asked about the pros and cons of enabling GPU clusters on each EDGE node for an AI/ML Platform.\n\n---\n\n### 2. oscarsan.chez (2025-05-08 22:36:57.810000)\n- Announced Q&A will be hosted on LinkedIn instead of Zoom this week, with guest John Williams.\n- Time changed to 11:00 AM for this week only.\n- Top six questions will be answered, and \u201cMember of the Week\u201d will be announced.\n- Future sessions will broadcast Zoom to LinkedIn for greater visibility.\n- Celebrated 1,000+ followers on LinkedIn.\n- Mentioned upcoming Gen AI Global 2.0 phase and informational session on Saturday at 1 PM.\n\n---\n\n### 3. ash.mikhail (2025-05-08 22:49:53.696000)\n- Expressed thanks.\n\n---\n\n### 4. ireney_67517 (2025-05-08 22:52:44.569000)\n- Appreciated a resource and mentioned it will be added to NonCoders\u2019 learning assets.\n\n---\n\n### 5. nikhil_34309 (2025-05-08 22:58:10.813000)\n- (No content, possibly accidental post.)\n\n---\n\n### 6. darkgago (2025-05-08 22:59:47.253000)\n- Raised concern about verifying someone claiming to be a former MIT Faculty member.\n\n---\n\n### 7. nikhil_34309 (2025-05-08 23:02:39.240000)\n- Asked everyone to vote for questions for the LinkedIn Q&A.\n\n---\n\n### 8. nikhil_34309 (2025-05-08 23:02:59.247000 & 23:03:01.297000)\n- Listed 10 potential Q&A questions on topics like open source in enterprises, multilingual AI, ISO governance, autonomous AI agents, agentic value, AI coding tools, generative AI vs. human judgment, enterprise AI agent shifts, digital divide, and open source security.\n\n---\n\n### 9. boozeena_49785 (2025-05-08 23:05:44.789000)\n- Thanked Oscar for reporting a suspicious profile.\n- Advised community to be cautious with unverified individuals, referencing cybersecurity team guidance.\n\n---\n\n### 10. nikhil_34309 (2025-05-08 23:24:34.291000)\n- Announced that voting closes at 11pm EST.\n\n---\n\n### 11. chiarapassuello (2025-05-08 23:25:50.570000)\n- Thanked the group, apologized for delayed response due to personal reasons.\n\n---\n\n### 12. ash.mikhail (2025-05-09 00:05:29.682000)\n- Shared a Discord event link.\n\n---\n\n**Key Points:**  \n- Q&A format change to LinkedIn, with new time and special guest.\n- Discussion and voting on major AI/ML topics and questions for Q&A.\n- Community growth milestones and upcoming events.\n- Security reminders about online interactions.\n- Resource sharing and appreciation.\n- Personal check-ins and acknowledgments.\n\nIf you need this in JSON format, let me know!",
-      "duration": 8.143007,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about learning resources from laura.neder in the last 3 days in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "**Summary of Discord Messages (2025-05-07 to 2025-05-10)**\n\n---\n\n### Key Themes:\n- **Knowledge management and learning platform development** (NonCoder Group).\n- **Buddy group formation, onboarding, and communication.**\n- **Q&A session coordination and question proposals for Dr. Sanchez\u2019s sessions.**\n- **Events: workshops, meetings, and new program launches (Agent Development Class).**\n- **AI tool evaluation, best practices, and news (OpenAI, IBM, Amazon, Windsurf, Cursor).**\n- **Security concerns, community recognitions, and growth updates.**\n\n---\n\n### Notable Messages (Chronological Highlights):\n\n#### May 7, 2025\n- **ireney_67517 (22:36)**: NonCoder group project on web-scraping and organizing learning content; seeking volunteers; Amber Bellou (Data Scientist) assisting.\n- **arthurcaves (22:48)**: Coordination regarding scheduling, waiting until Friday.\n- **fijop_ (22:53)**: Introduction: Francisco Pizano, IT Sales/Business Development (Miami).\n- **nikhil_34309 (23:54\u201323:57)**: Onboarding new buddy group members; confirmation of admin contacts.\n- **minsunnie, boozeena_49785, mightymilo23 (00:24\u201300:46)**: Scheduling group calls and meetings.\n\n#### May 8, 2025\n- **darkgago (02:43)**: Soliciting Q&A questions; mentions tool trends.\n- **ireney_67517 (02:54, 03:11)**: NonCoder group focus on tool curation, learning pathways, and staying current; prioritizing user skill levels.\n- **ash.mikhail (03:28)**: Announces 1st Buddy Group meeting, roundtable intros, and Q&A question submission/voting process.\n- **imkprabhat (07:28)**: Offers to share experience with advanced AI tools; proposes knowledge sharing sessions.\n- **melindamelcher, irinafrigola_14125 (08:40\u201309:10)**: Clarifies posting and interaction responsibilities for topic channels; buddy groups should propose Q&A questions collectively.\n- **jhorden2211, markvenn_30910 (09:58\u201310:11)**: Collaboration on Cursor AI; discussion of international tech uptake.\n- **rodrigoreyesjara (11:03)**: Event announcement for \u201cTurning Knowledge into Opportunity\u201d \u2013 May 14, 2pm EDT.\n- **melindamelcher (11:59)**: Example Q&A: Inclusion of multilingualism & digital diversity in AI.\n- **antoine789 (12:42)**: Buddy group 7\u2019s Q: AI\u2019s impact on human judgment in high-stakes industries.\n- **markvenn_30910, darkgago (14:08)**: Buddy Group 5 Q: AI coding tools \u201carms race\u201d after OpenAI\u2019s Windsurf purchase.\n- **minsunnie, boozeena_49785 (14:33\u201314:44)**: Meeting logistics, Q&A coordination for buddy groups.\n- **alvarogonzalez1073 (13:42)**: Q: Will the \u201cAI Dividend\u201d worsen digital inequality?\n- **apoorvgarg88 (13:45)**: Q: IBM/Amazon\u2019s new AI agents and implications for enterprise software.\n- **renej._07786 (13:47)**: Shares KPMG\u2019s 2025 global AI trust study \u2013 rising adoption but trust/accuracy problems, need for regulation.\n- **oscarsan.chez (13:34, 16:01, 16:17)**: Community growth milestone (1,000+ LinkedIn followers), \u201cMember of the Week\u201d (julioverne74), announcement of",
-      "duration": 16.303533,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about Notion in the discord-managers channel since yesterday in the \ud83c\udfd8general-chat channel",
-      "channel_id": 1353058864810950740,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.005739,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about AI tools in the papers-and-publications channel from the last week in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-04-28 to 2025-05-04)**\n\n---\n\n### 1. Community Organization & Onboarding\n\n- **Buddy Groups Launch**: (Author: oscarsan.chez, 2025-04-28 13:30)  \n  - Nine buddy groups announced, organized by time zone, with assigned admins and channels for focused collaboration.\n  - Each group to submit a question to Dr. Sanchez for Friday Q&A.\n  - Dedicated text and voice channels created for group meetings.\n\n- **Roles & Permissions**:  \n  - Discord Managers see all groups, Conversational Leaders see their group, General Members see only their own (oscarsan.chez, 2025-04-29 21:00).\n  - Technical adjustments made to allow polls, add/remove members, and manage voice channels.\n\n- **Onboarding Support**:  \n  - Regular reminders and Zoom/Discord support sessions for new members (oscarsan.chez, 2025-04-28 onward).\n  - Multiple time slots for introductory calls to accommodate global participants (ireney_67517, 2025-04-29 14:22).\n\n---\n\n### 2. Knowledge Sharing & Thematic Posts\n\n- **Motivational Monday/Tech Tip Tuesday/Midweek Discussion**:  \n  - Members share AI news, articles, and practical tips (e.g., AI in healthcare, prompt engineering, small business AI adoption).\n  - Actionable steps included, such as trying new AI tools, exploring use cases, and engaging in ethical debates.\n\n- **Content Overload Discussion**:  \n  - Concerns raised about volume of daily posts versus quality of discussions (laura.neder, 2025-04-28 18:08).\n  - Suggestions include limiting posts, using threads, rotating posters, and creating weekly digests.\n\n- **Tool Recommendations**:  \n  - Notion, Trello, Miro, and Google Drive discussed for collaboration and knowledge management.\n  - Members propose building a tool matrix to map AI tools to use cases (ireney_67517, 2025-05-02 20:34).\n\n---\n\n### 3. Learning, Workshops, & Events\n\n- **Workshops**:  \n  - Announcement and recap of a hands-on workshop by julioverne74 on building a Retrieval-Augmented Generation (RAG) AI agent for Discord, aimed at non-coders.\n  - Materials, recordings, and summaries shared for asynchronous learning.\n\n- **Q&A Sessions**:  \n  - Weekly Q&A with Dr. Sanchez, with questions crowdsourced from buddy groups.\n  - Summary and key takeaways from these sessions provided (andreahickethier, 2025-05-02 18:10).\n\n- **Non-Coder Learning Group**:  \n  - Formation of a group for non-coders, focusing on practical AI skills, tool demos, and peer-driven learning (ireney_67517, multiple posts).\n  - Use of Mural for personas, goals, and brainstorming.\n\n---\n\n### 4. AI & Industry Insights\n\n- **Ethics & Governance**:  \n  - Debates on OpenAI\u2019s for-profit model, regulatory standards for AI agents, and balancing profit with ethical responsibility.\n  - Discussion on the need for governance frameworks and potential industry standards (multiple authors, e.g., marie007532, silkefinken).\n\n- **AI in Practice**:  \n  - Member-shared case studies: e.g., building a sales copilot bot, automating RFP responses, GenAI in marketing, agentic commerce (Meta, Mastercard, PayPal, Visa).\n  - Insights into AI\u2019s impact on work, hiring, and required skillsets.\n\n---\n\n### 5. Community Reflections & Growth\n\n- **Introductions & Networking**:  \n  - New members share backgrounds, Linked",
-      "duration": 13.412272,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by oscarsan.chez in the announcements channel today in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002214,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has been discussed about meetings in the general channel in the past 2 days in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages from 2025-05-08 to 2025-05-10:**\n\n---\n\n1. **ash.mikhail** (_2025-05-08 22:35:26.722000_)\n   - Asked about the pros and cons of enabling GPU clusters on each EDGE node in connection with an AI/ML platform (on behalf of Buddy Group 11).\n\n2. **oscarsan.chez** (_2025-05-08 22:36:57.810000_)\n   - Announced Q&A will not be on Zoom this week but hosted on LinkedIn with guest John Williams.\n   - Time changed to 11:00 AM (from 11:30 AM) for this week only.\n   - Top six questions will be answered; \u201cMember of the Week\u201d will be announced.\n   - Beta test for hosting on Dr. Sanchez\u2019s LinkedIn; future sessions will move to the Gen AI Global LinkedIn page.\n   - Q&As will return to Zoom next week and be broadcast to LinkedIn.\n   - Thanked community for growth\u2014over 1,000 LinkedIn followers.\n   - Gen AI Global 2.0 will launch at the end of May, inviting all cohorts.\n   - Reminder: informational session on Saturday at 1 PM (Zoom link provided).\n\n3. **ash.mikhail** (_2025-05-08 22:49:53.696000_)\n   - Expressed thanks (in response to previous messages).\n\n4. **ireney_67517** (_2025-05-08 22:52:44.569000_)\n   - Praised provided resource and said it would be added to learning assets for NonCoders and referenced in ongoing discussions.\n\n5. **nikhil_34309** (_2025-05-08 22:58:10.813000_)\n   - (No message content provided\u2014possible placeholder or accidental post.)\n\n6. **darkgago** (_2025-05-08 22:59:47.253000_)\n   - Asked about verifying the credentials of someone claiming to be a former MIT Faculty member.\n\n7. **nikhil_34309** (_2025-05-08 23:02:39.240000_)\n   - Invited everyone to vote on questions for the upcoming Q&A on Gen AI Global LinkedIn.\n\n8. **nikhil_34309** (_2025-05-08 23:02:59.247000_ & _23:03:01.297000_)\n   - Posted 10 detailed questions for Q&A voting, covering topics such as open source in enterprises, multilingual AI inclusion, ISO-like governance, autonomous AI agents, value in agent systems, AI coding tools, generative AI vs human judgment, IBM/Amazon agent news, digital divide and AI, and open source security.\n\n9. **boozeena_49785** (_2025-05-08 23:05:44.789000_)\n   - Thanked Oscar for reporting a suspicious profile.\n   - Cited cybersecurity advice: remain cautious with unverified individuals, especially with rising fake profiles on LinkedIn and WhatsApp.\n\n10. **nikhil_34309** (_2025-05-08 23:24:34.291000_)\n    - Announced that Q&A voting concludes at 11pm EST.\n\n11. **chiarapassuello** (_2025-05-08 23:25:50.570000_)\n    - Thanked everyone and Melinda specifically; explained delayed response due to a difficult personal day.\n\n12. **ash.mikhail** (_2025-05-09 00:05:29.682000_)\n    - Shared a link to a Discord event.\n\n---\n\nLet me know if you want this summary in JSON format.",
-      "duration": 11.257468,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about learning resources from laura.neder in the last 3 days in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "**Summary of Discord Messages (2025-05-07 to 2025-05-10)**\n\n---\n\n### Key Themes & Highlights\n\n- **NonCoder Group Initiatives**: Teams led by ireney_67517 are working on web-scraping and organizing learning materials, building metadata classification, and creating a Magic Quadrant for AI tools focused on non-coders.\n- **Buddy Groups**: New members welcomed, group assignments clarified, recurring meetings scheduled, and Q&A question brainstorming for Dr. Sanchez\u2019s session.\n- **Q&A Submissions**: Multiple groups proposed questions on multilingual AI, open-source adoption, AI coding tools, digital divide, edge computing, agent-based systems, and AI\u2019s impact on human judgment.\n- **Community Events & Announcements**:\n    - Announcement of new sessions, Q&A format moving to LinkedIn, and a new Agent Development Class (formerly Discord Manager Program).\n    - Recognition of \u201cMember of the Week\u201d (julioverne74) and rapid community growth (1,000+ LinkedIn followers).\n- **Expertise Sharing**: Members introduced their backgrounds and offered to host sessions on tools like ChatGPT, Cursor, Langchain, etc. Links to resources and reports about AI trust, agentic AI, and industry news shared.\n- **Operational/Administrative**: Time zone issues, scheduling confusion, and technical troubleshooting for events.\n- **Security Caution**: Warning about impersonation attempts and advice from the cybersecurity team.\n- **Collaborative Initiatives**: Proposal for a global charter for ethical open-source AI and sessions to co-shape guardrails.\n- **General Support & Community Building**: Members offer congratulations, welcome each other, and coordinate logistics.\n\n---\n\n### Message Summaries (Selected & Notable)\n\n#### 2025-05-07\n\n- **ireney_67517** (22:36): NonCoder group is launching a project for web-scraping content, creating metadata, and automating knowledge organization. Team is open for new members.\n- **fijop_** (22:53): Introduces himself (Francisco Pizano, IT Sales/BD, Miami), shares background and interests.\n- **nikhil_34309** (23:54-23:57): Welcomes new members to buddy groups, clarifies group and admin assignments.\n\n#### 2025-05-08\n\n- **minsunnie** (00:24): Confirms group call time for the next day.\n- **darkgago** (02:43): Solicits Q&A question suggestions\u2014focus on AI tools\u2019 future.\n- **ireney_67517** (02:54, 03:11): Invites Bisera and rad.ai to NonCoder group, explains curated, skill-level based learning of AI tools, and plans for tool prioritization.\n- **ash.mikhail** (03:28): Announces first buddy group meeting, process for Q&A question submissions and voting.\n- **imkprabhat** (07:28): Offers to share expertise on ChatGPT, Cursor, Langchain, Canva, n8n; invites session interest.\n- **melindamelcher** (08:51): Explains role expectations for Conversational Leaders and members, Q&A process, and asks for topic preferences.\n- **rodrigoreyesjara** (11:03): Suggests announcement for a session on turning knowledge into opportunity, scheduled for May 14.\n- **oscarsan.chez** (13:34): Announces \u201cMember of the Week\u201d and celebrates LinkedIn community growth.\n- **alvarogonzalez1073** (13:42): Suggests Q&A question on AI and the digital divide.\n- **apoorvgarg88** (13:45): Buddy group Q: Implications of IBM/Amazon\u2019s new AI agents for enterprise and developers.\n- **renej._",
-      "duration": 17.103152,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about Notion in the discord-managers channel since yesterday in the \ud83d\udce2announcements channel",
-      "channel_id": 1353085578274410626,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.005032,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about AI tools in the papers-and-publications channel from the last week in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Discord Summary: 2025-04-28 to 2025-05-04**\n\n---\n\n### 1. **Community Structure & Onboarding**\n- **Oscar Sanchez** (oscarsan.chez) and team launched \"buddy groups,\" dividing members by interests and time zones; each group has designated admins.\n- Step-by-step guides were provided for posting weekly activities (Motivation Monday, Tech-Tip Tuesday, Midweek Discussion).\n- Voice and text channels for buddy groups were created for collaboration and Q&A submissions.\n- Members had onboarding questions about where to post, how groups work, and technical issues; Oscar and others frequently provided support.\n\n---\n\n### 2. **Introductions & Networking**\n- Dozens of members from around the world introduced themselves, sharing professional backgrounds (AI, engineering, healthcare, finance, marketing, etc.), locations, LinkedIn links, and learning goals.\n- Many expressed excitement to learn, collaborate, and build in the GenAI community, with interests ranging from AI product management to ethical AI, automation, and digital transformation.\n\n---\n\n### 3. **Knowledge Sharing & Tool Discussions**\n- Members discussed and shared resources on AI tools (Notion, Trello, Mural, Google Drive, Perplexity, FlowiseAI, etc.) for knowledge management, collaboration, and project tracking.\n- Several expressed the need for better information organization, including tool evaluations, use case mapping, and digestible knowledge repositories.\n- Some members demoed custom GPTs and AI assistants, and planned workshops for building RAG (Retrieval-Augmented Generation) bots.\n\n---\n\n### 4. **Content Volume & Engagement Feedback**\n- Concerns were raised about content overload and lack of conversational engagement compared to previous WhatsApp groups.\n- Suggestions included limiting posts per day, using threads for focused discussions, rotating posting responsibilities, and providing weekly digests.\n- Experimentation with Discord features (threads, polls, voice channels) was ongoing to improve structure and accessibility.\n\n---\n\n### 5. **Thematic Posts & News**\n- Regular posts highlighted AI news:\n    - AI in healthcare (NICU nutrition, Parkinson\u2019s assessment, cancer trials, AI for autism).\n    - AI in business and industry (Microsoft, Meta AI, Agent Pay by Mastercard, AWS Outposts).\n    - AI ethics, governance, and the OpenAI for-profit controversy.\n    - Prominent articles and reports were shared with discussion prompts.\n- Members often responded with takeaways and reflection questions.\n\n---\n\n### 6. **Q&A and Brainstorming**\n- Buddy groups brainstormed and submitted weekly Q&A questions for Dr. Sanchez\u2019s Friday sessions, covering:\n    - AI ethics and governance (minimum standards, enforcement, risks of superintelligence, hybrid profit/principle models).\n    - The evolution of AI teams and collaboration.\n    - Technical challenges (memory, energy efficiency, fine-tuning, auditability).\n    - Impacts of domain-specific AI, agentic AI, and autonomous agents in regulated industries.\n- Q&A sessions were recorded and summarized; key takeaways included the importance of ethics, measurable ROI, smaller models, and cultural change.\n\n---\n\n### 7. **Workshops & Events**\n- Workshops were announced, e.g., on building RAG bots with minimal coding (Julioverne74).\n- Recordings and transcripts were shared for those unable to attend.\n- Members discussed plans for future demos, deep dives, and collaborative learning events.\n\n---\n\n### 8. **Metrics, Admin, and Process Improvements**\n- Metrics for community health and engagement were proposed (growth, activity, onboarding, participation, content performance, etc.).\n- Ongoing work to streamline Discord admin processes, with plans for architecture overviews and handoff strategies between teams (Discord Managers, SGU, DEVS).\n- Discussions on scaling, managing team roles, and minimizing admin burden.\n\n---\n\n### 9. **Recognition & Community Spirit**\n- Member of the Week nominations and shout-outs",
-      "duration": 19.249815,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "List all posts by oscarsan.chez in the announcements channel today in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.002015,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "What has been discussed about meetings in the general channel in the past 2 days in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary of Discord Messages (2025-05-08 to 2025-05-10):**\n\n---\n\n1. **ash.mikhail**  \n   - **Timestamp:** 2025-05-08 22:35:26.722000  \n   - **Key Points:**  \n     - Asked about the pros and cons of enabling GPU clusters on each EDGE node in the context of an AI/ML platform.\n\n2. **oscarsan.chez**  \n   - **Timestamp:** 2025-05-08 22:36:57.810000  \n   - **Key Points:**  \n     - Announced that this week\u2019s Q&A will be on LinkedIn (not Zoom), featuring John Williams.  \n     - New temporary time: 11:00 AM instead of 11:30 AM.  \n     - Top six questions will be answered; \u201cMember of the Week\u201d will be announced.  \n     - This is a beta test; future Q&A sessions will move to the Gen AI Global LinkedIn page for better visibility.  \n     - Zoom will return next week, broadcasted to LinkedIn.  \n     - Celebrated reaching 1,000+ LinkedIn followers.  \n     - Gen AI Global 2.0 will launch at the end of May, including all cohorts.  \n     - Reminder: Informational session on Saturday at 1 PM (Zoom link provided).\n\n3. **ash.mikhail**  \n   - **Timestamp:** 2025-05-08 22:49:53.696000  \n   - **Key Points:**  \n     - Expressed thanks.\n\n4. **ireney_67517**  \n   - **Timestamp:** 2025-05-08 22:52:44.569000  \n   - **Key Points:**  \n     - Praised a resource and planned to add it to NonCoders\u2019 learning assets and discussions.\n\n5. **nikhil_34309**  \n   - **Timestamp:** 2025-05-08 22:58:10.813000  \n   - **Key Points:**  \n     - No message content; likely an accidental/empty message.\n\n6. **darkgago**  \n   - **Timestamp:** 2025-05-08 22:59:47.253000  \n   - **Key Points:**  \n     - Asked about verifying the credentials of someone claiming to be a former MIT faculty member.\n\n7. **nikhil_34309**  \n   - **Timestamp:** 2025-05-08 23:02:39.240000  \n   - **Key Points:**  \n     - Invited everyone to vote for which questions should be asked at the next Q&A on LinkedIn.  \n     - Emphasized that questions are in-depth and require thoughtful responses.\n\n8. **nikhil_34309**  \n   - **Timestamp:** 2025-05-08 23:02:59.247000 & 23:03:01.297000  \n   - **Key Points:**  \n     - Listed ten potential Q&A questions, including topics like open source in enterprises, multilingual AI inclusion, ISO-like governance, autonomous agents, AI coding tools, generative AI in sensitive fields, new AI agent announcements, the digital divide, and open source security concerns.\n\n9. **boozeena_49785**  \n   - **Timestamp:** 2025-05-08 23:05:44.789000  \n   - **Key Points:**  \n     - Thanked Oscar for reporting a security concern.  \n     - Advised caution due to an increase in fake profiles/bots on LinkedIn and WhatsApp.  \n     - Encouraged the community to remain vigilant and report suspicious activity.\n\n10. **nikhil_34309**  \n    - **Timestamp:** 2025-05-08 23:24:34.291000  \n    - **Key",
-      "duration": 10.407935,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Show me messages about learning resources from laura.neder in the last 3 days in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "**Summary of Discord Messages (2025-05-07 to 2025-05-10)**\n\n---\n\n### Key Themes:\n- **Buddy Groups & Onboarding:** Numerous welcome messages, introductions, and clarifications regarding buddy group assignments and meeting logistics.\n- **Q&A Preparation:** Each buddy group collaborating to formulate high-level, thoughtful questions for Dr. Sanchez\u2019s weekly Q&A. Voting and polling mechanics are discussed.\n- **Learning Initiatives:** Multiple projects in progress, including a Non-Coder group focused on web-scraping, categorizing AI tools, and building a knowledge repository.\n- **Events & Announcements:** Promotion of upcoming sessions (e.g., Conversational Sessions, Agent Development Class), discussions about scheduling and time zones.\n- **Community Engagement:** Recognition of \u201cMember of the Week,\u201d sharing of external resources, and encouragement of collaborative spirit.\n- **Security:** A warning about impersonation attempts and advice to remain vigilant.\n- **Technical/Process:** Discussions about Discord/server settings, event listings, and potential improvements for managing time zones and meetings.\n\n---\n\n### Detailed Summaries (Chronological):\n\n#### **2025-05-07**\n- **ireney_67517 (22:36)**: Announces a Non-Coder group project on web-scraping and organizing learning materials; invites participation.\n- **arthurcaves (22:48)**: Scheduling discussion\u2014suggests waiting until Friday.\n- **fijop_ (22:53)**: Introduces himself (Francisco Pizano), provides professional background and interests.\n- **julioverne74 (23:08)**: Points out the importance of workflow for SGU, suggests others can help.\n- **nikhil_34309 (23:54-23:57)**: Assigns members to buddy groups and welcomes them.\n\n#### **2025-05-08**\n- **boozeena_49785 (00:03-00:04)**: Expresses enthusiasm and suggests setting a meeting time.\n- **minsunnie (00:24)**: Checks on group call timing for tomorrow.\n- **darkgago (02:43)**: Prompts for Q&A questions, referencing interest in the future of AI tools.\n- **ireney_67517 (02:54-03:11)**: Recruits for NonCoder group; explains the goal of curating and prioritizing AI tools for non-coders.\n- **ash.mikhail (03:28)**: Announces first Buddy Group meeting; asks for Q&A question proposals, voting process for Dr. Sanchez's session.\n- **imkprabhat (05:29-08:39)**: Welcomes new members; proposes poll for meeting times; offers to share knowledge on GPTs, Cursor, Langchain, Canva, n8n; asks about Discord event calendar.\n- **irinafrigola_14125 & melindamelcher (08:40-09:10)**: Clarify posting responsibilities in topic channels and Q&A process; request input on channel/topic interests.\n- **melindamelcher (09:35-09:39)**: Shares schedule for Conversational Leaders; proposes Saturday meeting time.\n- **jhorden2211, markvenn_30910, malinhaag_13259 (09:58-10:14)**: Collaboration on Cursor AI materials; discussion of international tech adoption nuances; new member (Malin) expresses interest in joining a project.\n- **rodrigoreyesjara (11:03)**: Suggests event announcement for knowledge-to-opportunity session.\n- **melindamelcher (11:59)**: Posts Buddy Group 4\u2019s Q&A question on AI, multilingualism, and digital inclusion.\n- **antoine789 (12:42)**: Posts Buddy Group 7\u2019s Q&A on generative AI in high-stakes industries.\n- **julioverne74 (",
-      "duration": 22.322793,
-      "success": true,
-      "error": null
-    },
-    {
-      "query": "Find posts about Notion in the discord-managers channel since yesterday in the \ud83d\udc4bintroductions channel",
-      "channel_id": 1353442520717066320,
-      "result": "\u26a0\ufe0f No messages found in the specified timeframe.",
-      "duration": 0.006579,
+      "result": "\u274c Error processing query: Expecting ',' delimiter: line 75 column 6 (char 3200)",
+      "duration": 7.637346,
       "success": true,
       "error": null
     }

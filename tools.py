@@ -150,6 +150,14 @@ def summarize_messages(
     Summarize all messages in [start_iso, end_iso].
     Returns either a text summary or JSON, per `as_json`.
     """
+    # Debug logging
+    print(f"\nDEBUG: Query Parameters:")
+    print(f"Start ISO: {start_iso}")
+    print(f"End ISO: {end_iso}")
+    print(f"Guild ID: {guild_id}")
+    print(f"Channel ID: {channel_id}")
+    print(f"Channel Name: {channel_name}")
+
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
         raise ValueError(f"Invalid guild ID format: {guild_id}")
@@ -166,6 +174,11 @@ def summarize_messages(
         end = datetime.fromisoformat(end_iso)
         if end < start:
             raise ValueError("End time must be after start time")
+        
+        # Debug logging
+        print(f"\nDEBUG: Parsed Timestamps:")
+        print(f"Start: {start}")
+        print(f"End: {end}")
     except Exception as e:
         raise ValueError(f"Invalid ISO datetime: {e}")
 
@@ -184,7 +197,19 @@ def summarize_messages(
             q = q.filter(Message.guild_id == guild_id)
         if channel_id:
             q = q.filter(Message.channel_id == channel_id)
+        
+        # Debug logging
+        print("\nDEBUG: SQL Query:")
+        print(str(q.statement.compile(compile_kwargs={"literal_binds": True})))
+        
         msgs = q.order_by(Message.timestamp).all()
+        
+        # Debug logging
+        print(f"\nDEBUG: Query Results:")
+        print(f"Number of messages found: {len(msgs)}")
+        if msgs:
+            print(f"First message timestamp: {msgs[0].timestamp}")
+            print(f"Last message timestamp: {msgs[-1].timestamp}")
 
         if not msgs:
             return {"summary": "", "note": "No messages in that timeframe"} if as_json else "⚠️ No messages found in the specified timeframe."

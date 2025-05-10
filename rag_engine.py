@@ -1,15 +1,19 @@
 # rag_engine.py
 
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from dotenv import load_dotenv
 from openai import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from utils.helpers import build_jump_url
-from tools import resolve_channel_name, summarize_messages  # Add summarize_messages import
-from time_parser import parse_timeframe, extract_time_reference  # Add extract_time_reference import
-from datetime import datetime, timedelta
+from tools import resolve_channel_name, summarize_messages, validate_data_availability  # Add validate_data_availability import
+from time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference  # Add extract_time_reference, extract_channel_reference, and extract_content_reference imports
+from datetime import datetime, timedelta, ZoneInfo
+import json
+from functools import lru_cache
+from sqlalchemy.orm import Session
+from models import Message
 
 # ——— Load config & initialize clients ———
 load_dotenv()
@@ -161,6 +165,9 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
     Handles time-based, channel-specific, and content-based queries.
     """
     try:
+        # Validate data availability first
+        data_status = validate_data_availability()
+        
         # Extract time reference if present
         time_ref = extract_time_reference(query)
         if time_ref:
@@ -168,9 +175,9 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             start_iso = start.isoformat()
             end_iso = end.isoformat()
         else:
-            # Default to last 24 hours if no time reference
-            end = datetime.now()
-            start = end - timedelta(days=1)
+            # Default to last 7 days
+            end = datetime.now(ZoneInfo("UTC"))
+            start = end - timedelta(days=7)
             start_iso = start.isoformat()
             end_iso = end.isoformat()
 
@@ -187,7 +194,7 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
 
         # Build a more structured response
         response = {
-            "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')}",
+            "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC",
             "channel": f"Channel ID: {channel_id}" if channel_id else "All channels",
             "summary": messages["summary"],
             "note": messages.get("note", "")
@@ -207,11 +214,39 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
         return formatted_response.strip()
 
     except ValueError as e:
-        return f"❌ Error processing query: {str(e)}"
+        return f"❌ Data Error: {str(e)}"
+    except json.JSONDecodeError as e:
+        return f"❌ Response Format Error: {str(e)}"
     except Exception as e:
-        return f"❌ Unexpected error: {str(e)}"
+        return f"❌ Unexpected Error: {str(e)}"
 
 
 # ——— Convenience aliases for the app ———
 search_messages    = get_top_k_matches
 discord_rag_search = get_answer
+
+
+def preprocess_query(query: str) -> Dict[str, Any]:
+    """Extract and validate query components."""
+    components = {
+        "time_reference": extract_time_reference(query),
+        "channel_reference": extract_channel_reference(query),
+        "content_reference": extract_content_reference(query)
+    }
+    
+    # Validate components
+    if not any(components.values()):
+        raise ValueError("Query must contain at least one valid reference")
+    
+    return components
+
+
+def log_query_performance(query: str, duration: float, success: bool):
+    """Log query performance metrics."""
+    with open("query_performance.log", "a") as f:
+        f.write(json.dumps({
+            "timestamp": datetime.now().isoformat(),
+            "query": query,
+            "duration": duration,
+            "success": success
+        }) + "\n")
