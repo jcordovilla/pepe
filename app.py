@@ -5,9 +5,10 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 
 from db import SessionLocal, Message
-from rag_engine import get_answer, search_messages, safe_jump_url
+from rag_engine import get_answer, search_messages, safe_jump_url, get_agent_answer
 from time_parser import parse_timeframe
 from tools import summarize_messages
+from utils import validate_channel_id, validate_channel_name
 
 # ─── Streamlit page configuration ───────────────────────────────────────────────
 st.set_page_config(page_title="GenAI Discord Bot", layout="wide")
@@ -19,13 +20,25 @@ st.title("📡 Pathfinder – GenAI Discord Bot")
 def get_channels() -> List[Dict[str, Any]]:
     """Fetch distinct channel names & IDs from the database (cached)."""
     session = SessionLocal()
-    rows = session.query(Message.channel_name, Message.channel_id).distinct().all()
-    session.close()
-    return [
-        {"name": name, "id": cid}
-        for name, cid in rows
-        if name  # skip empty names
-    ]
+    try:
+        rows = session.query(Message.channel_name, Message.channel_id).distinct().all()
+        return [
+            {"name": name, "id": cid}
+            for name, cid in rows
+            if name and validate_channel_name(name) and validate_channel_id(cid)  # skip invalid entries
+        ]
+    finally:
+        session.close()
+
+def log_interaction(query: str, answer: Any, matches: List[Dict[str, Any]]) -> None:
+    """Log the interaction to chat_history.jsonl."""
+    record = {
+        "timestamp": datetime.now().isoformat(),
+        "question": query,
+        "answer": answer
+    }
+    with open("chat_history.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(record) + "\n")
 
 @st.cache_data(show_spinner=False)
 def cached_search(
@@ -90,6 +103,11 @@ selected_channel_id = (
     channel_options[selected_channel] if selected_channel else None
 )
 
+# Validate selected channel ID
+if selected_channel_id and not validate_channel_id(selected_channel_id):
+    st.error(f"Invalid channel ID format: {selected_channel_id}")
+    selected_channel_id = None
+
 # ─── TABS ───────────────────────────────────────────────────────────────────────
 tab1, tab2 = st.tabs(["💬 Query", "📚 History"])
 
@@ -110,96 +128,24 @@ with tab1:
         with st.spinner("⏳ Running your query..."):
             try:
                 if mode == "Ask (RAG Query)":
-                    # 1) Natural-language timeframe detection
-                    m = re.search(r"(?:last|past)\s+(?:day|week|month)", query, re.I)
-                    if m:
-                        expr = m.group(0)
-                        try:
-                            start_dt, end_dt = parse_timeframe(expr)
-                        except ValueError as pe:
-                            st.error(f"Could not parse timeframe “{expr}”: {pe}")
-                            st.stop()
-
-                        st.markdown(f"**🕒 Parsed timeframe:** {start_dt.date()} → {end_dt.date()}")
-                        # 2) Summarize messages in that window
-                        summary = cached_summarize(
-                            start_iso=start_dt.isoformat(),
-                            end_iso=end_dt.isoformat(),
-                            channel_id=selected_channel_id,
-                            as_json=False
-                        )
-                        st.markdown(f"### 📚 Summary ({start_dt.date()} → {end_dt.date()}):")
-                        st.write(summary)
-                        answer = summary
-                        matches = []
-
-                    else:
-                        # Fallback to standard RAG
-                        answer, matches = get_answer(
-                            query,
-                            k=k,
-                            as_json=as_json,
-                            return_matches=True,
-                            channel_id=selected_channel_id
-                        )
-                        if as_json:
-                            st.json(json.loads(answer))
-                        else:
-                            st.markdown(f"**Answer:** {answer}")
-
-                        answer = answer  # for history
-                        if show_context:
-                            st.markdown("**Context snippets:**")
-                            for m in matches:
-                                author = (
-                                    m.get("author", {}).get("display_name")
-                                    or m.get("author", {}).get("username")
-                                    or "Unknown"
-                                )
-                                ts = m.get("timestamp", "")
-                                ch = m.get("channel_name", "") or m.get("channel_id", "")
-                                snippet = m.get("content", "").replace("\n", " ")
-                                url = safe_jump_url(m)
-                                st.markdown(
-                                    f"- **{author}** (_{ts}_ in **#{ch}**): {snippet} [🔗]({url})"
-                                )
-
+                    # Let the agent handle time parsing and query execution
+                    answer = get_agent_answer(query)
+                    st.markdown("### 📚 Response:")
+                    st.write(answer)
+                    matches = []  # No matches for RAG queries
                 else:
-                    # Mode == "Search (Messages)"
-                    results = cached_search(
+                    # Direct search mode
+                    results = search_messages(
                         query=query,
-                        channel_id=selected_channel_id,
-                        k=k
+                        k=k,
+                        channel_id=selected_channel_id
                     )
-                    if results:
-                        st.markdown(f"**Found {len(results)} messages:**")
-                        for m in results:
-                            author = (
-                                m.get("author", {}).get("display_name")
-                                or m.get("author", {}).get("username")
-                                or "Unknown"
-                            )
-                            ts = m.get("timestamp", "")
-                            ch = m.get("channel_name", "") or m.get("channel_id", "")
-                            snippet = m.get("content", "")[:200] + "…"
-                            url = safe_jump_url(m)
-                            st.markdown(
-                                f"- **{author}** (_{ts}_ in **#{ch}**): {snippet} [🔗]({url})"
-                            )
-                        answer = results
-                    else:
-                        st.info("No messages found matching your criteria.")
-                        answer = []
+                    matches = results
+                    answer = None
 
-                # ── Append to chat history ─────────────────────────────
-                record = {
-                    "timestamp": datetime.now().isoformat(),
-                    "question": query,
-                    "answer": answer
-                }
-                with open("chat_history.jsonl", "a", encoding="utf-8") as f:
-                    f.write(json.dumps(record) + "\n")
-
+                # Log the interaction
+                log_interaction(query, answer, matches)
+                
             except Exception as e:
                 st.error(f"❌ Error processing request: {e}")
 

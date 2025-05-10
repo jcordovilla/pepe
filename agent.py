@@ -13,7 +13,10 @@ from time_parser import parse_timeframe
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL_NAME     = os.getenv("GPT_MODEL", "gpt-4-turbo")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY environment variable is not set")
+
+MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo")
 
 llm = ChatOpenAI(
     model_name=MODEL_NAME,
@@ -45,10 +48,18 @@ tools = [
 
 SYSTEM_MESSAGE = """
 You are a specialized Discord data assistant. To handle any user request:
-1. If it involves time-based queries, call `parse_timeframe(text)` first.
-2. To retrieve messages, call `search_messages(query, k, keyword, guild_id, channel_id, channel_name, author_name)`.
-3. To summarize a window, call `summarize_messages(start_iso, end_iso, guild_id, channel_id, channel_name, as_json)`.
-Always use function-calling; do not answer directly without invoking these tools.
+
+1. ALWAYS check for time expressions first (e.g. "past 2 days", "last week", "yesterday"). If found:
+   - Call parse_timeframe(text) to get start_iso and end_iso
+   - Use these timestamps with summarize_messages() to get a time-windowed summary
+
+2. For non-time queries or after getting time context:
+   - Use search_messages() to find specific messages
+   - Include any parsed timestamps in your search parameters
+
+3. Always use function-calling; never answer directly without invoking these tools.
+   - For time-based queries, you MUST call parse_timeframe() first
+   - Then use the returned timestamps with summarize_messages() or search_messages()
 """
 
 # ─── Agent Initialization ────────────────────────────────────────────────────────
@@ -58,7 +69,8 @@ agent = initialize_agent(
     llm=llm,
     agent=AgentType.OPENAI_FUNCTIONS,
     verbose=True,
-    system_message=SYSTEM_MESSAGE
+    system_message=SYSTEM_MESSAGE,
+    handle_parsing_errors=True  # Better error handling for tool parsing
 )
 
 # ─── Public Entry Point ─────────────────────────────────────────────────────────
@@ -66,5 +78,21 @@ agent = initialize_agent(
 def get_agent_answer(query: str) -> Any:
     """
     Send the user's raw query to the function-calling agent.
+    
+    Args:
+        query: The user's question or request
+        
+    Returns:
+        The agent's response
+        
+    Raises:
+        ValueError: If the query is empty
+        Exception: For other errors during agent execution
     """
-    return agent.run(query)
+    if not query.strip():
+        raise ValueError("Query cannot be empty")
+        
+    try:
+        return agent.run(query)
+    except Exception as e:
+        raise Exception(f"Agent failed to process query: {str(e)}")
