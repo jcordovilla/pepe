@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-from utils import build_jump_url
+from utils.helpers import build_jump_url
 from tools import resolve_channel_name  # maps a channel_name → channel_id
 
 # ——— Load config & initialize clients ———
@@ -135,7 +135,7 @@ def get_answer(
             channel_name=channel_name
         )
         if not matches and not return_matches:
-            return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
+            return "⚠️ I couldn't find relevant messages. Try rephrasing your question or being more specific."
 
         chat_messages = build_prompt(matches, query, as_json)
         response = openai_client.chat.completions.create(

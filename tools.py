@@ -9,8 +9,6 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import (
-    build_jump_url,
-    validate_ids,
     validate_channel_id,
     validate_guild_id,
     validate_channel_name

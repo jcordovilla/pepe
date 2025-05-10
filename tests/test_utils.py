@@ -1,5 +1,5 @@
 import pytest
-from utils import build_jump_url
+from utils.helpers import build_jump_url
 
 def test_build_jump_url_valid():
     url = build_jump_url(1, 2, 3)
