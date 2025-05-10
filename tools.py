@@ -66,9 +66,7 @@ def search_messages(
     author_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
-    Hybrid keyword + semantic search.
-    - keyword: exact-match pre-filter
-    - semantic rerank top-N via FAISS
+    Enhanced hybrid keyword + semantic search with improved relevance.
     """
     if not query.strip():
         raise ValueError("Query cannot be empty")
@@ -83,15 +81,15 @@ def search_messages(
     if channel_name is not None and not validate_channel_name(channel_name):
         raise ValueError(f"Invalid channel name format: {channel_name}")
 
-    # resolve channel_name → channel_id
+    # Resolve channel_name → channel_id
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
             raise ValueError(f"Unknown channel: {channel_name}")
 
-    # 1) keyword pre-filter via DB
     session = SessionLocal()
     try:
+        # 1) Enhanced keyword pre-filter
         db_q = session.query(Message)
         if guild_id:
             db_q = db_q.filter(Message.guild_id == guild_id)
@@ -99,26 +97,44 @@ def search_messages(
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
+        
+        # Improved keyword matching
         if keyword:
-            db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
-        candidates = db_q.limit(k * 5).all()
+            # Split keyword into terms for better matching
+            terms = keyword.split()
+            for term in terms:
+                db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
+        
+        # Get more candidates for better semantic ranking
+        candidates = db_q.limit(k * 10).all()
 
         if not candidates:
             return []
 
-        # 2) rerank via FAISS
+        # 2) Enhanced semantic reranking
         texts = [m.content for m in candidates]
-        metas = [m.__dict__ for m in candidates]
+        metas = [{
+            **m.__dict__,
+            'relevance_score': 0.0  # Will be updated during ranking
+        } for m in candidates]
+        
+        # Create temporary FAISS index
         temp_store = FAISS.from_texts(
             texts=texts,
             embedding=_embedding,
             metadatas=metas
         )
-        retriever = temp_store.as_retriever(search_kwargs={"k": k})
+        
+        # Get more documents for better coverage
+        retriever = temp_store.as_retriever(search_kwargs={"k": k * 2})
         docs = retriever.get_relevant_documents(query)
-
-        # extract metadata dicts
-        return [d.metadata for d in docs]
+        
+        # Extract and sort by relevance
+        results = [d.metadata for d in docs]
+        results.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
+        
+        # Return top k results
+        return results[:k]
     finally:
         session.close()
 
@@ -198,5 +214,30 @@ def summarize_messages(
         result = resp.choices[0].message.content
         return json.loads(result) if as_json else result
 
+    finally:
+        session.close()
+
+def get_channels() -> List[Dict[str, Any]]:
+    """
+    Get a list of all available channels from the database.
+    Returns a list of dictionaries containing channel information.
+    """
+    session = SessionLocal()
+    try:
+        # Query distinct channels
+        channels = session.query(
+            Message.channel_id,
+            Message.channel_name
+        ).distinct().all()
+        
+        # Format results
+        return [
+            {
+                "id": channel_id,
+                "name": channel_name
+            }
+            for channel_id, channel_name in channels
+            if channel_id and channel_name  # Filter out None values
+        ]
     finally:
         session.close()

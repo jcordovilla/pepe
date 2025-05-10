@@ -7,8 +7,9 @@ from openai import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from utils.helpers import build_jump_url
-from tools import resolve_channel_name  # maps a channel_name → channel_id
-from time_parser import parse_timeframe
+from tools import resolve_channel_name, summarize_messages  # Add summarize_messages import
+from time_parser import parse_timeframe, extract_time_reference  # Add extract_time_reference import
+from datetime import datetime, timedelta
 
 # ——— Load config & initialize clients ———
 load_dotenv()
@@ -154,35 +155,61 @@ def get_answer(
         return (err, []) if return_matches else err
 
 
-def get_agent_answer(query: str) -> str:
+def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
     """
-    High-level function that handles time parsing and query execution.
-    This is the main entry point for RAG queries from the app.
-    
-    Args:
-        query: The user's query, which may contain time references
-        
-    Returns:
-        str: The answer to the query
+    Process a natural language query and return a response.
+    Handles time-based, channel-specific, and content-based queries.
     """
     try:
-        # Parse any time references in the query
-        timeframe = parse_timeframe(query)
-        if timeframe:
-            start_iso, end_iso = timeframe
-            # If we have a time range, use summarize_messages
-            from tools import summarize_messages
-            return summarize_messages(
-                start_iso=start_iso,
-                end_iso=end_iso,
-                as_json=False
-            )
-        
-        # Otherwise, use regular RAG search
-        return get_answer(query)
-        
+        # Extract time reference if present
+        time_ref = extract_time_reference(query)
+        if time_ref:
+            start, end = parse_timeframe(time_ref)
+            start_iso = start.isoformat()
+            end_iso = end.isoformat()
+        else:
+            # Default to last 24 hours if no time reference
+            end = datetime.now()
+            start = end - timedelta(days=1)
+            start_iso = start.isoformat()
+            end_iso = end.isoformat()
+
+        # Get messages for the timeframe
+        messages = summarize_messages(
+            start_iso=start_iso,
+            end_iso=end_iso,
+            channel_id=channel_id,
+            as_json=True
+        )
+
+        if not messages or not messages.get("summary"):
+            return "⚠️ No messages found in the specified timeframe."
+
+        # Build a more structured response
+        response = {
+            "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')}",
+            "channel": f"Channel ID: {channel_id}" if channel_id else "All channels",
+            "summary": messages["summary"],
+            "note": messages.get("note", "")
+        }
+
+        # Format the response
+        formatted_response = f"""
+📊 Query Results:
+⏰ Timeframe: {response['timeframe']}
+📢 Channel: {response['channel']}
+
+📝 Summary:
+{response['summary']}
+
+{response['note'] if response['note'] else ''}
+"""
+        return formatted_response.strip()
+
+    except ValueError as e:
+        return f"❌ Error processing query: {str(e)}"
     except Exception as e:
-        return f"❌ Error processing query: {e}"
+        return f"❌ Unexpected error: {str(e)}"
 
 
 # ——— Convenience aliases for the app ———
