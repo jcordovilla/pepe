@@ -53,12 +53,30 @@ def cached_summarize(
 
 @st.cache_data(show_spinner=False)
 def read_history(n: int = 20) -> List[Dict[str, Any]]:
-    """Read the last `n` entries from chat_history.jsonl (cached)."""
+    """
+    Read the last `n` entries from chat_history.jsonl (cached).
+    Silently skips any lines that fail JSON decoding.
+    """
+    out: List[Dict[str, Any]] = []
     try:
-        lines = open("chat_history.jsonl", "r", encoding="utf-8").read().splitlines()[-n:]
-        return [json.loads(l) for l in lines if l.strip()]
+        lines = (
+            open("chat_history.jsonl", "r", encoding="utf-8")
+            .read()
+            .splitlines()[-n:]
+        )
     except FileNotFoundError:
-        return []
+        return out
+
+    for line in lines:
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            # skip this malformed line
+            continue
+        out.append(rec)
+    return out
 
 # ─── SIDEBAR ────────────────────────────────────────────────────────────────────
 channels = get_channels()
