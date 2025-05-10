@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 
 from rag_engine import get_answer, search_messages, safe_jump_url
+from db import SessionLocal, Message  # Import the database session and model
 
 # Streamlit page configuration
 st.set_page_config(page_title="GenAI Discord RAG", layout="wide")
@@ -25,6 +26,17 @@ keyword_input = st.sidebar.text_input(
     "Keyword filter (optional)",
     help="Exact keyword pre-filter before semantic rerank"
 )
+
+# Function to fetch distinct channels
+def get_channels():
+    session = SessionLocal()
+    channels = session.query(Message.channel_name, Message.channel_id).distinct().all()
+    session.close()
+    return [{"name": ch[0], "id": ch[1]} for ch in channels if ch[0]]  # Filter out empty names
+
+# Fetch channels for the dropdown
+channels = get_channels()
+channel_options = {ch["name"]: ch["id"] for ch in channels}  # Map channel names to IDs
 
 # Main tabs
 tab1, tab2, tab3 = st.tabs(["💬 Ask", "🔍 Search", "📚 History"])
@@ -82,6 +94,10 @@ with tab2:
     search_query = st.text_input("Search query:")
     k = st.slider("Top K results", min_value=1, max_value=10, value=5)
 
+    # Dropdown for channel selection
+    selected_channel = st.selectbox("Select a channel:", [""] + list(channel_options.keys()))
+    selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
+
     if st.button("Search Messages") and search_query:
         params = {'query': search_query, 'k': k}
         if keyword_input:
@@ -91,13 +107,8 @@ with tab2:
                 params['guild_id'] = int(guild_input)
             except ValueError:
                 st.warning("Guild ID must be an integer.")
-        if channel_input:
-            try:
-                # allow either numeric ID or channel name
-                cid = int(channel_input)
-                params['channel_id'] = cid
-            except ValueError:
-                params['channel_name'] = channel_input
+        if selected_channel_id:  # Use the selected channel ID
+            params['channel_id'] = selected_channel_id
         if author_input:
             params['author_name'] = author_input
 
