@@ -105,8 +105,8 @@ def load_vectorstore() -> FAISS:
 def get_top_k_matches(
     query: str,
     k: int = 5,
-    guild_id: Optional[int]    = None,
-    channel_id: Optional[int]  = None,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
     channel_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
@@ -197,9 +197,12 @@ def get_answer(
     channel_id: Optional[int] = None
 ) -> Any:
     try:
-        matches = get_top_k_matches(query, k) if not return_matches else get_top_k_matches(query, k)
+        # Pass the channel_id to get_top_k_matches for filtering
+        matches = get_top_k_matches(query, k, channel_id=channel_id) if not return_matches else get_top_k_matches(query, k, channel_id=channel_id)
+        
         if not matches and not return_matches:
             return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
+        
         chat_messages = build_prompt(matches, query, as_json)
         response = openai_client.chat.completions.create(
             model=GPT_MODEL,
