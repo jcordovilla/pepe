@@ -18,16 +18,6 @@ st.sidebar.info(
     "```"
 )
 
-# Sidebar filters for Search tab
-guild_input = st.sidebar.text_input("Guild ID (optional)")
-selected_channel = st.sidebar.selectbox("Channel (optional)", [""] + list(channel_options.keys()))
-selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
-author_input = st.sidebar.text_input("Author name filter (optional)")
-keyword_input = st.sidebar.text_input(
-    "Keyword filter (optional)",
-    help="Exact keyword pre-filter before semantic rerank"
-)
-
 # Function to fetch distinct channels
 def get_channels():
     session = SessionLocal()
@@ -38,6 +28,16 @@ def get_channels():
 # Fetch channels for the dropdown
 channels = get_channels()
 channel_options = {ch["name"]: ch["id"] for ch in channels}  # Map channel names to IDs
+
+# Sidebar filters for Search tab
+guild_input = st.sidebar.text_input("Guild ID (optional)")
+selected_channel = st.sidebar.selectbox("Channel (optional)", [""] + list(channel_options.keys()))
+selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
+author_input = st.sidebar.text_input("Author name filter (optional)")
+keyword_input = st.sidebar.text_input(
+    "Keyword filter (optional)",
+    help="Exact keyword pre-filter before semantic rerank"
+)
 
 # Main tabs
 tab1, tab2, tab3 = st.tabs(["💬 Ask", "🔍 Search", "📚 History"])
