@@ -51,8 +51,13 @@ with tab1:
 
     if st.button("Run RAG Query") and query:
         try:
+            # Pass the selected_channel_id to the get_answer function
             answer, matches = get_answer(
-                query, k=5, as_json=as_json, return_matches=True
+                query, 
+                k=5, 
+                as_json=as_json, 
+                return_matches=True, 
+                channel_id=selected_channel_id  # Add this parameter
             )
             # Display answer
             if as_json:

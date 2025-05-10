@@ -193,7 +193,8 @@ def get_answer(
     query: str,
     k: int = 5,
     as_json: bool = False,
-    return_matches: bool = False
+    return_matches: bool = False,
+    channel_id: Optional[int] = None
 ) -> Any:
     try:
         matches = get_top_k_matches(query, k) if not return_matches else get_top_k_matches(query, k)
