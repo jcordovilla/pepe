@@ -29,103 +29,108 @@ keyword_input = st.sidebar.text_input(
     help="Exact keyword pre-filter before semantic rerank"
 )
 
-# Unified Tab
-st.header("Unified Query Interface")
-query_type = st.radio("Select Query Type:", ["Ask (RAG Query)", "Search (Messages)"])
+# Tabs
+tab1, tab2 = st.tabs(["💬 Query", "📚 History"])
 
-query = st.text_input("Enter your query:")
-k = st.slider("Top K results", min_value=1, max_value=10, value=5)
+# --- Tab 1: Unified Query Interface ---
+with tab1:
+    st.header("Unified Query Interface")
+    query_type = st.radio("Select Query Type:", ["Ask (RAG Query)", "Search (Messages)"])
 
-# Additional options for RAG Query
-if query_type == "Ask (RAG Query)":
-    as_json = st.checkbox("Return raw JSON answer", value=False)
-    show_context = st.checkbox("Show RAG context snippets", value=False)
+    query = st.text_input("Enter your query:")
+    k = st.slider("Top K results", min_value=1, max_value=10, value=5)
 
-if st.button("Run Query") and query:
-    try:
-        if query_type == "Ask (RAG Query)":
-            # RAG Query
-            answer, matches = get_answer(
-                query,
-                k=k,
-                as_json=as_json,
-                return_matches=True,
-                channel_id=selected_channel_id
-            )
-            # Display answer
-            if as_json:
-                st.json(json.loads(answer))
-            else:
-                st.markdown(f"**Answer:** {answer}")
+    # Additional options for RAG Query
+    if query_type == "Ask (RAG Query)":
+        as_json = st.checkbox("Return raw JSON answer", value=False)
+        show_context = st.checkbox("Show RAG context snippets", value=False)
 
-            # Display context snippets
-            if show_context:
-                st.markdown("**Context snippets:**")
-                for m in matches:
-                    author = (
-                        m.get('author', {}).get('display_name')
-                        or m.get('author', {}).get('username')
-                        or 'Unknown'
-                    )
-                    ts = m.get('timestamp', '')
-                    ch = m.get('channel_name', m.get('channel_id', ''))
-                    content = m.get('content', '').replace("\n", " ")[:200] + '...'
-                    url = safe_jump_url(m)
-                    st.markdown(
-                        f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
-                    )
-
-        elif query_type == "Search (Messages)":
-            # Hybrid Search
-            params = {'query': query, 'k': k}
-            if keyword_input:
-                params['keyword'] = keyword_input
-            if selected_channel_id:
-                params['channel_id'] = selected_channel_id
-            if author_input:
-                params['author_name'] = author_input
-
-            results = search_messages(**params)
-            if results:
-                for m in results:
-                    author = (
-                        m.get('author', {}).get('display_name')
-                        or m.get('author', {}).get('username')
-                        or 'Unknown'
-                    )
-                    ts = m.get('timestamp', '')
-                    ch = m.get('channel_name', m.get('channel_id', ''))
-                    content = m.get('content', '')[:200] + '...'
-                    url = safe_jump_url(m)
-                    st.markdown(
-                        f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
-                    )
-            else:
-                st.info("No messages found matching the criteria.")
-
-        # Append to history
-        record = {
-            'timestamp': datetime.now().isoformat(),
-            'question': query,
-            'answer': answer if query_type == "Ask (RAG Query)" else results
-        }
-        with open('chat_history.jsonl', 'a', encoding='utf-8') as f:
-            f.write(json.dumps(record) + '\n')
-
-    except Exception as e:
-        st.error(f"❌ Error processing request: {e}")
-
-# History Section
-st.header("📚 Chat History (Last 20)")
-try:
-    with open('chat_history.jsonl', 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-    for entry in reversed(lines[-20:]):
+    if st.button("Run Query") and query:
         try:
-            rec = json.loads(entry)
-            st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
-            st.markdown(f"**A:** {rec['answer']}")
-        except json.JSONDecodeError:
-            st.warning("⚠️ Skipping malformed history entry.")
-except FileNotFoundError:
-    st.info("No history available yet.")
+            if query_type == "Ask (RAG Query)":
+                # RAG Query
+                answer, matches = get_answer(
+                    query,
+                    k=k,
+                    as_json=as_json,
+                    return_matches=True,
+                    channel_id=selected_channel_id
+                )
+                # Display answer
+                if as_json:
+                    st.json(json.loads(answer))
+                else:
+                    st.markdown(f"**Answer:** {answer}")
+
+                # Display context snippets
+                if show_context:
+                    st.markdown("**Context snippets:**")
+                    for m in matches:
+                        author = (
+                            m.get('author', {}).get('display_name')
+                            or m.get('author', {}).get('username')
+                            or 'Unknown'
+                        )
+                        ts = m.get('timestamp', '')
+                        ch = m.get('channel_name', m.get('channel_id', ''))
+                        content = m.get('content', '').replace("\n", " ")[:200] + '...'
+                        url = safe_jump_url(m)
+                        st.markdown(
+                            f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
+                        )
+
+            elif query_type == "Search (Messages)":
+                # Hybrid Search
+                params = {'query': query, 'k': k}
+                if keyword_input:
+                    params['keyword'] = keyword_input
+                if selected_channel_id:
+                    params['channel_id'] = selected_channel_id
+                if author_input:
+                    params['author_name'] = author_input
+
+                results = search_messages(**params)
+                if results:
+                    for m in results:
+                        author = (
+                            m.get('author', {}).get('display_name')
+                            or m.get('author', {}).get('username')
+                            or 'Unknown'
+                        )
+                        ts = m.get('timestamp', '')
+                        ch = m.get('channel_name', m.get('channel_id', ''))
+                        content = m.get('content', '')[:200] + '...'
+                        url = safe_jump_url(m)
+                        st.markdown(
+                            f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
+                        )
+                else:
+                    st.info("No messages found matching the criteria.")
+
+            # Append to history
+            record = {
+                'timestamp': datetime.now().isoformat(),
+                'question': query,
+                'answer': answer if query_type == "Ask (RAG Query)" else results
+            }
+            with open('chat_history.jsonl', 'a', encoding='utf-8') as f:
+                f.write(json.dumps(record) + '\n')
+
+        except Exception as e:
+            st.error(f"❌ Error processing request: {e}")
+
+# --- Tab 2: History ---
+with tab2:
+    st.header("📚 Chat History (Last 20)")
+    try:
+        with open('chat_history.jsonl', 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        for entry in reversed(lines[-20:]):
+            try:
+                rec = json.loads(entry)
+                st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
+                st.markdown(f"**A:** {rec['answer']}")
+            except json.JSONDecodeError:
+                st.warning("⚠️ Skipping malformed history entry.")
+    except FileNotFoundError:
+        st.info("No history available yet.")
