@@ -3,17 +3,68 @@
 from sqlalchemy import (
     Column, Integer, String, Text, DateTime, JSON, create_engine
 )
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.pool import QueuePool
+import logging
+from typing import Optional
+from contextlib import contextmanager
+import time
+from functools import wraps
 
-# 1. Engine points to a local SQLite file
-engine = create_engine("sqlite:///discord_messages.db", echo=False)
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+def with_retry(max_retries: int = 3, delay: float = 1.0):
+    """
+    Decorator for retrying database operations.
+    Args:
+        max_retries: Maximum number of retry attempts
+        delay: Delay between retries in seconds
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exception = None
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    last_exception = e
+                    if attempt < max_retries - 1:
+                        logger.warning(f"Attempt {attempt + 1} failed: {str(e)}. Retrying...")
+                        time.sleep(delay * (attempt + 1))  # Exponential backoff
+                    else:
+                        logger.error(f"All {max_retries} attempts failed")
+                        raise last_exception
+            return None
+        return wrapper
+    return decorator
+
+# 1. Engine points to a local SQLite file with connection pooling
+engine = create_engine(
+    "sqlite:///discord_messages.db",
+    echo=False,
+    poolclass=QueuePool,
+    pool_size=5,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=1800  # Recycle connections after 30 minutes
+)
 
 # 2. Base class for models
 Base = declarative_base()
 
-# 3. Session factory
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+# 3. Session factory with retry mechanism
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False
+)
 
 class Message(Base):
     __tablename__ = "messages"
@@ -29,7 +80,36 @@ class Message(Base):
     mention_ids = Column(JSON, nullable=False)  # list of ints
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
-    channel_name = Column(String, index=True, nullable=True)  # <<< add this
+    channel_name = Column(String, index=True, nullable=True)
+
+@contextmanager
+def get_db_session():
+    """
+    Context manager for database sessions with automatic cleanup.
+    Usage:
+        with get_db_session() as session:
+            # Use session here
+    """
+    session = SessionLocal()
+    try:
+        yield session
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        logger.error(f"Database session error: {e}")
+        raise
+    finally:
+        session.close()
+
+@with_retry(max_retries=3)
+def execute_query(query_func):
+    """
+    Execute a database query with retry mechanism.
+    Args:
+        query_func: Function that takes a session and returns query results
+    """
+    with get_db_session() as session:
+        return query_func(session)
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)

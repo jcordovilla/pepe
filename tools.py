@@ -13,6 +13,51 @@ from utils import (
     validate_guild_id,
     validate_channel_name
 )
+from functools import lru_cache
+import time
+import logging
+from typing import Callable, TypeVar, cast
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Type variable for generic function typing
+T = TypeVar('T')
+
+def cache_with_timeout(timeout_seconds: int = 300) -> Callable[[Callable[..., T]], Callable[..., T]]:
+    """
+    Cache decorator with timeout.
+    Args:
+        timeout_seconds: Cache timeout in seconds (default: 5 minutes)
+    """
+    def decorator(func: Callable[..., T]) -> Callable[..., T]:
+        cache = {}
+        last_updated = {}
+        
+        def wrapper(*args: Any, **kwargs: Any) -> T:
+            # Create cache key from function name and arguments
+            key = f"{func.__name__}:{str(args)}:{str(kwargs)}"
+            current_time = time.time()
+            
+            # Check if cache is valid
+            if key in cache and key in last_updated:
+                if current_time - last_updated[key] < timeout_seconds:
+                    logger.debug(f"Cache hit for {func.__name__}")
+                    return cache[key]
+            
+            # Cache miss or expired, call function
+            result = func(*args, **kwargs)
+            cache[key] = result
+            last_updated[key] = current_time
+            logger.debug(f"Cache miss for {func.__name__}")
+            return result
+            
+        return cast(Callable[..., T], wrapper)
+    return decorator
 
 # setup
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -27,13 +72,17 @@ INDEX_DIR   = "index_faiss"
 _embedding = OpenAIEmbeddings(model=EMBED_MODEL, openai_api_key=OPENAI_API_KEY)
 _openai    = OpenAI(api_key=OPENAI_API_KEY)
 
+@cache_with_timeout(timeout_seconds=3600)  # Cache for 1 hour
 def _load_store() -> FAISS:
     """Load the FAISS index from disk."""
     try:
+        logger.info("Loading FAISS index from disk")
         return FAISS.load_local(INDEX_DIR, _embedding, allow_dangerous_deserialization=True)
     except Exception as e:
+        logger.error(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
         raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
 
+@cache_with_timeout(timeout_seconds=300)  # Cache for 5 minutes
 def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
     """
     Given a human-friendly channel_name (e.g. "non-coders-learning")
@@ -41,18 +90,24 @@ def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> O
     from the database, or None if not found.
     """
     if not validate_channel_name(channel_name):
+        logger.error(f"Invalid channel name format: {channel_name}")
         raise ValueError(f"Invalid channel name format: {channel_name}")
         
     if guild_id is not None and not validate_guild_id(guild_id):
+        logger.error(f"Invalid guild ID format: {guild_id}")
         raise ValueError(f"Invalid guild ID format: {guild_id}")
         
     session = SessionLocal()
     try:
+        logger.info(f"Resolving channel name: {channel_name}")
         query = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
         if guild_id is not None:
             query = query.filter(Message.guild_id == guild_id)
         result = query.first()
         return result[0] if result else None
+    except Exception as e:
+        logger.error(f"Error resolving channel name: {e}")
+        raise
     finally:
         session.close()
 
