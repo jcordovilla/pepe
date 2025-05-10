@@ -20,7 +20,8 @@ st.sidebar.info(
 
 # Sidebar filters for Search tab
 guild_input = st.sidebar.text_input("Guild ID (optional)")
-channel_input = st.sidebar.text_input("Channel ID (optional)")
+selected_channel = st.sidebar.selectbox("Channel (optional)", [""] + list(channel_options.keys()))
+selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
 author_input = st.sidebar.text_input("Author name filter (optional)")
 keyword_input = st.sidebar.text_input(
     "Keyword filter (optional)",
@@ -107,7 +108,7 @@ with tab2:
                 params['guild_id'] = int(guild_input)
             except ValueError:
                 st.warning("Guild ID must be an integer.")
-        if selected_channel_id:  # Use the selected channel ID
+        if selected_channel_id:  # Use the selected channel ID from the dropdown
             params['channel_id'] = selected_channel_id
         if author_input:
             params['author_name'] = author_input
