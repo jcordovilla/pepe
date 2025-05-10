@@ -8,6 +8,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from utils.helpers import build_jump_url
 from tools import resolve_channel_name  # maps a channel_name → channel_id
+from time_parser import parse_timeframe
 
 # ——— Load config & initialize clients ———
 load_dotenv()
@@ -151,6 +152,37 @@ def get_answer(
     except Exception as e:
         err = f"❌ Error during RAG retrieval: {e}"
         return (err, []) if return_matches else err
+
+
+def get_agent_answer(query: str) -> str:
+    """
+    High-level function that handles time parsing and query execution.
+    This is the main entry point for RAG queries from the app.
+    
+    Args:
+        query: The user's query, which may contain time references
+        
+    Returns:
+        str: The answer to the query
+    """
+    try:
+        # Parse any time references in the query
+        timeframe = parse_timeframe(query)
+        if timeframe:
+            start_iso, end_iso = timeframe
+            # If we have a time range, use summarize_messages
+            from tools import summarize_messages
+            return summarize_messages(
+                start_iso=start_iso,
+                end_iso=end_iso,
+                as_json=False
+            )
+        
+        # Otherwise, use regular RAG search
+        return get_answer(query)
+        
+    except Exception as e:
+        return f"❌ Error processing query: {e}"
 
 
 # ——— Convenience aliases for the app ———
