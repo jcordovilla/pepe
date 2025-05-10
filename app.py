@@ -20,8 +20,7 @@ def get_channels():
 channels = get_channels()
 channel_options = {ch["name"]: ch["id"] for ch in channels}  # Map channel names to IDs
 
-# Sidebar filters for Search tab
-guild_input = st.sidebar.text_input("Guild ID (optional)")
+# Sidebar filters
 selected_channel = st.sidebar.selectbox("Channel (optional)", [""] + list(channel_options.keys()))
 selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
 author_input = st.sidebar.text_input("Author name filter (optional)")
@@ -30,25 +29,28 @@ keyword_input = st.sidebar.text_input(
     help="Exact keyword pre-filter before semantic rerank"
 )
 
-# Main tabs
-tab1, tab2, tab3 = st.tabs(["💬 Ask", "🔍 Search", "📚 History"])
+# Unified Tab
+st.header("Unified Query Interface")
+query_type = st.radio("Select Query Type:", ["Ask (RAG Query)", "Search (Messages)"])
 
-# --- Tab 1: RAG Query ---
-with tab1:
-    st.header("RAG Query Interface")
-    query = st.text_input("Natural-language question:")
+query = st.text_input("Enter your query:")
+k = st.slider("Top K results", min_value=1, max_value=10, value=5)
+
+# Additional options for RAG Query
+if query_type == "Ask (RAG Query)":
     as_json = st.checkbox("Return raw JSON answer", value=False)
     show_context = st.checkbox("Show RAG context snippets", value=False)
 
-    if st.button("Run RAG Query") and query:
-        try:
-            # Pass the selected_channel_id to the get_answer function
+if st.button("Run Query") and query:
+    try:
+        if query_type == "Ask (RAG Query)":
+            # RAG Query
             answer, matches = get_answer(
-                query, 
-                k=5, 
-                as_json=as_json, 
-                return_matches=True, 
-                channel_id=selected_channel_id  # Add this parameter
+                query,
+                k=k,
+                as_json=as_json,
+                return_matches=True,
+                channel_id=selected_channel_id
             )
             # Display answer
             if as_json:
@@ -67,78 +69,63 @@ with tab1:
                     )
                     ts = m.get('timestamp', '')
                     ch = m.get('channel_name', m.get('channel_id', ''))
-                    content = m.get('content', '').replace("", " ")[:200] + '...'
+                    content = m.get('content', '').replace("\n", " ")[:200] + '...'
                     url = safe_jump_url(m)
                     st.markdown(
                         f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
                     )
 
-            # Append to history
-            record = {
-                'timestamp': datetime.now().isoformat(),
-                'question': query,
-                'answer': answer
-            }
-            with open('chat_history.jsonl', 'a', encoding='utf-8') as f:
-                f.write(json.dumps(record) + '\n')
+        elif query_type == "Search (Messages)":
+            # Hybrid Search
+            params = {'query': query, 'k': k}
+            if keyword_input:
+                params['keyword'] = keyword_input
+            if selected_channel_id:
+                params['channel_id'] = selected_channel_id
+            if author_input:
+                params['author_name'] = author_input
 
-        except Exception as e:
-            st.error(f"❌ Error processing request: {e}")
+            results = search_messages(**params)
+            if results:
+                for m in results:
+                    author = (
+                        m.get('author', {}).get('display_name')
+                        or m.get('author', {}).get('username')
+                        or 'Unknown'
+                    )
+                    ts = m.get('timestamp', '')
+                    ch = m.get('channel_name', m.get('channel_id', ''))
+                    content = m.get('content', '')[:200] + '...'
+                    url = safe_jump_url(m)
+                    st.markdown(
+                        f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
+                    )
+            else:
+                st.info("No messages found matching the criteria.")
 
-# --- Tab 2: Hybrid Search ---
-with tab2:
-    st.header("Hybrid Keyword & Semantic Search")
-    search_query = st.text_input("Search query:")
-    k = st.slider("Top K results", min_value=1, max_value=10, value=5)
+        # Append to history
+        record = {
+            'timestamp': datetime.now().isoformat(),
+            'question': query,
+            'answer': answer if query_type == "Ask (RAG Query)" else results
+        }
+        with open('chat_history.jsonl', 'a', encoding='utf-8') as f:
+            f.write(json.dumps(record) + '\n')
 
-    # Dropdown for channel selection
-    selected_channel = st.selectbox("Select a channel:", [""] + list(channel_options.keys()))
-    selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
+    except Exception as e:
+        st.error(f"❌ Error processing request: {e}")
 
-    if st.button("Search Messages") and search_query:
-        params = {'query': search_query, 'k': k}
-        if keyword_input:
-            params['keyword'] = keyword_input
-        if guild_input:
-            try:
-                params['guild_id'] = int(guild_input)
-            except ValueError:
-                st.warning("Guild ID must be an integer.")
-        if selected_channel_id:  # Use the selected channel ID from the dropdown
-            params['channel_id'] = selected_channel_id
-        if author_input:
-            params['author_name'] = author_input
-
-        results = search_messages(**params)
-        if results:
-            for m in results:
-                author = (
-                    m.get('author', {}).get('display_name')
-                    or m.get('author', {}).get('username')
-                    or 'Unknown'
-                )
-                ts = m.get('timestamp', '')
-                ch = m.get('channel_name', m.get('channel_id', ''))
-                content = m.get('content', '')[:200] + '...'
-                url = safe_jump_url(m)
-                st.markdown(
-                    f"- **{author}** (_{ts}_ in **#{ch}**): {content} [🔗]({url})"
-                )
-        else:
-            st.info("No messages found matching the criteria.")
-
-# --- Tab 3: History ---
-with tab3:
-    st.header("📚 Chat History (Last 20)")
-    try:
-        with open('chat_history.jsonl', 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        for entry in reversed(lines[-20:]):
-            try:
-                rec = json.loads(entry)
-                st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
-                st.markdown(f"**A:** {rec['answer']}")
-            except json.JSONDecodeError:
-                st.warning("⚠️ Skipping malformed history entry.")
-    except FileNotFoundError:
-        st.info("No history available yet.")
+# History Tab
+st.header("📚 Chat History (Last 20)")
+try:
+    with open('chat_history.jsonl', 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    for entry in reversed(lines[-20:]):
+        try:
+            rec = json.loads(entry)
+            st.markdown(f"**{rec['timestamp']}** — **Q:** {rec['question']}")
+            st.markdown(f"**A:** {rec['answer']}")
+        except json.JSONDecodeError:
+            st.warning("⚠️ Skipping malformed history entry.")
+except FileNotFoundError:
+    st.info("No history available yet.")

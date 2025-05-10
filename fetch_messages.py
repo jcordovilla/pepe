@@ -87,8 +87,7 @@ class DiscordFetcher(discord.Client):
                             fetched.append({
                                 'message_id': str(message.id),
                                 'channel_id': str(channel.id),
-                                'guild_id': str(guild.id),
-                                'channel_name': channel.name, 
+                                'channel_name': channel.name,
                                 'content': message.content.replace('\u2028', ' ').replace('\u2029', ' ').strip(),
                                 'timestamp': message.created_at.isoformat(),
                                 'jump_url': message.jump_url,
