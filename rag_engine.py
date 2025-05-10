@@ -221,3 +221,4 @@ def get_answer(
 if __name__ == "__main__":
     # Quick local smoke test
     log.info(get_top_k_matches("ethics", guild_id=1353058864810950737, channel_name="non-coders-learning"))
+    log.info(f"Using GPT model: {GPT_MODEL}")
