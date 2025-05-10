@@ -1,98 +1,22 @@
+# rag_engine.py
+
 import os
-import json
+from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
-from typing import Optional, List, Dict, Any
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
 from openai import OpenAI
-from utils import build_jump_url, validate_ids
-from rapidfuzz import process, fuzz
-from utils.logger import setup_logging
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from utils import build_jump_url
+from tools import resolve_channel_name  # maps a channel_name → channel_id
 
-# Initialize logging
-setup_logging()
-import logging
-log = logging.getLogger(__name__)
-
-# Load environment variables and initialize clients
+# ——— Load config & initialize clients ———
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
-INDEX_DIR = "index_faiss"
+GPT_MODEL       = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
+INDEX_DIR       = "index_faiss"
 
-# Embedding model and OpenAI client
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
-
-
-def find_author_id(name_query: str) -> Optional[int]:
-    """
-    Fuzzy-match a user’s input against known author usernames
-    and return the best matching author_id (or None).
-    """
-    from embed_store import flatten_messages
-    all_msgs = flatten_messages("discord_messages_v2.json")
-    author_map: Dict[str, int] = {}
-    for _, meta in all_msgs:
-        author = meta.get("author", {})
-        uname = author.get("username")
-        aid = author.get("id")
-        if uname and aid and uname not in author_map:
-            author_map[uname] = aid
-    if not author_map:
-        return None
-    best, score, _ = process.extractOne(
-        name_query,
-        list(author_map.keys()),
-        scorer=fuzz.WRatio
-    )
-    return author_map[best] if score >= 60 else None
-
-
-def search_messages(
-    query: str,
-    keyword: Optional[str] = None,
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None,
-    channel_name: Optional[str] = None,
-    author_name: Optional[str] = None,
-    k: int = 5
-) -> List[Dict[str, Any]]:
-    """
-    Hybrid search: optional keyword, guild/channel (id or name), author filter, then semantic rerank.
-    """
-    from langchain_community.vectorstores import FAISS
-
-    # Load the FAISS index from disk
-    print("📂 Loading FAISS index...")
-    vectorstore = FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
-
-    # Perform semantic search using the FAISS index
-    retriever = vectorstore.as_retriever(search_kwargs={"k": k})
-    docs = retriever.get_relevant_documents(query)
-
-    # Filter results based on optional parameters
-    results = []
-    for doc in docs:
-        meta = doc.metadata
-        if keyword and keyword.lower() not in meta.get("content", "").lower():
-            continue
-        if guild_id and meta.get("guild_id") != str(guild_id):
-            continue
-        if channel_id and meta.get("channel_id") != str(channel_id):
-            continue
-        if channel_name and meta.get("channel_name") != channel_name.lstrip("#"):
-            continue
-        if author_name:
-            author = meta.get("author", {})
-            if author.get("username") != author_name:
-                continue
-        results.append(meta)
-
-    log.info(f"Retrieved {len(docs)} documents from FAISS index.")
-    log.info(f"Filtered down to {len(results)} results based on query parameters.")
-
-    return results
+openai_client   = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def load_vectorstore() -> FAISS:
@@ -105,9 +29,9 @@ def load_vectorstore() -> FAISS:
 def get_top_k_matches(
     query: str,
     k: int = 5,
-    guild_id: Optional[int] = None,
-    channel_id: Optional[int] = None,
-    channel_name: Optional[str] = None
+    guild_id: Optional[int]      = None,
+    channel_id: Optional[int]    = None,
+    channel_name: Optional[str]  = None
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
@@ -115,31 +39,33 @@ def get_top_k_matches(
     via manual post-filtering.
     """
     store = load_vectorstore()
-
-    # 1) Pull back more candidates for local filtering
+    # 1) Fetch extra candidates for reliable filtering
     fetch_k = k * 10
     retriever = store.as_retriever(search_kwargs={"k": fetch_k})
     docs = retriever.get_relevant_documents(query)
     metas = [doc.metadata for doc in docs]
 
-    # 2) Manually filter by guild_id
+    # 2) Resolve a human channel_name to ID if needed
+    if channel_name and not channel_id:
+        resolved = resolve_channel_name(channel_name, guild_id)
+        if resolved is None:
+            raise ValueError(f"Unknown channel name: {channel_name}")
+        channel_id = resolved
+
+    # 3) Manual metadata filters
     if guild_id is not None:
         metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
-
-    # 3) Manually filter by channel_id
     if channel_id is not None:
         metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
 
-    # 4) Manually filter by human channel_name
-    if channel_name is not None:
-        name = channel_name.lstrip("#")
-        metas = [m for m in metas if m.get("channel_name") == name]
-
-    # 5) Return the top-k of whatever remains
+    # 4) Return the top-k of whatever remains
     return metas[:k]
 
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
+    """
+    Ensure the metadata contains a valid jump_url, constructing one if missing.
+    """
     url = metadata.get("jump_url")
     if url:
         return url
@@ -157,52 +83,60 @@ def build_prompt(
     question: str,
     as_json: bool
 ) -> List[Dict[str, str]]:
+    """
+    Construct a ChatML prompt with context from matching messages.
+    """
     context_lines: List[str] = []
     for m in matches:
-        author = m.get("author", {})
-        author_name = author.get("display_name") or author.get("username") or str(author)
-        ts = m.get("timestamp")
-        ch_name = m.get("channel_name") or m.get("channel_id")
-        content = m.get("content", "").replace("\n", " ")
-        url = safe_jump_url(m)
+        author      = m.get("author", {})
+        author_name = author.get("display_name") or author.get("username") or "Unknown"
+        ts          = m.get("timestamp", "")
+        ch_name     = m.get("channel_name") or m.get("channel_id")
+        content     = m.get("content", "").replace("\n", " ")
+        url         = safe_jump_url(m)
         line = f"**{author_name}** (_{ts}_ in **#{ch_name}**):\n{content}"
         if url:
             line += f"\n[🔗 View Message]({url})"
         context_lines.append(line)
-    context = "\n\n".join(context_lines)
+
     instructions = (
-        "You are a knowledgeable and versatile assistant specialized in analyzing Discord server data.\n\n"
-        "Based on the user’s query, you can:\n"
-        "- Search and summarize Discord messages using retrieval-augmented generation (RAG).\n"
-        "- Call specific analysis tools for structured tasks.\n\n"
-        "When presenting answers:\n"
-        "- Use clear natural language by default, or JSON if requested.\n"
-        "- Include author, timestamp, channel, and message snippets.\n"
-        "- Provide jump URLs when available."
+        "You are a knowledgeable assistant specialized in Discord server data.\n\n"
+        "Use RAG to answer the user's question based on the provided context. "
+        "Include author, timestamp, channel, snippets, and URLs.\n"
     )
     if as_json:
-        instructions += "\nReturn the results as a JSON array with those fields."
-    prompt = f"{instructions}\n\nContext:\n{context}\n\nUser's question: {question}\n"
+        instructions += "Return results as a JSON array with fields: guild_id, channel_id, message_id, content, timestamp, author, jump_url.\n"
+
     return [
         {"role": "system", "content": "You are a Discord message analyst."},
-        {"role": "user",   "content": prompt}
+        {"role": "user",   "content": instructions + "\nContext:\n" + "\n\n".join(context_lines)
+                                  + f"\n\nUser's question: {question}\n"}
     ]
 
 
 def get_answer(
     query: str,
-    k: int = 5,
-    as_json: bool = False,
-    return_matches: bool = False,
-    channel_id: Optional[int] = None
+    k: int                = 5,
+    as_json: bool          = False,
+    return_matches: bool   = False,
+    guild_id: Optional[int]     = None,
+    channel_id: Optional[int]   = None,
+    channel_name: Optional[str] = None
 ) -> Any:
+    """
+    Perform a RAG-based query: retrieve matches, build a prompt, and ask OpenAI.
+    Returns either a string (answer) or (answer, matches) if return_matches=True.
+    """
     try:
-        # Pass the channel_id to get_top_k_matches for filtering
-        matches = get_top_k_matches(query, k, channel_id=channel_id) if not return_matches else get_top_k_matches(query, k, channel_id=channel_id)
-        
+        matches = get_top_k_matches(
+            query, k,
+            guild_id=guild_id,
+            channel_id=channel_id,
+            channel_name=channel_name
+        )
         if not matches and not return_matches:
             return "⚠️ I couldn’t find relevant messages. Try rephrasing your question or being more specific."
-        
+
         chat_messages = build_prompt(matches, query, as_json)
         response = openai_client.chat.completions.create(
             model=GPT_MODEL,
@@ -213,12 +147,12 @@ def get_answer(
         )
         answer = response.choices[0].message.content
         return (answer, matches) if return_matches else answer
+
     except Exception as e:
-        error_msg = f"❌ Error during RAG retrieval: {e}"
-        return (error_msg, []) if return_matches else error_msg
+        err = f"❌ Error during RAG retrieval: {e}"
+        return (err, []) if return_matches else err
 
 
-if __name__ == "__main__":
-    # Quick local smoke test
-    log.info(get_top_k_matches("ethics", guild_id=1353058864810950737, channel_name="non-coders-learning"))
-    log.info(f"Using GPT model: {GPT_MODEL}")
+# ——— Convenience aliases for the app ———
+search_messages    = get_top_k_matches
+discord_rag_search = get_answer

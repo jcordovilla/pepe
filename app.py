@@ -3,92 +3,78 @@ import json
 import re
 from datetime import datetime
 
-from rag_engine import get_answer, search_messages, safe_jump_url
 from db import SessionLocal, Message
+from rag_engine import get_answer, search_messages, safe_jump_url
 from time_parser import parse_timeframe
-from tools import summarize_messages_in_range
+from tools import summarize_messages
 
-# Streamlit page configuration
+# --- Page config ---
 st.set_page_config(page_title="GenAI Discord Bot", layout="wide")
-st.title("📡 Pathfinder - GenAI Discord Bot v2.1")
+st.title("📡 Pathfinder – GenAI Discord Bot")
 
-# Function to fetch distinct channels
+# --- Helper to fetch channels (cached for performance) ---
+@st.cache_data
 def get_channels():
     session = SessionLocal()
-    channels = (
-        session.query(Message.channel_name, Message.channel_id)
-        .distinct()
-        .all()
-    )
+    rows = session.query(Message.channel_name, Message.channel_id).distinct().all()
     session.close()
     return [
-        {"name": ch[0], "id": ch[1]}
-        for ch in channels
-        if ch[0]
+        {"name": name, "id": cid}
+        for name, cid in rows
+        if name  # skip empty names
     ]
 
-# Sidebar filters
 channels = get_channels()
-channel_options = {c["name"]: c["id"] for c in channels}
+channel_options = {ch["name"]: ch["id"] for ch in channels}
 selected_channel = st.sidebar.selectbox(
     "Channel (optional)",
     [""] + list(channel_options.keys())
 )
-selected_channel_id = (
-    channel_options[selected_channel]
-    if selected_channel else None
-)
-author_input = st.sidebar.text_input(
-    "Author name filter (optional)"
-)
-keyword_input = st.sidebar.text_input(
-    "Keyword filter (optional)",
-    help="Exact keyword pre-filter before semantic rerank"
-)
+selected_channel_id = channel_options.get(selected_channel) if selected_channel else None
 
-# Tabs
+# --- Tabs ---
 tab1, tab2 = st.tabs(["💬 Query", "📚 History"])
 
 # --- Tab 1: Query ---
 with tab1:
-    st.header("Unified Query Interface")
+    st.header("Ask or Search Discord Messages")
     query_type = st.radio(
-        "Select Query Type:",
-        ["Ask (RAG Query)", "Search (Messages)"]
+        "Mode:",
+        ["Ask (RAG Query)", "Search (Messages)"],
+        index=0
     )
 
     query = st.text_input("Enter your query:")
-    k = st.slider("Top K results", 1, 10, 5)
+    k = st.slider("Top K results", min_value=1, max_value=10, value=5)
 
+    # For RAG queries, allow JSON or context previews
     if query_type == "Ask (RAG Query)":
         as_json = st.checkbox("Return raw JSON answer", value=False)
         show_context = st.checkbox("Show RAG context snippets", value=False)
 
     if st.button("Run Query") and query:
         try:
-            # ----- Ask (RAG Query) branch -----
             if query_type == "Ask (RAG Query)":
-                # 1) Look for a natural-language timeframe
+                # 1) Detect natural-language timeframe
                 m = re.search(r"(?:last|past)\s+(?:day|week|month)", query, re.I)
                 if m:
                     expr = m.group(0)
                     start_dt, end_dt = parse_timeframe(expr)
-                    st.markdown(
-                        f"**🕒 Parsed timeframe:** {start_dt.date()} → {end_dt.date()}"
-                    )
-                    # 2) Delegate to summarization tool
-                    summary = summarize_messages_in_range(
+                    st.markdown(f"**🕒 Parsed timeframe:** {start_dt.date()} → {end_dt.date()}")
+
+                    # 2) Summarize via summarize_messages
+                    summary = summarize_messages(
                         start_iso=start_dt.isoformat(),
                         end_iso=end_dt.isoformat(),
                         channel_id=selected_channel_id,
-                        output_format="text"
+                        as_json=False
                     )
-                    st.markdown(f"### 📚 Summary ({start_dt.date()}→{end_dt.date()}):")
+                    st.markdown(f"### 📚 Summary ({start_dt.date()} → {end_dt.date()}):")
                     st.write(summary)
                     answer = summary
                     matches = []
                 else:
-                    # Fallback: standard RAG query
+                    # Fallback: full RAG query
                     answer, matches = get_answer(
                         query,
                         k=k,
@@ -96,13 +82,11 @@ with tab1:
                         return_matches=True,
                         channel_id=selected_channel_id
                     )
-                    # Display the answer
                     if as_json:
                         st.json(json.loads(answer))
                     else:
                         st.markdown(f"**Answer:** {answer}")
 
-                    # Optionally show context snippets
                     if show_context:
                         st.markdown("**Context snippets:**")
                         for m in matches:
@@ -112,28 +96,21 @@ with tab1:
                                 or "Unknown"
                             )
                             ts = m.get("timestamp", "")
-                            ch = m.get("channel_name", m.get("channel_id", ""))
-                            snippet = (
-                                m.get("content", "")
-                                .replace("\n", " ")[:200] + "…"
-                            )
+                            ch = m.get("channel_name", "") or m.get("channel_id", "")
+                            snippet = m.get("content", "").replace("\n", " ")
                             url = safe_jump_url(m)
                             st.markdown(
                                 f"- **{author}** (_{ts}_ in **#{ch}**): {snippet} [🔗]({url})"
                             )
 
-            # ----- Search (Messages) branch -----
-            elif query_type == "Search (Messages)":
-                params = {"query": query, "k": k}
-                if keyword_input:
-                    params["keyword"] = keyword_input
-                if selected_channel_id:
-                    params["channel_id"] = selected_channel_id
-                if author_input:
-                    params["author_name"] = author_input
-
-                results = search_messages(**params)
+            else:  # Search (Messages)
+                results = search_messages(
+                    query=query,
+                    channel_id=selected_channel_id,
+                    k=k
+                )
                 if results:
+                    st.markdown(f"**Found {len(results)} messages:**")
                     for m in results:
                         author = (
                             m.get("author", {}).get("display_name")
@@ -141,16 +118,16 @@ with tab1:
                             or "Unknown"
                         )
                         ts = m.get("timestamp", "")
-                        ch = m.get("channel_name", m.get("channel_id", ""))
+                        ch = m.get("channel_name", "") or m.get("channel_id", "")
                         snippet = m.get("content", "")[:200] + "…"
                         url = safe_jump_url(m)
                         st.markdown(
                             f"- **{author}** (_{ts}_ in **#{ch}**): {snippet} [🔗]({url})"
                         )
                 else:
-                    st.info("No messages found matching the criteria.")
+                    st.info("No messages found matching your criteria.")
 
-            # ----- Append to chat history -----
+            # --- Append to chat history ---
             record = {
                 "timestamp": datetime.now().isoformat(),
                 "question": query,
@@ -164,7 +141,7 @@ with tab1:
 
 # --- Tab 2: History ---
 with tab2:
-    st.header("📚 Chat History (Last 20)")
+    st.header("Chat History (last 20)")
     try:
         with open("chat_history.jsonl", "r", encoding="utf-8") as f:
             lines = f.readlines()
