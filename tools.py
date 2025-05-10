@@ -9,6 +9,8 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import build_jump_url, validate_ids
+from typing import Optional
+from db import SessionLocal, Message
 
 # setup
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -23,18 +25,20 @@ _openai    = OpenAI(api_key=OPENAI_API_KEY)
 def _load_store() -> FAISS:
     return FAISS.load_local(INDEX_DIR, _embedding, allow_dangerous_deserialization=True)
 
-def _resolve_channel_name(
-    channel_name: str,
-    guild_id: Optional[int]
-) -> Optional[int]:
-    """Look up a channel_name → channel_id via your DB."""
+
+def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
+    """
+    Given a human-friendly channel_name (e.g. "non-coders-learning")
+    and an optional guild_id, return the corresponding channel_id
+    from the database, or None if not found.
+    """
     session = SessionLocal()
     query = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
-    if guild_id:
+    if guild_id is not None:
         query = query.filter(Message.guild_id == guild_id)
-    row = query.first()
+    result = query.first()
     session.close()
-    return row[0] if row else None
+    return result[0] if result else None
 
 def search_messages(
     query: str,
