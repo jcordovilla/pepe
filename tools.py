@@ -34,7 +34,7 @@ def _load_store() -> FAISS:
     except Exception as e:
         raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
 
-def _resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
+def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
     """
     Given a human-friendly channel_name (e.g. "non-coders-learning")
     and an optional guild_id, return the corresponding channel_id
@@ -85,7 +85,7 @@ def search_messages(
 
     # resolve channel_name → channel_id
     if channel_name and not channel_id:
-        channel_id = _resolve_channel_name(channel_name, guild_id)
+        channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
             raise ValueError(f"Unknown channel: {channel_name}")
 
@@ -155,7 +155,7 @@ def summarize_messages(
 
     # resolve channel_name → channel_id
     if channel_name and not channel_id:
-        channel_id = _resolve_channel_name(channel_name, guild_id)
+        channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
             raise ValueError(f"Unknown channel: {channel_name}")
 
