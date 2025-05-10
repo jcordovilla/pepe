@@ -29,7 +29,7 @@ TOOLS_METADATA = [
         "guild_id":     { "type": "integer", "description": "Discord guild ID (optional)" },
         "channel_id":   { "type": "integer", "description": "Discord channel ID (optional)" },
         "channel_name": { "type": "string",  "description": "Discord channel name (optional)" },
-        "as_json":      { "type": "boolean", "default": false, "description": "Return structured JSON if true" }
+        "as_json":      { "type": "boolean", "default": False, "description": "Return structured JSON if true" }
       },
       "required": ["start_iso","end_iso"]
     }
