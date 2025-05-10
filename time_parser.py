@@ -5,15 +5,19 @@ Utility to parse natural-language timeframes into concrete start/end datetimes.
 from datetime import datetime, timedelta
 import dateparser
 from zoneinfo import ZoneInfo
-import streamlit as st
 
 
-def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = None) -> tuple[datetime, datetime]:
+def parse_timeframe(
+    text: str,
+    timezone: str = "Europe/Madrid",
+    now: datetime = None
+) -> tuple[datetime, datetime]:
     """
     Parse a natural-language timeframe into (start, end) datetimes in the given timezone.
 
     Supports:
       - "last week" (previous calendar week: Monday → Sunday)
+      - "past week" (rolling 7-day window)
       - "past X days/hours"
       - "YYYY-MM-DD to YYYY-MM-DD"
       - "between ... and ..."
@@ -31,17 +35,17 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = 
     else:
         now_dt = now if now.tzinfo else now.replace(tzinfo=tzinfo)
 
-    # Explicit calendar last week: previous Monday → Sunday
-    if lower == "last week":
-        this_week_start = (now_dt - timedelta(days=now_dt.weekday())).replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
+    # Calendar "last week": previous Monday → Sunday
+    if "last week" in lower:
+        this_week_start = (
+            now_dt - timedelta(days=now_dt.weekday())
+        ).replace(hour=0, minute=0, second=0, microsecond=0)
         last_week_start = this_week_start - timedelta(weeks=1)
         last_week_end = this_week_start - timedelta(seconds=1)
         return last_week_start, last_week_end
 
-    # Past week as simple 7-day window ending now
-    if lower == "past week":
+    # Rolling 7-day window
+    if "past week" in lower:
         start = now_dt - timedelta(days=7)
         end = now_dt
         return start, end
@@ -52,42 +56,37 @@ def parse_timeframe(text: str, timezone: str = "Europe/Madrid", now: datetime = 
         "PREFER_DATES_FROM": "past",
     }
 
-    # Try explicit range separators first
+    # Explicit range separators
     for sep in [" to ", " and ", "–", "-"]:
         if sep in text:
             start_str, end_str = text.split(sep, 1)
             start = dateparser.parse(start_str, settings=settings)
             end = dateparser.parse(end_str, settings=settings)
             if start and end:
-                st.write(f"DEBUG: Parsed timeframe '{text}' -> Start: {start}, End: {end}, Timezone: {timezone}")
                 return start, end
 
-    # Single-point parse and infer range
+    # Fallback single date parse
     dt = dateparser.parse(text, settings=settings)
     if not dt:
         raise ValueError(f"Could not parse timeframe: '{text}'")
 
-    # Infer ranges for non-explicit calendar weeks
-    lower = lower
-    if "hour" in lower:
-        delta_hours = int(''.join(filter(str.isdigit, lower))) or 1
-        start = dt - timedelta(hours=delta_hours)
+    # Infer range based on keywords
+    if any(keyword in lower for keyword in ["hour", "hours"]):
+        # e.g. "past 5 hours"
+        num = int(''.join(filter(str.isdigit, lower))) or 1
+        start = dt - timedelta(hours=num)
         end = dt
-    elif any(x in lower for x in ["day", "yesterday", "today"]):
+    elif any(keyword in lower for keyword in ["day", "yesterday", "today"]):
         start = dt.replace(hour=0, minute=0, second=0, microsecond=0)
         end = dt.replace(hour=23, minute=59, second=59, microsecond=999999)
     elif "week" in lower:
-        start = dt - timedelta(days=7)
+        # e.g. "2 weeks ago"
+        num = int(''.join(filter(str.isdigit, lower))) if any(c.isdigit() for c in lower) else 1
+        start = dt - timedelta(weeks=num)
         end = dt
     else:
+        # default to one day
         start = dt - timedelta(days=1)
         end = dt
 
-    st.write(f"DEBUG: Parsed timeframe '{text}' -> Start: {start}, End: {end}, Timezone: {timezone}")
     return start, end
-
-
-try:
-    start, end = parse_timeframe("past week")
-except ValueError as e:
-    print(f"DEBUG: Exception in parse_timeframe: {e}")
