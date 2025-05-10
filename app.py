@@ -115,7 +115,7 @@ if st.button("Run Query") and query:
     except Exception as e:
         st.error(f"❌ Error processing request: {e}")
 
-# History Tab
+# History Section
 st.header("📚 Chat History (Last 20)")
 try:
     with open('chat_history.jsonl', 'r', encoding='utf-8') as f:

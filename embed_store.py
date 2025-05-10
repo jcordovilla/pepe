@@ -22,6 +22,7 @@ def build_langchain_faiss_index():
     for m in rows:
         texts.append(m.content)
         metadatas.append({
+            "guild_id":     str(m.guild_id),
             "channel_id":   str(m.channel_id),
             "channel_name": m.channel_name,           # plain name from Discord API
             "message_id":   str(m.message_id),

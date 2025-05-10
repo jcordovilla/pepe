@@ -33,13 +33,16 @@ def load_vectorstore() -> FAISS:
 def summarize_messages(
     start_iso: str,
     end_iso: str,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     as_json: bool = False
 ) -> Any:
     """
-    Summarize Discord messages between two ISO datetimes, optionally scoped by channel.
+    Summarize Discord messages between two ISO datetimes, optionally scoped by guild and/or channel.
     """
     # Validate IDs
+    if guild_id is not None:
+        validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
@@ -49,6 +52,8 @@ def summarize_messages(
         Message.timestamp >= start_iso,
         Message.timestamp <= end_iso
     )
+    if guild_id is not None:
+        query = query.filter(Message.guild_id == guild_id)
     if channel_id is not None:
         query = query.filter(Message.channel_id == channel_id)
     msgs = query.all()
@@ -90,15 +95,23 @@ def summarize_messages(
 def search_messages(
     query: str,
     keyword: Optional[str] = None,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     channel_name: Optional[str] = None,
     author_name: Optional[str] = None,
     k: int = 5
 ) -> List[Dict[str, Any]]:
+    # If user passed channel_name but not channel_id, resolve it
+    if channel_name and not channel_id:
+        channel_id = resolve_channel_name(channel_name, guild_id)
+        if not channel_id:
+            raise ValueError(f"Unknown channel: {channel_name}")
     """
     Hybrid keyword + semantic search over Discord messages.
     """
     # Validate IDs
+    if guild_id is not None:
+        validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
@@ -107,6 +120,8 @@ def search_messages(
     q = db.query(Message)
     if keyword:
         q = q.filter(Message.content.ilike(f"%{keyword}%"))
+    if guild_id:
+        q = q.filter(Message.guild_id == guild_id)
     if channel_id:
         q = q.filter(Message.channel_id == channel_id)
     candidates = q.all()
@@ -143,18 +158,22 @@ def search_messages(
 
 
 def get_most_reacted_messages(
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     top_n: int = 5
 ) -> List[Dict[str, Any]]:
     """
     Return the top N messages by total reaction count.
     """
-    # Validate IDs
+    if guild_id is not None:
+        validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
     session = SessionLocal()
     q = session.query(Message)
+    if guild_id is not None:
+        q = q.filter(Message.guild_id == guild_id)
     if channel_id is not None:
         q = q.filter(Message.channel_id == channel_id)
     msgs = q.all()
@@ -184,17 +203,21 @@ def get_most_reacted_messages(
 
 def find_users_by_skill(
     skill: str,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None
 ) -> List[Dict[str, Any]]:
     """
     Identify authors whose messages contain a given skill keyword.
     """
-    # Validate IDs
+    if guild_id is not None:
+        validate_ids(guild_id=guild_id)
     if channel_id is not None:
         validate_ids(channel_id=channel_id)
 
     session = SessionLocal()
     q = session.query(Message).filter(Message.content.ilike(f"%{skill}%"))
+    if guild_id is not None:
+        q = q.filter(Message.guild_id == guild_id)
     if channel_id is not None:
         q = q.filter(Message.channel_id == channel_id)
     msgs = q.all()
@@ -215,6 +238,7 @@ def find_users_by_skill(
 def summarize_messages_in_range(
     start_iso: str,
     end_iso: str,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     channel_name: Optional[str] = None,
     output_format: Literal["text","json"]="text"
@@ -242,6 +266,8 @@ def summarize_messages_in_range(
         Message.timestamp >= start_dt,
         Message.timestamp <= end_dt
     )
+    if guild_id:
+        q = q.filter(Message.guild_id == guild_id)
     if channel_id:
         q = q.filter(Message.channel_id == channel_id)
     msgs = q.all()

@@ -19,6 +19,7 @@ class Message(Base):
     __tablename__ = "messages"
     # Primary key auto-increments
     id = Column(Integer, primary_key=True, index=True)
+    guild_id = Column(Integer, index=True, nullable=False)
     channel_id = Column(Integer, index=True, nullable=False)
     channel_name = Column(String, nullable=False)
     message_id = Column(Integer, unique=True, index=True, nullable=False)
@@ -28,6 +29,7 @@ class Message(Base):
     mention_ids = Column(JSON, nullable=False)  # list of ints
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
+    channel_name = Column(String, index=True, nullable=True)  # <<< add this
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)

@@ -52,13 +52,14 @@ def find_author_id(name_query: str) -> Optional[int]:
 def search_messages(
     query: str,
     keyword: Optional[str] = None,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     channel_name: Optional[str] = None,
     author_name: Optional[str] = None,
     k: int = 5
 ) -> List[Dict[str, Any]]:
     """
-    Hybrid search: optional keyword, channel (id or name), author filter, then semantic rerank.
+    Hybrid search: optional keyword, guild/channel (id or name), author filter, then semantic rerank.
     """
     from langchain_community.vectorstores import FAISS
 
@@ -75,6 +76,8 @@ def search_messages(
     for doc in docs:
         meta = doc.metadata
         if keyword and keyword.lower() not in meta.get("content", "").lower():
+            continue
+        if guild_id and meta.get("guild_id") != str(guild_id):
             continue
         if channel_id and meta.get("channel_id") != str(channel_id):
             continue
@@ -102,12 +105,13 @@ def load_vectorstore() -> FAISS:
 def get_top_k_matches(
     query: str,
     k: int = 5,
+    guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     channel_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
     Retrieve the top-k FAISS matches for 'query',
-    optionally scoped to a channel_id or channel_name
+    optionally scoped to a guild, channel_id, or channel_name
     via manual post-filtering.
     """
     store = load_vectorstore()
@@ -118,16 +122,20 @@ def get_top_k_matches(
     docs = retriever.get_relevant_documents(query)
     metas = [doc.metadata for doc in docs]
 
-    # 2) Manually filter by channel_id
+    # 2) Manually filter by guild_id
+    if guild_id is not None:
+        metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+
+    # 3) Manually filter by channel_id
     if channel_id is not None:
         metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
 
-    # 3) Manually filter by human channel_name
+    # 4) Manually filter by human channel_name
     if channel_name is not None:
         name = channel_name.lstrip("#")
         metas = [m for m in metas if m.get("channel_name") == name]
 
-    # 4) Return the top-k of whatever remains
+    # 5) Return the top-k of whatever remains
     return metas[:k]
 
 
