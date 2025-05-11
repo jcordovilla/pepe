@@ -275,10 +275,32 @@ def summarize_messages(
             f"**{m.author['username']}** (_{m.timestamp}_): {m.content}"
             for m in msgs
         )
-        instructions = (
-            f"Summarize the following Discord messages from {start.date()} to {end.date()}:\n\n"
-            "Include author, timestamp, and key points. Return JSON if requested."
-        )
+        
+        if as_json:
+            instructions = (
+                f"Summarize the following Discord messages from {start.date()} to {end.date()}.\n"
+                "Return a JSON object with the following structure:\n"
+                "{\n"
+                '  "timeframe": "From [start] to [end] UTC",\n'
+                '  "channel": "[channel name or All channels]",\n'
+                '  "summary": {\n'
+                '    "[date]": [\n'
+                '      {\n'
+                '        "author": "username",\n'
+                '        "timestamp": "ISO timestamp",\n'
+                '        "key_points": ["point1", "point2"]\n'
+                '      }\n'
+                '    ]\n'
+                '  }\n'
+                "}\n"
+                "Ensure the response is valid JSON."
+            )
+        else:
+            instructions = (
+                f"Summarize the following Discord messages from {start.date()} to {end.date()}:\n\n"
+                "Include author, timestamp, and key points. Format as markdown."
+            )
+            
         prompt = f"{instructions}\n\n{context}\n\nSummary:"
 
         # chat completion
@@ -293,7 +315,29 @@ def summarize_messages(
             **({"response_format": {"type": "json_object"}} if as_json else {})
         )
         result = resp.choices[0].message.content
-        return json.loads(result) if as_json else result
+
+        if as_json:
+            try:
+                # Try to parse the result as JSON
+                json_result = json.loads(result)
+                # Ensure it has the expected structure
+                if not isinstance(json_result, dict):
+                    json_result = {
+                        "timeframe": f"From {start_iso} to {end_iso} UTC",
+                        "channel": channel_name or "All channels",
+                        "summary": result
+                    }
+                return json_result
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON parsing error: {e}")
+                # If parsing fails, wrap the result in a proper JSON structure
+                return {
+                    "timeframe": f"From {start_iso} to {end_iso} UTC",
+                    "channel": channel_name or "All channels",
+                    "summary": result,
+                    "note": "Response was not in JSON format"
+                }
+        return result
 
     finally:
         session.close()

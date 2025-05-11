@@ -3,13 +3,15 @@ import json
 from datetime import datetime, timedelta
 from tools import get_channels, search_messages, summarize_messages
 from rag_engine import get_agent_answer, get_answer
+from time_parser import parse_timeframe
 import pyperclip
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
+import re
 
 # Page config
 st.set_page_config(
     page_title="Discord Message Search",
-    page_icon="��",
+    page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -135,18 +137,118 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def format_message(message: Dict[str, Any]) -> str:
-    """Format a message for display with jump URL."""
-    author = message.get('author', {}).get('username', 'Unknown')
-    timestamp = message.get('timestamp', '')
-    content = message.get('content', '')
-    jump_url = message.get('jump_url', '')
+    """Format a message for display with enhanced link handling."""
+    author_info = message.get("author", {})
+    display_name = author_info.get("display_name", "")
+    username = author_info.get("username", "Unknown")
+    timestamp = message.get("timestamp", "")
+    content = message.get("content", "")
+    jump_url = message.get("jump_url", "")
     
-    formatted = f"**{author}** (_{timestamp}_):\n{content}"
-    if jump_url:
-        formatted += f"\n[🔗 View Message]({jump_url})"
+    # Format author name to show both display name and username if different
+    author_display = f"{display_name} (@{username})" if display_name and display_name != username else username
+    
+    # Extract and format external links
+    external_links = []
+    if content:
+        # Look for URLs in the content
+        urls = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', content)
+        for url in urls:
+            # Add to external links list if not already included
+            if url not in external_links:
+                external_links.append(url)
+    
+    # Format the message
+    formatted = f"""
+**{author_display}** (_{timestamp}_)
+{content}
+[🔗 Jump to message]({jump_url})
+"""
+    
+    # Add external links section if any found
+    if external_links:
+        formatted += "\n**External Links:**\n"
+        for url in external_links:
+            formatted += f"- [🔗 {url}]({url})\n"
+    
     return formatted
 
-def copy_to_clipboard(text: str):
+def format_summary(messages: List[Dict[str, Any]]) -> str:
+    """Format a summary of messages with improved organization and link handling."""
+    # Group messages by author
+    author_messages = {}
+    for msg in messages:
+        author_info = msg.get("author", {})
+        display_name = author_info.get("display_name", "")
+        username = author_info.get("username", "Unknown")
+        # Use display name if available, otherwise use username
+        author_key = display_name if display_name else username
+        if author_key not in author_messages:
+            author_messages[author_key] = {
+                "messages": [],
+                "display_name": display_name,
+                "username": username
+            }
+        author_messages[author_key]["messages"].append(msg)
+    
+    # Format the summary
+    summary = "## Discord Message Summary\n\n"
+    
+    # Add timeframe if available
+    if messages:
+        timestamps = [msg.get("timestamp") for msg in messages if msg.get("timestamp")]
+        if timestamps:
+            start_date = min(timestamps)
+            end_date = max(timestamps)
+            summary += f"**Timeframe:** {start_date} to {end_date}\n\n"
+    
+    # Add messages by author
+    for author_key, author_data in author_messages.items():
+        # Format author name to show both display name and username if different
+        display_name = author_data["display_name"]
+        username = author_data["username"]
+        author_display = f"{display_name} (@{username})" if display_name and display_name != username else username
+        
+        summary += f"### {author_display}\n\n"
+        for msg in sorted(author_data["messages"], key=lambda x: x.get("timestamp", "")):
+            timestamp = msg.get("timestamp", "")
+            content = msg.get("content", "")
+            jump_url = msg.get("jump_url", "")
+            
+            # Extract external links
+            external_links = []
+            if content:
+                urls = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', content)
+                external_links = [url for url in urls if url not in external_links]
+            
+            summary += f"- **{timestamp}**\n"
+            summary += f"  - {content}\n"
+            summary += f"  - [🔗 Jump to message]({jump_url})\n"
+            
+            if external_links:
+                summary += "  - **External Links:**\n"
+                for url in external_links:
+                    summary += f"    - [🔗 {url}]({url})\n"
+            summary += "\n"
+    
+    # Add key points section
+    summary += "---\n\n**Key Points:**\n"
+    # Extract key points from message content
+    key_points = set()
+    for msg in messages:
+        content = msg.get("content", "").lower()
+        if any(keyword in content for keyword in ["important", "key", "note", "highlight", "focus"]):
+            key_points.add(msg.get("content", ""))
+    
+    if key_points:
+        for point in key_points:
+            summary += f"- {point}\n"
+    else:
+        summary += "- No specific key points identified in the messages.\n"
+    
+    return summary
+
+def copy_to_clipboard(text: str) -> None:
     """Copy text to clipboard and show success message."""
     pyperclip.copy(text)
     st.success("✅ Copied to clipboard!")
@@ -171,7 +273,8 @@ def main():
         selected_channel = st.selectbox(
             "Select a channel to filter results",
             ["All Channels"] + channel_names,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            key="channel_selector"  # Add a unique key to prevent auto-triggering
         )
         
         st.markdown("---")
@@ -199,7 +302,8 @@ def main():
         label_visibility="collapsed"
     )
     
-    if query:
+    # Only process query when the search button is clicked
+    if st.button("🔍 Search", key="search_button") and query:
         try:
             # Get channel ID if a channel is selected
             channel_id = None
@@ -211,35 +315,48 @@ def main():
             
             # Process the query with a nice loading animation
             with st.spinner("🔍 Searching messages..."):
-                if output_format == "JSON":
-                    # Get raw results in JSON format
-                    results = get_answer(
-                        query,
-                        k=k_results,
-                        as_json=True,
-                        channel_id=channel_id
+                # Try to parse timeframe from query
+                try:
+                    start_dt, end_dt = parse_timeframe(query)
+                    st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
+                    
+                    # Use summarize_messages for time-based queries
+                    results = summarize_messages(
+                        start_iso=start_dt.isoformat(),
+                        end_iso=end_dt.isoformat(),
+                        channel_id=channel_id,
+                        as_json=(output_format == "JSON")
                     )
                     
-                    # Display JSON with copy button in a nice container
-                    st.markdown("### 📊 Results")
-                    st.markdown('<div class="message-box">', unsafe_allow_html=True)
+                    # Format the results
+                    if not isinstance(results, dict):
+                        results = format_summary(results)
+                except ValueError:
+                    # Fall back to regular search if no timeframe found
+                    if output_format == "JSON":
+                        results = get_answer(
+                            query,
+                            k=k_results,
+                            as_json=True,
+                            channel_id=channel_id
+                        )
+                    else:
+                        results = get_agent_answer(query, channel_id)
+                
+                # Display results
+                st.markdown("### 📝 Results")
+                st.markdown('<div class="message-box">', unsafe_allow_html=True)
+                if output_format == "JSON":
                     st.json(results)
-                    st.markdown('</div>', unsafe_allow_html=True)
-                    
-                    if st.button("📋 Copy JSON"):
-                        copy_to_clipboard(json.dumps(results, indent=2))
                 else:
-                    # Get formatted results
-                    results = get_agent_answer(query, channel_id)
-                    
-                    # Display results with copy button in a nice container
-                    st.markdown("### 📝 Results")
-                    st.markdown('<div class="message-box">', unsafe_allow_html=True)
                     st.markdown(results)
-                    st.markdown('</div>', unsafe_allow_html=True)
-                    
-                    if st.button("📋 Copy Results"):
-                        copy_to_clipboard(results)
+                st.markdown('</div>', unsafe_allow_html=True)
+                
+                # Add copy button
+                if st.button("📋 Copy Results"):
+                    copy_to_clipboard(
+                        json.dumps(results, indent=2) if output_format == "JSON" else results
+                    )
                 
                 # Show RAG context if requested
                 if show_rag:

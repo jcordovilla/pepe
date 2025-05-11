@@ -18,72 +18,80 @@ logger = logging.getLogger(__name__)
 
 def extract_time_reference(query: str) -> Optional[str]:
     """
-    Extract time reference from a query string.
+    Extract time reference from query string.
     Returns the matched time reference or None.
     """
-    # Common time patterns
+    # Common time reference patterns
     patterns = [
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(day|week|month|year)s?',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(day|week|month|year)s?',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(day|week|month|year)',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(day|week|month|year)',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(hour|minute)s?',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(hour|minute)s?',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(hour|minute)',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(hour|minute)',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(day|week|month|year)s?\s+(?:ago|before)',
-        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(day|week|month|year)s?\s+(?:from now|ahead)',
+        r'past \d+ days?',
+        r'last \d+ days?',
+        r'previous \d+ days?',
+        r'past week',
+        r'last week',
+        r'previous week',
+        r'past month',
+        r'last month',
+        r'previous month',
+        r'past year',
+        r'last year',
+        r'previous year',
+        r'from \d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}',
+        r'between \d{4}-\d{2}-\d{2} and \d{4}-\d{2}-\d{2}',
+        r'from \d{4}-\d{2}-\d{2}',
+        r'since \d{4}-\d{2}-\d{2}',
+        r'until \d{4}-\d{2}-\d{2}',
+        r'before \d{4}-\d{2}-\d{2}'
     ]
     
     for pattern in patterns:
         match = re.search(pattern, query.lower())
         if match:
             return match.group(0)
+    
     return None
 
 def extract_channel_reference(query: str) -> Optional[str]:
     """
-    Extract channel reference from a query string.
+    Extract channel reference from query string.
     Returns the channel name or None.
     """
-    # Pattern to match channel references
+    # Channel reference patterns
     patterns = [
-        r'(?:in|from|on|at)\s+(?:the\s+)?(?:channel\s+)?(?:#)?([a-zA-Z0-9-]+(?:-[a-zA-Z0-9-]+)*)',
-        r'(?:channel\s+)?(?:#)?([a-zA-Z0-9-]+(?:-[a-zA-Z0-9-]+)*)\s+(?:channel)?',
+        r'in #?([a-zA-Z0-9-]+)',
+        r'from #?([a-zA-Z0-9-]+)',
+        r'in channel #?([a-zA-Z0-9-]+)',
+        r'from channel #?([a-zA-Z0-9-]+)'
     ]
     
     for pattern in patterns:
         match = re.search(pattern, query.lower())
         if match:
-            channel = match.group(1)
-            # Clean up the channel name
-            channel = channel.strip('-').replace('--', '-')
-            return channel
+            return match.group(1)
+    
     return None
 
-def extract_content_reference(query: str) -> Optional[str]:
+def extract_content_reference(query: str) -> str:
     """
-    Extract content reference from a query string.
-    Returns the content keywords or None.
+    Extract content reference from query string.
+    Returns the remaining keywords after removing time and channel references.
     """
-    # Remove time and channel references
-    query = query.lower()
+    # Remove time reference
     time_ref = extract_time_reference(query)
-    channel_ref = extract_channel_reference(query)
-    
     if time_ref:
         query = query.replace(time_ref, '')
+    
+    # Remove channel reference
+    channel_ref = extract_channel_reference(query)
     if channel_ref:
-        query = query.replace(channel_ref, '')
+        query = query.replace(f'in #{channel_ref}', '')
+        query = query.replace(f'from #{channel_ref}', '')
     
     # Remove common query words
-    common_words = {'show', 'me', 'find', 'search', 'look', 'for', 'about', 'in', 'from', 'on', 'at', 'the', 'a', 'an'}
+    common_words = ['show', 'me', 'messages', 'about', 'related', 'to', 'from', 'in', 'the']
     words = query.split()
-    content_words = [w for w in words if w not in common_words]
+    filtered_words = [w for w in words if w.lower() not in common_words]
     
-    if content_words:
-        return ' '.join(content_words)
-    return None
+    return ' '.join(filtered_words).strip()
 
 def extract_number(text: str) -> Optional[int]:
     """Extract a number from text."""
@@ -107,208 +115,63 @@ def get_period_start(period: str, number: int = 1) -> datetime:
         return now - timedelta(days=365*number)
     return now
 
-def parse_timeframe(
-    text: str,
-    timezone: str = "UTC",
-    now: datetime = None
-) -> tuple[datetime, datetime]:
+def parse_timeframe(query: str) -> Tuple[datetime, datetime]:
     """
-    Parse a natural-language timeframe into (start, end) datetimes in UTC.
-
-    Supports:
-      - "last week" (previous calendar week: Monday → Sunday)
-      - "past week" (rolling 7-day window)
-      - "past X days/hours/minutes"
-      - "last X days/hours/minutes"
-      - "X days/hours/minutes ago"
-      - "yesterday", "today", "this week", "this month"
-      - "YYYY-MM-DD to YYYY-MM-DD"
-      - "between ... and ..."
-      - "since X" (e.g., "since yesterday", "since last week")
-      - "until X" (e.g., "until tomorrow", "until next week")
-      - "from X to Y" (e.g., "from yesterday to today")
-      - "during X" (e.g., "during last week", "during this month")
-
-    Returns:
-      (start_dt, end_dt) in UTC
-    Raises:
-      ValueError if parsing fails.
+    Parse natural language timeframe from query string.
+    Returns tuple of (start_datetime, end_datetime).
     """
-    # Extract time reference from the full text
-    time_ref = extract_time_reference(text)
-    lower = time_ref.lower().strip() if time_ref else text.lower().strip()
+    # Get current time in UTC
+    now = datetime.now(ZoneInfo("UTC"))
     
-    tzinfo = ZoneInfo(timezone)
-    if now is None:
-        now_dt = datetime.now(tzinfo)
-    else:
-        now_dt = now if now.tzinfo else now.replace(tzinfo=tzinfo)
-
-    settings = {
-        "TIMEZONE": timezone,
-        "RETURN_AS_TIMEZONE_AWARE": True,
-        "PREFER_DATES_FROM": "past",
+    # Common timeframe patterns
+    patterns = {
+        r'past (\d+) days?': lambda m: (now - timedelta(days=int(m.group(1))), now),
+        r'last (\d+) days?': lambda m: (now - timedelta(days=int(m.group(1))), now),
+        r'previous (\d+) days?': lambda m: (now - timedelta(days=int(m.group(1))), now),
+        r'past week': lambda m: (now - timedelta(days=7), now),
+        r'last week': lambda m: (now - timedelta(days=7), now),
+        r'previous week': lambda m: (now - timedelta(days=7), now),
+        r'past month': lambda m: (now - timedelta(days=30), now),
+        r'last month': lambda m: (now - timedelta(days=30), now),
+        r'previous month': lambda m: (now - timedelta(days=30), now),
+        r'past year': lambda m: (now - timedelta(days=365), now),
+        r'last year': lambda m: (now - timedelta(days=365), now),
+        r'previous year': lambda m: (now - timedelta(days=365), now),
+        r'from (\d{4}-\d{2}-\d{2}) to (\d{4}-\d{2}-\d{2})': lambda m: (
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC")),
+            datetime.fromisoformat(m.group(2)).replace(tzinfo=ZoneInfo("UTC"))
+        ),
+        r'between (\d{4}-\d{2}-\d{2}) and (\d{4}-\d{2}-\d{2})': lambda m: (
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC")),
+            datetime.fromisoformat(m.group(2)).replace(tzinfo=ZoneInfo("UTC"))
+        ),
+        r'from (\d{4}-\d{2}-\d{2})': lambda m: (
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC")),
+            now
+        ),
+        r'since (\d{4}-\d{2}-\d{2})': lambda m: (
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC")),
+            now
+        ),
+        r'until (\d{4}-\d{2}-\d{2})': lambda m: (
+            now - timedelta(days=30),  # Default to last 30 days if only end date specified
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC"))
+        ),
+        r'before (\d{4}-\d{2}-\d{2})': lambda m: (
+            now - timedelta(days=30),  # Default to last 30 days if only end date specified
+            datetime.fromisoformat(m.group(1)).replace(tzinfo=ZoneInfo("UTC"))
+        )
     }
-
-    # Helper function to extract numbers from text
-    def extract_number(text: str) -> int:
-        match = re.search(r'\d+', text)
-        return int(match.group()) if match else 1
-
-    # Helper function to get start of period
-    def get_period_start(period: str) -> datetime:
-        if period == "day":
-            return now_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-        elif period == "week":
-            return (now_dt - timedelta(days=now_dt.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
-        elif period == "month":
-            return now_dt.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        elif period == "year":
-            return now_dt.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
-        return now_dt
-
-    # Handle "since X" format
-    if lower.startswith("since "):
-        start = dateparser.parse(lower[6:], settings=settings)
-        if start:
-            return start, now_dt
-
-    # Handle "until X" format
-    if lower.startswith("until "):
-        end = dateparser.parse(lower[6:], settings=settings)
-        if end:
-            return now_dt - timedelta(days=7), end  # Default to past week
-
-    # Handle "during X" format
-    if lower.startswith("during "):
-        period = lower[7:].strip()
-        if "last" in period:
-            if "week" in period:
-                start = get_period_start("week") - timedelta(weeks=1)
-                end = get_period_start("week") - timedelta(seconds=1)
-                return start, end
-            elif "month" in period:
-                start = get_period_start("month") - timedelta(days=30)
-                end = get_period_start("month") - timedelta(seconds=1)
-                return start, end
-        elif "this" in period:
-            if "week" in period:
-                start = get_period_start("week")
-                return start, now_dt
-            elif "month" in period:
-                start = get_period_start("month")
-                return start, now_dt
-
-    # Handle "from X to Y" format
-    if " from " in lower and " to " in lower:
-        parts = lower.split(" from ", 1)[1].split(" to ", 1)
-        if len(parts) == 2:
-            start = dateparser.parse(parts[0], settings=settings)
-            end = dateparser.parse(parts[1], settings=settings)
-            if start and end:
-                return start, end
-
-    # Calendar "last week": previous Monday → Sunday
-    if "last week" in lower:
-        this_week_start = get_period_start("week")
-        last_week_start = this_week_start - timedelta(weeks=1)
-        last_week_end = this_week_start - timedelta(seconds=1)
-        return last_week_start, last_week_end
-
-    # Handle "this week/month"
-    if "this week" in lower:
-        start = get_period_start("week")
-        return start, now_dt
-    if "this month" in lower:
-        start = get_period_start("month")
-        return start, now_dt
-
-    # Handle "yesterday" and "today"
-    if "yesterday" in lower:
-        yesterday = now_dt - timedelta(days=1)
-        start = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
-        end = yesterday.replace(hour=23, minute=59, second=59, microsecond=999999)
-        return start, end
-    if "today" in lower:
-        start = now_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-        end = now_dt.replace(hour=23, minute=59, second=59, microsecond=999999)
-        return start, end
-
-    # Handle "X time ago" format
-    ago_match = re.search(r'(\d+)\s*(day|hour|minute|week|month|year)s?\s+ago', lower)
-    if ago_match:
-        num = int(ago_match.group(1))
-        unit = ago_match.group(2)
-        if unit == "day":
-            start = now_dt - timedelta(days=num)
-        elif unit == "hour":
-            start = now_dt - timedelta(hours=num)
-        elif unit == "minute":
-            start = now_dt - timedelta(minutes=num)
-        elif unit == "week":
-            start = now_dt - timedelta(weeks=num)
-        elif unit == "month":
-            start = now_dt - timedelta(days=num * 30)
-        elif unit == "year":
-            start = now_dt - timedelta(days=num * 365)
-        return start, now_dt
-
-    # Handle "past/last X time" format
-    past_match = re.search(r'(?:past|last)\s+(\d+)\s*(day|hour|minute|week|month|year)s?', lower)
-    if past_match:
-        num = int(past_match.group(1))
-        unit = past_match.group(2)
-        if unit == "day":
-            start = now_dt - timedelta(days=num)
-        elif unit == "hour":
-            start = now_dt - timedelta(hours=num)
-        elif unit == "minute":
-            start = now_dt - timedelta(minutes=num)
-        elif unit == "week":
-            start = now_dt - timedelta(weeks=num)
-        elif unit == "month":
-            start = now_dt - timedelta(days=num * 30)
-        elif unit == "year":
-            start = now_dt - timedelta(days=num * 365)
-        return start, now_dt
-
-    # Explicit range separators
-    for sep in [" to ", " and ", "–", "-"]:
-        if sep in text:
-            start_str, end_str = text.split(sep, 1)
-            start = dateparser.parse(start_str, settings=settings)
-            end = dateparser.parse(end_str, settings=settings)
-            if start and end:
-                return start, end
-
-    # Fallback single date parse
-    dt = dateparser.parse(text, settings=settings)
-    if not dt:
-        raise ValueError(f"Could not parse timeframe: '{text}'")
-
-    # Infer range based on keywords
-    if any(keyword in lower for keyword in ["hour", "hours"]):
-        num = extract_number(lower)
-        start = dt - timedelta(hours=num)
-        end = dt
-    elif any(keyword in lower for keyword in ["day", "yesterday", "today"]):
-        start = dt.replace(hour=0, minute=0, second=0, microsecond=0)
-        end = dt.replace(hour=23, minute=59, second=59, microsecond=999999)
-    elif "week" in lower:
-        num = extract_number(lower)
-        start = dt - timedelta(weeks=num)
-        end = dt
-    elif "month" in lower:
-        num = extract_number(lower)
-        start = dt - timedelta(days=num * 30)
-        end = dt
-    elif "year" in lower:
-        num = extract_number(lower)
-        start = dt - timedelta(days=num * 365)
-        end = dt
-    else:
-        # default to one day
-        start = dt - timedelta(days=1)
-        end = dt
-
-    return start, end
+    
+    # Try to match each pattern
+    for pattern, handler in patterns.items():
+        match = re.search(pattern, query.lower())
+        if match:
+            try:
+                start_dt, end_dt = handler(match)
+                return start_dt, end_dt
+            except (ValueError, AttributeError) as e:
+                raise ValueError(f"Could not parse timeframe: {str(e)}")
+    
+    # If no pattern matches, default to last 7 days
+    return now - timedelta(days=7), now
