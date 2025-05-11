@@ -162,8 +162,11 @@ def format_message(message: Dict[str, Any]) -> str:
     formatted = f"""
 **{author_display}** (_{timestamp}_)
 {content}
-[🔗 Jump to message]({jump_url})
 """
+    
+    # Add jump URL if it exists
+    if jump_url:
+        formatted += f"[🔗 Jump to message]({jump_url})\n"
     
     # Add external links section if any found
     if external_links:
@@ -221,30 +224,20 @@ def format_summary(messages: List[Dict[str, Any]]) -> str:
                 urls = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', content)
                 external_links = [url for url in urls if url not in external_links]
             
-            summary += f"- **{timestamp}**\n"
-            summary += f"  - {content}\n"
-            summary += f"  - [🔗 Jump to message]({jump_url})\n"
+            # Format the message with better visual hierarchy
+            summary += f"#### {timestamp}\n\n"
+            summary += f"{content}\n\n"
+            
+            if jump_url:
+                summary += f"[🔗 Jump to message]({jump_url})\n\n"
             
             if external_links:
-                summary += "  - **External Links:**\n"
+                summary += "**External Links:**\n"
                 for url in external_links:
-                    summary += f"    - [🔗 {url}]({url})\n"
-            summary += "\n"
-    
-    # Add key points section
-    summary += "---\n\n**Key Points:**\n"
-    # Extract key points from message content
-    key_points = set()
-    for msg in messages:
-        content = msg.get("content", "").lower()
-        if any(keyword in content for keyword in ["important", "key", "note", "highlight", "focus"]):
-            key_points.add(msg.get("content", ""))
-    
-    if key_points:
-        for point in key_points:
-            summary += f"- {point}\n"
-    else:
-        summary += "- No specific key points identified in the messages.\n"
+                    summary += f"- [🔗 {url}]({url})\n"
+                summary += "\n"
+            
+            summary += "---\n\n"
     
     return summary
 
@@ -315,8 +308,8 @@ def main():
             
             # Process the query with a nice loading animation
             with st.spinner("🔍 Searching messages..."):
-                # Try to parse timeframe from query
                 try:
+                    # Try to parse timeframe from query
                     start_dt, end_dt = parse_timeframe(query)
                     st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
                     
@@ -327,21 +320,29 @@ def main():
                         channel_id=channel_id,
                         as_json=(output_format == "JSON")
                     )
-                    
-                    # Format the results
-                    if not isinstance(results, dict):
-                        results = format_summary(results)
-                except ValueError:
-                    # Fall back to regular search if no timeframe found
-                    if output_format == "JSON":
-                        results = get_answer(
-                            query,
-                            k=k_results,
-                            as_json=True,
-                            channel_id=channel_id
+                except ValueError as e:
+                    if "No timeframe specified" in str(e):
+                        # If no timeframe specified, use search_messages instead
+                        results = search_messages(
+                            query=query,
+                            channel_id=channel_id,
+                            k=k_results
                         )
                     else:
-                        results = get_agent_answer(query, channel_id)
+                        raise
+                
+                # Format the results based on their type
+                if isinstance(results, str):
+                    # If results is already a formatted string, use it directly
+                    formatted_results = results
+                elif isinstance(results, dict):
+                    # If results is a dictionary (JSON format), convert to string
+                    formatted_results = json.dumps(results, indent=2) if output_format == "JSON" else format_summary(results.get("messages", []))
+                elif isinstance(results, list):
+                    # If results is a list of messages, format them
+                    formatted_results = format_summary(results)
+                else:
+                    formatted_results = str(results)
                 
                 # Display results
                 st.markdown("### 📝 Results")
@@ -349,14 +350,18 @@ def main():
                 if output_format == "JSON":
                     st.json(results)
                 else:
-                    st.markdown(results)
+                    st.markdown(formatted_results)
                 st.markdown('</div>', unsafe_allow_html=True)
                 
-                # Add copy button
-                if st.button("📋 Copy Results"):
-                    copy_to_clipboard(
-                        json.dumps(results, indent=2) if output_format == "JSON" else results
-                    )
+                # Add copy button with a unique key
+                copy_button_key = f"copy_button_{hash(formatted_results)}"
+                if st.button("📋 Copy Results", key=copy_button_key):
+                    try:
+                        # Copy the formatted results
+                        pyperclip.copy(formatted_results)
+                        st.success("✅ Copied to clipboard!")
+                    except Exception as e:
+                        st.error(f"❌ Failed to copy: {str(e)}")
                 
                 # Show RAG context if requested
                 if show_rag:
@@ -378,6 +383,8 @@ def main():
         
         except Exception as e:
             st.error(f"❌ Error processing query: {str(e)}")
+            # Add debug information
+            st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
 
 if __name__ == "__main__":
     main()

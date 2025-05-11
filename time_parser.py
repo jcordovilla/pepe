@@ -119,6 +119,7 @@ def parse_timeframe(query: str) -> Tuple[datetime, datetime]:
     """
     Parse natural language timeframe from query string.
     Returns tuple of (start_datetime, end_datetime).
+    Raises ValueError if no timeframe is specified.
     """
     # Get current time in UTC
     now = datetime.now(ZoneInfo("UTC"))
@@ -173,5 +174,5 @@ def parse_timeframe(query: str) -> Tuple[datetime, datetime]:
             except (ValueError, AttributeError) as e:
                 raise ValueError(f"Could not parse timeframe: {str(e)}")
     
-    # If no pattern matches, default to last 7 days
-    return now - timedelta(days=7), now
+    # If no pattern matches, raise an error instead of defaulting
+    raise ValueError("No timeframe specified in query")

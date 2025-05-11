@@ -18,6 +18,7 @@ import time
 import logging
 from typing import Callable, TypeVar, cast
 from sqlalchemy import func
+import re
 
 # Setup logging
 logging.basicConfig(
@@ -154,12 +155,18 @@ def search_messages(
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
         
-        # Improved keyword matching
+        # Improved keyword matching for skill-based queries
         if keyword:
             # Split keyword into terms for better matching
             terms = keyword.split()
             for term in terms:
                 db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
+        else:
+            # Extract skill-related terms from the query
+            skill_terms = extract_skill_terms(query)
+            if skill_terms:
+                for term in skill_terms:
+                    db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
         
         # Get more candidates for better semantic ranking
         candidates = db_q.limit(k * 10).all()
@@ -193,6 +200,36 @@ def search_messages(
         return results[:k]
     finally:
         session.close()
+
+def extract_skill_terms(query: str) -> List[str]:
+    """
+    Extract skill-related terms from a query string.
+    """
+    # Common skill-related patterns
+    patterns = [
+        r'experience in (\w+)',
+        r'expertise in (\w+)',
+        r'knowledge of (\w+)',
+        r'background in (\w+)',
+        r'proficient in (\w+)',
+        r'skilled in (\w+)',
+        r'with (\w+) experience',
+        r'with (\w+) expertise',
+        r'with (\w+) knowledge',
+        r'with (\w+) background',
+        r'with (\w+) proficiency',
+        r'with (\w+) skills'
+    ]
+    
+    terms = []
+    for pattern in patterns:
+        matches = re.finditer(pattern, query.lower())
+        for match in matches:
+            term = match.group(1)
+            if term not in terms:
+                terms.append(term)
+    
+    return terms
 
 def summarize_messages(
     start_iso: str,
@@ -270,74 +307,34 @@ def summarize_messages(
         if not msgs:
             return {"summary": "", "note": "No messages in that timeframe"} if as_json else "⚠️ No messages found in the specified timeframe."
 
-        # build prompt with clear time context
-        context = "\n\n".join(
-            f"**{m.author['username']}** (_{m.timestamp}_): {m.content}"
-            for m in msgs
-        )
-        
+        # Convert messages to dictionaries with all necessary fields
+        message_dicts = []
+        for m in msgs:
+            msg_dict = {
+                "author": {
+                    "username": m.author.get("username", "Unknown"),
+                    "display_name": m.author.get("display_name", ""),
+                    "id": m.author.get("id")
+                },
+                "timestamp": m.timestamp.isoformat(),
+                "content": m.content,
+                "jump_url": build_jump_url(m.guild_id, m.channel_id, m.message_id),
+                "channel_name": m.channel_name,
+                "guild_id": m.guild_id,
+                "channel_id": m.channel_id,
+                "message_id": m.message_id
+            }
+            message_dicts.append(msg_dict)
+
         if as_json:
-            instructions = (
-                f"Summarize the following Discord messages from {start.date()} to {end.date()}.\n"
-                "Return a JSON object with the following structure:\n"
-                "{\n"
-                '  "timeframe": "From [start] to [end] UTC",\n'
-                '  "channel": "[channel name or All channels]",\n'
-                '  "summary": {\n'
-                '    "[date]": [\n'
-                '      {\n'
-                '        "author": "username",\n'
-                '        "timestamp": "ISO timestamp",\n'
-                '        "key_points": ["point1", "point2"]\n'
-                '      }\n'
-                '    ]\n'
-                '  }\n'
-                "}\n"
-                "Ensure the response is valid JSON."
-            )
+            return {
+                "timeframe": f"From {start.date()} to {end.date()} UTC",
+                "channel": channel_name or "All channels",
+                "messages": message_dicts
+            }
         else:
-            instructions = (
-                f"Summarize the following Discord messages from {start.date()} to {end.date()}:\n\n"
-                "Include author, timestamp, and key points. Format as markdown."
-            )
-            
-        prompt = f"{instructions}\n\n{context}\n\nSummary:"
-
-        # chat completion
-        resp = _openai.chat.completions.create(
-            model=GPT_MODEL,
-            messages=[
-                {"role": "system", "content": instructions},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7,
-            max_tokens=800,
-            **({"response_format": {"type": "json_object"}} if as_json else {})
-        )
-        result = resp.choices[0].message.content
-
-        if as_json:
-            try:
-                # Try to parse the result as JSON
-                json_result = json.loads(result)
-                # Ensure it has the expected structure
-                if not isinstance(json_result, dict):
-                    json_result = {
-                        "timeframe": f"From {start_iso} to {end_iso} UTC",
-                        "channel": channel_name or "All channels",
-                        "summary": result
-                    }
-                return json_result
-            except json.JSONDecodeError as e:
-                logger.error(f"JSON parsing error: {e}")
-                # If parsing fails, wrap the result in a proper JSON structure
-                return {
-                    "timeframe": f"From {start_iso} to {end_iso} UTC",
-                    "channel": channel_name or "All channels",
-                    "summary": result,
-                    "note": "Response was not in JSON format"
-                }
-        return result
+            # Return the list of message dictionaries for formatting
+            return message_dicts
 
     finally:
         session.close()
@@ -413,3 +410,17 @@ def validate_data_availability() -> Dict[str, Any]:
         }
     finally:
         session.close()
+
+def build_jump_url(guild_id: int, channel_id: int, message_id: int) -> str:
+    """
+    Build a Discord message jump URL from guild, channel, and message IDs.
+    
+    Args:
+        guild_id: The Discord guild (server) ID
+        channel_id: The Discord channel ID
+        message_id: The Discord message ID
+        
+    Returns:
+        A Discord message jump URL in the format: https://discord.com/channels/{guild_id}/{channel_id}/{message_id}
+    """
+    return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
