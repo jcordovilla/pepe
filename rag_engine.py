@@ -9,11 +9,12 @@ from langchain.vectorstores import FAISS
 from utils.helpers import build_jump_url
 from tools import resolve_channel_name, summarize_messages, validate_data_availability
 from time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
-from datetime import datetime, timedelta, ZoneInfo
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 import json
 from functools import lru_cache
 from sqlalchemy.orm import Session
-from models import Message
+from db import Message, get_db_session
 import logging
 import time
 from prometheus_client import Counter, Histogram, start_http_server
@@ -249,8 +250,29 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             "note": messages.get("note", "")
         }
         
-        logger.info("Successfully processed query")
-        return json.dumps(response, indent=2)
+        # Ensure the response is properly formatted JSON
+        try:
+            # First try to parse the summary as JSON if it's a string
+            if isinstance(response["summary"], str):
+                try:
+                    summary_json = json.loads(response["summary"])
+                    response["summary"] = summary_json
+                except json.JSONDecodeError:
+                    # If it's not valid JSON, keep it as a string
+                    pass
+            
+            # Convert the entire response to a formatted JSON string
+            formatted_response = json.dumps(response, indent=2, ensure_ascii=False)
+            logger.info("Successfully processed query")
+            return formatted_response
+            
+        except Exception as e:
+            logger.error(f"Error formatting response: {e}")
+            # Fallback to a simpler format if JSON formatting fails
+            return f"""Timeframe: {response['timeframe']}
+Channel: {response['channel']}
+Summary: {response['summary']}
+Note: {response['note']}"""
         
     except Exception as e:
         QUERY_ERRORS.inc()
