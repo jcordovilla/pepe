@@ -17,6 +17,7 @@ from functools import lru_cache
 import time
 import logging
 from typing import Callable, TypeVar, cast
+from sqlalchemy import func
 
 # Setup logging
 logging.basicConfig(
@@ -319,5 +320,52 @@ def get_channels() -> List[Dict[str, Any]]:
             for channel_id, channel_name in channels
             if channel_id and channel_name  # Filter out None values
         ]
+    finally:
+        session.close()
+
+def validate_data_availability() -> Dict[str, Any]:
+    """
+    Check if the database has messages and return their distribution.
+    Returns a dictionary with status and message counts.
+    """
+    session = SessionLocal()
+    try:
+        # Get total message count
+        total_messages = session.query(Message).count()
+        
+        if total_messages == 0:
+            return {
+                "status": "error",
+                "message": "No messages found in the database",
+                "count": 0
+            }
+        
+        # Get message count by channel
+        channel_counts = session.query(
+            Message.channel_name,
+            func.count(Message.id)
+        ).group_by(Message.channel_name).all()
+        
+        # Get date range
+        oldest = session.query(Message.timestamp).order_by(Message.timestamp.asc()).first()
+        newest = session.query(Message.timestamp).order_by(Message.timestamp.desc()).first()
+        
+        return {
+            "status": "ok",
+            "message": "Data available",
+            "count": total_messages,
+            "channels": dict(channel_counts),
+            "date_range": {
+                "oldest": oldest[0].isoformat() if oldest else None,
+                "newest": newest[0].isoformat() if newest else None
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error validating data availability: {e}")
+        return {
+            "status": "error",
+            "message": f"Error checking data: {str(e)}",
+            "count": 0
+        }
     finally:
         session.close()

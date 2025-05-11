@@ -2,40 +2,93 @@
 """
 Utility to parse natural-language timeframes into concrete start/end datetimes.
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import dateparser
 from zoneinfo import ZoneInfo
 import re
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Dict, Any
+import logging
 
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
-def extract_time_reference(text: str) -> Optional[str]:
+def extract_time_reference(query: str) -> Optional[str]:
     """
-    Extract time reference from full query text.
-    Returns the time reference if found, None otherwise.
+    Extract time reference from a query string.
+    Returns the matched time reference or None.
     """
     # Common time patterns
     patterns = [
-        r'(?:in|during|from|since|until|to|between)\s+(?:the\s+)?(?:last|past|next|this|previous)\s+\d+\s+(?:minute|hour|day|week|month|year)s?',
-        r'(?:in|during|from|since|until|to|between)\s+(?:the\s+)?(?:last|past|next|this|previous)\s+(?:minute|hour|day|week|month|year)s?',
-        r'(?:\d+\s+(?:minute|hour|day|week|month|year)s?\s+ago)',
-        r'(?:yesterday|today|tomorrow)',
-        r'(?:this|last|next)\s+(?:week|month|year)',
-        r'(?:from|since|until|to|between)\s+\d{4}-\d{2}-\d{2}(?:\s+to\s+\d{4}-\d{2}-\d{2})?'
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(day|week|month|year)s?',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(day|week|month|year)s?',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(day|week|month|year)',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(day|week|month|year)',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(hour|minute)s?',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(hour|minute)s?',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(hour|minute)',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(hour|minute)',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:last|past|previous)\s+(\d+)\s+(day|week|month|year)s?\s+(?:ago|before)',
+        r'(?:in|during|over|for|since|from|after|before)\s+(?:the\s+)?(?:next|upcoming|following)\s+(\d+)\s+(day|week|month|year)s?\s+(?:from now|ahead)',
     ]
     
     for pattern in patterns:
-        match = re.search(pattern, text.lower())
+        match = re.search(pattern, query.lower())
         if match:
             return match.group(0)
     return None
 
+def extract_channel_reference(query: str) -> Optional[str]:
+    """
+    Extract channel reference from a query string.
+    Returns the channel name or None.
+    """
+    # Pattern to match channel references
+    patterns = [
+        r'(?:in|from|on|at)\s+(?:the\s+)?(?:channel\s+)?(?:#)?([a-zA-Z0-9-]+(?:-[a-zA-Z0-9-]+)*)',
+        r'(?:channel\s+)?(?:#)?([a-zA-Z0-9-]+(?:-[a-zA-Z0-9-]+)*)\s+(?:channel)?',
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, query.lower())
+        if match:
+            channel = match.group(1)
+            # Clean up the channel name
+            channel = channel.strip('-').replace('--', '-')
+            return channel
+    return None
+
+def extract_content_reference(query: str) -> Optional[str]:
+    """
+    Extract content reference from a query string.
+    Returns the content keywords or None.
+    """
+    # Remove time and channel references
+    query = query.lower()
+    time_ref = extract_time_reference(query)
+    channel_ref = extract_channel_reference(query)
+    
+    if time_ref:
+        query = query.replace(time_ref, '')
+    if channel_ref:
+        query = query.replace(channel_ref, '')
+    
+    # Remove common query words
+    common_words = {'show', 'me', 'find', 'search', 'look', 'for', 'about', 'in', 'from', 'on', 'at', 'the', 'a', 'an'}
+    words = query.split()
+    content_words = [w for w in words if w not in common_words]
+    
+    if content_words:
+        return ' '.join(content_words)
+    return None
 
 def extract_number(text: str) -> Optional[int]:
     """Extract a number from text."""
     match = re.search(r'\d+', text)
     return int(match.group(0)) if match else None
-
 
 def get_period_start(period: str, number: int = 1) -> datetime:
     """Get the start of a time period."""
@@ -53,7 +106,6 @@ def get_period_start(period: str, number: int = 1) -> datetime:
     elif period == 'year':
         return now - timedelta(days=365*number)
     return now
-
 
 def parse_timeframe(
     text: str,
