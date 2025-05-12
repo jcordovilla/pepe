@@ -80,7 +80,6 @@ class Message(Base):
     mention_ids = Column(JSON, nullable=False)  # list of ints
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
-    channel_name = Column(String, index=True, nullable=True)
 
 class Resource(Base):
     __tablename__ = "resources"
@@ -93,6 +92,8 @@ class Resource(Base):
     type       = Column(String, nullable=True)   # e.g. "PDF", "article"
     tag        = Column(String, nullable=True)   # e.g. "Paper", "Tutorial"
     author     = Column(JSON,   nullable=True)   # reuse same JSON structure as Message.author
+    author_display = Column(String, nullable=True)  # display/global/nick name
+    channel_name = Column(String, nullable=True)    # channel name
     timestamp  = Column(DateTime, nullable=False)
     context_snippet = Column(Text, nullable=True)
     meta   = Column(JSON,   nullable=True)   # any extra parsed fields (renamed from metadata)
@@ -128,6 +129,3 @@ def execute_query(query_func):
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)
-
-engine = create_engine("sqlite:///discord_messages.db", pool_pre_ping=True)
-Session = sessionmaker(bind=engine)

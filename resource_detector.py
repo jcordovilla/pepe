@@ -10,6 +10,67 @@ URL_REGEX = re.compile(
     r'(https?://[^\s]+)'
 )
 
+TRASH_PATTERNS = [
+    r'discord\\.com/channels/',
+    r'discord\\.com/events/',
+    r'zoom\\.us',
+    r'meet\\.google\\.com',
+    r'teams\\.microsoft\\.com',
+    r'webex\\.com',
+    r'gotomeeting\\.com',
+    r'calendar\\.google\\.com',
+    r'calendar\\.outlook',
+    r'facebook\\.com/events',
+    r'\\.(png|jpg|jpeg|gif|webp|svg)$',
+    r'cdn\\.discordapp\\.com',
+    r'giphy\\.com',
+    r'tenor\\.com',
+    # Add more as needed
+]
+
+def is_trash_url(url):
+    return any(re.search(pat, url) for pat in TRASH_PATTERNS)
+
+def ai_vet_resource(resource: dict) -> bool:
+    """
+    Use OpenAI to vet if a resource is valuable (not a meeting, internal, or spam).
+    Returns True if valuable, False if not or on error.
+    """
+    from openai import OpenAI
+    import os
+    api_key = os.getenv("OPENAI_API_KEY")
+    model = os.getenv("GPT_MODEL", "gpt-4-turbo")
+    openai_client = OpenAI(api_key=api_key)
+    system_prompt = (
+        "You are a filter for a knowledge resource library. "
+        "Given a link and its context, decide if it is a valuable resource (e.g., paper, tool, tutorial) "
+        "or if it is a meeting invite, internal navigation, or irrelevant. "
+        "Reply with 'Yes' if valuable, 'No' if not, and a brief reason."
+    )
+    user_content = (
+        f"Resource info:\n"
+        f"URL: {resource.get('url')}\n"
+        f"Type: {resource.get('type')}\n"
+        f"Author: {resource.get('author')}\n"
+        f"Channel: {resource.get('channel')}\n"
+        f"Context: {resource.get('context_snippet')}\n"
+    )
+    try:
+        response = openai_client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content}
+            ],
+            max_tokens=10,
+            temperature=0
+        )
+        answer = response.choices[0].message.content.strip().lower()
+        return answer.startswith('yes')
+    except Exception as e:
+        print(f"AI vetting error: {e}. Defaulting to False.")
+        return False
+
 # Helper to determine resource type from URL or filename
 def get_resource_type(url: str) -> str:
     if url.endswith('.pdf'):
@@ -92,6 +153,8 @@ def detect_resources(message) -> List[Dict[str, Any]]:
     content = getattr(message, "content", "")
     urls = URL_REGEX.findall(content)
     for url in urls:
+        if is_trash_url(url):
+            continue  # Skip trash links
         resource = {
             "url": url,
             "type": get_resource_type(url),
@@ -101,6 +164,9 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "jump_url": get_jump_url(message),
             "context_snippet": content[:200]
         }
+        # AI vetting: skip if not valuable
+        if not ai_vet_resource(resource):
+            continue
         resource["tag"] = classify_resource(resource)
         resources.append(resource)
 
@@ -108,7 +174,7 @@ def detect_resources(message) -> List[Dict[str, Any]]:
     attachments = getattr(message, "attachments", [])
     for att in attachments:
         url = getattr(att, "url", None)
-        if url:
+        if url and not is_trash_url(url):
             resource = {
                 "url": url,
                 "type": get_resource_type(url),
@@ -118,6 +184,8 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "jump_url": get_jump_url(message),
                 "context_snippet": content[:200]
             }
+            if not ai_vet_resource(resource):
+                continue
             resource["tag"] = classify_resource(resource)
             resources.append(resource)
 

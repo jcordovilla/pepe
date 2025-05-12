@@ -21,16 +21,18 @@ def upgrade():
     op.create_table(
         'resources',
         sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('message_id', sa.String, unique=True, nullable=False),
+        sa.Column('message_id', sa.String, nullable=False),  # removed unique=True
         sa.Column('guild_id', sa.String, nullable=True),
         sa.Column('channel_id', sa.String, nullable=True),
         sa.Column('url', sa.Text, nullable=False),
         sa.Column('type', sa.String, nullable=False),
         sa.Column('tag', sa.String, nullable=False),
         sa.Column('author', sa.JSON, nullable=True),
+        sa.Column('author_display', sa.String, nullable=True),  # new: display/global name
+        sa.Column('channel_name', sa.String, nullable=True),    # new: channel name
         sa.Column('timestamp', sa.DateTime, nullable=False),
         sa.Column('context_snippet', sa.Text, nullable=True),
-        sa.Column('metadata', sa.JSON, nullable=True),
+        sa.Column('meta', sa.JSON, nullable=True),  # renamed from metadata to meta
     )
 
 def downgrade():
