@@ -3,6 +3,51 @@
 
 This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG), vector search (using FAISS), and advanced message storage for enhanced chat interactions and AI-powered features.
 
+## Project Tree
+```
+agent.py                # AI agent orchestration
+app.py                  # Main entry point (Streamlit UI / bot runner)
+chat_history.jsonl      # Query and chat history log
+db.py                   # Database models and session management
+discord_messages_v2.json# Exported Discord messages (v2)
+discord_messages.db     # SQLite database file
+discord_messages.json   # Exported Discord messages
+embed_store.py          # Embedding and vector store utilities
+fetch_messages.py       # Script: fetch and store Discord messages
+Leeme_JC.txt            # (Documentation or notes)
+migrate_messages.py     # Script: migrate message data
+models.py               # (Additional data models)
+rag_engine.py           # RAG (Retrieval-Augmented Generation) core logic
+readme.md               # Project documentation (this file)
+requirements.txt        # Python dependencies
+time_parser.py          # Natural language time parsing
+tools_metadata.py       # Tool definitions and metadata
+tools.py                # Core tools for message handling
+
+docs/                   # Project documentation
+  ├── 2025-05-10-Perf-Simplify-Tools.md
+  ├── 2025-05-11-evaluation-after-test2.md
+  ├── 2025-05-11-Perf-after-eval2-&UI.md
+  └── 2025-05-11-project-architecture.md
+
+index_faiss/            # FAISS vector index files
+  ├── index.faiss
+  └── index.pkl
+
+tests/                  # Unit and integration tests, test runners, and results
+  ├── test_migration.py
+  ├── test_summarizer.py
+  ├── test_time_parser.py
+  ├── test_utils.py
+  ├── test_queries.py         # Test runner for queries
+  └── query_test_results.json # Test results for queries
+
+utils/                  # Helper functions and logging
+  ├── __init__.py
+  ├── helpers.py
+  └── logger.py
+```
+
 ## How It Works (Plain Language)
 1. **Message Storage:** The bot listens to Discord messages and stores them in a local SQLite database, saving details like author, channel, timestamp, mentions, and reactions.
 2. **Embedding & Vector Search:** Messages are converted into vector embeddings using OpenAI models. These embeddings are stored locally with FAISS, allowing the bot to quickly find similar or relevant messages.
@@ -39,7 +84,6 @@ This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG
 - `tools.py`, `tools_metadata.py` — Tooling and metadata for bot features
 - `utils/` — Helper functions and logging
 - `tests/` — Unit and integration tests
-- `docs/` — Project documentation and architecture notes
 
 ## Setup
 1. **Clone the repository:**
