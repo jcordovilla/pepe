@@ -2,6 +2,7 @@ import re
 import json
 from datetime import datetime
 from typing import List, Dict, Any
+from classifier import classify_resource  # <-- Import the classifier
 
 # Example: from time_parser import parse_time  # Uncomment if you want to use your time parser
 
@@ -26,7 +27,7 @@ def get_resource_type(url: str) -> str:
 def detect_resources(message) -> List[Dict[str, Any]]:
     """
     Detect resources in a Discord message object.
-    Returns a list of dicts with keys: url, type, timestamp, author, channel, message_id, context_snippet
+    Returns a list of dicts with keys: url, type, timestamp, author, channel, message_id, context_snippet, tag
     """
     # Basic filtering: skip bots/system messages
     if getattr(message, "author", None) and (getattr(message.author, "bot", False) or getattr(message.author, "system", False)):
@@ -43,7 +44,7 @@ def detect_resources(message) -> List[Dict[str, Any]]:
     content = getattr(message, "content", "")
     urls = URL_REGEX.findall(content)
     for url in urls:
-        resources.append({
+        resource = {
             "url": url,
             "type": get_resource_type(url),
             "timestamp": normalize_timestamp(getattr(message, "timestamp", None)),
@@ -51,14 +52,16 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
             "message_id": getattr(message, "id", None),
             "context_snippet": content[:200]
-        })
+        }
+        resource["tag"] = classify_resource(resource)
+        resources.append(resource)
 
     # Include attachments as resources
     attachments = getattr(message, "attachments", [])
     for att in attachments:
         url = getattr(att, "url", None)
         if url:
-            resources.append({
+            resource = {
                 "url": url,
                 "type": get_resource_type(url),
                 "timestamp": normalize_timestamp(getattr(message, "timestamp", None)),
@@ -66,7 +69,9 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
                 "message_id": getattr(message, "id", None),
                 "context_snippet": content[:200]
-            })
+            }
+            resource["tag"] = classify_resource(resource)
+            resources.append(resource)
 
     return resources
 
