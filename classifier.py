@@ -1,6 +1,10 @@
 import os
 import re
-import openai
+from openai import OpenAI
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4-turbo")
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 def classify_resource(resource: dict, use_llm: bool = True) -> str:
     """
@@ -25,8 +29,8 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
             f"Context: {resource.get('context_snippet')}\n"
         )
         try:
-            response = openai.ChatCompletion.create(
-                model=os.getenv("GPT_MODEL", "gpt-3.5-turbo"),
+            response = openai_client.chat.completions.create(
+                model=GPT_MODEL,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_content}
@@ -35,7 +39,7 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
                 temperature=0
             )
             # Extract the tag from the assistant's reply
-            tag = response.choices[0].message['content'].strip()
+            tag = response.choices[0].message.content.strip()
             # Normalize to one of the allowed tags
             for t in tags:
                 if t.lower() in tag.lower():
