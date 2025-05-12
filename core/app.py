@@ -18,6 +18,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+st.title("📡 GenAI Pathfinder Discord Bot - v0.2")
+
 # Custom CSS for modern look
 st.markdown("""
 <style>
@@ -151,14 +153,16 @@ def format_message(message: Dict[str, Any]) -> str:
     return formatted
 
 def format_summary(messages: List[Dict[str, Any]]) -> str:
-    """Format a summary of messages with improved organization and link handling."""
+    """Format a summary of messages with improved organization, spacing, and Markdown."""
+    if not messages:
+        return "No messages found."
+
     # Group messages by author
     author_messages = {}
     for msg in messages:
         author_info = msg.get("author", {})
         display_name = author_info.get("display_name", "")
         username = author_info.get("username", "Unknown")
-        # Use display name if available, otherwise use username
         author_key = display_name if display_name else username
         if author_key not in author_messages:
             author_messages[author_key] = {
@@ -167,62 +171,46 @@ def format_summary(messages: List[Dict[str, Any]]) -> str:
                 "username": username
             }
         author_messages[author_key]["messages"].append(msg)
-    
-    # Format the summary
+
     summary = "## Discord Message Summary\n\n"
-    
+
     # Add timeframe if available
-    if messages:
-        timestamps = [msg.get("timestamp") for msg in messages if msg.get("timestamp")]
-        if timestamps:
-            start_date = min(timestamps)
-            end_date = max(timestamps)
-            summary += f"**Timeframe:** {start_date} to {end_date}\n\n"
-    
+    timestamps = [msg.get("timestamp") for msg in messages if msg.get("timestamp")]
+    if timestamps:
+        start_date = min(timestamps)
+        end_date = max(timestamps)
+        summary += f"**Timeframe:** `{start_date}` → `{end_date}`\n\n"
+
     # Add messages by author
     for author_key, author_data in author_messages.items():
-        # Format author name to show both display name and username if different
         display_name = author_data["display_name"]
         username = author_data["username"]
         author_display = f"{display_name} (@{username})" if display_name and display_name != username else username
-        
         summary += f"### {author_display}\n\n"
         for msg in sorted(author_data["messages"], key=lambda x: x.get("timestamp", "")):
             timestamp = msg.get("timestamp", "")
             content = msg.get("content", "")
             jump_url = msg.get("jump_url", "")
-            
             # Extract external links
             external_links = []
             if content:
-                urls = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', content)
+                urls = re.findall(r'https?://[^\s<>"\']+|www\.[^\s<>"\']+', content)
                 external_links = [url for url in urls if url not in external_links]
-            
             # Format the message with better visual hierarchy
-            summary += f"#### {timestamp}\n\n"
-            summary += f"{content}\n\n"
-            
+            summary += f"<div style='margin-bottom: 1.5em;'>"
+            summary += f"<span style='font-size:1.1em; color:#1E88E5;'><b>{timestamp}</b></span>\n\n"
+            summary += f"<div style='margin: 0.5em 0 1em 0; font-family: 'Segoe UI', 'Arial', sans-serif;'>{content}</div>\n"
             if jump_url:
-                summary += f"[🔗 Jump to message]({jump_url})\n\n"
-            
+                summary += f"<a href='{jump_url}' target='_blank' style='color:#1565C0;'>🔗 Jump to message</a><br>\n"
             if external_links:
-                summary += "**External Links:**\n"
+                summary += "<div style='margin-top:0.5em;'><b>External Links:</b><ul style='margin:0.2em 0 0.5em 1.2em;'>"
                 for url in external_links:
-                    summary += f"- [🔗 {url}]({url})\n"
-                summary += "\n"
-            
-            summary += "---\n\n"
-    
+                    summary += f"<li><a href='{url}' target='_blank' style='color:#1565C0;'>{url}</a></li>"
+                summary += "</ul></div>"
+            summary += "</div>\n<hr style='border:0;border-top:1px solid #e0e0e0;margin:1.5em 0;'>\n"
     return summary
 
 def main():
-    # Header with logo and title
-    col1, col2 = st.columns([1, 4])
-    with col1:
-        st.image("https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg", width=50)
-    with col2:
-        st.title("Discord Message Search")
-    
     # Sidebar with a nice header
     with st.sidebar:
         st.markdown("### 🔧 Search Options")
@@ -231,7 +219,6 @@ def main():
         # Channel filter
         st.markdown("#### 📢 Channel")
         channels = get_channels()
-        st.write("[DEBUG] Channels:", channels)
         channel_names = [ch['name'] for ch in channels]
         selected_channel = st.selectbox(
             "Select a channel to filter results",
@@ -239,7 +226,6 @@ def main():
             label_visibility="collapsed",
             key="channel_selector"
         )
-        st.write("[DEBUG] Selected channel:", selected_channel)
         
         st.markdown("---")
         
@@ -262,14 +248,12 @@ def main():
         placeholder="e.g., 'Show me messages about AI from the last week'",
         label_visibility="collapsed"
     )
-    st.write("[DEBUG] Query:", query)
     
     if st.button("🔍 Search", key="search_button") and query:
         try:
             channel_id = None
             if selected_channel != "All Channels":
                 channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
-            st.write("[DEBUG] Channel ID:", channel_id)
             with st.spinner("🔍 Searching messages..."):
                 try:
                     start_dt, end_dt = parse_timeframe(query)
@@ -289,7 +273,6 @@ def main():
                         )
                     else:
                         raise
-                st.write("[DEBUG] Raw results:", results)
                 if isinstance(results, str):
                     formatted_results = results
                 elif isinstance(results, dict):
@@ -302,9 +285,17 @@ def main():
                 st.markdown('<div class="message-box">', unsafe_allow_html=True)
                 if output_format == "JSON":
                     st.json(results)
+                    copy_text = json.dumps(results, indent=2)
                 else:
-                    st.markdown(formatted_results)
+                    st.markdown(formatted_results, unsafe_allow_html=True)
+                    copy_text = formatted_results
                 st.markdown('</div>', unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                # Improved copy-to-clipboard
+                st.markdown("""
+<textarea id="copyArea" style="width:100%;height:200px;border-radius:6px;padding:8px;font-family:monospace;">{}</textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('copyArea').value)" style="margin-top:8px;padding:6px 16px;border:none;border-radius:5px;background:#1E88E5;color:white;font-weight:bold;cursor:pointer;">📋 Copy Output</button>
+""".format(copy_text.replace("</textarea>", "&lt;/textarea&gt;")), unsafe_allow_html=True)
         except Exception as e:
             import traceback
             st.error(f"❌ Error processing query: {str(e)}")
