@@ -33,9 +33,7 @@ st.markdown("""
     }
     
     /* Sidebar */
-    .css-1d391kg {
-        background-color: #f8f9fa;
-    }
+    /* Custom sidebar styling can be added here if needed */
     
     /* Buttons */
     .stButton button {

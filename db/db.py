@@ -46,7 +46,7 @@ def with_retry(max_retries: int = 3, delay: float = 1.0):
 
 # 1. Engine points to a local SQLite file with connection pooling
 engine = create_engine(
-    "sqlite:///discord_messages.db",
+    "sqlite:///data/discord_messages.db",
     echo=False,
     poolclass=QueuePool,
     pool_size=5,
