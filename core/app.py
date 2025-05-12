@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import streamlit as st
 import json
 from datetime import datetime, timedelta
@@ -229,6 +233,7 @@ def main():
         # Channel filter
         st.markdown("#### 📢 Channel")
         channels = get_channels()
+        st.write("[DEBUG] Channels:", channels)
         channel_names = [ch['name'] for ch in channels]
         selected_channel = st.selectbox(
             "Select a channel to filter results",
@@ -236,6 +241,7 @@ def main():
             label_visibility="collapsed",
             key="channel_selector"
         )
+        st.write("[DEBUG] Selected channel:", selected_channel)
         
         st.markdown("---")
         
@@ -258,12 +264,14 @@ def main():
         placeholder="e.g., 'Show me messages about AI from the last week'",
         label_visibility="collapsed"
     )
+    st.write("[DEBUG] Query:", query)
     
     if st.button("🔍 Search", key="search_button") and query:
         try:
             channel_id = None
             if selected_channel != "All Channels":
                 channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
+            st.write("[DEBUG] Channel ID:", channel_id)
             with st.spinner("🔍 Searching messages..."):
                 try:
                     start_dt, end_dt = parse_timeframe(query)
@@ -283,6 +291,7 @@ def main():
                         )
                     else:
                         raise
+                st.write("[DEBUG] Raw results:", results)
                 if isinstance(results, str):
                     formatted_results = results
                 elif isinstance(results, dict):
@@ -299,8 +308,10 @@ def main():
                     st.markdown(formatted_results)
                 st.markdown('</div>', unsafe_allow_html=True)
         except Exception as e:
+            import traceback
             st.error(f"❌ Error processing query: {str(e)}")
             st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
+            st.error(traceback.format_exc())
 
 if __name__ == "__main__":
     main()

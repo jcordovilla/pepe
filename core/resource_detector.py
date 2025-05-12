@@ -2,7 +2,7 @@ import re
 import json
 from datetime import datetime
 from typing import List, Dict, Any
-from classifier import classify_resource  # <-- Import the classifier
+from core.classifier import classify_resource  # <-- Import the classifier
 
 # Example: from tools.time_parser import parse_time  # Uncomment if you want to use your time parser
 
