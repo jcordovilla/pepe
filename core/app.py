@@ -1,10 +1,8 @@
 import streamlit as st
 import json
 from datetime import datetime, timedelta
-from tools import get_channels, search_messages, summarize_messages
-from rag_engine import get_agent_answer, get_answer
-from time_parser import parse_timeframe
-import pyperclip
+from tools.tools import get_channels, search_messages, summarize_messages
+from tools.time_parser import parse_timeframe
 from typing import Dict, Any, Optional, List
 import re
 
@@ -70,32 +68,6 @@ st.markdown("""
         margin: 1rem 0;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         border: 1px solid #e0e0e0;
-    }
-    
-    /* RAG context */
-    .rag-context {
-        background-color: #f5f9ff;
-        padding: 1.5rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-        border: 1px solid #e3f2fd;
-        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-    }
-    
-    /* Copy button */
-    .copy-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .copy-button:hover {
-        background-color: #43A047;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     
     /* Success message */
@@ -241,11 +213,6 @@ def format_summary(messages: List[Dict[str, Any]]) -> str:
     
     return summary
 
-def copy_to_clipboard(text: str) -> None:
-    """Copy text to clipboard and show success message."""
-    pyperclip.copy(text)
-    st.success("✅ Copied to clipboard!")
-
 def main():
     # Header with logo and title
     col1, col2 = st.columns([1, 4])
@@ -259,7 +226,7 @@ def main():
         st.markdown("### 🔧 Search Options")
         st.markdown("---")
         
-        # Channel filter with emoji
+        # Channel filter
         st.markdown("#### 📢 Channel")
         channels = get_channels()
         channel_names = [ch['name'] for ch in channels]
@@ -267,12 +234,12 @@ def main():
             "Select a channel to filter results",
             ["All Channels"] + channel_names,
             label_visibility="collapsed",
-            key="channel_selector"  # Add a unique key to prevent auto-triggering
+            key="channel_selector"
         )
         
         st.markdown("---")
         
-        # Output format with emoji
+        # Output format
         st.markdown("#### 📝 Output Format")
         output_format = st.radio(
             "Choose how you want to see the results",
@@ -282,12 +249,9 @@ def main():
         
         st.markdown("---")
         
-        # Additional options with emoji
-        st.markdown("#### ⚙️ Additional Options")
-        show_rag = st.checkbox("Show RAG Context", value=False)
         k_results = st.slider("Number of Results", 1, 20, 5)
-    
-    # Main search interface with a nice container
+
+    # Main search interface
     st.markdown("### 🔍 Search Messages")
     query = st.text_input(
         "Enter your search query",
@@ -295,25 +259,15 @@ def main():
         label_visibility="collapsed"
     )
     
-    # Only process query when the search button is clicked
     if st.button("🔍 Search", key="search_button") and query:
         try:
-            # Get channel ID if a channel is selected
             channel_id = None
             if selected_channel != "All Channels":
-                channel_id = next(
-                    (ch['id'] for ch in channels if ch['name'] == selected_channel),
-                    None
-                )
-            
-            # Process the query with a nice loading animation
+                channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
             with st.spinner("🔍 Searching messages..."):
                 try:
-                    # Try to parse timeframe from query
                     start_dt, end_dt = parse_timeframe(query)
                     st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
-                    
-                    # Use summarize_messages for time-based queries
                     results = summarize_messages(
                         start_iso=start_dt.isoformat(),
                         end_iso=end_dt.isoformat(),
@@ -322,7 +276,6 @@ def main():
                     )
                 except ValueError as e:
                     if "No timeframe specified" in str(e):
-                        # If no timeframe specified, use search_messages instead
                         results = search_messages(
                             query=query,
                             channel_id=channel_id,
@@ -330,21 +283,14 @@ def main():
                         )
                     else:
                         raise
-                
-                # Format the results based on their type
                 if isinstance(results, str):
-                    # If results is already a formatted string, use it directly
                     formatted_results = results
                 elif isinstance(results, dict):
-                    # If results is a dictionary (JSON format), convert to string
                     formatted_results = json.dumps(results, indent=2) if output_format == "JSON" else format_summary(results.get("messages", []))
                 elif isinstance(results, list):
-                    # If results is a list of messages, format them
                     formatted_results = format_summary(results)
                 else:
                     formatted_results = str(results)
-                
-                # Display results
                 st.markdown("### 📝 Results")
                 st.markdown('<div class="message-box">', unsafe_allow_html=True)
                 if output_format == "JSON":
@@ -352,38 +298,8 @@ def main():
                 else:
                     st.markdown(formatted_results)
                 st.markdown('</div>', unsafe_allow_html=True)
-                
-                # Add copy button with a unique key
-                copy_button_key = f"copy_button_{hash(formatted_results)}"
-                if st.button("📋 Copy Results", key=copy_button_key):
-                    try:
-                        # Copy the formatted results
-                        pyperclip.copy(formatted_results)
-                        st.success("✅ Copied to clipboard!")
-                    except Exception as e:
-                        st.error(f"❌ Failed to copy: {str(e)}")
-                
-                # Show RAG context if requested
-                if show_rag:
-                    st.markdown("### 🔍 RAG Context")
-                    with st.expander("View RAG Context", expanded=True):
-                        rag_results = get_answer(
-                            query,
-                            k=k_results,
-                            return_matches=True,
-                            channel_id=channel_id
-                        )
-                        if isinstance(rag_results, tuple):
-                            _, matches = rag_results
-                            for match in matches:
-                                st.markdown(
-                                    f'<div class="rag-context">{format_message(match)}</div>',
-                                    unsafe_allow_html=True
-                                )
-        
         except Exception as e:
             st.error(f"❌ Error processing query: {str(e)}")
-            # Add debug information
             st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
 
 if __name__ == "__main__":

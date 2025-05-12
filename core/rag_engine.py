@@ -7,8 +7,8 @@ from openai import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from utils.helpers import build_jump_url
-from tools import resolve_channel_name, summarize_messages, validate_data_availability
-from time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
+from tools.tools import resolve_channel_name, summarize_messages, validate_data_availability
+from tools.time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 import json

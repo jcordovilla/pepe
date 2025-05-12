@@ -30,6 +30,8 @@ logger = logging.getLogger(__name__)
 # Type variable for generic function typing
 T = TypeVar('T')
 
+# Helper: cache_with_timeout
+
 def cache_with_timeout(timeout_seconds: int = 300) -> Callable[[Callable[..., T]], Callable[..., T]]:
     """
     Cache decorator with timeout.
@@ -39,25 +41,18 @@ def cache_with_timeout(timeout_seconds: int = 300) -> Callable[[Callable[..., T]
     def decorator(func: Callable[..., T]) -> Callable[..., T]:
         cache = {}
         last_updated = {}
-        
         def wrapper(*args: Any, **kwargs: Any) -> T:
-            # Create cache key from function name and arguments
             key = f"{func.__name__}:{str(args)}:{str(kwargs)}"
             current_time = time.time()
-            
-            # Check if cache is valid
             if key in cache and key in last_updated:
                 if current_time - last_updated[key] < timeout_seconds:
                     logger.debug(f"Cache hit for {func.__name__}")
                     return cache[key]
-            
-            # Cache miss or expired, call function
             result = func(*args, **kwargs)
             cache[key] = result
             last_updated[key] = current_time
             logger.debug(f"Cache miss for {func.__name__}")
             return result
-            
         return cast(Callable[..., T], wrapper)
     return decorator
 
@@ -74,44 +69,15 @@ INDEX_DIR   = "index_faiss"
 _embedding = OpenAIEmbeddings(model=EMBED_MODEL, openai_api_key=OPENAI_API_KEY)
 _openai    = OpenAI(api_key=OPENAI_API_KEY)
 
-@cache_with_timeout(timeout_seconds=3600)  # Cache for 1 hour
-def _load_store() -> FAISS:
-    """Load the FAISS index from disk."""
-    try:
-        logger.info("Loading FAISS index from disk")
-        return FAISS.load_local(INDEX_DIR, _embedding, allow_dangerous_deserialization=True)
-    except Exception as e:
-        logger.error(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
-        raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
-
-@cache_with_timeout(timeout_seconds=300)  # Cache for 5 minutes
-def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
-    """
-    Given a human-friendly channel_name (e.g. "non-coders-learning")
-    and an optional guild_id, return the corresponding channel_id
-    from the database, or None if not found.
-    """
-    if not validate_channel_name(channel_name):
-        logger.error(f"Invalid channel name format: {channel_name}")
-        raise ValueError(f"Invalid channel name format: {channel_name}")
-        
-    if guild_id is not None and not validate_guild_id(guild_id):
-        logger.error(f"Invalid guild ID format: {guild_id}")
-        raise ValueError(f"Invalid guild ID format: {guild_id}")
-        
-    session = SessionLocal()
-    try:
-        logger.info(f"Resolving channel name: {channel_name}")
-        query = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
-        if guild_id is not None:
-            query = query.filter(Message.guild_id == guild_id)
-        result = query.first()
-        return result[0] if result else None
-    except Exception as e:
-        logger.error(f"Error resolving channel name: {e}")
-        raise
-    finally:
-        session.close()
+# @cache_with_timeout(timeout_seconds=3600)  # Cache for 1 hour
+# def _load_store() -> FAISS:
+#     """Load the FAISS index from disk."""
+#     try:
+#         logger.info("Loading FAISS index from disk")
+#         return FAISS.load_local(INDEX_DIR, _embedding, allow_dangerous_deserialization=True)
+#     except Exception as e:
+#         logger.error(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
+#         raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
 
 def search_messages(
     query: str,
@@ -201,35 +167,64 @@ def search_messages(
     finally:
         session.close()
 
-def extract_skill_terms(query: str) -> List[str]:
+# Helper: resolve_channel_name
+@cache_with_timeout(timeout_seconds=300)  # Cache for 5 minutes
+
+def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
     """
-    Extract skill-related terms from a query string.
+    Given a human-friendly channel_name (e.g. "non-coders-learning")
+    and an optional guild_id, return the corresponding channel_id
+    from the database, or None if not found.
     """
-    # Common skill-related patterns
-    patterns = [
-        r'experience in (\w+)',
-        r'expertise in (\w+)',
-        r'knowledge of (\w+)',
-        r'background in (\w+)',
-        r'proficient in (\w+)',
-        r'skilled in (\w+)',
-        r'with (\w+) experience',
-        r'with (\w+) expertise',
-        r'with (\w+) knowledge',
-        r'with (\w+) background',
-        r'with (\w+) proficiency',
-        r'with (\w+) skills'
-    ]
+    if not validate_channel_name(channel_name):
+        logger.error(f"Invalid channel name format: {channel_name}")
+        raise ValueError(f"Invalid channel name format: {channel_name}")
+    if guild_id is not None and not validate_guild_id(guild_id):
+        logger.error(f"Invalid guild ID format: {guild_id}")
+        raise ValueError(f"Invalid guild ID format: {guild_id}")
+    session = SessionLocal()
+    try:
+        logger.info(f"Resolving channel name: {channel_name}")
+        query = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
+        if guild_id is not None:
+            query = query.filter(Message.guild_id == guild_id)
+        result = query.first()
+        return result[0] if result else None
+    except Exception as e:
+        logger.error(f"Error resolving channel name: {e}")
+        raise
+    finally:
+        session.close()
+
+# def extract_skill_terms(query: str) -> List[str]:
+#     """
+#     Extract skill-related terms from a query string.
+#     """
+#     # Common skill-related patterns
+#     patterns = [
+#         r'experience in (\w+)',
+#         r'expertise in (\w+)',
+#         r'knowledge of (\w+)',
+#         r'background in (\w+)',
+#         r'proficient in (\w+)',
+#         r'skilled in (\w+)',
+#         r'with (\w+) experience',
+#         r'with (\w+) expertise',
+#         r'with (\w+) knowledge',
+#         r'with (\w+) background',
+#         r'with (\w+) proficiency',
+#         r'with (\w+) skills'
+#     ]
     
-    terms = []
-    for pattern in patterns:
-        matches = re.finditer(pattern, query.lower())
-        for match in matches:
-            term = match.group(1)
-            if term not in terms:
-                terms.append(term)
+#     terms = []
+#     for pattern in patterns:
+#         matches = re.finditer(pattern, query.lower())
+#         for match in matches:
+#             term = match.group(1)
+#             if term not in terms:
+#                 terms.append(term)
     
-    return terms
+#     return terms
 
 def summarize_messages(
     start_iso: str,
@@ -411,15 +406,42 @@ def validate_data_availability() -> Dict[str, Any]:
     finally:
         session.close()
 
+def extract_skill_terms(query: str) -> List[str]:
+    """
+    Extract skill-related terms from a query string.
+    """
+    patterns = [
+        r'experience in (\w+)',
+        r'expertise in (\w+)',
+        r'knowledge of (\w+)',
+        r'background in (\w+)',
+        r'proficient in (\w+)',
+        r'skilled in (\w+)',
+        r'with (\w+) experience',
+        r'with (\w+) expertise',
+        r'with (\w+) knowledge',
+        r'with (\w+) background',
+        r'with (\w+) proficiency',
+        r'with (\w+) skills'
+    ]
+    terms = []
+    for pattern in patterns:
+        matches = re.finditer(pattern, query.lower())
+        for match in matches:
+            term = match.group(1)
+            if term not in terms:
+                terms.append(term)
+    return terms
+
+# Helper: build_jump_url
+
 def build_jump_url(guild_id: int, channel_id: int, message_id: int) -> str:
     """
     Build a Discord message jump URL from guild, channel, and message IDs.
-    
     Args:
         guild_id: The Discord guild (server) ID
         channel_id: The Discord channel ID
         message_id: The Discord message ID
-        
     Returns:
         A Discord message jump URL in the format: https://discord.com/channels/{guild_id}/{channel_id}/{message_id}
     """

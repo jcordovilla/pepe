@@ -1,6 +1,6 @@
 import json
 from db import Session, engine, Message, Resource
-from resource_detector import detect_resources
+from core.resource_detector import detect_resources
 
 def main():
     session = Session()

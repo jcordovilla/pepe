@@ -1,7 +1,7 @@
 # migrate_messages.py
 
 import json
-from models import DiscordMessage
+from db.models import DiscordMessage
 from collections import defaultdict
 
 def transform_raw(raw: dict) -> dict:

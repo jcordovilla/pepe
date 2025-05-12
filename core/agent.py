@@ -6,8 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
 
-from tools import search_messages, summarize_messages
-from time_parser import parse_timeframe
+from tools.tools import search_messages, summarize_messages
 
 # ─── Env & LLM Setup ────────────────────────────────────────────────────────────
 
@@ -27,11 +26,6 @@ llm = ChatOpenAI(
 # ─── Tool Registry ──────────────────────────────────────────────────────────────
 
 tools = [
-    StructuredTool.from_function(
-        parse_timeframe,
-        name="parse_timeframe",
-        description="Parse a natural-language timeframe (e.g. 'last week') into (start_iso, end_iso)."
-    ),
     StructuredTool.from_function(
         search_messages,
         name="search_messages",

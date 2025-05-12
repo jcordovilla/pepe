@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Dict, Any
 from classifier import classify_resource  # <-- Import the classifier
 
-# Example: from time_parser import parse_time  # Uncomment if you want to use your time parser
+# Example: from tools.time_parser import parse_time  # Uncomment if you want to use your time parser
 
 URL_REGEX = re.compile(
     r'(https?://[^\s]+)'
