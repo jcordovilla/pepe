@@ -1,17 +1,5 @@
-# Welcome to MkDocs
+# Gen AI Global by MIT - Resources Library
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to the Resources Library of the MIT Gen AI Global Community. 
+This library contains all the AI and human-curated content detected in our active Discord community: links, papers, and tutorials will appear under **Resources**.
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.

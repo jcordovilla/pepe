@@ -1,1 +1,10 @@
-site_name: My Docs
+site_name: Gen AI Global - Resources Library
+docs_dir: docs
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Resources:
+    - (auto-generated via script)
+plugins:
+  - search
