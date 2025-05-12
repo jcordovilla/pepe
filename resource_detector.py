@@ -40,6 +40,54 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             return str(ts.isoformat())
         return str(ts)
 
+    def get_author_display_name(author):
+        if author is None:
+            return None
+        # Prefer display_name or global_name if available
+        if hasattr(author, 'display_name') and getattr(author, 'display_name', None):
+            return getattr(author, 'display_name')
+        if hasattr(author, 'global_name') and getattr(author, 'global_name', None):
+            return getattr(author, 'global_name')
+        if hasattr(author, 'nick') and getattr(author, 'nick', None):
+            return getattr(author, 'nick')
+        if hasattr(author, 'username') and getattr(author, 'username', None):
+            return getattr(author, 'username')
+        if hasattr(author, 'name'):
+            return getattr(author, 'name')
+        if isinstance(author, dict):
+            return (
+                author.get('display_name') or
+                author.get('global_name') or
+                author.get('nick') or
+                author.get('username') or
+                author.get('name')
+            )
+        return str(author)
+
+    def format_timestamp(ts):
+        # Return 'YYYY-MM-DD HH:MM' if possible
+        if hasattr(ts, 'strftime'):
+            return ts.strftime('%Y-%m-%d %H:%M')
+        try:
+            # Try parsing if it's a string
+            from datetime import datetime
+            dt = datetime.fromisoformat(ts)
+            return dt.strftime('%Y-%m-%d %H:%M')
+        except Exception:
+            return str(ts)
+
+    def get_jump_url(msg):
+        # Try to get jump_url attribute, else build from known fields
+        if hasattr(msg, 'jump_url') and getattr(msg, 'jump_url', None):
+            return msg.jump_url
+        # Try to build from known fields if possible
+        guild_id = getattr(msg, 'guild_id', None)
+        channel_id = getattr(msg, 'channel_id', None)
+        message_id = getattr(msg, 'message_id', None) or getattr(msg, 'id', None)
+        if guild_id and channel_id and message_id:
+            return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
+        return None
+
     # Extract URLs from message content
     content = getattr(message, "content", "")
     urls = URL_REGEX.findall(content)
@@ -47,10 +95,10 @@ def detect_resources(message) -> List[Dict[str, Any]]:
         resource = {
             "url": url,
             "type": get_resource_type(url),
-            "timestamp": normalize_timestamp(getattr(message, "timestamp", None)),
-            "author": getattr(message, "author", None).name if getattr(message, "author", None) else None,
+            "timestamp": format_timestamp(getattr(message, "timestamp", None)),
+            "author": get_author_display_name(getattr(message, "author", None)),
             "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
-            "message_id": getattr(message, "id", None),
+            "jump_url": get_jump_url(message),
             "context_snippet": content[:200]
         }
         resource["tag"] = classify_resource(resource)
@@ -64,10 +112,10 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             resource = {
                 "url": url,
                 "type": get_resource_type(url),
-                "timestamp": normalize_timestamp(getattr(message, "timestamp", None)),
-                "author": getattr(message, "author", None).name if getattr(message, "author", None) else None,
+                "timestamp": format_timestamp(getattr(message, "timestamp", None)),
+                "author": get_author_display_name(getattr(message, "author", None)),
                 "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
-                "message_id": getattr(message, "id", None),
+                "jump_url": get_jump_url(message),
                 "context_snippet": content[:200]
             }
             resource["tag"] = classify_resource(resource)
@@ -78,8 +126,11 @@ def detect_resources(message) -> List[Dict[str, Any]]:
 if __name__ == "__main__":
     # Mock Discord message objects for testing
     class MockAuthor:
-        def __init__(self, name, bot=False, system=False):
+        def __init__(self, name, display_name=None, global_name=None, nick=None, bot=False, system=False):
             self.name = name
+            self.display_name = display_name
+            self.global_name = global_name
+            self.nick = nick
             self.bot = bot
             self.system = system
 
@@ -104,7 +155,7 @@ if __name__ == "__main__":
     messages = [
         MockMessage(
             content="Check this out: https://github.com/user/repo and this PDF: https://example.com/file.pdf",
-            author=MockAuthor("alice"),
+            author=MockAuthor("alice", display_name="Alice D.", global_name="AliceGlobal"),
             channel=MockChannel("general"),
             id=123,
             timestamp=str(datetime.now()),

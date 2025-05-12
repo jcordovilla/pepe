@@ -82,6 +82,21 @@ class Message(Base):
     jump_url = Column(String, nullable=True)
     channel_name = Column(String, index=True, nullable=True)
 
+class Resource(Base):
+    __tablename__ = "resources"
+
+    id = Column(Integer, primary_key=True, index=True)
+    message_id = Column(Integer, index=True, nullable=False)
+    guild_id   = Column(Integer, index=True, nullable=False)
+    channel_id = Column(Integer, index=True, nullable=False)
+    url        = Column(String, nullable=False)
+    type       = Column(String, nullable=True)   # e.g. "PDF", "article"
+    tag        = Column(String, nullable=True)   # e.g. "Paper", "Tutorial"
+    author     = Column(JSON,   nullable=True)   # reuse same JSON structure as Message.author
+    timestamp  = Column(DateTime, nullable=False)
+    context_snippet = Column(Text, nullable=True)
+    meta   = Column(JSON,   nullable=True)   # any extra parsed fields (renamed from metadata)
+
 @contextmanager
 def get_db_session():
     """
@@ -113,3 +128,6 @@ def execute_query(query_func):
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)
+
+engine = create_engine("sqlite:///discord_messages.db", pool_pre_ping=True)
+Session = sessionmaker(bind=engine)
