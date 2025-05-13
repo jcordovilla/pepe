@@ -4,7 +4,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import yaml  # Requires PyYAML
-from db.models import Resource
+from db.db import Resource
 
 def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
     """
