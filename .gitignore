@@ -5,3 +5,5 @@ discord_messages.json
 Leeme_JC.txt
 venv/
 discord_messages.db
+.DS_Store
+jc_logs/
