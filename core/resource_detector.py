@@ -149,8 +149,18 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
         return None
 
-    # Extract URLs from message content
+    # --- IMPROVEMENT: Gather more context ---
     content = getattr(message, "content", "")
+    channel_topic = getattr(getattr(message, "channel", None), "topic", "")
+    thread_name = getattr(getattr(message, "thread", None), "name", "")
+    context_snippet = content
+    if channel_topic:
+        context_snippet += f"\nChannel topic: {channel_topic}"
+    if thread_name:
+        context_snippet += f"\nThread: {thread_name}"
+    context_snippet = context_snippet[:500]  # Use more context, up to 500 chars
+
+    # Extract URLs from message content
     urls = URL_REGEX.findall(content)
     for url in urls:
         if is_trash_url(url):
@@ -162,7 +172,7 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "author": get_author_display_name(getattr(message, "author", None)),
             "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
             "jump_url": get_jump_url(message),
-            "context_snippet": content[:200]
+            "context_snippet": context_snippet
         }
         # AI vetting: skip if not valuable
         if not ai_vet_resource(resource):
@@ -170,83 +180,117 @@ def detect_resources(message) -> List[Dict[str, Any]]:
         resource["tag"] = classify_resource(resource)
         resources.append(resource)
 
-    # Include attachments as resources
+    # --- IMPROVEMENT: Attachment handling ---
     attachments = getattr(message, "attachments", [])
     for att in attachments:
         url = getattr(att, "url", None)
+        filename = getattr(att, "filename", "")
+        content_type = getattr(att, "content_type", "")
         if url and not is_trash_url(url):
+            resource_type = get_resource_type(url)
+            # Use filename/content_type to improve type detection
+            if not resource_type or resource_type == "link":
+                if filename.endswith('.pdf'):
+                    resource_type = 'pdf'
+                elif filename.endswith('.mp4'):
+                    resource_type = 'video'
+                elif filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.gif'):
+                    resource_type = 'image'
+                elif filename.endswith('.zip'):
+                    resource_type = 'archive'
+                elif 'pdf' in content_type:
+                    resource_type = 'pdf'
+                elif 'image' in content_type:
+                    resource_type = 'image'
+                elif 'video' in content_type:
+                    resource_type = 'video'
             resource = {
                 "url": url,
-                "type": get_resource_type(url),
+                "type": resource_type,
                 "timestamp": format_timestamp(getattr(message, "timestamp", None)),
                 "author": get_author_display_name(getattr(message, "author", None)),
                 "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
                 "jump_url": get_jump_url(message),
-                "context_snippet": content[:200]
+                "context_snippet": context_snippet
             }
             if not ai_vet_resource(resource):
                 continue
             resource["tag"] = classify_resource(resource)
             resources.append(resource)
 
+    # --- IMPROVEMENT: Pinned message boost & non-URL resource detection ---
+    is_pinned = getattr(message, "is_pinned", False)
+    if is_pinned and not urls and content:
+        keywords = ["tool", "tutorial", "paper", "event", "job", "course", "resource"]
+        if any(kw in content.lower() for kw in keywords):
+            resource = {
+                "url": None,
+                "type": "pinned-text",
+                "timestamp": format_timestamp(getattr(message, "timestamp", None)),
+                "author": get_author_display_name(getattr(message, "author", None)),
+                "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
+                "jump_url": get_jump_url(message),
+                "context_snippet": context_snippet
+            }
+            # AI vetting: skip if not valuable
+            if ai_vet_resource(resource):
+                resource["tag"] = classify_resource(resource)
+                resources.append(resource)
+
     return resources
 
 if __name__ == "__main__":
-    # Mock Discord message objects for testing
-    class MockAuthor:
-        def __init__(self, name, display_name=None, global_name=None, nick=None, bot=False, system=False):
-            self.name = name
-            self.display_name = display_name
-            self.global_name = global_name
-            self.nick = nick
-            self.bot = bot
-            self.system = system
+    import os
+    import sqlite3
 
-    class MockChannel:
-        def __init__(self, name):
-            self.name = name
+    DB_PATH = os.path.join(os.path.dirname(__file__), '../data/discord_messages.db')
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
 
-    class MockAttachment:
-        def __init__(self, url):
-            self.url = url
+    # Try to get all messages from a likely table name
+    # Adjust table/column names as needed for your schema
+    try:
+        cur.execute("SELECT * FROM messages")
+    except Exception:
+        # Try a fallback table name
+        cur.execute("SELECT * FROM discord_messages")
 
-    class MockMessage:
-        def __init__(self, content, author, channel, id, timestamp, attachments=None):
-            self.content = content
-            self.author = author
-            self.channel = channel
-            self.id = id
-            self.timestamp = timestamp
-            self.attachments = attachments or []
+    rows = cur.fetchall()
 
-    # Example messages
-    messages = [
-        MockMessage(
-            content="Check this out: https://github.com/user/repo and this PDF: https://example.com/file.pdf",
-            author=MockAuthor("alice", display_name="Alice D.", global_name="AliceGlobal"),
-            channel=MockChannel("general"),
-            id=123,
-            timestamp=str(datetime.now()),
-            attachments=[MockAttachment("https://example.com/image.png")]
-        ),
-        MockMessage(
-            content="I'm a bot, ignore me.",
-            author=MockAuthor("botty", bot=True),
-            channel=MockChannel("bots"),
-            id=124,
-            timestamp=str(datetime.now())
-        ),
-        MockMessage(
-            content="Here's a video: https://videos.com/clip.mp4",
-            author=MockAuthor("bob"),
-            channel=MockChannel("media"),
-            id=125,
-            timestamp=str(datetime.now())
-        ),
-    ]
+    class DictToObj:
+        def __init__(self, d):
+            for k, v in d.items():
+                setattr(self, k, v)
 
     all_resources = []
-    for msg in messages:
-        all_resources.extend(detect_resources(msg))
+    for row in rows:
+        # Convert sqlite3.Row to dict, then to object with attributes
+        msg_obj = DictToObj(dict(row))
+        # If channel info is not present, set a dummy channel with name and topic if available
+        if not hasattr(msg_obj, 'channel'):
+            class DummyChannel:
+                def __init__(self, name, topic=None):
+                    self.name = name
+                    self.topic = topic
+            channel_name = getattr(msg_obj, 'channel_name', None) or getattr(msg_obj, 'channel', None)
+            channel_topic = getattr(msg_obj, 'channel_topic', None)
+            msg_obj.channel = DummyChannel(channel_name, channel_topic)
+        # If author is a dict, convert to object
+        if hasattr(msg_obj, 'author') and isinstance(msg_obj.author, dict):
+            msg_obj.author = DictToObj(msg_obj.author)
+        # If attachments is a JSON string, parse and convert
+        if hasattr(msg_obj, 'attachments') and isinstance(msg_obj.attachments, str):
+            try:
+                import ast
+                att_list = json.loads(msg_obj.attachments)
+                class DummyAttachment:
+                    def __init__(self, d):
+                        for k, v in d.items():
+                            setattr(self, k, v)
+                msg_obj.attachments = [DummyAttachment(a) for a in att_list]
+            except Exception:
+                msg_obj.attachments = []
+        all_resources.extend(detect_resources(msg_obj))
 
     print(json.dumps(all_resources, indent=2, default=str))

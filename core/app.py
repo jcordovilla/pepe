@@ -2,6 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from db.db import SessionLocal, Resource
 import streamlit as st
 import json
 from datetime import datetime, timedelta
@@ -241,38 +242,41 @@ def main():
         
         k_results = st.slider("Number of Results", 1, 20, 5)
 
+    tab1, tab2 = st.tabs(["🔍 Search Messages", "📚 Resources"])
+
     # Main search interface
-    st.markdown("### 🔍 Search Messages")
-    query = st.text_input(
-        "Enter your search query",
-        placeholder="e.g., 'Show me messages about AI from the last week'",
-        label_visibility="collapsed"
-    )
-    
-    if st.button("🔍 Search", key="search_button") and query:
-        try:
-            channel_id = None
-            if selected_channel != "All Channels":
-                channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
-            with st.spinner("🔍 Searching messages..."):
-                try:
-                    start_dt, end_dt = parse_timeframe(query)
-                    st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
-                    results = summarize_messages(
-                        start_iso=start_dt.isoformat(),
-                        end_iso=end_dt.isoformat(),
-                        channel_id=channel_id,
-                        as_json=(output_format == "JSON")
-                    )
-                except ValueError as e:
-                    if "No timeframe specified" in str(e):
-                        results = search_messages(
-                            query=query,
+    with tab1:
+        st.markdown("### 🔍 Search Messages")
+        query = st.text_input(
+            "Enter your search query",
+            placeholder="e.g., 'Show me messages about AI from the last week'",
+            label_visibility="collapsed"
+        )
+        
+        if st.button("🔍 Search", key="search_button") and query:
+            try:
+                channel_id = None
+                if selected_channel != "All Channels":
+                    channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
+                with st.spinner("🔍 Searching messages..."):
+                    try:
+                        start_dt, end_dt = parse_timeframe(query)
+                        st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
+                        results = summarize_messages(
+                            start_iso=start_dt.isoformat(),
+                            end_iso=end_dt.isoformat(),
                             channel_id=channel_id,
-                            k=k_results
+                            as_json=(output_format == "JSON")
                         )
-                    else:
-                        raise
+                    except ValueError as e:
+                        if "No timeframe specified" in str(e):
+                            results = search_messages(
+                                query=query,
+                                channel_id=channel_id,
+                                k=k_results
+                            )
+                        else:
+                            raise
                 if isinstance(results, str):
                     formatted_results = results
                 elif isinstance(results, dict):
@@ -296,11 +300,31 @@ def main():
 <textarea id="copyArea" style="width:100%;height:200px;border-radius:6px;padding:8px;font-family:monospace;">{}</textarea>
 <button onclick="navigator.clipboard.writeText(document.getElementById('copyArea').value)" style="margin-top:8px;padding:6px 16px;border:none;border-radius:5px;background:#1E88E5;color:white;font-weight:bold;cursor:pointer;">📋 Copy Output</button>
 """.format(copy_text.replace("</textarea>", "&lt;/textarea&gt;")), unsafe_allow_html=True)
-        except Exception as e:
-            import traceback
-            st.error(f"❌ Error processing query: {str(e)}")
-            st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
-            st.error(traceback.format_exc())
+            except Exception as e:
+                import traceback
+                st.error(f"❌ Error processing query: {str(e)}")
+                st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
+                st.error(traceback.format_exc())
+
+    with tab2:
+        st.header("📚 Resource Library")
+        # Fetch all resource types from the DB
+        session = SessionLocal()
+        resource_types = session.query(Resource.type).distinct().all()
+        resource_types = [r[0] for r in resource_types if r[0]]  # Flatten and remove None
+
+        if not resource_types:
+            st.info("No resources found in the database.")
+        else:
+            selected_type = st.selectbox("Select resource type", resource_types)
+            resources = session.query(Resource).filter(Resource.type == selected_type).all()
+            st.markdown(f"### Showing all resources of type: `{selected_type}`")
+            for res in resources:
+                st.markdown(f"- **Name:** {res.name if hasattr(res, 'name') else ''}")
+                st.markdown(f"  - **URL:** [{res.url}]({res.url})" if hasattr(res, 'url') else "")
+                st.markdown(f"  - **Description:** {res.description if hasattr(res, 'description') else ''}")
+                st.markdown("---")
+        session.close()
 
 if __name__ == "__main__":
     main()
