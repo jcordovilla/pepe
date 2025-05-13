@@ -31,10 +31,11 @@ TRASH_PATTERNS = [
 def is_trash_url(url):
     return any(re.search(pat, url) for pat in TRASH_PATTERNS)
 
-def ai_vet_resource(resource: dict) -> bool:
+def ai_vet_resource(resource: dict, log_decision: bool = False) -> bool:
     """
     Use OpenAI to vet if a resource is valuable (not a meeting, internal, or spam).
     Returns True if valuable, False if not or on error.
+    If log_decision is True, print the AI's answer and reason for each resource.
     """
     from openai import OpenAI
     import os
@@ -43,7 +44,7 @@ def ai_vet_resource(resource: dict) -> bool:
     openai_client = OpenAI(api_key=api_key)
     system_prompt = (
         "You are a filter for a knowledge resource library. "
-        "Given a link and its context, decide if it is a valuable resource (e.g., paper, tool, tutorial) "
+        "Given a link and its context, decide if it is a valuable resource (e.g., paper, tool, tutorial, news article, blog) "
         "or if it is a meeting invite, internal navigation, or irrelevant. "
         "Reply with 'Yes' if valuable, 'No' if not, and a brief reason."
     )
@@ -62,11 +63,13 @@ def ai_vet_resource(resource: dict) -> bool:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content}
             ],
-            max_tokens=10,
+            max_tokens=30,
             temperature=0
         )
-        answer = response.choices[0].message.content.strip().lower()
-        return answer.startswith('yes')
+        answer = response.choices[0].message.content.strip()
+        if log_decision:
+            print(f"AI vetting for resource: {resource.get('url') or '[no url]'} => {answer}")
+        return answer.lower().startswith('yes')
     except Exception as e:
         print(f"AI vetting error: {e}. Defaulting to False.")
         return False
@@ -77,6 +80,10 @@ def get_resource_type(url: str) -> str:
         return 'pdf'
     if url.endswith('.mp4'):
         return 'video'
+    if 'youtube.com' in url or 'youtu.be' in url:
+        return 'youtube'
+    if 'drive.google.com' in url:
+        return 'drive'
     if 'github.com' in url:
         return 'github'
     if url.endswith('.png') or url.endswith('.jpg') or url.endswith('.jpeg') or url.endswith('.gif'):
@@ -104,6 +111,12 @@ def detect_resources(message) -> List[Dict[str, Any]]:
     def get_author_display_name(author):
         if author is None:
             return None
+        if isinstance(author, str):
+            try:
+                author_dict = json.loads(author)
+                return author_dict.get('username') or author_dict.get('name')
+            except Exception:
+                return author
         # Prefer display_name or global_name if available
         if hasattr(author, 'display_name') and getattr(author, 'display_name', None):
             return getattr(author, 'display_name')
@@ -174,8 +187,26 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "jump_url": get_jump_url(message),
             "context_snippet": context_snippet
         }
-        # AI vetting: skip if not valuable
-        if not ai_vet_resource(resource):
+        # Always accept known news domains (skip AI vetting for these)
+        from core.classifier import classify_resource
+        news_domains = [
+            "nytimes.com", "bbc.com", "cnn.com", "reuters.com", "theguardian.com", "washingtonpost.com",
+            "bloomberg.com", "forbes.com", "wsj.com", "nbcnews.com", "abcnews.go.com", "cbsnews.com",
+            "npr.org", "aljazeera.com", "apnews.com", "news.ycombinator.com", "medium.com", "substack.com",
+            "blog", "news", "article", "thetimes.com", "ft.com", "bloomberg.com", "politico.com", "axios.com",
+            "wired.com", "techcrunch.com", "engadget.com", "arstechnica.com", "nature.com", "sciencemag.org"
+        ]
+        if any(domain in url for domain in news_domains):
+            resource["tag"] = classify_resource(resource)
+            resources.append(resource)
+            continue
+        # Loosen AI vetting: accept if AI says 'yes' OR if the resource type is 'github', 'pdf', 'youtube', 'drive', or 'video'
+        auto_accept_types = ["github", "pdf", "youtube", "drive", "video"]
+        if resource["type"] in auto_accept_types:
+            resource["tag"] = classify_resource(resource)
+            resources.append(resource)
+            continue
+        if not ai_vet_resource(resource, log_decision=True):
             continue
         resource["tag"] = classify_resource(resource)
         resources.append(resource)
@@ -242,6 +273,7 @@ def detect_resources(message) -> List[Dict[str, Any]]:
 if __name__ == "__main__":
     import os
     import sqlite3
+    import random
 
     DB_PATH = os.path.join(os.path.dirname(__file__), '../data/discord_messages.db')
     conn = sqlite3.connect(DB_PATH)
@@ -249,14 +281,13 @@ if __name__ == "__main__":
     cur = conn.cursor()
 
     # Try to get all messages from a likely table name
-    # Adjust table/column names as needed for your schema
     try:
         cur.execute("SELECT * FROM messages")
     except Exception:
-        # Try a fallback table name
         cur.execute("SELECT * FROM discord_messages")
 
     rows = cur.fetchall()
+    sample_rows = random.sample(rows, min(30, len(rows)))
 
     class DictToObj:
         def __init__(self, d):
@@ -264,10 +295,8 @@ if __name__ == "__main__":
                 setattr(self, k, v)
 
     all_resources = []
-    for row in rows:
-        # Convert sqlite3.Row to dict, then to object with attributes
+    for row in sample_rows:
         msg_obj = DictToObj(dict(row))
-        # If channel info is not present, set a dummy channel with name and topic if available
         if not hasattr(msg_obj, 'channel'):
             class DummyChannel:
                 def __init__(self, name, topic=None):
@@ -276,13 +305,10 @@ if __name__ == "__main__":
             channel_name = getattr(msg_obj, 'channel_name', None) or getattr(msg_obj, 'channel', None)
             channel_topic = getattr(msg_obj, 'channel_topic', None)
             msg_obj.channel = DummyChannel(channel_name, channel_topic)
-        # If author is a dict, convert to object
         if hasattr(msg_obj, 'author') and isinstance(msg_obj.author, dict):
             msg_obj.author = DictToObj(msg_obj.author)
-        # If attachments is a JSON string, parse and convert
         if hasattr(msg_obj, 'attachments') and isinstance(msg_obj.attachments, str):
             try:
-                import ast
                 att_list = json.loads(msg_obj.attachments)
                 class DummyAttachment:
                     def __init__(self, d):

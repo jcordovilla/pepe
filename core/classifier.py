@@ -9,16 +9,17 @@ openai_client = OpenAI(api_key=OPENAI_API_KEY)
 def classify_resource(resource: dict, use_llm: bool = True) -> str:
     """
     Classify a resource dict into one of:
-    Tool, Paper, Tutorial, Event, Job/Opportunity, Other.
+    Tool, Paper, Tutorial, Event, Job/Opportunity, News/Article, Other.
     Uses OpenAI Chat API if use_llm is True, else regex-based fallback.
     """
-    tags = ["Tool", "Paper", "Tutorial", "Event", "Job/Opportunity", "Other"]
+    tags = ["Tool", "Paper", "Tutorial", "Event", "Job/Opportunity", "News/Article", "Other"]
 
     if use_llm:
         system_prompt = (
             "You are an assistant that classifies shared links into categories. "
-            "The possible tags are: Tool, Paper, Tutorial, Event, Job/Opportunity, Other. "
-            "Assign the most appropriate tag based on the URL, file type, author, and context snippet."
+            "The possible tags are: Tool, Paper, Tutorial, Event, Job/Opportunity, News/Article, Other. "
+            "Assign the most appropriate tag based on the URL, file type, author, and context snippet. "
+            "If the resource is a news article, blog post, or media article, use 'News/Article'."
         )
         user_content = (
             f"Resource info:\n"
@@ -44,6 +45,9 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
             for t in tags:
                 if t.lower() in tag.lower():
                     return t
+            # Heuristic: if 'news' or 'article' in tag, return News/Article
+            if any(x in tag.lower() for x in ["news", "article", "blog"]):
+                return "News/Article"
             return "Other"
         except Exception as e:
             print(f"OpenAI API error: {e}. Falling back to regex.")
@@ -52,6 +56,13 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
     # Regex-based fallback
     url = resource.get("url", "").lower()
     context = resource.get("context_snippet", "").lower()
+    news_domains = [
+        "nytimes.com", "bbc.com", "cnn.com", "reuters.com", "theguardian.com", "washingtonpost.com",
+        "bloomberg.com", "forbes.com", "wsj.com", "nbcnews.com", "abcnews.go.com", "cbsnews.com",
+        "npr.org", "aljazeera.com", "apnews.com", "news.ycombinator.com", "medium.com", "substack.com",
+        "blog", "news", "article", "thetimes.com", "ft.com", "bloomberg.com", "politico.com", "axios.com",
+        "wired.com", "techcrunch.com", "engadget.com", "arstechnica.com", "nature.com", "sciencemag.org"
+    ]
     if any(x in url for x in [".pdf", "arxiv.org", "researchgate.net"]):
         return "Paper"
     if any(x in url for x in ["github.com", "tool", "app", "software"]):
@@ -62,6 +73,8 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
         return "Event"
     if any(x in url for x in ["jobs", "job", "opportunity", "careers", "hiring"]):
         return "Job/Opportunity"
+    if any(domain in url for domain in news_domains) or any(word in context for word in ["news", "article", "blog", "newsletter", "press release"]):
+        return "News/Article"
     if "video" in resource.get("type", ""):
         return "Tutorial"
     return "Other"
