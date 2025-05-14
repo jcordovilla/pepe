@@ -10,8 +10,8 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
     """
     Connect to the database at db_url, fetch all Resource records,
     and write one Markdown file per resource under output_dir,
-    with YAML front-matter (title, date, author, channel, tag, original_url)
-    followed by the context_snippet.
+    with YAML front-matter (title, date, author, channel, tag, original_url, description)
+    followed by the description as the main content.
     """
     engine = create_engine(db_url)
     Session = sessionmaker(bind=engine)
@@ -31,6 +31,7 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
             "channel": res.channel_name or res.channel_id,
             "tag": res.tag,
             "original_url": res.url,
+            "description": description,
         }
         filename = f"{res.id}.md"
         filepath = os.path.join(output_dir, filename)

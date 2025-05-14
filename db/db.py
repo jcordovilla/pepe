@@ -97,6 +97,8 @@ class Resource(Base):
     timestamp  = Column(DateTime, nullable=False)
     context_snippet = Column(Text, nullable=True)
     meta   = Column(JSON,   nullable=True)   # any extra parsed fields (renamed from metadata)
+    name = Column(String, nullable=True)  # new: resource name/title
+    description = Column(Text, nullable=True)  # new: resource description
 
 @contextmanager
 def get_db_session():

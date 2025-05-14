@@ -1,6 +1,7 @@
 import json
 from db.db import SessionLocal, Message, Resource  # Updated import paths
 from core.resource_detector import detect_resources
+from tqdm import tqdm  # Add tqdm for progress bar
 
 def main():
     session = SessionLocal()
@@ -9,7 +10,7 @@ def main():
         messages = session.query(Message).order_by(Message.timestamp.desc()).all()
 
         new_resources = []
-        for msg in messages:
+        for msg in tqdm(messages, desc="Detecting resources", unit="msg"):
             # Patch channel if missing
             if not hasattr(msg, 'channel'):
                 class DummyChannel:
