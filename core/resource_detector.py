@@ -31,10 +31,10 @@ TRASH_PATTERNS = [
 def is_trash_url(url):
     return any(re.search(pat, url) for pat in TRASH_PATTERNS)
 
-def ai_vet_resource(resource: dict, log_decision: bool = False) -> bool:
+def ai_vet_resource(resource: dict, log_decision: bool = False) -> dict:
     """
     Use OpenAI to vet if a resource is valuable (not a meeting, internal, or spam).
-    Returns True if valuable, False if not or on error.
+    Returns a dict: {'is_valuable': bool, 'name': str, 'description': str}
     If log_decision is True, print the AI's answer and reason for each resource.
     """
     from openai import OpenAI
@@ -43,10 +43,15 @@ def ai_vet_resource(resource: dict, log_decision: bool = False) -> bool:
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
     openai_client = OpenAI(api_key=api_key)
     system_prompt = (
-        "You are a filter for a knowledge resource library. "
-        "Given a link and its context, decide if it is a valuable resource (e.g., paper, tool, tutorial, news article, blog) "
-        "or if it is a meeting invite, internal navigation, or irrelevant. "
-        "Reply with 'Yes' if valuable, 'No' if not, and a brief reason."
+        """
+        You are a filter for a knowledge resource library. 
+        Given a link and its context, decide if it is a valuable resource (e.g., paper, tool, tutorial, news article, blog) 
+        or if it is a meeting invite, internal navigation, or irrelevant. 
+        If valuable, reply in the following JSON format: 
+        {"valuable": true, "name": "<resource name>", "description": "<brief description>"}
+        If not valuable, reply: {"valuable": false}
+        The name should be a concise title for the resource. The description should be 1-2 sentences summarizing its content or value.
+        """
     )
     user_content = (
         f"Resource info:\n"
@@ -63,16 +68,25 @@ def ai_vet_resource(resource: dict, log_decision: bool = False) -> bool:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content}
             ],
-            max_tokens=30,
+            max_tokens=100,
             temperature=0
         )
         answer = response.choices[0].message.content.strip()
         if log_decision:
             print(f"AI vetting for resource: {resource.get('url') or '[no url]'} => {answer}")
-        return answer.lower().startswith('yes')
+        import json as _json
+        try:
+            parsed = _json.loads(answer)
+            is_valuable = parsed.get("valuable", False)
+            name = parsed.get("name")
+            description = parsed.get("description")
+            return {"is_valuable": is_valuable, "name": name, "description": description}
+        except Exception:
+            # fallback: treat as not valuable
+            return {"is_valuable": False, "name": None, "description": None}
     except Exception as e:
         print(f"AI vetting error: {e}. Defaulting to False.")
-        return False
+        return {"is_valuable": False, "name": None, "description": None}
 
 # Helper to determine resource type from URL or filename
 def get_resource_type(url: str) -> str:
@@ -198,16 +212,23 @@ def detect_resources(message) -> List[Dict[str, Any]]:
         ]
         if any(domain in url for domain in news_domains):
             resource["tag"] = classify_resource(resource)
+            # Try to extract name/description heuristically for news
+            resource["name"] = None
+            resource["description"] = None
             resources.append(resource)
             continue
-        # Loosen AI vetting: accept if AI says 'yes' OR if the resource type is 'github', 'pdf', 'youtube', 'drive', or 'video'
         auto_accept_types = ["github", "pdf", "youtube", "drive", "video"]
         if resource["type"] in auto_accept_types:
             resource["tag"] = classify_resource(resource)
+            resource["name"] = None
+            resource["description"] = None
             resources.append(resource)
             continue
-        if not ai_vet_resource(resource, log_decision=True):
+        vet_result = ai_vet_resource(resource, log_decision=True)
+        if not vet_result["is_valuable"]:
             continue
+        resource["name"] = vet_result["name"]
+        resource["description"] = vet_result["description"]
         resource["tag"] = classify_resource(resource)
         resources.append(resource)
 
@@ -244,8 +265,11 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "jump_url": get_jump_url(message),
                 "context_snippet": context_snippet
             }
-            if not ai_vet_resource(resource):
+            vet_result = ai_vet_resource(resource)
+            if not vet_result["is_valuable"]:
                 continue
+            resource["name"] = vet_result["name"]
+            resource["description"] = vet_result["description"]
             resource["tag"] = classify_resource(resource)
             resources.append(resource)
 
@@ -263,8 +287,10 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "jump_url": get_jump_url(message),
                 "context_snippet": context_snippet
             }
-            # AI vetting: skip if not valuable
-            if ai_vet_resource(resource):
+            vet_result = ai_vet_resource(resource)
+            if vet_result["is_valuable"]:
+                resource["name"] = vet_result["name"]
+                resource["description"] = vet_result["description"]
                 resource["tag"] = classify_resource(resource)
                 resources.append(resource)
 
