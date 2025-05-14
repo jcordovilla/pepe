@@ -296,6 +296,50 @@ def detect_resources(message) -> List[Dict[str, Any]]:
 
     return resources
 
+def needs_title_fix(resource):
+    # True if name is a URL and description is not empty (likely fallback)
+    name = resource.get("name", "")
+    description = resource.get("description", "")
+    return isinstance(name, str) and name.startswith("http") and description.strip() != ""
+
+def ai_enrich_title_description(resource):
+    """
+    Use OpenAI to generate a better title and description for a resource with fallback values.
+    """
+    from openai import OpenAI
+    import os
+    import json as _json
+    from dotenv import load_dotenv
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+    model = os.getenv("GPT_MODEL", "gpt-4-turbo")
+    openai_client = OpenAI(api_key=api_key)
+    prompt = f"""
+Given the following Discord message content and resource URL, generate a concise, human-readable title and a 1-2 sentence description suitable for a public resource library. Do not use the raw URL as the title. If the message is just a link, infer the likely topic from the URL or context.
+
+Message content:
+{resource.get('description','')}
+
+Resource URL:
+{resource.get('url','')}
+
+Respond in JSON with keys 'title' and 'description'.
+"""
+    response = openai_client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=200,
+        temperature=0.7,
+    )
+    try:
+        content = response.choices[0].message.content
+        data = _json.loads(content)
+        return data["title"], data["description"]
+    except Exception:
+        desc = resource.get("description","")
+        words = desc.split()
+        return ("Resource: " + " ".join(words[:10]), desc)
+
 if __name__ == "__main__":
     import os
     import sqlite3
