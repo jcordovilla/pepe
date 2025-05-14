@@ -22,7 +22,7 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
     resources = session.query(Resource).all()
 
     for res in resources:
-        # Use the new name and description fields from the database directly
+        # Use the correct name and description fields from the database
         title = res.name or res.url
         description = res.description or (res.context_snippet or "")
         front_matter = {
@@ -60,14 +60,14 @@ def sync_to_json(db_url: str, output_path: str = "docs/resources/resources.json"
     for res in resources:
         resource_dicts.append({
             "id": res.id,
-            "title": res.name or res.url,
-            "description": res.description or (res.context_snippet or ""),
+            "title": res.name or res.url,  # Use the correct name field
+            "description": res.description or (res.context_snippet or ""),  # Use the correct description field
             "date": res.timestamp.strftime("%Y-%m-%d") if res.timestamp else None,
             "author": res.author_display or res.author,
             "channel": res.channel_name or res.channel_id,
             "tag": res.tag,
-            "original_url": res.url,
-            "jump_url": getattr(res, 'jump_url', None),
+            "resource_url": res.url,  # Renamed from original_url
+            "discord_url": getattr(res, 'jump_url', None),  # Renamed from jump_url
         })
 
     with open(output_path, "w", encoding="utf-8") as f:
