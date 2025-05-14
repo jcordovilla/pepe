@@ -1,13 +1,29 @@
 import json
+import time  # Add this import
 from db.db import SessionLocal, Message, Resource  # Updated import paths
 from core.resource_detector import detect_resources
-from tqdm import tqdm  # Add tqdm for progress bar
+from tqdm import tqdm  # Already imported
+
+def author_to_dict(author):
+    if isinstance(author, dict):
+        return author
+    if hasattr(author, '__dict__'):
+        return vars(author)
+    return author
 
 def main():
     session = SessionLocal()
     try:
         # Query all messages in the database
         messages = session.query(Message).order_by(Message.timestamp.desc()).all()
+
+        # Timer start
+        start_time = time.time()
+
+        # For test runs: only process a few messages
+        import os
+        if os.getenv("BATCH_DETECT_TEST", "0") == "1":
+            messages = messages[:10]  # Only process the first 10 messages
 
         new_resources = []
         for msg in tqdm(messages, desc="Detecting resources", unit="msg"):
@@ -34,6 +50,9 @@ def main():
                             for k, v in d.items():
                                 setattr(self, k, v)
                     msg.author = DummyAuthor(msg.author)
+            # Ensure msg.author is always JSON-serializable for DB
+            if hasattr(msg, 'author') and type(msg.author).__name__ == 'DummyAuthor':
+                msg.author = vars(msg.author)
             # Patch attachments if string (rare in DB, but for compatibility)
             if hasattr(msg, 'attachments') and isinstance(msg.attachments, str):
                 try:
@@ -64,7 +83,7 @@ def main():
                     url=res["url"],
                     type=res["type"],
                     tag=res["tag"],
-                    author=json.dumps(getattr(msg, "author", None), default=str),
+                    author=json.dumps(author_to_dict(getattr(msg, "author", None)), default=str),
                     author_display=res.get("author"),
                     channel_name=res.get("channel"),
                     timestamp=getattr(msg, "timestamp", None),
@@ -74,6 +93,8 @@ def main():
                 session.add(resource_obj)
                 new_resources.append(res)
         session.commit()
+        elapsed = time.time() - start_time
+        print(f"Detection completed in {elapsed:.2f} seconds.")
         print(json.dumps(new_resources, indent=2, default=str))
     finally:
         session.close()

@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import yaml  # Requires PyYAML
 from db.db import Resource
+import json
 
 def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
     """
@@ -43,5 +44,37 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
 
     print(f"Wrote {len(resources)} Markdown files to {output_dir}")
 
+def sync_to_json(db_url: str, output_path: str = "docs/resources/resources.json"):
+    """
+    Connect to the database at db_url, fetch all Resource records,
+    and write them all to a single JSON file at output_path.
+    """
+    engine = create_engine(db_url)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    resources = session.query(Resource).all()
+
+    resource_dicts = []
+    for res in resources:
+        resource_dicts.append({
+            "id": res.id,
+            "title": getattr(res, 'name', None) or (getattr(res, 'meta', {}) or {}).get('title') or res.url,
+            "description": getattr(res, 'description', None) or (getattr(res, 'meta', {}) or {}).get('description') or (res.context_snippet or ""),
+            "date": res.timestamp.strftime("%Y-%m-%d") if res.timestamp else None,
+            "author": res.author_display or res.author,
+            "channel": res.channel_name or res.channel_id,
+            "tag": res.tag,
+            "original_url": res.url,
+            "jump_url": getattr(res, 'jump_url', None),
+        })
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(resource_dicts, f, indent=2, default=str)
+
+    print(f"Wrote {len(resource_dicts)} resources to {output_path}")
+
 if __name__ == "__main__":
-    sync_to_markdown("sqlite:///resources.db")
+    sync_to_markdown("sqlite:///data/discord_messages.db")
+    sync_to_json("sqlite:///data/discord_messages.db")
