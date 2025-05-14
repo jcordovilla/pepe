@@ -21,11 +21,14 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
     resources = session.query(Resource).all()
 
     for res in resources:
+        # Use new fields if available, fallback to old
+        title = getattr(res, 'name', None) or (getattr(res, 'meta', {}) or {}).get('title') or res.url
+        description = getattr(res, 'description', None) or (getattr(res, 'meta', {}) or {}).get('description') or (res.context_snippet or "")
         front_matter = {
-            "title": res.metadata.get("title", res.url),
-            "date": res.timestamp.strftime("%Y-%m-%d"),
-            "author": res.author,
-            "channel": res.channel_id,
+            "title": title,
+            "date": res.timestamp.strftime("%Y-%m-%d") if res.timestamp else None,
+            "author": res.author_display or res.author,
+            "channel": res.channel_name or res.channel_id,
             "tag": res.tag,
             "original_url": res.url,
         }
@@ -35,7 +38,7 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
             md_file.write("---\n")
             yaml.dump(front_matter, md_file, default_flow_style=False, sort_keys=False)
             md_file.write("---\n\n")
-            md_file.write(res.context_snippet or "")
+            md_file.write(description)
 
     print(f"Wrote {len(resources)} Markdown files to {output_dir}")
 
