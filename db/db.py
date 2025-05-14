@@ -99,6 +99,7 @@ class Resource(Base):
     meta   = Column(JSON,   nullable=True)   # any extra parsed fields (renamed from metadata)
     name = Column(String, nullable=True)  # new: resource name/title
     description = Column(Text, nullable=True)  # new: resource description
+    jump_url = Column(String, nullable=True)  # new: jump_url for direct Discord link
 
 @contextmanager
 def get_db_session():

@@ -23,7 +23,7 @@ def main():
         # For test runs: only process a few messages
         import os
         if os.getenv("BATCH_DETECT_TEST", "0") == "1":
-            messages = messages[:10]  # Only process the first 10 messages
+            messages = messages[:50]  # Only process the first 50 messages
 
         new_resources = []
         for msg in tqdm(messages, desc="Detecting resources", unit="msg"):
@@ -75,6 +75,19 @@ def main():
                     message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None))
                 ).first()
                 if exists:
+                    # Backfill name/description/jump_url if missing and new values are available
+                    updated = False
+                    if not exists.name and res.get("name"):
+                        exists.name = res.get("name")
+                        updated = True
+                    if not exists.description and res.get("description"):
+                        exists.description = res.get("description")
+                        updated = True
+                    if not exists.jump_url and res.get("jump_url"):
+                        exists.jump_url = res.get("jump_url")
+                        updated = True
+                    if updated:
+                        session.add(exists)
                     continue
                 resource_obj = Resource(
                     message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None)),
@@ -88,6 +101,9 @@ def main():
                     channel_name=res.get("channel"),
                     timestamp=getattr(msg, "timestamp", None),
                     context_snippet=res.get("context_snippet"),
+                    name=res.get("name"),
+                    description=res.get("description"),
+                    jump_url=res.get("jump_url"),
                     meta=None
                 )
                 session.add(resource_obj)
