@@ -1,88 +1,45 @@
 [
   {
-    "message_id": 152,
+    "message_id": 1818,
     "resources": []
   },
   {
-    "message_id": 1542,
+    "message_id": 3953,
     "resources": []
   },
   {
-    "message_id": 696,
+    "message_id": 2728,
     "resources": []
   },
   {
-    "message_id": 2132,
+    "message_id": 2289,
     "resources": []
   },
   {
-    "message_id": 3220,
+    "message_id": 2838,
     "resources": []
   },
   {
-    "message_id": 114,
-    "resources": []
-  },
-  {
-    "message_id": 2049,
+    "message_id": 2893,
     "resources": [
       {
-        "url": "https://www.cnet.com/home/kitchen-and-household/a-robot-vacuum-that-picks-up-socks-stole-our-hearts-and-socks-at-ces-2025/",
+        "url": "https://www.msn.com/en-xl/news/other/scientists-create-next-gen-3d-printed-robots-that-run-without-electronics/vi-AA1BHprp?ocid=socialshare&pc=HCTS&cvid=9d2293d5c7a746a389d4920fa2f83cc3&ei=19",
         "type": "link",
-        "timestamp": "2025-04-22 02:07",
-        "author": "antoine789",
-        "channel": "\ud83c\udfd8general-chat",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1364060135193972867",
-        "context_snippet": "Motivational story for everyone who hates housework! Roborock's Saros Z70 robot vacuum, unveiled at CES 2025, features a mechanical arm capable of picking up larger debris like socks while cleaning. This innovation marks a significant step toward fully autonomous home cleaning solutions that can handle both dry and wet messes. Can't wait for convergence of AI and robotics for full service household robots!\nhttps://www.cnet.com/home/kitchen-and-household/a-robot-vacuum-that-picks-up-socks-stole-o",
+        "timestamp": "2025-04-23 09:27",
+        "author": "nura775",
+        "channel": "\ud83d\udddegenai-news",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1364533204824096859",
+        "context_snippet": "Hello everone! Here is interesting news: Scientists create next-gen 3D-printed robots that run without electronics. \nExciting developments are underway in robotics: scientists at the University of California, San Diego, have engineered a 3D-printed robot that operates without any electronics: \nhttps://www.msn.com/en-xl/news/other/scientists-create-next-gen-3d-printed-robots-that-run-without-electronics/vi-AA1BHprp?ocid=socialshare&pc=HCTS&cvid=9d2293d5c7a746a389d4920fa2f83cc3&ei=19",
         "tag": "News/Article"
       }
     ]
   },
   {
-    "message_id": 1217,
+    "message_id": 1049,
     "resources": []
   },
   {
-    "message_id": 945,
-    "resources": []
-  },
-  {
-    "message_id": 3603,
-    "resources": [
-      {
-        "url": "https://chatgpt.com/g/g-6803803bd90c8191aa5d78df4484e739-archidrawgpt]",
-        "type": "link",
-        "timestamp": "2025-04-25 12:36",
-        "author": "imkprabhat",
-        "channel": "showcase",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1354191556680089600/1365305589286047765",
-        "context_snippet": "Hi @everyone !\ud83d\udc4b  Thrilled to introduce **ArchiDrawGPT**\u2014an AI agent built to support enterprise architects and anyone stepping into architecture modeling.\n\nArchitecture models are essential for large enterprises\u2014they align strategy, processes, and technology. But creating them, especially following TOGAF and ArchiMate standards, can be complex and time-consuming.\n\nI built *ArchiDrawGPT* from a deep desire to bring GenAI into serious architectural work\u2014giving a helping hand to junior and medior a",
-        "tag": "Tool"
-      }
-    ]
-  },
-  {
-    "message_id": 1353,
-    "resources": []
-  },
-  {
-    "message_id": 1923,
-    "resources": []
-  },
-  {
-    "message_id": 3621,
-    "resources": []
-  },
-  {
-    "message_id": 3105,
-    "resources": []
-  },
-  {
-    "message_id": 2849,
-    "resources": []
-  },
-  {
-    "message_id": 1629,
+    "message_id": 63,
     "resources": []
   },
   {
@@ -90,763 +47,30 @@
     "resources": []
   },
   {
-    "message_id": 2533,
+    "message_id": 1992,
     "resources": []
   },
   {
-    "message_id": 2629,
-    "resources": []
-  },
-  {
-    "message_id": 3217,
-    "resources": []
-  },
-  {
-    "message_id": 325,
-    "resources": []
-  },
-  {
-    "message_id": 3349,
-    "resources": []
-  },
-  {
-    "message_id": 2171,
-    "resources": []
-  },
-  {
-    "message_id": 2662,
-    "resources": []
-  },
-  {
-    "message_id": 247,
-    "resources": []
-  },
-  {
-    "message_id": 234,
-    "resources": []
-  },
-  {
-    "message_id": 1952,
-    "resources": []
-  },
-  {
-    "message_id": 1049,
-    "resources": []
-  },
-  {
-    "message_id": 631,
-    "resources": []
-  },
-  {
-    "message_id": 2106,
-    "resources": []
-  },
-  {
-    "message_id": 1938,
-    "resources": []
-  },
-  {
-    "message_id": 166,
-    "resources": []
-  },
-  {
-    "message_id": 2599,
-    "resources": []
-  },
-  {
-    "message_id": 3115,
-    "resources": []
-  },
-  {
-    "message_id": 765,
-    "resources": []
-  },
-  {
-    "message_id": 2206,
-    "resources": []
-  },
-  {
-    "message_id": 47,
-    "resources": []
-  },
-  {
-    "message_id": 36,
-    "resources": []
-  },
-  {
-    "message_id": 931,
-    "resources": []
-  },
-  {
-    "message_id": 242,
-    "resources": []
-  },
-  {
-    "message_id": 896,
-    "resources": []
-  },
-  {
-    "message_id": 3468,
-    "resources": []
-  },
-  {
-    "message_id": 341,
-    "resources": []
-  },
-  {
-    "message_id": 1434,
-    "resources": []
-  },
-  {
-    "message_id": 295,
-    "resources": []
-  },
-  {
-    "message_id": 441,
-    "resources": []
-  },
-  {
-    "message_id": 3000,
-    "resources": []
-  },
-  {
-    "message_id": 1135,
-    "resources": []
-  },
-  {
-    "message_id": 579,
-    "resources": []
-  },
-  {
-    "message_id": 3904,
-    "resources": []
-  },
-  {
-    "message_id": 1926,
-    "resources": []
-  },
-  {
-    "message_id": 1291,
-    "resources": []
-  },
-  {
-    "message_id": 3386,
-    "resources": []
-  },
-  {
-    "message_id": 2127,
-    "resources": []
-  },
-  {
-    "message_id": 3783,
-    "resources": []
-  },
-  {
-    "message_id": 1645,
-    "resources": []
-  },
-  {
-    "message_id": 329,
-    "resources": []
-  },
-  {
-    "message_id": 734,
-    "resources": []
-  },
-  {
-    "message_id": 1530,
-    "resources": []
-  },
-  {
-    "message_id": 747,
-    "resources": []
-  },
-  {
-    "message_id": 3658,
-    "resources": []
-  },
-  {
-    "message_id": 154,
-    "resources": []
-  },
-  {
-    "message_id": 2831,
-    "resources": []
-  },
-  {
-    "message_id": 363,
-    "resources": []
-  },
-  {
-    "message_id": 1940,
-    "resources": []
-  },
-  {
-    "message_id": 2741,
-    "resources": []
-  },
-  {
-    "message_id": 3501,
+    "message_id": 2528,
     "resources": [
       {
-        "url": "https://www.deeplearning.ai/courses/generative-ai-for-everyone/",
+        "url": "https://www.linkedin.com/posts/prabhat-kumar-283b331b_vibewriting-cursoride-genai-activity-7324689244088688640-iY_f?utm_medium=ios_app&rcm=ACoAAARCvMMBi1W4H5DZSQvTq4Qug_fPX_hk-rc&utm_source=social_share_send&utm_campaign=copy_link",
         "type": "link",
-        "timestamp": "2025-04-13 10:55",
-        "author": "julioverne74",
-        "channel": "\ud83d\udcd6resources-library",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353449106537713756/1360931327574278275",
-        "context_snippet": "Some I recommend specifically:\n\nGenerative AI for Everyone (this one is a basic primer):\nhttps://www.deeplearning.ai/courses/generative-ai-for-everyone/\n\nAI Python for Beginners\nhttps://www.deeplearning.ai/short-courses/ai-python-for-beginners/\n\nChatGPT Prompt Engineering for Developers\nhttps://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/\n\nBuilding systems with the ChatGPT API:\nhttps://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/\n\nThis last one",
-        "tag": "Tutorial"
-      },
-      {
-        "url": "https://www.deeplearning.ai/short-courses/ai-python-for-beginners/",
-        "type": "link",
-        "timestamp": "2025-04-13 10:55",
-        "author": "julioverne74",
-        "channel": "\ud83d\udcd6resources-library",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353449106537713756/1360931327574278275",
-        "context_snippet": "Some I recommend specifically:\n\nGenerative AI for Everyone (this one is a basic primer):\nhttps://www.deeplearning.ai/courses/generative-ai-for-everyone/\n\nAI Python for Beginners\nhttps://www.deeplearning.ai/short-courses/ai-python-for-beginners/\n\nChatGPT Prompt Engineering for Developers\nhttps://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/\n\nBuilding systems with the ChatGPT API:\nhttps://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/\n\nThis last one",
-        "tag": "Tutorial"
-      },
-      {
-        "url": "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/",
-        "type": "link",
-        "timestamp": "2025-04-13 10:55",
-        "author": "julioverne74",
-        "channel": "\ud83d\udcd6resources-library",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353449106537713756/1360931327574278275",
-        "context_snippet": "Some I recommend specifically:\n\nGenerative AI for Everyone (this one is a basic primer):\nhttps://www.deeplearning.ai/courses/generative-ai-for-everyone/\n\nAI Python for Beginners\nhttps://www.deeplearning.ai/short-courses/ai-python-for-beginners/\n\nChatGPT Prompt Engineering for Developers\nhttps://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/\n\nBuilding systems with the ChatGPT API:\nhttps://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/\n\nThis last one",
-        "tag": "Tutorial"
-      },
-      {
-        "url": "https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/",
-        "type": "link",
-        "timestamp": "2025-04-13 10:55",
-        "author": "julioverne74",
-        "channel": "\ud83d\udcd6resources-library",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353449106537713756/1360931327574278275",
-        "context_snippet": "Some I recommend specifically:\n\nGenerative AI for Everyone (this one is a basic primer):\nhttps://www.deeplearning.ai/courses/generative-ai-for-everyone/\n\nAI Python for Beginners\nhttps://www.deeplearning.ai/short-courses/ai-python-for-beginners/\n\nChatGPT Prompt Engineering for Developers\nhttps://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/\n\nBuilding systems with the ChatGPT API:\nhttps://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/\n\nThis last one",
-        "tag": "Tutorial"
-      }
-    ]
-  },
-  {
-    "message_id": 2299,
-    "resources": []
-  },
-  {
-    "message_id": 2118,
-    "resources": []
-  },
-  {
-    "message_id": 3253,
-    "resources": []
-  },
-  {
-    "message_id": 392,
-    "resources": []
-  },
-  {
-    "message_id": 3013,
-    "resources": []
-  },
-  {
-    "message_id": 1150,
-    "resources": []
-  },
-  {
-    "message_id": 586,
-    "resources": []
-  },
-  {
-    "message_id": 1787,
-    "resources": []
-  },
-  {
-    "message_id": 3116,
-    "resources": []
-  },
-  {
-    "message_id": 564,
-    "resources": []
-  },
-  {
-    "message_id": 2536,
-    "resources": [
-      {
-        "url": "https://www.foxnews.com/health/woman-says-chatgpt-saved-her-life-helping-detect-cancer-which-doctors-missed",
-        "type": "link",
-        "timestamp": "2025-04-25 01:00",
-        "author": "gmacrina",
-        "channel": "\ud83d\udee0ai-practical-applications",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1365130424807985172",
-        "context_snippet": "I was always told not to google my way through my own health problems. While consulting a healthcare professional is always advisable, I\u2019d say that GenAi will play a more positive role in those motivated to explore their own health.  I\u2019ve seen many examples lately like the following. https://www.foxnews.com/health/woman-says-chatgpt-saved-her-life-helping-detect-cancer-which-doctors-missed",
-        "tag": "News/Article"
-      }
-    ]
-  },
-  {
-    "message_id": 569,
-    "resources": []
-  },
-  {
-    "message_id": 3100,
-    "resources": []
-  },
-  {
-    "message_id": 3267,
-    "resources": []
-  },
-  {
-    "message_id": 1981,
-    "resources": []
-  },
-  {
-    "message_id": 3,
-    "resources": []
-  },
-  {
-    "message_id": 1797,
-    "resources": []
-  },
-  {
-    "message_id": 3277,
-    "resources": []
-  },
-  {
-    "message_id": 2182,
-    "resources": []
-  },
-  {
-    "message_id": 2153,
-    "resources": []
-  },
-  {
-    "message_id": 634,
-    "resources": []
-  },
-  {
-    "message_id": 884,
-    "resources": []
-  },
-  {
-    "message_id": 57,
-    "resources": []
-  },
-  {
-    "message_id": 2807,
-    "resources": []
-  },
-  {
-    "message_id": 537,
-    "resources": []
-  },
-  {
-    "message_id": 909,
-    "resources": []
-  },
-  {
-    "message_id": 2719,
-    "resources": []
-  },
-  {
-    "message_id": 1597,
-    "resources": []
-  },
-  {
-    "message_id": 3313,
-    "resources": [
-      {
-        "url": "https://zapier.com/blog/how-zapier-rolled-out-ai/",
-        "type": "link",
-        "timestamp": "2025-05-08 20:06",
-        "author": "minsunnie",
-        "channel": "\ud83d\udca0buddy-group9",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1366389852249133148/1370129684532039862",
-        "context_snippet": "Hackathons to Habits > Reinvention https://zapier.com/blog/how-zapier-rolled-out-ai/ 7min ready",
-        "tag": "News/Article"
-      }
-    ]
-  },
-  {
-    "message_id": 3533,
-    "resources": []
-  },
-  {
-    "message_id": 1631,
-    "resources": []
-  },
-  {
-    "message_id": 1593,
-    "resources": []
-  },
-  {
-    "message_id": 878,
-    "resources": []
-  },
-  {
-    "message_id": 3140,
-    "resources": []
-  },
-  {
-    "message_id": 757,
-    "resources": []
-  },
-  {
-    "message_id": 2069,
-    "resources": []
-  },
-  {
-    "message_id": 3588,
-    "resources": []
-  },
-  {
-    "message_id": 1187,
-    "resources": []
-  },
-  {
-    "message_id": 2331,
-    "resources": []
-  },
-  {
-    "message_id": 3837,
-    "resources": []
-  },
-  {
-    "message_id": 3363,
-    "resources": []
-  },
-  {
-    "message_id": 2888,
-    "resources": []
-  },
-  {
-    "message_id": 2832,
-    "resources": []
-  },
-  {
-    "message_id": 3418,
-    "resources": []
-  },
-  {
-    "message_id": 3598,
-    "resources": []
-  },
-  {
-    "message_id": 411,
-    "resources": []
-  },
-  {
-    "message_id": 1945,
-    "resources": []
-  },
-  {
-    "message_id": 1456,
-    "resources": []
-  },
-  {
-    "message_id": 3765,
-    "resources": []
-  },
-  {
-    "message_id": 700,
-    "resources": []
-  },
-  {
-    "message_id": 337,
-    "resources": []
-  },
-  {
-    "message_id": 1294,
-    "resources": []
-  },
-  {
-    "message_id": 2032,
-    "resources": []
-  },
-  {
-    "message_id": 26,
-    "resources": []
-  },
-  {
-    "message_id": 8,
-    "resources": []
-  },
-  {
-    "message_id": 1757,
-    "resources": []
-  },
-  {
-    "message_id": 3662,
-    "resources": []
-  },
-  {
-    "message_id": 350,
-    "resources": []
-  },
-  {
-    "message_id": 1800,
-    "resources": []
-  },
-  {
-    "message_id": 2714,
-    "resources": []
-  },
-  {
-    "message_id": 1004,
-    "resources": []
-  },
-  {
-    "message_id": 317,
-    "resources": []
-  },
-  {
-    "message_id": 3128,
-    "resources": []
-  },
-  {
-    "message_id": 1170,
-    "resources": []
-  },
-  {
-    "message_id": 1195,
-    "resources": []
-  },
-  {
-    "message_id": 2580,
-    "resources": []
-  },
-  {
-    "message_id": 1650,
-    "resources": []
-  },
-  {
-    "message_id": 1937,
-    "resources": [
-      {
-        "url": "https://youtu.be/hYgRfncTTes",
-        "type": "youtube",
-        "timestamp": "2025-04-14 18:23",
-        "author": "laura.neder",
+        "timestamp": "2025-05-04 07:32",
+        "author": "imkprabhat",
         "channel": "\ud83c\udfd8general-chat",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1361406625193263297",
-        "context_snippet": "Good to know that deep fakes can be used for good reasons, too! \nhttps://youtu.be/hYgRfncTTes\n\n**Source**: Good News Network. (2023, December 19). *Company surprises workers with amazing hugs from people they most wished to see for holidays\u2013WATCH*. [Article link](https://www.goodnewsnetwork.org/company-surprises-workers-with-amazing-hugs-from-people-they-most-wished-to-see-for-holidays-watch/)",
-        "tag": "News/Article"
-      },
-      {
-        "url": "https://www.goodnewsnetwork.org/company-surprises-workers-with-amazing-hugs-from-people-they-most-wished-to-see-for-holidays-watch/)",
-        "type": "link",
-        "timestamp": "2025-04-14 18:23",
-        "author": "laura.neder",
-        "channel": "\ud83c\udfd8general-chat",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1361406625193263297",
-        "context_snippet": "Good to know that deep fakes can be used for good reasons, too! \nhttps://youtu.be/hYgRfncTTes\n\n**Source**: Good News Network. (2023, December 19). *Company surprises workers with amazing hugs from people they most wished to see for holidays\u2013WATCH*. [Article link](https://www.goodnewsnetwork.org/company-surprises-workers-with-amazing-hugs-from-people-they-most-wished-to-see-for-holidays-watch/)",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1368490344928514088",
+        "context_snippet": "Hi @everyone - I have been using coding copilots for writing. Inspired by the post of <@672229862085361664> , I also created a demo on how I am using Code Editors to write an entire Data Management book. Have a look here ! \nhttps://www.linkedin.com/posts/prabhat-kumar-283b331b_vibewriting-cursoride-genai-activity-7324689244088688640-iY_f?utm_medium=ios_app&rcm=ACoAAARCvMMBi1W4H5DZSQvTq4Qug_fPX_hk-rc&utm_source=social_share_send&utm_campaign=copy_link",
         "tag": "News/Article"
       }
     ]
   },
   {
-    "message_id": 1842,
+    "message_id": 1224,
     "resources": []
   },
   {
-    "message_id": 18,
-    "resources": []
-  },
-  {
-    "message_id": 3110,
-    "resources": []
-  },
-  {
-    "message_id": 322,
-    "resources": []
-  },
-  {
-    "message_id": 1404,
-    "resources": []
-  },
-  {
-    "message_id": 712,
-    "resources": []
-  },
-  {
-    "message_id": 852,
-    "resources": []
-  },
-  {
-    "message_id": 3905,
-    "resources": []
-  },
-  {
-    "message_id": 2477,
-    "resources": []
-  },
-  {
-    "message_id": 1378,
-    "resources": []
-  },
-  {
-    "message_id": 2077,
-    "resources": []
-  },
-  {
-    "message_id": 2623,
-    "resources": []
-  },
-  {
-    "message_id": 2950,
-    "resources": []
-  },
-  {
-    "message_id": 2081,
-    "resources": []
-  },
-  {
-    "message_id": 3178,
-    "resources": []
-  },
-  {
-    "message_id": 3638,
-    "resources": []
-  },
-  {
-    "message_id": 676,
-    "resources": []
-  },
-  {
-    "message_id": 368,
-    "resources": []
-  },
-  {
-    "message_id": 3264,
-    "resources": []
-  },
-  {
-    "message_id": 2693,
-    "resources": [
-      {
-        "url": "https://developer.paypal.com/tools/agent-toolkit/",
-        "type": "link",
-        "timestamp": "2025-05-02 05:36",
-        "author": "marie007532",
-        "channel": "\ud83d\uddc3gen-ai-use-cases",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1360973368676843583/1367736433154068480",
-        "context_snippet": "<@1075075819807985714> <@1364837264827617284> Paypal have also just introduced Agent Toolkit (allowing developers to integrate payments into AI experiences) and Visa Intelligent Commerce (enabling agent to shop based on user's criteria)\nhttps://developer.paypal.com/tools/agent-toolkit/\nhttps://developer.visa.com/capabilities/visa-intelligent-commerce/overview",
-        "tag": "Tool"
-      },
-      {
-        "url": "https://developer.visa.com/capabilities/visa-intelligent-commerce/overview",
-        "type": "link",
-        "timestamp": "2025-05-02 05:36",
-        "author": "marie007532",
-        "channel": "\ud83d\uddc3gen-ai-use-cases",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1360973368676843583/1367736433154068480",
-        "context_snippet": "<@1075075819807985714> <@1364837264827617284> Paypal have also just introduced Agent Toolkit (allowing developers to integrate payments into AI experiences) and Visa Intelligent Commerce (enabling agent to shop based on user's criteria)\nhttps://developer.paypal.com/tools/agent-toolkit/\nhttps://developer.visa.com/capabilities/visa-intelligent-commerce/overview",
-        "tag": "Tool"
-      }
-    ]
-  },
-  {
-    "message_id": 1792,
-    "resources": []
-  },
-  {
-    "message_id": 591,
-    "resources": []
-  },
-  {
-    "message_id": 3754,
-    "resources": []
-  },
-  {
-    "message_id": 3227,
-    "resources": []
-  },
-  {
-    "message_id": 1079,
-    "resources": []
-  },
-  {
-    "message_id": 2395,
-    "resources": []
-  },
-  {
-    "message_id": 2006,
-    "resources": []
-  },
-  {
-    "message_id": 3630,
-    "resources": []
-  },
-  {
-    "message_id": 2274,
-    "resources": []
-  },
-  {
-    "message_id": 577,
-    "resources": []
-  },
-  {
-    "message_id": 1406,
-    "resources": []
-  },
-  {
-    "message_id": 1880,
-    "resources": []
-  },
-  {
-    "message_id": 2702,
-    "resources": []
-  },
-  {
-    "message_id": 1470,
-    "resources": []
-  },
-  {
-    "message_id": 582,
-    "resources": []
-  },
-  {
-    "message_id": 2698,
-    "resources": []
-  },
-  {
-    "message_id": 3060,
-    "resources": []
-  },
-  {
-    "message_id": 1158,
-    "resources": []
-  },
-  {
-    "message_id": 2311,
-    "resources": [
-      {
-        "url": "https://medium.com/@dylanhwilliams/utilizing-generative-ai-and-llms-to-automate-detection-writing-5e4ea074072e",
-        "type": "link",
-        "timestamp": "2025-05-05 14:46",
-        "author": "eduardofadanelli",
-        "channel": "\ud83c\udfd8general-chat",
-        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1368962036373000232",
-        "context_snippet": "Headline: Utilizing Generative AI and LLMs to Automate Detection Writing\nSource / Date: Medium, April 29, 2025\nLink: https://medium.com/@dylanhwilliams/utilizing-generative-ai-and-llms-to-automate-detection-writing-5e4ea074072e\nTip Summary: The author shares a practical approach to using LLMs to automate the writing of security detection reports, focusing on simplifying repetitive tasks. He demonstrates how to structure prompts and integrate APIs to generate relevant, contextualized technical co",
-        "tag": "News/Article"
-      }
-    ]
-  },
-  {
-    "message_id": 829,
-    "resources": []
-  },
-  {
-    "message_id": 111,
-    "resources": []
-  },
-  {
-    "message_id": 2404,
-    "resources": []
-  },
-  {
-    "message_id": 1703,
+    "message_id": 2072,
     "resources": []
   },
   {
@@ -854,87 +78,857 @@
     "resources": []
   },
   {
-    "message_id": 353,
+    "message_id": 1074,
     "resources": []
   },
   {
-    "message_id": 1161,
+    "message_id": 2883,
     "resources": []
   },
   {
-    "message_id": 2983,
+    "message_id": 882,
     "resources": []
   },
   {
-    "message_id": 3320,
+    "message_id": 3426,
     "resources": []
   },
   {
-    "message_id": 1433,
+    "message_id": 3513,
     "resources": []
   },
   {
-    "message_id": 3826,
+    "message_id": 496,
     "resources": []
   },
   {
-    "message_id": 3199,
+    "message_id": 2960,
     "resources": []
   },
   {
-    "message_id": 1591,
+    "message_id": 2498,
     "resources": []
   },
   {
-    "message_id": 836,
+    "message_id": 1890,
     "resources": []
   },
   {
-    "message_id": 2961,
+    "message_id": 1935,
     "resources": []
   },
   {
-    "message_id": 746,
+    "message_id": 1951,
+    "resources": [
+      {
+        "url": "https://www.theclueless.ai/)",
+        "type": "link",
+        "timestamp": "2025-04-30 10:35",
+        "author": "juanhayek",
+        "channel": "\ud83d\udc4bintroductions",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353442520717066320/1367086845191786527",
+        "context_snippet": "Hi Everyone!  Happy to be part of this community!\n\n\ud83d\udccc Full Name: Juan Hayek\n\n\ud83d\udcda Background: 18+ years of experience in software development and AI, I\u2019m currently CTO at Traxi\u00f3n, one of Mexico\u2019s top logistics companies, and at Troop MX, where we launched Mexico\u2019s first AI influencers with (https://www.theclueless.ai/) (Spain).\n\n\ud83d\udcbc Role: CTO Logistics and Technology\n\n\ud83d\udccd Location: Mexico City, Mexico\n\n\ud83d\udd17 LinkedIn: https://www.linkedin.com/in/juanhayek\n\ud83d\udd17 Traxion: https://traxion.global\n\ud83d\udd17 Troop: https://t",
+        "tag": "Tool"
+      }
+    ]
+  },
+  {
+    "message_id": 3190,
     "resources": []
   },
   {
-    "message_id": 256,
+    "message_id": 3107,
     "resources": []
   },
   {
-    "message_id": 2443,
+    "message_id": 2143,
     "resources": []
   },
   {
-    "message_id": 1510,
+    "message_id": 2587,
     "resources": []
   },
   {
-    "message_id": 1309,
+    "message_id": 2463,
     "resources": []
   },
   {
-    "message_id": 3670,
+    "message_id": 991,
     "resources": []
   },
   {
-    "message_id": 3752,
+    "message_id": 944,
     "resources": []
   },
   {
-    "message_id": 689,
+    "message_id": 2966,
+    "resources": [
+      {
+        "url": "https://createwith.com/",
+        "type": "link",
+        "timestamp": "2025-05-13 16:20",
+        "author": "jhorden2211",
+        "channel": "\ud83d\udcbccareer-opportunities",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1354193330854035617/1371884747252568074",
+        "context_snippet": "An old friend from university has co-founded Create With, a thriving community of founders, freelancers, and enthusiasts who are launching ideas and solving real problems with speed, scale and efficiency using modern AI techniques and Visual Development tools.  They are holding a conference in London on 22nd May focused on non-coding and low-code approaches to building with AI.\n\nThey've got some interesting speakers lined up so great opportunity for learning and networking if you happen to be in",
+        "tag": "Event"
+      }
+    ]
+  },
+  {
+    "message_id": 264,
     "resources": []
   },
   {
-    "message_id": 2765,
+    "message_id": 3856,
     "resources": []
   },
   {
-    "message_id": 2457,
+    "message_id": 3095,
     "resources": []
   },
   {
-    "message_id": 769,
+    "message_id": 3748,
+    "resources": []
+  },
+  {
+    "message_id": 1936,
+    "resources": []
+  },
+  {
+    "message_id": 701,
+    "resources": []
+  },
+  {
+    "message_id": 1335,
+    "resources": []
+  },
+  {
+    "message_id": 722,
+    "resources": []
+  },
+  {
+    "message_id": 2008,
+    "resources": []
+  },
+  {
+    "message_id": 999,
+    "resources": []
+  },
+  {
+    "message_id": 492,
+    "resources": []
+  },
+  {
+    "message_id": 151,
+    "resources": []
+  },
+  {
+    "message_id": 1302,
+    "resources": []
+  },
+  {
+    "message_id": 878,
+    "resources": []
+  },
+  {
+    "message_id": 3563,
+    "resources": []
+  },
+  {
+    "message_id": 3177,
+    "resources": []
+  },
+  {
+    "message_id": 3575,
+    "resources": []
+  },
+  {
+    "message_id": 1969,
+    "resources": []
+  },
+  {
+    "message_id": 2712,
+    "resources": [
+      {
+        "url": "https://www.linkedin.com/posts/alanaiethics_aiethics-responsibleai-techforgood-activity-7312432246693523457-Yaoz?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVt0CABILqZAs_8HVxmz5LscYHcSPweDSY,",
+        "type": "link",
+        "timestamp": "2025-04-27 08:43",
+        "author": "andreahickethier",
+        "channel": "\ud83d\udcdaai-philosophy-ethics",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353448986408779877/1365971646577381417",
+        "context_snippet": "Thank you, Sebastien, for bringing up the role of neutral stakeholders like governments or the World Economic Forum. This really resonates \u2014 but it also makes me wonder:\n\n\ud83d\udd0d How do we define \"neutral\" in a global AI landscape where power dynamics and economic interests often intersect?\n\nI recently came across a great post by Alan R. Goold (Alan AI Ethics) here\u2019s the link https://www.linkedin.com/posts/alanaiethics_aiethics-responsibleai-techforgood-activity-7312432246693523457-Yaoz?utm_source=sha",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 154,
+    "resources": []
+  },
+  {
+    "message_id": 3035,
+    "resources": []
+  },
+  {
+    "message_id": 2228,
+    "resources": []
+  },
+  {
+    "message_id": 1399,
+    "resources": []
+  },
+  {
+    "message_id": 2828,
+    "resources": []
+  },
+  {
+    "message_id": 2293,
+    "resources": [
+      {
+        "url": "https://cloudsecurityalliance.org/blog/2025/04/22/ai-and-privacy-2024-to-2025-embracing-the-future-of-global-legal-developments",
+        "type": "link",
+        "timestamp": "2025-04-23 17:01",
+        "author": "ireney_67517",
+        "channel": "\ud83c\udfd8general-chat",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1364647442024239245",
+        "context_snippet": "Hi all, here's a Midweek Topic which deserves more coverage.  \n**Headline: **AI and Privacy - Shifting from 2024 to 2025\n**Source/Date: **Cloud Security Alliance, April 22, 2025\n**Link**: https://cloudsecurityalliance.org/blog/2025/04/22/ai-and-privacy-2024-to-2025-embracing-the-future-of-global-legal-developments\n**Summary: **As AI technologies proliferate, global privacy regulations are evolving to address the unique challenges posed by AI systems. This article discusses the necessity for orga",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 846,
+    "resources": []
+  },
+  {
+    "message_id": 3031,
+    "resources": []
+  },
+  {
+    "message_id": 3462,
+    "resources": []
+  },
+  {
+    "message_id": 3188,
+    "resources": []
+  },
+  {
+    "message_id": 1174,
+    "resources": []
+  },
+  {
+    "message_id": 2921,
+    "resources": []
+  },
+  {
+    "message_id": 913,
+    "resources": []
+  },
+  {
+    "message_id": 2994,
+    "resources": []
+  },
+  {
+    "message_id": 1063,
+    "resources": []
+  },
+  {
+    "message_id": 2962,
+    "resources": []
+  },
+  {
+    "message_id": 1107,
+    "resources": []
+  },
+  {
+    "message_id": 2454,
+    "resources": []
+  },
+  {
+    "message_id": 281,
+    "resources": []
+  },
+  {
+    "message_id": 1254,
+    "resources": []
+  },
+  {
+    "message_id": 1216,
+    "resources": []
+  },
+  {
+    "message_id": 1700,
+    "resources": []
+  },
+  {
+    "message_id": 1050,
+    "resources": []
+  },
+  {
+    "message_id": 841,
+    "resources": []
+  },
+  {
+    "message_id": 2938,
+    "resources": []
+  },
+  {
+    "message_id": 3921,
+    "resources": [
+      {
+        "url": "https://time.com/6302984/ai-jobs-career/&#8203;:contentReference[oaicite:0]{index=0}",
+        "type": "link",
+        "timestamp": "2025-04-24 16:12",
+        "author": "darkgago",
+        "channel": "\ud83d\udcbblearning-without-coding-skills",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1364997514985738292",
+        "context_snippet": "Headline: How to Make AI Work for You, at Work\nSource / Date: TIME, August 9, 2023\nLink: https://time.com/6302984/ai-jobs-career/&#8203;:contentReference[oaicite:0]{index=0}\n\nQuick\u202fSummary: This article highlights how professionals without coding backgrounds are leveraging AI tools to enhance their work. By taking accessible courses like \"Elements of AI,\" individuals from various fields are gaining foundational AI knowledge, enabling them to utilize AI effectively in their careers.\u200b\n\nTakeaway: Y",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 2527,
+    "resources": []
+  },
+  {
+    "message_id": 976,
+    "resources": []
+  },
+  {
+    "message_id": 1439,
+    "resources": []
+  },
+  {
+    "message_id": 3510,
+    "resources": []
+  },
+  {
+    "message_id": 3976,
+    "resources": []
+  },
+  {
+    "message_id": 2957,
+    "resources": []
+  },
+  {
+    "message_id": 1867,
+    "resources": []
+  },
+  {
+    "message_id": 3793,
+    "resources": []
+  },
+  {
+    "message_id": 3248,
+    "resources": []
+  },
+  {
+    "message_id": 3796,
+    "resources": []
+  },
+  {
+    "message_id": 2738,
+    "resources": []
+  },
+  {
+    "message_id": 1024,
+    "resources": []
+  },
+  {
+    "message_id": 3554,
+    "resources": []
+  },
+  {
+    "message_id": 2836,
+    "resources": [
+      {
+        "url": "https://www.mckinsey.com/capabilities/operations/our-insights/beyond-automation-how-gen-ai-is-reshaping-supply-chains",
+        "type": "link",
+        "timestamp": "2025-04-27 14:42",
+        "author": "boozeena_49785",
+        "channel": "\ud83d\udee0ai-practical-applications",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366061936852078764",
+        "context_snippet": "Headline: Beyond automation: How gen AI is reshaping supply chains\nSource / Date: McKinsey & Company, April 17 2025\nLink: https://www.mckinsey.com/capabilities/operations/our-insights/beyond-automation-how-gen-ai-is-reshaping-supply-chains\nKey Insight: McKinsey details how generative AI is cutting logistics paperwork time by up to 60 % and saving last-mile operators $30\u201335 million through virtual dispatcher agents. The article stresses that end-to-end supply-chain visibility and route optimizati",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 1038,
+    "resources": []
+  },
+  {
+    "message_id": 1917,
+    "resources": []
+  },
+  {
+    "message_id": 252,
+    "resources": []
+  },
+  {
+    "message_id": 2042,
+    "resources": []
+  },
+  {
+    "message_id": 4003,
+    "resources": []
+  },
+  {
+    "message_id": 3855,
+    "resources": []
+  },
+  {
+    "message_id": 3140,
+    "resources": []
+  },
+  {
+    "message_id": 564,
+    "resources": []
+  },
+  {
+    "message_id": 3256,
+    "resources": []
+  },
+  {
+    "message_id": 2670,
+    "resources": []
+  },
+  {
+    "message_id": 2600,
+    "resources": []
+  },
+  {
+    "message_id": 3326,
+    "resources": []
+  },
+  {
+    "message_id": 685,
+    "resources": []
+  },
+  {
+    "message_id": 1672,
+    "resources": []
+  },
+  {
+    "message_id": 367,
+    "resources": []
+  },
+  {
+    "message_id": 1929,
+    "resources": []
+  },
+  {
+    "message_id": 91,
+    "resources": []
+  },
+  {
+    "message_id": 670,
+    "resources": []
+  },
+  {
+    "message_id": 1639,
+    "resources": []
+  },
+  {
+    "message_id": 2546,
+    "resources": []
+  },
+  {
+    "message_id": 2279,
+    "resources": [
+      {
+        "url": "https://spring.io/blog/2025/04/14/spring-ai-prompt-engineering-patterns",
+        "type": "link",
+        "timestamp": "2025-04-22 13:22",
+        "author": "boozeena_49785",
+        "channel": "\ud83c\udfd8general-chat",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1364229978140573707",
+        "context_snippet": "Hi guys ! Happy Tech Tip Tuesday to everyone ! \n\nHeadline: Prompt Engineering Techniques with Spring AI\nSource / Date: Spring.io Blog, April 14, 2025\nLink: https://spring.io/blog/2025/04/14/spring-ai-prompt-engineering-patterns\nTip Summary: This blog post demonstrates practical implementations of Prompt Engineering techniques using Spring AI. It shows how to translate concepts into working Java code using Spring AI\u2019s fluent ChatClient API. The examples follow patterns outlined in the Prompt Engi",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 1896,
+    "resources": []
+  },
+  {
+    "message_id": 3369,
+    "resources": []
+  },
+  {
+    "message_id": 734,
+    "resources": []
+  },
+  {
+    "message_id": 2110,
+    "resources": []
+  },
+  {
+    "message_id": 1375,
+    "resources": []
+  },
+  {
+    "message_id": 1509,
+    "resources": []
+  },
+  {
+    "message_id": 1627,
+    "resources": []
+  },
+  {
+    "message_id": 2946,
+    "resources": []
+  },
+  {
+    "message_id": 1237,
+    "resources": []
+  },
+  {
+    "message_id": 530,
+    "resources": []
+  },
+  {
+    "message_id": 1724,
+    "resources": []
+  },
+  {
+    "message_id": 692,
+    "resources": []
+  },
+  {
+    "message_id": 242,
+    "resources": []
+  },
+  {
+    "message_id": 977,
+    "resources": []
+  },
+  {
+    "message_id": 2339,
+    "resources": []
+  },
+  {
+    "message_id": 1531,
+    "resources": []
+  },
+  {
+    "message_id": 1210,
+    "resources": []
+  },
+  {
+    "message_id": 597,
+    "resources": []
+  },
+  {
+    "message_id": 1613,
+    "resources": []
+  },
+  {
+    "message_id": 1898,
+    "resources": []
+  },
+  {
+    "message_id": 2542,
+    "resources": []
+  },
+  {
+    "message_id": 68,
+    "resources": []
+  },
+  {
+    "message_id": 1004,
+    "resources": []
+  },
+  {
+    "message_id": 1762,
+    "resources": []
+  },
+  {
+    "message_id": 3614,
+    "resources": []
+  },
+  {
+    "message_id": 784,
+    "resources": []
+  },
+  {
+    "message_id": 3398,
+    "resources": []
+  },
+  {
+    "message_id": 521,
+    "resources": []
+  },
+  {
+    "message_id": 2477,
+    "resources": [
+      {
+        "url": "https://stanforddaily.com/2025/04/18/ai-model-formulates-life-saving-nutrition-for-nicu-infants/",
+        "type": "link",
+        "timestamp": "2025-04-28 09:09",
+        "author": "marie007532",
+        "channel": "\ud83c\udfd8general-chat",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1366340613955522662",
+        "context_snippet": "Good morning and warm welcome to all new members. **This is Motivational Monday ! **\n\nHeadline: AI Model Formulates Life-Saving Nutrition for NICU Infants\nSource / Date: Stanford Daily, 18 April 2025\nLink: https://stanforddaily.com/2025/04/18/ai-model-formulates-life-saving-nutrition-for-nicu-infants/\nQuick Summary: Researchers have developed an AI-driven model that designs personalized nutritional formulas for premature infants in neonatal intensive care units (NICUs). This advancement ensures ",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 454,
+    "resources": []
+  },
+  {
+    "message_id": 1072,
+    "resources": []
+  },
+  {
+    "message_id": 3995,
+    "resources": []
+  },
+  {
+    "message_id": 2396,
+    "resources": []
+  },
+  {
+    "message_id": 3599,
+    "resources": []
+  },
+  {
+    "message_id": 1892,
+    "resources": []
+  },
+  {
+    "message_id": 1030,
+    "resources": []
+  },
+  {
+    "message_id": 28,
+    "resources": []
+  },
+  {
+    "message_id": 2149,
+    "resources": []
+  },
+  {
+    "message_id": 435,
+    "resources": []
+  },
+  {
+    "message_id": 1123,
+    "resources": []
+  },
+  {
+    "message_id": 2379,
+    "resources": []
+  },
+  {
+    "message_id": 1492,
+    "resources": []
+  },
+  {
+    "message_id": 1124,
+    "resources": []
+  },
+  {
+    "message_id": 1588,
+    "resources": []
+  },
+  {
+    "message_id": 442,
+    "resources": []
+  },
+  {
+    "message_id": 825,
+    "resources": []
+  },
+  {
+    "message_id": 2803,
+    "resources": []
+  },
+  {
+    "message_id": 654,
+    "resources": []
+  },
+  {
+    "message_id": 357,
+    "resources": []
+  },
+  {
+    "message_id": 2022,
+    "resources": []
+  },
+  {
+    "message_id": 314,
+    "resources": []
+  },
+  {
+    "message_id": 2040,
+    "resources": []
+  },
+  {
+    "message_id": 2118,
+    "resources": []
+  },
+  {
+    "message_id": 2084,
+    "resources": []
+  },
+  {
+    "message_id": 2473,
+    "resources": []
+  },
+  {
+    "message_id": 2714,
+    "resources": []
+  },
+  {
+    "message_id": 2082,
+    "resources": []
+  },
+  {
+    "message_id": 3733,
+    "resources": []
+  },
+  {
+    "message_id": 3761,
+    "resources": []
+  },
+  {
+    "message_id": 3496,
+    "resources": []
+  },
+  {
+    "message_id": 273,
+    "resources": []
+  },
+  {
+    "message_id": 1956,
+    "resources": []
+  },
+  {
+    "message_id": 3773,
+    "resources": []
+  },
+  {
+    "message_id": 605,
+    "resources": []
+  },
+  {
+    "message_id": 2375,
+    "resources": []
+  },
+  {
+    "message_id": 498,
+    "resources": []
+  },
+  {
+    "message_id": 1008,
+    "resources": []
+  },
+  {
+    "message_id": 1922,
+    "resources": []
+  },
+  {
+    "message_id": 2709,
+    "resources": []
+  },
+  {
+    "message_id": 1512,
+    "resources": []
+  },
+  {
+    "message_id": 945,
+    "resources": []
+  },
+  {
+    "message_id": 3747,
+    "resources": []
+  },
+  {
+    "message_id": 508,
+    "resources": []
+  },
+  {
+    "message_id": 2663,
+    "resources": [
+      {
+        "url": "https://www.geeksforgeeks.org/best-prompt-engineering-courses/",
+        "type": "link",
+        "timestamp": "2025-05-13 13:07",
+        "author": "melindamelcher",
+        "channel": "\ud83c\udfd8general-chat",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1371836316953874442",
+        "context_snippet": "**\ud83d\udcbbTech Tip Tuesday** - do you feel like more learning?\n\nHeadline: 10 Best Prompt Engineering Courses [2025]\nSource / Date: GeeksforGeeks, May 1, 2025\nLink: https://www.geeksforgeeks.org/best-prompt-engineering-courses/\nTip Summary: This curated list highlights eight interactive, hands-on prompt engineering courses\u2014covering zero- and few-shot techniques, chain-of-thought workflows, and tool integrations. Each entry includes estimated time-to-completion, example exercises, and community support c",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 1355,
+    "resources": []
+  },
+  {
+    "message_id": 2668,
+    "resources": [
+      {
+        "url": "https://www.nijho.lt/post/using-llms/",
+        "type": "link",
+        "timestamp": "2025-05-13 15:56",
+        "author": "darkgago",
+        "channel": "\ud83c\udfd8general-chat",
+        "jump_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1371878893618991196",
+        "context_snippet": "Morning @everyone ! Tech Tuesday Tip Day !\n\nHope everyone is having a great Day\n\n**Headline:** Optimizing My LLM Workflow: Self-Hosting AI Interfaces\n**Source / Date:** Bas Nijholt, April 29, 2025\n**Link:** https://www.nijho.lt/post/using-llms/\n**Tip Summary:** Bas Nijholt shares his approach to enhancing AI development workflows by self-hosting AI interfaces like LibreChat and OpenWebUI. By integrating these tools with various AI APIs, he achieves a more efficient and cost-effective development",
+        "tag": "News/Article"
+      }
+    ]
+  },
+  {
+    "message_id": 366,
+    "resources": []
+  },
+  {
+    "message_id": 2102,
+    "resources": []
+  },
+  {
+    "message_id": 994,
+    "resources": []
+  },
+  {
+    "message_id": 3291,
+    "resources": []
+  },
+  {
+    "message_id": 1310,
+    "resources": []
+  },
+  {
+    "message_id": 3227,
+    "resources": []
+  },
+  {
+    "message_id": 3067,
+    "resources": []
+  },
+  {
+    "message_id": 45,
+    "resources": []
+  },
+  {
+    "message_id": 446,
+    "resources": []
+  },
+  {
+    "message_id": 2927,
+    "resources": []
+  },
+  {
+    "message_id": 3390,
     "resources": []
   }
 ]

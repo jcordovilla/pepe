@@ -1,19 +1,59 @@
 import json
-from db import Session, engine, Message, Resource
+from db.db import SessionLocal, Message, Resource  # Updated import paths
 from core.resource_detector import detect_resources
 
 def main():
-    session = Session()
+    session = SessionLocal()
     try:
         # Query all messages in the database
         messages = session.query(Message).order_by(Message.timestamp.desc()).all()
 
         new_resources = []
         for msg in messages:
+            # Patch channel if missing
+            if not hasattr(msg, 'channel'):
+                class DummyChannel:
+                    def __init__(self, name, topic=None):
+                        self.name = name
+                        self.topic = topic
+                channel_name = getattr(msg, 'channel_name', None) or getattr(msg, 'channel', None)
+                channel_topic = getattr(msg, 'channel_topic', None)
+                msg.channel = DummyChannel(channel_name, channel_topic)
+            # Patch author if dict or JSON string
+            if hasattr(msg, 'author'):
+                if isinstance(msg.author, str):
+                    try:
+                        import json as _json
+                        msg.author = _json.loads(msg.author)
+                    except Exception:
+                        pass
+                if isinstance(msg.author, dict):
+                    class DummyAuthor:
+                        def __init__(self, d):
+                            for k, v in d.items():
+                                setattr(self, k, v)
+                    msg.author = DummyAuthor(msg.author)
+            # Patch attachments if string (rare in DB, but for compatibility)
+            if hasattr(msg, 'attachments') and isinstance(msg.attachments, str):
+                try:
+                    att_list = json.loads(msg.attachments)
+                    class DummyAttachment:
+                        def __init__(self, d):
+                            for k, v in d.items():
+                                setattr(self, k, v)
+                    msg.attachments = [DummyAttachment(a) for a in att_list]
+                except Exception:
+                    msg.attachments = []
+            elif not hasattr(msg, 'attachments'):
+                msg.attachments = []
+
             detected = detect_resources(msg)
             for res in detected:
                 # Check if resource already exists (by url and message_id)
-                exists = session.query(Resource).filter_by(url=res["url"], message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None))).first()
+                exists = session.query(Resource).filter_by(
+                    url=res["url"],
+                    message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None))
+                ).first()
                 if exists:
                     continue
                 resource_obj = Resource(
