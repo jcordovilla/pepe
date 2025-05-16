@@ -1,7 +1,7 @@
 import json
 import time  # Add this import
 from db.db import SessionLocal, Message, Resource  # Updated import paths
-from core.resource_detector import detect_resources
+from core.resource_detector import detect_resources, deduplicate_resources
 from tqdm import tqdm  # Already imported
 
 def author_to_dict(author):
@@ -68,46 +68,48 @@ def main():
                 msg.attachments = []
 
             detected = detect_resources(msg)
-            for res in detected:
-                # Check if resource already exists (by url and message_id)
-                exists = session.query(Resource).filter_by(
-                    url=res["url"],
-                    message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None))
-                ).first()
-                if exists:
-                    # Backfill name/description/jump_url if missing and new values are available
-                    updated = False
-                    if not exists.name and res.get("name"):
-                        exists.name = res.get("name")
-                        updated = True
-                    if not exists.description and res.get("description"):
-                        exists.description = res.get("description")
-                        updated = True
-                    if not exists.jump_url and res.get("jump_url"):
-                        exists.jump_url = res.get("jump_url")
-                        updated = True
-                    if updated:
-                        session.add(exists)
-                    continue
-                resource_obj = Resource(
-                    message_id=str(getattr(msg, "message_id", None) or getattr(msg, "id", None)),
-                    guild_id=str(getattr(msg, "guild_id", None)),
-                    channel_id=str(getattr(msg, "channel_id", None)),
-                    url=res["url"],
-                    type=res["type"],
-                    tag=res["tag"],
-                    author=json.dumps(author_to_dict(getattr(msg, "author", None)), default=str),
-                    author_display=res.get("author"),
-                    channel_name=res.get("channel"),
-                    timestamp=getattr(msg, "timestamp", None),
-                    context_snippet=res.get("context_snippet"),
-                    name=res.get("name"),
-                    description=res.get("description"),
-                    jump_url=res.get("jump_url"),
-                    meta=None
-                )
-                session.add(resource_obj)
-                new_resources.append(res)
+            new_resources.extend(detected)
+        # Deduplicate all collected resources before saving/output
+        new_resources = deduplicate_resources(new_resources)
+        for res in new_resources:
+            # Check if resource already exists (by url and message_id)
+            exists = session.query(Resource).filter_by(
+                url=res["url"],
+                message_id=str(res.get("message_id", None))
+            ).first()
+            if exists:
+                # Backfill name/description/jump_url if missing and new values are available
+                updated = False
+                if not exists.name and res.get("name"):
+                    exists.name = res.get("name")
+                    updated = True
+                if not exists.description and res.get("description"):
+                    exists.description = res.get("description")
+                    updated = True
+                if not exists.jump_url and res.get("jump_url"):
+                    exists.jump_url = res.get("jump_url")
+                    updated = True
+                if updated:
+                    session.add(exists)
+                continue
+            resource_obj = Resource(
+                message_id=str(res.get("message_id", None)),
+                guild_id=str(res.get("guild_id", None)),
+                channel_id=str(res.get("channel_id", None)),
+                url=res["url"],
+                type=res["type"],
+                tag=res["tag"],
+                author=json.dumps(res.get("author", None), default=str),
+                author_display=res.get("author"),
+                channel_name=res.get("channel"),
+                timestamp=res.get("timestamp", None),
+                context_snippet=res.get("context_snippet"),
+                name=res.get("name"),
+                description=res.get("description"),
+                jump_url=res.get("jump_url"),
+                meta=None
+            )
+            session.add(resource_obj)
         session.commit()
         elapsed = time.time() - start_time
         print(f"Detection completed in {elapsed:.2f} seconds.")

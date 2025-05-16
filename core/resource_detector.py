@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from typing import List, Dict, Any
 from core.classifier import classify_resource  # <-- Import the classifier
+from urllib.parse import urlparse, urlunparse
 
 # Example: from tools.time_parser import parse_time  # Uncomment if you want to use your time parser
 
@@ -339,6 +340,46 @@ Respond in JSON with keys 'title' and 'description'.
         desc = resource.get("description","")
         words = desc.split()
         return ("Resource: " + " ".join(words[:10]), desc)
+
+def normalize_url(url: str) -> str:
+    """Strip query parameters, fragments, and trailing punctuation from a URL."""
+    if not url:
+        return None
+    try:
+        parsed = urlparse(url)
+        parsed = parsed._replace(query='', fragment='')
+        clean = urlunparse(parsed).rstrip(') ').strip()
+        return clean
+    except Exception:
+        return url.strip()
+
+def normalize_title(title: str) -> str:
+    """Lowercase, remove non-alphanumeric chars, and collapse whitespace in titles."""
+    if not title:
+        return None
+    t = title.lower()
+    t = re.sub(r'[^a-z0-9\s]', '', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
+
+def deduplicate_resources(resources):
+    """Remove duplicates by normalized URL or title."""
+    seen_urls = set()
+    seen_titles = set()
+    unique = []
+    for item in resources:
+        url = item.get('url') or item.get('resource_url')
+        title = item.get('title') or item.get('name', '')
+        norm_url = normalize_url(url) if url else None
+        norm_title = normalize_title(title) if title else None
+        if (norm_url and norm_url in seen_urls) or (norm_title and norm_title in seen_titles):
+            continue
+        unique.append(item)
+        if norm_url:
+            seen_urls.add(norm_url)
+        if norm_title:
+            seen_titles.add(norm_title)
+    return unique
 
 if __name__ == "__main__":
     import os
