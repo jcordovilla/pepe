@@ -3,6 +3,7 @@ import time  # Add this import
 from db.db import SessionLocal, Message, Resource  # Updated import paths
 from core.resource_detector import detect_resources, deduplicate_resources
 from tqdm import tqdm  # Already imported
+from datetime import datetime
 
 def author_to_dict(author):
     if isinstance(author, dict):
@@ -10,6 +11,14 @@ def author_to_dict(author):
     if hasattr(author, '__dict__'):
         return vars(author)
     return author
+
+def parse_timestamp(ts):
+    if isinstance(ts, datetime) or ts is None:
+        return ts
+    try:
+        return datetime.fromisoformat(ts)
+    except Exception:
+        return None
 
 def main():
     session = SessionLocal()
@@ -102,7 +111,7 @@ def main():
                 author=json.dumps(res.get("author", None), default=str),
                 author_display=res.get("author"),
                 channel_name=res.get("channel"),
-                timestamp=res.get("timestamp", None),
+                timestamp=parse_timestamp(res.get("timestamp", None)),
                 context_snippet=res.get("context_snippet"),
                 name=res.get("name"),
                 description=res.get("description"),
