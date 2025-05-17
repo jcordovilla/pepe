@@ -89,16 +89,14 @@ def search_messages(
     author_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
-    Enhanced hybrid keyword + semantic search with improved relevance.
-    Always returns a list of dicts with required metadata: author, timestamp, content, jump_url, channel_name, guild_id, channel_id, message_id.
-    Handles unknown channels gracefully.
+    Hybrid keyword + semantic search. Always returns a list of dicts with required metadata: author, timestamp, content, jump_url, channel_name, guild_id, channel_id, message_id.
+    Handles unknown channels gracefully. No summaries or paraphrasing.
     """
     # Default query to empty string if not provided
     if query is None:
         query = ""
     if not isinstance(query, str):
         raise ValueError("Query must be a string.")
-    # Allow empty query for author/channel-only searches
 
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
@@ -122,7 +120,6 @@ def search_messages(
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
-        # AND logic: both keyword and query must be present in the message content
         skill_terms = []
         if keyword and query:
             db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
@@ -137,7 +134,6 @@ def search_messages(
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 10).all()
         if not candidates:
             return []
-        # AND logic for filtering: both keyword and query must be present
         filtered = []
         for m in candidates:
             content = (m.content or '').lower()
@@ -157,12 +153,16 @@ def search_messages(
                 filtered.append(m)
         if not filtered:
             return []
-        # Only return the actual, full message content and required metadata
         formatted = []
         for m in filtered[:k]:
+            author = m.author or {}
             formatted.append({
-                "author": m.author or {},
-                "timestamp": m.timestamp,
+                "author": {
+                    "username": author.get("username", "Unknown"),
+                    "id": author.get("id"),
+                    "display_name": author.get("display_name", "")
+                },
+                "timestamp": m.timestamp.isoformat() if hasattr(m.timestamp, 'isoformat') else str(m.timestamp),
                 "content": m.content or "",
                 "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id),
                 "channel_name": m.channel_name,
