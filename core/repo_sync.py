@@ -44,6 +44,7 @@ def sync_to_markdown(db_url: str, output_dir: str = "docs/resources"):
 
     print(f"Wrote {len(resources)} Markdown files to {output_dir}")
 
+
 def sync_to_json(db_url: str, output_path: str = "docs/resources/resources.json"):
     """
     Connect to the database at db_url, fetch all Resource records,
@@ -76,5 +77,5 @@ def sync_to_json(db_url: str, output_path: str = "docs/resources/resources.json"
     print(f"Wrote {len(resource_dicts)} resources to {output_path}")
 
 if __name__ == "__main__":
-    sync_to_markdown("sqlite:///data/discord_messages.db")
+    # Only output a single JSON file, not individual JSONs per resource
     sync_to_json("sqlite:///data/discord_messages.db")
