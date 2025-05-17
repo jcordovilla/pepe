@@ -131,22 +131,19 @@ def search_messages(
                 "info": f"No messages found for the given parameters (guild_id={guild_id}, channel_id={channel_id}, channel_name={channel_name})"
             }]
 
-        def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
-            if not msg_content:
-                return False
-            if keyword and keyword.lower() not in msg_content.lower():
-                return False
-            return True
+        def keyword_full_word_match(text: str, word: str) -> bool:
+            # Match only if 'word' appears as a full word (case-insensitive)
+            return bool(re.search(rf'\\b{re.escape(word)}\\b', text, re.IGNORECASE))
 
         filtered = []
         # Hybrid search: both query and keyword must be present if both are given
         if keyword and query:
             for m in candidates:
-                if query.lower() in m.content.lower() and keyword.lower() in m.content.lower():
+                if query.lower() in m.content.lower() and keyword_full_word_match(m.content, keyword):
                     filtered.append(m)
         elif keyword:
             for m in candidates:
-                if keyword.lower() in m.content.lower():
+                if keyword_full_word_match(m.content, keyword):
                     filtered.append(m)
         elif query:
             for m in candidates:

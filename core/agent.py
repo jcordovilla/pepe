@@ -107,6 +107,25 @@ def get_agent_answer(query: str) -> Any:
     if not query.strip():
         raise ValueError("Query cannot be empty")
 
+    # Data availability queries
+    lower_query = query.lower().strip()
+    if any(
+        kw in lower_query for kw in [
+            "what data is currently cached", "what data is available", "how many messages", "data availability", "database status", "message count", "what's in the database", "how much data", "how many channels", "date range"
+        ]
+    ):
+        from tools.tools import validate_data_availability
+        data = validate_data_availability()
+        if data["status"] == "ok":
+            channels = ", ".join([f"{name} ({count})" for name, count in data["channels"].items()])
+            return (
+                f"Data available: {data['count']} messages across {len(data['channels'])} channels. "
+                f"Date range: {data['date_range']['oldest']} to {data['date_range']['newest']}.\n"
+                f"Channels: {channels}"
+            )
+        else:
+            return data["message"]
+
     # Fallback/clarification for vague queries
     lower_query = query.lower()
     if not any(
