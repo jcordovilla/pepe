@@ -119,36 +119,11 @@ def search_messages(
             db_q = db_q.filter(Message.guild_id == guild_id)
         if channel_id:
             db_q = db_q.filter(Message.channel_id == channel_id)
-        if author_name:
-            db_q = db_q.filter(Message.author_name == author_name)
 
         # Fetch more candidates for post-filtering
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
             return []
-
-        # Author filter: handle author_name as username in author or author_name fields
-        if author_name:
-            filtered_candidates = []
-            for m in candidates:
-                # Try author_name (string or dict)
-                author_name_val = getattr(m, "author_name", None)
-                match = False
-                if isinstance(author_name_val, dict):
-                    if author_name_val.get("username") == author_name:
-                        match = True
-                elif isinstance(author_name_val, str):
-                    if author_name_val == author_name:
-                        match = True
-                # Try author (dict)
-                if not match:
-                    author_val = getattr(m, "author", None)
-                    if isinstance(author_val, dict):
-                        if author_val.get("username") == author_name:
-                            match = True
-                if match:
-                    filtered_candidates.append(m)
-            candidates = filtered_candidates
 
         def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
             if not msg_content:
@@ -170,67 +145,64 @@ def search_messages(
         filtered = []
         # Hybrid search: both query and keyword must be present if both are given
         if keyword and query:
+            # 1. Try strict intersection (both present)
             for m in candidates:
-                if m.content and re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE) and re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE):
+                if m.content and keyword.lower() in m.content.lower() and query.lower() in m.content.lower():
                     if is_real_message(m.content, keyword):
                         filtered.append(m)
-            # If no matches for both, try to return matches for at least one term
-            if not filtered:
+            # 2. If not enough, fill with union (either present, but not both)
+            if len(filtered) < k:
+                union = []
                 for m in candidates:
-                    if m.content and (re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE) or re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE)):
+                    if m in filtered:
+                        continue
+                    if m.content and (keyword.lower() in m.content.lower() or query.lower() in m.content.lower()):
                         if is_real_message(m.content, keyword):
-                            filtered.append(m)
+                            union.append(m)
+                filtered.extend(union)
+            # Only keep up to k
+            filtered = filtered[:k]
         elif keyword:
             for m in candidates:
-                if m.content and re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE):
+                if m.content and keyword.lower() in m.content.lower():
                     if is_real_message(m.content, keyword):
                         filtered.append(m)
+            filtered = filtered[:k]
         elif query:
             for m in candidates:
-                if m.content and re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE):
+                if m.content and query.lower() in m.content.lower():
                     if is_real_message(m.content, query):
                         filtered.append(m)
+            filtered = filtered[:k]
         else:
             for m in candidates:
                 if is_real_message(m.content):
-                    filtered = candidates
+                    filtered = candidates[:k]
                     break
 
-        if not filtered:
-            return []
-
-        # Sort by timestamp descending and take top k
-        filtered = sorted(filtered, key=lambda m: m.timestamp, reverse=True)[:k]
-
-        formatted = []
-        for m in filtered:
-            # Robust author extraction
-            username = None
-            display_name = None
-            # Try author_name (string or dict)
-            author_name_val = getattr(m, "author_name", None)
-            if isinstance(author_name_val, dict):
-                username = author_name_val.get("username")
-                display_name = author_name_val.get("display_name")
-            elif isinstance(author_name_val, str):
-                username = author_name_val
-            # Try author (dict)
-            if not username or not display_name:
+        # Author filtering in Python (after keyword/query filtering)
+        if author_name:
+            def author_matches(m):
+                author_name_val = getattr(m, "author_name", None)
+                if isinstance(author_name_val, dict):
+                    if author_name_val.get("username") == author_name or author_name_val.get("display_name") == author_name:
+                        return True
+                elif isinstance(author_name_val, str):
+                    if author_name_val == author_name:
+                        return True
                 author_val = getattr(m, "author", None)
                 if isinstance(author_val, dict):
-                    if not username:
-                        username = author_val.get("username")
-                    if not display_name:
-                        display_name = author_val.get("display_name")
-            # Fallbacks
-            if not username:
-                username = "Unknown"
-            if not display_name:
-                display_name = username
-            author = {
-                "username": username,
-                "display_name": display_name
-            }
+                    if author_val.get("username") == author_name or author_val.get("display_name") == author_name:
+                        return True
+                return False
+            filtered = [m for m in filtered if author_matches(m)]
+
+        # Always return a list of dicts with all required metadata, even if empty
+        formatted = []
+        for m in filtered:
+            author = getattr(m, "author", {})
+            if isinstance(author, str):
+                author = {"username": author, "display_name": author}
             jump_url = getattr(m, "jump_url", None)
             if not jump_url:
                 try:
@@ -330,14 +302,7 @@ def summarize_messages(
     print(f"Channel ID: {channel_id}")
     print(f"Channel Name: {channel_name}")
 
-    # Validate IDs
-    if guild_id is not None and not validate_guild_id(guild_id):
-        raise ValueError(f"Invalid guild ID format: {guild_id}")
-    if channel_id is not None and not validate_channel_id(channel_id):
-        raise ValueError(f"Invalid channel ID format: {channel_id}")
-    if channel_name is not None and not validate_channel_name(channel_name):
-        raise ValueError(f"Invalid channel name format: {channel_name}")
-    # validate time inputs
+    # Validate time inputs strictly, and return exact error string if end < start
     try:
         if isinstance(start_iso, str) and start_iso.endswith('Z'):
             start_iso = start_iso.replace('Z', '+00:00')
@@ -346,22 +311,16 @@ def summarize_messages(
         start = datetime.fromisoformat(start_iso)
         end = datetime.fromisoformat(end_iso)
         if end < start:
-            if as_json:
-                return {"error": "End time must be after start time"}
-            else:
-                return "End time must be after start time"
+            return "End time must be after start time"
     except Exception as e:
-        if as_json:
-            return {"error": f"Invalid ISO datetime: {e}"}
-        else:
-            return f"Invalid ISO datetime: {e}"
+        return f"Invalid ISO datetime: {e}"
+
+    # Channel name resolution
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            if as_json:
-                return {"error": "Unknown channel"}
-            else:
-                return "Unknown channel"
+            return "Unknown channel"
+
     session = SessionLocal()
     try:
         q = session.query(Message)
