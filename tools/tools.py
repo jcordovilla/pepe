@@ -127,6 +127,29 @@ def search_messages(
         if not candidates:
             return []
 
+        # Author filter: handle author_name as username in author or author_name fields
+        if author_name:
+            filtered_candidates = []
+            for m in candidates:
+                # Try author_name (string or dict)
+                author_name_val = getattr(m, "author_name", None)
+                match = False
+                if isinstance(author_name_val, dict):
+                    if author_name_val.get("username") == author_name:
+                        match = True
+                elif isinstance(author_name_val, str):
+                    if author_name_val == author_name:
+                        match = True
+                # Try author (dict)
+                if not match:
+                    author_val = getattr(m, "author", None)
+                    if isinstance(author_val, dict):
+                        if author_val.get("username") == author_name:
+                            match = True
+                if match:
+                    filtered_candidates.append(m)
+            candidates = filtered_candidates
+
         def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
             # Ignore section headers, lines with only dashes, or lines that look like bot headers
             if not msg_content:
@@ -135,10 +158,11 @@ def search_messages(
             # If all lines are headers or separators, skip
             if all(l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) for l in lines):
                 return False
-            # If keyword is present, ensure it's in a non-header line
+            # If keyword is present, ensure it's in a non-header line (not just in a heading)
             if keyword:
                 for l in lines:
-                    if keyword.lower() in l.lower() and not (l.startswith('---') or l.endswith('---')):
+                    # Only count as a match if the keyword is in a line that is not a heading or separator
+                    if keyword.lower() in l.lower() and not (l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) or re.match(r'^[\W_ ]*welcome[\W_ ]*$', l, re.IGNORECASE)):
                         return True
                 return False
             return True
