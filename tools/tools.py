@@ -131,12 +131,13 @@ def search_messages(
             if skill_terms:
                 for term in skill_terms:
                     db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
-        candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 10).all()
+        candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
             return []
         filtered = []
         for m in candidates:
             content = (m.content or '').lower()
+            # Only match if keyword/query/skill-term is in the actual message content (not just in section titles)
             if keyword and query:
                 if keyword.lower() in content and query.lower() in content:
                     filtered.append(m)
