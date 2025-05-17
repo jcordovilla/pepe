@@ -122,10 +122,13 @@ def search_messages(
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
-        # Strict keyword filtering: only return messages that actually contain the keyword
-        if keyword:
+        # AND logic: both keyword and query must be present in the message content
+        if keyword and query:
             db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
-        else:
+            db_q = db_q.filter(Message.content.ilike(f"%{query}%"))
+        elif keyword:
+            db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
+        elif query:
             skill_terms = extract_skill_terms(query)
             if skill_terms:
                 for term in skill_terms:
@@ -133,10 +136,11 @@ def search_messages(
         candidates = db_q.limit(k * 10).all()
         if not candidates:
             return []
-        # If keyword is provided, filter candidates to only those that actually contain the keyword (case-insensitive)
-        if keyword:
+        # AND logic for filtering: both keyword and query must be present
+        if keyword and query:
+            candidates = [m for m in candidates if keyword.lower() in (m.content or '').lower() and query.lower() in (m.content or '').lower()]
+        elif keyword:
             candidates = [m for m in candidates if keyword.lower() in (m.content or '').lower()]
-        # If skill_terms are provided, filter candidates to only those that contain any skill term
         elif query and skill_terms:
             filtered = []
             for m in candidates:
@@ -158,14 +162,15 @@ def search_messages(
         )
         retriever = temp_store.as_retriever(search_kwargs={"k": k * 2})
         docs = retriever.get_relevant_documents(query)
-        # Only return messages that actually match the keyword/skill_terms if provided
         filtered_results = []
         for d in docs:
             m = d.metadata
             content = (m.get("content", "") or "")
-            if keyword and keyword.lower() not in content.lower():
+            if keyword and query and (keyword.lower() not in content.lower() or query.lower() not in content.lower()):
                 continue
-            if not keyword and skill_terms and not any(term.lower() in content.lower() for term in skill_terms):
+            if keyword and not query and keyword.lower() not in content.lower():
+                continue
+            if not keyword and query and skill_terms and not any(term.lower() in content.lower() for term in skill_terms):
                 continue
             filtered_results.append(m)
         results = filtered_results if (keyword or (query and skill_terms)) else [d.metadata for d in docs]
