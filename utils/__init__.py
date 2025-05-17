@@ -67,7 +67,7 @@ def validate_guild_id(guild_id: Optional[Union[str, int]]) -> bool:
 
 def validate_channel_name(channel_name: Optional[str]) -> bool:
     """
-    Validate a Discord channel name.
+    Validate a Discord channel name, allowing emoji and Unicode at the start.
     
     Args:
         channel_name: The channel name to validate
@@ -85,12 +85,16 @@ def validate_channel_name(channel_name: Optional[str]) -> bool:
     if not (2 <= len(name) <= 100):
         return False
         
-    # Channel names can only contain:
-    # - Alphanumeric characters
-    # - Underscores
-    # - Hyphens
-    # - Spaces
-    if not re.match(r'^[\w\-\s]+$', name):
+    # Allow emoji/unicode at the start, then require at least one alphanumeric/underscore/hyphen after
+    # Discord allows a wide range of Unicode, so we check for at least one valid trailing part
+    # Accepts: emoji + dash + text, or just text, etc.
+    # Example: '🏘general-chat', '📚ai-philosophy-ethics', 'general', 'ai'
+    # Regex: start with any unicode, must contain at least one [\w-] after
+    if not re.search(r'[\w-]', name):
+        return False
+        
+    # Disallow forbidden characters (e.g., @, /, etc.)
+    if re.search(r'[@/\\]', name):
         return False
         
     return True

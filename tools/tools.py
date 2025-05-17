@@ -80,7 +80,7 @@ _openai    = OpenAI(api_key=OPENAI_API_KEY)
 #         raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
 
 def search_messages(
-    query: str,
+    query: Optional[str] = None,
     k: int = 5,
     keyword: Optional[str] = None,
     guild_id: Optional[int] = None,
@@ -93,9 +93,13 @@ def search_messages(
     Always returns a list of dicts with required metadata: author, timestamp, content, jump_url, channel_name, guild_id, channel_id, message_id.
     Handles unknown channels gracefully.
     """
-    if not query or not isinstance(query, str) or not query.strip():
-        raise ValueError("Query is required and must be a non-empty string.")
-    
+    # Default query to empty string if not provided
+    if query is None:
+        query = ""
+    if not isinstance(query, str):
+        raise ValueError("Query must be a string.")
+    # Allow empty query for author/channel-only searches
+
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
         raise ValueError(f"Invalid guild ID format: {guild_id}")
