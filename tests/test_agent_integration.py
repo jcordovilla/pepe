@@ -70,12 +70,11 @@ def ai_validate_response(query, response, functionality=None):
     prompt = f"""
     {app_context}{func_context}\n\nUser Query: {query}\nAgent Response: {response}\n\nEvaluate if the agent's response correctly and fully answers the user's query. Reply with 'PASS' if it does, or 'FAIL' and a brief explanation if it does not.
     """
-    completion = openai.ChatCompletion.create(
+    completion = openai.chat.completions.create(
         model=gpt_model,
-        messages=[{"role": "user", "content": prompt}],
-        api_key=openai_api_key
+        messages=[{"role": "user", "content": prompt}]
     )
-    result = completion.choices[0].message['content'].strip()
+    result = completion.choices[0].message.content.strip()
     return result
 
 @pytest.mark.parametrize("query,expected_keywords", [

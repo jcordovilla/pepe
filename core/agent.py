@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
 
-from tools.tools import search_messages, summarize_messages
+from tools.tools import search_messages, summarize_messages, validate_data_availability
 
 # ─── Env & LLM Setup ────────────────────────────────────────────────────────────
 
@@ -29,12 +29,17 @@ tools = [
     StructuredTool.from_function(
         search_messages,
         name="search_messages",
-        description="Search Discord messages by keyword or semantically, scoped by guild_id, channel_id, or channel_name."
+        description="Search Discord messages by keyword or semantically, scoped by guild_id, channel_id, or channel_name. Always returns message content, author, timestamp, jump_url, and metadata."
     ),
     StructuredTool.from_function(
         summarize_messages,
         name="summarize_messages",
         description="Summarize Discord messages between two ISO datetimes, scoped by guild_id, channel_id, or channel_name."
+    ),
+    StructuredTool.from_function(
+        validate_data_availability,
+        name="validate_data_availability",
+        description="Check if the database has messages and return their count, available channels, and date range."
     ),
 ]
 
@@ -54,6 +59,22 @@ You are a specialized Discord data assistant. To handle any user request:
 3. Always use function-calling; never answer directly without invoking these tools.
    - For time-based queries, you MUST call parse_timeframe() first
    - Then use the returned timestamps with summarize_messages() or search_messages()
+
+4. For search results, ALWAYS return a list of messages with the following fields for each message:
+   - author (username and display_name if available)
+   - timestamp (ISO format)
+   - content (the actual message text)
+   - jump_url (a direct link to the message)
+   - channel_name, guild_id, channel_id, message_id
+   Do NOT return only summaries or links—always include the actual message content and metadata.
+
+5. For channel name queries, resolve human-friendly names (e.g., "#general", "#dev") to channel IDs. If the channel is unknown, reply with a clear note (e.g., "Channel '#foo' not found.").
+
+6. For data availability queries (e.g., "How many messages are in the database?"), call the data availability tool and return the count, date range, and available channels.
+
+7. For output formatting, always include jump URLs and message content in the results. If no results, reply with a clear message.
+
+8. For invalid or missing fields, reply with a clear error message.
 """
 
 # ─── Agent Initialization ────────────────────────────────────────────────────────

@@ -90,17 +90,19 @@ def search_messages(
 ) -> List[Dict[str, Any]]:
     """
     Enhanced hybrid keyword + semantic search with improved relevance.
+    Always returns a list of dicts with required metadata: author, timestamp, content, jump_url, channel_name, guild_id, channel_id, message_id.
+    Handles unknown channels gracefully.
     """
-    if not query.strip():
-        raise ValueError("Query cannot be empty")
-        
+    if not query or not isinstance(query, str) or not query.strip():
+        raise ValueError("Query is required and must be a non-empty string.")
+    
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
         raise ValueError(f"Invalid guild ID format: {guild_id}")
-        
+    
     if channel_id is not None and not validate_channel_id(channel_id):
         raise ValueError(f"Invalid channel ID format: {channel_id}")
-        
+    
     if channel_name is not None and not validate_channel_name(channel_name):
         raise ValueError(f"Invalid channel name format: {channel_name}")
 
@@ -108,7 +110,11 @@ def search_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            raise ValueError(f"Unknown channel: {channel_name}")
+            # Instead of raising, return a clear result
+            return [{
+                "note": f"Channel '{channel_name}' not found.",
+                "messages": []
+            }]
 
     session = SessionLocal()
     try:
@@ -123,47 +129,48 @@ def search_messages(
         
         # Improved keyword matching for skill-based queries
         if keyword:
-            # Split keyword into terms for better matching
             terms = keyword.split()
             for term in terms:
                 db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
         else:
-            # Extract skill-related terms from the query
             skill_terms = extract_skill_terms(query)
             if skill_terms:
                 for term in skill_terms:
                     db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
         
-        # Get more candidates for better semantic ranking
         candidates = db_q.limit(k * 10).all()
-
         if not candidates:
             return []
-
+        
         # 2) Enhanced semantic reranking
         texts = [m.content for m in candidates]
         metas = [{
             **m.__dict__,
-            'relevance_score': 0.0  # Will be updated during ranking
+            'relevance_score': 0.0
         } for m in candidates]
-        
-        # Create temporary FAISS index
         temp_store = FAISS.from_texts(
             texts=texts,
             embedding=_embedding,
             metadatas=metas
         )
-        
-        # Get more documents for better coverage
         retriever = temp_store.as_retriever(search_kwargs={"k": k * 2})
         docs = retriever.get_relevant_documents(query)
-        
-        # Extract and sort by relevance
         results = [d.metadata for d in docs]
         results.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
-        
-        # Return top k results
-        return results[:k]
+        # Always return required metadata for each result
+        formatted = []
+        for m in results[:k]:
+            formatted.append({
+                "author": m.get("author", {}),
+                "timestamp": m.get("timestamp"),
+                "content": m.get("content"),
+                "jump_url": build_jump_url(m.get("guild_id"), m.get("channel_id"), m.get("message_id")),
+                "channel_name": m.get("channel_name"),
+                "guild_id": m.get("guild_id"),
+                "channel_id": m.get("channel_id"),
+                "message_id": m.get("message_id")
+            })
+        return formatted
     finally:
         session.close()
 
@@ -258,11 +265,15 @@ def summarize_messages(
 
     # validate time inputs
     try:
+        # Handle 'Z' suffix for UTC
+        if isinstance(start_iso, str) and start_iso.endswith('Z'):
+            start_iso = start_iso.replace('Z', '+00:00')
+        if isinstance(end_iso, str) and end_iso.endswith('Z'):
+            end_iso = end_iso.replace('Z', '+00:00')
         start = datetime.fromisoformat(start_iso)
         end = datetime.fromisoformat(end_iso)
         if end < start:
             raise ValueError("End time must be after start time")
-        
         # Debug logging
         print(f"\nDEBUG: Parsed Timestamps:")
         print(f"Start: {start}")

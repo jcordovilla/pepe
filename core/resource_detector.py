@@ -160,6 +160,9 @@ def detect_resources(message) -> List[Dict[str, Any]]:
         try:
             # Try parsing if it's a string
             from datetime import datetime
+            # Handle 'Z' suffix for UTC
+            if isinstance(ts, str) and ts.endswith('Z'):
+                ts = ts.replace('Z', '+00:00')
             dt = datetime.fromisoformat(ts)
             return dt.strftime('%Y-%m-%d %H:%M')
         except Exception:
