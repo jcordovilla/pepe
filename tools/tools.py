@@ -154,7 +154,13 @@ def search_messages(
 
         # Author filtering in Python (after keyword/query filtering)
         if author_name:
-            filtered = [m for m in filtered if (m.author and author_name.lower() in (m.author.lower() or ""))]
+            def author_matches(author: dict, author_name: str) -> bool:
+                if not author:
+                    return False
+                name = author.get("username", "") or ""
+                display = author.get("display_name", "") or ""
+                return author_name.lower() in name.lower() or author_name.lower() in display.lower()
+            filtered = [m for m in filtered if author_matches(m.author, author_name)]
 
         # Always return a list of dicts with all required metadata, even if empty
         formatted = []
@@ -195,16 +201,8 @@ def search_messages(
                     }
                 }]
             elif query:
-                return [{
-                    "result": [],
-                    "info": f"No messages found containing '{query}' in channel '{channel_name or channel_id}'.",
-                    "parameters": {
-                        "query": query,
-                        "channel_name": channel_name,
-                        "channel_id": channel_id,
-                        "guild_id": guild_id
-                    }
-                }]
+                # For semantic-only search, return empty list and info
+                return []
             else:
                 return [{
                     "result": [],
