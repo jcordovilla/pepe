@@ -180,15 +180,29 @@ def search_messages(
 
         formatted = []
         for m in filtered:
-            # Handle author extraction: always a string for username
+            # Robust author extraction
+            username = None
+            display_name = None
+            # Try author_name (string or dict)
             author_name_val = getattr(m, "author_name", None)
-            author_display_name_val = getattr(m, "author_display_name", None)
-            # If author_name is a dict, extract username string
             if isinstance(author_name_val, dict):
-                username = author_name_val.get("username", str(author_name_val))
-            else:
-                username = str(author_name_val) if author_name_val else "Unknown"
-            display_name = str(author_display_name_val) if author_display_name_val else username or "Unknown"
+                username = author_name_val.get("username")
+                display_name = author_name_val.get("display_name")
+            elif isinstance(author_name_val, str):
+                username = author_name_val
+            # Try author (dict)
+            if not username or not display_name:
+                author_val = getattr(m, "author", None)
+                if isinstance(author_val, dict):
+                    if not username:
+                        username = author_val.get("username")
+                    if not display_name:
+                        display_name = author_val.get("display_name")
+            # Fallbacks
+            if not username:
+                username = "Unknown"
+            if not display_name:
+                display_name = username
             author = {
                 "username": username,
                 "display_name": display_name
