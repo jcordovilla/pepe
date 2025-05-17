@@ -113,7 +113,6 @@ def search_messages(
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
             return {"error": "Unknown channel"}
-
     session = SessionLocal()
     try:
         db_q = session.query(Message)
@@ -123,16 +122,28 @@ def search_messages(
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
+        # Strict keyword filtering: only return messages that actually contain the keyword
         if keyword:
-            terms = keyword.split()
-            for term in terms:
-                db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
+            db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
         else:
             skill_terms = extract_skill_terms(query)
             if skill_terms:
                 for term in skill_terms:
                     db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
         candidates = db_q.limit(k * 10).all()
+        if not candidates:
+            return []
+        # If keyword is provided, filter candidates to only those that actually contain the keyword (case-insensitive)
+        if keyword:
+            candidates = [m for m in candidates if keyword.lower() in (m.content or '').lower()]
+        # If skill_terms are provided, filter candidates to only those that contain any skill term
+        elif query and skill_terms:
+            filtered = []
+            for m in candidates:
+                content = (m.content or '').lower()
+                if any(term.lower() in content for term in skill_terms):
+                    filtered.append(m)
+            candidates = filtered
         if not candidates:
             return []
         texts = [m.content for m in candidates]
@@ -147,7 +158,17 @@ def search_messages(
         )
         retriever = temp_store.as_retriever(search_kwargs={"k": k * 2})
         docs = retriever.get_relevant_documents(query)
-        results = [d.metadata for d in docs]
+        # Only return messages that actually match the keyword/skill_terms if provided
+        filtered_results = []
+        for d in docs:
+            m = d.metadata
+            content = (m.get("content", "") or "")
+            if keyword and keyword.lower() not in content.lower():
+                continue
+            if not keyword and skill_terms and not any(term.lower() in content.lower() for term in skill_terms):
+                continue
+            filtered_results.append(m)
+        results = filtered_results if (keyword or (query and skill_terms)) else [d.metadata for d in docs]
         results.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
         formatted = []
         for m in results[:k]:
