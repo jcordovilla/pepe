@@ -287,6 +287,7 @@ def summarize_messages(
     """
     Summarize all messages in [start_iso, end_iso].
     Returns either a text summary or JSON, per `as_json`.
+    Strictly enforces error handling and output types.
     """
     # Debug logging
     print(f"\nDEBUG: Query Parameters:")
@@ -309,10 +310,10 @@ def summarize_messages(
     except Exception as e:
         return f"Invalid ISO datetime: {e}"
 
-    # Channel name resolution
+    # Channel name resolution (do not proceed if channel does not exist)
     if channel_name and not channel_id:
-        channel_id = resolve_channel_name(channel_name, guild_id)
-        if not channel_id:
+        resolved_id = resolve_channel_name(channel_name, guild_id)
+        if not resolved_id:
             # Suggest similar channels if possible
             session = SessionLocal()
             try:
@@ -323,6 +324,8 @@ def summarize_messages(
             finally:
                 session.close()
             return f"Unknown channel: #{channel_name}.{suggestion}"
+        channel_id = resolved_id
+
     session = SessionLocal()
     try:
         q = session.query(Message)
@@ -336,7 +339,7 @@ def summarize_messages(
             if as_json:
                 return {"summary": "", "note": "No messages in that timeframe"}
             else:
-                return "⚠️ No messages found in the specified timeframe."
+                return []
         message_dicts = []
         for m in msgs:
             msg_dict = {
