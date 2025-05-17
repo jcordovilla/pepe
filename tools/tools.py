@@ -305,7 +305,7 @@ def summarize_messages(
         start = datetime.fromisoformat(start_iso)
         end = datetime.fromisoformat(end_iso)
         if end < start:
-            return "End time must be after start time"
+            return "End time must be after start time. The end date you provided is before the start date. Please provide a valid date range."
     except Exception as e:
         return f"Invalid ISO datetime: {e}"
 
@@ -313,8 +313,16 @@ def summarize_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            return "Unknown channel"
-
+            # Suggest similar channels if possible
+            session = SessionLocal()
+            try:
+                all_channels = session.query(Message.channel_name).distinct().all()
+                all_channel_names = [c[0] for c in all_channels if c[0]]
+                similar = [c for c in all_channel_names if channel_name.lower() in c.lower() or c.lower() in channel_name.lower()]
+                suggestion = f" Did you mean: {', '.join(similar)}?" if similar else ""
+            finally:
+                session.close()
+            return f"Unknown channel: #{channel_name}.{suggestion}"
     session = SessionLocal()
     try:
         q = session.query(Message)
