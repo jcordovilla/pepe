@@ -77,70 +77,75 @@ def ai_validate_response(query, response, functionality=None):
     result = completion.choices[0].message.content.strip()
     return result
 
-@pytest.mark.parametrize("query,expected_keywords", [
-    ("Show me discussions about machine learning.", ["machine learning"]),
-    ("Find messages containing 'Python'.", ["python"]),
-    ("Who has experience in Docker?", ["docker"]),
-    ("Show AI messages in #general.", ["general", "ai"]),
-    ("Messages from user Alice about deployment.", ["alice", "deployment"]),
+# Balanced suite of 20 end-to-end test prompts
+@pytest.mark.parametrize("query,expected_behavior", [
+    # 1. Validate data availability
+    ("What data is currently cached?", {"functionality": "data_availability"}),
+    # 2. Basic keyword search
+    ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+    # 3. Top-K override
+    ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+    # 4. Hybrid keyword + semantic
+    ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+    # 5. Author filter
+    ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+    # 6. Channel-ID filter with ISO times
+    ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+    # 7. Plain-text summarization (relative)
+    ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+    # 8. JSON summarization (absolute)
+    ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+    # 9. Plain-text summarization (absolute)
+    ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+    # 10. Skill-term extraction
+    ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+    # 11. Semantic-only reranking
+    ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+    # 12. Empty-query guard
+    ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+    # 13. Invalid timeframe
+    ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+    # 14. Unknown channel
+    ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+    # 15. Fallback/clarification prompt
+    ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+    # 16. Combined multi-criteria
+    ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+    # 17. Implicit channel name parsing
+    ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+    # 18. JSON summary key validation
+    ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+    # 19. Jump-URL accuracy
+    ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+    # 20. Empty-channel search
+    ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
 ])
-def test_search_and_filtering(query, expected_keywords):
+def test_balanced_suite(query, expected_behavior):
+    if expected_behavior.get("raises"):
+        with pytest.raises(expected_behavior["raises"]):
+            get_agent_answer(query)
+        return
     result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="search")
+    # Error handling/clarification/fallback
+    if expected_behavior["functionality"] == "error_handling":
+        if "msg" in expected_behavior:
+            assert expected_behavior["msg"].lower() in str(result).lower()
+        else:
+            ai_eval = ai_validate_response(query, result, functionality="error_handling")
+            assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+        return
+    # JSON summary key validation
+    if expected_behavior.get("json_keys"):
+        assert isinstance(result, dict), "Expected JSON output"
+        for key in expected_behavior["json_keys"]:
+            assert key in result, f"Missing key '{key}' in JSON summary"
+    # Expect empty result
+    if expected_behavior.get("expect_empty"):
+        assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
+        return
+    # Standard AI validation
+    ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
     assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-
-@pytest.mark.parametrize("query", [
-    "Summarize last week's activity in #dev.",
-    "Summarize yesterday in #help as JSON.",
-    "Summarize activity in #random."
-])
-def test_time_scoped_summarization(query):
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="summarize")
-    assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-
-@pytest.mark.parametrize("query,expected_time_phrases", [
-    ("Summarize past 2 days in #dev.", ["2 days"]),
-    ("Summarize yesterday.", ["yesterday"]),
-    ("Summarize from May 1st to May 5th.", ["may 1", "may 5"]),
-])
-def test_time_expression_parsing(query, expected_time_phrases):
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="time_parse")
-    assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-
-@pytest.mark.parametrize("query,should_find", [
-    ("Show messages in #announcements.", True),
-    ("Show messages in #unknown.", False),
-])
-def test_channel_name_resolution(query, should_find):
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="channel_resolve")
-    if should_find:
-        assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-    else:
-        assert ai_eval.startswith("PASS") or "no messages" in ai_eval.lower() or "not found" in ai_eval.lower(), f"AI validation failed: {ai_eval}"
-
-def test_data_availability():
-    query = "How many messages are in the database?"
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="data_availability")
-    assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-
-@pytest.mark.parametrize("query", [
-    "Show messages with links.",
-    "Show messages with external links."
-])
-def test_output_formatting_links(query):
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="output_formatting")
-    assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-
-def test_error_handling():
-    query = "Show messages in #unknown."
-    result = get_agent_answer(query)
-    ai_eval = ai_validate_response(query, result, functionality="error_handling")
-    assert ai_eval.startswith("PASS") or "no messages" in ai_eval.lower() or "not found" in ai_eval.lower(), f"AI validation failed: {ai_eval}"
 
 def test_empty_query():
     with pytest.raises(ValueError):
