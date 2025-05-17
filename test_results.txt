@@ -1,36 +1,15 @@
 ============================= test session starts ==============================
-platform darwin -- Python 3.9.6, pytest-8.3.5, pluggy-1.5.0 -- /Users/jose/Documents/discord-bot/venv/bin/python3
-cachedir: .pytest_cache
+platform darwin -- Python 3.9.6, pytest-8.3.5, pluggy-1.5.0
 rootdir: /Users/jose/Documents/discord-bot
 plugins: anyio-4.9.0, langsmith-0.3.42, cov-6.1.1
-collecting ... collected 21 items
+collected 21 items
 
-tests/test_agent_integration.py::test_balanced_suite[What data is currently cached?-expected_behavior0] PASSED [  4%]
-tests/test_agent_integration.py::test_balanced_suite[Find messages containing \u2018AI ethics\u2019 in #\U0001f4daai-philosophy-ethics.-expected_behavior1] PASSED [  9%]
-tests/test_agent_integration.py::test_balanced_suite[Show me the top 4 messages mentioning \u2018welcome\u2019 in #\U0001f4ddwelcome-rules.-expected_behavior2] FAILED [ 14%]
-tests/test_agent_integration.py::test_balanced_suite[Search for \u2018use cases\u2019 with keyword \u2018roundtable\u2019 in #genai-use-case-roundtable, returning the top 3 results.-expected_behavior3] PASSED [ 19%]
-tests/test_agent_integration.py::test_balanced_suite[List all messages by cristian_72225 in #\U0001f44bintroductions.-expected_behavior4] FAILED [ 23%]
-tests/test_agent_integration.py::test_balanced_suite[Retrieve messages in channel ID 1365732945859444767 (\U0001f4e2announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.-expected_behavior5] PASSED [ 28%]
-tests/test_agent_integration.py::test_balanced_suite[Summarize messages from last weekend in #\U0001f3d8general-chat.-expected_behavior6] PASSED [ 33%]
-tests/test_agent_integration.py::test_balanced_suite[Summarize messages from 2025-04-01 to 2025-04-30 in #\U0001f6e0ai-practical-applications as JSON.-expected_behavior7] PASSED [ 38%]
-tests/test_agent_integration.py::test_balanced_suite[What were the key discussion points in #\U0001f916intro-to-agentic-ai between 2025-04-22 and 2025-04-24?-expected_behavior8] PASSED [ 42%]
-tests/test_agent_integration.py::test_balanced_suite[Extract all skills mentioned by darkgago in #\U0001f6e0ai-practical-applications over the past month.-expected_behavior9] FAILED [ 47%]
-tests/test_agent_integration.py::test_balanced_suite[Find the 3 most semantically similar messages to \u2018invite link restrictions\u2019 across all channels.-expected_behavior10] FAILED [ 52%]
-tests/test_agent_integration.py::test_balanced_suite[-expected_behavior11] PASSED [ 57%]
-tests/test_agent_integration.py::test_balanced_suite[Search messages from 2025-04-26 to 2025-04-23 in #\U0001f3d8general-chat.-expected_behavior12] FAILED [ 61%]
-tests/test_agent_integration.py::test_balanced_suite[Search for \u2018bug\u2019 in #nonexistent-channel.-expected_behavior13] FAILED [ 66%]
-tests/test_agent_integration.py::test_balanced_suite[Tell me something interesting.-expected_behavior14] FAILED [ 71%]
-tests/test_agent_integration.py::test_balanced_suite[In #\U0001f4e5feedback-submissions, find the top 2 messages about \u2018suggestions\u2019 by laura.neder between last Friday and yesterday, then summarize them.-expected_behavior15] PASSED [ 76%]
-tests/test_agent_integration.py::test_balanced_suite[What was discussed about \u2018help\u2019 on 2025-04-18 in the discord-help channel?-expected_behavior16] FAILED [ 80%]
-tests/test_agent_integration.py::test_balanced_suite[Summarize this week in #\u2753q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.-expected_behavior17] FAILED [ 85%]
-tests/test_agent_integration.py::test_balanced_suite[Give me the 5 most recent messages in #\U0001f3d8general-chat with jump URLs.-expected_behavior18] PASSED [ 90%]
-tests/test_agent_integration.py::test_balanced_suite[Retrieve messages in channel ID 1364250555467300976 (\U0001f4e9midweek-request) between 2025-04-20 and 2025-04-25.-expected_behavior19] FAILED [ 95%]
-tests/test_agent_integration.py::test_empty_query PASSED                 [100%]
+tests/test_agent_integration.py ...F........FFF.FF.F.                    [100%]
 
 =================================== FAILURES ===================================
-_ test_balanced_suite[Show me the top 4 messages mentioning \u2018welcome\u2019 in #\U0001f4ddwelcome-rules.-expected_behavior2] _
+_ test_balanced_suite[Search for \u2018use cases\u2019 with keyword \u2018roundtable\u2019 in #genai-use-case-roundtable, returning the top 3 results.-expected_behavior3] _
 
-query = 'Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.'
+query = 'Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.'
 expected_behavior = {'functionality': 'search'}
 
     @pytest.mark.parametrize("query,expected_behavior", [
@@ -103,14 +82,10 @@ expected_behavior = {'functionality': 'search'}
 >       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
 E       AssertionError: AI validation failed: FAIL
 E         
-E         Explanation: The agent correctly filtered messages to those in the #📝welcome-rules channel and included message metadata (jump URL). However, not all returned messages clearly mention the word "welcome." Specifically, message 3 ("Welcome & Rules – Part 4") does not contain the word "welcome" in the message content—only in the section header, which could be a structural or bot-inserted header rather than actual message text. The user asked for messages "mentioning 'welcome'," which implies the term should actually appear in the message itself, not just in section headers.
-E         
-E         Additionally, proper metadata such as author and timestamp is missing from the output, which was explicitly required per the functionality. 
-E         
-E         Therefore, the response is incomplete and partially incorrect.
+E         Explanation: The user's query specifies searching for messages containing ‘use cases’, with the keyword ‘roundtable’, in the #genai-use-case-roundtable channel, and returning the top 3 results with metadata. The agent says it couldn't find any such messages, but does not demonstrate that it checked both keywords’ presence (as required: messages must contain both ‘use cases’ and ‘roundtable’), nor does it provide search details, message snippets, or metadata as would be expected for a complete and correct response. The wording also leaves ambiguity whether it searched for both terms together, or across all possibilities. A complete answer would list the top results if found (with required metadata), or explicitly confirm that a search was performed for messages meeting both criteria in the specified channel, and that no results matched, with a clear explanation.
 E       assert False
-E        +  where False = <built-in method startswith of str object at 0x12d80fe00>('PASS')
-E        +    where <built-in method startswith of str object at 0x12d80fe00> = 'FAIL\n\nExplanation: The agent correctly filtered messages to those in the #📝welcome-rules channel and included message metadata (jump URL). However, not all returned messages clearly mention the word "welcome." Specifically, message 3 ("Welcome & Rules – Part 4") does not contain the word "welcome" in the message content—only in the section header, which could be a structural or bot-inserted header rather than actual message text. The user asked for messages "mentioning \'welcome\'," which implies the term should actually appear in the message itself, not just in section headers.\n\nAdditionally, proper metadata such as author and timestamp is missing from the output, which was explicitly required per the functionality. \n\nTherefore, the response is incomplete and partially incorrect.'.startswith
+E        +  where False = <built-in method startswith of str object at 0x110810000>('PASS')
+E        +    where <built-in method startswith of str object at 0x110810000> = "FAIL\n\nExplanation: The user's query specifies searching for messages containing ‘use cases’, with the keyword ‘roun...ed for messages meeting both criteria in the specified channel, and that no results matched, with a clear explanation.".startswith
 
 tests/test_agent_integration.py:148: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -118,376 +93,10 @@ tests/test_agent_integration.py:148: AssertionError
 
 [1m> Entering new AgentExecutor chain...[0m
 [32;1m[1;3m
-Invoking: `search_messages` with `{'keyword': 'welcome', 'k': 4, 'channel_name': '📝welcome-rules'}`
+Invoking: `search_messages` with `{'query': 'use cases', 'k': 3, 'keyword': 'roundtable', 'channel_name': 'genai-use-case-roundtable'}`
 
 
-[0m[36;1m[1;3m[{'author': {'username': 'oscarsan.chez', 'id': '1352785241252565174', 'display_name': ''}, 'timestamp': '2025-04-24T01:45:33.496000', 'content': '🚀 Welcome & Rules – Part 6 || 📌 Next Step in Your Journey:\n\nTo continue your journey in integrating yourself into the GenAI Global community, simply proceed to the <#1361060350266577134> channel. There you’ll find the next steps and resources to help you get started and become an active, informed member of our community.', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442557438328864/1364779266457473137', 'channel_name': '📝welcome-rules', 'guild_id': 1353058864810950737, 'channel_id': 1353442557438328864, 'message_id': 1364779266457473137}, {'author': {'username': 'oscarsan.chez', 'id': '1352785241252565174', 'display_name': ''}, 'timestamp': '2025-04-24T01:43:48.014000', 'content': '---------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🎤 Welcome & Rules – Part 5\n\n🗓️ Live Events on the Gen AI Global Server\n\nWe believe that real-time collaboration — both online and offline — is essential for building a strong, high-impact community. Here’s what you can expect:\n------------------------------------------------------------------------------------------\n\n🧠 Bi-Monthly GenAI Use-Case Roundtable\n\n🔁 Every Two Months\n📍 Live Voice Chat or Scheduled Stage Event (Discord)\n🎯 Industry Focus: Rotates by domain (e.g., AI in Healthcare, Finance, EdTech)\n\n• 🎙 Members & guest experts showcase real-world GenAI applications\n• 💬 Open forum for questions, insights, and constructive feedback\n• 🔎 Practical use cases bridge conceptual learning and enterprise execution\n• 🚀 Great visibility for ambitious members to shine as thought leaders\n------------------------------------------------------------------------------------------\n\n🤝 Bi-Monthly In-Person Meetups\n\n📍 Held in major cities — every two months\n🧭 Designed for: Real-world networking, buddy check-ins, team bonding, and photo ops\n🗳 Community decides dates & locations via polls\n🗂️ Roles:\n• Conversational Leaders lead activities\n• Discord Managers support logistics\n• Network Architects align with strategy & extract insights\n📸 Members are encouraged to post event recaps to keep the momentum flowing\n\n---------------------------------------------------------------------------------------------------------------------------------------------------------', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442557438328864/1364778824033898537', 'channel_name': '📝welcome-rules', 'guild_id': 1353058864810950737, 'channel_id': 1353442557438328864, 'message_id': 1364778824033898537}, {'author': {'username': 'oscarsan.chez', 'id': '1352785241252565174', 'display_name': ''}, 'timestamp': '2025-04-24T01:34:36.159000', 'content': '---------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🔧 Welcome & Rules – Part 4\n🗣️ The Feedback System for Coordinators & General Members\n\nTo ensure every voice has a fair chance at shaping this community, we’ve built a clear system for suggesting changes and enhancements. Follow each step closely to get your ideas seen, supported, and possibly implemented! 🛠️✨\n\n🧠 #feedback-workshop\n• 💡 Brainstorm + refine Discord optimization ideas.\n• 🤝 Collaborate freely; sketches and rough drafts welcome.\n• 📤 When your concept feels solid, pass it to #feedback-submissions.\n\n📥 #feedback-submissions\n• 🚀 Drop polished proposals here for community review.\n• 👍 React-votes determine popularity — hype the ideas you love!\n• ⏫ Top-liked concepts are queued for the monthly poll in #feedback-polls.\n• ⏲️ Slow-mode: 6 hours — make it count before hitting send!\n\n🗳 #feedback-polls\n• 📅 First Friday of the Month — Poll goes live. Vote by Saturday 11:59 PM ET.\n• 🗓️ Sunday: Community Coordinator Roundtable — they debate the top ideas.\n• 🤝 Final review by Oscar Sanchez & Dr. Abel for implementation feasibility.\n• 🏆 Two winners: one from Coordinators, one from General Members.\n• ✅ Winners move forward to implementation — tracked in #announcements.\n• 🔔 Missed the deadline? Next month’s your shot!\n\n---------------------------------------------------------------------------------------------------------------------------------------------------------', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442557438328864/1364776509385998478', 'channel_name': '📝welcome-rules', 'guild_id': 1353058864810950737, 'channel_id': 1353442557438328864, 'message_id': 1364776509385998478}, {'author': {'username': 'oscarsan.chez', 'id': '1352785241252565174', 'display_name': ''}, 'timestamp': '2025-04-24T01:21:11.926000', 'content': "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🔐 Welcome & Rules – Part 3 || 📜 Community Rules\n\n\U0001faf6 Respect and Tolerance: Treat all members with respect. No forms of harassment, witch‑hunting, sexism, racism, or any other type of hate speech will be tolerated. Violating this rule will result in immediate expulsion to maintain a safe and welcoming environment.\n\n🚫 No Spam: Do not spam or self‑promote (including server invites, advertisements, brand promotions, etc.) without team permission. Share only relevant links and resources that add value to the community.\n\n🔒 Confidentiality: Do not disclose personal or contact information of members without their explicit consent, including photos or any private data.\n\n***NOTE: Per guidance from Oscar and Dr. Sanchez (our founders), all members are required to share their real identity{In there UserName}. Refusal to do so is considered a security risk and may result in removal from the community. This policy is in place to maintain a safe and trustworthy environment for all participants.\n\n🛡️ Moderation: Moderators have the final authority in resolving conflicts and may modify the rules to preserve the quality of discussions. If you observe anything contrary to the rules or that compromises your safety, immediately inform the staff. We value your feedback to improve the community.\n\n📚 Appropriate Content: It is prohibited to share illegal, unofficial, age‑restricted, or obscene content, including texts, images, nicknames, or links that contain nudity, sex, excessive violence, or disturbing content. Keep all content appropriate and professional for a collaborative environment.\n\n🔊 For Voice Chat: Reduce background noise, use the push‑to‑talk option only when necessary. Moderators have the right to disconnect, mute, deafen, or move members from voice channels to ensure the quality of communication.\n\n🤖 Use of AI Tools and Citations: When using AI tools, ensure to correctly cite the source, including the name of the tool, the URL, and specific details of use. For example, APA guidelines require you to include the author's name of the AI tool, the title, the URL, and the date of access.\n\n© Copyright: Let us respect copyright when sharing information. Share only content that is your own or properly licensed. It is not permitted to infringe intellectual property rights.\n\n✉️ Invitations and Admission: Do not invite unofficial bots or people outside the community without an explicit request and approval from the staff. The team reserves the right of admission to maintain the integrity and purpose of our community.\n\n🛠 Feedback System Required for Changes: All server changes and optimizations — whether from general members or Community Coordinators — must be submitted through the official 🧠 Feedback System outlined in the next step. To protect the structure and flow of the server, bypassing this process may result in removal from the community. We value transparency and order to ensure everyone’s voice is heard through the proper channels. 🔁🔒\n\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------", 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442557438328864/1364773136188313601', 'channel_name': '📝welcome-rules', 'guild_id': 1353058864810950737, 'channel_id': 1353442557438328864, 'message_id': 1364773136188313601}][0m[32;1m[1;3mHere are the top 4 messages mentioning ‘welcome’ in #📝welcome-rules:
-
-1. 🚀 Welcome & Rules – Part 6 || 📌 Next Step in Your Journey:
-To continue your journey in integrating yourself into the GenAI Global community, simply proceed to the <#1361060350266577134> channel. There you’ll find the next steps and resources to help you get started and become an active, informed member of our community.
-[View message](https://discord.com/channels/1353058864810950737/1353442557438328864/1364779266457473137)
-
-2. 🎤 Welcome & Rules – Part 5
-🗓️ Live Events on the Gen AI Global Server
-We believe that real-time collaboration — both online and offline — is essential for building a strong, high-impact community. Here’s what you can expect:
-• Bi-Monthly GenAI Use-Case Roundtable
-• Bi-Monthly In-Person Meetups
-[View message](https://discord.com/channels/1353058864810950737/1353442557438328864/1364778824033898537)
-
-3. 🔧 Welcome & Rules – Part 4
-🗣️ The Feedback System for Coordinators & General Members
-To ensure every voice has a fair chance at shaping this community, we’ve built a clear system for suggesting changes and enhancements. Follow each step closely to get your ideas seen, supported, and possibly implemented!
-[View message](https://discord.com/channels/1353058864810950737/1353442557438328864/1364776509385998478)
-
-4. 🔐 Welcome & Rules – Part 3 || 📜 Community Rules
-🫶 Respect and Tolerance: Treat all members with respect. No forms of harassment, witch‑hunting, sexism, racism, or any other type of hate speech will be tolerated. Violating this rule will result in immediate expulsion to maintain a safe and welcoming environment.
-[View message](https://discord.com/channels/1353058864810950737/1353442557438328864/1364773136188313601)
-
-Let me know if you need more details or further assistance![0m
-
-[1m> Finished chain.[0m
-_ test_balanced_suite[List all messages by cristian_72225 in #\U0001f44bintroductions.-expected_behavior4] _
-
-query = 'List all messages by cristian_72225 in #👋introductions.'
-expected_behavior = {'functionality': 'search'}
-
-    @pytest.mark.parametrize("query,expected_behavior", [
-        # 1. Validate data availability
-        ("What data is currently cached?", {"functionality": "data_availability"}),
-        # 2. Basic keyword search
-        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
-        # 3. Top-K override
-        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
-        # 4. Hybrid keyword + semantic
-        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
-        # 5. Author filter
-        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
-        # 6. Channel-ID filter with ISO times
-        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
-        # 7. Plain-text summarization (relative)
-        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
-        # 8. JSON summarization (absolute)
-        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
-        # 9. Plain-text summarization (absolute)
-        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
-        # 10. Skill-term extraction
-        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
-        # 11. Semantic-only reranking
-        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
-        # 12. Empty-query guard
-        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
-        # 13. Invalid timeframe
-        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
-        # 14. Unknown channel
-        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
-        # 15. Fallback/clarification prompt
-        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
-        # 16. Combined multi-criteria
-        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
-        # 17. Implicit channel name parsing
-        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
-        # 18. JSON summary key validation
-        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
-        # 19. Jump-URL accuracy
-        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
-        # 20. Empty-channel search
-        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
-    ])
-    def test_balanced_suite(query, expected_behavior):
-        if expected_behavior.get("raises"):
-            with pytest.raises(expected_behavior["raises"]):
-                get_agent_answer(query)
-            return
-        result = get_agent_answer(query)
-        # Error handling/clarification/fallback
-        if expected_behavior["functionality"] == "error_handling":
-            if "msg" in expected_behavior:
-                assert expected_behavior["msg"].lower() in str(result).lower()
-            else:
-                ai_eval = ai_validate_response(query, result, functionality="error_handling")
-                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-            return
-        # JSON summary key validation
-        if expected_behavior.get("json_keys"):
-            assert isinstance(result, dict), "Expected JSON output"
-            for key in expected_behavior["json_keys"]:
-                assert key in result, f"Missing key '{key}' in JSON summary"
-        # Expect empty result
-        if expected_behavior.get("expect_empty"):
-            assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
-            return
-        # Standard AI validation
-        ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
->       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-E       AssertionError: AI validation failed: FAIL
-E         
-E         Explanation: While the agent provides messages by cristian_72225 in #👋introductions with content and dates, it does not include all required metadata, specifically the jump URLs (direct links) to each message. The user query requires that each message be returned with metadata such as author, timestamp, and jump URL. The agent mentions "View message" in place of jump URLs, but does not actually provide the URLs or sufficient metadata. Therefore, the response is incomplete.
-E       assert False
-E        +  where False = <built-in method startswith of str object at 0x12d81a000>('PASS')
-E        +    where <built-in method startswith of str object at 0x12d81a000> = 'FAIL\n\nExplanation: While the agent provides messages by cristian_72225 in #👋introductions with content and dates, it does not include all required metadata, specifically the jump URLs (direct links) to each message. The user query requires that each message be returned with metadata such as author, timestamp, and jump URL. The agent mentions "View message" in place of jump URLs, but does not actually provide the URLs or sufficient metadata. Therefore, the response is incomplete.'.startswith
-
-tests/test_agent_integration.py:148: AssertionError
------------------------------ Captured stdout call -----------------------------
-
-
-[1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m
-Invoking: `search_messages` with `{'channel_name': '👋introductions', 'author_name': 'cristian_72225', 'k': 20}`
-
-
-[0m[36;1m[1;3m[{'author': {'username': 'cristian_72225', 'id': '1356965427162517514', 'display_name': ''}, 'timestamp': '2025-04-24T12:54:04.839000', 'content': 'How to Change Your Display Name in Discord\nThis quick tutorial guides you through changing your display name in Discord, which appears in servers and can differ from your username.\nSteps:\n1.    Open User Settings:\no    Click the gear icon in the bottom-left corner of the Discord app (near your current username).\n2.    Edit Profile:\no    Under "User Settings," click User Profile in the User Settings menu.\no    Click the Edit Profile button under "User Profile".\n3.    Change Display Name:\no    In the "Display Name" field, enter your new display name. It can be 2–32 characters and include letters, numbers, spaces, and special characters.\no    This name will appear in servers instead of your username if set.\n4.    Save Changes:\no    Click Save Changes to update your display name.\nNotes:\n•    Your display name is global and applies across all servers unless overridden by a server-specific nickname.\n•    To set a server-specific nickname, right-click your name in a server, select Change Nickname, and enter a new name (server permissions may restrict this).\n•    Changing your display name does not affect your username, which remains unique to your account.\nDone! Your new display name is now updated.', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442520717066320/1364947505623597167', 'channel_name': '👋introductions', 'guild_id': 1353058864810950737, 'channel_id': 1353442520717066320, 'message_id': 1364947505623597167}, {'author': {'username': 'cristian_72225', 'id': '1356965427162517514', 'display_name': ''}, 'timestamp': '2025-04-11T14:31:08.312000', 'content': 'Full Name: Cristian Ursan  \nBackground: Customer service, Sales  and Ops management \nRole: Support Lead  Tech Mahindra Spain\nLocation: Madrid, Spain\nLinkedIn Profile: https://www.linkedin.com/in/cristianursan/ \nHobbies: travel, technology and sports', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442520717066320/1360260888787161251', 'channel_name': '👋introductions', 'guild_id': 1353058864810950737, 'channel_id': 1353442520717066320, 'message_id': 1360260888787161251}, {'author': {'username': 'cristian_72225', 'id': '1356965427162517514', 'display_name': ''}, 'timestamp': '2025-04-10T19:22:23.391000', 'content': 'but yeah lets start with this', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442520717066320/1359971796715176258', 'channel_name': '👋introductions', 'guild_id': 1353058864810950737, 'channel_id': 1353442520717066320, 'message_id': 1359971796715176258}, {'author': {'username': 'cristian_72225', 'id': '1356965427162517514', 'display_name': ''}, 'timestamp': '2025-04-10T19:22:12.552000', 'content': 'thats a good idea,i was about to suggest the same but during one of the calls , like 5 min each', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442520717066320/1359971751253246054', 'channel_name': '👋introductions', 'guild_id': 1353058864810950737, 'channel_id': 1353442520717066320, 'message_id': 1359971751253246054}, {'author': {'username': 'cristian_72225', 'id': '1356965427162517514', 'display_name': ''}, 'timestamp': '2025-04-10T18:53:40.029000', 'content': 'hi everyone 🙂', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353442520717066320/1359964568410914816', 'channel_name': '👋introductions', 'guild_id': 1353058864810950737, 'channel_id': 1353442520717066320, 'message_id': 1359964568410914816}][0m[32;1m[1;3mHere are all the messages by cristian_72225 in #👋introductions:
-
-1. (2025-04-24)
-How to Change Your Display Name in Discord
-This quick tutorial guides you through changing your display name in Discord, which appears in servers and can differ from your username.
-Steps:
-1. Open User Settings:
-   - Click the gear icon in the bottom-left corner of the Discord app (near your current username).
-2. Edit Profile:
-   - Under "User Settings," click User Profile in the User Settings menu.
-   - Click the Edit Profile button under "User Profile".
-3. Change Display Name:
-   - In the "Display Name" field, enter your new display name. It can be 2–32 characters and include letters, numbers, spaces, and special characters.
-   - This name will appear in servers instead of your username if set.
-4. Save Changes:
-   - Click Save Changes to update your display name.
-Notes:
-• Your display name is global and applies across all servers unless overridden by a server-specific nickname.
-• To set a server-specific nickname, right-click your name in a server, select Change Nickname, and enter a new name (server permissions may restrict this).
-• Changing your display name does not affect your username, which remains unique to your account.
-Done! Your new display name is now updated.
-View message
-
-2. (2025-04-11)
-Full Name: Cristian Ursan  
-Background: Customer service, Sales and Ops management 
-Role: Support Lead  Tech Mahindra Spain
-Location: Madrid, Spain
-LinkedIn Profile: https://www.linkedin.com/in/cristianursan/ 
-Hobbies: travel, technology and sports
-View message
-
-3. (2025-04-10)
-but yeah lets start with this
-View message
-
-4. (2025-04-10)
-thats a good idea,i was about to suggest the same but during one of the calls , like 5 min each
-View message
-
-5. (2025-04-10)
-hi everyone 🙂
-View message
-
-Let me know if you need the direct links or more details about any message![0m
-
-[1m> Finished chain.[0m
-_ test_balanced_suite[Extract all skills mentioned by darkgago in #\U0001f6e0ai-practical-applications over the past month.-expected_behavior9] _
-
-query = 'Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.'
-expected_behavior = {'functionality': 'search'}
-
-    @pytest.mark.parametrize("query,expected_behavior", [
-        # 1. Validate data availability
-        ("What data is currently cached?", {"functionality": "data_availability"}),
-        # 2. Basic keyword search
-        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
-        # 3. Top-K override
-        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
-        # 4. Hybrid keyword + semantic
-        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
-        # 5. Author filter
-        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
-        # 6. Channel-ID filter with ISO times
-        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
-        # 7. Plain-text summarization (relative)
-        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
-        # 8. JSON summarization (absolute)
-        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
-        # 9. Plain-text summarization (absolute)
-        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
-        # 10. Skill-term extraction
-        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
-        # 11. Semantic-only reranking
-        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
-        # 12. Empty-query guard
-        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
-        # 13. Invalid timeframe
-        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
-        # 14. Unknown channel
-        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
-        # 15. Fallback/clarification prompt
-        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
-        # 16. Combined multi-criteria
-        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
-        # 17. Implicit channel name parsing
-        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
-        # 18. JSON summary key validation
-        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
-        # 19. Jump-URL accuracy
-        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
-        # 20. Empty-channel search
-        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
-    ])
-    def test_balanced_suite(query, expected_behavior):
-        if expected_behavior.get("raises"):
-            with pytest.raises(expected_behavior["raises"]):
-                get_agent_answer(query)
-            return
-        result = get_agent_answer(query)
-        # Error handling/clarification/fallback
-        if expected_behavior["functionality"] == "error_handling":
-            if "msg" in expected_behavior:
-                assert expected_behavior["msg"].lower() in str(result).lower()
-            else:
-                ai_eval = ai_validate_response(query, result, functionality="error_handling")
-                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-            return
-        # JSON summary key validation
-        if expected_behavior.get("json_keys"):
-            assert isinstance(result, dict), "Expected JSON output"
-            for key in expected_behavior["json_keys"]:
-                assert key in result, f"Missing key '{key}' in JSON summary"
-        # Expect empty result
-        if expected_behavior.get("expect_empty"):
-            assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
-            return
-        # Standard AI validation
-        ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
->       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-E       AssertionError: AI validation failed: FAIL
-E         
-E         Explanation: The agent provides a list of skills grouped by application area and associated details, but it does not include the required metadata for each message (such as author, timestamp, and jump URL). Additionally, it is not clear whether these "skills" are directly extracted as mentioned by darkgago or are a summary/interpreted grouping by the agent. The response is not transparent or auditable against the actual messages, which is important for verification and completeness per the requirements.
-E       assert False
-E        +  where False = <built-in method startswith of str object at 0x10ae1f4f0>('PASS')
-E        +    where <built-in method startswith of str object at 0x10ae1f4f0> = 'FAIL\n\nExplanation: The agent provides a list of skills grouped by application area and associated details, but it does not include the required metadata for each message (such as author, timestamp, and jump URL). Additionally, it is not clear whether these "skills" are directly extracted as mentioned by darkgago or are a summary/interpreted grouping by the agent. The response is not transparent or auditable against the actual messages, which is important for verification and completeness per the requirements.'.startswith
-
-tests/test_agent_integration.py:148: AssertionError
------------------------------ Captured stdout call -----------------------------
-
-
-[1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m
-Invoking: `validate_data_availability` with `{}`
-
-
-[0m[38;5;200m[1;3m{'status': 'ok', 'message': 'Data available', 'count': 4492, 'channels': {'genai-use-case-roundtable': 8, 'showcase': 29, '❌💻non-coders-learning': 199, '❓buddy-support': 24, '❓q-and-a-questions': 25, '🌎-community': 97, '🌐official-site': 1, '🎓-classes': 8, '🎥meeting-recordings': 33, '🎯admin-onboarding': 9, '🎯onboarding': 5, '🏘admin-general-chat': 239, '🏘general-chat': 651, '🏛netarch-general': 379, '🏛🗣netarch-content': 15, '🏛🤖netarch-agents': 68, '👋admin-introductions': 2, '👋introductions': 140, '👾discord-managers': 174, '💠buddy-group1': 59, '💠buddy-group10': 50, '💠buddy-group11': 53, '💠buddy-group12': 19, '💠buddy-group2': 119, '💠buddy-group3': 63, '💠buddy-group5': 95, '💠buddy-group6': 41, '💠buddy-group7': 62, '💠buddy-group8': 92, '💠buddy-group9': 110, '💬convo-leaders-prompts': 6, '💬live-chat': 16, '💬questions-help': 5, '💵financial-services': 22, '💻learning-without-coding-skills': 20, '💼career-opportunities': 59, '📄papers-and-publications': 27, '📖resources-library': 29, '📚ai-philosophy-ethics': 151, '📝q-and-a-polls': 13, '📝welcome-rules': 6, '📣general-announcements': 50, '📥feedback-submissions': 27, '📥member-of-the-week-submissions': 14, '📥socialmedia-submissions': 2, '📩midweek-request': 1, '📸-social-media': 4, '📸content-creation-chat': 3, '🔐cyber‑report‑desk': 6, '🗂sgu-managers-resources': 23, '🗃gen-ai-use-cases': 37, '🗞genai-news': 30, '🗣convo-leaders-chat': 131, '🙋member-of-the-week-poll': 36, '\U0001f6dddiscord-pg': 142, '\U0001f6dddiscord-pg-sgu': 14, '🛠-workshops': 4, '🛠ai-practical-applications': 77, '🛠it-support': 62, '🤖agent-dev': 2, '🤖workshops': 56, '🤝find-a-buddy': 104, '🦾sgu-managers': 277, '🧠feedback-workshop': 80, '🧢buddy-group4': 87}, 'date_range': {'oldest': '2025-03-27T21:03:27.683000', 'newest': '2025-05-16T16:33:38.673000'}}[0m[32;1m[1;3m
-Invoking: `search_messages` with `{'channel_name': '🛠ai-practical-applications', 'author_name': 'darkgago', 'k': 30}`
-
-
-[0m[36;1m[1;3m[{'author': {'username': 'darkgago', 'id': '758206516753858561', 'display_name': ''}, 'timestamp': '2025-04-28T17:33:10.033000', 'content': 'This is Amazing !', 'jump_url': 'https://discord.com/channels/1353058864810950737/1354190157049364501/1366467291520176250', 'channel_name': '🛠ai-practical-applications', 'guild_id': 1353058864810950737, 'channel_id': 1354190157049364501, 'message_id': 1366467291520176250}, {'author': {'username': 'darkgago', 'id': '758206516753858561', 'display_name': ''}, 'timestamp': '2025-04-28T17:33:09.461000', 'content': '', 'jump_url': 'https://discord.com/channels/1353058864810950737/1354190157049364501/1366467289121292379', 'channel_name': '🛠ai-practical-applications', 'guild_id': 1353058864810950737, 'channel_id': 1354190157049364501, 'message_id': 1366467289121292379}, {'author': {'username': 'darkgago', 'id': '758206516753858561', 'display_name': ''}, 'timestamp': '2025-04-25T16:24:10.381000', 'content': "Morning ! for those in Advertising ! \n\n**Headline:** Microsoft made an ad with generative AI and nobody noticed  \n**Source / Date:** The Verge, April 25, 2025  \n**Link:** https://www.theverge.com/news/656104/microsoft-surface-ad-generative-ai-copilot-intel](https://www.theverge.com/news/656104/microsoft-surface-ad-generative-ai-copilot-intel\n**Quick\u202fSummary:** Microsoft utilized generative AI tools to create segments of a one-minute advertisement for its Surface Pro and Surface Laptop, which aired on YouTube starting January 30, 2025. The AI-generated content, including visuals and script elements, was seamlessly integrated with real footage, going unnoticed by viewers for nearly three months. This approach led to a 90% reduction in production time and cost, demonstrating AI's potential to streamline creative processes without compromising quality.  \n**Takeaway:** Generative AI is revolutionizing advertising by enabling efficient, high-quality content creation that blends indistinguishably with human-made media.", 'jump_url': 'https://discord.com/channels/1353058864810950737/1354190157049364501/1365362764964565042', 'channel_name': '🛠ai-practical-applications', 'guild_id': 1353058864810950737, 'channel_id': 1354190157049364501, 'message_id': 1365362764964565042}, {'author': {'username': 'darkgago', 'id': '758206516753858561', 'display_name': ''}, 'timestamp': '2025-04-22T21:49:03.792000', 'content': '**Headline:** US Law Firms Prioritize Jobs and Safety in AI Rollout  \n**Source / Date:** Financial Times, January 2025  \n**Link:** https://www.ft.com/content/afb750bf-ab26-42fd-a802-b788145b8449\n**Quick\u202fSummary:** Leading US law firms, including Crowell & Moring and White & Case, are integrating generative AI tools to enhance efficiency and reduce routine workloads. These tools assist in tasks such as summarizing documents and drafting legal content, allowing lawyers to focus on more complex work. Firms are implementing training programs and secure AI deployments to address concerns about data privacy and ensure responsible usage.  \n**Takeaway:** Generative AI is streamlining legal workflows, enabling firms to deliver cost-effective services while maintaining a focus on job preservation and ethical considerations.', 'jump_url': 'https://discord.com/channels/1353058864810950737/1354190157049364501/1364357362659496006', 'channel_name': '🛠ai-practical-applications', 'guild_id': 1353058864810950737, 'channel_id': 1354190157049364501, 'message_id': 1364357362659496006}, {'author': {'username': 'darkgago', 'id': '758206516753858561', 'display_name': ''}, 'timestamp': '2025-04-21T18:54:17.225000', 'content': 'Hi everybody !  I found this real world case ! a good example of how AI can improve and make our jobs better and safer !\n\nHeadline: A Boston-based construction firm is leveraging AI to keep roughly 30,000 workers safe  \nSource / Date: Business Insider, April 15, 2025  \nLink: https://www.businessinsider.com/ai-for-worker-site-safety-in-construction-2025-4  \nQuick\u202fSummary: Shawmut Design and Construction uses AI to analyze data from job sites, weather conditions, and workforce changes to predict and prevent safety incidents. By integrating GPS-enabled tracking and daily risk assessments, they proactively reduce hazards across 150+ worksites. The company ensures ethical use by anonymizing data and plans to expand with real-time AI alerts tailored to local regulations.  \nTakeaway: AI is keeping construction workers safer—predictive tech is becoming the new hard hat.', 'jump_url': 'https://discord.com/channels/1353058864810950737/1354190157049364501/1363950990944108587', 'channel_name': '🛠ai-practical-applications', 'guild_id': 1353058864810950737, 'channel_id': 1354190157049364501, 'message_id': 1363950990944108587}][0m[32;1m[1;3mHere are the skills mentioned by darkgago in #🛠ai-practical-applications over the past month:
-
-1. Generative AI tools for advertising:
-   - Creating ad content (visuals and scripts) with generative AI
-   - Integrating AI-generated content with real footage
-   - Streamlining creative processes in advertising
-
-2. Generative AI in legal workflows:
-   - Summarizing documents using AI
-   - Drafting legal content with AI assistance
-   - Implementing secure AI deployments and training programs
-   - Addressing data privacy and ethical AI use
-
-3. AI for construction and workplace safety:
-   - Analyzing job site data, weather, and workforce changes with AI
-   - Predicting and preventing safety incidents using AI
-   - Integrating GPS-enabled tracking and daily risk assessments
-   - Using real-time AI alerts tailored to regulations
-   - Ensuring ethical use by anonymizing data
-
-These skills reflect practical applications of AI in advertising, legal, and construction industries, focusing on content creation, workflow automation, safety, and ethical considerations.[0m
-
-[1m> Finished chain.[0m
-_ test_balanced_suite[Find the 3 most semantically similar messages to \u2018invite link restrictions\u2019 across all channels.-expected_behavior10] _
-
-query = 'Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.'
-expected_behavior = {'functionality': 'search'}
-
-    @pytest.mark.parametrize("query,expected_behavior", [
-        # 1. Validate data availability
-        ("What data is currently cached?", {"functionality": "data_availability"}),
-        # 2. Basic keyword search
-        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
-        # 3. Top-K override
-        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
-        # 4. Hybrid keyword + semantic
-        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
-        # 5. Author filter
-        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
-        # 6. Channel-ID filter with ISO times
-        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
-        # 7. Plain-text summarization (relative)
-        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
-        # 8. JSON summarization (absolute)
-        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
-        # 9. Plain-text summarization (absolute)
-        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
-        # 10. Skill-term extraction
-        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
-        # 11. Semantic-only reranking
-        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
-        # 12. Empty-query guard
-        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
-        # 13. Invalid timeframe
-        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
-        # 14. Unknown channel
-        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
-        # 15. Fallback/clarification prompt
-        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
-        # 16. Combined multi-criteria
-        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
-        # 17. Implicit channel name parsing
-        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
-        # 18. JSON summary key validation
-        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
-        # 19. Jump-URL accuracy
-        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
-        # 20. Empty-channel search
-        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
-    ])
-    def test_balanced_suite(query, expected_behavior):
-        if expected_behavior.get("raises"):
-            with pytest.raises(expected_behavior["raises"]):
-                get_agent_answer(query)
-            return
-        result = get_agent_answer(query)
-        # Error handling/clarification/fallback
-        if expected_behavior["functionality"] == "error_handling":
-            if "msg" in expected_behavior:
-                assert expected_behavior["msg"].lower() in str(result).lower()
-            else:
-                ai_eval = ai_validate_response(query, result, functionality="error_handling")
-                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-            return
-        # JSON summary key validation
-        if expected_behavior.get("json_keys"):
-            assert isinstance(result, dict), "Expected JSON output"
-            for key in expected_behavior["json_keys"]:
-                assert key in result, f"Missing key '{key}' in JSON summary"
-        # Expect empty result
-        if expected_behavior.get("expect_empty"):
-            assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
-            return
-        # Standard AI validation
-        ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
->       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
-E       AssertionError: AI validation failed: FAIL
-E         
-E         Explanation: The agent's response does not specify whether it conducted a semantic search, nor does it provide any sample messages, metadata, or evidence of having checked across all channels. Even if there were no matches, best practice would be to clarify the search method and include information like search scope, to show the process was thorough. Furthermore, the user requested the 3 most similar messages, not an all-or-nothing match, so partial or low-similarity results (with similarity scores and metadata) should have been presented if available.
-E       assert False
-E        +  where False = <built-in method startswith of str object at 0x10ae28c70>('PASS')
-E        +    where <built-in method startswith of str object at 0x10ae28c70> = "FAIL\n\nExplanation: The agent's response does not specify whether it conducted a semantic search, nor does it provide any sample messages, metadata, or evidence of having checked across all channels. Even if there were no matches, best practice would be to clarify the search method and include information like search scope, to show the process was thorough. Furthermore, the user requested the 3 most similar messages, not an all-or-nothing match, so partial or low-similarity results (with similarity scores and metadata) should have been presented if available.".startswith
-
-tests/test_agent_integration.py:148: AssertionError
------------------------------ Captured stdout call -----------------------------
-
-
-[1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m
-Invoking: `search_messages` with `{'query': 'invite link restrictions', 'k': 3}`
-
-
-[0m[36;1m[1;3m[][0m[32;1m[1;3mI couldn't find any messages that are semantically similar to "invite link restrictions" across all channels. If you have a different phrase or keyword you'd like me to search for, please let me know![0m
+[0m[36;1m[1;3m[][0m[32;1m[1;3mI couldn't find any messages containing both "use cases" and the keyword "roundtable" in the #genai-use-case-roundtable channel among the top 3 results. If you want to broaden the search or try different keywords, please let me know![0m
 
 [1m> Finished chain.[0m
 _ test_balanced_suite[Search messages from 2025-04-26 to 2025-04-23 in #\U0001f3d8general-chat.-expected_behavior12] _
@@ -547,19 +156,19 @@ expected_behavior = {'functionality': 'error_handling', 'msg': 'End time must be
         if expected_behavior["functionality"] == "error_handling":
             if "msg" in expected_behavior:
 >               assert expected_behavior["msg"].lower() in str(result).lower()
-E               AssertionError: assert 'end time must be after start time' in 'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please clarify the correct date range? should i search from 2025-04-23 to 2025-04-26, or did you mean different dates? let me know so i can proceed with your request!'
-E                +  where 'end time must be after start time' = <built-in method lower of str object at 0x106db2990>()
-E                +    where <built-in method lower of str object at 0x106db2990> = 'End time must be after start time'.lower
-E                +  and   'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please clarify the correct date range? should i search from 2025-04-23 to 2025-04-26, or did you mean different dates? let me know so i can proceed with your request!' = <built-in method lower of str object at 0x10be637b0>()
-E                +    where <built-in method lower of str object at 0x10be637b0> = 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please clarify the correct date range? Should I search from 2025-04-23 to 2025-04-26, or did you mean different dates? Let me know so I can proceed with your request!'.lower
-E                +      where 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please clarify the correct date range? Should I search from 2025-04-23 to 2025-04-26, or did you mean different dates? Let me know so I can proceed with your request!' = str('It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please clarify the correct date range? Should I search from 2025-04-23 to 2025-04-26, or did you mean different dates? Let me know so I can proceed with your request!')
+E               AssertionError: assert 'end time must be after start time' in 'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please confirm the correct date range? should it be from 2025-04-23 to 2025-04-26? let me know so i can proceed with your request!'
+E                +  where 'end time must be after start time' = <built-in method lower of str object at 0x102d5e9f0>()
+E                +    where <built-in method lower of str object at 0x102d5e9f0> = 'End time must be after start time'.lower
+E                +  and   'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please confirm the correct date range? should it be from 2025-04-23 to 2025-04-26? let me know so i can proceed with your request!' = <built-in method lower of str object at 0x102c4f390>()
+E                +    where <built-in method lower of str object at 0x102c4f390> = 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!'.lower
+E                +      where 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!' = str('It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!')
 
 tests/test_agent_integration.py:132: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 
 
 [1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3mIt looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please clarify the correct date range? Should I search from 2025-04-23 to 2025-04-26, or did you mean different dates? Let me know so I can proceed with your request![0m
+[32;1m[1;3mIt looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request![0m
 
 [1m> Finished chain.[0m
 _ test_balanced_suite[Search for \u2018bug\u2019 in #nonexistent-channel.-expected_behavior13] _
@@ -619,12 +228,12 @@ expected_behavior = {'functionality': 'error_handling', 'msg': 'Unknown channel'
         if expected_behavior["functionality"] == "error_handling":
             if "msg" in expected_behavior:
 >               assert expected_behavior["msg"].lower() in str(result).lower()
-E               assert 'unknown channel' in 'it appears that the channel #nonexistent-channel does not exist, so i couldn\'t search for messages containing "bug" there. if you have another channel in mind, please let me know and i can search there instead!'
-E                +  where 'unknown channel' = <built-in method lower of str object at 0x106dbb070>()
-E                +    where <built-in method lower of str object at 0x106dbb070> = 'Unknown channel'.lower
-E                +  and   'it appears that the channel #nonexistent-channel does not exist, so i couldn\'t search for messages containing "bug" there. if you have another channel in mind, please let me know and i can search there instead!' = <built-in method lower of str object at 0x10beb6530>()
-E                +    where <built-in method lower of str object at 0x10beb6530> = 'It appears that the channel #nonexistent-channel does not exist, so I couldn\'t search for messages containing "bug" there. If you have another channel in mind, please let me know and I can search there instead!'.lower
-E                +      where 'It appears that the channel #nonexistent-channel does not exist, so I couldn\'t search for messages containing "bug" there. If you have another channel in mind, please let me know and I can search there instead!' = str('It appears that the channel #nonexistent-channel does not exist, so I couldn\'t search for messages containing "bug" there. If you have another channel in mind, please let me know and I can search there instead!')
+E               assert 'unknown channel' in 'i couldn\'t find any messages containing "bug" in #nonexistent-channel. it\'s possible that the channel doesn\'t exist or there are no messages matching your search. if you need help searching in a different channel, please let me know!'
+E                +  where 'unknown channel' = <built-in method lower of str object at 0x102d62e30>()
+E                +    where <built-in method lower of str object at 0x102d62e30> = 'Unknown channel'.lower
+E                +  and   'i couldn\'t find any messages containing "bug" in #nonexistent-channel. it\'s possible that the channel doesn\'t exist or there are no messages matching your search. if you need help searching in a different channel, please let me know!' = <built-in method lower of str object at 0x106cc9450>()
+E                +    where <built-in method lower of str object at 0x106cc9450> = 'I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!'.lower
+E                +      where 'I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!' = str('I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!')
 
 tests/test_agent_integration.py:132: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -632,10 +241,10 @@ tests/test_agent_integration.py:132: AssertionError
 
 [1m> Entering new AgentExecutor chain...[0m
 [32;1m[1;3m
-Invoking: `search_messages` with `{'keyword': 'bug', 'channel_name': 'nonexistent-channel'}`
+Invoking: `search_messages` with `{'query': 'bug', 'channel_name': 'nonexistent-channel'}`
 
 
-[0m[36;1m[1;3m{'error': 'Unknown channel'}[0m[32;1m[1;3mIt appears that the channel #nonexistent-channel does not exist, so I couldn't search for messages containing "bug" there. If you have another channel in mind, please let me know and I can search there instead![0m
+[0m[36;1m[1;3m[][0m[32;1m[1;3mI couldn't find any messages containing "bug" in #nonexistent-channel. It's possible that the channel doesn't exist or there are no messages matching your search. If you need help searching in a different channel, please let me know![0m
 
 [1m> Finished chain.[0m
 ___ test_balanced_suite[Tell me something interesting.-expected_behavior14] ____
@@ -695,12 +304,12 @@ expected_behavior = {'functionality': 'error_handling', 'msg': 'Which channel, t
         if expected_behavior["functionality"] == "error_handling":
             if "msg" in expected_behavior:
 >               assert expected_behavior["msg"].lower() in str(result).lower()
-E               AssertionError: assert 'which channel, timeframe, or keyword' in 'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the rest of the body. even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?'
-E                +  where 'which channel, timeframe, or keyword' = <built-in method lower of str object at 0x106db2c30>()
-E                +    where <built-in method lower of str object at 0x106db2c30> = 'Which channel, timeframe, or keyword'.lower
-E                +  and   'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the rest of the body. even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?' = <built-in method lower of str object at 0x10ac06570>()
-E                +    where <built-in method lower of str object at 0x10ac06570> = 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the rest of the body. Even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?'.lower
-E                +      where 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the rest of the body. Even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?' = str('Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the rest of the body. Even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?')
+E               AssertionError: assert 'which channel, timeframe, or keyword' in 'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?'
+E                +  where 'which channel, timeframe, or keyword' = <built-in method lower of str object at 0x102d5ec90>()
+E                +    where <built-in method lower of str object at 0x102d5ec90> = 'Which channel, timeframe, or keyword'.lower
+E                +  and   'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?' = <built-in method lower of str object at 0x107f463b0>()
+E                +    where <built-in method lower of str object at 0x107f463b0> = 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?'.lower
+E                +      where 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?' = str('Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?')
 
 tests/test_agent_integration.py:132: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -785,10 +394,10 @@ expected_behavior = {'functionality': 'search'}
 >       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
 E       AssertionError: AI validation failed: FAIL
 E         
-E         Explanation: The agent should have searched for similarly named channels (such as "help", "support", or any close matches), or at least stated explicitly whether it attempted to match partial or case-insensitive channel names, rather than immediately returning that the channel was not found. Additionally, it fails to answer the user's query about "help" discussions on 2025-04-18 in the (presumed) help channel. The response is not complete and does not show an attempt at semantic search or other flexible retrieval strategies.
+E         Explanation: The agent should attempt to find the closest matching channel to "discord-help" or provide messages from similarly named channels if an exact match is not present in the data. The user query is clear, and asking for clarification without attempting a search or mentioning near matches is not acceptable. Additionally, the response does not mention searching by date or for the keyword "help" at all. The answer is not complete or sufficiently helpful.
 E       assert False
-E        +  where False = <built-in method startswith of str object at 0x10ae30e40>('PASS')
-E        +    where <built-in method startswith of str object at 0x10ae30e40> = 'FAIL\n\nExplanation: The agent should have searched for similarly named channels (such as "help", "support", or any close matches), or at least stated explicitly whether it attempted to match partial or case-insensitive channel names, rather than immediately returning that the channel was not found. Additionally, it fails to answer the user\'s query about "help" discussions on 2025-04-18 in the (presumed) help channel. The response is not complete and does not show an attempt at semantic search or other flexible retrieval strategies.'.startswith
+E        +  where False = <built-in method startswith of str object at 0x106816b20>('PASS')
+E        +    where <built-in method startswith of str object at 0x106816b20> = 'FAIL\n\nExplanation: The agent should attempt to find the closest matching channel to "discord-help" or provide messa...es not mention searching by date or for the keyword "help" at all. The answer is not complete or sufficiently helpful.'.startswith
 
 tests/test_agent_integration.py:148: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -875,7 +484,7 @@ expected_behavior = {'functionality': 'summarize', 'json_keys': ['summary', 'not
 >           assert isinstance(result, dict), "Expected JSON output"
 E           AssertionError: Expected JSON output
 E           assert False
-E            +  where False = isinstance('{\n  "summary": "This week in #❓q-and-a-questions, the channel featured a series of thought-provoking questions from various buddy groups, focusing on the challenges and opportunities of integrating generative AI into different domains. Key topics included: the need to rethink explainability as a system-level property in modular AI environments; the impact of U.S. research funding cuts and whether AI can compensate for the loss of human scientific talent; balancing governance frameworks like ISO/IEC 42001 with innovation in AI; integrating LLMs with enterprise systems while ensuring traceability and auditability; design principles for maintainability and debuggability in agentic AI systems; strategies for adopting generative AI in the workplace without causing job displacement fears; ethical considerations for multimodal AI interfaces and user perceptions; the challenges of AI-driven healthcare, especially regarding trust and compliance; validating AI agent behavior in production; and management attitudes toward employee resistance to AI adoption.",\n  "note": "The questions this week reflect a strong focus on both the technical and ethical dimensions of AI adoption, with an emphasis on real-world implementation challenges, governance, and the human-AI relationship. No direct answers or discussions were posted in the channel during this period—only the questions themselves, which are intended to spark further conversation."\n}', dict)
+E            +  where False = isinstance('{\n  "summary": "This week in #❓q-and-a-questions, the main activity was the posting of thought-provoking questions f...ns. No major debates or answers were recorded in the channel this week—activity was primarily question submission."\n}', dict)
 
 tests/test_agent_integration.py:139: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -898,8 +507,8 @@ Guild ID: None
 Channel ID: None
 Channel Name: ❓q-and-a-questions
 [33;1m[1;3m{'summary': '', 'note': '', 'messages': [{'author': {'username': 'kiss_ambassador', 'display_name': '', 'id': '1362326150373966035'}, 'timestamp': '2025-05-15T10:23:06.040000', 'content': '🧢 Here is the question from **Buddy Group 4**:\n“As generative AI systems scale and integrate across domains (from content to decision-making tools), should we rethink ‘explainability’ as a system-level property rather than a model feature? What new patterns or architectural shifts could support end-to-end traceability and contextual reasoning in increasingly modular and agentic AI environments?”', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372519655444451369', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372519655444451369}, {'author': {'username': 'kiss_ambassador', 'display_name': '', 'id': '1362326150373966035'}, 'timestamp': '2025-05-15T10:29:30.285000', 'content': 'Special remark to <@1365074657446723624> you kept your question short an sweet. Well done👏', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372521267084918805', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372521267084918805}, {'author': {'username': 'apoorvgarg88', 'display_name': '', 'id': '1335299567440367757'}, 'timestamp': '2025-05-15T13:01:04.688000', 'content': '🏛️Here is the question from Buddy Group 8:\n\nWith U.S. research funding cuts — especially from the DOGE— top scientists are leaving for better support abroad, accelerating a growing brain drain (Business Insider, May 2025).\n\nCan AI meaningfully replace the loss of human scientific talent? Could generative AI or autonomous research tools fill this gap — or are we overestimating what AI can do without the insight, creativity, and mentorship of human scientists? \n\nSpecial remarks to <@1365814219932565615> for bringing this important topic for discussion!', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372559411775799296', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372559411775799296}, {'author': {'username': 'andreahickethier', 'display_name': '', 'id': '1361976806651068517'}, 'timestamp': '2025-05-15T14:07:57.013000', 'content': 'Buddy Group no 1, we are keeping the question from last week. In dynamic AI environments, how can we implement ISO-like governance frameworks (e.g. ISO/IEC 42001) without stifling agility and innovation? What are key design patterns that balance certifiability with adaptiveness?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372576240686338201', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372576240686338201}, {'author': {'username': 'eduardofadanelli', 'display_name': '', 'id': '1087795330067742760'}, 'timestamp': '2025-05-15T14:32:25.442000', 'content': 'Here is the question from Buddy Group 6:\n\nHow complex is it to integrate LLM models with existing enterprise systems such as CRMs, ERPs, or automation platforms, and what tools are available to ensure the traceability, explainability, and auditability of those models?\nThanks for Miguel Angel Calzada for bringing this topic for us.👍', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372582399724097637', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372582399724097637}, {'author': {'username': 'jhorden2211', 'display_name': '', 'id': '691008994789163020'}, 'timestamp': '2025-05-15T17:34:00.451000', 'content': 'Here is the question from Buddy Group 5:\n\nAs generative AI systems become increasingly agentic and capable of complex autonomous tasks, what design principles and architectural choices are essential to ensure maintainability and debuggability over time – especially to avoid the upfront efficiency gains being lost to long-term technical debt?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372628096704057344', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372628096704057344}, {'author': {'username': 'nura775', 'display_name': '', 'id': '1362171740104556584'}, 'timestamp': '2025-05-15T17:50:06.729000', 'content': 'Here is the question from Buddy Group 2: \n\nHow can companies adopt Generative AI to enhance employee productivity and engagement - without creating fear of job displacement?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372632149567475722', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372632149567475722}, {'author': {'username': 'georgi8865', 'display_name': '', 'id': '969571634027589643'}, 'timestamp': '2025-05-15T18:33:52.091000', 'content': "Question from buddy group 3: \n\nAs AI-driven multimodal interfaces become more fluent and human-like, how can we ensure that users don't mistake these systems' responses for true understanding or agency? What ethical responsibilities arise in shaping the cues of collaboration and intelligence in such systems?", 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372643161133940967', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372643161133940967}, {'author': {'username': 'shabana_39556', 'display_name': '', 'id': '1357376692384960524'}, 'timestamp': '2025-05-15T19:12:17.764000', 'content': 'Question from buddy group 7:                                                                                          With the recent launch of  China’s first AI hospital featuring 42 AI doctors . What are the potential ethical and practical challenges of AI driven docs into our healthcare systems?. How can we ensure that AI doctors build  and maintain trust , comply with medical regulations and work seamlessly alongside human healthcare providers to provide optimal patient care ?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372652831827300494', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372652831827300494}, {'author': {'username': 'apoorvgarg88', 'display_name': '', 'id': '1335299567440367757'}, 'timestamp': '2025-05-15T19:32:40.110000', 'content': '🗒️Question from Buddy Group 11 - How do we validate the behaviour of AI agents in production environments? Is continuous evaluation more important than pre-deployment certification?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372657958718017556', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372657958718017556}, {'author': {'username': 'silkefinken', 'display_name': '', 'id': '1075075819807985714'}, 'timestamp': '2025-05-15T22:01:30.139000', 'content': 'Question from buddy group 10:  What will be the right attitude of management with regards to AI resistance from employees? Some companies seem to push AI-first rather broadly, e.g. making AI usage part of performance reviews etc. but will that be the right way forward?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372695413974372444', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372695413974372444}]}[0m[32;1m[1;3m{
-  "summary": "This week in #❓q-and-a-questions, the channel featured a series of thought-provoking questions from various buddy groups, focusing on the challenges and opportunities of integrating generative AI into different domains. Key topics included: the need to rethink explainability as a system-level property in modular AI environments; the impact of U.S. research funding cuts and whether AI can compensate for the loss of human scientific talent; balancing governance frameworks like ISO/IEC 42001 with innovation in AI; integrating LLMs with enterprise systems while ensuring traceability and auditability; design principles for maintainability and debuggability in agentic AI systems; strategies for adopting generative AI in the workplace without causing job displacement fears; ethical considerations for multimodal AI interfaces and user perceptions; the challenges of AI-driven healthcare, especially regarding trust and compliance; validating AI agent behavior in production; and management attitudes toward employee resistance to AI adoption.",
-  "note": "The questions this week reflect a strong focus on both the technical and ethical dimensions of AI adoption, with an emphasis on real-world implementation challenges, governance, and the human-AI relationship. No direct answers or discussions were posted in the channel during this period—only the questions themselves, which are intended to spark further conversation."
+  "summary": "This week in #❓q-and-a-questions, the main activity was the posting of thought-provoking questions from various Buddy Groups, focusing on the challenges and opportunities of integrating generative AI into different domains. Topics included: system-level explainability and traceability in modular AI, the impact of research funding cuts and whether AI can replace human scientific talent, balancing governance frameworks with innovation, integrating LLMs with enterprise systems, design principles for maintainability in agentic AI, ethical and practical challenges of AI in healthcare, validating AI agent behavior in production, and management attitudes toward employee AI resistance. The questions reflect a strong emphasis on ethics, governance, technical integration, and the human-AI relationship.",
+  "note": "Most questions were posted on May 15th, with each Buddy Group contributing a unique perspective. There was a notable focus on real-world implications, such as AI in healthcare and the workplace, as well as broader philosophical and technical concerns. No major debates or answers were recorded in the channel this week—activity was primarily question submission."
 }[0m
 
 [1m> Finished chain.[0m
@@ -973,7 +582,7 @@ expected_behavior = {'expect_empty': True, 'functionality': 'search'}
         if expected_behavior.get("expect_empty"):
 >           assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
 E           AssertionError: Expected empty result for empty channel search
-E           assert ('There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or another channel, please let me know!' == [] or 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or another channel, please let me know!' == {} or not 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or another channel, please let me know!')
+E           assert ('There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!' == [] or 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!' == {} or not 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!')
 
 tests/test_agent_integration.py:144: AssertionError
 ----------------------------- Captured stdout call -----------------------------
@@ -991,7 +600,7 @@ End ISO: 2025-04-25T23:59:59Z
 Guild ID: None
 Channel ID: 1364250555467300976
 Channel Name: None
-[33;1m[1;3m⚠️ No messages found in the specified timeframe.[0m[32;1m[1;3mThere are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or another channel, please let me know![0m
+[33;1m[1;3m⚠️ No messages found in the specified timeframe.[0m[32;1m[1;3mThere are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know![0m
 
 [1m> Finished chain.[0m
 =============================== warnings summary ===============================
@@ -1020,9 +629,17 @@ tests/test_agent_integration.py::test_balanced_suite[What data is currently cach
   /Users/jose/Documents/discord-bot/core/agent.py:111: LangChainDeprecationWarning: The method `Chain.run` was deprecated in langchain 0.1.0 and will be removed in 1.0. Use :meth:`~invoke` instead.
     return agent.run(query)
 
-tests/test_agent_integration.py: 42 warnings
+tests/test_agent_integration.py: 40 warnings
   /Users/jose/Documents/discord-bot/venv/lib/python3.9/site-packages/langchain_community/chat_models/openai.py:495: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
     response = response.dict()
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-============ 10 failed, 11 passed, 48 warnings in 122.56s (0:02:02) ============
+=========================== short test summary info ============================
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search for \u2018use cases\u2019 with keyword \u2018roundtable\u2019 in #genai-use-case-roundtable, returning the top 3 results.-expected_behavior3]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search messages from 2025-04-26 to 2025-04-23 in #\U0001f3d8general-chat.-expected_behavior12]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search for \u2018bug\u2019 in #nonexistent-channel.-expected_behavior13]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Tell me something interesting.-expected_behavior14]
+FAILED tests/test_agent_integration.py::test_balanced_suite[What was discussed about \u2018help\u2019 on 2025-04-18 in the discord-help channel?-expected_behavior16]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Summarize this week in #\u2753q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.-expected_behavior17]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Retrieve messages in channel ID 1364250555467300976 (\U0001f4e9midweek-request) between 2025-04-20 and 2025-04-25.-expected_behavior19]
+============ 7 failed, 14 passed, 46 warnings in 109.54s (0:01:49) =============
