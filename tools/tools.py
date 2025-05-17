@@ -151,18 +151,18 @@ def search_messages(
             candidates = filtered_candidates
 
         def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
-            # Ignore section headers, lines with only dashes, or lines that look like bot headers
             if not msg_content:
                 return False
             lines = [l.strip() for l in msg_content.split('\n') if l.strip()]
             # If all lines are headers or separators, skip
             if all(l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) for l in lines):
                 return False
-            # If keyword is present, ensure it's in a non-header line (not just in a heading)
+            # If keyword is present, ensure it's in a non-header line and as a standalone word
             if keyword:
+                pattern = r'\\b' + re.escape(keyword) + r'\\b'
                 for l in lines:
-                    # Only count as a match if the keyword is in a line that is not a heading or separator
-                    if keyword.lower() in l.lower() and not (l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) or re.match(r'^[\W_ ]*welcome[\W_ ]*$', l, re.IGNORECASE)):
+                    if (re.search(pattern, l, re.IGNORECASE)
+                        and not (l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) or re.match(r'^[\W_ ]*'+re.escape(keyword)+r'[\W_ ]*$', l, re.IGNORECASE))):
                         return True
                 return False
             return True
@@ -171,23 +171,23 @@ def search_messages(
         # Hybrid search: both query and keyword must be present if both are given
         if keyword and query:
             for m in candidates:
-                if m.content and keyword.lower() in m.content.lower() and query.lower() in m.content.lower():
+                if m.content and re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE) and re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE):
                     if is_real_message(m.content, keyword):
                         filtered.append(m)
-            # If no matches for both, try to return matches for at least one term (with a note)
+            # If no matches for both, try to return matches for at least one term
             if not filtered:
                 for m in candidates:
-                    if m.content and (keyword.lower() in m.content.lower() or query.lower() in m.content.lower()):
+                    if m.content and (re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE) or re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE)):
                         if is_real_message(m.content, keyword):
                             filtered.append(m)
         elif keyword:
             for m in candidates:
-                if m.content and keyword.lower() in m.content.lower():
+                if m.content and re.search(r'\\b'+re.escape(keyword)+r'\\b', m.content, re.IGNORECASE):
                     if is_real_message(m.content, keyword):
                         filtered.append(m)
         elif query:
             for m in candidates:
-                if m.content and query.lower() in m.content.lower():
+                if m.content and re.search(r'\\b'+re.escape(query)+r'\\b', m.content, re.IGNORECASE):
                     if is_real_message(m.content, query):
                         filtered.append(m)
         else:
