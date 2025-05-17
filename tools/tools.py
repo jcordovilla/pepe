@@ -110,7 +110,8 @@ def search_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            return {"error": "Unknown channel"}
+            return []  # Unknown channel, return empty result
+
     session = SessionLocal()
     try:
         db_q = session.query(Message)
@@ -119,57 +120,53 @@ def search_messages(
         if channel_id:
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
-            db_q = db_q.filter(Message.author["username"].as_string() == author_name)
-        skill_terms = []
-        if keyword and query:
-            db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
-            db_q = db_q.filter(Message.content.ilike(f"%{query}%"))
-        elif keyword:
-            db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
-        elif query:
-            skill_terms = extract_skill_terms(query)
-            if skill_terms:
-                for term in skill_terms:
-                    db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
+            db_q = db_q.filter(Message.author_name == author_name)
+
+        # Fetch more candidates for post-filtering
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
             return []
+
+        # Strict keyword filter: keyword must appear in content (case-insensitive)
         filtered = []
-        for m in candidates:
-            content = (m.content or '').lower()
-            # Only match if keyword/query/skill-term is in the actual message content (not just in section titles)
-            if keyword and query:
-                if keyword.lower() in content and query.lower() in content:
+        if keyword:
+            for m in candidates:
+                if m.content and keyword.lower() in m.content.lower():
                     filtered.append(m)
-            elif keyword:
-                if keyword.lower() in content:
+        elif query:
+            for m in candidates:
+                if m.content and query.lower() in m.content.lower():
                     filtered.append(m)
-            elif query and skill_terms:
-                if any(term.lower() in content for term in skill_terms):
-                    filtered.append(m)
-            elif query:
-                if query.lower() in content:
-                    filtered.append(m)
-            else:
-                filtered.append(m)
+        else:
+            filtered = candidates
+
         if not filtered:
             return []
+
+        # Sort by timestamp descending and take top k
+        filtered = sorted(filtered, key=lambda m: m.timestamp, reverse=True)[:k]
+
         formatted = []
-        for m in filtered[:k]:
-            author = m.author or {}
+        for m in filtered:
+            author = {
+                "username": getattr(m, "author_name", None) or getattr(m, "author", None) or "Unknown",
+                "display_name": getattr(m, "author_display_name", None) or getattr(m, "author_name", None) or "Unknown"
+            }
+            jump_url = getattr(m, "jump_url", None)
+            if not jump_url:
+                try:
+                    jump_url = build_jump_url(m.guild_id, m.channel_id, m.message_id)
+                except Exception:
+                    jump_url = ""
             formatted.append({
-                "author": {
-                    "username": author.get("username", "Unknown"),
-                    "id": author.get("id"),
-                    "display_name": author.get("display_name", "")
-                },
+                "author": author,
                 "timestamp": m.timestamp.isoformat() if hasattr(m.timestamp, 'isoformat') else str(m.timestamp),
-                "content": m.content or "",
-                "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id),
-                "channel_name": m.channel_name,
-                "guild_id": m.guild_id,
-                "channel_id": m.channel_id,
-                "message_id": m.message_id
+                "content": m.content,
+                "jump_url": jump_url,
+                "channel_name": getattr(m, "channel_name", None),
+                "guild_id": getattr(m, "guild_id", None),
+                "channel_id": getattr(m, "channel_id", None),
+                "message_id": getattr(m, "message_id", None) or getattr(m, "id", None)
             })
         return formatted
     finally:
