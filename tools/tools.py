@@ -127,18 +127,50 @@ def search_messages(
         if not candidates:
             return []
 
-        # Strict keyword filter: keyword must appear in content (case-insensitive)
+        def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
+            # Ignore section headers, lines with only dashes, or lines that look like bot headers
+            if not msg_content:
+                return False
+            lines = [l.strip() for l in msg_content.split('\n') if l.strip()]
+            # If all lines are headers or separators, skip
+            if all(l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) for l in lines):
+                return False
+            # If keyword is present, ensure it's in a non-header line
+            if keyword:
+                for l in lines:
+                    if keyword.lower() in l.lower() and not (l.startswith('---') or l.endswith('---')):
+                        return True
+                return False
+            return True
+
         filtered = []
-        if keyword:
+        # Hybrid search: both query and keyword must be present if both are given
+        if keyword and query:
+            for m in candidates:
+                if m.content and keyword.lower() in m.content.lower() and query.lower() in m.content.lower():
+                    if is_real_message(m.content, keyword):
+                        filtered.append(m)
+            # If no matches for both, try to return matches for at least one term (with a note)
+            if not filtered:
+                for m in candidates:
+                    if m.content and (keyword.lower() in m.content.lower() or query.lower() in m.content.lower()):
+                        if is_real_message(m.content, keyword):
+                            filtered.append(m)
+        elif keyword:
             for m in candidates:
                 if m.content and keyword.lower() in m.content.lower():
-                    filtered.append(m)
+                    if is_real_message(m.content, keyword):
+                        filtered.append(m)
         elif query:
             for m in candidates:
                 if m.content and query.lower() in m.content.lower():
-                    filtered.append(m)
+                    if is_real_message(m.content, query):
+                        filtered.append(m)
         else:
-            filtered = candidates
+            for m in candidates:
+                if is_real_message(m.content):
+                    filtered = candidates
+                    break
 
         if not filtered:
             return []
@@ -148,9 +180,18 @@ def search_messages(
 
         formatted = []
         for m in filtered:
+            # Handle author extraction: always a string for username
+            author_name_val = getattr(m, "author_name", None)
+            author_display_name_val = getattr(m, "author_display_name", None)
+            # If author_name is a dict, extract username string
+            if isinstance(author_name_val, dict):
+                username = author_name_val.get("username", str(author_name_val))
+            else:
+                username = str(author_name_val) if author_name_val else "Unknown"
+            display_name = str(author_display_name_val) if author_display_name_val else username or "Unknown"
             author = {
-                "username": getattr(m, "author_name", None) or getattr(m, "author", None) or "Unknown",
-                "display_name": getattr(m, "author_display_name", None) or getattr(m, "author_name", None) or "Unknown"
+                "username": username,
+                "display_name": display_name
             }
             jump_url = getattr(m, "jump_url", None)
             if not jump_url:
