@@ -106,7 +106,14 @@ def get_agent_answer(query: str) -> Any:
     """
     if not query.strip():
         raise ValueError("Query cannot be empty")
-        
+
+    # Fallback/clarification for vague queries
+    lower_query = query.lower()
+    if not any(
+        kw in lower_query for kw in ["channel", "#", "time", "day", "week", "month", "year", "keyword", "messages", "summarize", "find", "search", "between", "from", "to", "in "]
+    ):
+        return "Which channel, timeframe, or keyword would you like to search or summarize? Please specify so I can help you."
+    
     try:
         return agent.run(query)
     except Exception as e:

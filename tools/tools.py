@@ -110,7 +110,10 @@ def search_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            return []  # Unknown channel, return empty result
+            return [{
+                "error": f"Unknown channel: #{channel_name}",
+                "detail": f"Unknown channel"
+            }]
 
     session = SessionLocal()
     try:
@@ -123,102 +126,98 @@ def search_messages(
         # Fetch more candidates for post-filtering
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
-            return []
+            return [{
+                "result": [],
+                "info": f"No messages found for the given parameters (guild_id={guild_id}, channel_id={channel_id}, channel_name={channel_name})"
+            }]
 
         def is_real_message(msg_content: str, keyword: Optional[str] = None) -> bool:
             if not msg_content:
                 return False
-            lines = [l.strip() for l in msg_content.split('\n') if l.strip()]
-            # If all lines are headers or separators, skip
-            if all(l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) for l in lines):
-                return False
-            # If keyword is present, ensure it's in a non-header line and as a standalone word
-            if keyword:
-                pattern = r'\\b' + re.escape(keyword) + r'\\b'
-                for l in lines:
-                    if (re.search(pattern, l, re.IGNORECASE)
-                        and not (l.startswith('---') or l.endswith('---') or re.match(r'^[\W_]+$', l) or re.match(r'^[\W_ ]*'+re.escape(keyword)+r'[\W_ ]*$', l, re.IGNORECASE))):
-                        return True
+            if keyword and keyword.lower() not in msg_content.lower():
                 return False
             return True
 
         filtered = []
         # Hybrid search: both query and keyword must be present if both are given
         if keyword and query:
-            # 1. Try strict intersection (both present)
             for m in candidates:
-                if m.content and keyword.lower() in m.content.lower() and query.lower() in m.content.lower():
-                    if is_real_message(m.content, keyword):
-                        filtered.append(m)
-            # 2. If not enough, fill with union (either present, but not both)
-            if len(filtered) < k:
-                union = []
-                for m in candidates:
-                    if m in filtered:
-                        continue
-                    if m.content and (keyword.lower() in m.content.lower() or query.lower() in m.content.lower()):
-                        if is_real_message(m.content, keyword):
-                            union.append(m)
-                filtered.extend(union)
-            # Only keep up to k
-            filtered = filtered[:k]
+                if query.lower() in m.content.lower() and keyword.lower() in m.content.lower():
+                    filtered.append(m)
         elif keyword:
             for m in candidates:
-                if m.content and keyword.lower() in m.content.lower():
-                    if is_real_message(m.content, keyword):
-                        filtered.append(m)
-            filtered = filtered[:k]
+                if keyword.lower() in m.content.lower():
+                    filtered.append(m)
         elif query:
             for m in candidates:
-                if m.content and query.lower() in m.content.lower():
-                    if is_real_message(m.content, query):
-                        filtered.append(m)
-            filtered = filtered[:k]
+                if query.lower() in m.content.lower():
+                    filtered.append(m)
         else:
-            for m in candidates:
-                if is_real_message(m.content):
-                    filtered = candidates[:k]
-                    break
+            filtered = candidates[:k]
 
         # Author filtering in Python (after keyword/query filtering)
         if author_name:
-            def author_matches(m):
-                author_name_val = getattr(m, "author_name", None)
-                if isinstance(author_name_val, dict):
-                    if author_name_val.get("username") == author_name or author_name_val.get("display_name") == author_name:
-                        return True
-                elif isinstance(author_name_val, str):
-                    if author_name_val == author_name:
-                        return True
-                author_val = getattr(m, "author", None)
-                if isinstance(author_val, dict):
-                    if author_val.get("username") == author_name or author_val.get("display_name") == author_name:
-                        return True
-                return False
-            filtered = [m for m in filtered if author_matches(m)]
+            filtered = [m for m in filtered if (m.author and author_name.lower() in (m.author.lower() or ""))]
 
         # Always return a list of dicts with all required metadata, even if empty
         formatted = []
-        for m in filtered:
-            author = getattr(m, "author", {})
-            if isinstance(author, str):
-                author = {"username": author, "display_name": author}
-            jump_url = getattr(m, "jump_url", None)
-            if not jump_url:
-                try:
-                    jump_url = build_jump_url(m.guild_id, m.channel_id, m.message_id)
-                except Exception:
-                    jump_url = ""
+        for m in filtered[:k]:
             formatted.append({
-                "author": author,
-                "timestamp": m.timestamp.isoformat() if hasattr(m.timestamp, 'isoformat') else str(m.timestamp),
+                "author": m.author,
+                "timestamp": m.timestamp.isoformat() if m.timestamp else None,
                 "content": m.content,
-                "jump_url": jump_url,
-                "channel_name": getattr(m, "channel_name", None),
-                "guild_id": getattr(m, "guild_id", None),
-                "channel_id": getattr(m, "channel_id", None),
-                "message_id": getattr(m, "message_id", None) or getattr(m, "id", None)
+                "jump_url": build_jump_url(m.guild_id, m.channel_id, m.id),
+                "channel_name": m.channel_name,
+                "guild_id": m.guild_id,
+                "channel_id": m.channel_id,
+                "message_id": m.id
             })
+        if not formatted:
+            # Explicitly state what was searched for
+            if keyword and query:
+                return [{
+                    "result": [],
+                    "info": f"No messages found containing BOTH '{query}' and keyword '{keyword}' in channel '{channel_name or channel_id}'. Searched for both terms together.",
+                    "parameters": {
+                        "query": query,
+                        "keyword": keyword,
+                        "channel_name": channel_name,
+                        "channel_id": channel_id,
+                        "guild_id": guild_id
+                    }
+                }]
+            elif keyword:
+                return [{
+                    "result": [],
+                    "info": f"No messages found containing keyword '{keyword}' in channel '{channel_name or channel_id}'.",
+                    "parameters": {
+                        "keyword": keyword,
+                        "channel_name": channel_name,
+                        "channel_id": channel_id,
+                        "guild_id": guild_id
+                    }
+                }]
+            elif query:
+                return [{
+                    "result": [],
+                    "info": f"No messages found containing '{query}' in channel '{channel_name or channel_id}'.",
+                    "parameters": {
+                        "query": query,
+                        "channel_name": channel_name,
+                        "channel_id": channel_id,
+                        "guild_id": guild_id
+                    }
+                }]
+            else:
+                return [{
+                    "result": [],
+                    "info": "No messages found for the given parameters.",
+                    "parameters": {
+                        "channel_name": channel_name,
+                        "channel_id": channel_id,
+                        "guild_id": guild_id
+                    }
+                }]
         return formatted
     finally:
         session.close()
@@ -233,22 +232,22 @@ def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> O
     from the database, or None if not found.
     """
     if not validate_channel_name(channel_name):
-        logger.error(f"Invalid channel name format: {channel_name}")
-        raise ValueError(f"Invalid channel name format: {channel_name}")
+        return None
     if guild_id is not None and not validate_guild_id(guild_id):
-        logger.error(f"Invalid guild ID format: {guild_id}")
-        raise ValueError(f"Invalid guild ID format: {guild_id}")
+        return None
     session = SessionLocal()
     try:
-        logger.info(f"Resolving channel name: {channel_name}")
-        query = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
-        if guild_id is not None:
-            query = query.filter(Message.guild_id == guild_id)
-        result = query.first()
-        return result[0] if result else None
+        q = session.query(Message.channel_id).filter(Message.channel_name == channel_name)
+        if guild_id:
+            q = q.filter(Message.guild_id == guild_id)
+        result = q.first()
+        if result:
+            return result[0]
+        else:
+            # Explicitly log or return None for unknown channel
+            return None
     except Exception as e:
-        logger.error(f"Error resolving channel name: {e}")
-        raise
+        return None
     finally:
         session.close()
 
