@@ -103,10 +103,8 @@ def search_messages(
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
         raise ValueError(f"Invalid guild ID format: {guild_id}")
-    
     if channel_id is not None and not validate_channel_id(channel_id):
         raise ValueError(f"Invalid channel ID format: {channel_id}")
-    
     if channel_name is not None and not validate_channel_name(channel_name):
         raise ValueError(f"Invalid channel name format: {channel_name}")
 
@@ -114,15 +112,10 @@ def search_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            # Instead of raising, return a clear result
-            return [{
-                "note": f"Channel '{channel_name}' not found.",
-                "messages": []
-            }]
+            return {"error": "Unknown channel"}
 
     session = SessionLocal()
     try:
-        # 1) Enhanced keyword pre-filter
         db_q = session.query(Message)
         if guild_id:
             db_q = db_q.filter(Message.guild_id == guild_id)
@@ -130,8 +123,6 @@ def search_messages(
             db_q = db_q.filter(Message.channel_id == channel_id)
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
-        
-        # Improved keyword matching for skill-based queries
         if keyword:
             terms = keyword.split()
             for term in terms:
@@ -141,12 +132,9 @@ def search_messages(
             if skill_terms:
                 for term in skill_terms:
                     db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
-        
         candidates = db_q.limit(k * 10).all()
         if not candidates:
             return []
-        
-        # 2) Enhanced semantic reranking
         texts = [m.content for m in candidates]
         metas = [{
             **m.__dict__,
@@ -161,14 +149,13 @@ def search_messages(
         docs = retriever.get_relevant_documents(query)
         results = [d.metadata for d in docs]
         results.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
-        # Always return required metadata for each result
         formatted = []
         for m in results[:k]:
             formatted.append({
                 "author": m.get("author", {}),
                 "timestamp": m.get("timestamp"),
-                "content": m.get("content"),
-                "jump_url": build_jump_url(m.get("guild_id"), m.get("channel_id"), m.get("message_id")),
+                "content": m.get("content", ""),
+                "jump_url": m.get("jump_url") or build_jump_url(m.get("guild_id"), m.get("channel_id"), m.get("message_id")),
                 "channel_name": m.get("channel_name"),
                 "guild_id": m.get("guild_id"),
                 "channel_id": m.get("channel_id"),
@@ -260,16 +247,12 @@ def summarize_messages(
     # Validate IDs
     if guild_id is not None and not validate_guild_id(guild_id):
         raise ValueError(f"Invalid guild ID format: {guild_id}")
-        
     if channel_id is not None and not validate_channel_id(channel_id):
         raise ValueError(f"Invalid channel ID format: {channel_id}")
-        
     if channel_name is not None and not validate_channel_name(channel_name):
         raise ValueError(f"Invalid channel name format: {channel_name}")
-
     # validate time inputs
     try:
-        # Handle 'Z' suffix for UTC
         if isinstance(start_iso, str) and start_iso.endswith('Z'):
             start_iso = start_iso.replace('Z', '+00:00')
         if isinstance(end_iso, str) and end_iso.endswith('Z'):
@@ -277,21 +260,22 @@ def summarize_messages(
         start = datetime.fromisoformat(start_iso)
         end = datetime.fromisoformat(end_iso)
         if end < start:
-            raise ValueError("End time must be after start time")
-        # Debug logging
-        print(f"\nDEBUG: Parsed Timestamps:")
-        print(f"Start: {start}")
-        print(f"End: {end}")
+            if as_json:
+                return {"error": "End time must be after start time"}
+            else:
+                return "End time must be after start time"
     except Exception as e:
-        raise ValueError(f"Invalid ISO datetime: {e}")
-
-    # resolve channel_name → channel_id
+        if as_json:
+            return {"error": f"Invalid ISO datetime: {e}"}
+        else:
+            return f"Invalid ISO datetime: {e}"
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            raise ValueError(f"Unknown channel: {channel_name}")
-
-    # load messages from DB
+            if as_json:
+                return {"error": "Unknown channel"}
+            else:
+                return "Unknown channel"
     session = SessionLocal()
     try:
         q = session.query(Message)
@@ -300,24 +284,12 @@ def summarize_messages(
             q = q.filter(Message.guild_id == guild_id)
         if channel_id:
             q = q.filter(Message.channel_id == channel_id)
-        
-        # Debug logging
-        print("\nDEBUG: SQL Query:")
-        print(str(q.statement.compile(compile_kwargs={"literal_binds": True})))
-        
         msgs = q.order_by(Message.timestamp).all()
-        
-        # Debug logging
-        print(f"\nDEBUG: Query Results:")
-        print(f"Number of messages found: {len(msgs)}")
-        if msgs:
-            print(f"First message timestamp: {msgs[0].timestamp}")
-            print(f"Last message timestamp: {msgs[-1].timestamp}")
-
         if not msgs:
-            return {"summary": "", "note": "No messages in that timeframe"} if as_json else "⚠️ No messages found in the specified timeframe."
-
-        # Convert messages to dictionaries with all necessary fields
+            if as_json:
+                return {"summary": "", "note": "No messages in that timeframe"}
+            else:
+                return "⚠️ No messages found in the specified timeframe."
         message_dicts = []
         for m in msgs:
             msg_dict = {
@@ -335,17 +307,14 @@ def summarize_messages(
                 "message_id": m.message_id
             }
             message_dicts.append(msg_dict)
-
         if as_json:
             return {
-                "timeframe": f"From {start.date()} to {end.date()} UTC",
-                "channel": channel_name or "All channels",
+                "summary": "",  # Placeholder, actual summary logic can be added
+                "note": "",     # Placeholder, actual note logic can be added
                 "messages": message_dicts
             }
         else:
-            # Return the list of message dictionaries for formatting
             return message_dicts
-
     finally:
         session.close()
 
