@@ -123,6 +123,7 @@ def search_messages(
         if author_name:
             db_q = db_q.filter(Message.author["username"].as_string() == author_name)
         # AND logic: both keyword and query must be present in the message content
+        skill_terms = []
         if keyword and query:
             db_q = db_q.filter(Message.content.ilike(f"%{keyword}%"))
             db_q = db_q.filter(Message.content.ilike(f"%{query}%"))
@@ -133,59 +134,41 @@ def search_messages(
             if skill_terms:
                 for term in skill_terms:
                     db_q = db_q.filter(Message.content.ilike(f"%{term}%"))
-        candidates = db_q.limit(k * 10).all()
+        candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 10).all()
         if not candidates:
             return []
         # AND logic for filtering: both keyword and query must be present
-        if keyword and query:
-            candidates = [m for m in candidates if keyword.lower() in (m.content or '').lower() and query.lower() in (m.content or '').lower()]
-        elif keyword:
-            candidates = [m for m in candidates if keyword.lower() in (m.content or '').lower()]
-        elif query and skill_terms:
-            filtered = []
-            for m in candidates:
-                content = (m.content or '').lower()
+        filtered = []
+        for m in candidates:
+            content = (m.content or '').lower()
+            if keyword and query:
+                if keyword.lower() in content and query.lower() in content:
+                    filtered.append(m)
+            elif keyword:
+                if keyword.lower() in content:
+                    filtered.append(m)
+            elif query and skill_terms:
                 if any(term.lower() in content for term in skill_terms):
                     filtered.append(m)
-            candidates = filtered
-        if not candidates:
+            elif query:
+                if query.lower() in content:
+                    filtered.append(m)
+            else:
+                filtered.append(m)
+        if not filtered:
             return []
-        texts = [m.content for m in candidates]
-        metas = [{
-            **m.__dict__,
-            'relevance_score': 0.0
-        } for m in candidates]
-        temp_store = FAISS.from_texts(
-            texts=texts,
-            embedding=_embedding,
-            metadatas=metas
-        )
-        retriever = temp_store.as_retriever(search_kwargs={"k": k * 2})
-        docs = retriever.get_relevant_documents(query)
-        filtered_results = []
-        for d in docs:
-            m = d.metadata
-            content = (m.get("content", "") or "")
-            if keyword and query and (keyword.lower() not in content.lower() or query.lower() not in content.lower()):
-                continue
-            if keyword and not query and keyword.lower() not in content.lower():
-                continue
-            if not keyword and query and skill_terms and not any(term.lower() in content.lower() for term in skill_terms):
-                continue
-            filtered_results.append(m)
-        results = filtered_results if (keyword or (query and skill_terms)) else [d.metadata for d in docs]
-        results.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
+        # Only return the actual, full message content and required metadata
         formatted = []
-        for m in results[:k]:
+        for m in filtered[:k]:
             formatted.append({
-                "author": m.get("author", {}),
-                "timestamp": m.get("timestamp"),
-                "content": m.get("content", ""),
-                "jump_url": m.get("jump_url") or build_jump_url(m.get("guild_id"), m.get("channel_id"), m.get("message_id")),
-                "channel_name": m.get("channel_name"),
-                "guild_id": m.get("guild_id"),
-                "channel_id": m.get("channel_id"),
-                "message_id": m.get("message_id")
+                "author": m.author or {},
+                "timestamp": m.timestamp,
+                "content": m.content or "",
+                "jump_url": m.jump_url or build_jump_url(m.guild_id, m.channel_id, m.message_id),
+                "channel_name": m.channel_name,
+                "guild_id": m.guild_id,
+                "channel_id": m.channel_id,
+                "message_id": m.message_id
             })
         return formatted
     finally:
