@@ -193,7 +193,7 @@ def detect_resources(message) -> List[Dict[str, Any]]:
 
     # Extract URLs from message content
     urls = URL_REGEX.findall(content)
-    for url in urls:
+    for idx, url in enumerate(urls):
         if is_trash_url(url):
             continue  # Skip trash links
         resource = {
@@ -203,42 +203,25 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "author": get_author_display_name(getattr(message, "author", None)),
             "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
             "jump_url": get_jump_url(message),
-            "context_snippet": context_snippet
+            "context_snippet": context_snippet,
+            "message_id": getattr(message, "id", None),
+            # Unique resource id: message_id + index (1-based)
+            "resource_id": f"{getattr(message, 'id', 'noid')}-{idx+1}"
         }
-        # Always accept known news domains (skip AI vetting for these)
-        from core.classifier import classify_resource
-        news_domains = [
-            "nytimes.com", "bbc.com", "cnn.com", "reuters.com", "theguardian.com", "washingtonpost.com",
-            "bloomberg.com", "forbes.com", "wsj.com", "nbcnews.com", "abcnews.go.com", "cbsnews.com",
-            "npr.org", "aljazeera.com", "apnews.com", "news.ycombinator.com", "medium.com", "substack.com",
-            "blog", "news", "article", "thetimes.com", "ft.com", "bloomberg.com", "politico.com", "axios.com",
-            "wired.com", "techcrunch.com", "engadget.com", "arstechnica.com", "nature.com", "sciencemag.org"
-        ]
-        if any(domain in url for domain in news_domains):
-            resource["tag"] = classify_resource(resource)
-            # Try to extract name/description heuristically for news
-            resource["name"] = None
-            resource["description"] = None
-            resources.append(resource)
-            continue
-        auto_accept_types = ["github", "pdf", "youtube", "drive", "video"]
-        if resource["type"] in auto_accept_types:
-            resource["tag"] = classify_resource(resource)
-            resource["name"] = None
-            resource["description"] = None
-            resources.append(resource)
-            continue
         vet_result = ai_vet_resource(resource, log_decision=True)
         if not vet_result["is_valuable"]:
             continue
         resource["name"] = vet_result["name"]
         resource["description"] = vet_result["description"]
+        if needs_title_fix(resource):
+            title, desc = ai_enrich_title_description(resource)
+            resource["name"], resource["description"] = title, desc
         resource["tag"] = classify_resource(resource)
         resources.append(resource)
 
     # --- IMPROVEMENT: Attachment handling ---
     attachments = getattr(message, "attachments", [])
-    for att in attachments:
+    for aidx, att in enumerate(attachments):
         url = getattr(att, "url", None)
         filename = getattr(att, "filename", "")
         content_type = getattr(att, "content_type", "")
@@ -267,13 +250,19 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "author": get_author_display_name(getattr(message, "author", None)),
                 "channel": getattr(message, "channel", None).name if getattr(message, "channel", None) else None,
                 "jump_url": get_jump_url(message),
-                "context_snippet": context_snippet
+                "context_snippet": context_snippet,
+                "message_id": getattr(message, "id", None),
+                # Unique resource id for attachment: message_id + aidx offset from url count
+                "resource_id": f"{getattr(message, 'id', 'noid')}-att{aidx+1}"
             }
             vet_result = ai_vet_resource(resource)
             if not vet_result["is_valuable"]:
                 continue
             resource["name"] = vet_result["name"]
             resource["description"] = vet_result["description"]
+            if needs_title_fix(resource):
+                title, desc = ai_enrich_title_description(resource)
+                resource["name"], resource["description"] = title, desc
             resource["tag"] = classify_resource(resource)
             resources.append(resource)
 
@@ -295,6 +284,9 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             if vet_result["is_valuable"]:
                 resource["name"] = vet_result["name"]
                 resource["description"] = vet_result["description"]
+                if needs_title_fix(resource):
+                    title, desc = ai_enrich_title_description(resource)
+                    resource["name"], resource["description"] = title, desc
                 resource["tag"] = classify_resource(resource)
                 resources.append(resource)
 
@@ -374,7 +366,8 @@ You are an expert research assistant for a public resource library. Given a Disc
 - Use your knowledge (as of cutoff date) to infer the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title), not just a summary or the URL/domain.
 - If the resource is a news article, paper, blog, or video, use the actual title as published, if possible.
 - If you cannot find the real title, generate a concise, human-readable title based on the context and topic, but never use the raw URL, domain, or any part of the URL as the title.
-- Write a 1-2 sentence description summarizing the resource's content or value.
+- Never use the Discord message author's username or display name as the resource's author or in the title or description. Only use the real author/title as published on the web resource itself.
+- Write a 1-2 sentence description summarizing the resource's content or value. The description must not mention the Discord author unless they are the actual author of the resource.
 - Respond in JSON with keys 'title' and 'description'.
 - Never use the URL, domain, or any part of the URL as the title. If you cannot find the real title, create a plausible, readable one from the context and topic only.
 
@@ -385,7 +378,7 @@ Resource URL:
 {resource.get('url','')}
 """
 
-    strict_prompt = base_prompt + "\n\nIMPORTANT: The title must never be a URL, domain, or any part of the URL. If you cannot find the real title, create a plausible, readable one from the context and topic only."
+    strict_prompt = base_prompt + "\n\nIMPORTANT: The title and description must never be a URL, domain, or any part of the URL. Never use the Discord message author as the resource author, in the title, or in the description. If you cannot find the real title, create a plausible, readable one from the context and topic only."
 
     for attempt, prompt in enumerate([base_prompt, strict_prompt]):
         try:
@@ -534,76 +527,18 @@ def deduplicate_resources(resources):
         return SequenceMatcher(None, a, b).ratio()
     seen = set()
     unique = []
-    def canonical_drive_url(url):
-        m = re.match(r"https?://(?:drive|docs)\.google\.com/[^/]+/d/([\w-]+)", url)
-        if m:
-            return f"drive.google.com/file/{m.group(1)}"
-        return url
-    # First pass: canonical URL/title/desc
-    for item in resources:
-        url = (item.get('url') or item.get('resource_url') or '').strip().lower()
-        url = normalize_url(url) if url else ''
-        url = canonical_drive_url(url)
-        title = item.get('title') or item.get('name')
-        desc = item.get('description') or ''
-        norm_title = normalize_title(title) if title else ''
-        norm_desc = normalize_title(desc) if desc else ''
-        key = (url, norm_title, norm_desc)
-        if key not in seen:
-            seen.add(key)
-            unique.append(item)
-    # Second pass: merge by id, author, date, channel, tag, and fuzzy title/desc
-    merged = []
-    skip_idxs = set()
-    for i, item in enumerate(unique):
-        if i in skip_idxs:
-            continue
-        id1 = item.get('id')
-        author1 = (item.get('author') or '').strip().lower()
-        date1 = (item.get('date') or '').strip()
-        channel1 = (item.get('channel') or '').strip().lower()
-        tag1 = (item.get('tag') or '').strip().lower()
-        title1 = item.get('title') or item.get('name')
-        desc1 = item.get('description') or ''
-        norm_title1 = normalize_title(title1) if title1 else ''
-        norm_desc1 = normalize_title(desc1) if desc1 else ''
-        merged_item = item.copy()
-        for j in range(i+1, len(unique)):
-            if j in skip_idxs:
-                continue
-            item2 = unique[j]
-            id2 = item2.get('id')
-            author2 = (item2.get('author') or '').strip().lower()
-            date2 = (item2.get('date') or '').strip()
-            channel2 = (item2.get('channel') or '').strip().lower()
-            tag2 = (item2.get('tag') or '').strip().lower()
-            title2 = item2.get('title') or item2.get('name')
-            desc2 = item2.get('description') or ''
-            norm_title2 = normalize_title(title2) if title2 else ''
-            norm_desc2 = normalize_title(desc2) if desc2 else ''
-            # If all context matches and title/desc are highly similar, merge
-            if id1 == id2 and author1 == author2 and date1 == date2 and channel1 == channel2 and tag1 == tag2:
-                title_sim = fuzzy_sim(norm_title1, norm_title2)
-                desc_sim = fuzzy_sim(norm_desc1, norm_desc2)
-                if title_sim > 0.80 or desc_sim > 0.80:
-                    log_merge(item, item2, f"context match, title_sim={title_sim:.2f}, desc_sim={desc_sim:.2f}")
-                    # Prefer richer description/title
-                    if len(desc2) > len(merged_item.get('description') or ''):
-                        merged_item['description'] = desc2
-                    if len(title2 or '') > len(merged_item.get('title') or merged_item.get('name') or ''):
-                        merged_item['title'] = title2
-                    skip_idxs.add(j)
-        merged.append(merged_item)
-    # Fallback: deduplicate on normalized description only
-    seen_desc = set()
-    deduped = []
-    for item in merged:
-        desc = item.get('description') or ''
-        norm_desc = normalize_title(desc) if desc else ''
-        if norm_desc not in seen_desc:
-            seen_desc.add(norm_desc)
-            deduped.append(item)
-    return deduped
+    for res in resources:
+        is_dup = False
+        for u in unique:
+            # Fuzzy match on title and description
+            title_sim = SequenceMatcher(None, (res.get('name') or '').lower(), (u.get('name') or '').lower()).ratio()
+            desc_sim = SequenceMatcher(None, (res.get('description') or '').lower(), (u.get('description') or '').lower()).ratio()
+            if title_sim > 0.92 and desc_sim > 0.85:
+                is_dup = True
+                break
+        if not is_dup:
+            unique.append(res)
+    return unique
 
 def is_bad_title(title):
     if not title:

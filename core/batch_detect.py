@@ -1,7 +1,7 @@
 import json
 import time  # Add this import
 from db.db import SessionLocal, Message, Resource  # Updated import paths
-from core.resource_detector import detect_resources, deduplicate_resources
+from core.resource_detector import detect_resources  # Removed deduplicate_resources import
 from tqdm import tqdm  # Already imported
 from datetime import datetime
 
@@ -31,9 +31,13 @@ def main():
 
         # For test runs: only process a few messages
         import os
+        import random
         is_test_mode = os.getenv("BATCH_DETECT_TEST", "0") == "1"
         if is_test_mode:
-            messages = messages[:100]  # Only process the first 100 messages
+            if len(messages) > 100:
+                messages = random.sample(messages, 100)  # Randomly sample 100 messages
+            else:
+                messages = messages[:100]  # Only process the first 100 messages
 
         new_resources = []
         for msg in tqdm(messages, desc="Detecting resources", unit="msg"):
@@ -78,9 +82,33 @@ def main():
                 msg.attachments = []
 
             detected = detect_resources(msg)
+            # Assign unique id per resource: message_id-index or hash if no message_id
+            for idx, res in enumerate(detected):
+                msg_id = res.get("message_id") or getattr(msg, 'id', None)
+                if msg_id is not None:
+                    unique_id = f"{msg_id}-{idx+1}"
+                else:
+                    import hashlib
+                    hash_input = (res.get("url") or "") + (res.get("name") or "") + (res.get("channel") or "")
+                    unique_id = hashlib.md5(hash_input.encode('utf-8')).hexdigest()
+                res["id"] = unique_id
             new_resources.extend(detected)
         # Deduplicate all collected resources before saving/output
-        new_resources = deduplicate_resources(new_resources)
+        def fuzzy_deduplicate(resources):
+            from difflib import SequenceMatcher
+            unique = []
+            for res in resources:
+                is_dup = False
+                for u in unique:
+                    title_sim = SequenceMatcher(None, (res.get('name') or '').lower(), (u.get('name') or '').lower()).ratio()
+                    desc_sim = SequenceMatcher(None, (res.get('description') or '').lower(), (u.get('description') or '').lower()).ratio()
+                    if title_sim > 0.92 and desc_sim > 0.85:
+                        is_dup = True
+                        break
+                if not is_dup:
+                    unique.append(res)
+            return unique
+        new_resources = fuzzy_deduplicate(new_resources)
 
         if is_test_mode:
             # Output to docs/resources/batch_test_output.json with repo_sync-compatible keys
@@ -102,9 +130,11 @@ def main():
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(output_resources, f, indent=2, default=str)
             print(f"Test mode: wrote {len(output_resources)} resources to {output_path}")
-            return  # Skip DB commit and stdout in test mode
+            # Do not return here; continue to DB population for test verification
 
         for res in new_resources:
+            # Use the unique resource_id if present, else fallback to url+message_id
+            resource_id = res.get("resource_id") or (str(res.get("url")) + "-" + str(res.get("message_id", None)))
             # Check if resource already exists (by url and message_id)
             exists = session.query(Resource).filter_by(
                 url=res["url"],
@@ -140,7 +170,8 @@ def main():
                 name=res.get("name"),
                 description=res.get("description"),
                 jump_url=res.get("jump_url"),
-                meta=None
+                meta=None,
+                # Optionally store resource_id if your DB supports it
             )
             session.add(resource_obj)
         session.commit()

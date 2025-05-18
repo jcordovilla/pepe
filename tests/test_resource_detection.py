@@ -110,9 +110,18 @@ def main():
             else:
                 logging.info(f"[ENRICH] No enrichment needed: title='{res.get('name')}' desc='{str(res.get('description'))[:60]}...'")
         # For each detected resource, output as a flat list with repo_sync-compatible keys
-        for res in detected:
+        for idx, res in enumerate(detected):
+            # Generate a unique id for each resource: message_id + resource index, or hash if no message_id
+            msg_id = res.get("message_id") or getattr(msg_obj, 'id', None)
+            # If message_id is None, fallback to hash of url+title+channel
+            if msg_id is not None:
+                unique_id = f"{msg_id}-{idx+1}"
+            else:
+                import hashlib
+                hash_input = (res.get("url") or "") + (res.get("name") or "") + (res.get("channel") or "")
+                unique_id = hashlib.md5(hash_input.encode('utf-8')).hexdigest()
             all_resources.append({
-                "id": res.get("message_id") or getattr(msg_obj, 'id', None),
+                "id": unique_id,
                 "title": res.get("name") or res.get("url"),
                 "description": res.get("description") or (res.get("context_snippet") or ""),
                 "date": res.get("timestamp")[:10] if res.get("timestamp") else None,
@@ -124,8 +133,25 @@ def main():
             })
     # Deduplicate resources after enrichment and before writing output
     from core.resource_detector import deduplicate_resources
+    def fuzzy_deduplicate(resources):
+        from difflib import SequenceMatcher
+        seen = []
+        unique = []
+        for res in resources:
+            is_dup = False
+            for u in unique:
+                # Fuzzy match on title and description
+                title_sim = SequenceMatcher(None, (res.get('title') or '').lower(), (u.get('title') or '').lower()).ratio()
+                desc_sim = SequenceMatcher(None, (res.get('description') or '').lower(), (u.get('description') or '').lower()).ratio()
+                # If both are highly similar, treat as duplicate
+                if title_sim > 0.92 and desc_sim > 0.85:
+                    is_dup = True
+                    break
+            if not is_dup:
+                unique.append(res)
+        return unique
     before_dedup = len(all_resources)
-    all_resources = deduplicate_resources(all_resources)
+    all_resources = fuzzy_deduplicate(all_resources)
     after_dedup = len(all_resources)
     # Print each resource and result in color
     GREEN = '\033[92m'
