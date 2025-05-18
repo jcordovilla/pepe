@@ -33,7 +33,7 @@ def main():
         import os
         is_test_mode = os.getenv("BATCH_DETECT_TEST", "0") == "1"
         if is_test_mode:
-            messages = messages[:50]  # Only process the first 50 messages
+            messages = messages[:100]  # Only process the first 100 messages
 
         new_resources = []
         for msg in tqdm(messages, desc="Detecting resources", unit="msg"):
