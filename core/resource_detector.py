@@ -334,47 +334,44 @@ def ai_enrich_title_description(resource):
             return False
         return bool(re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', s.strip()))
     def url_to_title(url):
+        """
+        Generate a plausible, human-readable title from a URL slug.
+        Examples:
+          - https://example.com/this-is-a-title -> 'This Is a Title'
+          - https://news.site.com/2025/05/12/ai-breakthrough-announced -> 'AI Breakthrough Announced'
+        """
+        from urllib.parse import urlparse, unquote
+        import re
+        if not url:
+            return "Resource"
         try:
             parsed = urlparse(url)
+            # Use the last non-empty segment of the path as the title candidate
+            path = parsed.path
+            segments = [seg for seg in path.split('/') if seg]
+            if segments:
+                # Remove numeric-only segments (dates, IDs)
+                candidates = [s for s in segments if not re.match(r'^\d+$', s)]
+                if candidates:
+                    slug = candidates[-1]
+                else:
+                    slug = segments[-1]
+                # Remove file extensions
+                slug = re.sub(r'\.[a-zA-Z0-9]+$', '', slug)
+                # Replace dashes/underscores with spaces, capitalize
+                title = unquote(slug).replace('-', ' ').replace('_', ' ')
+                # Remove trailing numbers (e.g. ...-12345)
+                title = re.sub(r'\b\d{4,}\b$', '', title).strip()
+                # Capitalize each word
+                title = re.sub(r'\s+', ' ', title).title().strip()
+                # Fallback if too short
+                if len(title) > 3:
+                    return title
+            # If no good path, use domain
             domain = parsed.netloc.replace('www.', '')
-            path = parsed.path.strip('/')
-            # Google Drive file
-            if 'drive.google.com' in domain:
-                if '/file/d/' in path:
-                    file_id = path.split('/file/d/')[-1].split('/')[0]
-                    return f"Google Drive File {file_id}"
-                elif '/folders/' in path:
-                    folder_id = path.split('/folders/')[-1].split('/')[0]
-                    return f"Google Drive Folder {folder_id}"
-            # Google Docs
-            if 'docs.google.com' in domain:
-                if '/document/d/' in path:
-                    doc_id = path.split('/document/d/')[-1].split('/')[0]
-                    return f"Google Doc {doc_id}"
-            # YouTube
-            if 'youtube.com' in domain or 'youtu.be' in domain:
-                if 'v=' in parsed.query:
-                    video_id = parse_qs(parsed.query).get('v', [''])[0]
-                    return f"YouTube Video {video_id}"
-                elif path:
-                    return f"YouTube Video {path.split('/')[-1]}"
-            # Medium
-            if 'medium.com' in domain:
-                slug = path.split('/')[-1]
-                return f"Medium Article: {slug.replace('-', ' ').title()}"
-            # General: use last path segment as title
-            if path:
-                slug = path.split('/')[-1]
-                slug = unquote(slug)
-                slug = re.sub(r'[-_]', ' ', slug)
-                slug = re.sub(r'\.[a-z0-9]+$', '', slug)
-                if slug:
-                    return f"{domain.title()}: {slug.title()}"
-            if domain:
-                return domain.title() + " Resource"
+            return domain.title()
         except Exception:
-            pass
-        return "Resource"
+            return "Resource"
 
     # Gather more context for the prompt
     message_info = []
@@ -506,6 +503,9 @@ def is_bad_title(title):
         return True
     # Just a slug (no spaces, mostly lowercase, contains dashes/underscores)
     if '-' in title and title.lower() == title and ' ' not in title:
+        return True
+    # Fallback: if title is too short or generic
+    if title.lower() in ("resource", "untitled", "index"):
         return True
     return False
 
