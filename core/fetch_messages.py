@@ -143,6 +143,21 @@ class DiscordFetcher(discord.Client):
                 else:
                     log.info(f"    📫 No new messages")
 
+        # After fetching and saving messages, print summary stats
+        total_channels_checked = len(guild.text_channels)
+        total_channels_not_accessed = len([c for c in guild.text_channels if c.name in SKIP_CHANNEL_NAMES])
+        total_new_messages = self.sync_log_entry["total_messages_synced"]
+        # total_messages_including_past is not directly available, calculate it
+        db = SessionLocal()
+        total_messages_including_past = db.query(Message).filter_by(guild_id=guild.id).count()
+        db.close()
+
+        print(f"\nSummary for guild {guild.name}:")
+        print(f"Total channels checked: {total_channels_checked}")
+        print(f"Channels not accessed: {total_channels_not_accessed}")
+        print(f"Total new messages: {total_new_messages}")
+        print(f"Total messages including history: {total_messages_including_past}")
+
         log.info("🔌 Sync complete, closing connection...")
         await self.close()
 
