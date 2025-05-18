@@ -309,32 +309,46 @@ def needs_title_fix(resource):
 def ai_enrich_title_description(resource):
     """
     Use OpenAI to generate a better title and description for a resource with fallback values.
-    Ensures the title is never a URL. Retries once if the LLM returns a URL as the title.
+    Ensures the title is never a URL. Retries with a more explicit prompt, then falls back to a readable title from the URL if needed.
     """
     from openai import OpenAI
     import os
     import json as _json
     from dotenv import load_dotenv
     import re
+    from urllib.parse import urlparse
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
     openai_client = OpenAI(api_key=api_key)
     prompt = f"""
-Given the following Discord message content and resource URL, generate a concise, human-readable title and a 1-2 sentence description suitable for a public resource library. Do not use the raw URL as the title. If the message is just a link, infer the likely topic from the URL or context.
+Given the following Discord message content and resource URL, generate a concise, human-readable title and a 1-2 sentence description suitable for a public resource library. Do not use the raw URL as the title. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
 
 Message content:
 {resource.get('description','')}
 
 Resource URL:
 {resource.get('url','')}
-
-Respond in JSON with keys 'title' and 'description'.
 """
     def is_url_like(s):
         if not s:
             return False
         return bool(re.match(r'https?://', s))
+    def url_to_title(url):
+        # Extract domain and slug for a readable fallback
+        try:
+            parsed = urlparse(url)
+            domain = parsed.netloc.replace('www.', '')
+            path = parsed.path.strip('/').replace('-', ' ').replace('_', ' ')
+            if path:
+                path = path.split('/')[-1]
+            if domain and path:
+                return f"{domain.title()}: {path.title()}"
+            elif domain:
+                return domain.title()
+        except Exception:
+            pass
+        return "Resource"
     for attempt in range(2):  # Try up to 2 times
         response = openai_client.chat.completions.create(
             model=model,
@@ -347,13 +361,13 @@ Respond in JSON with keys 'title' and 'description'.
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
-            if not is_url_like(title):
+            if title and not is_url_like(title):
                 return title, desc
         except Exception:
             pass
         # If we get here, retry with a more explicit prompt
         prompt = f"""
-Given the following Discord message content and resource URL, generate a concise, human-readable title (not a URL) and a 1-2 sentence description suitable for a public resource library. The title must not be a URL. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
+Given the following Discord message content and resource URL, generate a concise, human-readable title (not a URL, not just the domain) and a 1-2 sentence description suitable for a public resource library. The title must not be a URL or just the domain. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
 
 Message content:
 {resource.get('description','')}
@@ -361,10 +375,13 @@ Message content:
 Resource URL:
 {resource.get('url','')}
 """
-    # Fallback: use first 10 words of description as title
+    # Fallback: use a readable title from the URL, or from the description if available
+    url = resource.get("url", "")
     desc = resource.get("description","")
-    words = desc.split()
-    return ("Resource: " + " ".join(words[:10]), desc)
+    fallback_title = url_to_title(url)
+    if desc:
+        return (fallback_title, desc)
+    return (fallback_title, url)
 
 def normalize_url(url: str) -> str:
     """Strip query parameters, fragments, and trailing punctuation from a URL."""
