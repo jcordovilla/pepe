@@ -17,6 +17,8 @@ class DictToObj:
             setattr(self, k, v)
 
 def main():
+    import logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
@@ -59,13 +61,18 @@ def main():
             except Exception:
                 msg_obj.attachments = []
         detected = detect_resources(msg_obj)
+        logging.info(f"[DETECT] Message ID {getattr(msg_obj, 'id', None)}: Detected {len(detected)} resources.")
         # Enrich each detected resource with AI title/description if needed
         from core.resource_detector import ai_enrich_title_description, needs_title_fix
         for res in detected:
+            logging.info(f"[RESOURCE] Before enrichment: {json.dumps(res, default=str)}")
             if needs_title_fix(res):
                 title, desc = ai_enrich_title_description(res)
                 res["name"] = title
                 res["description"] = desc
+                logging.info(f"[ENRICH] After enrichment: title='{title}' desc='{desc[:60]}...'")
+            else:
+                logging.info(f"[ENRICH] No enrichment needed: title='{res.get('name')}' desc='{str(res.get('description'))[:60]}...'")
         # For each detected resource, output as a flat list with repo_sync-compatible keys
         for res in detected:
             all_resources.append({
@@ -81,7 +88,10 @@ def main():
             })
     # Deduplicate resources after enrichment and before writing output
     from core.resource_detector import deduplicate_resources
+    before_dedup = len(all_resources)
     all_resources = deduplicate_resources(all_resources)
+    after_dedup = len(all_resources)
+    logging.info(f"[DEDUP] Resources before deduplication: {before_dedup}, after: {after_dedup}")
     with open(DETECTION_OUTPUT_PATH, 'w') as f:
         json.dump(all_resources, f, indent=2, default=str)
     # Evaluation summary
