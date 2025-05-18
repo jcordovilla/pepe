@@ -309,7 +309,8 @@ def needs_title_fix(resource):
 def ai_enrich_title_description(resource):
     """
     Use OpenAI to generate a better title and description for a resource with fallback values.
-    Ensures the title is never a URL. Retries with a more explicit prompt, then falls back to a readable title from the URL if needed.
+    Ensures the title is never a URL or just a domain. Retries with a more explicit prompt, then falls back to a readable title from the URL if needed.
+    Includes more message info in the prompt for better LLM results.
     """
     from openai import OpenAI
     import os
@@ -321,19 +322,16 @@ def ai_enrich_title_description(resource):
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
     openai_client = OpenAI(api_key=api_key)
-    prompt = f"""
-Given the following Discord message content and resource URL, generate a concise, human-readable title and a 1-2 sentence description suitable for a public resource library. Do not use the raw URL as the title. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
 
-Message content:
-{resource.get('description','')}
-
-Resource URL:
-{resource.get('url','')}
-"""
     def is_url_like(s):
         if not s:
             return False
         return bool(re.match(r'https?://', s))
+    def is_domain_only(s):
+        if not s:
+            return False
+        # e.g. 'nytimes.com', 'bbc.com', etc.
+        return bool(re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', s.strip()))
     def url_to_title(url):
         # Extract domain and slug for a readable fallback
         try:
@@ -345,10 +343,32 @@ Resource URL:
             if domain and path:
                 return f"{domain.title()}: {path.title()}"
             elif domain:
-                return domain.title()
+                return domain.title() + " Resource"
         except Exception:
             pass
         return "Resource"
+
+    # Gather more context for the prompt
+    message_info = []
+    if resource.get('author'):
+        message_info.append(f"Author: {resource.get('author')}")
+    if resource.get('channel'):
+        message_info.append(f"Channel: {resource.get('channel')}")
+    if resource.get('timestamp'):
+        message_info.append(f"Timestamp: {resource.get('timestamp')}")
+    if resource.get('context_snippet'):
+        message_info.append(f"Context: {resource.get('context_snippet')}")
+    message_info_str = '\n'.join(message_info)
+
+    prompt = f"""
+Given the following Discord message information and resource URL, generate a concise, human-readable title and a 1-2 sentence description suitable for a public resource library. Do not use the raw URL or just the domain as the title. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
+
+Message info:
+{message_info_str}
+
+Resource URL:
+{resource.get('url','')}
+"""
     for attempt in range(2):  # Try up to 2 times
         response = openai_client.chat.completions.create(
             model=model,
@@ -361,16 +381,16 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
-            if title and not is_url_like(title):
+            if title and not is_url_like(title) and not is_domain_only(title):
                 return title, desc
         except Exception:
             pass
         # If we get here, retry with a more explicit prompt
         prompt = f"""
-Given the following Discord message content and resource URL, generate a concise, human-readable title (not a URL, not just the domain) and a 1-2 sentence description suitable for a public resource library. The title must not be a URL or just the domain. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
+Given the following Discord message information and resource URL, generate a concise, human-readable title (not a URL, not just the domain) and a 1-2 sentence description suitable for a public resource library. The title must not be a URL or just the domain. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
 
-Message content:
-{resource.get('description','')}
+Message info:
+{message_info_str}
 
 Resource URL:
 {resource.get('url','')}
