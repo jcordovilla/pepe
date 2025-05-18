@@ -59,22 +59,37 @@ def main():
             except Exception:
                 msg_obj.attachments = []
         detected = detect_resources(msg_obj)
-        all_resources.append({
-            'message_id': getattr(msg_obj, 'id', None) or getattr(msg_obj, 'message_id', None),
-            'resources': detected
-        })
+        # Enrich each detected resource with AI title/description if needed
+        from core.resource_detector import ai_enrich_title_description, needs_title_fix
+        for res in detected:
+            if needs_title_fix(res):
+                title, desc = ai_enrich_title_description(res)
+                res["name"] = title
+                res["description"] = desc
+        # For each detected resource, output as a flat list with repo_sync-compatible keys
+        for res in detected:
+            all_resources.append({
+                "id": res.get("message_id") or getattr(msg_obj, 'id', None),
+                "title": res.get("name") or res.get("url"),
+                "description": res.get("description") or (res.get("context_snippet") or ""),
+                "date": res.get("timestamp")[:10] if res.get("timestamp") else None,
+                "author": res.get("author"),
+                "channel": res.get("channel"),
+                "tag": res.get("tag"),
+                "resource_url": res.get("url"),
+                "discord_url": res.get("jump_url", None),
+            })
 
     with open(DETECTION_OUTPUT_PATH, 'w') as f:
         json.dump(all_resources, f, indent=2, default=str)
 
     # Evaluation summary
     total_msgs = len(sample_rows)
-    total_resources = sum(len(x['resources']) for x in all_resources)
+    total_resources = len(all_resources)
     tag_counts = {}
-    for x in all_resources:
-        for r in x['resources']:
-            tag = r.get('tag', 'None')
-            tag_counts[tag] = tag_counts.get(tag, 0) + 1
+    for r in all_resources:
+        tag = r.get('tag', 'None')
+        tag_counts[tag] = tag_counts.get(tag, 0) + 1
     print(f"Sampled messages: {total_msgs}")
     print(f"Total resources detected: {total_resources}")
     print(f"Tag counts: {tag_counts}")
