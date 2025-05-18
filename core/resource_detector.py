@@ -325,77 +325,19 @@ def ai_enrich_title_description(resource):
     websearch_model = os.getenv("OPENAI_WEBSEARCH_MODEL")  # e.g. 'gpt-4-1106-preview', 'gpt-4-browsing', etc.
     openai_client = OpenAI(api_key=api_key)
 
-    def is_url_like(s):
-        if not s:
-            return False
-        return bool(re.match(r'https?://', s))
-    def is_domain_only(s):
-        if not s:
-            return False
-        return bool(re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', s.strip()))
-    def url_to_title(url):
-        """
-        Generate a plausible, human-readable title from a URL slug, with domain-specific heuristics for common platforms.
-        """
-        from urllib.parse import urlparse, unquote
-        import re
-        if not url:
-            return "Resource"
-        try:
-            parsed = urlparse(url)
-            domain = parsed.netloc.replace('www.', '')
-            path = parsed.path
-            segments = [seg for seg in path.split('/') if seg]
-            # --- Domain-specific heuristics ---
-            if 'drive.google.com' in domain:
-                if '/file/' in path:
-                    return "Google Drive File"
-                if '/folders/' in path or '/folder/' in path:
-                    return "Google Drive Folder"
-                return "Google Drive Resource"
-            if 'dropbox.com' in domain:
-                return "Dropbox File"
-            if 'onedrive.live.com' in domain or '1drv.ms' in domain:
-                return "OneDrive File"
-            if 'github.com' in domain:
-                if len(segments) >= 2:
-                    return f"GitHub: {segments[0]}/{segments[1]}"
-                return "GitHub Resource"
-            if 'medium.com' in domain:
-                # Try to extract a readable article title from the last segment
-                if segments:
-                    slug = segments[-1]
-                    # If slug is a hash, fallback
-                    if re.match(r'^[a-f0-9]{10,}$', slug):
-                        return "Medium Article"
-                    title = unquote(slug).replace('-', ' ').replace('_', ' ')
-                    title = re.sub(r'\s+', ' ', title).title().strip()
-                    if len(title) > 3:
-                        return f"Medium: {title}"
-                return "Medium Article"
-            if 'linkedin.com' in domain:
-                return "LinkedIn Post"
-            if 'youtube.com' in domain or 'youtu.be' in domain:
-                return "YouTube Video"
-            if 'philschmid.de' in domain:
-                return "Blog Article"
-            # --- Generic slug-to-title fallback ---
-            if segments:
-                candidates = [s for s in segments if not re.match(r'^\d+$', s)]
-                if candidates:
-                    slug = candidates[-1]
-                else:
-                    slug = segments[-1]
-                slug = re.sub(r'\.[a-zA-Z0-9]+$', '', slug)
-                title = unquote(slug).replace('-', ' ').replace('_', ' ')
-                title = re.sub(r'\b\d{4,}\b$', '', title).strip()
-                title = re.sub(r'\s+', ' ', title).title().strip()
-                if len(title) > 3:
-                    return title
-        except Exception:
-            pass
-        # Fallback to domain
-        return domain.title()
+    def postprocess_title(title):
+        if not title:
+            return title
+        # Remove leading/trailing whitespace and punctuation
+        title = title.strip().strip('-:|')
+        # Remove domain prefix if present
+        title = re.sub(r'^(https?://)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/?', '', title)
+        # Remove trailing hashes/IDs
+        title = re.sub(r'[-_][a-f0-9]{6,}$', '', title)
+        # Fix casing
+        if title.isupper() or title.islower():
+            title = title.title()
+        return title.strip()
 
     # Gather more context for the prompt
     message_info = []
@@ -413,10 +355,10 @@ def ai_enrich_title_description(resource):
 You are an expert research assistant for a public resource library. Given a Discord message and a resource URL, your job is to:
 - Use your knowledge (as of cutoff date) to infer the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title), not just a summary or the URL/domain.
 - If the resource is a news article, paper, blog, or video, use the actual title as published, if possible.
-- If you cannot find the real title, generate a concise, human-readable title based on the context and URL, but never use the raw URL or just the domain.
+- If you cannot find the real title, generate a concise, human-readable title based on the context and URL, but never use the raw URL, domain, or any part of the URL as the title.
 - Write a 1-2 sentence description summarizing the resource's content or value.
 - Respond in JSON with keys 'title' and 'description'.
-- Never use the URL or just the domain as the title. If you cannot find the real title, create a plausible, readable one.
+- Never use the URL, domain, or any part of the URL as the title. If you cannot find the real title, create a plausible, readable one from the context and topic only.
 
 Message info:
 {message_info_str}
@@ -425,7 +367,7 @@ Resource URL:
 {resource.get('url','')}
 """
 
-    strict_prompt = base_prompt + "\n\nIMPORTANT: The title must never be a URL or just a domain. If you cannot find the real title, create a plausible, readable one from the context and URL."
+    strict_prompt = base_prompt + "\n\nIMPORTANT: The title must never be a URL, domain, or any part of the URL. If you cannot find the real title, create a plausible, readable one from the context and topic only."
 
     # First, try with the main model (twice: normal and strict prompt)
     for attempt, prompt in enumerate([base_prompt, strict_prompt]):
@@ -440,6 +382,8 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
+            # Post-process title
+            title = postprocess_title(title)
             # If the title is bad, force fallback
             if title and not is_bad_title(title):
                 return title, desc
@@ -449,7 +393,7 @@ Resource URL:
     # If still not good, try a websearch-capable model if available
     if websearch_model:
         websearch_prompt = f"""
-You are a research assistant with access to web search. Given a resource URL and context, use web search to find the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title). Never use the URL or just the domain as the title. Respond in JSON with keys 'title' and 'description'.
+You are a research assistant with access to web search. Given a resource URL and context, use web search to find the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title). Never use the URL, domain, or any part of the URL as the title. Respond in JSON with keys 'title' and 'description'.
 
 Message info:
 {message_info_str}
@@ -468,15 +412,46 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
+            title = postprocess_title(title)
             if title and not is_bad_title(title):
                 return title, desc
         except Exception:
             pass
 
-    # Fallback: always use a readable title from the URL
+    # Fallback: use message context if available
     url = resource.get("url", "")
     desc = resource.get("description","")
-    fallback_title = url_to_title(url)
+    context = resource.get("context_snippet", "")
+    # Try to synthesize a title from context (first sentence, up to 80 chars)
+    if context:
+        context_title = context.strip().split('\n')[0][:80].strip()
+        if context_title and not is_bad_title(context_title):
+            return context_title, desc or context
+    # Fallback: always use a readable title from the URL
+    # Inline url_to_title logic here to avoid NameError
+    from urllib.parse import urlparse, unquote
+    import re
+    if not url:
+        fallback_title = "Resource"
+    else:
+        try:
+            parsed = urlparse(url)
+            domain = parsed.netloc.replace('www.', '')
+            path = parsed.path
+            segments = [seg for seg in path.split('/') if seg]
+            if segments:
+                slug = segments[-1]
+                slug = re.sub(r'\.[a-zA-Z0-9]+$', '', slug)
+                title = unquote(slug).replace('-', ' ').replace('_', ' ')
+                title = re.sub(r'\s+', ' ', title).title().strip()
+                if len(title) > 3:
+                    fallback_title = title
+                else:
+                    fallback_title = domain.title()
+            else:
+                fallback_title = domain.title()
+        except Exception:
+            fallback_title = "Resource"
     if desc:
         return (fallback_title, desc)
     return (fallback_title, url)
@@ -525,8 +500,17 @@ def is_bad_title(title):
     # URL or domain
     if re.match(r'https?://', title) or re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', title):
         return True
-    # Just a slug (no spaces, mostly lowercase, contains dashes/underscores)
-    if '-' in title and title.lower() == title and ' ' not in title:
+    # Contains a URL or domain substring
+    if re.search(r'https?://|www\.|\.[a-z]{2,}', title):
+        return True
+    # Just a slug (all lowercase, dashes/underscores, no spaces)
+    if ('-' in title or '_' in title) and title.lower() == title and ' ' not in title:
+        return True
+    # Looks like a hash/UUID
+    if re.match(r'^[a-f0-9\-]{10,}$', title):
+        return True
+    # Mostly non-alphabetic
+    if len(re.sub(r'[^a-zA-Z]', '', title)) < 3:
         return True
     # Fallback: if title is too short or generic
     if title.lower() in ("resource", "untitled", "index"):
