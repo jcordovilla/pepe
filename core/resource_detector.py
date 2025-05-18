@@ -309,11 +309,13 @@ def needs_title_fix(resource):
 def ai_enrich_title_description(resource):
     """
     Use OpenAI to generate a better title and description for a resource with fallback values.
+    Ensures the title is never a URL. Retries once if the LLM returns a URL as the title.
     """
     from openai import OpenAI
     import os
     import json as _json
     from dotenv import load_dotenv
+    import re
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
@@ -329,20 +331,40 @@ Resource URL:
 
 Respond in JSON with keys 'title' and 'description'.
 """
-    response = openai_client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200,
-        temperature=0.7,
-    )
-    try:
-        content = response.choices[0].message.content
-        data = _json.loads(content)
-        return data["title"], data["description"]
-    except Exception:
-        desc = resource.get("description","")
-        words = desc.split()
-        return ("Resource: " + " ".join(words[:10]), desc)
+    def is_url_like(s):
+        if not s:
+            return False
+        return bool(re.match(r'https?://', s))
+    for attempt in range(2):  # Try up to 2 times
+        response = openai_client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=200,
+            temperature=0.7,
+        )
+        try:
+            content = response.choices[0].message.content
+            data = _json.loads(content)
+            title = data.get("title")
+            desc = data.get("description")
+            if not is_url_like(title):
+                return title, desc
+        except Exception:
+            pass
+        # If we get here, retry with a more explicit prompt
+        prompt = f"""
+Given the following Discord message content and resource URL, generate a concise, human-readable title (not a URL) and a 1-2 sentence description suitable for a public resource library. The title must not be a URL. If the message is just a link, infer the likely topic from the URL or context. Respond in JSON with keys 'title' and 'description'.
+
+Message content:
+{resource.get('description','')}
+
+Resource URL:
+{resource.get('url','')}
+"""
+    # Fallback: use first 10 words of description as title
+    desc = resource.get("description","")
+    words = desc.split()
+    return ("Resource: " + " ".join(words[:10]), desc)
 
 def normalize_url(url: str) -> str:
     """Strip query parameters, fragments, and trailing punctuation from a URL."""
