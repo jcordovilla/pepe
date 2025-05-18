@@ -79,14 +79,11 @@ def main():
                 "resource_url": res.get("url"),
                 "discord_url": res.get("jump_url", None),
             })
-
-    # Deduplicate resources before writing output
+    # Deduplicate resources after enrichment and before writing output
     from core.resource_detector import deduplicate_resources
     all_resources = deduplicate_resources(all_resources)
-
     with open(DETECTION_OUTPUT_PATH, 'w') as f:
         json.dump(all_resources, f, indent=2, default=str)
-
     # Evaluation summary
     total_msgs = len(sample_rows)
     total_resources = len(all_resources)

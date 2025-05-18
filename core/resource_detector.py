@@ -419,8 +419,8 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
-            # If the title is a URL or domain, force fallback
-            if title and not is_url_like(title) and not is_domain_only(title):
+            # If the title is bad, force fallback
+            if title and not is_bad_title(title):
                 return title, desc
         except Exception:
             pass
@@ -447,7 +447,7 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
-            if title and not is_url_like(title) and not is_domain_only(title):
+            if title and not is_bad_title(title):
                 return title, desc
         except Exception:
             pass
@@ -482,23 +482,32 @@ def normalize_title(title: str) -> str:
     return t
 
 def deduplicate_resources(resources):
-    """Remove duplicates by normalized URL or title."""
-    seen_urls = set()
-    seen_titles = set()
+    """
+    Remove duplicates by normalized URL (or resource_url) and normalized description.
+    This prevents the same resource (same URL and description) from appearing in multiple channels or with different IDs.
+    """
+    seen = set()
     unique = []
     for item in resources:
-        url = item.get('url') or item.get('resource_url')
-        title = item.get('title') or item.get('name', '')
-        norm_url = normalize_url(url) if url else None
-        norm_title = normalize_title(title) if title else None
-        if (norm_url and norm_url in seen_urls) or (norm_title and norm_title in seen_titles):
-            continue
-        unique.append(item)
-        if norm_url:
-            seen_urls.add(norm_url)
-        if norm_title:
-            seen_titles.add(norm_title)
+        url = (item.get('url') or item.get('resource_url') or '').strip().lower()
+        desc = (item.get('description') or '').strip().lower()
+        key = (url, desc)
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
     return unique
+
+def is_bad_title(title):
+    if not title:
+        return True
+    title = title.strip()
+    # URL or domain
+    if re.match(r'https?://', title) or re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', title):
+        return True
+    # Just a slug (no spaces, mostly lowercase, contains dashes/underscores)
+    if '-' in title and title.lower() == title and ' ' not in title:
+        return True
+    return False
 
 if __name__ == "__main__":
     import os
