@@ -45,7 +45,7 @@ def build_langchain_faiss_index():
     # Try to load existing index
     if os.path.exists(index_path) and os.path.exists(pkl_path):
         print(f"🔄 Loading existing FAISS index from {INDEX_DIR}/")
-        vectorstore = FAISS.load_local(INDEX_DIR, embedding_model)
+        vectorstore = FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
         # Get all message_ids already in the index
         existing_ids = set()
         for meta in vectorstore.docstore._dict.values():
