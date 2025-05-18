@@ -31,7 +31,8 @@ def main():
 
         # For test runs: only process a few messages
         import os
-        if os.getenv("BATCH_DETECT_TEST", "0") == "1":
+        is_test_mode = os.getenv("BATCH_DETECT_TEST", "0") == "1"
+        if is_test_mode:
             messages = messages[:50]  # Only process the first 50 messages
 
         new_resources = []
@@ -80,6 +81,29 @@ def main():
             new_resources.extend(detected)
         # Deduplicate all collected resources before saving/output
         new_resources = deduplicate_resources(new_resources)
+
+        if is_test_mode:
+            # Output to docs/resources/batch_test_output.json with repo_sync-compatible keys
+            output_resources = []
+            for res in new_resources:
+                output_resources.append({
+                    "id": res.get("id"),
+                    "title": res.get("name") or res.get("url"),
+                    "description": res.get("description") or (res.get("context_snippet") or ""),
+                    "date": res.get("timestamp")[:10] if res.get("timestamp") else None,
+                    "author": res.get("author"),
+                    "channel": res.get("channel"),
+                    "tag": res.get("tag"),
+                    "resource_url": res.get("url"),
+                    "discord_url": res.get("jump_url", None),
+                })
+            output_path = os.path.join("docs", "resources", "batch_test_output.json")
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(output_resources, f, indent=2, default=str)
+            print(f"Test mode: wrote {len(output_resources)} resources to {output_path}")
+            return  # Skip DB commit and stdout in test mode
+
         for res in new_resources:
             # Check if resource already exists (by url and message_id)
             exists = session.query(Resource).filter_by(
