@@ -309,19 +309,20 @@ def needs_title_fix(resource):
 def ai_enrich_title_description(resource):
     """
     Use OpenAI to generate a high-quality, human-readable title and description for a resource, with robust fallback logic.
-    - The prompt is explicit: the LLM should use its knowledge and infer the real title as it appears on the web, not just summarize the URL or context.
-    - The LLM is told to avoid using the URL or domain as the title, and to research or infer the actual title if possible.
-    - If the LLM fails, a readable fallback is always generated from the URL.
+    - If the LLM returns a title that is a URL or domain, always use a robust fallback.
+    - If the fallback is triggered, and a websearch-capable model is available, use it for a final attempt.
+    - The fallback is improved for common platforms (Google Drive, YouTube, Medium, etc.).
     """
     from openai import OpenAI
     import os
     import json as _json
     from dotenv import load_dotenv
     import re
-    from urllib.parse import urlparse
+    from urllib.parse import urlparse, parse_qs, unquote
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
+    websearch_model = os.getenv("OPENAI_WEBSEARCH_MODEL")  # e.g. 'gpt-4-1106-preview', 'gpt-4-browsing', etc.
     openai_client = OpenAI(api_key=api_key)
 
     def is_url_like(s):
@@ -336,12 +337,40 @@ def ai_enrich_title_description(resource):
         try:
             parsed = urlparse(url)
             domain = parsed.netloc.replace('www.', '')
-            path = parsed.path.strip('/').replace('-', ' ').replace('_', ' ')
+            path = parsed.path.strip('/')
+            # Google Drive file
+            if 'drive.google.com' in domain:
+                if '/file/d/' in path:
+                    file_id = path.split('/file/d/')[-1].split('/')[0]
+                    return f"Google Drive File {file_id}"
+                elif '/folders/' in path:
+                    folder_id = path.split('/folders/')[-1].split('/')[0]
+                    return f"Google Drive Folder {folder_id}"
+            # Google Docs
+            if 'docs.google.com' in domain:
+                if '/document/d/' in path:
+                    doc_id = path.split('/document/d/')[-1].split('/')[0]
+                    return f"Google Doc {doc_id}"
+            # YouTube
+            if 'youtube.com' in domain or 'youtu.be' in domain:
+                if 'v=' in parsed.query:
+                    video_id = parse_qs(parsed.query).get('v', [''])[0]
+                    return f"YouTube Video {video_id}"
+                elif path:
+                    return f"YouTube Video {path.split('/')[-1]}"
+            # Medium
+            if 'medium.com' in domain:
+                slug = path.split('/')[-1]
+                return f"Medium Article: {slug.replace('-', ' ').title()}"
+            # General: use last path segment as title
             if path:
-                path = path.split('/')[-1]
-            if domain and path:
-                return f"{domain.title()}: {path.title()}"
-            elif domain:
+                slug = path.split('/')[-1]
+                slug = unquote(slug)
+                slug = re.sub(r'[-_]', ' ', slug)
+                slug = re.sub(r'\.[a-z0-9]+$', '', slug)
+                if slug:
+                    return f"{domain.title()}: {slug.title()}"
+            if domain:
                 return domain.title() + " Resource"
         except Exception:
             pass
@@ -377,6 +406,7 @@ Resource URL:
 
     strict_prompt = base_prompt + "\n\nIMPORTANT: The title must never be a URL or just a domain. If you cannot find the real title, create a plausible, readable one from the context and URL."
 
+    # First, try with the main model (twice: normal and strict prompt)
     for attempt, prompt in enumerate([base_prompt, strict_prompt]):
         response = openai_client.chat.completions.create(
             model=model,
@@ -389,11 +419,40 @@ Resource URL:
             data = _json.loads(content)
             title = data.get("title")
             desc = data.get("description")
+            # If the title is a URL or domain, force fallback
             if title and not is_url_like(title) and not is_domain_only(title):
                 return title, desc
         except Exception:
             pass
-    # Fallback: use a readable title from the URL, or from the description if available
+
+    # If still not good, try a websearch-capable model if available
+    if websearch_model:
+        websearch_prompt = f"""
+You are a research assistant with access to web search. Given a resource URL and context, use web search to find the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title). Never use the URL or just the domain as the title. Respond in JSON with keys 'title' and 'description'.
+
+Message info:
+{message_info_str}
+
+Resource URL:
+{resource.get('url','')}
+"""
+        try:
+            response = openai_client.chat.completions.create(
+                model=websearch_model,
+                messages=[{"role": "user", "content": websearch_prompt}],
+                max_tokens=200,
+                temperature=0.2,
+            )
+            content = response.choices[0].message.content
+            data = _json.loads(content)
+            title = data.get("title")
+            desc = data.get("description")
+            if title and not is_url_like(title) and not is_domain_only(title):
+                return title, desc
+        except Exception:
+            pass
+
+    # Fallback: always use a readable title from the URL
     url = resource.get("url", "")
     desc = resource.get("description","")
     fallback_title = url_to_title(url)
