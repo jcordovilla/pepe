@@ -301,45 +301,63 @@ def detect_resources(message) -> List[Dict[str, Any]]:
     return resources
 
 def needs_title_fix(resource):
-    # True if name is a URL and description is not empty (likely fallback)
+    """
+    Return True if the resource's name/title is missing or is a bad title (URL, domain, slug, hash, generic, etc.).
+    Triggers enrichment for all cases where the output title would not be human-readable.
+    """
     name = resource.get("name", "")
-    description = resource.get("description", "")
-    return isinstance(name, str) and name.startswith("http") and description.strip() != ""
+    if not name or is_bad_title(name):
+        return True
+    return False
 
 def ai_enrich_title_description(resource):
     """
     Use OpenAI to generate a high-quality, human-readable title and description for a resource, with robust fallback logic.
     - If the LLM returns a title that is a URL or domain, always use a robust fallback.
-    - If the fallback is triggered, and a websearch-capable model is available, use it for a final attempt.
-    - The fallback is improved for common platforms (Google Drive, YouTube, Medium, etc.).
+    - Fallback: use message context (first non-empty, non-URL line) as title if LLM fails.
+    - Fallback: use domain-aware label (e.g. 'WSJ Article', 'Axios Article') as last resort.
+    - For Google Drive/docs, synthesize a title from the description if all else fails.
     """
     from openai import OpenAI
     import os
     import json as _json
     from dotenv import load_dotenv
     import re
-    from urllib.parse import urlparse, parse_qs, unquote
+    from urllib.parse import urlparse, unquote
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("GPT_MODEL", "gpt-4-turbo")
-    websearch_model = os.getenv("OPENAI_WEBSEARCH_MODEL")  # e.g. 'gpt-4-1106-preview', 'gpt-4-browsing', etc.
     openai_client = OpenAI(api_key=api_key)
+
+    def is_bad_title(title):
+        if not title:
+            return True
+        title = title.strip()
+        if re.match(r'https?://', title) or re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', title):
+            return True
+        if re.search(r'https?://|www\\.|\.[a-z]{2,}', title):
+            return True
+        if ('-' in title or '_' in title) and title.lower() == title and ' ' not in title:
+            return True
+        if re.match(r'^[a-f0-9\-]{10,}$', title):
+            return True
+        if len(re.sub(r'[^a-zA-Z]', '', title)) < 3:
+            return True
+        if title.lower() in ("resource", "untitled", "index"):
+            return True
+        return False
 
     def postprocess_title(title):
         if not title:
             return title
-        # Remove leading/trailing whitespace and punctuation
         title = title.strip().strip('-:|')
-        # Remove domain prefix if present
-        title = re.sub(r'^(https?://)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/?', '', title)
-        # Remove trailing hashes/IDs
+        title = re.sub(r'^(https?://)?(www\\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/?', '', title)
         title = re.sub(r'[-_][a-f0-9]{6,}$', '', title)
-        # Fix casing
         if title.isupper() or title.islower():
             title = title.title()
         return title.strip()
 
-    # Gather more context for the prompt
+    # --- LLM attempt ---
     message_info = []
     if resource.get('author'):
         message_info.append(f"Author: {resource.get('author')}")
@@ -355,7 +373,7 @@ def ai_enrich_title_description(resource):
 You are an expert research assistant for a public resource library. Given a Discord message and a resource URL, your job is to:
 - Use your knowledge (as of cutoff date) to infer the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title), not just a summary or the URL/domain.
 - If the resource is a news article, paper, blog, or video, use the actual title as published, if possible.
-- If you cannot find the real title, generate a concise, human-readable title based on the context and URL, but never use the raw URL, domain, or any part of the URL as the title.
+- If you cannot find the real title, generate a concise, human-readable title based on the context and topic, but never use the raw URL, domain, or any part of the URL as the title.
 - Write a 1-2 sentence description summarizing the resource's content or value.
 - Respond in JSON with keys 'title' and 'description'.
 - Never use the URL, domain, or any part of the URL as the title. If you cannot find the real title, create a plausible, readable one from the context and topic only.
@@ -369,92 +387,108 @@ Resource URL:
 
     strict_prompt = base_prompt + "\n\nIMPORTANT: The title must never be a URL, domain, or any part of the URL. If you cannot find the real title, create a plausible, readable one from the context and topic only."
 
-    # First, try with the main model (twice: normal and strict prompt)
     for attempt, prompt in enumerate([base_prompt, strict_prompt]):
-        response = openai_client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=200,
-            temperature=0.5 if attempt == 0 else 0.2,
-        )
-        try:
-            content = response.choices[0].message.content
-            data = _json.loads(content)
-            title = data.get("title")
-            desc = data.get("description")
-            # Post-process title
-            title = postprocess_title(title)
-            # If the title is bad, force fallback
-            if title and not is_bad_title(title):
-                return title, desc
-        except Exception:
-            pass
-
-    # If still not good, try a websearch-capable model if available
-    if websearch_model:
-        websearch_prompt = f"""
-You are a research assistant with access to web search. Given a resource URL and context, use web search to find the real, human-readable title of the resource as it appears on the web (e.g., the article, paper, or video title). Never use the URL, domain, or any part of the URL as the title. Respond in JSON with keys 'title' and 'description'.
-
-Message info:
-{message_info_str}
-
-Resource URL:
-{resource.get('url','')}
-"""
         try:
             response = openai_client.chat.completions.create(
-                model=websearch_model,
-                messages=[{"role": "user", "content": websearch_prompt}],
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
                 max_tokens=200,
-                temperature=0.2,
+                temperature=0.5 if attempt == 0 else 0.2,
             )
             content = response.choices[0].message.content
             data = _json.loads(content)
-            title = data.get("title")
+            title = postprocess_title(data.get("title"))
             desc = data.get("description")
-            title = postprocess_title(title)
             if title and not is_bad_title(title):
                 return title, desc
         except Exception:
             pass
 
-    # Fallback: use message context if available
-    url = resource.get("url", "")
-    desc = resource.get("description","")
+    # --- Fallback: try message context and description lines ---
     context = resource.get("context_snippet", "")
-    # Try to synthesize a title from context (first sentence, up to 80 chars)
-    if context:
-        context_title = context.strip().split('\n')[0][:80].strip()
-        if context_title and not is_bad_title(context_title):
-            return context_title, desc or context
-    # Fallback: always use a readable title from the URL
-    # Inline url_to_title logic here to avoid NameError
-    from urllib.parse import urlparse, unquote
-    import re
-    if not url:
-        fallback_title = "Resource"
-    else:
-        try:
-            parsed = urlparse(url)
-            domain = parsed.netloc.replace('www.', '')
-            path = parsed.path
-            segments = [seg for seg in path.split('/') if seg]
-            if segments:
-                slug = segments[-1]
-                slug = re.sub(r'\.[a-zA-Z0-9]+$', '', slug)
-                title = unquote(slug).replace('-', ' ').replace('_', ' ')
-                title = re.sub(r'\s+', ' ', title).title().strip()
-                if len(title) > 3:
-                    fallback_title = title
-                else:
-                    fallback_title = domain.title()
-            else:
-                fallback_title = domain.title()
-        except Exception:
-            fallback_title = "Resource"
-    if desc:
-        return (fallback_title, desc)
-    return (fallback_title, url)
+    description = resource.get("description", "")
+    tried_lines = set()
+    for source in [context, description]:
+        if not source:
+            continue
+        for line in source.split('\n'):
+            line = line.strip()
+            if not line or is_bad_title(line) or line in tried_lines:
+                continue
+            tried_lines.add(line)
+            if len(line) > 6:
+                return line[:80].strip(), description or context
+
+    # --- Fallback: Google Drive/docs special handling ---
+    url = resource.get("url", "")
+    if url:
+        parsed = urlparse(url)
+        domain = parsed.netloc.replace('www.', '')
+        path = parsed.path
+        # Google Drive or Docs
+        if any(d in domain for d in ["drive.google.com", "docs.google.com", "docs.microsoft.com", "onedrive.live.com"]):
+            # Try to synthesize a title from the description
+            desc = description or context
+            # Try to extract a session/topic from the description
+            session_match = re.search(r'session on [\"\']?([^\"\']+)[\"\']?', desc, re.IGNORECASE)
+            if session_match:
+                session_title = session_match.group(1).strip()
+                if not is_bad_title(session_title):
+                    return f"Session Recording: {session_title}", desc
+            # Fallback: use first 10 words of description
+            words = desc.split()
+            if words:
+                fallback_title = "Session Recording: " + " ".join(words[:10])
+                if not is_bad_title(fallback_title):
+                    return fallback_title, desc
+            # Last fallback for docs: label by type
+            if "document" in domain or "docs" in domain:
+                return "Google Doc", desc
+            if "drive" in domain:
+                return "Google Drive Resource", desc
+            if "onedrive" in domain:
+                return "OneDrive Resource", desc
+
+    # --- Fallback: domain-aware label ---
+    if url:
+        parsed = urlparse(url)
+        domain = parsed.netloc.replace('www.', '')
+        domain_labels = {
+            'wsj.com': 'WSJ Article',
+            'axios.com': 'Axios Article',
+            'reuters.com': 'Reuters Article',
+            'forbes.com': 'Forbes Article',
+            'arxiv.org': 'arXiv Paper',
+            'pewresearch.org': 'Pew Research Report',
+            'digitalocean.com': 'DigitalOcean Guide',
+            'tortoisemedia.com': 'Tortoise Media Report',
+            'microsoft.com': 'Microsoft Blog',
+            'medium.com': 'Medium Article',
+            'substack.com': 'Substack Post',
+            'linkedin.com': 'LinkedIn Post',
+            'youtube.com': 'YouTube Video',
+            'youtu.be': 'YouTube Video',
+            'bloomberg.com': 'Bloomberg Article',
+            'nytimes.com': 'NYT Article',
+            'bbc.com': 'BBC Article',
+            'cnn.com': 'CNN Article',
+            'theguardian.com': 'Guardian Article',
+            'washingtonpost.com': 'Washington Post Article',
+            'nature.com': 'Nature Article',
+            'sciencemag.org': 'Science Magazine Article',
+            'github.com': 'GitHub Repository',
+            'docs.google.com': 'Google Doc',
+            'drive.google.com': 'Google Drive Resource',
+            'onedrive.live.com': 'OneDrive Resource',
+        }
+        for d, label in domain_labels.items():
+            if d in domain:
+                return label, description or url
+        # fallback: use domain as label
+        if domain:
+            return domain.title() + " Resource", description or url
+    # --- Last resort ---
+    return "Resource", description or url
 
 def normalize_url(url: str) -> str:
     """Strip query parameters, fragments, and trailing punctuation from a URL."""
@@ -479,19 +513,97 @@ def normalize_title(title: str) -> str:
 
 def deduplicate_resources(resources):
     """
-    Remove duplicates by normalized URL (or resource_url) and normalized description.
-    This prevents the same resource (same URL and description) from appearing in multiple channels or with different IDs.
+    Remove duplicates by normalized URL (canonicalized), normalized title, and normalized description.
+    For Google Drive/docs, treat all links to the same file as the same resource.
+    If all else fails, deduplicate on normalized description.
+    Also, merge resources with the same id, author, date, channel, and tag, and highly similar title/description, even if URLs differ.
+    Log merges to data/resources/resource_merge.log.
     """
+    import re
+    from urllib.parse import urlparse
+    from difflib import SequenceMatcher
+    import os
+    merge_log_path = os.path.join(os.path.dirname(__file__), '../data/resources/resource_merge.log')
+    os.makedirs(os.path.dirname(merge_log_path), exist_ok=True)
+    def log_merge(item1, item2, reason):
+        with open(merge_log_path, 'a') as f:
+            f.write(f"MERGE: {item1.get('id')} | {item1.get('title')} <==> {item2.get('title')} | Reason: {reason}\n")
+    def fuzzy_sim(a, b):
+        if not a or not b:
+            return 0.0
+        return SequenceMatcher(None, a, b).ratio()
     seen = set()
     unique = []
+    def canonical_drive_url(url):
+        m = re.match(r"https?://(?:drive|docs)\.google\.com/[^/]+/d/([\w-]+)", url)
+        if m:
+            return f"drive.google.com/file/{m.group(1)}"
+        return url
+    # First pass: canonical URL/title/desc
     for item in resources:
         url = (item.get('url') or item.get('resource_url') or '').strip().lower()
-        desc = (item.get('description') or '').strip().lower()
-        key = (url, desc)
+        url = normalize_url(url) if url else ''
+        url = canonical_drive_url(url)
+        title = item.get('title') or item.get('name')
+        desc = item.get('description') or ''
+        norm_title = normalize_title(title) if title else ''
+        norm_desc = normalize_title(desc) if desc else ''
+        key = (url, norm_title, norm_desc)
         if key not in seen:
             seen.add(key)
             unique.append(item)
-    return unique
+    # Second pass: merge by id, author, date, channel, tag, and fuzzy title/desc
+    merged = []
+    skip_idxs = set()
+    for i, item in enumerate(unique):
+        if i in skip_idxs:
+            continue
+        id1 = item.get('id')
+        author1 = (item.get('author') or '').strip().lower()
+        date1 = (item.get('date') or '').strip()
+        channel1 = (item.get('channel') or '').strip().lower()
+        tag1 = (item.get('tag') or '').strip().lower()
+        title1 = item.get('title') or item.get('name')
+        desc1 = item.get('description') or ''
+        norm_title1 = normalize_title(title1) if title1 else ''
+        norm_desc1 = normalize_title(desc1) if desc1 else ''
+        merged_item = item.copy()
+        for j in range(i+1, len(unique)):
+            if j in skip_idxs:
+                continue
+            item2 = unique[j]
+            id2 = item2.get('id')
+            author2 = (item2.get('author') or '').strip().lower()
+            date2 = (item2.get('date') or '').strip()
+            channel2 = (item2.get('channel') or '').strip().lower()
+            tag2 = (item2.get('tag') or '').strip().lower()
+            title2 = item2.get('title') or item2.get('name')
+            desc2 = item2.get('description') or ''
+            norm_title2 = normalize_title(title2) if title2 else ''
+            norm_desc2 = normalize_title(desc2) if desc2 else ''
+            # If all context matches and title/desc are highly similar, merge
+            if id1 == id2 and author1 == author2 and date1 == date2 and channel1 == channel2 and tag1 == tag2:
+                title_sim = fuzzy_sim(norm_title1, norm_title2)
+                desc_sim = fuzzy_sim(norm_desc1, norm_desc2)
+                if title_sim > 0.80 or desc_sim > 0.80:
+                    log_merge(item, item2, f"context match, title_sim={title_sim:.2f}, desc_sim={desc_sim:.2f}")
+                    # Prefer richer description/title
+                    if len(desc2) > len(merged_item.get('description') or ''):
+                        merged_item['description'] = desc2
+                    if len(title2 or '') > len(merged_item.get('title') or merged_item.get('name') or ''):
+                        merged_item['title'] = title2
+                    skip_idxs.add(j)
+        merged.append(merged_item)
+    # Fallback: deduplicate on normalized description only
+    seen_desc = set()
+    deduped = []
+    for item in merged:
+        desc = item.get('description') or ''
+        norm_desc = normalize_title(desc) if desc else ''
+        if norm_desc not in seen_desc:
+            seen_desc.add(norm_desc)
+            deduped.append(item)
+    return deduped
 
 def is_bad_title(title):
     if not title:

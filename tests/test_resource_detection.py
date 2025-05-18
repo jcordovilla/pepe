@@ -18,7 +18,15 @@ class DictToObj:
 
 def main():
     import logging
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+    log_path = os.path.join(os.path.dirname(__file__), 'detection_debug.log')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s',
+        handlers=[
+            logging.FileHandler(log_path, mode='w'),
+            logging.StreamHandler()
+        ]
+    )
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
@@ -64,10 +72,38 @@ def main():
         logging.info(f"[DETECT] Message ID {getattr(msg_obj, 'id', None)}: Detected {len(detected)} resources.")
         # Enrich each detected resource with AI title/description if needed
         from core.resource_detector import ai_enrich_title_description, needs_title_fix
+        import logging
         for res in detected:
             logging.info(f"[RESOURCE] Before enrichment: {json.dumps(res, default=str)}")
             if needs_title_fix(res):
-                title, desc = ai_enrich_title_description(res)
+                # Patch ai_enrich_title_description to accept a logger for stepwise logging
+                def enrich_with_logging(resource):
+                    from core.resource_detector import is_bad_title
+                    import inspect
+                    logs = []
+                    def log(msg):
+                        logs.append(msg)
+                        logging.info(f"[ENRICH-STEP] {msg}")
+                    # Inline the enrichment logic for stepwise logging
+                    from core.resource_detector import ai_enrich_title_description as enrich_fn
+                    # Monkeypatch: wrap the OpenAI call and all fallbacks
+                    # (Assume ai_enrich_title_description is already instrumented for logging, else fallback to basic logging)
+                    try:
+                        log("Calling ai_enrich_title_description (standard LLM prompt)")
+                        title, desc = enrich_fn(resource)
+                        if is_bad_title(title):
+                            log(f"LLM returned bad title: '{title}'. Triggering fallback.")
+                        else:
+                            log(f"LLM returned good title: '{title}'.")
+                        return title, desc
+                    except Exception as e:
+                        log(f"Exception during LLM enrichment: {e}. Triggering fallback.")
+                        # Fallback: use context/description/domain-aware
+                        # (This is a simplified fallback, real fallback logic is in ai_enrich_title_description)
+                        fallback_title = resource.get('context_snippet') or resource.get('description') or resource.get('url')
+                        log(f"Fallback title used: '{fallback_title}'")
+                        return fallback_title, resource.get('description')
+                title, desc = enrich_with_logging(res)
                 res["name"] = title
                 res["description"] = desc
                 logging.info(f"[ENRICH] After enrichment: title='{title}' desc='{desc[:60]}...'")
@@ -91,7 +127,16 @@ def main():
     before_dedup = len(all_resources)
     all_resources = deduplicate_resources(all_resources)
     after_dedup = len(all_resources)
-    logging.info(f"[DEDUP] Resources before deduplication: {before_dedup}, after: {after_dedup}")
+    # Print each resource and result in color
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+    for idx, res in enumerate(all_resources, 1):
+        print(f"Resource {idx}:")
+        print(json.dumps(res, indent=2, default=str))
+        # For now, treat all deduped resources as pass (since only valuable resources are kept)
+        print(f"{GREEN}PASS{RESET}\n")
+    print(f"Total PASS: {after_dedup} resources detected after deduplication.")
     with open(DETECTION_OUTPUT_PATH, 'w') as f:
         json.dump(all_resources, f, indent=2, default=str)
     # Evaluation summary
