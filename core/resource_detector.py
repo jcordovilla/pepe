@@ -335,10 +335,7 @@ def ai_enrich_title_description(resource):
         return bool(re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', s.strip()))
     def url_to_title(url):
         """
-        Generate a plausible, human-readable title from a URL slug.
-        Examples:
-          - https://example.com/this-is-a-title -> 'This Is a Title'
-          - https://news.site.com/2025/05/12/ai-breakthrough-announced -> 'AI Breakthrough Announced'
+        Generate a plausible, human-readable title from a URL slug, with domain-specific heuristics for common platforms.
         """
         from urllib.parse import urlparse, unquote
         import re
@@ -346,32 +343,59 @@ def ai_enrich_title_description(resource):
             return "Resource"
         try:
             parsed = urlparse(url)
-            # Use the last non-empty segment of the path as the title candidate
+            domain = parsed.netloc.replace('www.', '')
             path = parsed.path
             segments = [seg for seg in path.split('/') if seg]
+            # --- Domain-specific heuristics ---
+            if 'drive.google.com' in domain:
+                if '/file/' in path:
+                    return "Google Drive File"
+                if '/folders/' in path or '/folder/' in path:
+                    return "Google Drive Folder"
+                return "Google Drive Resource"
+            if 'dropbox.com' in domain:
+                return "Dropbox File"
+            if 'onedrive.live.com' in domain or '1drv.ms' in domain:
+                return "OneDrive File"
+            if 'github.com' in domain:
+                if len(segments) >= 2:
+                    return f"GitHub: {segments[0]}/{segments[1]}"
+                return "GitHub Resource"
+            if 'medium.com' in domain:
+                # Try to extract a readable article title from the last segment
+                if segments:
+                    slug = segments[-1]
+                    # If slug is a hash, fallback
+                    if re.match(r'^[a-f0-9]{10,}$', slug):
+                        return "Medium Article"
+                    title = unquote(slug).replace('-', ' ').replace('_', ' ')
+                    title = re.sub(r'\s+', ' ', title).title().strip()
+                    if len(title) > 3:
+                        return f"Medium: {title}"
+                return "Medium Article"
+            if 'linkedin.com' in domain:
+                return "LinkedIn Post"
+            if 'youtube.com' in domain or 'youtu.be' in domain:
+                return "YouTube Video"
+            if 'philschmid.de' in domain:
+                return "Blog Article"
+            # --- Generic slug-to-title fallback ---
             if segments:
-                # Remove numeric-only segments (dates, IDs)
                 candidates = [s for s in segments if not re.match(r'^\d+$', s)]
                 if candidates:
                     slug = candidates[-1]
                 else:
                     slug = segments[-1]
-                # Remove file extensions
                 slug = re.sub(r'\.[a-zA-Z0-9]+$', '', slug)
-                # Replace dashes/underscores with spaces, capitalize
                 title = unquote(slug).replace('-', ' ').replace('_', ' ')
-                # Remove trailing numbers (e.g. ...-12345)
                 title = re.sub(r'\b\d{4,}\b$', '', title).strip()
-                # Capitalize each word
                 title = re.sub(r'\s+', ' ', title).title().strip()
-                # Fallback if too short
                 if len(title) > 3:
                     return title
-            # If no good path, use domain
-            domain = parsed.netloc.replace('www.', '')
-            return domain.title()
         except Exception:
-            return "Resource"
+            pass
+        # Fallback to domain
+        return domain.title()
 
     # Gather more context for the prompt
     message_info = []
