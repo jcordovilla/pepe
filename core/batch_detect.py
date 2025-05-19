@@ -4,6 +4,8 @@ from db.db import SessionLocal, Message, Resource  # Updated import paths
 from core.resource_detector import detect_resources  # Removed deduplicate_resources import
 from tqdm import tqdm  # Already imported
 from datetime import datetime
+import logging
+import os
 
 def author_to_dict(author):
     if isinstance(author, dict):
@@ -21,6 +23,17 @@ def parse_timestamp(ts):
         return None
 
 def main():
+    # Set up logging to file in data/resources/
+    log_dir = os.path.join(os.path.dirname(__file__), '../data/resources')
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, 'batch_detect.log')
+    logging.basicConfig(
+        filename=log_path,
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s',
+    )
+    logging.info('Batch detect started.')
+
     session = SessionLocal()
     try:
         # Only process messages that have not been detected yet
@@ -30,7 +43,6 @@ def main():
         start_time = time.time()
 
         # For test runs: only process a few messages
-        import os
         import random
         is_test_mode = os.getenv("BATCH_DETECT_TEST", "0") == "1"
         if is_test_mode:
@@ -82,6 +94,7 @@ def main():
                 msg.attachments = []
 
             detected = detect_resources(msg)
+            logging.info(f"Message ID {getattr(msg, 'id', None)}: Detected {len(detected)} resources.")
             # Assign unique id per resource: message_id-index or hash if no message_id
             for idx, res in enumerate(detected):
                 msg_id = res.get("message_id") or getattr(msg, 'id', None)
@@ -93,9 +106,10 @@ def main():
                     unique_id = hashlib.md5(hash_input.encode('utf-8')).hexdigest()
                 res["id"] = unique_id
             new_resources.extend(detected)
-            # Mark message as processed
-            msg.resource_detected = 1
-            session.add(msg)
+            # Mark message as processed ONLY if at least one resource was detected
+            if detected:
+                msg.resource_detected = 1
+                session.add(msg)
         # Deduplicate all collected resources before saving/output
         def fuzzy_deduplicate(resources):
             from difflib import SequenceMatcher
@@ -183,6 +197,7 @@ def main():
         print(json.dumps(new_resources, indent=2, default=str))
     finally:
         session.close()
+    logging.info(f"Batch detect finished. Total new resources: {len(new_resources)}")
 
 if __name__ == "__main__":
     main()
