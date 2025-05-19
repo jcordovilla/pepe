@@ -8,6 +8,9 @@ import os
 from datetime import datetime
 
 LOG_PATH = "tools/full_pipeline.log"
+# Reset the log file at the start of each run
+with open(LOG_PATH, "w"):
+    pass
 logging.basicConfig(
     filename=LOG_PATH,
     level=logging.INFO,

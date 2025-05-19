@@ -1,5 +1,7 @@
 """
 Cleans the resources table in-place by re-enriching, deduplicating, and re-classifying all resources using the latest pipeline logic.
+This will run the enrich and dedup logic on all resources in the database, and then update the database with the cleaned resources.
+Careful, it will take a while to run, and will modify the database in-place.
 """
 import sys
 import json
