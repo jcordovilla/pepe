@@ -19,13 +19,16 @@ def run_and_log(cmd, step_name):
     print(f"Running: {cmd}")
     proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     for line in proc.stdout:
-        logging.info(line.rstrip())
-        print(line, end="")
+        line = line.rstrip()
+        logging.info(line)
+        print(line)
     proc.wait()
     if proc.returncode == 0:
         logging.info(f"SUCCESS: {step_name}")
+        print(f"SUCCESS: {step_name}")
     else:
         logging.error(f"FAIL: {step_name} (exit code {proc.returncode})")
+        print(f"FAIL: {step_name} (exit code {proc.returncode})")
     return proc.returncode
 
 def main():
@@ -50,12 +53,13 @@ def main():
         n_msgs = cur.fetchone()[0]
         cur.execute("SELECT COUNT(*) FROM resources")
         n_resources = cur.fetchone()[0]
-        logging.info(f"Total messages in DB: {n_msgs}")
-        logging.info(f"Total resources in DB: {n_resources}")
-        print(f"Total messages: {n_msgs}, Total resources: {n_resources}")
+        msg = f"Total messages in DB: {n_msgs} | Total resources in DB: {n_resources}"
+        logging.info(msg)
+        print(msg)
         conn.close()
     except Exception as e:
         logging.error(f"Failed to log DB stats: {e}")
+        print(f"Failed to log DB stats: {e}")
 
 if __name__ == "__main__":
     main()
