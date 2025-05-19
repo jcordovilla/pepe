@@ -80,6 +80,7 @@ class Message(Base):
     mention_ids = Column(JSON, nullable=False)  # list of ints
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
+    resource_detected = Column(Integer, default=0, nullable=False)  # 0 = not detected, 1 = detected
 
 class Resource(Base):
     __tablename__ = "resources"

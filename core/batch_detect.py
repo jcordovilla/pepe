@@ -23,8 +23,8 @@ def parse_timestamp(ts):
 def main():
     session = SessionLocal()
     try:
-        # Query all messages in the database
-        messages = session.query(Message).order_by(Message.timestamp.desc()).all()
+        # Only process messages that have not been detected yet
+        messages = session.query(Message).filter_by(resource_detected=0).order_by(Message.timestamp.desc()).all()
 
         # Timer start
         start_time = time.time()
@@ -93,6 +93,9 @@ def main():
                     unique_id = hashlib.md5(hash_input.encode('utf-8')).hexdigest()
                 res["id"] = unique_id
             new_resources.extend(detected)
+            # Mark message as processed
+            msg.resource_detected = 1
+            session.add(msg)
         # Deduplicate all collected resources before saving/output
         def fuzzy_deduplicate(resources):
             from difflib import SequenceMatcher
