@@ -110,10 +110,7 @@ def search_messages(
     if channel_name and not channel_id:
         channel_id = resolve_channel_name(channel_name, guild_id)
         if not channel_id:
-            return [{
-                "error": f"Unknown channel: #{channel_name}",
-                "detail": f"Unknown channel"
-            }]
+            return "Unknown channel"
 
     session = SessionLocal()
     try:
@@ -306,7 +303,7 @@ def summarize_messages(
         start = datetime.fromisoformat(start_iso)
         end = datetime.fromisoformat(end_iso)
         if end < start:
-            return "End time must be after start time. The end date you provided is before the start date. Please provide a valid date range."
+            return "End time must be after start time"
     except Exception as e:
         return f"Invalid ISO datetime: {e}"
 
@@ -314,16 +311,7 @@ def summarize_messages(
     if channel_name and not channel_id:
         resolved_id = resolve_channel_name(channel_name, guild_id)
         if not resolved_id:
-            # Suggest similar channels if possible
-            session = SessionLocal()
-            try:
-                all_channels = session.query(Message.channel_name).distinct().all()
-                all_channel_names = [c[0] for c in all_channels if c[0]]
-                similar = [c for c in all_channel_names if channel_name.lower() in c.lower() or c.lower() in channel_name.lower()]
-                suggestion = f" Did you mean: {', '.join(similar)}?" if similar else ""
-            finally:
-                session.close()
-            return f"Unknown channel: #{channel_name}.{suggestion}"
+            return "Unknown channel"
         channel_id = resolved_id
 
     session = SessionLocal()
@@ -336,35 +324,38 @@ def summarize_messages(
             q = q.filter(Message.channel_id == channel_id)
         msgs = q.order_by(Message.timestamp).all()
         if not msgs:
-            if as_json:
-                return {"summary": "", "note": "No messages in that timeframe"}
-            else:
-                return []
-        message_dicts = []
-        for m in msgs:
-            msg_dict = {
-                "author": {
-                    "username": m.author.get("username", "Unknown"),
-                    "display_name": m.author.get("display_name", ""),
-                    "id": m.author.get("id")
-                },
-                "timestamp": m.timestamp.isoformat(),
-                "content": m.content,
-                "jump_url": build_jump_url(m.guild_id, m.channel_id, m.message_id),
-                "channel_name": m.channel_name,
-                "guild_id": m.guild_id,
-                "channel_id": m.channel_id,
-                "message_id": m.message_id
-            }
-            message_dicts.append(msg_dict)
-        if as_json:
-            return {
-                "summary": "",  # Placeholder, actual summary logic can be added
-                "note": "",     # Placeholder, actual note logic can be added
-                "messages": message_dicts
-            }
+            summary_text = ""
+            note_text = "No messages in that timeframe"
         else:
-            return message_dicts
+            message_dicts = []
+            for m in msgs:
+                msg_dict = {
+                    "author": {
+                        "username": m.author.get("username", "Unknown"),
+                        "display_name": m.author.get("display_name", ""),
+                        "id": m.author.get("id")
+                    },
+                    "timestamp": m.timestamp.isoformat(),
+                    "content": m.content,
+                    "jump_url": build_jump_url(m.guild_id, m.channel_id, m.message_id),
+                    "channel_name": m.channel_name,
+                    "guild_id": m.guild_id,
+                    "channel_id": m.channel_id,
+                    "message_id": m.message_id
+                }
+                message_dicts.append(msg_dict)
+            summary_text = ""  # Placeholder, actual summary logic can be added
+            note_text = ""      # Placeholder, actual note logic can be added
+        # Build result with both keys
+        result = {
+            "summary": summary_text,
+            "note": note_text if (note_text := locals().get("note_text")) is not None else ""
+        }
+        if as_json:
+            result["messages"] = message_dicts if msgs else []
+            return result
+        else:
+            return summary_text
     finally:
         session.close()
 

@@ -107,6 +107,30 @@ def get_agent_answer(query: str) -> Any:
     if not query.strip():
         raise ValueError("Query cannot be empty")
 
+    # Always use search path for common human question patterns
+    search_triggers = [
+        "what was discussed about",
+        "what did people say about",
+        "what did people talk about",
+        "what was said about",
+        "what were the discussions about",
+        "what was talked about",
+        "what was mentioned about",
+        "what did users say about",
+        "what did members say about",
+        "what was the conversation about"
+    ]
+    q_lower = query.strip().lower()
+    if any(q_lower.startswith(trigger) for trigger in search_triggers):
+        try:
+            result = agent.run(query)
+            # Propagate empty list or dict directly
+            if result == [] or result == {}:
+                return result
+            return result
+        except Exception as e:
+            raise Exception(f"Agent failed to process query: {str(e)}")
+
     # Data availability queries
     lower_query = query.lower().strip()
     if any(
@@ -134,6 +158,10 @@ def get_agent_answer(query: str) -> Any:
         return "Which channel, timeframe, or keyword would you like to search or summarize? Please specify so I can help you."
     
     try:
-        return agent.run(query)
+        result = agent.run(query)
+        # Propagate empty list or dict directly
+        if result == [] or result == {}:
+            return result
+        return result
     except Exception as e:
         raise Exception(f"Agent failed to process query: {str(e)}")

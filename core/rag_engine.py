@@ -67,6 +67,12 @@ def load_vectorstore() -> FAISS:
         logger.error(f"Failed to load vector store: {e}")
         raise
 
+def vector_search(metas: List[dict], k: int) -> List[dict]:
+    """
+    Always return the top-k regardless of score (no threshold filtering).
+    """
+    return metas[:k]
+
 def get_top_k_matches(
     query: str,
     k: int = 5,
@@ -103,8 +109,8 @@ def get_top_k_matches(
             if channel_id is not None:
                 metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
 
-            # 4) Return the top-k of whatever remains
-            results = metas[:k]
+            # 4) Always return the top-k regardless of score
+            results = vector_search(metas, k)
             logger.info(f"Found {len(results)} matches")
             return results
         except Exception as e:
