@@ -13,6 +13,7 @@ from utils import (
     validate_guild_id,
     validate_channel_name
 )
+from utils.helpers import build_jump_url
 from functools import lru_cache
 import time
 import logging
@@ -166,11 +167,11 @@ def search_messages(
                 "author": m.author,
                 "timestamp": m.timestamp.isoformat() if m.timestamp else None,
                 "content": m.content,
-                "jump_url": build_jump_url(m.guild_id, m.channel_id, m.id),
+                "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
                 "channel_name": m.channel_name,
                 "guild_id": m.guild_id,
                 "channel_id": m.channel_id,
-                "message_id": m.id
+                "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
             })
         if not formatted:
             # Explicitly state what was searched for
@@ -337,11 +338,11 @@ def summarize_messages(
                     },
                     "timestamp": m.timestamp.isoformat(),
                     "content": m.content,
-                    "jump_url": build_jump_url(m.guild_id, m.channel_id, m.message_id),
+                    "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
                     "channel_name": m.channel_name,
                     "guild_id": m.guild_id,
                     "channel_id": m.channel_id,
-                    "message_id": m.message_id
+                    "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
                 }
                 message_dicts.append(msg_dict)
             summary_text = ""  # Placeholder, actual summary logic can be added
@@ -457,17 +458,3 @@ def extract_skill_terms(query: str) -> List[str]:
             if term not in terms:
                 terms.append(term)
     return terms
-
-# Helper: build_jump_url
-
-def build_jump_url(guild_id: int, channel_id: int, message_id: int) -> str:
-    """
-    Build a Discord message jump URL from guild, channel, and message IDs.
-    Args:
-        guild_id: The Discord guild (server) ID
-        channel_id: The Discord channel ID
-        message_id: The Discord message ID
-    Returns:
-        A Discord message jump URL in the format: https://discord.com/channels/{guild_id}/{channel_id}/{message_id}
-    """
-    return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
