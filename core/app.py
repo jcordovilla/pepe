@@ -2,7 +2,6 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from db.db import SessionLocal, Resource
 import streamlit as st
 import json
 from datetime import datetime, timedelta
@@ -10,6 +9,14 @@ from tools.tools import get_channels, search_messages, summarize_messages
 from tools.time_parser import parse_timeframe
 from typing import Dict, Any, Optional, List
 import re
+import logging
+
+# Setup logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Page config
 st.set_page_config(
@@ -212,6 +219,7 @@ def format_summary(messages: List[Dict[str, Any]]) -> str:
     return summary
 
 def main():
+    logger.debug("Starting main function")
     # Sidebar with a nice header
     with st.sidebar:
         st.markdown("### 🔧 Search Options")
@@ -219,7 +227,9 @@ def main():
         
         # Channel filter
         st.markdown("#### 📢 Channel")
+        logger.debug("Fetching channels")
         channels = get_channels()
+        logger.debug(f"Found {len(channels)} channels")
         channel_names = [ch['name'] for ch in channels]
         selected_channel = st.selectbox(
             "Select a channel to filter results",
@@ -227,6 +237,7 @@ def main():
             label_visibility="collapsed",
             key="channel_selector"
         )
+        logger.debug(f"Selected channel: {selected_channel}")
         
         st.markdown("---")
         
@@ -237,46 +248,58 @@ def main():
             ["Formatted Text", "JSON"],
             label_visibility="collapsed"
         )
+        logger.debug(f"Selected output format: {output_format}")
         
         st.markdown("---")
         
         k_results = st.slider("Number of Results", 1, 20, 5)
-
-    tab1, tab2 = st.tabs(["🔍 Search Messages", "📚 Resources"])
+        logger.debug(f"Selected number of results: {k_results}")
 
     # Main search interface
-    with tab1:
-        st.markdown("### 🔍 Search Messages")
-        query = st.text_input(
-            "Enter your search query",
-            placeholder="e.g., 'Show me messages about AI from the last week'",
-            label_visibility="collapsed"
-        )
-        
-        if st.button("🔍 Search", key="search_button") and query:
-            try:
-                channel_id = None
-                if selected_channel != "All Channels":
-                    channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
-                with st.spinner("🔍 Searching messages..."):
-                    try:
-                        start_dt, end_dt = parse_timeframe(query)
-                        st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
-                        results = summarize_messages(
-                            start_iso=start_dt.isoformat(),
-                            end_iso=end_dt.isoformat(),
+    st.markdown("### 🔍 Search Messages")
+    query = st.text_input(
+        "Enter your search query",
+        placeholder="e.g., 'Show me messages about AI from the last week'",
+        label_visibility="collapsed"
+    )
+    
+    if st.button("🔍 Search", key="search_button") and query:
+        logger.debug(f"Search button clicked with query: {query}")
+        try:
+            channel_id = None
+            if selected_channel != "All Channels":
+                channel_id = next((ch['id'] for ch in channels if ch['name'] == selected_channel), None)
+                logger.debug(f"Resolved channel_id: {channel_id}")
+            
+            with st.spinner("🔍 Searching messages..."):
+                try:
+                    logger.debug("Attempting to parse timeframe from query")
+                    start_dt, end_dt = parse_timeframe(query)
+                    logger.debug(f"Parsed timeframe: {start_dt} to {end_dt}")
+                    st.markdown(f"**🕒 Timeframe:** {start_dt.date()} → {end_dt.date()}")
+                    
+                    logger.debug("Calling summarize_messages")
+                    results = summarize_messages(
+                        start_iso=start_dt.isoformat(),
+                        end_iso=end_dt.isoformat(),
+                        channel_id=channel_id,
+                        as_json=(output_format == "JSON")
+                    )
+                    logger.debug(f"Summarize results type: {type(results)}")
+                except ValueError as e:
+                    logger.debug(f"Timeframe parsing failed: {str(e)}")
+                    if "No timeframe specified" in str(e):
+                        logger.debug("Falling back to search_messages")
+                        results = search_messages(
+                            query=query,
                             channel_id=channel_id,
-                            as_json=(output_format == "JSON")
+                            k=k_results
                         )
-                    except ValueError as e:
-                        if "No timeframe specified" in str(e):
-                            results = search_messages(
-                                query=query,
-                                channel_id=channel_id,
-                                k=k_results
-                            )
-                        else:
-                            raise
+                        logger.debug(f"Search results type: {type(results)}")
+                    else:
+                        raise
+                
+                logger.debug("Formatting results")
                 if isinstance(results, str):
                     formatted_results = results
                 elif isinstance(results, dict):
@@ -285,6 +308,8 @@ def main():
                     formatted_results = format_summary(results)
                 else:
                     formatted_results = str(results)
+                
+                logger.debug("Displaying results")
                 st.markdown("### 📝 Results")
                 st.markdown('<div class="message-box">', unsafe_allow_html=True)
                 if output_format == "JSON":
@@ -295,36 +320,18 @@ def main():
                     copy_text = formatted_results
                 st.markdown('</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
+                
                 # Improved copy-to-clipboard
                 st.markdown("""
 <textarea id="copyArea" style="width:100%;height:200px;border-radius:6px;padding:8px;font-family:monospace;">{}</textarea>
 <button onclick="navigator.clipboard.writeText(document.getElementById('copyArea').value)" style="margin-top:8px;padding:6px 16px;border:none;border-radius:5px;background:#1E88E5;color:white;font-weight:bold;cursor:pointer;">📋 Copy Output</button>
 """.format(copy_text.replace("</textarea>", "&lt;/textarea&gt;")), unsafe_allow_html=True)
-            except Exception as e:
-                import traceback
-                st.error(f"❌ Error processing query: {str(e)}")
-                st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
-                st.error(traceback.format_exc())
-
-    with tab2:
-        st.header("📚 Resource Library")
-        # Fetch all resource types from the DB
-        session = SessionLocal()
-        resource_types = session.query(Resource.type).distinct().all()
-        resource_types = [r[0] for r in resource_types if r[0]]  # Flatten and remove None
-
-        if not resource_types:
-            st.info("No resources found in the database.")
-        else:
-            selected_type = st.selectbox("Select resource type", resource_types)
-            resources = session.query(Resource).filter(Resource.type == selected_type).all()
-            st.markdown(f"### Showing all resources of type: `{selected_type}`")
-            for res in resources:
-                st.markdown(f"- **Name:** {res.name if hasattr(res, 'name') else ''}")
-                st.markdown(f"  - **URL:** [{res.url}]({res.url})" if hasattr(res, 'url') else "")
-                st.markdown(f"  - **Description:** {res.description if hasattr(res, 'description') else ''}")
-                st.markdown("---")
-        session.close()
+                logger.debug("Results displayed successfully")
+        except Exception as e:
+            logger.error(f"Error processing query: {str(e)}", exc_info=True)
+            st.error(f"❌ Error processing query: {str(e)}")
+            st.error("Debug info: Please check if the channel exists and contains messages in the specified timeframe.")
+            st.error(traceback.format_exc())
 
 if __name__ == "__main__":
     main()
