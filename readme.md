@@ -27,18 +27,28 @@ core/                     # Core logic and orchestration
     agent.py              # AI agent orchestration and Discord bot logic
     app.py                # Streamlit UI / bot runner
     classifier.py         # Message/resource classification logic
-    resource_detector.py  # Resource detection utilities
-    rag_engine.py         # Retrieval-Augmented Generation engine
-    repo_sync.py          # Repo sync logic
+    resource_detector.py  # Resource detection, enrichment, normalization, deduplication
+    rag_engine.py         # Retrieval-Augmented Generation engine (FAISS, OpenAI)
+    repo_sync.py          # Export resources to JSON/Markdown
+    batch_detect.py       # Batch resource detection and enrichment
+    fetch_messages.py     # Fetch and store Discord messages
+    bot.py                # Discord bot entrypoint
+    embed_store.py        # Embedding and vector store logic
+
 
 tools/                    # Custom tools and scripts
     __init__.py
     tools.py              # Tool registry and main tool functions
-    tools_metadata.py     # Tool metadata
-    fetch_messages.py     # Fetch and store Discord messages
+    tools_metadata.py     # Tool metadata for agent/LLM tool-calling
+    fetch_messages.py     # (Legacy/alt) Fetch Discord messages
     migrate_messages.py   # Migrate message data
-    batch_detect.py       # Batch resource detection
+    batch_detect.py       # (Legacy/alt) Batch resource detection
     time_parser.py        # Natural language time parsing
+    clean_resources_db.py # Clean, deduplicate, and re-enrich resources in DB
+    dedup_resources.py    # Deduplicate JSON resources by URL/title (CLI)
+    fix_resource_titles.py# AI-based title/description enrichment for resources
+    full_pipeline.py      # Run full pipeline (fetch, embed, detect, export)
+
 
 db/                       # Database models and migrations
     __init__.py
@@ -47,16 +57,28 @@ db/                       # Database models and migrations
     alembic.ini           # Alembic config
     alembic/              # Alembic migrations
 
+
 data/                     # Data files and vector indexes
     discord_messages.db   # Main SQLite database
+    resources/            # Resource logs and exports
     *.json, *.jsonl       # Message and chat history exports
     index_faiss/          # FAISS vector index files
 
 utils/                    # Utility functions and helpers
+    __init__.py
+    helpers.py            # Helper functions (jump URLs, validation, etc.)
+    logger.py             # Logging setup
+    embed_store.py        # Embedding helpers
 
 tests/                    # Unit and integration tests
+    test_*.py             # Test modules (run with pytest)
+    conftest.py           # Pytest fixtures
+    query_test_results.json# Test results
 
-docs/                     # Project documentation
+docs/                     # Project documentation (Markdown, resources)
+    index.md
+    resources/
+        resources.json    # Exported/curated resources
 
 jc_logs/                  # Performance and architecture logs (gitignored)
 ```
@@ -69,32 +91,32 @@ jc_logs/                  # Performance and architecture logs (gitignored)
    ```sh
    pip install -r requirements.txt
    ```
-2. **Prepare the database and data files** (see `tools/fetch_messages.py` and `tools/migrate_messages.py`).
+2. **Prepare the database and data files:**
+   - Fetch Discord messages: `python core/fetch_messages.py`
+   - (Optional) Migrate or clean data: see `tools/migrate_messages.py`, `tools/clean_resources_db.py`
 3. **Configure environment variables:**
    - Copy `.env` and fill in your `DISCORD_TOKEN`, `OPENAI_API_KEY`, etc.
 4. **Run the Streamlit app:**
    ```sh
    streamlit run core/app.py
    ```
-
----
-
-## Scripts & Tools
-
-- `tools/fetch_messages.py` — Fetches and stores Discord messages
-- `tools/batch_detect.py` — **Batch resource detection** in messages
-- `tools/time_parser.py` — Natural language time parsing
-- `core/classifier.py` — **Classifies** messages/resources by type, topic, or intent (isolated run from batch_detect if needed. Otherwise, run batch_detect)
-- `core/resource_detector.py` — **Detects resources** (links, files, etc.) in messages (isolated run from batch_detect if needed. Otherwise, run batch_detect)
-- `tests/test_*.py` — Run tests with `pytest`
+5. **(Optional) Run the Discord bot:**
+   ```sh
+   python core/bot.py
+   ```
+6. **(Optional) Run the full pipeline:**
+   ```sh
+   python tools/full_pipeline.py
+   ```
 
 ---
 
 ## Requirements
 
 - Python 3.9+
-- Discord API token
-- OpenAI API key
+- Discord API token (`DISCORD_TOKEN`)
+- OpenAI API key (`OPENAI_API_KEY`)
+- (Optional) FAISS, Streamlit, SQLAlchemy, LangChain, TQDM, Prometheus, etc. (see `requirements.txt`)
 
 ---
 
@@ -102,9 +124,12 @@ jc_logs/                  # Performance and architecture logs (gitignored)
 
 - The `jc_logs/` directory and `.DS_Store` files are ignored by git (see `.gitignore`).
 - The main database is located at `data/discord_messages.db`.
-- For advanced documentation, see the `docs/` folder or build with MkDocs.
+- For advanced documentation, see the `docs/` folder or build with MkDocs (`mkdocs serve`).
+- Test coverage: run `pytest` in the `tests/` directory.
+- For troubleshooting, see logs in `jc_logs/` and `tools/full_pipeline.log`.
 
 ---
 
 **Author:**  
 Jose Cordovilla
+GenAI Global Network Architect
