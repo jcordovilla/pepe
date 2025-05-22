@@ -4332,5 +4332,115 @@
     "tag": "News/Article",
     "resource_url": "https://www.tomsguide.com/ai/this-game-changing-ai-trick-is-the-secret-to-getting-the-best-chatbot-results",
     "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1374163345032220802"
+  },
+  {
+    "id": 395,
+    "title": "How to Build Your Own AI-Powered Sales Agent (No Coding Required)",
+    "description": "This LinkedIn post provides a step-by-step guide for building an AI-powered sales agent without any coding experience, making it accessible for beginners interested in practical AI applications in sales.",
+    "date": "2025-05-22",
+    "author": "rodrigoreyesjara",
+    "channel": "\ud83d\udcf8-social-media",
+    "tag": "Tutorial",
+    "resource_url": "https://www.linkedin.com/posts/rodrigo-reyes-jara-44a41045_how-to-build-your-own-sales-agent-activity-7331413071174811649-rWYl?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAAl-U3oBoefyzXlm1OH7K2wlbSd1XWQzyMs",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1371971806860410921/1375209514277539844"
+  },
+  {
+    "id": 396,
+    "title": "Core Concepts Made Simple",
+    "description": "This Medium article provides a beginner-friendly overview of Bubble.io, explaining its key concepts and features for those interested in building applications without code. It's a helpful resource for newcomers seeking to understand the fundamentals of the Bubble.io platform.",
+    "date": "2025-05-22",
+    "author": "megrosed_65608",
+    "channel": "\ud83d\udee0ai-practical-applications",
+    "tag": "News/Article",
+    "resource_url": "https://medium.com/no-code-vibes/bubble-io-core-concepts-made-simple-81dc6d01abf4",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375205339342835754"
+  },
+  {
+    "id": 397,
+    "title": "Run Your Favorite Gen AI Model with Privacy",
+    "description": "This Oracle blog post discusses strategies and considerations for deploying generative AI models in private, enterprise cloud environments, focusing on privacy and practical implementation takeaways.",
+    "date": "2025-05-22",
+    "author": "jaime.rojas.s",
+    "channel": "\ud83d\udee0ai-practical-applications",
+    "tag": "News/Article",
+    "resource_url": "https://blogs.oracle.com/ai-and-datascience/post/run-your-favorite-gen-ai-model-with-privacy)",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375177347275165697"
+  },
+  {
+    "id": 398,
+    "title": "Gen AI Global Website",
+    "description": "This is the homepage for Gen AI Global, an organization or initiative focused on generative AI. The site likely provides information, resources, and updates related to generative AI technologies and their global impact.",
+    "date": "2025-05-22",
+    "author": "minsunnie",
+    "channel": "\ud83d\udca0buddy-group9",
+    "tag": "Other",
+    "resource_url": "https://genaiglobal.org/index.html",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1366389852249133148/1375128843190407309"
+  },
+  {
+    "id": 399,
+    "title": "GEN-AI GLOBAL Community Update Recording",
+    "description": "A recorded video of the latest GEN-AI GLOBAL community update, providing insights, progress reports, and future plans for the community. Includes attached slides for reference.",
+    "date": "2025-05-14",
+    "author": "oscarsan.chez",
+    "channel": "\ud83c\udf0e-community",
+    "tag": "News/Article",
+    "resource_url": "https://fathom.video/share/LrBdW6zGJLUFQoiPq4Zmz6oWDKnDUdve",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1353085578274410626/1372243477630287933"
+  },
+  {
+    "id": 400,
+    "title": "Demo of Cursor IDE for Technical Design and Book Authoring",
+    "description": "This LinkedIn post by Prabhat Kumar showcases a demo of using Cursor IDE for technical design documentation and book authoring, highlighting its features and user experience for organizing and writing content with GenAI support.",
+    "date": "2025-05-07",
+    "author": "imkprabhat",
+    "channel": "\ud83c\udfd8general-chat",
+    "tag": "News/Article",
+    "resource_url": "https://www.linkedin.com/posts/prabhat-kumar-283b331b_vibewriting-cursoride-genai-activity-7324689244088688640-iY_f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAARCvMMBi1W4H5DZSQvTq4Qug_fPX_hk-rc",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1369766218101428395"
+  },
+  {
+    "id": 401,
+    "title": "Example Kanban Board on Trello",
+    "description": "This is a sample Trello board demonstrating how to use Kanban methodology for project and idea management. It serves as a practical tool for non-coders to organize tasks and workflows visually, similar to internal tools used at companies like Amazon.",
+    "date": "2025-04-28",
+    "author": "sandraf1230",
+    "channel": "\u274c\ud83d\udcbbnon-coders-learning",
+    "tag": "Tool",
+    "resource_url": "https://trello.com/b/vjXzN6zT/example-kanban-board",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1364361051830747156/1366381821352214528"
+  },
+  {
+    "id": 402,
+    "title": "Ultimate Open-Source Local AI Automation Setup with n8n, Docker, and MCP",
+    "description": "This YouTube video tutorial demonstrates how to build a fully local AI automation stack using open-source tools like n8n, Docker, and Model Context Protocol (MCP), providing practical guidance for self-hosted AI workflows and automation.",
+    "date": "2025-04-27",
+    "author": "gabrielfranch",
+    "channel": "\ud83d\udddegenai-news",
+    "tag": "Tutorial",
+    "resource_url": "https://youtu.be/DUE56G0fF5s?si=5JQgkY68Kw2HHRCc",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1366080852899139650"
+  },
+  {
+    "id": 403,
+    "title": "System Design & Coding Interview Tips Visual",
+    "description": "This LinkedIn post by Alex Xu provides a visual resource related to system design and coding interview tips, which can be valuable for those preparing for technical interviews or seeking to understand practical applications of AI agents.",
+    "date": "2025-04-20",
+    "author": "saak123456",
+    "channel": "\ud83d\udee0ai-practical-applications",
+    "tag": "News/Article",
+    "resource_url": "https://www.linkedin.com/posts/alexxubyte_systemdesign-coding-interviewtips-activity-7319749120762535936-UB3S?utm_source=share&utm_medium=member_desktop&rcm=ACoAAASHdL4BhSF2jwtbNPbe5zEVip3m0WcWo5c)",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1363561111500357853"
+  },
+  {
+    "id": 404,
+    "title": "Ed Shares His Life-Changing Story",
+    "description": "This YouTube video features Ed discussing a transformative experience and its profound impact on his life, offering an inspiring and emotional narrative. The story is highlighted as particularly moving and is associated with ElevenLabs.",
+    "date": "2025-04-14",
+    "author": "laura.neder",
+    "channel": "\ud83c\udfd8general-chat",
+    "tag": "News/Article",
+    "resource_url": "https://www.youtube.com/watch?v=XFJOqWUJJC0",
+    "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1361401625385767027"
   }
 ]
