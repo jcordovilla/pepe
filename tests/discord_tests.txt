@@ -1,0 +1,41 @@
+Question: fetch the 5 last messages in ⁠❓q-and-a-questions
+A: Here are the 5 latest messages in ⁠❓q-and-a-questions:
+darkgago: Buddy group 5: Q. Are there any options for existing General Members to take on new responsibilities or roles in the Community? (22 May 2025, 02:03 UTC) [Jump to message],
+eduardofadanelli: Question from Buddy Group 6: What has been the most challenging part of building this community? Could you give us a brief explanation of how that challenge was addressed and resolved? (21 May 2025, 20:29 UTC) [Jump to message],
+carladomingo33: Question from buddy group 2 for Oscar: what‘s the plan for non-coders/agent development class? Any information that can be share on that and learning paths planned for the community (21 May 2025, 19:09 UTC) [Jump to message],
+silkefinken: Question from buddy group 10: What will be the right attitude of management with regards to AI resistance from employees? Some companies seem to push AI-first rather broadly, e.g. making AI usage part of performance reviews etc. but will that be the right way forward? (15 May 2025, 22:01 UTC) [Jump to message],
+apoorvgarg88: 🗒️Question from Buddy Group 11 - How do we validate the behaviour of AI agents in production environments? Is continuous evaluation more important than pre-deployment certification? (15 May 2025, 19:32 UTC) [Jump to message],
+Let me know if you need more details or want to see earlier messages!
+
+Question: explain the main topics discussed in ⁠🏛netarch-general in the past week
+A: There have been no messages or discussions in channel ⁠🏛netarch-general during the past week. If you need information from a different timeframe or another channel, please let me know!
+
+Question: What data is currently cached?
+Data available: 5172 messages across 74 channels. Date range: 2025-03-27T21:03:27.683000 to 2025-05-22T10:38:55.095000.
+A: Channels: agile-ideation-announcements (17), genai-use-case-roundtable (8), pain-points (2), showcase (29), ❌inactive-submit (20), ❌💻non-coders (5), ❌💻non-coders-learning (199), ❓buddy-support (26), ❓q-and-a-questions (28), 🌎-community (102), 🌐official-site (1), 🎓-classes (8), 🎥meeting-recordings (33), 🎯admin-onboarding (9), 🎯onboarding (5), 🏘admin-general-chat (251), 🏘general-chat (701), 🏛netarch-general (398), 🏛🗣netarch-content (15), 🏛🤖netarch-agents (68), 👋admin-introductions (2), 👋introductions (140), 👾discord-managers (177), 💠buddy-group1 (72), 💠buddy-group10 (61), 💠buddy-group11 (74), 💠buddy-group12 (25), 💠buddy-group2 (138), 💠buddy-group3 (74), 💠buddy-group5 (118), 💠buddy-group6 (54), 💠buddy-group7 (87), 💠buddy-group8 (100), 💠buddy-group9 (120), 💬convo-leaders-prompts (6), 💬live-chat (16), 💬questions-help (5), 💵financial-services (23), 💻learning-without-coding-skills (20), 💼career-opportunities (61), 📄papers-and-publications (27), 📖resources-library (29), 📚ai-philosophy-ethics (206), 📝q-and-a-polls (13), 📝welcome-rules (6), 📣general (2), 📣general-announcements (50), 📥channel-submissions (28), 📥feedback-submissions (34), 📥member-of-the-week-submissions (20), 📥socialmedia-submissions (8), 📩midweek-request (1), 📸-social-media (5), 📸content-creation (1), 📸content-creation-chat (3), 🔐cyber‑report‑desk (6), 🕊ethical-ai-team (26), 🗂sgu-managers-resources (33), 🗃gen-ai-use-cases (37), 🗞genai-news (33), 🗣convo-leaders (3), 🗣convo-leaders-chat (141), 🙋member-of-the-week-poll (36), 🛝discord-pg (181), 🛝discord-pg-sgu (14), 🛠-workshops (5), 🛠ai-practical-applications (86), 🛠it-support (62), 🤖agent-dev (16), 🤖workshops (56), 🤝find-a-buddy (105), 🦾sgu-managers (386), 🧠feedback-workshop (80), 🧢buddy-group4 (135)
+
+Question: Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.
+A: No messages were found in #genai-use-case-roundtable that contain both "use cases" and the keyword "roundtable." If you’d like, I can broaden the search or try searching for just one of the terms. Let me know how you’d like to proceed!
+
+Question: List all messages by cristian_72225 in #👋introductions.
+A: There are no messages by cristian_72225 in the #👋introductions channel. If you need information from another channel or user, please let me know!
+
+Question: Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.
+A: There are no messages in the channel 📢announcements-admin (ID: 1365732945859444767) between 2025-04-20 and 2025-04-25. If you need messages from a different timeframe or channel, please let me know!
+
+Question: Summarize messages from last weekend in #🏘general-chat.
+A: Here’s a summary of the activity in #🏘general-chat from last weekend (May 16–18, 2025):
+15 messages were posted by 11 different users.,
+The conversation included contributions from members such as markvenn_30910, georgi8865, cristian_72225, shobana_nambiar, daguerreros7, testbot31, jhorden2211, internationalcio, alexandrobermeo, megrosed_65608, and laura.neder.,
+The discussion was spread out, with no single user dominating the chat.,
+If you’d like a more detailed summary or highlights of the topics discussed, let me know!
+
+Question:
+A: An error occurred: 400 Bad Request (error code: 50035): Invalid Form Body
+In content: Must be 2000 or fewer in length.
+
+Question: Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.
+A: There are no messages from darkgago in the #🛠ai-practical-applications channel over the past month. Therefore, no skills can be extracted from this user in that channel during this period. If you need information from another user or channel, or a different timeframe, please let me know!
+
+Question: Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.
+A: I couldn't find any messages that are semantically similar to "invite link restrictions" across all channels. If you have a different phrase or keyword you'd like me to search for, please let me know!

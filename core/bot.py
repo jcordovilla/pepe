@@ -68,10 +68,11 @@ async def pepe(interaction: discord.Interaction, query: str):
                 jump_url = msg.get('jump_url', '')
                 channel_name = msg.get('channel_name', 'Unknown Channel')
                 
+                # Format the message with proper Discord markdown
                 msg_str = f"**{author_name}** ({timestamp}) in **#{channel_name}**\n{content}\n"
                 if jump_url:
                     msg_str += f"[🔗 Jump to message]({jump_url})\n"
-                msg_str += "\n"
+                msg_str += "---\n"
 
                 if len(current_chunk) + len(msg_str) > 1900:
                     try:
@@ -91,7 +92,24 @@ async def pepe(interaction: discord.Interaction, query: str):
 
         elif isinstance(response, dict):
             # Format dictionary response with header
-            formatted_response = header + str(response)
+            formatted_response = header
+            if "timeframe" in response:
+                formatted_response += f"**Timeframe:** {response['timeframe']}\n"
+            if "channel" in response:
+                formatted_response += f"**Channel:** {response['channel']}\n"
+            if "summary" in response:
+                formatted_response += f"\n{response['summary']}\n"
+            if "messages" in response and response["messages"]:
+                formatted_response += "\n**Messages:**\n"
+                for msg in response["messages"]:
+                    author = msg.get("author", {}).get("username", "Unknown")
+                    timestamp = msg.get("timestamp", "")
+                    content = msg.get("content", "")
+                    jump_url = msg.get("jump_url", "")
+                    formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
+                    if jump_url:
+                        formatted_response += f"[🔗 Jump to message]({jump_url})\n"
+                    formatted_response += "---\n"
             await interaction.followup.send(formatted_response)
         else:
             # Format string response with header

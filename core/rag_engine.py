@@ -257,27 +257,33 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             "channel": f"Channel: {messages.get('channel_name', 'All channels')}",
             "summary": messages.get("summary", ""),
             "note": messages.get("note", ""),
-            "messages": messages.get("messages", [])
+            "messages": []
         }
 
-        # Format the response as a string
-        formatted_response = f"**Timeframe:** {response['timeframe']}\n"
-        formatted_response += f"**Channel:** {response['channel']}\n\n"
-        formatted_response += f"{response['summary']}\n"
-        
-        if response['messages']:
-            formatted_response += "\n**Messages:**\n"
-            for msg in response['messages']:
-                author = msg['author']['username']
-                timestamp = msg['timestamp']
-                content = msg['content']
-                jump_url = msg['jump_url']
-                formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
-                if jump_url:
-                    formatted_response += f"[🔗 Jump to message]({jump_url})\n"
-                formatted_response += "---\n"
+        # Process messages and ensure jump URLs are included
+        for msg in messages.get("messages", []):
+            processed_msg = {
+                "author": msg.get("author", {}),
+                "timestamp": msg.get("timestamp", ""),
+                "content": msg.get("content", ""),
+                "channel_name": msg.get("channel_name", ""),
+                "jump_url": msg.get("jump_url", "")
+            }
+            
+            # If jump_url is missing, try to build it
+            if not processed_msg["jump_url"]:
+                try:
+                    guild_id = msg.get("guild_id")
+                    channel_id = msg.get("channel_id")
+                    message_id = msg.get("message_id")
+                    if all([guild_id, channel_id, message_id]):
+                        processed_msg["jump_url"] = build_jump_url(guild_id, channel_id, message_id)
+                except Exception as e:
+                    logger.warning(f"Failed to build jump URL: {e}")
+            
+            response["messages"].append(processed_msg)
 
-        return formatted_response
+        return response
 
     except Exception as e:
         QUERY_ERRORS.inc()
