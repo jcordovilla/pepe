@@ -36,8 +36,13 @@ def main():
 
     session = SessionLocal()
     try:
-        # Only process messages that have not been detected yet
-        messages = session.query(Message).filter_by(resource_detected=0).order_by(Message.timestamp.desc()).all()
+        # Get all messages that haven't been processed yet
+        messages = session.query(Message)\
+            .filter_by(resource_detected=0)\
+            .order_by(Message.timestamp.desc())\
+            .all()
+
+        logging.info(f"Found {len(messages)} messages to process")
 
         # Timer start
         start_time = time.time()
