@@ -4,12 +4,21 @@ from discord.ext import commands
 from discord import app_commands
 from dotenv import load_dotenv
 from core.agent import get_agent_answer
+from flask import Flask
+import threading
 
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 if not DISCORD_TOKEN:
     raise ValueError("DISCORD_TOKEN environment variable is not set")
+
+# Set up Flask app
+app = Flask(__name__)
+
+@app.route('/health')
+def health_check():
+    return 'OK', 200
 
 # Set up bot with command prefix '!' (kept for potential future use)
 intents = discord.Intents.default()
@@ -57,6 +66,14 @@ async def pepe(interaction: discord.Interaction, query: str):
     except Exception as e:
         await interaction.followup.send(f"Error: {str(e)}")
 
+def run_flask():
+    app.run(host='0.0.0.0', port=8080)
+
 # Run the bot
 if __name__ == "__main__":
+    # Start Flask in a separate thread
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.start()
+    
+    # Run the Discord bot
     bot.run(DISCORD_TOKEN) 

@@ -1,9 +1,11 @@
 services:
-  - type: worker
+  - type: web
     name: discord-bot
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python core/bot.py
     envVars:
       - key: DISCORD_TOKEN
-        sync: false 
+        sync: false
+    healthCheckPath: /health
+    port: 8080 
