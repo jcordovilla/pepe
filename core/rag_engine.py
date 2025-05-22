@@ -244,42 +244,41 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
                 as_json=True
             )
 
-        if not messages or not messages.get("summary"):
-            logger.warning("No messages found in specified timeframe")
-            return "⚠️ No messages found in the specified timeframe."
+        if isinstance(messages, str):
+            # Handle error messages
+            return messages
+
+        if not messages or not messages.get("messages"):
+            return f"⚠️ No messages found in the specified timeframe ({start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')})"
 
         # Build a more structured response
         response = {
             "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC",
-            "channel": f"Channel ID: {channel_id}" if channel_id else "All channels",
-            "summary": messages["summary"],
-            "note": messages.get("note", "")
+            "channel": f"Channel: {messages.get('channel_name', 'All channels')}",
+            "summary": messages.get("summary", ""),
+            "note": messages.get("note", ""),
+            "messages": messages.get("messages", [])
         }
+
+        # Format the response as a string
+        formatted_response = f"**Timeframe:** {response['timeframe']}\n"
+        formatted_response += f"**Channel:** {response['channel']}\n\n"
+        formatted_response += f"{response['summary']}\n"
         
-        # Ensure the response is properly formatted JSON
-        try:
-            # First try to parse the summary as JSON if it's a string
-            if isinstance(response["summary"], str):
-                try:
-                    summary_json = json.loads(response["summary"])
-                    response["summary"] = summary_json
-                except json.JSONDecodeError:
-                    # If it's not valid JSON, keep it as a string
-                    pass
-            
-            # Convert the entire response to a formatted JSON string
-            formatted_response = json.dumps(response, indent=2, ensure_ascii=False)
-            logger.info("Successfully processed query")
-            return formatted_response
-            
-        except Exception as e:
-            logger.error(f"Error formatting response: {e}")
-            # Fallback to a simpler format if JSON formatting fails
-            return f"""Timeframe: {response['timeframe']}
-Channel: {response['channel']}
-Summary: {response['summary']}
-Note: {response['note']}"""
-        
+        if response['messages']:
+            formatted_response += "\n**Messages:**\n"
+            for msg in response['messages']:
+                author = msg['author']['username']
+                timestamp = msg['timestamp']
+                content = msg['content']
+                jump_url = msg['jump_url']
+                formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
+                if jump_url:
+                    formatted_response += f"[🔗 Jump to message]({jump_url})\n"
+                formatted_response += "---\n"
+
+        return formatted_response
+
     except Exception as e:
         QUERY_ERRORS.inc()
         logger.error(f"Error processing query: {e}")

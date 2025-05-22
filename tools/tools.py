@@ -312,7 +312,11 @@ def summarize_messages(
     if channel_name and not channel_id:
         resolved_id = resolve_channel_name(channel_name, guild_id)
         if not resolved_id:
-            return "Unknown channel"
+            return {
+                "summary": "",
+                "note": f"Channel '{channel_name}' not found",
+                "messages": []
+            } if as_json else f"Channel '{channel_name}' not found"
         channel_id = resolved_id
 
     session = SessionLocal()
@@ -324,39 +328,58 @@ def summarize_messages(
         if channel_id:
             q = q.filter(Message.channel_id == channel_id)
         msgs = q.order_by(Message.timestamp).all()
+        
         if not msgs:
-            summary_text = ""
-            note_text = "No messages in that timeframe"
-        else:
-            message_dicts = []
-            for m in msgs:
-                msg_dict = {
-                    "author": {
-                        "username": m.author.get("username", "Unknown"),
-                        "display_name": m.author.get("display_name", ""),
-                        "id": m.author.get("id")
-                    },
-                    "timestamp": m.timestamp.isoformat(),
-                    "content": m.content,
-                    "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
-                    "channel_name": m.channel_name,
-                    "guild_id": m.guild_id,
-                    "channel_id": m.channel_id,
-                    "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
-                }
-                message_dicts.append(msg_dict)
-            summary_text = ""  # Placeholder, actual summary logic can be added
-            note_text = ""      # Placeholder, actual note logic can be added
-        # Build result with both keys
+            return {
+                "summary": "",
+                "note": f"No messages found in the specified timeframe ({start.isoformat()} to {end.isoformat()})",
+                "messages": []
+            } if as_json else f"No messages found in the specified timeframe ({start.isoformat()} to {end.isoformat()})"
+
+        message_dicts = []
+        for m in msgs:
+            msg_dict = {
+                "author": {
+                    "username": m.author.get("username", "Unknown"),
+                    "display_name": m.author.get("display_name", ""),
+                    "id": m.author.get("id")
+                },
+                "timestamp": m.timestamp.isoformat(),
+                "content": m.content,
+                "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
+                "channel_name": m.channel_name,
+                "guild_id": m.guild_id,
+                "channel_id": m.channel_id,
+                "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
+            }
+            message_dicts.append(msg_dict)
+
+        # Create a meaningful summary
+        summary_text = f"Found {len(msgs)} messages in the specified timeframe.\n\n"
+        if channel_name:
+            summary_text += f"Channel: #{channel_name}\n"
+        summary_text += f"Time range: {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC\n\n"
+        
+        # Group messages by author for better organization
+        author_messages = {}
+        for msg in message_dicts:
+            author = msg["author"]["username"]
+            if author not in author_messages:
+                author_messages[author] = []
+            author_messages[author].append(msg)
+
+        # Add author summaries
+        for author, messages in author_messages.items():
+            summary_text += f"**{author}** posted {len(messages)} messages\n"
+
+        # Build result
         result = {
             "summary": summary_text,
-            "note": note_text if (note_text := locals().get("note_text")) is not None else ""
+            "note": f"Summary of {len(msgs)} messages from {start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')}",
+            "messages": message_dicts if as_json else []
         }
-        if as_json:
-            result["messages"] = message_dicts if msgs else []
-            return result
-        else:
-            return summary_text
+        
+        return result if as_json else summary_text
     finally:
         session.close()
 
