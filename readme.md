@@ -1,3 +1,4 @@
+# PEPE - Predictive Engine for Prompt Experimentation
 # Discord Bot with RAG and Vector Search
 # Version: beta-03
 
