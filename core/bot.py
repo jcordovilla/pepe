@@ -71,7 +71,7 @@ async def pepe(interaction: discord.Interaction, query: str):
                 # Format the message with proper Discord markdown
                 msg_str = f"**{author_name}** ({timestamp}) in **#{channel_name}**\n{content}\n"
                 if jump_url:
-                    msg_str += f"[🔗 Jump to message]({jump_url})\n"
+                    msg_str += f"[View message]({jump_url})\n"  # Use Discord's markdown link format with proper spacing
                 msg_str += "---\n"
 
                 if len(current_chunk) + len(msg_str) > 1900:
@@ -108,7 +108,7 @@ async def pepe(interaction: discord.Interaction, query: str):
                     jump_url = msg.get("jump_url", "")
                     formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
                     if jump_url:
-                        formatted_response += f"[🔗 Jump to message]({jump_url})\n"
+                        formatted_response += f"[View message]({jump_url})\n"  # Use Discord's markdown link format
                     formatted_response += "---\n"
             await interaction.followup.send(formatted_response)
         else:
