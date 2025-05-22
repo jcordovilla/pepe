@@ -4,8 +4,8 @@ import os
 from typing import Any, Dict, List, Optional, Union
 from dotenv import load_dotenv
 from openai import OpenAI
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
 from utils.helpers import build_jump_url
 from tools.tools import resolve_channel_name, summarize_messages, validate_data_availability
 from tools.time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference

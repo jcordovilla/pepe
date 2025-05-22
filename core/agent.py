@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from typing import Any
 
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
 

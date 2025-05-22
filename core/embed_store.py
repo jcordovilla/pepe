@@ -2,7 +2,7 @@
 
 import os
 from db import SessionLocal, Message
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from typing import List, Dict, Any
 

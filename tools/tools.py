@@ -5,7 +5,7 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from datetime import datetime
 from db import SessionLocal, Message
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
 from utils import (

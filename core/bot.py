@@ -6,6 +6,12 @@ from dotenv import load_dotenv
 from core.agent import get_agent_answer
 from flask import Flask
 import threading
+import asyncio
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
@@ -27,44 +33,79 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} has connected to Discord!')
+    logger.info(f'{bot.user} has connected to Discord!')
     try:
         synced = await bot.tree.sync()  # Register slash commands globally
-        print(f"Synced {len(synced)} command(s).")
+        logger.info(f"Synced {len(synced)} command(s).")
     except Exception as e:
-        print(f"Failed to sync commands: {e}")
+        logger.error(f"Failed to sync commands: {e}")
 
 @bot.tree.command(name="pepe", description="Ask Pepe the AI assistant something")
 @app_commands.describe(query="Your question for Pepe")
 async def pepe(interaction: discord.Interaction, query: str):
-    await interaction.response.defer()  # Indicate bot is processing
     try:
+        # First, acknowledge the interaction immediately
+        await interaction.response.defer(ephemeral=False)
+        
+        # Get the response from the agent
         response = get_agent_answer(query)
+
+        # Add header with user's question
+        header = f"**Question:** {query}\n\n"
 
         if isinstance(response, list):
             if not response:
-                await interaction.followup.send("No messages found matching your query.")
+                await interaction.followup.send(header + "No messages found matching your query.")
                 return
 
-            current_chunk = ""
+            current_chunk = header
             for msg in response:
-                msg_str = f"**{msg.get('author', {}).get('username', 'Unknown')}** ({msg.get('timestamp', '')})\n{msg.get('content', '')}\n[🔗 Jump to message]({msg.get('jump_url', '')})\n\n"
+                # Ensure we have all required fields
+                author = msg.get('author', {})
+                author_name = author.get('username', 'Unknown')
+                timestamp = msg.get('timestamp', '')
+                content = msg.get('content', '')
+                jump_url = msg.get('jump_url', '')
+                channel_name = msg.get('channel_name', 'Unknown Channel')
+                
+                msg_str = f"**{author_name}** ({timestamp}) in **#{channel_name}**\n{content}\n"
+                if jump_url:
+                    msg_str += f"[🔗 Jump to message]({jump_url})\n"
+                msg_str += "\n"
+
                 if len(current_chunk) + len(msg_str) > 1900:
-                    await interaction.followup.send(current_chunk)
+                    try:
+                        await interaction.followup.send(current_chunk)
+                    except discord.NotFound:
+                        logger.warning("Interaction not found when sending chunk")
+                        return
                     current_chunk = msg_str
                 else:
                     current_chunk += msg_str
 
             if current_chunk:
-                await interaction.followup.send(current_chunk)
+                try:
+                    await interaction.followup.send(current_chunk)
+                except discord.NotFound:
+                    logger.warning("Interaction not found when sending final chunk")
 
         elif isinstance(response, dict):
-            await interaction.followup.send(str(response))
+            # Format dictionary response with header
+            formatted_response = header + str(response)
+            await interaction.followup.send(formatted_response)
         else:
-            await interaction.followup.send(str(response))
+            # Format string response with header
+            formatted_response = header + str(response)
+            await interaction.followup.send(formatted_response)
 
+    except discord.NotFound:
+        logger.warning("Interaction not found - it may have timed out")
     except Exception as e:
-        await interaction.followup.send(f"Error: {str(e)}")
+        logger.error(f"Error in pepe command: {str(e)}")
+        try:
+            await interaction.followup.send(f"An error occurred: {str(e)}")
+        except:
+            pass
 
 def run_flask():
     app.run(host='0.0.0.0', port=8080)
@@ -73,7 +114,12 @@ def run_flask():
 if __name__ == "__main__":
     # Start Flask in a separate thread
     flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True  # Make thread daemon so it exits when main thread exits
     flask_thread.start()
     
     # Run the Discord bot
-    bot.run(DISCORD_TOKEN) 
+    try:
+        bot.run(DISCORD_TOKEN)
+    except Exception as e:
+        logger.error(f"Error running bot: {str(e)}")
+        raise 
