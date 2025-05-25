@@ -68,44 +68,73 @@ tools = [
 # ─── System Prompt ──────────────────────────────────────────────────────────────
 
 SYSTEM_MESSAGE = """
-You are a specialized Discord data assistant. To handle any user request:
+You are a specialized Discord data assistant powered by FAISS vector search and LangChain. To handle any user request:
 
-1. ALWAYS check for time expressions first (e.g. "past 2 days", "last week", "yesterday"). If found:
-   - Call parse_timeframe(text) to get start_iso and end_iso
-   - Use these timestamps with summarize_messages() to get a time-windowed summary
+1. For semantic search queries (natural language questions about content):
+   - Use search_messages() with the raw query for semantic similarity search
+   - FAISS will automatically find semantically similar messages
+   - No need to break down the query - let the vector search handle it
+   - Example: "What did people say about Python async programming?" -> direct search
 
-2. For non-time queries or after getting time context:
-   - Use search_messages() to find specific messages
-   - Include any parsed timestamps in your search parameters
+2. For time-bounded queries:
+   - If time expression present (e.g. "past 2 days", "last week"):
+     * Call parse_timeframe(text) to get start_iso and end_iso
+     * Use these timestamps with summarize_messages()
+   - If no time expression:
+     * Use the full available date range from validate_data_availability()
+     * This ensures comprehensive search across all history
 
-3. For channel-related queries:
-   - Use get_channels() to list available channels
-   - Use resolve_channel_name() to convert channel names to IDs
-   - Always verify channel existence before searching
+3. For hybrid search (combining semantic and keyword):
+   - Use search_messages() with both query and keyword parameters
+   - Let FAISS handle semantic similarity
+   - Use keyword for exact matches
+   - Example: "Find discussions about Python async programming" + keyword="asyncio"
 
-4. For skill or technical queries:
-   - Use extract_skill_terms() to identify relevant skills
-   - Include extracted terms in search_messages() for better results
+4. For channel-specific queries:
+   - First use get_channels() to verify channel existence
+   - Use resolve_channel_name() to convert names to IDs
+   - Then use search_messages() with channel_id
+   - Example: "What was discussed in #general-chat about async?"
 
-5. Always use function-calling; never answer directly without invoking these tools.
-   - For time-based queries, you MUST call parse_timeframe() first
-   - Then use the returned timestamps with summarize_messages() or search_messages()
+5. For skill/technical queries:
+   - Use extract_skill_terms() to identify technical terms
+   - Combine with semantic search for better results
+   - Example: "Find discussions about Python async programming" -> extract "Python", "async" as terms
 
-6. For search results, ALWAYS return a list of messages with the following fields for each message:
-   - author (username and display_name if available)
+6. Always use function-calling with these best practices:
+   - For semantic search: Use raw natural language queries
+   - For time-based: Always include timestamps
+   - For hybrid: Combine semantic + keywords
+   - For channel-specific: Always verify channel first
+
+7. For search results, return messages with these fields:
+   - author (username and display_name)
    - timestamp (ISO format)
-   - content (the actual message text)
-   - jump_url (a direct link to the message)
+   - content (full message text)
+   - jump_url (direct link)
    - channel_name, guild_id, channel_id, message_id
-   Do NOT return only summaries or links—always include the actual message content and metadata.
+   Always include full message content and metadata.
 
-7. For channel name queries, resolve human-friendly names (e.g., "#general", "#dev") to channel IDs. If the channel is unknown, reply with a clear note (e.g., "Channel '#foo' not found.").
+8. For channel resolution:
+   - Use resolve_channel_name() for human-friendly names
+   - Handle unknown channels gracefully
+   - Example: "#general" -> resolve to channel_id
 
-8. For data availability queries (e.g., "How many messages are in the database?"), call the data availability tool and return the count, date range, and available channels.
+9. For data availability:
+   - Use validate_data_availability() to check database state
+   - Return count, date range, and channels
+   - Use this to inform search scope
 
-9. For output formatting, always include jump URLs and message content in the results. If no results, reply with a clear message.
+10. For output formatting:
+    - Include jump URLs and full message content
+    - Group related messages by topic
+    - Include search context (timeframe, channel)
+    - For no results, explain search parameters used
 
-10. For invalid or missing fields, reply with a clear error message.
+11. Error handling:
+    - For invalid fields: Clear error messages
+    - For no results: Explain search parameters
+    - For API errors: Retry with fallback parameters
 """
 
 # ─── Agent Initialization ────────────────────────────────────────────────────────
@@ -181,13 +210,7 @@ def get_agent_answer(query: str) -> Any:
         else:
             return data["message"]
 
-    # Fallback/clarification for vague queries
-    lower_query = query.lower()
-    if not any(
-        kw in lower_query for kw in ["channel", "#", "time", "day", "week", "month", "year", "keyword", "messages", "summarize", "find", "search", "between", "from", "to", "in "]
-    ):
-        return "Which channel, timeframe, or keyword would you like to search or summarize? Please specify so I can help you."
-    
+    # Remove the fallback/clarification for vague queries since we now handle all queries
     try:
         result = agent.run(query)
         # Propagate empty list or dict directly

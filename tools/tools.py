@@ -20,6 +20,9 @@ import logging
 from typing import Callable, TypeVar, cast
 from sqlalchemy import func
 import re
+from langchain.chains.retrieval_qa import RetrievalQA
+from langchain.prompts import PromptTemplate
+from langchain.chat_models import ChatOpenAI
 
 # Setup logging
 logging.basicConfig(
@@ -90,29 +93,33 @@ def search_messages(
     author_name: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
-    Hybrid keyword + semantic search. Always returns a list of dicts with required metadata: author, timestamp, content, jump_url, channel_name, guild_id, channel_id, message_id.
-    Handles unknown channels gracefully. No summaries or paraphrasing.
+    Hybrid search combining FAISS vector similarity with keyword filtering.
+    Optimized for semantic search using text-embedding-3-small model.
+    
+    Args:
+        query (str): Natural language query for semantic search
+        k (int): Number of results to return (default: 5)
+        keyword (str): Optional exact keyword match
+        guild_id (int): Optional guild ID filter
+        channel_id (int): Optional channel ID filter
+        channel_name (str): Optional channel name filter
+        author_name (str): Optional author name filter
+        
+    Returns:
+        List of messages with full metadata including:
+        - author (username, display_name)
+        - timestamp (ISO format)
+        - content (full message text)
+        - jump_url (direct link)
+        - channel_name, guild_id, channel_id, message_id
     """
-    # Default query to empty string if not provided
-    if query is None:
-        query = ""
-    if not isinstance(query, str):
-        raise ValueError("Query must be a string.")
-
-    # Validate IDs
-    if guild_id is not None and not validate_guild_id(guild_id):
-        raise ValueError(f"Invalid guild ID format: {guild_id}")
-    if channel_id is not None and not validate_channel_id(channel_id):
-        raise ValueError(f"Invalid channel ID format: {channel_id}")
-    if channel_name is not None and not validate_channel_name(channel_name):
-        raise ValueError(f"Invalid channel name format: {channel_name}")
-
-    # Resolve channel_name → channel_id
-    if channel_name and not channel_id:
-        channel_id = resolve_channel_name(channel_name, guild_id)
-        if not channel_id:
-            return "Unknown channel"
-
+    # Initialize FAISS with OpenAI embeddings
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        openai_api_key=OPENAI_API_KEY
+    )
+    
+    # Get messages from database with filters
     session = SessionLocal()
     try:
         db_q = session.query(Message)
@@ -120,98 +127,79 @@ def search_messages(
             db_q = db_q.filter(Message.guild_id == guild_id)
         if channel_id:
             db_q = db_q.filter(Message.channel_id == channel_id)
-
-        # Fetch more candidates for post-filtering
+            
+        # Fetch candidates for vectorization
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
             return [{
                 "result": [],
-                "info": f"No messages found for the given parameters (guild_id={guild_id}, channel_id={channel_id}, channel_name={channel_name})"
+                "info": f"No messages found for the given parameters"
             }]
-
-        def keyword_full_word_match(text: str, word: str) -> bool:
-            # Match only if 'word' appears as a full word (case-insensitive)
-            return bool(re.search(rf'\\b{re.escape(word)}\\b', text, re.IGNORECASE))
-
-        filtered = []
-        # Hybrid search: both query and keyword must be present if both are given
-        if keyword and query:
-            for m in candidates:
-                if query.lower() in m.content.lower() and keyword_full_word_match(m.content, keyword):
-                    filtered.append(m)
-        elif keyword:
-            for m in candidates:
-                if keyword_full_word_match(m.content, keyword):
-                    filtered.append(m)
-        elif query:
-            for m in candidates:
-                if query.lower() in m.content.lower():
-                    filtered.append(m)
-        else:
-            filtered = candidates[:k]
-
-        # Author filtering in Python (after keyword/query filtering)
-        if author_name:
-            def author_matches(author: dict, author_name: str) -> bool:
-                if not author:
-                    return False
-                name = author.get("username", "") or ""
-                display = author.get("display_name", "") or ""
-                return author_name.lower() in name.lower() or author_name.lower() in display.lower()
-            filtered = [m for m in filtered if author_matches(m.author, author_name)]
-
-        # Always return a list of dicts with all required metadata, even if empty
-        formatted = []
-        for m in filtered[:k]:
-            formatted.append({
-                "author": m.author,
-                "timestamp": m.timestamp.isoformat() if m.timestamp else None,
-                "content": m.content,
-                "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
-                "channel_name": m.channel_name,
-                "guild_id": m.guild_id,
-                "channel_id": m.channel_id,
-                "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
+            
+        # Prepare texts for vectorization
+        texts = []
+        metadata = []
+        for msg in candidates:
+            # Combine message content with metadata for better semantic matching
+            text = f"{msg.content} - {msg.author.get('username', '')} - {msg.channel_name}"
+            texts.append(text)
+            metadata.append({
+                "message": msg,
+                "text": text
             })
-        if not formatted:
-            # Explicitly state what was searched for
-            if keyword and query:
-                return [{
-                    "result": [],
-                    "info": f"No messages found containing BOTH '{query}' and keyword '{keyword}' in channel '{channel_name or channel_id}'. Searched for both terms together.",
-                    "parameters": {
-                        "query": query,
-                        "keyword": keyword,
-                        "channel_name": channel_name,
-                        "channel_id": channel_id,
-                        "guild_id": guild_id
-                    }
-                }]
-            elif keyword:
-                return [{
-                    "result": [],
-                    "info": f"No messages found containing keyword '{keyword}' in channel '{channel_name or channel_id}'.",
-                    "parameters": {
-                        "keyword": keyword,
-                        "channel_name": channel_name,
-                        "channel_id": channel_id,
-                        "guild_id": guild_id
-                    }
-                }]
-            elif query:
-                # For semantic-only search, return empty list and info
-                return []
-            else:
-                return [{
-                    "result": [],
-                    "info": "No messages found for the given parameters.",
-                    "parameters": {
-                        "channel_name": channel_name,
-                        "channel_id": channel_id,
-                        "guild_id": guild_id
-                    }
-                }]
-        return formatted
+            
+        # Create FAISS index
+        vectorstore = FAISS.from_texts(
+            texts,
+            embeddings,
+            metadatas=metadata
+        )
+        
+        # Perform semantic search
+        if query:
+            docs = vectorstore.similarity_search(
+                query,
+                k=k * 2  # Fetch more for post-filtering
+            )
+        else:
+            docs = candidates[:k]
+            
+        # Post-process results
+        results = []
+        for doc in docs:
+            msg = doc.metadata["message"]
+            
+            # Apply keyword filter if specified
+            if keyword and keyword.lower() not in msg.content.lower():
+                continue
+                
+            # Apply author filter if specified
+            if author_name:
+                author = msg.author
+                if not (author_name.lower() in author.get("username", "").lower() or 
+                       author_name.lower() in author.get("display_name", "").lower()):
+                    continue
+                    
+            # Format result
+            results.append({
+                "author": msg.author,
+                "timestamp": msg.timestamp.isoformat() if msg.timestamp else None,
+                "content": msg.content,
+                "jump_url": build_jump_url(
+                    msg.guild_id,
+                    msg.channel_id,
+                    getattr(msg, 'message_id', getattr(msg, 'id', None))
+                ),
+                "channel_name": msg.channel_name,
+                "guild_id": msg.guild_id,
+                "channel_id": msg.channel_id,
+                "message_id": getattr(msg, 'message_id', getattr(msg, 'id', None))
+            })
+            
+            if len(results) >= k:
+                break
+                
+        return results
     finally:
         session.close()
 
@@ -283,103 +271,117 @@ def summarize_messages(
     as_json: bool = False
 ) -> Union[str, Dict[str, Any]]:
     """
-    Summarize all messages in [start_iso, end_iso].
-    Returns either a text summary or JSON, per `as_json`.
-    Strictly enforces error handling and output types.
+    Generate a summary of messages using LangChain's RetrievalQA chain.
+    Optimized for GPT-4 with FAISS vector store for semantic retrieval.
+    
+    Args:
+        start_iso (str): Start timestamp in ISO format
+        end_iso (str): End timestamp in ISO format
+        guild_id (int): Optional guild ID filter
+        channel_id (int): Optional channel ID filter
+        channel_name (str): Optional channel name filter
+        as_json (bool): Return JSON format if True
+        
+    Returns:
+        Summary text or JSON with messages and metadata
     """
-    # Debug logging
-    print(f"\nDEBUG: Query Parameters:")
-    print(f"Start ISO: {start_iso}")
-    print(f"End ISO: {end_iso}")
-    print(f"Guild ID: {guild_id}")
-    print(f"Channel ID: {channel_id}")
-    print(f"Channel Name: {channel_name}")
-
-    # Validate time inputs strictly, and return exact error string if end < start
-    try:
-        if isinstance(start_iso, str) and start_iso.endswith('Z'):
-            start_iso = start_iso.replace('Z', '+00:00')
-        if isinstance(end_iso, str) and end_iso.endswith('Z'):
-            end_iso = end_iso.replace('Z', '+00:00')
-        start = datetime.fromisoformat(start_iso)
-        end = datetime.fromisoformat(end_iso)
-        if end < start:
-            return "End time must be after start time"
-    except Exception as e:
-        return f"Invalid ISO datetime: {e}"
-
-    # Channel name resolution (do not proceed if channel does not exist)
-    if channel_name and not channel_id:
-        resolved_id = resolve_channel_name(channel_name, guild_id)
-        if not resolved_id:
-            return {
-                "summary": "",
-                "note": f"Channel '{channel_name}' not found",
-                "messages": []
-            } if as_json else f"Channel '{channel_name}' not found"
-        channel_id = resolved_id
-
+    # Initialize LangChain components
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        openai_api_key=OPENAI_API_KEY
+    )
+    
+    llm = ChatOpenAI(
+        model_name=GPT_MODEL,
+        temperature=0.0,
+        openai_api_key=OPENAI_API_KEY
+    )
+    
+    # Get messages from database
     session = SessionLocal()
     try:
         q = session.query(Message)
-        q = q.filter(Message.timestamp.between(start, end))
+        q = q.filter(Message.timestamp.between(start_iso, end_iso))
         if guild_id:
             q = q.filter(Message.guild_id == guild_id)
         if channel_id:
             q = q.filter(Message.channel_id == channel_id)
-        msgs = q.order_by(Message.timestamp).all()
+            
+        messages = q.order_by(Message.timestamp).all()
         
-        if not msgs:
+        if not messages:
             return {
                 "summary": "",
-                "note": f"No messages found in the specified timeframe ({start.isoformat()} to {end.isoformat()})",
+                "note": "No messages found in timeframe",
                 "messages": []
-            } if as_json else f"No messages found in the specified timeframe ({start.isoformat()} to {end.isoformat()})"
-
-        message_dicts = []
-        for m in msgs:
-            msg_dict = {
-                "author": {
-                    "username": m.author.get("username", "Unknown"),
-                    "display_name": m.author.get("display_name", ""),
-                    "id": m.author.get("id")
-                },
-                "timestamp": m.timestamp.isoformat(),
-                "content": m.content,
-                "jump_url": build_jump_url(m.guild_id, m.channel_id, getattr(m, 'message_id', getattr(m, 'id', None))),
-                "channel_name": m.channel_name,
-                "guild_id": m.guild_id,
-                "channel_id": m.channel_id,
-                "message_id": getattr(m, 'message_id', getattr(m, 'id', None))
+            } if as_json else "No messages found in timeframe"
+            
+        # Prepare texts for vectorization
+        texts = []
+        metadata = []
+        for msg in messages:
+            text = f"{msg.content} - {msg.author.get('username', '')} - {msg.channel_name}"
+            texts.append(text)
+            metadata.append({
+                "message": msg,
+                "text": text
+            })
+            
+        # Create FAISS index
+        vectorstore = FAISS.from_texts(
+            texts,
+            embeddings,
+            metadatas=metadata
+        )
+        
+        # Create QA chain
+        qa_chain = RetrievalQA.from_chain_type(
+            llm=llm,
+            chain_type="stuff",
+            retriever=vectorstore.as_retriever(
+                search_kwargs={"k": min(10, len(texts))}
+            ),
+            return_source_documents=True
+        )
+        
+        # Generate summary
+        prompt = PromptTemplate(
+            input_variables=["context"],
+            template="""Analyze and summarize the following Discord messages. 
+            Focus on key topics, discussions, and insights. Include important quotes:
+            
+            {context}
+            
+            Summary:"""
+        )
+        
+        result = qa_chain({"query": "Summarize these messages", "prompt": prompt})
+        
+        # Format output
+        if as_json:
+            return {
+                "summary": result["result"],
+                "note": f"Summary of {len(messages)} messages",
+                "messages": [
+                    {
+                        "author": msg.author,
+                        "timestamp": msg.timestamp.isoformat(),
+                        "content": msg.content,
+                        "jump_url": build_jump_url(
+                            msg.guild_id,
+                            msg.channel_id,
+                            getattr(msg, 'message_id', getattr(msg, 'id', None))
+                        ),
+                        "channel_name": msg.channel_name,
+                        "guild_id": msg.guild_id,
+                        "channel_id": msg.channel_id,
+                        "message_id": getattr(msg, 'message_id', getattr(msg, 'id', None))
+                    }
+                    for msg in messages
+                ]
             }
-            message_dicts.append(msg_dict)
-
-        # Create a meaningful summary
-        summary_text = f"Found {len(msgs)} messages in the specified timeframe.\n\n"
-        if channel_name:
-            summary_text += f"Channel: #{channel_name}\n"
-        summary_text += f"Time range: {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC\n\n"
-        
-        # Group messages by author for better organization
-        author_messages = {}
-        for msg in message_dicts:
-            author = msg["author"]["username"]
-            if author not in author_messages:
-                author_messages[author] = []
-            author_messages[author].append(msg)
-
-        # Add author summaries
-        for author, messages in author_messages.items():
-            summary_text += f"**{author}** posted {len(messages)} messages\n"
-
-        # Build result
-        result = {
-            "summary": summary_text,
-            "note": f"Summary of {len(msgs)} messages from {start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')}",
-            "messages": message_dicts if as_json else []
-        }
-        
-        return result if as_json else summary_text
+        else:
+            return result["result"]
     finally:
         session.close()
 
