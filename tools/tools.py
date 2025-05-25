@@ -20,7 +20,7 @@ import logging
 from typing import Callable, TypeVar, cast
 from sqlalchemy import func
 import re
-from langchain.chains.retrieval_qa import RetrievalQA
+from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 
