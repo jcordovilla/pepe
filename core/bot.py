@@ -8,9 +8,18 @@ from flask import Flask
 import threading
 import asyncio
 import logging
+import json
+from datetime import datetime
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('bot.log'),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
@@ -44,17 +53,38 @@ async def on_ready():
 @app_commands.describe(query="Your question for Pepe")
 async def pepe(interaction: discord.Interaction, query: str):
     try:
+        # Log the incoming query
+        log_data = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'user_id': interaction.user.id,
+            'username': str(interaction.user),
+            'query': query,
+            'channel_id': interaction.channel_id,
+            'guild_id': interaction.guild_id if interaction.guild else None
+        }
+        logger.info(f"Query received: {json.dumps(log_data)}")
+        
         # First, acknowledge the interaction immediately
         await interaction.response.defer(ephemeral=False)
         
         # Get the response from the agent
         response = get_agent_answer(query)
 
+        # Log the agent's response
+        response_log = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'query': query,
+            'response_type': type(response).__name__,
+            'response_length': len(str(response)) if isinstance(response, (str, list, dict)) else 0
+        }
+        logger.info(f"Agent response: {json.dumps(response_log)}")
+
         # Add header with user's question
         header = f"**Question:** {query}\n\n"
 
         if isinstance(response, list):
             if not response:
+                logger.info(f"Empty response for query: {query}")
                 await interaction.followup.send(header + "No messages found matching your query.")
                 return
 
@@ -71,7 +101,7 @@ async def pepe(interaction: discord.Interaction, query: str):
                 # Format the message with proper Discord markdown
                 msg_str = f"**{author_name}** ({timestamp}) in **#{channel_name}**\n{content}\n"
                 if jump_url:
-                    msg_str += f"[View message]({jump_url})\n"  # Use Discord's markdown link format with proper spacing
+                    msg_str += f"[View message]({jump_url})\n"
                 msg_str += "---\n"
 
                 if len(current_chunk) + len(msg_str) > 1900:
@@ -108,7 +138,7 @@ async def pepe(interaction: discord.Interaction, query: str):
                     jump_url = msg.get("jump_url", "")
                     formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
                     if jump_url:
-                        formatted_response += f"[View message]({jump_url})\n"  # Use Discord's markdown link format
+                        formatted_response += f"[View message]({jump_url})\n"
                     formatted_response += "---\n"
             await interaction.followup.send(formatted_response)
         else:
@@ -119,7 +149,7 @@ async def pepe(interaction: discord.Interaction, query: str):
     except discord.NotFound:
         logger.warning("Interaction not found - it may have timed out")
     except Exception as e:
-        logger.error(f"Error in pepe command: {str(e)}")
+        logger.error(f"Error in pepe command: {str(e)}", exc_info=True)
         try:
             await interaction.followup.send(f"An error occurred: {str(e)}")
         except:
