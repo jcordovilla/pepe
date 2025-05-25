@@ -16,9 +16,10 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('bot.log'),
+        logging.FileHandler('bot.log', mode='w', encoding='utf-8'),
         logging.StreamHandler()
-    ]
+    ],
+    force=True  # Force reconfiguration of the root logger
 )
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,8 @@ def health_check():
 # Set up bot with command prefix '!' (kept for potential future use)
 intents = discord.Intents.default()
 intents.message_content = True
+intents.guilds = True
+intents.messages = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
@@ -64,7 +67,7 @@ async def pepe(interaction: discord.Interaction, query: str):
         }
         logger.info(f"Query received: {json.dumps(log_data)}")
         
-        # First, acknowledge the interaction immediately
+        # Acknowledge the interaction first
         await interaction.response.defer(ephemeral=False)
         
         # Get the response from the agent
@@ -75,9 +78,10 @@ async def pepe(interaction: discord.Interaction, query: str):
             'timestamp': datetime.utcnow().isoformat(),
             'query': query,
             'response_type': type(response).__name__,
-            'response_length': len(str(response)) if isinstance(response, (str, list, dict)) else 0
+            'response_length': len(str(response)) if isinstance(response, (str, list, dict)) else 0,
+            'response_content': str(response) if isinstance(response, (str, dict)) else [str(msg) for msg in response] if isinstance(response, list) else None
         }
-        logger.info(f"Agent response: {json.dumps(response_log)}")
+        logger.info(f"Agent response: {json.dumps(response_log, ensure_ascii=False)}")
 
         # Add header with user's question
         header = f"**Question:** {query}\n\n"
@@ -110,6 +114,9 @@ async def pepe(interaction: discord.Interaction, query: str):
                     except discord.NotFound:
                         logger.warning("Interaction not found when sending chunk")
                         return
+                    except Exception as e:
+                        logger.error(f"Error sending chunk: {str(e)}", exc_info=True)
+                        return
                     current_chunk = msg_str
                 else:
                     current_chunk += msg_str
@@ -119,6 +126,8 @@ async def pepe(interaction: discord.Interaction, query: str):
                     await interaction.followup.send(current_chunk)
                 except discord.NotFound:
                     logger.warning("Interaction not found when sending final chunk")
+                except Exception as e:
+                    logger.error(f"Error sending final chunk: {str(e)}", exc_info=True)
 
         elif isinstance(response, dict):
             # Format dictionary response with header
@@ -140,11 +149,21 @@ async def pepe(interaction: discord.Interaction, query: str):
                     if jump_url:
                         formatted_response += f"[View message]({jump_url})\n"
                     formatted_response += "---\n"
-            await interaction.followup.send(formatted_response)
+            try:
+                await interaction.followup.send(formatted_response)
+            except discord.NotFound:
+                logger.warning("Interaction not found when sending dictionary response")
+            except Exception as e:
+                logger.error(f"Error sending dictionary response: {str(e)}", exc_info=True)
         else:
             # Format string response with header
             formatted_response = header + str(response)
-            await interaction.followup.send(formatted_response)
+            try:
+                await interaction.followup.send(formatted_response)
+            except discord.NotFound:
+                logger.warning("Interaction not found when sending string response")
+            except Exception as e:
+                logger.error(f"Error sending string response: {str(e)}", exc_info=True)
 
     except discord.NotFound:
         logger.warning("Interaction not found - it may have timed out")

@@ -1,0 +1,19 @@
+2025-05-25 15:57:28,558 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2025-05-25 15:57:28,559 - discord.client - INFO - logging in using static token
+2025-05-25 15:57:28,563 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.120:8080
+2025-05-25 15:57:28,563 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 15:57:29,436 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: eb0249e7ad43b6cf12fac7f9d37b74f0).
+2025-05-25 15:57:31,453 - __main__ - INFO - Pepe#4178 has connected to Discord!
+2025-05-25 15:57:31,703 - __main__ - INFO - Synced 1 command(s).
+2025-05-25 15:57:47,369 - __main__ - INFO - Query received: {"timestamp": "2025-05-25T13:57:47.369483", "user_id": 673901899837341736, "username": "julioverne74", "query": "summarise the messages in <#1353442520717066320> in the past week", "channel_id": 1361465528333369534, "guild_id": 1353058864810950737}
+2025-05-25 15:57:48,629 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-25 15:57:49,540 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-25 15:57:49,542 - __main__ - INFO - Agent response: {"timestamp": "2025-05-25T13:57:49.542218", "query": "summarise the messages in <#1353442520717066320> in the past week", "response_type": "str", "response_length": 178, "response_content": "There have been no messages posted in channel <#1353442520717066320> during the past week. If you need a summary for a different timeframe or another channel, please let me know!"}
+2025-05-25 15:58:35,108 - __main__ - INFO - Query received: {"timestamp": "2025-05-25T13:58:35.108524", "user_id": 1143203059820933251, "username": "boozeena_49785", "query": "make a summary of the messages sent in <#1371647370911154228> in the last week", "channel_id": 1361465528333369534, "guild_id": 1353058864810950737}
+2025-05-25 15:58:36,010 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-25 15:58:36,910 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-25 15:58:38,248 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-25 15:58:38,250 - __main__ - INFO - Agent response: {"timestamp": "2025-05-25T13:58:38.250442", "query": "make a summary of the messages sent in <#1371647370911154228> in the last week", "response_type": "str", "response_length": 273, "response_content": "In the last week, there were 2 messages sent in <#1371647370911154228>. The messages were posted by two users: boozeena_49785 and rodrigoreyesjara, with each user contributing one message. If you need more details or a summary of the content of these messages, let me know!"}
