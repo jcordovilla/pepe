@@ -6,7 +6,14 @@ from langchain_openai import ChatOpenAI
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
 
-from tools.tools import search_messages, summarize_messages, validate_data_availability
+from tools.tools import (
+    search_messages,
+    summarize_messages,
+    validate_data_availability,
+    extract_skill_terms,
+    get_channels,
+    resolve_channel_name
+)
 
 # ─── Env & LLM Setup ────────────────────────────────────────────────────────────
 
@@ -41,6 +48,21 @@ tools = [
         name="validate_data_availability",
         description="Check if the database has messages and return their count, available channels, and date range."
     ),
+    StructuredTool.from_function(
+        extract_skill_terms,
+        name="extract_skill_terms",
+        description="Extract skill-related terms from a query to enhance search capabilities. Useful for identifying technical skills, programming languages, or frameworks mentioned in queries."
+    ),
+    StructuredTool.from_function(
+        get_channels,
+        name="get_channels",
+        description="Get a list of all available channels with their IDs and message counts. Optionally filter by guild_id."
+    ),
+    StructuredTool.from_function(
+        resolve_channel_name,
+        name="resolve_channel_name",
+        description="Convert a channel name to its ID, optionally scoped to a specific guild. Useful for resolving human-readable channel names to their IDs."
+    ),
 ]
 
 # ─── System Prompt ──────────────────────────────────────────────────────────────
@@ -56,11 +78,20 @@ You are a specialized Discord data assistant. To handle any user request:
    - Use search_messages() to find specific messages
    - Include any parsed timestamps in your search parameters
 
-3. Always use function-calling; never answer directly without invoking these tools.
+3. For channel-related queries:
+   - Use get_channels() to list available channels
+   - Use resolve_channel_name() to convert channel names to IDs
+   - Always verify channel existence before searching
+
+4. For skill or technical queries:
+   - Use extract_skill_terms() to identify relevant skills
+   - Include extracted terms in search_messages() for better results
+
+5. Always use function-calling; never answer directly without invoking these tools.
    - For time-based queries, you MUST call parse_timeframe() first
    - Then use the returned timestamps with summarize_messages() or search_messages()
 
-4. For search results, ALWAYS return a list of messages with the following fields for each message:
+6. For search results, ALWAYS return a list of messages with the following fields for each message:
    - author (username and display_name if available)
    - timestamp (ISO format)
    - content (the actual message text)
@@ -68,13 +99,13 @@ You are a specialized Discord data assistant. To handle any user request:
    - channel_name, guild_id, channel_id, message_id
    Do NOT return only summaries or links—always include the actual message content and metadata.
 
-5. For channel name queries, resolve human-friendly names (e.g., "#general", "#dev") to channel IDs. If the channel is unknown, reply with a clear note (e.g., "Channel '#foo' not found.").
+7. For channel name queries, resolve human-friendly names (e.g., "#general", "#dev") to channel IDs. If the channel is unknown, reply with a clear note (e.g., "Channel '#foo' not found.").
 
-6. For data availability queries (e.g., "How many messages are in the database?"), call the data availability tool and return the count, date range, and available channels.
+8. For data availability queries (e.g., "How many messages are in the database?"), call the data availability tool and return the count, date range, and available channels.
 
-7. For output formatting, always include jump URLs and message content in the results. If no results, reply with a clear message.
+9. For output formatting, always include jump URLs and message content in the results. If no results, reply with a clear message.
 
-8. For invalid or missing fields, reply with a clear error message.
+10. For invalid or missing fields, reply with a clear error message.
 """
 
 # ─── Agent Initialization ────────────────────────────────────────────────────────

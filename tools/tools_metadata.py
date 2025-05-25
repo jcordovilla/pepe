@@ -36,6 +36,47 @@ TOOLS = [
             "required": ["start_iso", "end_iso"]
         }
     },
+    {
+        "name": "validate_data_availability",
+        "description": "Check if the database has messages and return their count, available channels, and date range.",
+        "parameters": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    {
+        "name": "extract_skill_terms",
+        "description": "Extract skill-related terms from a query to enhance search capabilities.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "The query to analyze for skill terms"}
+            },
+            "required": ["query"]
+        }
+    },
+    {
+        "name": "get_channels",
+        "description": "Get a list of all available channels with their IDs and message counts.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "guild_id": {"type": "integer", "description": "Optional guild/server ID to filter channels", "nullable": True}
+            }
+        }
+    },
+    {
+        "name": "resolve_channel_name",
+        "description": "Convert a channel name to its ID, optionally scoped to a specific guild.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "channel_name": {"type": "string", "description": "The channel name to resolve"},
+                "guild_id": {"type": "integer", "description": "Optional guild/server ID to scope the search", "nullable": True}
+            },
+            "required": ["channel_name"]
+        }
+    }
 ]
 
 # Deprecated or auxiliary tool definitions (commented out for tidying):
