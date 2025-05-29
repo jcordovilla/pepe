@@ -11,12 +11,21 @@ import logging
 import json
 from datetime import datetime
 
+# Create logs directory if it doesn't exist
+logs_dir = 'logs'
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
+
+# Generate log filename with timestamp
+timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+log_filename = os.path.join(logs_dir, f'bot_{timestamp}.log')
+
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('bot.log', mode='w', encoding='utf-8'),
+        logging.FileHandler(log_filename, mode='a', encoding='utf-8'),  # Changed to append mode
         logging.StreamHandler()
     ],
     force=True  # Force reconfiguration of the root logger
@@ -145,25 +154,45 @@ async def pepe(interaction: discord.Interaction, query: str):
                     timestamp = msg.get("timestamp", "")
                     content = msg.get("content", "")
                     jump_url = msg.get("jump_url", "")
-                    formatted_response += f"\n**{author}** ({timestamp}):\n{content}\n"
+                    msg_str = f"\n**{author}** ({timestamp}):\n{content}\n"
                     if jump_url:
-                        formatted_response += f"[View message]({jump_url})\n"
-                    formatted_response += "---\n"
-            try:
-                await interaction.followup.send(formatted_response)
-            except discord.NotFound:
-                logger.warning("Interaction not found when sending dictionary response")
-            except Exception as e:
-                logger.error(f"Error sending dictionary response: {str(e)}", exc_info=True)
+                        msg_str += f"[View message]({jump_url})\n"
+                    msg_str += "---\n"
+                    # Chunking for Discord 2000 char limit
+                    if len(formatted_response) + len(msg_str) > 1900:
+                        try:
+                            await interaction.followup.send(formatted_response)
+                        except discord.NotFound:
+                            logger.warning("Interaction not found when sending dictionary chunk")
+                            return
+                        except Exception as e:
+                            logger.error(f"Error sending dictionary chunk: {str(e)}", exc_info=True)
+                            return
+                        formatted_response = msg_str
+                    else:
+                        formatted_response += msg_str
+                if formatted_response:
+                    try:
+                        await interaction.followup.send(formatted_response)
+                    except discord.NotFound:
+                        logger.warning("Interaction not found when sending final dictionary chunk")
+                    except Exception as e:
+                        logger.error(f"Error sending final dictionary chunk: {str(e)}", exc_info=True)
         else:
             # Format string response with header
             formatted_response = header + str(response)
-            try:
-                await interaction.followup.send(formatted_response)
-            except discord.NotFound:
-                logger.warning("Interaction not found when sending string response")
-            except Exception as e:
-                logger.error(f"Error sending string response: {str(e)}", exc_info=True)
+            # Chunk if too long
+            while formatted_response:
+                chunk = formatted_response[:1900]
+                formatted_response = formatted_response[1900:]
+                try:
+                    await interaction.followup.send(chunk)
+                except discord.NotFound:
+                    logger.warning("Interaction not found when sending string response")
+                    break
+                except Exception as e:
+                    logger.error(f"Error sending string response: {str(e)}", exc_info=True)
+                    break
 
     except discord.NotFound:
         logger.warning("Interaction not found - it may have timed out")
@@ -189,4 +218,4 @@ if __name__ == "__main__":
         bot.run(DISCORD_TOKEN)
     except Exception as e:
         logger.error(f"Error running bot: {str(e)}")
-        raise 
+        raise

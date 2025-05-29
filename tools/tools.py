@@ -127,15 +127,12 @@ def search_messages(
             db_q = db_q.filter(Message.guild_id == guild_id)
         if channel_id:
             db_q = db_q.filter(Message.channel_id == channel_id)
-            
+
         # Fetch candidates for vectorization
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         if not candidates:
-            return [{
-                "result": [],
-                "info": f"No messages found for the given parameters"
-            }]
-            
+            return []
+
         # Prepare texts for vectorization
         texts = []
         metadata = []
@@ -163,12 +160,15 @@ def search_messages(
             )
         else:
             docs = candidates[:k]
-            
+
         # Post-process results
         results = []
         for doc in docs:
-            msg = doc.metadata["message"]
-            
+            # Get message from metadata
+            msg = doc.metadata.get("message")
+            if not msg:
+                continue
+                
             # Apply keyword filter if specified
             if keyword and keyword.lower() not in msg.content.lower():
                 continue
@@ -206,13 +206,36 @@ def search_messages(
 # Helper: resolve_channel_name
 @cache_with_timeout(timeout_seconds=300)  # Cache for 5 minutes
 
-def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> Optional[int]:
+def resolve_channel_name(*args, **kwargs) -> Optional[int]:
     """
     Given a human-friendly channel_name (e.g. "non-coders-learning")
     and an optional guild_id, return the corresponding channel_id
     from the database, or None if not found.
+    Accepts *args and **kwargs for compatibility with agent tool-calling.
+    Also handles Discord's channel mention format (<#channel_id>).
     """
-    if not validate_channel_name(channel_name):
+    # Extract channel_name and guild_id from args or kwargs
+    channel_name = None
+    guild_id = None
+    # Try kwargs first
+    if 'channel_name' in kwargs:
+        channel_name = kwargs['channel_name']
+    if 'guild_id' in kwargs:
+        guild_id = kwargs['guild_id']
+    # Fallback to positional args
+    if channel_name is None and args:
+        channel_name = args[0]
+    if guild_id is None and len(args) > 1:
+        guild_id = args[1]
+
+    # Handle Discord channel mention format (<#channel_id>)
+    if channel_name and channel_name.startswith('<#') and channel_name.endswith('>'):
+        try:
+            return int(channel_name[2:-1])
+        except ValueError:
+            return None
+
+    if not channel_name or not validate_channel_name(channel_name):
         return None
     if guild_id is not None and not validate_guild_id(guild_id):
         return None
@@ -225,7 +248,6 @@ def resolve_channel_name(channel_name: str, guild_id: Optional[int] = None) -> O
         if result:
             return result[0]
         else:
-            # Explicitly log or return None for unknown channel
             return None
     except Exception as e:
         return None
@@ -343,7 +365,7 @@ def summarize_messages(
             ),
             return_source_documents=True
         )
-        
+
         # Generate summary
         prompt = PromptTemplate(
             input_variables=["context"],
