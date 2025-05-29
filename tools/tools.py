@@ -95,24 +95,9 @@ def search_messages(
     """
     Hybrid search combining FAISS vector similarity with keyword filtering.
     Optimized for semantic search using text-embedding-3-small model.
-    
-    Args:
-        query (str): Natural language query for semantic search
-        k (int): Number of results to return (default: 5)
-        keyword (str): Optional exact keyword match
-        guild_id (int): Optional guild ID filter
-        channel_id (int): Optional channel ID filter
-        channel_name (str): Optional channel name filter
-        author_name (str): Optional author name filter
-        
-    Returns:
-        List of messages with full metadata including:
-        - author (username, display_name)
-        - timestamp (ISO format)
-        - content (full message text)
-        - jump_url (direct link)
-        - channel_name, guild_id, channel_id, message_id
     """
+    logger.info(f"Searching messages with params: query={query}, k={k}, channel_id={channel_id}, channel_name={channel_name}")
+    
     # Initialize FAISS with OpenAI embeddings
     embeddings = OpenAIEmbeddings(
         model="text-embedding-3-small",
@@ -127,9 +112,23 @@ def search_messages(
             db_q = db_q.filter(Message.guild_id == guild_id)
         if channel_id:
             db_q = db_q.filter(Message.channel_id == channel_id)
+        elif channel_name:
+            # Try to find channel by name
+            channel_matches = session.query(Message.channel_id)\
+                .filter(Message.channel_name.ilike(f"%{channel_name}%"))\
+                .distinct()\
+                .all()
+            if channel_matches:
+                channel_ids = [match[0] for match in channel_matches]
+                logger.info(f"Found channel IDs for name '{channel_name}': {channel_ids}")
+                db_q = db_q.filter(Message.channel_id.in_(channel_ids))
+            else:
+                logger.warning(f"No channels found matching name: {channel_name}")
 
         # Fetch candidates for vectorization
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
+        logger.info(f"Found {len(candidates)} candidate messages")
+        
         if not candidates:
             return []
 
@@ -167,7 +166,8 @@ def search_messages(
             # Get message from metadata
             try:
                 msg = doc.metadata["message"]
-            except (KeyError, TypeError, AttributeError):
+            except (KeyError, TypeError, AttributeError) as e:
+                logger.error(f"Error accessing metadata: {str(e)}")
                 continue
                 
             if not msg:
@@ -203,7 +203,11 @@ def search_messages(
             if len(results) >= k:
                 break
                 
+        logger.info(f"Returning {len(results)} results")
         return results
+    except Exception as e:
+        logger.error(f"Error in search_messages: {str(e)}", exc_info=True)
+        return []
     finally:
         session.close()
 
