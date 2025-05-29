@@ -165,7 +165,11 @@ def search_messages(
         results = []
         for doc in docs:
             # Get message from metadata
-            msg = doc.metadata.get("message")
+            try:
+                msg = doc.metadata["message"]
+            except (KeyError, TypeError, AttributeError):
+                continue
+                
             if not msg:
                 continue
                 
