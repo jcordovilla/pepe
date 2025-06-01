@@ -1,0 +1,802 @@
+"""
+Persistent Vector Store using ChromaDB
+
+Replaces the real-time FAISS indexing with a persistent, scalable vector store.
+"""
+
+import os
+import logging
+from typing import Dict, List, Any, Optional, Union
+import asyncio
+from datetime import datetime
+import json
+
+import chromadb
+from chromadb.config import Settings
+from chromadb.utils import embedding_functions
+import numpy as np
+
+from ..cache.smart_cache import SmartCache
+
+logger = logging.getLogger(__name__)
+
+
+class PersistentVectorStore:
+    """
+    ChromaDB-based persistent vector store for Discord messages.
+    
+    Provides semantic search, keyword search, and filtering capabilities
+    with persistent storage and optimized performance.
+    """
+    
+    def __init__(self, config: Dict[str, Any]):
+        self.config = config
+        
+        # Configuration
+        self.collection_name = config.get("collection_name", "discord_messages")
+        self.persist_directory = config.get("persist_directory", "./data/chromadb")
+        self.embedding_model = config.get("embedding_model", "text-embedding-3-small")
+        self.chunk_size = config.get("chunk_size", 1000)
+        self.batch_size = config.get("batch_size", 100)
+        
+        # Performance tracking - Initialize before ChromaDB
+        self.stats: Dict[str, Any] = {
+            "total_documents": 0,
+            "total_searches": 0,
+            "cache_hits": 0,
+            "cache_misses": 0,
+            "index_updates": 0
+        }
+        
+        # Initialize ChromaDB
+        self._init_chromadb()
+        
+        # Initialize cache
+        self.cache = SmartCache(config.get("cache", {}))
+        
+        logger.info(f"PersistentVectorStore initialized with collection: {self.collection_name}")
+    
+    def _init_chromadb(self):
+        """Initialize ChromaDB client and collection."""
+        try:
+            # Ensure persist directory exists
+            os.makedirs(self.persist_directory, exist_ok=True)
+            
+            # Initialize ChromaDB client with persistence
+            self.client = chromadb.PersistentClient(
+                path=self.persist_directory,
+                settings=Settings(
+                    anonymized_telemetry=False,
+                    allow_reset=True
+                )
+            )
+            
+            # Initialize embedding function
+            self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(
+                api_key=os.getenv("OPENAI_API_KEY"),
+                model_name=self.embedding_model
+            )
+            
+            # Get or create collection
+            try:
+                self.collection = self.client.get_collection(
+                    name=self.collection_name,
+                    embedding_function=self.embedding_function
+                )
+                logger.info(f"Loaded existing collection: {self.collection_name}")
+            except Exception:
+                self.collection = self.client.create_collection(
+                    name=self.collection_name,
+                    embedding_function=self.embedding_function,
+                    metadata={"description": "Discord messages vector store"}
+                )
+                logger.info(f"Created new collection: {self.collection_name}")
+            
+            # Update stats
+            if self.collection:
+                self.stats["total_documents"] = self.collection.count()
+            else:
+                logger.warning("Collection not initialized, stats will be incomplete")
+            
+        except Exception as e:
+            logger.error(f"Error initializing ChromaDB: {e}")
+            raise
+    
+    def _ensure_collection(self) -> bool:
+        """Ensure collection is available for operations"""
+        if self.collection is None:
+            logger.error("ChromaDB collection not initialized")
+            return False
+        return True
+    
+    async def add_messages(self, messages: List[Dict[str, Any]]) -> bool:
+        """
+        Add or update messages in the vector store.
+        
+        Args:
+            messages: List of message dictionaries
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        if not self._ensure_collection():
+            return False
+            
+        try:
+            if not messages:
+                return True
+            
+            # Prepare documents for insertion
+            documents = []
+            metadatas = []
+            ids = []
+            
+            for msg in messages:
+                # Create document text
+                content = msg.get("content", "").strip()
+                if not content:
+                    continue
+                
+                # Create unique ID
+                message_id = str(msg.get("message_id", ""))
+                if not message_id:
+                    continue
+                
+                # Prepare metadata
+                metadata = {
+                    "message_id": message_id,
+                    "channel_id": str(msg.get("channel_id", "")),
+                    "channel_name": msg.get("channel_name", ""),
+                    "guild_id": str(msg.get("guild_id", "")),
+                    "author_id": str(msg.get("author", {}).get("id", "")),
+                    "author_username": msg.get("author", {}).get("username", ""),
+                    "timestamp": msg.get("timestamp", ""),
+                    "jump_url": msg.get("jump_url", ""),
+                    "content_length": len(content),
+                    "indexed_at": datetime.utcnow().isoformat()
+                }
+                
+                documents.append(content)
+                metadatas.append(metadata)
+                ids.append(message_id)
+            
+            if not documents:
+                logger.warning("No valid documents to add")
+                return True
+            
+            # Add to collection in batches
+            for i in range(0, len(documents), self.batch_size):
+                batch_docs = documents[i:i + self.batch_size]
+                batch_metas = metadatas[i:i + self.batch_size]
+                batch_ids = ids[i:i + self.batch_size]
+                
+                try:
+                    self.collection.upsert(
+                        documents=batch_docs,
+                        metadatas=batch_metas,
+                        ids=batch_ids
+                    )
+                except Exception as e:
+                    logger.error(f"Error adding batch {i//self.batch_size + 1}: {e}")
+                    continue
+            
+            # Update stats
+            self.stats["total_documents"] = self.collection.count()
+            self.stats["index_updates"] += 1
+            
+            logger.info(f"Added {len(documents)} messages to vector store")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error adding messages to vector store: {e}")
+            return False
+    
+    async def similarity_search(
+        self,
+        query: str,
+        k: int = 10,
+        filters: Optional[Dict[str, Any]] = None,
+        min_score: float = 0.0
+    ) -> List[Dict[str, Any]]:
+        """
+        Perform semantic similarity search.
+        
+        Args:
+            query: Search query
+            k: Number of results to return
+            filters: Optional metadata filters
+            min_score: Minimum similarity score
+            
+        Returns:
+            List of search results with metadata
+        """
+        try:
+            # Check cache first
+            cache_key = f"similarity:{hash(query)}:{k}:{hash(str(filters))}"
+            cached_results = await self.cache.get(cache_key)
+            
+            if cached_results:
+                self.stats["cache_hits"] += 1
+                return cached_results
+            
+            # Build where clause from filters
+            where_clause = self._build_where_clause(filters) if filters else None
+            
+            # Perform similarity search
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=k,
+                where=where_clause,
+                include=["documents", "metadatas", "distances"]
+            )
+            
+            # Process results
+            processed_results = self._process_search_results(results, min_score)
+            
+            # Cache results
+            await self.cache.set(cache_key, processed_results, ttl=1800)  # 30 min TTL
+            
+            self.stats["total_searches"] += 1
+            logger.info(f"Similarity search found {len(processed_results)} results")
+            
+            return processed_results
+            
+        except Exception as e:
+            logger.error(f"Error in similarity search: {e}")
+            return []
+    
+    async def keyword_search(
+        self,
+        keywords: List[str],
+        k: int = 10,
+        filters: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Perform keyword-based search.
+        
+        Args:
+            keywords: List of keywords to search
+            k: Number of results to return
+            filters: Optional metadata filters
+            
+        Returns:
+            List of search results
+        """
+        try:
+            # Check cache
+            cache_key = f"keyword:{hash(str(keywords))}:{k}:{hash(str(filters))}"
+            cached_results = await self.cache.get(cache_key)
+            
+            if cached_results:
+                self.stats["cache_hits"] += 1
+                return cached_results
+            
+            # Build where clause
+            where_clause = self._build_where_clause(filters) if filters else None
+            
+            # For keyword search, we'll use a simple text matching approach
+            # This is a limitation of ChromaDB - it doesn't have built-in keyword search
+            # We'll use similarity search with the keywords joined
+            keyword_query = " ".join(keywords)
+            
+            results = self.collection.query(
+                query_texts=[keyword_query],
+                n_results=k * 2,  # Get more results to filter
+                where=where_clause,
+                include=["documents", "metadatas", "distances"]
+            )
+            
+            # Filter results that actually contain the keywords
+            filtered_results = self._filter_by_keywords(results, keywords)
+            
+            # Limit to requested number
+            filtered_results = filtered_results[:k]
+            
+            # Cache results
+            await self.cache.set(cache_key, filtered_results, ttl=1800)
+            
+            self.stats["total_searches"] += 1
+            logger.info(f"Keyword search found {len(filtered_results)} results")
+            
+            return filtered_results
+            
+        except Exception as e:
+            logger.error(f"Error in keyword search: {e}")
+            return []
+    
+    async def filter_search(
+        self,
+        filters: Dict[str, Any],
+        k: int = 10,
+        sort_by: str = "timestamp"
+    ) -> List[Dict[str, Any]]:
+        """
+        Search messages using only filters (no text query).
+        
+        Args:
+            filters: Metadata filters
+            k: Number of results to return
+            sort_by: Field to sort by
+            
+        Returns:
+            List of filtered results
+        """
+        try:
+            # Check cache
+            cache_key = f"filter:{hash(str(filters))}:{k}:{sort_by}"
+            cached_results = await self.cache.get(cache_key)
+            
+            if cached_results:
+                self.stats["cache_hits"] += 1
+                return cached_results
+            
+            # Build where clause
+            where_clause = self._build_where_clause(filters) if filters else None
+            
+            # Get all matching documents (ChromaDB doesn't support sorting directly)
+            # We'll retrieve more than needed and sort in Python
+            results = self.collection.get(
+                where=where_clause,
+                limit=k * 5,  # Get more to allow for sorting
+                include=["documents", "metadatas"]
+            )
+            
+            # Process and sort results
+            processed_results = []
+            
+            if results and results.get("documents"):
+                documents = results["documents"]
+                metadatas = results["metadatas"]
+                
+                for i, doc in enumerate(documents):
+                    metadata = metadatas[i] if i < len(metadatas) else {}
+                    
+                    result = {
+                        "content": doc,
+                        "score": 1.0,  # No similarity score for filter-only search
+                        **metadata
+                    }
+                    
+                    processed_results.append(result)
+                
+                # Sort results
+                if sort_by in ["timestamp", "indexed_at"]:
+                    processed_results.sort(
+                        key=lambda x: x.get(sort_by, ""),
+                        reverse=True
+                    )
+                elif sort_by == "content_length":
+                    processed_results.sort(
+                        key=lambda x: x.get(sort_by, 0),
+                        reverse=True
+                    )
+                
+                # Limit to requested number
+                processed_results = processed_results[:k]
+            
+            # Cache results
+            await self.cache.set(cache_key, processed_results, ttl=1800)
+            
+            self.stats["total_searches"] += 1
+            logger.info(f"Filter search found {len(processed_results)} results")
+            
+            return processed_results
+            
+        except Exception as e:
+            logger.error(f"Error in filter search: {e}")
+            return []
+    
+    async def delete_messages(self, message_ids: List[str]) -> bool:
+        """
+        Delete messages from the vector store.
+        
+        Args:
+            message_ids: List of message IDs to delete
+            
+        Returns:
+            True if successful
+        """
+        try:
+            if not message_ids:
+                return True
+            
+            # Delete in batches
+            for i in range(0, len(message_ids), self.batch_size):
+                batch_ids = message_ids[i:i + self.batch_size]
+                
+                try:
+                    self.collection.delete(ids=batch_ids)
+                except Exception as e:
+                    logger.error(f"Error deleting batch {i//self.batch_size + 1}: {e}")
+                    continue
+            
+            # Update stats
+            self.stats["total_documents"] = self.collection.count()
+            
+            logger.info(f"Deleted {len(message_ids)} messages from vector store")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error deleting messages: {e}")
+            return False
+    
+    async def update_message(self, message_id: str, updated_data: Dict[str, Any]) -> bool:
+        """
+        Update a single message in the vector store.
+        
+        Args:
+            message_id: ID of message to update
+            updated_data: Updated message data
+            
+        Returns:
+            True if successful
+        """
+        try:
+            # Prepare updated document
+            content = updated_data.get("content", "").strip()
+            if not content:
+                logger.warning(f"No content provided for message {message_id}")
+                return False
+            
+            # Prepare metadata
+            metadata = {
+                "message_id": message_id,
+                "channel_id": str(updated_data.get("channel_id", "")),
+                "channel_name": updated_data.get("channel_name", ""),
+                "guild_id": str(updated_data.get("guild_id", "")),
+                "author_id": str(updated_data.get("author", {}).get("id", "")),
+                "author_username": updated_data.get("author", {}).get("username", ""),
+                "timestamp": updated_data.get("timestamp", ""),
+                "jump_url": updated_data.get("jump_url", ""),
+                "content_length": len(content),
+                "indexed_at": datetime.utcnow().isoformat(),
+                "updated_at": datetime.utcnow().isoformat()
+            }
+            
+            # Update using upsert
+            self.collection.upsert(
+                documents=[content],
+                metadatas=[metadata],
+                ids=[message_id]
+            )
+            
+            logger.info(f"Updated message {message_id} in vector store")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error updating message {message_id}: {e}")
+            return False
+    
+    def _build_where_clause(self, filters: Dict[str, Any]) -> Dict[str, Any]:
+        """Build ChromaDB where clause from filters."""
+        where_clause = {}
+        
+        for key, value in filters.items():
+            if isinstance(value, dict):
+                # Handle operators like $in, $gte, $lte
+                for op, op_value in value.items():
+                    if op == "$in" and isinstance(op_value, list):
+                        where_clause[key] = {"$in": op_value}
+                    elif op == "$gte":
+                        where_clause[key] = {"$gte": op_value}
+                    elif op == "$lte":
+                        where_clause[key] = {"$lte": op_value}
+                    elif op == "$ne":
+                        where_clause[key] = {"$ne": op_value}
+            else:
+                # Direct equality
+                where_clause[key] = {"$eq": value}
+        
+        return where_clause
+    
+    def _process_search_results(
+        self,
+        results: Dict[str, Any],
+        min_score: float = 0.0
+    ) -> List[Dict[str, Any]]:
+        """Process raw ChromaDB search results."""
+        processed = []
+        
+        if not results or not results.get("documents"):
+            return processed
+        
+        documents = results["documents"][0] if results["documents"] else []
+        metadatas = results["metadatas"][0] if results["metadatas"] else []
+        distances = results["distances"][0] if results["distances"] else []
+        
+        for i, doc in enumerate(documents):
+            # Convert distance to similarity score (ChromaDB returns distances)
+            distance = distances[i] if i < len(distances) else 1.0
+            score = max(0, 1 - distance)  # Convert distance to similarity
+            
+            if score < min_score:
+                continue
+            
+            metadata = metadatas[i] if i < len(metadatas) else {}
+            
+            result = {
+                "content": doc,
+                "score": score,
+                **metadata
+            }
+            
+            processed.append(result)
+        
+        return processed
+    
+    def _filter_by_keywords(
+        self,
+        results: Dict[str, Any],
+        keywords: List[str]
+    ) -> List[Dict[str, Any]]:
+        """Filter search results to only include those containing keywords."""
+        processed = self._process_search_results(results)
+        filtered = []
+        
+        for result in processed:
+            content = result.get("content", "").lower()
+            
+            # Check if any keyword is present
+            if any(keyword.lower() in content for keyword in keywords):
+                # Calculate keyword score
+                keyword_matches = sum(1 for kw in keywords if kw.lower() in content)
+                keyword_score = keyword_matches / len(keywords)
+                
+                # Combine with similarity score
+                result["keyword_score"] = keyword_score
+                result["combined_score"] = (result["score"] * 0.6) + (keyword_score * 0.4)
+                
+                filtered.append(result)
+        
+        # Sort by combined score
+        filtered.sort(key=lambda x: x.get("combined_score", 0), reverse=True)
+        
+        return filtered
+    
+    async def get_collection_stats(self) -> Dict[str, Any]:
+        """
+        Get statistics about the vector store collection.
+        
+        Returns:
+            Dictionary with collection statistics
+        """
+        try:
+            # Get basic count
+            total_count = self.collection.count()
+            
+            # Get sample of documents to analyze
+            sample_results = self.collection.get(
+                limit=min(1000, total_count),
+                include=["metadatas"]
+            )
+            
+            stats = {
+                "total_documents": total_count,
+                "collection_name": self.collection_name,
+                "embedding_model": self.embedding_model,
+                "last_updated": datetime.utcnow().isoformat()
+            }
+            
+            # Analyze metadata if we have documents
+            if sample_results and sample_results.get("metadatas"):
+                metadatas = sample_results["metadatas"]
+                
+                # Count by channel
+                channels = {}
+                guilds = {}
+                authors = {}
+                content_lengths = []
+                timestamps = []
+                
+                for metadata in metadatas:
+                    # Channel analysis
+                    channel_id = metadata.get("channel_id", "unknown")
+                    channel_name = metadata.get("channel_name", "Unknown")
+                    channels[channel_id] = {
+                        "name": channel_name,
+                        "count": channels.get(channel_id, {}).get("count", 0) + 1
+                    }
+                    
+                    # Guild analysis
+                    guild_id = metadata.get("guild_id", "unknown")
+                    guilds[guild_id] = guilds.get(guild_id, 0) + 1
+                    
+                    # Author analysis
+                    author_id = metadata.get("author_id", "unknown")
+                    author_username = metadata.get("author_username", "Unknown")
+                    authors[author_id] = {
+                        "username": author_username,
+                        "count": authors.get(author_id, {}).get("count", 0) + 1
+                    }
+                    
+                    # Content length analysis
+                    content_length = metadata.get("content_length", 0)
+                    if isinstance(content_length, (int, float)):
+                        content_lengths.append(content_length)
+                    
+                    # Timestamp analysis
+                    timestamp = metadata.get("timestamp")
+                    if timestamp:
+                        timestamps.append(timestamp)
+                
+                # Calculate statistics
+                if content_lengths:
+                    stats["content_stats"] = {
+                        "avg_length": sum(content_lengths) / len(content_lengths),
+                        "min_length": min(content_lengths),
+                        "max_length": max(content_lengths),
+                        "total_characters": sum(content_lengths)
+                    }
+                
+                # Top channels
+                stats["top_channels"] = sorted(
+                    [{"id": k, **v} for k, v in channels.items()],
+                    key=lambda x: x["count"],
+                    reverse=True
+                )[:10]
+                
+                # Top authors
+                stats["top_authors"] = sorted(
+                    [{"id": k, **v} for k, v in authors.items()],
+                    key=lambda x: x["count"],
+                    reverse=True
+                )[:10]
+                
+                # Guild distribution
+                stats["guild_distribution"] = dict(sorted(
+                    guilds.items(),
+                    key=lambda x: x[1],
+                    reverse=True
+                )[:10])
+                
+                # Date range
+                if timestamps:
+                    sorted_timestamps = sorted(timestamps)
+                    stats["date_range"] = {
+                        "earliest": sorted_timestamps[0],
+                        "latest": sorted_timestamps[-1]
+                    }
+            
+            # Add performance stats
+            stats["performance_stats"] = self.stats.copy()
+            
+            return stats
+            
+        except Exception as e:
+            logger.error(f"Error getting collection stats: {e}")
+            return {
+                "total_documents": 0,
+                "collection_name": self.collection_name,
+                "error": str(e)
+            }
+    
+    async def health_check(self) -> Dict[str, Any]:
+        """
+        Perform health check on the vector store.
+        
+        Returns:
+            Health status information
+        """
+        health = {
+            "status": "healthy",
+            "timestamp": datetime.utcnow().isoformat(),
+            "checks": {}
+        }
+        
+        try:
+            # Check ChromaDB connection
+            try:
+                count = self.collection.count()
+                health["checks"]["chromadb"] = {
+                    "status": "healthy",
+                    "document_count": count
+                }
+            except Exception as e:
+                health["checks"]["chromadb"] = {
+                    "status": "unhealthy",
+                    "error": str(e)
+                }
+                health["status"] = "unhealthy"
+            
+            # Check cache system
+            try:
+                test_key = "health_check_test"
+                await self.cache.set(test_key, "test_value", ttl=60)
+                cached_value = await self.cache.get(test_key)
+                await self.cache.delete(test_key)
+                
+                if cached_value == "test_value":
+                    health["checks"]["cache"] = {"status": "healthy"}
+                else:
+                    health["checks"]["cache"] = {
+                        "status": "degraded",
+                        "message": "Cache not working properly"
+                    }
+            except Exception as e:
+                health["checks"]["cache"] = {
+                    "status": "unhealthy",
+                    "error": str(e)
+                }
+            
+            # Check disk space
+            try:
+                import shutil
+                disk_usage = shutil.disk_usage(self.persist_directory)
+                free_space_gb = disk_usage.free / (1024**3)
+                
+                if free_space_gb > 1.0:  # More than 1GB free
+                    health["checks"]["disk_space"] = {
+                        "status": "healthy",
+                        "free_space_gb": round(free_space_gb, 2)
+                    }
+                else:
+                    health["checks"]["disk_space"] = {
+                        "status": "warning",
+                        "free_space_gb": round(free_space_gb, 2),
+                        "message": "Low disk space"
+                    }
+                    if health["status"] == "healthy":
+                        health["status"] = "degraded"
+                        
+            except Exception as e:
+                health["checks"]["disk_space"] = {
+                    "status": "unknown",
+                    "error": str(e)
+                }
+            
+            return health
+            
+        except Exception as e:
+            logger.error(f"Error during health check: {e}")
+            return {
+                "status": "unhealthy",
+                "timestamp": datetime.utcnow().isoformat(),
+                "error": str(e)
+            }
+    
+    async def optimize(self) -> bool:
+        """
+        Optimize the vector store performance.
+        
+        Returns:
+            True if optimization successful
+        """
+        try:
+            logger.info("Starting vector store optimization...")
+            
+            # Clean up cache
+            cleaned_entries = await self.cache.cleanup_expired()
+            logger.info(f"Cleaned up {cleaned_entries} expired cache entries")
+            
+            # ChromaDB doesn't have explicit optimization commands
+            # But we can perform some maintenance tasks
+            
+            # Get current collection stats
+            current_count = self.collection.count()
+            logger.info(f"Current collection has {current_count} documents")
+            
+            # Update internal stats
+            self.stats["total_documents"] = current_count
+            
+            logger.info("Vector store optimization completed")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error during optimization: {e}")
+            return False
+    
+    async def close(self):
+        """Close the vector store and cleanup resources."""
+        try:
+            # Close cache
+            await self.cache.close()
+            
+            # ChromaDB client doesn't need explicit closing
+            # but we can clear references
+            self.collection = None
+            self.client = None
+            
+            logger.info("PersistentVectorStore closed successfully")
+            
+        except Exception as e:
+            logger.error(f"Error closing vector store: {e}")

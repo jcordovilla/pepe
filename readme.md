@@ -1,54 +1,203 @@
-# PEPE - Predictive Engine for Prompt Experimentation
-# Discord Bot with RAG and Vector Search
-# Version: beta-03
+# 🤖 Agentic Discord Bot
+## Advanced Multi-Agent RAG System for Discord Intelligence
+### Version: 2.0.0 - Production Ready
 
-This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG), vector search (using FAISS), advanced message storage, resource detection, and classification for enhanced chat interactions and AI-powered features.
-
----
-
-## Key Features
-
-- **Search & Summarize:** Query and summarize Discord messages using LLMs and vector search.
-- **Resource Search:** Find and display links, files, and other resources shared in messages.
-- **Classify:** Automatically classify messages or resources by type, topic, or intent.
-- **Streamlit UI:** User-friendly web interface for searching, filtering, and copying results.
-- **Discord Bot:** Interact with users in Discord channels, answer queries, detect resources, and classify content.
-- **Batch Tools:** Scripts for fetching, migrating, and batch-processing messages and resources.
+An intelligent Discord bot powered by a sophisticated **multi-agent architecture** using LangGraph, ChromaDB vector storage, and specialized AI agents for enhanced conversational intelligence.
 
 ---
 
-## Project Structure
+## 🎯 **Key Features**
+
+### 🤖 **Multi-Agent Architecture**
+- **Planning Agent**: Query analysis and task decomposition
+- **Search Agent**: Vector similarity search and message retrieval
+- **Analysis Agent**: Content analysis and response synthesis
+- **Orchestrator**: LangGraph-powered workflow coordination
+
+### 💾 **Advanced Data Management**
+- **Persistent Vector Store**: ChromaDB with OpenAI embeddings
+- **Conversation Memory**: SQLite-backed history tracking
+- **Smart Caching**: Redis-powered multi-level caching
+- **Real-time Processing**: Async I/O operations throughout
+
+### 🔧 **Production Features**
+- **Error Handling**: Comprehensive error tracking and recovery
+- **Performance Monitoring**: Built-in metrics and analytics
+- **Scalable Design**: Modular architecture for easy extension
+- **Environment Management**: Full Docker and environment support
+
+---
+
+## 🚀 **Quick Start**
+
+### 1. **Setup Environment**
+```bash
+# Clone and setup
+git clone <repository>
+cd discord-bot-v2
+
+# Setup project
+./launch.sh setup
 ```
-mkdocs.yml                # MkDocs documentation config
-readme.md                 # Project documentation (this file)
-requirements.txt          # Python dependencies
 
-core/                     # Core logic and orchestration
-    __init__.py
-    agent.py              # AI agent orchestration and Discord bot logic
-    app.py                # Streamlit UI / bot runner
-    classifier.py         # Message/resource classification logic
-    resource_detector.py  # Resource detection, enrichment, normalization, deduplication
-    rag_engine.py         # Retrieval-Augmented Generation engine (FAISS, OpenAI)
-    repo_sync.py          # Export resources to JSON/Markdown
-    batch_detect.py       # Batch resource detection and enrichment
-    fetch_messages.py     # Fetch and store Discord messages
-    bot.py                # Discord bot entrypoint
-    embed_store.py        # Embedding and vector store logic
+### 2. **Configure Environment Variables**
+Create a `.env` file:
+```env
+DISCORD_TOKEN=your_discord_bot_token
+OPENAI_API_KEY=your_openai_api_key
+GUILD_ID=your_discord_guild_id
+```
 
+### 3. **Start the Bot**
+```bash
+# Start Discord bot
+./launch.sh bot
 
-tools/                    # Custom tools and scripts
-    __init__.py
-    tools.py              # Tool registry and main tool functions
-    tools_metadata.py     # Tool metadata for agent/LLM tool-calling
-    fetch_messages.py     # (Legacy/alt) Fetch Discord messages
-    migrate_messages.py   # Migrate message data
-    batch_detect.py       # (Legacy/alt) Batch resource detection
-    time_parser.py        # Natural language time parsing
-    clean_resources_db.py # Clean, deduplicate, and re-enrich resources in DB
-    dedup_resources.py    # Deduplicate JSON resources by URL/title (CLI)
-    fix_resource_titles.py# AI-based title/description enrichment for resources
-    full_pipeline.py      # Run full pipeline (fetch, embed, detect, export)
+# Or start web interface
+./launch.sh streamlit
+```
+
+---
+
+## 🏗️ **Architecture Overview**
+
+```
+🤖 Agentic Framework
+├── 🎛️ Agent Orchestrator (LangGraph)
+│   ├── 🎯 Planning Agent
+│   ├── 🔍 Search Agent
+│   └── 📈 Analysis Agent
+├── 💾 Data Layer
+│   ├── 🔍 Vector Store (ChromaDB)
+│   ├── 🧠 Conversation Memory (SQLite)
+│   └── ⚡ Smart Cache (Redis)
+├── 🌐 Interfaces
+│   ├── 💬 Discord Interface
+│   ├── 🌊 Streamlit Web UI
+│   └── 🔌 Agent API
+└── 🔧 Core Systems
+    ├── 🧪 Query Analysis
+    ├── 📋 Task Planning
+    └── 📊 Performance Monitoring
+```
+
+---
+
+## 📁 **Project Structure**
+
+```
+discord-bot-v2/
+├── 🤖 agentic/              # Core agentic framework
+│   ├── agents/              # Specialized AI agents
+│   ├── memory/              # Conversation memory system
+│   ├── vectorstore/         # Vector storage with ChromaDB
+│   ├── cache/               # Smart caching system
+│   ├── interfaces/          # Discord, Streamlit, API interfaces
+│   └── reasoning/           # Query analysis and task planning
+├── 📊 data/                 # Persistent data storage
+├── 📚 docs/                 # Documentation
+├── 🏗️ architecture/         # System architecture docs
+├── 🚀 main.py              # Main entry point
+├── 🛠️ launch.sh            # Launch script
+└── 📋 requirements.txt     # Dependencies
+```
+│   ├── Planning Agent (Query Analysis)
+│   ├── Search Agent (Vector Retrieval)
+│   ├── Analysis Agent (Content Synthesis)
+│   └── Orchestrator (Workflow Management)
+├── 💾 Persistent Storage
+│   ├── ChromaDB Vector Store
+│   ├── SQLite Conversation Memory
+│   └── User Context Management
+├── ⚡ Performance Layer
+│   ├── Smart Cache (L1/L2/L3)
+│   ├── Background Processing
+│   └── Connection Pooling
+└── 🔌 Interfaces
+    ├── Discord Interface
+    ├── Streamlit Web App
+    └── REST API
+```
+
+---
+
+## ✨ Key Features
+
+### 🎯 Intelligent Query Processing
+- **Multi-Agent Reasoning**: Specialized agents collaborate for optimal results
+- **Context-Aware Search**: Understands user intent and conversation history
+- **Semantic Understanding**: Goes beyond keyword matching to find meaning
+- **Execution Planning**: Breaks down complex queries into manageable tasks
+
+### 💬 Advanced Discord Integration
+- **Real-time Responses**: Fast, intelligent answers to user questions
+- **Message History Analysis**: Deep insights into server conversations
+- **User Context Tracking**: Personalized responses based on interaction history
+- **Performance Monitoring**: Built-in analytics and health monitoring
+
+### 🌐 Modern Web Interface
+- **Interactive Chat**: Streamlit-powered web interface
+- **Real-time Analytics**: System performance and usage metrics
+- **Export Capabilities**: Download conversations and insights
+- **Admin Controls**: System optimization and health management
+
+### 🔧 Enterprise Features
+- **Persistent Storage**: No data loss with ChromaDB vector store
+- **Smart Caching**: Multi-level caching for optimal performance
+- **Scalable Architecture**: Designed for high-volume Discord servers
+- **Monitoring & Observability**: Comprehensive system health tracking
+
+---
+
+## 📁 Project Structure
+
+```
+🤖 Agentic Discord Bot v2.0
+├── 📋 launch.sh              # Easy launcher script
+├── 🔄 migrate_to_agentic.py  # Migration from v1.x
+├── 📄 requirements.txt       # Dependencies (LangGraph, ChromaDB, etc.)
+├── 📚 readme.md              # This file
+
+🧠 agentic/                   # Core agentic framework
+├── 🤖 agents/               # Specialized AI agents
+│   ├── base_agent.py        # Base agent class and registry
+│   ├── orchestrator.py      # LangGraph workflow orchestrator
+│   ├── planning_agent.py    # Query planning specialist
+│   ├── search_agent.py      # Vector search specialist
+│   └── analysis_agent.py    # Content analysis specialist
+├── 💾 memory/              # Conversation memory system
+│   └── conversation_memory.py # SQLite-backed memory
+├── 🧩 reasoning/           # Reasoning components
+│   ├── query_analyzer.py   # Intent detection & entity extraction
+│   └── task_planner.py     # Execution plan generation
+├── 📊 vectorstore/         # Persistent vector storage
+│   └── persistent_store.py # ChromaDB implementation
+├── ⚡ cache/               # Smart caching system
+│   └── smart_cache.py      # Multi-level cache
+└── 🔌 interfaces/          # Platform interfaces
+    ├── agent_api.py         # High-level API
+    ├── discord_interface.py # Discord integration
+    └── streamlit_interface.py # Web interface
+
+🎮 core/                     # Application entry points
+├── agentic_bot.py          # New Discord bot
+├── agentic_app.py          # New Streamlit app
+├── bot.py                  # Legacy Discord bot
+└── app.py                  # Legacy Streamlit app
+
+🛠️ tools/                   # Utilities and tools
+├── tools.py                # Tool functions
+├── time_parser.py          # Natural language time parsing
+└── full_pipeline.py        # Data processing pipeline
+
+💾 data/                    # Data storage
+├── discord_messages.db     # SQLite database
+├── chroma_db/             # ChromaDB vector store
+└── cache/                 # Cache storage
+
+📊 logs/                    # Application logs
+└── monitoring/            # System metrics
+```
 
 
 db/                       # Database models and migrations

@@ -1,7 +1,43 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables
 .env
-Leeme_JC.txt
+.env.local
+.env.production
+
+# Agentic framework data
+data/conversation_memory.db
+data/cache/
+data/vectorstore/
+*.db
+*.log
+
+# Backup and legacy files
+.backup/
+docs/legacy/
+data/legacy/
+
+# Virtual environment
 venv/
+env/
+
+# Development and testing
+.pytest_cache/
+test_results.txt
+query_test_results.json
+.coverage
+
+# IDE and OS files
 .DS_Store
-jc_logs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Deployment
+.render/
