@@ -55,6 +55,11 @@ class QueryAnalyzer:
                 r"what data|how much data|data available",
                 r"how many messages|message count",
                 r"date range|time range|coverage"
+            ],
+            "reactions": [
+                r"most reacted|popular messages|top reaction",
+                r"reactions to|emoji reactions|most liked",
+                r"messages with (most|highest|top) reactions"
             ]
         }
         
@@ -64,7 +69,8 @@ class QueryAnalyzer:
             "user": r"@[\w.-]+|by\s+([\w.-]+)|from\s+([\w.-]+)",
             "time_range": r"(last|past|previous)\s+\w+|between\s+[\d-]+\s+and\s+[\d-]+",
             "keyword": r"'([^']+)'|\"([^\"]+)\"|about\s+(\w+)",
-            "count": r"top\s+(\d+)|(\d+)\s+results|limit\s+(\d+)"
+            "count": r"top\s+(\d+)|(\d+)\s+results|limit\s+(\d+)",
+            "reaction": r"(👍|❤️|😂|👀|🎉|🚀|👏|👌)|(:\w+:)|emoji|reaction"
         }
         
         logger.info("Query analyzer initialized")

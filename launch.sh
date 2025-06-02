@@ -144,6 +144,12 @@ print(f'  venv/: {\"✅ Exists\" if os.path.exists(\"venv\") else \"❌ Missing\
         "
         ;;
     
+    "pipeline"|"update")
+        log_info "🔄 Running Discord message database update pipeline..."
+        init_env
+        python3 run_pipeline.py
+        ;;
+    
     "help"|*)
         echo "🚀 Agentic Discord Bot Launcher"
         echo ""
@@ -154,6 +160,7 @@ print(f'  venv/: {\"✅ Exists\" if os.path.exists(\"venv\") else \"❌ Missing\
         echo "  streamlit, web  Start the Streamlit web interface"
         echo "  test           Run framework tests"
         echo "  setup          Initial project setup"
+        echo "  pipeline, update Update Discord messages database"
         echo "  clean          Clean temporary files"
         echo "  status         Show system status"
         echo "  help           Show this help message"
@@ -162,5 +169,6 @@ print(f'  venv/: {\"✅ Exists\" if os.path.exists(\"venv\") else \"❌ Missing\
         echo "  ./launch.sh setup     # First time setup"
         echo "  ./launch.sh bot       # Start Discord bot"
         echo "  ./launch.sh streamlit # Start web interface"
+        echo "  ./launch.sh pipeline  # Update Discord messages database"
         ;;
 esac

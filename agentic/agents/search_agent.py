@@ -80,6 +80,8 @@ class SearchAgent(BaseAgent):
                     task_results = await self._filtered_search(subtask, state)
                 elif subtask.task_type == "hybrid_search":
                     task_results = await self._hybrid_search(subtask, state)
+                elif subtask.task_type == "reaction_search":
+                    task_results = await self._reaction_search(subtask, state)
                 else:
                     logger.warning(f"Unknown search task type: {subtask.task_type}")
                     continue
@@ -125,7 +127,8 @@ class SearchAgent(BaseAgent):
         """
         search_types = [
             "search", "semantic_search", "keyword_search", 
-            "filtered_search", "hybrid_search", "vector_search"
+            "filtered_search", "hybrid_search", "vector_search",
+            "reaction_search"  # Add reaction search support
         ]
         return any(search_type in task.task_type.lower() for search_type in search_types)
     
@@ -332,6 +335,52 @@ class SearchAgent(BaseAgent):
             
         except Exception as e:
             logger.error(f"Error in hybrid search: {e}")
+            return []
+    
+    async def _reaction_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
+        """
+        Perform search based on message reactions (likes, loves, etc.).
+        
+        Args:
+            subtask: Search subtask
+            state: Current agent state
+            
+        Returns:
+            List of search results
+        """
+        try:
+            reaction_type = subtask.parameters.get("reaction", "")
+            k = subtask.parameters.get("k", self.default_k)
+            
+            if not reaction_type:
+                return []
+            
+            # Check cache
+            cache_key = f"reaction:{hash(reaction_type)}:{k}"
+            cached_results = await self.cache.get(cache_key)
+            
+            if cached_results:
+                self.search_stats["cache_hits"] += 1
+                return cached_results
+            
+            # Perform reaction-based search
+            self.search_stats["cache_misses"] += 1
+            self.search_stats["total_searches"] += 1
+            
+            results = await self.vector_store.reaction_search(
+                reaction=reaction_type,
+                k=min(k, self.max_k),
+                filters=subtask.parameters.get("filters", {})
+            )
+            
+            # Cache results
+            await self.cache.set(cache_key, results, ttl=3600)
+            
+            logger.info(f"Reaction search found {len(results)} results")
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error in reaction search: {e}")
             return []
     
     async def _deduplicate_results(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
