@@ -80,6 +80,10 @@ class PersistentVectorStore:
             # Initialize embedding function with improved error handling
             api_key = os.getenv("OPENAI_API_KEY") or os.getenv("CHROMA_OPENAI_API_KEY")
             
+            # Ensure CHROMA_OPENAI_API_KEY is set if OPENAI_API_KEY is available
+            if api_key and not os.getenv("CHROMA_OPENAI_API_KEY"):
+                os.environ["CHROMA_OPENAI_API_KEY"] = api_key
+            
             if not api_key or api_key == "test-key-for-testing":
                 # For testing scenarios, create a simple mock embedding function
                 logger.warning("Using test/mock configuration - creating collection with default embedding function")
