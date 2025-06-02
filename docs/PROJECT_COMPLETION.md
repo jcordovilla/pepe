@@ -17,7 +17,7 @@ The Discord RAG bot has been successfully upgraded to a sophisticated **multi-ag
 - ✅ Fixed agent API parameter types and method calls
 
 ### 3. **Discord Bot Integration Completed**
-- ✅ Added complete Discord slash command functionality (`/ask`)
+- ✅ Added complete Discord slash command functionality (`/pepe`)
 - ✅ Implemented proper bot initialization with intents and permissions
 - ✅ Added comprehensive error handling for Discord interactions
 - ✅ Created proper event handlers and command synchronization
@@ -134,9 +134,9 @@ python main.py
 
 ### **Discord Usage**
 ```
-/ask What are the latest AI developments?
-/ask Summarize recent discussions in this channel
-/ask Find papers about transformer architectures
+/pepe What are the latest AI developments?
+/pepe Summarize recent discussions in this channel
+/pepe Find papers about transformer architectures
 ```
 
 ## 📁 File Structure

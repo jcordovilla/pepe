@@ -180,4 +180,4 @@ The following legacy files have been cleaned up:
 **📋 Next Steps**
 1. Set required environment variables (OPENAI_API_KEY, DISCORD_TOKEN, GUILD_ID)
 2. Run `python3 main.py` to start the bot
-3. Use `/ask` command in Discord for intelligent interactions
+3. Use `/pepe` command in Discord for intelligent interactions

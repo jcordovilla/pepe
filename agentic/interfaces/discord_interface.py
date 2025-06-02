@@ -113,8 +113,8 @@ class DiscordInterface:
                     logger.error(f"Failed to sync commands: {e}")
         
         # Set up slash command
-        @self.bot.tree.command(name="ask", description="Ask the AI assistant something")
-        async def ask_command(interaction: discord.Interaction, query: str):
+        @self.bot.tree.command(name="pepe", description="Ask the AI assistant something")
+        async def pepe_command(interaction: discord.Interaction, query: str):
             await self.handle_slash_command(interaction, query)
             
         return self.bot

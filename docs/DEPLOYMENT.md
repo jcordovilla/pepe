@@ -60,14 +60,14 @@ python test_system.py
 ## 🎯 Usage
 
 ### Discord Commands
-- `/ask <question>` - Ask the AI assistant anything
+- `/pepe <question>` - Ask the AI assistant anything
 - The bot will process queries through the multi-agent system
 - Responses include source attribution and metadata
 
 ### Example Queries
-- `/ask What are the latest AI developments?`
-- `/ask Summarize recent discussions in this channel`
-- `/ask Find papers about transformer architectures`
+- `/pepe What are the latest AI developments?`
+- `/pepe Summarize recent discussions in this channel`
+- `/pepe Find papers about transformer architectures`
 
 ## 🏗️ Architecture Overview
 

@@ -109,7 +109,7 @@ python3 scripts/test_system.py
 
 3. **Use in Discord:**
    ```
-   /ask What can you help me with?
+   /pepe What can you help me with?
    ```
 
 4. **Push to Remote (when ready):**
