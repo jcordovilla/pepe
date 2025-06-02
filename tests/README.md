@@ -22,16 +22,27 @@ This directory contains all test files for the Discord Bot v2 project.
 
 ## Running Tests
 
+**Important**: All tests must be run from the project root directory to ensure correct module imports.
+
 ### Reaction Search Tests
 ```bash
 # Run comprehensive reaction search test
-python3 tests/reaction_search/test_reaction_functionality.py
+python3 -m tests.reaction_search.test_reaction_functionality
 
 # Run production test with realistic data
-python3 tests/reaction_search/test_production_reaction_search.py
+python3 -m tests.reaction_search.test_production_reaction_search
+
+# Run production test (moved from root)
+python3 -m tests.reaction_search.test_production_real
 
 # Test with existing data
-python3 tests/reaction_search/test_simple_reaction_search.py
+python3 -m tests.reaction_search.test_simple_reaction_search
+```
+
+### Main Bot Integration Tests
+```bash
+# Test main bot integration
+python3 -m tests.test_main_bot_integration
 ```
 
 ### Debug Tests
