@@ -464,6 +464,7 @@ class DiscordInterface:
         
         execution_time = (datetime.now() - start_time).total_seconds()
         
+        # Simple local tracking for legacy compatibility
         self.query_count += 1
         if not success:
             self.error_count += 1
@@ -474,12 +475,46 @@ class DiscordInterface:
             / self.query_count
         )
         
+        # Note: Detailed analytics are automatically recorded by AgentAPI.query()
+        # This method now mainly handles legacy local counters
+        
         if self.query_count % 10 == 0:  # Log every 10 queries
             logger.info(
                 f"Analytics: {self.query_count} queries, "
                 f"{self.error_count} errors, "
                 f"avg response time: {self.average_response_time:.2f}s"
             )
+    
+    async def get_analytics_dashboard(self) -> Dict[str, Any]:
+        """Get analytics dashboard data from the comprehensive analytics system"""
+        try:
+            if hasattr(self.agent_api, 'analytics_dashboard'):
+                # Get comprehensive analytics from the AgentAPI analytics system
+                return await self.agent_api.analytics_dashboard.generate_overview_dashboard(
+                    hours_back=24,
+                    platform="discord"
+                )
+            else:
+                # Fallback to basic analytics
+                return await self.get_user_stats(0)  # Global stats
+        except Exception as e:
+            logger.error(f"Error getting analytics dashboard: {e}")
+            return {"error": str(e)}
+    
+    async def get_performance_analytics(self, hours_back: int = 24) -> Dict[str, Any]:
+        """Get performance analytics for Discord platform"""
+        try:
+            if hasattr(self.agent_api, 'query_repository'):
+                return await self.agent_api.query_repository.get_performance_analytics(
+                    hours_back=hours_back,
+                    platform="discord"
+                )
+            else:
+                # Fallback to basic stats
+                return await self.get_user_stats(0)
+        except Exception as e:
+            logger.error(f"Error getting performance analytics: {e}")
+            return {"error": str(e)}
     
     async def get_user_stats(self, user_id: int) -> Dict[str, Any]:
         """Get user interaction statistics"""

@@ -6,6 +6,7 @@ Replaces the real-time FAISS indexing with a persistent, scalable vector store.
 
 import os
 import logging
+import shutil
 from typing import Dict, List, Any, Optional, Union
 import asyncio
 from datetime import datetime
@@ -720,7 +721,6 @@ class PersistentVectorStore:
             
             # Check disk space
             try:
-                import shutil
                 disk_usage = shutil.disk_usage(self.persist_directory)
                 free_space_gb = disk_usage.free / (1024**3)
                 

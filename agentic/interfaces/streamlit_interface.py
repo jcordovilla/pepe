@@ -62,7 +62,13 @@ class StreamlitInterface:
             enable_analytics: Whether to track analytics
             session_state_key: Key for Streamlit session state
         """
-        self.agent_api = agent_api or AgentAPI()
+        self.agent_api = agent_api or AgentAPI({
+            "orchestrator": {},
+            "vector_store": {},
+            "memory": {},
+            "pipeline": {},
+            "analytics": {}
+        })
         self.cache_enabled = cache_enabled
         self.enable_analytics = enable_analytics
         self.session_state_key = session_state_key
@@ -71,8 +77,8 @@ class StreamlitInterface:
         self._init_session_state()
         
         # Initialize components
-        self.memory = ConversationMemory()
-        self.cache = SmartCache() if cache_enabled else None
+        self.memory = ConversationMemory({"db_path": "data/conversation_memory.db"})
+        self.cache = SmartCache({"cache_dir": "data/cache"}) if cache_enabled else None
         
         logger.info("Streamlit interface initialized")
     
@@ -123,6 +129,39 @@ class StreamlitInterface:
             # System optimization
             if st.button("🔧 Optimize System", type="secondary"):
                 self._optimize_system()
+            
+            # Pipeline controls
+            st.markdown("---")
+            st.header("⚙️ Data Pipeline")
+            
+            # Pipeline status
+            pipeline_status = self.agent_api.get_pipeline_status()
+            if pipeline_status.get("is_running"):
+                st.warning(f"🔄 Pipeline running: {pipeline_status.get('current_step', 'unknown')}")
+            else:
+                st.success("✅ Pipeline ready")
+            
+            # Pipeline buttons
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("🚀 Run Full Pipeline", type="primary", disabled=pipeline_status.get("is_running", False)):
+                    self._run_full_pipeline()
+                    st.rerun()
+            
+            with col2:
+                if st.button("📊 Pipeline Status", type="secondary"):
+                    self._show_pipeline_status()
+            
+            # Individual step controls
+            with st.expander("🔧 Individual Steps"):
+                available_steps = pipeline_status.get("available_steps", [])
+                
+                for step in available_steps:
+                    step_label = step.replace("_", " ").title()
+                    if st.button(f"▶️ {step_label}", key=f"step_{step}", disabled=pipeline_status.get("is_running", False)):
+                        self._run_pipeline_step(step)
+                        st.rerun()
             
             st.header("📊 Session Info")
             session_data = st.session_state[self.session_state_key]
@@ -249,10 +288,10 @@ class StreamlitInterface:
                     result = await self.agent_api.query(
                         query=query,
                         user_id=streamlit_context.user_id,
-                        session_id=streamlit_context.session_id,
                         context={
                             "platform": "streamlit",
                             "page": streamlit_context.page,
+                            "session_id": streamlit_context.session_id,
                             "timestamp": streamlit_context.timestamp.isoformat()
                         }
                     )
@@ -445,15 +484,135 @@ class StreamlitInterface:
         """Trigger system optimization"""
         try:
             with st.spinner("🔧 Optimizing system..."):
-                result = asyncio.run(self.agent_api.optimize())
+                result = asyncio.run(self.agent_api.optimize_system())
                 
-                if result.get("status") == "success":
+                if result.get("success"):
                     st.success("✅ System optimization complete!")
                 else:
-                    st.error(f"❌ Optimization failed: {result.get('message')}")
+                    st.error(f"❌ Optimization failed: {result.get('error', 'Unknown error')}")
                     
         except Exception as e:
             st.error(f"❌ Optimization error: {e}")
+    
+    def _run_full_pipeline(self):
+        """Run the full data processing pipeline"""
+        try:
+            session_data = st.session_state[self.session_state_key]
+            user_id = session_data["user_id"]
+            
+            with st.spinner("🚀 Running full pipeline..."):
+                result = asyncio.run(self.agent_api.run_pipeline(user_id))
+                
+                if result.get("success"):
+                    st.success("✅ Pipeline completed successfully!")
+                    
+                    # Show pipeline statistics
+                    if "stats" in result:
+                        stats = result["stats"]
+                        st.info(f"📊 Messages: {stats.get('total_messages', 'N/A')} | Resources: {stats.get('total_resources', 'N/A')}")
+                else:
+                    st.error(f"❌ Pipeline failed: {result.get('error', 'Unknown error')}")
+                    if "failed_step" in result:
+                        st.error(f"Failed at step: {result['failed_step']}")
+                        
+        except Exception as e:
+            st.error(f"❌ Pipeline error: {e}")
+    
+    def _run_pipeline_step(self, step_name: str):
+        """Run a single pipeline step"""
+        try:
+            session_data = st.session_state[self.session_state_key]
+            user_id = session_data["user_id"]
+            
+            with st.spinner(f"▶️ Running {step_name.replace('_', ' ').title()}..."):
+                result = asyncio.run(self.agent_api.run_pipeline_step(step_name, user_id))
+                
+                if result.get("success"):
+                    st.success(f"✅ {step_name.replace('_', ' ').title()} completed!")
+                    
+                    # Show step statistics
+                    if "stats" in result:
+                        stats = result["stats"]
+                        st.info(f"📊 Messages: {stats.get('total_messages', 'N/A')} | Resources: {stats.get('total_resources', 'N/A')}")
+                else:
+                    st.error(f"❌ {step_name.replace('_', ' ').title()} failed: {result.get('error', 'Unknown error')}")
+                    
+        except Exception as e:
+            st.error(f"❌ Step error: {e}")
+    
+    def _show_pipeline_status(self):
+        """Show detailed pipeline status and history"""
+        try:
+            # Get current status
+            status = self.agent_api.get_pipeline_status()
+            
+            # Get pipeline history
+            history_result = self.agent_api.get_pipeline_history(limit=5)
+            history = history_result.get("history", []) if history_result.get("success") else []
+            
+            # Get data statistics
+            stats_result = asyncio.run(self.agent_api.get_data_stats())
+            stats = stats_result if stats_result.get("success") else {}
+            
+            # Display in expander
+            with st.expander("📊 Detailed Pipeline Status", expanded=True):
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.subheader("Current Status")
+                    if status.get("is_running"):
+                        st.warning(f"🔄 Running: {status.get('current_step', 'unknown')}")
+                    else:
+                        st.success("✅ Ready")
+                    
+                    st.metric("Available Steps", len(status.get("available_steps", [])))
+                
+                with col2:
+                    st.subheader("Data Statistics")
+                    if "database" in stats:
+                        db_stats = stats["database"]
+                        st.metric("Total Messages", db_stats.get("total_messages", "N/A"))
+                        st.metric("Total Resources", db_stats.get("total_resources", "N/A"))
+                
+                # Recent pipeline history
+                if history:
+                    st.subheader("Recent Pipeline Runs")
+                    for run in history[-3:]:  # Show last 3 runs
+                        status_emoji = "✅" if run.get("success") else "❌"
+                        start_time = run.get("start_time", "Unknown")
+                        st.write(f"{status_emoji} {start_time} - Pipeline ID: {run.get('pipeline_id', 'Unknown')}")
+                        
+                # Pipeline logs button
+                if st.button("📋 View Pipeline Logs"):
+                    self._show_pipeline_logs()
+                    
+        except Exception as e:
+            st.error(f"❌ Error getting pipeline status: {e}")
+    
+    def _show_pipeline_logs(self):
+        """Show recent pipeline logs"""
+        try:
+            logs_result = asyncio.run(self.agent_api.get_pipeline_logs(lines=50))
+            
+            if logs_result.get("success"):
+                logs = logs_result.get("lines", [])
+                
+                with st.expander("📋 Pipeline Logs", expanded=True):
+                    if logs:
+                        log_text = "".join(logs)
+                        st.text_area(
+                            "Recent Log Output",
+                            value=log_text,
+                            height=300,
+                            label_visibility="collapsed"
+                        )
+                    else:
+                        st.info("No logs available")
+            else:
+                st.error(f"❌ Failed to get logs: {logs_result.get('error', 'Unknown error')}")
+                
+        except Exception as e:
+            st.error(f"❌ Error getting logs: {e}")
     
     async def _store_conversation(
         self,
@@ -463,26 +622,20 @@ class StreamlitInterface:
     ):
         """Store conversation in memory"""
         try:
-            await asyncio.to_thread(
-                self.memory.add_user_message,
+            response_text = self._extract_response_text(result)
+            await self.memory.add_interaction(
                 streamlit_context.user_id,
                 query,
-                {
+                response_text,
+                context={
                     "platform": "streamlit",
                     "session_id": streamlit_context.session_id,
                     "page": streamlit_context.page
-                }
-            )
-            
-            response_text = self._extract_response_text(result)
-            await asyncio.to_thread(
-                self.memory.add_assistant_message,
-                streamlit_context.user_id,
-                response_text,
-                {
+                },
+                metadata={
                     "execution_time": result.get("execution_time"),
                     "agents_used": result.get("agents_used", []),
-                    "session_id": streamlit_context.session_id
+                    "status": result.get("status")
                 }
             )
         except Exception as e:
@@ -502,20 +655,327 @@ class StreamlitInterface:
             return str(response_data)
     
     def render_analytics_page(self):
-        """Render analytics and monitoring page"""
+        """Render comprehensive analytics and monitoring page"""
         st.title("📊 System Analytics")
         
-        # System health overview
-        self._render_health_overview()
+        # Create tabs for different analytics views
+        tab1, tab2, tab3, tab4 = st.tabs([
+            "📊 Overview", 
+            "⚡ Performance", 
+            "👥 User Analytics", 
+            "🔍 Quality Assessment"
+        ])
         
-        # Usage statistics
-        self._render_usage_stats()
+        with tab1:
+            self._render_overview_analytics()
         
-        # Performance metrics
-        self._render_performance_metrics()
+        with tab2:
+            self._render_performance_analytics()
         
-        # Agent activity
-        self._render_agent_activity()
+        with tab3:
+            self._render_user_analytics()
+        
+        with tab4:
+            self._render_quality_analytics()
+    
+    def _render_overview_analytics(self):
+        """Render overview analytics dashboard"""
+        st.header("📊 System Overview")
+        
+        try:
+            # Get comprehensive analytics from AgentAPI
+            if hasattr(self.agent_api, 'analytics_dashboard'):
+                dashboard_data = asyncio.run(
+                    self.agent_api.analytics_dashboard.generate_overview_dashboard(
+                        hours_back=24,
+                        platform="streamlit"
+                    )
+                )
+                
+                # System Health Metrics
+                col1, col2, col3, col4 = st.columns(4)
+                
+                stats = dashboard_data.get("stats", {})
+                with col1:
+                    st.metric(
+                        "Total Queries", 
+                        stats.get("total_queries", 0),
+                        delta=stats.get("queries_delta", 0)
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Avg Response Time", 
+                        f"{stats.get('avg_response_time', 0):.2f}s",
+                        delta=f"{stats.get('response_time_delta', 0):.2f}s"
+                    )
+                
+                with col3:
+                    st.metric(
+                        "Success Rate", 
+                        f"{stats.get('success_rate', 0):.1f}%",
+                        delta=f"{stats.get('success_rate_delta', 0):.1f}%"
+                    )
+                
+                with col4:
+                    st.metric(
+                        "Quality Score", 
+                        f"{stats.get('avg_quality_score', 0):.2f}/5",
+                        delta=f"{stats.get('quality_delta', 0):.2f}"
+                    )
+                
+                # Charts
+                charts = dashboard_data.get("charts", {})
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    if "query_volume" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["query_volume"]), 
+                            use_container_width=True
+                        )
+                
+                with col2:
+                    if "response_time" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["response_time"]), 
+                            use_container_width=True
+                        )
+                
+                # Platform Usage
+                if "platform_usage" in charts:
+                    st.subheader("Platform Usage Distribution")
+                    st.plotly_chart(
+                        go.Figure(charts["platform_usage"]), 
+                        use_container_width=True
+                    )
+                    
+            else:
+                self._render_fallback_overview()
+                
+        except Exception as e:
+            st.error(f"Error loading analytics: {e}")
+            logger.error(f"Analytics error: {e}", exc_info=True)
+            self._render_fallback_overview()
+    
+    def _render_performance_analytics(self):
+        """Render performance analytics dashboard"""
+        st.header("⚡ Performance Analytics")
+        
+        try:
+            if hasattr(self.agent_api, 'analytics_dashboard'):
+                performance_data = asyncio.run(
+                    self.agent_api.analytics_dashboard.generate_performance_dashboard(
+                        hours_back=24
+                    )
+                )
+                
+                # Performance Metrics
+                col1, col2, col3 = st.columns(3)
+                
+                stats = performance_data.get("stats", {})
+                with col1:
+                    st.metric(
+                        "System Load", 
+                        f"{stats.get('cpu_usage', 0):.1f}%"
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Memory Usage", 
+                        f"{stats.get('memory_usage', 0):.1f}%"
+                    )
+                
+                with col3:
+                    st.metric(
+                        "Cache Hit Rate", 
+                        f"{stats.get('cache_hit_rate', 0):.1f}%"
+                    )
+                
+                # Performance Charts
+                charts = performance_data.get("charts", {})
+                
+                if "system_health" in charts:
+                    st.subheader("System Health Over Time")
+                    st.plotly_chart(
+                        go.Figure(charts["system_health"]), 
+                        use_container_width=True
+                    )
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    if "performance_trends" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["performance_trends"]), 
+                            use_container_width=True
+                        )
+                
+                with col2:
+                    if "error_distribution" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["error_distribution"]), 
+                            use_container_width=True
+                        )
+                        
+            else:
+                self._render_fallback_performance()
+                
+        except Exception as e:
+            st.error(f"Error loading performance analytics: {e}")
+            logger.error(f"Performance analytics error: {e}", exc_info=True)
+            self._render_fallback_performance()
+    
+    def _render_user_analytics(self):
+        """Render user analytics dashboard"""
+        st.header("👥 User Analytics")
+        
+        try:
+            if hasattr(self.agent_api, 'analytics_dashboard'):
+                user_data = asyncio.run(
+                    self.agent_api.analytics_dashboard.generate_user_analytics(
+                        hours_back=24
+                    )
+                )
+                
+                # User Metrics
+                col1, col2, col3, col4 = st.columns(4)
+                
+                stats = user_data.get("stats", {})
+                with col1:
+                    st.metric("Active Users", stats.get("active_users", 0))
+                
+                with col2:
+                    st.metric("Total Sessions", stats.get("total_sessions", 0))
+                
+                with col3:
+                    st.metric("Avg Session Duration", f"{stats.get('avg_session_duration', 0):.1f}m")
+                
+                with col4:
+                    st.metric("Queries per User", f"{stats.get('queries_per_user', 0):.1f}")
+                
+                # User Charts
+                charts = user_data.get("charts", {})
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    if "user_activity" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["user_activity"]), 
+                            use_container_width=True
+                        )
+                
+                with col2:
+                    if "session_patterns" in charts:
+                        st.plotly_chart(
+                            go.Figure(charts["session_patterns"]), 
+                            use_container_width=True
+                        )
+                
+                if "user_satisfaction" in charts:
+                    st.subheader("User Satisfaction Trends")
+                    st.plotly_chart(
+                        go.Figure(charts["user_satisfaction"]), 
+                        use_container_width=True
+                    )
+                    
+            else:
+                self._render_fallback_users()
+                
+        except Exception as e:
+            st.error(f"Error loading user analytics: {e}")
+            logger.error(f"User analytics error: {e}", exc_info=True)
+            self._render_fallback_users()
+    
+    def _render_quality_analytics(self):
+        """Render quality assessment analytics"""
+        st.header("🔍 Quality Assessment")
+        
+        try:
+            if hasattr(self.agent_api, 'query_repository'):
+                # Get performance analytics which include quality metrics
+                performance_data = asyncio.run(
+                    self.agent_api.query_repository.get_performance_analytics(
+                        hours_back=24
+                    )
+                )
+                
+                # Quality Metrics from performance data
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric(
+                        "Total Queries", 
+                        performance_data.get('total_queries', 0)
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Success Rate", 
+                        f"{performance_data.get('success_rate', 0):.1f}%"
+                    )
+                
+                with col3:
+                    st.metric(
+                        "Avg Response Time", 
+                        f"{performance_data.get('avg_response_time', 0):.2f}s"
+                    )
+                
+                with col4:
+                    st.metric(
+                        "Error Rate", 
+                        f"{performance_data.get('error_rate', 0):.1f}%"
+                    )
+                
+                # Quality trends from historical data
+                if 'response_time_trend' in performance_data:
+                    st.subheader("Performance Trends Over Time")
+                    
+                    trend_data = performance_data['response_time_trend']
+                    if trend_data:
+                        df = pd.DataFrame(trend_data)
+                        
+                        if not df.empty:
+                            fig = px.line(
+                                df, 
+                                x="timestamp", 
+                                y="avg_response_time",
+                                title="Response Time Trends"
+                            )
+                            st.plotly_chart(fig, use_container_width=True)
+                
+                # Recent queries for quality assessment
+                recent_queries = asyncio.run(
+                    self.agent_api.query_repository.get_query_history(
+                        hours_back=24,
+                        limit=10
+                    )
+                )
+                
+                if recent_queries:
+                    st.subheader("Recent Query Performance")
+                    df_queries = pd.DataFrame([
+                        {
+                            "Query": q.get('query_text', '')[:50] + "..." if len(q.get('query_text', '')) > 50 else q.get('query_text', ''),
+                            "Response Time": f"{q.get('response_time', 0):.2f}s",
+                            "Status": "✅ Success" if q.get('success') else "❌ Failed",
+                            "Platform": q.get('platform', 'Unknown'),
+                            "Timestamp": q.get('timestamp', '')
+                        }
+                        for q in recent_queries[:10]
+                    ])
+                    st.dataframe(df_queries, use_container_width=True)
+                else:
+                    st.info("No recent queries found")
+                        
+            else:
+                st.info("Quality analytics not available - requires analytics components")
+                
+        except Exception as e:
+            st.error(f"Error loading quality analytics: {e}")
+            logger.error(f"Quality analytics error: {e}", exc_info=True)
     
     def _render_health_overview(self):
         """Render system health overview"""
@@ -632,15 +1092,103 @@ class StreamlitInterface:
         
         try:
             if self.agent_api:
-                await self.agent_api.shutdown()
+                await self.agent_api.close()
             
-            if self.memory:
-                await asyncio.to_thread(self.memory.close)
-            
-            if self.cache:
-                await asyncio.to_thread(self.cache.close)
+            # Note: ConversationMemory and Cache don't have close methods implemented
+            # They use SQLite which closes automatically
                 
         except Exception as e:
             logger.error(f"Error during shutdown: {e}")
         
         logger.info("Streamlit interface shutdown complete")
+    
+    def _render_fallback_overview(self):
+        """Render fallback overview when comprehensive analytics are not available"""
+        st.info("Comprehensive analytics not available. Showing basic system status.")
+        
+        # Basic system metrics
+        col1, col2, col3, col4 = st.columns(4)
+        
+        session_data = st.session_state.get(self.session_state_key, {})
+        
+        with col1:
+            st.metric("Session Queries", session_data.get("query_count", 0))
+        
+        with col2:
+            st.metric("System Status", "🟢 Online")
+        
+        with col3:
+            st.metric("Cache Status", "🟢 Active" if self.cache_enabled else "🔴 Disabled")
+        
+        with col4:
+            st.metric("Analytics", "🟢 Enabled" if self.enable_analytics else "🔴 Disabled")
+        
+        # Basic usage chart with mock data
+        st.subheader("Session Activity")
+        dates = pd.date_range(start='2024-06-01', end='2024-06-02', freq='H')
+        activity = [5 + i % 10 for i in range(len(dates))]
+        
+        fig = px.line(
+            x=dates, 
+            y=activity,
+            title="Hourly Activity (Mock Data)",
+            labels={"x": "Time", "y": "Activity"}
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    
+    def _render_fallback_performance(self):
+        """Render fallback performance metrics"""
+        st.info("Advanced performance analytics not available. Showing basic metrics.")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("System Load", "Normal")
+        
+        with col2:
+            st.metric("Memory Usage", "< 512MB")
+        
+        with col3:
+            st.metric("Response Status", "🟢 Responsive")
+        
+        # Basic performance chart
+        st.subheader("System Performance (Estimated)")
+        times = pd.date_range(start='2024-06-01', periods=24, freq='H')
+        response_times = [0.5 + (i % 5) * 0.1 for i in range(24)]
+        
+        fig = px.line(
+            x=times,
+            y=response_times,
+            title="Response Time Trends (Mock Data)",
+            labels={"x": "Time", "y": "Response Time (s)"}
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    
+    def _render_fallback_users(self):
+        """Render fallback user analytics"""
+        st.info("User analytics not available. Showing session information.")
+        
+        session_data = st.session_state.get(self.session_state_key, {})
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric("Current Session", "Active")
+        
+        with col2:
+            st.metric("Session Queries", session_data.get("query_count", 0))
+        
+        with col3:
+            st.metric("Session Duration", "N/A")
+        
+        with col4:
+            st.metric("User Type", "Streamlit User")
+        
+        # Session activity
+        st.subheader("Session Information")
+        st.json({
+            "user_id": session_data.get("user_id", "Unknown"),
+            "session_id": session_data.get("session_id", "Unknown"),
+            "last_query": session_data.get("last_query_time", "Never"),
+            "total_queries": session_data.get("query_count", 0)
+        })
