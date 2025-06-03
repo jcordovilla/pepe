@@ -225,21 +225,28 @@ class AgentOrchestrator:
         try:
             search_results = state.get("search_results", [])
             plan = state.get("task_plan")
+            query = state.get("user_context", {}).get("query", "")
             
             if not search_results and not plan:
                 state["response"] = "I couldn't find any relevant information for your query."
                 return state
             
-            # Basic synthesis logic - can be enhanced with LLM-based synthesis
+            # Return the actual search results for the agent API to process
             if search_results:
-                if len(search_results) == 1:
-                    state["response"] = f"I found 1 relevant result for your query."
+                # Create a response that includes both summary and results
+                result_count = len(search_results)
+                if result_count == 1:
+                    summary = "I found 1 relevant result for your query."
                 else:
-                    state["response"] = f"I found {len(search_results)} relevant results for your query."
+                    summary = f"I found {result_count} relevant results for your query."
+                
+                # The response will be used as the answer, and search_results contains the actual data
+                state["response"] = summary
+                # Ensure search_results are preserved for the agent API
+                logger.info(f"Results synthesized successfully: {result_count} results")
             else:
                 state["response"] = "I processed your query but didn't find specific results."
             
-            logger.info("Results synthesized successfully")
             return state
             
         except Exception as e:

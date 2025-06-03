@@ -73,7 +73,7 @@ class PersistentVectorStore:
                 path=self.persist_directory,
                 settings=Settings(
                     anonymized_telemetry=False,
-                    allow_reset=True
+                    allow_reset=False  # FIXED: Prevent accidental resets that cause data loss
                 )
             )
             
@@ -550,10 +550,76 @@ class PersistentVectorStore:
             
             metadata = metadatas[i] if i < len(metadatas) else {}
             
+            # Restructure author information to match expected format - with comprehensive extraction
+            author_info = {}
+            
+            # Method 1: Direct author fields in metadata root
+            if "author_username" in metadata:
+                author_info["username"] = metadata["author_username"]
+            if "author_id" in metadata:
+                author_info["id"] = metadata["author_id"]
+            if "author_display_name" in metadata:
+                author_info["display_name"] = metadata["author_display_name"]
+                
+            # Method 2: Nested author object with direct fields
+            if isinstance(metadata.get("author"), dict):
+                if not author_info.get("username") and "username" in metadata["author"]:
+                    author_info["username"] = metadata["author"]["username"]
+                if not author_info.get("id") and "id" in metadata["author"]:
+                    author_info["id"] = metadata["author"]["id"]
+                if not author_info.get("display_name") and "display_name" in metadata["author"]:
+                    author_info["display_name"] = metadata["author"]["display_name"]
+                # Some systems store it as name instead of username
+                if not author_info.get("username") and "name" in metadata["author"]:
+                    author_info["username"] = metadata["author"]["name"]
+            
+            # Method 3: Serialized author object (from JSON string)
+            if not author_info.get("username") and isinstance(metadata.get("author"), str):
+                try:
+                    author_data = json.loads(metadata["author"])
+                    if isinstance(author_data, dict):
+                        if "username" in author_data:
+                            author_info["username"] = author_data["username"]
+                        if "id" in author_data:
+                            author_info["id"] = author_data["id"]
+                except (json.JSONDecodeError, TypeError):
+                    # Not a valid JSON string, will be handled by fallbacks
+                    pass
+                
+            # Fallback 1: String author field as username
+            if not author_info.get("username") and isinstance(metadata.get("author"), str):
+                author_info["username"] = metadata["author"]
+                
+            # Fallback 2: Ensure at least some username is present (avoid "Unknown")
+            if not author_info.get("username"):
+                # Try to use any other identifying information from metadata
+                possible_username_fields = ["user", "user_name", "username", "name", "sender"]
+                for field in possible_username_fields:
+                    if field in metadata and metadata[field]:
+                        author_info["username"] = metadata[field]
+                        break
+                        
+            # Final fallback to prevent "Unknown" display
+            if not author_info.get("username"):
+                # Use message ID or a timestamp as last resort
+                if "message_id" in metadata:
+                    author_info["username"] = f"User-{metadata['message_id'][-6:]}"
+                else:
+                    # Absolute last resort
+                    author_info["username"] = f"User-{i}"
+
+            # Ensure we're not passing back an empty author object
+            if not author_info:
+                author_info = {"username": f"User-{i}"}
+            
+            # Create result with proper author structure - ensuring we have a valid author field
             result = {
                 "content": doc,
                 "score": score,
-                **metadata
+                "author": author_info,
+                # Include other metadata but exclude the individual author fields
+                **{k: v for k, v in metadata.items() 
+                   if not k.startswith("author_") and k != "author"}
             }
             
             processed.append(result)
@@ -806,7 +872,7 @@ class PersistentVectorStore:
                         "avg_length": sum(content_lengths) / len(content_lengths),
                         "min_length": min(content_lengths),
                         "max_length": max(content_lengths),
-                        "total_characters": sum(content_lengths)
+                        "total_tokens": sum(content_lengths)
                     }
                 
                 # Top channels

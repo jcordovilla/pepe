@@ -1,0 +1,226 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1353442557438328864",
+  "channel_name": "📝welcome-rules",
+  "fetch_timestamp": "2025-06-03T22:03:47.159339",
+  "message_count": 6,
+  "messages": [
+    {
+      "message_id": "1364770620788969512",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🎬 Welcome to Gen AI Global!– Part 1 🚀\n\nWatch this video first to smoothly integrate into our community! You'll learn about:\n\n✅ Our Vision and Purpose\n📅 Weekly Engagement Activities\n🤝 Buddy Groups & Collaboration\n🔑 Leadership Opportunities (Admin Roles)\n🛠️ Final Steps for Onboarding\n\nVideo created entirely using GEN-AI by <@1352785241252565174>  🤖✨",
+      "timestamp": "2025-04-24T01:11:12.208000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364770620788969512",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 13
+        },
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "🤖",
+          "count": 1
+        },
+        {
+          "emoji": "🖤",
+          "count": 1
+        },
+        {
+          "emoji": "🚀",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1364770612144246874",
+          "filename": "compressed_1_1.mp4",
+          "url": "https://cdn.discordapp.com/attachments/1353442557438328864/1364770612144246874/compressed_1_1.mp4?ex=684045ee&is=683ef46e&hm=891d313c29caca55ee86d340d2d40725f5661b6490a2ceae559b5bf9d575f91b&",
+          "size": 294447186
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364770835201527880",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🔐 Welcome & Rules – Part 2\nManaging External Requests to Join Our Community 🌍\n\n👇 Please review how we handle incoming join requests from outside the server to ensure a smooth and secure onboarding experience!\n\n🚥  How to manage external requests to join this community\n✅  Follow this protocol (v1.1) when someone from outside the community contacts you requesting to join.\n⛔  Never share the server link. Follow this protocol instead. Sharing the link without prior permission will result in a ban from the Discord server.\nContact the coordinators if in doubt. Thank you.\nCredit to <@1359966236473168188> for drafting the doc.\n\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+      "timestamp": "2025-04-24T01:12:03.328000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364770835201527880",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 13
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1364770834861916171",
+          "filename": "Protocol-requests-to-join-Network-v1.1_1.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1353442557438328864/1364770834861916171/Protocol-requests-to-join-Network-v1.1_1.pdf?ex=68404623&is=683ef4a3&hm=123abfa1a6242cb66538f79786624c476bc019dacbc401513578c644cb2fde62&",
+          "size": 100759
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364773136188313601",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🔐 Welcome & Rules – Part 3 || 📜 Community Rules\n\n🫶 Respect and Tolerance: Treat all members with respect. No forms of harassment, witch‑hunting, sexism, racism, or any other type of hate speech will be tolerated. Violating this rule will result in immediate expulsion to maintain a safe and welcoming environment.\n\n🚫 No Spam: Do not spam or self‑promote (including server invites, advertisements, brand promotions, etc.) without team permission. Share only relevant links and resources that add value to the community.\n\n🔒 Confidentiality: Do not disclose personal or contact information of members without their explicit consent, including photos or any private data.\n\n***NOTE: Per guidance from Oscar and Dr. Sanchez (our founders), all members are required to share their real identity{In there UserName}. Refusal to do so is considered a security risk and may result in removal from the community. This policy is in place to maintain a safe and trustworthy environment for all participants.\n\n🛡️ Moderation: Moderators have the final authority in resolving conflicts and may modify the rules to preserve the quality of discussions. If you observe anything contrary to the rules or that compromises your safety, immediately inform the staff. We value your feedback to improve the community.\n\n📚 Appropriate Content: It is prohibited to share illegal, unofficial, age‑restricted, or obscene content, including texts, images, nicknames, or links that contain nudity, sex, excessive violence, or disturbing content. Keep all content appropriate and professional for a collaborative environment.\n\n🔊 For Voice Chat: Reduce background noise, use the push‑to‑talk option only when necessary. Moderators have the right to disconnect, mute, deafen, or move members from voice channels to ensure the quality of communication.\n\n🤖 Use of AI Tools and Citations: When using AI tools, ensure to correctly cite the source, including the name of the tool, the URL, and specific details of use. For example, APA guidelines require you to include the author's name of the AI tool, the title, the URL, and the date of access.\n\n© Copyright: Let us respect copyright when sharing information. Share only content that is your own or properly licensed. It is not permitted to infringe intellectual property rights.\n\n✉️ Invitations and Admission: Do not invite unofficial bots or people outside the community without an explicit request and approval from the staff. The team reserves the right of admission to maintain the integrity and purpose of our community.\n\n🛠 Feedback System Required for Changes: All server changes and optimizations — whether from general members or Community Coordinators — must be submitted through the official 🧠 Feedback System outlined in the next step. To protect the structure and flow of the server, bypassing this process may result in removal from the community. We value transparency and order to ensure everyone’s voice is heard through the proper channels. 🔁🔒\n\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
+      "timestamp": "2025-04-24T01:21:11.926000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364773136188313601",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 14
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364776509385998478",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "---------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🔧 Welcome & Rules – Part 4\n🗣️ The Feedback System for Coordinators & General Members\n\nTo ensure every voice has a fair chance at shaping this community, we’ve built a clear system for suggesting changes and enhancements. Follow each step closely to get your ideas seen, supported, and possibly implemented! 🛠️✨\n\n🧠 #feedback-workshop\n• 💡 Brainstorm + refine Discord optimization ideas.\n• 🤝 Collaborate freely; sketches and rough drafts welcome.\n• 📤 When your concept feels solid, pass it to #feedback-submissions.\n\n📥 #feedback-submissions\n• 🚀 Drop polished proposals here for community review.\n• 👍 React-votes determine popularity — hype the ideas you love!\n• ⏫ Top-liked concepts are queued for the monthly poll in #feedback-polls.\n• ⏲️ Slow-mode: 6 hours — make it count before hitting send!\n\n🗳 #feedback-polls\n• 📅 First Friday of the Month — Poll goes live. Vote by Saturday 11:59 PM ET.\n• 🗓️ Sunday: Community Coordinator Roundtable — they debate the top ideas.\n• 🤝 Final review by Oscar Sanchez & Dr. Abel for implementation feasibility.\n• 🏆 Two winners: one from Coordinators, one from General Members.\n• ✅ Winners move forward to implementation — tracked in #announcements.\n• 🔔 Missed the deadline? Next month’s your shot!\n\n---------------------------------------------------------------------------------------------------------------------------------------------------------",
+      "timestamp": "2025-04-24T01:34:36.159000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364776509385998478",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 10
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364778824033898537",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "---------------------------------------------------------------------------------------------------------------------------------------------------------\n\n🎤 Welcome & Rules – Part 5\n\n🗓️ Live Events on the Gen AI Global Server\n\nWe believe that real-time collaboration — both online and offline — is essential for building a strong, high-impact community. Here’s what you can expect:\n------------------------------------------------------------------------------------------\n\n🧠 Bi-Monthly GenAI Use-Case Roundtable\n\n🔁 Every Two Months\n📍 Live Voice Chat or Scheduled Stage Event (Discord)\n🎯 Industry Focus: Rotates by domain (e.g., AI in Healthcare, Finance, EdTech)\n\n• 🎙 Members & guest experts showcase real-world GenAI applications\n• 💬 Open forum for questions, insights, and constructive feedback\n• 🔎 Practical use cases bridge conceptual learning and enterprise execution\n• 🚀 Great visibility for ambitious members to shine as thought leaders\n------------------------------------------------------------------------------------------\n\n🤝 Bi-Monthly In-Person Meetups\n\n📍 Held in major cities — every two months\n🧭 Designed for: Real-world networking, buddy check-ins, team bonding, and photo ops\n🗳 Community decides dates & locations via polls\n🗂️ Roles:\n• Conversational Leaders lead activities\n• Discord Managers support logistics\n• Network Architects align with strategy & extract insights\n📸 Members are encouraged to post event recaps to keep the momentum flowing\n\n---------------------------------------------------------------------------------------------------------------------------------------------------------",
+      "timestamp": "2025-04-24T01:43:48.014000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364778824033898537",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👌",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 11
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364779266457473137",
+      "channel_id": "1353442557438328864",
+      "channel_name": "📝welcome-rules",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🚀 Welcome & Rules – Part 6 || 📌 Next Step in Your Journey:\n\nTo continue your journey in integrating yourself into the GenAI Global community, simply proceed to the <#1361060350266577134> channel. There you’ll find the next steps and resources to help you get started and become an active, informed member of our community.",
+      "timestamp": "2025-04-24T01:45:33.496000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353442557438328864/1364779266457473137",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 16
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1372397860980658327",
+  "channel_name": "📥channel-submissions",
+  "fetch_timestamp": "2025-06-03T22:03:58.053406",
+  "message_count": 15,
+  "messages": [
+    {
+      "message_id": "1373671200869584958",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-18T14:38:55.864000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373671200869584958",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1373542834526879764",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1373671242149920942",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-18T14:39:05.706000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373671242149920942",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1373402246297026760",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1373671403009867936",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1364924054653505569> <@1082181389266473051> re-submit your ideas here for non-industry specific channels !",
+      "timestamp": "2025-05-18T14:39:44.058000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373671403009867936",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1364924054653505569",
+        "1082181389266473051"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373673854295343254",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📢 Announcement: General Channel Submissions Now Open! 📢\n\nHey @everyone,\n\nWe’ve just launched the <#1372397860980658327>  channel under the “General Discussion” category! This is the perfect place to propose new general-interest channels to broaden our community discussions on diverse topics.\n\n🔍 Submission Guidelines:\n\n1️⃣ Ensure your proposed channel clearly focuses on a specific general-interest topic (e.g., \"Secure AI\").\n2️⃣ Make sure you have a team ready to actively run and engage with the channel. The aim is to keep these discussions vibrant and continuously updated.\n3️⃣ Upon review, we’ll reach out to the submitters of approved channels to discuss governance strategies and how they plan to maintain engagement.\n4️⃣ If everything aligns, we’ll create the channel.\n\n🕐 Timeline:\n\nAt 1 PM EST today, our governance committee will finalize the approval process for these submissions. After which we will begin to review channels for approval so make sure to submit your best ideas!\n\n👤 Community Governance Lead:\n\n<@546559083357143044>  will be leading the governance process, alongside <@1352735021093359626> , <@1125194882164736050> , and <@1311434218622156850> .\n\nSince <@546559083357143044>  heads the website development team, there's great synergy in having her oversee this process. She'll ensure the content from these channels integrates smoothly into our resource repository, enhancing the user experience.\n\n<@1352735021093359626>  and <@1125194882164736050>  are on the governance team due to their affiliation with the content creation team and synergy with third-party content development.\n\n<@1311434218622156850> , our Head of IT, will be on the team to provide input and set up channels with proper permissions once approved.\n\nLet’s build something great together! 🚀",
+      "timestamp": "2025-05-18T14:49:28.490000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373673854295343254",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050",
+        "1352735021093359626",
+        "546559083357143044",
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "🦾",
+          "count": 3
+        },
+        {
+          "emoji": "🔥",
+          "count": 4
+        },
+        {
+          "emoji": "📸",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373673924503670926",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-18T14:49:45.229000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373673924503670926",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1373673854295343254",
+        "channel_id": "1372397860980658327",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1373735502754349116",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Is there interest in having a channel for aspiring entrepreneurs in AI space?",
+      "timestamp": "2025-05-18T18:54:26.628000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373735502754349116",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373736823746072597",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Is there interest in having a channel dedicated to discuss secure AI  ?",
+      "timestamp": "2025-05-18T18:59:41.577000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373736823746072597",
+      "author": {
+        "id": "1364924054653505569",
+        "username": "shobana_nambiar",
+        "discriminator": "0",
+        "display_name": "Shobana Nambiar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373740702445473814",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Perhaps we can propose one that could combine - Entrepreneurs and looking for co-founders 😀",
+      "timestamp": "2025-05-18T19:15:06.331000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373740702445473814",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373735502754349116",
+        "channel_id": "1372397860980658327",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1373755375626748147",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thats actually more important one 🙂",
+      "timestamp": "2025-05-18T20:13:24.690000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373755375626748147",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373740702445473814",
+        "channel_id": "1372397860980658327",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1373782587763458088",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Would anyone be interested in a channel regarding robotics and automation in e-commerce and logistics?",
+      "timestamp": "2025-05-18T22:01:32.569000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373782587763458088",
+      "author": {
+        "id": "1364942657859878953",
+        "username": "bastiengrelaud",
+        "discriminator": "0",
+        "display_name": "Bastien Grelaud",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373923557217669121",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I would like to open the point of having a channel for AI legislation around different counties, etc. etc.  Any other person interested?",
+      "timestamp": "2025-05-19T07:21:42.306000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373923557217669121",
+      "author": {
+        "id": "1082181389266473051",
+        "username": "internationalcio",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Sánchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373938260526764063",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Miguel thanks for your message.  I am interested in the European perspective.",
+      "timestamp": "2025-05-19T08:20:07.848000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373938260526764063",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373986370996932721",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My proposal: https://discordapp.com/channels/1353058864810950737/1373042811318046802/1373982667166711808",
+      "timestamp": "2025-05-19T11:31:18.278000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1373986370996932721",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377680547609837669",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thought: I've noticed there are many great content creators amplifying their blog/posts in various channels. How about we create an \"Amplify\" channel for those who want to share their posts? One place to amplify:)",
+      "timestamp": "2025-05-29T16:10:38.617000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1377680547609837669",
+      "author": {
+        "id": "1352697519498334252",
+        "username": "minsunnie",
+        "discriminator": "0",
+        "display_name": "Michelle Rhee  Los Angeles GMT-7",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377686251179737152",
+      "channel_id": "1372397860980658327",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Is there interest in having a channel",
+      "timestamp": "2025-05-29T16:33:18.454000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372397860980658327/1377686251179737152",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1373736823746072597",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

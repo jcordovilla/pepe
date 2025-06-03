@@ -1,0 +1,4299 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1366389753833979966",
+  "channel_name": "💠buddy-group5",
+  "fetch_timestamp": "2025-06-03T22:04:03.147584",
+  "message_count": 164,
+  "messages": [
+    {
+      "message_id": "1366449096608579736",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good Morning Everyone !",
+      "timestamp": "2025-04-28T16:20:52.028000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366449096608579736",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366451476213534831",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@456226577798135808> <@1365093933461274654> Hello buddy group 5.  Look forward to connecting.  I am trying to locate Marsha too who should be part of our group.",
+      "timestamp": "2025-04-28T16:30:19.370000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366451476213534831",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654",
+        "456226577798135808"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366512375024451624",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good evening from London!  Thank-you for the welcome to our new buddy group!",
+      "timestamp": "2025-04-28T20:32:18.778000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366512375024451624",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366513712013381672",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🙌",
+      "timestamp": "2025-04-28T20:37:37.541000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366513712013381672",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366784868293546004",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@691008994789163020> Just made the fix! There are two Jonathan's on the server so there was a brief mix up.\n\nExcited to have you !",
+      "timestamp": "2025-04-29T14:35:06.236000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366784868293546004",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366799412927533150",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello! Hi <@1365093933461274654> - good to see you again! 😂",
+      "timestamp": "2025-04-29T15:32:53.947000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366799412927533150",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "🤣",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366803890569216010",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@691008994789163020> - likewise!  +++will share some notes after the AWS London Summit tomorrow!",
+      "timestamp": "2025-04-29T15:50:41.500000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366803890569216010",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366813230730842183",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great, look forward to hearing the key takeaways and catching up soon. Enjoy!",
+      "timestamp": "2025-04-29T16:27:48.368000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366813230730842183",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366854776310071478",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all, when do you all want to meet up?  Should we try Sat am EST?",
+      "timestamp": "2025-04-29T19:12:53.606000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366854776310071478",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366883702700773497",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Saturday should work...what time ?",
+      "timestamp": "2025-04-29T21:07:50.195000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366883702700773497",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366902881344815104",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I am free between 9 am and- 10:30 am est.  what about you all? We can do a zoom if we find a time. Happy to set it up",
+      "timestamp": "2025-04-29T22:24:02.740000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366902881344815104",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366902942640377876",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think I have all your emails already",
+      "timestamp": "2025-04-29T22:24:17.354000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366902942640377876",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366925194677190659",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I can 10 am your time, that would be 8 am for me hehe",
+      "timestamp": "2025-04-29T23:52:42.653000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1366925194677190659",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367170281994453034",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning group !!",
+      "timestamp": "2025-04-30T16:06:36.023000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367170281994453034",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367186087000145930",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Oscar, would you prefer 10:30 am est Sat?",
+      "timestamp": "2025-04-30T17:09:24.230000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367186087000145930",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367186675297681492",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just created an invite and emailed it to Oscar and Jonathan. Mark are you able to join too? Irene Yang is inviting you to a scheduled Zoom meeting.\n\nTopic: GenAI Global Buddy Group 5\nTime: May 3, 2025 10:30 AM Eastern Time (US and Canada)\nJoin Zoom Meeting\nhttps://zoom.us/j/92255437434\n\nMeeting ID: 922 5543 7434\n\n---\n\nOne tap mobile\n+16469313860,,92255437434# US\n+19292056099,,92255437434# US (New York)\n\n---\n\nDial by your location\n• +1 646 931 3860 US\n• +1 929 205 6099 US (New York)\n• +1 309 205 3325 US\n• +1 312 626 6799 US (Chicago)\n• +1 301 715 8592 US (Washington DC)\n• +1 305 224 1968 US\n• +1 507 473 4847 US\n• +1 564 217 2000 US\n• +1 669 444 9171 US\n• +1 669 900 6833 US (San Jose)\n• +1 689 278 1000 US\n• +1 719 359 4580 US\n• +1 253 205 0468 US\n• +1 253 215 8782 US (Tacoma)\n• +1 346 248 7799 US (Houston)\n• +1 360 209 5623 US\n• +1 386 347 5053 US\n\nMeeting ID: 922 5543 7434\n\nFind your local number: https://zoom.us/u/aeGk4cR1ee",
+      "timestamp": "2025-04-30T17:11:44.491000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367186675297681492",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367208773156081684",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yeah 1030 EST sound good !",
+      "timestamp": "2025-04-30T18:39:33.031000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367208773156081684",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367186675297681492",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367246776729604179",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just emailed both of you the meeting invite. I had a typo in Jonathan's email earlier. Resent it.",
+      "timestamp": "2025-04-30T21:10:33.789000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367246776729604179",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367249787308605582",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "hello! sorry, somehow managed to miss these messages. i have a clash with a kid's birthday party on saturday. could we do a little earlier, say 9am EST or 9.15am EST?",
+      "timestamp": "2025-04-30T21:22:31.567000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367249787308605582",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367254242653503488",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oscar is two hours earlier so not sure he wants to do a 7 am on Sat.",
+      "timestamp": "2025-04-30T21:40:13.804000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367254242653503488",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367254445796098098",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "oof, yeah that doesn't sound like fun",
+      "timestamp": "2025-04-30T21:41:02.237000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367254445796098098",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "😅",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367254468995059964",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Mark is also traveling so he cant join this week.",
+      "timestamp": "2025-04-30T21:41:07.768000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367254468995059964",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367254882809020536",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Maybe we do this... Oscar and I first meet.. and then we do another call next week.  I'm trying to figure out how we are supposed to leverage these buddy groups besides the question of the week.  I think all of you are also in my NonCoder Learning Group who is now growing in number and scope..it's taking a life on its own. Need to recruit roles or this will become a full-time job with no pay. lol.",
+      "timestamp": "2025-04-30T21:42:46.429000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367254882809020536",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367255362016772147",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "In the announcement section Oscar just posted that they are putting the buddy chat on hold until they stabilize some things... anyway, i think we have time.. the dust seems to be settling still on a number of fronts.",
+      "timestamp": "2025-04-30T21:44:40.681000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367255362016772147",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367255430421807196",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yeah i was thinking that it's quite a high maintenance burden for you to be across all these groups. i thought the buddy groups would be largely self managing - there for local collabs as and when needed rather than steered by admins. i'm just thinking of the load on everyone.",
+      "timestamp": "2025-04-30T21:44:56.990000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367255430421807196",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367255566434439308",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "makes sense",
+      "timestamp": "2025-04-30T21:45:29.418000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367255566434439308",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367256587680612382",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I agree.  I wasnt planning to do a lot of administration in the buddy group actually.  I thought we are all in here as buddies, no?   The operating model of the NonCoder Learning Forum will be very fluid and co-led by everyone in the group.  There will be self-serve content and resources, group level meetings, but then also sessions that individuals set up based on common interests/learning goals. I will share more when you join the meetings.  We'll have a calendar in Mural for the meetings, events, etc.  When you join one of the calls this week, I'll explain.",
+      "timestamp": "2025-04-30T21:49:32.902000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367256587680612382",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367256788096782468",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "cool, planning to join tomorrow. looking forward to it!",
+      "timestamp": "2025-04-30T21:50:20.685000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367256788096782468",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367257387282727115",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ok sounds like a plan is in motion. So Irene, you and I will meet this Saturday at 1030am est ?",
+      "timestamp": "2025-04-30T21:52:43.542000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367257387282727115",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367267638950101097",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Totally agree — there isn’t supposed to be a ton of admin work for conversational leaders in the buddy groups. They’re just there as a light support presence, not to manage anything. The only optional weekly task is joining a quick meeting to help come up with a Q&A question for the week — but again, that’s totally optional!\n\nHope that helps.",
+      "timestamp": "2025-04-30T22:33:27.730000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367267638950101097",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367256587680612382",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367269261575192709",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanx Oscar, crystal clear !",
+      "timestamp": "2025-04-30T22:39:54.594000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367269261575192709",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367267638950101097",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367499237171925132",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey folks, we are supposed to come up with a question of the week for our Buddy Group today.  I had actually posted a question in there before our team formed",
+      "timestamp": "2025-05-01T13:53:45.049000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499237171925132",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367499290897027136",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Question of the week:  As domain specific AI applications and new start ups focusing on niche use cases are quickly increasing in number, how do you think this will influence/ impact the future of GenAI for enterprises and for individuals?",
+      "timestamp": "2025-05-01T13:53:57.858000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499290897027136",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367499364901195848",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Not sure you want to keep going with this one or come up with a new one. It has 5 votes so far.",
+      "timestamp": "2025-05-01T13:54:15.502000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499364901195848",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367499500486131794",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I can echo it as our question for Buddy Group 5 or we can create a new one.  No biggie if there is a burning question you want to pose to Dr Abel",
+      "timestamp": "2025-05-01T13:54:47.828000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499500486131794",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367499789071155422",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Happy to go with that <@1359552583244583153> - i'd like to hear the answer",
+      "timestamp": "2025-05-01T13:55:56.632000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499789071155422",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367499807593332867",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "thank you",
+      "timestamp": "2025-05-01T13:56:01.048000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367499807593332867",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367539667553226814",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ill second that question Irene",
+      "timestamp": "2025-05-01T16:34:24.403000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367539667553226814",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367568203462742238",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi, had an interesting day at the AWS London Summit yesterday.  I kept an eye out for new announcements (after re:Invent last December).  I posted a short summary here:\n\nhttps://www.linkedin.com/posts/activity-7323732816108691457-Zevd?utm_source=share&utm_medium=member_ios&rcm=ACoAAAIbAaABjMVR71zrZMwK79OZiK9Hgb_xrmQ\n\nI have some more info on AWS Outposts for Small Language Models.  Wondering where the best place to post this on discord would be?  Any suggestions?",
+      "timestamp": "2025-05-01T18:27:47.894000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367568203462742238",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367597676064931871",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "That’s great! Will read your post. Maybe general chat for the AWS one.",
+      "timestamp": "2025-05-01T20:24:54.710000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367597676064931871",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367601027682930819",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This one is very helpful !\n\nhttps://yourstory.com/2025/02/greg-brockman-perfect-ai-prompt-framework",
+      "timestamp": "2025-05-01T20:38:13.798000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367601027682930819",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367865926866702356",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\nReminder: We’re having our Q&A session on Zoom with Dr. Sanchez today at 11:30 AM EST!\n\nZoom Link: https://mit.zoom.us/j/97336834725\n\nLooking forward to seeing you all there! Don’t miss it\n🧠✨",
+      "timestamp": "2025-05-02T14:10:50.685000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367865926866702356",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367899208123940935",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Do any of you use ChatGPT Summarize? Have you added it as a Chrome Extension?  Have you created any OpenAI API keys?  I havent created any API keys with my ChatGPT. Looked at their platform.openai.com section which is the developer platform to see if I can understand how to create/use the API keys but havent dug into it. Wondering if any of you have experience with it",
+      "timestamp": "2025-05-02T16:23:05.555000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367899208123940935",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367900972596330627",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I used some tools to summarize for example the youtube videos. Its is a pluggin for the browser.",
+      "timestamp": "2025-05-02T16:30:06.238000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367900972596330627",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367954574668992582",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "hiya, i used a few extensions suggested in the course but i ended up removing them all because they were slowing my laptop down. can't remember if ChatGPT summarise was one of those.",
+      "timestamp": "2025-05-02T20:03:05.968000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367954574668992582",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367954900373209138",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yep i've created an open API key and have used it while experimenting with my project. chat gpt can give you a step by step guide on how to create one and how to use it.",
+      "timestamp": "2025-05-02T20:04:23.622000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367954900373209138",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367959398508662815",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "also you need to load some funds before you can use it and then it's pay as you go. i put £10 on there and it's lasted quite a long time so there's plenty you can experiment with without spending loads of money. i think it also depends what model  you use. I used the 3.5 model which is clearly very cheap per token used.",
+      "timestamp": "2025-05-02T20:22:16.061000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367959398508662815",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367959496994848850",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "what kind of use case were you looking at?",
+      "timestamp": "2025-05-02T20:22:39.542000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367959496994848850",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367962032145563649",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi thanks for this.  I haven’t set it up yet.  Not sure I need a ChatGPT summary extension w an API and to pay if I can create specific prompts to drop the documents or links in and ask it to summarize.  How were you using it? I used the Glasp chrome web extensions for captions in videos which is helpful but perhaps GPT summary can produce summaries of webinars.",
+      "timestamp": "2025-05-02T20:32:43.969000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367962032145563649",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367962584791384226",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It would be great to do a tool mapping by use case to identify the best tools for diff purposes.  I created a board in Mural to capture the various tools to start but then I think it would be helpful to also create a tools and use case matrix next to categorize them.  What do you think?",
+      "timestamp": "2025-05-02T20:34:55.730000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367962584791384226",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367964431442645023",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "i don't know if you've played around with the non-coders customised chatGPT yet but i just asked it about that and it came up with a nice little matrix for non-coders:",
+      "timestamp": "2025-05-02T20:42:16.006000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367964431442645023",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367964431585382491",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1366389753833979966/1367964431585382491/image.png?ex=6840afa8&is=683f5e28&hm=164fe20e609f947300c5156db369e28ec9bdb10fabc410ef7ad97e541bd516ba&",
+          "size": 90887
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367964873283080273",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "i think it's definitely helpful to have something like this. there are so many tools out that it's hard to know where to start. so starting with \"what am i trying to do\" helps.",
+      "timestamp": "2025-05-02T20:44:01.349000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367964873283080273",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367965297419747478",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "re: the open AI API i was creating (with a lot of chatGPT help) a python script which was helping me to do some analysis and summarisation on some content that i'd embedded into a vectorDB (also with chatGPTs help).",
+      "timestamp": "2025-05-02T20:45:42.471000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367965297419747478",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367965779504398336",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "so the vectorDB was local and i was prompting through the cmd line interface - i think the prompt would go and find the relevant data in the vectorDB and send it to the OpenAI API with some specific instruction and then the LLM would return a response.",
+      "timestamp": "2025-05-02T20:47:37.409000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367965779504398336",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367967669617430599",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is helpful Jonathan, the matrix that is.  I'll have to read up on how the AI APIs work in ChatGPT... i'm not sure there with using them to connect to connect in my local vector DB but I am interested in learning how this could work later on.",
+      "timestamp": "2025-05-02T20:55:08.047000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367967669617430599",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367968168307327027",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "using the API vs ChatGPT interface depends on what you're trying to do. if you want to summarise a few docs or websites, the UI is fine. i think if you want to do something at scale and/or repeatedly, then the API might make more sense.",
+      "timestamp": "2025-05-02T20:57:06.944000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367968168307327027",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367968255926603837",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Once we have the tools identified that we want to focus on, i think we should create a prompt to develop a matrix like you have above for non-coders and then drop that into Mural.  But before we do that, i think we shoudl agree on the best tools and then the evaluation and use cases can be step 2.  I had done a few prompts on this before too so I think we are all on the same page.  I love how you are leveraging ChatGPT to its fullest to drive productivity and enable so many assistants",
+      "timestamp": "2025-05-02T20:57:27.834000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367968255926603837",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367968599989293087",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "anytime i find myself doing a manual task or think through a problem, me new default is - wait a minute, how can i use ChatGPT to help me do this more efficiently.",
+      "timestamp": "2025-05-02T20:58:49.865000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367968599989293087",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367971872494456923",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Really great mindset!  You'll need to think about a session you want to facilitate in the NonCoder group sometime in May.  I think a lot of people can learn from you.",
+      "timestamp": "2025-05-02T21:11:50.091000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367971872494456923",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367972485332729916",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What you're saying makes a lot of sense, and I confess I have GPT dependency syndrome. Nowadays, I feel like I can't do anything without AI (comment generated with AI, by the way).",
+      "timestamp": "2025-05-02T21:14:16.203000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367972485332729916",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [
+        {
+          "emoji": "😂",
+          "count": 2
+        },
+        {
+          "emoji": "😀",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367968599989293087",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367982458997309492",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hahahahaha",
+      "timestamp": "2025-05-02T21:53:54.110000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1367982458997309492",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050"
+      ],
+      "reactions": [
+        {
+          "emoji": "😆",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367972485332729916",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368012242498486347",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oscar and Jonathan I sent a zoom for our meeting tomorrow at 10:30 am est? Did you all get it? If not I will resend when I get back from the gym. I have to update you on some conversations I had today",
+      "timestamp": "2025-05-02T23:52:15.050000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1368012242498486347",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368013506728956034",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "i'm at a kids b'day party! seem to have one every weekend atm. sorry.",
+      "timestamp": "2025-05-02T23:57:16.466000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1368013506728956034",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368012242498486347",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368019006123933726",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ok no worries",
+      "timestamp": "2025-05-03T00:19:07.624000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1368019006123933726",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369423367077101669",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello, quick one - do we know when the next Q&A is due to take place?",
+      "timestamp": "2025-05-06T21:19:33.367000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369423367077101669",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369643312029634652",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1365093933461274654> i know you reached out on linkedIn re: ideas for presentations. Thought I'd bring it in here so get <@1359552583244583153> and <@758206516753858561> 's input too. \n\nI was thinking about pulling together a presentation (similar to the one Jose did) to share my hands-on journey learning AI. It would cover the numerous false starts experimenting with local models through to actually building an AI powered app. I can walk through experiments, challenges, and breakthroughs, including how I used ChatGPT to improve my technical skills, how I created a custom GPT-powered product team, and used it to rapidly developed an MVP app for dementia care using AI tools like Cursor. I can reflect on what worked, what didn’t, and demonstrate how anyone can use generative AI to solve meaningful problems—without needing to be a coder.\n\nThoughts?",
+      "timestamp": "2025-05-07T11:53:32.330000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369643312029634652",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1359552583244583153",
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369698220854214727",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi there, I've been thinking about a potential question for the Q&A.  I was very interested to see the Cursor announcement this week.  I have to admit it was the first time I had looked at Cursor.  I've been closer to Amazon CodeWhisperer (and now Amazon Q Developer).  Would there be interest to raise a question on the future of such tools  and which ones to watch in the near term?",
+      "timestamp": "2025-05-07T15:31:43.614000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369698220854214727",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369700590619332689",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "That sounds really awesome !",
+      "timestamp": "2025-05-07T15:41:08.610000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369700590619332689",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369643312029634652",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369701195861594304",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Mark, definitly ! For my perspective, anything that opens up more tools to explore and to learn from Its always a great idea. Now that are soooo many around having an expert opinion like Dr. Sanchez in which ones are more suitable is always a great help",
+      "timestamp": "2025-05-07T15:43:32.911000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369701195861594304",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369698220854214727",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369867397422387321",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Guys which Question do you wanna propose for the Q&A ? <@1365093933461274654> said something really interesting about the future of some tools and which other ones to look for in the near future. \n\n<@1365093933461274654> could you give form to your suggestion for the Q&A ? Also if anyone else have another one let’s hear it !",
+      "timestamp": "2025-05-08T02:43:58.451000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369867397422387321",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369920233850273792",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@758206516753858561> !  Here’s a first draft of my proposed question:\n—\nQ.  OpenAI’s purchase of Windsurf made headlines this week. Their rival Cursor is also in the spotlight.  Which AI Coding tools should we be aware of in the “arms race” ahead?\n—",
+      "timestamp": "2025-05-08T06:13:55.637000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369920233850273792",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369980098404548709",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sounds great Jonathan!  I was wondering if there are any International nuances in terms of early uptake & readiness?  E.g.  I had always assumed early sight in North America of new products/tech marginally ahead of us in Europe.  Although this does seem to be narrowing now with the AI & Gen AI wave.",
+      "timestamp": "2025-05-08T10:11:48.459000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1369980098404548709",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369643312029634652",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370039804749938720",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanx Mark ! I posted the question into the poll !",
+      "timestamp": "2025-05-08T14:09:03.561000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1370039804749938720",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369920233850273792",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370067768795463700",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-08T16:00:10.709000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1370067768795463700",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372261009557028864",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello!  Any thoughts on a question for the next Q&A…?",
+      "timestamp": "2025-05-14T17:15:20.055000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372261009557028864",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372264411359613009",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning !! Everyone ! Happy to hear if anybody has one 😃  we need to submit it as soon as we can",
+      "timestamp": "2025-05-14T17:28:51.108000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372264411359613009",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372273430572957706",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "If there are no new questions, I would suggest the same as last week :). Unfortunately I don’t get a chance to respond to the poll, but can see the window has changed now for those of us in Europe time zones!  Just a thought…",
+      "timestamp": "2025-05-14T18:04:41.456000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372273430572957706",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372279020171034665",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Or an alternative new question from me:\n\nQ.  What are the first thoughts on the potential for the Saudi Arabia HUMAIN AI Project announced this week?",
+      "timestamp": "2025-05-14T18:26:54.120000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372279020171034665",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372279853822382194",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-14T18:30:12.878000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372279853822382194",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372294932806766712",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-14T19:30:07.988000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372294932806766712",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372615675935199322",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello!  Any other thoughts on questions for the Q&A?",
+      "timestamp": "2025-05-15T16:44:39.109000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372615675935199322",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372617375869964351",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Mark, I was thinking of a question about agentic design\n\nAs generative AI systems become increasingly agentic and capable of complex autonomous tasks, what design principles and architectural choices are essential to ensure maintainability and debuggability over time – especially to avoid the upfront efficiency gains being lost to long-term technical debt?",
+      "timestamp": "2025-05-15T16:51:24.405000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372617375869964351",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372618201527091222",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sounds good!\n\nI wasn’t sure who was going to submit the question (I think it was <@758206516753858561>  last week)?",
+      "timestamp": "2025-05-15T16:54:41.257000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372618201527091222",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372626843789951170",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "cool, i can submit it for us",
+      "timestamp": "2025-05-15T17:29:01.733000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372626843789951170",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372627103262048276",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Gets my vote!",
+      "timestamp": "2025-05-15T17:30:03.596000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372627103262048276",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372627118105825392",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561> is it ok for you?",
+      "timestamp": "2025-05-15T17:30:07.135000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372627118105825392",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372627409567879270",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hope the question displays okay in the voting poll - I think they are summarised further when they are added.  \n\n\nThankfully we have a longer voting window in Europe this week too to get our votes in! 👍",
+      "timestamp": "2025-05-15T17:31:16.625000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372627409567879270",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372627768768069662",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yeah !",
+      "timestamp": "2025-05-15T17:32:42.265000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372627768768069662",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372628008786985062",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "just include \"buddy group 5\" so they know from which group is it",
+      "timestamp": "2025-05-15T17:33:39.490000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372628008786985062",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372628025711132692",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "😄",
+      "timestamp": "2025-05-15T17:33:43.525000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372628025711132692",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372628132548575314",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "done",
+      "timestamp": "2025-05-15T17:34:08.997000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372628132548575314",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372630630398955610",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "😄",
+      "timestamp": "2025-05-15T17:44:04.531000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372630630398955610",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372630642851971083",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "perfect !!",
+      "timestamp": "2025-05-15T17:44:07.500000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372630642851971083",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372657379107410102",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-15T19:30:21.920000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1372657379107410102",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373029360944283648",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Admins!\nCould you please check who’s been inactive in this buddy group over the past two weeks and share the list in <#1372943237890707576>?\n\nThis isn’t about removing anyone it’s about ensuring everyone’s in a space where they can contribute and grow meaningfully.",
+      "timestamp": "2025-05-16T20:08:29.301000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373029360944283648",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373071015093076098",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sure !!",
+      "timestamp": "2025-05-16T22:54:00.424000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373071015093076098",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373140906110095430",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Member of Buddy Group 5 raise your haaand !! 😛",
+      "timestamp": "2025-05-17T03:31:43.741000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373140906110095430",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373341949678850140",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1068496361651179540> Are you still here ? 😎",
+      "timestamp": "2025-05-17T16:50:36.263000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373341949678850140",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373654805070741504",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@758206516753858561>  & team, still here and participating asynchronously. Sorry!",
+      "timestamp": "2025-05-18T13:33:46.801000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373654805070741504",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373697836142825633",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Glad to have you here!!",
+      "timestamp": "2025-05-18T16:24:46.208000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1373697836142825633",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373654805070741504",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374130989986742367",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good Afternoon Everyone ! \nHow’s everyone doing ? \nDo we have any questions or topics you want to take on ?",
+      "timestamp": "2025-05-19T21:05:58.132000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374130989986742367",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374162714041258034",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello <@758206516753858561>!    Quick one - do you know if there are any updates yet for the Non Coders Group  (onboarding into the Discord Manager stage)?",
+      "timestamp": "2025-05-19T23:12:01.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374162714041258034",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374165280112119920",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Welcome to the Buddy Group <@1068496361651179540> !",
+      "timestamp": "2025-05-19T23:22:13.535000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374165280112119920",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374165606139691048",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Mark for that you´ll need to reach <@1143203059820933251> please !",
+      "timestamp": "2025-05-19T23:23:31.266000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374165606139691048",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1143203059820933251"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374415222613213205",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning everyone !!\nDo we have a topic / question you want to propuse ?? Is there any doubt scratching your back ? 😄😂",
+      "timestamp": "2025-05-20T15:55:24.471000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374415222613213205",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374416349455188089",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "also Tech Tip Tuesday !\n\nMorning Everyone ! Tech Tip Tuesday !\n\n**Headline:** 10 ChatGPT prompts I love that'll turn you into a power user\n**Source / Date:** Tom's Guide, May 18, 2025\n**Link:** https://www.tomsguide.com/ai/10-chatgpt-prompts-thatll-turn-you-into-a-power-user\n**Tip Summary:** This article presents ten innovative ChatGPT prompts designed to enhance productivity, creativity, and decision-making. Examples include role-playing as a negotiation coach, reverse-engineering TED Talks to improve storytelling, simulating expert debates for balanced perspectives, and creating customized productivity schedules. These prompts are versatile, boosting efficiency and engagement in both professional and personal contexts.\n**Action Step:** Use ChatGPT to simulate a debate between two experts on a topic you’re exploring.",
+      "timestamp": "2025-05-20T15:59:53.131000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374416349455188089",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374716312298717224",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-21T11:51:49.846000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374716312298717224",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1374583287254880256",
+        "channel_id": "1353085578274410626",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374776942779437126",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Buddy group lets take this opportunity to express all your cuestions about our amazing community !",
+      "timestamp": "2025-05-21T15:52:45.279000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374776942779437126",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374836662185496668",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "A potential question from me <@758206516753858561> :\n\nQ.  Are there any options for existing General Members to take on new responsibilities or roles in the Community?",
+      "timestamp": "2025-05-21T19:50:03.495000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374836662185496668",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374839190403026954",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-21T20:00:06.269000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374839190403026954",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374854295031120035",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-21T21:00:07.493000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374854295031120035",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374858734802702356",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "no one else have another question ?",
+      "timestamp": "2025-05-21T21:17:46.017000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374858734802702356",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374836662185496668",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374858932794953929",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1068496361651179540> <@691008994789163020> ?",
+      "timestamp": "2025-05-21T21:18:33.222000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374858932794953929",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020",
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374859570282758164",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Happy with Mark’s question.",
+      "timestamp": "2025-05-21T21:21:05.211000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374859570282758164",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374860229493260361",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "thanx guuys, we will <@1068496361651179540> a little bit of time, in any other case I´ll send Mark´s question",
+      "timestamp": "2025-05-21T21:23:42.379000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374860229493260361",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374930317613207552",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "im posting Mark´s question",
+      "timestamp": "2025-05-22T02:02:12.689000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374930317613207552",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374930648636063956",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "done",
+      "timestamp": "2025-05-22T02:03:31.611000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1374930648636063956",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375493155218260038",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://www.linkedin.com/events/insidegenaiglobal-liveq-awithfo7331033014556123136/theater/",
+      "timestamp": "2025-05-23T15:18:43.631000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1375493155218260038",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375493557233782794",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Our Question was included in the call this week!",
+      "timestamp": "2025-05-23T15:20:19.479000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1375493557233782794",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375519927456235642",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "And extensively !",
+      "timestamp": "2025-05-23T17:05:06.630000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1375519927456235642",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375493557233782794",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376237540859711579",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561> and <@691008994789163020>  - just spotted we are in the same Group 1 for the non/low code training starting 2nd June!",
+      "timestamp": "2025-05-25T16:36:38.998000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376237540859711579",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "691008994789163020"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376242958856093827",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Indeed !",
+      "timestamp": "2025-05-25T16:58:10.749000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376242958856093827",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376252077138903132",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m at the half way point now on the MIT Data Leadership Course.  Going well.  The quality of these courses is very high.  I wish I had discovered them earlier, although the Gen AI one came at exactly the right time!",
+      "timestamp": "2025-05-25T17:34:24.717000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376252077138903132",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376655477374714077",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m on holiday in the middle of nowhere. The power conked out 30 minutes ago, WiFi is struggling to recover and I have no mobile signal. 😂",
+      "timestamp": "2025-05-26T20:17:22.828000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376655477374714077",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376655666244092056",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Send my apologies to whoever is running the session",
+      "timestamp": "2025-05-26T20:18:07.858000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376655666244092056",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376672838471385309",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "hahahah no worries Jonathan ! enjoy the holiday",
+      "timestamp": "2025-05-26T21:26:22.036000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1376672838471385309",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377044304803135528",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello Everyone !\nTech Tip Tuesday !\n\n**Headline:** Build Your LLM Workflow with Full Control Using AdalFlow\n**Source / Date:** Sylph AI, May 20, 2025\n**Link:** https://adalflow.sylph.ai\n**Tip Summary:** AdalFlow offers a streamlined approach to constructing and managing LLM workflows by providing developers with granular control over prompts, models, and output parsing. Utilizing Jinja2 templating, it allows for precise prompt structuring, while its DataClass feature enables clear definition of input and output schemas. This setup facilitates the development of modular, testable, and efficient AI applications, enhancing both flexibility and scalability in LLM deployments.\n**Action Step:** Use AdalFlow to create a custom prompt template and test it with your preferred LLM",
+      "timestamp": "2025-05-27T22:02:26.511000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377044304803135528",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377315739211534356",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "morning everyone !\nCheck this out! \n📢 Upcoming Live Event!\n\nHey @everyone! 🚨\n\nWe’re excited to announce that this Friday at 11 AM EST, we’ll be hosting our weekly Live Q&A with Dr.Sanchez ON OUR Gen AI Global LinkedIn page!!!!\n\nThis will be in addition to our Keynote this Saturday at 11AM EST !\n\n🎙️ Special Guest: Dr. Abel Sanchez\n🧠 Topic: “What is an AI agent?”\n🔗 Join us here: https://www.linkedin.com/feed/update/urn:li:activity:7333502917456404481\n\n📅 Mark your calendars — see you there!",
+      "timestamp": "2025-05-28T16:01:01.517000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377315739211534356",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377379687663144971",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-28T20:15:08.016000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377379687663144971",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377394864114761799",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-28T21:15:26.364000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377394864114761799",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377658582782443560",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi, my proposed question for the Q&A this week:\n\nQ.  Do you have initial thoughts on the OpenAI acquisition of Jony Ive’s Startup IO for $6.5Bn this week?",
+      "timestamp": "2025-05-29T14:43:21.794000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377658582782443560",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377680867136110693",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1068496361651179540> <@691008994789163020> you got any questions you wanna post ?",
+      "timestamp": "2025-05-29T16:11:54.798000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377680867136110693",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020",
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377731101816258601",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "posted <@1365093933461274654>",
+      "timestamp": "2025-05-29T19:31:31.679000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377731101816258601",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377737875709366354",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Assuming we are still on track to start our Group 1 training next week?  Have you seen any further emails or updates yet?",
+      "timestamp": "2025-05-29T19:58:26.701000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377737875709366354",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377738660933275668",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "No, so far we ares still on track",
+      "timestamp": "2025-05-29T20:01:33.913000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377738660933275668",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377737875709366354",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377774112545702031",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What did I miss in this week's session? Was it recorded?",
+      "timestamp": "2025-05-29T22:22:26.236000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377774112545702031",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377738660933275668",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377778714120687798",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "First session is next Monday (2nd June)!",
+      "timestamp": "2025-05-29T22:40:43.337000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377778714120687798",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377778879120408828",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🤦‍♂️",
+      "timestamp": "2025-05-29T22:41:22.676000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377778879120408828",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377778904231579659",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "thanks",
+      "timestamp": "2025-05-29T22:41:28.663000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1377778904231579659",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378079177944727572",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "A great LinkedIn Live today!",
+      "timestamp": "2025-05-30T18:34:39.495000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378079177944727572",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378079636839333959",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Inded it was !",
+      "timestamp": "2025-05-30T18:36:28.904000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378079636839333959",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378079721014951976",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Do not miss tomorrows !",
+      "timestamp": "2025-05-30T18:36:48.973000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378079721014951976",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378079906960900187",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Will try and join!  What time is the session?",
+      "timestamp": "2025-05-30T18:37:33.306000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378079906960900187",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378080143607599239",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "1 sec",
+      "timestamp": "2025-05-30T18:38:29.727000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378080143607599239",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378080306518560860",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://www.linkedin.com/posts/gen-ai-global_genaiglobal-ai-innovation-activity-7332800237431832577-YLEu?utm_source=share&utm_medium=member_desktop&rcm=ACoAACS9ntIBUEGHMlt3-LjYyNIcYgzF_JjxEOg",
+      "timestamp": "2025-05-30T18:39:08.568000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378080306518560860",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378080455693307955",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@758206516753858561> !",
+      "timestamp": "2025-05-30T18:39:44.134000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378080455693307955",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378099523397619793",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Quick one… <@758206516753858561> & <@691008994789163020>  - have you received a Calendar invite yet for the first Group 1 session on June 2nd yet?  I haven’t seen anything just yet…",
+      "timestamp": "2025-05-30T19:55:30.229000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378099523397619793",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378099787638902805",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Nope",
+      "timestamp": "2025-05-30T19:56:33.229000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378099787638902805",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378099859743313970",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Let me see",
+      "timestamp": "2025-05-30T19:56:50.420000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378099859743313970",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378099936159338558",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "nop not yet+",
+      "timestamp": "2025-05-30T19:57:08.639000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378099936159338558",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378100051213156463",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "No worries, hopefully we’ll receive over the weekend",
+      "timestamp": "2025-05-30T19:57:36.070000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378100051213156463",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378101204097302579",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thought to share - this book was recommended to me recently and have bought a copy.  It’s very good.  There’s a discount available at the moment too.  Some nice explanations of the concepts.  It’s motivated me to brush up on my Python skills after a long break (10 years+ !).  Might be of interest to you too:\n\nhttps://www.packtpub.com/en-gb/product/generative-ai-with-python-and-pytorch-9781835884454",
+      "timestamp": "2025-05-30T20:02:10.939000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1378101204097302579",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379178745906331688",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Mornig / Afternoon @everyone \nIts Motivational Monday !\nAnd this ones always hit hard for me, hope you find it Interesting !\n\n**Headline:** AI Test Predicts Which Men Will Benefit from Prostate Cancer Drug\n**Source / Date:** The Guardian, May 30, 2025\n**Link:** https://www.theguardian.com/society/2025/may/30/new-ai-test-can-predict-which-men-will-benefit-from-prostate-cancer-drug\n**Quick Summary:** Researchers from the US, UK, and Switzerland have developed an AI test that analyzes tumor biopsy slides to identify which men with high-risk, non-metastatic prostate cancer are most likely to benefit from the drug abiraterone. In trials involving over 1,000 men, the AI identified a biomarker-positive group where abiraterone reduced the five-year mortality risk from 17% to 9%, enabling more targeted and effective treatment.\n**Takeaway:** AI is personalizing cancer care, turning data into life-saving decisions",
+      "timestamp": "2025-06-02T19:23:56.926000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379178745906331688",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379179761057927269",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "And Ill leave you another one ! \n\nMorning / Afternoon to all !\nMotivational Monday !! hope you find this interesting !\n\n**Headline:** AI-Powered Blood Test Revolutionizes Early Cancer Detection\n**Source / Date:** Reuters, May 30, 2025\n**Link:** https://www.reuters.com/business/healthcare-pharmaceuticals/health-rounds-amgen-blood-platelet-booster-helps-patients-who-need-chemotherapy-2025-05-30/\n**Quick Summary:** Researchers have developed an AI-driven blood test capable of detecting multiple types of cancer at early stages with remarkable accuracy. This breakthrough offers a non-invasive, efficient method for early diagnosis, potentially saving countless lives through timely treatment.\n**Takeaway:** AI is transforming early cancer detection, turning hope into reality.",
+      "timestamp": "2025-06-02T19:27:58.957000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379179761057927269",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379183725228851341",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561> & <@691008994789163020> - apologies I may miss the Zoom for Group 1 today (9pm UK).  If you are attending is it possible to find out if any slides/content to catch-up on after?",
+      "timestamp": "2025-06-02T19:43:44.089000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379183725228851341",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379184049519853730",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sure ! my guess is it is going to be recorded so do not worry, an any case if any content is shared we will share it with you",
+      "timestamp": "2025-06-02T19:45:01.406000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379184049519853730",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379184097498370209",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "hope you can make it tho´",
+      "timestamp": "2025-06-02T19:45:12.845000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379184097498370209",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379510839878619276",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning Everyone !\nTech Tip Tuesday ! 🪴☘️🌱🏵️\n\n**Headline:** \"I use ChatGPT to keep my houseplants happy — try these 5 game-changing prompts\"\n**Source / Date:** Tom's Guide, May 31, 2025\n**Link:** https://www.tomsguide.com/ai/i-use-chatgpt-to-keep-my-houseplants-happy-try-these-5-game-changing-prompts\n**Tip Summary:** This article demonstrates how ChatGPT can assist in plant care by providing tailored advice based on specific plant conditions. The author shares five effective prompts to diagnose plant issues, create customized care schedules, recommend optimal lighting setups, set up seasonal watering reminders, and identify unknown plants. By leveraging AI, plant enthusiasts can enhance their plant care routines, leading to healthier and happier houseplants.\n**Action Step:** Ask ChatGPT: \"My \\[plant name] has \\[describe symptoms]. It gets \\[describe light], and I water it \\[how often]. What could be the problem?\"",
+      "timestamp": "2025-06-03T17:23:34.299000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379510839878619276",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379510996556840980",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1365093933461274654> did you got the chance to look the google drive link provided with the resources from the session ?",
+      "timestamp": "2025-06-03T17:24:11.654000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379510996556840980",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379183725228851341",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379546670919979078",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@758206516753858561> Thanks for asking!  I’ve seen the links in the channel and will take a look this evening.   How did the session go yesterday?",
+      "timestamp": "2025-06-03T19:45:57.085000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379546670919979078",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379549410157002844",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Pretty good ! Its going to be a great program !",
+      "timestamp": "2025-06-03T19:56:50.170000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379549410157002844",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1365093933461274654"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379546670919979078",
+        "channel_id": "1366389753833979966",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379549714135126076",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just catching up on the video now",
+      "timestamp": "2025-06-03T19:58:02.644000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379549714135126076",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379550745942163597",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It does sound pretty cool",
+      "timestamp": "2025-06-03T20:02:08.646000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379550745942163597",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379561679964344350",
+      "channel_id": "1366389753833979966",
+      "channel_name": "💠buddy-group5",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just started the video - it’s very good!",
+      "timestamp": "2025-06-03T20:45:35.520000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389753833979966/1379561679964344350",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

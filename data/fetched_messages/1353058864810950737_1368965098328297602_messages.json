@@ -1,0 +1,61 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1368965098328297602",
+  "channel_name": "📸content-creation",
+  "fetch_timestamp": "2025-06-03T22:03:28.792009",
+  "message_count": 1,
+  "messages": [
+    {
+      "message_id": "1374385140889026602",
+      "channel_id": "1368965098328297602",
+      "channel_name": "📸content-creation",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Repost from <@1352735021093359626> :\n\n🚀 Hello @everyone! Thank you for enthusiastically sharing original, thought leadership contents with us for the LinkedIn posts. We invite more posts as we are planning to post at least 1 every week.\n\n📜 Just as a reminder, here's what we are looking as part of the post/content:\n\n==================== 📝 Basic Rules for Submission ====================\n\n🔹 Community Membership: Submissions must come from active members of our AI Community.,\n🔹 AI Relevance: The content must be directly related to the field of Artificial Intelligence, Machine Learning, Data Science, or closely associated domains.,\n🔹 Originality: The core idea, analysis, build, or creative work must be the original creation of the submitting member(s). Proper attribution must be given for any foundational work or data used. Plagiarism is strictly prohibited.,\n🔹 Exclusivity (Initial Sharing): The specific piece of content (paper, detailed insight, build description, etc.) submitted for recognition should not have been previously published or shared publicly on broad social media platforms (like personal LinkedIn feeds, Twitter, public blogs, etc.) before being shared within our community group for consideration. Sharing within the closed community first is encouraged!,\n🔹 Respectful & Constructive: All submissions and related discussions must adhere to our community’s code of conduct – respectful, professional, and constructive.,\n🔹 No Overt Promotion: While showcasing work is encouraged, the primary focus must be on the thought leadership, technical merit, or creative insight, not solely on promoting a product or service.,\n\n================= 🏆 Selection Criteria for Recognition =================\n\n💡 Pragmatism & Value:,  \n•    Presents actionable insights, or the idea is applicable in a real-world/research context  \n•    Goes beyond summarizing readily available information  \n•    Offers value to the AI community  \n•    Thought-provoking and likely to spark meaningful discussion  \n\n🔬 Rigor & Substantiation:,  \n•    References & Attributions  \n•    Technical Soundness  \n•    Clarity & Cohesion  \n\n🎨 Quality of Presentation:,  \n•    Well-written, clearly explained, and easy to understand for the target audience  \n•    If it’s a build, is there a clear demonstration, documentation, or repository?  \n•    Professionally presented submission  \n\n🤝 Community Engagement & Resonance:,  \n•    Internal Community Feedback: How well was the submission received within our community group? Consider factors like:  \n•    Number of likes/reactions.  \n•    Depth and quality of comments and discussion generated.  \n•    Note: While high engagement is a strong positive signal, it will be weighed alongside the other quality criteria, not as the sole deciding factor, to ensure substance over mere popularity.  \n\n📚 Completeness:,  \n•    Submission represent a reasonably developed thought, analysis, or project  \n\n====================== 📅 Selection Process Outline =====================\n\n1️⃣ Members share their original work to the <#1368763793370517514>  channel.\n  \n2️⃣ Community Leaders/Review Panel monitor submissions tagged for showcase.\n\n3️⃣ Submissions are evaluated based on the criteria above (Originality, Value, Rigor, Quality, Engagement, Completeness).  \n\n4️⃣ A selection is made every week ensuring a balance of different types of contributions over time.  \n\n5️⃣ The selected contribution is featured in a dedicated post on the main LinkedIn Community Page, crediting the author(s) by linking their profile.  \n\n📣 Please note that the above message is applicable only for the 3rd-party/thought leadership content. As you're aware, we will also be sharing more fun stuffs. So, keep them coming. DM me if you have any questions. I look forward to those expert contents.",
+      "timestamp": "2025-05-20T13:55:52.429000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368965098328297602/1374385140889026602",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        },
+        {
+          "emoji": "😍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

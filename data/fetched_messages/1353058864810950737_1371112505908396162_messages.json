@@ -1,0 +1,2493 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1371112505908396162",
+  "channel_name": "🕊ethical-ai-team",
+  "fetch_timestamp": "2025-06-03T22:03:38.950083",
+  "message_count": 82,
+  "messages": [
+    {
+      "message_id": "1373754385414357053",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear @everyone Team,\nI hope this message finds you well. First, a big thank you to everyone - especially <@672229862085361664>  for his thoughtful guidance and <@1359955242438889545>  , <@1352785241252565174>  & each one of you - for your time, thoughtful contributions, and ongoing support & interest in the Global Charter initiative.\n**Summary of the Session:**\nMyself & Marie had a productive discussion with <@672229862085361664> centered on our vision to establish a non-binding yet influential global standard for open-source AI governance - focusing on ethics, trust, and responsible use. \n**Key Feedback Highlights:**\n- **Business Relevance & Adoption: ** <@672229862085361664>   emphasized the need to frame this initiative in a way that aligns with real-world business incentives. Enterprises won’t adopt frameworks out of goodwill alone - they need clear ROI, trust advantages, and practical tools.\n- **Focus and Feasibility: **The idea is bold and timely, but to gain traction, we should begin with a tighter scope. Choosing a specific industry (e.g., healthcare or finance) and creating a tangible proof-of-concept will offer immediate value and learnings.\n- **Model Evaluation vs. Governance: **Instead of solving all ethical issues, our immediate role could be to highlight and disclose model characteristics (biases, training scope, applicability), not enforce or redesign them. Think \"nutrition label for AI models.\"\n- **Certification-Like Trust Mechanism:** A visible “scorecard” or classification system for models could serve as a trust indicator - akin to a cybersecurity star rating or MIT license badge.\n- **Strategic Partnerships:** There’s value in mapping existing standards (NIST, Meta, etc.) and potentially collaborating with institutions already active in this space.\n- **Consumers hold the key to drive such initiative**:  Dr Abel emphasised that such initiatives can only be driven or adopted by businesses when there is strong push from consumers. \n\n***Next Steps:***\n**Model a Business Case: **Map out value propositions for developers, enterprises, and consumers. Define potential monetization or incentive pathways.\n**Refine Scope: **Start small - perhaps with financial services or medical AI - where adoption urgency is high.\n**Research & Outreach:** Identify 2 - 3 pilot organizations or experts in these industries who could provide field insights or collaborate.\n**Plan Ahead:** We'll schedule a meeting on **Tuesday** to regroup, dive deeper into the next steps, and assign working streams.\nThis is a pivotal opportunity for us to create something with real-world impact. As Abel aptly put it: “Tight loops beat long waits.” Let's validate fast, learn quicker, and adjust smartly.",
+      "timestamp": "2025-05-18T20:09:28.605000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1373754385414357053",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "672229862085361664",
+        "1359955242438889545",
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "👏",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373763736061345813",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://discord.com/events/1353058864810950737/1373763634949390366",
+      "timestamp": "2025-05-18T20:46:37.973000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1373763736061345813",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374027159449894953",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear @everyone  - Welcome to the dedicated channel for \"Global Charter for Ethical AI\".",
+      "timestamp": "2025-05-19T14:13:23.003000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374027159449894953",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373754385414357053",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374027376740012042",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I hope I did not miss anyone 🤞",
+      "timestamp": "2025-05-19T14:14:14.809000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374027376740012042",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374027716730290239",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please acknowledge so that I know you are successfully onboarded to the channel.",
+      "timestamp": "2025-05-19T14:15:35.869000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374027716730290239",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🦾",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373763736061345813",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374054419796201642",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-19T16:01:42.376000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374054419796201642",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374054514759438410",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://tenor.com/view/hello-gif-13062150862685254762",
+      "timestamp": "2025-05-19T16:02:05.017000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374054514759438410",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374074679031107594",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-19T17:22:12.554000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374074679031107594",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374155894463533067",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-19T22:44:55.822000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374155894463533067",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374157658227085384",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1349019079683473488> and <@1359955242438889545> Thank you so much! I wish to attend the meeting on May 20th but the timing is I will be traveling in a train from one destination to another. Will give a try to connect.",
+      "timestamp": "2025-05-19T22:51:56.336000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374157658227085384",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374192501707243632",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T01:10:23.669000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374192501707243632",
+      "author": {
+        "id": "1360632266979807406",
+        "username": "sudalai22",
+        "discriminator": "0",
+        "display_name": "Sudalai Muthu",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374382847514906795",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for the heads up!",
+      "timestamp": "2025-05-20T13:46:45.646000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374382847514906795",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374157658227085384",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374385096504901663",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T13:55:41.847000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374385096504901663",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1374384578751369288",
+        "channel_id": "1369325227733155921",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1374385185830998036",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone -- Let us use above link for the meeting",
+      "timestamp": "2025-05-20T13:56:03.144000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374385185830998036",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374390429210116177",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Is the meeting done already ?",
+      "timestamp": "2025-05-20T14:16:53.263000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374390429210116177",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374391052441751554",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We will reschedule to Saturday or Tuesday next week, poll will be sent out to confirm which is better option. Look forward to meeting you then !",
+      "timestamp": "2025-05-20T14:19:21.853000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374391052441751554",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374390429210116177",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374391163288551589",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**Let’s Move Forward - AI Ethics Global Charter Initiative Next Steps & Meeting Poll**\n\nDear Team,\n\nFirst, a heartfelt thank you to <@1349019079683473488>  and <@1359955242438889545>  for taking the lead and dedication in driving the Ethical Global Charter initiative forward. Setting up the foundation for something truly meaningful in the world of open-source AI governance.\n\n@everyone - As we move into this pivotal next phase, it’s crucial that we come together as a team to build on the momentum and insights shared—especially the actionable feedback from Dr. Abel Sanchez. Every one of you brings unique expertise and energy that will be vital as we refine our focus, model business cases, and begin outreach to industry partners.\n\n**Action Required:**\n\nTo ensure everyone can contribute meaningfully, please take a moment to fill out the poll below to finalize our next meeting time. Your input is essential so we can have all voices at the table as we chart our course.",
+      "timestamp": "2025-05-20T14:19:48.281000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374391163288551589",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374391430826426429",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T14:20:52.067000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374391430826426429",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374393101912768616",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1359955242438889545> , <@1349019079683473488> <@1335299567440367757> !",
+      "timestamp": "2025-05-20T14:27:30.485000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374393101912768616",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545",
+        "1335299567440367757"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374427318528774275",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone  - We are maintaining all relevant documents here - https://drive.google.com/drive/folders/14g3Z-AJzSsp2ObD8tIv7dmqc9amj3tGE  .. Please request access and I will give you access.",
+      "timestamp": "2025-05-20T16:43:28.362000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374427318528774275",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374428051936645180",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "In relation to the action item around business case - I started charting out the key aspects of OpenAi landscape using this mindmap -- https://prabhat152.github.io/ai-ecosystem-mindmap/  ...It is just to trigger the thinking and  it will evolve..",
+      "timestamp": "2025-05-20T16:46:23.220000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374428051936645180",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373754385414357053",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374428090612191402",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T16:46:32.441000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374428090612191402",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1374427318528774275",
+        "channel_id": "1371112505908396162",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1374428378450628670",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1364924054653505569> & <@758206516753858561>  - I hope you are able to see these msgs.. earlier we had a bit of trouble including people. Please acknowledge.",
+      "timestamp": "2025-05-20T16:47:41.067000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374428378450628670",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1364924054653505569"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374428809234878564",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yeah I can see the messages from 18th of may till today. \nAlready voted in the poll too for next session 🤓",
+      "timestamp": "2025-05-20T16:49:23.774000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374428809234878564",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374428870886822020",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yea, I can see the messages",
+      "timestamp": "2025-05-20T16:49:38.473000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374428870886822020",
+      "author": {
+        "id": "1364924054653505569",
+        "username": "shobana_nambiar",
+        "discriminator": "0",
+        "display_name": "Shobana Nambiar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374429380452945940",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T16:51:39.963000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1374429380452945940",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375478677810184223",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-23T14:21:11.948000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375478677810184223",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        "1335299567440367757"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.poll_result",
+      "reference": {
+        "message_id": "1374391430826426429",
+        "channel_id": "1371112505908396162",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1375488176713502843",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://discord.com/events/1353058864810950737/1375488031221485719",
+      "timestamp": "2025-05-23T14:58:56.663000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375488176713502843",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375488759637737664",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear all @everyone  - we have more votes for Saturday. However I got a last minute unavoidable conflict at the 17 est. so I planned a bit early. Hope you could still accommodate.",
+      "timestamp": "2025-05-23T15:01:15.643000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375488759637737664",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375488176713502843",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375544181417705503",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Greetings, team\n\nI've just realize this channel was created. Read the messages from the 18th, so I´m on board for tomorrow´s session",
+      "timestamp": "2025-05-23T18:41:29.225000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375544181417705503",
+      "author": {
+        "id": "1364956984318754887",
+        "username": "daguerreros7",
+        "discriminator": "0",
+        "display_name": "David A. Guerrero S.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375600169424261190",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1349019079683473488> . I missed today’s meeting. Still traveling. Be back to. Boston on the 26th evening.",
+      "timestamp": "2025-05-23T22:23:57.806000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375600169424261190",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375488176713502843",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375601373529247896",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good afternoon to all. \nSo when it’s the date for the next meeting? 😟 kinda got lost",
+      "timestamp": "2025-05-23T22:28:44.887000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375601373529247896",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375682186774319166",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It’s today 9 EST time , 15 CET time.",
+      "timestamp": "2025-05-24T03:49:52.266000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375682186774319166",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375601373529247896",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375725013923266640",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi guys, I might have missed some of the developments. Is there any action from my side required?",
+      "timestamp": "2025-05-24T06:40:03.054000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375725013923266640",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375739823414837261",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362326150373966035> Morning Melinda, we are sharing feedback fr Dr Sanchez on Global Charter on Open Source for Ethical AI and discussion on next steps, we would love for you to join either today (Saturday) at  9 EST/15 CET, or on Monday 10 EST/16 CET. Your contribution and input is important, so hope that you can join us for either of the sessions. Many thanks, Marie",
+      "timestamp": "2025-05-24T07:38:53.912000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375739823414837261",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375740695062511647",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for your reply and update, <@1359955242438889545> I am happy to join you all on Monday. Cheers, Melinda PS: Could you send me a calender invite?",
+      "timestamp": "2025-05-24T07:42:21.729000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375740695062511647",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375739823414837261",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375742317365039216",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1349019079683473488> and <@1359955242438889545> I am not home yet. Monday, May 26th is a US Holiday. So sorry, I know earlier I suggested for Monday without realizing that it is a holiday and also my flight to Boston will be reaching around 4 pm. Is it possible to move Monday’s meeting to Wednesday? Is it possible to record today’s session? I am outside the hotel with the family (spotty network) so will not be able to attend today’s meeting.",
+      "timestamp": "2025-05-24T07:48:48.516000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375742317365039216",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375743804576894976",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I am sure to coordinate all is not easy <@1359955242438889545>  & <@1349019079683473488> .😅  For future reference, I am mostly available on Monday & Wednesday (after 4 pm CEST/ 9 a.m. EST) , as I run an analog art studio (focusing on ACT) on Tuesdays & Thursdays. FYI.",
+      "timestamp": "2025-05-24T07:54:43.095000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375743804576894976",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375753345800863775",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362326150373966035> Excellent, thank you, yes will organise",
+      "timestamp": "2025-05-24T08:32:37.900000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375753345800863775",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375740695062511647",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375799721452634222",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> Yes we will record today's session for you to listen in at convenient time.",
+      "timestamp": "2025-05-24T11:36:54.717000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375799721452634222",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375742317365039216",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375803724353503233",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Here is the link for todays meeting at 0900 ET -- https://meet.google.com/jaz-ntff-byc. -- In about 1 hour from now -- see you soon",
+      "timestamp": "2025-05-24T11:52:49.083000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375803724353503233",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375804303226179666",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I do not have everyone's email so I cannot send email invite.",
+      "timestamp": "2025-05-24T11:55:07.097000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375804303226179666",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375807943731314772",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1359955242438889545>",
+      "timestamp": "2025-05-24T12:09:35.061000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375807943731314772",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375799721452634222",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375810949092606023",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone - If you can please fill-in this doc - it will help us in planning and next activities. https://docs.google.com/spreadsheets/d/1kN3DR6XLi3uiBAxhzzYOlIdWefju6L9mBHFTpBXTkJw/edit?usp=sharing",
+      "timestamp": "2025-05-24T12:21:31.595000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375810949092606023",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375824025435246613",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1371111890851467314> - Meeting has started. Please join if you can - https://meet.google.com/jaz-ntff-byc",
+      "timestamp": "2025-05-24T13:13:29.238000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375824025435246613",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375834768339501197",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-24T13:56:10.546000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375834768339501197",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1375834767991242782",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1375834767991242782/image.png?ex=6840507a&is=683efefa&hm=9e7785b2e2a7433248b641261b6cd7fae9fb3e7732aed12697cf0237efe367d8&",
+          "size": 1207022
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375835450526142634",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-24T13:58:53.192000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375835450526142634",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1375835449834209332",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1375835449834209332/image.png?ex=6840511d&is=683eff9d&hm=d50757fffc386b725f60543bdf50f5965eed6bd5baed8d5a63e508d8e38b41a7&",
+          "size": 4508966
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375835833546047538",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for😀  a great session. Looking forward working woth you !",
+      "timestamp": "2025-05-24T14:00:24.511000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375835833546047538",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375836253819240540",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1349019079683473488> I need an access to view this file. Please grant me an access. Thanks.",
+      "timestamp": "2025-05-24T14:02:04.712000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836253819240540",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375810949092606023",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375836488314519644",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Same don’t have access. Thank you for the session! Eager to collaborate on this effort",
+      "timestamp": "2025-05-24T14:03:00.620000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836488314519644",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375836598544891974",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Also please share the deck",
+      "timestamp": "2025-05-24T14:03:26.901000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836598544891974",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375836750127304794",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1349019079683473488> <@1359955242438889545> and the team for a great discussion. I was able to attend parts of this meeting due to some technical issue. Thanks for recording this session.",
+      "timestamp": "2025-05-24T14:04:03.041000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836750127304794",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375836798814519386",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great session. \n\nLet's \"give birth\" something great from this awsome team",
+      "timestamp": "2025-05-24T14:04:14.649000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836798814519386",
+      "author": {
+        "id": "1364956984318754887",
+        "username": "daguerreros7",
+        "discriminator": "0",
+        "display_name": "David A. Guerrero S.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375836845102989447",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great discussion everyone. <@546559083357143044> - To your point on ground work, we were thinking of formulating a survey questionnaire which can be floated...this is something we can evolve it further in future sessions",
+      "timestamp": "2025-05-24T14:04:25.685000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375836845102989447",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375837564711469116",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for the session and great discussion - looking forward to working this out with you all. For the ground work I can also assist with Design Thinking workshops if interested. \nP.S. do not forget there is no AI without IA - happy to share my experience and network in the field of cloud computing.",
+      "timestamp": "2025-05-24T14:07:17.253000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375837564711469116",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🦾",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375837624656199680",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@546559083357143044>  & <@1357376692384960524> & everyon - please request access to this complete folder.. this is where we intend to maintain all the docs",
+      "timestamp": "2025-05-24T14:07:31.545000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375837624656199680",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044",
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374427318528774275",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375851290801868840",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks I have just requested access to the folder Val",
+      "timestamp": "2025-05-24T15:01:49.808000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375851290801868840",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375855528001015998",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "oscargago@hotmail.com\n\nmorning everyone. I’m sorry I missed it today. Had to work late last nite and at 7 am was totally asleep hehehe. \n\nI will join Monday !! <@1349019079683473488>  could you sent me the invite so I can add it to my calendar ?",
+      "timestamp": "2025-05-24T15:18:40.035000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375855528001015998",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375803724353503233",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375863236947218552",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sure thing! I will share it tomorrow.",
+      "timestamp": "2025-05-24T15:49:17.991000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1375863236947218552",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375855528001015998",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376102200283234316",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone  Dear all - I have scheduled the meeting  on Monday. I sent invite to known emails.  IF you mised, you can use below link to add it in your calendar. https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MXA5NDEyM2kxYzF1OTRhM2cxcm9xcmwxbnUgMDI1YzM1YjY2MWU0N2ZkNmZlYjQwNmY5YzgwMjBjYmNhOTUyNDY3ZDcxODQ0ZGFiNmJhZjZjYmMyM2FiZmFiZUBn&tmsrc=025c35b661e47fd6feb406f9c8020cbca952467d71844dab6baf6cbc23abfabe%40group.calendar.google.com",
+      "timestamp": "2025-05-25T07:38:51.290000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376102200283234316",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376103919260008548",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear Prabhat and Marie is it ok for you to reschedule the meeting to another time or having most of us only for 30min? We have our Design Thinking workshops with the SGU managers and network architects running from Mo-Wed 10:30-11:15 am ET. Thank you for your understanding!",
+      "timestamp": "2025-05-25T07:45:41.126000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376103919260008548",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376102200283234316",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376105907368362005",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360182837113786399>  Monday 26th of May is the rerun of Saturday session for those who could not make it over the weekend. After Monday, we will post next session (and regular slots) going forward. Your time constraint and proposal have been noted. Thank you Diellza.",
+      "timestamp": "2025-05-25T07:53:35.128000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376105907368362005",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376103919260008548",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376109176295657523",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Here is the link to the meeting recording -- This is the best I could do this time. https://drive.google.com/file/d/1GlrGkjaso66W74S22_iNDOdguDxjOnUs/view?usp=drive_link",
+      "timestamp": "2025-05-25T08:06:34.501000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376109176295657523",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376109748511965215",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "On side note Design thinking  workshops could also be very handy to shape this stream.   Let us discuss next time.",
+      "timestamp": "2025-05-25T08:08:50.928000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376109748511965215",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376103919260008548",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376152746956292228",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1349019079683473488> on Monday, I will be in the flight at 10 AM EST so can’t attend this meeting. Hope the meeting is recorded. \nMy calendar is open on Wednesday-Thursday just in case if this meeting gets rescheduled. \n\nAlso, it’s a US Holiday (Memorial Day) on Monday.",
+      "timestamp": "2025-05-25T10:59:42.556000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376152746956292228",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376235863570124860",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you <@1349019079683473488> and <@1359955242438889545> ! I’ll see you tomorrow !",
+      "timestamp": "2025-05-25T16:29:59.101000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376235863570124860",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376422988211159101",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Came across this site and found their approach quite interesting. They have implemented some of these concepts in a unique way, and I thought it would be great to share with our group for inspiration.\n\nhttps://www.genai.global/home",
+      "timestamp": "2025-05-26T04:53:33.092000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376422988211159101",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376427905491402853",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "At first i got amused by the name:-) thank you very much for sharing. I will have a closer look.",
+      "timestamp": "2025-05-26T05:13:05.463000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376427905491402853",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376422988211159101",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376429004403507250",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Me too, with the coincidence! 😀",
+      "timestamp": "2025-05-26T05:17:27.464000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376429004403507250",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376427905491402853",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376561317401333760",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ethical AI\nMonday, 26 May · 16:00 – 17:00\nGoogle Meet joining info\nVideo call link: https://meet.google.com/rfo-uaqx-anx",
+      "timestamp": "2025-05-26T14:03:13.341000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376561317401333760",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376579556827336885",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🎥 Here is the recording of today's session https://fathom.video/share/bduWPVnuzRZfoM6ErhqVLrZzgqkxKa64",
+      "timestamp": "2025-05-26T15:15:41.959000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376579556827336885",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376586506218639491",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you guys fot the meeting today ! ill be more than happy to help you in any way I can",
+      "timestamp": "2025-05-26T15:43:18.823000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376586506218639491",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376603906284458004",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1349019079683473488> and <@1359955242438889545>, unfortunately I couldn't attend live but I just finished the visualization of the meetiing and it was very interesting, pleasae count with me as well!",
+      "timestamp": "2025-05-26T16:52:27.322000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1376603906284458004",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377621804197085325",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-29T12:17:13.096000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1377621804197085325",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1377621802640998550",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1377621802640998550/image.png?ex=68403948&is=683ee7c8&hm=e2fdd2607b8170d18b092f66a994aab457cb6bcb11be2df1b969ef8834e49cae&",
+          "size": 39575
+        },
+        {
+          "id": "1377621802939056209",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1377621802939056209/image.png?ex=68403948&is=683ee7c8&hm=56356458d3270146e26c433d6ef8557a23cbc2f6706ad5f8a54ffad429ff29d7&",
+          "size": 39575
+        },
+        {
+          "id": "1377621803400167444",
+          "filename": "Screenshot_2025-05-29_at_13.08.03.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1377621803400167444/Screenshot_2025-05-29_at_13.08.03.png?ex=68403948&is=683ee7c8&hm=b81f159a4510c4f67afdc63319cb20304126543939e2539570bc41fa9ad8116e&",
+          "size": 3092511
+        },
+        {
+          "id": "1377621803945431211",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1377621803945431211/image.png?ex=68403949&is=683ee7c9&hm=3af7891d075a0a12324b53a351a39bbd88eed7efe48b6b55a80b5464709f2f53&",
+          "size": 39575
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377948455439306764",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📣 @everyone  Dear all,\n\nSome great momentum is building, and we wanted to share a few exciting updates:\n\n- We’ve started putting our ideas into motion:\n  - An **initial draft of the business case** is ready. It’s still a brain dump, but a solid start!\n  - A **rough idea of the scorecard** is also down on paper to capture key thoughts.\n  - These drafts will help steer our collaboration in the right direction.\n\n- We’re teaming up with <@1360182837113786399> & <@1003559239723266118>  to launch **Design Thinking sessions** for this group.\n  - One conversation with <@1360182837113786399>  has already taken place, and planning is in motion.\n\n- A big milestone ahead: we’ve got a meeting scheduled with **ITU leadership next Tuesday** to present our ideas and explore alignment.  \n  *(ITU is the UN body responsible for AI and other tech topics.)*\n\n- We’re meeting <@672229862085361664> **on Monday** to discuss our approach and shape next steps.\n\n- We’ll be sharing **more details and the draft documents soon**, and we’re planning a **working Design Thinking session mid-next week**. Stay tuned!\n\nThanks again to everyone for the energy and collaboration so far!",
+      "timestamp": "2025-05-30T09:55:12.821000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1377948455439306764",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "672229862085361664",
+        "1003559239723266118",
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378707780076048434",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone Dear GenAI colleagues. Following up on Prabhat's message, we have further elaborated on our charter model, the value proposition for key stakeholders and scorecard parameters for the envisioned UN Charter for Ethical AI. \n\nPlans for this coming week:\n\n1) Validation and **alignment with Dr Sanchez on Monday**\n\n2) **Meeting on Tuesday with ITU in Geneva** with the Head of Emerging Tech & Strategy and Policy Advisor of General Secretariat of ITU, and a Lawyer of the Emerging Technologies Division of ITU, and a Junior Professional Officer focusing on emerging technologies and AI. All individuals are involved with AI for Good. Thank you <@1349019079683473488> for travelling to Geneva to join me for the meeting. \n\nWe are hopeful that these meetings will provide insightful direction to continue shaping this project SMARTLY AND OPTIMALLY (hence reason for conducting these now and use input for our future work). I can only say that the topic is raising interest and curiosity 🙂  ** Expect to hear back from us midweek on meeting takeaways.**\n\nSubsequently we will hold workshops under the leadership of <@1360182837113786399> and <@1003559239723266118> (day/timing for workshops TBC later part of this week/weekend ). For this, please check enclosed slides and start reflecting ! \n\nThank you to all that have participated in conversations so far, your proactiveness, input and support are truly inspiring. 🙏",
+      "timestamp": "2025-06-01T12:12:29.922000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378707780076048434",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1003559239723266118",
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        },
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "🦾",
+          "count": 3
+        },
+        {
+          "emoji": "💯",
+          "count": 3
+        },
+        {
+          "emoji": "👏",
+          "count": 2
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1378707778339737650",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1378707778339737650/image.png?ex=6840382d&is=683ee6ad&hm=d1c2383cadcb9d906eb0ff9e4009aa8bdaafc81c251356e1792ac30468af55c4&",
+          "size": 563554
+        },
+        {
+          "id": "1378707778805301298",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1378707778805301298/image.png?ex=6840382d&is=683ee6ad&hm=1fb2442bf215ec41adf48826852325f07a8b791e2bcbe88d421130aa419f2d2e&",
+          "size": 429531
+        },
+        {
+          "id": "1378707779426062356",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1378707779426062356/image.png?ex=6840382d&is=683ee6ad&hm=1dbdf98e9e0d249aaa35c126eea9cda62f1df95cd8fd43f7ee0058a9123657e2&",
+          "size": 244351
+        },
+        {
+          "id": "1378707779870789734",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1371112505908396162/1378707779870789734/image.png?ex=6840382d&is=683ee6ad&hm=ffb187470c184038595302e5a91721be885fcb70090ccc5a55c607811b0f7b3e&",
+          "size": 232466
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378721510918983680",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear Marie and Prabhat this is great news and impressive how far a fledging idea has developed into something you are going to present next week. I wish you all the best for the meeting and the outcome you are hoping for.  Please count me in for support going forward. I am now more familiar what is going on at European level after attending thr Digital Humanism Conference. All the best Val",
+      "timestamp": "2025-06-01T13:07:03.610000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378721510918983680",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378747737134207067",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What an amazing work !! Congrats !!!",
+      "timestamp": "2025-06-01T14:51:16.427000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378747737134207067",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1359955242438889545"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378707780076048434",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1378777233681944597",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Remarkable work, <@1359955242438889545> and <@1349019079683473488>. Sorry I have not been able to contribute much (or at all!) due to overload at work. Will do my best to follow and provide inputs in the coming stages. Congrats.",
+      "timestamp": "2025-06-01T16:48:28.952000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378777233681944597",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378707780076048434",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1378788316513833103",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just concluded an insightful conversation with <@546559083357143044> . Thank you very much for your timely inputs  🙏",
+      "timestamp": "2025-06-01T17:32:31.305000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378788316513833103",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378824218292125768",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you Sangame <@546559083357143044>  👍",
+      "timestamp": "2025-06-01T19:55:10.956000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378824218292125768",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "546559083357143044"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378788316513833103",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1378826004142882916",
+      "channel_id": "1371112505908396162",
+      "channel_name": "🕊ethical-ai-team",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Anytime! Happy to support <@1359955242438889545> and <@1349019079683473488>! Excited about this agenda and looking forward to making meaningful progress together!",
+      "timestamp": "2025-06-01T20:02:16.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1371112505908396162/1378826004142882916",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359955242438889545"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378824218292125768",
+        "channel_id": "1371112505908396162",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

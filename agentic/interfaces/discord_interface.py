@@ -7,11 +7,13 @@ replacing the existing LangChain-based agent with a sophisticated multi-agent sy
 import asyncio
 import json
 import logging
+import random
 from datetime import datetime
-from typing import Dict, List, Optional, Union, Any
+from typing import Dict, List, Optional, Union, Any, cast
 from dataclasses import dataclass
 
 import discord
+from discord import Webhook, WebhookMessage
 from discord.ext import commands
 
 from ..interfaces.agent_api import AgentAPI
@@ -111,12 +113,47 @@ class DiscordInterface:
                     logger.info(f"Synced {len(synced)} command(s)")
                 except Exception as e:
                     logger.error(f"Failed to sync commands: {e}")
+
+        @self.bot.event
+        async def on_message(message):
+            # Ignore messages from the bot itself
+            if self.bot and message.author == self.bot.user:
+                return
+
+            try:
+                # Prepare message data for vectorstore
+                message_data = {
+                    "message_id": str(message.id),
+                    "content": message.content,
+                    "channel_id": str(message.channel.id),
+                    "channel_name": message.channel.name,
+                    "guild_id": str(message.guild.id) if message.guild else None,
+                    "author": {
+                        "id": str(message.author.id),
+                        "username": message.author.display_name
+                    },
+                    "timestamp": message.created_at.isoformat(),
+                    "jump_url": message.jump_url,
+                    "reactions": [
+                        {
+                            "emoji": str(reaction.emoji),
+                            "count": reaction.count
+                        }
+                        for reaction in message.reactions
+                    ]
+                }
+
+                # Add message to vectorstore
+                await self.agent_api.add_documents([message_data], source="discord")
+                logger.debug(f"Indexed message {message.id} from {message.author.display_name}")
+
+            except Exception as e:
+                logger.error(f"Error indexing message: {e}")
+
+            # Process commands
+            if self.bot:
+                await self.bot.process_commands(message)
         
-        # Set up slash command
-        @self.bot.tree.command(name="pepe", description="Ask the AI assistant something")
-        async def pepe_command(interaction: discord.Interaction, query: str):
-            await self.handle_slash_command(interaction, query)
-            
         return self.bot
     
     async def start(self):
@@ -165,11 +202,16 @@ class DiscordInterface:
             # Update user context
             await self._update_user_context(discord_context)
             
-            # Send typing indicator if interaction provided
-            if interaction and not interaction.response.is_done():
-                await interaction.response.defer(ephemeral=False)
+            # The interaction should already be deferred by the command handler
+            # No need to defer again here
             
             # Process through agentic system
+            logger.info(f"⏳ Starting agent API query processing at {datetime.now().isoformat()}")
+            query_start_time = datetime.now()
+            
+            # Note: Removed interim status updates as users shouldn't see processing steps
+            # Users should only see the final result
+            
             result = await self.agent_api.query(
                 query=query,
                 user_id=str(discord_context.user_id),
@@ -181,18 +223,34 @@ class DiscordInterface:
                 }
             )
             
+            query_duration = (datetime.now() - query_start_time).total_seconds()
+            logger.info(f"✅ Agent API query completed in {query_duration:.2f}s")
+            
             # Cache successful results
-            if self.cache_enabled and result.get("status") == "success":
+            if self.cache_enabled and result.get("success"):
                 await self._cache_response(query, discord_context.user_id, result)
             
+            # Transform agent API response to expected format
+            transform_start = datetime.now()
+            transformed_result = self._transform_agent_response(result)
+            logger.info(f"✅ Response transformation completed in {(datetime.now() - transform_start).total_seconds():.2f}s")
+            
+            # Note: Removed interim status updates as users shouldn't see processing steps
+            # Users should only see the final result
+            
             # Format for Discord
-            formatted_messages = await self._format_response(result, query, discord_context)
+            format_start = datetime.now()
+            formatted_messages = await self._format_response(transformed_result, query, discord_context)
+            logger.info(f"✅ Response formatting completed in {(datetime.now() - format_start).total_seconds():.2f}s")
             
             # Update analytics
             await self._update_analytics(start_time, success=True)
             
             # Store conversation
             await self._store_conversation(query, result, discord_context, session_id)
+            
+            total_processing = (datetime.now() - start_time).total_seconds()
+            logger.info(f"🏁 Total query processing completed in {total_processing:.2f}s")
             
             return formatted_messages
             
@@ -582,6 +640,212 @@ class DiscordInterface:
             logger.error(f"Error optimizing system: {e}")
             return {"status": "error", "message": str(e)}
     
+    async def handle_slash_command(self, interaction: discord.Interaction, query: str):
+        """Handle slash command interactions."""
+        import time
+        start_time = time.time()
+        
+        try:
+            logger.info(f"🎯 Starting slash command handling for query: {query[:50]}...")
+            
+            # CRITICAL FIX: Defer the response IMMEDIATELY to prevent interaction expiry
+            # This must be the FIRST thing we do with the interaction - before any other operations
+            try:
+                # Check if the interaction is still valid
+                if not interaction.response.is_done():
+                    # Set a shorter timeout for the deferral to ensure it happens quickly
+                    await asyncio.wait_for(
+                        interaction.response.defer(ephemeral=False, thinking=True),
+                        timeout=2.0
+                    )
+                    logger.info("✅ Interaction deferred successfully (immediate)")
+                else:
+                    logger.warning("⚠️ Interaction was already responded to - continuing with followup")
+            except asyncio.TimeoutError:
+                logger.error("❌ Deferring the interaction timed out")
+                # Try again with a simple approach as last resort
+                try:
+                    await interaction.response.defer(ephemeral=False)
+                    logger.info("✅ Interaction deferred successfully (retry)")
+                except Exception as e:
+                    logger.error(f"❌ Failed to defer interaction after retry: {e}")
+            except Exception as defer_error:
+                logger.error(f"❌ Failed to defer interaction: {defer_error}")
+                # Continue anyway - we'll try to use followup
+            
+            # Validate that the interaction is still valid
+            if not hasattr(interaction, 'followup'):
+                logger.error("❌ Invalid interaction object - missing followup")
+                return
+            
+            # Create Discord context from interaction
+            discord_context = DiscordContext(
+                user_id=interaction.user.id,
+                username=interaction.user.display_name,
+                channel_id=interaction.channel_id or 0,
+                guild_id=interaction.guild_id,
+                channel_name=getattr(interaction.channel, 'name', 'Unknown'),
+                guild_name=interaction.guild.name if interaction.guild else None,
+                timestamp=datetime.now()
+            )
+            
+            logger.info(f"📝 Created Discord context for user {discord_context.username} in #{discord_context.channel_name}")
+            
+            # Note: Status updates removed - users should only see final results
+            # Initial processing notification removed to keep the interface clean
+            
+            # CRITICAL FIX: Set shorter timeout to ensure we respond within Discord's limits
+            logger.info("🔄 Processing query through agentic system with timeout...")
+            
+            # Create a future for the query processing
+            query_task = asyncio.create_task(
+                self.process_query(query, discord_context, interaction)
+            )
+            
+            try:
+                # Wait for the query with a timeout
+                messages = await asyncio.wait_for(
+                    query_task,
+                    timeout=45.0  # 45 second timeout to be safe - Discord interactions expire at ~3 minutes
+                )
+            except asyncio.TimeoutError:
+                logger.error("❌ Query processing timed out after timeout period")
+                error_msg = "⏰ Your request is taking longer than expected. Please try a simpler query."
+                query_task.cancel()
+                
+                # Try to send a timeout message
+                try:
+                    await interaction.followup.send(error_msg)
+                except Exception as e:
+                    logger.error(f"Could not send timeout message: {e}")
+                return
+            except Exception as e:
+                logger.error(f"❌ Error in query processing: {str(e)}")
+                query_task.cancel()
+                
+                # Try to send an error message
+                try:
+                    await interaction.followup.send(f"❌ An error occurred: {str(e)}")
+                except Exception as send_error:
+                    logger.error(f"Could not send error message: {send_error}")
+                return
+            
+            processing_time = time.time() - start_time
+            logger.info(f"✅ Query processed in {processing_time:.2f}s, got {len(messages)} response messages")
+            
+            # Send response messages with improved handling
+            message_sent = False  # Track if at least one message was sent
+            
+            async def send_message_with_retries(msg_content, msg_index):
+                nonlocal message_sent
+                max_retries = 4  # Increase retries
+                base_delay = 0.5  # Start with a shorter delay
+                
+                logger.info(f"📤 Sending response message {msg_index+1}/{len(messages)} (length: {len(msg_content)})")
+                
+                for retry in range(max_retries):
+                    try:
+                        # For long messages, try to chunk them further if they might be close to Discord's limit
+                        if len(msg_content) > 1800:  # Discord's limit is ~2000, be conservative
+                            # Split on paragraph boundaries for more natural breaks
+                            paragraphs = msg_content.split('\n\n')
+                            current_chunk = ""
+                            
+                            for para in paragraphs:
+                                if len(current_chunk) + len(para) + 2 < 1800:  # +2 for the newlines
+                                    if current_chunk:
+                                        current_chunk += "\n\n" + para
+                                    else:
+                                        current_chunk = para
+                                else:
+                                    # Send the current chunk before it gets too big
+                                    if current_chunk:
+                                        await interaction.followup.send(current_chunk)
+                                        message_sent = True
+                                        await asyncio.sleep(0.5)  # Brief pause between chunks
+                                        current_chunk = para
+                                    else:
+                                        # Single paragraph is too long, send it anyway
+                                        await interaction.followup.send(para[:1800])
+                                        message_sent = True
+                                        await asyncio.sleep(0.5)
+                                        # If there's remaining text, add to current chunk
+                                        current_chunk = para[1800:]
+                            
+                            # Send any remaining text
+                            if current_chunk:
+                                await interaction.followup.send(current_chunk)
+                                message_sent = True
+                        else:
+                            # Regular message that's under the limit
+                            await interaction.followup.send(msg_content)
+                            message_sent = True
+                            
+                        logger.info(f"✅ Successfully sent message {msg_index+1}")
+                        return True  # Success
+                        
+                    except discord.errors.NotFound:
+                        logger.error(f"❌ Interaction expired while sending message {msg_index+1}")
+                        return False  # Fatal error
+                    except Exception as send_error:
+                        # Check for fatal errors that indicate we should stop trying
+                        if "Unknown interaction" in str(send_error) or "Invalid Webhook Token" in str(send_error):
+                            logger.error(f"❌ Interaction has expired: {send_error}")
+                            return False  # Fatal error
+                            
+                        if retry < max_retries - 1:
+                            # Calculate delay with jitter to prevent thundering herd
+                            delay = base_delay * (2 ** retry) * (0.8 + 0.4 * random.random())
+                            logger.warning(f"⚠️ Retry {retry+1}/{max_retries} for message {msg_index+1} in {delay:.2f}s: {send_error}")
+                            await asyncio.sleep(delay)  # Exponential backoff with jitter
+                        else:
+                            logger.error(f"❌ Failed to send message {msg_index+1} after {max_retries} retries: {send_error}")
+                            return False
+                
+                return False  # All retries failed
+            
+            # Process all messages
+            for i, message in enumerate(messages):
+                success = await send_message_with_retries(message, i)
+                if not success:
+                    # If we can't send a message, try one last fallback with a simple message
+                    if not message_sent:  # Only if no messages were sent yet
+                        try:
+                            simple_msg = "I processed your query but encountered an error sending the full response. Please try again."
+                            await interaction.followup.send(simple_msg)
+                            logger.info("✅ Sent simple fallback message")
+                            message_sent = True
+                        except Exception as e:
+                            logger.error(f"❌ Failed to send fallback message: {e}")
+                    break  # Stop processing remaining messages
+                
+            total_time = time.time() - start_time
+            logger.info(f"🎉 All response messages sent successfully! Total time: {total_time:.2f}s")
+                
+        except discord.errors.NotFound as nf_error:
+            logger.error(f"❌ Discord interaction not found: {nf_error}")
+            # Don't try to respond if the interaction is invalid
+        except Exception as e:
+            logger.error(f"❌ Error handling slash command: {e}", exc_info=True)
+            
+            error_message = self._format_error_message(str(e))
+            logger.info(f"📤 Attempting to send error message: {error_message[:100]}...")
+            
+            # Try to send an error message with retry logic
+            max_retries = 2
+            for retry in range(max_retries):
+                try:
+                    await interaction.followup.send(f"❌ An error occurred: {error_message}")
+                    break
+                except discord.errors.NotFound:
+                    logger.error("❌ Cannot send error message - interaction expired")
+                    break
+                except Exception as error_send_error:
+                    if retry < max_retries - 1:
+                        await asyncio.sleep(1)
+                        continue
+                    logger.error(f"❌ Failed to send error message after retries: {error_send_error}")
+    
     async def shutdown(self):
         """Gracefully shutdown the interface"""
         logger.info("Shutting down Discord interface...")
@@ -593,43 +857,41 @@ class DiscordInterface:
         except Exception as e:
             logger.error(f"Error during shutdown: {e}")
     
-    async def handle_slash_command(self, interaction: discord.Interaction, query: str):
-        """Handle Discord slash command interactions"""
-        try:
-            # Create Discord context
-            discord_context = DiscordContext(
-                user_id=interaction.user.id,
-                username=interaction.user.display_name,
-                channel_id=interaction.channel_id or 0,
-                guild_id=interaction.guild_id,
-                channel_name=getattr(interaction.channel, 'name', 'DM'),
-                guild_name=interaction.guild.name if interaction.guild else None,
-                timestamp=datetime.now()
-            )
-            
-            # Process the query
-            response_messages = await self.process_query(query, discord_context, interaction)
-            
-            # Send response(s)
-            for i, message in enumerate(response_messages):
-                if i == 0:
-                    # First message - use the interaction response
-                    if interaction.response.is_done():
-                        await interaction.followup.send(message)
-                    else:
-                        await interaction.response.send_message(message)
-                else:
-                    # Subsequent messages - use followup
-                    await interaction.followup.send(message)
-                    
-        except Exception as e:
-            logger.error(f"Error handling slash command: {e}", exc_info=True)
-            error_message = f"Sorry, I encountered an error: {str(e)}"
-            
-            try:
-                if interaction.response.is_done():
-                    await interaction.followup.send(error_message, ephemeral=True)
-                else:
-                    await interaction.response.send_message(error_message, ephemeral=True)
-            except Exception as send_error:
-                logger.error(f"Failed to send error message: {send_error}")
+    def _transform_agent_response(self, result: Dict[str, Any]) -> Dict[str, Any]:
+        """Transform agent API response to Discord interface expected format"""
+        if not result.get("success"):
+            return {
+                "status": "error",
+                "message": result.get("error", "Unknown error occurred")
+            }
+        
+        # Get the sources (search results)
+        sources = result.get("sources", [])
+        answer = result.get("answer", "")
+        
+        # Determine response type based on sources content
+        if sources and isinstance(sources, list) and len(sources) > 0:
+            # Check if sources contain message-like objects
+            first_source = sources[0]
+            if isinstance(first_source, dict) and ("content" in first_source or "author" in first_source):
+                # Format as message list
+                return {
+                    "response": {
+                        "messages": sources,
+                        "total_count": len(sources)
+                    }
+                }
+            else:
+                # Format as text response with answer
+                return {
+                    "response": {
+                        "answer": answer if answer else f"Found {len(sources)} results."
+                    }
+                }
+        else:
+            # No sources, use answer as text response
+            return {
+                "response": {
+                    "answer": answer if answer else "No results found."
+                }
+            }

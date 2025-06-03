@@ -1,0 +1,753 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1368763793370517514",
+  "channel_name": "📥socialmedia-submissions",
+  "fetch_timestamp": "2025-06-03T22:03:39.662627",
+  "message_count": 23,
+  "messages": [
+    {
+      "message_id": "1371274921719763005",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good Afternoon @everyone hope you find this interesting !\n\n**Integrating Cognitive Signals into Language Models: A New Frontier**\n\n**Source / Date:** - Lopez-Cardona et al., April 2025\n**Link:** - https://arxiv.org/abs/2504.06843\n**Category:** - Technical Advancement | Human-Centric AI\n\n**Summary**\n\nRecent research highlights the potential of enhancing language models by incorporating cognitive processing signals, such as eye-tracking data. This approach aims to improve model alignment with human attention and comprehension patterns, leading to more efficient and human-like AI systems.\n\nBy leveraging these signals, models can achieve:\n* Improved data efficiency through targeted augmentation.\n* Faster convergence during training.\n* Enhanced alignment with human interpretability and reasoning.\n\nApplications span various domains, including visual question answering and reducing hallucinations in multimodal models\n\n**Key Implications**\n\n* **Human-Centric Design:** Aligning AI behavior with human cognitive patterns can lead to more intuitive interactions.\n* **Efficiency Gains:** Utilizing cognitive signals may reduce the need for extensive training data, lowering computational costs.\n* **Enhanced Interpretability:** Models informed by human attention patterns could offer more transparent decision-making processes.([arXiv][1], [Financial Times][4])\n\n**Discussion Questions**\n\n1. How can integrating cognitive signals improve the alignment between AI models and human users?\n2. What ethical considerations arise when using human cognitive data to train AI systems?\n3. In what ways might this approach impact the future development of multimodal AI applications?",
+      "timestamp": "2025-05-11T23:56:58.394000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1371274921719763005",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371492545158320300",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear all, \nI tried to summarize the current discussion on trust within our ethics channel for a potential post:\n\nAt Gen AI Global, we discuss crucial and current questions on AI ethics and practical applications. Triggered by a recent study by KPMG and the University of Melbourne on trust in the context of AI usage, our community members have been debating the following questions (link to the study in the comments):\n\n-    How do we define trust in the context of genAI?\n-    Will trust differ across regions due to cultural differences?\n-    Which guardrails, standards, or other prerequisites will help us to establish trust in the context of genAI?\n\nKey sentiments in our discussions \n-    Trust is becoming more and more critical – and a key question will be how to establish this in the age of deepfakes and increasing anonymity\n    Establishing trust goes hand in hand with the responsible use of AI, including key principles such as accountability, transparency, explainability, accuracy, and minimizing biases\n-    Standards are making headway into operational practice and  could help to boost trust\n-    The importance of transformational leadership and stronger governance, as addressed by the report, will be essential for bridging gaps in AI literacy and growing trust in AI applications in the long run\n\nWhat are your thoughts on the topic?\n\n\n\nLink to be included in comments: \nhttps://assets.kpmg.com/content/dam/kpmgsites/xx/pdf/2025/05/trust-attitudes-and-use-of-ai-global-report.pdf\nhttps://assets.kpmg.com/content/dam/kpmgsites/xx/pdf/2025/05/trust-attitudes-and-use-of-ai-executive-summary.pdf",
+      "timestamp": "2025-05-12T14:21:43.865000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1371492545158320300",
+      "author": {
+        "id": "1075075819807985714",
+        "username": "silkefinken",
+        "discriminator": "0",
+        "display_name": "Silke Finken",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373869570242383932",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "good night team !! <@1125194882164736050> <@1359966236473168188> <@1335299567440367757> \nI have been working in this content, Ill love if you can look at it and see if is valuable to post it !\nIf you need me to make some changes to it, just let me know !!",
+      "timestamp": "2025-05-19T03:47:10.808000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1373869570242383932",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050",
+        "1359966236473168188",
+        "1335299567440367757"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1373869569952845844",
+          "filename": "Elicit_NotebookLM__Claude_Profesional_Ingles.doc",
+          "url": "https://cdn.discordapp.com/attachments/1368763793370517514/1373869569952845844/Elicit_NotebookLM__Claude_Profesional_Ingles.doc?ex=68406a7e&is=683f18fe&hm=9a82285a5486e84bb28ea6d4f13b214e75379e89b9cb3e8982008f6caec6f524&",
+          "size": 2948096
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373869802787180584",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352735021093359626> sorry Rad forgot to tag you !",
+      "timestamp": "2025-05-19T03:48:06.251000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1373869802787180584",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373869963827216466",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Lol no worries, I was working anyways 🙂",
+      "timestamp": "2025-05-19T03:48:44.646000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1373869963827216466",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373869802787180584",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1373870232476712971",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "😄 hope you find the content useful and meaningfull !",
+      "timestamp": "2025-05-19T03:49:48.697000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1373870232476712971",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373870276202332232",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Excellent content 🙌🏽",
+      "timestamp": "2025-05-19T03:49:59.122000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1373870276202332232",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373869570242383932",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374783423234838558",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning Team ! \nI just made some changes to a couple of paragrphs to make it more professional.\nCan you please consider them ? <@1352735021093359626> could you please check them out and create the curated versión with this one ? Thank you !! \nAlso <@1125194882164736050> <@1335299567440367757> <@1359966236473168188> <@1352785241252565174> <@1075075819807985714> Thank you very much to consider it for posting !",
+      "timestamp": "2025-05-21T16:18:30.340000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1374783423234838558",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626",
+        "1335299567440367757",
+        "1075075819807985714",
+        "1125194882164736050",
+        "1352785241252565174",
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1374783422857347175",
+          "filename": "Elicit_NotebookLM__Claude_Profesional_Ingles_V2.doc",
+          "url": "https://cdn.discordapp.com/attachments/1368763793370517514/1374783422857347175/Elicit_NotebookLM__Claude_Profesional_Ingles_V2.doc?ex=684071d6&is=683f2056&hm=1f13f26581e452c4879ab6ed58b40d065b71322ae7800831b62aacf6b7c1bb8d&",
+          "size": 2948608
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375707407455359036",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good nite !! @everyone <@1359966236473168188> did not know if you were just throwing the idea out, but I did find it as a good idea for content ! So here is ! 😂😊😅😝",
+      "timestamp": "2025-05-24T05:30:05.345000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1375707407455359036",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1375707406897647636",
+          "filename": "Being_an_AI_Powered_Company.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1368763793370517514/1375707406897647636/Being_an_AI_Powered_Company.pdf?ex=6840829d&is=683f311d&hm=a9bd88b89cff67088463d1dcaf1828393f1e9b3bbe86e9a43c8102eb22908936&",
+          "size": 4678335
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375812691788300338",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I will read it today! But it looks good!!!",
+      "timestamp": "2025-05-24T12:28:27.086000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1375812691788300338",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375707407455359036",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376168170708140123",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> thank you so much for publishing the member of the week post on Linkedin. It is a luxury to have you lead the visibility of our community",
+      "timestamp": "2025-05-25T12:00:59.865000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376168170708140123",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376243170752462858",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning everyone !!\n<@1359966236473168188> did you have the chance to look at it ? 😀🙃",
+      "timestamp": "2025-05-25T16:59:01.269000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376243170752462858",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375707407455359036",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376258441148108940",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Oscar;\nOf course,  I saw it, it is quite complete. \nIt is this type of content that gives us the chance to fragment it in parts, so that it is not so long. \nI have worked on this proposal:",
+      "timestamp": "2025-05-25T17:59:42.015000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376258441148108940",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376243170752462858",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376259005768274020",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "An AI-powered company is one that embeds artificial intelligence at the very heart of its strategy and operations, rather than treating AI as an occasional tool. It undergoes a digital transformation in which AI becomes both a disruptive force and an enabler of new business models and ecosystems.\n\nBecoming AI-powered isn’t a one-time project but an ongoing evolution. Organizations must remain flexible and innovative, continually optimizing their people, processes, and technologies to sustain efficiency, ethical integrity, and long-term growth in the digital age.\n\nThanks to Oscar Garcia for sharing such valuable inishts and to Katherine Valqui for sharing the image and prompt.",
+      "timestamp": "2025-05-25T18:01:56.631000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376259005768274020",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1376259005399306250",
+          "filename": "AI_Powered_Company.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1368763793370517514/1376259005399306250/AI_Powered_Company.pdf?ex=68408a14&is=683f3894&hm=7a8176b11372fbb26d19816f010ea7b960466925861b9ead7039e84ed058a5a0&",
+          "size": 7395650
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376262840704307240",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Haha the image looks great !",
+      "timestamp": "2025-05-25T18:17:10.951000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376262840704307240",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376263035668398141",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "So the idea it’s to make at least 2 post about it with the info I gave ?",
+      "timestamp": "2025-05-25T18:17:57.434000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376263035668398141",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376275184239251559",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Two at least! \nThanks Oscar! \nHappy Sunday everyone!",
+      "timestamp": "2025-05-25T19:06:13.879000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376275184239251559",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376263035668398141",
+        "channel_id": "1368763793370517514",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376278966343827516",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Happy Sunday !!",
+      "timestamp": "2025-05-25T19:21:15.603000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376278966343827516",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376556603213615235",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> Yesterday, Me and Rad discussed about a possible content from the details I shared in this thread here \nPlease let me know if you need more information.\n\n\nhttps://discord.com/channels/1353058864810950737/1372102582620913676/1372969100938055731",
+      "timestamp": "2025-05-26T13:44:29.391000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376556603213615235",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376562893948059740",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-26T14:09:29.219000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376562893948059740",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1376561997080039444",
+        "channel_id": "1372102582620913676",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1376563295145955480",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> Just moved the message to this channel.\n\nThank you for all the amazing work that you and the team are doing here. \nI am in no hurry - please take your time and let me know if any inputs are required from my side.",
+      "timestamp": "2025-05-26T14:11:04.872000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376563295145955480",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376586379449995284",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> thank you for the Post !!",
+      "timestamp": "2025-05-26T15:42:48.599000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1376586379449995284",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377786467845410927",
+      "channel_id": "1368763793370517514",
+      "channel_name": "📥socialmedia-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> \nHere’s a piece titled “The 3 Questions Every Company Must Ask Before Using AI.” It’s a quick, strategic read that outlines what every organization should consider before diving into AI projects. \n\nIt is just like an opinion piece. \n\nIt focuses on three key questions:\n\nWhat problem are we actually trying to solve?\n\nDo we have the right data—and is it good enough?\n\nAre we organizationally and ethically ready?",
+      "timestamp": "2025-05-29T23:11:31.969000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368763793370517514/1377786467845410927",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1377786467534770277",
+          "filename": "The_3_Questions_Every_Company_Must_Ask_Before_Using_AI_-_Final.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1368763793370517514/1377786467534770277/The_3_Questions_Every_Company_Must_Ask_Before_Using_AI_-_Final.pdf?ex=684029e3&is=683ed863&hm=cc0d8bd839bf2d990c73336bcec441fdb86d93ed5ac5a428da9f76a6bb2004e4&",
+          "size": 1348596
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

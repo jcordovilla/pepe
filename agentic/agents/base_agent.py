@@ -39,6 +39,7 @@ class SubTask:
     id: str
     description: str
     agent_role: AgentRole
+    task_type: str
     parameters: Dict[str, Any]
     dependencies: List[str]
     status: TaskStatus = TaskStatus.PENDING

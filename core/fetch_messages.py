@@ -369,10 +369,18 @@ async def main():
     except Exception as e:
         logger.error(f"❌ Error starting Discord client: {e}")
     finally:
+        # Ensure we properly close the client
         if not client.is_closed():
             await client.close()
+        # Give time for any pending tasks to complete
+        await asyncio.sleep(1)
         logger.info("🔌 Discord message fetcher finished")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("🛑 Message fetcher stopped by user")
+    except Exception as e:
+        logger.error(f"❌ Error running message fetcher: {e}")

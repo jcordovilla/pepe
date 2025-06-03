@@ -6,7 +6,25 @@ A sophisticated Discord bot powered by **multi-agent architecture** using LangGr
 
 **🎉 Status: Complete and Production Ready** - All tests passing with 100% success rate!  
 **🔥 Latest Feature**: Advanced reaction search with emoji filtering and engagement analytics  
-**📊 Test Coverage**: 100% passing (reaction search, agent integration, analytics)
+**📊 Test Coverage**: 100% passing (reaction search, agent integration, analytics)  
+**🧹 Recent Update**: Codebase organization and cleanup completed  
+
+## 🚀 **Quick Start**
+
+```bash
+# Check system status
+python scripts/system_status.py
+
+# Start bot
+python main.py
+
+# Or use quick launch
+./launch.sh
+```
+
+📖 **See [docs/QUICKSTART.md](docs/QUICKSTART.md) for detailed setup instructions**  
+🗂️ **See [docs/ORGANIZATION.md](docs/ORGANIZATION.md) for project structure**  
+🚀 **See [docs/DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md) for deployment**
 
 ---
 

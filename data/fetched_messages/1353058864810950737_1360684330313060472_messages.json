@@ -1,0 +1,4269 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1360684330313060472",
+  "channel_name": "🗣convo-leaders-chat",
+  "fetch_timestamp": "2025-06-03T22:03:37.842646",
+  "message_count": 155,
+  "messages": [
+    {
+      "message_id": "1360684429499957458",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone this is the chat for conversational leader admins",
+      "timestamp": "2025-04-12T18:34:08.287000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1360684429499957458",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360710923962028163",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Conversational Leaders! 🙌🏼\n\nThanks for continuously sparking lively discussions and keeping our community vibrant—you’re doing fantastic work!\n\nQuick heads-up: I’ll be stepping in temporarily as the Discord Manager & Network Architect while Carlos is out this upcoming week. During this time, please direct any Discord-related suggestions, questions, or ideas straight to me via DM or through our <#1354188981826228448> channel. 📩\n\nAlongside this announcement, I'm releasing our official \"Discord Structure & Engagement\" guide. 📚\nThis document clearly outlines our channel setup, weekly schedules, role permissions, and tips for boosting community interaction. Feel free to review and reference it throughout the week!\n\n👉 [Discord Structure & Engagement PDF Below]\n\n🎉 Exciting News:\nDr. Sanchez has agreed to recognize each of our community coordinators on a special LinkedIn post this week as a thank you for your continuous commitment to the community! 🏅 Additionally, we are actively working with MIT on even more ways to highlight your leadership contributions, and they’re fully onboard to support us! Stay tuned for more updates!\n\nIf you're curious about who’ll be steering things in Carlos’s absence, you can find my professional background, CV, and portfolio here:\n🔗 https://www.mit.edu/~oscarsan/\n\nThanks again for all your efforts—looking forward to supporting your great work this week! 🚀✨\n\nWarm regards,\nOscar Sanchez\nCommunity Manager",
+      "timestamp": "2025-04-12T20:19:25.059000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1360710923962028163",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360710974952439828",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-12T20:19:37.216000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1360710974952439828",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1360710974549524610",
+          "filename": "DiscordEngagementStructure_1.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1360710974549524610/DiscordEngagementStructure_1.pdf?ex=6840aa59&is=683f58d9&hm=e1febf193f3011b35cca2dbf455ae5c676cbc40a9f09be3c90251969d343e355&",
+          "size": 270598
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361020359188549719",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Should we have a channel called \"AI Learning Journey\"?  It seems like everyone is at a different phase of the learning journey.  We could share what course were good to take at diff phases of the journey.",
+      "timestamp": "2025-04-13T16:49:00.166000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361020359188549719",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361042012991787158",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sounds good to me Irene!",
+      "timestamp": "2025-04-13T18:15:02.835000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361042012991787158",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361072808054096103",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "QQ who are all part of the <#1354190157049364501>?",
+      "timestamp": "2025-04-13T20:17:24.950000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361072808054096103",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361072988522414281",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Was it <@392733996880101396> , <@1359551204648157214> and me? Did I get that right?",
+      "timestamp": "2025-04-13T20:18:07.977000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361072988522414281",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396",
+        "1359551204648157214"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361076909395546262",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352735021093359626> that is correct!",
+      "timestamp": "2025-04-13T20:33:42.786000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361076909395546262",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361077011136778422",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174>",
+      "timestamp": "2025-04-13T20:34:07.043000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361077011136778422",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361077097401024622",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> when you can add me as a friend so I can make the groupchat you guys requested! 🙂",
+      "timestamp": "2025-04-13T20:34:27.610000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361077097401024622",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361325171402870956",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello everyone! 🌟\n\nIt’s Motivation Monday! Let’s start the week strong by sharing or responding to an inspiring AI success story in <#1353058864810950740>. Your experiences and reflections are the heartbeat of our community!\n\nThank you for keeping the momentum going — together we’re building an amazing space!\n\nWarmly,\nDragana and Rodrigo 🚀",
+      "timestamp": "2025-04-14T13:00:13.061000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361325171402870956",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361333990543593684",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> make sure to complete this engagement activity as your action item of the day!\n\nRemember to only spend 30 minutes maximum!",
+      "timestamp": "2025-04-14T13:35:15.708000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361333990543593684",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050"
+      ],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361325171402870956",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361334295293198567",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> I have added you as a friend.",
+      "timestamp": "2025-04-14T13:36:28.366000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361334295293198567",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361077097401024622",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361338816949911583",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "And pls post in this group as well that it’s done 🙂",
+      "timestamp": "2025-04-14T13:54:26.413000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361338816949911583",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361333990543593684",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361347729816686804",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey guys!\n\nI wanted to share this prompt that should make it easier to find a story to post within 5 minutes.\n\nYou can copy and paste this into chatgbt with its search capabilities and find a story right away:\n\nPROMPT:\n\nYou are my “AI Good‑News Scout.”  \n\nTask  \n1. Find ONE uplifting, real‑world story (published in the last 14 days) where artificial intelligence created a positive impact—e.g., saved lives, advanced climate solutions, boosted accessibility, or empowered a community.  \n2. Provide the story’s:  \n   • Headline  \n   • Source + publication date  \n   • Link (URL)  \n3. Write a 2‑sentence, plain‑English summary that highlights why this win matters for innovators like us.  \n4. End with one short, motivational takeaway (max 15 words) that I can use as a Monday morale boost.  \n\nFormatting  \nReturn your answer exactly like this:\n\n**Headline:** <headline>  \n**Source / Date:** <outlet>, <date>  \n**Link:** <url>  \n**Quick Summary:** <2 sentences>  \n**Takeaway:** <short punch‑line>\n\nOnly output the story—no extra commentary.",
+      "timestamp": "2025-04-14T14:29:51.406000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361347729816686804",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361348598041673930",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just posted an example output of the prompt in general chat!\n\n\n\nI was thinking I could share with you guys a prompt as well tommorow for tech tip tuesday\n\n\n\nThat way we can find ai integrations for the conversational leaders side of things!",
+      "timestamp": "2025-04-14T14:33:18.407000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361348598041673930",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361348794523975871",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Awesome! Thanks so much, <@1352785241252565174> — this is super helpful!",
+      "timestamp": "2025-04-14T14:34:05.252000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361348794523975871",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361347729816686804",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361350688243716180",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> as appeared in my example when using the prompt just make sure that the link it provides is credible because the one returned to me was broken. If that happens just re-run the prompt.",
+      "timestamp": "2025-04-14T14:41:36.750000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361350688243716180",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361352218661355671",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just completed daily engagement item!",
+      "timestamp": "2025-04-14T14:47:41.630000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361352218661355671",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361353884727247050",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey quick question, should we be using our 2 person buddy group from before or should we be reaching out to create new buddy groups? Also, in the buddy corner, are we posting the groups? Need some clarity.",
+      "timestamp": "2025-04-14T14:54:18.851000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361353884727247050",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361354663403982940",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153> since we don't have general members yet there isn't buddy groups yet to oversee. \n\nSo as stated before the goal should be the daily engagement item.\n\nBut it is a cool idea to have buddy groups within the admin teams. Could eventually integrate that once we have the daily engagement items mastered.",
+      "timestamp": "2025-04-14T14:57:24.502000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361354663403982940",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361368228760125713",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi folks, happy Monday! Thanks for the prompt, Oscar, super helpful!",
+      "timestamp": "2025-04-14T15:51:18.735000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361368228760125713",
+      "author": {
+        "id": "1359961544430981340",
+        "username": "antoine789",
+        "discriminator": "0",
+        "display_name": "Antoine Christopher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361368618675208372",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Seeing all the motivational stories being posted, maybe as this evolves, we can have a rotating schedule of 2-3 folks posting a story every day vs having us all post a story on the same day. Might be easier to absorb in this way and keeps the motivation going every day 🙂",
+      "timestamp": "2025-04-14T15:52:51.698000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361368618675208372",
+      "author": {
+        "id": "1359961544430981340",
+        "username": "antoine789",
+        "discriminator": "0",
+        "display_name": "Antoine Christopher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "☝️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361396168483012649",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "added a \"point up\" emoji ☝️ to reflect +1 support for Antoine's suggestion. Feel free to add if you agree this would be a helpful way to do things going forward. That way we can get an idea of how many people agree with suggestions!",
+      "timestamp": "2025-04-14T17:42:20.084000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361396168483012649",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        "1359961544430981340"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361368618675208372",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361522307545301227",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry for completing the task until know ! Just landed !",
+      "timestamp": "2025-04-15T02:03:33.980000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361522307545301227",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361676151180759212",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello Everyone!  \n\nIt’s  Tech Tip Tuesday 💻✨🔧— time to level up our tools and tricks!  \n\n•    Provide a practical tech tip in <#1353058864810950740>\n• ⁠Engage members to share their favorite little hacks or follow-up questions \n\nLet’s swap ideas, spark creativity, and build up our collective toolkit!\n\nCheers,\nRodrigo and Dragana  🚀🧠💡",
+      "timestamp": "2025-04-15T12:14:53.161000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361676151180759212",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361676522909602046",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> I placed a prompt to use with chat gbt to make it easier for tech tip tuesday in [Convo-leaders-prompts] channel if you guys wanna check it out",
+      "timestamp": "2025-04-15T12:16:21.788000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361676522909602046",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361676151180759212",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361677475129589770",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I tried to visit convo-leaders-prompts but it seems that I do not have permission to access to this.",
+      "timestamp": "2025-04-15T12:20:08.815000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361677475129589770",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361676522909602046",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361677604674867391",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> thank you for pointing that out let me check whats up",
+      "timestamp": "2025-04-15T12:20:39.701000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361677604674867391",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361677822682202314",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> Try refereshing your page can you see it now",
+      "timestamp": "2025-04-15T12:21:31.678000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361677822682202314",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361678064634953998",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Heres the prompt just in case:\n\n\n💻Tech Tip Tuesday\n\nYou are my “AI Tech Tip Scout.”\n\nTask:\nFind ONE recent article or blog post (from the last 14 days) with a practical, hands-on tip or tutorial related to generative AI or LLMs (e.g., prompt engineering, API use, fine-tuning tips, workflow optimization, useful libraries/tools, etc.).\nProvide clearly:\n• Headline\n• Source + publication date\n• Link (URL)\nSummarize the tip or tutorial clearly and simply in 2-3 sentences.\nEnd with one short, actionable step or challenge (max 15 words) our members can immediately try and share results.\n\nFormatting:\nReturn your answer exactly like this:\n\nHeadline: <headline>\nSource / Date: <outlet>, <date>\nLink: <url>\nTip Summary: <2-3 sentence summary>\nAction Step: <short, actionable challenge>\n\nOnly output the requested information—no extra commentary.",
+      "timestamp": "2025-04-15T12:22:29.364000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361678064634953998",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361700677465932067",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-15T13:52:20.683000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361700677465932067",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1361347729816686804",
+        "channel_id": "1360684330313060472",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1361700796454142095",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-15T13:52:49.052000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361700796454142095",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1361678064634953998",
+        "channel_id": "1360684330313060472",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1361701441638629426",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360639641556090894> Welcome to conversation leaders! the engagement item is pinned item",
+      "timestamp": "2025-04-15T13:55:22.876000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361701441638629426",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1360639641556090894"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361756625555165214",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello #converational-leaders! 🌟\n\nJust a quick reminder that tomorrow we’ll have our Midweek Discussion Wednesday activity, so it's a good time to make sure everyone knows their assigned channel.\n\nHere’s the list of channels and the members responsible:\n\n🔹 <#1353058864810950740>: Michael Keady\n🔹 <#1353448986408779877>: Marie Ribbelov, Shabana Islam, Apoorv Garg\n🔹 <#1360973368676843583> Irene Yang\n🔹 <#1354193330854035617>: Michael Keady, Antoine Christopher\n🔹 <#1354190157049364501>: Ash Mikhail, Abdel-Nasser Ali Mohamed, Bisera Ferrero, Radhakrishnan Ramamurthy\n🔹 <#1360643112657223890>: Laura Shapland\n🔹 <#1360642371531968582>: Oscar Jesús García González\n\nCould you please confirm if everything is clear for tomorrow? 🚀\n\nThanks for helping keep the rhythm and energy of this amazing community going!\n\nWarmly,\nDragana and Rodrigo ✨",
+      "timestamp": "2025-04-15T17:34:39.747000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361756625555165214",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361830609231544480",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1125194882164736050> For ai-philosophy-ethics discussion we have to post the content at general-chat? Correct?",
+      "timestamp": "2025-04-15T22:28:38.830000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361830609231544480",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361831491201400832",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> it will be in the designated channel so it will be posted in the \"ai philosophy ethics\" channel\n\nI'm working on your groups questions rn as well! Should have answers over in the next 10 minutes!",
+      "timestamp": "2025-04-15T22:32:09.108000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361831491201400832",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361830609231544480",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361834788930977984",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanx Everyone !",
+      "timestamp": "2025-04-15T22:45:15.348000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361834788930977984",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361884775547142254",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@392733996880101396> <@1352735021093359626> <@1359551204648157214> I've added you all as a friend and once you accept, I'll create a DM group chat in Discord to connect on <#1354190157049364501>",
+      "timestamp": "2025-04-16T02:03:53.086000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361884775547142254",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626",
+        "392733996880101396",
+        "1359551204648157214"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361889765846159502",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We already have one. I’ve added you there now",
+      "timestamp": "2025-04-16T02:23:42.866000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361889765846159502",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1360639641556090894"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361884775547142254",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361891428833300602",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Super. Thanks for adding me",
+      "timestamp": "2025-04-16T02:30:19.353000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1361891428833300602",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361889765846159502",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362043034623017052",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360639641556090894> <@1361976806651068517> add me as a friend if you can so I can put you guys in a group-chat to coordinate a time if you guys are available for 10-15 minutes just to bring you guys up to speed tomorrow!",
+      "timestamp": "2025-04-16T12:32:44.990000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362043034623017052",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1361976806651068517",
+        "1360639641556090894"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362047061826207976",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for adding me.",
+      "timestamp": "2025-04-16T12:48:45.150000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362047061826207976",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362043034623017052",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362050054042423346",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello everyone! 🌟\n\nJust a friendly reminder that today marks the start of our first Midweek Chat — an exciting step to keep the conversation flowing across our channels!\n\nPlease remember to post today in your assigned channel. Your contributions are what keep our community vibrant and full of great energy!\n\nHere’s the list for quick reference:\n\n<#1353058864810950740>: Michael Keady\n<#1353448986408779877>: Marie Ribbelov, Shabana Islam, and Apoorv Garg\n<#1360973368676843583>: ai-use-case: Irene Yang\n<#1354193330854035617>: Michael Keady, Antoine Christopher\n<#1354190157049364501>: Ash Mikhail, Abdel-Nasser Ali Mohamed, Bisera Ferrero, and Radhakrishnan Ramamurthy\n<#1360643112657223890>: Laura Shapland\n<#1360642371531968582>: Oscar Jesús García González\n\nPlease let us know and confirm once you've posted your topic in your designated channel. And if you encounter any issues or won’t be able to post, kindly inform us ASAP so we can support and cover for you if needed.\n\nThanks so much for keeping the momentum going — together we’re building an amazing space!\n\nWarmly,\nDragana and Rodrigo",
+      "timestamp": "2025-04-16T13:00:38.550000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362050054042423346",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362087165323907103",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just posted a discussion topic in <#1360643112657223890> — would be so helpful if you're willing to take a look and engage. Thanks in advance!",
+      "timestamp": "2025-04-16T15:28:06.569000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362087165323907103",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362088899924459581",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning everyone !\nJust posted a few minutes ago a topic for <#1360642371531968582> . Hope it might bring some good discussions !",
+      "timestamp": "2025-04-16T15:35:00.130000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362088899924459581",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362101384719372379",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m in the discord managers group but following some of your conversational outputs, loving them! Good work",
+      "timestamp": "2025-04-16T16:24:36.737000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362101384719372379",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362115925276495934",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Learned about the @ everyone pinging feature with your post, thanks for using that!",
+      "timestamp": "2025-04-16T17:22:23.476000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362115925276495934",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362088899924459581",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362184208730165318",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I posted a  topic in <#1354190157049364501> with questions to engage.",
+      "timestamp": "2025-04-16T21:53:43.520000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362184208730165318",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362465870772965479",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1352785241252565174> thank you for the meeting and I am really happy to contribute to <#1353448986408779877> . For all my collegues here in the channel. As I am based in Europe I am having an eye not only on ethics but also on compliance (EU AI Act etc). I hope I can bring value to our community. Thank you Oscar for assigning me to this group.",
+      "timestamp": "2025-04-17T16:32:56.984000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362465870772965479",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362466082660679972",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Welcome to the team Andrea 👍",
+      "timestamp": "2025-04-17T16:33:47.502000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362466082660679972",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        "1361976806651068517"
+      ],
+      "reactions": [
+        {
+          "emoji": "💙",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362465870772965479",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362507987650089020",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362171740104556584> welcome on board! Dm me to set up an orientation!",
+      "timestamp": "2025-04-17T19:20:18.430000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362507987650089020",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1362171740104556584"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362509997380210798",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-17T19:28:17.587000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362509997380210798",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362512783647965484",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-17T19:39:21.885000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362512783647965484",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362527111495159992",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-17T20:36:17.910000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362527111495159992",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362545727942692995",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-17T21:50:16.417000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1362545727942692995",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363152180240060718",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-19T14:00:05.912000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1363152180240060718",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363167284121829616",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-19T15:00:06.958000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1363167284121829616",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363244882977882334",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@633801046954737674> welcome to the team!",
+      "timestamp": "2025-04-19T20:08:27.967000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1363244882977882334",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "633801046954737674"
+      ],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363861849556254951",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-21T13:00:04.262000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1363861849556254951",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363876956697006264",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-21T14:00:06.085000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1363876956697006264",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364224244921143326",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-22T13:00:06.050000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364224244921143326",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364239343643918487",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-22T14:00:05.866000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364239343643918487",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364586635374628896",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-23T13:00:06.667000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364586635374628896",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364601735003373629",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-23T14:00:06.699000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364601735003373629",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364609652146573342",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone, I was in a work meeting and couldn't attend our Conversational Leaders meeting today. Where do I post my midweek discussion post?",
+      "timestamp": "2025-04-23T14:31:34.293000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364609652146573342",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364614072514908160",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📢 Midweek Discussion Update – <@&1353441943845077033> \n\nHey team! Due to a heavier workload this week, we didn’t get the chance to assign topics as usual. Here’s how we’ll handle it:\n\n[A] ✅ If you're already part of a group assigned to a specific discussion channel, feel free to proceed as scheduled.\n\n[B] 🎯 For everyone else, you’re welcome to choose your own topic and post in the channel of your choice today.\n\nThanks for your flexibility and continued leadership — let’s keep the momentum going!",
+      "timestamp": "2025-04-23T14:49:08.191000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364614072514908160",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364615312108032082",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear Conversational Leaders,\n\nQuick update for today:\n\n\nDue to the heavy workload this week we are still in the process of completing the  assigning  of the rest of conversational leaders to specific channels.  \n\nIf you’re already in a group for a specific channel, please  continue as planned.\nEveryone else — feel free to select  any channel you’d like to post  today.\n\nThanks for your flexibility, and we really appreciate your continued energy and support!\n\nWarmly,\nRodrigo & Dragana",
+      "timestamp": "2025-04-23T14:54:03.733000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1364615312108032082",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 8
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365020604813676614",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear Conversational Leaders,\n\nJust want to take a moment to recognize the incredible quality and momentum you’ve brought to this work. It’s not only impressive — it’s truly inspiring.\n\nThank you for your dedication, thoughtfulness, and excellence every step of the way. Grateful to witness and be part of this journey with you.\n\nRodrigo & Dragana",
+      "timestamp": "2025-04-24T17:44:33.044000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365020604813676614",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 10
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365021082058231929",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "More than happy to be part of this amazing Community ! Thank you <@1322962807565848586> and <@1125194882164736050> for your Work and expertise ! I just hope to keep learning from you and everyone else !",
+      "timestamp": "2025-04-24T17:46:26.828000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365021082058231929",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050",
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365020604813676614",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365022549452521543",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Let’s have a call between us to meet and greet \nMaybe on Saturday , we could start 30 min before the workshop . Rodrigo and I will be in touch",
+      "timestamp": "2025-04-24T17:52:16.682000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365022549452521543",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "🦾",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365023732749570058",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We’ll also set up a regular cadence to stay connected and hear your ideas and feedback — I can’t wait to meet all of you! I’ll be having one-on-one conversations with each of you as well, to get to know you better, understand what excites you, and explore how we can best support your growth and aspirations.\n1+1=11",
+      "timestamp": "2025-04-24T17:56:58.802000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365023732749570058",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365023947363586108",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great idea! \nI will do my best to join \nI'm traveling though and can't promise",
+      "timestamp": "2025-04-24T17:57:49.970000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365023947363586108",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365022549452521543",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365024129060835520",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Tanks <@758206516753858561>  We’re the ones who are truly grateful for everything you have been contributing — not just knowledge, but also that amazing energy you bring to motivate others! That’s exactly the kind of spirit we need to keep alive as a community, because there will be moments when we’ll need to lean on each other more than ever.\n\nWe genuinely believe this community is going to grow into something huge and meaningful — and it’s a privilege for all of us, as a full team, to witness and nurture it from the very beginning.\n\nTotally agree with <@1322962807565848586> — it would be fantastic to meet up this weekend a bit before the session we’re preparing on AI Agents.\n\nBig hug and thank you for everything!",
+      "timestamp": "2025-04-24T17:58:33.290000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365024129060835520",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365021082058231929",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365688896855216209",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-26T14:00:06.283000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365688896855216209",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365704031405609042",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-26T15:00:14.641000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1365704031405609042",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366224256719126638",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello everyone. I was traveling over the weekend. Sorry I didn't participate in the activities. I have some questions: \n1) The activities for Monday, Tuesday and Wednesday are clear to me, and I will do them. Where do I post these activities?\n 2) Now that we have 100 more people in the community, they will be divided into groups based on their interests. What are these groups? Which Conversational Leaders will be in each group?\n 3) Please, who can help me? Regards Eduardo",
+      "timestamp": "2025-04-28T01:27:26.021000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366224256719126638",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366380487878119525",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Have the sames questions...",
+      "timestamp": "2025-04-28T11:48:14.432000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366380487878119525",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1087795330067742760"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366224256719126638",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366398568604373022",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-28T13:00:05.213000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366398568604373022",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366398707557208126",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-28T13:00:38.342000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366398707557208126",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1366229688837476423",
+        "channel_id": "1353443443925582014",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366398745352343623",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357372535653666968>",
+      "timestamp": "2025-04-28T13:00:47.353000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366398745352343623",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357372535653666968"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366398707557208126",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366413678420824094",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-28T14:00:07.674000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366413678420824094",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366476135436648561",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey @everyone, quick thought and question!\n\nI wanted to start a conversation about how we’re handling daily posts. Right now, we’re following the daily theme schedule, but if everyone posts a separate topic each day, it feels like there’s a lot of content going out — and not as much back-and-forth conversation as we had on the WhatsApp group.\n\nWe’ve also heard feedback from the WhatsApp group that there’s already so much content it’s hard to stay on top of everything, and I’m wondering if the way we’re posting now might actually exacerbate that feeling.\n\nMaybe we could try limiting it to 5 posts per day (either first-come, first-post, or assigning 5 people per day) and focusing more on fueling deeper conversations around those posts, rather than prioritizing a lot of content?\n\nIt also seems like the themes might be overwhelming people — instead of casually sharing interesting ideas, they might feel like they have to perfectly fit the theme. I’m wondering if the structure could unintentionally make non-leaders feel more shy about jumping in.\n\nAlso — slight meta question — is this even the right place to be posting this? 😅 Feels like even figuring out where to bring these kinds of discussions is part of what we’re learning as we go.\n\nCurious what you all think!",
+      "timestamp": "2025-04-28T18:08:18.587000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366476135436648561",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366492965811523665",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey <@1360003496384008262> ! I do share some of your thoughts about the topic. I Do believe that so much content its been share that seems to be overwhelming at some point.\nIm sure there is a better way to administrate the content each and everyone of us is trying to share. \nNot a fan tho´ of limiting the posts in a \"first time first server\" cause we have so much time zones that it would not be fair for all.\n\nI think we can try to have a brainstorm of ideas with <@1352785241252565174> and the Converstional leaders in order to try to find a better solution. Now that we have the Community rolling it is important to hear and take notice of the feedback.",
+      "timestamp": "2025-04-28T19:15:11.261000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366492965811523665",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262",
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366496999012040868",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561> <@1360003496384008262> I would submit this in feedback workshop; That way we dont lose it: you guys can workshop a solution and create potential implementation plan <#1360642506500476948>",
+      "timestamp": "2025-04-28T19:31:12.851000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366496999012040868",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1360003496384008262"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366760962635599916",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-29T13:00:06.683000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366760962635599916",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366776062700294154",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-29T14:00:06.819000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366776062700294154",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366882570943463525",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have a question about the midweek discussion post. Should we continue posting in groups based on specific topics (ethics, practical applications, careers...) or can we use this midweek discussion to warm up our buddy groups?",
+      "timestamp": "2025-04-29T21:03:20.363000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366882570943463525",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366944240927768607",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Excellent question, <@1087795330067742760> !! Hey <@&1353441943845077033> Leaders! Quick update: our buddy groups launch tomorrow 🚀. Because weekly assignments don’t start until next week, you’re free to pick any topic for this mid-week discussion—choose something that excites your group and sparks engagement. Use it as a warm-up to connect and get the conversation flowing. Once your group decides, post the topic in your buddy channel so everyone’s aligned. Let’s make this first week dynamic! 🙌",
+      "timestamp": "2025-04-30T01:08:23.633000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1366944240927768607",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        "1087795330067742760"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366882570943463525",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367123354200309857",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-30T13:00:07.565000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367123354200309857",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367131150920978452",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please, post conversation triggers [Mon-Wed] as threads instead of normal messages.",
+      "timestamp": "2025-04-30T13:31:06.448000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367131150920978452",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367135153285238905",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just deleted my post and reposted as a thread.  We need to ensure that threads which are more hidden are clicked thru.  If we start responding to threads more so, then others will follow.  When I tried to threads previously to organize our channel, no one responded to my post so I stopped using threats. We need to be the role models to change the behaviors within the Discord community by starting to use threads too if that is the preferred way. 🙂",
+      "timestamp": "2025-04-30T13:47:00.686000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367135153285238905",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367138436653252628",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-04-30T14:00:03.502000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367138436653252628",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367139405571035188",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Would a quick follow up in the thread improve its visibility? \n\nWe could organize to do that",
+      "timestamp": "2025-04-30T14:03:54.510000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367139405571035188",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367135153285238905",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367142789183176725",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153>  <@969571634027589643> Is it possible to turn a past message into a thread such a way that all conversations/replies on that message also become part of the thread?",
+      "timestamp": "2025-04-30T14:17:21.226000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367142789183176725",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153",
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367153541705371679",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I couldn't find a way to do it 🫤 \nIf people have started responding better leave as it is.",
+      "timestamp": "2025-04-30T15:00:04.827000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367153541705371679",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367142789183176725",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367168824335536170",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I couldnt find a way to convert it either. That's why I deleted mine and recreated it.  I did it before any responses came in.",
+      "timestamp": "2025-04-30T16:00:48.490000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367168824335536170",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367170321005940746",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I found out a way. \nBut it requires a reply.\n\n1) Use the context menu of a normal message\n2) Select 'Create Thread'\n\nand there you have it.\n\nFor whatever reason it doesn't work here.\nPerhaps enabling threads is a channel administrative setting <@1352785241252565174>\n\ncc <@1349019079683473488> <@1359552583244583153>",
+      "timestamp": "2025-04-30T16:06:45.324000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367170321005940746",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "1359552583244583153",
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1367170320787701831",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1367170320787701831/image.png?ex=68406f15&is=683f1d95&hm=8b474a262e9d4ac56876c0950959c8ba23439deb70b95d06904b8a9034553dac&",
+          "size": 199905
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367176457264042004",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "To convey the right message, perhaps we could align on some terms that are already in rotation.\n\nAccording to chatGPT and Perplexity: \n- Conversational AI Leader: someone who leads or is highly influential in the field of conversational AI.\n- Conversational Leader: someone who leads in a conversational way—i.e., engaging, informal, approachable.\n- Conversation Leader: someone who leads or facilitates conversations.\n\nI hope that helps.",
+      "timestamp": "2025-04-30T16:31:08.322000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367176457264042004",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367177510651166801",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone   I just created 2 threads, both for todays topic, one un <#1354193330854035617> and anothe one for <#1360642371531968582> \n\nIf anyone can check them out and see if this is the way we can improve our content, ill more than happy to read your thoughts",
+      "timestamp": "2025-04-30T16:35:19.469000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367177510651166801",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367179497849356288",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Interesting, \n\nThe one in <#1354193330854035617>  looks great and I suspect you have created it from an existing message, correct?\n\nThe other in <#1360642371531968582> is easy to miss.  Probably that's what you meant <@1359552583244583153>, right?\n<@758206516753858561> it's been created as a thread from scratch, correct?\n\nIf that's the case I'd say we should start threads from normal messages. \nWay to go discord...  🤷‍♂️ \n\nI also observed that the threads will be hidden after three days of inactivity frmo the channel. Keep an eye on this.",
+      "timestamp": "2025-04-30T16:43:13.254000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367179497849356288",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367179497593634868",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1367179497593634868/image.png?ex=684077a1&is=683f2621&hm=30a9fac6426b1aeef78b2041b3bc2c01666a1abbf44bc633edabcb865960aacc&",
+          "size": 36985
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367177510651166801",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367181118255923291",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yeah the one from Carrer Op - made it from one post already made..\n\nthe other one made from scratch...but ill see it fine...how do you see it ?",
+      "timestamp": "2025-04-30T16:49:39.589000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367181118255923291",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367181585304260661",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "the time for the threads to be available is from a configuration within the channel maybe <@1322962807565848586> <@1125194882164736050> <@673901899837341736> can help us out with that",
+      "timestamp": "2025-04-30T16:51:30.942000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367181585304260661",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736",
+        "1125194882164736050",
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367181845850230804",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-30T16:52:33.061000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367181845850230804",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367181845652967576",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1367181845652967576/image.png?ex=684079d1&is=683f2851&hm=1dd20177ecb99f9899bf0d958905da81987feb07f55b9302f00cf583bce8623f&",
+          "size": 14279
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367179497849356288",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367185189490524241",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "The Learning WIthout Coding Skills is in the Resources Section so I wasnt referring to that being a thread since it is already a category under HELP & RESOURCES.  I just was referring to the ability to create threads within each of these major categories.  I noticed when Threads are created, they are compressed which is good and bad to some degree. Good in that it doesnt take up as much real estate space so we have to keep scrolling to get a view at a glance on all the topics. But Bad in that it is also hidden and requires you to click into it.  It can be more easily missed since if you are quickly scrolling, you will likely only glance at the headline.  Anyway, I'm sure this will all fall into place based on what works best for everyone.",
+      "timestamp": "2025-04-30T17:05:50.247000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367185189490524241",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367179497849356288",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367185855621632060",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think it might be confusing to have so many labels.  Within our GenAI Global Conversational Leader group, I believe there will naturally be some experts who can productize Conversational AI capabilities and take more of an active builder role working with the Architects.",
+      "timestamp": "2025-04-30T17:08:29.065000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367185855621632060",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367176457264042004",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367187921907617903",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-30T17:16:41.706000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367187921907617903",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367187920926015599",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1367187920926015599/image.png?ex=68407f79&is=683f2df9&hm=e9421ad2aaef115c7c4f3c5d15df87e748783c149a8afe4994a2c3fed7e175b2&",
+          "size": 517607
+        },
+        {
+          "id": "1367187921399976066",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360684330313060472/1367187921399976066/image.png?ex=68407f79&is=683f2df9&hm=ef17fab5d69c46195c78079b4fc882935be3cf53571b68b3c8d2c9cfceca806a&",
+          "size": 544115
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367181845850230804",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367188367569326110",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "The first one is a bit harder to trace to an original message compared to the second one.",
+      "timestamp": "2025-04-30T17:18:27.960000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367188367569326110",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367189873081061466",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I will move the discussion about thread retention and content search after inactivity to the https://discord.com/channels/1353058864810950737/1363882056001523772/1367189790432428133 channel.",
+      "timestamp": "2025-04-30T17:24:26.902000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367189873081061466",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367204259350712364",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "See my answer about threads here: https://discord.com/channels/1353058864810950737/1363882056001523772/1367203849345175563",
+      "timestamp": "2025-04-30T18:21:36.856000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367204259350712364",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367181585304260661",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367233940477448332",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for checking 🙏 I gave a try. It didn't come out very nice for msgs that has split in multiple sub msg.  I find it practical when I create a thread soon after the initial msg.",
+      "timestamp": "2025-04-30T20:19:33.388000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1367233940477448332",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367170321005940746",
+        "channel_id": "1360684330313060472",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368225622060699823",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-03T14:00:08.702000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1368225622060699823",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368240725526839357",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-03T15:00:09.649000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1368240725526839357",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368935296393281546",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-05T13:00:08.248000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1368935296393281546",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368950384596357121",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-05T14:00:05.556000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1368950384596357121",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369297677799657554",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-06T13:00:06.708000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369297677799657554",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369312784235368578",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-06T14:00:08.363000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369312784235368578",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369334147679649965",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey y'all. Can anyone help me understand what SGU is? Catching up on messages and I don't understand that acronym",
+      "timestamp": "2025-05-06T15:25:01.805000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369334147679649965",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369352564700745728",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dont know if its correct, dont remember the context...but it could be Server Governance Unit?",
+      "timestamp": "2025-05-06T16:38:12.765000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369352564700745728",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369370930580557874",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360003496384008262> , Oscar is correct, it is the Server Governance Unit, which is kind of a task force of 'advanced' discord managers that will be powering the optimisations development cycle weekly. There will be a general presentation about this on Saturday, check this post:\nhttps://discord.com/channels/1353058864810950737/1365732945859444767/1369360061159182378",
+      "timestamp": "2025-05-06T17:51:11.532000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369370930580557874",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369464237382041682",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks!",
+      "timestamp": "2025-05-07T00:01:57.607000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369464237382041682",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369660065199558687",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-07T13:00:06.597000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369660065199558687",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369675166233268224",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-07T14:00:06.964000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1369675166233268224",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370762323408719992",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-10T14:00:05.433000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1370762323408719992",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370777437423800390",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-10T15:00:08.895000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1370777437423800390",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371471994188730512",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-12T13:00:04.132000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1371471994188730512",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371487099898953909",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-12T14:00:05.614000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1371487099898953909",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371834406905577572",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-13T13:00:10.057000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1371834406905577572",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371849487164768379",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-13T14:00:05.471000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1371849487164768379",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372196772000170077",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-14T13:00:04.628000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1372196772000170077",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372211874560741519",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-14T14:00:05.359000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1372211874560741519",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373299036655718551",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-17T14:00:05.001000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1373299036655718551",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373301066946449479",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Is there a different link?  I am the only one on.",
+      "timestamp": "2025-05-17T14:08:09.060000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1373301066946449479",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373303038646812812",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Join",
+      "timestamp": "2025-05-17T14:15:59.150000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1373303038646812812",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373314171403370669",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-17T15:00:13.406000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1373314171403370669",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374008713496494233",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-19T13:00:05.145000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374008713496494233",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374023833933320252",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-19T14:00:10.138000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374023833933320252",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374371103983534082",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-20T13:00:05.770000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374371103983534082",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374386207923896361",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-20T14:00:06.830000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374386207923896361",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374733484194664509",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-21T13:00:03.945000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374733484194664509",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374748588894064735",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-21T14:00:05.186000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1374748588894064735",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375835754764173372",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-24T14:00:05.728000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1375835754764173372",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375850873577799811",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-24T15:00:10.334000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1375850873577799811",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376545450047438869",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-26T13:00:10.269000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1376545450047438869",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376560531422576691",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-26T14:00:05.949000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1376560531422576691",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376907827758759936",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-27T13:00:07.848000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1376907827758759936",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376922909771169823",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-27T14:00:03.680000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1376922909771169823",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377270196728889375",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-28T13:00:03.343000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1377270196728889375",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377285306931482654",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-28T14:00:05.896000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1377285306931482654",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378372479768203315",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-05-31T14:00:08.099000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1378372479768203315",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378387568885764197",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-31T15:00:05.625000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1378387568885764197",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379082152800682006",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-06-02T13:00:07.335000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1379082152800682006",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379097263271313432",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-06-02T14:00:09.952000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1379097263271313432",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379444537080025222",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-06-03T13:00:06.480000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1379444537080025222",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379459648343638016",
+      "channel_id": "1360684330313060472",
+      "channel_name": "🗣convo-leaders-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033>",
+      "timestamp": "2025-06-03T14:00:09.286000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360684330313060472/1379459648343638016",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

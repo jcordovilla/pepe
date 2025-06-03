@@ -1,0 +1,166 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1361494378484601033",
+  "channel_name": "💬convo-leaders-prompts",
+  "fetch_timestamp": "2025-06-03T22:03:38.121258",
+  "message_count": 6,
+  "messages": [
+    {
+      "message_id": "1361495146595749888",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> I thought I would make this channel to create a central prompt‑library where I’ll drop all engagement prompts I make for easy re‑use, if any of you guys wanna use them.\n\n⚠️ Quick Reminder: Always double‑check the links and content each prompt generates—LLMs can slip up!\n\n--------------------------------------------------------",
+      "timestamp": "2025-04-15T00:15:38.305000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1361495146595749888",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361495718828707841",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🤖 ai-philosophy-ethics prompt:\n\nYou are my “AI Ethics Radar.”\n\nTask\n1. Locate ONE notable article or op‑ed published in the last 14 days that tackles AI philosophy or ethics (e.g., alignment debates, responsible deployment, bias, rights of intelligent agents, societal impact, etc.).\n2. Provide:\n   • Headline\n   • Source + publication date\n   • Link (URL)\n3. Summarize the core argument or insight in 2‑3 plain‑English sentences.\n4. Finish with one provocative discussion question (max 20 words) I can post to spark debate.\n\nFormatting\nReturn your answer exactly like this:\n\n**Headline:** <headline>  \n**Source / Date:** <outlet>, <date>  \n**Link:** <url>  \n**Key Insight:** <2‑3 sentences>  \n**Discussion Question:** <short, thought‑provoking prompt>\n\nOnly output the article—no extra commentary.",
+      "timestamp": "2025-04-15T00:17:54.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1361495718828707841",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361497850680316215",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "---------------------------------\n\n💪Motivation Monday\n\nPROMPT:\n\nYou are my “AI Good‑News Scout.”\n\nTask\nFind ONE uplifting, real‑world story (published in the last 14 days) where artificial intelligence created a positive impact—e.g., saved lives, advanced climate solutions, boosted accessibility, or empowered a community.\nProvide the story’s:\n• Headline\n• Source + publication date\n• Link (URL)\nWrite a 2‑sentence, plain‑English summary that highlights why this win matters for innovators like us.\nEnd with one short, motivational takeaway (max 15 words) that I can use as a Monday morale boost.\n\nFormatting\nReturn your answer exactly like this:\n\nHeadline: <headline>\nSource / Date: <outlet>, <date>\nLink: <url>\nQuick Summary: <2 sentences>\nTakeaway: <short punch‑line>\n\nOnly output the story—no extra commentary.",
+      "timestamp": "2025-04-15T00:26:23.009000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1361497850680316215",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361498893661245570",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "------------------------------------------------------------------------------\n\n💻Tech Tip Tuesday\n\nYou are my “AI Tech Tip Scout.”\n\nTask:\n1. Find ONE recent article or blog post (from the last 14 days) with a practical, hands-on tip or tutorial related to generative AI or LLMs (e.g., prompt engineering, API use, fine-tuning tips, workflow optimization, useful libraries/tools, etc.).\n2. Provide clearly:\n   • Headline\n   • Source + publication date\n   • Link (URL)\n3. Summarize the tip or tutorial clearly and simply in 2-3 sentences.\n4. End with one short, actionable step or challenge (max 15 words) our members can immediately try and share results.\n\nFormatting:\nReturn your answer exactly like this:\n\n**Headline:** <headline>  \n**Source / Date:** <outlet>, <date>  \n**Link:** <url>  \n**Tip Summary:** <2-3 sentence summary>  \n**Action Step:** <short, actionable challenge>\n\nOnly output the requested information—no extra commentary.",
+      "timestamp": "2025-04-15T00:30:31.675000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1361498893661245570",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362544778050277750",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> I have created this prompt for the Midweek Discussions following the philosophy of the other two. Will include it in the recurring event's description. Let me know if you want any changes to it.\n\n---\nYou are my “AI Discussion Starter.”\n\nTask:\nCreate one engaging, midweek discussion post for a generative AI community. Your goal is to spark respectful debate or idea exchange.\n\nChoose ONE thought-provoking article, post, or insight (published in the last 14 days) related to your assigned discussion channel theme:\n• Ethics & Philosophy → Dilemmas, regulations, AI alignment, etc.\n• Practical Applications → Industry case studies, use cases, deployment stories.\n• Career & Collaboration → Job shifts, new roles, org strategies, skill evolution.\n• Showcase / Use-Case Roundtable → Real-world product launches, creative experiments.\n\nRequired Structure:\n1. **Headline:** Title of the post, article, or issue.\n2. **Source / Date:** Name of outlet or author + date published.\n3. **Link:** Full URL.\n4. **Summary:** 2-sentence plain-English explanation of what’s happening and why it matters.\n5. **Discussion Prompt:** One open-ended question (max 30 words) to encourage diverse perspectives.\n\nFormatting:\nReturn your answer exactly like this:\n\n**Headline:** <headline>  \n**Source / Date:** <source>, <date>  \n**Link:** <url>  \n**Summary:** <2 sentences>  \n**Discussion Prompt:** <open-ended question>  \n\nOnly output the requested information—no extra commentary.\n---",
+      "timestamp": "2025-04-17T21:46:29.945000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1362544778050277750",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364606269817749555",
+      "channel_id": "1361494378484601033",
+      "channel_name": "💬convo-leaders-prompts",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This looks great , thak you !",
+      "timestamp": "2025-04-23T14:18:07.883000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1361494378484601033/1364606269817749555",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

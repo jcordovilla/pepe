@@ -14,9 +14,14 @@ import asyncio
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+from tqdm import tqdm
+from dotenv import load_dotenv
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Load environment variables from .env file
+load_dotenv()
 
 from agentic.vectorstore.persistent_store import PersistentVectorStore
 
@@ -43,11 +48,15 @@ class MessageEmbedder:
         """Initialize the message embedder"""
         if config is None:
             config = {
-                'persist_directory': 'data/vectorstore',
+                'persist_directory': './data/chromadb',
                 'collection_name': 'discord_messages',
                 'embedding_model': 'text-embedding-3-small',
                 'batch_size': 100
             }
+        
+        # Check for required environment variables
+        if not os.getenv('CHROMA_OPENAI_API_KEY'):
+            raise ValueError("CHROMA_OPENAI_API_KEY environment variable is not set")
         
         self.config = config
         self.vector_store = PersistentVectorStore(config)
@@ -81,13 +90,16 @@ class MessageEmbedder:
         
         logger.info(f"📄 Found {len(message_files)} message files to process")
         
-        for file_path in message_files:
-            try:
-                await self.process_message_file(file_path)
-                self.stats["files_processed"] += 1
-            except Exception as e:
-                logger.error(f"❌ Error processing {file_path}: {e}")
-                self.stats["errors"].append(f"File {file_path.name}: {str(e)}")
+        # Create progress bar for files
+        with tqdm(total=len(message_files), desc="Processing files", unit="file") as pbar:
+            for file_path in message_files:
+                try:
+                    await self.process_message_file(file_path)
+                    self.stats["files_processed"] += 1
+                except Exception as e:
+                    logger.error(f"❌ Error processing {file_path}: {e}")
+                    self.stats["errors"].append(f"File {file_path.name}: {str(e)}")
+                pbar.update(1)
         
         # Save processing stats
         await self.save_stats()
@@ -126,11 +138,15 @@ class MessageEmbedder:
             
             logger.info(f"📝 Found {len(messages)} messages in {file_path.name}")
             
-            # Process messages in batches
+            # Process messages in batches with progress bar
             batch_size = self.config.get('batch_size', 100)
-            for i in range(0, len(messages), batch_size):
-                batch = messages[i:i + batch_size]
-                await self.process_message_batch(batch, file_path.name)
+            total_batches = (len(messages) + batch_size - 1) // batch_size
+            
+            with tqdm(total=len(messages), desc=f"Processing {file_path.name}", unit="msg") as pbar:
+                for i in range(0, len(messages), batch_size):
+                    batch = messages[i:i + batch_size]
+                    await self.process_message_batch(batch, file_path.name)
+                    pbar.update(len(batch))
             
             # Mark file as processed
             await self.mark_file_processed(file_path)
@@ -248,55 +264,42 @@ class MessageEmbedder:
         stats_file = PROCESSED_MARKER_DIR / f"processing_stats_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
         
         try:
-            with open(stats_file, 'w', encoding='utf-8') as f:
-                json.dump(self.stats, f, indent=2, ensure_ascii=False)
-            
-            logger.info(f"📊 Processing statistics saved to {stats_file}")
-            
+            with open(stats_file, 'w') as f:
+                json.dump(self.stats, f, indent=2)
+            logger.info(f"📊 Saved processing stats to {stats_file}")
         except Exception as e:
-            logger.error(f"❌ Error saving statistics: {e}")
+            logger.error(f"❌ Error saving stats: {e}")
     
     async def reset_processing_markers(self):
-        """Reset all processing markers (for reprocessing)"""
-        logger.warning("🔄 Resetting all processing markers...")
-        
+        """Reset all processing markers"""
         try:
-            for marker_file in PROCESSED_MARKER_DIR.glob("*.processed"):
-                marker_file.unlink()
-            
-            logger.info("✅ All processing markers reset")
-            
+            for marker in PROCESSED_MARKER_DIR.glob("*.processed"):
+                marker.unlink()
+            logger.info("🧹 Reset all processing markers")
         except Exception as e:
             logger.error(f"❌ Error resetting markers: {e}")
 
 
 async def main():
-    """Main function"""
-    logger.info("🚀 Starting Discord message embedding process...")
-    
-    # Configuration for vector store
-    config = {
-        'persist_directory': 'data/vectorstore',
-        'collection_name': 'discord_messages',
-        'embedding_model': 'text-embedding-3-small',
-        'batch_size': 50  # Smaller batch size for more reliable processing
-    }
-    
-    embedder = MessageEmbedder(config)
-    
-    # Check for reset flag
-    if len(sys.argv) > 1 and sys.argv[1] == "--reset":
-        await embedder.reset_processing_markers()
-        logger.info("🔄 Processing markers reset. Run again without --reset to process messages.")
-        return
-    
+    """Main entry point"""
     try:
+        # Check for reset flag
+        if len(sys.argv) > 1 and sys.argv[1] == "--reset":
+            embedder = MessageEmbedder()
+            await embedder.reset_processing_markers()
+            logger.info("🔄 Processing markers reset. Run again without --reset to process messages.")
+            return
+        
+        # Process messages
+        embedder = MessageEmbedder()
         await embedder.process_all_messages()
-    except Exception as e:
-        logger.error(f"❌ Fatal error in message processing: {e}")
+        
+    except ValueError as e:
+        logger.error(f"❌ Configuration error: {e}")
         sys.exit(1)
-    
-    logger.info("🎉 Message embedding process completed successfully!")
+    except Exception as e:
+        logger.error(f"❌ Fatal error: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

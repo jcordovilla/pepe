@@ -103,7 +103,9 @@ def initialize_system():
                     "orchestrator": {},
                     "vector_store": {
                         "collection_name": "discord_messages",
-                        "persist_directory": "data/vectorstore"
+                        "persist_directory": "data/vectorstore",
+                        "embedding_model": "text-embedding-3-small",
+                        "batch_size": 100
                     },
                     "memory": {
                         "db_path": "data/conversation_memory.db"

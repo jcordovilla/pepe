@@ -1,0 +1,1812 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1369699947380871320",
+  "channel_name": "🗂agent-ops-resources",
+  "fetch_timestamp": "2025-06-03T22:03:36.423066",
+  "message_count": 61,
+  "messages": [
+    {
+      "message_id": "1369704388884435024",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1368100449407864962> Here is the link to the Trello:\n\nhttps://trello.com/invite/b/680fbae5341fa5fd3fcf1292/ATTI1e3a069c8404cdd71c7d3e4d87e30bb2A57D7F8D/sgu-team",
+      "timestamp": "2025-05-07T15:56:14.187000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1369704388884435024",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369704763129856100",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1368100449407864962> Here is the link to the recording from today:\nhttps://fathom.video/share/m-sx1m4Df8UCwFyYzScde7cxX8LjpsUe",
+      "timestamp": "2025-05-07T15:57:43.414000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1369704763129856100",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 6
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369704812605866114",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I will post the slides within the hour after I complete general member onboarding right now",
+      "timestamp": "2025-05-07T15:57:55.210000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1369704812605866114",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370112951859544156",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1368100449407864962> here are the slides from today",
+      "timestamp": "2025-05-08T18:59:43.191000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1370112951859544156",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1370112951431729374",
+          "filename": "Agent_Dev_Class.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1370112951431729374/Agent_Dev_Class.pdf?ex=6840979f&is=683f461f&hm=b59d3f4120981c00a30241e5ea61ae98d11121a294a7307d966e3fc656dbc86d&",
+          "size": 337293
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370119484727103599",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Oscar, great stuff",
+      "timestamp": "2025-05-08T19:25:40.748000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1370119484727103599",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370346311282462782",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1368100449407864962> here is the meeting schedule:\n\n➊ Morning Sync (10 :30 – 11 :00 AM EST)\nLeader – Arturo\n• Deidré Luzmore\n• Ralph Eisenhardt\n• Naeem Afzal\n• Pablo \n\n➊ Mid‑day Sync (12 :00 – 12 :30 PM EST)\nLeader – Jose\n• Frédérique Lambers\n• Cristian Ursan\n• Diellza Ahmetaj\n\n➋ Evening Sync (6 :30 – 7 :00 PM EST)\nLeader – Sangame\n• Sudalai Muthu\n•{Amber Bellou} once graduated learning experience\n\n----------------------------\nAs stated earlier, the first sessions will be on Friday 📅\n\nLet me know if this works for everyone ✅\n\nI'll work on creating a group sync meeting time. I'll also post the resources from today, alongside the Trello, in: <#1369699947380871320>",
+      "timestamp": "2025-05-09T10:27:00.413000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1370346311282462782",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370348661128560660",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey guys, I will be able to attend the call  ➊ Mid‑day Sync (12 :00 – 12 :30 PM EST)",
+      "timestamp": "2025-05-09T10:36:20.660000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1370348661128560660",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370348760290426881",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yesterday i had to go to the office and had several meetings so i was busy all day",
+      "timestamp": "2025-05-09T10:36:44.302000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1370348760290426881",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371526800035020852",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "10:00am EST Recording & Summary",
+      "timestamp": "2025-05-12T16:37:50.864000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371526800035020852",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371526822096932957",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/AbSR4ppUIq4xlyFnBU8yRr7prVv_5sw8apbfG2BsulsnOFO1RP4HxIcECWLTPdX3.A22OfkfwodM4mHWp?startTime=1747060205000\nPasscode: ?JQD4N7L",
+      "timestamp": "2025-05-12T16:37:56.124000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371526822096932957",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371526912114950224",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-12T16:38:17.586000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371526912114950224",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1371526911808897136",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May12_FULL.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1371526911808897136/Gen_AI_MIT_Meeting_Summary_May12_FULL.pdf?ex=68407679&is=683f24f9&hm=a575e56a618bc9e5960fe0831d871ae2cc8bc97863e01771cc0de3f4d4591bc0&",
+          "size": 1618317
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371527334229971047",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "⚡ Quick Recap – May 12, 2025\nThe team discussed implementing an Agile Delivery process using Mural and Trello.\nOscar and Deidre introduced the new meeting structure, emphasizing collaboration, transparency, and continuous improvement.\nThe Double Diamond design thinking framework was reviewed, with a plan to launch bi-weekly workshops starting May 19th.\nRoles were clarified, including the proposal for proxy product owners (Jose, Arturo, and Sangami).\nThe team reinforced the importance of a positive environment, practical learning, and support for agent development.\n\n⸻\n\n✅ Next Steps\n• Arturo to ask Pablo to align on one of the SGU meeting sessions and inform Oscar.\n• Oscar to attend the validate and test session for Christian and Pablo‘s work.\n• Dealza to create and share a tutorial video on interacting with the Mural board.\n• SGU team members to watch the tutorial video before the May 19th workshops.\n• SGU team to continue working on current Trello board items this week.\n• SGU team to review and discuss the two in-progress items on Trello in tomorrow’s meeting.\n• Deidre & Oscar to facilitate daily syncs using the new Trello board process.\n• SGU team to participate in bi-weekly design thinking workshops (starting next Monday & Tuesday).\n• Oscar to clarify with Jose, Arturo, and Sangami their potential role as proxy product owners.\n• SGU team to trial the agile process for 4–6 weeks before running a retrospective.",
+      "timestamp": "2025-05-12T16:39:58.226000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371527334229971047",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371626456647729213",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-12T23:13:50.852000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371626456647729213",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.chat_input_command",
+      "reference": null
+    },
+    {
+      "message_id": "1371841604893282415",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all, thank you again for joining the SGU Daily sync yesterday to hear about the Agile Design and Delivery Process. Here is the slide deck for you to view.",
+      "timestamp": "2025-05-13T13:28:46.191000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371841604893282415",
+      "author": {
+        "id": "1003559239723266118",
+        "username": "dluzmore",
+        "discriminator": "0",
+        "display_name": "Deidré Luzmore",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1371841603999895665",
+          "filename": "SGU_Agile_Delivery_Process__Operations_Guide.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1371841603999895665/SGU_Agile_Delivery_Process__Operations_Guide.pdf?ex=68404a0d&is=683ef88d&hm=d7ea57acef43b09d04649b679a2e996bd1662be65573209792475e5d28810f8f&",
+          "size": 1058029
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371884617094795298",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://fathom.video/share/s_ksms6NXBF4rCBmPo-KLBxhdvDdK3Js",
+      "timestamp": "2025-05-13T16:19:41.099000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371884617094795298",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371904418923937953",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – May 13, 2025\n\n⚡ Quick Recap\n    •    Trello was introduced for project tracking and explained by Deidre.\n    •    Testing and validation processes were reviewed.\n    •    Suggestions made to involve both CS team and non-technical users.\n    •    Plans made for a dedicated meeting to integrate CS into the agile workflow.\n\n✅ Next Steps\n• Pablo to discuss calendar integration issues in the next daily meeting.\n• Deidre to refine the validation process and include Pablo’s ideas.\n• Oscar to clarify the CS team’s role in testing and validation.\n• Christian to contact Jose about testing the bot tracker and choosing the right tool.\n• Deidre to assign Trello cards to team members and remove purple labels.\n• Oscar to meet with Deidre to align on integrating the CS team.\n\n🤝 Final reflection\nWhat’s one Trello tip or validation insight you’d like to try this week? Drop it below!",
+      "timestamp": "2025-05-13T17:38:22.223000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371904418923937953",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371904487312068639",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/vRvAM8ycLRzKlYdqMYpdYFHgTPFseDON-X08sxwhUQrRunj10BkEpFXPvjX9X7QU.x_cvwh50HoFUajLW?startTime=1747146631000\nPasscode: 6FvG#0Tv",
+      "timestamp": "2025-05-13T17:38:38.528000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371904487312068639",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371904686982037605",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-13T17:39:26.133000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371904686982037605",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1371904686260486154",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May13.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1371904686260486154/Gen_AI_MIT_Meeting_Summary_May13.pdf?ex=684084cd&is=683f334d&hm=c4daf3c59fabf5a260805297300a504664eae6e2707f8554fe5d7cec54a2d045&",
+          "size": 1618428
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371926341540253766",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – SGU - B - May 13, 2025\nAI-generated summary and notes here:\nhttps://docs.google.com/document/d/1RD-iSjd7vgKMkPdd3YuHJ_SJiUudM3-4dNaGhLFUf3M/edit?usp=sharing\nVideo recording here:\nhttps://drive.google.com/file/d/19AQWcMGKR-df8nnoCp757UwintmOhidc/view?usp=sharing\nGreat meeting, <@1003559239723266118> , <@1352785241252565174> , <@1360182837113786399> , <@1143203059820933251> and <@1360267706204426442> , thanks!",
+      "timestamp": "2025-05-13T19:05:28.982000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371926341540253766",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1143203059820933251",
+        "1003559239723266118",
+        "1360267706204426442",
+        "1352785241252565174",
+        "1360182837113786399"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371933523430346862",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "So, Learning of the day: when I attend the meeting, AI captures my name correctly 🤔🤣",
+      "timestamp": "2025-05-13T19:34:01.278000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1371933523430346862",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "😂",
+          "count": 3
+        },
+        {
+          "emoji": "🙌",
+          "count": 2
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        },
+        {
+          "emoji": "😝",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371926341540253766",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372246375458144427",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – May 14, 2025\n\n⚡ Quick Recap\n    •    Discussed Google calendar integration issues and idea of switching tools.\n    •    Pablo proposed a Discord chat to facilitate collaboration.\n    •    Progress reviewed on the automatic Q&A feature and user engagement bot.\n    •    Deidre will record Trello tutorial.\n    •    Discussed documentation needs, task status, and time zones (plus a well-earned coffee!).\n\n✅ Next Steps\n• Pablo to create a Discord chat with Frederick, Christian, Carl, and Deidre for calendar discussion.\n• Arturo to invite Naim and Nikhil to Trello.\n• Arturo, Naim, and Nikhil to continue testing the automatic Q&A poll bot.\n• Christian to meet with Jose tomorrow at 11 AM about the user engagement bot.\n• Ralph to join Christian and Jose on the user engagement bot project.\n• Deidre to create a training video on how to use Trello.\n• Sudalai to join Arturo’s team working on the automatic Q&A poll.\n\n🤝 Final reflection\nIf you could improve one part of our Trello workflow or calendar setup, what would it be?",
+      "timestamp": "2025-05-14T16:17:11.014000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1372246375458144427",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372246442458087436",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/r9A7DlkN0JBF7tezKNXo9_jEWMCVxS1rx0jpZRp9BwAqC1Fx4P41Rj_PK76P01Wb.Xb19DWWlv580_Rod?startTime=1747233005000\nPasscode: $!gog%4G",
+      "timestamp": "2025-05-14T16:17:26.988000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1372246442458087436",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372246498561232948",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-14T16:17:40.364000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1372246498561232948",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1372246498204586106",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May14_FULL.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1372246498204586106/Gen_AI_MIT_Meeting_Summary_May14_FULL.pdf?ex=684071a4&is=683f2024&hm=e2e51a7648a0fdc0c54454c1b32378fb644124af65b828649af7a0c0c653c33e&",
+          "size": 1616572
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374258167822815293",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry I took so long, I got a really busy day, but here you have today’s Meeting Summary, Recording Link and PDF.",
+      "timestamp": "2025-05-20T05:31:19.691000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374258167822815293",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374258196025184327",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – May 19, 2025\n\n⚡ Quick Recap\n    •    Workshop kickoff using the Double Diamond framework.\n    •    Zoom session setup and breakout room management reviewed.\n    •    Teams brainstormed onboarding, community structure, and SGU challenges.\n    •    Pain points identified, Discord experience discussed, and Mural used to map priorities.\n    •    Team encouraged to finish radar diagram prioritization before tomorrow’s session.\n\n✅ Next Steps\n• All participants: Move top pain points to the inner circle of the radar diagram in Mural.\n• Diellza: Consolidate all prioritized pain points into Section 3 of the Mural board.\n• Oscar: Share presentation on community vision and next steps.\n• All participants: Watch the 20-min video shared by Diellza if not done already.\n• Everyone: Join tomorrow’s session to work on the empathy map.\n\n🤝 Final reflection\nWhat’s one Discord or onboarding pain point you’d love to see solved this week?",
+      "timestamp": "2025-05-20T05:31:26.415000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374258196025184327",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374258258059071558",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/cD0xyfPeYFuAL7HjrGjzIdbeYBET7SsIVfbwIF_N1_xfJgXB6SxGuzuhNRWxluIY.zHLYqxLiH20Xdjnw?startTime=1747664847000\nPasscode: +ZA3@8tf",
+      "timestamp": "2025-05-20T05:31:41.205000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374258258059071558",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374258327823056916",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T05:31:57.838000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374258327823056916",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1374258327407689828",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May19_Corrected.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1374258327407689828/Gen_AI_MIT_Meeting_Summary_May19_Corrected.pdf?ex=6840830d&is=683f318d&hm=77aeb72e47b64562fcd5e4cc7c8b9db4515253fa8c66762f63536c1a9c6f166d&",
+          "size": 1617353
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374259023901360199",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for al the work you put on this workshop <@1360182837113786399>",
+      "timestamp": "2025-05-20T05:34:43.796000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374259023901360199",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374413305073893407",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hats off to <@1360182837113786399> for the great work, very didactical and useful",
+      "timestamp": "2025-05-20T15:47:47.294000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374413305073893407",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374439974652612758",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – May 20, 2025\n\n⚡ Quick Recap\n    •    Workshop session focused on defining personas for Gen AI platform.\n    •    Teams explored user categories: onboarding, community, and SGU.\n    •    Cultural differences in workflow were discussed.\n    •    Design Thinking workshop led by Diellza – participants suggested a longer session.\n    •    Collaboration through Mural and Discord continues.\n\n✅ Next Steps\n• Diellza to consolidate workshop feedback and share it with the team.\n• Diellza to coordinate with Oscar to schedule a 90-minute follow-up workshop.\n• Diellza to confirm continuation of Day 2 workshop techniques.\n• Deidre to follow up on Trello after her return.\n• Agile & Ops team to evaluate department development with new members.\n• Team to review Mural boards for improvements in community building.\n• Anyone interested in joining Agile & Ops should contact Diellza.\n\n🤝 Final reflection\nWhat’s one insight from today’s personas that we can apply to improve onboarding or collaboration this week?",
+      "timestamp": "2025-05-20T17:33:45.817000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374439974652612758",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374440483723411526",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "i always add a final reflection, if someone wants to contribute would be great",
+      "timestamp": "2025-05-20T17:35:47.189000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374440483723411526",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374440566015918100",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/_DxswOFlcOjGTnQNpYSSKwtfSth_FRTjFi_fD4YBHf-z-VHZUHQ9GxNBw-xMsUr5.XeyvePL58qilusgX?startTime=1747751154000\nPasscode: 2Zf*Mk16",
+      "timestamp": "2025-05-20T17:36:06.809000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374440566015918100",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374440759431794688",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-20T17:36:52.923000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1374440759431794688",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1374440758823878778",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May20.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1374440758823878778/Gen_AI_MIT_Meeting_Summary_May20.pdf?ex=68408434&is=683f32b4&hm=370a77bbfbdb0b5553824a5c76ba169007bcbd9f1d5d35df6ca8ade096c5ca0b&",
+          "size": 1617304
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274335232594002",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey guys! Here you have today´s summary and recording. Thumbs up to <@1357372349632221420> and <@1359959114708418782> who are proposing and making huge advances!!!",
+      "timestamp": "2025-05-23T00:49:12.881000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274335232594002",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [
+        "1357372349632221420",
+        "1359959114708418782"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274501985800192",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – May 22, 2025\n\n⚡ Quick Recap\n    •    Naeem presented a calendar integration test; Pablo raised long-term maintenance concerns.\n    •    Focus shifted to simplifying via voting and external calendar links.\n    •    Discussed connecting with Google Calendar instead of custom builds.\n    •    Considered hosting, user control, and poll-based meeting invites.\n    •    Trello tasks and requirements review pending; attendance was lower than usual.\n\n✅ Next Steps\n• Naeem to meet with Oscar and the network admin to assess calendar bot feasibility.\n• Pablo to schedule a meeting with Oscar and the network team.\n• Naeem to present calendar bot code to the team.\n• Naeem to show how to set up a local LLM.\n• Team to review Pablo’s calendar requirements doc.\n• Naeem to update Trello with current tasks.\n\n🤝 Final reflection\nWhat’s one improvement you’d like to see in how we manage our team calendars and event invites?",
+      "timestamp": "2025-05-23T00:49:52.638000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274501985800192",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274557971365958",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/_1S2EH2xU3K9Wy6sWrOKSDHZhvLzYkPAYDjSOijZ8wdibMS5tfZw1usvfKySFZkX.xfQVPecPgNGba2rt?startTime=1747924254000\nPasscode: X*%1*8Cs",
+      "timestamp": "2025-05-23T00:50:05.986000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274557971365958",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274693967216762",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you Arturo !!!",
+      "timestamp": "2025-05-23T00:50:38.410000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274693967216762",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274705451352156",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-23T00:50:41.148000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274705451352156",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1375274705111617616",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May22.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1375274705111617616/Gen_AI_MIT_Meeting_Summary_May22.pdf?ex=68404121&is=683eefa1&hm=46e0c6dcecfb4bc932e57b5ee1dabe3c814042916383b5a1662ef2f1d15f5c9a&",
+          "size": 1616534
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375274882547323052",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My pleasure Jhen!",
+      "timestamp": "2025-05-23T00:51:23.371000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375274882547323052",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [
+        "1319765990027956276"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375274693967216762",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375367942136397824",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is great stuff, thanks. Pablo suggested we meet to discuss. Maybe we can look into merging the two SGU syncs together this Monday coming?",
+      "timestamp": "2025-05-23T07:01:10.506000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375367942136397824",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1359331018129276958"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375274557971365958",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375417198696333383",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you so much for the recap. Sounds like a great meeting.",
+      "timestamp": "2025-05-23T10:16:54.185000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375417198696333383",
+      "author": {
+        "id": "669205811326615591",
+        "username": "ironhardt.",
+        "discriminator": "0",
+        "display_name": "Ralph Eisenhardt",
+        "bot": false
+      },
+      "mentions": [
+        "1359331018129276958"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375274501985800192",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375478738875322478",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think is a great idea, we definitely need to look into merging the two SGU meetings. I understand we will have the second part of the workshop with Diellza on Monday, but we should find another time. We can discuss it today",
+      "timestamp": "2025-05-23T14:21:26.507000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375478738875322478",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375367942136397824",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375620911440334898",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – Server Governance Unit – May 23, 2025\n\n⚡ Quick Recap\n    •    Project updates shared, including bot development and calendar integration.\n    •    Arturo clarified the Trello + Mural workflow for design thinking training.\n    •    Teams reviewed progress on Q&A polls, user engagement tracking, and validation steps.\n    •    Calendar tools remain a challenge — team agreed to continue using Sesh for now.\n    •    Q&A session with Oscar Sanchez confirmed on LinkedIn.\n\n✅ Next Steps\n• Pablo to meet with the network admin re: calendar concerns.\n• Arturo to coordinate with Jose for calendar strategy meeting.\n• Sudalai to upload profile picture to Trello.\n• Team to continue using Sesh until a replacement is found.\n• Naeem and Jose to continue work on their user engagement bots.\n• Team to define what constitutes user inactivity.\n• Naeem and Nikhil to confirm Q&A poll creation feature.\n• Team to validate and plan deployment of Q&A poll.\n• Attend the Q&A session with Oscar Sanchez via LinkedIn.\n\n🤝 Final reflection\nWhat’s one feature or process we should prioritize before next week’s sprint?",
+      "timestamp": "2025-05-23T23:46:23.088000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375620911440334898",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375621024359645255",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/meI4wGI3IU5rFaoMSnDMV5q_wpmyY9ZZgc1WSUbuwBahh-C9HVeeuQQGgK1Av5Xq.SjAZ7pl23_k75TQW?startTime=1748010663000\nPasscode: 0.H=c+mV",
+      "timestamp": "2025-05-23T23:46:50.010000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375621024359645255",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375621192744173628",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-23T23:47:30.156000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1375621192744173628",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1375621192408502407",
+          "filename": "Gen_AI_MIT_Meeting_Summary_May23.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1375621192408502407/Gen_AI_MIT_Meeting_Summary_May23.pdf?ex=68403252&is=683ee0d2&hm=910e6f274b345d93860b5af90478da9d06477c0c1d25722bad37e76c9cde08da&",
+          "size": 1615866
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377488124715860150",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone! I'm sharing with you a step-by-step guide to configure your calendar. Please... take a moment to try it out! If you have any questions or  issues, feel free to ask Pablo or me.\nThanks !! See you tomorrow.",
+      "timestamp": "2025-05-29T03:26:01.424000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1377488124715860150",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1377488124581515335",
+          "filename": "How_to_configure_your_calendar_GEN_AI_Global.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1377488124581515335/How_to_configure_your_calendar_GEN_AI_Global.pdf?ex=68406589&is=683f1409&hm=00b566022d94bcddd62a3226c208dc9a42e3f20536bf46b0825ecf76f7b52171&",
+          "size": 1991677
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377555657078865952",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1319765990027956276> . Calendar is the priority optimization for SGU, let's discuss later at 10:30EST",
+      "timestamp": "2025-05-29T07:54:22.394000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1377555657078865952",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1319765990027956276"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378022690698559521",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-30T14:50:11.886000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378022690698559521",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.chat_input_command",
+      "reference": null
+    },
+    {
+      "message_id": "1378628331901157386",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone!\nAs promised, I’m happy to finally share the guide \"How to Sync GEN AI Global Events to Your Calendar\", so you don’t miss a single session from our community.\nIf you have any questions, feel free to reach out to <@1359959114708418782>  or me.\nIf you’re okay with it, we can share it with the community.\nHave a great day !! 🙂",
+      "timestamp": "2025-06-01T06:56:48.001000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378628331901157386",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [
+        "1359959114708418782"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1378628331574132766",
+          "filename": "How_to_configure_your_Calendar_GEN_AI_Global.V1.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1378628331574132766/How_to_configure_your_Calendar_GEN_AI_Global.V1.pdf?ex=684096ef&is=683f456f&hm=0d5daafd5aa1a34ad972af67f1a691f52c8cf95d8c86db8760126dc2fbd0f17b&",
+          "size": 1967371
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378630130867376168",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please consider this last file. Thank you !!",
+      "timestamp": "2025-06-01T07:03:56.908000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378630130867376168",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👌",
+          "count": 2
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👏",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1378630130510987284",
+          "filename": "How_to_configure_your_Calendar_GEN_AI_Global.V1.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1378630130510987284/How_to_configure_your_Calendar_GEN_AI_Global.V1.pdf?ex=6840989c&is=683f471c&hm=6116dffdb15484d4d24f5d1101a6e4a339d0eb55ac8e6afe5a27e24f03fbb38d&",
+          "size": 1949581
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378709023465144422",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you Jhen!!! Great work!! 👌🏻",
+      "timestamp": "2025-06-01T12:17:26.369000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378709023465144422",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378778222900019211",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1319765990027956276> , great guide. One question: the url link that is generated by sesh, will it cover all RSVP'd events we subscribe to across the discord server, or only those in the channel where we call the /link command?",
+      "timestamp": "2025-06-01T16:52:24.800000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378778222900019211",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1319765990027956276"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378630130867376168",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1378778604170645726",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Once this is answered I think we will be set ! <@1319765990027956276> <@1359959114708418782> then you can post it to <#1361060350266577134> whenever you are ready",
+      "timestamp": "2025-06-01T16:53:55.702000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1378778604170645726",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736",
+        "1319765990027956276",
+        "1359959114708418782"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378778222900019211",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379103219862732954",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes, it will covered RSVPs event in the server, no matter the channel.",
+      "timestamp": "2025-06-02T14:23:50.114000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379103219862732954",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378778222900019211",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379103342579417129",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please No Oscar, it is not working welll, stiil  it is not stable.",
+      "timestamp": "2025-06-02T14:24:19.372000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379103342579417129",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378778604170645726",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379116034052587563",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174>, at the SGU (now renamed to AgentOps) sync today we went through Jhen's instructions and the results looks good. <@1359959114708418782> and <@1319765990027956276> suggested we (people in this group) test and validate it during this week and then they will pin the guide on the onboarding channel. Hope that makes sense",
+      "timestamp": "2025-06-02T15:14:45.255000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379116034052587563",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1319765990027956276",
+        "1359959114708418782",
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👌",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1378778604170645726",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379320837785784321",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – Agent Ops – June 2, 2025\n\n⚡ Quick Recap\nThe team discussed ongoing issues with calendar integration and event scheduling in Sesh, including problems with recurring meetings not appearing correctly in calendars and synchronization delays. Pablo expressed concerns about the stability of the calendar integration feature and suggested a step-by-step implementation process, while the team agreed to continue testing and refining the system before wider deployment. The conversation ended with discussions about testing new onboarding documentation and upcoming meetings with network administrators, with the team agreeing to a staged testing approach before sharing with the community..\n\n✅ Next Steps\n    •    Jhen to post testing instructions for the Sesh calendar sync in the Agent Ops channel.\n    •    Agent Ops team members to test the sync process and provide feedback.\n    •    Arturo to notify in the channel on Thursdays if Friday’s meeting is canceled.\n    •    Jose to update Oscar on the staged testing plan for Sesh calendar sync.\n    •    Jhen and Pablo to coordinate sharing sync instructions with other groups after testing.\n    •    Jose to attend the meeting with the networks team.\n    •    Oscar to consider scheduling a full admin meeting on Saturday to discuss community strategy.\n\n\n🤝 Final reflection\nWhat’s one feature or process we should prioritize before next week’s sprint?",
+      "timestamp": "2025-06-03T04:48:34.270000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379320837785784321",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379320917821493388",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/hCawPiRvqzgxsTGqfnz9PVpmot-iSPJRwDvan9cTMCwcVYS7_cO011NFx0q2m1xI.ffWeKZmziwDypJDq?startTime=1748874692000\nPasscode: &*gTL&V6",
+      "timestamp": "2025-06-03T04:48:53.352000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379320917821493388",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379477569644003349",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks!",
+      "timestamp": "2025-06-03T15:11:22.057000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379477569644003349",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1359331018129276958"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379320837785784321",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379479175236288546",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1368100449407864962> , as mentioned in our daily sync today, here is the readme.md file that describes the current status of Pepe. In case you want to feed it to your coding copilot and see what happens!! (would love your feedback if you do)",
+      "timestamp": "2025-06-03T15:17:44.860000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379479175236288546",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1379479174829310032",
+          "filename": "readme.md",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1379479174829310032/readme.md?ex=68406398&is=683f1218&hm=e7f7e66a41e0fd01bc0405892327da7a074a37ca792cd0b05f0c6484facece79&",
+          "size": 13354
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379573378696085554",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you Jose !!",
+      "timestamp": "2025-06-03T21:32:04.715000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379573378696085554",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379479175236288546",
+        "channel_id": "1369699947380871320",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

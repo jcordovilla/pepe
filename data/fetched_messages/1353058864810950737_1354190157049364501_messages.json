@@ -1,0 +1,2975 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1354190157049364501",
+  "channel_name": "🛠ai-practical-applications",
+  "fetch_timestamp": "2025-06-03T22:03:57.077906",
+  "message_count": 96,
+  "messages": [
+    {
+      "message_id": "1360238171731923216",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Article published in HBR this month on \"how to capture the value AI brings\". If you need to sell AI in your company, the article gives you some hints.",
+      "timestamp": "2025-04-11T13:00:52.144000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1360238171731923216",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 8
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1360238171211956344",
+          "filename": "HBR032025.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1360238171211956344/HBR032025.pdf?ex=68404384&is=683ef204&hm=ca4c283e5082d81417ba5562eb3de9ea28974b0d50c5921da51a9f92213f2d09&",
+          "size": 688149
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362067187237388520",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "AI in Action: How companies are applying artificial intelligence innovations\nSource / Date: Business Insider, April 15, 2025\nLink: https://www.businessinsider.com/ai-in-action-company-workforce-strategies\nQuick Summary: Companies across various industries are integrating AI technologies—such as chatbots, predictive analytics, robotic process automation, and generative design—into their operations. This strategic adoption, supported by employee training and robust data-security practices, is reshaping business processes and driving innovation.\nTakeaway: Strategic AI adoption transforms operations and fuels innovation across industries.",
+      "timestamp": "2025-04-16T14:08:43.422000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362067187237388520",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362068761737167078",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Interesting topic for a mid-week conversation <@1322962807565848586>! On the same lines, Vibe coding is impacting developers on a positive way. I had been vibe coding for sometime now and wanted to share some thoughts around that.\n\nAs an AI Strategist, I spend my days at the intersection of innovation and practicality—so when Andrej Karpathy introduced the concept of “vibe coding,” it caught my attention.\n\nWhat is vibe coding?\nIt’s a new way of building software: instead of writing every line of code, you describe what you want, and AI generates most of the implementation. In theory, this lets us focus on ideas and outcomes while the AI handles the technical grunt work.\n\nHere’s my honest take:\n    •    ⚡️ Speed for Prototypes: Vibe coding is a fantastic accelerator for MVPs and personal tools. I’ve seen teams go from concept to demo in hours, not weeks.\n    •    🛡️ Production Reality Check: But when it comes to production, things get tricky. AI-generated code can be a black box—hard to debug, often inefficient, and sometimes riddled with security gaps.\n    •    🤝 Collaboration & Transparency: The “why” behind the code lives in a chat log with the AI, not in shared team knowledge. That’s a challenge for scaling and maintaining products long-term.\n\nBottom line:\nVibe coding is opening doors for rapid experimentation and democratizing access to software creation. But for anything mission-critical, I strongly believe we still need skilled engineers to review, test, and secure the code before it goes live.\n\nI’m curious:\n    •    Would you trust a vibe-coded product in production?\n    •    How are you integrating AI into your development process?\n    •    Is this just a buzzword, or the start of a real shift in how we build software?\n\n👇 I’d love to hear your thoughts and experiences. Let’s spark a real conversation about the future of AI in development.",
+      "timestamp": "2025-04-16T14:14:58.812000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362068761737167078",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362122681746718752",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Superb post <@1322962807565848586> , thanks",
+      "timestamp": "2025-04-16T17:49:14.344000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362122681746718752",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362067187237388520",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362161379150397584",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think this represents a real shift in how products are developed, equipping many more people with the ability to try out ideas, test concepts, or just explore creatively.\n\nVibe coding significantly lowers the barrier to entry, enabling a lot of creative folks to build on ideas that, not too long ago, would have required a full team and a prolonged development effort to bring to life.\n\nI see it as the future for rapid prototyping and early-stage concept validation. It opens up a wide range of possibilities. I’ve used it recently, and it’s amazing to experience your idea coming to life almost instantly. That kind of immediacy can be incredibly motivating.\n\nStill  there are still quite a few steps between this phase of “concept validation” and having something fully developed, robust, and running in production.\nTo fully trust a production version of something born from vibe coding, a few more elements need to be in place—things like scalability, observability, reliability, and maintainability. These aspects typically come into focus as an idea transitions from a prototype to a production-grade system.\n\nTo me, this shift feels very similar to when the creator economy went mainstream: suddenly, people had access to tools that let them express themselves on their own terms, we now have tools not just for creation, but also for distribution and reaching an audience. In the same way, vibe coding democratizes software experimentation and unlocks a whole new layer of creativity.",
+      "timestamp": "2025-04-16T20:23:00.524000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362161379150397584",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362068761737167078",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362183787840143601",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Headline: AI Tool VisionMD Transforms Assessment of Parkinson's Disease and Movement Disorders\nSource / Date: University of Florida / ScienceDaily, April 14, 2025\nLink: https://www.sciencedaily.com/releases/2025/04/250414134922.htm\nQuick Summary: A groundbreaking open-source computer program called VisionMD uses artificial intelligence to analyze videos of patients with Parkinson's disease and other movement disorders, helping doctors more accurately monitor subtle motor changes and improve patient care. ScienceDaily This innovation provides consistent, objective measurements that overcome the limitations of traditional subjective assessments, enabling more precise treatment optimization and better quality of life for millions of people worldwide.\nI am curious:\n\n- How might AI-powered diagnostic tools impact healthcare accessibility in underserved communities?\n- Could similar video analysis techniques be applied to other neurological conditions?\n- What ethical considerations should guide AI implementation in patient care?\n\n👇 I’d love to hear your thoughts and experiences",
+      "timestamp": "2025-04-16T21:52:03.172000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362183787840143601",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362187014140854362",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is a good article about: How generative AI is being used by real people in everyday life and work in 2025.\n\n- Headline: How People Are Really Using Gen AI in 2025\n\n- Source / Date: Harvard Business Review, April 2025\n\n- Link: https://hbr.org/2025/04/how-people-are-really-using-gen-ai-in-2025\n\n- Quick Summary:\nThis article presents a breakdown of the top 100 generative AI use cases identified in 2025, based on user data and survey analysis. It finds an even split between work-related (e.g., coding, data analysis, content creation) and personal (e.g., learning, planning, journaling) applications, showcasing how integrated GenAI has become in daily life.\n\n- Takeaway:\nGenAI isn’t just a tool for tech experts—it’s now a widely adopted personal and professional assistant that supports creativity, productivity, and problem-solving across a range of real-world scenarios.\n\n- Discussion Questions:\n\n1) What are some GenAI use cases you’ve adopted recently—either at work or in your personal life?\n\n2) Are there any areas where you’re still hesitant to rely on AI? Why?\n\n3) Do you think the current balance between personal and professional use will shift in the future?",
+      "timestamp": "2025-04-16T22:04:52.382000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362187014140854362",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362206539602989208",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great article..it reflects the shift in usage from people using it from technical to using it for therapy/companionship, personal, enhanced learning more in 2025.",
+      "timestamp": "2025-04-16T23:22:27.615000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362206539602989208",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362228123776716810",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "1. Some of the Gen AI use cases which I have adopted are specifically on having an enhanced learning experience and for research on a specific topic.\n\n2. There are areas with respect to personalization, I am skeptical of putting my personal information for data and privacy concerns.\n\n3. Definitely, the shift is changing the way we operate and things are moving very fast beyond imagination. As we see 35% of the people are using it for personal and professional support in 2025, I see this number is going to be more than 60-70% for 2026.",
+      "timestamp": "2025-04-17T00:48:13.683000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1362228123776716810",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363561111500357853",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "An AI agent is a smart software that can understand its surroundings, make decisions, and act on its own (or with some human help) to reach specific goals. These agents can learn, remember preferences, use tools like APIs or the internet, and even collaborate with people or other agents, making them powerful for practical, real-world use.\n\nThey can work alone (like a personal assistant), in groups with other agents, or alongside humans to get things done more efficiently.\n\n[Here is a neat visual representation of the architectural approaches!](https://www.linkedin.com/posts/alexxubyte_systemdesign-coding-interviewtips-activity-7319749120762535936-UB3S?utm_source=share&utm_medium=member_desktop&rcm=ACoAAASHdL4BhSF2jwtbNPbe5zEVip3m0WcWo5c)",
+      "timestamp": "2025-04-20T17:05:02.722000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1363561111500357853",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "💫",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1363561111709815075",
+          "filename": "1745164176676.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1363561111709815075/1745164176676.png?ex=68407cbe&is=683f2b3e&hm=108fd6bf16024d8ac1542706f5977f5853d832b9d3581cabc483bde509999d79&",
+          "size": 339602
+        }
+      ],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363950990944108587",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everybody !  I found this real world case ! a good example of how AI can improve and make our jobs better and safer !\n\nHeadline: A Boston-based construction firm is leveraging AI to keep roughly 30,000 workers safe  \nSource / Date: Business Insider, April 15, 2025  \nLink: https://www.businessinsider.com/ai-for-worker-site-safety-in-construction-2025-4  \nQuick Summary: Shawmut Design and Construction uses AI to analyze data from job sites, weather conditions, and workforce changes to predict and prevent safety incidents. By integrating GPS-enabled tracking and daily risk assessments, they proactively reduce hazards across 150+ worksites. The company ensures ethical use by anonymizing data and plans to expand with real-time AI alerts tailored to local regulations.  \nTakeaway: AI is keeping construction workers safer—predictive tech is becoming the new hard hat.",
+      "timestamp": "2025-04-21T18:54:17.225000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1363950990944108587",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364125933467865109",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Wow",
+      "timestamp": "2025-04-22T06:29:26.773000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364125933467865109",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1363950990944108587",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364240133825630218",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great article!",
+      "timestamp": "2025-04-22T14:03:14.260000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364240133825630218",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364357362659496006",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**Headline:** US Law Firms Prioritize Jobs and Safety in AI Rollout  \n**Source / Date:** Financial Times, January 2025  \n**Link:** https://www.ft.com/content/afb750bf-ab26-42fd-a802-b788145b8449\n**Quick Summary:** Leading US law firms, including Crowell & Moring and White & Case, are integrating generative AI tools to enhance efficiency and reduce routine workloads. These tools assist in tasks such as summarizing documents and drafting legal content, allowing lawyers to focus on more complex work. Firms are implementing training programs and secure AI deployments to address concerns about data privacy and ensure responsible usage.  \n**Takeaway:** Generative AI is streamlining legal workflows, enabling firms to deliver cost-effective services while maintaining a focus on job preservation and ethical considerations.",
+      "timestamp": "2025-04-22T21:49:03.792000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364357362659496006",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364580756516638751",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone Its's the 4th Wednesday of the month. Here's a practical AI deployment story: \n\nHeadline: Goldman Sachs' AI Sidekick Revolutionizes Workplace Efficiency\n\nSource/Date: Bytefeed / April 18, 2025\n\nLink: https://bytefeed.ai/technology/7-goldman-sachs-insiders-explain-how-the-banks-new-ai-sidekick-is-helping-them-crush-it-at-work/\n\nQuick Summary: Goldman Sachs has integrated a suite of AI tools, including the GS AI Assistant, into its operations to enhance productivity and streamline workflows. These tools, built on platforms like Google's Gemini and OpenAI's ChatGPT, assist employees across various roles—from coding and translation to strategic planning—demonstrating significant time savings and efficiency gains.\n\nKey Takeaways:\n•    The GS AI Assistant aids in drafting, coding, and problem-solving tasks, reducing time spent on complex      activities.\n•    Translate AI enables rapid multilingual communication, replacing slower outsourcing methods.\n•    Employees across different levels report enhanced productivity and creativity due to AI integration.\n•    The initiative reflects Goldman Sachs' commitment to leveraging AI for operational excellence and client engagement.\n\n**Engagement Questions:**\n1) How might the integration of AI tools like GS AI Assistant influence the future skill sets required in the financial industry?\n\n2) What are the potential ethical considerations of relying heavily on AI for decision-making in high-stakes environments like investment banking?\n\n3) In what ways can organizations balance the benefits of AI-driven efficiency with the need to maintain human oversight and judgment?",
+      "timestamp": "2025-04-23T12:36:45.038000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364580756516638751",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364583260427915334",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey <@1352735021093359626> 💡 Love this, Ram! Your reflections on Vibe Coding really resonate—especially the tension between speed and production integrity. I am no coder, but reading your post,  I couldn’t help but think of the Chain-of-Thought (CoT) prompting approach in large language models. At its core, CoT lets models reason step by step, often producing better outcomes in complex tasks. It struck me how similar this is to what vibe coding could evolve into:\n\n🔗 Chain-of-Thought = Conscious Coding Vibes\nWhat if we viewed vibe coding not just as fast generation, but as an opportunity to structure our intent and context more deliberately—prompt by prompt, thought by thought? Instead of a “code dump,” it becomes a conversational build with reasoning baked in.\n\n🧠 In essence, we could:\n\n    Treat prompts like mental scaffolding (logic > syntax)\n\n    Document not just what we want the code to do, but why\n\n    Build systems that retain and surface that reasoning—so it’s not lost in ephemeral chat logs\n\n🚨 Of course, like you said, production still demands real engineering muscle. But the idea of prompting with purpose could make vibe coding more robust, explainable, and collaborative.\n\nI’m curious—has anyone experimented with integrating CoT prompting techniques into their coding workflows? Could be the next evolution: from vibe to structured vibes.\n\nLooking forward to hearing from the crew. 👇\n— Melinda",
+      "timestamp": "2025-04-23T12:46:42.017000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364583260427915334",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364632314033868830",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi today is a day for midweek discution, let's analyze this Amazon article?\nHeadline: 'Project Greenland': How Amazon Overcame a GPU Crunch\nSource / Date: Business Insider, April 22, 2025\nLink: \nhttps://www.businessinsider.com/amazon-strategy-overcome-gpu-shortages-nvidia-2025-4?utm_source=chatgpt.com\n\nSummary: In response to a critical GPU shortage in 2024 that delayed numerous AI-driven projects across its retail division, Amazon launched \"Project Greenland,\" a centralized GPU orchestration platform aimed at optimizing allocation and usage of limited graphics processing units. Facing intense competition for GPUs amid the generative AI boom, Amazon introduced new internal practices requiring justification of GPU needs through return-on-investment (ROI) metrics and project readiness.\nDiscussion Prompt: How can organizations balance the need for rapid AI development with the challenges of limited computational resources, and what strategies can be employed to optimize resource allocation effectively?​",
+      "timestamp": "2025-04-23T16:01:37.308000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364632314033868830",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364640592084078675",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oh I love this Conscious Coding Vibes <@1362326150373966035> ! \nIt effectively declares vibe coding  a collaborative effort between a human and a bot (a generic term 🥸 ) \nI have done similar just as a way to manage overflow of code, attempting to grasp it all, but i love that we could build a method out of this. And I believe you're onto something with these declarations (!)  \n\"- Treat prompts like mental scaffolding (logic > syntax)\n\n    - Document not just what we want the code to do, but why\n\n    - Build systems that retain and surface that reasoning—so it’s not lost in ephemeral chat logs\"\nIt really could be an evolution \" from vibe to structured vibes\"\n\nHow could we turn this into reality?",
+      "timestamp": "2025-04-23T16:34:30.949000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364640592084078675",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364583260427915334",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364642753534885939",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My Midweek Discussion Item:\nHeadline: Top Banks Accelerate AI Adoption, Leaving Mid-Tier Rivals Behind\nSource / Date: Tearsheet, April 23, 2025\nLink: https://tearsheet.co/artificial-intelligence/the-banking-ai-adoption-gap-leaders-pull-ahead-while-others-struggle-to-catch-up/\n\nSummary: Leading banks are adopting AI technologies at twice the pace of their mid-tier counterparts, creating a significant competitive advantage. This rapid adoption is attributed to early investments in data infrastructure and governance, enabling faster integration of advanced AI applications like agentic AI and quantum-inspired algorithms.\n\nDiscussion Prompt: \nWhat strategies can mid-tier banks employ to bridge the AI adoption gap and remain competitive in the evolving financial landscape?​",
+      "timestamp": "2025-04-23T16:43:06.279000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1364642753534885939",
+      "author": {
+        "id": "1362171740104556584",
+        "username": "nura775",
+        "discriminator": "0",
+        "display_name": "Nura",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365093185541373962",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "For one physician, AI helps close significant care gaps.  An article today on how practical AI can be in healthcare.   It doesn't have to be complex use cases such as drug development or discovering new therapies...it can be as practical of a use case as this article highlights.  Every patient outcome improvement counts.     https://www.healthcareitnews.com/news/one-physician-ai-helps-close-significant-care-gaps",
+      "timestamp": "2025-04-24T22:32:57.638000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1365093185541373962",
+      "author": {
+        "id": "1364010452937347276",
+        "username": "gmacrina",
+        "discriminator": "0",
+        "display_name": "Giovanni Macrina",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365130424807985172",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I was always told not to google my way through my own health problems. While consulting a healthcare professional is always advisable, I’d say that GenAi will play a more positive role in those motivated to explore their own health.  I’ve seen many examples lately like the following. https://www.foxnews.com/health/woman-says-chatgpt-saved-her-life-helping-detect-cancer-which-doctors-missed",
+      "timestamp": "2025-04-25T01:00:56.171000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1365130424807985172",
+      "author": {
+        "id": "1364010452937347276",
+        "username": "gmacrina",
+        "discriminator": "0",
+        "display_name": "Giovanni Macrina",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365362764964565042",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning ! for those in Advertising ! \n\n**Headline:** Microsoft made an ad with generative AI and nobody noticed  \n**Source / Date:** The Verge, April 25, 2025  \n**Link:** https://www.theverge.com/news/656104/microsoft-surface-ad-generative-ai-copilot-intel](https://www.theverge.com/news/656104/microsoft-surface-ad-generative-ai-copilot-intel\n**Quick Summary:** Microsoft utilized generative AI tools to create segments of a one-minute advertisement for its Surface Pro and Surface Laptop, which aired on YouTube starting January 30, 2025. The AI-generated content, including visuals and script elements, was seamlessly integrated with real footage, going unnoticed by viewers for nearly three months. This approach led to a 90% reduction in production time and cost, demonstrating AI's potential to streamline creative processes without compromising quality.  \n**Takeaway:** Generative AI is revolutionizing advertising by enabling efficient, high-quality content creation that blends indistinguishably with human-made media.",
+      "timestamp": "2025-04-25T16:24:10.381000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1365362764964565042",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366058703329169489",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all, anyone interested in joining a private non-coder learning group that I formed to collaborate and learn together as non-coders to build assistants, agents, upskill prompting skills using GenAI tools including multi-modal to automate and improve productivity, and more pls DM me directly. We have an active group who want to continue our momentum learning after this course!! We will still leverage the broader discord channels but discuss topics, tools, and workshop  with one another in more depth.",
+      "timestamp": "2025-04-27T14:29:35.017000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366058703329169489",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366061936852078764",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Headline: Beyond automation: How gen AI is reshaping supply chains\nSource / Date: McKinsey & Company, April 17 2025\nLink: https://www.mckinsey.com/capabilities/operations/our-insights/beyond-automation-how-gen-ai-is-reshaping-supply-chains\nKey Insight: McKinsey details how generative AI is cutting logistics paperwork time by up to 60 % and saving last-mile operators $30–35 million through virtual dispatcher agents. The article stresses that end-to-end supply-chain visibility and route optimization are now being driven by AI copilots and chatbots, unlocking new efficiency gains across planning, warehousing, and customer support.\nDiscussion Question: Will gen AI savings justify the upfront costs for mid-size supply-chain operators?",
+      "timestamp": "2025-04-27T14:42:25.949000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366061936852078764",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366105351463637073",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’d be happy to join.",
+      "timestamp": "2025-04-27T17:34:56.799000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366105351463637073",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366058703329169489",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366105522432114688",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m down!",
+      "timestamp": "2025-04-27T17:35:37.561000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366105522432114688",
+      "author": {
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
+        "discriminator": "0",
+        "display_name": "Francisco Castro Santos",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366058703329169489",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366130264325095434",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I added both of you!",
+      "timestamp": "2025-04-27T19:13:56.488000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366130264325095434",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366130520257335328",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m in! Please ass me as well",
+      "timestamp": "2025-04-27T19:14:57.507000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366130520257335328",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366130264325095434",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366136090154635264",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m in! ChatGPT created a 30 day boot camp to make me AI fluent based on my work area. I’m a week in but happy to share that doc. 😊",
+      "timestamp": "2025-04-27T19:37:05.474000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366136090154635264",
+      "author": {
+        "id": "1365814219932565615",
+        "username": "sandraf1230",
+        "discriminator": "0",
+        "display_name": "Sandra Finkelstein",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366136394246000671",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Can you add me too? Thank you",
+      "timestamp": "2025-04-27T19:38:17.975000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366136394246000671",
+      "author": {
+        "id": "1358671083213033613",
+        "username": "martin.s3942",
+        "discriminator": "0",
+        "display_name": "Martin Soltermann",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366130264325095434",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366454229165674507",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello <#1354190157049364501> enthusiast, I am sharing this brief summary, with the internet to spark conversations around following few  questions. Please chime in:\n\n1. How might AI diagnostic tools like this improve healthcare in underserved communities?\n2. What other neurological conditions could benefit from similar video analysis approaches?\n3. How do we balance AI implementation with the human touch in healthcare?\n\n**Headline:** AI-Powered VisionMD Tool Transforms Parkinson's Disease Assessment and Care\n\n**Source / Date:** University of Florida Health News, April 14, 2025\n\n**Link:** https://news.ufl.edu/2025/04/visionmd-/\n\n**Quick Summary:** VisionMD, an innovative AI system developed by University of Florida researchers, analyzes video recordings of patients with Parkinson's disease to provide objective measurements of motor symptoms with 99% accuracy, dramatically improving diagnosis and treatment monitoring. This breakthrough technology makes expert-level assessment more accessible worldwide, potentially transforming care for millions affected by movement disorders through earlier intervention and better treatment optimization.",
+      "timestamp": "2025-04-28T16:41:15.725000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366454229165674507",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366460928987762798",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🚀 Hey everyone!\nSuper cool news: Google AI Studio Live is now open! 🎉\n\nYou can interact with AI models in real-time via streaming, test ideas instantly, and push the limits of creativity and innovation. 🎨🤖⚡️\n\nDefinitely worth checking out if you want to see live how AI evolves with your prompts: https://aistudio.google.com/live\n\nLet’s explore it together! 💥\n\n🔥 When can it be super useful?\nPrototyping AI applications or ideas in real time:\nInstantly see how the model reacts and refine your ideas on the fly.\n\nDynamic prompt engineering:\nQuickly fine-tune prompts, test different versions, and optimize results without long wait times.\n\nTesting chatbot or virtual assistant conversations:\nSimulate full interaction flows and fix gaps instantly to deliver smoother user experiences.\n\nCreative exploration (storytelling, art, music):\nCo-create stories, generate art, or compose music with live feedback from the AI.\n\nPre-deployment product testing:\nStress-test your AI integrations before going live, spotting errors or misalignments early.\n\nLive demos for teams, clients, or innovation events:\nImpress your audience with real-time AI model interactions during workshops, pitches, or hackathons.\n\nResearch and academic experimentation:\nConduct fast experiments, study bias, model behavior, or prompt effectiveness with real-time feedback.",
+      "timestamp": "2025-04-28T17:07:53.087000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366460928987762798",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366467289121292379",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-28T17:33:09.461000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366467289121292379",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1366454610260262912",
+        "channel_id": "1353058864810950740",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366467291520176250",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is Amazing !",
+      "timestamp": "2025-04-28T17:33:10.033000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366467291520176250",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366469854772854814",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It is amazing",
+      "timestamp": "2025-04-28T17:43:21.160000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366469854772854814",
+      "author": {
+        "id": "1364721820313456643",
+        "username": "petrova_ekaterina_",
+        "discriminator": "0",
+        "display_name": "Ekaterina Petrova",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366532505875910776",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for posting this <@1319008015491268681> , availability of Studio Live opens up opportunities, have you had a chance to try it out?  Or do you have any suggestions for a simple use case to try the Studio out?",
+      "timestamp": "2025-04-28T21:52:18.347000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366532505875910776",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366460928987762798",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366555376266252328",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I want to share with you this project I knew some months ago, maybe it could be useful to anyone: https://www.baigrapher.com/#/\n\" The world's 1st Artificial Intelligence biographer\nI help people with Alzheimer's maintain their cognitive function by writing their life stories based on recollections from them and their loved ones.\"",
+      "timestamp": "2025-04-28T23:23:11.073000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366555376266252328",
+      "author": {
+        "id": "1365796693408223303",
+        "username": "jaime.rojas.s",
+        "discriminator": "0",
+        "display_name": "Jaime R.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366560613215502426",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for asking! Actually, yes — it’s been very useful, especially when I start working with agent platforms like 8n8, Hugging Face, or others I’m not very familiar with.\n\nTo be fair, I’ve been using the free streaming option, which allows you to interact for about 10 minutes timeframe, then you need to start again, no memory at all. Basically, you can ask anything you need — for example, “I want to create an agent to perform X task” — and Gemini reads the screen very accurately, guiding you step-by-step, even telling you which buttons to click to move forward.\n\nThe downside: it takes quite a while to respond, and you can’t switch screens during the process. Sometimes the guidance isn’t 100% accurate — like when it gets stuck trying to move forward, or if I receive a call via Teams, it interrupts the flow.",
+      "timestamp": "2025-04-28T23:43:59.659000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366560613215502426",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366532505875910776",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366817069559058453",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please add me",
+      "timestamp": "2025-04-29T16:43:03.616000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366817069559058453",
+      "author": {
+        "id": "1364924054653505569",
+        "username": "shobana_nambiar",
+        "discriminator": "0",
+        "display_name": "Shobana Nambiar",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366058703329169489",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366853339333132348",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just added you",
+      "timestamp": "2025-04-29T19:07:11.004000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366853339333132348",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "1364924054653505569"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366817069559058453",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366895003908968591",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "oh it's like Studio Live really wants your full attention, it wants you to be live with it 😆 \nand maybe the paid version is less slow? \nI wonder if it would be worth our time to spawn a few different efforts to gain the collective skill with it? But then there are other tools available out there that might be worth of the same consideration.\n\nIs that something this community would be interested in: - selecting a few tools (like Gemini Studio Live, create a few different projects to explore the tool's capability and then feed back that knowledge to this community?",
+      "timestamp": "2025-04-29T21:52:44.613000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366895003908968591",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366560613215502426",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366897421954842765",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Really interesting thought Bisera; this is me raising my hand to focus on Open AI's stuff — more and more these different tools / ecosystems / platforms remind me of different operative systems in computers. At the end of the day whether you're on Linux, Mac, Windows, Unix.. you're essentially getting stuff done through the operative system that fits best to you, your objectives, or your organisation's objectives.\n\nHaving different experts in different \"systems\" that are all aligned to a common objective can only be a good thing.",
+      "timestamp": "2025-04-29T22:02:21.120000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1366897421954842765",
+      "author": {
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
+        "discriminator": "0",
+        "display_name": "Francisco Castro Santos",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366895003908968591",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367076212546998282",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "The real question is what took them so long... 😀 \n\nhttps://console.anthropic.com/\nhttps://platform.openai.com/\nhttps://aws.amazon.com/bedrock/\nhttps://www.together.ai/\nhttps://playground.ai.cloudflare.com/ \n...",
+      "timestamp": "2025-04-30T09:52:48.119000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367076212546998282",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367076212777812049",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1367076212777812049/image.png?ex=6840c030&is=683f6eb0&hm=9a01d71ebd992a4a9ae48d5c757f440db81f5c5779c2fc71e7e42172a48a1a29&",
+          "size": 319833
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366460928987762798",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367087120446918666",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I actually  built something similar using vibe coding powered through Open source models:-)",
+      "timestamp": "2025-04-30T10:36:08.765000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367087120446918666",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367076212546998282",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367087999405527040",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-30T10:39:38.325000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367087999405527040",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367087998935629887",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1367087998935629887/image.png?ex=6840226a&is=683ed0ea&hm=9fe05c038612b58f40ff4942726fb6b6fe51609b4cde31f87a910f110bc2ef4e&",
+          "size": 372751
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367088070385598500",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I can also pick and choose models -",
+      "timestamp": "2025-04-30T10:39:55.248000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367088070385598500",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1367088070415089715",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1367088070415089715/image.png?ex=6840227b&is=683ed0fb&hm=237a44adebc326ed15a9fab2ff27169a663882fd98afc3b8aea8991b6a5e935c&",
+          "size": 371648
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367088213541523537",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-30T10:40:29.379000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367088213541523537",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1367088213134671962",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1367088213134671962/image.png?ex=6840229d&is=683ed11d&hm=f215a14aeab5635e94bc352f91efbaed46df4abdab6c44319d03d801088b90e9&",
+          "size": 348547
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367130302056759387",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Love it!\n\nYou might want to check this for DIY scenarios: https://github.com/open-webui/open-webui\n\nPutting aside the poor naming strategy, it's an all-in-one UI for LLMs including ollama support.",
+      "timestamp": "2025-04-30T13:27:44.063000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367130302056759387",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367087999405527040",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367143432836878386",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is indeed a wonderful tool as well. I experimented with this earlier..",
+      "timestamp": "2025-04-30T14:19:54.685000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367143432836878386",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367130302056759387",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367143567671427082",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "However, I personally like Msty for simple chats with local models or having a specific persona based chat:-)",
+      "timestamp": "2025-04-30T14:20:26.832000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367143567671427082",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367144445237268490",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@969571634027589643>  The special about this project is that - it is exclusively designed to show the intricacies of the LLMs.. For ex - showing the change in response quality with or without a tool integration..",
+      "timestamp": "2025-04-30T14:23:56.060000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367144445237268490",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367088213541523537",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367144550983926023",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "And of-course, wanted to have something of my own 😉",
+      "timestamp": "2025-04-30T14:24:21.272000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367144550983926023",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367152163993948262",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Georgi, Is this usefull for change of ML Models as well like CNN or only for LMMs?",
+      "timestamp": "2025-04-30T14:54:36.355000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367152163993948262",
+      "author": {
+        "id": "1358671083213033613",
+        "username": "martin.s3942",
+        "discriminator": "0",
+        "display_name": "Martin Soltermann",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367076212546998282",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367167832630099983",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Georgi, Is this usefull for change of",
+      "timestamp": "2025-04-30T15:56:52.049000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367167832630099983",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1367152163993948262",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367177384712736979",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1349019079683473488> and <@969571634027589643> , fantastic tools you are showcasing. If you had to choose a platform to host such app for general use, where would you do it?",
+      "timestamp": "2025-04-30T16:34:49.443000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367177384712736979",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488",
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367185619100635250",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@Prabhat Kumar and @Georgi Pavlov ,",
+      "timestamp": "2025-04-30T17:07:32.674000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1367185619100635250",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1367177384712736979",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368874421061685318",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-05T08:58:14.438000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1368874421061685318",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368877164031905813",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174>  can you help shouting out : https://discord.com/channels/1353058864810950737/1354190157049364501/1368874421061685318",
+      "timestamp": "2025-05-05T09:09:08.413000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1368877164031905813",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368913093714776134",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes I'll dm you !",
+      "timestamp": "2025-05-05T11:31:54.717000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1368913093714776134",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368877164031905813",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369689129616408806",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Mid-week prompt has me scrolling through all the topics. and treads that have been brought up so far, I am curious what has resonated.  I seem to think that hands-on, practical conversations have higher engagement than industry wide bot generated summaries. \nHere are some highlights, curious how others think we could evolve the conversation in  <#1354190157049364501> ?\n\n**AI in Action / General AI Adoption**: This thread encompasses broad discussions about how companies across various sectors are implementing AI technologies, highlighting specific examples and the strategic considerations involved.\n\n**Vibe Coding & AI in Software Development**: This thread explores a new approach to building software where AI generates most of the code based on descriptions.\n◦ the concept of \"vibe coding\" as describing desired software outcomes for AI to implement, allowing focus on ideas rather than technical details,  its speed for prototypes and MVPs but  production challenges like code being a \"black box,\" hard to debug, inefficient, and having security gaps.\n**Generative AI Use Cases** (Personal & Professional): This thread discusses the diverse applications of generative AI in daily life and work in 2025.\n◦ An article detailed the top 100 Gen AI use cases in 2025, finding an even split between work (coding, data analysis, content creation) and personal (learning, planning, journaling) applications\n**AI Agent Definition and Applications**: This thread focuses on understanding what AI agents are and their potential.\n**Hosting and Developing AI/Agent Apps** (Technical Deep Dive): This active thread covers the technical aspects, tools, platforms, and costs associated with developing and hosting AI applications and agents.  <@969571634027589643> hosting a session on May 8th.",
+      "timestamp": "2025-05-07T14:55:36.094000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1369689129616408806",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369728985227071604",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Evolving the convo in # 🛠ai-practical-applications",
+      "timestamp": "2025-05-07T17:33:58.412000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1369728985227071604",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1369689129616408806",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369746211996831825",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Found something on Agentic AI that may be useful:\n\nAgentic AI: The Autonomous Revolution Transforming Business and Work\n\nImagine AI systems that don’t just assist but independently plan, decide, and execute complex tasks-freeing human workers to focus on innovation while driving unprecedented efficiency, cost savings, and customer satisfaction. Agentic AI is no longer a futuristic concept; it’s reshaping industries today and setting the stage for a smarter, more agile tomorrow",
+      "timestamp": "2025-05-07T18:42:25.594000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1369746211996831825",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1369746211862482994",
+          "filename": "Agentic_AI_AI_Agents_1746149324.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1369746211862482994/Agentic_AI_AI_Agents_1746149324.pdf?ex=68409391&is=683f4211&hm=ae64a57b8b36ff50c3d08a881ac7ffdb74da4adefb46cd8b680d04eadc1f48a9&",
+          "size": 1394914
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369689129616408806",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369872197069312082",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Please can you add me there as well?",
+      "timestamp": "2025-05-08T03:03:02.776000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1369872197069312082",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369869990077009950",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369959068353036318",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Navigating the tools is the biggest challenge, as you said <@1359552583244583153>  100s of tools clamoring for our attention, picking a few to use and have relative proficiency with is  an accomplishment in itself. \nThanks for organizing us all, Irene!",
+      "timestamp": "2025-05-08T08:48:14.504000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1369959068353036318",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369874305415905311",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370052650875486245",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-08T15:00:06.316000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370052650875486245",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370087432212578465",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Congrats and thanks to <@969571634027589643> who today delivered a masterclass on Deployment ⚙️ and 💰  cost basics of AI Agents 🤖.\nWhat a luxury for us learners. Hope we can have a second round soon, Georgi! 🙏 👏👏👏",
+      "timestamp": "2025-05-08T17:18:18.833000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370087432212578465",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370093607003885598",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you <@673901899837341736> . I'm happy to share!\n\nHere's the slide deck from today session. \nhttps://docs.google.com/presentation/d/1AU5jOPVTpmakHjW7x9a3w1l9XkG6jM1iPADvxTY30wI/edit?usp=sharing",
+      "timestamp": "2025-05-08T17:42:51.018000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370093607003885598",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370087432212578465",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370093711261962346",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": ":calendar_spiral:  **Navigating the AI A...",
+      "timestamp": "2025-05-08T17:43:15.875000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370093711261962346",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1368874421061685318",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370103824404185169",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "That kind of fell in line with my warnings on the session today, not to underestimate the challenges of DIY, so I'm sharing 😂 \nIt's oddly correct, and mesmerizingly left-aligned.. \n\nBUT let me add - **do not let this discourage you!**\n\nIt's a journey, and I can tell you it's getting easier and easier. \nYou should see how it looked when Langchain was v1.0... 😁",
+      "timestamp": "2025-05-08T18:23:27.036000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370103824404185169",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🤣",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1370103824152399872",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1370103824152399872/image.png?ex=68408f1e&is=683f3d9e&hm=cdade58c195b50d6e2bef5011d2a8abb614df99ccbd3e4eb6ff4762e1515ce2f&",
+          "size": 232634
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370141302842331207",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Rad,\nReally appreciate you sharing this insightful document! The way it breaks down the evolution of agentic AI and its transformative potential across industries is both inspiring and actionable. I love how it emphasizes moving from simple automation to true autonomy—with agents planning, deciding, and executing tasks independently. Definitely a must-read for anyone serious about staying ahead in the AI space. Thanks again for bringing this to the group! 🙌🚀",
+      "timestamp": "2025-05-08T20:52:22.592000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370141302842331207",
+      "author": {
+        "id": "692409052478701709",
+        "username": "master_p.",
+        "discriminator": "0",
+        "display_name": "Patrick Dalpe",
+        "bot": false
+      },
+      "mentions": [
+        "1352735021093359626"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369746211996831825",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370254451520045057",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@969571634027589643> for a great presentation on \"Navigating AI Agents Deployment and Costs\". I feel great to be in the team with experts from who I can collaborate and leasrn!",
+      "timestamp": "2025-05-09T04:21:59.339000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1370254451520045057",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "969571634027589643"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371972471732965426",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "ah this is so interesting, bold even for a bot.\nI asked Claude for the tech tip Tuesday and got this back:\n\nHeadline: Revolutionize Your Productivity with AI: A Non-Technical Guide to ChatGPT\nSource / Date: Harvard Business Review, April 18, 2025\nLink: https://hbr.org/2025/04/revolutionize-your-productivity-with-ai-a-non-technical-guide-to-chatgpt\nQuick Summary: This comprehensive primer shows non-technical professionals how to use ChatGPT effectively for everyday tasks like email drafting, content summarization, and creative brainstorming without requiring any coding knowledge. By following the article's step-by-step instructions and prompt templates, anyone can immediately start saving hours each week and enhancing their work quality regardless of their technical background.\nAction Steps:\nTry the \"email transformation prompt\" to rewrite a difficult message in your style.\nUse the summarization technique on a long document you've been avoiding reading.\nHow might you integrate AI assistant check-ins into your daily workflow?\n\n\n**A small detail that the link to Harvard Business Review article is non-existent.**\n\nChallenging Claude to provide the link, it responded with:\n\n\"I apologize for providing a link that isn't active. You're right to question this. The article I referenced isn't from a real publication - I generated this example based on the type of content that would be helpful for your request since I couldn't access current search results.\"\n\ndo bots define new normal or did they pick that up from us: \nAct confidently, even when making things up, when caught, apologize and roll forward?",
+      "timestamp": "2025-05-13T22:08:47.277000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1371972471732965426",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🙀",
+          "count": 5
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        },
+        {
+          "emoji": "🧛‍♂️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371974210410512405",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@392733996880101396> - Surprised to see this. Bots are mimicking human tendencies reflecting the biases in the human provided data !",
+      "timestamp": "2025-05-13T22:15:41.810000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1371974210410512405",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371972471732965426",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372161988557537302",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I love that bots are low on judgement, and this no fuss approach of apologizing/ dusting off is quite effective (i.e. for us humans who tend to overthink, maybe a lesson?)",
+      "timestamp": "2025-05-14T10:41:51.609000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1372161988557537302",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1335299567440367757"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371974210410512405",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372262577949642772",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@392733996880101396> . Yesterday, ChatGPT was sharing broken link or an error message. Sharing representative screen shot below:",
+      "timestamp": "2025-05-14T17:21:33.989000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1372262577949642772",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371972471732965426",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372262590432153711",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-14T17:21:36.965000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1372262590432153711",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1372262589878501376",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1372262589878501376/image.png?ex=684080a0&is=683f2f20&hm=9be0c8e2522e8f06f2c97bbd4a1d381f10b09d3f1a680a5d1b144316405fc968&",
+          "size": 101433
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372262798075105300",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Then I used Gemini. Wondering if it was a server issue?",
+      "timestamp": "2025-05-14T17:22:26.471000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1372262798075105300",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373781191630651474",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great article on different vibe coding tools and how people are using them: [Read the article](https://www.linkedin.com/pulse/state-vibe-coding-tools-may-2025-nufar-gaspar-x1znf/). \n\nIt was also featured on [this episode](https://podcasts.apple.com/us/podcast/the-ai-daily-brief-formerly-the-ai-breakdown/id1680633614?i=1000708883831) of *The AI Daily Brief* — one of my go-to sources for AI news.",
+      "timestamp": "2025-05-18T21:55:59.705000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1373781191630651474",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373781722734395422",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-18T21:58:06.330000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1373781722734395422",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1373781722541326366",
+          "filename": "1746903334658.png",
+          "url": "https://cdn.discordapp.com/attachments/1354190157049364501/1373781722541326366/1746903334658.png?ex=6840c16e&is=683f6fee&hm=426a7d69a84b6249d2a6545d014cce83f1e71358f480bde9138b9a1a15b449b3&",
+          "size": 403977
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373782814226382878",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Insightful share, thank you!",
+      "timestamp": "2025-05-18T22:02:26.562000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1373782814226382878",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373781722734395422",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374477532140933281",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for sharing this <@1360003496384008262> , this adds nicely to our list of tools as captured by the <#1364361051830747156>  channel. \nAnyone here has had experience with the tools captured in the Vibecoding Landscape diagram?",
+      "timestamp": "2025-05-20T20:03:00.220000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374477532140933281",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374712226715533412",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone - do we have any real use case of building a sophisticated virtual consultant in a large organisation? I mean persona like  virtual analyst in a bank?",
+      "timestamp": "2025-05-21T11:35:35.767000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374712226715533412",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374720387492872326",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Take a look at Bank of America's virtual assistant Erica, and Morgan Stanley has done a tremendous amount of work in building tools using agents to support Advisors.  Tom Davenport has written extensively on this topic.",
+      "timestamp": "2025-05-21T12:08:01.448000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374720387492872326",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374720432871313559",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "AI agents are evolving into autonomous collaborators—able to reason, plan, and act—transforming workflows across industries. Deloitte’s latest report shows how multiagent systems can drive next-level productivity and innovation. A must-read for leaders rethinking the future of work: https://www2.deloitte.com/us/en/pages/consulting/articles/generative-ai-agents-multiagent-systems.html\n\n#AI #GenAI #FutureOfWork #DeloitteInsights #IntelligentAutomation",
+      "timestamp": "2025-05-21T12:08:12.267000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374720432871313559",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374838555901296782",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "here is a writeup of how  Block uses its own agent to speed up code writing and such...\n\"Goose helped developers at Block to develop a new agent-to-agent communication server at the hackathon. The company says Goose has changed the way it works, not only helping automate code generation but also allowing non-engineers to dabble in coding or prototype for new apps or features.\"\nhttps://www.wired.com/story/jack-dorseys-block-made-an-ai-agent-to-boost-its-own-productivity/\nand a link to the  Goose open source: https://github.com/block/goose  \"Goose can be powered by a range of different AI models and will run commands and access files and folders on a computer. Goose can also tap into a growing number of online tools, like cloud storage platforms or online databases, thanks to the Model Context Protocol scheme for agent communications developed by Anthropic.\"",
+      "timestamp": "2025-05-21T19:57:34.992000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374838555901296782",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 2,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374859036004057230",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I plan to work my way through them in the next couple of weeks!",
+      "timestamp": "2025-05-21T21:18:57.829000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1374859036004057230",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374477532140933281",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375177347275165697",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello, I want to share with you a blog I just wrote about AI solutions running privately in cloud environments for enterprises, it is easy to read and has a couple of takeaways to consider. [Link](https://blogs.oracle.com/ai-and-datascience/post/run-your-favorite-gen-ai-model-with-privacy) Let me know your thoughts.",
+      "timestamp": "2025-05-22T18:23:49.150000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375177347275165697",
+      "author": {
+        "id": "1365796693408223303",
+        "username": "jaime.rojas.s",
+        "discriminator": "0",
+        "display_name": "Jaime R.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "🍑",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375200286712402040",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Its a very good read. I completely echo, a lot of task doesn’t require inference to large model apis.",
+      "timestamp": "2025-05-22T19:54:58.338000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375200286712402040",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1365796693408223303"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375177347275165697",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375204097975783587",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Very interesting Jaime !!!\nThe priority right now is providing Gen AI solutions that can work securely without compromising compliance",
+      "timestamp": "2025-05-22T20:10:07.014000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375204097975783587",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [
+        "1365796693408223303"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375177347275165697",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375205339342835754",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for the awesome cheat sheet <@1360003496384008262>. Just started exploring Bubble .io and came across this medium article that gives a nice overview. Sharing in case anyone else is interested in Bubble.io. https://medium.com/no-code-vibes/bubble-io-core-concepts-made-simple-81dc6d01abf4",
+      "timestamp": "2025-05-22T20:15:02.979000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375205339342835754",
+      "author": {
+        "id": "1361504997719933050",
+        "username": "megrosed_65608",
+        "discriminator": "0",
+        "display_name": "Megan Davis",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373781722734395422",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375210880660406282",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "did you also go to the sizing level details? I have a question 🙋‍♂️- I have built a knowledge agent which i want to productiovalize with llama4 scout (preferred) or llama 4 maverick. In the beginning I expect about 50 concurrent users but eventually this number will grow to 3-400. What could be a good config to host llama4 for such a use case!",
+      "timestamp": "2025-05-22T20:37:04.132000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375210880660406282",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1365796693408223303"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375177347275165697",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375217035490889748",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Unfortunately this is not a performance test, so I didn’t measure the concurrence impact. Sorry.",
+      "timestamp": "2025-05-22T21:01:31.558000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375217035490889748",
+      "author": {
+        "id": "1365796693408223303",
+        "username": "jaime.rojas.s",
+        "discriminator": "0",
+        "display_name": "Jaime R.",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375210880660406282",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375339460845109308",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is great. As a non techi  I have just configured Azure to run my agents in accordance to Iso 27001.Would be interested to receive your feedback on my article https://medium.com/@andrea.hickethier/why-i-moved-my-peach-ai-agents-to-azure-and-what-that-has-to-do-with-trust-a4c9ababe88b",
+      "timestamp": "2025-05-23T05:08:00.037000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375339460845109308",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        "1365796693408223303"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375177347275165697",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375478501402214470",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Really insightful read, Andrea & and I admire the intentional shift toward trust and structure in your GenAI architecture. I’m also building an app that integrates agentic RAG, and your approach reinforces something I’ve been thinking about: it's not just about what agents can do, but what they should do & under what framework.\n\nHave you noticed that the clearer the governance, the easier it becomes to scale agent responsibilities with confidence? Also curious , how do you balance transparency with usability when surfacing explainability to end users?\n\nThanks again for sharing this approach Andrea, it’s a powerful reminder that alignment isn’t a constraint, it’s a foundation 👏 🙏",
+      "timestamp": "2025-05-23T14:20:29.889000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1375478501402214470",
+      "author": {
+        "id": "692409052478701709",
+        "username": "master_p.",
+        "discriminator": "0",
+        "display_name": "Patrick Dalpe",
+        "bot": false
+      },
+      "mentions": [
+        "1361976806651068517"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375339460845109308",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379104706487386194",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**This is gonna revolutionise AI based solutions on mobile. **\n\n**Headline: **Google Unveils Gemma 3n: A Leap Forward in Mobile AI Accessibility\n**Source / Date**: Google Developers Blog, May 26, 2025\n**Link:** https://developers.googleblog.com/en/introducing-gemma-3n\n\n**QuickSummary:**\nGoogle has introduced Gemma 3n, a lightweight, open-weight AI model designed for efficient on-device performance. Leveraging innovations like Per-Layer Embeddings (PLE) and MatFormer architecture, Gemma 3n delivers faster responses and reduced memory usage, enabling advanced AI capabilities on mobile devices without compromising quality.\n**Takeaway:**\nGemma 3n democratizes access to powerful AI by bringing high-quality, multimodal understanding to everyday devices, fostering innovation and inclusivity in AI applications.",
+      "timestamp": "2025-06-02T14:29:44.553000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1379104706487386194",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379283778584711198",
+      "channel_id": "1354190157049364501",
+      "channel_name": "🛠ai-practical-applications",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "oh wow that opens up all kinds of use cases, quoting a few capabilities: \n- Multimodal understanding: Analyzes and responds to combined images and text — with video and audio coming soon.\n- Privacy-first, offline-ready: Build intelligent, interactive features that put user privacy first and work reliably offline.\n- Optimized on-device performance: Mobile-first architecture, with a significantly reduced memory footprint. Co-designed by Google's mobile hardware teams and industry leaders.",
+      "timestamp": "2025-06-03T02:21:18.668000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354190157049364501/1379283778584711198",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379104706487386194",
+        "channel_id": "1354190157049364501",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

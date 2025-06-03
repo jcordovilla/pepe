@@ -1,0 +1,1771 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1364972361232941158",
+  "channel_name": "🧰workshop-submissions",
+  "fetch_timestamp": "2025-06-03T22:04:11.068172",
+  "message_count": 56,
+  "messages": [
+    {
+      "message_id": "1364975733038125157",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\n 🚀 Build Your First AI Agent with <@1322962807565848586>  — Live Workshop | Sat Apr 26, 12 PM EST \n\nHi everyone, \n\nDue to community feedback we have created a new channel called <#1364972361232941158> the goal here is to empower you to interact with ai agents with a bi-weekly lesson hosted on Saturdays by <@1322962807565848586> . \n\nThis is meant to give our community the tools to automate their business and personal life. \n\nJoin us this Saturday, April 26, at 12pm EST for our live, hands-on  workshop where we’ll build a fully-functioning AI agent from scratch—no coding background or prior assignments required. \n\n 🎒 What to Bring: Curiosity, a laptop, and one mundane task you’d love to automate.  Can’t wait to build together ! \n\nZoom link: [https://mit.zoom.us/j/94265292187] \n\nWarm regards, \n\nOscar",
+      "timestamp": "2025-04-24T14:46:14.779000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364975733038125157",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 6
+        },
+        {
+          "emoji": "💯",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 6
+        },
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👌",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364976555175968890",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174>     <@1322962807565848586> could it be possible to add a Sesh Event so anyone interested can join",
+      "timestamp": "2025-04-24T14:49:30.792000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364976555175968890",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586",
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364977030344609864",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174> . I was wondering if the session will be recorded? I’ll be at the family event at this time. I do want to learn from this workshop.",
+      "timestamp": "2025-04-24T14:51:24.081000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364977030344609864",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364975733038125157",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364978769080746065",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586> 💐",
+      "timestamp": "2025-04-24T14:58:18.628000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364978769080746065",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586",
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364975733038125157",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364980311200366614",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes for sure that Is why we are hosting it on zoom so we can post the recording on <#1364289798340349953> post call !",
+      "timestamp": "2025-04-24T15:04:26.298000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364980311200366614",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364977030344609864",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364980429681070171",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes for sure ! That is being worked on right now as well ! Anyone will also be able to join from the link !",
+      "timestamp": "2025-04-24T15:04:54.546000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364980429681070171",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364976555175968890",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364980481594097756",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174> !",
+      "timestamp": "2025-04-24T15:05:06.923000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364980481594097756",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364980311200366614",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364997053301915720",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This one <@1356965427162517514>",
+      "timestamp": "2025-04-24T16:10:57.926000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1364997053301915720",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
+        "bot": false
+      },
+      "mentions": [
+        "1356965427162517514",
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364975733038125157",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365004357728211055",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586>  Love this!!  I have my last Office Hours at 12:30 pm so can only join the first 30 min and will listen to the recording after.  Will this be a regular event?  Could we explore different times as over time in the summer, Sat might become harder for people?  For the Non Coder Learning channel I started, i think we can also utilize your recordings for ongoing discussions on building Agentic AI..",
+      "timestamp": "2025-04-24T16:39:59.437000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365004357728211055",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365016973234278492",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-24T17:30:07.208000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365016973234278492",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365017681530589295",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Irene , of course , we could perhaps make Saturdays 10:30am EST  reoccurring workshops from May  .\nWe are gonna learn so much from each other !",
+      "timestamp": "2025-04-24T17:32:56.079000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365017681530589295",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365004357728211055",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365314094424526979",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Count’t me in! 🙏 for your inspiring engagement <@1359552583244583153> , <@1322962807565848586>, <@758206516753858561> a.o.",
+      "timestamp": "2025-04-25T13:10:46.420000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365314094424526979",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561",
+        "1322962807565848586",
+        "1359552583244583153"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365339384634937374",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ah man, would love to join that session <@1322962807565848586> but am on parent duties. Will definitely catch up on the recording.",
+      "timestamp": "2025-04-25T14:51:16.076000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365339384634937374",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365429153448464557",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Same here!",
+      "timestamp": "2025-04-25T20:47:58.629000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365429153448464557",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365339384634937374",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365607911056871464",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m currently in Berlin and will view the recording! Thank you and sunny greetings 👋🏼",
+      "timestamp": "2025-04-26T08:38:17.764000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365607911056871464",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [
+        "616754792965865495"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365016973234278492",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365661889870172160",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586> me too, will watch the recording 🙏",
+      "timestamp": "2025-04-26T12:12:47.316000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365661889870172160",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365690737181593651",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Dragana thanks for suggesting count me in \\",
+      "timestamp": "2025-04-26T14:07:25.051000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365690737181593651",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365715519541346356",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1322962807565848586>  Sorry, I can't make it to the meeting. I look forward to watching the recording!",
+      "timestamp": "2025-04-26T15:45:53.626000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365715519541346356",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365719105444774009",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-26T16:00:08.572000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365719105444774009",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365719608425975882",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\n\nReminder that  🚀 Build Your First AI Agent with @dragana linfield  — Live Workshop | Sat Apr 26, 12 PM EST \n\nStarts now !\n\nAt the following Zoom link: [https://mit.zoom.us/j/94265292187]",
+      "timestamp": "2025-04-26T16:02:08.492000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365719608425975882",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365724460795166760",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586> this is an amazing workshop thank you for sharing this knowledge with us!",
+      "timestamp": "2025-04-26T16:21:25.387000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365724460795166760",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365724786931531998",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "agree 100% , looks really easy",
+      "timestamp": "2025-04-26T16:22:43.144000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365724786931531998",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365724848248197162",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is amazing",
+      "timestamp": "2025-04-26T16:22:57.763000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365724848248197162",
+      "author": {
+        "id": "1357372349632221420",
+        "username": "naeem_91404",
+        "discriminator": "0",
+        "display_name": "Naeem Afzal",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365724877692338246",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "intuitive and helpful",
+      "timestamp": "2025-04-26T16:23:04.783000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365724877692338246",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365726982494752790",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586> expertise and experience its huge value !",
+      "timestamp": "2025-04-26T16:31:26.607000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365726982494752790",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365727401576894574",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Very insightful..enjoy seeing the agent creation in real time online thanks😃",
+      "timestamp": "2025-04-26T16:33:06.524000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365727401576894574",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365753894654836836",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Can you please share the recording?",
+      "timestamp": "2025-04-26T18:18:22.966000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365753894654836836",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365760987868692562",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes,please share the recording.",
+      "timestamp": "2025-04-26T18:46:34.120000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365760987868692562",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365764608085856370",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> <@1364811456914259978> Yes ! it is currently uploading to <#1364289798340349953> !",
+      "timestamp": "2025-04-26T19:00:57.247000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365764608085856370",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1364811456914259978",
+        "1359966236473168188"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365779474552983583",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear All,\n\nIt was a privilege to spend time with you today.\nAttached are the slides from our session.\n\nAs a next step, I will be focusing on learning how to configure RAG using n8n (hopefully before my free trial expires :), and I look forward to demonstrating it in action soon. Have a nice weekend, D",
+      "timestamp": "2025-04-26T20:00:01.689000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365779474552983583",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👏",
+          "count": 7
+        },
+        {
+          "emoji": "😊",
+          "count": 1
+        },
+        {
+          "emoji": "🙌",
+          "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365779469406699520",
+          "filename": "Dragana_Community_Workshop_April_26.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1364972361232941158/1365779469406699520/Dragana_Community_Workshop_April_26.pdf?ex=6840a5c0&is=683f5440&hm=9f8ad54516b229b0adc29e69a609e50068f6e14788e72f4551607aad3d66be27&",
+          "size": 1764356
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365780815908175882",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you so much for sharing the slides and for the time you spent today!!  The live demonstration was really helpful and informative!!! Looking forward for our next session!!! 👏👏👏👏",
+      "timestamp": "2025-04-26T20:05:21.493000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365780815908175882",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365779474552983583",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365948910794838058",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1322962807565848586>, a big thank you for this session and the way you drove it live was impressive!\nBefore a business use case, I am thinking to build agent to help me manage my Airbnb listing: guest request, questions, thank you messages, etc. If anyone has been through this, interested by sharing experience.\nCheers,",
+      "timestamp": "2025-04-27T07:13:18.437000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365948910794838058",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1322962807565848586"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365779474552983583",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365971585457983568",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Really interesting use case!! Did you already start doing something? Do you have some sort of sketch of how success could look like?",
+      "timestamp": "2025-04-27T08:43:24.498000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365971585457983568",
+      "author": {
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
+        "discriminator": "0",
+        "display_name": "Francisco Castro Santos",
+        "bot": false
+      },
+      "mentions": [
+        "1357372535653666968"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365948910794838058",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365972237886296155",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Not yet. Will use Dragana’s insights to proceed so.",
+      "timestamp": "2025-04-27T08:46:00.049000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1365972237886296155",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1350111040733577246"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365971585457983568",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366102810730561709",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have tried to set up the followings in n8n:\n1- workflow to retrieve messages from my Airbnb inbox (via HTTP post method) to feed a MongoDB database (DB1) so it can be used by the agent to generate personalized response to guest-requests. \n2- agent to respond guests with, OpenAI, database for memory, and database DB1 for message (sort of RAG).\n\nUnfortunately, I got stuck on #1 as Airbnb fields (listingName, senderName, message, etc) change regularly and could not figure out what are the current ones. And access to API documentation (or HTTP fields naming) seems to be restricted to a few API partners (like Hospitable).\nIf anyone has a clue 😉",
+      "timestamp": "2025-04-27T17:24:51.041000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1366102810730561709",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366106131340197971",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What about a web scrapper looking periodically at your inbox? \n\nIf there are changes, then it would activate the HTTP Post method, no?\n\nSomething like browserbase? https://www.browserbase.com",
+      "timestamp": "2025-04-27T17:38:02.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1366106131340197971",
+      "author": {
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
+        "discriminator": "0",
+        "display_name": "Francisco Castro Santos",
+        "bot": false
+      },
+      "mentions": [
+        "1357372535653666968"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366102810730561709",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366245986435072100",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Sebastien, I am thinking of presenting another workshop on how to build a RAG that can be helpful in storing information that your business needs before sending to an LLM",
+      "timestamp": "2025-04-28T02:53:46.789000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1366245986435072100",
+      "author": {
+        "id": "1322962807565848586",
+        "username": "dlinfield_95648",
+        "discriminator": "0",
+        "display_name": "dragana linfield",
+        "bot": false
+      },
+      "mentions": [
+        "1357372535653666968"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 12
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365948910794838058",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366280005415473226",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Francisco! Great point. However, where I am stuck is in the naming of Airbnb’s messages objects / fields which I can’t find.",
+      "timestamp": "2025-04-28T05:08:57.546000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1366280005415473226",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1350111040733577246"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366106131340197971",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367989424062988381",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey @everyone.\nThis Sunday May 4, at 2pm EST / 8pm CET I will run an open session to **share my personal AI-agent learning journey**: How I’ve built a RAG app / bot that retrieves insights from the Discord server, using OpenAI embeddings & LLM and LangChain. **No coding background**, just some basic knowledge and plenty of chat time with a coding bot.\nWill love to have you there. Event post coming right after this post.",
+      "timestamp": "2025-05-02T22:21:34.711000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1367989424062988381",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 14
+        },
+        {
+          "emoji": "🔥",
+          "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "👏",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1367989423802814594",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1364972361232941158/1367989423802814594/image.png?ex=68401e2e&is=683eccae&hm=e7f00c5c6e6f18451deeceedddb847aadba9514822f3cbeea8f28920a0063112&",
+          "size": 351736
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367990600065876029",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-02T22:26:15.092000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1367990600065876029",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368005559370125362",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@673901899837341736> Hi Jose, how exciting! I can’t make the session unfortunately. Hoping you can record it so we can listen to it later if you can add it to the recordings library.",
+      "timestamp": "2025-05-02T23:25:41.668000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368005559370125362",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367989424062988381",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368005994843738252",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Plus 1 from me",
+      "timestamp": "2025-05-02T23:27:25.493000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368005994843738252",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1359552583244583153"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368005559370125362",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368021372932194355",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sure, it will be recorded.",
+      "timestamp": "2025-05-03T00:28:31.915000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368021372932194355",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368127754859577455",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is wonderful 🙂",
+      "timestamp": "2025-05-03T07:31:15.343000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368127754859577455",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367989424062988381",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368133595750858802",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I also can't make it but would like to listen to recording. Thanks for sharing 😀",
+      "timestamp": "2025-05-03T07:54:27.920000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368133595750858802",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368149912163848202",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It will be great to have you there and get your view on how to expand and scale a tool like that",
+      "timestamp": "2025-05-03T08:59:18.056000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368149912163848202",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1349019079683473488"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368127754859577455",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368522352660316260",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Jose,\nI will not be able to attend but will watch the recording",
+      "timestamp": "2025-05-04T09:39:14.790000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368522352660316260",
+      "author": {
+        "id": "1360267706204426442",
+        "username": "frederique_20320",
+        "discriminator": "0",
+        "display_name": "Frédérique Lambers",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367989424062988381",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368536953292718100",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great initiative, <@673901899837341736> As I am due to complete the course, I’d love to watch the recording.  Will be more engaged upon course completion😅🙏👋",
+      "timestamp": "2025-05-04T10:37:15.852000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368536953292718100",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367989424062988381",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368648402988040303",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-04T18:00:07.530000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368648402988040303",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368667845063606385",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for the amazing presentation <@673901899837341736> !! Amazing work !",
+      "timestamp": "2025-05-04T19:17:22.882000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368667845063606385",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368669240449699851",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@673901899837341736> for the great presentation! You have reached to this level with your hard work! Your work is inspiring me to try learning AI-agent and the applications.",
+      "timestamp": "2025-05-04T19:22:55.568000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368669240449699851",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368673515611619532",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you all who attended, so glad to have the opportunity to share my experience with you. Will share the contents very soon",
+      "timestamp": "2025-05-04T19:39:54.846000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368673515611619532",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368674426991677593",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you Jose",
+      "timestamp": "2025-05-04T19:43:32.136000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368674426991677593",
+      "author": {
+        "id": "1360632266979807406",
+        "username": "sudalai22",
+        "discriminator": "0",
+        "display_name": "Sudalai Muthu",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368673515611619532",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368690535535214744",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have posted the links to recording, transcript and presentation here:\nhttps://discord.com/channels/1353058864810950737/1364289798340349953/1368690303640404031",
+      "timestamp": "2025-05-04T20:47:32.712000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368690535535214744",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368765506537918534",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for today’s presentation <@673901899837341736> . It was inspiring to see your passion, grit, and tenacity. You’ve inspired me to reach outside my comfort zone and begin experimenting on my own.",
+      "timestamp": "2025-05-05T01:45:27.192000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368765506537918534",
+      "author": {
+        "id": "1361504997719933050",
+        "username": "megrosed_65608",
+        "discriminator": "0",
+        "display_name": "Megan Davis",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368970784999215115",
+      "channel_id": "1364972361232941158",
+      "channel_name": "🧰workshop-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Of course! Thank you for the words. Do dive in and experiment, the downside is minimal and the upside is immense.\n1. Install VS Code\n2. Open a GitHub account\n3.  Connect GitHub to VS Code\n4. Open an empty folder you have created\n5. Open the Copilot in VS Code\n6. Ask the copilot to build a RAG app with langchain that does ...whatever you like!\nIf you don't know how to do any of the above, ask ChatGPT or your chatbot of choice.",
+      "timestamp": "2025-05-05T15:21:09.391000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364972361232941158/1368970784999215115",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1361504997719933050"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        },
+        {
+          "emoji": "🔥",
+          "count": 8
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368765506537918534",
+        "channel_id": "1364972361232941158",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

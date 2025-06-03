@@ -1,0 +1,2205 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1353443209166065664",
+  "channel_name": "🤝find-a-buddy",
+  "fetch_timestamp": "2025-06-03T22:03:59.526722",
+  "message_count": 80,
+  "messages": [
+    {
+      "message_id": "1364834316214861844",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: CST.  Main Goal for the Server: Networking & Learning. Preferred Display Name: Hugo",
+      "timestamp": "2025-04-24T05:24:18.381000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364834316214861844",
+      "author": {
+        "id": "1364816840550912142",
+        "username": "hugovillalva",
+        "discriminator": "0",
+        "display_name": "Hugo Villalva",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364857034977312768",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 CET\n🎯 Networking & Learning\n✏️ Malin",
+      "timestamp": "2025-04-24T06:54:34.956000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364857034977312768",
+      "author": {
+        "id": "1364826411566764043",
+        "username": "malinhaag_13259",
+        "discriminator": "0",
+        "display_name": "Malin Haag",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364883154116022334",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone:   CET, Main Goal for the Server: Networking & Learning, Collaboration, Business Oportunities,. Preferred Display Name: Ekaterina",
+      "timestamp": "2025-04-24T08:38:22.244000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364883154116022334",
+      "author": {
+        "id": "1364721820313456643",
+        "username": "petrova_ekaterina_",
+        "discriminator": "0",
+        "display_name": "Ekaterina Petrova",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364894741619146793",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Looking forward to meeting my buddy!\n\n🌍  Time Zone: CET \n🎯  Your Main Goals for the Server: Networking, Learning, Integration of AI into marketing strategies and workflows\n✏️  Preferred Display Name: Laure",
+      "timestamp": "2025-04-24T09:24:24.920000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364894741619146793",
+      "author": {
+        "id": "1364837264827617284",
+        "username": "lauregolly",
+        "discriminator": "0",
+        "display_name": "Laure Golly",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364896296573472829",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Tim Zone: CET, Main Goal: Networking, Collaboration and Business Opportunities with focus on EMEA,n Preferred Display: Seb.",
+      "timestamp": "2025-04-24T09:30:35.650000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364896296573472829",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364921400032497704",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET\n🎯 Main Goal for the Server: Networking, Learning, and Collaboration. I’m particularly interested in embedding AI into standard processes like Sales, Marketing, and beyond. Ethics in AI is another passion of mine, and I’m eager to explore this area further. Overall, I’m happy to connect with peers who are curious, enthusiastic about exploring new ideas, and maintain a positive outlook.\n✏️ Preferred Display Name: Manoella",
+      "timestamp": "2025-04-24T11:10:20.781000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364921400032497704",
+      "author": {
+        "id": "1364899385866981390",
+        "username": "manoella_22229",
+        "discriminator": "0",
+        "display_name": "Manoella",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364924294026756106",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍  Time Zone: BST/GMT\n🎯  Your Main Goals for the Server: Networking, Learning and Collaboration. Professionally I'm interested in using AI to improve the efficiency in operational processes and would like to map out some use cases and craete some prototype solutions. It would be great to work towards a more comprehensive AI implementation framework to guide companies in creating an AI adoption strategy. Personally, I'm also experimenting with a project to see how AI can be used to support people with dementia. Would be great to collaborate with anyone keen to dicuss these topics or any other adjacent ideas.\n✏️  Preferred Display Name: Jonathan",
+      "timestamp": "2025-04-24T11:21:50.763000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364924294026756106",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364958906467745872",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: EST.  Main Goal for the Server: Learning & Collaboration. Preferred Display Name: Alvaro",
+      "timestamp": "2025-04-24T13:39:23.012000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364958906467745872",
+      "author": {
+        "id": "1364822781220360283",
+        "username": "alvarogonzalez1073",
+        "discriminator": "0",
+        "display_name": "Alvaro Gonzalez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364961250705936545",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey All - Looking forward to learn from one and all! \n\n\n🌍  Time Zone: PST \n🎯  Your Main Goals for the Server: Networking & Learning\n✏️  Preferred Display Name: Vivek",
+      "timestamp": "2025-04-24T13:48:41.922000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1364961250705936545",
+      "author": {
+        "id": "1144131362790576219",
+        "username": "vivekkumar1717",
+        "discriminator": "0",
+        "display_name": "Vivek",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365009185959575592",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 TimeZone (PDT) Los Angeles, CA USA\n🎯 Main Goal: Learning/Collaborating/Networking. Similar to some of you, **interested **in collaborating on AI Adoption & Transformation leading Enterprise Strategy and Tech Enablement (Reimagine degree - Transform Process & Business Models). I’m also part of micro learning program with Women Defining AI cohort 🚀  \n✏️ Preferred Display Name (Michelle) \n💡 It's great to be here and look forward to learning from all of you!!",
+      "timestamp": "2025-04-24T16:59:10.577000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365009185959575592",
+      "author": {
+        "id": "1352697519498334252",
+        "username": "minsunnie",
+        "discriminator": "0",
+        "display_name": "Michelle Rhee  Los Angeles GMT-7",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365030342473547849",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CST (Central Standard Time) – Mexico City\n\n🎯 Your Main Goal for the Server:\nMainly learning and collaboration. I’m here to connect with people working at the intersection of design, technology, and creativity. I’m interested in exploring how AI can be integrated into design processes and workflows in meaningful ways.\n\n✏️ Preferred Display Name:\nAlexandro",
+      "timestamp": "2025-04-24T18:23:14.683000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365030342473547849",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365038766666027078",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CST (Central Standard Time) – Mexico City\n\n🎯 Your Main Goal for the Server:\nLearning, networking and collaboration . Interested in the design and implementation of AI solutions for the financial sector\n\n✏️ Preferred Display Name:\nMiguel",
+      "timestamp": "2025-04-24T18:56:43.167000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365038766666027078",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365046246485524525",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CST (Central Standard Time) - Mexico City\n\n🎯 Your main goal for the server:\nLearning, network, read and share case studies. Create, participate and collaborate on AI solutions for different industries. \n\n ✏️ Preferred display name: Mario",
+      "timestamp": "2025-04-24T19:26:26.495000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365046246485524525",
+      "author": {
+        "id": "1364832312029876237",
+        "username": "mariop1987",
+        "discriminator": "0",
+        "display_name": "Mario Peimbert",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365047763250970757",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET - Central European Time\n\n🎯 Your main goal for the server:\nnerworking, learning and being ready for the future 🚀\n\n ✏️ Preferred display name: Carla",
+      "timestamp": "2025-04-24T19:32:28.120000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365047763250970757",
+      "author": {
+        "id": "1364837995412328498",
+        "username": "carladomingo33",
+        "discriminator": "0",
+        "display_name": "Carla Domingo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365055273034846318",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: CET\n\n🎯 Main goal: Networking, learning, and collaboration. Especially interested in AI solutions in Innovation and Financial Services as well as Transformation and Strategy. \n\n✏️ Preferred Display Name: Silke",
+      "timestamp": "2025-04-24T20:02:18.592000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365055273034846318",
+      "author": {
+        "id": "1075075819807985714",
+        "username": "silkefinken",
+        "discriminator": "0",
+        "display_name": "Silke Finken",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365061728143937547",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: EST\n\n🎯 Main Goal: Learning and networking, with a particular interest in AI solutions that leverage people data and analytics to drive impactful business outcomes. \n\n✏️ Preferred Display Name: Leila",
+      "timestamp": "2025-04-24T20:27:57.610000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365061728143937547",
+      "author": {
+        "id": "1364985137720201276",
+        "username": "wxgal008",
+        "discriminator": "0",
+        "display_name": "Leila Chen",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365069973239890010",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: (EST)\n\n🎯 Your Main Goal for the Server: (Networking, Learning)\n\n✏️ Preferred Display Name: (Gio)",
+      "timestamp": "2025-04-24T21:00:43.394000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365069973239890010",
+      "author": {
+        "id": "1364010452937347276",
+        "username": "gmacrina",
+        "discriminator": "0",
+        "display_name": "Giovanni Macrina",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365191341528580107",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time zone: GMT 🇬🇧\nGoals: Professional - automate and reimagine ways of working in the creative and marketing profession across luxury brands. Personal - automate and reimagine the codes of nature and time.\nDisplay name: Marsha",
+      "timestamp": "2025-04-25T05:02:59.849000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365191341528580107",
+      "author": {
+        "id": "1311032999998914741",
+        "username": "mm11217_02617",
+        "discriminator": "0",
+        "display_name": "Marsha Meredith",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365300076045533305",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌐 Time Zone:CET \n🥅 Goal to Server:  Collaboration & Networking and Learning as well. I am actively involve on AI expansion and transformation for Automotive Software and reusage of best practicies from other Industries \n🤵  Preferred Display Name ( Igor)",
+      "timestamp": "2025-04-25T12:15:04.178000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365300076045533305",
+      "author": {
+        "id": "1364336942170378303",
+        "username": "kravchenko.i",
+        "discriminator": "0",
+        "display_name": "Igor Kravchenko",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365301322387034242",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: EST  (Eastern  Standard Time) - Dayton , Ohio\n\n🎯 Your main goal for the server:\nLearning, network, read case studies ,  participate  and collaborate on AI solutions\n\n ✏️ Preferred display name: Shobana",
+      "timestamp": "2025-04-25T12:20:01.329000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365301322387034242",
+      "author": {
+        "id": "1364924054653505569",
+        "username": "shobana_nambiar",
+        "discriminator": "0",
+        "display_name": "Shobana Nambiar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365362049915551887",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET\n\n🎯 Your Main Goal for the Server: Learning & Collaboration\n\n✏️ Preferred Display Name: Gerardo",
+      "timestamp": "2025-04-25T16:21:19.900000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365362049915551887",
+      "author": {
+        "id": "1365333179031883816",
+        "username": "gerardo_abad79_08324",
+        "discriminator": "0",
+        "display_name": "Gerardo Abad",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365734452977729798",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET\n\n🎯 Main Goal for the server: Learning, Networking, Collaboration\n\n✏️ Preferred Display Name: Stephan",
+      "timestamp": "2025-04-26T17:01:07.709000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365734452977729798",
+      "author": {
+        "id": "1212668149867094037",
+        "username": "stephan_72123",
+        "discriminator": "0",
+        "display_name": "Stephan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365742633904898069",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: EST (Eastern Standard Time) - Cambridge, MA, USA\n\n🎯 Main Goal: Learning and Collaborating to apply AI throughout daily tasks and processes related to sales, engineering, project management and after-sales service (Focus: Equipment in E-Commerce, Logistics and Distribution Centers - NAM and EMEA)\n\n ✏️ Preferred display name: Bastien",
+      "timestamp": "2025-04-26T17:33:38.194000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365742633904898069",
+      "author": {
+        "id": "1364942657859878953",
+        "username": "bastiengrelaud",
+        "discriminator": "0",
+        "display_name": "Bastien Grelaud",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365742737458204673",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: EST\n\n🎯 Main Goal for the Server: Learning, networking, share my experience in banking industry, Ethics and Data Privacy to add value and efficiency through Gen AI\n\n✏️ Preferred Display Name: David",
+      "timestamp": "2025-04-26T17:34:02.883000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365742737458204673",
+      "author": {
+        "id": "1364956984318754887",
+        "username": "daguerreros7",
+        "discriminator": "0",
+        "display_name": "David A. Guerrero S.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365971067453308958",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET (Geneva, Switzerland)\n\n🎯 Main Goal for the Server: Practical learning, collaboration, and discussion. \nI am passionate about understanding processes and creating practical, tangible, AI powered workflows to accelerate sales, marketing and add positive value to organisations. \n\n✏️ Preferred Display Name: Francisco",
+      "timestamp": "2025-04-27T08:41:20.996000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365971067453308958",
+      "author": {
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
+        "discriminator": "0",
+        "display_name": "Francisco Castro Santos",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🫕",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365975537981587476",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: CET\n\nGoals: Networking and Collaboration. Particularly interested in exchanging ideas with like-minded people on Digital Transformation focused on AI Automation - identifying automation use cases, integration across the organization, upskill teams and foster a cultural shift etc.\n\nDisplay Name: Narsi",
+      "timestamp": "2025-04-27T08:59:06.853000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1365975537981587476",
+      "author": {
+        "id": "1364861865003323392",
+        "username": "narasaiahpasaladi_77019",
+        "discriminator": "0",
+        "display_name": "Narasaiah Pasaladi",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366006352933027972",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "• 🌎 Time Zone: CET (Italy)\n\n• 🎯 Main Goal for the server: Learning everything I can and Networking. I do not come from Tech and/or STEM but from the Legal/Humanities field, so I wanna be able to apply AI in a inclusive, impactful and positive way.\n\n• ✏️ Preferred Display Name: Chiara",
+      "timestamp": "2025-04-27T11:01:33.710000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366006352933027972",
+      "author": {
+        "id": "1365074657446723624",
+        "username": "chiarapassuello",
+        "discriminator": "0",
+        "display_name": "Chiara Passuello",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366024126409736324",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: EST New York, NY USA\n🎯Main Goal: Networking and Learning /Collaboration on AI Transformation projects \nI’m with Amazon and looking to transition out into something new!\n✏️Preferred display name: Sandra",
+      "timestamp": "2025-04-27T12:12:11.237000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366024126409736324",
+      "author": {
+        "id": "1365814219932565615",
+        "username": "sandraf1230",
+        "discriminator": "0",
+        "display_name": "Sandra Finkelstein",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366061635701047468",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: UTC-5. LATAM/Lima-Peru\n\n🎯 Main Goal: Learning and networking, with a particular interest in AI solutions that leverage people data and analytics to drive impactful business outcomes. \n\n✏️ Preferred Display Name: Gabriel",
+      "timestamp": "2025-04-27T14:41:14.149000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366061635701047468",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366077554347343954",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: GMT+1, London, UK\n\n🎯 Main Goal: Networking, knowledge sharing and AI/Digital collaboration. Experienced in Financial Services, FinTech, Energy & MedTech Sectors with Cloud Architecture & Engineering on AWS, Azure & GCP.\n\n✏️ Preferred Display Name: Mark",
+      "timestamp": "2025-04-27T15:44:29.450000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366077554347343954",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366118975821451375",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: GMT+4, Abu Dhabi, UAE\n\n🎯 Main Goal: Develop a collaborative network of AI, fintech, and nonprofit digital-transformation experts for ongoing knowledge exchange.\n\n✏️ Preferred Display Name: Fayaz",
+      "timestamp": "2025-04-27T18:29:05.099000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366118975821451375",
+      "author": {
+        "id": "1064436806495510528",
+        "username": "fazi6307",
+        "discriminator": "0",
+        "display_name": "Muhammad Fayaz",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366149495452205126",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET \n\n🎯 Your main goal for the server:\nlearning, networking, remain intellectually stimulated and be part of this game-changing community\n\n ✏️ Preferred display name: Irina",
+      "timestamp": "2025-04-27T20:30:21.546000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366149495452205126",
+      "author": {
+        "id": "1365361860299460761",
+        "username": "irinafrigola_14125",
+        "discriminator": "0",
+        "display_name": "Irina Frigola",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366395405222412379",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: Arabia Standard Time (GMT+3) -Doha (Qatar)\n 🎯 Main Goal: Networking, Learning and Collaboration. Currently, very interested in how to build and implement corporate level AI strategies and the use of AI tools in the Broadcast/Media landscape.\n 📝 Preferred Display Name: Israel",
+      "timestamp": "2025-04-28T12:47:31.004000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366395405222412379",
+      "author": {
+        "id": "1366326179753361490",
+        "username": "israelesteban_51397",
+        "discriminator": "0",
+        "display_name": "Israel Esteban",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366430787850862602",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello! \n🎯 Main Goal: Learning, collaboration, and networking. Interest in IA development in the business and corporate world\n\n🌍 Time Zone: UTC-5. LATAM/Lima-Peru\n\n• ✏️ Preferred Display Name: Karem",
+      "timestamp": "2025-04-28T15:08:06.880000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366430787850862602",
+      "author": {
+        "id": "1365325329463382150",
+        "username": "karempcc",
+        "discriminator": "0",
+        "display_name": "Karem Carreño Cuadros",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366449634171551855",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello\n🎯 Main Goal:Learning and Collaboration. Interested  in AI Application in Organisation . Ethics and Compliance challenges in AI.\n🌎  Time Zone UTC +1\n✏️ Preferred Display Name : Val",
+      "timestamp": "2025-04-28T16:23:00.193000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366449634171551855",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366501431846113281",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time zone: CST, Mexico city\nGoals: Learning & networking! I would like to keep learning on this new topic for me and Apply the knowledge to Unified Commerce sector!\nDisplay name: Arturo",
+      "timestamp": "2025-04-28T19:48:49.721000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366501431846113281",
+      "author": {
+        "id": "1365155712342425674",
+        "username": "arturoibarra0491",
+        "discriminator": "0",
+        "display_name": "Arturo Ibarra",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366546839050125312",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello! \n🎯 Main Goal: Learning and networking. Understand how AI will impact industries and how to handled the AI adoption in companies. \n\n🌍 Time Zone: UTC-5. LATAM/Bogota-Colombia\n\n• ✏️ Preferred Display Name: Jaime",
+      "timestamp": "2025-04-28T22:49:15.642000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366546839050125312",
+      "author": {
+        "id": "1365796693408223303",
+        "username": "jaime.rojas.s",
+        "discriminator": "0",
+        "display_name": "Jaime R.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366628291863121980",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello \n\n🌍 Time Zone: EST (Lima)\n\n🎯 Main goal: Networking, learning, and collaboration. Especially interested in AI solutions for process improvement and automation. \n\n✏️ Preferred Display Name: Jose",
+      "timestamp": "2025-04-29T04:12:55.506000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366628291863121980",
+      "author": {
+        "id": "1365353686427238621",
+        "username": "jasuazo_91848",
+        "discriminator": "0",
+        "display_name": "Jose Suazo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366793541908435076",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: GMT-3, Buenos Aires, Argentina\n\n🎯 Main Goal: Sharing knowledge and experiences of automated  use cases in corporations,  organizational impacts (Ethics, Data Privacy and strucutral reorganization) and challenges in reskilling/upskilling teams. \n✏️ Preferred Display Name: Ana",
+      "timestamp": "2025-04-29T15:09:34.187000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366793541908435076",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366939241837498409",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1068496361651179540> <@1365353686427238621> \n\nAssignning you buddy groups now ! If you dont see your buddy groups within the next 30 minutes let me know !",
+      "timestamp": "2025-04-30T00:48:31.757000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366939241837498409",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540",
+        "1365353686427238621"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366989589100892181",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time zone: CST, Mexico city\nGoals: Learning & networking!\nDisplay name: Gera",
+      "timestamp": "2025-04-30T04:08:35.480000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1366989589100892181",
+      "author": {
+        "id": "1364811522592866344",
+        "username": "gerardogiamportoni",
+        "discriminator": "0",
+        "display_name": "Gerardo Giamportoni",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367109643737890908",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "• 🌎 Time Zone - EST \n• 🎯 Main Goal for the server : Learning, Networking, Collaboration\n• ✏️ Preferred Display Name: Nicole",
+      "timestamp": "2025-04-30T12:05:38.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367109643737890908",
+      "author": {
+        "id": "1364977607925567620",
+        "username": "nicolelussier_78400",
+        "discriminator": "0",
+        "display_name": "Nicole Lussier",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367180595884593283",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "•    🌎 Time Zone: CET (Switzerland)\n •    🎯 Your Main Goal for the Server: (Discussing and sharing use cases, joint learning, possibly joint collaboration\n •    📝 Preferred Display Name: René",
+      "timestamp": "2025-04-30T16:47:35.046000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367180595884593283",
+      "author": {
+        "id": "1364573571686334547",
+        "username": "renej._07786",
+        "discriminator": "0",
+        "display_name": "René Jost",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367216775330005104",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Oscar! I don´t see my buddy Group. Waiting for your help.",
+      "timestamp": "2025-04-30T19:11:20.898000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367216775330005104",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366939241837498409",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367219474436063232",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Made the update ! Let me know in <#1363539367058084062> if you can see it now !",
+      "timestamp": "2025-04-30T19:22:04.415000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367219474436063232",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367216775330005104",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367221573404201081",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1364573571686334547> <@1364811522592866344> <@1364977607925567620> <@1068496361651179540> \n\nLet me know if you can see your buddy group VC + channel in <#1363966092384669807>",
+      "timestamp": "2025-04-30T19:30:24.848000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367221573404201081",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1364811522592866344",
+        "1364977607925567620",
+        "1364573571686334547",
+        "1068496361651179540"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367238769434165269",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "👌 Perfect, Oscar. Thanks!",
+      "timestamp": "2025-04-30T20:38:44.701000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367238769434165269",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367219474436063232",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367420209316761600",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I can see a group now. Thanks <@1352785241252565174>",
+      "timestamp": "2025-05-01T08:39:43.340000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367420209316761600",
+      "author": {
+        "id": "1364573571686334547",
+        "username": "renej._07786",
+        "discriminator": "0",
+        "display_name": "René Jost",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367221573404201081",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367563491371909252",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello! \n\n🎯  Main Goal: Education and networking. Understanding how AI will impact industries and the ever-evolving best use cases and hacks for AI adoption in business. \n\n🌍  Time Zone: UTC-7. Pacific Time: San Francisco, CA, USA\n\n✏️  Preferred Display Name: Joel",
+      "timestamp": "2025-05-01T18:09:04.444000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367563491371909252",
+      "author": {
+        "id": "812920739291463701",
+        "username": "joelnathanson0697",
+        "discriminator": "0",
+        "display_name": "joelnathanson",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367588340555321436",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: CET\n\n🎯 Main Goal: Learning, networking, collaboration, and exploring business opportunities. I’m especially interested in understanding how to initiate digital transformation within an organization and how to gradually design and implement efficient workflows and AI agents that create real value.\n\n✏️ Preferred Display Name: Rafal",
+      "timestamp": "2025-05-01T19:47:48.951000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1367588340555321436",
+      "author": {
+        "id": "1363263256877072574",
+        "username": "rafgil",
+        "discriminator": "0",
+        "display_name": "Rafal Gilewski",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368957898998419547",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: (GMT+3)\n\n🎯 Your Main Goal for the Server: My goal in joining this group is to engage in networking and learning opportunities, particularly focused on understanding artificial intelligence applications, staying informed about emerging regulations and their impacts, following developments in policy-making, and exchanging insights and perspectives with others active in this space.\n\n✏️ Preferred Display Name: (Hatice)",
+      "timestamp": "2025-05-05T14:29:57.129000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1368957898998419547",
+      "author": {
+        "id": "1367919978434662591",
+        "username": "haticeyavuz_22546_24612",
+        "discriminator": "0",
+        "display_name": "Hatice Yavuz",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369415358330437803",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi,\n\n🌎 Time Zone: EST New York, NY USA\n🎯 Your Main Goal for the Server: Having open discussions, exposing use cases. Learning and collaborating\n✏️ Preferred Display Name: Pat",
+      "timestamp": "2025-05-06T20:47:43.933000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369415358330437803",
+      "author": {
+        "id": "692409052478701709",
+        "username": "master_p.",
+        "discriminator": "0",
+        "display_name": "Patrick Dalpe",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369438747602456646",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: (Colorado, USA [MT])\n\n🎯 Your Main Goal for the Server: My goal in joining this community is to network and learn more about AI (e.g., develop project management use cases, new algorithms). I would be open to collaborating to conduct research and publish papers as well as collaborate with other professionals.\n\n✏️ Preferred Display Name: Mike",
+      "timestamp": "2025-05-06T22:20:40.370000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369438747602456646",
+      "author": {
+        "id": "926187818550722632",
+        "username": "cryptowhaleson",
+        "discriminator": "0",
+        "display_name": "MikeB-AI",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369475594114437213",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1367919978434662591> <@692409052478701709> <@926187818550722632> You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group.",
+      "timestamp": "2025-05-07T00:47:05.263000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369475594114437213",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "926187818550722632",
+        "692409052478701709",
+        "1367919978434662591"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369523401391079454",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: EST\n📝 Preferred Display Name: Saurabh \n🎯 Your Main Goal for the Server: \nMy aim is to learn more about Generative AI, share ideas and discover how AI solutions and agents are used in real-world situations. I’m also excited to connect with people around the world and be part of a community that supports innovation in a responsible way.\n🏭 Industry or Sector: Higher Education, Healthcare, Automotive.",
+      "timestamp": "2025-05-07T03:57:03.406000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369523401391079454",
+      "author": {
+        "id": "1369378054236934205",
+        "username": "saurabhtyagi24",
+        "discriminator": "0",
+        "display_name": "Saurabh Tyagi",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369566179097841766",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: PDT\nMain Goal: Networking, Learning  and Collaboration. I am looking for opportunities to learn more about how to apply AI in manufacturing/engineering space ! Also want to learn how AI can help enhance  the Digital Transformation in general. And explore the possibility of using AI for predictive/prescriptive analytics! Open to collaborate with others and work on common industry use cases!",
+      "timestamp": "2025-05-07T06:47:02.406000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369566179097841766",
+      "author": {
+        "id": "1369381215898959932",
+        "username": "dhilipsr",
+        "discriminator": "0",
+        "display_name": "Dhilip Ranganathan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369591198649684029",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: CET \n\n Main Goal: Having the ability to develop end-to-end software, looking forward to networking, collaborating , and exploring opportunities to develop together AI enabled apps and services . Finger crossed to find buddies who have similar goal.\n\n Preferred Display Name: Ananta",
+      "timestamp": "2025-05-07T08:26:27.532000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369591198649684029",
+      "author": {
+        "id": "1365325918779871273",
+        "username": "ananta8204",
+        "discriminator": "0",
+        "display_name": "Ananta Das",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369634371367207055",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: Switzerland, CET\n📝 Preferred Display Name: Rodrigo\n🎯 Your Main Goal for the Server: Learning more about GenAI and Collaboration towards real-life applications. Discussing ethics too. \n🏭 Industry or Sector: Finance (Asset Management) \n💬 Communication & Interaction Preferences: async chat, could eventually do calls.",
+      "timestamp": "2025-05-07T11:18:00.710000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369634371367207055",
+      "author": {
+        "id": "1369340923200278532",
+        "username": "rcbarbieri",
+        "discriminator": "0",
+        "display_name": "Rodrigo Barbieri",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369651281664413716",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello back to you, Rodrigo, from the FS sector in Switzerland/Zurich. Best regards, René",
+      "timestamp": "2025-05-07T12:25:12.439000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369651281664413716",
+      "author": {
+        "id": "1364573571686334547",
+        "username": "renej._07786",
+        "discriminator": "0",
+        "display_name": "René Jost",
+        "bot": false
+      },
+      "mentions": [
+        "1369340923200278532"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369634371367207055",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369711603204882452",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: EST - Miami, FL\n📝 Preferred Display Name: Francisco\n🎯 Your Main Goal for the Server: Networking &  Learning\n🏭 Industry or Sector: Technology, Telecommunications & Cybersecurity\n💡 Areas of Expertise: Sales & Business Development\n🎯 Desired Learning Topics: Gen AI, Use Cases\n💬 Communication & Interaction Preferences: weekly calls, async chat",
+      "timestamp": "2025-05-07T16:24:54.215000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369711603204882452",
+      "author": {
+        "id": "959602679460532334",
+        "username": "fijop_",
+        "discriminator": "0",
+        "display_name": "Francisco Pizano",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369751911397462076",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: Pacific Time, California USA\n🎯 Your Main Goal for the Server: To learn and explore AI through practical examples and real-world use cases, stay up to date with AI advancements, and connect with like-minded peers for collaboration and knowledge sharing.\n✏️ Preferred Display Name: Chaitra",
+      "timestamp": "2025-05-07T19:05:04.437000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369751911397462076",
+      "author": {
+        "id": "1364814377806594168",
+        "username": "cs0051",
+        "discriminator": "0",
+        "display_name": "Chaitra Shetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369777542021517315",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: Uruguay, GMT-3\n📝 Preferred Display Name: Javi\n🎯 Your Main Goal for the Server: Networking &  Learning\n🏭 Industry or Sector: Technology, Innovation, Retail\n💡 Areas of Expertise: Software Engineering\n🎯 Desired Learning Topics: Gen AI / Agentic AI: how AI solutions in general are used in real-world situations. Connect and learn from others!\n💬 Communication & Interaction Preferences: async chat, could eventually do calls",
+      "timestamp": "2025-05-07T20:46:55.254000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369777542021517315",
+      "author": {
+        "id": "1054143721035276288",
+        "username": "mightymilo23",
+        "discriminator": "0",
+        "display_name": "Javier Camacho",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369824791044948059",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1369378054236934205> <@1369381215898959932> <@1365325918779871273> <@1369340923200278532> <@959602679460532334> <@1364814377806594168> <@1054143721035276288> You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
+      "timestamp": "2025-05-07T23:54:40.299000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1369824791044948059",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1054143721035276288",
+        "1369340923200278532",
+        "1365325918779871273",
+        "959602679460532334",
+        "1364814377806594168",
+        "1369381215898959932",
+        "1369378054236934205"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370023918261506101",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone:  Madrid, GMT +2\n📝 Preferred Display Name: Miguel Angel\n🎯 Your Main Goal for the Server:  Networking, Learning & Collaboration\n🏭 Industry or Sector: Retail\n💡 Areas of Expertise: Technology Management and strategy (CIO /CTO)\n🎯 Desired Learning Topics:  from the sky to the ground : How to apply in the real business world the technologies innovations\n💬 Communication & Interaction Preferences: all of them",
+      "timestamp": "2025-05-08T13:05:55.927000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1370023918261506101",
+      "author": {
+        "id": "1082181389266473051",
+        "username": "internationalcio",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Sánchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370164945185931386",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues accessing the group.",
+      "timestamp": "2025-05-08T22:26:19.366000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1370164945185931386",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1082181389266473051"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370023918261506101",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370202616113401857",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Group4, it is ok. Thanks <@1311434218622156850>",
+      "timestamp": "2025-05-09T00:56:00.815000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1370202616113401857",
+      "author": {
+        "id": "1082181389266473051",
+        "username": "internationalcio",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Sánchez",
+        "bot": false
+      },
+      "mentions": [
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "👏",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370164945185931386",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370646111894638613",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: Switzerland, CET\n📝 Peter or Pit \n🎯 Your Main Goal for the Server: \nExchange on strategic AI topics — from top-down initiatives to real-world adoption and change management\nDive into architecture and solution design for AI-powered systems\nMutual coaching and idea-challenging — reflective and hands-on\nShare experiences in building apps and client solutions\nCollaborate on technical implementation and best practices in AI engineering\nConnect with top talent for project-based contracting opportunities\n\n🏭 Industry or Sector: \nPrimarily Financial Services & Insurance, with openness to cross-industry collaboration and opportunities in other sectors.  \n\n💡 Areas of Expertise: \nConsulting & Engineering for Software and Data Engineering\nEnterprise Architecture Management and Solution Design\nIT-Strategy & Process Organization in agile and scaled agile setups\nAccount Management and long-term client partnerships\nBusiness Development and opportunity shaping across industries\n\n🎯 Desired Learning Topics: \nAI adoption strategies tailored for consulting businesses\nDesigning and implementing enterprise-ready AI solutions for clients\nBuilding and scaling own AI-powered products and apps\n\n💬 Communication & Interaction Preferences: \nPrefer asynchronous chat for day-to-day exchange\nOpen to calls or web sessions on demand for valuable or complex topics\n\n** Looking forward to connect with**\nAn entrepreneurial mind who bridges strategy and hands-on implementation — someone open to new ideas, yet a strong challenger and critical thinker. Ideally with the ability to shape solutions from concept to code, and a passion for turning vision into impact.",
+      "timestamp": "2025-05-10T06:18:18.449000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1370646111894638613",
+      "author": {
+        "id": "1369289641836154911",
+        "username": "pitstampede_46733",
+        "discriminator": "0",
+        "display_name": "Peter Stampfli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371166067506024690",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
+      "timestamp": "2025-05-11T16:44:25.527000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1371166067506024690",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1369289641836154911"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370646111894638613",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371526650952552500",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello! \n🎯 Your Main Goal for the Server: To learn and explore AI through practical examples and real-world use cases, stay up to date with AI advancements also create new AI agents and connect with like-minded peers for collaboration and knowledge sharing.\n\n🌎 Time Zone:Eastern Standard Time, Georgia USA\n\n✏️ Preferred Display Name: Manaswita",
+      "timestamp": "2025-05-12T16:37:15.320000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1371526650952552500",
+      "author": {
+        "id": "1247410151737131009",
+        "username": "manaswita2931",
+        "discriminator": "0",
+        "display_name": "Manaswita",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372111351270346802",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌎 Time Zone: CET Switzerland \n🎯 Main Goal for the Server: is to exchange ideas and learn about opportunities and business cases related to omnichannel strategies. This includes the integration of digital platforms with physical retail, customer services, and digital solutions across sectors.\n✏️ Preferred Display Name: Ophélie",
+      "timestamp": "2025-05-14T07:20:38.739000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372111351270346802",
+      "author": {
+        "id": "1365311293715779727",
+        "username": "ophelie.sandoz",
+        "discriminator": "0",
+        "display_name": "Ophelie Dobler",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372283565353467925",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Welcome and greetings from Zurich 😃 👋",
+      "timestamp": "2025-05-14T18:44:57.776000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372283565353467925",
+      "author": {
+        "id": "1364573571686334547",
+        "username": "renej._07786",
+        "discriminator": "0",
+        "display_name": "René Jost",
+        "bot": false
+      },
+      "mentions": [
+        "1365311293715779727"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372111351270346802",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372288655934095360",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Main Goal for the Server: To build Agents that can be used for real-life scenarios. Although my current role (Tech Program Manager / Scrum Master) doesn’t demand coding but I am committed to upskill myself by learning Python ( currently pursuing Python training) and other technologies which can be useful for building Agents.\nTime Zone: Eastern Standard Time, NC,USA \n\nPreferred Display Name: Pragya",
+      "timestamp": "2025-05-14T19:05:11.465000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372288655934095360",
+      "author": {
+        "id": "1365161721295015978",
+        "username": "pragyashukla0633",
+        "discriminator": "0",
+        "display_name": "Pragya Shukla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372587710472257626",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1247410151737131009> <@1365311293715779727> <@1365161721295015978> You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
+      "timestamp": "2025-05-15T14:53:31.623000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372587710472257626",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1247410151737131009",
+        "1365161721295015978",
+        "1365311293715779727"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372594455831515197",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1311434218622156850> I can see buddy group # 11",
+      "timestamp": "2025-05-15T15:20:19.842000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372594455831515197",
+      "author": {
+        "id": "1365161721295015978",
+        "username": "pragyashukla0633",
+        "discriminator": "0",
+        "display_name": "Pragya Shukla",
+        "bot": false
+      },
+      "mentions": [
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372656184548655125",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1311434218622156850> , I am able to send the messages in buddy group #11.",
+      "timestamp": "2025-05-15T19:25:37.115000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1372656184548655125",
+      "author": {
+        "id": "1247410151737131009",
+        "username": "manaswita2931",
+        "discriminator": "0",
+        "display_name": "Manaswita",
+        "bot": false
+      },
+      "mentions": [
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374473891199582411",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: EST (Eastern Standard Time)\n📝 Preferred Display Name: Walter\n🎯 Your Main Goal for the Server: Collaboration on AI-powered education tools — especially intelligent agents that support personalized learning\n🏢 Industry or Sector: EdTech, Data Training, Generative AI\n💡 Areas of Expertise:\n\nSQL & Data Analytics Instruction\n\nAI/LLM Integration (LangChain, OpenAI, Ollama, MemGPT)\n\nStreamlit app development for education\n\nCourse design (LinkedIn Learning, self-paced, corporate)\n\nAuthoring and curriculum strategy\n\n🎯 Desired Learning Topics:\n\nAI agents for tutoring, coaching, and feedback in education\n\nAgentic workflows in LangChain/MemGPT\n\nHuman-in-the-loop systems for data instruction\n\nDesign patterns for multi-step agent reasoning\n\nScalable solutions for adaptive, real-world learning paths\n\n💬 Communication & Interaction Preferences:\nAsync-first (chat, collaborative docs), open to occasional deep-dive calls\nLooking for mutual idea exchange, prototyping partners, or just curious minds in the same space",
+      "timestamp": "2025-05-20T19:48:32.152000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1374473891199582411",
+      "author": {
+        "id": "991347065273720964",
+        "username": "waltershields.",
+        "discriminator": "0",
+        "display_name": "WalterShields",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377310988835225744",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: PST California\nMain Goal: To learn AI through practical implications in healthcare (datacenter management) and exchange ideas.\nPreferred Display Name: Serdar \nAreas of Expertise:  Program Management (Data Center and the programs therof)\nDesired Learning Topics: \nAI adoption strategies for consulting\nImplementing AI solutions for healthcare clients",
+      "timestamp": "2025-05-28T15:42:08.939000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1377310988835225744",
+      "author": {
+        "id": "1377305753127354562",
+        "username": "serdarseyhun_74842",
+        "discriminator": "0",
+        "display_name": "Serdar Seyhun",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377479682961702914",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
+      "timestamp": "2025-05-29T02:52:28.753000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1377479682961702914",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "1377305753127354562"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377310988835225744",
+        "channel_id": "1353443209166065664",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377650150708744365",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Time Zone: IST, Bangalore \nMain Goal: To enhance my AI and Software Engineering skills, and contribute to the community in a meaningful way  \nPreferred Display Name: Enu\nAreas of Expertise:  Software Engineering, Copilots, Cloud-Native Apps Architectures, Digital & App Innovation/Modernization\nDesired Learning Topics: \nInDepth learning on AI , Agentic AI, GenAI usecases and Adoption",
+      "timestamp": "2025-05-29T14:09:51.431000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1377650150708744365",
+      "author": {
+        "id": "1377273962198728765",
+        "username": "remarkable_possum_91579",
+        "discriminator": "0",
+        "display_name": "Enu Mittal",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379413486152716388",
+      "channel_id": "1353443209166065664",
+      "channel_name": "🤝find-a-buddy",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🌍 Time Zone: BRT (GMT-3)\n📝 Preferred Display Name: Jorge Van Dal\n🎯 Your Main Goal for the Server: Networking, Collaboration and Learning\n🏢 Industry or Sector: Education, Technology and Social Impact\n💡 Areas of Expertise: Generative AI, Science Communication, Educational Innovation, Strategic Foresight\n🎯 Desired Learning Topics: AI for education, ethical AI, community engagement, public policy and AI inclusion strategies\n💬 Communication & Interaction Preferences: Async chat preferred during the week + voice calls biweekly voice calls)\n🧭 Mission: I'm focused on democratizing AI in Brazil by expanding access to technology and education for social impact.",
+      "timestamp": "2025-06-03T10:56:43.362000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353443209166065664/1379413486152716388",
+      "author": {
+        "id": "1377095869035188275",
+        "username": "jorgevandal_20402",
+        "discriminator": "0",
+        "display_name": "Jorge Luiz Garcia Van Dal",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

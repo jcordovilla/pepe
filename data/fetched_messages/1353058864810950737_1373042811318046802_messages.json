@@ -1,0 +1,871 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1373042811318046802",
+  "channel_name": "📥channel-submissions",
+  "fetch_timestamp": "2025-06-03T22:03:58.736957",
+  "message_count": 28,
+  "messages": [
+    {
+      "message_id": "1373402246297026760",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Channel request for Secure AI",
+      "timestamp": "2025-05-17T20:50:12.097000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373402246297026760",
+      "author": {
+        "id": "1364924054653505569",
+        "username": "shobana_nambiar",
+        "discriminator": "0",
+        "display_name": "Shobana Nambiar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373542834526879764",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Chanel request for AI legislation",
+      "timestamp": "2025-05-18T06:08:50.943000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373542834526879764",
+      "author": {
+        "id": "1082181389266473051",
+        "username": "internationalcio",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Sánchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373671027246235699",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📢 Announcement: Industry Channel Submissions Now Open! 📢\n\nHey @everyone,\n\nWe’ve just launched the <#1373042811318046802>  channel under the “AI by Industry” category! This is the place to propose new industry-specific channels to expand our discussions into various sectors.\n\n🔍 Submission Guidelines:\n\n1️⃣ Ensure your proposed channel focuses on a specific industry.\n2️⃣ Make sure you have a team ready to help run and engage with the channel. The goal is to keep these channels active and informative with consistent contributions.\n3️⃣Upon review, we’ll reach out to the submitters of approved channels to discuss how they plan to govern the channel and maintain engagement.\n4️⃣ If everything checks out, we’ll create the channel.\n\n🕐 Timeline:\nAt 1 PM EST today, our governance committee will finalize the approval process for these submissions {using data analytics}.  After which we will begin to review channels for approval so make sure to submit your best ideas!\n\n👤 Community channel Governance Leads:\n\n<@546559083357143044> will be leading the governance process; alongside <@1352735021093359626>  & <@1125194882164736050>  & <@1311434218622156850> . \n\n<@546559083357143044>  is heading since she’s heading the website development team, there’s great synergy in having her oversee this. She’ll ensure the content from these channels integrates smoothly into our resource repository, enhancing the user experience.\n\n<@1352735021093359626> & <@1125194882164736050> are on the governance team due to there affiliation with the content creation team and synergy with 3rd party content development.\n\n<@1311434218622156850> Is our head of IT; so he will be on the team to offer input and create the channels with proper permissions once approved.\n\nLet’s build something great together! 🚀",
+      "timestamp": "2025-05-18T14:38:14.469000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373671027246235699",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050",
+        "1352735021093359626",
+        "546559083357143044",
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "🦾",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "📸",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": true,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373673947891105975",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-18T14:49:50.805000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373673947891105975",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1373671027246235699",
+        "channel_id": "1373042811318046802",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1373689139131580558",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just a thought - it’s great having channels for industry verticals but there’s probably also value in having channels for horizontals. For example, I would love to have a channel for product & programme management where we can collaborate on role specific challenges and solutions.",
+      "timestamp": "2025-05-18T15:50:12.679000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373689139131580558",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373690832279830578",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Also, will you eventually open up the industry channels so users can choose which ones to join? My experience is FS so makes sense I’m in that group but also I’m really interested in healthcare use cases - so would be great to be able to drop in to speak to the experts in that channel.",
+      "timestamp": "2025-05-18T15:56:56.357000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373690832279830578",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373693101985632416",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great points, <@691008994789163020>  really appreciate the feedback!\n\nUsing threads within industry-specific channels is actually a great way to support those horizontal role-based convos without diluting the structure too early {Further creating complexity on the server with to many channels}. So if you're a product/programme lead in FS or healthcare, you can spark those threads and collaborate within context.\n\nAlso, just to clarify: that's exactly what the <#1373042811318046802>  channel is for! If you (or anyone else) sees a need for a new channel industry or General chat chat concept inclusion <#1372397860980658327> this is where you can propose it for approval. We're building it with you all in mind.\n\nJust to make it easier for our governance team, lets continue the conversation in <#1354188981826228448> !\n\nLooking forward to seeing what you submit!",
+      "timestamp": "2025-05-18T16:05:57.497000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373693101985632416",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "691008994789163020"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373759490926579812",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174>  - we could manage this adhoc in threads within the industry channels but here's my pitch for a channel. I think there may be value in cross-industry collaboration around certain disciplines with the theory that product/project managers often deal with fundamentally similar challenges regardless of the sector. I understand the desire to not have too many channels but I guess eventually we should be able to pick and choose which channels to join? The more important thing is making sure we try and avoid multiple channels trying to tackle the same problems. So putting this out there for consideration:\n\n🚀 Proposal: New Channel – Product & Programme Management\n\nI’d love to propose a new channel focused on the Product & Programme Management discipline in the context of AI adoption in financial services. This space would be for those of us driving or planning AI initiatives—from idea to execution.\n\n👥 Who’s it for?\nProduct Managers, Programme/Project Managers, and anyone leading the delivery of AI capabilities in FS.\n\n🎯 Why this channel?\nTo dig into the specific challenges of managing AI delivery—like aligning with compliance, scaling MVPs, cross-team collaboration, tool selection, and more. We’ll share experiences, tackle roadblocks together, and design better ways forward.\n\n📦 What will we create together?\nToolkits: e.g., delivery playbooks, MVP checklists, AI compliance templates\nFrameworks: for governance, delivery alignment, and agile execution\nCase studies & lessons learned\nBest practices using current tools\nCommunity-built solutions to shared problems\n\n🎯 What do we aim to achieve?\nStronger, risk-aware AI delivery practices\nMore confidence navigating complexity in AI delivery\nHigher success rates for AI initiatives by learning from each other\n\nIf you’re interested in building this with me, drop a 👍 or your thoughts below! Would love to co-create this with peers who care about getting AI into production responsibly and effectively.",
+      "timestamp": "2025-05-18T20:29:45.854000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373759490926579812",
+      "author": {
+        "id": "691008994789163020",
+        "username": "jhorden2211",
+        "discriminator": "0",
+        "display_name": "Jonathan Horden",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373982667166711808",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**Proposal: **“**Multilingual & Plain Language │ Inclusion │ Slow-AI │ AI-Powered Solutions”**\nWhere clarity meets action, diversity drives design, and AI moves with purpose. \n\n**My pitch line:** Join us to explore how plain-language prompts, multilingual models, and a ‘slow-AI’ ethic can empower inclusive, high-impact solutions across industries.”\n\n**Who is it for?** \nAll community members passionate about:\n- Making AI understandable in any language\n- Designing ethically inclusive systems\n- Applying deliberate, “Slow-AI” practices\n- Building small, powerful AI-powered tools\n\n**What We’ll Create Together**\n• Community Showcase Gallery  \n  👉 Rotating spotlight on member demos & case studies (code snippets, lessons learned, best practices)  \n• Weekly Co-Creation Sessions  \n  👉 Live sprints to prototype, test & refine new AI helpers in a multilingual space  \n\nWho I asked to participate / taking a driving role: <@1082181389266473051> & <@1364721820313456643>, they are both multilingual. And of course: I am open for others! \n*Confirmed engagement: <@1364721820313456643> *\n\n**Piloting Context/Industry:**\nSwitzerland is officially multilingual—**German, French, Italian, English**, and more\n👉 SMEs here (99.7% of companies) can benefit immediately from accessible, inclusive AI solutions.\n\nℹ** Getting Started with Slow-AI **\n1. We could choose one feature or model to pilot.  \n2. We could design a two-week test with success criteria and user interviews.  \n3. We could schedule a mid-pilot ethics “pause point” to review early data.  \n4. We could plan a modular rollout (e.g., phase 1 = English; phase 2 = add German or French).  \n5. We could set up a simple dashboard for explainability logs or “Why?” queries.  \n\nPS: my proposal came in late. Keep an eye on time zones and week days.😜",
+      "timestamp": "2025-05-19T11:16:35.216000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1373982667166711808",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1364721820313456643",
+        "1082181389266473051"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374013145932369981",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for your proposal <@1362326150373966035> , I find this is a very important topic and I am totally with you regarding multilingual assets here in Switzerland. And what is enormously important in my opinion is the AI literacy, do I understand it correctly, that slow AI is sort of part of the AI literacy topic?",
+      "timestamp": "2025-05-19T13:17:41.920000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374013145932369981",
+      "author": {
+        "id": "1364721820313456643",
+        "username": "petrova_ekaterina_",
+        "discriminator": "0",
+        "display_name": "Ekaterina Petrova",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373982667166711808",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374014360757993577",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Valueable question <@1364721820313456643> Here a resource which explains Slow AI nicely: https://www.peacemongernetwork.com/the-rise-of-slow-ai-apps-why-deliberate-tech-is-the-future-of-artificial-intelligence\nI suggested Slow AI practices-see **Getting Started with Slow-AI** . Focusing on structured, phased pilots with built-in ethics checkpoints and monitoring dashboards lead to more trustworthy AI. In a nutshell Slow AI is focusing less on speed and more on depth, nuance, and human-centric design. More via DM.",
+      "timestamp": "2025-05-19T13:22:31.557000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374014360757993577",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1364721820313456643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374013145932369981",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374042816216563772",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks a lot <@1362326150373966035> , I like the approach very much, especially for therapy chatbots!",
+      "timestamp": "2025-05-19T15:15:35.867000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374042816216563772",
+      "author": {
+        "id": "1364721820313456643",
+        "username": "petrova_ekaterina_",
+        "discriminator": "0",
+        "display_name": "Ekaterina Petrova",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374046103665643712",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks, Ekaterina! I’m training as an ACT therapist, using plain language and a Slow AI approach to make our chatbots safer and clearer. Looking forward to more exchange with you!\n\nSome further information on ACT: https://contextualscience.org/act_self_help_and_the_world_health_organization_doing_what_matters_in_times\n\n👉Developed for global use:\nMultilingual (available in over 20 languages)\nAudio versions for low-literacy settings\nDesigned for use without a therapist",
+      "timestamp": "2025-05-19T15:28:39.656000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374046103665643712",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1364721820313456643"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374042816216563772",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374046554826080438",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Melinda love the slow AI approach. Very interested to learn more about it.",
+      "timestamp": "2025-05-19T15:30:27.221000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374046554826080438",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374338712015470653",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Super interesting <@1362326150373966035>. This would  certainly be a big asset towards a more inclusive AI system!",
+      "timestamp": "2025-05-20T10:51:22.923000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1374338712015470653",
+      "author": {
+        "id": "1365074657446723624",
+        "username": "chiarapassuello",
+        "discriminator": "0",
+        "display_name": "Chiara Passuello",
+        "bot": false
+      },
+      "mentions": [
+        "1362326150373966035"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375152278574465189",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🚀 Channel Proposal: Practical AI Applications\n\nI’d love to propose a new channel focused on real-world, high-impact applications of AI. The goal is to create a space where we can share practical use cases, learn from each other, and build things that matter.\n\nTo illustrate: I’m currently based in Peru, and across LATAM I’ve seen incredible grassroots innovation — startups using augmented reality, early-stage GenAI solutions, and more. But what if we could take it a step further?\n\n✨ Imagine launching a Global AI Impact Lab — powered by this amazing community — to connect visionary leaders with students and early professionals. A space to train talent, build real solutions, and drive social and economic transformation in regions that need it most.\n\nThis could be a place for prototyping, sharing tools, testing ideas, and scaling what works.\n\nLet’s turn learning into action — together.",
+      "timestamp": "2025-05-22T16:44:12.306000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375152278574465189",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375164342311452802",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I love this <@1319008015491268681> . We had some talks earlier with <@673901899837341736>  & <@969571634027589643> on this topic. This could be a wonderful step.. Perhaps, As a baby step ,  we could at least think of an impact lab for the community members.",
+      "timestamp": "2025-05-22T17:32:08.525000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375164342311452802",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736",
+        "1319008015491268681",
+        "969571634027589643"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375152278574465189",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375164556258705630",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It will require some dedicated effort.",
+      "timestamp": "2025-05-22T17:32:59.534000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375164556258705630",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375164342311452802",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375197921493913711",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I completely agree with taking baby steps — it's a smart and sustainable approach. I'm happy to dedicate time to this initiative, as I truly see great potential in it",
+      "timestamp": "2025-05-22T19:45:34.426000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375197921493913711",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375202190947520602",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "If you need a hand, I am happy to think along sometime next week.",
+      "timestamp": "2025-05-22T20:02:32.343000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375202190947520602",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375197921493913711",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375214045228957726",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Over the past couple of weeks, I’ve prepared a few documents. Although they were originally developed for an AI Lab initiative in Peru, we can definitely use them as a starting point or draft for this purpose.\n\nSince the documents were prepared through my company, you’ll see both the company name and mine throughout—please disregard that. What I believe could be truly useful are the structure, proposed steps, and overall framework. The team, companies, and universities mentioned are all Peru-focused, so they should be adapted to reflect the broader community or group involved in this initiative",
+      "timestamp": "2025-05-22T20:49:38.624000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375214045228957726",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1375214044893679698",
+          "filename": "IA_Impact_Lab_Guide_Complete_EN.docx",
+          "url": "https://cdn.discordapp.com/attachments/1373042811318046802/1375214044893679698/IA_Impact_Lab_Guide_Complete_EN.docx?ex=6840b162&is=683f5fe2&hm=1ef1f58d4165615c32f7b0d52740cdf942590be18a23558e365af72a7111d06c&",
+          "size": 94088
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375216066367717377",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just glanced through, quite extensive doc. I will have a closer look tomorrow .",
+      "timestamp": "2025-05-22T20:57:40.501000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375216066367717377",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375214045228957726",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375236989267476530",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1319008015491268681> I do like the idea of Global A impact Lab  connecting leaders with students, I see it as a miniature version of this community, there are quite a few offerings to build or learn together. \nSo then, I'm curious though if what you're suggesting,  could be done within the existing channels, for example there is already <#1354190157049364501> channel.",
+      "timestamp": "2025-05-22T22:20:48.909000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375236989267476530",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375152278574465189",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375260146187636746",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@392733996880101396> , thank you for the thoughtful comment!\n\nYou're right — the 🛠ai-practical-applications channel is a great space to share and explore practical uses of AI. However, what I’m proposing goes one step further: rather than just exchanging ideas or showcasing use cases, the IA Lab would be a space to co-create, prototype, and actually implement real-world solutions with a diverse group — students, researchers, professionals, and community members alike.\n\nIt’s less about broadcasting applications and more about building them together through a structured, collaborative framework.\n\nThat said, I’m totally open to exploring how this could align or complement existing channels. Maybe it can evolve as a special initiative or spin-off within the community if there's interest.",
+      "timestamp": "2025-05-22T23:52:49.949000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375260146187636746",
+      "author": {
+        "id": "1319008015491268681",
+        "username": "gabrielfranch",
+        "discriminator": "0",
+        "display_name": "Gabriel Franch",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375236989267476530",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375432910861242418",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear <@1364907913415757854>, in our Buddy Group 4 live session on Saturday we'll explore the topic Slow AI. You're happy to join us on** Saturday 24.5., 11 am (CET).** DM me for the details. @everyone is welcome.",
+      "timestamp": "2025-05-23T11:19:20.257000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375432910861242418",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "1364907913415757854"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374046554826080438",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375441684329926677",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Melinda.  Please count me in. I will DM you.",
+      "timestamp": "2025-05-23T11:54:12.015000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375441684329926677",
+      "author": {
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
+        "discriminator": "0",
+        "display_name": "Val",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375544032088035439",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1319008015491268681> for starting this great conversation. \nI am advocating for using the existing channels for the opportunities to build real-world, high-impact applications of AI. The existing channels already congregate people (experts and novice) based on their interest.  Posting or inviting others to contribute within existing channels, within their sphere of interest  has greater chance of amassing  diverse perspectives and in my view, has a greater chance of gaining steam, because the  channel is active and people are interested in the topic (of that channel), and might offer insights and contributions that might not surface up if this was posted in 'proposals' dedicated channel. \nTake a look at the <#1353448986408779877>  channel, the idea to build a Trust AI nutrition  label, and  Global Charter for Ethical AI came through organic conversations. \nThe non-coder initiative also came out of organic conversations.   \nSimilarly within <#1354190157049364501> there are invitations to explore different tools together and we had a session on \"Navigating the AI Agent Deployment and Costs Options!\"\n  \nAnyway, am curious what others think...",
+      "timestamp": "2025-05-23T18:40:53.622000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375544032088035439",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1319008015491268681"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375736451165192283",
+      "channel_id": "1373042811318046802",
+      "channel_name": "📥channel-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great clarification post, <@392733996880101396> 👏",
+      "timestamp": "2025-05-24T07:25:29.905000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373042811318046802/1375736451165192283",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375544032088035439",
+        "channel_id": "1373042811318046802",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

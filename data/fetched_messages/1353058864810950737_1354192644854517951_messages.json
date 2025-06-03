@@ -1,0 +1,249 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1354192644854517951",
+  "channel_name": "genai-use-case-roundtable",
+  "fetch_timestamp": "2025-06-03T22:04:14.484067",
+  "message_count": 8,
+  "messages": [
+    {
+      "message_id": "1364879551720587315",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I am fascinated about the hybrid companies of the future. Here is an article from Microsoft on the topic as well: https://blogs.microsoft.com/blog/2025/04/23/the-2025-annual-work-trend-index-the-frontier-firm-is-born/",
+      "timestamp": "2025-04-24T08:24:03.366000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364879551720587315",
+      "author": {
+        "id": "1054646486551511090",
+        "username": "dobtodorov",
+        "discriminator": "0",
+        "display_name": "Dob",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364879574009380914",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What are everyone's thoughts on that?",
+      "timestamp": "2025-04-24T08:24:08.680000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364879574009380914",
+      "author": {
+        "id": "1054646486551511090",
+        "username": "dobtodorov",
+        "discriminator": "0",
+        "display_name": "Dob",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364890719931727962",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1054646486551511090> for sharing this article. Interested to see how digital labor is expected to expand their workforce in the next 12 to 18 months. With the speed of technological advances I have a positive feeling for the digital labor. However, I am concerned where will be the balance - will humans lose job, or find more opportunities?",
+      "timestamp": "2025-04-24T09:08:26.075000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364890719931727962",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1054646486551511090"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364879551720587315",
+        "channel_id": "1354192644854517951",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364904823358619678",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great topic and article <@1054646486551511090>.  Agreed with <@1357376692384960524>'s point regarding this uncertainty of jobs as models get reshaped. Microsoft’s 2025 Work Trend Index nails it: automation is augmenting us! But risks pushing real intelligence aside if not controlled. THis is a white-collar revolution. Automation will supercharge us, yes, but risks turning work into performative noise. I see it on Linkedin already: AI content drowning real thought just to get more visibility. Why?\nI trust that organisations (and leaders) will be smart and shape this new combinaison of human and AI to serve better performance but also get a nicer human collective thinking, with probably more in-person interactions that we lived pos-Covid so far.\n\nAny additional thoughts?",
+      "timestamp": "2025-04-24T10:04:28.594000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364904823358619678",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1054646486551511090",
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364923902194618470",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Well, painters didn't lose jobs when photography was invented; mathematicians didn't lose jobs when computers were invented either.  We should embrace AI and become more productive - significantly more productive, and this will accelerate over time. When we get to a point where certain jobs can be mostly or entirely carried out by machines, even better - let's make sure that people focus on something else. If we ever get to a point where humans are losing jobs on mass because of much higher productivity, then two things can happen (1) we can establish universal income for everyone - effectively free healthcare, education, essentials food, basic accommodation, etc and (2) eradicate poverty - which is somewhat connected to (1). Of course, we need to make sure that machines play ball here too but assuming that we can control them - or coexist with them without conflict of interest - we shouldn't be worried about human jobs.",
+      "timestamp": "2025-04-24T11:20:17.343000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364923902194618470",
+      "author": {
+        "id": "1054646486551511090",
+        "username": "dobtodorov",
+        "discriminator": "0",
+        "display_name": "Dob",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364890719931727962",
+        "channel_id": "1354192644854517951",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364924299898781707",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I agree: AI-generated marketing is flooding social networks. Perhaps we need to have the option of opting out of marketing content, or AI-generated marketing content 🙂",
+      "timestamp": "2025-04-24T11:21:52.163000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364924299898781707",
+      "author": {
+        "id": "1054646486551511090",
+        "username": "dobtodorov",
+        "discriminator": "0",
+        "display_name": "Dob",
+        "bot": false
+      },
+      "mentions": [
+        "1357372535653666968"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364904823358619678",
+        "channel_id": "1354192644854517951",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364938897603301516",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good idea: filter AI-generated content!",
+      "timestamp": "2025-04-24T12:19:52.527000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364938897603301516",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [
+        "1054646486551511090"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364924299898781707",
+        "channel_id": "1354192644854517951",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364975106861830257",
+      "channel_id": "1354192644854517951",
+      "channel_name": "genai-use-case-roundtable",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "One addtional thought by respected man, M. Obama: https://www.instagram.com/reel/DIq2iZpRvn6/. So yes time to adapt... and figure out new jobs (e.g. agents admin / ochestrators).",
+      "timestamp": "2025-04-24T14:43:45.487000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1354192644854517951/1364975106861830257",
+      "author": {
+        "id": "1357372535653666968",
+        "username": "sfrancois",
+        "discriminator": "0",
+        "display_name": "Sebastien Francois",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

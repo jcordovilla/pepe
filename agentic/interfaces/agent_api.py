@@ -15,6 +15,7 @@ from ..memory.conversation_memory import ConversationMemory
 from ..agents.pipeline_agent import PipelineAgent
 from ..analytics import QueryAnswerRepository, PerformanceMonitor, ValidationSystem, AnalyticsDashboard
 from ..analytics.query_answer_repository import QueryMetrics
+from ..agents import agent_registry, SearchAgent, PlanningAgent, AnalysisAgent
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +35,15 @@ class AgentAPI:
         self.vector_store = PersistentVectorStore(config.get("vector_store", {}))
         self.memory = ConversationMemory(config.get("memory", {}))
         self.pipeline = PipelineAgent(config.get("pipeline", {}))
+        
+        # Initialize and register agents
+        search_agent = SearchAgent(config.get("search_agent", {}))
+        planning_agent = PlanningAgent(config.get("planning_agent", {}))
+        analysis_agent = AnalysisAgent(config.get("analysis_agent", {}))
+        
+        agent_registry.register_agent(search_agent)
+        agent_registry.register_agent(planning_agent)
+        agent_registry.register_agent(analysis_agent)
         
         # Initialize analytics components
         analytics_config = config.get("analytics", {})

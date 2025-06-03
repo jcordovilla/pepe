@@ -1,0 +1,203 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1372043351842361364",
+  "channel_name": "🛠-workshops",
+  "fetch_timestamp": "2025-06-03T22:03:49.858039",
+  "message_count": 5,
+  "messages": [
+    {
+      "message_id": "1372259049244196904",
+      "channel_id": "1372043351842361364",
+      "channel_name": "🛠-workshops",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\nDon't miss the  💬 **live community conversation** with <@1125194882164736050> at **2pm EST today** (in less than 1h), where we will explore how to transform volunteer work, peer learning, and community leadership into professional momentum 🔥.\n\nSee the **full event details here**:\nhttps://discord.com/channels/1353058864810950737/1353085578274410626/1370832243672748182\nSession link here:\nhttps://mit.zoom.us/j/99826550807",
+      "timestamp": "2025-05-14T17:07:32.680000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372043351842361364/1372259049244196904",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1125194882164736050"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372506119255359558",
+      "channel_id": "1372043351842361364",
+      "channel_name": "🛠-workshops",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Has it been recorded? Unfortunately, i could not join and would have been interested to it, too!",
+      "timestamp": "2025-05-15T09:29:18.761000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372043351842361364/1372506119255359558",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372259049244196904",
+        "channel_id": "1372043351842361364",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372585755632865321",
+      "channel_id": "1372043351842361364",
+      "channel_name": "🛠-workshops",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://fathom.video/share/zfzz2hoxnr3CUsfxeAaN31J6eDc7ymXU",
+      "timestamp": "2025-05-15T14:45:45.553000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372043351842361364/1372585755632865321",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1360182837113786399"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372506119255359558",
+        "channel_id": "1372043351842361364",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372639711667159043",
+      "channel_id": "1372043351842361364",
+      "channel_name": "🛠-workshops",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📢 Thank You for Joining the “GenAI Opportunities” Workshop! 🚀\n\nHey @everyone! I just wanted to say a huge THANK YOU to all who joined yesterday’s workshop on opportunities in GenAI 🌟\n\nAs promised, here’s the presentation we reviewed together:\n📎 GenAI_Global_Opportunity_Presentation.pdf (see attached)\n\nInside, you’ll find a summary of the top 520 opportunity (so as Risks) areas submitted by the Feb 2025 cohort (Forum 4.1)—a group many of you just got certified with. And as we discussed, we now have the perfect community to bring these ideas to life together!\n\n💬 If you couldn’t attend live, no worries—please check out the recording shared above by <@1352785241252565174>. Your input is always welcome as we brainstorm how to turn these insights into real initiatives and projects. Let’s keep building together as a truly augmented community of augmented humans 🤖💡\n\nHere are 3 key highlights:\n\n✅ Top Opportunity Areas:\nAutomation, Content Generation, and Copilot Development are leading the way. These are prime spots for action in our community.\n\n✅ Strategic Benefits:\nFrom building your professional AI portfolio to launching pilot projects and gaining visibility within the @MIT ecosystem—GAIG is becoming a real accelerator.\n\n✅ Turning Risk into Opportunity:\nWe’re not just dreaming—we’re actively designing strategies around concerns like privacy, bias, and job displacement to ensure our growth is ethical and inclusive.\n\n🌐 Let’s keep the momentum going. We’re not just a learning group—we’re a launchpad 🚀",
+      "timestamp": "2025-05-15T18:20:09.674000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372043351842361364/1372639711667159043",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "🖤",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1372639711373561937",
+          "filename": "GenAI_Global_Opportunity_Presentation.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1372043351842361364/1372639711373561937/GenAI_Global_Opportunity_Presentation.pdf?ex=68408e59&is=683f3cd9&hm=ab63b43b2edb5d4edecbf839e3fdff7cef950479dc9f338bac0eb05564622679&",
+          "size": 2079105
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374712540998668421",
+      "channel_id": "1372043351842361364",
+      "channel_name": "🛠-workshops",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📣@everyone \n\n<@1361976806651068517>  is offering the following workshop the second week of June {Exact Date TBD}:\n\n🗓️ **Session Invitation:**\nUnderstanding ISO 42001 – A Friendly Introduction to AI Governance\n\nHi everyone 👋\nAs discussed in recent threads, I’d love to invite you to a short session where we explore what ISO/IEC 42001 is all about – and how it could help us build more trustworthy AI systems (without needing to read the full standard 📘).\n\n**This won’t be a lecture – more like a shared discovery.\n**\n🧭 **Agenda (30–35 minutes)**\n\n**1. Welcome & Warm-up (5 min)**\n“What comes to mind when you hear AI governance?”\nQuick exchange to see where we’re starting from.\n\n**2. What is ISO 42001 – and what is it not? (7 min)**\nA simple explanation of the structure, goals & common misconceptions.\n\n**3. Visual walkthrough: The ISO ecosystem (5 min)**\n📍 I’ll share this graphic:\n“Building Trustworthy AI with ISO Standards”\n…and explain how other standards like 22989, 23984 or 24368 connect to it.\n\n4**. Why it matters – right now (5 min)**\nWhy companies (and regulators) care about ISO 42001 – and what it enables for trust, risk & leadership.\n\n**5. Open Discussion (5–10 min)**\n\n“Where do you see the value?”\n“Would something like this help your team?”\n“What would make it easier to adopt?”\n\n🧩 For whom?\nYou’re curious about AI governance but don’t want to drown in regulations\n\nYou’ve heard of ISO 42001, but aren’t sure what it actually does\n\nYou care about making AI more transparent, accountable and human-centered\n👉 Let me know if you’d like to join – and please vote directly here for a time that is matching your schedule! https://doodle.com/group-poll/participate/e0DBML3e\nCan’t wait to explore this with you.\n\n— Andrea 🍑",
+      "timestamp": "2025-05-21T11:36:50.698000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372043351842361364/1374712540998668421",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1361976806651068517"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 13
+        },
+        {
+          "emoji": "👏",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "😀",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

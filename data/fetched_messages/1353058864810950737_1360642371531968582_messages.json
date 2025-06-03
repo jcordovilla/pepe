@@ -1,0 +1,379 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1360642371531968582",
+  "channel_name": "💻learning-without-coding-skills",
+  "fetch_timestamp": "2025-06-03T22:04:13.330791",
+  "message_count": 12,
+  "messages": [
+    {
+      "message_id": "1362084737606356992",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning @everyone  ! \nLet’s start the day ! \n\nThis is a good article and example about how even without the knowledge of coding we can use AI to help us improve our jobs and life: \n\nI’ll be more than happy to read each one of your takeaways !\n\nHeadline: Canva is now in the coding and spreadsheet business\nSource / Date: The Verge, April 10, 2025\nLink: https://www.theverge.com/news/646682/canva-visual-suite-2-0-ai-spreadsheets-creative-workspace\n\nQuick Summary: Canva’s Visual Suite 2.0 introduces AI-powered tools like Canva Code and Canva Sheets, enabling users to create websites, apps, and spreadsheets using simple text prompts—no coding required. This expansion transforms Canva into a comprehensive platform, allowing individuals without technical backgrounds to build and collaborate on digital projects seamlessly.\n\nTakeaway: With AI tools like Canva’s, turning your ideas into digital reality is just a prompt away—no coding skills needed. \n\nDiscussion Questions:\n    1.    How might Canva’s new AI features impact the way non-developers approach digital project creation?\n    2.    What are the potential benefits and challenges of relying on AI-generated code and spreadsheets for business tasks?\n    3.    In what ways can tools like Canva’s Visual Suite 2.0 democratize access to technology and innovation?",
+      "timestamp": "2025-04-16T15:18:27.756000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1362084737606356992",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 7
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362117635558473968",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I'm not a regular user of Canva, so my first thought in reading this article was \"why would they try to re-create spreadsheets and word docs and powerpoints, those are already done just fine elsewhere\" but in reflecting on it, it makes more sense. Seems like they're trying to increase share of wallet with their customers so they'll stay in the Canva platform rather than copying and pasting from other places. Seems like most AI companies are focusing on creating an integrated vertical experience as their main go-to-market strategy. This makes sense with venture capitalist views I've heard that AI native companies will replace entire workflows and price on outputs, aligning price much more closely with the value it creates.",
+      "timestamp": "2025-04-16T17:29:11.239000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1362117635558473968",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362084737606356992",
+        "channel_id": "1360642371531968582",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362117647193608296",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561> This is such a great post. I learnt something new. I had used Canva to make invitation cards, or edit PDF. I didnt know about its AI capabilities until I read this post. Great learning for me.",
+      "timestamp": "2025-04-16T17:29:14.013000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1362117647193608296",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "758206516753858561"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362084737606356992",
+        "channel_id": "1360642371531968582",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362132068623974591",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "At first I thought the same ! Then I remember my wife used to use Canva to some simple designs for her business, and I thought how much could this help her too. She’s the perfect example of no knowledge of coding whatsoever hehe",
+      "timestamp": "2025-04-16T18:26:32.350000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1362132068623974591",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1360003496384008262"
+      ],
+      "reactions": [
+        {
+          "emoji": "👏",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362117635558473968",
+        "channel_id": "1360642371531968582",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362132334974996734",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’m glad you find it useful !! My wife it’s gonna love it too as soon as show this to her. She uses Canva the same way you do !",
+      "timestamp": "2025-04-16T18:27:35.853000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1362132334974996734",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362117647193608296",
+        "channel_id": "1360642371531968582",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364367713476284468",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**Headline:** Four Ways to Build AI Tools Without Knowing How to Code  \n**Source / Date:** Lifehacker, June 18, 2024  \n**Link:** https://lifehacker.com/the-best-ways-to-build-ai-tools-without-knowing-how-to-1850535556\n\n**Quick Summary:** This article introduces user-friendly platforms that enable individuals to create AI applications without any coding experience. Tools like Lobe allow users to train machine learning models through simple interfaces, making AI development accessible to all.\n\n**Takeaway:** You don't need to be a programmer to harness the power of AI—your ideas and creativity are the only prerequisites.\n\n**Discussion Questions:**\n1. How do no-code AI tools like Lobe democratize access to technology for non-programmers?\n2. What are the potential limitations of using no-code platforms for developing AI applications?\n3. In what ways can educators and professionals integrate no-code AI tools into their work to enhance productivity and innovation?",
+      "timestamp": "2025-04-22T22:30:11.619000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1364367713476284468",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364633099589390416",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good moorning @everyone ! here is a good topic for Discussion ! regarding learning without coding skills !\n\n**Headline:** How I'd Learn AI in 2025 (If I Knew Nothing)  \n**Source / Date:** Medium, January 2025  \n**Link:** https://medium.com/data-science/how-id-learn-ai-in-2025-if-i-knew-nothing-0496dc9ab54c\n\n**Quick Summary:** This article outlines a beginner-friendly approach to learning AI in 2025, emphasizing the use of no-code tools and AI assistants. It provides a step-by-step guide for non-technical individuals to start exploring AI concepts and applications without prior coding experience.\n\n**Takeaway:** In 2025, the barrier to entry for learning AI has significantly lowered—curiosity and willingness to explore are your most valuable tools.\n\n**Discussion Questions:**\n1. What are the most accessible no-code tools available for beginners to start learning AI in 2025?\n2. How can non-technical professionals leverage AI to enhance their work or personal projects?\n3. What challenges might beginners face when learning AI without coding, and how can they overcome them?\n\nHope to hear from you !",
+      "timestamp": "2025-04-23T16:04:44.599000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1364633099589390416",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364997468063928411",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Good Morning ! @everyoneand Welcome everyone to our <#1360642371531968582> channel ! Here ill be posting articles that I found useful and interesting for those who want to jump in the use of AI without the knowledge of coding ! Hope you find this post useful and I´ll love to hear from your own opinons !!",
+      "timestamp": "2025-04-24T16:12:36.813000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1364997468063928411",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364997514985738292",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Headline: How to Make AI Work for You, at Work\nSource / Date: TIME, August 9, 2023\nLink: https://time.com/6302984/ai-jobs-career/&#8203;:contentReference[oaicite:0]{index=0}\n\nQuick Summary: This article highlights how professionals without coding backgrounds are leveraging AI tools to enhance their work. By taking accessible courses like \"Elements of AI,\" individuals from various fields are gaining foundational AI knowledge, enabling them to utilize AI effectively in their careers.​\n\nTakeaway: You don't need to be a programmer to harness AI—curiosity and the right resources are your keys to unlocking its potential.​\n\nDiscussion Questions:\n\nHow can non-coders identify AI tools that best suit their professional needs?\n\nWhat are the benefits and challenges of integrating AI into non-technical workflows?\n\nIn what ways can foundational AI knowledge empower professionals across various industries?",
+      "timestamp": "2025-04-24T16:12:48+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1364997514985738292",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365008887560015993",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey @everyone!! , Today, thursday and within Discord as part of our weekly activities and opportunities to grow, the various channels and buddy groups are submitting a question for Dr Abel Sanchez's Friday Q&A Forum. From all of the questions posted the top 5 or so will be voted on.  If anyone has a question for Dr. Sanchez regarding how to be able to learn how to use AI without coding skills that you like to propose, I´ll be more than happy to submit it into the poll.  And do not worry If it doesn't get chosen, we can still continue the dialogue in this <#1360642371531968582> channel and across the community 🙌   \nFor example, One question I´ve been thinking of, and i´ll propose is, \"How do you feel about Vibe Coding, and which tools or Apps do you recommend to try on in order to jump into it ?",
+      "timestamp": "2025-04-24T16:57:59.433000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1365008887560015993",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365361781802926220",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Ill leave you this Article, hope you can find it Helpful ! and ill love to hear your thoughts about it too.\n\n**Headline:** How to Learn AI in 2025: A Guide for Beginners  \n**Source / Date:** DigitalOcean, April 10, 2025  \n**Link:** https://www.digitalocean.com/resources/articles/how-to-learn-ai \n\n**Quick Summary:** This beginner-friendly guide breaks down the branches of AI—like machine learning and natural language processing—and highlights accessible tools and resources to get started. It emphasizes that prior coding experience isn't necessary, offering pathways for individuals from various backgrounds to engage with AI technologies effectively.\n\n**Takeaway:** AI is no longer exclusive to coders; with the right resources, anyone can harness its power to innovate and solve real-world problems.\n\n**Discussion Questions:**\n1. What are some no-code tools mentioned in the article that can help beginners start learning AI?\n2. How can understanding the different branches of AI assist non-technical individuals in applying AI to their fields?\n3. What challenges might beginners face when learning AI without coding, and how can they overcome them?",
+      "timestamp": "2025-04-25T16:20:15.977000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1365361781802926220",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367176856788537415",
+      "channel_id": "1360642371531968582",
+      "channel_name": "💻learning-without-coding-skills",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Midweek Disscution ! April 30th 2025 !",
+      "timestamp": "2025-04-30T16:32:43.576000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642371531968582/1367176856788537415",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": "None",
+        "channel_id": "1367176856788537415",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

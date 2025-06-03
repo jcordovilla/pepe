@@ -1,0 +1,279 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1373001683273125918",
+  "channel_name": "🗣convo-leaders",
+  "fetch_timestamp": "2025-06-03T22:03:24.804688",
+  "message_count": 9,
+  "messages": [
+    {
+      "message_id": "1373001815775510539",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> \n\n📢 New Channel Alert: Inactive Submissions 📢\n\nHey everyone! In preparation for our upcoming buddy group redistribution (going back to 3–4 members per group), we want to ensure that no groups are left with only inactive members.\n\nTo help with this, we're asking admins and group leaders to drop the names of inactive members in the new <#1372943237890707576>   channel. This will allow us to remove them from the buddy system before redistribution, ensuring that all buddy groups are made up of active, engaged members.\n\n⚠️inactivity criteria: 2 weeks (14 days) without prior notice.\n\n🔁 Important note:\nMembers submitted to the Inactive Submissions channel will not be removed from the server—just from the buddy system temporarily. They can rejoin at any time by reapplying through the #find-a-buddy channel once they're ready to engage again.\n\nThanks for helping us keep the community active and connected! 🌟",
+      "timestamp": "2025-05-16T18:19:02.021000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1373001815775510539",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373052597916926073",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "what's the inactivity criteria? 2 weeks of no contribution or ...?",
+      "timestamp": "2025-05-16T21:40:49.427000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1373052597916926073",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373054631600455710",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes, sorry—I forgot to include that. It’s 2 weeks (14 days).",
+      "timestamp": "2025-05-16T21:48:54.295000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1373054631600455710",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1373052597916926073",
+        "channel_id": "1373001683273125918",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375224110262648914",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey @everyone \n\nTo help us align better across time zones and ensure our discussions are meaningful and well supported, please take a moment to fill in your **Name, Time Zone, and Conversation Focus **in this sheet. This will really help us coordinate and make the most of our community efforts!\nhttps://docs.google.com/spreadsheets/d/1AdpijwZ7vyd507eiuqSPkqDcHyJOLINQ1he8KkW4MGs/edit?gid=0#gid=0",
+      "timestamp": "2025-05-22T21:29:38.315000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375224110262648914",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375231637775843469",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1311434218622156850> wouldn't it make sense to capture that info with each profile? (As opposed to having to manage yet another sheet )",
+      "timestamp": "2025-05-22T21:59:33.014000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375231637775843469",
+      "author": {
+        "id": "392733996880101396",
+        "username": "biseraferrero",
+        "discriminator": "0",
+        "display_name": "Bisera Ferrero",
+        "bot": false
+      },
+      "mentions": [
+        "1311434218622156850"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375224110262648914",
+        "channel_id": "1373001683273125918",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375234273006850080",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@392733996880101396> That was the initial idea- but I thought it would be easy for each person to make one entry in the sheet. As we scale and have more resources - will find a better way to make this work. \nThe sheet is shared only in this channel and will be locked for access once I get all the details.\n\nPlease do let me know if there are any other concerns.",
+      "timestamp": "2025-05-22T22:10:01.302000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375234273006850080",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        "392733996880101396"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375231637775843469",
+        "channel_id": "1373001683273125918",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375689676467474502",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Everyone ! \nI’ve filled in the sheet with the details I was able to gather so far. Please take a look and let me know if any updates are needed. I’ll reach out directly to those whose information I couldn’t find.",
+      "timestamp": "2025-05-24T04:19:37.948000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375689676467474502",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375691507163725824",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Okok ! I’ll fill it !",
+      "timestamp": "2025-05-24T04:26:54.420000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375691507163725824",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375808307876593684",
+      "channel_id": "1373001683273125918",
+      "channel_name": "🗣convo-leaders",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "OK, I’ll look at it and fill the form.",
+      "timestamp": "2025-05-24T12:11:01.880000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1373001683273125918/1375808307876593684",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

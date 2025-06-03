@@ -1,0 +1,1866 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1362519753717186591",
+  "channel_name": "🏛🤖netarch-agents",
+  "fetch_timestamp": "2025-06-03T22:03:42.361372",
+  "message_count": 68,
+  "messages": [
+    {
+      "message_id": "1362562948223995984",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Here are the events I automated for reference I still need to fix some things though:\n\n(A) Poll Voting reminder in General Chat channel\n\nTitle: Reminder — Poll is live for Q and A selection! Cast your votes in <#1353449406677913680> by 11 PM EST\n\nTime: 7 PM EST every Thursday\n\nMention @start/creation: @everyone\n\nImage: https://cdn.discordapp.com/attachments/997262223628046456/1362447135634751558/kid.psilo_Text_Vote_in_poll_in_red_professional_font_with_black_0473df24-b8eb-4c0c-b48c-9fa1a363cab0.png?ex=68026d46&is=68011bc6&hm=9f8e2d91f3a4be8239b4fc339ca69d35a5e0e2eedd2c86ca20cb8e15033221b5&\n\nDescription: 🗳️ The poll for this week’s Q&A questions is now open in <#1353449406677913680>! Vote by 10 PM ET to choose the top questions.\n\nChannel: general-chat\n\n\n————————————————————————————————————————————————————————————————————————\n(B) Q&A Start reminder in General Chat channel\n\nTitle: Reminder — Q&A starts at 11:30 AM ET today! @everyone\n\nTime: 9 AM EST every Friday\n\nMention @start/creation: @everyone\n\nImage: https://cdn.discordapp.com/attachments/997262223628046456/1362447313196290228/kid.psilo_Text_QA_Today_in_red_professional_font_with_black_bac_e2222a37-159d-4b05-9f02-f31d94eeb339.png?ex=68026d70&is=68011bf0&hm=3905621b274e116b24012722887441f7d8f3794cf957d61610c0e8928ca0f91a&\n\nDescription: Q&A begins at 11:30 AM ET—get your questions ready and join us!\n\nChannel: general-chat\n\n————————————————————————————————————————————————————————————————————————\n\n(C) Buddy Check‑in & Projects reminder in Conversational Leaders channel\n\nTitle: Saturday – “Buddy Check‑in & Projects”: Encourage private reflections within your Buddy Group; Highlight a notable project or resource in <#1354191556680089600>.\n\nTime: 10 AM ET every Saturday\n\nMention @start/creation: Conversational Leaders\n\nImage: https://cdn.discordapp.com/attachments/997262223628046456/1362526294650130432/kid.psilo_text_Buddy_Checkin__Projects_in_red_professional_font_80f2d499-f05b-4c83-af3d-d64b9b0b6604.png?ex=6802b6ff&is=6801657f&hm=fbddbb919031779b32d27f039bcee871f1a1921b66651138383bf9cb970b7418&\n\nDescription: Encourage private reflections within your Buddy Group and highlight a notable project or resource in <#1354191556680089600>.\nChannel: Conversational‑Leaders\n\n\n————————————————————————————————————————————————————————————————————————\n(A) Member of the Week selection reminder in coord‑general‑chat channel\n\nTitle: Sunday – “Live AMA & Recognition”: Coordinate with Discord Managers & Conversational Leaders to select the “Member of the Week” for next week’s Q&A announcement.\n\nTime: 10 AM EST every Sunday\n\nMention @start/creation: @Discord-Managers @Conversational-Leaders @Network-Architects\n\nImage:\n\nDescription: Coordinate with Discord Managers and Conversational Leaders to choose the “Member of the Week” for next week’s Q&A announcement.\nChannel: coord-general-chat\n\n————————————————————————————————————————————————————————————————————————\n\n\n(A) Member of the Week selection reminder in coord‑general‑chat channel\n\nTitle: Thursday – “Select Member of the Week”: Coordinate with Discord Managers & Conversational Leaders & Network Architects to choose next week’s Member of the Week for the Q&A \nannouncement.\n\nTime: 12 PM EST every Thursday\n\nMention @start/creation: @Discord-Managers @Conversational-Leaders @Network-Architects\n\nImage:\n\nDescription: Finalize and confirm who will be honored as the Member of the Week in Friday’s AMA.\nChannel: coord-general-chat\n\n————————————————————————————————————————————————————————————————————",
+      "timestamp": "2025-04-17T22:58:42.052000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1362562948223995984",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 3,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362577176767103096",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@546559083357143044> test",
+      "timestamp": "2025-04-17T23:55:14.401000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1362577176767103096",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362577242114359406",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Got access",
+      "timestamp": "2025-04-17T23:55:29.981000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1362577242114359406",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362577176767103096",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1363204580120465689",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Here the ones from jose side {will be relevant to meeting}:\n\n(A) tech tip Tuesday engagement reminder in conversational leaders channel\n\nTitle: Hey! Conversational Leaders Make sure to submit your Tech Tip Tuesday Engagement item!\n\nTime: 9am EST every Tuesday \n\nMention @start/creation:  Conversational leaders\n\nImage: kid.psilo_Text_Tech_Tip_Tuesday_in_red_with_black_background_em_9a877fe1-95f2-4023-ac50-004f6abf12af.png\n\nDescription: Here is a prompt you can use to make the post!\n{prompt}\n\nChannel: Conversational-Leaders\n\n————————————————————————————————————————————————————————————————————————\n\n(B) Motivation Monday engagement reminder in Conversational Leaders channel\n\nTitle: Hey! Conversational Leaders — Make sure to submit your Motivation Monday engagement item!\n\nTime: 9 AM EST every Monday\n\nMention @start/creation: Conversational Leaders\n\nImage: kid.psilo_Text_Monday_Motivation_in_red_professional_font_with__d44beaec-7104-48b2-b6ce-54f0214088d6.png\n\nDescription: Here is a prompt you can use to make the post! {prompt}\n\nChannel: Conversational‑Leaders\n ————————————————————————————————————————————————————————————————————————\n\n(A) Midweek Discussion engagement reminder in Conversational Leaders channel\n\nTitle: Hey! Conversational Leaders — Make sure to submit your Midweek Discussion engagement item!\n\nTime: 9 AM EST every Wednesday\n\nMention @start/creation: Conversational Leaders\n\nImage: kid.psilo_Text_Midweek_Discussion_in_red_professional_font_with_093c439f-4592-47f3-a6a9-08822ec73ce2.png\n\nDescription: Here is a prompt you can use to make the post! \n{prompt}\n\nChannel: Conversational‑Leaders\n ————————————————————————————————————————————————————————————————————————\n\nTitle: Reminder — Buddy groups, submit one question to #q-and-a-questions by 5 PM ET (10‑minute cooldown in effect) @Community-Coordinators, please prompt your groups\n\nTime: 9 AM EST every Thursday\n\nMention @start/creation: @everyone @conversational Leaders\n\nImage: kid.psilo_Text_Submit_QA_Questions_in_red_professional_font_wit_e257f39c-2159-43c3-b70c-ca00a8138f2e.png \nDescription: We’ll have a Zoom with Dr. Sanchez at 11:30 AM ET the next day. Join here: https://mit.zoom.us/j/97336834725\n\nChannel: general-chat\n————————————————————————————————————————————————————————————————————————",
+      "timestamp": "2025-04-19T17:28:19.017000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1363204580120465689",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364262530091978802",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353085790971891735> , here is the final output from the discord managers group on optimizing the RSVP experience.\nThe first page is valuable: the definition of done for the RSVP optimisations.\nSome overlap with calendar sync / management.\nWe are aware that it will not be easy (or even feasible) to implement many of these optimizations, but we believe it is important to highlight them as improvement targets.\nCall to action: please give your feedback on the convenience and feasbility of these so we can progress as needed or close the case. Thank you.\nhttps://docs.google.com/document/d/1KUGvgX405h1EdamhT7p4oQmqJzpHlF-tw0eYi82dKdQ/edit?usp=sharing",
+      "timestamp": "2025-04-22T15:32:13.946000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1364262530091978802",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365417378162278430",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Action items: {just so i remember}\n\n- Set so only admins can create invites\n\n- Set up cyber sec team",
+      "timestamp": "2025-04-25T20:01:11.182000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1365417378162278430",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365440464492433520",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I just ran a test case from now on anyone joining the server will be put into a request que for admission\n\nThey will have to provide there linked in and read our rules as of now\n\nIf you guys can think of any other questions to further identify they are not a bot feel free to add\n\nThis should stop server flooding in the case of a leak",
+      "timestamp": "2025-04-25T21:32:55.392000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1365440464492433520",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365440463917678632",
+          "filename": "Screenshot_2025-04-25_at_5.31.11_PM.png",
+          "url": "https://cdn.discordapp.com/attachments/1362519753717186591/1365440463917678632/Screenshot_2025-04-25_at_5.31.11_PM.png?ex=6840bb87&is=683f6a07&hm=b619a94cb14cfdb0e974862a70b8f920b63d19d423b43f77d447b88f8af30880&",
+          "size": 83001
+        },
+        {
+          "id": "1365440464303423508",
+          "filename": "Screenshot_2025-04-25_at_5.30.45_PM.png",
+          "url": "https://cdn.discordapp.com/attachments/1362519753717186591/1365440464303423508/Screenshot_2025-04-25_at_5.30.45_PM.png?ex=6840bb87&is=683f6a07&hm=33c9f0f086d9ce3c434112a30ba86ac63c9970f72648b1f555d6612e61ebfbc9&",
+          "size": 19542
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365649921998589958",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1063015906650902549> this should explain why the joins are paused; it's to allow for higher vetting",
+      "timestamp": "2025-04-26T11:25:13.953000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1365649921998589958",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1063015906650902549"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365440464492433520",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365675931322290320",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> , I think we should introduce email verification. Let me investigate how this could work in discord.",
+      "timestamp": "2025-04-26T13:08:35.059000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1365675931322290320",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365440464492433520",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366466516362723421",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Here is your guys individual trello:\n\nhttps://trello.com/invite/b/680fbae5341fa5fd3fcf1292/ATTI1e3a069c8404cdd71c7d3e4d87e30bb2A57D7F8D/discord-managers",
+      "timestamp": "2025-04-28T17:30:05.221000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366466516362723421",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366816304375529503",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@673901899837341736> <@546559083357143044> <@1063015906650902549> \n\nAlso let me know when u want me to request the next series of lessons from Dr sanchez",
+      "timestamp": "2025-04-29T16:40:01.182000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366816304375529503",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736",
+        "546559083357143044",
+        "1063015906650902549"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366828492066521159",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> I am back with team meetings tonight following the blackout. Will check with the team and come back to you on this",
+      "timestamp": "2025-04-29T17:28:26.954000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366828492066521159",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366843848608845926",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have plenty of work. I am not in a hurry",
+      "timestamp": "2025-04-29T18:29:28.239000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366843848608845926",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366816304375529503",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366848023954460855",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://trello.com/invite/b/680fbae5341fa5fd3fcf1292/ATTI1e3a069c8404cdd71c7d3e4d87e30bb2A57D7F8D/discord-managers",
+      "timestamp": "2025-04-29T18:46:03.719000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366848023954460855",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366854992971038831",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://mit.zoom.us/j/96164000155",
+      "timestamp": "2025-04-29T19:13:45.262000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1366854992971038831",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367220756014174280",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> , at my group discussion yesterday there came the topic of how buddy groups will work for discord managers, specifically. I am not sure myself, either. Can you through some light/have this been discussed already and I have missed it? Thank you.",
+      "timestamp": "2025-04-30T19:27:09.967000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367220756014174280",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367221852564361256",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\n🗂️ Buddy-Group Channel Visibility — Quick FYI\n\nHere’s why the channel list looks different depending on your role:\n\n🔧 Discord Managers\n• See every buddy-group text + voice channel — they need full access to wire up Sesh, bots, and other integrations.\n\n🗣️ Conversational Leaders\n• See only the single buddy group they facilitate — keeps their focus on guiding discussion and weekly check-ins.\n\n👥 General Members\n• Will see just their own buddy group after they sign up in <#1353443209166065664>\n\nLet me know if that clears it up",
+      "timestamp": "2025-04-30T19:31:31.405000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367221852564361256",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367220756014174280",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367457534771859496",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It does, thank you.",
+      "timestamp": "2025-05-01T11:08:02.422000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367457534771859496",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367221852564361256",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367854991607468072",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone,\n\nFirst, I wanted to say a big congrats to Sangame!\n\nOn a separate note, I also wanted to address the recent issues with syncing all the groups in our Discord Manager program. I’ve been working on a document that outlines a solution to streamline this process.\n\nI’d like to present it to you all on Monday to get your feedback. If you all approve, we can schedule a general meeting with all the Discord managers in the program on Tuesday to outline the future of the program.\n\nLooking forward to hearing your thoughts!",
+      "timestamp": "2025-05-02T13:27:23.516000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367854991607468072",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367856034340802702",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’ll be sending the document Saturday at 9AM EST so you can review it ahead of Monday’s meeting — feel free to share any notes or thoughts before then.\n\nYou’re welcome to schedule time with me anytime this weekend if you’d like to ask questions or give feedback. I’m fully open to any changes or pivots you suggest,  since you guys interact more directly with the Discord Manager community.",
+      "timestamp": "2025-05-02T13:31:32.123000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367856034340802702",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367891836672413706",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Monday is good for me, thanks Oscar.",
+      "timestamp": "2025-05-02T15:53:48.064000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1367891836672413706",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367854991607468072",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368063065232244796",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Oscar! Will look for the document tomorrow and connect on Monday",
+      "timestamp": "2025-05-03T03:14:12.134000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368063065232244796",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367856034340802702",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368210755673129040",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Monday is perfect",
+      "timestamp": "2025-05-03T13:01:04.279000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368210755673129040",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368250356932284547",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry on the delay Im trying to make everything fully comprehensive, I will try and have it ready within the day but this will only be the draft ! I want to make sure everything is solid theres a ton of components so it will take a little bit!",
+      "timestamp": "2025-05-03T15:38:25.955000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368250356932284547",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368257984085622915",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Also new channels are only visible to network architects as of now; and we can discuss structure pivots on monday / when i send the document its going to go over every step of the life cycle\n\nA brief brief sneak peak as to what its going to outline in the title:\n\nEnd‑to‑End Agent Lifecycle: From Training to Production Deployment​\n\n🛠️ 1️⃣ Discord Manager – Learning / Teaching Stage\n\n🔬 2️⃣ SGU – Prototype / Exploratory Stage {Create prototype agent to automate server tasks / community management}\n\n💻 3️⃣ DEVS – Product Development Stage {Can request funding for server deployment}",
+      "timestamp": "2025-05-03T16:08:44.410000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368257984085622915",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368258018986426458",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "super super super high level^^^",
+      "timestamp": "2025-05-03T16:08:52.731000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368258018986426458",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368436327103598663",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📊 One‑line summary: This deck maps our end‑to‑end workflow—Discord Managers → SGU → DEVS + IT Ops integration—plus the leadership‑handoff strategy for future growth 🚀\n{attached below as DM2.pdf}\n\nLet me know your thoughts! 😊\n\nEverything here has Dr. Sanchez’s approval—feel free to share any thoughts, suggestions, or pivots. We can adjust wherever you guys think would be best !\n\nI will connect you guys with Nikhil this Monday! 📅\n\nSorry for the delay; I wanted to make sure it covered every component!\n\n-Oscar\n\n<@1063015906650902549> <@546559083357143044> <@673901899837341736> \n\nAlso welcome to overview: <@1125194882164736050> <@1322962807565848586>",
+      "timestamp": "2025-05-04T03:57:24.699000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368436327103598663",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044",
+        "673901899837341736",
+        "1322962807565848586",
+        "1125194882164736050",
+        "1063015906650902549"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368446052486746193",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-04T04:36:03.411000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368446052486746193",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1368446052121837650",
+          "filename": "Dm2_2.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1362519753717186591/1368446052121837650/Dm2_2.pdf?ex=684075f3&is=683f2473&hm=d782b006b86bce85846bead8721b81d7a01955531fd28065c91aed143c79a8ca&",
+          "size": 623325
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368446060795531400",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I will be making a architecture outlining all the departments tomorrow as well, I have been onboarding/creating a comprehensive ecosystem to facilate the community scaling to all previous cohorts !: \n\nCybersecurity \n\nFundraising \n\nMarketing \n\nOnboarding/HR \n\nIT-Department \n\nAgent Development {Software/product development}",
+      "timestamp": "2025-05-04T04:36:05.392000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368446060795531400",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368446267004420206",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "------------------------------------------------------------------------------------------------------\nI have even more exciting developments to share next monday for synch; cant wait to share !!!!!!",
+      "timestamp": "2025-05-04T04:36:54.556000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368446267004420206",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368556365043466302",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Impressive work <@1352785241252565174> , congrats and thanks. Conveying all these concepts adequately to the whole community will prove challenging, for sure. So I will do my best to support you on the task",
+      "timestamp": "2025-05-04T11:54:23.974000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368556365043466302",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368766450029953055",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is great <@1352785241252565174> , like how we are building a framework, roles and ownership! Thanks for creating this detailed view, our community is getting better and more structured by the day...",
+      "timestamp": "2025-05-05T01:49:12.138000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368766450029953055",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368937873994285131",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone we are set for our sync meeting @1pm?\n\nAnd thank you so much !",
+      "timestamp": "2025-05-05T13:10:22.796000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368937873994285131",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368938137212031057",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes!!",
+      "timestamp": "2025-05-05T13:11:25.552000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368938137212031057",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368993660569522176",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://mit.zoom.us/j/98692954407\n\nLink for 1 pm est",
+      "timestamp": "2025-05-05T16:52:03.352000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368993660569522176",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368996275197841450",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Running 5 minutes late previous meeting ran long\n\nWill be live @ 1:05",
+      "timestamp": "2025-05-05T17:02:26.728000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368996275197841450",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368996292428300369",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "ok",
+      "timestamp": "2025-05-05T17:02:30.836000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1368996292428300369",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369143103239491737",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Are we all planning to meet the same time tomorrow afternoon, to take the conversation forward?",
+      "timestamp": "2025-05-06T02:45:53.261000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369143103239491737",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369143422602186823",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@546559083357143044> Yes here is the link for tommorow @1pm est if that time still works for @everyone :\n\nhttps://mit.zoom.us/j/97940884138",
+      "timestamp": "2025-05-06T02:47:09.403000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369143422602186823",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "546559083357143044"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369358925308366909",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone starting meeting now",
+      "timestamp": "2025-05-06T17:03:29.252000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369358925308366909",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359045055746260",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "sure, I´m in the waiting room",
+      "timestamp": "2025-05-06T17:03:57.802000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359045055746260",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359226337497170",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "m2",
+      "timestamp": "2025-05-06T17:04:41.023000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359226337497170",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359257799098429",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I m joining in 15 mins",
+      "timestamp": "2025-05-06T17:04:48.524000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359257799098429",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359291177500855",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry something popped up",
+      "timestamp": "2025-05-06T17:04:56.482000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359291177500855",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359514771394640",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Waiting here",
+      "timestamp": "2025-05-06T17:05:49.791000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359514771394640",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359709483700265",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "ended the meeting?",
+      "timestamp": "2025-05-06T17:06:36.214000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359709483700265",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359791557972069",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "is there a virus?",
+      "timestamp": "2025-05-06T17:06:55.782000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359791557972069",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359816799158332",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think it's automatic",
+      "timestamp": "2025-05-06T17:07:01.800000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359816799158332",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359832943038626",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "it was. a mistake my bad if you try and rejoin",
+      "timestamp": "2025-05-06T17:07:05.649000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359832943038626",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359833433772112",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "ok",
+      "timestamp": "2025-05-06T17:07:05.766000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359833433772112",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359841604141157",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "it should work",
+      "timestamp": "2025-05-06T17:07:07.714000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359841604141157",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359886969999473",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "no, maybe he ran out of batteries, or had sthg really urgent",
+      "timestamp": "2025-05-06T17:07:18.530000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359886969999473",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359958306459808",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I'll stay around for 15 minutes",
+      "timestamp": "2025-05-06T17:07:35.538000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359958306459808",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369359979181768775",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "same link?",
+      "timestamp": "2025-05-06T17:07:40.515000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369359979181768775",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360067865870417",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "probably, but let's wait for Oscar",
+      "timestamp": "2025-05-06T17:08:01.659000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369360067865870417",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360127643090994",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Otherwise, I can share my link, and we can start",
+      "timestamp": "2025-05-06T17:08:15.911000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369360127643090994",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360313387847822",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "we are in Carlos. Same link",
+      "timestamp": "2025-05-06T17:09:00.196000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369360313387847822",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360364466208829",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "ok, joiining",
+      "timestamp": "2025-05-06T17:09:12.374000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369360364466208829",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360432157954048",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "txs",
+      "timestamp": "2025-05-06T17:09:28.513000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369360432157954048",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369377585813000434",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "SGU: The next step in the learning experience through practical applications of manual to automation through Agentic solutions. Guided by are Net-Archs and CS professionals.",
+      "timestamp": "2025-05-06T18:17:38.263000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369377585813000434",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369377671557025793",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Where we are at: \n\n{\n\n[A] Jose group almost done with learning experience\n\n[B] Sangame group is ready\n\n[C] Carlos\n\n\n}\n\nSchedule plan\n\n{\n\nWednesday: SGU TEAM {Notify emergency item / team}\n\nThursday: NON-SGU MEMBERS {General information session} \n\nFriday: Execute new system {9am/12pm-Jose/Sangame}\n\n}  Implementation plan: \n\n{ \nCarlos: Teaches people who haven’t finished {amber gets until next week}\n\nSangame/Jose: Oversee new sgu unit group moving forward\n\n[B] Splitting the week for SGU session supervision\n\n9am / 12pm\n\nCS: Act as additional help\n\n}",
+      "timestamp": "2025-05-06T18:17:58.706000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369377671557025793",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369378771215581194",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "FInalized timing: 9am / 1pm @jose does this work for you?",
+      "timestamp": "2025-05-06T18:22:20.885000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369378771215581194",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369449301050134590",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes",
+      "timestamp": "2025-05-06T23:02:36.508000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369449301050134590",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369378771215581194",
+        "channel_id": "1362519753717186591",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369685776652308523",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-07T14:42:16.685000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369685776652308523",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1369685776626876436",
+          "filename": "Screenshot_2025-05-07_at_10.41.35_AM.png",
+          "url": "https://cdn.discordapp.com/attachments/1362519753717186591/1369685776626876436/Screenshot_2025-05-07_at_10.41.35_AM.png?ex=68405b48&is=683f09c8&hm=749faa51143004dfc1211bff53b85ed519c7007beb8a01ac7e114c73665bea4f&",
+          "size": 31076
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369685971557417021",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@673901899837341736>",
+      "timestamp": "2025-05-07T14:43:03.154000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369685971557417021",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "673901899837341736"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369686274193231965",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We do have an overlap in the morning. 9 am EST",
+      "timestamp": "2025-05-07T14:44:15.308000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369686274193231965",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369688729840652399",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Arturo cannot make it at that time",
+      "timestamp": "2025-05-07T14:54:00.780000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369688729840652399",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369697275693236356",
+      "channel_id": "1362519753717186591",
+      "channel_name": "🏛🤖netarch-agents",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "im creating the assignments right now",
+      "timestamp": "2025-05-07T15:27:58.270000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1362519753717186591/1369697275693236356",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}

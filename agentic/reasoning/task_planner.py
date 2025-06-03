@@ -9,6 +9,7 @@ import uuid
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 import logging
+import time
 
 from ..agents.base_agent import SubTask, ExecutionPlan, AgentRole, TaskStatus
 
@@ -25,6 +26,7 @@ class TaskPlanner:
         self.config = config
         self.max_subtasks = config.get("max_subtasks", 10)
         self.timeout_seconds = config.get("timeout_seconds", 30)
+        self.default_k = config.get("default_k", 10)
         
         # Task templates for common patterns
         self.task_templates = {
@@ -57,66 +59,81 @@ class TaskPlanner:
         context: Dict[str, Any]
     ) -> ExecutionPlan:
         """
-        Create an execution plan for the given query and analysis.
+        Create an execution plan based on query analysis.
         
         Args:
-            query: Original user query
+            query: User's query
             analysis: Query analysis results
-            context: Execution context
+            context: Additional context
             
         Returns:
-            Complete execution plan with subtasks
+            Execution plan with subtasks
         """
         try:
-            plan_id = str(uuid.uuid4())
-            intent = analysis.get("intent", "search")
-            entities = analysis.get("entities", [])
+            # Generate unique plan ID
+            plan_id = f"plan_{int(time.time())}_{uuid.uuid4().hex[:8]}"
             
-            # Get base template for the intent
-            template = self.task_templates.get(intent, self.task_templates["search"])
-            
-            # Create subtasks from template
+            # Create subtasks based on intent
             subtasks = []
-            for i, task_template in enumerate(template):
+            
+            if analysis.get("intent") == "search":
+                # Extract entities and build filters
+                entities = analysis.get("entities", [])
+                filters = {}
+                k = self.default_k
+                
+                # Build filters from entities
+                for entity in entities:
+                    entity_type = entity["type"]
+                    entity_value = entity["value"]
+                    
+                    if entity_type == "channel":
+                        # Use channel_id if available, otherwise fall back to name
+                        channel_id = entity.get("channel_id")
+                        if channel_id:
+                            filters["channel_id"] = channel_id
+                            logger.info(f"Using channel_id filter: {channel_id} for channel '{entity_value}'")
+                        else:
+                            filters["channel_name"] = entity_value
+                            logger.warning(f"Channel ID not resolved for '{entity_value}', using channel_name filter")
+                    elif entity_type == "user":
+                        filters["author_username"] = entity_value
+                    elif entity_type == "count":
+                        try:
+                            k = int(entity_value)
+                        except (ValueError, TypeError):
+                            k = self.default_k
+                
+                # Create search subtask
                 subtask = SubTask(
-                    id=f"{plan_id}_{i}",
-                    description=task_template["description"],
-                    agent_role=task_template["role"],
-                    parameters=self._build_task_parameters(query, analysis, entities, context),
-                    dependencies=self._determine_dependencies(i, template)
+                    id=f"search_{uuid.uuid4().hex[:8]}",
+                    description="Search for relevant messages",
+                    agent_role=AgentRole.SEARCHER,
+                    task_type="search",  # Add task_type
+                    parameters={
+                        "query": query,
+                        "filters": filters,
+                        "k": k
+                    },
+                    dependencies=[],
+                    created_at=datetime.utcnow()
                 )
                 subtasks.append(subtask)
             
-            # Handle complex queries with multiple intents
-            if analysis.get("complexity", 0) > 0.7:
-                additional_tasks = await self._handle_complex_query(query, analysis, plan_id)
-                subtasks.extend(additional_tasks)
-            
+            # Create execution plan
             plan = ExecutionPlan(
                 id=plan_id,
                 query=query,
-                subtasks=subtasks
+                subtasks=subtasks,
+                created_at=datetime.utcnow()
             )
             
-            logger.info(f"Created execution plan with {len(subtasks)} subtasks for intent: {intent}")
+            logger.info(f"Created execution plan with {len(subtasks)} subtasks for intent: {analysis.get('intent')}")
             return plan
             
         except Exception as e:
-            logger.error(f"Error creating execution plan: {str(e)}")
-            # Return minimal fallback plan
-            return ExecutionPlan(
-                id=str(uuid.uuid4()),
-                query=query,
-                subtasks=[
-                    SubTask(
-                        id=f"fallback_{uuid.uuid4()}",
-                        description="Execute basic search",
-                        agent_role=AgentRole.SEARCHER,
-                        parameters={"query": query},
-                        dependencies=[]
-                    )
-                ]
-            )
+            logger.error(f"Error creating execution plan: {e}")
+            raise
     
     def _build_task_parameters(
         self, 

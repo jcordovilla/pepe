@@ -11,7 +11,7 @@ import asyncio
 import re
 from collections import Counter
 
-from .base_agent import BaseAgent, AgentRole, AgentState, SubTask
+from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,7 @@ class AnalysisAgent(BaseAgent):
                 analysis_results[subtask.task_type] = result
                 
                 # Update subtask status
-                subtask.status = "completed"
+                subtask.status = TaskStatus.COMPLETED
                 subtask.result = result
             
             # Update state

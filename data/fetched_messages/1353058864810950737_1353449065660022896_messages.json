@@ -1,0 +1,149 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1353449065660022896",
+  "channel_name": "💬questions-help",
+  "fetch_timestamp": "2025-06-03T22:04:11.361826",
+  "message_count": 5,
+  "messages": [
+    {
+      "message_id": "1364792473486102539",
+      "channel_id": "1353449065660022896",
+      "channel_name": "💬questions-help",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1352785241252565174> Regarding adding my role at LinkedIn profile for the Gen AI Global community, the dropdown menu does not list ‘volunteer’. The closest that I could find is ‘self-employed’. \nI have mentioned ‘volunteer’ in the description section and the role as ‘self-employed’ for the time being. \nThe #orientation channel suggests to add ‘volunteer’. \nWondering how can I add my role as‘volunteer’ at LinkedIn?",
+      "timestamp": "2025-04-24T02:38:02.297000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449065660022896/1364792473486102539",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364794939963342930",
+      "channel_id": "1353449065660022896",
+      "channel_name": "💬questions-help",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1357376692384960524> Since you’re a Community Coordinator, you’re allowed to list your role under Work Experience on LinkedIn (not just Volunteer). 💼\n\n📍 Just make sure to note \"Volunteer\" clearly in the description for compliance purposes.\n\nFor full guidance, check out the instructions in  <#1363537366110703937> it’s different than what is allowed for General members as denoted in <#1361060350266577134> section on Linked-in!",
+      "timestamp": "2025-04-24T02:47:50.351000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449065660022896/1364794939963342930",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1357376692384960524"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364796220010270740",
+      "channel_id": "1353449065660022896",
+      "channel_name": "💬questions-help",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174> . Got it! \nYes, I have mentioned volunteer in the description.",
+      "timestamp": "2025-04-24T02:52:55.538000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449065660022896/1364796220010270740",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366412978068521132",
+      "channel_id": "1353449065660022896",
+      "channel_name": "💬questions-help",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1352785241252565174> I thought I heard there was a meeting today at 11am with Dr Sanchez- is this correct? I did not see anything further re; invite- Thank you!",
+      "timestamp": "2025-04-28T13:57:20.697000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449065660022896/1366412978068521132",
+      "author": {
+        "id": "1365814219932565615",
+        "username": "sandraf1230",
+        "discriminator": "0",
+        "display_name": "Sandra Finkelstein",
+        "bot": false
+      },
+      "mentions": [
+        "1352785241252565174"
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366413177499291750",
+      "channel_id": "1353449065660022896",
+      "channel_name": "💬questions-help",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "There is a meeting for onboarding that I will be hosting I will make the announcement to remind everyone !",
+      "timestamp": "2025-04-28T13:58:08.245000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449065660022896/1366413177499291750",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        "1365814219932565615"
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366412978068521132",
+        "channel_id": "1353449065660022896",
+        "guild_id": "1353058864810950737"
+      }
+    }
+  ]
+}

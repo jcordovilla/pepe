@@ -35,6 +35,8 @@ env/
 test_results.txt
 query_test_results.json
 .coverage
+debug/*.log
+debug/test_*.json
 
 # IDE and OS files
 .DS_Store

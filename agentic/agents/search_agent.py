@@ -9,7 +9,7 @@ import logging
 from datetime import datetime
 import asyncio
 
-from .base_agent import BaseAgent, AgentRole, AgentState, SubTask
+from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus
 from ..vectorstore.persistent_store import PersistentVectorStore
 from ..cache.smart_cache import SmartCache
 
@@ -60,19 +60,50 @@ class SearchAgent(BaseAgent):
             Updated state with search results
         """
         try:
+            # Prefer current_subtask if present (orchestrator mode)
+            if "current_subtask" in state and state["current_subtask"] is not None:
+                subtask = state["current_subtask"]
+                if self.can_handle(subtask):
+                    logger.info(f"Processing search subtask: {subtask.task_type}")
+                    if subtask.task_type == "semantic_search" or subtask.task_type == "search":
+                        task_results = await self._semantic_search(subtask, state)
+                    elif subtask.task_type == "keyword_search":
+                        task_results = await self._keyword_search(subtask, state)
+                    elif subtask.task_type == "filtered_search":
+                        task_results = await self._filtered_search(subtask, state)
+                    elif subtask.task_type == "hybrid_search":
+                        task_results = await self._hybrid_search(subtask, state)
+                    elif subtask.task_type == "reaction_search":
+                        task_results = await self._reaction_search(subtask, state)
+                    else:
+                        logger.warning(f"Unknown search task type: {subtask.task_type}")
+                        task_results = []
+                    
+                    # Update state and subtask
+                    state["search_results"] = task_results
+                    subtask.status = TaskStatus.COMPLETED
+                    subtask.result = task_results
+                    state["metadata"]["search_agent"] = {
+                        "search_time": datetime.utcnow().isoformat(),
+                        "total_results": len(task_results),
+                        "subtasks_processed": 1,
+                        "stats": self.search_stats.copy()
+                    }
+                    logger.info(f"Search completed: {len(task_results)} results found")
+                    return state
+                else:
+                    logger.warning("Current subtask is not a search subtask")
+                    return state
+            # Fallback: process all subtasks if present (batch mode)
             subtasks = state.get("subtasks", [])
             search_subtasks = [task for task in subtasks if self.can_handle(task)]
-            
             if not search_subtasks:
                 logger.warning("No search subtasks found")
                 return state
-            
             results = []
-            
             for subtask in search_subtasks:
                 logger.info(f"Processing search subtask: {subtask.task_type}")
-                
-                if subtask.task_type == "semantic_search":
+                if subtask.task_type == "semantic_search" or subtask.task_type == "search":
                     task_results = await self._semantic_search(subtask, state)
                 elif subtask.task_type == "keyword_search":
                     task_results = await self._keyword_search(subtask, state)
@@ -85,19 +116,13 @@ class SearchAgent(BaseAgent):
                 else:
                     logger.warning(f"Unknown search task type: {subtask.task_type}")
                     continue
-                
                 results.extend(task_results)
-                
-                # Update subtask status
-                subtask.status = "completed"
+                subtask.status = TaskStatus.COMPLETED
                 subtask.result = task_results
-            
             # Deduplicate and rank results
             if results:
                 results = await self._deduplicate_results(results)
                 results = await self._rank_results(results, state)
-            
-            # Update state
             state["search_results"] = results
             state["metadata"]["search_agent"] = {
                 "search_time": datetime.utcnow().isoformat(),
@@ -105,10 +130,8 @@ class SearchAgent(BaseAgent):
                 "subtasks_processed": len(search_subtasks),
                 "stats": self.search_stats.copy()
             }
-            
             logger.info(f"Search completed: {len(results)} results found")
             return state
-            
         except Exception as e:
             logger.error(f"Error in search agent: {e}")
             state["errors"] = state.get("errors", [])
@@ -145,10 +168,15 @@ class SearchAgent(BaseAgent):
         """
         try:
             query = subtask.parameters.get("query", state.get("query", ""))
-            k = subtask.parameters.get("k", self.default_k)
+            if not query:
+                logger.warning("No query provided for semantic search")
+                return []
+            
+            query = str(query)  # Ensure query is a string
+            k = subtask.parameters.get("k", subtask.parameters.get("limit", self.default_k))
             
             # Check cache first
-            cache_key = f"semantic:{hash(query)}:{k}"
+            cache_key = f"semantic:{hash(query)}:{k}:{hash(str(subtask.parameters.get('filters', {})))}"
             cached_results = await self.cache.get(cache_key)
             
             if cached_results:
@@ -159,6 +187,8 @@ class SearchAgent(BaseAgent):
             # Perform vector search
             self.search_stats["cache_misses"] += 1
             self.search_stats["total_searches"] += 1
+            
+            logger.info(f"Performing semantic search: query='{query[:50]}...', k={k}, filters={subtask.parameters.get('filters', {})}")
             
             results = await self.vector_store.similarity_search(
                 query=query,
@@ -297,18 +327,24 @@ class SearchAgent(BaseAgent):
             # Perform both searches concurrently
             semantic_task = self._semantic_search(
                 SubTask(
-                    task_id=f"{subtask.task_id}_semantic",
+                    id=f"{subtask.id}_semantic",
+                    description="Semantic search for hybrid",
+                    agent_role=AgentRole.SEARCHER,
                     task_type="semantic_search",
-                    parameters={"query": query, "k": k//2}
+                    parameters={"query": query, "k": k//2},
+                    dependencies=[]
                 ),
                 state
             )
             
             keyword_task = self._keyword_search(
                 SubTask(
-                    task_id=f"{subtask.task_id}_keyword", 
+                    id=f"{subtask.id}_keyword",
+                    description="Keyword search for hybrid", 
+                    agent_role=AgentRole.SEARCHER,
                     task_type="keyword_search",
-                    parameters={"keywords": keywords, "k": k//2}
+                    parameters={"keywords": keywords, "k": k//2},
+                    dependencies=[]
                 ),
                 state
             )

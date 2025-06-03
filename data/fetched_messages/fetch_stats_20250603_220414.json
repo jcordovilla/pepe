@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-06-03T22:03:20.545930",
+  "guilds_processed": [
+    {
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "channels_processed": 86,
+      "messages_fetched": 5958,
+      "channels_skipped": 8
+    }
+  ],
+  "channels_skipped": [
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "jose-test",
+      "channel_id": "1361465528333369534",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "frederique-private-playground",
+      "channel_id": "1361738214385254500",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "private-diellza",
+      "channel_id": "1362877573083828404",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "🏛netarch-resources",
+      "channel_id": "1365741563606728828",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "testbuddy",
+      "channel_id": "1370096752430026762",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "💼career-opportunities",
+      "channel_id": "1354193330854035617",
+      "reason": "No permission"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "test-channel",
+      "channel_id": "1365455001748635782",
+      "reason": "Skipped by name"
+    },
+    {
+      "guild_name": "Gen AI Global",
+      "channel_name": "deidre-private-channel",
+      "channel_id": "1362877545225392269",
+      "reason": "No permission"
+    }
+  ],
+  "errors": [],
+  "total_messages_fetched": 5958,
+  "total_channels_processed": 86
+}

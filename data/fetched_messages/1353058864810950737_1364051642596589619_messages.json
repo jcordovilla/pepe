@@ -1,0 +1,84 @@
+{
+  "guild_id": "1353058864810950737",
+  "guild_name": "Gen AI Global",
+  "channel_id": "1364051642596589619",
+  "channel_name": "👋admin-introductions",
+  "fetch_timestamp": "2025-06-03T22:03:23.973578",
+  "message_count": 2,
+  "messages": [
+    {
+      "message_id": "1365395412336508960",
+      "channel_id": "1364051642596589619",
+      "channel_name": "👋admin-introductions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "**Full Name**: Georgi Pavlov \n\n**Background**: 25+ years mastering the skill of building the right solutions to real problems. Whether at a small startup, or contributing to open source, or working within a global tech giant—whether shaping developer experience or architecting one of the world’s largest e-commerce systems—I’ve built hands-on expertise across nearly every angle of IT: engineer, researcher, teacher, enterprise architect. These days, I am building the “brains” and the customer experience around a next-generation AI datacenter. \n**Role**: Senior Technology Leader | Advisor\n**Location**: Sofia, Bulgaria \n**Hobbies**: I’m a curious traveler and nature lover. I love gardening and cooking (they don’t always love me back), get lost in history books, and find peace in music— my passion and stress ball. \n\n**LinkedIn**: https://www.linkedin.com/in/georgi-pavlov-0617741/ \n\nThrilled to be joining as a **conversation leader**—looking forward to learning from each other and shaping an inspiring GenAI community together.",
+      "timestamp": "2025-04-25T18:33:54.121000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364051642596589619/1365395412336508960",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "👏",
+          "count": 1
+        },
+        {
+          "emoji": "💫",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366716220099006575",
+      "channel_id": "1364051642596589619",
+      "channel_name": "👋admin-introductions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Full name: Andrea Hickethier | Location: Munich\nBackground: 20+ years in Marketing and Sales. + 6 Years in Leadership Roles in the Tech Consulting Industry. Best experience as a Leader so far: I led as a business person a Team of Software Developers and IT Service Specialists. Our common ground was the Customer Journey. Moreover we processed ISO 9001 and ISO 27001 successful . This experience influenced my and this is why I am since a couple of weeks a certified AI Security Manager in accordance to ISO 42001.\n 🎯 Main Goals: Continuing my learning journey: Develop my Leadership further in the age of GenAI & Agents, manage my transformation as well as the transformation of the Revenue Engine in BtoB Organizations, improve my knowledge as non-tech person in using and understanding GenAI to create value and impact. \nHobbies: Golfing and Cooking\nEmoji I like: 🍑 \nLinkedIn: https://www.linkedin.com/in/andrea-hickethier-65449aa0/\nI feel so honored to be part of this community and I am looking forward to learn and contribute together with all of you!",
+      "timestamp": "2025-04-29T10:02:19.231000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364051642596589619/1366716220099006575",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    }
+  ]
+}
