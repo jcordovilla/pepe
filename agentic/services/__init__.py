@@ -1,13 +1,16 @@
 """
-Services module for agentic system.
-
-This module provides various services for the agentic system including
-channel resolution, user management, and other utilities.
+Modernized Services Package
+Enhanced from legacy core/ system with modern architecture
 """
 
-from .channel_resolver import ChannelResolver, ChannelInfo
+from .discord_service import DiscordMessageService
+from .content_processor import ContentProcessingService  
+from .sync_service import DataSynchronizationService
+from .unified_data_manager import UnifiedDataManager
 
 __all__ = [
-    'ChannelResolver',
-    'ChannelInfo'
+    "DiscordMessageService",
+    "ContentProcessingService", 
+    "DataSynchronizationService",
+    "UnifiedDataManager"
 ]

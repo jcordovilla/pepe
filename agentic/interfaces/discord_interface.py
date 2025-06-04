@@ -20,6 +20,13 @@ from ..interfaces.agent_api import AgentAPI
 from ..agents.base_agent import AgentRole, TaskStatus
 from ..memory.conversation_memory import ConversationMemory
 from ..cache.smart_cache import SmartCache
+# Integration of modernized services from legacy migration
+from ..services import (
+    DiscordMessageService,
+    ContentProcessingService,
+    DataSynchronizationService,
+    UnifiedDataManager
+)
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +84,9 @@ class DiscordInterface:
         cache_config = config.get('cache', {})
         self.cache = SmartCache(cache_config) if cache_enabled else None
         
+        # Initialize modernized services (migrated from legacy core/)
+        self._initialize_modernized_services()
+        
         # Performance tracking
         self.query_count = 0
         self.error_count = 0
@@ -88,10 +98,52 @@ class DiscordInterface:
         
         logger.info("Discord interface initialized")
     
+    def _initialize_modernized_services(self):
+        """Initialize modernized services migrated from legacy core/"""
+        try:
+            # Initialize unified data manager
+            self.data_manager = UnifiedDataManager(self.config)
+            
+            # Initialize Discord message service
+            discord_token = self.config.get('discord', {}).get('token')
+            if discord_token and self.cache and self.memory:
+                self.discord_service = DiscordMessageService(
+                    token=discord_token,
+                    cache=self.cache,
+                    memory=self.memory
+                )
+            else:
+                self.discord_service = None
+                logger.warning("Discord service not initialized - missing dependencies")
+            
+            # Initialize content processor
+            self.content_processor = ContentProcessingService(
+                self.config.get('content_processing', {})
+            )
+            
+            # Initialize sync service
+            self.sync_service = DataSynchronizationService(
+                self.config.get('sync', {})
+            )
+            
+            logger.info("🔄 Modernized services initialized successfully")
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize modernized services: {e}")
+            # Set services to None if initialization fails
+            self.data_manager = None
+            self.discord_service = None
+            self.content_processor = None
+            self.sync_service = None
+    
     async def setup_bot(self) -> commands.Bot:
         """Set up the Discord bot instance"""
         if self.bot is not None:
             return self.bot
+            
+        # Initialize async services if needed
+        if hasattr(self, 'data_manager') and self.data_manager:
+            await self.data_manager.initialize()
             
         # Set up Discord intents
         intents = discord.Intents.default()
