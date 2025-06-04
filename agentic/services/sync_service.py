@@ -1,6 +1,6 @@
 """
 Enhanced Data Synchronization Service
-Extracted from legacy core/repo_sync.py with modernizations
+Modern data sync with state management and recovery patterns
 """
 
 import asyncio
@@ -9,6 +9,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -59,22 +60,34 @@ class DataSynchronizationService:
             new_messages = await self._fetch_incremental_data(since)
             
             # Process and store with modern data layer
-            for message in new_messages:
-                try:
-                    # Process through modern unified data manager
-                    await self.data_manager.store_message(message)
-                    sync_result["stats"]["messages_processed"] += 1
-                    
-                    # Legacy-style progress tracking
-                    if sync_result["stats"]["messages_processed"] % 100 == 0:
-                        await self._save_sync_checkpoint(sync_result)
-                        
-                except Exception as e:
-                    error_msg = f"Error processing message {message.get('message_id')}: {e}"
-                    sync_result["stats"]["errors"].append(error_msg)
-                    logger.warning(f"⚠️ {error_msg}")
+            if new_messages:
+                print(f"🔄 Synchronizing {len(new_messages)} messages...")
+                with tqdm(new_messages, desc="🔄 Syncing data", unit="msg") as pbar:
+                    for message in pbar:
+                        try:
+                            # Process through modern unified data manager
+                            await self.data_manager.store_message(message)
+                            sync_result["stats"]["messages_processed"] += 1
+                            
+                            # Update progress bar with stats
+                            pbar.set_postfix({
+                                'Processed': sync_result["stats"]["messages_processed"],
+                                'Errors': len(sync_result["stats"]["errors"])
+                            })
+                            
+                            # Legacy-style progress tracking
+                            if sync_result["stats"]["messages_processed"] % 100 == 0:
+                                await self._save_sync_checkpoint(sync_result)
+                                
+                        except Exception as e:
+                            error_msg = f"Error processing message {message.get('message_id')}: {e}"
+                            sync_result["stats"]["errors"].append(error_msg)
+                            logger.warning(f"⚠️ {error_msg}")
+            else:
+                print("ℹ️  No new messages to synchronize")
             
             # Legacy-style data validation
+            print("🔍 Validating data integrity...")
             validation_result = await self._validate_data_integrity()
             sync_result["validation"] = validation_result
             
@@ -123,14 +136,20 @@ class DataSynchronizationService:
             "issues": []
         }
         
+        checks = list(validation["checks"].keys())
+        
         try:
             # Validate with modern data layer
-            health_check = await self.data_manager.health_check()
-            
-            for store, status in health_check.items():
-                if not status:
-                    validation["checks"][f"{store}_integrity"] = False
-                    validation["issues"].append(f"{store} integrity check failed")
+            with tqdm(total=len(checks), desc="🔍 Validation checks", unit="check") as pbar:
+                health_check = await self.data_manager.health_check()
+                
+                for store, status in health_check.items():
+                    if not status:
+                        validation["checks"][f"{store}_integrity"] = False
+                        validation["issues"].append(f"{store} integrity check failed")
+                    
+                    pbar.update(1)
+                    pbar.set_postfix({'Issues': len(validation["issues"])})
             
         except Exception as e:
             validation["issues"].append(f"Validation error: {e}")
