@@ -25,7 +25,7 @@ async def test_reaction_search_with_existing_data():
         
         # Initialize vector store with production config
         config = {
-            "persist_directory": "./data/vectorstore",  # Use the main vectorstore
+            "persist_directory": "./data/chromadb",  # Use the main vectorstore
             "embedding_model": "text-embedding-3-small",
             "batch_size": 10,
             "cache": {"type": "memory", "ttl": 3600}

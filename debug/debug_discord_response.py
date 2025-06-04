@@ -36,7 +36,7 @@ async def test_query_processing():
             },
             "vector_store": {
                 "type": "persistent",
-                "path": "./data/vectorstore"
+                "path": "./data/chromadb"
             },
             "memory": {
                 "database_path": "./data/conversation_memory.db"

@@ -37,7 +37,7 @@ async def test_real_agentic_query():
         "orchestrator": {},
         "vector_store": {
             "collection_name": "discord_messages",
-            "persist_directory": "data/vectorstore",
+            "persist_directory": "data/chromadb",
             "embedding_model": "text-embedding-3-small",
             "batch_size": 100
         },

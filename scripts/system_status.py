@@ -50,7 +50,7 @@ def check_databases():
     print_header("Database Status")
     
     databases = {
-        "ChromaDB Vector Store": "data/vectorstore/chroma.sqlite3",
+        "ChromaDB Vector Store": "data/chromadb/chroma.sqlite3",
         "Conversation Memory": "data/conversation_memory.db", 
         "Analytics Database": "data/analytics.db",
         "SQLite Messages": "data/discord_messages.db"
@@ -97,7 +97,7 @@ def check_data_directories():
     
     directories = {
         "Fetched Messages": "data/fetched_messages",
-        "Vector Store": "data/vectorstore", 
+        "Vector Store": "data/chromadb", 
         "Cache": "data/cache",
         "Exports": "data/exports",
         "Processing Markers": "data/processing_markers"
@@ -161,7 +161,7 @@ def get_system_summary():
     # Check critical components
     critical_files = [
         Path("main.py"),
-        Path("data/vectorstore/chroma.sqlite3"),
+        Path("data/chromadb/chroma.sqlite3"),
         Path("agentic/interfaces/discord_interface.py")
     ]
     
@@ -172,7 +172,7 @@ def get_system_summary():
         print("✅ System appears ready to run")
         
         # Check if vector store has data
-        chroma_db = Path("data/vectorstore/chroma.sqlite3")
+        chroma_db = Path("data/chromadb/chroma.sqlite3")
         if chroma_db.exists():
             try:
                 conn = sqlite3.connect(chroma_db)

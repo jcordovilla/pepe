@@ -48,7 +48,7 @@ async def test_full_response_flow():
                 }
             },
             "vectorstore": {
-                "persist_directory": "data/vectorstore",
+                "persist_directory": "data/chromadb",
                 "collection_name": "discord_messages",
                 "embedding_model": "text-embedding-3-small",
                 "batch_size": 100

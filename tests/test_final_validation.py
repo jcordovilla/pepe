@@ -26,7 +26,7 @@ async def test_vector_store_channel_filtering():
     # Initialize vector store
     config = {
         "collection_name": "discord_messages",
-        "persist_directory": "data/vectorstore",
+        "persist_directory": "data/chromadb",
         "embedding_model": "text-embedding-3-small"
     }
     
