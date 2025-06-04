@@ -26,6 +26,11 @@ data/debug_*/
 docs/legacy/
 data/legacy/
 
+# Snapshots (migration safety backups)
+.snapshots/
+*.tar.gz
+*.backup
+
 # Virtual environment
 venv/
 env/
