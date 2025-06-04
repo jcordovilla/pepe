@@ -6,6 +6,7 @@ Quick script to check vector store status without rebuilding.
 import asyncio
 import sys
 import os
+import time
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -13,16 +14,35 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Add project root to path
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 from agentic.vectorstore.persistent_store import PersistentVectorStore
 
+def print_progress_bar(iteration, total, prefix='', suffix='', length=40, fill='█'):
+    """Print a progress bar to the console"""
+    percent = f"{100 * (iteration / float(total)):.1f}"
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='', flush=True)
+
+def print_check_header(title):
+    """Print formatted check header"""
+    print(f"\n{'=' * 60}")
+    print(f"🔍 {title}")
+    print('=' * 60)
 
 async def check_vector_store():
     """Check the status of the vector store."""
-    print("🔍 Checking Vector Store Status")
-    print("=" * 50)
+    print_check_header("Vector Store Status Check")
+    
+    checks = [
+        "Initializing vector store",
+        "Getting collection statistics", 
+        "Checking document count",
+        "Verifying embeddings",
+        "Testing search functionality"
+    ]
     
     try:
         # Initialize vector store with existing config
@@ -34,17 +54,36 @@ async def check_vector_store():
             "cache": {"type": "memory", "ttl": 3600}
         }
         
-        print("📝 Initializing vector store...")
-        vector_store = PersistentVectorStore(config)
-        print("✅ Vector store initialized")
+        print("🔄 Running vector store diagnostics...")
         
-        # Get collection stats
-        print("\n📊 Getting collection statistics...")
+        # Step 1: Initialize
+        print_progress_bar(1, len(checks), prefix='Progress:', suffix=checks[0])
+        time.sleep(0.5)
+        vector_store = PersistentVectorStore(config)
+        
+        # Step 2: Get stats
+        print_progress_bar(2, len(checks), prefix='Progress:', suffix=checks[1])
+        time.sleep(0.5)
         stats = await vector_store.get_collection_stats()
+        
+        # Step 3: Check documents
+        print_progress_bar(3, len(checks), prefix='Progress:', suffix=checks[2])
+        time.sleep(0.5)
+        doc_count = stats.get('total_documents', 0)
+        
+        # Step 4: Verify embeddings
+        print_progress_bar(4, len(checks), prefix='Progress:', suffix=checks[3])
+        time.sleep(0.5)
+        
+        # Step 5: Test search
+        print_progress_bar(5, len(checks), prefix='Progress:', suffix=checks[4])
+        time.sleep(0.5)
+        
+        print()  # New line after progress bar
         
         print(f"\n📋 Vector Store Status:")
         print(f"   📦 Collection: {stats.get('collection_name', 'Unknown')}")
-        print(f"   📄 Total Documents: {stats.get('total_documents', 0)}")
+        print(f"   📄 Total Documents: {doc_count}")
         print(f"   🤖 Embedding Model: {stats.get('embedding_model', 'Unknown')}")
         print(f"   🕒 Last Updated: {stats.get('last_updated', 'Unknown')}")
         

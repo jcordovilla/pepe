@@ -2,8 +2,8 @@
 """
 Agentic Discord Bot - Main Entry Point
 
-This is the main entry point for the new agentic Discord bot that replaces
-the old core/ implementation with a sophisticated multi-agent architecture.
+This is the main entry point for the modernized Discord bot with unified
+agentic architecture integrating battle-tested legacy patterns.
 """
 
 import os

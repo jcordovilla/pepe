@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import sys
+import time
 from datetime import datetime
 from typing import Dict, Any
 from unittest.mock import Mock, AsyncMock, patch
@@ -20,21 +21,60 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def print_progress_bar(iteration, total, prefix='', suffix='', length=40, fill='█'):
+    """Print a progress bar to the console"""
+    percent = f"{100 * (iteration / float(total)):.1f}"
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='', flush=True)
+
+def print_test_header(title):
+    """Print formatted test header"""
+    print(f"\n{'=' * 60}")
+    print(f"🧪 {title}")
+    print('=' * 60)
+
+def print_test_step(step_num, total_steps, description):
+    """Print formatted test step"""
+    print(f"\n📋 Step {step_num}/{total_steps}: {description}")
+    print("-" * 50)
+
 def test_imports():
     """Test that all modules can be imported successfully"""
-    print("🧪 Testing imports...")
+    print_test_header("Module Import Tests")
     
-    try:
-        from agentic.interfaces.discord_interface import DiscordInterface, DiscordContext
-        from agentic.interfaces.agent_api import AgentAPI
-        from agentic.agents.orchestrator import AgentOrchestrator
-        from agentic.memory.conversation_memory import ConversationMemory
-        from agentic.cache.smart_cache import SmartCache
-        print("✅ All imports successful")
-        return True
-    except Exception as e:
-        print(f"❌ Import failed: {e}")
+    modules = [
+        ("Discord Interface", "agentic.interfaces.discord_interface"),
+        ("Agent API", "agentic.interfaces.agent_api"),
+        ("Agent Orchestrator", "agentic.agents.orchestrator"),
+        ("Conversation Memory", "agentic.memory.conversation_memory"),
+        ("Smart Cache", "agentic.cache.smart_cache"),
+        ("Vector Store", "agentic.vectorstore.persistent_store")
+    ]
+    
+    print("🔄 Testing module imports...")
+    
+    failed_imports = []
+    
+    for i, (name, module_path) in enumerate(modules):
+        time.sleep(0.2)  # Small delay for visual effect
+        print_progress_bar(i + 1, len(modules), prefix='Progress:', suffix=f'Importing {name}')
+        
+        try:
+            __import__(module_path, fromlist=[''])
+        except Exception as e:
+            failed_imports.append(f"{name}: {str(e)}")
+    
+    print()  # New line after progress bar
+    
+    if failed_imports:
+        print("❌ Failed imports:")
+        for failed in failed_imports:
+            print(f"   - {failed}")
         return False
+    
+    print("✅ All imports successful")
+    return True
 
 def test_configuration():
     """Test configuration loading and validation"""

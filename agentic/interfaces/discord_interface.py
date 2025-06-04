@@ -99,7 +99,7 @@ class DiscordInterface:
         logger.info("Discord interface initialized")
     
     def _initialize_modernized_services(self):
-        """Initialize modernized services migrated from legacy core/"""
+        """Initialize modernized services with unified architecture"""
         try:
             # Initialize unified data manager
             self.data_manager = UnifiedDataManager(self.config)

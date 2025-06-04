@@ -40,28 +40,10 @@ class PipelineAgent:
         # Pipeline step configurations
         self.pipeline_steps = [
             {
-                "name": "fetch_messages",
-                "command": "python3 core/fetch_messages.py",
-                "description": "Fetch Discord messages",
-                "timeout": 300
-            },
-            {
-                "name": "embed_store", 
-                "command": "python3 core/embed_store.py",
-                "description": "Embed and store messages",
-                "timeout": 600
-            },
-            {
-                "name": "batch_detect",
-                "command": "python3 core/batch_detect.py", 
-                "description": "Detect and enrich resources",
-                "timeout": 900
-            },
-            {
-                "name": "repo_sync",
-                "command": "python3 core/repo_sync.py",
-                "description": "Export resources to JSON/Markdown",
-                "timeout": 300
+                "name": "database_population",
+                "command": "python3 scripts/database/populate_database.py",
+                "description": "Run complete database population",
+                "timeout": 1800
             }
         ]
         

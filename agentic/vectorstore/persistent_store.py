@@ -77,12 +77,8 @@ class PersistentVectorStore:
                 )
             )
             
-            # Initialize embedding function with improved error handling
-            api_key = os.getenv("OPENAI_API_KEY") or os.getenv("CHROMA_OPENAI_API_KEY")
-            
-            # Ensure CHROMA_OPENAI_API_KEY is set if OPENAI_API_KEY is available
-            if api_key and not os.getenv("CHROMA_OPENAI_API_KEY"):
-                os.environ["CHROMA_OPENAI_API_KEY"] = api_key
+            # Initialize embedding function - use single OpenAI API key
+            api_key = os.getenv("OPENAI_API_KEY")
             
             if not api_key or api_key == "test-key-for-testing":
                 # For testing scenarios, create a simple mock embedding function
@@ -101,13 +97,29 @@ class PersistentVectorStore:
                     embedding_function=self.embedding_function
                 )
                 logger.info(f"Loaded existing collection: {self.collection_name}")
-            except Exception:
-                self.collection = self.client.create_collection(
-                    name=self.collection_name,
-                    embedding_function=self.embedding_function,
-                    metadata={"description": "Discord messages vector store"}
-                )
-                logger.info(f"Created new collection: {self.collection_name}")
+            except Exception as get_error:
+                try:
+                    self.collection = self.client.create_collection(
+                        name=self.collection_name,
+                        embedding_function=self.embedding_function,
+                        metadata={"description": "Discord messages vector store"}
+                    )
+                    logger.info(f"Created new collection: {self.collection_name}")
+                except Exception as create_error:
+                    # If creation fails because collection exists, try to get it again
+                    if "already exists" in str(create_error).lower():
+                        try:
+                            self.collection = self.client.get_collection(
+                                name=self.collection_name,
+                                embedding_function=self.embedding_function
+                            )
+                            logger.info(f"Retrieved existing collection after creation conflict: {self.collection_name}")
+                        except Exception:
+                            logger.error(f"Failed to get collection after creation conflict: {create_error}")
+                            raise create_error
+                    else:
+                        logger.error(f"Failed to create collection: {create_error}")
+                        raise create_error
             
             # Update stats
             if self.collection:

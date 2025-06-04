@@ -3,7 +3,15 @@
 Fix Vector Store Persistence Issues
 
 This script identifies and fixes issues that cause the vector store to lose data.
-The main problems are:
+The main prob        # Check final count
+        if hasattr(vector_store, 'collection') and vector_store.collection:
+            try:
+                new_count = vector_store.collection.count()
+                print(f"📊 Final collection count: {new_count}")
+            except Exception as e:
+                print(f"⚠️  Could not get final collection count: {e}")
+        else:
+            print("⚠️  Collection not available for final count check")ms are:
 1. allow_reset=True in ChromaDB settings
 2. Embedding function mismatches between sessions
 3. Collection recreation instead of loading existing data
@@ -13,6 +21,7 @@ import os
 import sys
 import json
 import logging
+import time
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -28,11 +37,23 @@ from agentic.vectorstore.persistent_store import PersistentVectorStore
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def print_progress_bar(iteration, total, prefix='', suffix='', length=40, fill='█'):
+    """Print a progress bar to the console"""
+    percent = f"{100 * (iteration / float(total)):.1f}"
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='', flush=True)
+
+def print_fix_header(title):
+    """Print formatted fix header"""
+    print(f"\n{'=' * 60}")
+    print(f"🔧 {title}")
+    print('=' * 60)
+
 
 def check_chromadb_directory():
     """Check the ChromaDB directory structure and files"""
-    print("🔍 Checking ChromaDB Directory Structure")
-    print("=" * 60)
+    print_fix_header("ChromaDB Directory Analysis")
     
     chromadb_path = Path("data/chromadb")
     if not chromadb_path.exists():
@@ -41,6 +62,16 @@ def check_chromadb_directory():
     
     print(f"📁 ChromaDB path: {chromadb_path.absolute()}")
     
+    # Analyze directory contents with progress
+    items = list(chromadb_path.iterdir())
+    
+    print("🔄 Analyzing directory contents...")
+    for i, item in enumerate(items):
+        time.sleep(0.1)
+        print_progress_bar(i + 1, len(items), prefix='Progress:', suffix=f'Checking {item.name}')
+        
+    print()  # New line after progress bar
+    
     # List all files in the directory
     for item in chromadb_path.iterdir():
         if item.is_file():
@@ -48,14 +79,15 @@ def check_chromadb_directory():
             print(f"   📄 {item.name}: {size_mb:.2f} MB")
         elif item.is_dir():
             print(f"   📁 {item.name}/")
+            
+    return True
     
     return True
 
 
 def backup_chromadb():
     """Create a backup of the current ChromaDB"""
-    print("\n💾 Creating ChromaDB Backup")
-    print("=" * 60)
+    print_fix_header("ChromaDB Backup Creation")
     
     import shutil
     from datetime import datetime
@@ -68,7 +100,17 @@ def backup_chromadb():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_path = Path(f"data/chromadb_backup_{timestamp}")
     
+    print("🔄 Creating backup...")
+    
     try:
+        # Show progress for backup creation
+        steps = ["Preparing backup", "Copying files", "Verifying backup"]
+        for i, step in enumerate(steps):
+            time.sleep(0.5)
+            print_progress_bar(i + 1, len(steps), prefix='Progress:', suffix=step)
+        
+        print()  # New line after progress bar
+        
         shutil.copytree(chromadb_path, backup_path)
         print(f"✅ Backup created: {backup_path}")
         return True
@@ -95,7 +137,15 @@ def test_vector_store_with_fixed_config():
         vector_store = PersistentVectorStore(config)
         
         print(f"✅ Vector store initialized")
-        print(f"📊 Collection count: {vector_store.collection.count()}")
+        # Check if collection exists and count documents
+        if hasattr(vector_store, 'collection') and vector_store.collection:
+            try:
+                collection_count = vector_store.collection.count()
+                print(f"📊 Collection count: {collection_count}")
+            except Exception as e:
+                print(f"⚠️  Could not get collection count: {e}")
+        else:
+            print("⚠️  Collection not initialized or missing")
         
         # Test adding a sample message
         test_message = [{
@@ -115,8 +165,14 @@ def test_vector_store_with_fixed_config():
         print(f"✅ Add result: {result}")
         
         # Check count after adding
-        new_count = vector_store.collection.count()
-        print(f"📊 New collection count: {new_count}")
+        if hasattr(vector_store, 'collection') and vector_store.collection:
+            try:
+                new_count = vector_store.collection.count()
+                print(f"📊 New collection count: {new_count}")
+            except Exception as e:
+                print(f"⚠️  Could not get new collection count: {e}")
+        else:
+            print("⚠️  Collection not available for count check")
         
         # Close properly
         asyncio.run(vector_store.close())
@@ -197,7 +253,7 @@ def main():
     print("🏁 Next Steps:")
     print("1. Apply the configuration fixes to persistent_store.py")
     print("2. Clear processing markers: rm -rf data/processing_markers/*")
-    print("3. Re-run embedding process: python core/embed_store.py")
+    print("3. Re-run database population: python scripts/database/populate_database.py")
     print("4. Verify persistence: python check_vector_store.py")
     print()
     print("🔍 Key Changes Needed:")

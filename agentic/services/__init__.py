@@ -1,6 +1,6 @@
 """
 Modernized Services Package
-Enhanced from legacy core/ system with modern architecture
+Unified architecture with battle-tested patterns
 """
 
 from .discord_service import DiscordMessageService

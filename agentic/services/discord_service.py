@@ -1,6 +1,6 @@
 """
 Enhanced Discord Message Service
-Extracted from legacy core/fetch_messages.py with modernizations
+Modern Discord API integration with rate limiting and batch processing
 """
 
 import asyncio

@@ -1,6 +1,6 @@
 """
 Enhanced Content Processing Service
-Extracted from legacy core/batch_detect.py with modernizations
+Modernized content classification and processing with AI integration
 """
 
 import re

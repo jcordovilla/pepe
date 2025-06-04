@@ -6,8 +6,22 @@ import os
 import subprocess
 import shutil
 import json
+import time
 from datetime import datetime
 from pathlib import Path
+
+def print_progress_bar(iteration, total, prefix='', suffix='', length=40, fill='█'):
+    """Print a progress bar to the console"""
+    percent = f"{100 * (iteration / float(total)):.1f}"
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='', flush=True)
+
+def print_snapshot_header(title):
+    """Print formatted snapshot header"""
+    print(f"\n{'=' * 60}")
+    print(f"📸 {title}")
+    print('=' * 60)
 
 def get_current_branch():
     """Get the current branch name"""

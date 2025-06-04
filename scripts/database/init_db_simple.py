@@ -5,6 +5,7 @@ Simple database initialization script that creates tables and adds sample data
 
 import os
 import json
+import time
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, JSON
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -17,6 +18,24 @@ load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data/discord_bot.db')
 engine = create_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
+
+def print_progress_bar(iteration, total, prefix='', suffix='', length=40, fill='█'):
+    """Print a progress bar to the console"""
+    percent = f"{100 * (iteration / float(total)):.1f}"
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + '-' * (length - filled_length)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='', flush=True)
+
+def print_init_header(title):
+    """Print formatted initialization header"""
+    print(f"\n{'=' * 60}")
+    print(f"🗄️ {title}")
+    print('=' * 60)
+
+def print_init_step(step_num, total_steps, description):
+    """Print formatted initialization step"""
+    print(f"\n📋 Step {step_num}/{total_steps}: {description}")
+    print("-" * 50)
 
 # Message model definition
 class Message(Base):
@@ -40,7 +59,10 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 def create_sample_data():
     """Create tables and sample Discord messages for testing"""
-    print("🔄 Creating database tables...")
+    print_init_header("Database Initialization")
+    
+    print_init_step(1, 3, "Creating Database Tables")
+    print("🔄 Setting up database schema...")
     
     # Create all tables
     Base.metadata.create_all(engine)
@@ -49,13 +71,15 @@ def create_sample_data():
     session = SessionLocal()
     
     try:
+        print_init_step(2, 3, "Checking Existing Data")
         # Check if data already exists
         existing_count = session.query(Message).count()
         if existing_count > 0:
             print(f"Database already has {existing_count} messages. Skipping initialization.")
             return
         
-        print("📝 Adding sample messages...")
+        print_init_step(3, 3, "Adding Sample Messages")
+        print("📝 Preparing sample data...")
         
         # Sample channels
         channels = [
@@ -100,10 +124,14 @@ def create_sample_data():
             }
         ]
         
-        # Insert sample messages
+        # Insert sample messages with progress tracking
         base_time = datetime.now() - timedelta(hours=6)
         
+        print("🔄 Inserting sample messages...")
         for i, msg_data in enumerate(sample_messages):
+            time.sleep(0.1)  # Small delay for visual effect
+            print_progress_bar(i + 1, len(sample_messages), prefix='Progress:', suffix=f'Adding message {i + 1}')
+            
             # Create message timestamp (spread over last 6 hours)
             timestamp = base_time + timedelta(hours=i)
             
@@ -123,6 +151,7 @@ def create_sample_data():
             
             session.add(message)
         
+        print()  # New line after progress bar
         session.commit()
         print(f"✅ Successfully created {len(sample_messages)} sample messages")
         
@@ -153,4 +182,4 @@ def create_sample_data():
 if __name__ == "__main__":
     print("🚀 Initializing Discord bot database with sample data...")
     create_sample_data()
-    print("🎉 Database initialization complete!")
+    print("\n🎉 Database initialization complete!")

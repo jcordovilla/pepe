@@ -52,3 +52,6 @@ debug/test_*.json
 
 # Deployment
 .render/
+
+# Legacy archive (post-migration)
+legacy_archive/
