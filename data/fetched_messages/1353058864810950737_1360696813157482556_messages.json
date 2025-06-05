@@ -3,990 +3,39 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1360696813157482556",
   "channel_name": "📥feedback-submissions",
-  "fetch_timestamp": "2025-06-03T22:03:46.663447",
-  "message_count": 35,
+  "fetch_timestamp": "2025-06-04T23:18:24.968002+00:00",
+  "message_count": 36,
   "messages": [
     {
-      "message_id": "1362519182079561758",
+      "message_id": "1379155348899893308",
       "channel_id": "1360696813157482556",
       "channel_name": "📥feedback-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> <@&1359958995854692373> This is a space to submit your concepts for upvotes to be entered into a poll for voting for updates to the server!\n\nWe will review the top items every month and select a item to incorporate! This is a very basic start to this channel, there will be a similar system with the wider community!",
-      "timestamp": "2025-04-17T20:04:47.390000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362519182079561758",
+      "content": "Great team!\nWell done: plain English & word count. Happy to see that my input was taken to heart and got implemented. 🙏",
+      "timestamp": "2025-06-02T17:50:58.645000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1379155348899893308",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362520930022199487",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1359552583244583153> <@1361976806651068517> <@1361586210639970384> I know you guys had some suggestions for channels!\n\nIf you guys want to submit them here I will try and include them today; i have been overseeing discord automation integration but tonight I should have some time to incorporate as I am doing a discord overhaul",
-      "timestamp": "2025-04-17T20:11:44.132000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362520930022199487",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1361586210639970384",
-        "1359552583244583153",
-        "1361976806651068517"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362528285644292146",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "We can maybe integrate a channel where the community can share useful prompts…and sub channels with different kind of specific uses.",
-      "timestamp": "2025-04-17T20:40:57.849000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362528285644292146",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Melinda Melcher",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362838615897669672",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "It looks like the categories I suggested were added except for the Multi-Modal AI Tools and Tips.  Can we add that one too?",
-      "timestamp": "2025-04-18T17:14:06.347000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362838615897669672",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1362519182079561758",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1362838973772337304",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I would also like to suggest a separate channel for Free Learning Courses and Videos.  It seems to be getting buried in the overall Resources Library and Chats.",
-      "timestamp": "2025-04-18T17:15:31.671000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362838973772337304",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362839174109200395",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Lastly, let's create a Glossary Channel in Help and Resources. So many terms coming out.  It will help make sense of the alphabet soup of terms",
-      "timestamp": "2025-04-18T17:16:19.435000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362839174109200395",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362850646671491206",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone , my personal take on this matter is to keep it simple and avoid the temptation of categorising too much (the taxonomical approach). On the other hand, I guess there is a long path ahead of us and we will be continously evaluating the convenience / usefulness of splitting or merging certain topics/themes.\nThere is one point worth highlighting, though: the network will eventually -maybe sooner than we expect- produce tools that analise, synthesise and organise information within the server. This was noted by Dr Sanchez as one of the key objectives, as the testing ground that this community is. This suggests that we should think strategically about the contents: communications, events and discussions vs documents / resources, etc..\nHope this makes sense...",
-      "timestamp": "2025-04-18T18:01:54.707000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362850646671491206",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 4
-        },
-        {
-          "emoji": "👍",
           "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362990605881315348",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Totally agree with <@673901899837341736>",
-      "timestamp": "2025-04-19T03:18:03.583000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362990605881315348",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1362850646671491206",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1363096095340757103",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "🧭 Channel Proposal: #ai-philosophy-ethics-inclusion\n\nHi all! I’d love to propose a dedicated space for conversations around *ethics, inclusion,* and *philosophy in generative AI*. This channel would explore:\n\n🤔 How does AI mirror or magnify human bias?  \n🌍 Who is left out or harmed by current AI systems?  \n🧠 What frameworks help us think more ethically—across cultures and contexts?\n\nAs a passionate learner and advocate for **digital inclusion**, I believe this channel can help surface essential questions that often get overlooked in fast-moving tech spaces.\n\nIf selected, I’d kick things off with:  \n✨ **Bias is a Mirror: What AI Reflects Back at Us** – an open reflection thread.\n\nWould love to co-create this with you all!  \n— Melinda\n\nPS:\n💡 Why Digital Inclusion Matters (Quick Pulse)\n\nWhen we talk about ethics in AI, we must also ask: Who gets to participate? Who gets left behind? Some key barriers that block digital inclusion:\n\n🔹 Tech Knowledge – Not everyone starts from the same level of familiarity or confidence.\n🔹 Language & Terminology – Complex AI lingo can act like a wall. Plain language matters.\n🔹 Access to Tools & Platforms – Many can't afford, find, or even locate the right AI tools or communities.\n🔹 Cognitive & Sensory Design – Interfaces often ignore neurodivergent users or those with fatigue.\n🔹 Cultural Fit – Most tools reflect dominant (often Western) norms, not diverse ways of thinking.\n🔹 Power Imbalance – Many users are consumers, not co-creators. Participation ≠ agency.\n\nIf we want ethical AI, we need inclusive systems that lower these barriers—by design.",
-      "timestamp": "2025-04-19T10:17:14.230000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363096095340757103",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363104243288117428",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey <@1362326150373966035> . There is already a channel for <#1353448986408779877>, are you suggesting to extend the title?",
-      "timestamp": "2025-04-19T10:49:36.852000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363104243288117428",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1363096095340757103",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1363104804750102600",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Yes, that would be ideal.",
-      "timestamp": "2025-04-19T10:51:50.715000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363104804750102600",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363105279842979953",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "As I do not yet grasp how all will be organised 😌  Or if needed a sub-channel focusing on AI-inclusion",
-      "timestamp": "2025-04-19T10:53:43.986000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363105279842979953",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365257730092306485",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "The sash reminders could benefit from a channel link.\n\nThis way when e.g the q&a reminder pops up you can click and navigate directly to the channel q&a submission channel",
-      "timestamp": "2025-04-25T09:26:48.116000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1365257730092306485",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369042353653809232",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks so much for all the thoughtful discussion over the past week — I pulled together this **From Volume to Vibe proposal** based on everything we’ve been talking about: from thread usage and content flow to posting rhythms and how we might (eventually) handle industry or use-case channels. <@1352785241252565174>",
-      "timestamp": "2025-05-05T20:05:32.688000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369042353653809232",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 5
         }
       ],
       "attachments": [
         {
-          "id": "1369042353289035826",
-          "filename": "From_Volume_to_Vibe_Proposal.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1369042353289035826/From_Volume_to_Vibe_Proposal.pdf?ex=6840a70c&is=683f558c&hm=5963d6198ff8ab0d15e573e6706e926dca2b949df21bd1361abefac0c02f5200&",
-          "size": 211863
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369724232853881004",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I counted 40+ channels potentially relevant to conversation leaders today, and it seems there will be more coming up.\nIt's getting impossible to scale and follow.\n\nIs there a recommended strategy to address that?\nOr if not, why not compress, e.g., all Admin channels (buddy,member-of-the-week,..) to one for active discussions and one for decisions, and apply this pattern generally? \nFor inner-channel posts organization perhaps we can use tags.\n\nwdyt?",
-      "timestamp": "2025-05-07T17:15:05.358000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369724232853881004",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369956902926286889",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Dear Discord gurus <#1360639083336175917>  - is there a way to see all the upcoming events at one place!  It will be handy to have a calendar view inside Discord.",
-      "timestamp": "2025-05-08T08:39:38.226000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369956902926286889",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370018736735522878",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "It’s the /list command. However, we are still polishing issues such as cluttering of events you have not rsvp’d to, work in progress!",
-      "timestamp": "2025-05-08T12:45:20.555000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370018736735522878",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369956902926286889",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1370037834886676500",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-08T14:01:13.909000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370037834886676500",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.chat_input_command",
-      "reference": null
-    },
-    {
-      "message_id": "1370038047818649690",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I like it 👍",
-      "timestamp": "2025-05-08T14:02:04.676000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370038047818649690",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370018736735522878",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1370276103754743848",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "We may need to address the time zones better in the question of the week polls.\n\n5PM est is the deadline for posting questions. \nIn Europe this is between 10pm and  12am. This is the moment when we we can have the complete picture.\n\nThe voting then concludes somewhere in the night.\n\nSo we are confronted with a choice - either vote for the questions that are already in and potentially miss new ones coming from N, America time zones, or miss out on  voting at all.\n\nCan we pull that one day earlier, or use the overlapping time between Europe and America time zones?\n\nCc <@1311434218622156850>",
-      "timestamp": "2025-05-09T05:48:01.634000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370276103754743848",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "1311434218622156850"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370277797590728825",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@969571634027589643> Definitely a valid point- I already noticed and realized that  improvement is needed for both questions and poll events. \n\nStarting from next week- will focus on making things better considering varied regions and timezones.",
-      "timestamp": "2025-05-09T05:54:45.476000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370277797590728825",
-      "author": {
-        "id": "1311434218622156850",
-        "username": "nikhil_kassetty",
-        "discriminator": "0",
-        "display_name": "Nikhil Kassetty",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370364830686646422",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks for the feedback<@969571634027589643>. This is something I have raised with the architects and the SGU is looking at it, I myself have missed a couple of polls precisely because of it. On it!",
-      "timestamp": "2025-05-09T11:40:35.783000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370364830686646422",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370276103754743848",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1370442951888601138",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@969571634027589643> <@1311434218622156850> , see recent post here:\nhttps://discord.com/channels/1353058864810950737/1353085578274410626/1370442704923791361\nHope this makes sense.",
-      "timestamp": "2025-05-09T16:51:01.329000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370442951888601138",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1311434218622156850",
-        "969571634027589643"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370443823737475174",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Got it- will setup accordingly. Thanks",
-      "timestamp": "2025-05-09T16:54:29.194000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370443823737475174",
-      "author": {
-        "id": "1311434218622156850",
-        "username": "nikhil_kassetty",
-        "discriminator": "0",
-        "display_name": "Nikhil Kassetty",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370442951888601138",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372255882838278236",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I am totally with you on this, <@969571634027589643>. It’s getting rather time consuming to stay afloat on Discord. And after the course, I also need to focus again on business matters😅 - I guess not just me😉",
-      "timestamp": "2025-05-14T16:54:57.750000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372255882838278236",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369724232853881004",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372257507636154580",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-14T17:01:25.132000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372257507636154580",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": {
-        "message_id": "1372243477630287933",
-        "channel_id": "1353085578274410626",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372257712041230468",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1362326150373966035> This goes over the fixes we are going to be rolling out to combat that issue, based on our community feedback session and data touch points.^^^\n\nFull roll-out of the channel structure fixes will be implemented by Friday, outside of automation.",
-      "timestamp": "2025-05-14T17:02:13.866000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372257712041230468",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1372255882838278236",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374053590380974091",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "A further suggestion from my side: Should we declare a word limit? Such lengthy messages I feel are overwhelming readers😉\n\nhttps://discord.com/channels/1353058864810950737/1353448986408779877/1374050160698724382",
-      "timestamp": "2025-05-19T15:58:24.628000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374053590380974091",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374089044132364439",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "+1\n\nI completely agree. That will increase the impact of messages.",
-      "timestamp": "2025-05-19T18:19:17.461000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374089044132364439",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1374053590380974091",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374089108313342133",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "75 words seem about enough for a single msg!",
-      "timestamp": "2025-05-19T18:19:32.763000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374089108313342133",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374127731507204458",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I‘d suggest to aim for 80–120 total words, formatted in 4–6 lines. That’s enough room to inspire, inform, and invite conversation—without triggering the scroll-past reflex.",
-      "timestamp": "2025-05-19T20:53:01.250000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374127731507204458",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1374089108313342133",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374161260295360524",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey everyone, me again 😊 I noticed we have 166 members, yet it’s largely the same few names engaging in #general-chat and others. Overall interaction is low and our weekly routine doesn’t seem to be sparking broad participation. Any ideas on how we can boost wider member involvement?",
-      "timestamp": "2025-05-19T23:06:15.136000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374161260295360524",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374163987880611881",
-      "channel_id": "1360696813157482556",
-      "channel_name": "📥feedback-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Some suggestions ☺️",
-      "timestamp": "2025-05-19T23:17:05.443000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374163987880611881",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1374163987758845993",
-          "filename": "IMG_4640.png",
-          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1374163987758845993/IMG_4640.png?ex=68402b31&is=683ed9b1&hm=115979e93996a370e933c1153e224ff4c782f3ba51964aaf3a7dd21fc6a37c51&",
-          "size": 237943
+          "id": "1379155348589510697",
+          "filename": "IMG_4780.png",
+          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1379155348589510697/IMG_4780.png?ex=6841d902&is=68408782&hm=0e9ce391a5fa4fe875dac8b25f2aa6113a959785184053a47e3c118c585dcc68&",
+          "size": 405550,
+          "content_type": "image/jpeg"
         }
       ],
       "embeds": 0,
@@ -1028,14 +77,14 @@
       "reference": null
     },
     {
-      "message_id": "1379155348899893308",
+      "message_id": "1374163987880611881",
       "channel_id": "1360696813157482556",
       "channel_name": "📥feedback-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Great team!\nWell done: plain English & word count. Happy to see that my input was taken to heart and got implemented. 🙏",
-      "timestamp": "2025-06-02T17:50:58.645000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1379155348899893308",
+      "content": "Some suggestions ☺️",
+      "timestamp": "2025-05-19T23:17:05.443000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374163987880611881",
       "author": {
         "id": "1362326150373966035",
         "username": "kiss_ambassador",
@@ -1047,15 +96,1077 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 2
+          "count": 3
         }
       ],
       "attachments": [
         {
-          "id": "1379155348589510697",
-          "filename": "IMG_4780.png",
-          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1379155348589510697/IMG_4780.png?ex=68408782&is=683f3602&hm=3a27a6d219207e47d97d190ad4dad9441a636aa56883a73be2a942d6591ca0ad&",
-          "size": 405550
+          "id": "1374163987758845993",
+          "filename": "IMG_4640.png",
+          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1374163987758845993/IMG_4640.png?ex=68422571&is=6840d3f1&hm=585bedb441134d137ec853a000c1961bb940dfb0aa698ba43e7e48e56c7ec469&",
+          "size": 237943,
+          "content_type": "image/jpeg"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374161260295360524",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey everyone, me again 😊 I noticed we have 166 members, yet it’s largely the same few names engaging in #general-chat and others. Overall interaction is low and our weekly routine doesn’t seem to be sparking broad participation. Any ideas on how we can boost wider member involvement?",
+      "timestamp": "2025-05-19T23:06:15.136000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374161260295360524",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374127731507204458",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I‘d suggest to aim for 80–120 total words, formatted in 4–6 lines. That’s enough room to inspire, inform, and invite conversation—without triggering the scroll-past reflex.",
+      "timestamp": "2025-05-19T20:53:01.250000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374127731507204458",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374089108313342133",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374089108313342133",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "75 words seem about enough for a single msg!",
+      "timestamp": "2025-05-19T18:19:32.763000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374089108313342133",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374089044132364439",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "+1\n\nI completely agree. That will increase the impact of messages.",
+      "timestamp": "2025-05-19T18:19:17.461000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374089044132364439",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374053590380974091",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374053590380974091",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "A further suggestion from my side: Should we declare a word limit? Such lengthy messages I feel are overwhelming readers😉\n\nhttps://discord.com/channels/1353058864810950737/1353448986408779877/1374050160698724382",
+      "timestamp": "2025-05-19T15:58:24.628000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1374053590380974091",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372257712041230468",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362326150373966035> This goes over the fixes we are going to be rolling out to combat that issue, based on our community feedback session and data touch points.^^^\n\nFull roll-out of the channel structure fixes will be implemented by Friday, outside of automation.",
+      "timestamp": "2025-05-14T17:02:13.866000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372257712041230468",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372255882838278236",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372257507636154580",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-14T17:01:25.132000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372257507636154580",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1372243477630287933",
+        "channel_id": "1353085578274410626",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372255882838278236",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I am totally with you on this, <@969571634027589643>. It’s getting rather time consuming to stay afloat on Discord. And after the course, I also need to focus again on business matters😅 - I guess not just me😉",
+      "timestamp": "2025-05-14T16:54:57.750000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1372255882838278236",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369724232853881004",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370443823737475174",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Got it- will setup accordingly. Thanks",
+      "timestamp": "2025-05-09T16:54:29.194000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370443823737475174",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370442951888601138",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370442951888601138",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@969571634027589643> <@1311434218622156850> , see recent post here:\nhttps://discord.com/channels/1353058864810950737/1353085578274410626/1370442704923791361\nHope this makes sense.",
+      "timestamp": "2025-05-09T16:51:01.329000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370442951888601138",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1311434218622156850",
+          "username": "nikhil_kassetty",
+          "display_name": "Nikhil Kassetty"
+        },
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370364830686646422",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for the feedback<@969571634027589643>. This is something I have raised with the architects and the SGU is looking at it, I myself have missed a couple of polls precisely because of it. On it!",
+      "timestamp": "2025-05-09T11:40:35.783000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370364830686646422",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370276103754743848",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370277797590728825",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@969571634027589643> Definitely a valid point- I already noticed and realized that  improvement is needed for both questions and poll events. \n\nStarting from next week- will focus on making things better considering varied regions and timezones.",
+      "timestamp": "2025-05-09T05:54:45.476000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370277797590728825",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370276103754743848",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We may need to address the time zones better in the question of the week polls.\n\n5PM est is the deadline for posting questions. \nIn Europe this is between 10pm and  12am. This is the moment when we we can have the complete picture.\n\nThe voting then concludes somewhere in the night.\n\nSo we are confronted with a choice - either vote for the questions that are already in and potentially miss new ones coming from N, America time zones, or miss out on  voting at all.\n\nCan we pull that one day earlier, or use the overlapping time between Europe and America time zones?\n\nCc <@1311434218622156850>",
+      "timestamp": "2025-05-09T05:48:01.634000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370276103754743848",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1311434218622156850",
+          "username": "nikhil_kassetty",
+          "display_name": "Nikhil Kassetty"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370038047818649690",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I like it 👍",
+      "timestamp": "2025-05-08T14:02:04.676000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370038047818649690",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370018736735522878",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370037834886676500",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-08T14:01:13.909000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370037834886676500",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.chat_input_command",
+      "reference": null
+    },
+    {
+      "message_id": "1370018736735522878",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It’s the /list command. However, we are still polishing issues such as cluttering of events you have not rsvp’d to, work in progress!",
+      "timestamp": "2025-05-08T12:45:20.555000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1370018736735522878",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369956902926286889",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369956902926286889",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dear Discord gurus <#1360639083336175917>  - is there a way to see all the upcoming events at one place!  It will be handy to have a calendar view inside Discord.",
+      "timestamp": "2025-05-08T08:39:38.226000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369956902926286889",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369724232853881004",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I counted 40+ channels potentially relevant to conversation leaders today, and it seems there will be more coming up.\nIt's getting impossible to scale and follow.\n\nIs there a recommended strategy to address that?\nOr if not, why not compress, e.g., all Admin channels (buddy,member-of-the-week,..) to one for active discussions and one for decisions, and apply this pattern generally? \nFor inner-channel posts organization perhaps we can use tags.\n\nwdyt?",
+      "timestamp": "2025-05-07T17:15:05.358000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369724232853881004",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369042353653809232",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks so much for all the thoughtful discussion over the past week — I pulled together this **From Volume to Vibe proposal** based on everything we’ve been talking about: from thread usage and content flow to posting rhythms and how we might (eventually) handle industry or use-case channels. <@1352785241252565174>",
+      "timestamp": "2025-05-05T20:05:32.688000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1369042353653809232",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1369042353289035826",
+          "filename": "From_Volume_to_Vibe_Proposal.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1369042353289035826/From_Volume_to_Vibe_Proposal.pdf?ex=6841f88c&is=6840a70c&hm=2d69c17fb1d2632197ead64f454bbdc73558aea725307381b1105b1d42ca1085&",
+          "size": 211863,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365257730092306485",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "The sash reminders could benefit from a channel link.\n\nThis way when e.g the q&a reminder pops up you can click and navigate directly to the channel q&a submission channel",
+      "timestamp": "2025-04-25T09:26:48.116000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1365257730092306485",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363105279842979953",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "As I do not yet grasp how all will be organised 😌  Or if needed a sub-channel focusing on AI-inclusion",
+      "timestamp": "2025-04-19T10:53:43.986000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363105279842979953",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363104804750102600",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes, that would be ideal.",
+      "timestamp": "2025-04-19T10:51:50.715000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363104804750102600",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363104243288117428",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey <@1362326150373966035> . There is already a channel for <#1353448986408779877>, are you suggesting to extend the title?",
+      "timestamp": "2025-04-19T10:49:36.852000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363104243288117428",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1363096095340757103",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1363096095340757103",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🧭 Channel Proposal: #ai-philosophy-ethics-inclusion\n\nHi all! I’d love to propose a dedicated space for conversations around *ethics, inclusion,* and *philosophy in generative AI*. This channel would explore:\n\n🤔 How does AI mirror or magnify human bias?  \n🌍 Who is left out or harmed by current AI systems?  \n🧠 What frameworks help us think more ethically—across cultures and contexts?\n\nAs a passionate learner and advocate for **digital inclusion**, I believe this channel can help surface essential questions that often get overlooked in fast-moving tech spaces.\n\nIf selected, I’d kick things off with:  \n✨ **Bias is a Mirror: What AI Reflects Back at Us** – an open reflection thread.\n\nWould love to co-create this with you all!  \n— Melinda\n\nPS:\n💡 Why Digital Inclusion Matters (Quick Pulse)\n\nWhen we talk about ethics in AI, we must also ask: Who gets to participate? Who gets left behind? Some key barriers that block digital inclusion:\n\n🔹 Tech Knowledge – Not everyone starts from the same level of familiarity or confidence.\n🔹 Language & Terminology – Complex AI lingo can act like a wall. Plain language matters.\n🔹 Access to Tools & Platforms – Many can't afford, find, or even locate the right AI tools or communities.\n🔹 Cognitive & Sensory Design – Interfaces often ignore neurodivergent users or those with fatigue.\n🔹 Cultural Fit – Most tools reflect dominant (often Western) norms, not diverse ways of thinking.\n🔹 Power Imbalance – Many users are consumers, not co-creators. Participation ≠ agency.\n\nIf we want ethical AI, we need inclusive systems that lower these barriers—by design.",
+      "timestamp": "2025-04-19T10:17:14.230000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1363096095340757103",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362990605881315348",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Totally agree with <@673901899837341736>",
+      "timestamp": "2025-04-19T03:18:03.583000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362990605881315348",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362850646671491206",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362850646671491206",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone , my personal take on this matter is to keep it simple and avoid the temptation of categorising too much (the taxonomical approach). On the other hand, I guess there is a long path ahead of us and we will be continously evaluating the convenience / usefulness of splitting or merging certain topics/themes.\nThere is one point worth highlighting, though: the network will eventually -maybe sooner than we expect- produce tools that analise, synthesise and organise information within the server. This was noted by Dr Sanchez as one of the key objectives, as the testing ground that this community is. This suggests that we should think strategically about the contents: communications, events and discussions vs documents / resources, etc..\nHope this makes sense...",
+      "timestamp": "2025-04-18T18:01:54.707000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362850646671491206",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362839174109200395",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Lastly, let's create a Glossary Channel in Help and Resources. So many terms coming out.  It will help make sense of the alphabet soup of terms",
+      "timestamp": "2025-04-18T17:16:19.435000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362839174109200395",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362838973772337304",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I would also like to suggest a separate channel for Free Learning Courses and Videos.  It seems to be getting buried in the overall Resources Library and Chats.",
+      "timestamp": "2025-04-18T17:15:31.671000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362838973772337304",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362838615897669672",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It looks like the categories I suggested were added except for the Multi-Modal AI Tools and Tips.  Can we add that one too?",
+      "timestamp": "2025-04-18T17:14:06.347000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362838615897669672",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1362519182079561758",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1362528285644292146",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We can maybe integrate a channel where the community can share useful prompts…and sub channels with different kind of specific uses.",
+      "timestamp": "2025-04-17T20:40:57.849000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362528285644292146",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362520930022199487",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153> <@1361976806651068517> <@1361586210639970384> I know you guys had some suggestions for channels!\n\nIf you guys want to submit them here I will try and include them today; i have been overseeing discord automation integration but tonight I should have some time to incorporate as I am doing a discord overhaul",
+      "timestamp": "2025-04-17T20:11:44.132000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362520930022199487",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1361586210639970384",
+          "username": "melanie.mitgenai",
+          "display_name": "Melanie"
+        },
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        },
+        {
+          "id": "1361976806651068517",
+          "username": "andreahickethier",
+          "display_name": "Andrea Hickethier 🍑 Munich"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362519182079561758",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> <@&1359958995854692373> This is a space to submit your concepts for upvotes to be entered into a poll for voting for updates to the server!\n\nWe will review the top items every month and select a item to incorporate! This is a very basic start to this channel, there will be a similar system with the wider community!",
+      "timestamp": "2025-04-17T20:04:47.390000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1362519182079561758",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380138350505365555",
+      "channel_id": "1360696813157482556",
+      "channel_name": "📥feedback-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My feedback regarding Buddy Group 4 Interaction Levels. A snapshot😉",
+      "timestamp": "2025-06-05T10:57:04.491000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360696813157482556/1380138350505365555",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1380138350375211090",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1360696813157482556/1380138350375211090/image.png?ex=6842c980&is=68417800&hm=4b350c92860797190880302390ebfc37cdf725fd0e2a4bed6f375ea34b76eaa0&",
+          "size": 244021,
+          "content_type": "image/png"
         }
       ],
       "embeds": 0,
@@ -1063,5 +1174,6 @@
       "type": "MessageType.default",
       "reference": null
     }
-  ]
+  ],
+  "last_update_timestamp": "2025-06-05T14:09:37.910758+00:00"
 }

@@ -4,7 +4,7 @@
   "channel_id": "1369819126691922000",
   "channel_name": "💠buddy-group12",
   "fetch_timestamp": "2025-06-03T22:04:09.701074",
-  "message_count": 36,
+  "message_count": 38,
   "messages": [
     {
       "message_id": "1369825425131442250",
@@ -958,6 +958,55 @@
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
+    },
+    {
+      "message_id": "1379916370569072732",
+      "channel_id": "1369819126691922000",
+      "channel_name": "💠buddy-group12",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-06-04T20:15:00.350000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369819126691922000/1379916370569072732",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379931565710381128",
+      "channel_id": "1369819126691922000",
+      "channel_name": "💠buddy-group12",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-04T21:15:23.154000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369819126691922000/1379931565710381128",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
-  ]
+  ],
+  "last_update_timestamp": "2025-06-05T14:10:22.356596+00:00"
 }

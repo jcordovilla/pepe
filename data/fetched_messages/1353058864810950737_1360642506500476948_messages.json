@@ -3,34 +3,34 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1360642506500476948",
   "channel_name": "🧠feedback-workshop",
-  "fetch_timestamp": "2025-06-03T22:03:46.291221",
+  "fetch_timestamp": "2025-06-04T23:18:17.420153+00:00",
   "message_count": 80,
   "messages": [
     {
-      "message_id": "1360696741665706207",
+      "message_id": "1371173327506374777",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hi all, for those interested in joining a call to brainstorm around the concept of learning mechanisms for non-coders, let's jump on a call at 10:30 am est via Discord.",
-      "timestamp": "2025-04-12T19:23:03.736000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360696741665706207",
+      "content": "@everyone Just posted the feedback session recording to <#1364289798340349953> !",
+      "timestamp": "2025-05-11T17:13:16.446000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1371173327506374777",
       "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Irene Yang",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
-          "emoji": "❤️",
-          "count": 2
+          "emoji": "👍",
+          "count": 5
         },
         {
-          "emoji": "👍",
-          "count": 3
+          "emoji": "👍🏼",
+          "count": 1
         }
       ],
       "attachments": [],
@@ -40,86 +40,14 @@
       "reference": null
     },
     {
-      "message_id": "1360698005052719244",
+      "message_id": "1371154688606605372",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I'm still trying to figure out exactly how this works.  But it looks like i dont need to create a separate meeting since in this channel, i can just enable voice and camera at the designated time. You are all administrators so if you would like to join the call tomorrow, Sunday 4/13 at 10:30 am est, just join in this channel.  Let me know if I am missing anything. I am new to Discord actually.",
-      "timestamp": "2025-04-12T19:28:04.951000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360698005052719244",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360699185480863986",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Irene! Sounds great! 😄\nI think it’s kind of hop in, hop off…open, virtual door 😅 see you tomorrow ☺️",
-      "timestamp": "2025-04-12T19:32:46.387000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360699185480863986",
-      "author": {
-        "id": "1360182837113786399",
-        "username": "diell_zaa",
-        "discriminator": "0",
-        "display_name": "Diellza Ahmetaj",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360740911415427092",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "See you tomorrow!",
-      "timestamp": "2025-04-12T22:18:34.625000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360740911415427092",
-      "author": {
-        "id": "546559083357143044",
-        "username": "saak123456",
-        "discriminator": "0",
-        "display_name": "Sangame Krishnamani",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360985832424607874",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@546559083357143044> <@1359552583244583153> I am currently in a meeting with Dr.Sanchez if one of you could update me on what you discuss that would be great!",
-      "timestamp": "2025-04-13T14:31:48.344000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360985832424607874",
+      "content": "https://mit.zoom.us/j/96295613946\n\n<@1360639641556090894> <@1360003496384008262>  / @everyone  who wants to join\n\nHere is the link for the feedback meeting today for the winning submission from the feedback workshop !\n\nSee you all there!",
+      "timestamp": "2025-05-11T15:59:12.586000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1371154688606605372",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -128,164 +56,22 @@
         "bot": false
       },
       "mentions": [
-        "1359552583244583153",
-        "546559083357143044"
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        },
+        {
+          "id": "1360639641556090894",
+          "username": "ash.mikhail",
+          "display_name": "Ash Mikhail"
+        }
       ],
       "reactions": [
         {
-          "emoji": "👍",
+          "emoji": "🫡",
           "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360985868180914367",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "So sorry I cant attend the meeting!",
-      "timestamp": "2025-04-13T14:31:56.869000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360985868180914367",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360986332758806530",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-13T14:33:47.633000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986332758806530",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360986335648809162",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi all, I opened up a video channel.  Sangame and I are on right now. Please join when you can.",
-      "timestamp": "2025-04-13T14:33:48.322000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986335648809162",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360986431698370662",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "https://discord.gg/Qy2Gx6DV",
-      "timestamp": "2025-04-13T14:34:11.222000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986431698370662",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360986464653148340",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Join thru this button",
-      "timestamp": "2025-04-13T14:34:19.079000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986464653148340",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1360988340064878653",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "https://www.instagram.com/p/DITZ2MNAs3s/?igsh=MW16NHE2YzN5cTlxZg==",
-      "timestamp": "2025-04-13T14:41:46.212000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360988340064878653",
-      "author": {
-        "id": "1359551204648157214",
-        "username": "nasseraly",
-        "discriminator": "0",
-        "display_name": "Nasser Aly",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
+        },
         {
           "emoji": "👍",
           "count": 1
@@ -298,29 +84,144 @@
       "reference": null
     },
     {
-      "message_id": "1360993908766806197",
+      "message_id": "1370170877316038707",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@546559083357143044> <@1359955242438889545> <@1359551204648157214> <@1357376692384960524> <@1335299567440367757> <@1352735021093359626> Thanks for joining our call to flesh out the concept around learning for non-coders and also the idea we should also identify and create pathways for coders.  The concept is to identify what is missing and/or what are the challenges and help fill the gaps thru providing content and resources.  In addition, we discussed tapping experts or one of our own (e.g. network architects) to lead a session to discuss fundamentals for non-tech.  <@1352785241252565174> A recommendation that we would like to follow up on is designing a short survey to identify what these learning gaps are for non-coders and coders.  I'm happy to take the lead with this group to develop some survey questions to capture VOC.",
-      "timestamp": "2025-04-13T15:03:53.894000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360993908766806197",
+      "content": "Thanks!",
+      "timestamp": "2025-05-08T22:49:53.696000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370170877316038707",
       "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
         "discriminator": "0",
-        "display_name": "Irene Yang",
+        "display_name": "Ash Mikhail",
         "bot": false
       },
       "mentions": [
-        "546559083357143044",
-        "1359955242438889545",
-        "1352735021093359626",
-        "1357376692384960524",
-        "1335299567440367757",
-        "1352785241252565174",
-        "1359551204648157214"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370165854393864244",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370165854393864244",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Will do!",
+      "timestamp": "2025-05-08T22:29:56.138000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370165854393864244",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360639641556090894",
+          "username": "ash.mikhail",
+          "display_name": "Ash Mikhail"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370164285006680064",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370164285006680064",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> please include me in this meeting as I have a couple of ideas would love to share with you. Thanks",
+      "timestamp": "2025-05-08T22:23:41.967000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370164285006680064",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369768426301554888",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369786906191073391",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174>",
+      "timestamp": "2025-05-07T21:24:07.846000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369786906191073391",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -330,23 +231,527 @@
       "reference": null
     },
     {
-      "message_id": "1361009680226320394",
+      "message_id": "1369786524673114234",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Irene, I would recommend we keep the focus on non-coders as coders know how to find their way around and get the info and resources they need. We are trained for it over the years!",
-      "timestamp": "2025-04-13T16:06:34.103000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361009680226320394",
+      "content": "That works Ill block it my calendar, <@1357376692384960524> yes it will be recorded!",
+      "timestamp": "2025-05-07T21:22:36.885000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369786524673114234",
       "author": {
-        "id": "546559083357143044",
-        "username": "saak123456",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Sangame Krishnamani",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [
-        "1359552583244583153"
+        {
+          "id": "1357376692384960524",
+          "username": "shabana_39556",
+          "display_name": "Shabana Islam"
+        },
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369768426301554888",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369772365998854195",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I am now lost here. Will this session be recorded? I maybe busy on the Mother’s Day!",
+      "timestamp": "2025-05-07T20:26:21.194000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369772365998854195",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369768426301554888",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sunday 12 pm ET or later works best for me (since it's Mother's Day in the US)",
+      "timestamp": "2025-05-07T20:10:41.897000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369768426301554888",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369733194680635544",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369733194680635544",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> <@969571634027589643> <@1360003496384008262>  / admins\n\nWhoever is interested let me know I was thinking of having a session where we discuss how to implement this concept since this won as the feedback submission for the month\n\nI was thinking this Sunday let me know what times work for everyone\n\nWe can workshop implementation / execution",
+      "timestamp": "2025-05-07T17:50:42.024000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369733194680635544",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        },
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369732780942037073",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369732780942037073",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-07T17:49:03.381000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369732780942037073",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1369042353653809232",
+        "channel_id": "1360696813157482556",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367735085817659402",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Jumping on the wagon here..I will be light on discord as well till 6th May👋",
+      "timestamp": "2025-05-02T05:30:55.748000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367735085817659402",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367373233241985025",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "No worries <@1349019079683473488> I‘ll do just the same. Enjoy the learning💜👋",
+      "timestamp": "2025-05-01T05:33:03.371000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367373233241985025",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367237408625786930",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I too need to conclude my courseware. I realise I have some ground to cover. I will keep it a little bit light on Discord till. 6th May..  Thanks everyone for understanding..",
+      "timestamp": "2025-04-30T20:33:20.259000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367237408625786930",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367128043646353580",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367236099659005984",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "just 2c to consider - turns out using threads is also related to channel data housekeeping.\n\nThreads that have been inactive for a configurable amount of time will automatically hide from channel.\n\nThat is the discord idea of keeping conversation focused on active topics.\n\nThis came up only today so we haven’t had the chance to survey wether this is cumbersome or convenient. But it looks like it may be a tool to address overwhelming  channel information.",
+      "timestamp": "2025-04-30T20:28:08.177000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367236099659005984",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367212264997916812",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367212264997916812",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> Thanks for the great discussion! Last call for thoughts before the write up/proposal phase. Would love to hear any other perspectives or ideas, and also feedback on what's been said so far.  All input welcome! Speak now or hold your peas 🫛 😅 🤣",
+      "timestamp": "2025-04-30T18:53:25.551000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367212264997916812",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367128782619803698",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> <@&1359958995854692373>  remember once you have a finalized concept for an update submit it in feedback submissions as a polished write up / presentation with implementation plan! So excited this space is being utilized can't wait to evolve this community together !",
+      "timestamp": "2025-04-30T13:21:41.801000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367128782619803698",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367128043646353580",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you <@1125194882164736050>  I just need to get some solid time to deep dive and finish everything. It’s been very busy & also a bit noisy the last few days. But now, most people are onboarded etc. To conclude: I will engage daily again after May 6th. Thanks @everyone for your understanding. 👋",
+      "timestamp": "2025-04-30T13:18:45.616000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367128043646353580",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍🏼",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367109776038957137",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Melinda and @everyone, by the way—if anyone has questions or needs help with an assignment or forum, feel free to DM me or, if you’d like, we could also hold a support session tomorrow (Thursday) or Friday. Please take advantage of this to lighten your load. Remember, you have six months to review all the content, and we can continue reinforcing and exploring AGAI topics in this community over time.",
+      "timestamp": "2025-04-30T12:06:10.279000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367109776038957137",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366692140435902506",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367104810897244252",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Idem for me",
+      "timestamp": "2025-04-30T11:46:26.497000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367104810897244252",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366823020357882056",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366823020357882056",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Very good point everyone.. As this discussion is evolving- I voluntarily skip posting a tech tip today. Will post next week..",
+      "timestamp": "2025-04-29T17:06:42.397000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366823020357882056",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366811859646287892",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Mooorning Oscar!  😀 \n\nI love the idea. It very much reminds me of how Medium is organized. \nIt has editors picks and content curated on the basis of interests for the weekly/monthly digests. \nIt's not a unique. It's best practices. Which is even better.\n\nI hope Discord can support it too. Others that are even more into their domain (slack) have it.\nPotentially, it could be managed by external tooling, but this means dev/support effort so .. probably no.",
+      "timestamp": "2025-04-29T16:22:21.476000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366811859646287892",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
       ],
       "reactions": [
         {
@@ -359,20 +764,175 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1360993908766806197",
+        "message_id": "1366810403052585090",
         "channel_id": "1360642506500476948",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1361011337777643721",
+      "message_id": "1366810403052585090",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Let's start to brainstorm a few questions for a survey.  I would recommend no more than 5 questions for the survey.",
-      "timestamp": "2025-04-13T16:13:09.294000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361011337777643721",
+      "content": "Hey <@969571634027589643> ! moorning !\nAbout the suscriptions, what I undestood about it (cause I myself search for good strategies) is that there´s probably a way whitin Discord settings or tools where If you use a reaction action it will \"subscribe\" you or \"notify you\" about when something in a particular channel is post...we will have to search more about this or talk with the Architechts.\n\nAbout setting up a Curator Rol...thats something we will need to lay down to <@1352785241252565174> and <@672229862085361664> to know the thougts about it, the intend behind this is like having someone or group of people to analyze the posts made in the channels or particular ones, in order for them to lets say clean the channel and only maintain the post that they consider more relevant. Of course for this that someone or group of people should be an expert of the subjetc or someone with high criteria.",
+      "timestamp": "2025-04-29T16:16:34.197000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366810403052585090",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        },
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366805351592366100",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366805351592366100",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My favs:\n+1 For better use of threads\n+1 for the weekly digest\n+1 for calendar to orchestrate the posts, provided that changes in schedule are easy too - e.g., someone is on vacation, how to change places... \n\nI have some open questions:\n- I couldn't quite understand how content subscription will work. \n   Subscribing to a specific content type means \n   1) we need to distinguish them \n   2) content authors need to create content with a type. \n    And 3) what's the effect of a subscription - the weekly digest, or do you mean something else?\n\n- I also wonder how we set the bar for the quality of posts? Was that the intent behind curators? \n   Who and how will step into this role?",
+      "timestamp": "2025-04-29T15:56:29.835000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366805351592366100",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366509339547799552",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366692140435902506",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Totally with you all on this. 🙏 And a quick thought: Let's slow down until everybody finished the course (May 6th).",
+      "timestamp": "2025-04-29T08:26:38.192000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366692140435902506",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366502347802542092",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366636576930660442",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone I recommend we rotate and take turns to post one topic per week to allow for a deeper dialogue. As Oscar Sanchez mentioned in the \"Discord Engagement & Structure\" doc:\n\n1)    #general-chat (Interactive)\n      o        The primary channel for casual conversation, small talk, or day-to-day questions.\n      o      Monday Motivators and Tech Tips are posted here each week.\n\n2)    #ai-philosophy-ethics (Interactive)\n      o    Deep dives into ethical, philosophical, and societal impacts of AI.\n      o    Intended for thought-provoking debate and resource sharing.\n\n3)    #ai-practical-applications (Interactive)\n      o    Showcases real-world examples of AI deployments and best practices.\n      o    Members can discuss industry-specific use cases and success stories.\n\n\nFor 2 and 3 above, focus Topic in either #ai-philosophy-ethics or #ai-practical-applications. Rotate weekly:\ni.    1st & 3rd Wednesdays: Debate an AI ethics or philosophical question.\nii.    2nd & 4th Wednesdays: Share a practical deployment story or industry insight.\n\nQuantity of posts is great, however, to get the members engaged, focus is vital.\n\nWould love to hear everyone's thoughts.",
+      "timestamp": "2025-04-29T04:45:50.820000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366636576930660442",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366550472592461895",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think the threads feature will help organize the conversations.  I like the idea of focusing on posting on possibly 2-3 themes on a lower frequency but going  deeper, eg similar to how in our course we have been responding and engaging",
+      "timestamp": "2025-04-28T23:03:41.946000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366550472592461895",
       "author": {
         "id": "1359552583244583153",
         "username": "ireney_67517",
@@ -381,7 +941,12 @@
         "bot": false
       },
       "mentions": [],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -389,23 +954,52 @@
       "reference": null
     },
     {
-      "message_id": "1361011994093813821",
+      "message_id": "1366520838513233981",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> I can create a survey in Microsoft Forms or Google for this. However if you prefer to keep it within Discord, please let me know what to use. I envision this is not simply a poll but want to capture open feedback.",
-      "timestamp": "2025-04-13T16:15:45.772000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361011994093813821",
+      "content": "love to hear your thoughts too <@1352785241252565174> <@546559083357143044> <@673901899837341736> <@1125194882164736050> <@1322962807565848586> <@1063015906650902549>  🤝",
+      "timestamp": "2025-04-28T21:05:56.631000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366520838513233981",
       "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
+        "id": "758206516753858561",
+        "username": "darkgago",
         "discriminator": "0",
-        "display_name": "Irene Yang",
+        "display_name": "Oscar Garcia",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        },
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        },
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        },
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        },
+        {
+          "id": "1063015906650902549",
+          "username": "snowflake1974",
+          "display_name": "Carlos de March"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -415,208 +1009,14 @@
       "reference": null
     },
     {
-      "message_id": "1361012606424580146",
+      "message_id": "1366520408433496115",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Sorry I missed the meeting yesterday.  Here is a survey developed by chatgpt: AI Literacy Needs Assessment Survey (For Non-Coders)\nSection 1: Background Information\nWhat is your current role or department?\n[Open-ended]\n\nHow familiar are you with artificial intelligence (AI)?\n\n Very familiar\n\n Somewhat familiar\n\n Heard of it, but don’t understand it\n\n Not familiar at all\n\nHave you used any AI-powered tools in your work (e.g., ChatGPT, Excel AI features, Grammarly, etc.)?\n\n Yes\n\n No\n\nIf yes, please list them: [Open-ended]\n\nSection 2: Current Understanding\nWhich AI concepts do you feel confident about? (Select all that apply)\n\n What AI is and how it works\n\n Machine learning vs. traditional programming\n\n Ethical implications of AI\n\n Data privacy and AI\n\n Limitations and risks of AI\n\n None of the above\n\nWhat do you find most confusing about AI?\n[Open-ended]\n\nSection 3: Learning Preferences & Needs\nWhat areas of AI would you like to learn more about? (Select all that apply)\n\n AI basics and terminology\n\n Real-world AI applications in our industry\n\n Using AI tools to improve productivity\n\n Responsible AI and ethics\n\n Interpreting AI-generated outputs\n\n Communicating with technical AI teams\n\n Other (please specify): [Open-ended]\n\nHow would you prefer to learn about AI?\n\n Interactive workshops\n\n Short online courses\n\n Webinars or speaker series\n\n Reading materials (articles, guides)\n\n One-on-one coaching or mentoring\n\n On-the-job demos and use cases\n\nWhat barriers, if any, prevent you from learning more about AI? (Select all that apply)\n\n Lack of time\n\n Intimidating or overly technical content\n\n No clear reason to use it in my role\n\n Not sure where to start\n\n Other (please specify): [Open-ended]\n\nSection 4: Expectations and Support\nWhat would help you feel more confident in using AI at work?\n[Open-ended]\n\nDo you have any suggestions for how our company can support non-technical employees in becoming more AI literate?\n[Open-ended]",
-      "timestamp": "2025-04-13T16:18:11.763000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361012606424580146",
-      "author": {
-        "id": "1360636661125349566",
-        "username": "michaelkeady_92138",
-        "discriminator": "0",
-        "display_name": "Michael Keady",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361014565436919848",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1360636661125349566> Thanks for sharing this. Does it provide any recommendations of courses/learning path after the survey?",
-      "timestamp": "2025-04-13T16:25:58.828000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361014565436919848",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [
-        "1360636661125349566"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361014749084782642",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Oh never mind, I misunderstood your point",
-      "timestamp": "2025-04-13T16:26:42.613000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361014749084782642",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361015005478387913",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I thought a ChatGPT bot can take in these questions and suggest a learning path (which might be a cool use case)",
-      "timestamp": "2025-04-13T16:27:43.742000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361015005478387913",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361017514078765299",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks for sharing Michael. I think the context for this survey will be our learning cohorts. The questions we want to drill into are what would non-coders like to learn and how?  What is missing?  We may also allow for open responses vs pre-selecting the choices.  For example non-coders wishing to learn how to build a Personal Assistant or building a website or building an Agentic AI assistant without coding.",
-      "timestamp": "2025-04-13T16:37:41.839000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017514078765299",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361017873375428639",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I went ahead and queried Gemini 2.5 and here’s the suggestion:\n\nOkay, here is a learning path designed to guide you toward AI expertise, integrating courses from top-tier providers like MIT, DeepLearning.AI, Udemy, and Coursera, along with estimated timelines.\n\n## AI Learning Path for Aspiring Experts\n\nThis path progresses from foundational knowledge to advanced specialization and practice. Timelines are estimates and can vary based on your background, learning pace, and dedication.\n\n**Phase 1: Foundations (Estimated Time: 3-6 Months)**\n\nFocus on building the necessary mathematical and programming skills.\n\n*   **Mathematics (Linear Algebra, Calculus, Probability & Statistics):**\n    *   *Recommendation:* Utilize resources like Khan Academy, MIT OpenCourseWare (OCW) for relevant math courses (e.g., 18.06 Linear Algebra, 18.01 Single Variable Calculus), or introductory university-level courses on Coursera/edX if needed. While MIT Professional Education offers a focused \"Foundations of Mathematics for AI\" course, it's short, intensive, and likely better suited for professionals needing a refresher rather than beginners [Search Result Ref: Implicit from Prof Ed focus].\n    *   *Why:* These are essential for understanding how AI algorithms work[4].\n*   **Programming (Python & Computer Science Fundamentals):**\n    *   *Recommendation:* Start with a beginner-friendly Python course. Consider DeepLearning.AI's \"AI Python for Beginners\" or comprehensive Python tracks on Codecademy or Coursera [Search Result Ref: Implicit, standard recommendation]. Follow up with data structures and algorithms, perhaps using MIT OCW's \"Introduction to Algorithms\" materials [Search Result Ref: Implicit from OCW course titles].\n    *   *Why:* Python is the dominant language in AI. Understanding data structures is crucial for efficient coding[4]. Many advanced courses assume Python proficiency.",
-      "timestamp": "2025-04-13T16:39:07.502000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017873375428639",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361017949288140830",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "**Phase 2: Core AI & Machine Learning (Estimated Time: 3-6 Months)**\n\nDive into the fundamental concepts and techniques of AI and ML.\n\n*   **Broad AI Introduction (Optional but Recommended):**\n    *   *Recommendation:* DeepLearning.AI's \"AI For Everyone\" on Coursera (Instructor: Andrew Ng) provides a non-technical overview, useful for context[4].\n    *   *Duration:* ~10 hours[4].\n*   **Machine Learning Fundamentals:**\n    *   *Recommendation:* DeepLearning.AI's \"Machine Learning Specialization\" on Coursera (Instructor: Andrew Ng). This is a foundational course covering supervised learning, unsupervised learning, and best practices[2]. Alternatively, explore MIT OCW's \"Introduction to Machine Learning\" materials [Search Result Ref: Implicit from OCW course titles].\n    *   *Provider & Duration:* DeepLearning.AI via Coursera, typically 1-3 months depending on pace[2].\n*   **Data Handling & Preparation:**\n    *   *Recommendation:* Learn libraries like NumPy and pandas. These are often integrated into ML courses (like the DeepLearning.AI one) or can be learned via dedicated courses/tutorials on platforms like Coursera or DataCamp.\n    *   *Why:* Cleaning and preparing data is a critical step in any AI project[4].",
-      "timestamp": "2025-04-13T16:39:25.601000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017949288140830",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361018063851491459",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "**Phase 3: Deep Learning (Estimated Time: 3-6 Months)**\n\nFocus on neural networks, the core of many modern AI advancements.\n\n*   **Deep Learning Fundamentals:**\n    *   *Recommendation:* DeepLearning.AI's \"Deep Learning Specialization\" on Coursera (Instructor: Andrew Ng). This comprehensive 5-course series covers foundational concepts, CNNs, RNNs, and practical aspects like hyperparameter tuning and optimization[2][6]. Requires intermediate Python and basic ML knowledge[6]. MIT OCW's \"Introduction to Deep Learning\" is another excellent, though potentially more rigorous, option [Search Result Ref: Implicit/known].\n    *   *Provider & Duration:* DeepLearning.AI via Coursera, estimated 3-6 months[2]. Syllabus covers foundational concepts, practical implementation (TensorFlow), optimization, and structuring ML projects[6].\n*   **Alternative/Supplement:** MIT xPRO offers \"Deep Learning: Mastering Neural Networks\" for exploring core concepts and toolkits [Search Result Ref: Implicit/known].",
-      "timestamp": "2025-04-13T16:39:52.915000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018063851491459",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361018153349681293",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "**Phase 4: Hands-on Practice & Initial Specialization (Estimated Time: 6-12+ Months)**\n\nApply your knowledge through projects and start exploring specific AI domains.\n\n*   **Projects & Portfolio Building:**\n    *   *Recommendation:* Engage in hands-on projects. Udemy's \"Artificial Intelligence A-Z 2024: Build 7 AI + LLM & ChatGPT\" focuses specifically on building multiple projects using various techniques (Q-Learning, Deep Q-Learning, LLMs)[3]. MIT's Applied Data Science Program (12 weeks) includes multiple hands-on projects and a capstone[1]. Platforms like Kaggle are excellent for practice competitions.\n    *   *Provider & Duration (Udemy Course):* Udemy, 15.5 hours of video content plus project time[3].\n    *   *Provider & Duration (MIT Program):* MIT Professional Education (via Great Learning), 12 weeks[1]. Requires significant weekly effort (est. 8-12 hrs/week for similar MIT programs[5]).\n*   **Explore Specializations (e.g., NLP, Computer Vision, Generative AI, Reinforcement Learning):**\n    *   *Generative AI Recommendation:* Google Cloud's \"Introduction to Generative AI Learning Path Specialization\" on Coursera covers LLMs and responsible AI[7]. MIT also offers specialized GenAI courses via xPRO and Professional Education [Search Result Ref: Implicit/known].\n    *   *NLP Recommendation:* Look into Stanford's CS224N materials (available freely) or DeepLearning.AI's NLP Specialization on Coursera [Search Result Ref: Implicit/known].\n    *   *Provider & Duration (Google GenAI):* Google Cloud via Coursera, 4 short courses, potentially ~1 month each[7].\n*   **Learn AI Tools & Frameworks:** Deepen expertise in TensorFlow, PyTorch, Scikit-learn, and potentially cloud AI platforms (AWS SageMaker, Google Vertex AI, Azure ML). Many specializations incorporate these tools.",
-      "timestamp": "2025-04-13T16:40:14.253000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018153349681293",
+      "content": "Someone from the conversational leader group suggested that we rotate and take turns to post.",
+      "timestamp": "2025-04-28T21:04:14.092000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366520408433496115",
       "author": {
         "id": "1352735021093359626",
         "username": "rad.ai",
@@ -627,7 +1027,297 @@
       "mentions": [],
       "reactions": [
         {
-          "emoji": "🏌️‍♂️",
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366515168170741933",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "👏  Thanks for putting this together! I especially love:\n+1 threads to organize conversations\n+1 daily/weekly digest \n+1 publishing calendar (along the lines of <@1349019079683473488>'s suggestion)",
+      "timestamp": "2025-04-28T20:43:24.716000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366515168170741933",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366509339547799552",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366509339547799552",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Let me know what you thoughts are",
+      "timestamp": "2025-04-28T20:20:15.064000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366509339547799552",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1366509339124432906",
+          "filename": "Posting_Feedback.doc",
+          "url": "https://cdn.discordapp.com/attachments/1360642506500476948/1366509339124432906/Posting_Feedback.doc?ex=6841fbfe&is=6840aa7e&hm=42f2b37d4693d58a846452181ed0a1b497811f50d4d1e9c0e63628006467c9ee&",
+          "size": 26112,
+          "content_type": "application/msword"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366504426944335883",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Bh the way thanks for bringing it up. I really like it.",
+      "timestamp": "2025-04-28T20:00:43.808000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504426944335883",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366504253606068224",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I suggest setting a practical rhythm of posting every 2–3 weeks by individuals. We’ll keep it flexible—if someone comes across something truly interesting and wants to share it sooner, they’re welcome to do so. For instance if I put a tech tip on this today then as a thumb rule i put it again after 2-3 weeks",
+      "timestamp": "2025-04-28T20:00:02.481000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504253606068224",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366504087205445773",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is my first time participating in a community like this. For those of you with more experience, what do you think is the “secret sauce” that really helps a community like this thrive?\n\nWould love to learn from your perspectives as we brainstorm together. 🙌",
+      "timestamp": "2025-04-28T19:59:22.808000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504087205445773",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366503240124072037",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@758206516753858561>  Whatcha looking at?",
+      "timestamp": "2025-04-28T19:56:00.848000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366503240124072037",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366503060800540682",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Im working in a analysis for this, hopefully I can share it with you later on this day",
+      "timestamp": "2025-04-28T19:55:18.094000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366503060800540682",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366502347802542092",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey @everyone! Quick move + summary of conversation about how to foster idea sharing and engagement in the community without overloading folks:\n\n<@1352785241252565174> suggested that we move this conversation here so we can properly workshop a solution and build a potential implementation plan. Here's what’s been said so far:\n\n**<@1360003496384008262> **: \n* Raised concerns that following the daily theme schedule has led to a lot of content being posted — but not as much back-and-forth conversation like we had on the WhatsApp group.\n* Also shared feedback from WhatsApp that there’s already so much content it’s hard to keep up, and posting more might make that worse.\n* Suggested maybe limiting to 5 posts per day (either by assignment or sign-up) and focusing more on fueling deeper conversations rather than prioritizing quantity.\n* Raised the question whether the daily theme structure might actually be making non-leaders more hesitant to jump in casually.\n**<@758206516753858561> **: \n* Agreed that the volume feels overwhelming sometimes.\n* Cautioned that a strict \"first-come, first-served\" posting rule might be unfair across different time zones.\n* Suggested we should brainstorm together as Conversational Leaders to find a better system, especially now that we’re getting more feedback as the community grows.\n\ncc: <@969571634027589643> <@1087795330067742760> <@1359551204648157214> <@1357376692384960524> who expressed interest in the convo",
+      "timestamp": "2025-04-28T19:52:28.102000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366502347802542092",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        },
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        },
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        },
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        },
+        {
+          "id": "1357376692384960524",
+          "username": "shabana_39556",
+          "display_name": "Shabana Islam"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        },
+        {
+          "id": "1359551204648157214",
+          "username": "nasseraly",
+          "display_name": "Nasser Aly"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
           "count": 1
         }
       ],
@@ -638,49 +1328,43 @@
       "reference": null
     },
     {
-      "message_id": "1361018171410354416",
+      "message_id": "1363957095711379476",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "## Overall Timeline to Expertise\n\nBecoming a true AI *expert* is a continuous journey involving years of learning, practice, and often real-world experience or research. However, reaching a level of proficiency where you can build complex AI systems and potentially specialize could follow this rough timeline:\n\n1.  **Foundations:** 3-6 Months\n2.  **Core AI/ML:** 3-6 Months\n3.  **Deep Learning:** 3-6 Months\n4.  **Practice & Initial Specialization:** 6-12+ Months\n\n**Total Estimated Time to Proficiency:** A dedicated learner starting from scratch might expect to spend **1.5 to 3 years** consistently learning and practicing to achieve a strong, employable level of expertise. This aligns roughly with intensive multi-phase learning plans[4].\n\n**Key Considerations:**\n\n*   **Pace:** This timeline assumes dedicated part-time or near full-time study. Your actual timeline will vary[4].\n*   **Depth vs. Breadth:** Initially focus on foundational understanding, then specialize.\n*   **Hands-on Work:** Practical application through projects is crucial and takes significant time.\n*   **Continuous Learning:** AI evolves rapidly; ongoing learning through research papers, blogs, podcasts, and new courses is essential[4].\n*   **Program Structure:** Some comprehensive programs like the MIT Professional Certificate in ML & AI or the MIT Applied Data Science Program bundle several phases but often require prior experience or significant time commitment[1].",
-      "timestamp": "2025-04-13T16:40:18.559000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018171410354416",
+      "content": "I believe we're all aligned here. Regarding the channels, there's still room for improvement, and all ideas are welcome. The channels will likely be refined until we have a clear structure and everything is in place. Great idea about creating a specific channel for recordings! However, due to Discord's 10 MB file size limit, we may need to store them on a drive and share the URL in the channel. <@1352785241252565174> or <@546559083357143044> can confirm this. After all, we're here to collaborate, to share our views and ideas to make this community greater and better!  🙂  thank you Kat for your suggestions here",
+      "timestamp": "2025-04-21T19:18:32.715000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363957095711379476",
       "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
         "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361076087051784232",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1359552583244583153> , Sorry I was enable to join the call today, I had another call lined up at that time.",
-      "timestamp": "2025-04-13T20:30:26.724000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361076087051784232",
-      "author": {
-        "id": "1360267706204426442",
-        "username": "frederique_20320",
-        "discriminator": "0",
-        "display_name": "Frédérique Lambers",
+        "display_name": "Cristian Ursan",
         "bot": false
       },
       "mentions": [
-        "1359552583244583153"
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 5
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -688,23 +1372,32 @@
       "reference": null
     },
     {
-      "message_id": "1361078467264774294",
+      "message_id": "1363948754394153042",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I also prompted with Chatgpt using Irene's  feedback . \n\nWhat is your current level of comfort with coding or programming tools (e.g., Python, Jupyter Notebooks)?\n\nNot comfortable at all\n\nSlightly comfortable\n\nModerately comfortable\n\nVery comfortable\n\nExpert level\n\nWhat are your main motivations for wanting to learn coding as part of your engagement with Generative AI? (Select all that apply)\n\nTo better understand how GenAI tools work\n\nTo build prototypes or experiments\n\nTo collaborate more effectively with technical colleagues\n\nTo automate tasks or workflows\n\nOther (please specify)\n\nWhat are the biggest challenges or barriers you face when trying to learn coding? (Select up to 3)\n\nLack of time\n\nLack of confidence or fear of failure\n\nDifficulty understanding programming logic\n\nNot sure where to start\n\nTeaching pace or materials are too technical\n\nNot enough hands-on examples\n\nOther (please specify)\n\nWhich types of support or learning resources would help you most in learning to code? (Select up to 3)\n\nInteractive coding tutorials\n\nLive or recorded walkthroughs of code\n\nExplanations using real-life, non-technical analogies\n\nAccess to a coding mentor or peer group\n\nSmall, hands-on projects with step-by-step guidance\n\nCheat sheets or quick reference guides\n\nOther (please specify)\n\nWhat outcomes would make you feel successful in learning to code during or after this program? (Open text)\n[Free response]\n\nI look forward to your feedback.",
-      "timestamp": "2025-04-13T20:39:54.211000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361078467264774294",
+      "content": "Another point I would like to mention is that I have noticed that several Communities always have values that group people in common behaviors. \n\nI think it would be interesting to have in the “Welcome & Orientation” section something like “Our Community Values”, maximum 6 values that integrate us as a Community. \nFor example (some that could be nice):\nWe are leaders who share\nWe are committed to our growth and purpose\nWe are visionary leaders who aim high\nWe are leading practitioners and open-minded\nWe embrace technology ...\n\n**Somewhere, I would like to highlight more the purpose of the community.**",
+      "timestamp": "2025-04-21T18:45:23.990000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363948754394153042",
       "author": {
-        "id": "1360267706204426442",
-        "username": "frederique_20320",
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
         "discriminator": "0",
-        "display_name": "Frédérique Lambers",
+        "display_name": "Katherine Valqui",
         "bot": false
       },
       "mentions": [],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -712,14 +1405,192 @@
       "reference": null
     },
     {
-      "message_id": "1361131069490987301",
+      "message_id": "1363947798491566322",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hi michael the attachment is not visible.",
-      "timestamp": "2025-04-14T00:08:55.559000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361131069490987301",
+      "content": "Could also help for later or potential information retrieval 😉",
+      "timestamp": "2025-04-21T18:41:36.085000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363947798491566322",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363946304316768438",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey <@1359966236473168188> I do too think its a good idea to have a dedicated channel for the Motivational Monday and Tech Tips for example. Indeed the General Discussion starts to feel like all in all channel with no dedicated purpose. What do you think <@1352785241252565174>",
+      "timestamp": "2025-04-21T18:35:39.846000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363946304316768438",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1363944757851848756",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1363944757851848756",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all! \nLast week I was off on family vacation and couldn't surf the discord as much as I would have liked! I must confess that I felt like a baby boomer at first!\n\n**On a personal note, I think there’s room to improve how the current categories are grouped.**\n\nAlso, I’ve noticed that many Members are sharing articles and relevant information in the #General-Chat channel, even though we already have a #GenAI-News channel for that.\n\nI find it interesting how the \"**Motivational Monday**\" idea has naturally taken off and is getting a lot of attention—maybe it could become its own dedicated channel?\n\nThe name \"General Discussion\" doesn’t really reflect what the channel is about. To me, it feels more like an **#AI-Sharing space.**\n\nPersonally, I think we’re missing something like a #Resource Center—a place where members can share useful content for the global community.\n\nIn the #Events channel, I’d love to see a section for #Upcoming-Events (to share events relevant to our field) and a #Past-Events section (to share recordings, if available).",
+      "timestamp": "2025-04-21T18:29:31.140000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363944757851848756",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1363272734313812219",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry Oscar I was part of that! \n\nFor those that we don't know what \"slow mode\" in discord:\n\nDiscord's \"Slow Mode\" feature limits the rate at which users can send messages in a channel, essentially creating a cooldown before they can send another message.",
+      "timestamp": "2025-04-19T21:59:08.243000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363272734313812219",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 6
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1363272074180689981",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1363272074180689981",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone who was talking on buddy chat I enacted slow mode I preparation for tmrw influx of general members\n\nContinue the conversation here if you wish! Check the channel description to understand as to why!\n\nThank you so much for everything you guys have been amazing!",
+      "timestamp": "2025-04-19T21:56:30.855000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363272074180689981",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362837487088832713",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I posted a message in our Coordinator Community general chat on survey functionality and whether or not it makes sense to create that functionality within Discord or use a pre-built tool outside of Discord.  Would like to launch a survey to this community to capture VOC feedback on non-coder/non-tech learning needs and preferences to help identify and prioritize topics.",
+      "timestamp": "2025-04-18T17:09:37.218000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362837487088832713",
       "author": {
         "id": "1359552583244583153",
         "username": "ireney_67517",
@@ -727,29 +1598,141 @@
         "display_name": "Irene Yang",
         "bot": false
       },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362834893180108992",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Oscar. Yes I can post now.",
+      "timestamp": "2025-04-18T16:59:18.782000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362834893180108992",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362824365183467662",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153> is it working now",
+      "timestamp": "2025-04-18T16:17:28.712000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362824365183467662",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
       "mentions": [
-        "1360636661125349566"
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        }
       ],
       "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1361126948046241882",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1361135816406991021",
+      "message_id": "1361378297967149287",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hi all, sorry I was watching The Masters⛳ 🏌️‍♂️ !  McIroy won! 1st Grand Slam winner since 2020 when Tiger Woods won that title.  Ok, so back to our topic at hand - - I was actually thinking the learning opportunity for non-technical would not be focused on coding.  My initial thoughts in the concept was more around learning AI tools and the idea that non-technical don't need to learn to code at all.  More and more the innovation and intuitiveness of these AI tools enable product managers, marketers, and business in general  to utilize sw applications, dragging and dropping and launching new capabilities without writing any code.  Perhaps we could have a survey that has branching questions to cover different segments and interests.  This would then cover those who want to leverage the power of genAI without having to take 3 - 6, 6 - 9, 12+ months to learn how to code or become  an expert in ML/AI.",
-      "timestamp": "2025-04-14T00:27:47.312000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361135816406991021",
+      "content": "Yes, agreed.  I think from the discussions we've had thus far, the focus will be on non-technical and non-coders and the objective of the survey is to capture VOC feedback from our course cohorts:   1)  learning goals 2) needs - what are gaps, what is missing, what are challenges you face as non-tech 3)  preferences.  In addition, I 'd like to suggest that we include a question around what AI tools you are most interested in learning more about or a question listing multiple categories people can multi-select. Lastly, open ended feedback.  Ping your thoughts on these priorities.  I can take a stab at a draft once we agree. I dont think it needs to be perfect. We're just collecting some feedback for ideas at this early phase. Can always do follow up surveys.",
+      "timestamp": "2025-04-14T16:31:19.421000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361378297967149287",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361367135485432050",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153> - I think it could be really helpful to agree on the scope of our work and write it down, so we have a common starting point. Otherwise, each of us might follow their own line of thought, which could be difficult to merge into a cohesive and impactful result. What do you think?",
+      "timestamp": "2025-04-14T15:46:58.078000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361367135485432050",
+      "author": {
+        "id": "1360267706204426442",
+        "username": "frederique_20320",
+        "discriminator": "0",
+        "display_name": "Frédérique Lambers",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361142229145620510",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have created an outline for the survey design which allows for branching questions and will go ahead and take a stab at drafting it tomorrow and share out for feedback. I think this might be faster.  Will also incorporate options for open-ended feedback.   I need to finish assignments due tomorrow still 🙂",
+      "timestamp": "2025-04-14T00:53:16.228000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361142229145620510",
       "author": {
         "id": "1359552583244583153",
         "username": "ireney_67517",
@@ -804,14 +1787,14 @@
       "reference": null
     },
     {
-      "message_id": "1361142229145620510",
+      "message_id": "1361135816406991021",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I have created an outline for the survey design which allows for branching questions and will go ahead and take a stab at drafting it tomorrow and share out for feedback. I think this might be faster.  Will also incorporate options for open-ended feedback.   I need to finish assignments due tomorrow still 🙂",
-      "timestamp": "2025-04-14T00:53:16.228000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361142229145620510",
+      "content": "Hi all, sorry I was watching The Masters⛳ 🏌️‍♂️ !  McIroy won! 1st Grand Slam winner since 2020 when Tiger Woods won that title.  Ok, so back to our topic at hand - - I was actually thinking the learning opportunity for non-technical would not be focused on coding.  My initial thoughts in the concept was more around learning AI tools and the idea that non-technical don't need to learn to code at all.  More and more the innovation and intuitiveness of these AI tools enable product managers, marketers, and business in general  to utilize sw applications, dragging and dropping and launching new capabilities without writing any code.  Perhaps we could have a survey that has branching questions to cover different segments and interests.  This would then cover those who want to leverage the power of genAI without having to take 3 - 6, 6 - 9, 12+ months to learn how to code or become  an expert in ML/AI.",
+      "timestamp": "2025-04-14T00:27:47.312000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361135816406991021",
       "author": {
         "id": "1359552583244583153",
         "username": "ireney_67517",
@@ -833,14 +1816,72 @@
       "reference": null
     },
     {
-      "message_id": "1361367135485432050",
+      "message_id": "1361131069490987301",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1359552583244583153> - I think it could be really helpful to agree on the scope of our work and write it down, so we have a common starting point. Otherwise, each of us might follow their own line of thought, which could be difficult to merge into a cohesive and impactful result. What do you think?",
-      "timestamp": "2025-04-14T15:46:58.078000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361367135485432050",
+      "content": "Hi michael the attachment is not visible.",
+      "timestamp": "2025-04-14T00:08:55.559000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361131069490987301",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360636661125349566",
+          "username": "michaelkeady_92138",
+          "display_name": "Michael Keady"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1361126948046241882",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1361078467264774294",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I also prompted with Chatgpt using Irene's  feedback . \n\nWhat is your current level of comfort with coding or programming tools (e.g., Python, Jupyter Notebooks)?\n\nNot comfortable at all\n\nSlightly comfortable\n\nModerately comfortable\n\nVery comfortable\n\nExpert level\n\nWhat are your main motivations for wanting to learn coding as part of your engagement with Generative AI? (Select all that apply)\n\nTo better understand how GenAI tools work\n\nTo build prototypes or experiments\n\nTo collaborate more effectively with technical colleagues\n\nTo automate tasks or workflows\n\nOther (please specify)\n\nWhat are the biggest challenges or barriers you face when trying to learn coding? (Select up to 3)\n\nLack of time\n\nLack of confidence or fear of failure\n\nDifficulty understanding programming logic\n\nNot sure where to start\n\nTeaching pace or materials are too technical\n\nNot enough hands-on examples\n\nOther (please specify)\n\nWhich types of support or learning resources would help you most in learning to code? (Select up to 3)\n\nInteractive coding tutorials\n\nLive or recorded walkthroughs of code\n\nExplanations using real-life, non-technical analogies\n\nAccess to a coding mentor or peer group\n\nSmall, hands-on projects with step-by-step guidance\n\nCheat sheets or quick reference guides\n\nOther (please specify)\n\nWhat outcomes would make you feel successful in learning to code during or after this program? (Open text)\n[Free response]\n\nI look forward to your feedback.",
+      "timestamp": "2025-04-13T20:39:54.211000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361078467264774294",
+      "author": {
+        "id": "1360267706204426442",
+        "username": "frederique_20320",
+        "discriminator": "0",
+        "display_name": "Frédérique Lambers",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361076087051784232",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153> , Sorry I was enable to join the call today, I had another call lined up at that time.",
+      "timestamp": "2025-04-13T20:30:26.724000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361076087051784232",
       "author": {
         "id": "1360267706204426442",
         "username": "frederique_20320",
@@ -849,63 +1890,12 @@
         "bot": false
       },
       "mentions": [
-        "1359552583244583153"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1361378297967149287",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Yes, agreed.  I think from the discussions we've had thus far, the focus will be on non-technical and non-coders and the objective of the survey is to capture VOC feedback from our course cohorts:   1)  learning goals 2) needs - what are gaps, what is missing, what are challenges you face as non-tech 3)  preferences.  In addition, I 'd like to suggest that we include a question around what AI tools you are most interested in learning more about or a question listing multiple categories people can multi-select. Lastly, open ended feedback.  Ping your thoughts on these priorities.  I can take a stab at a draft once we agree. I dont think it needs to be perfect. We're just collecting some feedback for ideas at this early phase. Can always do follow up surveys.",
-      "timestamp": "2025-04-14T16:31:19.421000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361378297967149287",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 2
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
         }
       ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362824365183467662",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1359552583244583153> is it working now",
-      "timestamp": "2025-04-18T16:17:28.712000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362824365183467662",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1359552583244583153"
-      ],
       "reactions": [],
       "attachments": [],
       "embeds": 0,
@@ -914,19 +1904,19 @@
       "reference": null
     },
     {
-      "message_id": "1362834893180108992",
+      "message_id": "1361018171410354416",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks Oscar. Yes I can post now.",
-      "timestamp": "2025-04-18T16:59:18.782000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362834893180108992",
+      "content": "## Overall Timeline to Expertise\n\nBecoming a true AI *expert* is a continuous journey involving years of learning, practice, and often real-world experience or research. However, reaching a level of proficiency where you can build complex AI systems and potentially specialize could follow this rough timeline:\n\n1.  **Foundations:** 3-6 Months\n2.  **Core AI/ML:** 3-6 Months\n3.  **Deep Learning:** 3-6 Months\n4.  **Practice & Initial Specialization:** 6-12+ Months\n\n**Total Estimated Time to Proficiency:** A dedicated learner starting from scratch might expect to spend **1.5 to 3 years** consistently learning and practicing to achieve a strong, employable level of expertise. This aligns roughly with intensive multi-phase learning plans[4].\n\n**Key Considerations:**\n\n*   **Pace:** This timeline assumes dedicated part-time or near full-time study. Your actual timeline will vary[4].\n*   **Depth vs. Breadth:** Initially focus on foundational understanding, then specialize.\n*   **Hands-on Work:** Practical application through projects is crucial and takes significant time.\n*   **Continuous Learning:** AI evolves rapidly; ongoing learning through research papers, blogs, podcasts, and new courses is essential[4].\n*   **Program Structure:** Some comprehensive programs like the MIT Professional Certificate in ML & AI or the MIT Applied Data Science Program bundle several phases but often require prior experience or significant time commitment[1].",
+      "timestamp": "2025-04-13T16:40:18.559000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018171410354416",
       "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
+        "id": "1352735021093359626",
+        "username": "rad.ai",
         "discriminator": "0",
-        "display_name": "Irene Yang",
+        "display_name": "Rad Ramamurthy",
         "bot": false
       },
       "mentions": [],
@@ -938,527 +1928,14 @@
       "reference": null
     },
     {
-      "message_id": "1362837487088832713",
+      "message_id": "1361018153349681293",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I posted a message in our Coordinator Community general chat on survey functionality and whether or not it makes sense to create that functionality within Discord or use a pre-built tool outside of Discord.  Would like to launch a survey to this community to capture VOC feedback on non-coder/non-tech learning needs and preferences to help identify and prioritize topics.",
-      "timestamp": "2025-04-18T17:09:37.218000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1362837487088832713",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363272074180689981",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone who was talking on buddy chat I enacted slow mode I preparation for tmrw influx of general members\n\nContinue the conversation here if you wish! Check the channel description to understand as to why!\n\nThank you so much for everything you guys have been amazing!",
-      "timestamp": "2025-04-19T21:56:30.855000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363272074180689981",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363272734313812219",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sorry Oscar I was part of that! \n\nFor those that we don't know what \"slow mode\" in discord:\n\nDiscord's \"Slow Mode\" feature limits the rate at which users can send messages in a channel, essentially creating a cooldown before they can send another message.",
-      "timestamp": "2025-04-19T21:59:08.243000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363272734313812219",
-      "author": {
-        "id": "1359959114708418782",
-        "username": "pabloallois_87684",
-        "discriminator": "0",
-        "display_name": "Pablo Allois",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 6
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1363272074180689981",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1363944757851848756",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi all! \nLast week I was off on family vacation and couldn't surf the discord as much as I would have liked! I must confess that I felt like a baby boomer at first!\n\n**On a personal note, I think there’s room to improve how the current categories are grouped.**\n\nAlso, I’ve noticed that many Members are sharing articles and relevant information in the #General-Chat channel, even though we already have a #GenAI-News channel for that.\n\nI find it interesting how the \"**Motivational Monday**\" idea has naturally taken off and is getting a lot of attention—maybe it could become its own dedicated channel?\n\nThe name \"General Discussion\" doesn’t really reflect what the channel is about. To me, it feels more like an **#AI-Sharing space.**\n\nPersonally, I think we’re missing something like a #Resource Center—a place where members can share useful content for the global community.\n\nIn the #Events channel, I’d love to see a section for #Upcoming-Events (to share events relevant to our field) and a #Past-Events section (to share recordings, if available).",
-      "timestamp": "2025-04-21T18:29:31.140000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363944757851848756",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        },
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363946304316768438",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey <@1359966236473168188> I do too think its a good idea to have a dedicated channel for the Motivational Monday and Tech Tips for example. Indeed the General Discussion starts to feel like all in all channel with no dedicated purpose. What do you think <@1352785241252565174>",
-      "timestamp": "2025-04-21T18:35:39.846000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363946304316768438",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 4
-        },
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1363944757851848756",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1363947798491566322",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Could also help for later or potential information retrieval 😉",
-      "timestamp": "2025-04-21T18:41:36.085000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363947798491566322",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363948754394153042",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Another point I would like to mention is that I have noticed that several Communities always have values that group people in common behaviors. \n\nI think it would be interesting to have in the “Welcome & Orientation” section something like “Our Community Values”, maximum 6 values that integrate us as a Community. \nFor example (some that could be nice):\nWe are leaders who share\nWe are committed to our growth and purpose\nWe are visionary leaders who aim high\nWe are leading practitioners and open-minded\nWe embrace technology ...\n\n**Somewhere, I would like to highlight more the purpose of the community.**",
-      "timestamp": "2025-04-21T18:45:23.990000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363948754394153042",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        },
-        {
-          "emoji": "❤️",
-          "count": 5
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1363957095711379476",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I believe we're all aligned here. Regarding the channels, there's still room for improvement, and all ideas are welcome. The channels will likely be refined until we have a clear structure and everything is in place. Great idea about creating a specific channel for recordings! However, due to Discord's 10 MB file size limit, we may need to store them on a drive and share the URL in the channel. <@1352785241252565174> or <@546559083357143044> can confirm this. After all, we're here to collaborate, to share our views and ideas to make this community greater and better!  🙂  thank you Kat for your suggestions here",
-      "timestamp": "2025-04-21T19:18:32.715000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1363957095711379476",
-      "author": {
-        "id": "1356965427162517514",
-        "username": "cristian_72225",
-        "discriminator": "0",
-        "display_name": "Cristian Ursan",
-        "bot": false
-      },
-      "mentions": [
-        "546559083357143044",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 5
-        },
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366502347802542092",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey @everyone! Quick move + summary of conversation about how to foster idea sharing and engagement in the community without overloading folks:\n\n<@1352785241252565174> suggested that we move this conversation here so we can properly workshop a solution and build a potential implementation plan. Here's what’s been said so far:\n\n**<@1360003496384008262> **: \n* Raised concerns that following the daily theme schedule has led to a lot of content being posted — but not as much back-and-forth conversation like we had on the WhatsApp group.\n* Also shared feedback from WhatsApp that there’s already so much content it’s hard to keep up, and posting more might make that worse.\n* Suggested maybe limiting to 5 posts per day (either by assignment or sign-up) and focusing more on fueling deeper conversations rather than prioritizing quantity.\n* Raised the question whether the daily theme structure might actually be making non-leaders more hesitant to jump in casually.\n**<@758206516753858561> **: \n* Agreed that the volume feels overwhelming sometimes.\n* Cautioned that a strict \"first-come, first-served\" posting rule might be unfair across different time zones.\n* Suggested we should brainstorm together as Conversational Leaders to find a better system, especially now that we’re getting more feedback as the community grows.\n\ncc: <@969571634027589643> <@1087795330067742760> <@1359551204648157214> <@1357376692384960524> who expressed interest in the convo",
-      "timestamp": "2025-04-28T19:52:28.102000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366502347802542092",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561",
-        "1360003496384008262",
-        "1087795330067742760",
-        "969571634027589643",
-        "1357376692384960524",
-        "1352785241252565174",
-        "1359551204648157214"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 4
-        },
-        {
-          "emoji": "🔥",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366503060800540682",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Im working in a analysis for this, hopefully I can share it with you later on this day",
-      "timestamp": "2025-04-28T19:55:18.094000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366503060800540682",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366503240124072037",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@758206516753858561>  Whatcha looking at?",
-      "timestamp": "2025-04-28T19:56:00.848000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366503240124072037",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366504087205445773",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "This is my first time participating in a community like this. For those of you with more experience, what do you think is the “secret sauce” that really helps a community like this thrive?\n\nWould love to learn from your perspectives as we brainstorm together. 🙌",
-      "timestamp": "2025-04-28T19:59:22.808000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504087205445773",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366504253606068224",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I suggest setting a practical rhythm of posting every 2–3 weeks by individuals. We’ll keep it flexible—if someone comes across something truly interesting and wants to share it sooner, they’re welcome to do so. For instance if I put a tech tip on this today then as a thumb rule i put it again after 2-3 weeks",
-      "timestamp": "2025-04-28T20:00:02.481000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504253606068224",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366504426944335883",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Bh the way thanks for bringing it up. I really like it.",
-      "timestamp": "2025-04-28T20:00:43.808000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366504426944335883",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366509339547799552",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Let me know what you thoughts are",
-      "timestamp": "2025-04-28T20:20:15.064000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366509339547799552",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1366509339124432906",
-          "filename": "Posting_Feedback.doc",
-          "url": "https://cdn.discordapp.com/attachments/1360642506500476948/1366509339124432906/Posting_Feedback.doc?ex=6840aa7e&is=683f58fe&hm=3c83c5cf0b78bcafe60bb029384bfc7b3536c864a1bddb6dd44790f81895d6bd&",
-          "size": 26112
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366515168170741933",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "👏  Thanks for putting this together! I especially love:\n+1 threads to organize conversations\n+1 daily/weekly digest \n+1 publishing calendar (along the lines of <@1349019079683473488>'s suggestion)",
-      "timestamp": "2025-04-28T20:43:24.716000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366515168170741933",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "758206516753858561"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        },
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366509339547799552",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366520408433496115",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Someone from the conversational leader group suggested that we rotate and take turns to post.",
-      "timestamp": "2025-04-28T21:04:14.092000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366520408433496115",
+      "content": "**Phase 4: Hands-on Practice & Initial Specialization (Estimated Time: 6-12+ Months)**\n\nApply your knowledge through projects and start exploring specific AI domains.\n\n*   **Projects & Portfolio Building:**\n    *   *Recommendation:* Engage in hands-on projects. Udemy's \"Artificial Intelligence A-Z 2024: Build 7 AI + LLM & ChatGPT\" focuses specifically on building multiple projects using various techniques (Q-Learning, Deep Q-Learning, LLMs)[3]. MIT's Applied Data Science Program (12 weeks) includes multiple hands-on projects and a capstone[1]. Platforms like Kaggle are excellent for practice competitions.\n    *   *Provider & Duration (Udemy Course):* Udemy, 15.5 hours of video content plus project time[3].\n    *   *Provider & Duration (MIT Program):* MIT Professional Education (via Great Learning), 12 weeks[1]. Requires significant weekly effort (est. 8-12 hrs/week for similar MIT programs[5]).\n*   **Explore Specializations (e.g., NLP, Computer Vision, Generative AI, Reinforcement Learning):**\n    *   *Generative AI Recommendation:* Google Cloud's \"Introduction to Generative AI Learning Path Specialization\" on Coursera covers LLMs and responsible AI[7]. MIT also offers specialized GenAI courses via xPRO and Professional Education [Search Result Ref: Implicit/known].\n    *   *NLP Recommendation:* Look into Stanford's CS224N materials (available freely) or DeepLearning.AI's NLP Specialization on Coursera [Search Result Ref: Implicit/known].\n    *   *Provider & Duration (Google GenAI):* Google Cloud via Coursera, 4 short courses, potentially ~1 month each[7].\n*   **Learn AI Tools & Frameworks:** Deepen expertise in TensorFlow, PyTorch, Scikit-learn, and potentially cloud AI platforms (AWS SageMaker, Google Vertex AI, Azure ML). Many specializations incorporate these tools.",
+      "timestamp": "2025-04-13T16:40:14.253000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018153349681293",
       "author": {
         "id": "1352735021093359626",
         "username": "rad.ai",
@@ -1469,8 +1946,8 @@
       "mentions": [],
       "reactions": [
         {
-          "emoji": "👍",
-          "count": 2
+          "emoji": "🏌️‍♂️",
+          "count": 1
         }
       ],
       "attachments": [],
@@ -1480,29 +1957,22 @@
       "reference": null
     },
     {
-      "message_id": "1366520838513233981",
+      "message_id": "1361018063851491459",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "love to hear your thoughts too <@1352785241252565174> <@546559083357143044> <@673901899837341736> <@1125194882164736050> <@1322962807565848586> <@1063015906650902549>  🤝",
-      "timestamp": "2025-04-28T21:05:56.631000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366520838513233981",
+      "content": "**Phase 3: Deep Learning (Estimated Time: 3-6 Months)**\n\nFocus on neural networks, the core of many modern AI advancements.\n\n*   **Deep Learning Fundamentals:**\n    *   *Recommendation:* DeepLearning.AI's \"Deep Learning Specialization\" on Coursera (Instructor: Andrew Ng). This comprehensive 5-course series covers foundational concepts, CNNs, RNNs, and practical aspects like hyperparameter tuning and optimization[2][6]. Requires intermediate Python and basic ML knowledge[6]. MIT OCW's \"Introduction to Deep Learning\" is another excellent, though potentially more rigorous, option [Search Result Ref: Implicit/known].\n    *   *Provider & Duration:* DeepLearning.AI via Coursera, estimated 3-6 months[2]. Syllabus covers foundational concepts, practical implementation (TensorFlow), optimization, and structuring ML projects[6].\n*   **Alternative/Supplement:** MIT xPRO offers \"Deep Learning: Mastering Neural Networks\" for exploring core concepts and toolkits [Search Result Ref: Implicit/known].",
+      "timestamp": "2025-04-13T16:39:52.915000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361018063851491459",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
+        "id": "1352735021093359626",
+        "username": "rad.ai",
         "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Rad Ramamurthy",
         "bot": false
       },
-      "mentions": [
-        "546559083357143044",
-        "673901899837341736",
-        "1322962807565848586",
-        "1125194882164736050",
-        "1063015906650902549",
-        "1352785241252565174"
-      ],
+      "mentions": [],
       "reactions": [],
       "attachments": [],
       "embeds": 0,
@@ -1511,14 +1981,62 @@
       "reference": null
     },
     {
-      "message_id": "1366550472592461895",
+      "message_id": "1361017949288140830",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I think the threads feature will help organize the conversations.  I like the idea of focusing on posting on possibly 2-3 themes on a lower frequency but going  deeper, eg similar to how in our course we have been responding and engaging",
-      "timestamp": "2025-04-28T23:03:41.946000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366550472592461895",
+      "content": "**Phase 2: Core AI & Machine Learning (Estimated Time: 3-6 Months)**\n\nDive into the fundamental concepts and techniques of AI and ML.\n\n*   **Broad AI Introduction (Optional but Recommended):**\n    *   *Recommendation:* DeepLearning.AI's \"AI For Everyone\" on Coursera (Instructor: Andrew Ng) provides a non-technical overview, useful for context[4].\n    *   *Duration:* ~10 hours[4].\n*   **Machine Learning Fundamentals:**\n    *   *Recommendation:* DeepLearning.AI's \"Machine Learning Specialization\" on Coursera (Instructor: Andrew Ng). This is a foundational course covering supervised learning, unsupervised learning, and best practices[2]. Alternatively, explore MIT OCW's \"Introduction to Machine Learning\" materials [Search Result Ref: Implicit from OCW course titles].\n    *   *Provider & Duration:* DeepLearning.AI via Coursera, typically 1-3 months depending on pace[2].\n*   **Data Handling & Preparation:**\n    *   *Recommendation:* Learn libraries like NumPy and pandas. These are often integrated into ML courses (like the DeepLearning.AI one) or can be learned via dedicated courses/tutorials on platforms like Coursera or DataCamp.\n    *   *Why:* Cleaning and preparing data is a critical step in any AI project[4].",
+      "timestamp": "2025-04-13T16:39:25.601000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017949288140830",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361017873375428639",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I went ahead and queried Gemini 2.5 and here’s the suggestion:\n\nOkay, here is a learning path designed to guide you toward AI expertise, integrating courses from top-tier providers like MIT, DeepLearning.AI, Udemy, and Coursera, along with estimated timelines.\n\n## AI Learning Path for Aspiring Experts\n\nThis path progresses from foundational knowledge to advanced specialization and practice. Timelines are estimates and can vary based on your background, learning pace, and dedication.\n\n**Phase 1: Foundations (Estimated Time: 3-6 Months)**\n\nFocus on building the necessary mathematical and programming skills.\n\n*   **Mathematics (Linear Algebra, Calculus, Probability & Statistics):**\n    *   *Recommendation:* Utilize resources like Khan Academy, MIT OpenCourseWare (OCW) for relevant math courses (e.g., 18.06 Linear Algebra, 18.01 Single Variable Calculus), or introductory university-level courses on Coursera/edX if needed. While MIT Professional Education offers a focused \"Foundations of Mathematics for AI\" course, it's short, intensive, and likely better suited for professionals needing a refresher rather than beginners [Search Result Ref: Implicit from Prof Ed focus].\n    *   *Why:* These are essential for understanding how AI algorithms work[4].\n*   **Programming (Python & Computer Science Fundamentals):**\n    *   *Recommendation:* Start with a beginner-friendly Python course. Consider DeepLearning.AI's \"AI Python for Beginners\" or comprehensive Python tracks on Codecademy or Coursera [Search Result Ref: Implicit, standard recommendation]. Follow up with data structures and algorithms, perhaps using MIT OCW's \"Introduction to Algorithms\" materials [Search Result Ref: Implicit from OCW course titles].\n    *   *Why:* Python is the dominant language in AI. Understanding data structures is crucial for efficient coding[4]. Many advanced courses assume Python proficiency.",
+      "timestamp": "2025-04-13T16:39:07.502000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017873375428639",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361017514078765299",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for sharing Michael. I think the context for this survey will be our learning cohorts. The questions we want to drill into are what would non-coders like to learn and how?  What is missing?  We may also allow for open responses vs pre-selecting the choices.  For example non-coders wishing to learn how to build a Personal Assistant or building a website or building an Agentic AI assistant without coding.",
+      "timestamp": "2025-04-13T16:37:41.839000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361017514078765299",
       "author": {
         "id": "1359552583244583153",
         "username": "ireney_67517",
@@ -1527,12 +2045,7 @@
         "bot": false
       },
       "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 4
-        }
-      ],
+      "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -1540,783 +2053,278 @@
       "reference": null
     },
     {
-      "message_id": "1366636576930660442",
+      "message_id": "1361015005478387913",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone I recommend we rotate and take turns to post one topic per week to allow for a deeper dialogue. As Oscar Sanchez mentioned in the \"Discord Engagement & Structure\" doc:\n\n1)    #general-chat (Interactive)\n      o        The primary channel for casual conversation, small talk, or day-to-day questions.\n      o      Monday Motivators and Tech Tips are posted here each week.\n\n2)    #ai-philosophy-ethics (Interactive)\n      o    Deep dives into ethical, philosophical, and societal impacts of AI.\n      o    Intended for thought-provoking debate and resource sharing.\n\n3)    #ai-practical-applications (Interactive)\n      o    Showcases real-world examples of AI deployments and best practices.\n      o    Members can discuss industry-specific use cases and success stories.\n\n\nFor 2 and 3 above, focus Topic in either #ai-philosophy-ethics or #ai-practical-applications. Rotate weekly:\ni.    1st & 3rd Wednesdays: Debate an AI ethics or philosophical question.\nii.    2nd & 4th Wednesdays: Share a practical deployment story or industry insight.\n\nQuantity of posts is great, however, to get the members engaged, focus is vital.\n\nWould love to hear everyone's thoughts.",
-      "timestamp": "2025-04-29T04:45:50.820000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366636576930660442",
+      "content": "I thought a ChatGPT bot can take in these questions and suggest a learning path (which might be a cool use case)",
+      "timestamp": "2025-04-13T16:27:43.742000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361015005478387913",
       "author": {
-        "id": "1360639641556090894",
-        "username": "ash.mikhail",
+        "id": "1352735021093359626",
+        "username": "rad.ai",
         "discriminator": "0",
-        "display_name": "Ash Mikhail",
+        "display_name": "Rad Ramamurthy",
         "bot": false
       },
       "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361014749084782642",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oh never mind, I misunderstood your point",
+      "timestamp": "2025-04-13T16:26:42.613000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361014749084782642",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361014565436919848",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360636661125349566> Thanks for sharing this. Does it provide any recommendations of courses/learning path after the survey?",
+      "timestamp": "2025-04-13T16:25:58.828000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361014565436919848",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360636661125349566",
+          "username": "michaelkeady_92138",
+          "display_name": "Michael Keady"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361012606424580146",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry I missed the meeting yesterday.  Here is a survey developed by chatgpt: AI Literacy Needs Assessment Survey (For Non-Coders)\nSection 1: Background Information\nWhat is your current role or department?\n[Open-ended]\n\nHow familiar are you with artificial intelligence (AI)?\n\n Very familiar\n\n Somewhat familiar\n\n Heard of it, but don’t understand it\n\n Not familiar at all\n\nHave you used any AI-powered tools in your work (e.g., ChatGPT, Excel AI features, Grammarly, etc.)?\n\n Yes\n\n No\n\nIf yes, please list them: [Open-ended]\n\nSection 2: Current Understanding\nWhich AI concepts do you feel confident about? (Select all that apply)\n\n What AI is and how it works\n\n Machine learning vs. traditional programming\n\n Ethical implications of AI\n\n Data privacy and AI\n\n Limitations and risks of AI\n\n None of the above\n\nWhat do you find most confusing about AI?\n[Open-ended]\n\nSection 3: Learning Preferences & Needs\nWhat areas of AI would you like to learn more about? (Select all that apply)\n\n AI basics and terminology\n\n Real-world AI applications in our industry\n\n Using AI tools to improve productivity\n\n Responsible AI and ethics\n\n Interpreting AI-generated outputs\n\n Communicating with technical AI teams\n\n Other (please specify): [Open-ended]\n\nHow would you prefer to learn about AI?\n\n Interactive workshops\n\n Short online courses\n\n Webinars or speaker series\n\n Reading materials (articles, guides)\n\n One-on-one coaching or mentoring\n\n On-the-job demos and use cases\n\nWhat barriers, if any, prevent you from learning more about AI? (Select all that apply)\n\n Lack of time\n\n Intimidating or overly technical content\n\n No clear reason to use it in my role\n\n Not sure where to start\n\n Other (please specify): [Open-ended]\n\nSection 4: Expectations and Support\nWhat would help you feel more confident in using AI at work?\n[Open-ended]\n\nDo you have any suggestions for how our company can support non-technical employees in becoming more AI literate?\n[Open-ended]",
+      "timestamp": "2025-04-13T16:18:11.763000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361012606424580146",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361011994093813821",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> I can create a survey in Microsoft Forms or Google for this. However if you prefer to keep it within Discord, please let me know what to use. I envision this is not simply a poll but want to capture open feedback.",
+      "timestamp": "2025-04-13T16:15:45.772000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361011994093813821",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361011337777643721",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Let's start to brainstorm a few questions for a survey.  I would recommend no more than 5 questions for the survey.",
+      "timestamp": "2025-04-13T16:13:09.294000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361011337777643721",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1361009680226320394",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Irene, I would recommend we keep the focus on non-coders as coders know how to find their way around and get the info and resources they need. We are trained for it over the years!",
+      "timestamp": "2025-04-13T16:06:34.103000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1361009680226320394",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        }
+      ],
       "reactions": [
         {
-          "emoji": "💯",
-          "count": 5
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1360993908766806197",
+        "channel_id": "1360642506500476948",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1360993908766806197",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@546559083357143044> <@1359955242438889545> <@1359551204648157214> <@1357376692384960524> <@1335299567440367757> <@1352735021093359626> Thanks for joining our call to flesh out the concept around learning for non-coders and also the idea we should also identify and create pathways for coders.  The concept is to identify what is missing and/or what are the challenges and help fill the gaps thru providing content and resources.  In addition, we discussed tapping experts or one of our own (e.g. network architects) to lead a session to discuss fundamentals for non-tech.  <@1352785241252565174> A recommendation that we would like to follow up on is designing a short survey to identify what these learning gaps are for non-coders and coders.  I'm happy to take the lead with this group to develop some survey questions to capture VOC.",
+      "timestamp": "2025-04-13T15:03:53.894000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360993908766806197",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
         },
         {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366692140435902506",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Totally with you all on this. 🙏 And a quick thought: Let's slow down until everybody finished the course (May 6th).",
-      "timestamp": "2025-04-29T08:26:38.192000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366692140435902506",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366502347802542092",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366805351592366100",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "My favs:\n+1 For better use of threads\n+1 for the weekly digest\n+1 for calendar to orchestrate the posts, provided that changes in schedule are easy too - e.g., someone is on vacation, how to change places... \n\nI have some open questions:\n- I couldn't quite understand how content subscription will work. \n   Subscribing to a specific content type means \n   1) we need to distinguish them \n   2) content authors need to create content with a type. \n    And 3) what's the effect of a subscription - the weekly digest, or do you mean something else?\n\n- I also wonder how we set the bar for the quality of posts? Was that the intent behind curators? \n   Who and how will step into this role?",
-      "timestamp": "2025-04-29T15:56:29.835000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366805351592366100",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366509339547799552",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366810403052585090",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey <@969571634027589643> ! moorning !\nAbout the suscriptions, what I undestood about it (cause I myself search for good strategies) is that there´s probably a way whitin Discord settings or tools where If you use a reaction action it will \"subscribe\" you or \"notify you\" about when something in a particular channel is post...we will have to search more about this or talk with the Architechts.\n\nAbout setting up a Curator Rol...thats something we will need to lay down to <@1352785241252565174> and <@672229862085361664> to know the thougts about it, the intend behind this is like having someone or group of people to analyze the posts made in the channels or particular ones, in order for them to lets say clean the channel and only maintain the post that they consider more relevant. Of course for this that someone or group of people should be an expert of the subjetc or someone with high criteria.",
-      "timestamp": "2025-04-29T16:16:34.197000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366810403052585090",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "672229862085361664",
-        "969571634027589643",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366805351592366100",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366811859646287892",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Mooorning Oscar!  😀 \n\nI love the idea. It very much reminds me of how Medium is organized. \nIt has editors picks and content curated on the basis of interests for the weekly/monthly digests. \nIt's not a unique. It's best practices. Which is even better.\n\nI hope Discord can support it too. Others that are even more into their domain (slack) have it.\nPotentially, it could be managed by external tooling, but this means dev/support effort so .. probably no.",
-      "timestamp": "2025-04-29T16:22:21.476000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366811859646287892",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366810403052585090",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366823020357882056",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Very good point everyone.. As this discussion is evolving- I voluntarily skip posting a tech tip today. Will post next week..",
-      "timestamp": "2025-04-29T17:06:42.397000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1366823020357882056",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367104810897244252",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Idem for me",
-      "timestamp": "2025-04-30T11:46:26.497000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367104810897244252",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366823020357882056",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367109776038957137",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi Melinda and @everyone, by the way—if anyone has questions or needs help with an assignment or forum, feel free to DM me or, if you’d like, we could also hold a support session tomorrow (Thursday) or Friday. Please take advantage of this to lighten your load. Remember, you have six months to review all the content, and we can continue reinforcing and exploring AGAI topics in this community over time.",
-      "timestamp": "2025-04-30T12:06:10.279000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367109776038957137",
-      "author": {
-        "id": "1125194882164736050",
-        "username": "rodrigoreyesjara",
-        "discriminator": "0",
-        "display_name": "Rodrigo Reyes",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366692140435902506",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367128043646353580",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you <@1125194882164736050>  I just need to get some solid time to deep dive and finish everything. It’s been very busy & also a bit noisy the last few days. But now, most people are onboarded etc. To conclude: I will engage daily again after May 6th. Thanks @everyone for your understanding. 👋",
-      "timestamp": "2025-04-30T13:18:45.616000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367128043646353580",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1125194882164736050"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍🏼",
-          "count": 1
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
         },
         {
-          "emoji": "💯",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367128782619803698",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> <@&1359958995854692373>  remember once you have a finalized concept for an update submit it in feedback submissions as a polished write up / presentation with implementation plan! So excited this space is being utilized can't wait to evolve this community together !",
-      "timestamp": "2025-04-30T13:21:41.801000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367128782619803698",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367212264997916812",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> Thanks for the great discussion! Last call for thoughts before the write up/proposal phase. Would love to hear any other perspectives or ideas, and also feedback on what's been said so far.  All input welcome! Speak now or hold your peas 🫛 😅 🤣",
-      "timestamp": "2025-04-30T18:53:25.551000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367212264997916812",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367236099659005984",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "just 2c to consider - turns out using threads is also related to channel data housekeeping.\n\nThreads that have been inactive for a configurable amount of time will automatically hide from channel.\n\nThat is the discord idea of keeping conversation focused on active topics.\n\nThis came up only today so we haven’t had the chance to survey wether this is cumbersome or convenient. But it looks like it may be a tool to address overwhelming  channel information.",
-      "timestamp": "2025-04-30T20:28:08.177000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367236099659005984",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367212264997916812",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367237408625786930",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I too need to conclude my courseware. I realise I have some ground to cover. I will keep it a little bit light on Discord till. 6th May..  Thanks everyone for understanding..",
-      "timestamp": "2025-04-30T20:33:20.259000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367237408625786930",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "💯",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367128043646353580",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367373233241985025",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "No worries <@1349019079683473488> I‘ll do just the same. Enjoy the learning💜👋",
-      "timestamp": "2025-05-01T05:33:03.371000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367373233241985025",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367735085817659402",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Jumping on the wagon here..I will be light on discord as well till 6th May👋",
-      "timestamp": "2025-05-02T05:30:55.748000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1367735085817659402",
-      "author": {
-        "id": "1335299567440367757",
-        "username": "apoorvgarg88",
-        "discriminator": "0",
-        "display_name": "Apoorv Garg",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "💯",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369732780942037073",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-07T17:49:03.381000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369732780942037073",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": {
-        "message_id": "1369042353653809232",
-        "channel_id": "1360696813157482556",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369733194680635544",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> <@969571634027589643> <@1360003496384008262>  / admins\n\nWhoever is interested let me know I was thinking of having a session where we discuss how to implement this concept since this won as the feedback submission for the month\n\nI was thinking this Sunday let me know what times work for everyone\n\nWe can workshop implementation / execution",
-      "timestamp": "2025-05-07T17:50:42.024000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369733194680635544",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643",
-        "1360003496384008262"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369732780942037073",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369768426301554888",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sunday 12 pm ET or later works best for me (since it's Mother's Day in the US)",
-      "timestamp": "2025-05-07T20:10:41.897000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369768426301554888",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369733194680635544",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369772365998854195",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I am now lost here. Will this session be recorded? I maybe busy on the Mother’s Day!",
-      "timestamp": "2025-05-07T20:26:21.194000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369772365998854195",
-      "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
-        "discriminator": "0",
-        "display_name": "Shabana Islam",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369786524673114234",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "That works Ill block it my calendar, <@1357376692384960524> yes it will be recorded!",
-      "timestamp": "2025-05-07T21:22:36.885000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369786524673114234",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1357376692384960524",
-        "1360003496384008262"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369768426301554888",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369786906191073391",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks <@1352785241252565174>",
-      "timestamp": "2025-05-07T21:24:07.846000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1369786906191073391",
-      "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
-        "discriminator": "0",
-        "display_name": "Shabana Islam",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370164285006680064",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> please include me in this meeting as I have a couple of ideas would love to share with you. Thanks",
-      "timestamp": "2025-05-08T22:23:41.967000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370164285006680064",
-      "author": {
-        "id": "1360639641556090894",
-        "username": "ash.mikhail",
-        "discriminator": "0",
-        "display_name": "Ash Mikhail",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369768426301554888",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1370165854393864244",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Will do!",
-      "timestamp": "2025-05-08T22:29:56.138000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370165854393864244",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1360639641556090894"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370164285006680064",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1370170877316038707",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks!",
-      "timestamp": "2025-05-08T22:49:53.696000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1370170877316038707",
-      "author": {
-        "id": "1360639641556090894",
-        "username": "ash.mikhail",
-        "discriminator": "0",
-        "display_name": "Ash Mikhail",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370165854393864244",
-        "channel_id": "1360642506500476948",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1371154688606605372",
-      "channel_id": "1360642506500476948",
-      "channel_name": "🧠feedback-workshop",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "https://mit.zoom.us/j/96295613946\n\n<@1360639641556090894> <@1360003496384008262>  / @everyone  who wants to join\n\nHere is the link for the feedback meeting today for the winning submission from the feedback workshop !\n\nSee you all there!",
-      "timestamp": "2025-05-11T15:59:12.586000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1371154688606605372",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262",
-        "1360639641556090894"
-      ],
-      "reactions": [
-        {
-          "emoji": "🫡",
-          "count": 1
+          "id": "1352735021093359626",
+          "username": "rad.ai",
+          "display_name": "Rad Ramamurthy"
         },
+        {
+          "id": "1357376692384960524",
+          "username": "shabana_39556",
+          "display_name": "Shabana Islam"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        },
+        {
+          "id": "1359551204648157214",
+          "username": "nasseraly",
+          "display_name": "Nasser Aly"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360988340064878653",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://www.instagram.com/p/DITZ2MNAs3s/?igsh=MW16NHE2YzN5cTlxZg==",
+      "timestamp": "2025-04-13T14:41:46.212000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360988340064878653",
+      "author": {
+        "id": "1359551204648157214",
+        "username": "nasseraly",
+        "discriminator": "0",
+        "display_name": "Nasser Aly",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
         {
           "emoji": "👍",
           "count": 1
@@ -2329,14 +2337,115 @@
       "reference": null
     },
     {
-      "message_id": "1371173327506374777",
+      "message_id": "1360986464653148340",
       "channel_id": "1360642506500476948",
       "channel_name": "🧠feedback-workshop",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone Just posted the feedback session recording to <#1364289798340349953> !",
-      "timestamp": "2025-05-11T17:13:16.446000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1371173327506374777",
+      "content": "Join thru this button",
+      "timestamp": "2025-04-13T14:34:19.079000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986464653148340",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360986431698370662",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://discord.gg/Qy2Gx6DV",
+      "timestamp": "2025-04-13T14:34:11.222000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986431698370662",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360986335648809162",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all, I opened up a video channel.  Sangame and I are on right now. Please join when you can.",
+      "timestamp": "2025-04-13T14:33:48.322000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986335648809162",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360986332758806530",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-13T14:33:47.633000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360986332758806530",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360985868180914367",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "So sorry I cant attend the meeting!",
+      "timestamp": "2025-04-13T14:31:56.869000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360985868180914367",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -2345,14 +2454,150 @@
         "bot": false
       },
       "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360985832424607874",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@546559083357143044> <@1359552583244583153> I am currently in a meeting with Dr.Sanchez if one of you could update me on what you discuss that would be great!",
+      "timestamp": "2025-04-13T14:31:48.344000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360985832424607874",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        },
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        }
+      ],
       "reactions": [
         {
           "emoji": "👍",
-          "count": 5
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360740911415427092",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "See you tomorrow!",
+      "timestamp": "2025-04-12T22:18:34.625000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360740911415427092",
+      "author": {
+        "id": "546559083357143044",
+        "username": "saak123456",
+        "discriminator": "0",
+        "display_name": "Sangame Krishnamani",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360699185480863986",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Irene! Sounds great! 😄\nI think it’s kind of hop in, hop off…open, virtual door 😅 see you tomorrow ☺️",
+      "timestamp": "2025-04-12T19:32:46.387000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360699185480863986",
+      "author": {
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
+        "discriminator": "0",
+        "display_name": "Diellza Ahmetaj",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360698005052719244",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I'm still trying to figure out exactly how this works.  But it looks like i dont need to create a separate meeting since in this channel, i can just enable voice and camera at the designated time. You are all administrators so if you would like to join the call tomorrow, Sunday 4/13 at 10:30 am est, just join in this channel.  Let me know if I am missing anything. I am new to Discord actually.",
+      "timestamp": "2025-04-12T19:28:04.951000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360698005052719244",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1360696741665706207",
+      "channel_id": "1360642506500476948",
+      "channel_name": "🧠feedback-workshop",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi all, for those interested in joining a call to brainstorm around the concept of learning mechanisms for non-coders, let's jump on a call at 10:30 am est via Discord.",
+      "timestamp": "2025-04-12T19:23:03.736000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1360642506500476948/1360696741665706207",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
         },
         {
-          "emoji": "👍🏼",
-          "count": 1
+          "emoji": "👍",
+          "count": 3
         }
       ],
       "attachments": [],

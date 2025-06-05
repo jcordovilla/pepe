@@ -3,18 +3,167 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1364289798340349953",
   "channel_name": "🎥meeting-recordings",
-  "fetch_timestamp": "2025-06-03T22:04:14.233038",
+  "fetch_timestamp": "2025-06-04T23:18:54.521969+00:00",
   "message_count": 33,
   "messages": [
     {
-      "message_id": "1364290059045441567",
+      "message_id": "1371176610006564944",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone here is the recording from today's meeting and the slide deck:",
-      "timestamp": "2025-04-22T17:21:37.360000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364290059045441567",
+      "content": "Thank you so much <@1352785241252565174>  for sharing the recording of the meeting. I’m really sorry I couldn’t make it, but the summary is excellent, and I truly hope @everyone takes the time to go through it — there are some very relevant points covered, especially:\n\n• Improving thread usage and limiting new channels: A thoughtful approach to reduce confusion and keep discussions organized without overwhelming members.\n\n• Launching a Weekly Digest and Posting Calendar: These tools will help keep everyone aligned on key conversations and content themes.\n\n• Defining new community roles: From Digest Owners to Channel Managers, these roles will empower leaders and bring structure to the engagement process.\n\nThanks again to everyone involved in driving this continuous improvement process — it’s incredibly valuable to help us get the most out of our channels without getting lost in them!",
+      "timestamp": "2025-05-11T17:26:19.055000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1371176610006564944",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371173028192587916",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371173028192587916",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\nRecording from our feedback implementation meeting !\n\nLink: https://fathom.video/share/3teUJZxMU8ys-974sNf3eyLN2wuszycm",
+      "timestamp": "2025-05-11T17:12:05.084000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1371173028192587916",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370837478528913498",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "They will be added to the repository we are making; so you will be able to download from there ✅",
+      "timestamp": "2025-05-10T18:58:43.810000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370837478528913498",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370836126939480214",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370836126939480214",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> is there any way that we could download the videos ? still only the Share option is available",
+      "timestamp": "2025-05-10T18:53:21.566000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370836126939480214",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370835825943773234",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\nHere is the recording for:\n\n[A] Gen AI Global 🌍 2.0 Informational Session – Part 1 📘:\nhttps://fathom.video/share/L3ikJuXy_uFwV4D2LMKc6WDQJpHNpnLg\n\n[B] 🌐 Towards a Global Charter for Ethical AI – A Gen AI Global Initiative 🤝\nhttps://fathom.video/share/q7Xps5xhnGweCD95JdL7rRmYDszdE5nu\n\nThank you so much for all your support 🙏—without you, none of this would be possible! 🌟",
+      "timestamp": "2025-05-10T18:52:09.803000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370835825943773234",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -26,35 +175,28 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 5
+          "count": 6
         },
         {
           "emoji": "👍",
-          "count": 1
+          "count": 4
         }
       ],
-      "attachments": [
-        {
-          "id": "1364290046940942448",
-          "filename": "video1250994263.mp4",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364290046940942448/video1250994263.mp4?ex=6840809e&is=683f2f1e&hm=832f65aebbcc39e9e4e52ebdbaaff8fc93adf9a34bb471dc822c8e864cc5242e&",
-          "size": 228714758
-        }
-      ],
-      "embeds": 0,
+      "attachments": [],
+      "embeds": 2,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1364290265388421131",
+      "message_id": "1370443557994758304",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-22T17:22:26.556000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364290265388421131",
+      "content": "@everyone \n\nHere is the link of the recording of the Q & A today!\n\nhttps://www.linkedin.com/events/7326032241518649346/comments/",
+      "timestamp": "2025-05-09T16:53:25.836000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370443557994758304",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -67,450 +209,14 @@
         {
           "emoji": "❤️",
           "count": 8
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1364290264906072185",
-          "filename": "Community_Updates_4.22.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364290264906072185/Community_Updates_4.22.pdf?ex=684080d2&is=683f2f52&hm=6e4b1cf957a15c2a288c2ac3dfd740cbc1530afc02b59995e10da3724886b655&",
-          "size": 263553
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1364364188553842688",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Meeting summary via NotebookLM 😎",
-      "timestamp": "2025-04-22T22:16:11.212000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364364188553842688",
-      "author": {
-        "id": "1359961544430981340",
-        "username": "antoine789",
-        "discriminator": "0",
-        "display_name": "Antoine Christopher",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 9
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1364364188180287698",
-          "filename": "Meeting_Summary.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364364188180287698/Meeting_Summary.pdf?ex=68401ceb&is=683ecb6b&hm=0f6963c2506455cea3777ea55030566c0564e4a6c6ea6570624fdbc1071e4355&",
-          "size": 185665
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1364290059045441567",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1365054065586999398",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Video and slide deck from general admissions onboarding",
-      "timestamp": "2025-04-24T19:57:30.714000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365054065586999398",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
+        },
         {
           "emoji": "👍",
-          "count": 10
+          "count": 6
         },
         {
-          "emoji": "❌",
+          "emoji": "🦾",
           "count": 1
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1365054061912789002",
-          "filename": "video1816859225.mp4",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365054061912789002/video1816859225.mp4?ex=6840a529&is=683f53a9&hm=091447ef39d825edef6471a8bb5044eaeaab5fe8ceb95147a054a8cef6c6d3e9&",
-          "size": 77476228
-        },
-        {
-          "id": "1365054065632874636",
-          "filename": "OnboardingGeneral_Admissions.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365054065632874636/OnboardingGeneral_Admissions.pdf?ex=6840a52a&is=683f53aa&hm=10539c9bd3560a1b33e225ef6972f7a43f2d3caca8452c1a8339b7ffa9cfe4ad&",
-          "size": 334638
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365363688109903983",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Recording from Today's Q and A!",
-      "timestamp": "2025-04-25T16:27:50.476000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365363688109903983",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 15
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1365363671538335805",
-          "filename": "video1860266497.mp4",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365363671538335805/video1860266497.mp4?ex=68407402&is=683f2282&hm=8f5b4e59a0d8ea6d49c57694cc291eeb2014432dc27162b619b8e4c1639e1404&",
-          "size": 365986661
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365725524462272594",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-26T16:25:38.985000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365725524462272594",
-      "author": {
-        "id": "1359961544430981340",
-        "username": "antoine789",
-        "discriminator": "0",
-        "display_name": "Antoine Christopher",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1365725524055429201",
-          "filename": "25_Apr_QA_Summary_Notes.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365725524055429201/25_Apr_QA_Summary_Notes.pdf?ex=68407382&is=683f2202&hm=d9153abad266246b1e4141fff8f1ce319336b0b352e87c497c83c78b2e4c5bd1&",
-          "size": 147399
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365363688109903983",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1365764518302584833",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Recording from todays session with <@1322962807565848586> !",
-      "timestamp": "2025-04-26T19:00:35.841000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365764518302584833",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 14
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1365764505514016889",
-          "filename": "video1397454629.mp4",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365764505514016889/video1397454629.mp4?ex=684097d0&is=683f4650&hm=0abf1e3735483cfa888a37b14c2daa3e66907a3ef6b9d1eee6e7f5172592b896&",
-          "size": 400216755
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365800169806762114",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Wonderful session <@1322962807565848586> 👌",
-      "timestamp": "2025-04-26T21:22:15.822000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365800169806762114",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365764518302584833",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1365828639446405181",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Excellent session, thank you <@1322962807565848586>",
-      "timestamp": "2025-04-26T23:15:23.513000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365828639446405181",
-      "author": {
-        "id": "691008994789163020",
-        "username": "jhorden2211",
-        "discriminator": "0",
-        "display_name": "Jonathan Horden",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366173901108936764",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you for the session, very helpful.",
-      "timestamp": "2025-04-27T22:07:20.308000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366173901108936764",
-      "author": {
-        "id": "1363269995559387226",
-        "username": "ezgiarguder",
-        "discriminator": "0",
-        "display_name": "Ezgi Arguder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366325650579001345",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Awesome. Thanks!",
-      "timestamp": "2025-04-28T08:10:20.201000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366325650579001345",
-      "author": {
-        "id": "1364899385866981390",
-        "username": "manoella_22229",
-        "discriminator": "0",
-        "display_name": "Manoella",
-        "bot": false
-      },
-      "mentions": [
-        "1359961544430981340"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365725524462272594",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366530767823573052",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1322962807565848586>  thank you so much for sharing your knowledge and encouraging us to explore on our own!! It was inspiring to me. Thanks",
-      "timestamp": "2025-04-28T21:45:23.963000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366530767823573052",
-      "author": {
-        "id": "1068496361651179540",
-        "username": "analia8726",
-        "discriminator": "0",
-        "display_name": "Analía Manildo",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366541839942942740",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you <@1322962807565848586> for the session and the recording. 💐. Oscar, thank you for sharing. I also vote for the rag on the next session.",
-      "timestamp": "2025-04-28T22:29:23.762000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366541839942942740",
-      "author": {
-        "id": "1361976806651068517",
-        "username": "andreahickethier",
-        "discriminator": "0",
-        "display_name": "Andrea Hickethier 🍑 Munich",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586",
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365764518302584833",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366782056704512062",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you <@1322962807565848586> !!! i just watch the recording as i wasnt able to attend the live session. it was truly encouraging... i am now starting to play with 8n8 tool . i also support the idea of RAG for the next session.",
-      "timestamp": "2025-04-29T14:23:55.901000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366782056704512062",
-      "author": {
-        "id": "1364822781220360283",
-        "username": "alvarogonzalez1073",
-        "discriminator": "0",
-        "display_name": "Alvaro Gonzalez",
-        "bot": false
-      },
-      "mentions": [
-        "1322962807565848586"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368208933893832714",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone Recording / Transcript / Key Takeaways / Topics From Q&A W/ Dr.Sanchez yesterday !\n\n🔗Link: https://fathom.video/share/F7UnYtRUoxhdgc_byJ2z_gmy_iYkxsnn",
-      "timestamp": "2025-05-03T12:53:49.933000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368208933893832714",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
         }
       ],
       "attachments": [],
@@ -520,23 +226,61 @@
       "reference": null
     },
     {
-      "message_id": "1368265427544834138",
+      "message_id": "1369300662919368715",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Oscar is it possible to download the video ?",
-      "timestamp": "2025-05-03T16:38:19.069000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368265427544834138",
+      "content": "Thanks Jonathan for the feedback, I haven’t tried cursor myself but will do, so much good talk about it. Keep experimenting!",
+      "timestamp": "2025-05-06T13:11:58.416000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369300662919368715",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
+        "id": "673901899837341736",
+        "username": "julioverne74",
         "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Jose Cordovilla",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "691008994789163020",
+          "username": "jhorden2211",
+          "display_name": "Jonathan Horden"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369034898949669025",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369262469796724838",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@673901899837341736> - thank-you for the presentation; this is really clear and topical using Discord itself.  The top-k observation is interesting.  I look forward to watching the recording later today.",
+      "timestamp": "2025-05-06T10:40:12.466000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369262469796724838",
+      "author": {
+        "id": "1365093933461274654",
+        "username": "markvenn_30910",
+        "discriminator": "0",
+        "display_name": "Mark Venn",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
       ],
       "reactions": [
         {
@@ -547,36 +291,70 @@
       "attachments": [],
       "embeds": 0,
       "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369215938800652309",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Great inputs & reflections👌 Will explore and share findings soon too.",
+      "timestamp": "2025-05-06T07:35:18.612000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369215938800652309",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "691008994789163020",
+          "username": "jhorden2211",
+          "display_name": "Jonathan Horden"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1368208933893832714",
+        "message_id": "1369034898949669025",
         "channel_id": "1364289798340349953",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1368275432444661792",
+      "message_id": "1369034898949669025",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Yes just click the three buttons next to share",
-      "timestamp": "2025-05-03T17:18:04.423000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368275432444661792",
+      "content": "Hey <@673901899837341736> , thanks so much for the time you've taken to put this together and share it with the group. I've been on the same journey going from non-coding to working with VSC to build vector stores etc and a lot of what you say resonates. A common theme in all my experimentation is that AI facilitates rapid progress at the start but the progress slows when you start hitting complexity - which basically mirrors the trajectory of any project albeit compressed into a much shorter timeframe. I've been using Cursor AI this week which has been amazing - looks to work in much the same way as GitHub Copilot that you demonstrated but totally agree that the vibe coding approach can leave the codebase in a bit of a mess.",
+      "timestamp": "2025-05-05T19:35:55.348000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369034898949669025",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "691008994789163020",
+        "username": "jhorden2211",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Jonathan Horden",
         "bot": false
       },
       "mentions": [
-        "758206516753858561"
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
       ],
       "reactions": [
         {
-          "emoji": "💯",
-          "count": 1
+          "emoji": "🔥",
+          "count": 4
         }
       ],
       "attachments": [],
@@ -584,66 +362,57 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1368265427544834138",
+        "message_id": "1368690303640404031",
         "channel_id": "1364289798340349953",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1368276449823293623",
+      "message_id": "1368980652791431309",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I think probably need permission to do that, dont see any other button, only to copy the link, or do we need to have a Fathom account",
-      "timestamp": "2025-05-03T17:22:06.985000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368276449823293623",
+      "content": "/list",
+      "timestamp": "2025-05-05T16:00:22.056000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368980652791431309",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
+        "id": "445062048775274496",
+        "username": "pablo000092",
         "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Pablo Allois Test",
         "bot": false
       },
-      "mentions": [
-        "1352785241252565174"
-      ],
+      "mentions": [],
       "reactions": [],
-      "attachments": [
-        {
-          "id": "1368276449618034849",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1368276449618034849/image.png?ex=684080be&is=683f2f3e&hm=00677b79e189a8876a7e0a5fde4549c7ca202ded02ea942b2237c595981dd643&",
-          "size": 11815
-        }
-      ],
+      "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1368275432444661792",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1368277251212312587",
+      "message_id": "1368969896527925330",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Possibly; I will look into it.",
-      "timestamp": "2025-05-03T17:25:18.051000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368277251212312587",
+      "content": "Done!",
+      "timestamp": "2025-05-05T15:17:37.563000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368969896527925330",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "673901899837341736",
+        "username": "julioverne74",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Jose Cordovilla",
         "bot": false
       },
       "mentions": [
-        "758206516753858561"
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
       ],
       "reactions": [
         {
@@ -656,7 +425,41 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1368276449823293623",
+        "message_id": "1368753826672410656",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368753826672410656",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "José will it be possible to give permissión to download the video recoding?",
+      "timestamp": "2025-05-05T00:59:02.495000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368753826672410656",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368690303640404031",
         "channel_id": "1364289798340349953",
         "guild_id": "1353058864810950737"
       }
@@ -699,53 +502,27 @@
       "reference": null
     },
     {
-      "message_id": "1368753826672410656",
+      "message_id": "1368277251212312587",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "José will it be possible to give permissión to download the video recoding?",
-      "timestamp": "2025-05-05T00:59:02.495000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368753826672410656",
+      "content": "Possibly; I will look into it.",
+      "timestamp": "2025-05-03T17:25:18.051000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368277251212312587",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1368690303640404031",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1368969896527925330",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Done!",
-      "timestamp": "2025-05-05T15:17:37.563000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368969896527925330",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561"
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
       ],
       "reactions": [
         {
@@ -758,25 +535,312 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1368753826672410656",
+        "message_id": "1368276449823293623",
         "channel_id": "1364289798340349953",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1368980652791431309",
+      "message_id": "1368276449823293623",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "/list",
-      "timestamp": "2025-05-05T16:00:22.056000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368980652791431309",
+      "content": "I think probably need permission to do that, dont see any other button, only to copy the link, or do we need to have a Fathom account",
+      "timestamp": "2025-05-03T17:22:06.985000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368276449823293623",
       "author": {
-        "id": "445062048775274496",
-        "username": "pablo000092",
+        "id": "758206516753858561",
+        "username": "darkgago",
         "discriminator": "0",
-        "display_name": "Pablo Allois Test",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1368276449618034849",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1368276449618034849/image.png?ex=6841d23e&is=684080be&hm=d6510acdf484aa869947a559f9cb77605681ed4d520bb8f5b281aeaad2164e7d&",
+          "size": 11815,
+          "content_type": "image/png"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368275432444661792",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368275432444661792",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yes just click the three buttons next to share",
+      "timestamp": "2025-05-03T17:18:04.423000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368275432444661792",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368265427544834138",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368265427544834138",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oscar is it possible to download the video ?",
+      "timestamp": "2025-05-03T16:38:19.069000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368265427544834138",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1368208933893832714",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1368208933893832714",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone Recording / Transcript / Key Takeaways / Topics From Q&A W/ Dr.Sanchez yesterday !\n\n🔗Link: https://fathom.video/share/F7UnYtRUoxhdgc_byJ2z_gmy_iYkxsnn",
+      "timestamp": "2025-05-03T12:53:49.933000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1368208933893832714",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366782056704512062",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you <@1322962807565848586> !!! i just watch the recording as i wasnt able to attend the live session. it was truly encouraging... i am now starting to play with 8n8 tool . i also support the idea of RAG for the next session.",
+      "timestamp": "2025-04-29T14:23:55.901000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366782056704512062",
+      "author": {
+        "id": "1364822781220360283",
+        "username": "alvarogonzalez1073",
+        "discriminator": "0",
+        "display_name": "Alvaro Gonzalez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366541839942942740",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you <@1322962807565848586> for the session and the recording. 💐. Oscar, thank you for sharing. I also vote for the rag on the next session.",
+      "timestamp": "2025-04-28T22:29:23.762000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366541839942942740",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365764518302584833",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366530767823573052",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1322962807565848586>  thank you so much for sharing your knowledge and encouraging us to explore on our own!! It was inspiring to me. Thanks",
+      "timestamp": "2025-04-28T21:45:23.963000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366530767823573052",
+      "author": {
+        "id": "1068496361651179540",
+        "username": "analia8726",
+        "discriminator": "0",
+        "display_name": "Analía Manildo",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366325650579001345",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Awesome. Thanks!",
+      "timestamp": "2025-04-28T08:10:20.201000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366325650579001345",
+      "author": {
+        "id": "1364899385866981390",
+        "username": "manoella_22229",
+        "discriminator": "0",
+        "display_name": "Manoella",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359961544430981340",
+          "username": "antoine789",
+          "display_name": "Antoine Christopher"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365725524462272594",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366173901108936764",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you for the session, very helpful.",
+      "timestamp": "2025-04-27T22:07:20.308000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1366173901108936764",
+      "author": {
+        "id": "1363269995559387226",
+        "username": "ezgiarguder",
+        "discriminator": "0",
+        "display_name": "Ezgi Arguder",
         "bot": false
       },
       "mentions": [],
@@ -788,14 +852,14 @@
       "reference": null
     },
     {
-      "message_id": "1369034898949669025",
+      "message_id": "1365828639446405181",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hey <@673901899837341736> , thanks so much for the time you've taken to put this together and share it with the group. I've been on the same journey going from non-coding to working with VSC to build vector stores etc and a lot of what you say resonates. A common theme in all my experimentation is that AI facilitates rapid progress at the start but the progress slows when you start hitting complexity - which basically mirrors the trajectory of any project albeit compressed into a much shorter timeframe. I've been using Cursor AI this week which has been amazing - looks to work in much the same way as GitHub Copilot that you demonstrated but totally agree that the vibe coding approach can leave the codebase in a bit of a mess.",
-      "timestamp": "2025-05-05T19:35:55.348000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369034898949669025",
+      "content": "Excellent session, thank you <@1322962807565848586>",
+      "timestamp": "2025-04-26T23:15:23.513000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365828639446405181",
       "author": {
         "id": "691008994789163020",
         "username": "jhorden2211",
@@ -804,79 +868,13 @@
         "bot": false
       },
       "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
         {
-          "emoji": "🔥",
-          "count": 4
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1368690303640404031",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369215938800652309",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Great inputs & reflections👌 Will explore and share findings soon too.",
-      "timestamp": "2025-05-06T07:35:18.612000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369215938800652309",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "691008994789163020"
       ],
       "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369034898949669025",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369262469796724838",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi <@673901899837341736> - thank-you for the presentation; this is really clear and topical using Discord itself.  The top-k observation is interesting.  I look forward to watching the recording later today.",
-      "timestamp": "2025-05-06T10:40:12.466000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369262469796724838",
-      "author": {
-        "id": "1365093933461274654",
-        "username": "markvenn_30910",
-        "discriminator": "0",
-        "display_name": "Mark Venn",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -884,44 +882,280 @@
       "reference": null
     },
     {
-      "message_id": "1369300662919368715",
+      "message_id": "1365800169806762114",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks Jonathan for the feedback, I haven’t tried cursor myself but will do, so much good talk about it. Keep experimenting!",
-      "timestamp": "2025-05-06T13:11:58.416000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1369300662919368715",
+      "content": "Wonderful session <@1322962807565848586> 👌",
+      "timestamp": "2025-04-26T21:22:15.822000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365800169806762114",
       "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
         "discriminator": "0",
-        "display_name": "Jose Cordovilla",
+        "display_name": "Prabhat Kumar",
         "bot": false
       },
       "mentions": [
-        "691008994789163020"
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1369034898949669025",
+        "message_id": "1365764518302584833",
         "channel_id": "1364289798340349953",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1370443557994758304",
+      "message_id": "1365764518302584833",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone \n\nHere is the link of the recording of the Q & A today!\n\nhttps://www.linkedin.com/events/7326032241518649346/comments/",
-      "timestamp": "2025-05-09T16:53:25.836000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370443557994758304",
+      "content": "Recording from todays session with <@1322962807565848586> !",
+      "timestamp": "2025-04-26T19:00:35.841000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365764518302584833",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1322962807565848586",
+          "username": "dlinfield_95648",
+          "display_name": "dragana linfield"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 14
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365764505514016889",
+          "filename": "video1397454629.mp4",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365764505514016889/video1397454629.mp4?ex=6841e950&is=684097d0&hm=c1a3512a7a8cdfd1a47dc2e30d445624b4c5f1ce38a0428b764db6d12204fb38&",
+          "size": 400216755,
+          "content_type": "video/mp4"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365725524462272594",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-26T16:25:38.985000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365725524462272594",
+      "author": {
+        "id": "1359961544430981340",
+        "username": "antoine789",
+        "discriminator": "0",
+        "display_name": "Antoine Christopher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365725524055429201",
+          "filename": "25_Apr_QA_Summary_Notes.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365725524055429201/25_Apr_QA_Summary_Notes.pdf?ex=6841c502&is=68407382&hm=48db9e09438b7c3e08ae823399a57af0c0f39102d317e3198d4626d612654144&",
+          "size": 147399,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365363688109903983",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365363688109903983",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Recording from Today's Q and A!",
+      "timestamp": "2025-04-25T16:27:50.476000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365363688109903983",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 15
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365363671538335805",
+          "filename": "video1860266497.mp4",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365363671538335805/video1860266497.mp4?ex=6841c582&is=68407402&hm=6ba654851ceb39c51f3b3e791be99545567a4718e8a9b2bc62717b991f1fcf0f&",
+          "size": 365986661,
+          "content_type": "video/mp4"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365054065586999398",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Video and slide deck from general admissions onboarding",
+      "timestamp": "2025-04-24T19:57:30.714000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1365054065586999398",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 10
+        },
+        {
+          "emoji": "❌",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1365054061912789002",
+          "filename": "video1816859225.mp4",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365054061912789002/video1816859225.mp4?ex=6841f6a9&is=6840a529&hm=861e44a1708159862488fb89f96ebc5c49a83160797155e611327ab17f6fa0ec&",
+          "size": 77476228,
+          "content_type": "video/mp4"
+        },
+        {
+          "id": "1365054065632874636",
+          "filename": "OnboardingGeneral_Admissions.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1365054065632874636/OnboardingGeneral_Admissions.pdf?ex=6841f6aa&is=6840a52a&hm=4059830c2cf090a71687b3a400e4df87d869c5efe9262c89913d6e69332ce1e6&",
+          "size": 334638,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1364364188553842688",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Meeting summary via NotebookLM 😎",
+      "timestamp": "2025-04-22T22:16:11.212000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364364188553842688",
+      "author": {
+        "id": "1359961544430981340",
+        "username": "antoine789",
+        "discriminator": "0",
+        "display_name": "Antoine Christopher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 9
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1364364188180287698",
+          "filename": "Meeting_Summary.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364364188180287698/Meeting_Summary.pdf?ex=6842172b&is=6840c5ab&hm=e230907420346155d821dfba7ec30b02ee048634eac6427e935630e82d4c1f1d&",
+          "size": 185665,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1364290059045441567",
+        "channel_id": "1364289798340349953",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1364290265388421131",
+      "channel_id": "1364289798340349953",
+      "channel_name": "🎥meeting-recordings",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-22T17:22:26.556000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364290265388421131",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -934,31 +1168,31 @@
         {
           "emoji": "❤️",
           "count": 8
-        },
-        {
-          "emoji": "👍",
-          "count": 6
-        },
-        {
-          "emoji": "🦾",
-          "count": 1
         }
       ],
-      "attachments": [],
-      "embeds": 1,
+      "attachments": [
+        {
+          "id": "1364290264906072185",
+          "filename": "Community_Updates_4.22.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364290264906072185/Community_Updates_4.22.pdf?ex=6841d252&is=684080d2&hm=bfb14685b446520cd7d1ec5cc4107029af794fc45a877d1e291687fe6e6eecd7&",
+          "size": 263553,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1370835825943773234",
+      "message_id": "1364290059045441567",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone \n\nHere is the recording for:\n\n[A] Gen AI Global 🌍 2.0 Informational Session – Part 1 📘:\nhttps://fathom.video/share/L3ikJuXy_uFwV4D2LMKc6WDQJpHNpnLg\n\n[B] 🌐 Towards a Global Charter for Ethical AI – A Gen AI Global Initiative 🤝\nhttps://fathom.video/share/q7Xps5xhnGweCD95JdL7rRmYDszdE5nu\n\nThank you so much for all your support 🙏—without you, none of this would be possible! 🌟",
-      "timestamp": "2025-05-10T18:52:09.803000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370835825943773234",
+      "content": "@everyone here is the recording from today's meeting and the slide deck:",
+      "timestamp": "2025-04-22T17:21:37.360000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1364290059045441567",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -970,155 +1204,26 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 6
+          "count": 5
         },
         {
           "emoji": "👍",
-          "count": 4
+          "count": 1
         }
       ],
-      "attachments": [],
-      "embeds": 2,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370836126939480214",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> is there any way that we could download the videos ? still only the Share option is available",
-      "timestamp": "2025-05-10T18:53:21.566000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370836126939480214",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
+      "attachments": [
+        {
+          "id": "1364290046940942448",
+          "filename": "video1250994263.mp4",
+          "url": "https://cdn.discordapp.com/attachments/1364289798340349953/1364290046940942448/video1250994263.mp4?ex=6841d21e&is=6840809e&hm=e039f236541363a63a7b2ae426b8eb3d8682395a5e927c8c561185a805798614&",
+          "size": 228714758,
+          "content_type": "video/mp4"
+        }
       ],
-      "reactions": [],
-      "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
-    },
-    {
-      "message_id": "1370837478528913498",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "They will be added to the repository we are making; so you will be able to download from there ✅",
-      "timestamp": "2025-05-10T18:58:43.810000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1370837478528913498",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370836126939480214",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1371173028192587916",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone \n\nRecording from our feedback implementation meeting !\n\nLink: https://fathom.video/share/3teUJZxMU8ys-974sNf3eyLN2wuszycm",
-      "timestamp": "2025-05-11T17:12:05.084000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1371173028192587916",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        },
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1371176610006564944",
-      "channel_id": "1364289798340349953",
-      "channel_name": "🎥meeting-recordings",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you so much <@1352785241252565174>  for sharing the recording of the meeting. I’m really sorry I couldn’t make it, but the summary is excellent, and I truly hope @everyone takes the time to go through it — there are some very relevant points covered, especially:\n\n• Improving thread usage and limiting new channels: A thoughtful approach to reduce confusion and keep discussions organized without overwhelming members.\n\n• Launching a Weekly Digest and Posting Calendar: These tools will help keep everyone aligned on key conversations and content themes.\n\n• Defining new community roles: From Digest Owners to Channel Managers, these roles will empower leaders and bring structure to the engagement process.\n\nThanks again to everyone involved in driving this continuous improvement process — it’s incredibly valuable to help us get the most out of our channels without getting lost in them!",
-      "timestamp": "2025-05-11T17:26:19.055000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1364289798340349953/1371176610006564944",
-      "author": {
-        "id": "1125194882164736050",
-        "username": "rodrigoreyesjara",
-        "discriminator": "0",
-        "display_name": "Rodrigo Reyes",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 4
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1371173028192587916",
-        "channel_id": "1364289798340349953",
-        "guild_id": "1353058864810950737"
-      }
     }
   ]
 }

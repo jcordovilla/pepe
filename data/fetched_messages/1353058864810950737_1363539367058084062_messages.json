@@ -3,18 +3,106 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1363539367058084062",
   "channel_name": "❓buddy-support",
-  "fetch_timestamp": "2025-06-03T22:03:59.168950",
+  "fetch_timestamp": "2025-06-04T23:18:48.062631+00:00",
   "message_count": 21,
   "messages": [
     {
-      "message_id": "1366417002352218133",
+      "message_id": "1374843320890818630",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hi Oscar\nI didn't find the new groups in the MOTW & buddy corner folder.",
-      "timestamp": "2025-04-28T14:13:20.161000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366417002352218133",
+      "content": "Hey <@991347065273720964> You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
+      "timestamp": "2025-05-21T20:16:31.054000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1374843320890818630",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "991347065273720964",
+          "username": "waltershields.",
+          "display_name": "WalterShields"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374788503933812867",
+        "channel_id": "1363539367058084062",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374788503933812867",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi I just posted my information for a buddy and curious about the next steps. Will someone reach out?",
+      "timestamp": "2025-05-21T16:38:41.673000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1374788503933812867",
+      "author": {
+        "id": "991347065273720964",
+        "username": "waltershields.",
+        "discriminator": "0",
+        "display_name": "WalterShields",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368961678653394975",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1087795330067742760> DM me we can figure out a fix",
+      "timestamp": "2025-05-05T14:44:58.269000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1368961678653394975",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368960507104460902",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi, my boddy group is blocked.( boddy group 6)",
+      "timestamp": "2025-05-05T14:40:18.950000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1368960507104460902",
       "author": {
         "id": "1087795330067742760",
         "username": "eduardofadanelli",
@@ -23,6 +111,36 @@
         "bot": false
       },
       "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366835283575832690",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you, <@673901899837341736> Jose",
+      "timestamp": "2025-04-29T17:55:26.176000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366835283575832690",
+      "author": {
+        "id": "1362171740104556584",
+        "username": "nura775",
+        "discriminator": "0",
+        "display_name": "Nura",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
       "reactions": [
         {
           "emoji": "👍",
@@ -36,14 +154,127 @@
       "reference": null
     },
     {
-      "message_id": "1366420831638523935",
+      "message_id": "1366835216857042945",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1087795330067742760> I just tagged you in your group",
-      "timestamp": "2025-04-28T14:28:33.134000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366420831638523935",
+      "content": "cool. thats what I thought when I used, but then the self-doubt came :-J Thanks",
+      "timestamp": "2025-04-29T17:55:10.269000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366835216857042945",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366834825423749183",
+        "channel_id": "1363539367058084062",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366834825423749183",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I can answer this one. Yes, it remains within the channel, tha's how **everyone** works.\nIf you mention within a Discord private channel, the scope of the notification remains strictly within that channel. Only users who have permission to view the channel will receive the notification; users without access to the channel will not see the message or receive any notification",
+      "timestamp": "2025-04-29T17:53:36.944000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366834825423749183",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366834303132106763",
+        "channel_id": "1363539367058084062",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366834303132106763",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1352785241252565174> - Quick Question - If I mention @  everyone within buddy group - does the scope remains within buddy group? <@1362171740104556584>",
+      "timestamp": "2025-04-29T17:51:32.420000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366834303132106763",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362171740104556584",
+          "username": "nura775",
+          "display_name": "Nura"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366785144391860236",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@691008994789163020> Just tagged you !",
+      "timestamp": "2025-04-29T14:36:12.063000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366785144391860236",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -52,9 +283,18 @@
         "bot": false
       },
       "mentions": [
-        "1087795330067742760"
+        {
+          "id": "691008994789163020",
+          "username": "jhorden2211",
+          "display_name": "Jonathan Horden"
+        }
       ],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -62,19 +302,19 @@
       "reference": null
     },
     {
-      "message_id": "1366421390885916793",
+      "message_id": "1366781771928178799",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-28T14:30:46.469000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366421390885916793",
+      "content": "Possibly stupid question incoming. Where do I see my buddy group? I don’t see a channel. 🤔",
+      "timestamp": "2025-04-29T14:22:48.005000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366781771928178799",
       "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
+        "id": "691008994789163020",
+        "username": "jhorden2211",
         "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
+        "display_name": "Jonathan Horden",
         "bot": false
       },
       "mentions": [],
@@ -86,47 +326,105 @@
       "reference": null
     },
     {
-      "message_id": "1366421492040077393",
+      "message_id": "1366424961769799781",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks Oscar",
-      "timestamp": "2025-04-28T14:31:10.586000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366421492040077393",
+      "content": "Probably should be called \"Supreme Dream Team coming up the Schemes\" 😄",
+      "timestamp": "2025-04-28T14:44:57.834000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424961769799781",
       "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
+        "id": "1350111040733577246",
+        "username": "fcastrosantos",
         "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366423007043784847",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey Oscar, I also don't see yet a group under the [ MOTW & Buddy Corner]. Cheers, Melinda",
-      "timestamp": "2025-04-28T14:37:11.791000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423007043784847",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
+        "display_name": "Francisco Castro Santos",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "🤣",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366424441336365056",
+        "channel_id": "1363539367058084062",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366424858711298179",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362326150373966035> I just tagged u in the chat",
+      "timestamp": "2025-04-28T14:44:33.263000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424858711298179",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366424441336365056",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Dm me we will get it sorted out; as of now I'm running this by myself but we are launching a team to handle these matters that will help streamline these issues in the future.",
+      "timestamp": "2025-04-28T14:42:53.753000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424441336365056",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -134,20 +432,20 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1366420831638523935",
+        "message_id": "1366423679117955164",
         "channel_id": "1363539367058084062",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1366423139445117100",
+      "message_id": "1366423679117955164",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "And: So Ekaterina and I got separated. Well, was not our wish, but I guess we go with the flow.",
-      "timestamp": "2025-04-28T14:37:43.358000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423139445117100",
+      "content": "Alright. To be honest, I don't get it really: admin buddy groups and others (with members). Ekaterina is a member. So, I am a bit confused.",
+      "timestamp": "2025-04-28T14:39:52.026000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423679117955164",
       "author": {
         "id": "1362326150373966035",
         "username": "kiss_ambassador",
@@ -180,7 +478,11 @@
         "bot": false
       },
       "mentions": [
-        "1362326150373966035"
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -194,14 +496,14 @@
       }
     },
     {
-      "message_id": "1366423679117955164",
+      "message_id": "1366423139445117100",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Alright. To be honest, I don't get it really: admin buddy groups and others (with members). Ekaterina is a member. So, I am a bit confused.",
-      "timestamp": "2025-04-28T14:39:52.026000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423679117955164",
+      "content": "And: So Ekaterina and I got separated. Well, was not our wish, but I guess we go with the flow.",
+      "timestamp": "2025-04-28T14:37:43.358000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423139445117100",
       "author": {
         "id": "1362326150373966035",
         "username": "kiss_ambassador",
@@ -218,23 +520,27 @@
       "reference": null
     },
     {
-      "message_id": "1366424441336365056",
+      "message_id": "1366423007043784847",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Dm me we will get it sorted out; as of now I'm running this by myself but we are launching a team to handle these matters that will help streamline these issues in the future.",
-      "timestamp": "2025-04-28T14:42:53.753000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424441336365056",
+      "content": "Hey Oscar, I also don't see yet a group under the [ MOTW & Buddy Corner]. Cheers, Melinda",
+      "timestamp": "2025-04-28T14:37:11.791000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366423007043784847",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Melinda Melcher",
         "bot": false
       },
       "mentions": [
-        "1362326150373966035"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -242,273 +548,20 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1366423679117955164",
+        "message_id": "1366420831638523935",
         "channel_id": "1363539367058084062",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1366424858711298179",
+      "message_id": "1366421492040077393",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1362326150373966035> I just tagged u in the chat",
-      "timestamp": "2025-04-28T14:44:33.263000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424858711298179",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366424961769799781",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Probably should be called \"Supreme Dream Team coming up the Schemes\" 😄",
-      "timestamp": "2025-04-28T14:44:57.834000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366424961769799781",
-      "author": {
-        "id": "1350111040733577246",
-        "username": "fcastrosantos",
-        "discriminator": "0",
-        "display_name": "Francisco Castro Santos",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        },
-        {
-          "emoji": "🤣",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366424441336365056",
-        "channel_id": "1363539367058084062",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366781771928178799",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Possibly stupid question incoming. Where do I see my buddy group? I don’t see a channel. 🤔",
-      "timestamp": "2025-04-29T14:22:48.005000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366781771928178799",
-      "author": {
-        "id": "691008994789163020",
-        "username": "jhorden2211",
-        "discriminator": "0",
-        "display_name": "Jonathan Horden",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366785144391860236",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@691008994789163020> Just tagged you !",
-      "timestamp": "2025-04-29T14:36:12.063000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366785144391860236",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "691008994789163020"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366834303132106763",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi <@1352785241252565174> - Quick Question - If I mention @  everyone within buddy group - does the scope remains within buddy group? <@1362171740104556584>",
-      "timestamp": "2025-04-29T17:51:32.420000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366834303132106763",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1362171740104556584",
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366834825423749183",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I can answer this one. Yes, it remains within the channel, tha's how **everyone** works.\nIf you mention within a Discord private channel, the scope of the notification remains strictly within that channel. Only users who have permission to view the channel will receive the notification; users without access to the channel will not see the message or receive any notification",
-      "timestamp": "2025-04-29T17:53:36.944000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366834825423749183",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366834303132106763",
-        "channel_id": "1363539367058084062",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366835216857042945",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "cool. thats what I thought when I used, but then the self-doubt came :-J Thanks",
-      "timestamp": "2025-04-29T17:55:10.269000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366835216857042945",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366834825423749183",
-        "channel_id": "1363539367058084062",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366835283575832690",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you, <@673901899837341736> Jose",
-      "timestamp": "2025-04-29T17:55:26.176000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366835283575832690",
-      "author": {
-        "id": "1362171740104556584",
-        "username": "nura775",
-        "discriminator": "0",
-        "display_name": "Nura",
-        "bot": false
-      },
-      "mentions": [
-        "673901899837341736"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368960507104460902",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi, my boddy group is blocked.( boddy group 6)",
-      "timestamp": "2025-05-05T14:40:18.950000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1368960507104460902",
+      "content": "Thanks Oscar",
+      "timestamp": "2025-04-28T14:31:10.586000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366421492040077393",
       "author": {
         "id": "1087795330067742760",
         "username": "eduardofadanelli",
@@ -525,45 +578,19 @@
       "reference": null
     },
     {
-      "message_id": "1368961678653394975",
+      "message_id": "1366421390885916793",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1087795330067742760> DM me we can figure out a fix",
-      "timestamp": "2025-05-05T14:44:58.269000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1368961678653394975",
+      "content": "",
+      "timestamp": "2025-04-28T14:30:46.469000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366421390885916793",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1087795330067742760"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374788503933812867",
-      "channel_id": "1363539367058084062",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi I just posted my information for a buddy and curious about the next steps. Will someone reach out?",
-      "timestamp": "2025-05-21T16:38:41.673000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1374788503933812867",
-      "author": {
-        "id": "991347065273720964",
-        "username": "waltershields.",
-        "discriminator": "0",
-        "display_name": "WalterShields",
+        "display_name": "Eduardo Fadanelli",
         "bot": false
       },
       "mentions": [],
@@ -575,34 +602,63 @@
       "reference": null
     },
     {
-      "message_id": "1374843320890818630",
+      "message_id": "1366420831638523935",
       "channel_id": "1363539367058084062",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hey <@991347065273720964> You should be assigned to a buddy group and a VC channel for communication. Please check and let me know if you don't see your buddy group or have any issues sending messages in the buddy group channel.",
-      "timestamp": "2025-05-21T20:16:31.054000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1374843320890818630",
+      "content": "<@1087795330067742760> I just tagged you in your group",
+      "timestamp": "2025-04-28T14:28:33.134000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366420831638523935",
       "author": {
-        "id": "1311434218622156850",
-        "username": "nikhil_kassetty",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Nikhil Kassetty",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [
-        "991347065273720964"
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        }
       ],
       "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1374788503933812867",
-        "channel_id": "1363539367058084062",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366417002352218133",
+      "channel_id": "1363539367058084062",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Oscar\nI didn't find the new groups in the MOTW & buddy corner folder.",
+      "timestamp": "2025-04-28T14:13:20.161000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363539367058084062/1366417002352218133",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
   ]
 }

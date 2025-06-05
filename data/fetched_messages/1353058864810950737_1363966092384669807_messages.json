@@ -3,77 +3,23 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1363966092384669807",
   "channel_name": "❓buddy-support",
-  "fetch_timestamp": "2025-06-03T22:03:43.864928",
+  "fetch_timestamp": "2025-06-04T23:18:51.903900+00:00",
   "message_count": 5,
   "messages": [
     {
-      "message_id": "1371816961364725824",
+      "message_id": "1372279375256354998",
       "channel_id": "1363966092384669807",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Trying to create a buddy with Raul Vargas Saavedra .  I did not see him in Discord.",
-      "timestamp": "2025-05-13T11:50:50.716000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1371816961364725824",
-      "author": {
-        "id": "1360636661125349566",
-        "username": "michaelkeady_92138",
-        "discriminator": "0",
-        "display_name": "Michael Keady",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372277351123128382",
-      "channel_id": "1363966092384669807",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi <@1360636661125349566> Are you looking to join a specific buddy group ?",
-      "timestamp": "2025-05-14T18:20:16.188000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372277351123128382",
+      "content": "Also, we are going to reorganize all the buddy groups in next couple weeks, so please expect  changes in the buddy group assignment.",
+      "timestamp": "2025-05-14T18:28:18.779000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372279375256354998",
       "author": {
         "id": "1311434218622156850",
         "username": "nikhil_kassetty",
         "discriminator": "0",
         "display_name": "Nikhil Kassetty",
-        "bot": false
-      },
-      "mentions": [
-        "1360636661125349566"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1371816961364725824",
-        "channel_id": "1363966092384669807",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372277654845391029",
-      "channel_id": "1363966092384669807",
-      "channel_name": "❓buddy-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "What groups are there?  Thank you",
-      "timestamp": "2025-05-14T18:21:28.601000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372277654845391029",
-      "author": {
-        "id": "1360636661125349566",
-        "username": "michaelkeady_92138",
-        "discriminator": "0",
-        "display_name": "Michael Keady",
         "bot": false
       },
       "mentions": [],
@@ -109,19 +55,77 @@
       "reference": null
     },
     {
-      "message_id": "1372279375256354998",
+      "message_id": "1372277654845391029",
       "channel_id": "1363966092384669807",
       "channel_name": "❓buddy-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Also, we are going to reorganize all the buddy groups in next couple weeks, so please expect  changes in the buddy group assignment.",
-      "timestamp": "2025-05-14T18:28:18.779000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372279375256354998",
+      "content": "What groups are there?  Thank you",
+      "timestamp": "2025-05-14T18:21:28.601000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372277654845391029",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372277351123128382",
+      "channel_id": "1363966092384669807",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1360636661125349566> Are you looking to join a specific buddy group ?",
+      "timestamp": "2025-05-14T18:20:16.188000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1372277351123128382",
       "author": {
         "id": "1311434218622156850",
         "username": "nikhil_kassetty",
         "discriminator": "0",
         "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360636661125349566",
+          "username": "michaelkeady_92138",
+          "display_name": "Michael Keady"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371816961364725824",
+        "channel_id": "1363966092384669807",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371816961364725824",
+      "channel_id": "1363966092384669807",
+      "channel_name": "❓buddy-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Trying to create a buddy with Raul Vargas Saavedra .  I did not see him in Discord.",
+      "timestamp": "2025-05-13T11:50:50.716000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363966092384669807/1371816961364725824",
+      "author": {
+        "id": "1360636661125349566",
+        "username": "michaelkeady_92138",
+        "discriminator": "0",
+        "display_name": "Michael Keady",
         "bot": false
       },
       "mentions": [],

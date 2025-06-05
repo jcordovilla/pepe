@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 import discord
 from discord.ext import commands
+from .fetch_state_manager import FetchStateManager
 
 logger = logging.getLogger(__name__)
 
@@ -20,12 +21,13 @@ class DiscordMessageFetcher:
     
     Features:
     - Fetches messages from specified channels/guilds
+    - Incremental fetching with state management
     - Rate limiting and error handling
     - Saves to JSON files for pipeline processing
     - Integrates with existing data format
     """
     
-    def __init__(self, token: str, config: Dict[str, Any] = None):
+    def __init__(self, token: str, config: Optional[Dict[str, Any]] = None):
         self.token = token
         self.config = config or {}
         
@@ -34,6 +36,11 @@ class DiscordMessageFetcher:
         self.rate_limit_delay = self.config.get("rate_limit_delay", 1.0)
         self.max_retries = self.config.get("max_retries", 3)
         self.output_dir = Path(self.config.get("output_dir", "data/fetched_messages"))
+        
+        # State management for incremental fetching
+        self.state_manager = FetchStateManager(
+            self.config.get("state_file", "data/processing_markers/fetch_state.json")
+        )
         
         # Discord client setup
         intents = discord.Intents.default()
@@ -46,7 +53,7 @@ class DiscordMessageFetcher:
         # Ensure output directory exists
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        logger.info("🔍 Discord message fetcher initialized")
+        logger.info("🔍 Discord message fetcher initialized with incremental support")
     
     async def initialize(self):
         """Initialize Discord client connection"""
@@ -61,7 +68,8 @@ class DiscordMessageFetcher:
         self, 
         guild_id: str, 
         channel_ids: Optional[List[str]] = None,
-        limit_per_channel: Optional[int] = None
+        limit_per_channel: Optional[int] = None,
+        incremental: bool = True
     ) -> Dict[str, Any]:
         """
         Fetch messages from a guild (all channels or specified channels)
@@ -70,16 +78,21 @@ class DiscordMessageFetcher:
             guild_id: Discord guild ID
             channel_ids: Optional list of specific channel IDs to fetch
             limit_per_channel: Optional limit of messages per channel
+            incremental: Whether to use incremental fetching (default: True)
             
         Returns:
             Dictionary with fetch results
         """
         try:
-            guild = await self.client.fetch_guild(guild_id)
+            guild = await self.client.fetch_guild(int(guild_id))
             if not guild:
                 return {"success": False, "error": "Guild not found"}
             
             logger.info(f"🏰 Fetching messages from guild: {guild.name} ({guild_id})")
+            if incremental:
+                logger.info("📈 Using incremental fetching mode")
+            else:
+                logger.info("📥 Using full fetching mode")
             
             # Get channels
             channels = await guild.fetch_channels()
@@ -95,7 +108,9 @@ class DiscordMessageFetcher:
                 "channels_processed": 0,
                 "total_messages": 0,
                 "files_created": [],
-                "errors": []
+                "files_updated": [],
+                "errors": [],
+                "incremental_mode": incremental
             }
             
             for channel in text_channels:
@@ -106,13 +121,18 @@ class DiscordMessageFetcher:
                         guild_id=guild_id,
                         guild_name=guild.name,
                         channel=channel,
-                        limit=limit_per_channel
+                        limit=limit_per_channel,
+                        incremental=incremental
                     )
                     
                     if channel_result["success"]:
                         results["channels_processed"] += 1
                         results["total_messages"] += channel_result["message_count"]
-                        results["files_created"].append(channel_result["file_path"])
+                        
+                        if channel_result.get("file_created"):
+                            results["files_created"].append(channel_result["file_path"])
+                        elif channel_result.get("file_updated"):
+                            results["files_updated"].append(channel_result["file_path"])
                     else:
                         results["errors"].append({
                             "channel": f"#{channel.name}",
@@ -141,16 +161,18 @@ class DiscordMessageFetcher:
         guild_id: str,
         guild_name: str,
         channel: discord.TextChannel,
-        limit: Optional[int] = None
+        limit: Optional[int] = None,
+        incremental: bool = True
     ) -> Dict[str, Any]:
         """
-        Fetch messages from a specific channel
+        Fetch messages from a specific channel with optional incremental fetching
         
         Args:
             guild_id: Discord guild ID
             guild_name: Discord guild name
             channel: Discord channel object
             limit: Optional limit of messages to fetch
+            incremental: Whether to use incremental fetching based on state
             
         Returns:
             Dictionary with fetch results
@@ -158,54 +180,117 @@ class DiscordMessageFetcher:
         try:
             messages = []
             message_count = 0
+            newest_timestamp = None
             
-            # Fetch messages with pagination
-            async for message in channel.history(limit=limit):
-                try:
-                    # Convert message to our standard format
-                    message_data = await self._convert_message_to_dict(message)
-                    messages.append(message_data)
-                    message_count += 1
-                    
-                    # Progress logging
-                    if message_count % 100 == 0:
-                        logger.info(f"  📝 Fetched {message_count} messages from #{channel.name}")
-                    
-                except Exception as e:
-                    logger.warning(f"⚠️ Error processing message {message.id}: {e}")
-                    continue
+            # Determine starting point for incremental fetching
+            after_datetime = None
+            if incremental:
+                last_fetch_time = self.state_manager.get_channel_last_fetch(guild_id, str(channel.id))
+                if last_fetch_time:
+                    after_datetime = last_fetch_time
+                    logger.info(f"📈 Incremental fetch from #{channel.name} after {last_fetch_time}")
+                else:
+                    logger.info(f"🆕 First fetch from #{channel.name} (no previous state)")
+            else:
+                logger.info(f"📥 Full fetch from #{channel.name}")
+            
+            # Fetch messages with proper pagination handling
+            if after_datetime and incremental:
+                # For incremental fetching, we need to get messages AFTER our last timestamp
+                # Use oldest_first=True to get them in chronological order and avoid infinite loops
+                logger.info(f"  🔍 Looking for messages after {after_datetime}")
+                
+                # Discord.py's after parameter gets messages created after the specified time
+                # We use oldest_first=True to get messages in chronological order
+                async for message in channel.history(limit=limit, after=after_datetime, oldest_first=True):
+                    try:
+                        # Convert message to our standard format
+                        message_data = await self._convert_message_to_dict(message)
+                        messages.append(message_data)
+                        message_count += 1
+                        
+                        # Track newest message timestamp for state updates
+                        if newest_timestamp is None or message.created_at > newest_timestamp:
+                            newest_timestamp = message.created_at
+                        
+                        # Progress logging
+                        if message_count % 100 == 0:
+                            logger.info(f"  📝 Fetched {message_count} new messages from #{channel.name}")
+                        
+                    except Exception as e:
+                        logger.warning(f"⚠️ Error processing message {message.id}: {e}")
+                        continue
+                        
+                if message_count == 0:
+                    logger.info(f"  ✨ No new messages in #{channel.name} since {after_datetime}")
+            else:
+                # Full fetch mode - get all messages (or up to limit) in default order (newest first)
+                async for message in channel.history(limit=limit):
+                    try:
+                        # Convert message to our standard format
+                        message_data = await self._convert_message_to_dict(message)
+                        messages.append(message_data)
+                        message_count += 1
+                        
+                        # Track newest message timestamp for state updates
+                        if newest_timestamp is None or message.created_at > newest_timestamp:
+                            newest_timestamp = message.created_at
+                        
+                        # Progress logging
+                        if message_count % 100 == 0:
+                            logger.info(f"  📝 Fetched {message_count} messages from #{channel.name}")
+                        
+                    except Exception as e:
+                        logger.warning(f"⚠️ Error processing message {message.id}: {e}")
+                        continue
             
             if not messages:
-                logger.warning(f"⚠️ No messages found in #{channel.name}")
-                return {"success": False, "error": "No messages found"}
+                if incremental and after_datetime:
+                    logger.info(f"✨ No new messages in #{channel.name} since last fetch")
+                    return {"success": True, "message_count": 0, "no_new_messages": True}
+                else:
+                    logger.warning(f"⚠️ No messages found in #{channel.name}")
+                    return {"success": False, "error": "No messages found"}
             
-            # Create output file
+            # Handle file creation/updating
             filename = f"{guild_id}_{channel.id}_messages.json"
             file_path = self.output_dir / filename
+            file_created = not file_path.exists()
+            file_updated = False
             
-            # Prepare data structure
-            data = {
-                "guild_id": guild_id,
-                "guild_name": guild_name,
-                "channel_id": str(channel.id),
-                "channel_name": channel.name,
-                "fetch_timestamp": datetime.now(timezone.utc).isoformat(),
-                "message_count": len(messages),
-                "messages": messages
-            }
+            if incremental and file_path.exists() and not file_created:
+                # Merge with existing data
+                await self._merge_messages_to_file(file_path, messages, guild_id, guild_name, channel, incremental)
+                file_updated = True
+                logger.info(f"🔄 Updated {filename} with {len(messages)} new messages")
+            else:
+                # Create new file or overwrite (full fetch mode)
+                await self._create_new_message_file(file_path, messages, guild_id, guild_name, channel)
+                if file_created:
+                    logger.info(f"💾 Created {filename} with {len(messages)} messages")
+                else:
+                    logger.info(f"💾 Overwrote {filename} with {len(messages)} messages")
             
-            # Save to file
-            with open(file_path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
-            
-            logger.info(f"💾 Saved {len(messages)} messages to {filename}")
+            # Update state for incremental fetching
+            if newest_timestamp:
+                self.state_manager.update_channel_state(
+                    guild_id=guild_id,
+                    channel_id=str(channel.id),
+                    channel_name=channel.name,
+                    last_message_timestamp=newest_timestamp.isoformat(),
+                    message_count=len(messages),
+                    fetch_mode="incremental" if incremental else "full"
+                )
             
             return {
                 "success": True,
                 "channel_id": str(channel.id),
                 "channel_name": channel.name,
                 "message_count": len(messages),
-                "file_path": str(file_path)
+                "file_path": str(file_path),
+                "file_created": file_created,
+                "file_updated": file_updated,
+                "incremental_mode": incremental
             }
             
         except Exception as e:
@@ -260,9 +345,9 @@ class DiscordMessageFetcher:
         return {
             "message_id": str(message.id),
             "channel_id": str(message.channel.id),
-            "channel_name": message.channel.name,
-            "guild_id": str(message.guild.id),
-            "guild_name": message.guild.name,
+            "channel_name": getattr(message.channel, 'name', 'Unknown'),
+            "guild_id": str(message.guild.id) if message.guild else None,
+            "guild_name": message.guild.name if message.guild else None,
             "content": message.content,
             "timestamp": message.created_at.isoformat(),
             "jump_url": message.jump_url,
@@ -289,3 +374,94 @@ class DiscordMessageFetcher:
             logger.info("🔌 Discord client connection closed")
         except Exception as e:
             logger.error(f"❌ Error closing Discord client: {e}")
+    
+    async def _merge_messages_to_file(
+        self,
+        file_path: Path,
+        new_messages: List[Dict[str, Any]],
+        guild_id: str,
+        guild_name: str,
+        channel: discord.TextChannel,
+        incremental: bool = True
+    ) -> None:
+        """Merge new messages with existing file data"""
+        try:
+            # Load existing data
+            with open(file_path, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+            
+            existing_messages = existing_data.get("messages", [])
+            
+            # Create a set of existing message IDs for deduplication
+            existing_ids = {msg.get("message_id") for msg in existing_messages}
+            
+            # Filter out duplicates from new messages
+            unique_new_messages = [
+                msg for msg in new_messages 
+                if msg.get("message_id") not in existing_ids
+            ]
+            
+            if not unique_new_messages:
+                logger.info(f"📄 No new unique messages to add to {file_path.name}")
+                return
+            
+            # Merge messages (maintain reverse chronological order - newest first)
+            if incremental:
+                # New messages are in chronological order (oldest first) from incremental fetch
+                # Existing messages are in reverse chronological order (newest first)
+                # We need to prepend new messages and maintain newest-first order
+                merged_messages = existing_messages + list(reversed(unique_new_messages))
+            else:
+                # For full fetch, new messages are already in newest-first order
+                merged_messages = unique_new_messages + existing_messages
+            
+            # Update metadata
+            existing_data.update({
+                "guild_id": guild_id,
+                "guild_name": guild_name,
+                "channel_id": str(channel.id),
+                "channel_name": channel.name,
+                "last_update_timestamp": datetime.now(timezone.utc).isoformat(),
+                "message_count": len(merged_messages),
+                "messages": merged_messages
+            })
+            
+            # Save merged data
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(existing_data, f, indent=2, ensure_ascii=False)
+            
+            logger.info(f"🔄 Merged {len(unique_new_messages)} new messages into {file_path.name}")
+            
+        except Exception as e:
+            logger.error(f"❌ Error merging messages to file: {e}")
+            # Fallback: create new file
+            await self._create_new_message_file(file_path, new_messages, guild_id, guild_name, channel)
+    
+    async def _create_new_message_file(
+        self,
+        file_path: Path,
+        messages: List[Dict[str, Any]],
+        guild_id: str,
+        guild_name: str,
+        channel: discord.TextChannel
+    ) -> None:
+        """Create a new message file with provided messages"""
+        try:
+            # Prepare data structure
+            data = {
+                "guild_id": guild_id,
+                "guild_name": guild_name,
+                "channel_id": str(channel.id),
+                "channel_name": channel.name,
+                "fetch_timestamp": datetime.now(timezone.utc).isoformat(),
+                "message_count": len(messages),
+                "messages": messages
+            }
+            
+            # Save to file
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            
+        except Exception as e:
+            logger.error(f"❌ Error creating message file: {e}")
+            raise

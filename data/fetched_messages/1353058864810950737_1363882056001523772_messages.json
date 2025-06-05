@@ -3,111 +3,18 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1363882056001523772",
   "channel_name": "🛠it-support",
-  "fetch_timestamp": "2025-06-03T22:03:45.549982",
+  "fetch_timestamp": "2025-06-04T23:18:49.411144+00:00",
   "message_count": 44,
   "messages": [
     {
-      "message_id": "1365371532364353577",
+      "message_id": "1378409568723271700",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> <@546559083357143044> <@1125194882164736050>  can you tell me if this is a real person in our MIT Gen AI community?  They asked to join the Non-Coder group but i cannot see their name and the email address looks suspicious.  Are we sure the site is secure?",
-      "timestamp": "2025-04-25T16:59:00.692000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371532364353577",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [
-        "1125194882164736050",
-        "546559083357143044",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👏🏼",
-          "count": 1
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1365371532213354566",
-          "filename": "Screenshot_2025-04-25_at_12.57.25_PM.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365371532213354566/Screenshot_2025-04-25_at_12.57.25_PM.png?ex=68407b54&is=683f29d4&hm=f4ec4ef718786d5cd626d24e5160d2478f539e55d0ddb52e465971a05b489dad&",
-          "size": 97155
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365371721573466236",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Also, it says member of this server since 2022!!  Weird since this serve is new, no?",
-      "timestamp": "2025-04-25T16:59:45.803000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371721573466236",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365371828515897457",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I think we shall have a sanity rule to have clear name and picture.",
-      "timestamp": "2025-04-25T17:00:11.300000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371828515897457",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365373448737525930",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1359552583244583153>  That just means they’ve been on Discord since 2022 🗓️\n\nWe’re currently developing a dedicated Cybersecurity Team 🔐 — as mentioned, there are a lot of moving parts right now, so everything is rolling out in phases ⚙️\n\nI’ll also be speaking with Dr. Sanchez later tonight about bringing on MIT students with the right permissions to help implement these fixes.\n\nWe’ve already begun deploying new security features this week, including AutoMod integrations, with more on the way ✅\n\nThanks for bringing this to our attention — it helps us tighten things up as we grow! 🙏",
-      "timestamp": "2025-04-25T17:06:37.591000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365373448737525930",
+      "content": "in progress to being fixed!",
+      "timestamp": "2025-05-31T16:27:30.795000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1378409568723271700",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -116,110 +23,11 @@
         "bot": false
       },
       "mentions": [
-        "1359552583244583153"
-      ],
-      "reactions": [
         {
-          "emoji": "🎖️",
-          "count": 3
-        },
-        {
-          "emoji": "💯",
-          "count": 2
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365371721573466236",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1365375456915755048",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Ok thanks.  I also think maybe it is a good idea to have people show their faces in meetings to help with engagement and ensure they are humans.",
-      "timestamp": "2025-04-25T17:14:36.378000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365375456915755048",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "🙏",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365469982783180850",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> <@546559083357143044> <@1125194882164736050>  -- I saw a popup coming to approve new member acceptance in the group! Wonder if we expect Convo leader to be able to admit general members! I personally would like it to be funnelled through 1-2 people.",
-      "timestamp": "2025-04-25T23:30:13.101000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365469982783180850",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1125194882164736050",
-        "546559083357143044",
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [
-        {
-          "id": "1365469982510813194",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365469982510813194/image.png?ex=68402e45&is=683edcc5&hm=82390541d391903ef598f3b3d5cea03811d071bd13d0dcbb47a9bd106ad07e8f&",
-          "size": 69220
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365470521504043100",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks for bringing it to our notice. Please do not approve this request.",
-      "timestamp": "2025-04-25T23:32:21.542000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365470521504043100",
-      "author": {
-        "id": "546559083357143044",
-        "username": "saak123456",
-        "discriminator": "0",
-        "display_name": "Sangame Krishnamani",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
       ],
       "reactions": [],
       "attachments": [],
@@ -227,59 +35,36 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1365469982783180850",
+        "message_id": "1378404505523060807",
         "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1365473235835027476",
+      "message_id": "1378404505523060807",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Not sure why, but I see and receive a notification from channel “q&a” the whole day long. 🤔",
-      "timestamp": "2025-04-25T23:43:08.689000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365473235835027476",
+      "content": "Hey, not sure if this is the proper channel, but heads up - the subscription form for the community is hardly readable with this bgcolor and font color combination:",
+      "timestamp": "2025-05-31T16:07:23.634000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1378404505523060807",
       "author": {
-        "id": "1360182837113786399",
-        "username": "diell_zaa",
+        "id": "969571634027589643",
+        "username": "georgi8865",
         "discriminator": "0",
-        "display_name": "Diellza Ahmetaj",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1365473515121152054",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-25T23:44:15.276000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365473515121152054",
-      "author": {
-        "id": "1360182837113786399",
-        "username": "diell_zaa",
-        "discriminator": "0",
-        "display_name": "Diellza Ahmetaj",
+        "display_name": "Georgi Pavlov",
         "bot": false
       },
       "mentions": [],
       "reactions": [],
       "attachments": [
         {
-          "id": "1365473514852847636",
-          "filename": "IMG_9855.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365473514852847636/IMG_9855.png?ex=6840318f&is=683ee00f&hm=48d9a0aa93c3402677a764b05345d3738c796a31249bfdb55722812f1f3ab80f&",
-          "size": 567953
+          "id": "1378404505313611916",
+          "filename": "image0.jpg",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1378404505313611916/image0.jpg?ex=6841c0bb&is=68406f3b&hm=2c758b35e0f86e4e30a6f77299e9d641767825cee0ec96c715f5c0b68382b136&",
+          "size": 181306,
+          "content_type": "image/jpeg"
         }
       ],
       "embeds": 0,
@@ -288,23 +73,51 @@
       "reference": null
     },
     {
-      "message_id": "1365475019286773820",
+      "message_id": "1369206612438417439",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "of-course 👍",
-      "timestamp": "2025-04-25T23:50:13.897000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365475019286773820",
+      "content": "Hi hello, I am not sure if this is the right channel to ask. As a conversational leader I want to analyse the current topics in the ai-philosophie and ethics channel to understand was has happened so far and to drive the converation and topics further. I would appreciate to get some guidance. Thank you and kind regards Andrea",
+      "timestamp": "2025-05-06T06:58:15.034000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1369206612438417439",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367888821835927714",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "As you wish Marie. \nIt's not a strict rule yet.",
+      "timestamp": "2025-05-02T15:41:49.271000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367888821835927714",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
         "bot": false
       },
       "mentions": [
-        "546559083357143044"
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -312,55 +125,170 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1365470521504043100",
+        "message_id": "1367233195455545374",
         "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1365475581797335101",
+      "message_id": "1367233195455545374",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I think it was as an idle user there … I just removed it…",
-      "timestamp": "2025-04-25T23:52:28.010000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365475581797335101",
+      "content": "Hi Georgi, Shall I create a thread as well of today's midweek under AI philoophy and ethics channel?",
+      "timestamp": "2025-04-30T20:16:35.761000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367233195455545374",
       "author": {
-        "id": "1356965427162517514",
-        "username": "cristian_72225",
+        "id": "1359955242438889545",
+        "username": "marie007532",
         "discriminator": "0",
-        "display_name": "Cristian Ursan",
+        "display_name": "Marie",
         "bot": false
       },
       "mentions": [
-        "1360182837113786399"
-      ],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 1
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
         }
       ],
+      "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1365473515121152054",
+        "message_id": "1367189790432428133",
         "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1365502414261587978",
+      "message_id": "1367203849345175563",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Following today’s 3 p.m. security review, we implemented a comprehensive set of upgrades to safeguard the server:\n\nInvite-link access disabled – new members can no longer join directly with a link.\n\nManual vetting – every application will be screened by staff before access is granted to the server. Alongside a series of inputs to confirm identity !\n\nEnhanced verification – additional authentication steps will be rolled out tonight and tomorrow.\n\nFurther safeguards – a number of additional controls were approved during the meeting and will be activated in stages.\n\nIn parallel, we have begun assembling a dedicated Cyber-Security Team. I’ll be meeting with Dr. Sanchez shortly to discuss recruiting MIT-affiliated security specialists to lead this effort.\n\nI was setting up permissions for our new cyber-security team role/team to be able to review/admit members and accidentally set it to all admins instead of their new subsection. We are implementing a lot of new back end systems to ensure safety!\n\nWe will keep you updated as each layer goes live.\nThank you for raising your concerns—your feedback is invaluable as we continue to strengthen the community.",
-      "timestamp": "2025-04-26T01:39:05.368000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365502414261587978",
+      "content": "According to the [official Discord documentation[(https://support.discord.com/hc/en-us/articles/4403205878423-Threads-FAQ) by default __threads automatically close after 3 days of inactivity__, but they __do not disappear__.\nMessages from closed threads are searchable and will show up in channel-wide searches.\nOn a different note, there is an interesting shortcut: click on the server name->Active Threads, self-descriptive.",
+      "timestamp": "2025-04-30T18:19:59.103000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367203849345175563",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367189790432428133",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367192214727430184",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "What we saw is that feature is whitin the Channels Configuration 😃",
+      "timestamp": "2025-04-30T17:33:45.194000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367192214727430184",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367189790432428133",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367189790432428133",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "A question to our Discord gurus.\n\nWe are evaluating the pros and cons of using threads.\n\nApparently, **threads will disappear after certain inactivity time** as a feature. \n\nThat's not necessarily bad because it's sort of automatic channels housekeeping.\n\nBut it is unclear if thread messages will still be searchable. \nOr if they can still be found and explored\n\nAt least for now i see a maximum of 1 week retention when thread is inactive.",
+      "timestamp": "2025-04-30T17:24:07.197000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367189790432428133",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366947852143693894",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "thank you, Oscar!",
+      "timestamp": "2025-04-30T01:22:44.614000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366947852143693894",
+      "author": {
+        "id": "1362171740104556584",
+        "username": "nura775",
+        "discriminator": "0",
+        "display_name": "Nura",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366937496486805616",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362171740104556584> It is under the plus button !",
+      "timestamp": "2025-04-30T00:41:35.633000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366937496486805616",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -369,57 +297,703 @@
         "bot": false
       },
       "mentions": [
-        "1349019079683473488"
+        {
+          "id": "1362171740104556584",
+          "username": "nura775",
+          "display_name": "Nura"
+        }
       ],
       "reactions": [
         {
           "emoji": "👍",
-          "count": 8
-        },
-        {
-          "emoji": "💯",
           "count": 2
-        },
-        {
-          "emoji": "🫡",
-          "count": 1
         }
       ],
-      "attachments": [],
+      "attachments": [
+        {
+          "id": "1366937496419565578",
+          "filename": "Screenshot_2025-04-29_at_8.40.59_PM.png",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366937496419565578/Screenshot_2025-04-29_at_8.40.59_PM.png?ex=6841907f&is=68403eff&hm=ded74fd3420ad7923421c2b3080961e4d868da11d5992f1a90965e527dfe4045&",
+          "size": 34705,
+          "content_type": "image/png"
+        }
+      ],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1365469982783180850",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1365588793595400222",
+      "message_id": "1366846215781613660",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-26T07:22:19.806000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365588793595400222",
+      "content": "<@1352785241252565174>  Where can I find the icons for creating polls and using the new voice call features in the buddy group?",
+      "timestamp": "2025-04-29T18:38:52.617000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366846215781613660",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1362171740104556584",
+        "username": "nura775",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Nura",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366831933417590905",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> \n\nI am rolling out a fix right now so: \n\n[A] You will be able to make polls\n\n[B] You will be able to add/remove members {For admin reasons}",
+      "timestamp": "2025-04-29T17:42:07.436000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831933417590905",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
       "reactions": [
         {
           "emoji": "❤️",
           "count": 1
         }
       ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366831270168100975",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1349019079683473488> will look into it! I will make a fix",
+      "timestamp": "2025-04-29T17:39:29.305000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831270168100975",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366830187219779696",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366831203025424434",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@969571634027589643> also just deleted message to clean up for announcements so we discuss support questions in here and keep announcements clean, im gonna do the same for the other messages as well tonight",
+      "timestamp": "2025-04-29T17:39:13.297000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831203025424434",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366830928625664210",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@969571634027589643> just made the fix let me know if it worked",
+      "timestamp": "2025-04-29T17:38:07.875000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366830928625664210",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366830187219779696",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi <@1352785241252565174>  - Can you please add <@1362171740104556584>  in buddy-group2.. Looks like some technical glitch. I do not see the list of people in there, neither I see any option to add",
+      "timestamp": "2025-04-29T17:35:11.110000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366830187219779696",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362171740104556584",
+          "username": "nura775",
+          "display_name": "Nura"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366816148070338681",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "With such a diverse and growing community, it does help to have people role and timezone at a click distance in their profile. \nDoes Discord allow some customization for this?\n\nFor the time being, my hack is to:\n1) Go to my profile and click \"Edit profile\"\n2) Use the \"About Me\"  box to fill in role and timezone\n3) I've used a link for the website time.is for convenient orientation across timezones.\n\nBonus: perhaps a linkedin link would be a good idea too.\n\nI encourage you to use it and share these important details.",
+      "timestamp": "2025-04-29T16:39:23.916000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366816148070338681",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1366816147848036543",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366816147848036543/image.png?ex=6841c83b&is=684076bb&hm=104e7a7734b3702f1a4dfbdb457c10d37d417c838ce72624474b01722814fedf&",
+          "size": 79189,
+          "content_type": "image/png"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366806109116956785",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yep, lgtm!",
+      "timestamp": "2025-04-29T15:59:30.443000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366806109116956785",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1366806108940927129",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366806108940927129/image.png?ex=6841bee2&is=68406d62&hm=3ee74ad9d7957e6cf2768a9f37157a2f753ee64178af607d42eb99d2a579fae8&",
+          "size": 3845,
+          "content_type": "image/png"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366804159868960849",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366804159868960849",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Should be fixed now let me know if there is still a issue!",
+      "timestamp": "2025-04-29T15:51:45.706000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366804159868960849",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366479932988985416",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366801467293433938",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Rolling out the fix now figured out the issue",
+      "timestamp": "2025-04-29T15:41:03.746000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366801467293433938",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366479932988985416",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366801417309782016",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360003496384008262> just made the fix",
+      "timestamp": "2025-04-29T15:40:51.829000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366801417309782016",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366792934606770388",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks so much! I think I was accidentally added to Buddy Group 5 voice channel. I am already in Buddy Group 6 which is the correct one so if someone could remove me from Buddy Group 5 that would be great!",
+      "timestamp": "2025-04-29T15:07:09.395000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366792934606770388",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366780449392951357",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366780449392951357",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just made a voice channel for buddy groups; if you check, you can meet with them there !",
+      "timestamp": "2025-04-29T14:17:32.688000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366780449392951357",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366481683301400768",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366488496344399933",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I would zoom for now; I will make private voice channels for each buddy group to roll out tomorrow though !",
+      "timestamp": "2025-04-28T18:57:25.657000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366488496344399933",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366481683301400768",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366481683301400768",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Another 🙋, maybe a dumb one, how do I plan a meeting with my buddy group members!",
+      "timestamp": "2025-04-28T18:30:21.301000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481683301400768",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366481537490747494",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for this ! I'll roll out an update today!",
+      "timestamp": "2025-04-28T18:29:46.537000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481537490747494",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366479932988985416",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366481302466986167",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "+1",
+      "timestamp": "2025-04-28T18:28:50.503000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481302466986167",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "969571634027589643",
+          "username": "georgi8865",
+          "display_name": "Georgi Pavlov"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366479932988985416",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366479932988985416",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Not a biggie but I noticed that I can’t set arbitrary reactions to messages in my buddy group (buddy-group3)\n\nIn fact the only reaction I can set is to double an existing reaction. And there is at most one type.\n\nIt’s perhaps a setting of the group?",
+      "timestamp": "2025-04-28T18:23:23.994000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366479932988985416",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366467925262995708",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks for all the work y'all are doing to keep this group safe and high quality! Seems like so many things to stay on top of! Bots and hackers already??!?",
+      "timestamp": "2025-04-28T17:35:41.129000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366467925262995708",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365675608264278017",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think email verification is needed. To be discussed during the week... thanks",
+      "timestamp": "2025-04-26T13:07:18.036000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365675608264278017",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -455,25 +1029,34 @@
       "reference": null
     },
     {
-      "message_id": "1365675608264278017",
+      "message_id": "1365588793595400222",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I think email verification is needed. To be discussed during the week... thanks",
-      "timestamp": "2025-04-26T13:07:18.036000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365675608264278017",
+      "content": "",
+      "timestamp": "2025-04-26T07:22:19.806000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365588793595400222",
       "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
         "discriminator": "0",
-        "display_name": "Jose Cordovilla",
+        "display_name": "Prabhat Kumar",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -485,62 +1068,100 @@
       }
     },
     {
-      "message_id": "1366467925262995708",
+      "message_id": "1365502414261587978",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks for all the work y'all are doing to keep this group safe and high quality! Seems like so many things to stay on top of! Bots and hackers already??!?",
-      "timestamp": "2025-04-28T17:35:41.129000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366467925262995708",
+      "content": "Following today’s 3 p.m. security review, we implemented a comprehensive set of upgrades to safeguard the server:\n\nInvite-link access disabled – new members can no longer join directly with a link.\n\nManual vetting – every application will be screened by staff before access is granted to the server. Alongside a series of inputs to confirm identity !\n\nEnhanced verification – additional authentication steps will be rolled out tonight and tomorrow.\n\nFurther safeguards – a number of additional controls were approved during the meeting and will be activated in stages.\n\nIn parallel, we have begun assembling a dedicated Cyber-Security Team. I’ll be meeting with Dr. Sanchez shortly to discuss recruiting MIT-affiliated security specialists to lead this effort.\n\nI was setting up permissions for our new cyber-security team role/team to be able to review/admit members and accidentally set it to all admins instead of their new subsection. We are implementing a lot of new back end systems to ensure safety!\n\nWe will keep you updated as each layer goes live.\nThank you for raising your concerns—your feedback is invaluable as we continue to strengthen the community.",
+      "timestamp": "2025-04-26T01:39:05.368000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365502414261587978",
       "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Laura Neder",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
-      "mentions": [],
-      "reactions": [],
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 8
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        },
+        {
+          "emoji": "🫡",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365469982783180850",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
     },
     {
-      "message_id": "1366479932988985416",
+      "message_id": "1365475581797335101",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Not a biggie but I noticed that I can’t set arbitrary reactions to messages in my buddy group (buddy-group3)\n\nIn fact the only reaction I can set is to double an existing reaction. And there is at most one type.\n\nIt’s perhaps a setting of the group?",
-      "timestamp": "2025-04-28T18:23:23.994000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366479932988985416",
+      "content": "I think it was as an idle user there … I just removed it…",
+      "timestamp": "2025-04-25T23:52:28.010000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365475581797335101",
       "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
         "discriminator": "0",
-        "display_name": "Georgi Pavlov",
+        "display_name": "Cristian Ursan",
         "bot": false
       },
-      "mentions": [],
-      "reactions": [],
+      "mentions": [
+        {
+          "id": "1360182837113786399",
+          "username": "diell_zaa",
+          "display_name": "Diellza Ahmetaj"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365473515121152054",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
     },
     {
-      "message_id": "1366481302466986167",
+      "message_id": "1365475019286773820",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "+1",
-      "timestamp": "2025-04-28T18:28:50.503000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481302466986167",
+      "content": "of-course 👍",
+      "timestamp": "2025-04-25T23:50:13.897000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365475019286773820",
       "author": {
         "id": "1349019079683473488",
         "username": "imkprabhat",
@@ -549,7 +1170,11 @@
         "bot": false
       },
       "mentions": [
-        "969571634027589643"
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        }
       ],
       "reactions": [],
       "attachments": [],
@@ -557,55 +1182,57 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1366479932988985416",
+        "message_id": "1365470521504043100",
         "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1366481537490747494",
+      "message_id": "1365473515121152054",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks for this ! I'll roll out an update today!",
-      "timestamp": "2025-04-28T18:29:46.537000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481537490747494",
+      "content": "",
+      "timestamp": "2025-04-25T23:44:15.276000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365473515121152054",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Diellza Ahmetaj",
         "bot": false
       },
-      "mentions": [
-        "969571634027589643"
-      ],
+      "mentions": [],
       "reactions": [],
-      "attachments": [],
+      "attachments": [
+        {
+          "id": "1365473514852847636",
+          "filename": "IMG_9855.png",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365473514852847636/IMG_9855.png?ex=6841830f&is=6840318f&hm=d88899d6b19e29fd9b4bc9e4a035749295a950bf3c41c831a780b5d85a24e865&",
+          "size": 567953,
+          "content_type": "image/jpeg"
+        }
+      ],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366479932988985416",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1366481683301400768",
+      "message_id": "1365473235835027476",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Another 🙋, maybe a dumb one, how do I plan a meeting with my buddy group members!",
-      "timestamp": "2025-04-28T18:30:21.301000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366481683301400768",
+      "content": "Not sure why, but I see and receive a notification from channel “q&a” the whole day long. 🤔",
+      "timestamp": "2025-04-25T23:43:08.689000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365473235835027476",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Diellza Ahmetaj",
         "bot": false
       },
       "mentions": [],
@@ -617,159 +1244,27 @@
       "reference": null
     },
     {
-      "message_id": "1366488496344399933",
+      "message_id": "1365470521504043100",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I would zoom for now; I will make private voice channels for each buddy group to roll out tomorrow though !",
-      "timestamp": "2025-04-28T18:57:25.657000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366488496344399933",
+      "content": "Thanks for bringing it to our notice. Please do not approve this request.",
+      "timestamp": "2025-04-25T23:32:21.542000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365470521504043100",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "546559083357143044",
+        "username": "saak123456",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Sangame Krishnamani",
         "bot": false
       },
       "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 3
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366481683301400768",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366780449392951357",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Just made a voice channel for buddy groups; if you check, you can meet with them there !",
-      "timestamp": "2025-04-29T14:17:32.688000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366780449392951357",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366481683301400768",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366792934606770388",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks so much! I think I was accidentally added to Buddy Group 5 voice channel. I am already in Buddy Group 6 which is the correct one so if someone could remove me from Buddy Group 5 that would be great!",
-      "timestamp": "2025-04-29T15:07:09.395000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366792934606770388",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366780449392951357",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366801417309782016",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1360003496384008262> just made the fix",
-      "timestamp": "2025-04-29T15:40:51.829000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366801417309782016",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366801467293433938",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Rolling out the fix now figured out the issue",
-      "timestamp": "2025-04-29T15:41:03.746000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366801467293433938",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
       ],
       "reactions": [],
       "attachments": [],
@@ -777,588 +1272,236 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1366479932988985416",
+        "message_id": "1365469982783180850",
         "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1366804159868960849",
+      "message_id": "1365469982783180850",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Should be fixed now let me know if there is still a issue!",
-      "timestamp": "2025-04-29T15:51:45.706000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366804159868960849",
+      "content": "<@1352785241252565174> <@546559083357143044> <@1125194882164736050>  -- I saw a popup coming to approve new member acceptance in the group! Wonder if we expect Convo leader to be able to admit general members! I personally would like it to be funnelled through 1-2 people.",
+      "timestamp": "2025-04-25T23:30:13.101000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365469982783180850",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Prabhat Kumar",
         "bot": false
       },
       "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 1
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        },
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366479932988985416",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366806109116956785",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "yep, lgtm!",
-      "timestamp": "2025-04-29T15:59:30.443000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366806109116956785",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
       ],
       "reactions": [],
       "attachments": [
         {
-          "id": "1366806108940927129",
+          "id": "1365469982510813194",
           "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366806108940927129/image.png?ex=68406d62&is=683f1be2&hm=b0a716ca6b022fa56c4d3ca3ee5ba57ad7c188e1c7335a2e546cb228a08fd895&",
-          "size": 3845
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365469982510813194/image.png?ex=68417fc5&is=68402e45&hm=cc08b252b5d97d8ad9e6765c41cf774d46c1df8e7cd075400245adec2272948c&",
+          "size": 69220,
+          "content_type": "image/png"
         }
       ],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366804159868960849",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1366816148070338681",
+      "message_id": "1365375456915755048",
       "channel_id": "1363882056001523772",
       "channel_name": "🛠it-support",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "With such a diverse and growing community, it does help to have people role and timezone at a click distance in their profile. \nDoes Discord allow some customization for this?\n\nFor the time being, my hack is to:\n1) Go to my profile and click \"Edit profile\"\n2) Use the \"About Me\"  box to fill in role and timezone\n3) I've used a link for the website time.is for convenient orientation across timezones.\n\nBonus: perhaps a linkedin link would be a good idea too.\n\nI encourage you to use it and share these important details.",
-      "timestamp": "2025-04-29T16:39:23.916000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366816148070338681",
+      "content": "Ok thanks.  I also think maybe it is a good idea to have people show their faces in meetings to help with engagement and ensure they are humans.",
+      "timestamp": "2025-04-25T17:14:36.378000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365375456915755048",
       "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
         "discriminator": "0",
-        "display_name": "Georgi Pavlov",
+        "display_name": "Irene Yang",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
-          "emoji": "👍",
+          "emoji": "🙏",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365373448737525930",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359552583244583153>  That just means they’ve been on Discord since 2022 🗓️\n\nWe’re currently developing a dedicated Cybersecurity Team 🔐 — as mentioned, there are a lot of moving parts right now, so everything is rolling out in phases ⚙️\n\nI’ll also be speaking with Dr. Sanchez later tonight about bringing on MIT students with the right permissions to help implement these fixes.\n\nWe’ve already begun deploying new security features this week, including AutoMod integrations, with more on the way ✅\n\nThanks for bringing this to our attention — it helps us tighten things up as we grow! 🙏",
+      "timestamp": "2025-04-25T17:06:37.591000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365373448737525930",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359552583244583153",
+          "username": "ireney_67517",
+          "display_name": "Irene Yang"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🎖️",
           "count": 3
-        }
-      ],
-      "attachments": [
+        },
         {
-          "id": "1366816147848036543",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366816147848036543/image.png?ex=684076bb&is=683f253b&hm=e9b50ff3c4deac1ef87dde549530b854d7178775f773fd8404f50dbf5fa67526&",
-          "size": 79189
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366830187219779696",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi <@1352785241252565174>  - Can you please add <@1362171740104556584>  in buddy-group2.. Looks like some technical glitch. I do not see the list of people in there, neither I see any option to add",
-      "timestamp": "2025-04-29T17:35:11.110000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366830187219779696",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1362171740104556584",
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366830928625664210",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@969571634027589643> just made the fix let me know if it worked",
-      "timestamp": "2025-04-29T17:38:07.875000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366830928625664210",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366831203025424434",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@969571634027589643> also just deleted message to clean up for announcements so we discuss support questions in here and keep announcements clean, im gonna do the same for the other messages as well tonight",
-      "timestamp": "2025-04-29T17:39:13.297000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831203025424434",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366831270168100975",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1349019079683473488> will look into it! I will make a fix",
-      "timestamp": "2025-04-29T17:39:29.305000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831270168100975",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366830187219779696",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366831933417590905",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> \n\nI am rolling out a fix right now so: \n\n[A] You will be able to make polls\n\n[B] You will be able to add/remove members {For admin reasons}",
-      "timestamp": "2025-04-29T17:42:07.436000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366831933417590905",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366846215781613660",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174>  Where can I find the icons for creating polls and using the new voice call features in the buddy group?",
-      "timestamp": "2025-04-29T18:38:52.617000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366846215781613660",
-      "author": {
-        "id": "1362171740104556584",
-        "username": "nura775",
-        "discriminator": "0",
-        "display_name": "Nura",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366937496486805616",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1362171740104556584> It is under the plus button !",
-      "timestamp": "2025-04-30T00:41:35.633000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366937496486805616",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1362171740104556584"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
+          "emoji": "💯",
           "count": 2
         }
       ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1365371721573466236",
+        "channel_id": "1363882056001523772",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1365371828515897457",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think we shall have a sanity rule to have clear name and picture.",
+      "timestamp": "2025-04-25T17:00:11.300000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371828515897457",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365371721573466236",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Also, it says member of this server since 2022!!  Weird since this serve is new, no?",
+      "timestamp": "2025-04-25T16:59:45.803000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371721573466236",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1365371532364353577",
+      "channel_id": "1363882056001523772",
+      "channel_name": "🛠it-support",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> <@546559083357143044> <@1125194882164736050>  can you tell me if this is a real person in our MIT Gen AI community?  They asked to join the Non-Coder group but i cannot see their name and the email address looks suspicious.  Are we sure the site is secure?",
+      "timestamp": "2025-04-25T16:59:00.692000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1365371532364353577",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        },
+        {
+          "id": "546559083357143044",
+          "username": "saak123456",
+          "display_name": "Sangame Krishnamani"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👏🏼",
+          "count": 1
+        }
+      ],
       "attachments": [
         {
-          "id": "1366937496419565578",
-          "filename": "Screenshot_2025-04-29_at_8.40.59_PM.png",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1366937496419565578/Screenshot_2025-04-29_at_8.40.59_PM.png?ex=68403eff&is=683eed7f&hm=3a883cbeaeb081d2a449d28db98756dff607db2552c34a44333fc0e2187f92ef&",
-          "size": 34705
+          "id": "1365371532213354566",
+          "filename": "Screenshot_2025-04-25_at_12.57.25_PM.png",
+          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1365371532213354566/Screenshot_2025-04-25_at_12.57.25_PM.png?ex=6841ccd4&is=68407b54&hm=53d229030d878a6aa1569b59cb4e07916fac89dccdf2061eb88cc878892bda85&",
+          "size": 97155,
+          "content_type": "image/png"
         }
       ],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
-    },
-    {
-      "message_id": "1366947852143693894",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "thank you, Oscar!",
-      "timestamp": "2025-04-30T01:22:44.614000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1366947852143693894",
-      "author": {
-        "id": "1362171740104556584",
-        "username": "nura775",
-        "discriminator": "0",
-        "display_name": "Nura",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367189790432428133",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "A question to our Discord gurus.\n\nWe are evaluating the pros and cons of using threads.\n\nApparently, **threads will disappear after certain inactivity time** as a feature. \n\nThat's not necessarily bad because it's sort of automatic channels housekeeping.\n\nBut it is unclear if thread messages will still be searchable. \nOr if they can still be found and explored\n\nAt least for now i see a maximum of 1 week retention when thread is inactive.",
-      "timestamp": "2025-04-30T17:24:07.197000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367189790432428133",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367192214727430184",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "What we saw is that feature is whitin the Channels Configuration 😃",
-      "timestamp": "2025-04-30T17:33:45.194000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367192214727430184",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367189790432428133",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367203849345175563",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "According to the [official Discord documentation[(https://support.discord.com/hc/en-us/articles/4403205878423-Threads-FAQ) by default __threads automatically close after 3 days of inactivity__, but they __do not disappear__.\nMessages from closed threads are searchable and will show up in channel-wide searches.\nOn a different note, there is an interesting shortcut: click on the server name->Active Threads, self-descriptive.",
-      "timestamp": "2025-04-30T18:19:59.103000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367203849345175563",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367189790432428133",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367233195455545374",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi Georgi, Shall I create a thread as well of today's midweek under AI philoophy and ethics channel?",
-      "timestamp": "2025-04-30T20:16:35.761000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367233195455545374",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367189790432428133",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367888821835927714",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "As you wish Marie. \nIt's not a strict rule yet.",
-      "timestamp": "2025-05-02T15:41:49.271000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1367888821835927714",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [
-        "1359955242438889545"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367233195455545374",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369206612438417439",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi hello, I am not sure if this is the right channel to ask. As a conversational leader I want to analyse the current topics in the ai-philosophie and ethics channel to understand was has happened so far and to drive the converation and topics further. I would appreciate to get some guidance. Thank you and kind regards Andrea",
-      "timestamp": "2025-05-06T06:58:15.034000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1369206612438417439",
-      "author": {
-        "id": "1361976806651068517",
-        "username": "andreahickethier",
-        "discriminator": "0",
-        "display_name": "Andrea Hickethier 🍑 Munich",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1378404505523060807",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey, not sure if this is the proper channel, but heads up - the subscription form for the community is hardly readable with this bgcolor and font color combination:",
-      "timestamp": "2025-05-31T16:07:23.634000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1378404505523060807",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [
-        {
-          "id": "1378404505313611916",
-          "filename": "image0.jpg",
-          "url": "https://cdn.discordapp.com/attachments/1363882056001523772/1378404505313611916/image0.jpg?ex=68406f3b&is=683f1dbb&hm=52d6a8482d9a522d497126c465296c11bcac5fc4930a2d136412f65818f6c549&",
-          "size": 181306
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1378409568723271700",
-      "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "in progress to being fixed!",
-      "timestamp": "2025-05-31T16:27:30.795000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363882056001523772/1378409568723271700",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "969571634027589643"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1378404505523060807",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
     }
   ]
 }

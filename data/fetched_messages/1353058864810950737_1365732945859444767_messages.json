@@ -3,640 +3,18 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1365732945859444767",
   "channel_name": "📣general",
-  "fetch_timestamp": "2025-06-03T22:03:24.451476",
-  "message_count": 65,
+  "fetch_timestamp": "2025-06-04T23:19:04.849602+00:00",
+  "message_count": 78,
   "messages": [
     {
-      "message_id": "1366070797252165783",
+      "message_id": "1379938286361116755",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> <@&1359958995854692373> <@&1353085790971891735> \n\n👕 Admin merch update:\nBranded apparel for our Conversational Leaders, Network Architects, and Discord Managers was purchased and shipped this evening. Everyone who requested an item should receive their package within 2-3 weeks; tracking details will follow by DM.\n\n🚀 Reminder: Member-of-the-Week submissions open today!\nDrop your nomination in <#1363518100972245203> any time before Thursday night! {Reminder Admins post there submissions in the admin MOTW Channel to nominate a single community Coordinator, General members nominate general members !}\n\nThanks for keeping the momentum strong!",
-      "timestamp": "2025-04-27T15:17:38.433000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366070797252165783",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 18
-        },
-        {
-          "emoji": "💯",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366072284791570453",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Awesome!! Thanks Oscar",
-      "timestamp": "2025-04-27T15:23:33.090000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366072284791570453",
-      "author": {
-        "id": "1359552583244583153",
-        "username": "ireney_67517",
-        "discriminator": "0",
-        "display_name": "Irene Yang",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "💯",
-          "count": 1
-        },
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366080353990611084",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Amazing! Thank you Oscar",
-      "timestamp": "2025-04-27T15:55:36.937000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366080353990611084",
-      "author": {
-        "id": "1360639641556090894",
-        "username": "ash.mikhail",
-        "discriminator": "0",
-        "display_name": "Ash Mikhail",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366070797252165783",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366087739044266204",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "That’s awesome <@1352785241252565174> !!! Can’t wait !",
-      "timestamp": "2025-04-27T16:24:57.671000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366087739044266204",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366070797252165783",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366102041143021568",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sorry <@1352785241252565174> , but Melinda needs to ask where do I purchase that? I might not get “Admin Merch Update” ☺️",
-      "timestamp": "2025-04-27T17:21:47.557000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366102041143021568",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366104204153847969",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "We are getting them ! No need to pay ! Just send address and size !",
-      "timestamp": "2025-04-27T17:30:23.259000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366104204153847969",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366102041143021568",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366104619176038440",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Wow!! Will send the details via DM",
-      "timestamp": "2025-04-27T17:32:02.208000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366104619176038440",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366104204153847969",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366111853423624334",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "#Metoo 🙋",
-      "timestamp": "2025-04-27T18:00:46.987000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366111853423624334",
-      "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
-        "discriminator": "0",
-        "display_name": "Prabhat Kumar",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366104204153847969",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366120130828042297",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "and me 🙂",
-      "timestamp": "2025-04-27T18:33:40.474000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366120130828042297",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366122973286895688",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Do they ship to Europe as well? 😅",
-      "timestamp": "2025-04-27T18:44:58.169000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366122973286895688",
-      "author": {
-        "id": "1356965427162517514",
-        "username": "cristian_72225",
-        "discriminator": "0",
-        "display_name": "Cristian Ursan",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366174341292884008",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Oh, am I too late to order?",
-      "timestamp": "2025-04-27T22:09:05.256000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366174341292884008",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366175624116305930",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi Oscar, is it too late for me to share address and size?",
-      "timestamp": "2025-04-27T22:14:11.105000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366175624116305930",
-      "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
-        "discriminator": "0",
-        "display_name": "Shabana Islam",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366070797252165783",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366176864900485201",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "This is Awesome!!! Is shipping to Perú available? Let me know! \nGreat idea!",
-      "timestamp": "2025-04-27T22:19:06.931000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366176864900485201",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366178568689684550",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Such good news, thanks Oscar !! 🙌🏼\nI’m currently in Bolivia, is there any possibility to ship it here? I can also receive it in the US to a friends address if that’s works better",
-      "timestamp": "2025-04-27T22:25:53.146000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366178568689684550",
-      "author": {
-        "id": "1319765990027956276",
-        "username": "jhen.cano",
-        "discriminator": "0",
-        "display_name": "Jhenayna Cano",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366419714393505922",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1359966236473168188> I think it should be possible ! We are using printful so I would check quickly before [ask chatgbt] but they are international so I think it should be ok",
-      "timestamp": "2025-04-28T14:24:06.762000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366419714393505922",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1319765990027956276",
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1366178568689684550",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366423720264204330",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@&1353441943845077033> <@&1359958995854692373> \n\nReminder the buddy groups that dropped today are separate then the admin buddy groups dropping this Wednesday ! \n\nIn the chats you are in now you will act as admin for general members as outlined in your conversational leader orientation packet !",
-      "timestamp": "2025-04-28T14:40:01.836000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366423720264204330",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366843144729264179",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-04-29T18:26:40.421000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366843144729264179",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": {
-        "message_id": "1366831933417590905",
-        "channel_id": "1363882056001523772",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1366843146016788621",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Just completed this update ! If anyone is not able to do the attached items message in <#1363882056001523772>",
-      "timestamp": "2025-04-29T18:26:40.728000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366843146016788621",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366881768220790815",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone \n\n🗂️ Buddy-Group Channel Visibility — Quick FYI\n\nHere’s why the channel list looks different depending on your role:\n\n🔧 Discord Managers\n• See every buddy-group text + voice channel — they need full access to wire up Sesh, bots, and other integrations.\n\n🗣️ Conversational Leaders\n• See only the single buddy group they facilitate — keeps their focus on guiding discussion and weekly check-ins.\n\n👥 General Members\n• Will see just their own buddy group after they sign up in <#1353443209166065664>",
-      "timestamp": "2025-04-29T21:00:08.979000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366881768220790815",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 4
-        },
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367044858409386024",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> Thank you so much. Just to be sure: \nCan we mute the buddy channels as discord managers in our discord panel to reduce popup-messages? From my pov, that should be no problem and only have local implications, but I prefer to ask before muting with admin rights.",
-      "timestamp": "2025-04-30T07:48:12.710000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367044858409386024",
-      "author": {
-        "id": "669205811326615591",
-        "username": "ironhardt.",
-        "discriminator": "0",
-        "display_name": "Ralph Eisenhardt",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367248891313131590",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone\nWe’re going to hold off on creating the Community Coordinator buddy group chats (just for Community Coordinators) until we’ve fully stabilized the buddy groups for general members.\n\nThis way, we can avoid:\n• ⚠️ Technical issues\n• ⏳ Staff overload\n• 🕒 Long wait times\n\nThe plan is to launch these chats next FRIDAY once the general member buddy groups are all set.\n\nThanks for your patience and excitement! 👍",
-      "timestamp": "2025-04-30T21:18:57.945000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367248891313131590",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 9
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367304229525651577",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone!\n\nI just wanted to start off by saying congratulations on successfully completing the onboarding process with Gen AI Global with our General members — that’s a big milestone. 🎉\n\n🚀 As we move into the next stage of our community, we’re gathering brief testimonials for MIT Professional Education. If you’d like to help, please drop your testimonial in this folder. 📂\n🔗Link to folder: https://mitprod-my.sharepoint.com/:f:/g/personal/oscarsan_mit_edu/EviD4hInVPFEm8Oc45B_cPYBZs2Eoh_M0aFOIqOTV-O01g\n\nI also heard about the exciting new development with SGU and the Content Creation Team — really great news! Looking forward to seeing what you all create and contribute. ✨\nPlease note: These teams have not launched yet.\nNews on how to apply to the SGU Team and Content Creation Team — including who their heads are and what those teams will do — will be announced this upcoming Tuesday. 🗓️\n\nThank you to everyone helping bring these teams to life, and special thanks to the Network Architects and Oscar for making this initiative possible. 🙏\n\nKeep up the great work!\n— Dr. Abel Sanchez",
-      "timestamp": "2025-05-01T00:58:51.603000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367304229525651577",
+      "content": "@everyone\n📣 Important Announcement\n\nAfter extensive discussions between Oscar and myself, we’ve realized that although we initially thought the August 15th date would work, the new scale of involvement and support from MIT PE has opened up opportunities we didn’t previously anticipate. To fully establish this enhanced relationship and leverage the broader scale they’re allowing us to operate at, we’ve decided that the August 15th date is no longer feasible.\n\nWe are rescheduling the event to January, this decision wasn’t made lightly, but it ensures that we can build a solid governance framework with MIT PE. By doing so, we won’t need constant check-ins and can integrate a lot of exciting new elements that come with our partnership. This is the first-of-its-kind community effort at this scale with MIT, and we want to ensure it’s sustainable and impactful. \n\nOur goal is to finalize the strategic alignment with MIT PE and have the agreement in writing by mid-June, so we can begin executing toward the January date.I will be present at the Heads of Department meeting tomorrow at 1:30 PM EST to answer any lingering questions.\n\nThank you all for your continued support and dedication.",
+      "timestamp": "2025-06-04T21:42:05.482000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379938286361116755",
       "author": {
         "id": "672229862085361664",
         "username": "peterparkerdata",
@@ -648,277 +26,32 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 11
-        },
-        {
-          "emoji": "🔥",
-          "count": 9
-        },
-        {
-          "emoji": "👍",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367488824413786206",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone \n\nHere are some prompts for the testimonial !\n\nThese prompts are designed to encourage authentic responses, especially for those who might appreciate a starting point. \n\n1. How has Gen AI Global helped you continue or expand what you learned in the AGAI course?\n\n2. What’s one example of something you’ve built, explored, or shared through the community that you wouldn’t have done alone?\n\n3. How do you see this community adding value to the broader learning journey after a course like AGAI?\n\n4. What makes this community different from other AI forums or learning networks you’ve been part of?\n\n5. How has being part of Gen AI Global impacted your confidence or leadership in applying GenAI at work or in your field?\n\n6. What kind of people, roles, or conversations have surprised or inspired you most in Gen AI Global?\n\n7. What motivated you to join, and what were your expectations? How have these experiences met or differed from your initial expectations?\n\n8. How have you applied what you learned from the GEN AI Global Community to your professional or personal projects?\n\nPrompts created by content creation team !",
-      "timestamp": "2025-05-01T13:12:22.454000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367488824413786206",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "672229862085361664"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 5
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1367304229525651577",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1367562251485315144",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-01T18:04:08.832000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367562251485315144",
-      "author": {
-        "id": "1008776202191634432",
-        "username": "automod",
-        "discriminator": "0000",
-        "display_name": "Automod",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.auto_moderation_action",
-      "reference": null
-    },
-    {
-      "message_id": "1367562251980116128",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "This channel has been set up to receive official Discord announcements for admins and moderators of Community servers. We'll let you know about important updates, such as new moderation features or changes to your server's eligibility for Server Discovery, here.\n\nYou can change which channel these messages are sent to at any time inside Server Settings. We recommend choosing your staff channel, as some information may be sensitive to your server.\n\nThanks for choosing Discord as the place to build your community!",
-      "timestamp": "2025-05-01T18:04:08.950000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367562251980116128",
-      "author": {
-        "id": "669627189624307712",
-        "username": "Community Updates",
-        "discriminator": "0001",
-        "display_name": "Community Updates",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369065269787361281",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "🚀 Gen AI Global 2.0 — Admin Launch Brief\nHey @everyone  👋,\n\nDr. Sanchez is about to reopen admissions for all past cohorts in late may, which means a sudden surge in members. Gen AI Global 2.0 is the foundation upgrade that lets us scale smoothly. Here’s what’s rolling out this week:\n\n\n📸Content Creation Team – Applications Open Today\n\nMission & Impact\nTurns community expertise into polished LinkedIn spotlights, amplifies member brand, and feeds performance data back into our scoring model for nonstop improvement.\n\nHead: <@1359966236473168188>  || VPs: <@1352735021093359626> | <@1335299567440367757> | <@1125194882164736050> \n\n Who we are onboarding:\n\n📝 LinkedIn Content Curator — Role Overview\nWhat you’ll actually do\n* Hunt & Drop: Share one high‑quality AI‑related link, article, demo, or PDF in #linkedin‑submissions (slow‑mode: one message per 6 hrs) whenever you spot something worth the spotlight.\n* Self‑Check Before You Post: Make sure the piece is original, non‑promotional, clearly attributed, and aligns with our code of conduct & AI focus. (Full ground‑rules live in the “LinkedIn Recognition” PDF, sec 2.) \n* Label for Success: Add a quick note—why it matters, target audience, and any key takeaways. That context helps the scoring bot (and humans) rank your find.\nWeekly rhythm\n* Sunday by 23:59 ET – last chance to drop submissions for the week.\n* Monday AM – bot + human check picks the winner.\n* Tue/Wed – polished post goes live; we all boost it. \nWhat’s in it for you\n* Shout‑outs in #announcements + LinkedIn tag on winning posts.\n* Early peek at trending AI ideas and direct impact on our external brand.\n* Clear pathway to bigger roles on the Content Creation Team once you prove consistency.\n\nDm <@1143203059820933251>  to apply !\n-------------------------------------\n⚡ Discord Managers 2.0 — Announcement & Info Session\n* We’re opening spots for the next wave of Discord Managers inside our community.\n* This rollout launches a new learning track + learning application process 🧠.\n* Goal: have a system that scales smoothly when we admit past cohorts 📈.\n* Info session{for all current discord managers and any other admins interested }: Thursday, 1 PM ET — https://mit.zoom.us/j/92801265314 🎉\n* During the call we’ll also reveal the SGU team and its lead.\n* We pushed the announcement from Tuesday to Thursday so everything is polished and ready to go.",
-      "timestamp": "2025-05-05T21:36:36.320000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369065269787361281",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1143203059820933251",
-        "1352735021093359626",
-        "1335299567440367757",
-        "1125194882164736050",
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369065326054080665",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone\n-------------------------------------\n🖥️ Introducing the IT Department \n\nMission & Mandate: Own every routine community‑management task so our builders{Discord managers 2.0} can stay laser‑focused on innovation. • \n\nLead: <@1311434218622156850>  will captain a lean ops squad. \n\nMotto: “If it’s a weekly chore, IT covers it.”\n\nWhat IT Covers \nWeekly engagement loops — welcome pings, polls, buddy‑group matching, and reminders. \n\nChannel hygiene, archiving, and event‑reminder setup. \n\nFast‑lane support desk: #support channels • Log every friction point and feed it to SGU  for future automation.\n\n\n🚀Launch: This Sunday\n--------------------------------------\nNew AI‑Powered Onboarding Team!\nLead by: <@1143203059820933251>  \n\nResponsibilities:\n\nTalent Sourcing 🔍 – AI scrapes LinkedIn + #introductions to pull the sharpest people. \n\nSmart Placement 🤝 – Matches each recruit with the squad that needs them most. \n\nSeamless Integration 🛠️ – Bot‑driven checklists & live mentoring get newcomers productive fast. \n\nOngoing Support 🚀 – Automated nudges and progress tracking keep every new member on track.\n\nBottom line: Amber’s team keeps our pipelines full and plugs talent straight into your projects. More details dropping soon!\n---------------------------------------\n🛡️ new Cyber‑Security Department\nWe’re taking a proactive step to keep our growing community safe:\n\n* What’s new? A dedicated Cyber‑Security Department led by @ David Whyte .\n\n* Why it matters: They’ll watch for scams, raids, and any shady activity, fixing problems before they spread.\n\n* Long‑term vision: Build layered safeguards so security scales with us—today, next year, and beyond.\n\n* Launch date: This Sunday. You’ll also see a new channel called #cyber‑report‑desk where anyone can flag concerns.\n\nBottom line: we’re investing early so the community stays welcoming and secure as we grow. 💪\n\n📅 This Saturday, 1 PM ET\nI’ll host a short call to explain the new departments, how they work together, and where Gen AI Global is headed. Bring any questions—see you then!\nLink:https://mit.zoom.us/j/94064953178",
-      "timestamp": "2025-05-05T21:36:49.735000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369065326054080665",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1311434218622156850",
-        "1143203059820933251"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 6
-        },
-        {
-          "emoji": "🫡",
-          "count": 1
-        },
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369070013067300985",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Excited to have helped launch the onboarding team and happy to continue building the team, while using my background in data analytics and marketing to develop innovative, agentic solutions for recruitment.",
-      "timestamp": "2025-05-05T21:55:27.206000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369070013067300985",
-      "author": {
-        "id": "1143203059820933251",
-        "username": "boozeena_49785",
-        "discriminator": "0",
-        "display_name": "Amber Bellou",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
           "count": 8
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369065326054080665",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369086907388006492",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone  Excited to officially kick off Gen AI Global 2.0 alongside this incredible team and a community of professionals committed to continuous learning and growth! 🚀 \n\n➡️ Tomorrow we will be posting at 9:00 AM EST and I invite you to interact with our first post! https://www.linkedin.com/company/gen-ai-global/\n\nThe LinkedIn Content Creation role is key to shaping how our community is seen and celebrated externally. We’re here to spotlight members, share cutting-edge insights, and showcase the impact Gen AI Global is driving across industries.\n\nHuge thanks to Oscar—grateful for the opportunity to contribute and keep learning from this inspiring community every day!🙌",
-      "timestamp": "2025-05-05T23:02:35.126000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369086907388006492",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
+        },
         {
-          "emoji": "❤️",
-          "count": 12
+          "emoji": "💯",
+          "count": 2
         },
         {
           "emoji": "🦾",
           "count": 1
-        },
-        {
-          "emoji": "🔥",
-          "count": 2
-        },
-        {
-          "emoji": "🍑",
-          "count": 1
         }
       ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369065269787361281",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1369300961457078323",
+      "message_id": "1379884590755221514",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Community Call-to-Action \n🚨 Community Call-to-Action 🚨\n\nHi @everyone on  Gen AI Global fam! 💥 Our official welcome post featuring Professor Abel Sanchez is now live on LinkedIn—and we need your energy to give it the momentum it deserves. This is the moment to amplify our vision and show the world who we are.\n\n👉 Please like, comment, share, and tag peers ASAP so we can maximize early engagement and help the post go viral.\n\n🔗 Post link:\nhttps://www.linkedin.com/posts/gen-ai-global_genaiglobal-welcome-generativeai-activity-7325504728782544897-UlgH?utm_source=share&utm_medium=member_ios&rcm=ACoAAAgl7UQBHHITc2O3zjRDL5TK27StRAjC0MA",
-      "timestamp": "2025-05-06T13:13:09.593000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369300961457078323",
+      "content": "Hi <@1352785241252565174>,\n\nDon’t worry about anything right now, just focus on your recovery. We need you back fully recharged and with the same drive as always.\n\nAlso, thanks to <@673901899837341736>  for updating the meeting and getting everything set. See you tomorrow at the link you shared on Sesh.\n\nTake care!",
+      "timestamp": "2025-06-04T18:08:43.452000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379884590755221514",
       "author": {
         "id": "1125194882164736050",
         "username": "rodrigoreyesjara",
@@ -926,114 +59,30 @@
         "display_name": "Rodrigo Reyes",
         "bot": false
       },
-      "mentions": [],
-      "reactions": [
+      "mentions": [
         {
-          "emoji": "❤️",
-          "count": 12
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
         },
         {
-          "emoji": "☑️",
-          "count": 2
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
         }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369342278212259840",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Done !! this is gonna be great !",
-      "timestamp": "2025-05-06T15:57:20.275000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369342278212259840",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1125194882164736050"
       ],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1369300961457078323",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1369360061159182378",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone\n\n📣 We’ve rolled out a brand‑new admin structure to support our growing teams and departments at Gen AI Global.\n\n📅 This Saturday at 1pm est I’ll be hosting a live Q&A to walk you through the new layout and our vision for the next stage of growth.\n\n❓ Got questions? Drop them below and I’ll make sure they’re covered!\n\n🚀 Excited to keep building the future together!\n\nLink for Saturday meeting @1pm est:\n🔗https://mit.zoom.us/j/94064953178",
-      "timestamp": "2025-05-06T17:08:00.060000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369360061159182378",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        },
         {
           "emoji": "🔥",
-          "count": 3
-        },
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369360401858428928",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> awesome ! could be possible to add this to se Sesh Calendar?",
-      "timestamp": "2025-05-06T17:09:21.289000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369360401858428928",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
+          "count": 2
         }
       ],
       "attachments": [],
@@ -1043,14 +92,14 @@
       "reference": null
     },
     {
-      "message_id": "1369702400453251214",
+      "message_id": "1379872821504639077",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
       "content": "",
-      "timestamp": "2025-05-07T15:48:20.108000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369702400453251214",
+      "timestamp": "2025-06-04T17:21:57.444000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379872821504639077",
       "author": {
         "id": "616754792965865495",
         "username": "sesh",
@@ -1063,55 +112,47 @@
       "attachments": [],
       "embeds": 1,
       "pinned": false,
-      "type": "MessageType.chat_input_command",
+      "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1370072247565418547",
+      "message_id": "1379871142990319867",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone 📢   \n\nAs we previously mentioned, today we’ll be overviewing and announcing the update to the Discord Manager Program, now renamed as the Agents Development Class.   \n\nI’ll outline how we’re moving this initiative forward and the new resources that are coming into play, over zoom at 1pm EST:\nhttps://mit.zoom.us/j/92801265314  \n\nThis session is for everyone, whether you’re a Discord Manager or not, so if you’re interested in learning about agent development with an assumption of 0 learning experience, under the leadership of Dr. Sanchez, our network architects, MIT Alumni {referred by Dr.Sanchez joining in the coming weeks}, and CS professionals feel free to join 🎓!   \n\nThis informative Zoom meeting will cover what we’re launching, how to enter the program, and all the exciting resources available. See you all at 1 PM 🕐! \n\nYour patience and support as we grow and restructure have been incredible.  \n\nThanks again, and I’m excited to see you all there 🤝!\n\nSide note: \n\nWe’ve heard your feedback and are working on making things more streamlined 🔄, so there’s less confusion with too many channels. \n\nAnd for a full update on all departments make sure to join our saturday meeting @1pm est {link will be posted here}.",
-      "timestamp": "2025-05-08T16:17:58.531000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370072247565418547",
+      "content": "Of course, I will change the sesh event to 1:30pm and share it with the heads. You get a good rest, Oscar",
+      "timestamp": "2025-06-04T17:15:17.255000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379871142990319867",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "673901899837341736",
+        "username": "julioverne74",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Jose Cordovilla",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
-          "emoji": "👍",
-          "count": 2
-        },
-        {
           "emoji": "❤️",
-          "count": 4
-        },
-        {
-          "emoji": "👏",
           "count": 2
         }
       ],
       "attachments": [],
-      "embeds": 1,
+      "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1370764509580365905",
+      "message_id": "1379870536527511723",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "🔔 Reminder: In addition to our Gen AI Global 2.0 presentation—which is super important to attend and will take place at 1 PM EST (link is in <#1353085578274410626> , with a direct announcement from Dr. Sanchez himself)—we have the following community-driven event at 11 AM EST you won’t want to miss it!\n\n@everyone \n\n👉 Join a collaborative session to co‑shape open‑source AI guardrails—and earn recognition across the Gen AI Global community.\n\n🌐 Towards a Global Charter for Ethical AI – A Gen AI Global Initiative 🤝\n\nIt is widely accepted that open‑source models hold the key to inclusive AI. During our ethics discussions, a proposal surfaced: could a UN‑style charter for AI—developed under the Gen AI Global banner—fill today’s governance gap? This charter would offer shared principles and a liability shield for contributors who commit to standards like ✅ bias testing and 🔍 transparency. Though not binding law, it could set a baseline for responsible, cross‑border development and help organisations build user trust. Could this be the foundation for global alignment in open‑source AI? 🤔\n\n🗣️ <@1349019079683473488>  & <@1359955242438889545>  will share their initial view and invite your input.\n\n🗓️ Saturday, 11 AM ET\n\n🔗 Zoom: https://mit.zoom.us/j/98455210706",
-      "timestamp": "2025-05-10T14:08:46.657000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370764509580365905",
+      "content": "I’m fine with either option if we want to change the meeting time, but I know some people are only available at 1. How about this: let’s have the meeting at 1:30, right after the session with Dr. Sanchez that’s planned and mentioned in the thread. It would be amazing if someone could make an announcement so the department heads see it—this would be a huge help.\n\nThank you so much, Jose, for everything you’re doing; I really appreciate it. And thanks to everyone else for offering to help—it means a lot.",
+      "timestamp": "2025-06-04T17:12:52.663000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379870536527511723",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -1120,8 +161,90 @@
         "bot": false
       },
       "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379868878372605952",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379868878372605952",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It seems I mistakenly scheduled the Heads of Depts meeting today, but it is tomorrow. Apologies.\nBut before I make the change, <@1352785241252565174>  , Eduardo and others pointed out that tomorrow at 1pm EST there is a webinar on agents by Dr Sanchez and Prof Williams. Do we keep the 1pm Heads meeting?",
+      "timestamp": "2025-06-04T17:06:17.328000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379868878372605952",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379868598515798186",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "yes <@1352785241252565174>  - if there is anything we can do to help support you or <@1143203059820933251>  please let us know",
+      "timestamp": "2025-06-04T17:05:10.605000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379868598515798186",
+      "author": {
+        "id": "1003559239723266118",
+        "username": "dluzmore",
+        "discriminator": "0",
+        "display_name": "Deidré Luzmore",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [
         {
@@ -1130,136 +253,166 @@
         }
       ],
       "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370824186250924153",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-10T18:05:54.684000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370824186250924153",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 10
-        },
-        {
-          "emoji": "👍",
-          "count": 4
-        },
-        {
-          "emoji": "💪",
-          "count": 2
-        }
-      ],
-      "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1370864770734882997",
+      "message_id": "1379868271846887434",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone please vote",
-      "timestamp": "2025-05-10T20:47:10.779000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370864770734882997",
+      "content": "Take care, Oscar and rest... hope you get fine soon! If theres anything I/we can contribute to, let us know.",
+      "timestamp": "2025-06-04T17:03:52.721000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379868271846887434",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Diellza Ahmetaj",
         "bot": false
       },
       "mentions": [
-        "1359955242438889545"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [
         {
-          "emoji": "🦾",
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379867522429489182",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379868266964586587",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "So the Heads of Department is NOT happening now , is that right?",
+      "timestamp": "2025-06-04T17:03:51.557000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379868266964586587",
+      "author": {
+        "id": "1003559239723266118",
+        "username": "dluzmore",
+        "discriminator": "0",
+        "display_name": "Deidré Luzmore",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
           "count": 3
         }
       ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379867857218703380",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Btw this is slated for tommorow, I think there was an issue jose said:\n🏛️ Heads of Department • Thu Jun 5 @ 1 PM EST — “https://mit.zoom.us/j/94526947923 ”",
+      "timestamp": "2025-06-04T17:02:13.866000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379867857218703380",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "616754792965865495",
+          "username": "sesh",
+          "display_name": "sesh"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1370824186250924153",
+        "message_id": "1379867581825024032",
         "channel_id": "1365732945859444767",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1371503429100372009",
+      "message_id": "1379867522429489182",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone  Dear All -  Thank you very much for your support and interest on this initiative. I am super proud of the contribution by each and everyone of you. As agreed during last meeting, before starting active work on this initiative, we have requested a time slot from  <@672229862085361664> to get his opinion on the idea of Global Charter for Ethical & Reliable Open Source AI. We will meet him coming Friday for that. We will plan a session to discuss next course of action after getting the feedback.  Thank you.",
-      "timestamp": "2025-05-12T15:04:58.799000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371503429100372009",
+      "content": "<@673901899837341736> <@1063015906650902549> & everyone\nwho joined the meeting,\n\nApologies for missing the session. I had a sudden health issue during the meeting and have since consulted my doctor. I’m starting treatment and taking time to recover, but I’m still committed to moving things forward.\n\nAs for general member onboarding, I’ve proposed a shift to smaller group onboarding sessions to improve engagement and reduce inactive members. Amber is helping facilitate this transition so we can bring in more active participants and ensure a smoother, more personal onboarding experience. We’ll now be holding sessions three times a week, starting today—with the next one set for this Sunday.\n\nI’m also working with Amber and her team to make sure the process runs smoothly even if I need to step back temporarily. They’ll be ready to manage day-to-day operations as needed.\n\nThanks so much for all your continued support I really appreciate it.",
+      "timestamp": "2025-06-04T17:00:54.046000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379867522429489182",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [
-        "672229862085361664",
-        "1359955242438889545"
+        {
+          "id": "673901899837341736",
+          "username": "julioverne74",
+          "display_name": "Jose Cordovilla"
+        },
+        {
+          "id": "1063015906650902549",
+          "username": "snowflake1974",
+          "display_name": "Carlos de March"
+        }
       ],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 11
+          "count": 10
         },
         {
-          "emoji": "👌",
-          "count": 1
-        },
-        {
-          "emoji": "👍",
-          "count": 1
+          "emoji": "🙏",
+          "count": 3
         }
       ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1370824186250924153",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
+      "type": "MessageType.default",
+      "reference": null
     },
     {
-      "message_id": "1371818786017251420",
+      "message_id": "1379843253901328497",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "This is remarkable work, <@1349019079683473488> and <@1359955242438889545> , congrats",
-      "timestamp": "2025-05-13T11:58:05.747000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371818786017251420",
+      "content": "There seems to be an issue with the meeting, many of us are still in the Zoom waiting room. Hope Oscar is well, too.",
+      "timestamp": "2025-06-04T15:24:27.978000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379843253901328497",
       "author": {
         "id": "673901899837341736",
         "username": "julioverne74",
@@ -1267,10 +420,7 @@
         "display_name": "Jose Cordovilla",
         "bot": false
       },
-      "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
-      ],
+      "mentions": [],
       "reactions": [
         {
           "emoji": "❤️",
@@ -1284,125 +434,14 @@
       "reference": null
     },
     {
-      "message_id": "1371849200354066435",
+      "message_id": "1379841209568198726",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone Please find the updated results to our Call for Collaborators - Global Charter on Ethical AI in Open Source. \nThank you for your participation and so inspiring with the interest behind this initiative. Please let us know in case anyone else would like to participate, a couple of people mentioned their interest at the outset which are not included so far (we do not have access to the chats where you shared your interest, if interested, please just reach out to <@1349019079683473488> or myself). It is an important initiative and where knowledge and experience of all can have a valuable role and input for the future direction of GenAI. We await feedback from <@672229862085361664> first to see if this is a GO / NO GO, and if a GO, to assist us in framing this optimally.",
-      "timestamp": "2025-05-13T13:58:57.090000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371849200354066435",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [
-        "672229862085361664",
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 8
-        },
-        {
-          "emoji": "👍",
-          "count": 2
-        },
-        {
-          "emoji": "🦾",
-          "count": 2
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1371849200295477258",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1365732945859444767/1371849200295477258/image.png?ex=68405121&is=683effa1&hm=f5af4792b79f252b42d8f2d5b5b0c5ab1439806c83cae496ed702d66ffbff53b&",
-          "size": 380960
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1371503429100372009",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1371911399265275904",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-13T18:06:06.466000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371911399265275904",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [
-        "1359955242438889545"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.poll_result",
-      "reference": {
-        "message_id": "1370824186250924153",
-        "channel_id": "1365732945859444767",
-        "guild_id": null
-      }
-    },
-    {
-      "message_id": "1371948168081702993",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Beautiful",
-      "timestamp": "2025-05-13T20:32:12.835000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371948168081702993",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1359955242438889545"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1371849200354066435",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372211817937375324",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I just got the email with my GEN AI completion certificate from MIT Professional Certification, which means you should have also received it. Congratulations to all of you for this outstanding achievement! Special thanks to <@672229862085361664> and <@1352785241252565174> for coping with us, and continuing the learning curve in this Discord Channel",
-      "timestamp": "2025-05-14T13:59:51.859000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372211817937375324",
+      "content": "Hope Oscar is well!",
+      "timestamp": "2025-06-04T15:16:20.571000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379841209568198726",
       "author": {
         "id": "1063015906650902549",
         "username": "snowflake1974",
@@ -1410,21 +449,14 @@
         "display_name": "Carlos de March",
         "bot": false
       },
-      "mentions": [
-        "672229862085361664",
-        "1352785241252565174"
-      ],
+      "mentions": [],
       "reactions": [
         {
-          "emoji": "🦾",
-          "count": 3
-        },
-        {
           "emoji": "❤️",
-          "count": 11
+          "count": 2
         },
         {
-          "emoji": "🤘",
+          "emoji": "🦾",
           "count": 1
         }
       ],
@@ -1435,78 +467,23 @@
       "reference": null
     },
     {
-      "message_id": "1372240798778917024",
+      "message_id": "1379837119945769164",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Indeed ! Got mine too !! Thank you <@672229862085361664> for your guidence and thank you too <@1352785241252565174> and both your trust !!",
-      "timestamp": "2025-05-14T15:55:01.430000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372240798778917024",
+      "content": "@everyone",
+      "timestamp": "2025-06-04T15:00:05.529000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379837119945769164",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
       },
-      "mentions": [
-        "672229862085361664",
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372571043473915914",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone on Gen AI Global Community! 👋\nI wanted to share a recent LinkedIn post where we spotlight the best practices from our community member <@1349019079683473488>:\nhttps://www.linkedin.com/posts/gen-ai-global_sora-genaiglobal-sora-activity-7328775048926752769-LpmA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAgl7UQBHHITc2O3zjRDL5TK27StRAjC0MA\n\nHuge thanks to <@1349019079683473488>  for generously walking us through his creative process, it’s a valuable guide for anyone exploring AI-driven image and video generation. 🎥🖼️\n\nI encourage you all to check out the step-by-step breakdown Prabhat shared, and if you’ve been experimenting too, we’d love to hear about your own learnings and best practices.\n\nLet’s keep inspiring each other. Have a great day! ☀️",
-      "timestamp": "2025-05-15T13:47:17.901000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372571043473915914",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 6
-        },
-        {
-          "emoji": "🔥",
-          "count": 4
-        },
-        {
-          "emoji": "🦾",
-          "count": 1
-        },
-        {
-          "emoji": "👏",
-          "count": 3
-        },
-        {
-          "emoji": "💯",
-          "count": 2
-        }
-      ],
+      "mentions": [],
+      "reactions": [],
       "attachments": [],
       "embeds": 1,
       "pinned": false,
@@ -1514,14 +491,182 @@
       "reference": null
     },
     {
-      "message_id": "1372631683542814821",
+      "message_id": "1379554669923274762",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hello @everyone — apologies for the delay in our Discord Manager onboarding this morning. We had an emergency cybersecurity meeting that ran over. The learning pods have now been created and I’ll share your assignments via DM shortly 📚. Thanks for your patience",
-      "timestamp": "2025-05-15T17:48:15.620000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372631683542814821",
+      "content": "Head of department Meeting",
+      "timestamp": "2025-06-03T20:17:44.196000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379554669923274762",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.thread_created",
+      "reference": {
+        "message_id": null,
+        "channel_id": "1379554669923274762",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379546778248151102",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-03T19:46:22.674000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379546778248151102",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379546313665810565",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-03T19:44:31.909000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379546313665810565",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379545397286146078",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-03T19:40:53.427000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379545397286146078",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379540246559195276",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks <@1352785241252565174>. I'll set up sesh event reminders for the three events here to help",
+      "timestamp": "2025-06-03T19:20:25.398000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379540246559195276",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379268884175261787",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n📢 Gen AI Global – Key Meetings This Week 📢\n\nHey Admins!\n\nWe’re entering a big growth phase, so please mark your calendars for three sessions. Attend the one(s) that match your role, and use the Zoom links attached at the end. If you can’t attend these sessions will be recorded.\n\n0️⃣ General Member Onboarding Session\nWhen: Wednesday @ 11 AM EST Focus:\n\n* Admin drop-ins: Admins can join briefly to introduce themselves to new members.\n* Purpose: Just a quick hello so new folks know who’s who—no other obligations.\n* Completely optional\n\n\n1️⃣ Heads of Department Meeting\n\nWhen: Thursday @ 1 PM EST Focus:\n\n* MIT collaboration updates & next-step roadmap (Dr. Sanchez will join on the call at 1:30)\n* How to relay these updates downstream to your teams\n\n2️⃣ Conversational Leaders Meeting\n\nWhen: Friday @ 1 PM EST Focus:\n\n* Action items from the latest recording (https://fathom.video/share/st2o7bXpkCk4eS5CzDsSWqQxyHaUUD4G)\n* Content-calendar vs. channel-governance plan\n* Converting channels to forum format & assigning clear stewardship\n\n3️⃣ All-Admins Meeting\n\nWhen: Saturday @ 1 PM EST \n\nFocus:\n*Fresh vision: outline the next-stage roadmap and strategic goals.\n*Open forum (≈ 1 h): every admin-level member can voice ideas, concerns, and improvements—no top-down lecture.\n\nAgent-Ops alignment:\n* Sync on the overarching tech vision.\n* Show how Agent-Ops initiatives plug into the broader scaling plan.\n\n\n🔗 Zoom Links\n👋 General Member Onboarding • Wed Jun 4 @ 11 AM EST — “https://mit.zoom.us/j/98394170553 ”\n🏛️ Heads of Department • Thu Jun 5 @ 1 PM EST — “https://mit.zoom.us/j/94526947923 ”\n💬 Conversational Leaders • Fri Jun 6 @ 1 PM EST — “https://mit.zoom.us/j/95320581317 ”\n🛠️ All Admins • Sat Jun 7 @ 1 PM EST — “https://mit.zoom.us/j/97965109592 ”",
+      "timestamp": "2025-06-03T01:22:07.564000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379268884175261787",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 7
+        },
+        {
+          "emoji": "✅",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 5,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379095533422907454",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone —\nI want to quickly acknowledge that I’ve been a bit less present this past week. I’ve been traveling, managing some personal matters, and also under the weather.\n\nSince I work closely with all departments, I know how important it is for me to be responsive and available — and I appreciate your patience during this short downtime. I’ll be back in Boston and fully available starting Wednesday.\n\nLooking forward to reconnecting and picking things back up with each of you. Thanks again for your understanding 💛",
+      "timestamp": "2025-06-02T13:53:17.524000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379095533422907454",
       "author": {
         "id": "1143203059820933251",
         "username": "boozeena_49785",
@@ -1533,15 +678,19 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 7
+          "count": 4
         },
         {
           "emoji": "👍",
           "count": 4
         },
         {
+          "emoji": "🔥",
+          "count": 2
+        },
+        {
           "emoji": "🦾",
-          "count": 3
+          "count": 2
         }
       ],
       "attachments": [],
@@ -1551,175 +700,32 @@
       "reference": null
     },
     {
-      "message_id": "1372632149534048397",
+      "message_id": "1377450767027535972",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "On this note, big thanks to <@1370236501736030238> for helping secure this community, and a giant thanks to <@1143203059820933251> for everything you’re doing as <@&1369302384924295241> to facilitate our continued growth.",
-      "timestamp": "2025-05-15T17:50:06.721000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372632149534048397",
+      "content": "<@1352785241252565174> Thank you for saying this. I fully support you keeping our mission rooted in open-source, transparency, and collective learning. I didn’t join this community to chase profit or build closed systems. I’m here to help make AI accessible, empowering, and human-centered. Let’s keep it real, keep it inclusive, and keep building something that actually matters.",
+      "timestamp": "2025-05-29T00:57:34.657000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1377450767027535972",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
+        "display_name": "Amber Bellou",
         "bot": false
       },
       "mentions": [
-        "1143203059820933251",
-        "1370236501736030238"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 13
-        },
-        {
-          "emoji": "🦾",
-          "count": 7
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1372631683542814821",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372662776614486127",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "It’s so good to have you with us <@1370236501736030238> . Way to go <@1143203059820933251>, you rock!",
-      "timestamp": "2025-05-15T19:51:48.786000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372662776614486127",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1143203059820933251",
-        "1352785241252565174",
-        "1370236501736030238"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 8
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1372632149534048397",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1372846732278370377",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "nicely done <@1349019079683473488> , i have to try it :)))",
-      "timestamp": "2025-05-16T08:02:47.234000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372846732278370377",
-      "author": {
-        "id": "1356965427162517514",
-        "username": "cristian_72225",
-        "discriminator": "0",
-        "display_name": "Cristian Ursan",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1372571043473915914",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374490100045582417",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Gen AI Global #📆-weekly-digest",
-      "timestamp": "2025-05-20T20:52:56.642000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1374490100045582417",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.channel_follow_add",
-      "reference": {
-        "message_id": "None",
-        "channel_id": "1373675862549069895",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374786583428857907",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks so much for organizing this, Andrea! 🙌 And team for facilitating it.\n\nISO/IEC 42001 is a powerful framework—but a heads-up for everyone: getting involved in ISO (or DIN) standardization is a multi-year commitment, and participants often cover their own travel and contribution costs. \n\nI’ve been part of the ISO & DIN standards work for four years—and yes, I’ve paid out of pocket to volunteer—so I know firsthand the effort and investment required.\n\nStill, if you’re ready for a deep dive into real-world AI governance (and have the bandwidth), you or your team will gain insights you simply can’t get from blog posts alone. Looking forward to the workshop notes!\n\nhttps://discordapp.com/channels/1353058864810950737/1372043351842361364/1374712540998668421",
-      "timestamp": "2025-05-21T16:31:03.789000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1374786583428857907",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        },
-        {
-          "emoji": "🍑",
-          "count": 1
+          "count": 15
         }
       ],
       "attachments": [],
@@ -1729,53 +735,32 @@
       "reference": null
     },
     {
-      "message_id": "1376561592778493972",
+      "message_id": "1377449419460313150",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1362326150373966035> this is the announcements channel for admins i think you meant to post here <#1353058864810950740>",
-      "timestamp": "2025-05-26T14:04:18.996000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1376561592778493972",
+      "content": "Thank you for the post, it's an important thing to say!",
+      "timestamp": "2025-05-29T00:52:13.372000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1377449419460313150",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "672229862085361664",
+        "username": "peterparkerdata",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [
-        "1362326150373966035"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1376557361300504707",
-        "channel_id": "1365732945859444767",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1376579271971045488",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Ohh, thanks!",
-      "timestamp": "2025-05-26T15:14:34.044000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1376579271971045488",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
+        "display_name": "Dr. Abel Sanchez",
         "bot": false
       },
       "mentions": [],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 15
+        },
+        {
+          "emoji": "👌",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -1828,29 +813,87 @@
       "reference": null
     },
     {
-      "message_id": "1377449419460313150",
+      "message_id": "1376579271971045488",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thank you for the post, it's an important thing to say!",
-      "timestamp": "2025-05-29T00:52:13.372000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1377449419460313150",
+      "content": "Ohh, thanks!",
+      "timestamp": "2025-05-26T15:14:34.044000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1376579271971045488",
       "author": {
-        "id": "672229862085361664",
-        "username": "peterparkerdata",
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
         "discriminator": "0",
-        "display_name": "Dr. Abel Sanchez",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376561592778493972",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1362326150373966035> this is the announcements channel for admins i think you meant to post here <#1353058864810950740>",
+      "timestamp": "2025-05-26T14:04:18.996000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1376561592778493972",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376557361300504707",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374786583428857907",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks so much for organizing this, Andrea! 🙌 And team for facilitating it.\n\nISO/IEC 42001 is a powerful framework—but a heads-up for everyone: getting involved in ISO (or DIN) standardization is a multi-year commitment, and participants often cover their own travel and contribution costs. \n\nI’ve been part of the ISO & DIN standards work for four years—and yes, I’ve paid out of pocket to volunteer—so I know firsthand the effort and investment required.\n\nStill, if you’re ready for a deep dive into real-world AI governance (and have the bandwidth), you or your team will gain insights you simply can’t get from blog posts alone. Looking forward to the workshop notes!\n\nhttps://discordapp.com/channels/1353058864810950737/1372043351842361364/1374712540998668421",
+      "timestamp": "2025-05-21T16:31:03.789000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1374786583428857907",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 15
+          "count": 2
         },
         {
-          "emoji": "👌",
+          "emoji": "🍑",
           "count": 1
         }
       ],
@@ -1861,45 +904,187 @@
       "reference": null
     },
     {
-      "message_id": "1377450767027535972",
+      "message_id": "1374490100045582417",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1352785241252565174> Thank you for saying this. I fully support you keeping our mission rooted in open-source, transparency, and collective learning. I didn’t join this community to chase profit or build closed systems. I’m here to help make AI accessible, empowering, and human-centered. Let’s keep it real, keep it inclusive, and keep building something that actually matters.",
-      "timestamp": "2025-05-29T00:57:34.657000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1377450767027535972",
+      "content": "Gen AI Global #📆-weekly-digest",
+      "timestamp": "2025-05-20T20:52:56.642000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1374490100045582417",
       "author": {
-        "id": "1143203059820933251",
-        "username": "boozeena_49785",
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
         "discriminator": "0",
-        "display_name": "Amber Bellou",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.channel_follow_add",
+      "reference": {
+        "message_id": null,
+        "channel_id": "1373675862549069895",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372846732278370377",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "nicely done <@1349019079683473488> , i have to try it :)))",
+      "timestamp": "2025-05-16T08:02:47.234000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372846732278370377",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
       ],
       "reactions": [
         {
-          "emoji": "❤️",
-          "count": 15
+          "emoji": "👍",
+          "count": 2
         }
       ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372571043473915914",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
     },
     {
-      "message_id": "1379095533422907454",
+      "message_id": "1372662776614486127",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hi everyone —\nI want to quickly acknowledge that I’ve been a bit less present this past week. I’ve been traveling, managing some personal matters, and also under the weather.\n\nSince I work closely with all departments, I know how important it is for me to be responsive and available — and I appreciate your patience during this short downtime. I’ll be back in Boston and fully available starting Wednesday.\n\nLooking forward to reconnecting and picking things back up with each of you. Thanks again for your understanding 💛",
-      "timestamp": "2025-06-02T13:53:17.524000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379095533422907454",
+      "content": "It’s so good to have you with us <@1370236501736030238> . Way to go <@1143203059820933251>, you rock!",
+      "timestamp": "2025-05-15T19:51:48.786000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372662776614486127",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        },
+        {
+          "id": "1370236501736030238",
+          "username": "dwhyte_15520",
+          "display_name": "dwhyte"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372632149534048397",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372632149534048397",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "On this note, big thanks to <@1370236501736030238> for helping secure this community, and a giant thanks to <@1143203059820933251> for everything you’re doing as <@&1369302384924295241> to facilitate our continued growth.",
+      "timestamp": "2025-05-15T17:50:06.721000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372632149534048397",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        },
+        {
+          "id": "1370236501736030238",
+          "username": "dwhyte_15520",
+          "display_name": "dwhyte"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 13
+        },
+        {
+          "emoji": "🦾",
+          "count": 7
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1372631683542814821",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1372631683542814821",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone — apologies for the delay in our Discord Manager onboarding this morning. We had an emergency cybersecurity meeting that ran over. The learning pods have now been created and I’ll share your assignments via DM shortly 📚. Thanks for your patience",
+      "timestamp": "2025-05-15T17:48:15.620000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372631683542814821",
       "author": {
         "id": "1143203059820933251",
         "username": "boozeena_49785",
@@ -1911,18 +1096,105 @@
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 3
+          "count": 7
         },
         {
           "emoji": "👍",
           "count": 4
         },
         {
+          "emoji": "🦾",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372571043473915914",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone on Gen AI Global Community! 👋\nI wanted to share a recent LinkedIn post where we spotlight the best practices from our community member <@1349019079683473488>:\nhttps://www.linkedin.com/posts/gen-ai-global_sora-genaiglobal-sora-activity-7328775048926752769-LpmA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAgl7UQBHHITc2O3zjRDL5TK27StRAjC0MA\n\nHuge thanks to <@1349019079683473488>  for generously walking us through his creative process, it’s a valuable guide for anyone exploring AI-driven image and video generation. 🎥🖼️\n\nI encourage you all to check out the step-by-step breakdown Prabhat shared, and if you’ve been experimenting too, we’d love to hear about your own learnings and best practices.\n\nLet’s keep inspiring each other. Have a great day! ☀️",
+      "timestamp": "2025-05-15T13:47:17.901000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372571043473915914",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        },
+        {
           "emoji": "🔥",
-          "count": 2
+          "count": 4
         },
         {
           "emoji": "🦾",
+          "count": 1
+        },
+        {
+          "emoji": "👏",
+          "count": 3
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372240798778917024",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Indeed ! Got mine too !! Thank you <@672229862085361664> for your guidence and thank you too <@1352785241252565174> and both your trust !!",
+      "timestamp": "2025-05-14T15:55:01.430000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372240798778917024",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
           "count": 2
         }
       ],
@@ -1933,14 +1205,398 @@
       "reference": null
     },
     {
-      "message_id": "1379268884175261787",
+      "message_id": "1372211817937375324",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone \n📢 Gen AI Global – Key Meetings This Week 📢\n\nHey Admins!\n\nWe’re entering a big growth phase, so please mark your calendars for three sessions. Attend the one(s) that match your role, and use the Zoom links attached at the end. If you can’t attend these sessions will be recorded.\n\n0️⃣ General Member Onboarding Session\nWhen: Wednesday @ 11 AM EST Focus:\n\n* Admin drop-ins: Admins can join briefly to introduce themselves to new members.\n* Purpose: Just a quick hello so new folks know who’s who—no other obligations.\n* Completely optional\n\n\n1️⃣ Heads of Department Meeting\n\nWhen: Thursday @ 1 PM EST Focus:\n\n* MIT collaboration updates & next-step roadmap (Dr. Sanchez will join on the call at 1:30)\n* How to relay these updates downstream to your teams\n\n2️⃣ Conversational Leaders Meeting\n\nWhen: Friday @ 1 PM EST Focus:\n\n* Action items from the latest recording (https://fathom.video/share/st2o7bXpkCk4eS5CzDsSWqQxyHaUUD4G)\n* Content-calendar vs. channel-governance plan\n* Converting channels to forum format & assigning clear stewardship\n\n3️⃣ All-Admins Meeting\n\nWhen: Saturday @ 1 PM EST \n\nFocus:\n*Fresh vision: outline the next-stage roadmap and strategic goals.\n*Open forum (≈ 1 h): every admin-level member can voice ideas, concerns, and improvements—no top-down lecture.\n\nAgent-Ops alignment:\n* Sync on the overarching tech vision.\n* Show how Agent-Ops initiatives plug into the broader scaling plan.\n\n\n🔗 Zoom Links\n👋 General Member Onboarding • Wed Jun 4 @ 11 AM EST — “https://mit.zoom.us/j/98394170553 ”\n🏛️ Heads of Department • Thu Jun 5 @ 1 PM EST — “https://mit.zoom.us/j/94526947923 ”\n💬 Conversational Leaders • Fri Jun 6 @ 1 PM EST — “https://mit.zoom.us/j/95320581317 ”\n🛠️ All Admins • Sat Jun 7 @ 1 PM EST — “https://mit.zoom.us/j/97965109592 ”",
-      "timestamp": "2025-06-03T01:22:07.564000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379268884175261787",
+      "content": "I just got the email with my GEN AI completion certificate from MIT Professional Certification, which means you should have also received it. Congratulations to all of you for this outstanding achievement! Special thanks to <@672229862085361664> and <@1352785241252565174> for coping with us, and continuing the learning curve in this Discord Channel",
+      "timestamp": "2025-05-14T13:59:51.859000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1372211817937375324",
+      "author": {
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
+        "discriminator": "0",
+        "display_name": "Carlos de March",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        },
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🦾",
+          "count": 3
+        },
+        {
+          "emoji": "❤️",
+          "count": 11
+        },
+        {
+          "emoji": "🤘",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371948168081702993",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Beautiful",
+      "timestamp": "2025-05-13T20:32:12.835000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371948168081702993",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371849200354066435",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371911399265275904",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-13T18:06:06.466000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371911399265275904",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.poll_result",
+      "reference": {
+        "message_id": "1370824186250924153",
+        "channel_id": "1365732945859444767",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1371849200354066435",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone Please find the updated results to our Call for Collaborators - Global Charter on Ethical AI in Open Source. \nThank you for your participation and so inspiring with the interest behind this initiative. Please let us know in case anyone else would like to participate, a couple of people mentioned their interest at the outset which are not included so far (we do not have access to the chats where you shared your interest, if interested, please just reach out to <@1349019079683473488> or myself). It is an important initiative and where knowledge and experience of all can have a valuable role and input for the future direction of GenAI. We await feedback from <@672229862085361664> first to see if this is a GO / NO GO, and if a GO, to assist us in framing this optimally.",
+      "timestamp": "2025-05-13T13:58:57.090000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371849200354066435",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        },
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "🦾",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1371849200295477258",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1365732945859444767/1371849200295477258/image.png?ex=6841a2a1&is=68405121&hm=c909da44d495c48e308bac17816fb849215eda0da44e2f3f4205ce42fc1fea17&",
+          "size": 380960,
+          "content_type": "image/png"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371503429100372009",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371818786017251420",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is remarkable work, <@1349019079683473488> and <@1359955242438889545> , congrats",
+      "timestamp": "2025-05-13T11:58:05.747000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371818786017251420",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371503429100372009",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone  Dear All -  Thank you very much for your support and interest on this initiative. I am super proud of the contribution by each and everyone of you. As agreed during last meeting, before starting active work on this initiative, we have requested a time slot from  <@672229862085361664> to get his opinion on the idea of Global Charter for Ethical & Reliable Open Source AI. We will meet him coming Friday for that. We will plan a session to discuss next course of action after getting the feedback.  Thank you.",
+      "timestamp": "2025-05-12T15:04:58.799000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1371503429100372009",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 11
+        },
+        {
+          "emoji": "👌",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370824186250924153",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370864770734882997",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone please vote",
+      "timestamp": "2025-05-10T20:47:10.779000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370864770734882997",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🦾",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1370824186250924153",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1370824186250924153",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-10T18:05:54.684000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370824186250924153",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 10
+        },
+        {
+          "emoji": "👍",
+          "count": 4
+        },
+        {
+          "emoji": "💪",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370764509580365905",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🔔 Reminder: In addition to our Gen AI Global 2.0 presentation—which is super important to attend and will take place at 1 PM EST (link is in <#1353085578274410626> , with a direct announcement from Dr. Sanchez himself)—we have the following community-driven event at 11 AM EST you won’t want to miss it!\n\n@everyone \n\n👉 Join a collaborative session to co‑shape open‑source AI guardrails—and earn recognition across the Gen AI Global community.\n\n🌐 Towards a Global Charter for Ethical AI – A Gen AI Global Initiative 🤝\n\nIt is widely accepted that open‑source models hold the key to inclusive AI. During our ethics discussions, a proposal surfaced: could a UN‑style charter for AI—developed under the Gen AI Global banner—fill today’s governance gap? This charter would offer shared principles and a liability shield for contributors who commit to standards like ✅ bias testing and 🔍 transparency. Though not binding law, it could set a baseline for responsible, cross‑border development and help organisations build user trust. Could this be the foundation for global alignment in open‑source AI? 🤔\n\n🗣️ <@1349019079683473488>  & <@1359955242438889545>  will share their initial view and invite your input.\n\n🗓️ Saturday, 11 AM ET\n\n🔗 Zoom: https://mit.zoom.us/j/98455210706",
+      "timestamp": "2025-05-10T14:08:46.657000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370764509580365905",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370072247565418547",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone 📢   \n\nAs we previously mentioned, today we’ll be overviewing and announcing the update to the Discord Manager Program, now renamed as the Agents Development Class.   \n\nI’ll outline how we’re moving this initiative forward and the new resources that are coming into play, over zoom at 1pm EST:\nhttps://mit.zoom.us/j/92801265314  \n\nThis session is for everyone, whether you’re a Discord Manager or not, so if you’re interested in learning about agent development with an assumption of 0 learning experience, under the leadership of Dr. Sanchez, our network architects, MIT Alumni {referred by Dr.Sanchez joining in the coming weeks}, and CS professionals feel free to join 🎓!   \n\nThis informative Zoom meeting will cover what we’re launching, how to enter the program, and all the exciting resources available. See you all at 1 PM 🕐! \n\nYour patience and support as we grow and restructure have been incredible.  \n\nThanks again, and I’m excited to see you all there 🤝!\n\nSide note: \n\nWe’ve heard your feedback and are working on making things more streamlined 🔄, so there’s less confusion with too many channels. \n\nAnd for a full update on all departments make sure to join our saturday meeting @1pm est {link will be posted here}.",
+      "timestamp": "2025-05-08T16:17:58.531000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1370072247565418547",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -1952,41 +1608,564 @@
       "reactions": [
         {
           "emoji": "👍",
-          "count": 7
+          "count": 2
         },
         {
-          "emoji": "✅",
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👏",
           "count": 2
         }
       ],
       "attachments": [],
-      "embeds": 5,
+      "embeds": 1,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1379540246559195276",
+      "message_id": "1369702400453251214",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thanks <@1352785241252565174>. I'll set up sesh event reminders for the three events here to help",
-      "timestamp": "2025-06-03T19:20:25.398000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379540246559195276",
+      "content": "",
+      "timestamp": "2025-05-07T15:48:20.108000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369702400453251214",
       "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.chat_input_command",
+      "reference": null
+    },
+    {
+      "message_id": "1369360401858428928",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> awesome ! could be possible to add this to se Sesh Calendar?",
+      "timestamp": "2025-05-06T17:09:21.289000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369360401858428928",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
         "discriminator": "0",
-        "display_name": "Jose Cordovilla",
+        "display_name": "Oscar Garcia",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369360061159182378",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\n\n📣 We’ve rolled out a brand‑new admin structure to support our growing teams and departments at Gen AI Global.\n\n📅 This Saturday at 1pm est I’ll be hosting a live Q&A to walk you through the new layout and our vision for the next stage of growth.\n\n❓ Got questions? Drop them below and I’ll make sure they’re covered!\n\n🚀 Excited to keep building the future together!\n\nLink for Saturday meeting @1pm est:\n🔗https://mit.zoom.us/j/94064953178",
+      "timestamp": "2025-05-06T17:08:00.060000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369360061159182378",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369342278212259840",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Done !! this is gonna be great !",
+      "timestamp": "2025-05-06T15:57:20.275000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369342278212259840",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369300961457078323",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369300961457078323",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Community Call-to-Action \n🚨 Community Call-to-Action 🚨\n\nHi @everyone on  Gen AI Global fam! 💥 Our official welcome post featuring Professor Abel Sanchez is now live on LinkedIn—and we need your energy to give it the momentum it deserves. This is the moment to amplify our vision and show the world who we are.\n\n👉 Please like, comment, share, and tag peers ASAP so we can maximize early engagement and help the post go viral.\n\n🔗 Post link:\nhttps://www.linkedin.com/posts/gen-ai-global_genaiglobal-welcome-generativeai-activity-7325504728782544897-UlgH?utm_source=share&utm_medium=member_ios&rcm=ACoAAAgl7UQBHHITc2O3zjRDL5TK27StRAjC0MA",
+      "timestamp": "2025-05-06T13:13:09.593000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369300961457078323",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 12
+        },
+        {
+          "emoji": "☑️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369086907388006492",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone  Excited to officially kick off Gen AI Global 2.0 alongside this incredible team and a community of professionals committed to continuous learning and growth! 🚀 \n\n➡️ Tomorrow we will be posting at 9:00 AM EST and I invite you to interact with our first post! https://www.linkedin.com/company/gen-ai-global/\n\nThe LinkedIn Content Creation role is key to shaping how our community is seen and celebrated externally. We’re here to spotlight members, share cutting-edge insights, and showcase the impact Gen AI Global is driving across industries.\n\nHuge thanks to Oscar—grateful for the opportunity to contribute and keep learning from this inspiring community every day!🙌",
+      "timestamp": "2025-05-05T23:02:35.126000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369086907388006492",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 12
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        },
+        {
+          "emoji": "🍑",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369065269787361281",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369070013067300985",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Excited to have helped launch the onboarding team and happy to continue building the team, while using my background in data analytics and marketing to develop innovative, agentic solutions for recruitment.",
+      "timestamp": "2025-05-05T21:55:27.206000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369070013067300985",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1369065326054080665",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1369065326054080665",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\n-------------------------------------\n🖥️ Introducing the IT Department \n\nMission & Mandate: Own every routine community‑management task so our builders{Discord managers 2.0} can stay laser‑focused on innovation. • \n\nLead: <@1311434218622156850>  will captain a lean ops squad. \n\nMotto: “If it’s a weekly chore, IT covers it.”\n\nWhat IT Covers \nWeekly engagement loops — welcome pings, polls, buddy‑group matching, and reminders. \n\nChannel hygiene, archiving, and event‑reminder setup. \n\nFast‑lane support desk: #support channels • Log every friction point and feed it to SGU  for future automation.\n\n\n🚀Launch: This Sunday\n--------------------------------------\nNew AI‑Powered Onboarding Team!\nLead by: <@1143203059820933251>  \n\nResponsibilities:\n\nTalent Sourcing 🔍 – AI scrapes LinkedIn + #introductions to pull the sharpest people. \n\nSmart Placement 🤝 – Matches each recruit with the squad that needs them most. \n\nSeamless Integration 🛠️ – Bot‑driven checklists & live mentoring get newcomers productive fast. \n\nOngoing Support 🚀 – Automated nudges and progress tracking keep every new member on track.\n\nBottom line: Amber’s team keeps our pipelines full and plugs talent straight into your projects. More details dropping soon!\n---------------------------------------\n🛡️ new Cyber‑Security Department\nWe’re taking a proactive step to keep our growing community safe:\n\n* What’s new? A dedicated Cyber‑Security Department led by @ David Whyte .\n\n* Why it matters: They’ll watch for scams, raids, and any shady activity, fixing problems before they spread.\n\n* Long‑term vision: Build layered safeguards so security scales with us—today, next year, and beyond.\n\n* Launch date: This Sunday. You’ll also see a new channel called #cyber‑report‑desk where anyone can flag concerns.\n\nBottom line: we’re investing early so the community stays welcoming and secure as we grow. 💪\n\n📅 This Saturday, 1 PM ET\nI’ll host a short call to explain the new departments, how they work together, and where Gen AI Global is headed. Bring any questions—see you then!\nLink:https://mit.zoom.us/j/94064953178",
+      "timestamp": "2025-05-05T21:36:49.735000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369065326054080665",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1311434218622156850",
+          "username": "nikhil_kassetty",
+          "display_name": "Nikhil Kassetty"
+        },
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        }
       ],
       "reactions": [
         {
           "emoji": "🔥",
+          "count": 6
+        },
+        {
+          "emoji": "🫡",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369065269787361281",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🚀 Gen AI Global 2.0 — Admin Launch Brief\nHey @everyone  👋,\n\nDr. Sanchez is about to reopen admissions for all past cohorts in late may, which means a sudden surge in members. Gen AI Global 2.0 is the foundation upgrade that lets us scale smoothly. Here’s what’s rolling out this week:\n\n\n📸Content Creation Team – Applications Open Today\n\nMission & Impact\nTurns community expertise into polished LinkedIn spotlights, amplifies member brand, and feeds performance data back into our scoring model for nonstop improvement.\n\nHead: <@1359966236473168188>  || VPs: <@1352735021093359626> | <@1335299567440367757> | <@1125194882164736050> \n\n Who we are onboarding:\n\n📝 LinkedIn Content Curator — Role Overview\nWhat you’ll actually do\n* Hunt & Drop: Share one high‑quality AI‑related link, article, demo, or PDF in #linkedin‑submissions (slow‑mode: one message per 6 hrs) whenever you spot something worth the spotlight.\n* Self‑Check Before You Post: Make sure the piece is original, non‑promotional, clearly attributed, and aligns with our code of conduct & AI focus. (Full ground‑rules live in the “LinkedIn Recognition” PDF, sec 2.) \n* Label for Success: Add a quick note—why it matters, target audience, and any key takeaways. That context helps the scoring bot (and humans) rank your find.\nWeekly rhythm\n* Sunday by 23:59 ET – last chance to drop submissions for the week.\n* Monday AM – bot + human check picks the winner.\n* Tue/Wed – polished post goes live; we all boost it. \nWhat’s in it for you\n* Shout‑outs in #announcements + LinkedIn tag on winning posts.\n* Early peek at trending AI ideas and direct impact on our external brand.\n* Clear pathway to bigger roles on the Content Creation Team once you prove consistency.\n\nDm <@1143203059820933251>  to apply !\n-------------------------------------\n⚡ Discord Managers 2.0 — Announcement & Info Session\n* We’re opening spots for the next wave of Discord Managers inside our community.\n* This rollout launches a new learning track + learning application process 🧠.\n* Goal: have a system that scales smoothly when we admit past cohorts 📈.\n* Info session{for all current discord managers and any other admins interested }: Thursday, 1 PM ET — https://mit.zoom.us/j/92801265314 🎉\n* During the call we’ll also reveal the SGU team and its lead.\n* We pushed the announcement from Tuesday to Thursday so everything is polished and ready to go.",
+      "timestamp": "2025-05-05T21:36:36.320000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1369065269787361281",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        },
+        {
+          "id": "1352735021093359626",
+          "username": "rad.ai",
+          "display_name": "Rad Ramamurthy"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        },
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367562251980116128",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This channel has been set up to receive official Discord announcements for admins and moderators of Community servers. We'll let you know about important updates, such as new moderation features or changes to your server's eligibility for Server Discovery, here.\n\nYou can change which channel these messages are sent to at any time inside Server Settings. We recommend choosing your staff channel, as some information may be sensitive to your server.\n\nThanks for choosing Discord as the place to build your community!",
+      "timestamp": "2025-05-01T18:04:08.950000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367562251980116128",
+      "author": {
+        "id": "669627189624307712",
+        "username": "Community Updates",
+        "discriminator": "0001",
+        "display_name": "Community Updates",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367562251485315144",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-01T18:04:08.832000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367562251485315144",
+      "author": {
+        "id": "1008776202191634432",
+        "username": "automod",
+        "discriminator": "0000",
+        "display_name": "Automod",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.auto_moderation_action",
+      "reference": null
+    },
+    {
+      "message_id": "1367488824413786206",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\nHere are some prompts for the testimonial !\n\nThese prompts are designed to encourage authentic responses, especially for those who might appreciate a starting point. \n\n1. How has Gen AI Global helped you continue or expand what you learned in the AGAI course?\n\n2. What’s one example of something you’ve built, explored, or shared through the community that you wouldn’t have done alone?\n\n3. How do you see this community adding value to the broader learning journey after a course like AGAI?\n\n4. What makes this community different from other AI forums or learning networks you’ve been part of?\n\n5. How has being part of Gen AI Global impacted your confidence or leadership in applying GenAI at work or in your field?\n\n6. What kind of people, roles, or conversations have surprised or inspired you most in Gen AI Global?\n\n7. What motivated you to join, and what were your expectations? How have these experiences met or differed from your initial expectations?\n\n8. How have you applied what you learned from the GEN AI Global Community to your professional or personal projects?\n\nPrompts created by content creation team !",
+      "timestamp": "2025-05-01T13:12:22.454000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367488824413786206",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1367304229525651577",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1367304229525651577",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone!\n\nI just wanted to start off by saying congratulations on successfully completing the onboarding process with Gen AI Global with our General members — that’s a big milestone. 🎉\n\n🚀 As we move into the next stage of our community, we’re gathering brief testimonials for MIT Professional Education. If you’d like to help, please drop your testimonial in this folder. 📂\n🔗Link to folder: https://mitprod-my.sharepoint.com/:f:/g/personal/oscarsan_mit_edu/EviD4hInVPFEm8Oc45B_cPYBZs2Eoh_M0aFOIqOTV-O01g\n\nI also heard about the exciting new development with SGU and the Content Creation Team — really great news! Looking forward to seeing what you all create and contribute. ✨\nPlease note: These teams have not launched yet.\nNews on how to apply to the SGU Team and Content Creation Team — including who their heads are and what those teams will do — will be announced this upcoming Tuesday. 🗓️\n\nThank you to everyone helping bring these teams to life, and special thanks to the Network Architects and Oscar for making this initiative possible. 🙏\n\nKeep up the great work!\n— Dr. Abel Sanchez",
+      "timestamp": "2025-05-01T00:58:51.603000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367304229525651577",
+      "author": {
+        "id": "672229862085361664",
+        "username": "peterparkerdata",
+        "discriminator": "0",
+        "display_name": "Dr. Abel Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 11
+        },
+        {
+          "emoji": "🔥",
+          "count": 9
+        },
+        {
+          "emoji": "👍",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367248891313131590",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\nWe’re going to hold off on creating the Community Coordinator buddy group chats (just for Community Coordinators) until we’ve fully stabilized the buddy groups for general members.\n\nThis way, we can avoid:\n• ⚠️ Technical issues\n• ⏳ Staff overload\n• 🕒 Long wait times\n\nThe plan is to launch these chats next FRIDAY once the general member buddy groups are all set.\n\nThanks for your patience and excitement! 👍",
+      "timestamp": "2025-04-30T21:18:57.945000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367248891313131590",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 9
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367044858409386024",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1352785241252565174> Thank you so much. Just to be sure: \nCan we mute the buddy channels as discord managers in our discord panel to reduce popup-messages? From my pov, that should be no problem and only have local implications, but I prefer to ask before muting with admin rights.",
+      "timestamp": "2025-04-30T07:48:12.710000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1367044858409386024",
+      "author": {
+        "id": "669205811326615591",
+        "username": "ironhardt.",
+        "discriminator": "0",
+        "display_name": "Ralph Eisenhardt",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
           "count": 2
         }
       ],
@@ -1997,115 +2176,52 @@
       "reference": null
     },
     {
-      "message_id": "1379545397286146078",
+      "message_id": "1366881768220790815",
       "channel_id": "1365732945859444767",
       "channel_name": "📣general",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-06-03T19:40:53.427000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379545397286146078",
+      "content": "@everyone \n\n🗂️ Buddy-Group Channel Visibility — Quick FYI\n\nHere’s why the channel list looks different depending on your role:\n\n🔧 Discord Managers\n• See every buddy-group text + voice channel — they need full access to wire up Sesh, bots, and other integrations.\n\n🗣️ Conversational Leaders\n• See only the single buddy group they facilitate — keeps their focus on guiding discussion and weekly check-ins.\n\n👥 General Members\n• Will see just their own buddy group after they sign up in <#1353443209166065664>",
+      "timestamp": "2025-04-29T21:00:08.979000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366881768220790815",
       "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379545957070274721",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-06-03T19:43:06.890000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379545957070274721",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379546313665810565",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-06-03T19:44:31.909000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379546313665810565",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379546778248151102",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-06-03T19:46:22.674000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379546778248151102",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379554669923274762",
-      "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Head of department Meeting",
-      "timestamp": "2025-06-03T20:17:44.196000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1379554669923274762",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
         "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 4
+        },
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366843146016788621",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Just completed this update ! If anyone is not able to do the attached items message in <#1363882056001523772>",
+      "timestamp": "2025-04-29T18:26:40.728000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366843146016788621",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
         "bot": false
       },
       "mentions": [],
@@ -2113,12 +2229,549 @@
       "attachments": [],
       "embeds": 0,
       "pinned": false,
-      "type": "MessageType.thread_created",
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366843144729264179",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-04-29T18:26:40.421000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366843144729264179",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
       "reference": {
-        "message_id": "None",
-        "channel_id": "1379554669923274762",
+        "message_id": "1366831933417590905",
+        "channel_id": "1363882056001523772",
         "guild_id": "1353058864810950737"
       }
+    },
+    {
+      "message_id": "1366423720264204330",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> <@&1359958995854692373> \n\nReminder the buddy groups that dropped today are separate then the admin buddy groups dropping this Wednesday ! \n\nIn the chats you are in now you will act as admin for general members as outlined in your conversational leader orientation packet !",
+      "timestamp": "2025-04-28T14:40:01.836000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366423720264204330",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366419714393505922",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359966236473168188> I think it should be possible ! We are using printful so I would check quickly before [ask chatgbt] but they are international so I think it should be ok",
+      "timestamp": "2025-04-28T14:24:06.762000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366419714393505922",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1319765990027956276",
+          "username": "jhen.cano",
+          "display_name": "Jhenayna Cano"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366178568689684550",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366178568689684550",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Such good news, thanks Oscar !! 🙌🏼\nI’m currently in Bolivia, is there any possibility to ship it here? I can also receive it in the US to a friends address if that’s works better",
+      "timestamp": "2025-04-27T22:25:53.146000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366178568689684550",
+      "author": {
+        "id": "1319765990027956276",
+        "username": "jhen.cano",
+        "discriminator": "0",
+        "display_name": "Jhenayna Cano",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366176864900485201",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This is Awesome!!! Is shipping to Perú available? Let me know! \nGreat idea!",
+      "timestamp": "2025-04-27T22:19:06.931000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366176864900485201",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366175624116305930",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Oscar, is it too late for me to share address and size?",
+      "timestamp": "2025-04-27T22:14:11.105000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366175624116305930",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366070797252165783",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366174341292884008",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oh, am I too late to order?",
+      "timestamp": "2025-04-27T22:09:05.256000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366174341292884008",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366122973286895688",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Do they ship to Europe as well? 😅",
+      "timestamp": "2025-04-27T18:44:58.169000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366122973286895688",
+      "author": {
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
+        "discriminator": "0",
+        "display_name": "Cristian Ursan",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366120130828042297",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "and me 🙂",
+      "timestamp": "2025-04-27T18:33:40.474000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366120130828042297",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366111853423624334",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "#Metoo 🙋",
+      "timestamp": "2025-04-27T18:00:46.987000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366111853423624334",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366104204153847969",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366104619176038440",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Wow!! Will send the details via DM",
+      "timestamp": "2025-04-27T17:32:02.208000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366104619176038440",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366104204153847969",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366104204153847969",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "We are getting them ! No need to pay ! Just send address and size !",
+      "timestamp": "2025-04-27T17:30:23.259000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366104204153847969",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1362326150373966035",
+          "username": "kiss_ambassador",
+          "display_name": "Melinda Melcher"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366102041143021568",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366102041143021568",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry <@1352785241252565174> , but Melinda needs to ask where do I purchase that? I might not get “Admin Merch Update” ☺️",
+      "timestamp": "2025-04-27T17:21:47.557000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366102041143021568",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366087739044266204",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "That’s awesome <@1352785241252565174> !!! Can’t wait !",
+      "timestamp": "2025-04-27T16:24:57.671000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366087739044266204",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366070797252165783",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366080353990611084",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Amazing! Thank you Oscar",
+      "timestamp": "2025-04-27T15:55:36.937000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366080353990611084",
+      "author": {
+        "id": "1360639641556090894",
+        "username": "ash.mikhail",
+        "discriminator": "0",
+        "display_name": "Ash Mikhail",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1366070797252165783",
+        "channel_id": "1365732945859444767",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1366072284791570453",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Awesome!! Thanks Oscar",
+      "timestamp": "2025-04-27T15:23:33.090000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366072284791570453",
+      "author": {
+        "id": "1359552583244583153",
+        "username": "ireney_67517",
+        "discriminator": "0",
+        "display_name": "Irene Yang",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        },
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366070797252165783",
+      "channel_id": "1365732945859444767",
+      "channel_name": "📣general",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@&1353441943845077033> <@&1359958995854692373> <@&1353085790971891735> \n\n👕 Admin merch update:\nBranded apparel for our Conversational Leaders, Network Architects, and Discord Managers was purchased and shipped this evening. Everyone who requested an item should receive their package within 2-3 weeks; tracking details will follow by DM.\n\n🚀 Reminder: Member-of-the-Week submissions open today!\nDrop your nomination in <#1363518100972245203> any time before Thursday night! {Reminder Admins post there submissions in the admin MOTW Channel to nominate a single community Coordinator, General members nominate general members !}\n\nThanks for keeping the momentum strong!",
+      "timestamp": "2025-04-27T15:17:38.433000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1365732945859444767/1366070797252165783",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 18
+        },
+        {
+          "emoji": "💯",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
   ]
 }

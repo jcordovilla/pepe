@@ -3,28 +3,31 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1368952166328303636",
   "channel_name": "📸content-creation-chat",
-  "fetch_timestamp": "2025-06-03T22:03:39.382433",
+  "fetch_timestamp": "2025-06-04T23:19:34.454119+00:00",
   "message_count": 9,
   "messages": [
     {
-      "message_id": "1371297021545152652",
+      "message_id": "1375789960778743899",
       "channel_id": "1368952166328303636",
       "channel_name": "📸content-creation-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@758206516753858561> & <@1075075819807985714> :Here are some suggestions for prompts to optimize your LinkedIn profiles",
-      "timestamp": "2025-05-12T01:24:47.403000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1371297021545152652",
+      "content": "Made my day 😂 happy weekend! ♥️",
+      "timestamp": "2025-05-24T10:58:07.591000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375789960778743899",
       "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
+        "id": "1360182837113786399",
+        "username": "diell_zaa",
         "discriminator": "0",
-        "display_name": "Katherine Valqui",
+        "display_name": "Diellza Ahmetaj",
         "bot": false
       },
       "mentions": [
-        "758206516753858561",
-        "1075075819807985714"
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
       ],
       "reactions": [
         {
@@ -32,12 +35,218 @@
           "count": 1
         }
       ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375184175757525064",
+        "channel_id": "1368952166328303636",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375184758056943616",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hahahahaha",
+      "timestamp": "2025-05-22T18:53:16.018000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184758056943616",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375184175757525064",
+        "channel_id": "1368952166328303636",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375184673319292988",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Guys we can plan a post about: What does being an AI Powered company means☺️",
+      "timestamp": "2025-05-22T18:52:55.815000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184673319292988",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375184175757525064",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-22T18:50:57.187000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184175757525064",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "🤣",
+          "count": 6
+        },
+        {
+          "emoji": "😝",
+          "count": 1
+        }
+      ],
       "attachments": [
         {
-          "id": "1371297021234905088",
-          "filename": "Optimize_your_LinkedIn_profile.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1371297021234905088/Optimize_your_LinkedIn_profile.pdf?ex=6840491f&is=683ef79f&hm=01866761b4cd00c71e06ab026d8d16f5afb3cc44c96c420802f629e30805b0df&",
-          "size": 42113
+          "id": "1375184175526580275",
+          "filename": "WhatsApp_Image_2025-05-22_at_1.43.22_PM.jpeg",
+          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1375184175526580275/WhatsApp_Image_2025-05-22_at_1.43.22_PM.jpeg?ex=6841e711&is=68409591&hm=a09ec17f60b2371fc3c90b40997a10d35d0299a3efbe3e90c53dc844e5a16ad2&",
+          "size": 123579,
+          "content_type": "image/jpeg"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375174746282397737",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you, <@758206516753858561>! It’s a very informative content. We loved it",
+      "timestamp": "2025-05-22T18:13:29.025000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375174746282397737",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375166078124163214",
+        "channel_id": "1368952166328303636",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375166078124163214",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thank you very very much to @everyone For having selected my work to be shared!! I will continue working to contribute more!",
+      "timestamp": "2025-05-22T17:39:02.375000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375166078124163214",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371297832543326300",
+      "channel_id": "1368952166328303636",
+      "channel_name": "📸content-creation-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "In addition, I share with you some specifications that may be useful to create a GPT to help you with copywriting.",
+      "timestamp": "2025-05-12T01:28:00.760000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1371297832543326300",
+      "author": {
+        "id": "1359966236473168188",
+        "username": "remarkable_sparrow_25173",
+        "discriminator": "0",
+        "display_name": "Katherine Valqui",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1371297832178548766",
+          "filename": "GEN_AI_LinkedIn_copywriting_My_GPT_Instructions_.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1371297832178548766/GEN_AI_LinkedIn_copywriting_My_GPT_Instructions_.pdf?ex=68419b60&is=684049e0&hm=81356b38ec8020f655bbe0465b639eb8080ab2e5a9965ea294ba26a916c6c204&",
+          "size": 107185,
+          "content_type": "application/pdf"
         }
       ],
       "embeds": 0,
@@ -75,238 +284,52 @@
       "reference": null
     },
     {
-      "message_id": "1371297832543326300",
+      "message_id": "1371297021545152652",
       "channel_id": "1368952166328303636",
       "channel_name": "📸content-creation-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "In addition, I share with you some specifications that may be useful to create a GPT to help you with copywriting.",
-      "timestamp": "2025-05-12T01:28:00.760000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1371297832543326300",
+      "content": "<@758206516753858561> & <@1075075819807985714> :Here are some suggestions for prompts to optimize your LinkedIn profiles",
+      "timestamp": "2025-05-12T01:24:47.403000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1371297021545152652",
       "author": {
         "id": "1359966236473168188",
         "username": "remarkable_sparrow_25173",
         "discriminator": "0",
         "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1371297832178548766",
-          "filename": "GEN_AI_LinkedIn_copywriting_My_GPT_Instructions_.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1371297832178548766/GEN_AI_LinkedIn_copywriting_My_GPT_Instructions_.pdf?ex=684049e0&is=683ef860&hm=01d0960499a529e44e73bd1df81d748b7264b9c6288947943b32da5f5072ff1a&",
-          "size": 107185
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375166078124163214",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you very very much to @everyone For having selected my work to be shared!! I will continue working to contribute more!",
-      "timestamp": "2025-05-22T17:39:02.375000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375166078124163214",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375174746282397737",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thank you, <@758206516753858561>! It’s a very informative content. We loved it",
-      "timestamp": "2025-05-22T18:13:29.025000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375174746282397737",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
         "bot": false
       },
       "mentions": [
-        "758206516753858561"
-      ],
-      "reactions": [
         {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1375166078124163214",
-        "channel_id": "1368952166328303636",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1375184175757525064",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-22T18:50:57.187000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184175757525064",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "🤣",
-          "count": 6
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
         },
         {
-          "emoji": "😝",
+          "id": "1075075819807985714",
+          "username": "silkefinken",
+          "display_name": "Silke Finken"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
           "count": 1
         }
       ],
       "attachments": [
         {
-          "id": "1375184175526580275",
-          "filename": "WhatsApp_Image_2025-05-22_at_1.43.22_PM.jpeg",
-          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1375184175526580275/WhatsApp_Image_2025-05-22_at_1.43.22_PM.jpeg?ex=68409591&is=683f4411&hm=7a3695fa287eb4fa0ca47993dc177c003073d1f22c21284cdac87ccd6419b7ba&",
-          "size": 123579
+          "id": "1371297021234905088",
+          "filename": "Optimize_your_LinkedIn_profile.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1368952166328303636/1371297021234905088/Optimize_your_LinkedIn_profile.pdf?ex=68419a9f&is=6840491f&hm=4f3fd28ee979c1b0ba4e3d0478d9338fa69cf5653ab3b3b0af9db846115531fc&",
+          "size": 42113,
+          "content_type": "application/pdf"
         }
       ],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
-    },
-    {
-      "message_id": "1375184673319292988",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Guys we can plan a post about: What does being an AI Powered company means☺️",
-      "timestamp": "2025-05-22T18:52:55.815000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184673319292988",
-      "author": {
-        "id": "1359966236473168188",
-        "username": "remarkable_sparrow_25173",
-        "discriminator": "0",
-        "display_name": "Katherine Valqui",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375184758056943616",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hahahahaha",
-      "timestamp": "2025-05-22T18:53:16.018000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375184758056943616",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1375184175757525064",
-        "channel_id": "1368952166328303636",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1375789960778743899",
-      "channel_id": "1368952166328303636",
-      "channel_name": "📸content-creation-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Made my day 😂 happy weekend! ♥️",
-      "timestamp": "2025-05-24T10:58:07.591000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1368952166328303636/1375789960778743899",
-      "author": {
-        "id": "1360182837113786399",
-        "username": "diell_zaa",
-        "discriminator": "0",
-        "display_name": "Diellza Ahmetaj",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1375184175757525064",
-        "channel_id": "1368952166328303636",
-        "guild_id": "1353058864810950737"
-      }
     }
   ]
 }

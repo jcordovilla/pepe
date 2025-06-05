@@ -3,169 +3,64 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1353449638174130277",
   "channel_name": "💬live-chat",
-  "fetch_timestamp": "2025-06-03T22:04:10.738688",
+  "fetch_timestamp": "2025-06-04T23:18:04.764726+00:00",
   "message_count": 16,
   "messages": [
     {
-      "message_id": "1362815453398962258",
+      "message_id": "1367990868904120410",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone here are the questions for reference",
-      "timestamp": "2025-04-18T15:42:03.977000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362815453398962258",
+      "content": "Brilliant, thanks",
+      "timestamp": "2025-05-02T22:27:19.188000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367990868904120410",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "673901899837341736",
+        "username": "julioverne74",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1362815453025665024",
-          "filename": "Discord_Questions4-18.pdf",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1362815453025665024/Discord_Questions4-18.pdf?ex=6840694b&is=683f17cb&hm=1eed8ec2ec08730f9ec7948a101be8a1e146482845371c2044f2fe219c77155e&",
-          "size": 33671
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362815803505774713",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone I will have a comprehensive answer for item #1 by 8pm EST tonight for those of you who would like to display there contributions on Linked-in!",
-      "timestamp": "2025-04-18T15:43:27.449000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362815803505774713",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362818932683046912",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Drive safe <@1352785241252565174>",
-      "timestamp": "2025-04-18T15:55:53.503000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362818932683046912",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
+        "display_name": "Jose Cordovilla",
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
         {
-          "emoji": "❤️",
-          "count": 1
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
         }
       ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362819172370743319",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "The car probably is automatically driven by an AI ...hehe!",
-      "timestamp": "2025-04-18T15:56:50.649000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362819172370743319",
-      "author": {
-        "id": "1359959114708418782",
-        "username": "pabloallois_87684",
-        "discriminator": "0",
-        "display_name": "Pablo Allois",
-        "bot": false
-      },
-      "mentions": [
-        "1352785241252565174"
-      ],
-      "reactions": [
-        {
-          "emoji": "😆",
-          "count": 2
-        },
-        {
-          "emoji": "❤️",
-          "count": 1
-        },
-        {
-          "emoji": "🤣",
-          "count": 2
-        }
-      ],
+      "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1362815803505774713",
+        "message_id": "1367966719624216677",
         "channel_id": "1353449638174130277",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1362819804993421385",
+      "message_id": "1367967620933877782",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Woohoo! swags 🙌",
-      "timestamp": "2025-04-18T15:59:21.478000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362819804993421385",
+      "content": "I got motivated by seeing some of you with the logo as background during the q&a",
+      "timestamp": "2025-05-02T20:54:56.440000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367967620933877782",
       "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
         "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
+        "display_name": "Prabhat Kumar",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 2
+          "count": 1
         }
       ],
       "attachments": [],
@@ -175,14 +70,87 @@
       "reference": null
     },
     {
-      "message_id": "1362820171533648033",
+      "message_id": "1367966719624216677",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Safe trip <@1352785241252565174> !",
-      "timestamp": "2025-04-18T16:00:48.868000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362820171533648033",
+      "content": "I created few background images that you may use during the meeting:-)",
+      "timestamp": "2025-05-02T20:51:21.551000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367966719624216677",
+      "author": {
+        "id": "1349019079683473488",
+        "username": "imkprabhat",
+        "discriminator": "0",
+        "display_name": "Prabhat Kumar",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 13
+        },
+        {
+          "emoji": "🫶",
+          "count": 1
+        },
+        {
+          "emoji": "💚",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1367966717967335545",
+          "filename": "Gen_AI_GlobAl_-_6.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966717967335545/Gen_AI_GlobAl_-_6.png?ex=68420349&is=6840b1c9&hm=73704b6dba0c944c66420bcfc086221c2e91f0f8ca81a7ed14f09b8c8c466deb&",
+          "size": 659326,
+          "content_type": "image/jpeg"
+        },
+        {
+          "id": "1367966718303142039",
+          "filename": "Gen_AI_GlobAl_-_4.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966718303142039/Gen_AI_GlobAl_-_4.png?ex=68420349&is=6840b1c9&hm=b99226d282565cd519d7f31934695e0027c6f9d4d44cd01775f391dfdc0e4ce1&",
+          "size": 372994,
+          "content_type": "image/jpeg"
+        },
+        {
+          "id": "1367966718688887006",
+          "filename": "Gen_AI_GlobAl_-_3.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966718688887006/Gen_AI_GlobAl_-_3.png?ex=68420349&is=6840b1c9&hm=e81fe14f6f29f95cc3f9764bed4ac347a3fe3de096502a15d077ba6e4c9a58d8&",
+          "size": 1524353,
+          "content_type": "image/jpeg"
+        },
+        {
+          "id": "1367966719053664359",
+          "filename": "Gen_AI_GlobAl_-_2.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966719053664359/Gen_AI_GlobAl_-_2.png?ex=68420349&is=6840b1c9&hm=dc4d80cde1ffa3e75a0bfc1a127ee92ea744e49963ec9d4e6d34b2ec9cd458b8&",
+          "size": 621077,
+          "content_type": "image/jpeg"
+        },
+        {
+          "id": "1367966719401922581",
+          "filename": "Gen_AI_GlobAl_-_1.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966719401922581/Gen_AI_GlobAl_-_1.png?ex=68420349&is=6840b1c9&hm=bf90e9ea41ec52b74bae22c867a47d2834aba0a8d942779b072d845596946d66&",
+          "size": 488517,
+          "content_type": "image/jpeg"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367958257112453141",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "That would be awesome !!",
+      "timestamp": "2025-05-02T20:17:43.931000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367958257112453141",
       "author": {
         "id": "758206516753858561",
         "username": "darkgago",
@@ -191,136 +159,13 @@
         "bot": false
       },
       "mentions": [
-        "1352785241252565174"
+        {
+          "id": "1356965427162517514",
+          "username": "cristian_72225",
+          "display_name": "Cristian Ursan"
+        }
       ],
       "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1362821503300927569",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Happy Easter!!",
-      "timestamp": "2025-04-18T16:06:06.386000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362821503300927569",
-      "author": {
-        "id": "1125194882164736050",
-        "username": "rodrigoreyesjara",
-        "discriminator": "0",
-        "display_name": "Rodrigo Reyes",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "😆",
-          "count": 9
-        },
-        {
-          "emoji": "😀",
-          "count": 4
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1362821502927372368",
-          "filename": "raw.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1362821502927372368/raw.png?ex=68406eee&is=683f1d6e&hm=8a4bc8321fff8f679213c35a095dd9fa33bd0f8eaa2fc1dd17357e105a7af780&",
-          "size": 1408603
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367895751593820292",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone! Here you can find today's Q&A session screenshots. Thanks so much for your active participation! The questions were extremely interesting, with excellent responses from <@672229862085361664> ! Thanks for keeping the momentum alive—let's go for more! 🚀🙌😄",
-      "timestamp": "2025-05-02T16:09:21.454000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367895751593820292",
-      "author": {
-        "id": "1125194882164736050",
-        "username": "rodrigoreyesjara",
-        "discriminator": "0",
-        "display_name": "Rodrigo Reyes",
-        "bot": false
-      },
-      "mentions": [
-        "672229862085361664"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 9
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [
-        {
-          "id": "1367895750738055278",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367895750738055278/image.png?ex=68406fb1&is=683f1e31&hm=383ef36eecd67e50d3d84186791b14748bb52b784267fd0756d2a31d54eca809&",
-          "size": 3756944
-        },
-        {
-          "id": "1367895751383842947",
-          "filename": "image.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367895751383842947/image.png?ex=68406fb1&is=683f1e31&hm=e62a8a37e3c22ab71353752e8820f88db9b98eab6d381ed66ac8b064d3d3deb4&",
-          "size": 2881636
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367900334416203796",
-      "channel_id": "1353449638174130277",
-      "channel_name": "💬live-chat",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Rodrigo, this was a nice touch! Let’s make it a tradition! 😆",
-      "timestamp": "2025-05-02T16:27:34.084000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367900334416203796",
-      "author": {
-        "id": "1359331018129276958",
-        "username": "arthurcaves",
-        "discriminator": "0",
-        "display_name": "Arturo Cuevas",
-        "bot": false
-      },
-      "mentions": [
-        "1125194882164736050"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        },
-        {
-          "emoji": "💯",
-          "count": 2
-        },
         {
           "emoji": "👍",
           "count": 1
@@ -331,38 +176,29 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1367895751593820292",
+        "message_id": "1367947513247563869",
         "channel_id": "1353449638174130277",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1367929180389380156",
+      "message_id": "1367947579521765386",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Many thanks Rodrigo..it's nice to see our faces...after all this talk about agents 🤣",
-      "timestamp": "2025-05-02T18:22:11.500000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367929180389380156",
+      "content": "100% corporate",
+      "timestamp": "2025-05-02T19:35:18.195000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367947579521765386",
       "author": {
-        "id": "1364907913415757854",
-        "username": "busy_monkey_43514",
+        "id": "1356965427162517514",
+        "username": "cristian_72225",
         "discriminator": "0",
-        "display_name": "Val",
+        "display_name": "Cristian Ursan",
         "bot": false
       },
       "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        },
-        {
-          "emoji": "🦾",
-          "count": 1
-        }
-      ],
+      "reactions": [],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -399,23 +235,32 @@
       "reference": null
     },
     {
-      "message_id": "1367947579521765386",
+      "message_id": "1367929180389380156",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "100% corporate",
-      "timestamp": "2025-05-02T19:35:18.195000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367947579521765386",
+      "content": "Many thanks Rodrigo..it's nice to see our faces...after all this talk about agents 🤣",
+      "timestamp": "2025-05-02T18:22:11.500000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367929180389380156",
       "author": {
-        "id": "1356965427162517514",
-        "username": "cristian_72225",
+        "id": "1364907913415757854",
+        "username": "busy_monkey_43514",
         "discriminator": "0",
-        "display_name": "Cristian Ursan",
+        "display_name": "Val",
         "bot": false
       },
       "mentions": [],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
@@ -423,25 +268,37 @@
       "reference": null
     },
     {
-      "message_id": "1367958257112453141",
+      "message_id": "1367900334416203796",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "That would be awesome !!",
-      "timestamp": "2025-05-02T20:17:43.931000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367958257112453141",
+      "content": "Thanks Rodrigo, this was a nice touch! Let’s make it a tradition! 😆",
+      "timestamp": "2025-05-02T16:27:34.084000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367900334416203796",
       "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
         "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Arturo Cuevas",
         "bot": false
       },
       "mentions": [
-        "1356965427162517514"
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        }
       ],
       "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        },
+        {
+          "emoji": "💯",
+          "count": 2
+        },
         {
           "emoji": "👍",
           "count": 1
@@ -452,72 +309,58 @@
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1367947513247563869",
+        "message_id": "1367895751593820292",
         "channel_id": "1353449638174130277",
         "guild_id": "1353058864810950737"
       }
     },
     {
-      "message_id": "1367966719624216677",
+      "message_id": "1367895751593820292",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I created few background images that you may use during the meeting:-)",
-      "timestamp": "2025-05-02T20:51:21.551000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367966719624216677",
+      "content": "Hello @everyone! Here you can find today's Q&A session screenshots. Thanks so much for your active participation! The questions were extremely interesting, with excellent responses from <@672229862085361664> ! Thanks for keeping the momentum alive—let's go for more! 🚀🙌😄",
+      "timestamp": "2025-05-02T16:09:21.454000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367895751593820292",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Rodrigo Reyes",
         "bot": false
       },
-      "mentions": [],
+      "mentions": [
+        {
+          "id": "672229862085361664",
+          "username": "peterparkerdata",
+          "display_name": "Dr. Abel Sanchez"
+        }
+      ],
       "reactions": [
         {
           "emoji": "❤️",
-          "count": 12
+          "count": 9
         },
         {
-          "emoji": "🫶",
-          "count": 1
-        },
-        {
-          "emoji": "💚",
+          "emoji": "👍",
           "count": 1
         }
       ],
       "attachments": [
         {
-          "id": "1367966717967335545",
-          "filename": "Gen_AI_GlobAl_-_6.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966717967335545/Gen_AI_GlobAl_-_6.png?ex=6840b1c9&is=683f6049&hm=900a7ccffc5f286799986fadb9f33369439363a9c3e0b50e0a8f14ee1c4894b8&",
-          "size": 659326
+          "id": "1367895750738055278",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367895750738055278/image.png?ex=6841c131&is=68406fb1&hm=ba5f6350bb3da28e20a0770473dc20d690b9d42ef2d30c9ddf240ee6051703a2&",
+          "size": 3756944,
+          "content_type": "image/png"
         },
         {
-          "id": "1367966718303142039",
-          "filename": "Gen_AI_GlobAl_-_4.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966718303142039/Gen_AI_GlobAl_-_4.png?ex=6840b1c9&is=683f6049&hm=2fc905f53043aa2e896a9b739783156f9f636442d9e0e8fbceba94c1edbdc0ce&",
-          "size": 372994
-        },
-        {
-          "id": "1367966718688887006",
-          "filename": "Gen_AI_GlobAl_-_3.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966718688887006/Gen_AI_GlobAl_-_3.png?ex=6840b1c9&is=683f6049&hm=54cd498d1bd65c3e90c5265a611c57a6d268357cbaa8d62253ac0ed940ebe03f&",
-          "size": 1524353
-        },
-        {
-          "id": "1367966719053664359",
-          "filename": "Gen_AI_GlobAl_-_2.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966719053664359/Gen_AI_GlobAl_-_2.png?ex=6840b1c9&is=683f6049&hm=4247ef222ea711b809ecb3e7544a3c6d7b20d6649c186257bb61a7582672b2b8&",
-          "size": 621077
-        },
-        {
-          "id": "1367966719401922581",
-          "filename": "Gen_AI_GlobAl_-_1.png",
-          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367966719401922581/Gen_AI_GlobAl_-_1.png?ex=6840b1c9&is=683f6049&hm=e05a9e5e4571a72f9e2033dd38b604c1be5c7c78f59904bca32dd2adda8fd837&",
-          "size": 488517
+          "id": "1367895751383842947",
+          "filename": "image.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1367895751383842947/image.png?ex=6841c131&is=68406fb1&hm=128c5dacf7576634cd7a3357663b4277866aff66d0c5ad0586fecf8944bb7f1a&",
+          "size": 2881636,
+          "content_type": "image/png"
         }
       ],
       "embeds": 0,
@@ -526,22 +369,69 @@
       "reference": null
     },
     {
-      "message_id": "1367967620933877782",
+      "message_id": "1362821503300927569",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I got motivated by seeing some of you with the logo as background during the q&a",
-      "timestamp": "2025-05-02T20:54:56.440000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367967620933877782",
+      "content": "Happy Easter!!",
+      "timestamp": "2025-04-18T16:06:06.386000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362821503300927569",
       "author": {
-        "id": "1349019079683473488",
-        "username": "imkprabhat",
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
         "discriminator": "0",
-        "display_name": "Prabhat Kumar",
+        "display_name": "Rodrigo Reyes",
         "bot": false
       },
       "mentions": [],
+      "reactions": [
+        {
+          "emoji": "😆",
+          "count": 9
+        },
+        {
+          "emoji": "😀",
+          "count": 4
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1362821502927372368",
+          "filename": "raw.png",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1362821502927372368/raw.png?ex=6841c06e&is=68406eee&hm=01c7c65c7139e7109f7eff954aa4c70d6786ca62cdb85430c673196a37e5d8d7&",
+          "size": 1408603,
+          "content_type": "image/png"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362820171533648033",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Safe trip <@1352785241252565174> !",
+      "timestamp": "2025-04-18T16:00:48.868000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362820171533648033",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
       "reactions": [
         {
           "emoji": "❤️",
@@ -555,34 +445,181 @@
       "reference": null
     },
     {
-      "message_id": "1367990868904120410",
+      "message_id": "1362819804993421385",
       "channel_id": "1353449638174130277",
       "channel_name": "💬live-chat",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Brilliant, thanks",
-      "timestamp": "2025-05-02T22:27:19.188000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1367990868904120410",
+      "content": "Woohoo! swags 🙌",
+      "timestamp": "2025-04-18T15:59:21.478000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362819804993421385",
       "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
+        "id": "1352735021093359626",
+        "username": "rad.ai",
         "discriminator": "0",
-        "display_name": "Jose Cordovilla",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362819172370743319",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "The car probably is automatically driven by an AI ...hehe!",
+      "timestamp": "2025-04-18T15:56:50.649000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362819172370743319",
+      "author": {
+        "id": "1359959114708418782",
+        "username": "pabloallois_87684",
+        "discriminator": "0",
+        "display_name": "Pablo Allois",
         "bot": false
       },
       "mentions": [
-        "1349019079683473488"
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
       ],
-      "reactions": [],
+      "reactions": [
+        {
+          "emoji": "😆",
+          "count": 2
+        },
+        {
+          "emoji": "❤️",
+          "count": 1
+        },
+        {
+          "emoji": "🤣",
+          "count": 2
+        }
+      ],
       "attachments": [],
       "embeds": 0,
       "pinned": false,
       "type": "MessageType.reply",
       "reference": {
-        "message_id": "1367966719624216677",
+        "message_id": "1362815803505774713",
         "channel_id": "1353449638174130277",
         "guild_id": "1353058864810950737"
       }
+    },
+    {
+      "message_id": "1362818932683046912",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Drive safe <@1352785241252565174>",
+      "timestamp": "2025-04-18T15:55:53.503000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362818932683046912",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352785241252565174",
+          "username": "oscarsan.chez",
+          "display_name": "Oscar Sanchez"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362815803505774713",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone I will have a comprehensive answer for item #1 by 8pm EST tonight for those of you who would like to display there contributions on Linked-in!",
+      "timestamp": "2025-04-18T15:43:27.449000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362815803505774713",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1362815453398962258",
+      "channel_id": "1353449638174130277",
+      "channel_name": "💬live-chat",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone here are the questions for reference",
+      "timestamp": "2025-04-18T15:42:03.977000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449638174130277/1362815453398962258",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [
+        {
+          "id": "1362815453025665024",
+          "filename": "Discord_Questions4-18.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1353449638174130277/1362815453025665024/Discord_Questions4-18.pdf?ex=6841bacb&is=6840694b&hm=d78fc3251a809303e1c237d45f43ae16571e609815aa1c8dbf106440215627c9&",
+          "size": 33671,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
   ]
 }

@@ -4,7 +4,7 @@
   "channel_id": "1369699947380871320",
   "channel_name": "🗂agent-ops-resources",
   "fetch_timestamp": "2025-06-03T22:03:36.423066",
-  "message_count": 61,
+  "message_count": 74,
   "messages": [
     {
       "message_id": "1369704388884435024",
@@ -1807,6 +1807,357 @@
         "channel_id": "1369699947380871320",
         "guild_id": "1353058864810950737"
       }
+    },
+    {
+      "message_id": "1379697500277051412",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MiT – Agent Ops (06/03/2025)\nQuick Recap:\nThe team discussed improvements to calendar sync functionality and addressed ongoing issues with event visibility in Google Calendar, with various solutions being tested and implemented. Updates were shared on bot development and AI capabilities, including discussions about local LLM hosting, GitHub Copilot usage, and the progress of agentic AI applications. The team also covered organizational changes including new team members, process improvements for battle cards, and the establishment of a dedicated space for sharing learning resources related to agent development.\n\n✅ Next Steps:\n🔹 Naeem to prepare and deliver a presentation on running local LLMs using Ollama in a future meeting.\n🔹 Jose to share the readme file for the current Pepe bot in the Agent Ops resources channel.\n🔹 Agent Ops team to test the new calendar sync with Sesh this week before rolling it out to all channels.\n🔹 Deidre to introduce Pragya, the new Agile and Ops team member, in tomorrow’s stand-up meeting.\n🔹 Agent Ops team to start working on new ideas and features using the Trello board this week.\n🔹 Agent Ops team members to share relevant agent development resources in the Agent Ops resources channel.\n\n🤝 Final reflection\nLet’s keep building the future of Agent Ops, one sync at a time. 🤖🚀",
+      "timestamp": "2025-06-04T05:45:17.606000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379697500277051412",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379697994181509201",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/GCPkcG86mUXDIWkyjRYo1xv2laXV9wyf9NctERYNyeoOXfvmugkUI0imX3jsoXzQ.Hbdqz8CUH4LOWSfE?startTime=1748961010000\nPasscode: +c@p$5BU",
+      "timestamp": "2025-06-04T05:47:15.362000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1379697994181509201",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380037523082051624",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📌 Meeting Summary – Gen AI @MIT – Agent Ops (06/04/2025)\n\n🔁 Quick Recap:\nWe reviewed the new sync feature 🔄, discussed event creation in Sesh 📆, and addressed permissions in both Discord and Sesh. The team aligned on creating documentation 📑 for event procedures and welcomed new members like Pragya 🙌🏼.\n\n✅ Next Steps:\n• Pablo to create Sesh event modification guide ✍🏼\n• Arturo to add Trello cards for documentation and permissions 🗂️\n• Jose to raise permission issues with the Network Architects 🧠\n• Arturo to join the Heads of Department meeting 🕐\n• Arturo to add Pragya to the right channels 👥\n\n💬 Final Reflection:\nClear communication is the foundation of every successful system. Let’s build it together—one sync, one event, one step at a time. 🚀",
+      "timestamp": "2025-06-05T04:16:25.360000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380037523082051624",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380037688291491872",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/Kt-Xk0q_asn93e1MM0y6YyovKzGL8HqhjZb-a5PrsOv_Ivt3OQdWvXD79sm69EAV.8wIs4jeqziWx_UTo?startTime=1749047425000\nPasscode: Adz@6+5U",
+      "timestamp": "2025-06-05T04:17:04.749000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380037688291491872",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380039625162231830",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-05T04:24:46.535000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380039625162231830",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1380039624868626532",
+          "filename": "Meeting_Summary_Gen_AI_MIT_Agent_Ops_2025_06_04_FULL_FINAL.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1380039624868626532/Meeting_Summary_Gen_AI_MIT_Agent_Ops_2025_06_04_FULL_FINAL.pdf?ex=68426d8e&is=68411c0e&hm=25b899a8482c4eb246c7370669d5c7f0581fdb4ef8f3a69e7507b9a41d872849&",
+          "size": 2020642,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380064597205188609",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🚨Meeting Summary – Gen AI @MIT – Agent Ops🚨\nDesign Thinking Workshop Summary (May 26–28, 2025)\n\n⸻\n\n🔴 Quick Recap\n\nOver three sessions, the team engaged in a Design Thinking workshop focused on improving onboarding, community organization, and the structure of the Agent Ops team. Through collaborative exercises like the Double Diamond framework and Creative Matrix ideation, participants developed and prioritized ideas around member engagement, moderation, AI-assisted tools, and structural clarity. The workshop concluded with agreement on next steps including battle card creation, voting on initiatives, and a proposal to rename the SGU team to better reflect its evolving mission.\n\n⸻\n\n🧭 Day 1 – Foundations and Frameworks (May 26)\n\nTopics Covered:\n    •    Technical access issues and calendar troubleshooting\n    •    Review of Double Diamond workshop outcomes\n    •    Key personas identified across onboarding and community roles\n    •    Onboarding challenges: re-engagement, role clarity, Discord use\n    •    Discord message control, phishing prevention, and channel limitations\n    •    Early ideas for time zone-based team structure\n\nKey Decisions:\n    •    Add rejoining criteria to onboarding plans\n    •    Improve Discord security and organization\n    •    Prepare for upcoming Design Thinking sessions\n\n⸻\n\n💡 Day 2 – Ideation and Breakouts (May 27)\n\nTopics Covered:\n    •    Creative Matrix technique introduced for idea generation\n    •    Breakout rooms divided into three categories: onboarding, SGU, community\n    •    Brainstorming on AI moderation, role-based Discord systems, content engagement\n    •    Homework assigned: review and add sticky notes to the matrix\n\nKey Decisions:\n    •    Top ideas to be turned into battle cards\n    •    Use AI for moderation prompts, security tips, content suggestions\n    •    Design role-based notifications and monthly analytics reviews\n\n⸻",
+      "timestamp": "2025-06-05T06:04:00.334000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380064597205188609",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380064892039593994",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📊 Day 3 – Prioritization and Strategy (May 28)\n\nTopics Covered:\n    •    Voting on top ideas using star-based system\n    •    Breakout room coordination and Zoom access fixes\n    •    Discussion of tools like AI concierge, LinkedIn-based matching, onboarding bots\n    •    Organizational structure reviewed: infrastructure, cohorts, prototypes\n\nKey Decisions:\n    •    Develop calendar prototype as first project\n    •    Rename SGU to “Agent Ops” or “Agent Lab”\n    •    Define scope and responsibilities in next meeting\n    •    Battle cards to be finalized and reviewed Monday\n\n⸻\n\n✅ Next Steps\n    •    Diellza to consolidate workshop ideas and populate battle cards\n    •    Jose to share slides with strategy and structure\n    •    Team to review and prepare for next session with feedback\n    •    Arturo and Pablo to reconfigure Zoom for full access in breakouts\n    •    Final naming decision for Agent Ops to be made in upcoming meeting\n    •    Launch development of calendar as the team’s first prototype",
+      "timestamp": "2025-06-05T06:05:10.628000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380064892039593994",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380065085522706553",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/Ntoc-1Abu452h0HpkEMe-q7FkGzktkHsH716Ln8gH9dRk1f-xl35JZrQLyaBiFVf.NchfvOGnAatD9Aff?startTime=1748269831000\nPasscode: %xoj4H31",
+      "timestamp": "2025-06-05T06:05:56.758000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380065085522706553",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380065236857520208",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/6xSYNnrxKqN_r3WoXy1pCHGQrtIsTrWSiXeN7F45ZvtnS8HREJUkg5UU5gdR768F.o3cNzXCy1ICNVjMq?startTime=1748356240000\nPasscode: QX5.vYDx",
+      "timestamp": "2025-06-05T06:06:32.839000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380065236857520208",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380065410304573503",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://us06web.zoom.us/rec/share/yorqHCgQ51zNsUHQDp2rTSexTapkfJB2M-K9PUku8BC-24XUTCNSkyZL4UTI_QyS.bmU_EgWI4gQ9YGxh?startTime=1748442609000\nPasscode: R7LAP1=.",
+      "timestamp": "2025-06-05T06:07:14.192000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380065410304573503",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380069181289926686",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-05T06:22:13.265000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380069181289926686",
+      "author": {
+        "id": "1359331018129276958",
+        "username": "arthurcaves",
+        "discriminator": "0",
+        "display_name": "Arturo Cuevas",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1380069180904181800",
+          "filename": "Design_Thinking_Workshop_Complete_3Day_Summary.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1369699947380871320/1380069180904181800/Design_Thinking_Workshop_Complete_3Day_Summary.pdf?ex=68428915&is=68413795&hm=142464bc259eceaf1275e4b4f8ac5eabea794fb2560bae234f32229e84b5f8c4&",
+          "size": 6557,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380069917814161459",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Wow <@1359331018129276958> thank you so much for the summary and Team <@&1379400005059870760> for developing this great workshop",
+      "timestamp": "2025-06-05T06:25:08.866000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380069917814161459",
+      "author": {
+        "id": "669205811326615591",
+        "username": "ironhardt.",
+        "discriminator": "0",
+        "display_name": "Ralph Eisenhardt",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359331018129276958",
+          "username": "arthurcaves",
+          "display_name": "Arturo Cuevas"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380077579708403773",
+      "channel_id": "1369699947380871320",
+      "channel_name": "🗂agent-ops-resources",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1359331018129276958>  Thank you, Thank you, Thank you  for the summary !!!",
+      "timestamp": "2025-06-05T06:55:35.604000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1369699947380871320/1380077579708403773",
+      "author": {
+        "id": "1360267706204426442",
+        "username": "frederique_20320",
+        "discriminator": "0",
+        "display_name": "Frédérique Lambers",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359331018129276958",
+          "username": "arthurcaves",
+          "display_name": "Arturo Cuevas"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
-  ]
+  ],
+  "last_update_timestamp": "2025-06-05T14:10:21.603023+00:00"
 }

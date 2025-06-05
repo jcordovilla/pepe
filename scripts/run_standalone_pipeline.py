@@ -103,7 +103,8 @@ class StandalonePipelineRunner:
         mode: str = "process_existing",
         guild_id: Optional[str] = None,
         channel_ids: Optional[List[str]] = None,
-        fetch_limit: Optional[int] = None
+        fetch_limit: Optional[int] = None,
+        incremental: bool = True
     ) -> Dict[str, Any]:
         """
         Run the complete pipeline
@@ -113,6 +114,7 @@ class StandalonePipelineRunner:
             guild_id: Discord guild ID for fetching (if applicable)
             channel_ids: Specific channel IDs to fetch (if applicable)
             fetch_limit: Limit messages per channel (if applicable)
+            incremental: Whether to use incremental fetching (default: True)
             
         Returns:
             Dictionary with pipeline results
@@ -141,7 +143,7 @@ class StandalonePipelineRunner:
                 # Stage 1: Data Acquisition (if needed)
                 if mode in ["fetch_and_process", "fetch_only"]:
                     print("\n🔍 Stage 1: Fetching Discord messages...")
-                    fetch_results = await self._fetch_discord_messages(guild_id, channel_ids, fetch_limit)
+                    fetch_results = await self._fetch_discord_messages(guild_id, channel_ids, fetch_limit, incremental)
                     results["stages"]["fetch"] = fetch_results
                     pipeline_pbar.update(1)
                     pipeline_pbar.set_postfix({"Current": "Fetching"})
@@ -223,12 +225,12 @@ class StandalonePipelineRunner:
             logger.error(f"❌ Pipeline failed: {e}")
             results["error"] = str(e)
             return results
-    
-    async def _fetch_discord_messages(
-        self, 
-        guild_id: Optional[str], 
-        channel_ids: Optional[List[str]], 
-        fetch_limit: Optional[int]
+     async def _fetch_discord_messages(
+        self,
+        guild_id: Optional[str],
+        channel_ids: Optional[List[str]],
+        fetch_limit: Optional[int],
+        incremental: bool = True
     ) -> Dict[str, Any]:
         """Fetch messages from Discord API"""
         try:
@@ -247,12 +249,19 @@ class StandalonePipelineRunner:
             fetch_result = await self.discord_fetcher.fetch_guild_messages(
                 guild_id=guild_id,
                 channel_ids=channel_ids,
-                limit_per_channel=fetch_limit
+                limit_per_channel=fetch_limit,
+                incremental=incremental
             )
             
             if fetch_result["success"]:
                 print(f"✅ Fetched messages from {fetch_result['channels_processed']} channels")
                 print(f"📊 Total messages: {fetch_result['total_messages']}")
+                if fetch_result.get("incremental_mode"):
+                    files_created = len(fetch_result.get("files_created", []))
+                    files_updated = len(fetch_result.get("files_updated", []))
+                    print(f"📈 Incremental mode: {files_created} new files, {files_updated} updated files")
+                else:
+                    print("📥 Full fetch mode")
             
             return fetch_result
             
@@ -675,7 +684,8 @@ async def main():
             'backup_enabled': True
         },
         'discord': {
-            'token': os.getenv('DISCORD_BOT_TOKEN')
+            'token': os.getenv('DISCORD_TOKEN'),
+            'guild_id': os.getenv('GUILD_ID')
         },
         'discord_fetcher': {
             'page_size': 100,
@@ -698,15 +708,24 @@ async def main():
         parser.add_argument('--guild-id', help='Discord guild ID for fetching')
         parser.add_argument('--channel-ids', nargs='+', help='Specific channel IDs to fetch')
         parser.add_argument('--fetch-limit', type=int, help='Limit messages per channel')
+        parser.add_argument('--incremental', action='store_true', default=True, 
+                          help='Use incremental fetching (default: True)')
+        parser.add_argument('--full-fetch', action='store_true', 
+                          help='Force full fetch instead of incremental')
         
         args = parser.parse_args()
         
+        # Determine incremental mode
+        incremental_mode = args.incremental and not args.full_fetch
+        
         # Run pipeline
+        guild_id = args.guild_id or pipeline.config.get('discord', {}).get('guild_id')
         results = await pipeline.run_complete_pipeline(
             mode=args.mode,
-            guild_id=args.guild_id,
+            guild_id=guild_id,
             channel_ids=args.channel_ids,
-            fetch_limit=args.fetch_limit
+            fetch_limit=args.fetch_limit,
+            incremental=incremental_mode
         )
         
         # Save results

@@ -3,44 +3,225 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1366389772251037737",
   "channel_name": "💠buddy-group6",
-  "fetch_timestamp": "2025-06-03T22:04:03.565792",
-  "message_count": 77,
+  "fetch_timestamp": "2025-06-04T23:19:13.883013+00:00",
+  "message_count": 80,
   "messages": [
     {
-      "message_id": "1366420690466504787",
+      "message_id": "1379931502191706264",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "<@1087795330067742760>",
-      "timestamp": "2025-04-28T14:27:59.476000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366420690466504787",
+      "content": "",
+      "timestamp": "2025-06-04T21:15:08.010000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379931502191706264",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
       },
-      "mentions": [
-        "1087795330067742760"
-      ],
+      "mentions": [],
       "reactions": [],
       "attachments": [],
-      "embeds": 0,
+      "embeds": 1,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
     },
     {
-      "message_id": "1366427220641321171",
+      "message_id": "1379916374561788101",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Welcome to Buddy group 6 Here in a smaller group and in closer time zones we can interact more easily. Feel free to post, ask questions, interact. Our group has the right to ask a question about AI to Professor Dr. Abel Sanches, at the conference on Friday. Laura and I are here to help and learn from you. Since the individual presentations were lost in the general chat, I will repeat mine below. Once again, welcome and participate. Hugs, Eduardo",
-      "timestamp": "2025-04-28T14:53:56.391000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366427220641321171",
+      "content": "@everyone",
+      "timestamp": "2025-06-04T20:15:01.302000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379916374561788101",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379863903554502777",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone \nMidweek discussion \nHeadline: Real-world gen AI use cases from the world's leading organizations\nSource / Date: Google Cloud, April 9, 2025\nLink: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders\nSummary: This compilation showcases over 600 real-world generative AI applications across various industries, illustrating how organizations are leveraging AI for innovation and efficiency. The use cases span sectors like healthcare, finance, and retail, demonstrating AI's transformative potential.\nDiscussion Prompt: Which generative AI application do you find most impactful, and how could it be adapted to your industry?",
+      "timestamp": "2025-06-04T16:46:31.239000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379863903554502777",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379549176873877595",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone \nTech Tip Tuesday \nHeadline: Top 8 Python Libraries for Generative AI\nSource / Date: Data Science Dojo, April 2025\nLink: https://datasciencedojo.com/blog/python-libraries-for-generative-ai/\nTip Summary: This article explores eight essential Python libraries for generative AI, including TensorFlow, PyTorch, and Hugging Face Transformers. It discusses each library's features and how they can be leveraged to build and deploy generative AI models effectively.\nAction Step: Implement a simple generative model using one of the highlighted libraries.",
+      "timestamp": "2025-06-03T19:55:54.551000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379549176873877595",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379529945331535913",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning Everyone !\nTech Tip Tuesday ! 🪴☘️🌱🏵️\n\n**Headline:** \"I use ChatGPT to keep my houseplants happy — try these 5 game-changing prompts\"\n**Source / Date:** Tom's Guide, May 31, 2025\n**Link:** https://www.tomsguide.com/ai/i-use-chatgpt-to-keep-my-houseplants-happy-try-these-5-game-changing-prompts\n**Tip Summary:** This article demonstrates how ChatGPT can assist in plant care by providing tailored advice based on specific plant conditions. The author shares five effective prompts to diagnose plant issues, create customized care schedules, recommend optimal lighting setups, set up seasonal watering reminders, and identify unknown plants. By leveraging AI, plant enthusiasts can enhance their plant care routines, leading to healthier and happier houseplants.\n**Action Step:** Ask ChatGPT: \"My \\[plant name] has \\[describe symptoms]. It gets \\[describe light], and I water it \\[how often]. What could be the problem?\"",
+      "timestamp": "2025-06-03T18:39:29.394000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379529945331535913",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379307613119975515",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I imagined many uses for meta lenses, but this use never crossed my mind… very good for meta.",
+      "timestamp": "2025-06-03T03:56:01.264000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379307613119975515",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1379167764970999859",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1379167764970999859",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone \nMotivational Monday \nHeadline: How We're Advancing Accessibility at Meta\nSource / Date: Meta Newsroom, May 20, 2025\nLink: https://about.fb.com/news/2025/05/advancing-accessibility-meta/\nQuick Summary: Meta has introduced new AI-driven accessibility features, including customizable responses on Ray-Ban Meta glasses and a \"Call a Volunteer\" service connecting visually impaired users with sighted assistance. These tools aim to empower individuals with disabilities, enhancing their independence and interaction with technology.\nTakeaway: Inclusive tech empowers all—AI opens doors for everyone",
+      "timestamp": "2025-06-02T18:40:18.867000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379167764970999859",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1378080801110888489",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Moorning Guys ! \nRemember  2morrows Keynote ! do not miss it !\n\nhttps://www.linkedin.com/posts/gen-ai-global_genaiglobal-ai-innovation-activity-7332800237431832577-YLEu?utm_source=share&utm_medium=member_desktop&rcm=ACoAACS9ntIBUEGHMlt3-LjYyNIcYgzF_JjxEOg",
+      "timestamp": "2025-05-30T18:41:06.488000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1378080801110888489",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377750428229308508",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Alexandro",
+      "timestamp": "2025-05-29T20:48:19.455000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377750428229308508",
       "author": {
         "id": "1087795330067742760",
         "username": "eduardofadanelli",
@@ -57,14 +238,407 @@
       "reference": null
     },
     {
-      "message_id": "1366428256391270444",
+      "message_id": "1377741859882930369",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hello everyone, so excited to be\n here! \nFull name:Eduardo Fadanelli \nBackground:Board Member/ Strategic Planning / M&A / \nNew Business / Innovation\nRole: Board Member\nLocation: São Paulo Brazil 🇧🇷 \nLinkedln:\nhttps://www.linkedin.com/in/eduardo-fadanelli-332862\nWe ended up joining the Latam group at GEN AI MIT  Greetings Eduardo",
-      "timestamp": "2025-04-28T14:58:03.333000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366428256391270444",
+      "content": "Hi everyone , here is a proposal for the Q&A\nWhat’s the current state of AI agents in terms of reliability and safety?\nI’m curious to understand whether agents are already trustworthy enough to be deployed for specific tasks (like assistance, automation, or analysis), or if there are still major limitations to keep in mind.\nAlso, to what extent can an agent handle different types of functions or adapt to new contexts without losing accuracy? How flexible are they really when it comes to performing a variety of tasks?",
+      "timestamp": "2025-05-29T20:14:16.602000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377741859882930369",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377674906098995242",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sure we can schedule some time for next week, let me know what time works better for you",
+      "timestamp": "2025-05-29T15:48:13.576000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377674906098995242",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377620968192737280",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377673801843740742",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Interesting article… Here are my the top 3 highlights:\n    1.    Human-AI Collaboration: Success with generative AI depends on human collaboration. Rather than replacing jobs, AI offers opportunities to reskill and redeploy workers, enhancing efficiency and fostering trust among stakeholders. \n    2.    Digital Infrastructure Modernization: Organizations should proactively modernize their digital infrastructure to manage digital sprawl. Generative AI can optimize code and identify technical debt, leading to long-term value creation. \n    3.    Industry-Specific Applications: Tailoring generative AI to specific industries can drive significant advancements. Examples include reducing clinician burnout in healthcare and resolving supply chain disruptions in manufacturing.",
+      "timestamp": "2025-05-29T15:43:50.301000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377673801843740742",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1376963627252191402",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377620968192737280",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Yeah I’d love to hear more about it. I’m traveling today through Wed so maybe we can set something the back end of next week?",
+      "timestamp": "2025-05-29T12:13:53.777000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377620968192737280",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377426793501294602",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360003496384008262>  I created the Inner Circle inside a regular chat. It all started with the idea of building a kind of journal-meets-diary, where I could write or speak about whatever I’m thinking — and then the Inner Circle would respond.\n\nIt’s made up of different AI experts, each focused on a topic that interests me, and they each give their own perspective or feedback based on what I share.\n\nNow, after several weeks of using it, I’m considering moving it to Custom GPT, which is supposed to offer more flexibility. But honestly, the regular chat has worked really well so far — especially because I set it up to remember previous conversations, so the Inner Circle has context and can give more informed responses.\n\nIf you’re interested, we could totally set up a call sometime to talk about it in more depth — I’d love to share and hear your thoughts too!",
+      "timestamp": "2025-05-28T23:22:18.923000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377426793501294602",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377411808981156050",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "How are you building the Inner Circle? Through Custom GPTs or something else?",
+      "timestamp": "2025-05-28T22:22:46.335000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411808981156050",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377411602894028991",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sounds like I need to give vibe dialoguing a try! Love that term!",
+      "timestamp": "2025-05-28T22:21:57.200000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411602894028991",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377411322974830686",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Oh wow <@992174053882331240> , I've been building advisors through Custom GPTs but more on the Buddhism, mindfulness and investing side! I've got a faux Warren Buffett, etc. And I just read the Dao De Jing a few months back. I think I've been pretty attached to my vision so when Chat GPT gives me things that aren't quite what I want I go into \"editing\" mode rather than trying to take it in at the higher level and letting what it created inspire new directions or help me ask better questions about why I was trying to do something in the first place... Definitely great food for thought",
+      "timestamp": "2025-05-28T22:20:50.462000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411322974830686",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "992174053882331240",
+          "username": "alexandrobermeo",
+          "display_name": "AlexandroBermeo"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377399952246046830",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377399952246046830",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey <@1360003496384008262> , totally agree — that part really stuck with me too. What resonated most was how Rick treats not knowing as a strength, not a weakness. That really mirrors the process I’ve been exploring with my Inner Circle project — where I use AI advisors built around Taoism, Jungian archetypes, and introspective frameworks.\nIt also reminded me of how I approach MidJourney prompts. I’ve been experimenting with something I call “dirty prompting” — where I intentionally leave space in the prompt for the AI to surprise me. I don’t try to control every variable. Instead, I let the model improvise, and often what comes back is more poetic, strange, or alive. It’s the same vibe Rick was talking about: co-creating with uncertainty, letting go of the illusion of full authorship.\nVibe coding, for me, feels more like vibe dialoguing — co-writing with the unknown. And I love that he brought the Dao De Jing into the mix… made me feel less alone in trying to merge code with consciousness",
+      "timestamp": "2025-05-28T21:35:39.469000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377399952246046830",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377396477621571695",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I listened to this just yesterday, so good! Loved when he talked about how vibe coding is like making art because when you create you know that you don't know what you're doing. Plus the part of about, when the LLM gives you back not what you asked for but a variation, being open to riff from there rather than staying married to your vision of it. <@992174053882331240> What did you get out of it?",
+      "timestamp": "2025-05-28T21:21:51.054000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377396477621571695",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "992174053882331240",
+          "username": "alexandrobermeo",
+          "display_name": "AlexandroBermeo"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1377367020768723045",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1377394805239189585",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-28T21:15:12.327000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377394805239189585",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377379697289068675",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-28T20:15:10.311000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377379697289068675",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377367020768723045",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hy @everyone , just wanted to share this interview, I found intersting, Headline: Rick Rubin on Art, Life, and Vibe Coding\n Source / Date: AI Daily Brief – YouTube Interview, May 2025\n🔗 Link: https://www.youtube.com/watch?v=6BDsFUvPqI0\n\n- Who is Rick Rubin?\nRick Rubin is one of the most influential music producers of the last 40 years — known for his minimalist, intuition-led style. He’s worked across nearly every genre with artists like Johnny Cash, Beastie Boys, System of a Down, Red Hot Chili Peppers, Jay-Z, and Adele. Rubin is a creative philosopher at heart, more monk than manager — a producer who doesn't play instruments, but knows how to listen like few others.\n\n- Quick Summary:\nIn this rich conversation, Rubin reflects on how a meme turned him into the accidental mascot of vibe coding — a term now linked to his new project The Way of Code, co-created with Anthropic's Claude AI. The work merges generative code, poetic meditation, and the timeless wisdom of the Dao De Jing.\n\n- He explores:\n\nHow AI can't replicate the artist's evolving point of view\n\nWhy letting go is key to authentic creativity\n\nThe role of mistakes and emergence in making something meaningful\n\nHow AI can become a creative partner, not a machine of control\n\n-Takeaway:\nCreativity isn’t about mastery — it’s about attunement to the unknown. You don’t control it. You collaborate with it.\n\n-Why this resonated with me:\nI’d already been developing a personal project called The Inner Circle — a group of AI advisors shaped by Taoism, Jungian psychology, and Musashi’s Dokkōdō.\nBut it was Andrea Hickethier’s PEACH system that lit the fuse — her framework helped me translate introspection into interface, and sketch a system where AI becomes a council of reflection.\n\nListening to Rick Rubin wasn’t what sparked the idea — it simply felt like I was hearing someone describe, in his language, what I had already begun to build.\n\n✨ Sometimes, resonance isn’t inspiration. It’s recognition.",
+      "timestamp": "2025-05-28T19:24:47.993000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377367020768723045",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377318733500121259",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone \nMidweek discussion item\nShowcase / Use-Case Roundtable\n\nHeadline: Google Just Dropped Their Most Insane AI Products Yet at I/O 2025\nSource / Date: Marketing AI Institute, May 28, 2025\nLink: https://www.marketingaiinstitute.com/blog/google-io\nSummary: At Google I/O 2025, the company introduced a range of advanced AI capabilities, including the Gemini 2.5 Pro model, creative tools like Veo 3 and Imagen 4, and the AI-powered filmmaking tool Flow. These innovations demonstrate Google's commitment to integrating AI into various creative and productivity applications.\nDiscussion Prompt: In what ways can these new AI tools from Google transform creative industries and content creation workflows?\nmarketingaiinstitute.com",
+      "timestamp": "2025-05-28T16:12:55.411000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377318733500121259",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376963627252191402",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \nTech Tip Tuesday \nHeadline: \"5 Ways to Make the Most of Generative AI\"\nSource / Date: Deloitte via The Wall Street Journal, May 10, 2025\nLink: https://deloitte.wsj.com/cio/5-ways-to-make-the-most-of-generative-ai-0f4f45aa\nTip Summary: Generative AI is transforming organizational strategies and priorities. Key recommendations include nurturing human-AI collaboration, modernizing digital infrastructure, ensuring data security, leveraging AI for industry-specific use cases, and adopting next-generation managed services.\nAction Step: Identify one area in your organization where AI can enhance efficiency and plan its implementation.",
+      "timestamp": "2025-05-27T16:41:51.484000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1376963627252191402",
       "author": {
         "id": "1087795330067742760",
         "username": "eduardofadanelli",
@@ -75,7 +649,7 @@
       "mentions": [],
       "reactions": [
         {
-          "emoji": "👋",
+          "emoji": "👍",
           "count": 1
         }
       ],
@@ -86,14 +660,1267 @@
       "reference": null
     },
     {
-      "message_id": "1366466733275349034",
+      "message_id": "1376581302521692181",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hey all! Excited to get to know you better. Here's my info:\nFull Name: Laura Neder\nBackground: health tech CEO\nRole: currently on sabbatical\nLocation: Houston, TX\nLinkedIn: https://www.linkedin.com/in/lauraneder/\nHobbies: learning, functional medicine, mindfulness",
-      "timestamp": "2025-04-28T17:30:56.937000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366466733275349034",
+      "content": "Hi @everyone \nMy Motivational Monday \nHeadline: Microsoft’s AI Model “Aurora” Revolutionizes Weather Forecasting\nSource / Date: The Washington Post, May 21, 2025\nLink: https://www.washingtonpost.com/weather/2025/05/21/microsoft-ai-weather-model-study/\nQuick Summary: Microsoft introduced \"Aurora,\" an AI-driven weather model that delivers faster and more accurate forecasts than traditional methods. It excels in predicting hurricane paths and provides detailed forecasts, enhancing disaster preparedness and response.\nTakeaway: AI accelerates our ability to foresee and respond to natural challenges.",
+      "timestamp": "2025-05-26T15:22:38.165000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1376581302521692181",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375492538831470662",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://www.linkedin.com/events/insidegenaiglobal-liveq-awithfo7331033014556123136/theater/",
+      "timestamp": "2025-05-23T15:16:16.673000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1375492538831470662",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375089281168703538",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I don’t have a question in my other buddy group so I’ll submit yours for that group <@1364811456914259978>",
+      "timestamp": "2025-05-22T12:33:52.554000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1375089281168703538",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1364811456914259978",
+          "username": "miguelangelcalzada16",
+          "display_name": "Miguel Angel Calzada"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374939552208257044",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Miguel\nLet's keep a rotation, just like last week the question was yours, this week it will be with Alexandre",
+      "timestamp": "2025-05-22T02:38:54.388000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374939552208257044",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374937237107511427",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi, my proposed question would be: How is the community going to evolve, and how can we digest so much information shared by different groups?",
+      "timestamp": "2025-05-22T02:29:42.425000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374937237107511427",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374854313234665594",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-21T21:00:11.833000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374854313234665594",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374846274347466772",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Alexandro",
+      "timestamp": "2025-05-21T20:28:15.213000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374846274347466772",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374842813187100673",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone , here’s my proposal for the question: What has been the most challenging part of building this community?\nCould you give us a brief explanation of how that challenge was addressed and resolved?",
+      "timestamp": "2025-05-21T20:14:30.008000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374842813187100673",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374839195763478721",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-21T20:00:07.547000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374839195763478721",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374814680123572294",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "let us not miss this opportunity to learn more about our incredible community!",
+      "timestamp": "2025-05-21T18:22:42.563000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374814680123572294",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1143203059820933251",
+          "username": "boozeena_49785",
+          "display_name": "Amber Bellou"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1374716310713532587",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374786925373816882",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My Midweek dicussion item\nI think I should put it in the Ai philosophy - ethics group\nHeadline: Ethics in AI's Wild West: Navigating Regulation, Bias, and Responsibility in 2025\nSource / Date: GOTO Conferences, May 2025\nLink: https://gotopia.tech/articles/376/ethics-in-ai-wild-west-navigating-regulation-biases-responsibility-2025\nSummary: This article delves into the challenges of AI ethics, emphasizing the need for transparency and responsibility as regulations evolve. It highlights the importance of balancing innovation with ethical considerations to ensure AI serves society positively.\nDiscussion Prompt: How can organizations proactively address ethical concerns in AI development amidst rapidly changing regulations?",
+      "timestamp": "2025-05-21T16:32:25.315000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374786925373816882",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374716310713532587",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-21T11:51:49.468000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374716310713532587",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": {
+        "message_id": "1374583287254880256",
+        "channel_id": "1353085578274410626",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1374458272228049006",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Tech Tip Tuesday \n\nHeadline: \"Winning the AI Long Game\"\nSource / Date: Business Insider, May 14, 2025\nLink: https://www.businessinsider.com/sc/how-to-win-the-ai-long-game\nTip Summary: The article emphasizes the importance of aligning AI initiatives with clear business strategies and integrating them into core workflows. It highlights the role of augmented intelligence in enhancing human decision-making and creativity for sustainable competitive advantage.\nAction Step: Identify one business process where AI can augment decision-making and plan its integration.",
+      "timestamp": "2025-05-20T18:46:28.299000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374458272228049006",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374049728840601610",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \nMotivational Monday \nHeadline: Symbiosis Launches New AI Institute to Democratize Artificial Intelligence Education\nSource / Date: The Economic Times, May 16, 2025\nLink: https://economictimes.indiatimes.com/industry/services/education/symbiosis-launches-new-ai-institute-to-democratize-artificial-intelligence-education/articleshow/121203860.cms\nQuick Summary: Symbiosis International University in India establishes an AI institute offering interdisciplinary programs to make AI education accessible beyond traditional tech fields. This initiative aims to cultivate responsible and inclusive AI development by integrating diverse academic disciplines.\nTakeaway: Broadening AI education paves the way for inclusive and ethical technological advancement.",
+      "timestamp": "2025-05-19T15:43:03.965000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374049728840601610",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374049400938041575",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "No inative in our group. \nWe need more members for our group,  we have only 4 people",
+      "timestamp": "2025-05-19T15:41:45.787000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374049400938041575",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373029380296671372",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey Admins!\nCould you please check who’s been inactive in this buddy group over the past two weeks and share the list in <#1372943237890707576>?\n\nThis isn’t about removing anyone it’s about ensuring everyone’s in a space where they can contribute and grow meaningfully.",
+      "timestamp": "2025-05-16T20:08:33.915000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1373029380296671372",
+      "author": {
+        "id": "1311434218622156850",
+        "username": "nikhil_kassetty",
+        "discriminator": "0",
+        "display_name": "Nikhil Kassetty",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372657363986813071",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-15T19:30:18.315000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372657363986813071",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372580978975047844",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi Miguel\nThank you for your question. I will present it representing our group.",
+      "timestamp": "2025-05-15T14:26:46.709000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372580978975047844",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372426355077025792",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello everyone… This is my proposal for Q&A… \n\nHow complex is it to integrate LLM models with existing enterprise systems such as CRMs, ERPs, or automation platforms, and what tools are available to ensure the traceability, explainability, and auditability of those models?",
+      "timestamp": "2025-05-15T04:12:21.499000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372426355077025792",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372295031276175451",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-14T19:30:31.465000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372295031276175451",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372279850680844299",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-14T18:30:12.129000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372279850680844299",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1372196653771132959",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone \nMy Midweek discussion \nHeadline: AI Regulations around the World - 2025\nSource / Date: mindfoundry.ai, N/A (The article mentions \"2025\" in the title and refers to the EU AI Act implementation starting in early 2025, suggesting recent relevance within the last 14 days).\nLink: https://www.mindfoundry.ai/blog/ai-regulations-around-the-world\nSummary: This article provides an overview of AI regulations globally, noting the EU AI Act became law in August 2024 with staggered implementation from early 2025 [2]. Understanding the evolving legal landscape is crucial for responsible AI innovation and deployment.\nDiscussion Prompt: How will differing global AI regulations impact the development and adoption of generative AI technologies across borders?",
+      "timestamp": "2025-05-14T12:59:36.440000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372196653771132959",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371841176822349884",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\nGroup, can you think of any new questions for Dr. Abel on Friday?\n\nMy Tech Tip Tuesday \n\nHeadline: \"Cognify: Supercharging Gen-AI Workflows With Hierarchical Autotuning\"\nSource / Date: arXiv, February 12, 2025\nLink: https://arxiv.org/abs/2502.08056\nTip Summary: The authors present Cognify, a framework that employs adaptive hierarchical search algorithms to automatically tune generative AI workflows. By optimizing structure, operators, and prompts, Cognify enhances generation quality, reduces execution costs, and decreases latency. This approach streamlines the development of complex AI applications by automating the tuning process.\nAction Step: Implement Cognify's hierarchical autotuning in your AI workflow to optimize performance and efficiency.\narXiv",
+      "timestamp": "2025-05-13T13:27:04.131000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371841176822349884",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1371693592673783881",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "How many use cases have emerged around AI, I am very happy that it is being used in things that help make the world a better place.",
+      "timestamp": "2025-05-13T03:40:37.328000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371693592673783881",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1371583816937902211",
+        "channel_id": "1366389772251037737",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1371583816937902211",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone\nMy Motivational Monday:\nHeadline: AI Strengthens Resilience to Climate Impacts Through Improved Drought Forecasting\nSource / Date: World Economic Forum, January 2025\nLink: https://www.weforum.org/stories/2025/01/artificial-intelligence-climate-transition-drive-growth/\nQuick Summary: Artificial intelligence is being used to create more accurate long-term drought forecasting, allowing for better adaptation strategies. This demonstrates AI's power to build resilience against severe climate events, offering a pathway for innovators to develop solutions for a sustainable future.\nTakeaway: AI empowers us to tackle global challenges. Innovate for a better tomorrow!",
+      "timestamp": "2025-05-12T20:24:24.753000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371583816937902211",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370435262659821669",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone thanks <@992174053882331240> for coming up with our question which was chosen for the Q&A today. I saw some of us in there but here's the recording of their answer to that question in case you missed it 👍",
+      "timestamp": "2025-05-09T16:20:28.074000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1370435262659821669",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "992174053882331240",
+          "username": "alexandrobermeo",
+          "display_name": "AlexandroBermeo"
+        }
+      ],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1370435262680797274",
+          "filename": "MIT_QA_reply_May_9_2025.m4a",
+          "url": "https://cdn.discordapp.com/attachments/1366389772251037737/1370435262680797274/MIT_QA_reply_May_9_2025.m4a?ex=6841c3cc&is=6840724c&hm=77a1e6d14944d04aca025a32729c053440be30a49e143f118ce20f37e3cb3484&",
+          "size": 2608841,
+          "content_type": "audio/mp4"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1370067787283828736",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone",
+      "timestamp": "2025-05-08T16:00:15.117000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1370067787283828736",
+      "author": {
+        "id": "616754792965865495",
+        "username": "sesh",
+        "discriminator": "1244",
+        "display_name": "sesh",
+        "bot": true
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369800806756515871",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Thanks Oscar for the clarification…",
+      "timestamp": "2025-05-07T22:19:21.999000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369800806756515871",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369795570134421597",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "<@1360003496384008262> it was just for new members going over the weekly engagement structure and discord manager / conversational leader program",
+      "timestamp": "2025-05-07T21:58:33.491000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369795570134421597",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1360003496384008262",
+          "username": "laura.neder",
+          "display_name": "Laura Neder"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369791226634698892",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "First time I heard of it too. I tried to join it late but think it was already over. <@992174053882331240> do you know if it was recorded so we can watch it later?",
+      "timestamp": "2025-05-07T21:41:17.920000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369791226634698892",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "992174053882331240",
+          "username": "alexandrobermeo",
+          "display_name": "AlexandroBermeo"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369782055323435038",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "It was a meeting hosted by Oscar , to explain the different opportunities you have as a general member as the community grows",
+      "timestamp": "2025-05-07T21:04:51.309000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369782055323435038",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369781574953992305",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Team, does anyone know what this is? First time I heard of it",
+      "timestamp": "2025-05-07T21:02:56.780000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369781574953992305",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1369781574970642492",
+          "filename": "IMG_5834.png",
+          "url": "https://cdn.discordapp.com/attachments/1366389772251037737/1369781574970642492/IMG_5834.png?ex=68420600&is=6840b480&hm=8fbde3d1fe9987e9a7fba85ef026717181e89b16491de7174b9fb05d2be20c2a&",
+          "size": 677025,
+          "content_type": "image/jpeg"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369779428220993576",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I do agree…",
+      "timestamp": "2025-05-07T20:54:24.959000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369779428220993576",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369765812184809562",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "OK, submitted!",
+      "timestamp": "2025-05-07T20:00:18.643000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369765812184809562",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369754763037773897",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Laura, please use Alexandro's question.",
+      "timestamp": "2025-05-07T19:16:24.321000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369754763037773897",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369693938297868319",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Anything else on your mind we should consider?",
+      "timestamp": "2025-05-07T15:14:42.573000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369693938297868319",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369693822568628246",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hey all, just wanted to open up the conversation for what questions we might want to ask in this week's Q&A session. We already have <@992174053882331240>'s question from last week \"What factors should we consider when integrating an AI agent that not only performs automated tasks, but also learns from my workflow, adapts over time, and is capable of collaborating with other tools or people within a broader creative or technical system?\"",
+      "timestamp": "2025-05-07T15:14:14.981000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369693822568628246",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "992174053882331240",
+          "username": "alexandrobermeo",
+          "display_name": "AlexandroBermeo"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1369371228825059449",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi @everyone \nMy Tech Tip Tuesday \n\nHeadline: \"Intimidated by AI? Here's How to Get Started\"\nSource / Date: The Wall Street Journal, April 28, 2025\nLink: https://www.wsj.com/tech/ai/using-ai-tips-prompts-chatbots-61d0964c\nTip Summary: This beginner's guide demystifies generative AI tools like ChatGPT, offering practical advice on crafting effective prompts. It emphasizes specificity, context provision, formatting requests, and iterative follow-ups to enhance AI interactions. The article also introduces various chatbot options and their unique features.\nAction Step: Craft a specific prompt with clear context and formatting instructions; observe the AI's response.",
+      "timestamp": "2025-05-06T17:52:22.639000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369371228825059449",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368962215159529634",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Headline: Utilizing Generative AI and LLMs to Automate Detection Writing\nSource / Date: Medium, April 29, 2025\nLink: https://medium.com/@dylanhwilliams/utilizing-generative-ai-and-llms-to-automate-detection-writing-5e4ea074072e\nTip Summary: The author shares a practical approach to using LLMs to automate the writing of security detection reports, focusing on simplifying repetitive tasks. He demonstrates how to structure prompts and integrate APIs to generate relevant, contextualized technical content.\nAction Step: Create a prompt to automate the writing of a 3-paragraph technical summary.",
+      "timestamp": "2025-05-05T14:47:06.182000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368962215159529634",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368961071783743701",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I will also publish my Monday Motivational Time here. I would like to remind you that we have a chance to ask Dr. Alex Sanches directly any questions about AI. Let's take advantage of it, send your questions here and we will put them in the live section next Friday.",
+      "timestamp": "2025-05-05T14:42:33.580000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368961071783743701",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368960618861826118",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone We are restarting our buddy group (ours is number 6) we are few people so far and Laura and I are here to help",
+      "timestamp": "2025-05-05T14:40:45.595000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368960618861826118",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368960607218307123",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello @everyone",
+      "timestamp": "2025-05-05T14:40:42.819000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368960607218307123",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367865936752935074",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone\nReminder: We’re having our Q&A session on Zoom with Dr. Sanchez today at 11:30 AM EST!\n\nZoom Link: https://mit.zoom.us/j/97336834725\n\nLooking forward to seeing you all there! Don’t miss it\n🧠✨",
+      "timestamp": "2025-05-02T14:10:53.042000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367865936752935074",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367589013367685242",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Sorry guys, I just saw the proposed question but I see that voting is over for this week.",
+      "timestamp": "2025-05-01T19:50:29.362000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367589013367685242",
+      "author": {
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
+        "discriminator": "0",
+        "display_name": "Miguel Angel Calzada",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367582044632387745",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I have a proposal - What factors should we consider when integrating an AI agent that not only performs automated tasks, but also learns from my workflow, adapts over time, and is capable of collaborating with other tools or people within a broader creative or technical system?",
+      "timestamp": "2025-05-01T19:22:47.886000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367582044632387745",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1367580299814506496",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi guys , do you have a question you would like to submit for tomorrows Q&A?",
+      "timestamp": "2025-05-01T19:15:51.889000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367580299814506496",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366796998400938105",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hi everyone,\nMy name is Alexandro Bermeo Maldonado. I’m an industrial designer with over 15 years of experience, specializing in urban design, temporary architecture, exhibition design, and cultural and educational projects. Throughout my career, I’ve worked at the intersection of physical space and digital tools, exploring how AI, parametric design, and digital fabrication can enhance both creative and technical processes.\n\nI currently work as an industrial designer for FI (Fabric images), personally, I'm interested in developing visual and narrative experimentation labs applied to spatial design, including immersive and exhibition-based projects. I’m based in Mexico City,  though I regularly collaborate remotely with teams and creators\n\nYou can check out more about my work here:\n🔗 https://www.linkedin.com/in/alexandrobermeo\n\nOutside of work, I’m passionate about self-directed learning, ping pong, football, and pretty much anything that blends technology, art, and play.",
+      "timestamp": "2025-04-29T15:23:18.279000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366796998400938105",
+      "author": {
+        "id": "992174053882331240",
+        "username": "alexandrobermeo",
+        "discriminator": "0",
+        "display_name": "AlexandroBermeo",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366794251177820210",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "¡Qué gusto conocerlos a todos! Estoy emocionada por trabajar juntos en esto. Si les resulta más fácil, podemos hablar en español. Estudié español en la escuela y solía hablarlo con fluidez, aunque ha pasado un tiempo, así que ¡me encantaría volver a practicar!",
+      "timestamp": "2025-04-29T15:12:23.290000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366794251177820210",
       "author": {
         "id": "1360003496384008262",
         "username": "laura.neder",
@@ -104,12 +1931,8 @@
       "mentions": [],
       "reactions": [
         {
-          "emoji": "💯",
-          "count": 1
-        },
-        {
-          "emoji": "👋",
-          "count": 1
+          "emoji": "👍",
+          "count": 2
         }
       ],
       "attachments": [],
@@ -119,19 +1942,48 @@
       "reference": null
     },
     {
-      "message_id": "1366474992090349699",
+      "message_id": "1366639303488311307",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hello everyone,",
-      "timestamp": "2025-04-28T18:03:45.992000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366474992090349699",
+      "content": "📌 Full Name: Hugo Villalva Tapias\n\n📚 Background: Bachelor's Degree in Chemical Engineering, Advanced Management Program IPADE Business School,  Seasoned executive with a General Management background rooted in Sales, complemented by strategic leadership in Planning, Quality, and Information Technology. Career highlights include Plant Engineering at P&G, Sales Management at DuPont Paints, and General Management at Delphy Pumps and Equipment. 💼 Role: Evolving into a leadership role in Digital Technologies, leveraging previous executive experience to lead strategic digital initiatives.\n\n📍 Location: México City, México\n\n🔗 LinkedIn: www.linkedin.com/in/hugo-villalva-b1202531\n\n🎨 Hobbies: physics (relativity and quantum mechanics) and ornamental aquariums.",
+      "timestamp": "2025-04-29T04:56:40.882000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366639303488311307",
       "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
+        "id": "1364816840550912142",
+        "username": "hugovillalva",
         "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
+        "display_name": "Hugo Villalva",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👋",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366638816798048380",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello,\n\nI am happy to be part of these community. I hope we can meet soon. \n\n\n\n\nhttps://discord.com/channels/1353058864810950737/1353442520717066320/1364845700545908807",
+      "timestamp": "2025-04-29T04:54:44.846000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366638816798048380",
+      "author": {
+        "id": "1364816840550912142",
+        "username": "hugovillalva",
+        "discriminator": "0",
+        "display_name": "Hugo Villalva",
         "bot": false
       },
       "mentions": [],
@@ -181,19 +2033,19 @@
       }
     },
     {
-      "message_id": "1366638816798048380",
+      "message_id": "1366474992090349699",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hello,\n\nI am happy to be part of these community. I hope we can meet soon. \n\n\n\n\nhttps://discord.com/channels/1353058864810950737/1353442520717066320/1364845700545908807",
-      "timestamp": "2025-04-29T04:54:44.846000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366638816798048380",
+      "content": "Hello everyone,",
+      "timestamp": "2025-04-28T18:03:45.992000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366474992090349699",
       "author": {
-        "id": "1364816840550912142",
-        "username": "hugovillalva",
+        "id": "1364811456914259978",
+        "username": "miguelangelcalzada16",
         "discriminator": "0",
-        "display_name": "Hugo Villalva",
+        "display_name": "Miguel Angel Calzada",
         "bot": false
       },
       "mentions": [],
@@ -210,304 +2062,58 @@
       "reference": null
     },
     {
-      "message_id": "1366639303488311307",
+      "message_id": "1366466733275349034",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "📌 Full Name: Hugo Villalva Tapias\n\n📚 Background: Bachelor's Degree in Chemical Engineering, Advanced Management Program IPADE Business School,  Seasoned executive with a General Management background rooted in Sales, complemented by strategic leadership in Planning, Quality, and Information Technology. Career highlights include Plant Engineering at P&G, Sales Management at DuPont Paints, and General Management at Delphy Pumps and Equipment. 💼 Role: Evolving into a leadership role in Digital Technologies, leveraging previous executive experience to lead strategic digital initiatives.\n\n📍 Location: México City, México\n\n🔗 LinkedIn: www.linkedin.com/in/hugo-villalva-b1202531\n\n🎨 Hobbies: physics (relativity and quantum mechanics) and ornamental aquariums.",
-      "timestamp": "2025-04-29T04:56:40.882000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366639303488311307",
+      "content": "Hey all! Excited to get to know you better. Here's my info:\nFull Name: Laura Neder\nBackground: health tech CEO\nRole: currently on sabbatical\nLocation: Houston, TX\nLinkedIn: https://www.linkedin.com/in/lauraneder/\nHobbies: learning, functional medicine, mindfulness",
+      "timestamp": "2025-04-28T17:30:56.937000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366466733275349034",
       "author": {
-        "id": "1364816840550912142",
-        "username": "hugovillalva",
+        "id": "1360003496384008262",
+        "username": "laura.neder",
         "discriminator": "0",
-        "display_name": "Hugo Villalva",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "💯",
+          "count": 1
+        },
+        {
+          "emoji": "👋",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1366428256391270444",
+      "channel_id": "1366389772251037737",
+      "channel_name": "💠buddy-group6",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Hello everyone, so excited to be\n here! \nFull name:Eduardo Fadanelli \nBackground:Board Member/ Strategic Planning / M&A / \nNew Business / Innovation\nRole: Board Member\nLocation: São Paulo Brazil 🇧🇷 \nLinkedln:\nhttps://www.linkedin.com/in/eduardo-fadanelli-332862\nWe ended up joining the Latam group at GEN AI MIT  Greetings Eduardo",
+      "timestamp": "2025-04-28T14:58:03.333000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366428256391270444",
+      "author": {
+        "id": "1087795330067742760",
+        "username": "eduardofadanelli",
+        "discriminator": "0",
+        "display_name": "Eduardo Fadanelli",
         "bot": false
       },
       "mentions": [],
       "reactions": [
         {
           "emoji": "👋",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366794251177820210",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "¡Qué gusto conocerlos a todos! Estoy emocionada por trabajar juntos en esto. Si les resulta más fácil, podemos hablar en español. Estudié español en la escuela y solía hablarlo con fluidez, aunque ha pasado un tiempo, así que ¡me encantaría volver a practicar!",
-      "timestamp": "2025-04-29T15:12:23.290000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366794251177820210",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1366796998400938105",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi everyone,\nMy name is Alexandro Bermeo Maldonado. I’m an industrial designer with over 15 years of experience, specializing in urban design, temporary architecture, exhibition design, and cultural and educational projects. Throughout my career, I’ve worked at the intersection of physical space and digital tools, exploring how AI, parametric design, and digital fabrication can enhance both creative and technical processes.\n\nI currently work as an industrial designer for FI (Fabric images), personally, I'm interested in developing visual and narrative experimentation labs applied to spatial design, including immersive and exhibition-based projects. I’m based in Mexico City,  though I regularly collaborate remotely with teams and creators\n\nYou can check out more about my work here:\n🔗 https://www.linkedin.com/in/alexandrobermeo\n\nOutside of work, I’m passionate about self-directed learning, ping pong, football, and pretty much anything that blends technology, art, and play.",
-      "timestamp": "2025-04-29T15:23:18.279000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366796998400938105",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367580299814506496",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi guys , do you have a question you would like to submit for tomorrows Q&A?",
-      "timestamp": "2025-05-01T19:15:51.889000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367580299814506496",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367582044632387745",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I have a proposal - What factors should we consider when integrating an AI agent that not only performs automated tasks, but also learns from my workflow, adapts over time, and is capable of collaborating with other tools or people within a broader creative or technical system?",
-      "timestamp": "2025-05-01T19:22:47.886000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367582044632387745",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367589013367685242",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sorry guys, I just saw the proposed question but I see that voting is over for this week.",
-      "timestamp": "2025-05-01T19:50:29.362000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367589013367685242",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1367865936752935074",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone\nReminder: We’re having our Q&A session on Zoom with Dr. Sanchez today at 11:30 AM EST!\n\nZoom Link: https://mit.zoom.us/j/97336834725\n\nLooking forward to seeing you all there! Don’t miss it\n🧠✨",
-      "timestamp": "2025-05-02T14:10:53.042000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1367865936752935074",
-      "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
-        "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368960607218307123",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone",
-      "timestamp": "2025-05-05T14:40:42.819000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368960607218307123",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368960618861826118",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone We are restarting our buddy group (ours is number 6) we are few people so far and Laura and I are here to help",
-      "timestamp": "2025-05-05T14:40:45.595000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368960618861826118",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368961071783743701",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I will also publish my Monday Motivational Time here. I would like to remind you that we have a chance to ask Dr. Alex Sanches directly any questions about AI. Let's take advantage of it, send your questions here and we will put them in the live section next Friday.",
-      "timestamp": "2025-05-05T14:42:33.580000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368961071783743701",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368962215159529634",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Headline: Utilizing Generative AI and LLMs to Automate Detection Writing\nSource / Date: Medium, April 29, 2025\nLink: https://medium.com/@dylanhwilliams/utilizing-generative-ai-and-llms-to-automate-detection-writing-5e4ea074072e\nTip Summary: The author shares a practical approach to using LLMs to automate the writing of security detection reports, focusing on simplifying repetitive tasks. He demonstrates how to structure prompts and integrate APIs to generate relevant, contextualized technical content.\nAction Step: Create a prompt to automate the writing of a 3-paragraph technical summary.",
-      "timestamp": "2025-05-05T14:47:06.182000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1368962215159529634",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369371228825059449",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone \nMy Tech Tip Tuesday \n\nHeadline: \"Intimidated by AI? Here's How to Get Started\"\nSource / Date: The Wall Street Journal, April 28, 2025\nLink: https://www.wsj.com/tech/ai/using-ai-tips-prompts-chatbots-61d0964c\nTip Summary: This beginner's guide demystifies generative AI tools like ChatGPT, offering practical advice on crafting effective prompts. It emphasizes specificity, context provision, formatting requests, and iterative follow-ups to enhance AI interactions. The article also introduces various chatbot options and their unique features.\nAction Step: Craft a specific prompt with clear context and formatting instructions; observe the AI's response.",
-      "timestamp": "2025-05-06T17:52:22.639000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369371228825059449",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
           "count": 1
         }
       ],
@@ -518,64 +2124,14 @@
       "reference": null
     },
     {
-      "message_id": "1369693822568628246",
+      "message_id": "1366427220641321171",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Hey all, just wanted to open up the conversation for what questions we might want to ask in this week's Q&A session. We already have <@992174053882331240>'s question from last week \"What factors should we consider when integrating an AI agent that not only performs automated tasks, but also learns from my workflow, adapts over time, and is capable of collaborating with other tools or people within a broader creative or technical system?\"",
-      "timestamp": "2025-05-07T15:14:14.981000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369693822568628246",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "992174053882331240"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369693938297868319",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Anything else on your mind we should consider?",
-      "timestamp": "2025-05-07T15:14:42.573000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369693938297868319",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369754763037773897",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Laura, please use Alexandro's question.",
-      "timestamp": "2025-05-07T19:16:24.321000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369754763037773897",
+      "content": "Welcome to Buddy group 6 Here in a smaller group and in closer time zones we can interact more easily. Feel free to post, ask questions, interact. Our group has the right to ask a question about AI to Professor Dr. Abel Sanches, at the conference on Friday. Laura and I are here to help and learn from you. Since the individual presentations were lost in the general chat, I will repeat mine below. Once again, welcome and participate. Hugs, Eduardo",
+      "timestamp": "2025-04-28T14:53:56.391000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366427220641321171",
       "author": {
         "id": "1087795330067742760",
         "username": "eduardofadanelli",
@@ -592,148 +2148,14 @@
       "reference": null
     },
     {
-      "message_id": "1369765812184809562",
+      "message_id": "1366420690466504787",
       "channel_id": "1366389772251037737",
       "channel_name": "💠buddy-group6",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "OK, submitted!",
-      "timestamp": "2025-05-07T20:00:18.643000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369765812184809562",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369779428220993576",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I do agree…",
-      "timestamp": "2025-05-07T20:54:24.959000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369779428220993576",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369781574953992305",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Team, does anyone know what this is? First time I heard of it",
-      "timestamp": "2025-05-07T21:02:56.780000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369781574953992305",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [
-        {
-          "id": "1369781574970642492",
-          "filename": "IMG_5834.png",
-          "url": "https://cdn.discordapp.com/attachments/1366389772251037737/1369781574970642492/IMG_5834.png?ex=6840b480&is=683f6300&hm=b297688131d0e7ea9599df6deac0730830d5ad739e391ced1b1f8112715dfb87&",
-          "size": 677025
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369782055323435038",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "It was a meeting hosted by Oscar , to explain the different opportunities you have as a general member as the community grows",
-      "timestamp": "2025-05-07T21:04:51.309000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369782055323435038",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369791226634698892",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "First time I heard of it too. I tried to join it late but think it was already over. <@992174053882331240> do you know if it was recorded so we can watch it later?",
-      "timestamp": "2025-05-07T21:41:17.920000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369791226634698892",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "992174053882331240"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369795570134421597",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1360003496384008262> it was just for new members going over the weekly engagement structure and discord manager / conversational leader program",
-      "timestamp": "2025-05-07T21:58:33.491000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369795570134421597",
+      "content": "<@1087795330067742760>",
+      "timestamp": "2025-04-28T14:27:59.476000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1366420690466504787",
       "author": {
         "id": "1352785241252565174",
         "username": "oscarsan.chez",
@@ -742,1303 +2164,15 @@
         "bot": false
       },
       "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 1
+          "id": "1087795330067742760",
+          "username": "eduardofadanelli",
+          "display_name": "Eduardo Fadanelli"
         }
       ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1369800806756515871",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Oscar for the clarification…",
-      "timestamp": "2025-05-07T22:19:21.999000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1369800806756515871",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
       "reactions": [],
       "attachments": [],
       "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370067787283828736",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone",
-      "timestamp": "2025-05-08T16:00:15.117000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1370067787283828736",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1370435262659821669",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone thanks <@992174053882331240> for coming up with our question which was chosen for the Q&A today. I saw some of us in there but here's the recording of their answer to that question in case you missed it 👍",
-      "timestamp": "2025-05-09T16:20:28.074000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1370435262659821669",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "992174053882331240"
-      ],
-      "reactions": [],
-      "attachments": [
-        {
-          "id": "1370435262680797274",
-          "filename": "MIT_QA_reply_May_9_2025.m4a",
-          "url": "https://cdn.discordapp.com/attachments/1366389772251037737/1370435262680797274/MIT_QA_reply_May_9_2025.m4a?ex=6840724c&is=683f20cc&hm=1bf1d3e61de335b3cf21c8f6b47ca2575c2c9cccdfa891c1fa77db493f14da48&",
-          "size": 2608841
-        }
-      ],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1371583816937902211",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone\nMy Motivational Monday:\nHeadline: AI Strengthens Resilience to Climate Impacts Through Improved Drought Forecasting\nSource / Date: World Economic Forum, January 2025\nLink: https://www.weforum.org/stories/2025/01/artificial-intelligence-climate-transition-drive-growth/\nQuick Summary: Artificial intelligence is being used to create more accurate long-term drought forecasting, allowing for better adaptation strategies. This demonstrates AI's power to build resilience against severe climate events, offering a pathway for innovators to develop solutions for a sustainable future.\nTakeaway: AI empowers us to tackle global challenges. Innovate for a better tomorrow!",
-      "timestamp": "2025-05-12T20:24:24.753000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371583816937902211",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1371693592673783881",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "How many use cases have emerged around AI, I am very happy that it is being used in things that help make the world a better place.",
-      "timestamp": "2025-05-13T03:40:37.328000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371693592673783881",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [
-        "1087795330067742760"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1371583816937902211",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1371841176822349884",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone\nGroup, can you think of any new questions for Dr. Abel on Friday?\n\nMy Tech Tip Tuesday \n\nHeadline: \"Cognify: Supercharging Gen-AI Workflows With Hierarchical Autotuning\"\nSource / Date: arXiv, February 12, 2025\nLink: https://arxiv.org/abs/2502.08056\nTip Summary: The authors present Cognify, a framework that employs adaptive hierarchical search algorithms to automatically tune generative AI workflows. By optimizing structure, operators, and prompts, Cognify enhances generation quality, reduces execution costs, and decreases latency. This approach streamlines the development of complex AI applications by automating the tuning process.\nAction Step: Implement Cognify's hierarchical autotuning in your AI workflow to optimize performance and efficiency.\narXiv",
-      "timestamp": "2025-05-13T13:27:04.131000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1371841176822349884",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372196653771132959",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone \nMy Midweek discussion \nHeadline: AI Regulations around the World - 2025\nSource / Date: mindfoundry.ai, N/A (The article mentions \"2025\" in the title and refers to the EU AI Act implementation starting in early 2025, suggesting recent relevance within the last 14 days).\nLink: https://www.mindfoundry.ai/blog/ai-regulations-around-the-world\nSummary: This article provides an overview of AI regulations globally, noting the EU AI Act became law in August 2024 with staggered implementation from early 2025 [2]. Understanding the evolving legal landscape is crucial for responsible AI innovation and deployment.\nDiscussion Prompt: How will differing global AI regulations impact the development and adoption of generative AI technologies across borders?",
-      "timestamp": "2025-05-14T12:59:36.440000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372196653771132959",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372279850680844299",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone",
-      "timestamp": "2025-05-14T18:30:12.129000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372279850680844299",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372295031276175451",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-14T19:30:31.465000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372295031276175451",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372426355077025792",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello everyone… This is my proposal for Q&A… \n\nHow complex is it to integrate LLM models with existing enterprise systems such as CRMs, ERPs, or automation platforms, and what tools are available to ensure the traceability, explainability, and auditability of those models?",
-      "timestamp": "2025-05-15T04:12:21.499000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372426355077025792",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372580978975047844",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi Miguel\nThank you for your question. I will present it representing our group.",
-      "timestamp": "2025-05-15T14:26:46.709000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372580978975047844",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1372657363986813071",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-15T19:30:18.315000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1372657363986813071",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1373029380296671372",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey Admins!\nCould you please check who’s been inactive in this buddy group over the past two weeks and share the list in <#1372943237890707576>?\n\nThis isn’t about removing anyone it’s about ensuring everyone’s in a space where they can contribute and grow meaningfully.",
-      "timestamp": "2025-05-16T20:08:33.915000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1373029380296671372",
-      "author": {
-        "id": "1311434218622156850",
-        "username": "nikhil_kassetty",
-        "discriminator": "0",
-        "display_name": "Nikhil Kassetty",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374049400938041575",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "No inative in our group. \nWe need more members for our group,  we have only 4 people",
-      "timestamp": "2025-05-19T15:41:45.787000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374049400938041575",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374049728840601610",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone \nMotivational Monday \nHeadline: Symbiosis Launches New AI Institute to Democratize Artificial Intelligence Education\nSource / Date: The Economic Times, May 16, 2025\nLink: https://economictimes.indiatimes.com/industry/services/education/symbiosis-launches-new-ai-institute-to-democratize-artificial-intelligence-education/articleshow/121203860.cms\nQuick Summary: Symbiosis International University in India establishes an AI institute offering interdisciplinary programs to make AI education accessible beyond traditional tech fields. This initiative aims to cultivate responsible and inclusive AI development by integrating diverse academic disciplines.\nTakeaway: Broadening AI education paves the way for inclusive and ethical technological advancement.",
-      "timestamp": "2025-05-19T15:43:03.965000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374049728840601610",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374458272228049006",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Tech Tip Tuesday \n\nHeadline: \"Winning the AI Long Game\"\nSource / Date: Business Insider, May 14, 2025\nLink: https://www.businessinsider.com/sc/how-to-win-the-ai-long-game\nTip Summary: The article emphasizes the importance of aligning AI initiatives with clear business strategies and integrating them into core workflows. It highlights the role of augmented intelligence in enhancing human decision-making and creativity for sustainable competitive advantage.\nAction Step: Identify one business process where AI can augment decision-making and plan its integration.",
-      "timestamp": "2025-05-20T18:46:28.299000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374458272228049006",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374716310713532587",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-21T11:51:49.468000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374716310713532587",
-      "author": {
-        "id": "1143203059820933251",
-        "username": "boozeena_49785",
-        "discriminator": "0",
-        "display_name": "Amber Bellou",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": {
-        "message_id": "1374583287254880256",
-        "channel_id": "1353085578274410626",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374786925373816882",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "My Midweek dicussion item\nI think I should put it in the Ai philosophy - ethics group\nHeadline: Ethics in AI's Wild West: Navigating Regulation, Bias, and Responsibility in 2025\nSource / Date: GOTO Conferences, May 2025\nLink: https://gotopia.tech/articles/376/ethics-in-ai-wild-west-navigating-regulation-biases-responsibility-2025\nSummary: This article delves into the challenges of AI ethics, emphasizing the need for transparency and responsibility as regulations evolve. It highlights the importance of balancing innovation with ethical considerations to ensure AI serves society positively.\nDiscussion Prompt: How can organizations proactively address ethical concerns in AI development amidst rapidly changing regulations?",
-      "timestamp": "2025-05-21T16:32:25.315000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374786925373816882",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374814680123572294",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "let us not miss this opportunity to learn more about our incredible community!",
-      "timestamp": "2025-05-21T18:22:42.563000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374814680123572294",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1143203059820933251"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1374716310713532587",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1374839195763478721",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone",
-      "timestamp": "2025-05-21T20:00:07.547000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374839195763478721",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374842813187100673",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi everyone , here’s my proposal for the question: What has been the most challenging part of building this community?\nCould you give us a brief explanation of how that challenge was addressed and resolved?",
-      "timestamp": "2025-05-21T20:14:30.008000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374842813187100673",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374846274347466772",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Alexandro",
-      "timestamp": "2025-05-21T20:28:15.213000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374846274347466772",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374854313234665594",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-21T21:00:11.833000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374854313234665594",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374937237107511427",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi, my proposed question would be: How is the community going to evolve, and how can we digest so much information shared by different groups?",
-      "timestamp": "2025-05-22T02:29:42.425000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374937237107511427",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374939552208257044",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Miguel\nLet's keep a rotation, just like last week the question was yours, this week it will be with Alexandre",
-      "timestamp": "2025-05-22T02:38:54.388000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1374939552208257044",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375089281168703538",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I don’t have a question in my other buddy group so I’ll submit yours for that group <@1364811456914259978>",
-      "timestamp": "2025-05-22T12:33:52.554000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1375089281168703538",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "1364811456914259978"
-      ],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375492538831470662",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "https://www.linkedin.com/events/insidegenaiglobal-liveq-awithfo7331033014556123136/theater/",
-      "timestamp": "2025-05-23T15:16:16.673000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1375492538831470662",
-      "author": {
-        "id": "1143203059820933251",
-        "username": "boozeena_49785",
-        "discriminator": "0",
-        "display_name": "Amber Bellou",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376581302521692181",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone \nMy Motivational Monday \nHeadline: Microsoft’s AI Model “Aurora” Revolutionizes Weather Forecasting\nSource / Date: The Washington Post, May 21, 2025\nLink: https://www.washingtonpost.com/weather/2025/05/21/microsoft-ai-weather-model-study/\nQuick Summary: Microsoft introduced \"Aurora,\" an AI-driven weather model that delivers faster and more accurate forecasts than traditional methods. It excels in predicting hurricane paths and provides detailed forecasts, enhancing disaster preparedness and response.\nTakeaway: AI accelerates our ability to foresee and respond to natural challenges.",
-      "timestamp": "2025-05-26T15:22:38.165000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1376581302521692181",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376963627252191402",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone \nTech Tip Tuesday \nHeadline: \"5 Ways to Make the Most of Generative AI\"\nSource / Date: Deloitte via The Wall Street Journal, May 10, 2025\nLink: https://deloitte.wsj.com/cio/5-ways-to-make-the-most-of-generative-ai-0f4f45aa\nTip Summary: Generative AI is transforming organizational strategies and priorities. Key recommendations include nurturing human-AI collaboration, modernizing digital infrastructure, ensuring data security, leveraging AI for industry-specific use cases, and adopting next-generation managed services.\nAction Step: Identify one area in your organization where AI can enhance efficiency and plan its implementation.",
-      "timestamp": "2025-05-27T16:41:51.484000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1376963627252191402",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377318733500121259",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone \nMidweek discussion item\nShowcase / Use-Case Roundtable\n\nHeadline: Google Just Dropped Their Most Insane AI Products Yet at I/O 2025\nSource / Date: Marketing AI Institute, May 28, 2025\nLink: https://www.marketingaiinstitute.com/blog/google-io\nSummary: At Google I/O 2025, the company introduced a range of advanced AI capabilities, including the Gemini 2.5 Pro model, creative tools like Veo 3 and Imagen 4, and the AI-powered filmmaking tool Flow. These innovations demonstrate Google's commitment to integrating AI into various creative and productivity applications.\nDiscussion Prompt: In what ways can these new AI tools from Google transform creative industries and content creation workflows?\nmarketingaiinstitute.com",
-      "timestamp": "2025-05-28T16:12:55.411000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377318733500121259",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377367020768723045",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hy @everyone , just wanted to share this interview, I found intersting, Headline: Rick Rubin on Art, Life, and Vibe Coding\n Source / Date: AI Daily Brief – YouTube Interview, May 2025\n🔗 Link: https://www.youtube.com/watch?v=6BDsFUvPqI0\n\n- Who is Rick Rubin?\nRick Rubin is one of the most influential music producers of the last 40 years — known for his minimalist, intuition-led style. He’s worked across nearly every genre with artists like Johnny Cash, Beastie Boys, System of a Down, Red Hot Chili Peppers, Jay-Z, and Adele. Rubin is a creative philosopher at heart, more monk than manager — a producer who doesn't play instruments, but knows how to listen like few others.\n\n- Quick Summary:\nIn this rich conversation, Rubin reflects on how a meme turned him into the accidental mascot of vibe coding — a term now linked to his new project The Way of Code, co-created with Anthropic's Claude AI. The work merges generative code, poetic meditation, and the timeless wisdom of the Dao De Jing.\n\n- He explores:\n\nHow AI can't replicate the artist's evolving point of view\n\nWhy letting go is key to authentic creativity\n\nThe role of mistakes and emergence in making something meaningful\n\nHow AI can become a creative partner, not a machine of control\n\n-Takeaway:\nCreativity isn’t about mastery — it’s about attunement to the unknown. You don’t control it. You collaborate with it.\n\n-Why this resonated with me:\nI’d already been developing a personal project called The Inner Circle — a group of AI advisors shaped by Taoism, Jungian psychology, and Musashi’s Dokkōdō.\nBut it was Andrea Hickethier’s PEACH system that lit the fuse — her framework helped me translate introspection into interface, and sketch a system where AI becomes a council of reflection.\n\nListening to Rick Rubin wasn’t what sparked the idea — it simply felt like I was hearing someone describe, in his language, what I had already begun to build.\n\n✨ Sometimes, resonance isn’t inspiration. It’s recognition.",
-      "timestamp": "2025-05-28T19:24:47.993000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377367020768723045",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377379697289068675",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "@everyone",
-      "timestamp": "2025-05-28T20:15:10.311000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377379697289068675",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377394805239189585",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-28T21:15:12.327000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377394805239189585",
-      "author": {
-        "id": "616754792965865495",
-        "username": "sesh",
-        "discriminator": "1244",
-        "display_name": "sesh",
-        "bot": true
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377396477621571695",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I listened to this just yesterday, so good! Loved when he talked about how vibe coding is like making art because when you create you know that you don't know what you're doing. Plus the part of about, when the LLM gives you back not what you asked for but a variation, being open to riff from there rather than staying married to your vision of it. <@992174053882331240> What did you get out of it?",
-      "timestamp": "2025-05-28T21:21:51.054000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377396477621571695",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "992174053882331240"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1377367020768723045",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1377399952246046830",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hey <@1360003496384008262> , totally agree — that part really stuck with me too. What resonated most was how Rick treats not knowing as a strength, not a weakness. That really mirrors the process I’ve been exploring with my Inner Circle project — where I use AI advisors built around Taoism, Jungian archetypes, and introspective frameworks.\nIt also reminded me of how I approach MidJourney prompts. I’ve been experimenting with something I call “dirty prompting” — where I intentionally leave space in the prompt for the AI to surprise me. I don’t try to control every variable. Instead, I let the model improvise, and often what comes back is more poetic, strange, or alive. It’s the same vibe Rick was talking about: co-creating with uncertainty, letting go of the illusion of full authorship.\nVibe coding, for me, feels more like vibe dialoguing — co-writing with the unknown. And I love that he brought the Dao De Jing into the mix… made me feel less alone in trying to merge code with consciousness",
-      "timestamp": "2025-05-28T21:35:39.469000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377399952246046830",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377411322974830686",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Oh wow <@992174053882331240> , I've been building advisors through Custom GPTs but more on the Buddhism, mindfulness and investing side! I've got a faux Warren Buffett, etc. And I just read the Dao De Jing a few months back. I think I've been pretty attached to my vision so when Chat GPT gives me things that aren't quite what I want I go into \"editing\" mode rather than trying to take it in at the higher level and letting what it created inspire new directions or help me ask better questions about why I was trying to do something in the first place... Definitely great food for thought",
-      "timestamp": "2025-05-28T22:20:50.462000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411322974830686",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [
-        "992174053882331240"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1377399952246046830",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1377411602894028991",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sounds like I need to give vibe dialoguing a try! Love that term!",
-      "timestamp": "2025-05-28T22:21:57.200000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411602894028991",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377411808981156050",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "How are you building the Inner Circle? Through Custom GPTs or something else?",
-      "timestamp": "2025-05-28T22:22:46.335000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377411808981156050",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377426793501294602",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "<@1360003496384008262>  I created the Inner Circle inside a regular chat. It all started with the idea of building a kind of journal-meets-diary, where I could write or speak about whatever I’m thinking — and then the Inner Circle would respond.\n\nIt’s made up of different AI experts, each focused on a topic that interests me, and they each give their own perspective or feedback based on what I share.\n\nNow, after several weeks of using it, I’m considering moving it to Custom GPT, which is supposed to offer more flexibility. But honestly, the regular chat has worked really well so far — especially because I set it up to remember previous conversations, so the Inner Circle has context and can give more informed responses.\n\nIf you’re interested, we could totally set up a call sometime to talk about it in more depth — I’d love to share and hear your thoughts too!",
-      "timestamp": "2025-05-28T23:22:18.923000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377426793501294602",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377620968192737280",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Yeah I’d love to hear more about it. I’m traveling today through Wed so maybe we can set something the back end of next week?",
-      "timestamp": "2025-05-29T12:13:53.777000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377620968192737280",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377673801843740742",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Interesting article… Here are my the top 3 highlights:\n    1.    Human-AI Collaboration: Success with generative AI depends on human collaboration. Rather than replacing jobs, AI offers opportunities to reskill and redeploy workers, enhancing efficiency and fostering trust among stakeholders. \n    2.    Digital Infrastructure Modernization: Organizations should proactively modernize their digital infrastructure to manage digital sprawl. Generative AI can optimize code and identify technical debt, leading to long-term value creation. \n    3.    Industry-Specific Applications: Tailoring generative AI to specific industries can drive significant advancements. Examples include reducing clinician burnout in healthcare and resolving supply chain disruptions in manufacturing.",
-      "timestamp": "2025-05-29T15:43:50.301000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377673801843740742",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [
-        "1087795330067742760"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1376963627252191402",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1377674906098995242",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Sure we can schedule some time for next week, let me know what time works better for you",
-      "timestamp": "2025-05-29T15:48:13.576000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377674906098995242",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [
-        "1360003496384008262"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1377620968192737280",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1377741859882930369",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi everyone , here is a proposal for the Q&A\nWhat’s the current state of AI agents in terms of reliability and safety?\nI’m curious to understand whether agents are already trustworthy enough to be deployed for specific tasks (like assistance, automation, or analysis), or if there are still major limitations to keep in mind.\nAlso, to what extent can an agent handle different types of functions or adapt to new contexts without losing accuracy? How flexible are they really when it comes to performing a variety of tasks?",
-      "timestamp": "2025-05-29T20:14:16.602000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377741859882930369",
-      "author": {
-        "id": "992174053882331240",
-        "username": "alexandrobermeo",
-        "discriminator": "0",
-        "display_name": "AlexandroBermeo",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377750428229308508",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Thanks Alexandro",
-      "timestamp": "2025-05-29T20:48:19.455000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1377750428229308508",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1378080801110888489",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Moorning Guys ! \nRemember  2morrows Keynote ! do not miss it !\n\nhttps://www.linkedin.com/posts/gen-ai-global_genaiglobal-ai-innovation-activity-7332800237431832577-YLEu?utm_source=share&utm_medium=member_desktop&rcm=ACoAACS9ntIBUEGHMlt3-LjYyNIcYgzF_JjxEOg",
-      "timestamp": "2025-05-30T18:41:06.488000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1378080801110888489",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379167764970999859",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hi @everyone \nMotivational Monday \nHeadline: How We're Advancing Accessibility at Meta\nSource / Date: Meta Newsroom, May 20, 2025\nLink: https://about.fb.com/news/2025/05/advancing-accessibility-meta/\nQuick Summary: Meta has introduced new AI-driven accessibility features, including customizable responses on Ray-Ban Meta glasses and a \"Call a Volunteer\" service connecting visually impaired users with sighted assistance. These tools aim to empower individuals with disabilities, enhancing their independence and interaction with technology.\nTakeaway: Inclusive tech empowers all—AI opens doors for everyone",
-      "timestamp": "2025-06-02T18:40:18.867000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379167764970999859",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379307613119975515",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I imagined many uses for meta lenses, but this use never crossed my mind… very good for meta.",
-      "timestamp": "2025-06-03T03:56:01.264000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379307613119975515",
-      "author": {
-        "id": "1364811456914259978",
-        "username": "miguelangelcalzada16",
-        "discriminator": "0",
-        "display_name": "Miguel Angel Calzada",
-        "bot": false
-      },
-      "mentions": [
-        "1087795330067742760"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1379167764970999859",
-        "channel_id": "1366389772251037737",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1379529945331535913",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Morning Everyone !\nTech Tip Tuesday ! 🪴☘️🌱🏵️\n\n**Headline:** \"I use ChatGPT to keep my houseplants happy — try these 5 game-changing prompts\"\n**Source / Date:** Tom's Guide, May 31, 2025\n**Link:** https://www.tomsguide.com/ai/i-use-chatgpt-to-keep-my-houseplants-happy-try-these-5-game-changing-prompts\n**Tip Summary:** This article demonstrates how ChatGPT can assist in plant care by providing tailored advice based on specific plant conditions. The author shares five effective prompts to diagnose plant issues, create customized care schedules, recommend optimal lighting setups, set up seasonal watering reminders, and identify unknown plants. By leveraging AI, plant enthusiasts can enhance their plant care routines, leading to healthier and happier houseplants.\n**Action Step:** Ask ChatGPT: \"My \\[plant name] has \\[describe symptoms]. It gets \\[describe light], and I water it \\[how often]. What could be the problem?\"",
-      "timestamp": "2025-06-03T18:39:29.394000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379529945331535913",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379549176873877595",
-      "channel_id": "1366389772251037737",
-      "channel_name": "💠buddy-group6",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello @everyone \nTech Tip Tuesday \nHeadline: Top 8 Python Libraries for Generative AI\nSource / Date: Data Science Dojo, April 2025\nLink: https://datasciencedojo.com/blog/python-libraries-for-generative-ai/\nTip Summary: This article explores eight essential Python libraries for generative AI, including TensorFlow, PyTorch, and Hugging Face Transformers. It discusses each library's features and how they can be leveraged to build and deploy generative AI models effectively.\nAction Step: Implement a simple generative model using one of the highlighted libraries.",
-      "timestamp": "2025-06-03T19:55:54.551000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1366389772251037737/1379549176873877595",
-      "author": {
-        "id": "1087795330067742760",
-        "username": "eduardofadanelli",
-        "discriminator": "0",
-        "display_name": "Eduardo Fadanelli",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
       "pinned": false,
       "type": "MessageType.default",
       "reference": null

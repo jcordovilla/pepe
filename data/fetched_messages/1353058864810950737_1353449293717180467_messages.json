@@ -3,255 +3,23 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1353449293717180467",
   "channel_name": "❓q-and-a-questions",
-  "fetch_timestamp": "2025-06-03T22:04:09.946540",
-  "message_count": 12,
+  "fetch_timestamp": "2025-06-04T23:18:02.090581+00:00",
+  "message_count": 14,
   "messages": [
     {
-      "message_id": "1365004011459186698",
+      "message_id": "1377753739863130233",
       "channel_id": "1353449293717180467",
       "channel_name": "❓q-and-a-questions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "@everyone \n\n🚨 Q&A SUBMISSION ALERT – SUBMIT YOUR QUESTIONS NOW! 🚨\n\nSubmit your best questions for Dr. Sanchez’s live Q&A session, happening Friday @ 11:00 AM ET\n\n✍️ How to Submit Your Question:\nPost ONE carefully crafted question in <#1353449293717180467>  by TODAY @ 5 PM ET to be considered!\n\n⏳ Heads up: Slow Mode is ON!\nYou can only post a question every 2 hours — so triple-check your submission before posting!\n\n✅ What Happens Next:\nAfter the deadline (5pm EST), the top 6 most liked/interacted questions will move to the next stage:\n\n🗳️ COMMUNITY POLL\nThese final 6 will be featured in a poll within <#1353449406677913680>  at 7pm EST, and YOU get to decide which ones make it into the live session! Voting concludes at 11pm EST.\n\n📍 Weekly Q&A Location:\nThe Q&A event will be hosted live on Discord in \n[📞Friday Q and A's] [Link:https://discord.gg/ZWq6svtr] Friday at 11:30 AM EST — and it repeats weekly so you always have a chance to engage, learn, and shine! ✨",
-      "timestamp": "2025-04-24T16:38:36.880000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1365004011459186698",
+      "content": "Buddy group 2: What will be the key challenges and, therefore, necessary aspects of governance and guardrails to ensure trust, compliance, and safety (e.g. regarding authentication and authorization for payments) – especially when multiple agents interact?",
+      "timestamp": "2025-05-29T21:01:29.010000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377753739863130233",
       "author": {
-        "id": "1352785241252565174",
-        "username": "oscarsan.chez",
+        "id": "1075075819807985714",
+        "username": "silkefinken",
         "discriminator": "0",
-        "display_name": "Oscar Sanchez",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        }
-      ],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1368006600102772907",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "",
-      "timestamp": "2025-05-02T23:29:49.798000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1368006600102772907",
-      "author": {
-        "id": "1364956984318754887",
-        "username": "daguerreros7",
-        "discriminator": "0",
-        "display_name": "David A. Guerrero S.",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.pins_add",
-      "reference": {
-        "message_id": "1367938928488747159",
-        "channel_id": "1353449293717180467",
-        "guild_id": null
-      }
-    },
-    {
-      "message_id": "1377589497864388711",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "🧢 Question Buddy Group 4: \nOn the emerging AI abstraction pyramid—from foundational models to agents to domain-specific applications—where do healthcare systems fit, and what technical and ethical safeguards are essential at each layer to ensure medical accuracy, accountability, and patient trust (both in physical diagnosis and in mental-health chatbots)?",
-      "timestamp": "2025-05-29T10:08:50.666000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377589497864388711",
-      "author": {
-        "id": "1362326150373966035",
-        "username": "kiss_ambassador",
-        "discriminator": "0",
-        "display_name": "Melinda Melcher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377595626396581918",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Buddy group 12: How do we balance AI and cognitive offloading?",
-      "timestamp": "2025-05-29T10:33:11.822000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377595626396581918",
-      "author": {
-        "id": "1360003496384008262",
-        "username": "laura.neder",
-        "discriminator": "0",
-        "display_name": "Laura Neder",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377670805160202251",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Morning, Buddy Group 9: Q: Given that most organizations struggle with AI ROI measurement. What emerging best practices are you seeing in industry for probabilistic ROI modeling that accounts for AI-specific uncertainties?",
-      "timestamp": "2025-05-29T15:31:55.836000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377670805160202251",
-      "author": {
-        "id": "1352697519498334252",
-        "username": "minsunnie",
-        "discriminator": "0",
-        "display_name": "Michelle Rhee  Los Angeles GMT-7",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377692255678369884",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Buddy Group 3: Many organizations label ‘AI digital transformation’ what in practice is little more than swapping Google for ChatGPT. How can enterprises recognize when they’re genuinely transforming, rather than just adding AI to outdated workflows and for FOMO?",
-      "timestamp": "2025-05-29T16:57:10.038000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377692255678369884",
-      "author": {
-        "id": "969571634027589643",
-        "username": "georgi8865",
-        "discriminator": "0",
-        "display_name": "Georgi Pavlov",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377701617553506445",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Buddy Group 7 🍀 : As self-teaching AI systems like Tsinghua University’s “Absolute Zero” begin to generate and solve tasks independently of human data, are we approaching a paradigm where human oversight becomes symbolic rather than substantive—and if so, what new frameworks of accountability and trust must we imagine for a future where AI evolves beyond our comprehension?",
-      "timestamp": "2025-05-29T17:34:22.083000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377701617553506445",
-      "author": {
-        "id": "1359961544430981340",
-        "username": "antoine789",
-        "discriminator": "0",
-        "display_name": "Antoine Christopher",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377705311426838592",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Buddy Group 1: \"How do you prove your identity in an agentic world ? Considering developments in payments,  what solutions can be envisioned to ensure trust? Blockchain, other alternatives \" ?",
-      "timestamp": "2025-05-29T17:49:02.771000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377705311426838592",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377717243814740120",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "📝Buddy Group 8: \n\nIn a recent MIT weekly news, it referred to a periodic table of machine learning that shows how more than 20 classical algorithms are connected. The new framework sheds light on how scientists could fuse strategies from different methods to improve existing AI models or come up with new ones. link to article is https://news.mit.edu/2025/machine-learning-periodic-table-could-fuel-ai-discovery-0423\n\n🙋‍♀️Question here is can you walk us through this AI periodic table and demonstrate how one might use it ?\n\nThank you <@1364977607925567620> for bringing this up for discussion.",
-      "timestamp": "2025-05-29T18:36:27.674000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377717243814740120",
-      "author": {
-        "id": "1335299567440367757",
-        "username": "apoorvgarg88",
-        "discriminator": "0",
-        "display_name": "Apoorv Garg",
-        "bot": false
-      },
-      "mentions": [
-        "1364977607925567620"
-      ],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 1,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1377731058564333618",
-      "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Buddy Group 5\nQ.  Do you have initial thoughts on the OpenAI acquisition of Jony Ive’s Startup IO for $6.5Bn this week?",
-      "timestamp": "2025-05-29T19:31:21.367000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377731058564333618",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
+        "display_name": "Silke Finken",
         "bot": false
       },
       "mentions": [],
@@ -287,19 +55,19 @@
       "reference": null
     },
     {
-      "message_id": "1377753739863130233",
+      "message_id": "1377731058564333618",
       "channel_id": "1353449293717180467",
       "channel_name": "❓q-and-a-questions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Buddy group 2: What will be the key challenges and, therefore, necessary aspects of governance and guardrails to ensure trust, compliance, and safety (e.g. regarding authentication and authorization for payments) – especially when multiple agents interact?",
-      "timestamp": "2025-05-29T21:01:29.010000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377753739863130233",
+      "content": "Buddy Group 5\nQ.  Do you have initial thoughts on the OpenAI acquisition of Jony Ive’s Startup IO for $6.5Bn this week?",
+      "timestamp": "2025-05-29T19:31:21.367000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377731058564333618",
       "author": {
-        "id": "1075075819807985714",
-        "username": "silkefinken",
+        "id": "758206516753858561",
+        "username": "darkgago",
         "discriminator": "0",
-        "display_name": "Silke Finken",
+        "display_name": "Oscar Garcia",
         "bot": false
       },
       "mentions": [],
@@ -309,6 +77,299 @@
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
+    },
+    {
+      "message_id": "1377717243814740120",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "📝Buddy Group 8: \n\nIn a recent MIT weekly news, it referred to a periodic table of machine learning that shows how more than 20 classical algorithms are connected. The new framework sheds light on how scientists could fuse strategies from different methods to improve existing AI models or come up with new ones. link to article is https://news.mit.edu/2025/machine-learning-periodic-table-could-fuel-ai-discovery-0423\n\n🙋‍♀️Question here is can you walk us through this AI periodic table and demonstrate how one might use it ?\n\nThank you <@1364977607925567620> for bringing this up for discussion.",
+      "timestamp": "2025-05-29T18:36:27.674000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377717243814740120",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1364977607925567620",
+          "username": "nicolelussier_78400",
+          "display_name": "Nicole Lussier"
+        }
+      ],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377705311426838592",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Buddy Group 1: \"How do you prove your identity in an agentic world ? Considering developments in payments,  what solutions can be envisioned to ensure trust? Blockchain, other alternatives \" ?",
+      "timestamp": "2025-05-29T17:49:02.771000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377705311426838592",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377701617553506445",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Buddy Group 7 🍀 : As self-teaching AI systems like Tsinghua University’s “Absolute Zero” begin to generate and solve tasks independently of human data, are we approaching a paradigm where human oversight becomes symbolic rather than substantive—and if so, what new frameworks of accountability and trust must we imagine for a future where AI evolves beyond our comprehension?",
+      "timestamp": "2025-05-29T17:34:22.083000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377701617553506445",
+      "author": {
+        "id": "1359961544430981340",
+        "username": "antoine789",
+        "discriminator": "0",
+        "display_name": "Antoine Christopher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377692255678369884",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Buddy Group 3: Many organizations label ‘AI digital transformation’ what in practice is little more than swapping Google for ChatGPT. How can enterprises recognize when they’re genuinely transforming, rather than just adding AI to outdated workflows and for FOMO?",
+      "timestamp": "2025-05-29T16:57:10.038000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377692255678369884",
+      "author": {
+        "id": "969571634027589643",
+        "username": "georgi8865",
+        "discriminator": "0",
+        "display_name": "Georgi Pavlov",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377670805160202251",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Morning, Buddy Group 9: Q: Given that most organizations struggle with AI ROI measurement. What emerging best practices are you seeing in industry for probabilistic ROI modeling that accounts for AI-specific uncertainties?",
+      "timestamp": "2025-05-29T15:31:55.836000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377670805160202251",
+      "author": {
+        "id": "1352697519498334252",
+        "username": "minsunnie",
+        "discriminator": "0",
+        "display_name": "Michelle Rhee  Los Angeles GMT-7",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377595626396581918",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "Buddy group 12: How do we balance AI and cognitive offloading?",
+      "timestamp": "2025-05-29T10:33:11.822000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377595626396581918",
+      "author": {
+        "id": "1360003496384008262",
+        "username": "laura.neder",
+        "discriminator": "0",
+        "display_name": "Laura Neder",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1377589497864388711",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🧢 Question Buddy Group 4: \nOn the emerging AI abstraction pyramid—from foundational models to agents to domain-specific applications—where do healthcare systems fit, and what technical and ethical safeguards are essential at each layer to ensure medical accuracy, accountability, and patient trust (both in physical diagnosis and in mental-health chatbots)?",
+      "timestamp": "2025-05-29T10:08:50.666000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1377589497864388711",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1368006600102772907",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-05-02T23:29:49.798000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1368006600102772907",
+      "author": {
+        "id": "1364956984318754887",
+        "username": "daguerreros7",
+        "discriminator": "0",
+        "display_name": "David A. Guerrero S.",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.pins_add",
+      "reference": {
+        "message_id": "1367938928488747159",
+        "channel_id": "1353449293717180467",
+        "guild_id": null
+      }
+    },
+    {
+      "message_id": "1365004011459186698",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "@everyone \n\n🚨 Q&A SUBMISSION ALERT – SUBMIT YOUR QUESTIONS NOW! 🚨\n\nSubmit your best questions for Dr. Sanchez’s live Q&A session, happening Friday @ 11:00 AM ET\n\n✍️ How to Submit Your Question:\nPost ONE carefully crafted question in <#1353449293717180467>  by TODAY @ 5 PM ET to be considered!\n\n⏳ Heads up: Slow Mode is ON!\nYou can only post a question every 2 hours — so triple-check your submission before posting!\n\n✅ What Happens Next:\nAfter the deadline (5pm EST), the top 6 most liked/interacted questions will move to the next stage:\n\n🗳️ COMMUNITY POLL\nThese final 6 will be featured in a poll within <#1353449406677913680>  at 7pm EST, and YOU get to decide which ones make it into the live session! Voting concludes at 11pm EST.\n\n📍 Weekly Q&A Location:\nThe Q&A event will be hosted live on Discord in \n[📞Friday Q and A's] [Link:https://discord.gg/ZWq6svtr] Friday at 11:30 AM EST — and it repeats weekly so you always have a chance to engage, learn, and shine! ✨",
+      "timestamp": "2025-04-24T16:38:36.880000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1365004011459186698",
+      "author": {
+        "id": "1352785241252565174",
+        "username": "oscarsan.chez",
+        "discriminator": "0",
+        "display_name": "Oscar Sanchez",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        }
+      ],
+      "attachments": [],
+      "embeds": 1,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380136615560609792",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "🧢 Buddy Group 4: As dark LLMs become easier to access and jailbreak attacks evolve rapidly, what concrete steps can SMEs take to protect their operations and clients — without the infrastructure of big tech?\n\nPS: our questions relates to the attached document",
+      "timestamp": "2025-06-05T10:50:10.848000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1380136615560609792",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1380137288217919580",
+      "channel_id": "1353449293717180467",
+      "channel_name": "❓q-and-a-questions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "",
+      "timestamp": "2025-06-05T10:52:51.222000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1353449293717180467/1380137288217919580",
+      "author": {
+        "id": "1362326150373966035",
+        "username": "kiss_ambassador",
+        "discriminator": "0",
+        "display_name": "Melinda Melcher",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [
+        {
+          "id": "1380137284686446642",
+          "filename": "dark_1749071141.pdf",
+          "url": "https://cdn.discordapp.com/attachments/1353449293717180467/1380137284686446642/dark_1749071141.pdf?ex=6842c882&is=68417702&hm=eef02c2b472b1f80070746b25b7e7aee7fb3e3195ceaa12ad8741f1b6351b80b&",
+          "size": 132429,
+          "content_type": "application/pdf"
+        }
+      ],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
-  ]
+  ],
+  "last_update_timestamp": "2025-06-05T14:09:24.469783+00:00"
 }

@@ -4,7 +4,7 @@
   "channel_id": "1372102582620913676",
   "channel_name": "💵financial-services",
   "fetch_timestamp": "2025-06-03T22:03:58.444371",
-  "message_count": 30,
+  "message_count": 31,
   "messages": [
     {
       "message_id": "1372397669686706247",
@@ -971,6 +971,31 @@
       "pinned": false,
       "type": "MessageType.default",
       "reference": null
+    },
+    {
+      "message_id": "1379965710201262101",
+      "channel_id": "1372102582620913676",
+      "channel_name": "💵financial-services",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "https://discord.com/channels/1353058864810950737/1360973368676843583/1379964092965584989",
+      "timestamp": "2025-06-04T23:31:03.835000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1372102582620913676/1379965710201262101",
+      "author": {
+        "id": "700950058941546526",
+        "username": "arjunkrishna",
+        "discriminator": "0",
+        "display_name": "Arjun Krishna",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
     }
-  ]
+  ],
+  "last_update_timestamp": "2025-06-05T14:10:30.545239+00:00"
 }

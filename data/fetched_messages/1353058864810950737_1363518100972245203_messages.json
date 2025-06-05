@@ -3,18 +3,18 @@
   "guild_name": "Gen AI Global",
   "channel_id": "1363518100972245203",
   "channel_name": "📥member-of-the-week-submissions",
-  "fetch_timestamp": "2025-06-03T22:03:44.904465",
+  "fetch_timestamp": "2025-06-04T23:18:42.847083+00:00",
   "message_count": 25,
   "messages": [
     {
-      "message_id": "1373681367015231649",
+      "message_id": "1379140893579415564",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "For this week I’d like to nominate <@1359955242438889545> and <@1349019079683473488> for leading the charter for ethical A.I ! This work is deeply needed and so important as we create the future of A.I together. For this reason I’d like to nominate you as member of the week.",
-      "timestamp": "2025-05-18T15:19:19.662000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1373681367015231649",
+      "content": "I’d also like to nominate <@1063015906650902549> for all his hard work!",
+      "timestamp": "2025-06-02T16:53:32.228000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379140893579415564",
       "author": {
         "id": "1143203059820933251",
         "username": "boozeena_49785",
@@ -23,48 +23,11 @@
         "bot": false
       },
       "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
-      ],
-      "reactions": [
         {
-          "emoji": "❤️",
-          "count": 4
-        },
-        {
-          "emoji": "👍",
-          "count": 2
-        },
-        {
-          "emoji": "🔥",
-          "count": 4
+          "id": "1063015906650902549",
+          "username": "snowflake1974",
+          "display_name": "Carlos de March"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374270794779066370",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I also would like to re-nominate <@1359955242438889545> <@1349019079683473488> for this week for the same reasons as Amber mentioned. Thank you.",
-      "timestamp": "2025-05-20T06:21:30.192000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374270794779066370",
-      "author": {
-        "id": "1361976806651068517",
-        "username": "andreahickethier",
-        "discriminator": "0",
-        "display_name": "Andrea Hickethier 🍑 Munich",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
       ],
       "reactions": [
         {
@@ -79,110 +42,14 @@
       "reference": null
     },
     {
-      "message_id": "1374273449052078110",
+      "message_id": "1379139781358784542",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I would like to nominate <@1359955242438889545> and <@1349019079683473488> for this week for the same reasons as Andrea and Amber mentioned.",
-      "timestamp": "2025-05-20T06:32:03.020000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374273449052078110",
-      "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
-        "discriminator": "0",
-        "display_name": "Shabana Islam",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374414046383571164",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "My nomination this week is for <@1359955242438889545> and <@1349019079683473488> for their remarkable work and progress on the ethical charter. Thanks",
-      "timestamp": "2025-05-20T15:50:44.036000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374414046383571164",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374417646988169348",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I think this week it’s gonna be Unanimous ! I nominate <@1359955242438889545> and <@1349019079683473488> for their amazing work with the Ethics  Charter !!",
-      "timestamp": "2025-05-20T16:05:02.487000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374417646988169348",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1349019079683473488",
-        "1359955242438889545"
-      ],
-      "reactions": [
-        {
-          "emoji": "🔥",
-          "count": 4
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1374586668451102727",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "This week, I’d like to nominate <@1359966236473168188>. Many may not directly see everything she does, as her work happens behind the scenes leading the LinkedIn content team—but her contribution has been extraordinary. She’s not only shared her deep knowledge, but also her strong leadership and vision to showcase the power of our community to the outside world.\n\nI also want to highlight <@1335299567440367757>, with whom I’ve had the pleasure of collaborating on several initiatives, and <@758206516753858561>, whose enthusiasm for everything he does is truly inspiring. Both bring a contagious passion that lifts the spirit.",
-      "timestamp": "2025-05-21T03:16:40.344000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374586668451102727",
+      "content": "This week, I’d like to nominate <@1063015906650902549> — not only for all the incredible support he consistently provides behind the scenes (where not everyone has the privilege of seeing him in action), but also for his dedication, patience, and mastery in teaching us during the Discord Manager 2.0 courses.\n\nCongratulations, Carlos, and thank you so much for everything you do for the community! 🚀🙌",
+      "timestamp": "2025-06-02T16:49:07.054000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379139781358784542",
       "author": {
         "id": "1125194882164736050",
         "username": "rodrigoreyesjara",
@@ -191,142 +58,16 @@
         "bot": false
       },
       "mentions": [
-        "758206516753858561",
-        "1359966236473168188",
-        "1335299567440367757"
-      ],
-      "reactions": [
         {
-          "emoji": "❤️",
-          "count": 8
-        },
-        {
-          "emoji": "<:plus1green:946531353602691162>",
-          "count": 3
-        },
-        {
-          "emoji": "💯",
-          "count": 3
-        },
-        {
-          "emoji": "🦾",
-          "count": 1
+          "id": "1063015906650902549",
+          "username": "snowflake1974",
+          "display_name": "Carlos de March"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375945752366420191",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "My nomination for this week is for <@1335299567440367757> and <@758206516753858561> for their contribution in multiple ways related to learning initiatives for the community!",
-      "timestamp": "2025-05-24T21:17:11.200000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375945752366420191",
-      "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
-        "discriminator": "0",
-        "display_name": "Shabana Islam",
-        "bot": false
-      },
-      "mentions": [
-        "758206516753858561",
-        "1335299567440367757"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 5
-        },
-        {
-          "emoji": "🔥",
-          "count": 1
-        },
-        {
-          "emoji": "💯",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375956684748623902",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "For this week I’d like to nominate <@1359966236473168188> for all her hard work, just from what I’ve heard it’s really amazing the growth coming from the content creation team. Also would like to thank  <@1335299567440367757> and <@1352735021093359626> as well !",
-      "timestamp": "2025-05-24T22:00:37.683000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375956684748623902",
-      "author": {
-        "id": "1143203059820933251",
-        "username": "boozeena_49785",
-        "discriminator": "0",
-        "display_name": "Amber Bellou",
-        "bot": false
-      },
-      "mentions": [
-        "1352735021093359626",
-        "1359966236473168188",
-        "1335299567440367757"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 5
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375957751091691621",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I’d like to nominate <@1359966236473168188> for her leadership in driving growth through content creation and SGU.",
-      "timestamp": "2025-05-24T22:04:51.919000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375957751091691621",
-      "author": {
-        "id": "1335299567440367757",
-        "username": "apoorvgarg88",
-        "discriminator": "0",
-        "display_name": "Apoorv Garg",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
       ],
       "reactions": [
         {
           "emoji": "❤️",
           "count": 4
-        },
-        {
-          "emoji": "🔥",
-          "count": 2
-        },
-        {
-          "emoji": "👍",
-          "count": 1
         }
       ],
       "attachments": [],
@@ -336,151 +77,14 @@
       "reference": null
     },
     {
-      "message_id": "1375960670662692958",
+      "message_id": "1379121499205537843",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "For this week, I’d like to nominate <@1359966236473168188> for her extreme ownership and impeccable leadership shown on Marketing the Gen AI Global Community to the world. Her eye to detail for brand management, efforts for timely posts, tracking impressions and interactions, making quick strategy amendments, learning and mentoring - shows entrepreneurial qualities nothing less than the world class leaders. Her Never give up attitude, methodical - trust the process - approach, consistency, myriad creative approaches and ideas to gain traction and grow exuberantly, lays a strong, immovable foundation to the growth of this community!",
-      "timestamp": "2025-05-24T22:16:27.999000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375960670662692958",
-      "author": {
-        "id": "1352735021093359626",
-        "username": "rad.ai",
-        "discriminator": "0",
-        "display_name": "Rad Ramamurthy",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 5
-        },
-        {
-          "emoji": "🦾",
-          "count": 3
-        },
-        {
-          "emoji": "💯",
-          "count": 3
-        },
-        {
-          "emoji": "🔥",
-          "count": 3
-        },
-        {
-          "emoji": "🙌",
-          "count": 2
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1375973131185029161",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I echo the same 🦾",
-      "timestamp": "2025-05-24T23:05:58.819000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375973131185029161",
-      "author": {
-        "id": "1335299567440367757",
-        "username": "apoorvgarg88",
-        "discriminator": "0",
-        "display_name": "Apoorv Garg",
-        "bot": false
-      },
-      "mentions": [
-        "1352735021093359626"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 3
-        },
-        {
-          "emoji": "🦾",
-          "count": 3
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.reply",
-      "reference": {
-        "message_id": "1375960670662692958",
-        "channel_id": "1363518100972245203",
-        "guild_id": "1353058864810950737"
-      }
-    },
-    {
-      "message_id": "1376169402977882152",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "My nomination also goes to <@1359966236473168188> for her dedication, generosity and excellence. She has put her skills in communication and marketing to work for this community, and her support is helping give visibility to every team and member. Thank you Kat",
-      "timestamp": "2025-05-25T12:05:53.661000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376169402977882152",
-      "author": {
-        "id": "673901899837341736",
-        "username": "julioverne74",
-        "discriminator": "0",
-        "display_name": "Jose Cordovilla",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 6
-        },
-        {
-          "emoji": "🔥",
-          "count": 1
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        },
-        {
-          "emoji": "☺️",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376174381302026332",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I’d like to nominate <@1359966236473168188>  as well. While I haven’t interacted with her much, I’ve consistently noticed the high quality of her content. She also reached out to me proactively when she saw a post of mine that aligned well with the Gen AI Global branding. As someone who’s been creating social media content lately, I fully understand how challenging it can be to simplify complex ideas. Kudos to Kath &  the content creation team.\n\nAlso, a big shoutout to <@1335299567440367757>  and <@1361976806651068517> . Both have been consistently supporting multiple conversations, and keeping the community thriving.",
-      "timestamp": "2025-05-25T12:25:40.586000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376174381302026332",
+      "content": "I fully support this. Right from the beginning, <@1361976806651068517>  has consistently contributed to keeping the spirit of the community strong.",
+      "timestamp": "2025-06-02T15:36:28.249000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379121499205537843",
       "author": {
         "id": "1349019079683473488",
         "username": "imkprabhat",
@@ -489,79 +93,11 @@
         "bot": false
       },
       "mentions": [
-        "1361976806651068517",
-        "1359966236473168188",
-        "1335299567440367757"
-      ],
-      "reactions": [
         {
-          "emoji": "👍",
-          "count": 3
-        },
-        {
-          "emoji": "❤️",
-          "count": 4
+          "id": "1361976806651068517",
+          "username": "andreahickethier",
+          "display_name": "Andrea Hickethier 🍑 Munich"
         }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376235530982789243",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Mi nomination this week goes to <@1359966236473168188> ! \nFor all the work and effort she is doing ! It echoes trough the entire community",
-      "timestamp": "2025-05-25T16:28:39.806000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376235530982789243",
-      "author": {
-        "id": "758206516753858561",
-        "username": "darkgago",
-        "discriminator": "0",
-        "display_name": "Oscar Garcia",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
-      ],
-      "reactions": [
-        {
-          "emoji": "❤️",
-          "count": 2
-        },
-        {
-          "emoji": "👍",
-          "count": 1
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376490668234506270",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "I also back <@1359966236473168188> and input to this role and topic to the future success and growth of Global GenAI ! Thank you Kat for all your efforts 👏",
-      "timestamp": "2025-05-26T09:22:29.267000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376490668234506270",
-      "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
-        "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [
-        "1359966236473168188"
       ],
       "reactions": [
         {
@@ -576,59 +112,36 @@
       "reference": null
     },
     {
-      "message_id": "1376490841048088636",
+      "message_id": "1379108688538894367",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "and efforts of team behind do not go unnoticed 😉",
-      "timestamp": "2025-05-26T09:23:10.469000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376490841048088636",
+      "content": "This week I want to nominate <@1361976806651068517> for the same reasons as <@1359955242438889545> mentioned!",
+      "timestamp": "2025-06-02T14:45:33.948000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379108688538894367",
       "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
         "discriminator": "0",
-        "display_name": "Marie",
-        "bot": false
-      },
-      "mentions": [],
-      "reactions": [],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1376913422691733504",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "Hello, This week my nomination goes to <@1125194882164736050> for going the extra mile on the Agent Development class (former Discord Managers)",
-      "timestamp": "2025-05-27T13:22:21.784000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376913422691733504",
-      "author": {
-        "id": "1063015906650902549",
-        "username": "snowflake1974",
-        "discriminator": "0",
-        "display_name": "Carlos de March",
+        "display_name": "Shabana Islam",
         "bot": false
       },
       "mentions": [
-        "1125194882164736050"
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        },
+        {
+          "id": "1361976806651068517",
+          "username": "andreahickethier",
+          "display_name": "Andrea Hickethier 🍑 Munich"
+        }
       ],
       "reactions": [
         {
-          "emoji": "🔥",
-          "count": 3
-        },
-        {
-          "emoji": "🙏🏼",
-          "count": 1
-        },
-        {
-          "emoji": "👏",
+          "emoji": "❤️",
           "count": 2
         }
       ],
@@ -639,14 +152,14 @@
       "reference": null
     },
     {
-      "message_id": "1377942105279827978",
+      "message_id": "1379105341173923871",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "Thank you all for the nomination this week. I was a little bit silent as I enjoyed a family holdiay. So many brilliant minds on the list. Everyone deserves it 🥇 . Thank you all for you great work. Andrea",
-      "timestamp": "2025-05-30T09:29:58.825000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1377942105279827978",
+      "content": "This week I want to re-nominante <@1335299567440367757>  for his contribution on content generation, in the ethics & philosophy channel and his work in the Ethical ai Team.",
+      "timestamp": "2025-06-02T14:32:15.874000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379105341173923871",
       "author": {
         "id": "1361976806651068517",
         "username": "andreahickethier",
@@ -654,8 +167,53 @@
         "display_name": "Andrea Hickethier 🍑 Munich",
         "bot": false
       },
-      "mentions": [],
+      "mentions": [
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        }
+      ],
       "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1379085939229331628",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This week my vote is for <@1361976806651068517> for the amazing energy, insightful conversations and knowledge sharing in Ethics & Philosophy Channel, ISO42001 workshop and Buddy Group contributions.",
+      "timestamp": "2025-06-02T13:15:10.090000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379085939229331628",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1361976806651068517",
+          "username": "andreahickethier",
+          "display_name": "Andrea Hickethier 🍑 Munich"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "👍",
+          "count": 2
+        },
         {
           "emoji": "❤️",
           "count": 1
@@ -697,29 +255,23 @@
       "reference": null
     },
     {
-      "message_id": "1379085939229331628",
+      "message_id": "1377942105279827978",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "This week my vote is for <@1361976806651068517> for the amazing energy, insightful conversations and knowledge sharing in Ethics & Philosophy Channel, ISO42001 workshop and Buddy Group contributions.",
-      "timestamp": "2025-06-02T13:15:10.090000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379085939229331628",
+      "content": "Thank you all for the nomination this week. I was a little bit silent as I enjoyed a family holdiay. So many brilliant minds on the list. Everyone deserves it 🥇 . Thank you all for you great work. Andrea",
+      "timestamp": "2025-05-30T09:29:58.825000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1377942105279827978",
       "author": {
-        "id": "1359955242438889545",
-        "username": "marie007532",
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
         "discriminator": "0",
-        "display_name": "Marie",
+        "display_name": "Andrea Hickethier 🍑 Munich",
         "bot": false
       },
-      "mentions": [
-        "1361976806651068517"
-      ],
+      "mentions": [],
       "reactions": [
-        {
-          "emoji": "👍",
-          "count": 2
-        },
         {
           "emoji": "❤️",
           "count": 1
@@ -732,23 +284,94 @@
       "reference": null
     },
     {
-      "message_id": "1379105341173923871",
+      "message_id": "1376913422691733504",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "This week I want to re-nominante <@1335299567440367757>  for his contribution on content generation, in the ethics & philosophy channel and his work in the Ethical ai Team.",
-      "timestamp": "2025-06-02T14:32:15.874000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379105341173923871",
+      "content": "Hello, This week my nomination goes to <@1125194882164736050> for going the extra mile on the Agent Development class (former Discord Managers)",
+      "timestamp": "2025-05-27T13:22:21.784000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376913422691733504",
       "author": {
-        "id": "1361976806651068517",
-        "username": "andreahickethier",
+        "id": "1063015906650902549",
+        "username": "snowflake1974",
         "discriminator": "0",
-        "display_name": "Andrea Hickethier 🍑 Munich",
+        "display_name": "Carlos de March",
         "bot": false
       },
       "mentions": [
-        "1335299567440367757"
+        {
+          "id": "1125194882164736050",
+          "username": "rodrigoreyesjara",
+          "display_name": "Rodrigo Reyes"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 3
+        },
+        {
+          "emoji": "🙏🏼",
+          "count": 1
+        },
+        {
+          "emoji": "👏",
+          "count": 2
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376490841048088636",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "and efforts of team behind do not go unnoticed 😉",
+      "timestamp": "2025-05-26T09:23:10.469000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376490841048088636",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [],
+      "reactions": [],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1376490668234506270",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I also back <@1359966236473168188> and input to this role and topic to the future success and growth of Global GenAI ! Thank you Kat for all your efforts 👏",
+      "timestamp": "2025-05-26T09:22:29.267000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376490668234506270",
+      "author": {
+        "id": "1359955242438889545",
+        "username": "marie007532",
+        "discriminator": "0",
+        "display_name": "Marie",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
       ],
       "reactions": [
         {
@@ -763,29 +386,36 @@
       "reference": null
     },
     {
-      "message_id": "1379108688538894367",
+      "message_id": "1376235530982789243",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "This week I want to nominate <@1361976806651068517> for the same reasons as <@1359955242438889545> mentioned!",
-      "timestamp": "2025-06-02T14:45:33.948000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379108688538894367",
+      "content": "Mi nomination this week goes to <@1359966236473168188> ! \nFor all the work and effort she is doing ! It echoes trough the entire community",
+      "timestamp": "2025-05-25T16:28:39.806000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376235530982789243",
       "author": {
-        "id": "1357376692384960524",
-        "username": "shabana_39556",
+        "id": "758206516753858561",
+        "username": "darkgago",
         "discriminator": "0",
-        "display_name": "Shabana Islam",
+        "display_name": "Oscar Garcia",
         "bot": false
       },
       "mentions": [
-        "1359955242438889545",
-        "1361976806651068517"
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
       ],
       "reactions": [
         {
           "emoji": "❤️",
           "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
         }
       ],
       "attachments": [],
@@ -795,14 +425,14 @@
       "reference": null
     },
     {
-      "message_id": "1379121499205537843",
+      "message_id": "1376174381302026332",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I fully support this. Right from the beginning, <@1361976806651068517>  has consistently contributed to keeping the spirit of the community strong.",
-      "timestamp": "2025-06-02T15:36:28.249000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379121499205537843",
+      "content": "I’d like to nominate <@1359966236473168188>  as well. While I haven’t interacted with her much, I’ve consistently noticed the high quality of her content. She also reached out to me proactively when she saw a post of mine that aligned well with the Gen AI Global branding. As someone who’s been creating social media content lately, I fully understand how challenging it can be to simplify complex ideas. Kudos to Kath &  the content creation team.\n\nAlso, a big shoutout to <@1335299567440367757>  and <@1361976806651068517> . Both have been consistently supporting multiple conversations, and keeping the community thriving.",
+      "timestamp": "2025-05-25T12:25:40.586000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376174381302026332",
       "author": {
         "id": "1349019079683473488",
         "username": "imkprabhat",
@@ -811,40 +441,27 @@
         "bot": false
       },
       "mentions": [
-        "1361976806651068517"
+        {
+          "id": "1361976806651068517",
+          "username": "andreahickethier",
+          "display_name": "Andrea Hickethier 🍑 Munich"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        }
       ],
       "reactions": [
         {
-          "emoji": "❤️",
-          "count": 2
-        }
-      ],
-      "attachments": [],
-      "embeds": 0,
-      "pinned": false,
-      "type": "MessageType.default",
-      "reference": null
-    },
-    {
-      "message_id": "1379139781358784542",
-      "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "guild_id": "1353058864810950737",
-      "guild_name": "Gen AI Global",
-      "content": "This week, I’d like to nominate <@1063015906650902549> — not only for all the incredible support he consistently provides behind the scenes (where not everyone has the privilege of seeing him in action), but also for his dedication, patience, and mastery in teaching us during the Discord Manager 2.0 courses.\n\nCongratulations, Carlos, and thank you so much for everything you do for the community! 🚀🙌",
-      "timestamp": "2025-06-02T16:49:07.054000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379139781358784542",
-      "author": {
-        "id": "1125194882164736050",
-        "username": "rodrigoreyesjara",
-        "discriminator": "0",
-        "display_name": "Rodrigo Reyes",
-        "bot": false
-      },
-      "mentions": [
-        "1063015906650902549"
-      ],
-      "reactions": [
+          "emoji": "👍",
+          "count": 3
+        },
         {
           "emoji": "❤️",
           "count": 4
@@ -857,14 +474,206 @@
       "reference": null
     },
     {
-      "message_id": "1379140893579415564",
+      "message_id": "1376169402977882152",
       "channel_id": "1363518100972245203",
       "channel_name": "📥member-of-the-week-submissions",
       "guild_id": "1353058864810950737",
       "guild_name": "Gen AI Global",
-      "content": "I’d also like to nominate <@1063015906650902549> for all his hard work!",
-      "timestamp": "2025-06-02T16:53:32.228000+00:00",
-      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1379140893579415564",
+      "content": "My nomination also goes to <@1359966236473168188> for her dedication, generosity and excellence. She has put her skills in communication and marketing to work for this community, and her support is helping give visibility to every team and member. Thank you Kat",
+      "timestamp": "2025-05-25T12:05:53.661000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1376169402977882152",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 6
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        },
+        {
+          "emoji": "☺️",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375973131185029161",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I echo the same 🦾",
+      "timestamp": "2025-05-24T23:05:58.819000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375973131185029161",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1352735021093359626",
+          "username": "rad.ai",
+          "display_name": "Rad Ramamurthy"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 3
+        },
+        {
+          "emoji": "🦾",
+          "count": 3
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.reply",
+      "reference": {
+        "message_id": "1375960670662692958",
+        "channel_id": "1363518100972245203",
+        "guild_id": "1353058864810950737"
+      }
+    },
+    {
+      "message_id": "1375960670662692958",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "For this week, I’d like to nominate <@1359966236473168188> for her extreme ownership and impeccable leadership shown on Marketing the Gen AI Global Community to the world. Her eye to detail for brand management, efforts for timely posts, tracking impressions and interactions, making quick strategy amendments, learning and mentoring - shows entrepreneurial qualities nothing less than the world class leaders. Her Never give up attitude, methodical - trust the process - approach, consistency, myriad creative approaches and ideas to gain traction and grow exuberantly, lays a strong, immovable foundation to the growth of this community!",
+      "timestamp": "2025-05-24T22:16:27.999000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375960670662692958",
+      "author": {
+        "id": "1352735021093359626",
+        "username": "rad.ai",
+        "discriminator": "0",
+        "display_name": "Rad Ramamurthy",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "🦾",
+          "count": 3
+        },
+        {
+          "emoji": "💯",
+          "count": 3
+        },
+        {
+          "emoji": "🔥",
+          "count": 3
+        },
+        {
+          "emoji": "🙌",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375957751091691621",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I’d like to nominate <@1359966236473168188> for her leadership in driving growth through content creation and SGU.",
+      "timestamp": "2025-05-24T22:04:51.919000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375957751091691621",
+      "author": {
+        "id": "1335299567440367757",
+        "username": "apoorvgarg88",
+        "discriminator": "0",
+        "display_name": "Apoorv Garg",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "🔥",
+          "count": 2
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375956684748623902",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "For this week I’d like to nominate <@1359966236473168188> for all her hard work, just from what I’ve heard it’s really amazing the growth coming from the content creation team. Also would like to thank  <@1335299567440367757> and <@1352735021093359626> as well !",
+      "timestamp": "2025-05-24T22:00:37.683000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375956684748623902",
       "author": {
         "id": "1143203059820933251",
         "username": "boozeena_49785",
@@ -873,12 +682,343 @@
         "bot": false
       },
       "mentions": [
-        "1063015906650902549"
+        {
+          "id": "1352735021093359626",
+          "username": "rad.ai",
+          "display_name": "Rad Ramamurthy"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        }
       ],
       "reactions": [
         {
           "emoji": "❤️",
           "count": 5
+        },
+        {
+          "emoji": "👍",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1375945752366420191",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My nomination for this week is for <@1335299567440367757> and <@758206516753858561> for their contribution in multiple ways related to learning initiatives for the community!",
+      "timestamp": "2025-05-24T21:17:11.200000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1375945752366420191",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        },
+        {
+          "emoji": "🔥",
+          "count": 1
+        },
+        {
+          "emoji": "💯",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374586668451102727",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "This week, I’d like to nominate <@1359966236473168188>. Many may not directly see everything she does, as her work happens behind the scenes leading the LinkedIn content team—but her contribution has been extraordinary. She’s not only shared her deep knowledge, but also her strong leadership and vision to showcase the power of our community to the outside world.\n\nI also want to highlight <@1335299567440367757>, with whom I’ve had the pleasure of collaborating on several initiatives, and <@758206516753858561>, whose enthusiasm for everything he does is truly inspiring. Both bring a contagious passion that lifts the spirit.",
+      "timestamp": "2025-05-21T03:16:40.344000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374586668451102727",
+      "author": {
+        "id": "1125194882164736050",
+        "username": "rodrigoreyesjara",
+        "discriminator": "0",
+        "display_name": "Rodrigo Reyes",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "758206516753858561",
+          "username": "darkgago",
+          "display_name": "Oscar Garcia"
+        },
+        {
+          "id": "1359966236473168188",
+          "username": "remarkable_sparrow_25173",
+          "display_name": "Katherine Valqui"
+        },
+        {
+          "id": "1335299567440367757",
+          "username": "apoorvgarg88",
+          "display_name": "Apoorv Garg"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 8
+        },
+        {
+          "emoji": "<:plus1green:946531353602691162>",
+          "count": 3
+        },
+        {
+          "emoji": "💯",
+          "count": 3
+        },
+        {
+          "emoji": "🦾",
+          "count": 1
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374417646988169348",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I think this week it’s gonna be Unanimous ! I nominate <@1359955242438889545> and <@1349019079683473488> for their amazing work with the Ethics  Charter !!",
+      "timestamp": "2025-05-20T16:05:02.487000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374417646988169348",
+      "author": {
+        "id": "758206516753858561",
+        "username": "darkgago",
+        "discriminator": "0",
+        "display_name": "Oscar Garcia",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374414046383571164",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "My nomination this week is for <@1359955242438889545> and <@1349019079683473488> for their remarkable work and progress on the ethical charter. Thanks",
+      "timestamp": "2025-05-20T15:50:44.036000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374414046383571164",
+      "author": {
+        "id": "673901899837341736",
+        "username": "julioverne74",
+        "discriminator": "0",
+        "display_name": "Jose Cordovilla",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374273449052078110",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I would like to nominate <@1359955242438889545> and <@1349019079683473488> for this week for the same reasons as Andrea and Amber mentioned.",
+      "timestamp": "2025-05-20T06:32:03.020000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374273449052078110",
+      "author": {
+        "id": "1357376692384960524",
+        "username": "shabana_39556",
+        "discriminator": "0",
+        "display_name": "Shabana Islam",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "🔥",
+          "count": 4
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1374270794779066370",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "I also would like to re-nominate <@1359955242438889545> <@1349019079683473488> for this week for the same reasons as Amber mentioned. Thank you.",
+      "timestamp": "2025-05-20T06:21:30.192000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1374270794779066370",
+      "author": {
+        "id": "1361976806651068517",
+        "username": "andreahickethier",
+        "discriminator": "0",
+        "display_name": "Andrea Hickethier 🍑 Munich",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 5
+        }
+      ],
+      "attachments": [],
+      "embeds": 0,
+      "pinned": false,
+      "type": "MessageType.default",
+      "reference": null
+    },
+    {
+      "message_id": "1373681367015231649",
+      "channel_id": "1363518100972245203",
+      "channel_name": "📥member-of-the-week-submissions",
+      "guild_id": "1353058864810950737",
+      "guild_name": "Gen AI Global",
+      "content": "For this week I’d like to nominate <@1359955242438889545> and <@1349019079683473488> for leading the charter for ethical A.I ! This work is deeply needed and so important as we create the future of A.I together. For this reason I’d like to nominate you as member of the week.",
+      "timestamp": "2025-05-18T15:19:19.662000+00:00",
+      "jump_url": "https://discord.com/channels/1353058864810950737/1363518100972245203/1373681367015231649",
+      "author": {
+        "id": "1143203059820933251",
+        "username": "boozeena_49785",
+        "discriminator": "0",
+        "display_name": "Amber Bellou",
+        "bot": false
+      },
+      "mentions": [
+        {
+          "id": "1349019079683473488",
+          "username": "imkprabhat",
+          "display_name": "Prabhat Kumar"
+        },
+        {
+          "id": "1359955242438889545",
+          "username": "marie007532",
+          "display_name": "Marie"
+        }
+      ],
+      "reactions": [
+        {
+          "emoji": "❤️",
+          "count": 4
+        },
+        {
+          "emoji": "👍",
+          "count": 2
+        },
+        {
+          "emoji": "🔥",
+          "count": 4
         }
       ],
       "attachments": [],
