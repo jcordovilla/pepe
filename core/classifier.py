@@ -1,16 +1,13 @@
-import os
 import re
-from openai import OpenAI
+from core.ai_client import get_ai_client
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4-turbo")
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
+ai_client = get_ai_client()
 
 def classify_resource(resource: dict, use_llm: bool = True) -> str:
     """
     Classify a resource dict into one of:
     Tool, Paper, Tutorial, Event, Job/Opportunity, News/Article, Other.
-    Uses OpenAI Chat API if use_llm is True, else regex-based fallback.
+    Uses local AI if use_llm is True, else regex-based fallback.
     """
     tags = ["Tool", "Paper", "Tutorial", "Event", "Job/Opportunity", "News/Article", "Other"]
 
@@ -30,17 +27,19 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
             f"Context: {resource.get('context_snippet')}\n"
         )
         try:
-            response = openai_client.chat.completions.create(
-                model=GPT_MODEL,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_content}
-                ],
-                max_tokens=10,
-                temperature=0
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content}
+            ]
+            
+            response = ai_client.chat_completion(
+                messages,
+                temperature=0.0,
+                max_tokens=50
             )
+            
             # Extract the tag from the assistant's reply
-            tag = response.choices[0].message.content.strip()
+            tag = response.strip()
             # Normalize to one of the allowed tags
             for t in tags:
                 if t.lower() in tag.lower():
@@ -50,7 +49,7 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
                 return "News/Article"
             return "Other"
         except Exception as e:
-            print(f"OpenAI API error: {e}. Falling back to regex.")
+            print(f"Local AI error: {e}. Falling back to regex.")
             # Fallback to regex if API fails
 
     # Regex-based fallback

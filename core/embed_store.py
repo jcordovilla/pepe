@@ -1,17 +1,22 @@
 # embed_store.py
 
 import os
+import numpy as np
+import pickle
+import faiss
 from db import SessionLocal, Message
-from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
+from core.ai_client import get_ai_client
+from core.config import get_config
 from typing import List, Dict, Any
 
-INDEX_DIR = "index_faiss"
-
-def build_langchain_faiss_index():
+def build_faiss_index():
     """
-    Incrementally embed new messages from the SQLite DB and update the FAISS index.
+    Incrementally embed new messages from the SQLite DB and update the FAISS index using local embeddings.
     """
+    config = get_config()
+    ai_client = get_ai_client()
+    INDEX_DIR = config.faiss_index_path
+    
     print("📚 Loading messages from SQLite DB...")
     session = SessionLocal()
     rows = session.query(Message).all()
@@ -37,7 +42,6 @@ def build_langchain_faiss_index():
         })
         ids.append(str(m.message_id))
 
-    embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
     os.makedirs(INDEX_DIR, exist_ok=True)
     index_path = os.path.join(INDEX_DIR, "index.faiss")
     pkl_path = os.path.join(INDEX_DIR, "index.pkl")
@@ -45,13 +49,18 @@ def build_langchain_faiss_index():
     # Try to load existing index
     if os.path.exists(index_path) and os.path.exists(pkl_path):
         print(f"🔄 Loading existing FAISS index from {INDEX_DIR}/")
-        vectorstore = FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
+        # Load existing index
+        index = faiss.read_index(index_path)
+        with open(pkl_path, "rb") as f:
+            existing_metadatas = pickle.load(f)
+        
         # Get all message_ids already in the index
         existing_ids = set()
-        for meta in vectorstore.docstore._dict.values():
-            mid = meta.metadata.get("message_id")
+        for meta in existing_metadatas:
+            mid = meta.get("message_id")
             if mid:
                 existing_ids.add(str(mid))
+        
         # Find new messages
         new_texts = []
         new_metadatas = []
@@ -59,24 +68,44 @@ def build_langchain_faiss_index():
             if mid not in existing_ids:
                 new_texts.append(text)
                 new_metadatas.append(meta)
+        
         if new_texts:
-            print(f"🧠 Embedding {len(new_texts)} new messages with OpenAI...")
-            vectorstore.add_texts(new_texts, metadatas=new_metadatas)
+            print(f"🧠 Embedding {len(new_texts)} new messages with local model...")
+            new_embeddings = ai_client.create_embeddings(new_texts)
+            
+            # Add to existing index
+            index.add(new_embeddings.astype('float32'))
+            existing_metadatas.extend(new_metadatas)
+            
             print(f"💾 Saving updated index to {INDEX_DIR}/")
-            vectorstore.save_local(INDEX_DIR)
+            faiss.write_index(index, index_path)
+            with open(pkl_path, "wb") as f:
+                pickle.dump(existing_metadatas, f)
             print("✅ Index updated.")
         else:
             print("✅ No new messages to embed. Index is up to date.")
     else:
-        print(f"🧠 Embedding {len(texts)} messages with OpenAI (full rebuild)...")
-        vectorstore = FAISS.from_texts(
-            texts=texts,
-            embedding=embedding_model,
-            metadatas=metadatas
-        )
+        print(f"🧠 Embedding {len(texts)} messages with local model (full rebuild)...")
+        
+        # Create embeddings for all texts
+        embeddings = ai_client.create_embeddings(texts)
+        
+        # Create FAISS index
+        dimension = embeddings.shape[1]
+        index = faiss.IndexFlatIP(dimension)  # Inner product for cosine similarity
+        
+        # Normalize embeddings for cosine similarity
+        faiss.normalize_L2(embeddings.astype('float32'))
+        index.add(embeddings.astype('float32'))
+        
         print(f"💾 Saving index to {INDEX_DIR}/")
-        vectorstore.save_local(INDEX_DIR)
+        faiss.write_index(index, index_path)
+        with open(pkl_path, "wb") as f:
+            pickle.dump(metadatas, f)
         print("✅ Index saved.")
+
+# Legacy function name for compatibility
+build_langchain_faiss_index = build_faiss_index
 
 def flatten_messages(db_path: str) -> List[tuple]:
     """

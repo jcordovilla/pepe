@@ -2,10 +2,9 @@
 
 import os
 from typing import Any, Dict, List, Optional, Union
-from dotenv import load_dotenv
-from openai import OpenAI
-from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
+import numpy as np
+from core.ai_client import get_ai_client
+from core.config import get_config
 from utils.helpers import build_jump_url
 from tools.tools import resolve_channel_name, summarize_messages, validate_data_availability
 from tools.time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
@@ -32,7 +31,7 @@ QUERY_COUNT = Counter('rag_query_total', 'Total number of RAG queries')
 QUERY_ERRORS = Counter('rag_query_errors', 'Number of failed RAG queries')
 QUERY_DURATION = Histogram('rag_query_duration_seconds', 'Time spent processing RAG queries')
 VECTOR_SEARCH_DURATION = Histogram('vector_search_duration_seconds', 'Time spent in vector search')
-OPENAI_API_DURATION = Histogram('openai_api_duration_seconds', 'Time spent in OpenAI API calls')
+AI_API_DURATION = Histogram('ai_api_duration_seconds', 'Time spent in AI API calls')
 
 # Start Prometheus metrics server in a separate thread
 def start_metrics_server(port: int = 8000):
@@ -48,13 +47,68 @@ metrics_thread = threading.Thread(target=start_metrics_server, daemon=True)
 metrics_thread.start()
 
 # ——— Load config & initialize clients ———
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GPT_MODEL       = os.getenv("GPT_MODEL", "gpt-4-turbo-2024-04-09")
-INDEX_DIR       = "index_faiss"
+config = get_config()
+INDEX_DIR = config.faiss_index_path
+ai_client = get_ai_client()
 
-embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
-openai_client   = OpenAI(api_key=OPENAI_API_KEY)
+class LocalVectorStore:
+    """Simple vector store using FAISS with local embeddings."""
+    
+    def __init__(self, index_path: str):
+        self.index_path = index_path
+        self._index = None
+        self._metadata = None
+    
+    def load(self):
+        """Load FAISS index and metadata from disk."""
+        import faiss
+        import pickle
+        
+        try:
+            logger.info("Loading vector store from disk")
+            # Load FAISS index
+            self._index = faiss.read_index(f"{self.index_path}/index.faiss")
+            # Load metadata
+            with open(f"{self.index_path}/index.pkl", "rb") as f:
+                self._metadata = pickle.load(f)
+            logger.info(f"Loaded vector store with {self._index.ntotal} vectors")
+        except Exception as e:
+            logger.error(f"Failed to load vector store: {e}")
+            raise
+    
+    def search(self, query_text: str, k: int = 5) -> List[Dict[str, Any]]:
+        """Search for similar messages."""
+        if self._index is None:
+            self.load()
+        
+        # Create query embedding
+        query_embedding = ai_client.create_embeddings(query_text)
+        if len(query_embedding.shape) == 1:
+            query_embedding = query_embedding.reshape(1, -1)
+        
+        # Search FAISS index
+        scores, indices = self._index.search(query_embedding.astype('float32'), k * 10)  # Get more for filtering
+        
+        # Return metadata for found documents
+        results = []
+        for i, idx in enumerate(indices[0]):
+            if idx >= 0 and idx < len(self._metadata):
+                meta = self._metadata[idx].copy()
+                meta['score'] = float(scores[0][i])
+                results.append(meta)
+        
+        return results
+
+# Global vector store
+_vector_store = None
+
+def load_vectorstore() -> LocalVectorStore:
+    """Load the locally saved FAISS index from disk."""
+    global _vector_store
+    if _vector_store is None:
+        _vector_store = LocalVectorStore(INDEX_DIR)
+        _vector_store.load()
+    return _vector_store
 
 def load_vectorstore() -> FAISS:
     """
@@ -81,7 +135,7 @@ def get_top_k_matches(
     channel_name: Optional[str]  = None
 ) -> List[Dict[str, Any]]:
     """
-    Retrieve the top-k FAISS matches for 'query',
+    Retrieve the top-k matches for 'query',
     optionally scoped to a guild, channel_id, or channel_name
     via manual post-filtering.
     """
@@ -89,11 +143,9 @@ def get_top_k_matches(
         try:
             logger.info(f"Searching for matches: query='{query}', k={k}")
             store = load_vectorstore()
-            # 1) Fetch extra candidates for reliable filtering
-            fetch_k = k * 10
-            retriever = store.as_retriever(search_kwargs={"k": fetch_k})
-            docs = retriever.get_relevant_documents(query)
-            metas = [doc.metadata for doc in docs]
+            
+            # Get search results from local vector store
+            results = store.search(query, k * 10)  # Get extra for filtering
 
             # 2) Resolve a human channel_name to ID if needed
             if channel_name and not channel_id:
@@ -105,14 +157,14 @@ def get_top_k_matches(
 
             # 3) Manual metadata filters
             if guild_id is not None:
-                metas = [m for m in metas if m.get("guild_id") == str(guild_id)]
+                results = [r for r in results if r.get("guild_id") == str(guild_id)]
             if channel_id is not None:
-                metas = [m for m in metas if m.get("channel_id") == str(channel_id)]
+                results = [r for r in results if r.get("channel_id") == str(channel_id)]
 
-            # 4) Always return the top-k regardless of score
-            results = vector_search(metas, k)
-            logger.info(f"Found {len(results)} matches")
-            return results
+            # 4) Return top-k results
+            final_results = vector_search(results, k)
+            logger.info(f"Found {len(final_results)} matches")
+            return final_results
         except Exception as e:
             logger.error(f"Error in vector search: {e}")
             raise
@@ -177,7 +229,7 @@ def get_answer(
     channel_name: Optional[str] = None
 ) -> Any:
     """
-    Perform a RAG-based query: retrieve matches, build a prompt, and ask OpenAI.
+    Perform a RAG-based query: retrieve matches, build a prompt, and ask local AI.
     Returns either a string (answer) or (answer, matches) if return_matches=True.
     """
     try:
@@ -191,14 +243,18 @@ def get_answer(
             return "⚠️ I couldn't find relevant messages. Try rephrasing your question or being more specific."
 
         chat_messages = build_prompt(matches, query, as_json)
-        response = openai_client.chat.completions.create(
-            model=GPT_MODEL,
-            messages=chat_messages,
-            temperature=0.7,
-            max_tokens=1000,
-            **({"response_format": {"type": "json_object"}} if as_json else {})
-        )
-        answer = response.choices[0].message.content
+        
+        with AI_API_DURATION.time():
+            if as_json:
+                # For JSON responses, add specific instruction
+                chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+            
+            answer = ai_client.chat_completion(
+                chat_messages,
+                temperature=0.7,
+                max_tokens=1000
+            )
+        
         return (answer, matches) if return_matches else answer
 
     except Exception as e:
@@ -236,7 +292,7 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             logger.info(f"Using default timeframe: {start_iso} to {end_iso}")
 
         # Get messages for the timeframe
-        with OPENAI_API_DURATION.time():
+        with AI_API_DURATION.time():
             messages = summarize_messages(
                 start_iso=start_iso,
                 end_iso=end_iso,

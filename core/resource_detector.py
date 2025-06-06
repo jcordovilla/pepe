@@ -34,15 +34,13 @@ def is_trash_url(url):
 
 def ai_vet_resource(resource: dict, log_decision: bool = False) -> dict:
     """
-    Use OpenAI to vet if a resource is valuable (not a meeting, internal, or spam).
+    Use local AI to vet if a resource is valuable (not a meeting, internal, or spam).
     Returns a dict: {'is_valuable': bool, 'name': str, 'description': str}
     If log_decision is True, print the AI's answer and reason for each resource.
     """
-    from openai import OpenAI
-    import os
-    api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("GPT_MODEL", "gpt-4-turbo")
-    openai_client = OpenAI(api_key=api_key)
+    from core.ai_client import get_ai_client
+    
+    ai_client = get_ai_client()
     system_prompt = (
         """
         You are a filter for a knowledge resource library. 
@@ -63,18 +61,20 @@ def ai_vet_resource(resource: dict, log_decision: bool = False) -> dict:
         f"Context: {resource.get('context_snippet')}\n"
     )
     try:
-        response = openai_client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_content}
-            ],
-            max_tokens=100,
-            temperature=0
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_content}
+        ]
+        
+        answer = ai_client.chat_completion(
+            messages,
+            temperature=0.0,
+            max_tokens=150
         )
-        answer = response.choices[0].message.content.strip()
+        
         if log_decision:
             print(f"AI vetting for resource: {resource.get('url') or '[no url]'} => {answer}")
+        
         import json as _json
         try:
             parsed = _json.loads(answer)
@@ -304,22 +304,18 @@ def needs_title_fix(resource):
 
 def ai_enrich_title_description(resource):
     """
-    Use OpenAI to generate a high-quality, human-readable title and description for a resource, with robust fallback logic.
+    Use local AI to generate a high-quality, human-readable title and description for a resource, with robust fallback logic.
     - If the LLM returns a title that is a URL or domain, always use a robust fallback.
     - Fallback: use message context (first non-empty, non-URL line) as title if LLM fails.
     - Fallback: use domain-aware label (e.g. 'WSJ Article', 'Axios Article') as last resort.
     - For Google Drive/docs, synthesize a title from the description if all else fails.
     """
-    from openai import OpenAI
-    import os
+    from core.ai_client import get_ai_client
     import json as _json
-    from dotenv import load_dotenv
     import re
     from urllib.parse import urlparse, unquote
-    load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("GPT_MODEL", "gpt-4-turbo")
-    openai_client = OpenAI(api_key=api_key)
+    
+    ai_client = get_ai_client()
 
     def is_bad_title(title):
         if not title:
@@ -382,13 +378,14 @@ Resource URL:
 
     for attempt, prompt in enumerate([base_prompt, strict_prompt]):
         try:
-            response = openai_client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=200,
+            messages = [{"role": "user", "content": prompt}]
+            
+            content = ai_client.chat_completion(
+                messages,
                 temperature=0.5 if attempt == 0 else 0.2,
+                max_tokens=200
             )
-            content = response.choices[0].message.content
+            
             data = _json.loads(content)
             title = postprocess_title(data.get("title"))
             desc = data.get("description")

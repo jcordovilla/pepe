@@ -1,10 +1,13 @@
-import os
-from dotenv import load_dotenv
-from typing import Any
-
-from langchain_openai import ChatOpenAI
+from typing import Any, Dict, List
+import logging
 from langchain.tools import StructuredTool
 from langchain.agents import initialize_agent, AgentType
+from langchain.llms.base import LLM
+from langchain.callbacks.manager import CallbackManagerForLLMRun
+from core.ai_client import get_ai_client
+from core.config import get_config
+
+logger = logging.getLogger(__name__)
 
 from tools.tools import (
     search_messages,
@@ -15,20 +18,31 @@ from tools.tools import (
     resolve_channel_name
 )
 
-# ─── Env & LLM Setup ────────────────────────────────────────────────────────────
+# ─── Local LLM Wrapper for LangChain ────────────────────────────────────────────
 
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable is not set")
+class OllamaLLM(LLM):
+    """LangChain-compatible wrapper for our Ollama AI client."""
+    
+    @property
+    def _llm_type(self) -> str:
+        return "ollama"
+    
+    def _call(
+        self,
+        prompt: str,
+        stop: List[str] = None,
+        run_manager: CallbackManagerForLLMRun = None,
+        **kwargs: Any,
+    ) -> str:
+        """Call the Ollama model via our AI client."""
+        ai_client = get_ai_client()
+        messages = [{"role": "user", "content": prompt}]
+        return ai_client.chat_completion(messages)
 
-MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo")
+# ─── LLM Setup ──────────────────────────────────────────────────────────────────
 
-llm = ChatOpenAI(
-    model_name=MODEL_NAME,
-    openai_api_key=OPENAI_API_KEY,
-    temperature=0.0
-)
+config = get_config()
+llm = OllamaLLM()
 
 # ─── Tool Registry ──────────────────────────────────────────────────────────────
 
@@ -139,14 +153,86 @@ You are a specialized Discord data assistant powered by FAISS vector search and 
 
 # ─── Agent Initialization ────────────────────────────────────────────────────────
 
-agent = initialize_agent(
-    tools=tools,
-    llm=llm,
-    agent=AgentType.OPENAI_FUNCTIONS,
-    verbose=True,
-    system_message=SYSTEM_MESSAGE,
-    handle_parsing_errors=True  # Better error handling for tool parsing
+# Create a simple chain-based agent that works better with local models
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+
+# Create agent prompt
+agent_prompt = PromptTemplate(
+    input_variables=["query", "tools"],
+    template="""You are a helpful Discord bot assistant with access to these tools:
+
+{tools}
+
+User Query: {query}
+
+Think through this step by step:
+1. What type of information is the user asking for?
+2. Which tool(s) would be most helpful?
+3. What parameters should I use?
+
+Based on the user's query, determine the best approach and provide a helpful response. If you need to search for messages, channel information, or summaries, explain what you're looking for and provide relevant results.
+
+Response:"""
 )
+
+# Create the chain
+agent_chain = LLMChain(llm=llm, prompt=agent_prompt)
+
+# Helper function to format tools for the prompt
+def format_tools_for_prompt():
+    tool_descriptions = []
+    for tool in tools:
+        tool_descriptions.append(f"- {tool.name}: {tool.description}")
+    return "\n".join(tool_descriptions)
+
+def execute_agent_query(query: str) -> str:
+    """Execute agent query using local model approach."""
+    try:
+        # First, let the LLM understand the query
+        tools_text = format_tools_for_prompt()
+        response = agent_chain.run(query=query, tools=tools_text)
+        
+        # Simple intent detection and tool calling
+        query_lower = query.lower()
+        
+        # Channel listing
+        if any(word in query_lower for word in ['channel', 'channels', 'list']):
+            try:
+                channels = get_channels()
+                if channels:
+                    channel_list = "\n".join([f"- **{ch['name']}** ({ch['id']})" for ch in channels[:20]])
+                    return f"Here are the available channels:\n{channel_list}\n\n{response}"
+                else:
+                    return "No channels found."
+            except Exception as e:
+                logger.error(f"Error getting channels: {e}")
+        
+        # Message search
+        if any(word in query_lower for word in ['search', 'find', 'message', 'about']):
+            try:
+                # Extract search parameters from query (simplified)
+                search_results = search_messages(query=query, k=5)
+                if search_results:
+                    formatted_results = []
+                    for msg in search_results[:3]:
+                        author = msg.get('author', {}).get('username', 'Unknown')
+                        content = msg.get('content', '')[:100] + '...' if len(msg.get('content', '')) > 100 else msg.get('content', '')
+                        channel = msg.get('channel_name', 'Unknown')
+                        formatted_results.append(f"**{author}** in #{channel}: {content}")
+                    
+                    results_text = "\n".join(formatted_results)
+                    return f"Here are some relevant messages:\n{results_text}\n\n{response}"
+                else:
+                    return f"No messages found for your query. {response}"
+            except Exception as e:
+                logger.error(f"Error searching messages: {e}")
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Agent execution error: {e}")
+        return f"I apologize, but I encountered an error processing your request: {str(e)}"
 
 # ─── Public Entry Point ─────────────────────────────────────────────────────────
 
@@ -167,55 +253,35 @@ def get_agent_answer(query: str) -> Any:
     if not query.strip():
         raise ValueError("Query cannot be empty")
 
-    # Always use search path for common human question patterns
-    search_triggers = [
-        "what was discussed about",
-        "what did people say about",
-        "what did people talk about",
-        "what was said about",
-        "what were the discussions about",
-        "what was talked about",
-        "what was mentioned about",
-        "what did users say about",
-        "what did members say about",
-        "what was the conversation about"
-    ]
-    q_lower = query.strip().lower()
-    if any(q_lower.startswith(trigger) for trigger in search_triggers):
-        try:
-            result = agent.run(query)
-            # Propagate empty list or dict directly
-            if result == [] or result == {}:
-                return result
-            return result
-        except Exception as e:
-            raise Exception(f"Agent failed to process query: {str(e)}")
-
     # Data availability queries
     lower_query = query.lower().strip()
     if any(
         kw in lower_query for kw in [
-            "what data is currently cached", "what data is available", "how many messages", "data availability", "database status", "message count", "what's in the database", "how much data", "how many channels", "date range"
+            "what data is currently cached", "what data is available", "how many messages", 
+            "data availability", "database status", "message count", "what's in the database", 
+            "how much data", "how many channels", "date range"
         ]
     ):
         from tools.tools import validate_data_availability
-        data = validate_data_availability()
-        if data["status"] == "ok":
-            channels = ", ".join([f"{name} ({count})" for name, count in data["channels"].items()])
-            return (
-                f"Data available: {data['count']} messages across {len(data['channels'])} channels. "
-                f"Date range: {data['date_range']['oldest']} to {data['date_range']['newest']}.\n"
-                f"Channels: {channels}"
-            )
-        else:
-            return data["message"]
+        try:
+            data = validate_data_availability()
+            if data.get("status") == "ok":
+                channels = ", ".join([f"{name} ({count})" for name, count in data["channels"].items()])
+                return (
+                    f"Data available: {data['count']} messages across {len(data['channels'])} channels. "
+                    f"Date range: {data['date_range']['oldest']} to {data['date_range']['newest']}.\n"
+                    f"Channels: {channels}"
+                )
+            else:
+                return data.get("message", "Unable to check data availability")
+        except Exception as e:
+            logger.error(f"Data availability check failed: {e}")
+            return "Unable to check data availability at this time."
 
-    # Remove the fallback/clarification for vague queries since we now handle all queries
+    # Use the new simplified agent approach
     try:
-        result = agent.run(query)
-        # Propagate empty list or dict directly
-        if result == [] or result == {}:
-            return result
+        result = execute_agent_query(query)
         return result
     except Exception as e:
-        raise Exception(f"Agent failed to process query: {str(e)}")
+        logger.error(f"Agent failed to process query: {e}")
+        return f"I apologize, but I encountered an error processing your request: {str(e)}"

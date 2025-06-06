@@ -2,14 +2,17 @@ import os
 import discord
 from discord.ext import commands
 from discord import app_commands
-from dotenv import load_dotenv
 from core.agent import get_agent_answer
+from core.config import get_config
 from flask import Flask
 import threading
 import asyncio
 import logging
 import json
 from datetime import datetime
+
+# Load configuration
+config = get_config()
 
 # Create logs directory if it doesn't exist
 logs_dir = 'logs'
@@ -22,21 +25,18 @@ log_filename = os.path.join(logs_dir, f'bot_{timestamp}.log')
 
 # Set up logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=getattr(logging, config.log_level),
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(log_filename, mode='a', encoding='utf-8'),  # Changed to append mode
+        logging.FileHandler(log_filename, mode='a', encoding='utf-8'),
         logging.StreamHandler()
     ],
-    force=True  # Force reconfiguration of the root logger
+    force=True
 )
 logger = logging.getLogger(__name__)
 
-# Load environment variables
-load_dotenv()
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-if not DISCORD_TOKEN:
-    raise ValueError("DISCORD_TOKEN environment variable is not set")
+# Use Discord token from config
+DISCORD_TOKEN = config.discord_token
 
 # Set up Flask app
 app = Flask(__name__)

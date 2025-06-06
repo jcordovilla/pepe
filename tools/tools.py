@@ -5,9 +5,8 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from datetime import datetime
 from db import SessionLocal, Message
-from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from openai import OpenAI
+from core.ai_client import get_ai_client
+from core.config import get_config
 from utils import (
     validate_channel_id,
     validate_guild_id,
@@ -20,9 +19,8 @@ import logging
 from typing import Callable, TypeVar, cast
 from sqlalchemy import func
 import re
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.chat_models import ChatOpenAI
+import numpy as np
+import faiss
 
 # Setup logging
 logging.basicConfig(
@@ -60,18 +58,37 @@ def cache_with_timeout(timeout_seconds: int = 300) -> Callable[[Callable[..., T]
         return cast(Callable[..., T], wrapper)
     return decorator
 
-# setup
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable is not set")
+# Load configuration and AI client
+config = get_config()
+ai_client = get_ai_client()
 
-EMBED_MODEL = "text-embedding-3-small"
-GPT_MODEL   = os.getenv("GPT_MODEL", "gpt-4-turbo")
-INDEX_DIR   = "index_faiss"
+INDEX_DIR = config.faiss_index_path
 
-# init clients
-_embedding = OpenAIEmbeddings(model=EMBED_MODEL, openai_api_key=OPENAI_API_KEY)
-_openai    = OpenAI(api_key=OPENAI_API_KEY)
+# Initialize FAISS store lazily
+_faiss_store = None
+
+def _get_faiss_store():
+    """Get or initialize FAISS store."""
+    global _faiss_store
+    if _faiss_store is None:
+        try:
+            logger.info(f"Loading FAISS index from {INDEX_DIR}")
+            # Load FAISS index
+            index = faiss.read_index(f"{INDEX_DIR}/index.faiss")
+            # Load metadata
+            with open(f"{INDEX_DIR}/index.pkl", "rb") as f:
+                import pickle
+                metadata = pickle.load(f)
+            _faiss_store = {"index": index, "metadata": metadata}
+            logger.info(f"Loaded FAISS index with {index.ntotal} vectors")
+        except Exception as e:
+            logger.error(f"Failed to load FAISS index: {e}")
+            # Create empty index if not found
+            dimension = config.models.embedding_dimension
+            index = faiss.IndexFlatL2(dimension)
+            _faiss_store = {"index": index, "metadata": []}
+            logger.warning("Created empty FAISS index")
+    return _faiss_store
 
 # @cache_with_timeout(timeout_seconds=3600)  # Cache for 1 hour
 # def _load_store() -> FAISS:
@@ -94,15 +111,9 @@ def search_messages(
 ) -> List[Dict[str, Any]]:
     """
     Hybrid search combining FAISS vector similarity with keyword filtering.
-    Optimized for semantic search using text-embedding-3-small model.
+    Uses local embeddings for semantic search.
     """
     logger.info(f"Searching messages with params: query={query}, k={k}, channel_id={channel_id}, channel_name={channel_name}")
-    
-    # Initialize FAISS with OpenAI embeddings
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
-        openai_api_key=OPENAI_API_KEY
-    )
     
     # Get messages from database with filters
     session = SessionLocal()
@@ -125,54 +136,53 @@ def search_messages(
             else:
                 logger.warning(f"No channels found matching name: {channel_name}")
 
-        # Fetch candidates for vectorization
+        # Fetch candidates
         candidates = db_q.order_by(Message.timestamp.desc()).limit(k * 20).all()
         logger.info(f"Found {len(candidates)} candidate messages")
         
         if not candidates:
             return []
 
-        # Prepare texts for vectorization
-        texts = []
-        metadata = []
-        for msg in candidates:
-            # Combine message content with metadata for better semantic matching
-            text = f"{msg.content} - {msg.author.get('username', '')} - {msg.channel_name}"
-            texts.append(text)
-            metadata.append({
-                "message": msg,
-                "text": text
-            })
-            
-        # Create FAISS index
-        vectorstore = FAISS.from_texts(
-            texts,
-            embeddings,
-            metadatas=metadata
-        )
-        
-        # Perform semantic search
+        # If we have a query, use semantic search
         if query:
-            docs = vectorstore.similarity_search(
-                query,
-                k=k * 2  # Fetch more for post-filtering
-            )
+            try:
+                # Use FAISS store for semantic search
+                store = _get_faiss_store()
+                query_embedding = ai_client.create_embeddings(query)
+                
+                if store["index"].ntotal > 0:
+                    # Search in FAISS index
+                    distances, indices = store["index"].search(
+                        query_embedding.reshape(1, -1), min(k * 2, store["index"].ntotal)
+                    )
+                    
+                    # Map back to messages
+                    semantic_results = []
+                    for idx, distance in zip(indices[0], distances[0]):
+                        if idx < len(store["metadata"]):
+                            meta = store["metadata"][idx]
+                            # Find corresponding message in candidates
+                            for msg in candidates:
+                                if (hasattr(meta, 'get') and meta.get('message_id') == msg.message_id) or \
+                                   (isinstance(meta, dict) and meta.get('message_id') == msg.message_id):
+                                    semantic_results.append(msg)
+                                    break
+                    
+                    # Use semantic results if found, otherwise fall back to candidates
+                    messages = semantic_results[:k] if semantic_results else candidates[:k]
+                else:
+                    # No index available, use database results
+                    messages = candidates[:k]
+            except Exception as e:
+                logger.error(f"Semantic search failed: {e}")
+                messages = candidates[:k]
         else:
-            docs = candidates[:k]
+            # No query, just return recent messages
+            messages = candidates[:k]
 
         # Post-process results
         results = []
-        for doc in docs:
-            # Get message from metadata
-            try:
-                msg = doc.metadata["message"]
-            except (KeyError, TypeError, AttributeError) as e:
-                logger.error(f"Error accessing metadata: {str(e)}")
-                continue
-                
-            if not msg:
-                continue
-                
+        for msg in messages:
             # Apply keyword filter if specified
             if keyword and keyword.lower() not in msg.content.lower():
                 continue
@@ -182,6 +192,7 @@ def search_messages(
                 author = msg.author
                 if not (author_name.lower() in author.get("username", "").lower() or 
                        author_name.lower() in author.get("display_name", "").lower()):
+                    continue
                     continue
                     
             # Format result
@@ -301,8 +312,7 @@ def summarize_messages(
     as_json: bool = False
 ) -> Union[str, Dict[str, Any]]:
     """
-    Generate a summary of messages using LangChain's RetrievalQA chain.
-    Optimized for GPT-4 with FAISS vector store for semantic retrieval.
+    Generate a summary of messages using local AI models.
     
     Args:
         start_iso (str): Start timestamp in ISO format
@@ -315,18 +325,6 @@ def summarize_messages(
     Returns:
         Summary text or JSON with messages and metadata
     """
-    # Initialize LangChain components
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
-        openai_api_key=OPENAI_API_KEY
-    )
-    
-    llm = ChatOpenAI(
-        model_name=GPT_MODEL,
-        temperature=0.0,
-        openai_api_key=OPENAI_API_KEY
-    )
-    
     # Get messages from database
     session = SessionLocal()
     try:
@@ -345,47 +343,49 @@ def summarize_messages(
                 "note": "No messages found in timeframe",
                 "messages": []
             } if as_json else "No messages found in timeframe"
-            
-        # Prepare texts for vectorization
-        texts = []
-        metadata = []
+        
+        # Prepare messages for summarization
+        message_texts = []
         for msg in messages:
-            text = f"{msg.content} - {msg.author.get('username', '')} - {msg.channel_name}"
-            texts.append(text)
-            metadata.append({
-                "message": msg,
-                "text": text
-            })
-            
-        # Create FAISS index
-        vectorstore = FAISS.from_texts(
-            texts,
-            embeddings,
-            metadatas=metadata
-        )
+            author_name = msg.author.get('username', 'Unknown')
+            timestamp = msg.timestamp.strftime('%Y-%m-%d %H:%M')
+            message_texts.append(f"[{timestamp}] {author_name}: {msg.content}")
         
-        # Create QA chain
-        qa_chain = RetrievalQA.from_chain_type(
-            llm=llm,
-            chain_type="stuff",
-            retriever=vectorstore.as_retriever(
-                search_kwargs={"k": min(10, len(texts))}
-            ),
-            return_source_documents=True
-        )
+        # Create combined text for summarization
+        combined_text = "\n".join(message_texts)
+        
+        # Generate summary using local AI
+        prompt = f"""Analyze and summarize the following Discord messages. 
+Focus on key topics, discussions, and insights. Be concise but informative:
 
-        # Generate summary
-        prompt = PromptTemplate(
-            input_variables=["context"],
-            template="""Analyze and summarize the following Discord messages. 
-            Focus on key topics, discussions, and insights. Include important quotes:
-            
-            {context}
-            
-            Summary:"""
-        )
+{combined_text}
+
+Summary:"""
         
-        result = qa_chain({"query": "Summarize these messages", "prompt": prompt})
+        summary = ai_client.chat_completion([
+            {"role": "system", "content": "You are a helpful assistant that summarizes Discord conversations concisely."},
+            {"role": "user", "content": prompt}
+        ])
+        
+        # Format output
+        if as_json:
+            return {
+                "summary": summary,
+                "timeframe": f"{start_iso} to {end_iso}",
+                "message_count": len(messages),
+                "messages": [
+                    {
+                        "author": msg.author.get('username', 'Unknown'),
+                        "content": msg.content,
+                        "timestamp": msg.timestamp.isoformat(),
+                        "channel_name": msg.channel_name,
+                        "jump_url": build_jump_url(msg.guild_id, msg.channel_id, msg.message_id)
+                    }
+                    for msg in messages[:10]  # Limit to first 10 messages
+                ]
+            }
+        else:
+            return f"**Summary ({len(messages)} messages from {start_iso} to {end_iso}):**\n{summary}"
         
         # Format output
         if as_json:
