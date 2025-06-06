@@ -4,4 +4,4 @@ __pycache__/
 Leeme_JC.txt
 venv/
 .DS_Store
-jc_logs/
+jc_logs/.DS_Store
