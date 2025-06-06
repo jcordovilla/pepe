@@ -2,11 +2,17 @@
 streamlit>=1.32.0
 pyperclip>=1.8.2
 python-dotenv>=1.0.0
-openai>=1.12.0
+# AI & ML - Local models only
+sentence-transformers>=2.2.0
+torch>=2.0.0
+numpy>=1.24.0
+# Langchain for agent framework (without OpenAI)
 langchain>=0.1.0
 langchain_community>=0.0.30
-langchain-openai>=0.0.5
+# Vector store
 faiss-cpu>=1.7.4
+# HTTP requests for Ollama API
+requests>=2.31.0
 SQLAlchemy>=2.0.0
 pytz>=2024.1
 python-dateutil>=2.8.2
