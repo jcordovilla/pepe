@@ -110,17 +110,6 @@ def load_vectorstore() -> LocalVectorStore:
         _vector_store.load()
     return _vector_store
 
-def load_vectorstore() -> FAISS:
-    """
-    Load the locally saved FAISS index from disk.
-    """
-    try:
-        logger.info("Loading vector store from disk")
-        return FAISS.load_local(INDEX_DIR, embedding_model, allow_dangerous_deserialization=True)
-    except Exception as e:
-        logger.error(f"Failed to load vector store: {e}")
-        raise
-
 def vector_search(metas: List[dict], k: int) -> List[dict]:
     """
     Always return the top-k regardless of score (no threshold filtering).
