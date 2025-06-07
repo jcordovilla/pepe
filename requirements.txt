@@ -6,9 +6,6 @@ python-dotenv>=1.0.0
 sentence-transformers>=2.2.0
 torch>=2.0.0
 numpy>=1.24.0
-# Langchain for agent framework (without OpenAI)
-langchain>=0.1.0
-langchain_community>=0.0.30
 # Vector store
 faiss-cpu>=1.7.4
 # HTTP requests for Ollama API
@@ -27,8 +24,7 @@ pydantic>=1.10.0
 # Web server
 flask>=3.0.0
 
-# Monitoring and metrics
-prometheus-client>=0.19.0
+# Monitoring and logging
 python-json-logger>=2.0.7
 
 # Testing

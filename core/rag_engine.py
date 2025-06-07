@@ -11,13 +11,10 @@ from tools.time_parser import parse_timeframe, extract_time_reference, extract_c
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 import json
-from functools import lru_cache
 from sqlalchemy.orm import Session
 from db import Message, get_db_session
 import logging
 import time
-from prometheus_client import Counter, Histogram, start_http_server
-import threading
 
 # Setup logging
 logging.basicConfig(
@@ -25,26 +22,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-# Prometheus metrics
-QUERY_COUNT = Counter('rag_query_total', 'Total number of RAG queries')
-QUERY_ERRORS = Counter('rag_query_errors', 'Number of failed RAG queries')
-QUERY_DURATION = Histogram('rag_query_duration_seconds', 'Time spent processing RAG queries')
-VECTOR_SEARCH_DURATION = Histogram('vector_search_duration_seconds', 'Time spent in vector search')
-AI_API_DURATION = Histogram('ai_api_duration_seconds', 'Time spent in AI API calls')
-
-# Start Prometheus metrics server in a separate thread
-def start_metrics_server(port: int = 8000):
-    """Start Prometheus metrics server."""
-    try:
-        start_http_server(port)
-        logger.info(f"Metrics server started on port {port}")
-    except Exception as e:
-        logger.error(f"Failed to start metrics server: {e}")
-
-# Start metrics server in background
-metrics_thread = threading.Thread(target=start_metrics_server, daemon=True)
-metrics_thread.start()
 
 # ——— Load config & initialize clients ———
 config = get_config()
@@ -128,35 +105,34 @@ def get_top_k_matches(
     optionally scoped to a guild, channel_id, or channel_name
     via manual post-filtering.
     """
-    with VECTOR_SEARCH_DURATION.time():
-        try:
-            logger.info(f"Searching for matches: query='{query}', k={k}")
-            store = load_vectorstore()
+    try:
+        logger.info(f"Searching for matches: query='{query}', k={k}")
+        store = load_vectorstore()
             
-            # Get search results from local vector store
-            results = store.search(query, k * 10)  # Get extra for filtering
+        # Get search results from local vector store
+        results = store.search(query, k * 10)  # Get extra for filtering
 
-            # 2) Resolve a human channel_name to ID if needed
-            if channel_name and not channel_id:
-                resolved = resolve_channel_name(channel_name, guild_id)
-                if resolved is None:
-                    logger.warning(f"Unknown channel name: {channel_name}")
-                    raise ValueError(f"Unknown channel name: {channel_name}")
-                channel_id = resolved
+        # 2) Resolve a human channel_name to ID if needed
+        if channel_name and not channel_id:
+            resolved = resolve_channel_name(channel_name, guild_id)
+            if resolved is None:
+                logger.warning(f"Unknown channel name: {channel_name}")
+                raise ValueError(f"Unknown channel name: {channel_name}")
+            channel_id = resolved
 
-            # 3) Manual metadata filters
-            if guild_id is not None:
-                results = [r for r in results if r.get("guild_id") == str(guild_id)]
-            if channel_id is not None:
-                results = [r for r in results if r.get("channel_id") == str(channel_id)]
+        # 3) Manual metadata filters
+        if guild_id is not None:
+            results = [r for r in results if r.get("guild_id") == str(guild_id)]
+        if channel_id is not None:
+            results = [r for r in results if r.get("channel_id") == str(channel_id)]
 
-            # 4) Return top-k results
-            final_results = vector_search(results, k)
-            logger.info(f"Found {len(final_results)} matches")
-            return final_results
-        except Exception as e:
-            logger.error(f"Error in vector search: {e}")
-            raise
+        # 4) Return top-k results
+        final_results = vector_search(results, k)
+        logger.info(f"Found {len(final_results)} matches")
+        return final_results
+    except Exception as e:
+        logger.error(f"Error in vector search: {e}")
+        raise
 
 def safe_jump_url(metadata: Dict[str, Any]) -> str:
     """
@@ -233,16 +209,15 @@ def get_answer(
 
         chat_messages = build_prompt(matches, query, as_json)
         
-        with AI_API_DURATION.time():
-            if as_json:
-                # For JSON responses, add specific instruction
-                chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
-            
-            answer = ai_client.chat_completion(
-                chat_messages,
-                temperature=0.7,
-                max_tokens=1000
-            )
+        if as_json:
+            # For JSON responses, add specific instruction
+            chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+        
+        answer = ai_client.chat_completion(
+            chat_messages,
+            temperature=0.7,
+            max_tokens=1000
+        )
         
         return (answer, matches) if return_matches else answer
 
@@ -255,7 +230,6 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
     Process a natural language query and return a response.
     Handles time-based, channel-specific, and content-based queries.
     """
-    QUERY_COUNT.inc()
     start_time = time.time()
     
     try:
@@ -281,13 +255,12 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             logger.info(f"Using default timeframe: {start_iso} to {end_iso}")
 
         # Get messages for the timeframe
-        with AI_API_DURATION.time():
-            messages = summarize_messages(
-                start_iso=start_iso,
-                end_iso=end_iso,
-                channel_id=channel_id,
-                as_json=True
-            )
+        messages = summarize_messages(
+            start_iso=start_iso,
+            end_iso=end_iso,
+            channel_id=channel_id,
+            as_json=True
+        )
 
         if isinstance(messages, str):
             # Handle error messages
@@ -331,38 +304,12 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
         return response
 
     except Exception as e:
-        QUERY_ERRORS.inc()
         logger.error(f"Error processing query: {e}")
         return f"❌ Error processing query: {str(e)}"
     finally:
         duration = time.time() - start_time
-        QUERY_DURATION.observe(duration)
         logger.info(f"Query completed in {duration:.2f} seconds")
 
-# ——— Convenience aliases for the app ———
-search_messages    = get_top_k_matches
+# Convenience aliases for the app
+search_messages = get_top_k_matches
 discord_rag_search = get_answer
-
-def preprocess_query(query: str) -> Dict[str, Any]:
-    """Extract and validate query components."""
-    components = {
-        "time_reference": extract_time_reference(query),
-        "channel_reference": extract_channel_reference(query),
-        "content_reference": extract_content_reference(query)
-    }
-    
-    # Validate components
-    if not any(components.values()):
-        raise ValueError("Query must contain at least one valid reference")
-    
-    return components
-
-def log_query_performance(query: str, duration: float, success: bool):
-    """Log query performance metrics."""
-    with open("query_performance.log", "a") as f:
-        f.write(json.dumps({
-            "timestamp": datetime.now().isoformat(),
-            "query": query,
-            "duration": duration,
-            "success": success
-        }) + "\n")

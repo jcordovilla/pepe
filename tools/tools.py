@@ -13,10 +13,8 @@ from utils import (
     validate_channel_name
 )
 from utils.helpers import build_jump_url
-from functools import lru_cache
 import time
 import logging
-from typing import Callable, TypeVar, cast
 from sqlalchemy import func
 import re
 import numpy as np
@@ -28,35 +26,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-# Type variable for generic function typing
-T = TypeVar('T')
-
-# Helper: cache_with_timeout
-
-def cache_with_timeout(timeout_seconds: int = 300) -> Callable[[Callable[..., T]], Callable[..., T]]:
-    """
-    Cache decorator with timeout.
-    Args:
-        timeout_seconds: Cache timeout in seconds (default: 5 minutes)
-    """
-    def decorator(func: Callable[..., T]) -> Callable[..., T]:
-        cache = {}
-        last_updated = {}
-        def wrapper(*args: Any, **kwargs: Any) -> T:
-            key = f"{func.__name__}:{str(args)}:{str(kwargs)}"
-            current_time = time.time()
-            if key in cache and key in last_updated:
-                if current_time - last_updated[key] < timeout_seconds:
-                    logger.debug(f"Cache hit for {func.__name__}")
-                    return cache[key]
-            result = func(*args, **kwargs)
-            cache[key] = result
-            last_updated[key] = current_time
-            logger.debug(f"Cache miss for {func.__name__}")
-            return result
-        return cast(Callable[..., T], wrapper)
-    return decorator
 
 # Load configuration and AI client
 config = get_config()
@@ -89,16 +58,6 @@ def _get_faiss_store():
             _faiss_store = {"index": index, "metadata": []}
             logger.warning("Created empty FAISS index")
     return _faiss_store
-
-# @cache_with_timeout(timeout_seconds=3600)  # Cache for 1 hour
-# def _load_store() -> FAISS:
-#     """Load the FAISS index from disk."""
-#     try:
-#         logger.info("Loading FAISS index from disk")
-#         return FAISS.load_local(INDEX_DIR, _embedding, allow_dangerous_deserialization=True)
-#     except Exception as e:
-#         logger.error(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
-#         raise RuntimeError(f"Failed to load FAISS index from {INDEX_DIR}: {e}")
 
 def search_messages(
     query: Optional[str] = None,
@@ -193,7 +152,6 @@ def search_messages(
                 if not (author_name.lower() in author.get("username", "").lower() or 
                        author_name.lower() in author.get("display_name", "").lower()):
                     continue
-                    continue
                     
             # Format result
             results.append({
@@ -223,8 +181,6 @@ def search_messages(
         session.close()
 
 # Helper: resolve_channel_name
-@cache_with_timeout(timeout_seconds=300)  # Cache for 5 minutes
-
 def resolve_channel_name(*args, **kwargs) -> Optional[int]:
     """
     Given a human-friendly channel_name (e.g. "non-coders-learning")
