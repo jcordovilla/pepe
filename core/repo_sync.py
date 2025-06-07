@@ -150,7 +150,10 @@ def sync_to_json(output_path: str = "docs/resources/resources.json",
         resources = execute_query(get_filtered_resources)
         logger.info(f"Retrieved {len(resources)} resources from database")
         
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        # Create output directory if path contains a directory
+        output_dir = os.path.dirname(output_path)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
         
         resource_dicts = []
         processed_count = 0
