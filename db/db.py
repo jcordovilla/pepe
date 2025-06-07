@@ -1,7 +1,7 @@
 # db.py
 
 from sqlalchemy import (
-    Column, Integer, String, Text, DateTime, JSON, create_engine
+    Column, Integer, String, Text, DateTime, JSON, Boolean, create_engine
 )
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.pool import QueuePool
@@ -81,6 +81,43 @@ class Message(Base):
     reactions = Column(JSON, nullable=False)    # list of {emoji, count}
     jump_url = Column(String, nullable=True)
     resource_detected = Column(Integer, default=0, nullable=False)  # 0 = not detected, 1 = detected
+    
+    # New essential metadata fields
+    edited_at = Column(DateTime, nullable=True)  # when message was last edited
+    type = Column(String, nullable=True)         # message type (default, reply, system, etc.)
+    flags = Column(Integer, default=0, nullable=False)  # message flags bitmask
+    tts = Column(Boolean, default=False, nullable=False)  # text-to-speech flag
+    pinned = Column(Boolean, default=False, nullable=False)  # whether message is pinned
+    
+    # Rich content fields
+    embeds = Column(JSON, nullable=True)         # rich embed objects
+    attachments = Column(JSON, nullable=True)    # file attachments with metadata
+    stickers = Column(JSON, nullable=True)       # sticker objects
+    components = Column(JSON, nullable=True)     # interactive components (buttons, select menus)
+    
+    # Reply/thread context
+    reference = Column(JSON, nullable=True)      # message reference for replies
+    thread = Column(JSON, nullable=True)         # associated thread information
+    
+    # Advanced metadata
+    webhook_id = Column(String, nullable=True)   # if sent by webhook
+    application_id = Column(String, nullable=True)  # if sent by application
+    application = Column(JSON, nullable=True)    # application data
+    activity = Column(JSON, nullable=True)       # rich presence activity
+    poll = Column(JSON, nullable=True)           # poll data if message contains poll
+    
+    # Raw mention arrays
+    raw_mentions = Column(JSON, nullable=True)         # raw user mention data
+    raw_channel_mentions = Column(JSON, nullable=True) # raw channel mention data
+    raw_role_mentions = Column(JSON, nullable=True)    # raw role mention data
+    
+    # Derived content
+    clean_content = Column(Text, nullable=True)       # content with mentions resolved to names
+    system_content = Column(Text, nullable=True)      # system message content
+    
+    # Additional mention data
+    channel_mentions = Column(JSON, nullable=True)    # mentioned channel IDs
+    role_mentions = Column(JSON, nullable=True)       # mentioned role IDs
 
 class Resource(Base):
     __tablename__ = "resources"

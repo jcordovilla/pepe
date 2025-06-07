@@ -22,6 +22,31 @@ This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG
 - **🖥️ Streamlit UI:** User-friendly web interface for searching, filtering, and copying results
 - **🤖 Discord Bot Integration:** Interact with users in Discord channels, answer queries, detect resources, and classify content
 - **⚙️ Batch Processing Tools:** Scripts for fetching, migrating, and batch-processing messages and resources
+- **🎯 Comprehensive Message Capture:** Enhanced Discord API integration capturing all message fields including embeds, attachments, replies, polls, and rich metadata
+
+### 🆕 Enhanced Discord Message Fields (v0.5)
+
+The system now captures **all available Discord API message fields** for comprehensive analysis:
+
+**📋 Core Enhancements:**
+- **Rich Content:** Embeds, attachments, stickers, interactive components
+- **Message Context:** Reply chains, thread relationships, edit history
+- **Metadata:** Message types, flags, TTS, pinned status, system messages
+- **Bot Integration:** Webhook detection, application data, polls
+- **Advanced Mentions:** Raw mention arrays, resolved content, role/channel mentions
+
+**🎨 Rich Content Types Captured:**
+- File attachments with metadata (dimensions, file type, size)
+- Rich embeds with images, videos, and formatted content
+- Discord stickers and custom emoji usage
+- Interactive components (buttons, select menus)
+- Poll data with questions, answers, and voting metadata
+
+**🔗 Conversation Analysis:**
+- Reply threading and conversation chains
+- Message edit tracking and history
+- Cross-channel references and mentions
+- Thread starter identification and archival status
 
 ### 🎯 Embedding Model Optimization (v0.4)
 
