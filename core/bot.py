@@ -79,21 +79,46 @@ async def pepe(interaction: discord.Interaction, query: str):
         # Acknowledge the interaction first
         await interaction.response.defer(ephemeral=False)
         
-        # Get the response from the agent
+        # Import analyze_query_type for debugging capabilities
+        from core.agent import analyze_query_type
+        
+        # Analyze query for logging and debugging
+        query_analysis = analyze_query_type(query)
+        logger.info(f"Query analysis: {json.dumps(query_analysis)}")
+        
+        # Get the response from the enhanced agent
         response = get_agent_answer(query)
 
-        # Log the agent's response
+        # Log the agent's response with analysis info
         response_log = {
             'timestamp': datetime.utcnow().isoformat(),
             'query': query,
+            'query_type': query_analysis.get('query_type', 'unknown'),
+            'strategy': query_analysis.get('strategy', 'unknown'),
+            'confidence': query_analysis.get('confidence', 0.0),
             'response_type': type(response).__name__,
             'response_length': len(str(response)) if isinstance(response, (str, list, dict)) else 0,
-            'response_content': str(response) if isinstance(response, (str, dict)) else [str(msg) for msg in response] if isinstance(response, list) else None
         }
         logger.info(f"Agent response: {json.dumps(response_log, ensure_ascii=False)}")
 
-        # Add header with user's question
-        header = f"**Question:** {query}\n\n"
+        # Add enhanced header with query analysis for transparency
+        strategy_emojis = {
+            'data_status': '📊',
+            'channel_list': '📋', 
+            'resources_only': '📚',
+            'hybrid_search': '🔍',
+            'agent_summary': '📝',
+            'messages_only': '💬'
+        }
+        
+        strategy = query_analysis.get('strategy', 'messages_only')
+        emoji = strategy_emojis.get(strategy, '🤖')
+        
+        header = f"{emoji} **Question:** {query}\n"
+        if query_analysis.get('confidence', 0) > 0.8:
+            header += f"*Using {strategy.replace('_', ' ').title()} Strategy*\n\n"
+        else:
+            header += "\n"
 
         if isinstance(response, list):
             if not response:

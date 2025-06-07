@@ -1,3 +1,22 @@
+"""
+Enhanced tools system for Discord bot queries with 768D embedding architecture.
+
+Features:
+- Hybrid semantic search using msmarco-distilbert-base-v4 (768D)
+- Multi-tier FAISS index support (community, enhanced, standard)
+- Intelligent channel resolution and validation
+- Comprehensive message summarization with local AI
+- Data availability validation and reporting
+- Robust error handling and fallback mechanisms
+
+Architecture:
+- Integrates with upgraded 768D embedding model for superior semantic understanding
+- Supports multiple FAISS indices for different use cases
+- Uses local AI client for summarization and processing
+- Provides comprehensive metadata for message results
+- Compatible with enhanced RAG engine capabilities
+"""
+
 # tools.py
 
 import os
@@ -22,8 +41,10 @@ import faiss
 
 try:
     from sentence_transformers import SentenceTransformer
+    SENTENCE_TRANSFORMERS_AVAILABLE = True
 except ImportError:
-    SentenceTransformer = None
+    SentenceTransformer = None  
+    SENTENCE_TRANSFORMERS_AVAILABLE = False
 
 # Setup logging
 logging.basicConfig(
@@ -42,9 +63,101 @@ INDEX_DIR = config.faiss_index_path
 _faiss_store = None
 _enhanced_faiss_store = None
 _community_faiss_store = None
+_embedding_model = None
+
+def get_768d_embedding_model():
+    """
+    Get the 768D embedding model (msmarco-distilbert-base-v4) with proper error handling.
+    Returns None if unavailable and logs appropriate warnings.
+    """
+    global _embedding_model
+    
+    if _embedding_model is not None:
+        return _embedding_model
+    
+    if not SENTENCE_TRANSFORMERS_AVAILABLE:
+        logger.warning(
+            "SentenceTransformers library not available. "
+            "Install with: pip install sentence-transformers"
+        )
+        return None
+        
+    try:
+        logger.info("Loading msmarco-distilbert-base-v4 embedding model (768D)...")
+        _embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
+        logger.info("Successfully loaded 768D embedding model")
+        return _embedding_model
+    except Exception as e:
+        logger.error(f"Failed to load 768D embedding model: {e}")
+        return None
+
+def create_query_embedding(query: str) -> Optional[np.ndarray]:
+    """
+    Create embedding for query using the 768D model with fallback support.
+    
+    Args:
+        query: Query string to embed
+        
+    Returns:
+        768-dimensional embedding array or None if failed
+    """
+    if not query or not query.strip():
+        logger.warning("Empty query provided for embedding")
+        return None
+        
+    # Primary: Use 768D SentenceTransformer model
+    model = get_768d_embedding_model()
+    if model is not None:
+        try:
+            embedding = model.encode([query.strip()], convert_to_numpy=True)
+            logger.debug(f"Created 768D embedding for query (shape: {embedding.shape})")
+            return embedding
+        except Exception as e:
+            logger.error(f"Failed to create embedding with SentenceTransformer: {e}")
+    
+    # Fallback: Use AI client
+    try:
+        logger.info("Falling back to AI client for embeddings")
+        embedding = ai_client.create_embeddings(query.strip())
+        if isinstance(embedding, np.ndarray):
+            return embedding.reshape(1, -1)
+        else:
+            logger.warning("AI client returned non-array embedding")
+            return None
+    except Exception as e:
+        logger.error(f"Failed to create embedding with AI client: {e}")
+        return None
+
+def validate_embedding_compatibility(embedding: np.ndarray, expected_dim: int = 768) -> bool:
+    """
+    Validate embedding dimensions for 768D architecture compatibility.
+    
+    Args:
+        embedding: Embedding array to validate
+        expected_dim: Expected embedding dimension (default 768)
+        
+    Returns:
+        True if compatible, False otherwise
+    """
+    if embedding is None:
+        return False
+    
+    if not isinstance(embedding, np.ndarray):
+        logger.warning(f"Embedding is not numpy array: {type(embedding)}")
+        return False
+        
+    if len(embedding.shape) != 2:
+        logger.warning(f"Embedding has wrong shape: {embedding.shape}")
+        return False
+        
+    if embedding.shape[1] != expected_dim:
+        logger.warning(f"Embedding dimension mismatch: {embedding.shape[1]} != {expected_dim}")
+        return False
+        
+    return True
 
 def _get_community_faiss_store():
-    """Get or initialize community-focused FAISS store."""
+    """Get or initialize community-focused FAISS store with enhanced error handling."""
     global _community_faiss_store
     if _community_faiss_store is None:
         try:
@@ -57,14 +170,18 @@ def _get_community_faiss_store():
                 base_name = latest_index.replace('.index', '')
                 metadata_file = f"{base_name}_metadata.json"
                 
+                if not os.path.exists(metadata_file):
+                    logger.error(f"Metadata file not found: {metadata_file}")
+                    _community_faiss_store = None
+                    return None
+                
                 logger.info(f"Loading community FAISS index from {latest_index}")
                 # Load FAISS index
                 index = faiss.read_index(latest_index)
                 # Load metadata
                 with open(metadata_file, "r") as f:
-                    import json
                     data = json.load(f)
-                    metadata = data["metadata"]
+                    metadata = data.get("metadata", [])
                 
                 _community_faiss_store = {"index": index, "metadata": metadata}
                 logger.info(f"Loaded community FAISS index with {index.ntotal} vectors")
@@ -77,7 +194,7 @@ def _get_community_faiss_store():
     return _community_faiss_store
 
 def _get_enhanced_faiss_store():
-    """Get or initialize enhanced FAISS store."""
+    """Get or initialize enhanced FAISS store with enhanced error handling."""
     global _enhanced_faiss_store
     if _enhanced_faiss_store is None:
         try:
@@ -90,14 +207,18 @@ def _get_enhanced_faiss_store():
                 base_name = latest_index.replace('.index', '')
                 metadata_file = f"{base_name}_metadata.json"
                 
+                if not os.path.exists(metadata_file):
+                    logger.error(f"Metadata file not found: {metadata_file}")
+                    _enhanced_faiss_store = None
+                    return None
+                
                 logger.info(f"Loading enhanced FAISS index from {latest_index}")
                 # Load FAISS index
                 index = faiss.read_index(latest_index)
                 # Load metadata
                 with open(metadata_file, "r") as f:
-                    import json
                     data = json.load(f)
-                    metadata = data["metadata"]
+                    metadata = data.get("metadata", [])
                 
                 _enhanced_faiss_store = {"index": index, "metadata": metadata}
                 logger.info(f"Loaded enhanced FAISS index with {index.ntotal} vectors")
@@ -109,40 +230,44 @@ def _get_enhanced_faiss_store():
             _enhanced_faiss_store = None
     return _enhanced_faiss_store
 
-def _create_embedding_with_correct_model(text: str):
-    """Create embedding using the correct model that matches the enhanced index."""
-    try:
-        from sentence_transformers import SentenceTransformer
-        # Use the same model that was used to build the enhanced index
-        model = SentenceTransformer("msmarco-distilbert-base-v4")
-        embedding = model.encode([text])
-        return embedding
-    except Exception as e:
-        logger.error(f"Failed to create embedding with correct model: {e}")
-        # Fall back to AI client
-        return ai_client.create_embeddings(text)
-
 def _get_faiss_store():
-    """Get or initialize FAISS store."""
+    """Get or initialize standard FAISS store with enhanced error handling."""
     global _faiss_store
     if _faiss_store is None:
         try:
-            logger.info(f"Loading FAISS index from {INDEX_DIR}")
+            logger.info(f"Loading standard FAISS index from {INDEX_DIR}")
+            index_path = f"{INDEX_DIR}/index.faiss"
+            metadata_path = f"{INDEX_DIR}/index.pkl"
+            
+            if not os.path.exists(index_path):
+                logger.warning(f"Standard FAISS index not found at {index_path}")
+                # Create empty index if not found
+                dimension = config.models.embedding_dimension
+                index = faiss.IndexFlatL2(dimension)
+                _faiss_store = {"index": index, "metadata": []}
+                logger.warning("Created empty standard FAISS index")
+                return _faiss_store
+            
             # Load FAISS index
-            index = faiss.read_index(f"{INDEX_DIR}/index.faiss")
+            index = faiss.read_index(index_path)
             # Load metadata
-            with open(f"{INDEX_DIR}/index.pkl", "rb") as f:
-                import pickle
-                metadata = pickle.load(f)
+            if os.path.exists(metadata_path):
+                with open(metadata_path, "rb") as f:
+                    import pickle
+                    metadata = pickle.load(f)
+            else:
+                logger.warning(f"Metadata file not found: {metadata_path}")
+                metadata = []
+                
             _faiss_store = {"index": index, "metadata": metadata}
-            logger.info(f"Loaded FAISS index with {index.ntotal} vectors")
+            logger.info(f"Loaded standard FAISS index with {index.ntotal} vectors")
         except Exception as e:
-            logger.error(f"Failed to load FAISS index: {e}")
-            # Create empty index if not found
+            logger.error(f"Failed to load standard FAISS index: {e}")
+            # Create empty index if loading failed
             dimension = config.models.embedding_dimension
             index = faiss.IndexFlatL2(dimension)
             _faiss_store = {"index": index, "metadata": []}
-            logger.warning("Created empty FAISS index")
+            logger.warning("Created empty standard FAISS index due to loading error")
     return _faiss_store
 
 def search_messages(
@@ -191,136 +316,123 @@ def search_messages(
         # If we have a query, use semantic search
         if query:
             try:
-                # Try community FAISS store first (best features)
-                community_store = _get_community_faiss_store()
-                enhanced_store = _get_enhanced_faiss_store()
-                
-                semantic_results = []
-                
-                if community_store and community_store["index"].ntotal > 0:
-                    logger.info("Using community FAISS index for semantic search")
-                    # Use correct embedding model for community index
-                    try:
-                        if SentenceTransformer is not None:
-                            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
-                            query_embedding = embedding_model.encode([query])
-                        else:
-                            query_embedding = ai_client.create_embeddings(query)
-                            query_embedding = query_embedding.reshape(1, -1)
-                    except Exception as e:
-                        logger.error(f"Failed to load correct embedding model: {e}")
-                        query_embedding = ai_client.create_embeddings(query)
-                        query_embedding = query_embedding.reshape(1, -1)
-                    
-                    # Search in community FAISS index
-                    distances, indices = community_store["index"].search(
-                        query_embedding, min(k * 2, community_store["index"].ntotal)
-                    )
-                    
-                    logger.info(f"Community search returned indices: {indices[0][:5]}")
-                    
-                    # Map back to messages using community metadata
-                    semantic_messages = []
-                    for idx, distance in zip(indices[0], distances[0]):
-                        if 0 <= idx < len(community_store["metadata"]):
-                            meta = community_store["metadata"][idx]
-                            message_id = meta.get('message_id')
-                            
-                            # First try to find in candidates for efficiency
-                            found_in_candidates = False
-                            for msg in candidates:
-                                if msg.message_id == message_id:
-                                    semantic_messages.append(msg)
-                                    found_in_candidates = True
-                                    logger.info(f"Found candidate match for message_id: {message_id}")
-                                    break
-                            
-                            # If not in candidates, query database directly
-                            if not found_in_candidates:
-                                try:
-                                    msg = session.query(Message).filter(Message.message_id == message_id).first()
-                                    if msg:
-                                        # Apply filters
-                                        if guild_id and msg.guild_id != guild_id:
-                                            continue
-                                        if channel_id and msg.channel_id != channel_id:
-                                            continue
-                                        elif channel_name and channel_name.lower() not in msg.channel_name.lower():
-                                            continue
-                                        
-                                        semantic_messages.append(msg)
-                                        logger.info(f"Found database match for message_id: {message_id}")
-                                except Exception as e:
-                                    logger.warning(f"Error querying message {message_id}: {e}")
-                                    continue
-                        else:
-                            logger.warning(f"Invalid index {idx} (metadata size: {len(community_store['metadata'])})")
-                    
-                    semantic_results = semantic_messages
-                    logger.info(f"Community search found {len(semantic_results)} semantic results")
-                
-                # Fall back to enhanced FAISS if community search didn't work
-                elif enhanced_store and enhanced_store["index"].ntotal > 0:
-                    logger.info("Using enhanced FAISS index for semantic search")
-                    # Use correct embedding model for enhanced index
-                    try:
-                        if SentenceTransformer is not None:
-                            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
-                            query_embedding = embedding_model.encode([query])
-                        else:
-                            query_embedding = ai_client.create_embeddings(query)
-                            query_embedding = query_embedding.reshape(1, -1)
-                    except Exception as e:
-                        logger.error(f"Failed to load correct embedding model: {e}")
-                        query_embedding = ai_client.create_embeddings(query)
-                        query_embedding = query_embedding.reshape(1, -1)
-                    
-                    # Search in enhanced FAISS index
-                    distances, indices = enhanced_store["index"].search(
-                        query_embedding, min(k * 2, enhanced_store["index"].ntotal)
-                    )
-                    
-                    logger.info(f"Enhanced search returned indices: {indices[0][:5]}")
-                    
-                    # Map back to messages using enhanced metadata
-                    for idx, distance in zip(indices[0], distances[0]):
-                        if 0 <= idx < len(enhanced_store["metadata"]):
-                            meta = enhanced_store["metadata"][idx]
-                            # Find corresponding message in candidates
-                            for msg in candidates:
-                                if meta.get('message_id') == msg.message_id:
-                                    semantic_results.append(msg)
-                                    logger.info(f"Found match for message_id: {msg.message_id}")
-                                    break
-                        else:
-                            logger.warning(f"Invalid index {idx} (metadata size: {len(enhanced_store['metadata'])})")
-                    
-                    logger.info(f"Enhanced search found {len(semantic_results)} semantic results")
-                
-                # If no enhanced results, fall back to regular FAISS
-                if not semantic_results:
-                    logger.info("Falling back to regular FAISS index")
-                    store = _get_faiss_store()
-                    
-                    if store["index"].ntotal > 0:
-                        # Search in regular FAISS index
-                        distances, indices = store["index"].search(
-                            query_embedding.reshape(1, -1), min(k * 2, store["index"].ntotal)
-                        )
+                # Create query embedding using enhanced 768D model
+                query_embedding = create_query_embedding(query)
+                if query_embedding is None:
+                    logger.error("Failed to create query embedding, falling back to keyword search")
+                    messages = candidates[:k]
+                else:
+                    # Validate embedding compatibility
+                    if not validate_embedding_compatibility(query_embedding):
+                        logger.error("Query embedding not compatible with 768D architecture")
+                        messages = candidates[:k]
+                    else:
+                        # Try community FAISS store first (best features)
+                        community_store = _get_community_faiss_store()
+                        enhanced_store = _get_enhanced_faiss_store()
                         
-                        # Map back to messages
-                        for idx, distance in zip(indices[0], distances[0]):
-                            if idx < len(store["metadata"]):
-                                meta = store["metadata"][idx]
-                                # Find corresponding message in candidates
-                                for msg in candidates:
-                                    if (hasattr(meta, 'get') and meta.get('message_id') == msg.message_id) or \
-                                       (isinstance(meta, dict) and meta.get('message_id') == msg.message_id):
-                                        semantic_results.append(msg)
-                                        break
-                
-                # Use semantic results if found, otherwise fall back to candidates
-                messages = semantic_results[:k] if semantic_results else candidates[:k]
+                        semantic_results = []
+                        
+                        if community_store and community_store["index"].ntotal > 0:
+                            logger.info("Using community FAISS index for semantic search")
+                            
+                            # Search in community FAISS index
+                            distances, indices = community_store["index"].search(
+                                query_embedding, min(k * 2, community_store["index"].ntotal)
+                            )
+                            
+                            logger.info(f"Community search returned indices: {indices[0][:5]}")
+                            
+                            # Map back to messages using community metadata
+                            semantic_messages = []
+                            for idx, distance in zip(indices[0], distances[0]):
+                                if 0 <= idx < len(community_store["metadata"]):
+                                    meta = community_store["metadata"][idx]
+                                    message_id = meta.get('message_id')
+                                    
+                                    # First try to find in candidates for efficiency
+                                    found_in_candidates = False
+                                    for msg in candidates:
+                                        if msg.message_id == message_id:
+                                            semantic_messages.append(msg)
+                                            found_in_candidates = True
+                                            logger.info(f"Found candidate match for message_id: {message_id}")
+                                            break
+                                    
+                                    # If not in candidates, query database directly
+                                    if not found_in_candidates:
+                                        try:
+                                            msg = session.query(Message).filter(Message.message_id == message_id).first()
+                                            if msg:
+                                                # Apply filters
+                                                if guild_id and msg.guild_id != guild_id:
+                                                    continue
+                                                if channel_id and msg.channel_id != channel_id:
+                                                    continue
+                                                elif channel_name and channel_name.lower() not in msg.channel_name.lower():
+                                                    continue
+                                                
+                                                semantic_messages.append(msg)
+                                                logger.info(f"Found database match for message_id: {message_id}")
+                                        except Exception as e:
+                                            logger.warning(f"Error querying message {message_id}: {e}")
+                                            continue
+                                else:
+                                    logger.warning(f"Invalid index {idx} (metadata size: {len(community_store['metadata'])})")
+                            
+                            semantic_results = semantic_messages
+                            logger.info(f"Community search found {len(semantic_results)} semantic results")
+                        
+                        # Fall back to enhanced FAISS if community search didn't work
+                        elif enhanced_store and enhanced_store["index"].ntotal > 0:
+                            logger.info("Using enhanced FAISS index for semantic search")
+                            
+                            # Search in enhanced FAISS index
+                            distances, indices = enhanced_store["index"].search(
+                                query_embedding, min(k * 2, enhanced_store["index"].ntotal)
+                            )
+                            
+                            logger.info(f"Enhanced search returned indices: {indices[0][:5]}")
+                            
+                            # Map back to messages using enhanced metadata
+                            for idx, distance in zip(indices[0], distances[0]):
+                                if 0 <= idx < len(enhanced_store["metadata"]):
+                                    meta = enhanced_store["metadata"][idx]
+                                    # Find corresponding message in candidates
+                                    for msg in candidates:
+                                        if meta.get('message_id') == msg.message_id:
+                                            semantic_results.append(msg)
+                                            logger.info(f"Found match for message_id: {msg.message_id}")
+                                            break
+                                else:
+                                    logger.warning(f"Invalid index {idx} (metadata size: {len(enhanced_store['metadata'])})")
+                            
+                            logger.info(f"Enhanced search found {len(semantic_results)} semantic results")
+                        
+                        # If no enhanced results, fall back to regular FAISS
+                        if not semantic_results:
+                            logger.info("Falling back to regular FAISS index")
+                            store = _get_faiss_store()
+                            
+                            if store["index"].ntotal > 0:
+                                # Search in regular FAISS index
+                                distances, indices = store["index"].search(
+                                    query_embedding.reshape(1, -1), min(k * 2, store["index"].ntotal)
+                                )
+                                
+                                # Map back to messages
+                                for idx, distance in zip(indices[0], distances[0]):
+                                    if idx < len(store["metadata"]):
+                                        meta = store["metadata"][idx]
+                                        # Find corresponding message in candidates
+                                        for msg in candidates:
+                                            if (hasattr(meta, 'get') and meta.get('message_id') == msg.message_id) or \
+                                               (isinstance(meta, dict) and meta.get('message_id') == msg.message_id):
+                                                semantic_results.append(msg)
+                                                break
+                        
+                        # Use semantic results if found, otherwise fall back to candidates
+                        messages = semantic_results[:k] if semantic_results else candidates[:k]
                 
             except Exception as e:
                 logger.error(f"Semantic search failed: {e}")
@@ -532,103 +644,134 @@ Summary:"""
             }
         else:
             return f"**Summary ({len(messages)} messages from {start_iso} to {end_iso}):**\n{summary}"
-        
-        # Format output
-        if as_json:
-            return {
-                "summary": result["result"],
-                "note": f"Summary of {len(messages)} messages",
-                "messages": [
-                    {
-                        "author": msg.author,
-                        "timestamp": msg.timestamp.isoformat(),
-                        "content": msg.content,
-                        "jump_url": build_jump_url(
-                            msg.guild_id,
-                            msg.channel_id,
-                            getattr(msg, 'message_id', getattr(msg, 'id', None))
-                        ),
-                        "channel_name": msg.channel_name,
-                        "guild_id": msg.guild_id,
-                        "channel_id": msg.channel_id,
-                        "message_id": getattr(msg, 'message_id', getattr(msg, 'id', None))
-                    }
-                    for msg in messages
-                ]
-            }
-        else:
-            return result["result"]
+            
+    except Exception as e:
+        logger.error(f"Error summarizing messages: {e}")
+        error_msg = f"Error generating summary: {str(e)}"
+        return {"error": error_msg} if as_json else error_msg
     finally:
         session.close()
 
 def get_channels() -> List[Dict[str, Any]]:
     """
-    Get a list of all available channels from the database.
-    Returns a list of dictionaries containing channel information.
+    Enhanced channel listing with additional metadata.
+    
+    Returns:
+        List of channel dictionaries with enhanced information
     """
     session = SessionLocal()
     try:
-        # Query distinct channels
-        channels = session.query(
+        # Get channel information with message counts and date ranges
+        channel_info = session.query(
             Message.channel_id,
+            Message.channel_name,
+            func.count(Message.message_id).label('message_count'),
+            func.min(Message.timestamp).label('oldest_message'),
+            func.max(Message.timestamp).label('newest_message')
+        ).group_by(
+            Message.channel_id, 
             Message.channel_name
-        ).distinct().all()
+        ).order_by(
+            func.count(Message.message_id).desc()
+        ).all()
         
-        # Format results
-        return [
-            {
-                "id": channel_id,
-                "name": channel_name
-            }
-            for channel_id, channel_name in channels
-            if channel_id and channel_name  # Filter out None values
-        ]
+        channels = []
+        for info in channel_info:
+            channels.append({
+                "id": info.channel_id,
+                "name": info.channel_name,
+                "message_count": info.message_count,
+                "oldest_message": info.oldest_message.isoformat() if info.oldest_message else None,
+                "newest_message": info.newest_message.isoformat() if info.newest_message else None,
+                "activity_level": "high" if info.message_count > 100 else "medium" if info.message_count > 20 else "low"
+            })
+        
+        logger.info(f"Retrieved {len(channels)} channels")
+        return channels
+        
+    except Exception as e:
+        logger.error(f"Error retrieving channels: {e}")
+        return []
     finally:
         session.close()
 
 def validate_data_availability() -> Dict[str, Any]:
     """
-    Check if the database has messages and return their distribution.
-    Returns a dictionary with status and message counts.
+    Enhanced data availability validation with 768D architecture info.
+    
+    Returns:
+        Dictionary with data status, counts, and system health
     """
     session = SessionLocal()
     try:
-        # Get total message count
-        total_messages = session.query(Message).count()
+        # Get message count
+        total_messages = session.query(func.count(Message.message_id)).scalar()
         
         if total_messages == 0:
             return {
                 "status": "error",
-                "message": "No messages found in the database",
-                "count": 0
+                "message": "No messages found in database",
+                "count": 0,
+                "channels": {},
+                "date_range": {},
+                "system_health": {
+                    "embedding_model": "not_available",
+                    "faiss_indices": []
+                }
             }
         
-        # Get message count by channel
-        channel_counts = session.query(
-            Message.channel_name,
-            func.count(Message.id)
+        # Get channel breakdown
+        channel_data = session.query(
+            Message.channel_name, 
+            func.count(Message.message_id).label('count')
         ).group_by(Message.channel_name).all()
         
+        channels = {name: count for name, count in channel_data}
+        
         # Get date range
-        oldest = session.query(Message.timestamp).order_by(Message.timestamp.asc()).first()
-        newest = session.query(Message.timestamp).order_by(Message.timestamp.desc()).first()
+        oldest = session.query(func.min(Message.timestamp)).scalar()
+        newest = session.query(func.max(Message.timestamp)).scalar()
+        
+        date_range = {
+            "oldest": oldest.isoformat() if oldest else "Unknown",
+            "newest": newest.isoformat() if newest else "Unknown"
+        }
+        
+        # Check system health
+        system_health = {
+            "embedding_model": "available" if get_768d_embedding_model() else "unavailable",
+            "sentence_transformers": SENTENCE_TRANSFORMERS_AVAILABLE,
+            "faiss_indices": []
+        }
+        
+        # Check FAISS indices availability
+        if _get_community_faiss_store():
+            system_health["faiss_indices"].append("community")
+        if _get_enhanced_faiss_store():
+            system_health["faiss_indices"].append("enhanced")
+        if _get_faiss_store():
+            system_health["faiss_indices"].append("standard")
         
         return {
             "status": "ok",
-            "message": "Data available",
             "count": total_messages,
-            "channels": dict(channel_counts),
-            "date_range": {
-                "oldest": oldest[0].isoformat() if oldest else None,
-                "newest": newest[0].isoformat() if newest else None
-            }
+            "channels": channels,
+            "date_range": date_range,
+            "system_health": system_health
         }
+        
     except Exception as e:
         logger.error(f"Error validating data availability: {e}")
         return {
             "status": "error",
-            "message": f"Error checking data: {str(e)}",
-            "count": 0
+            "message": f"Database error: {str(e)}",
+            "count": 0,
+            "channels": {},
+            "date_range": {},
+            "system_health": {
+                "embedding_model": "error",
+                "faiss_indices": []
+            }
         }
     finally:
         session.close()

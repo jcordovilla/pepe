@@ -1,10 +1,19 @@
 # PEPE - Predictive Engine for Prompt Experimentation
 # Discord Bot with RAG and Vector Search
-# Version: beta-04
+# Version: beta-05
 
 This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG), vector search (using FAISS), advanced message storage, resource detection, and classification for enhanced chat interactions and AI-powered features.
 
-**🚀 NEW in v0.4:** **Complete Performance Optimization & Enhancement Suite**
+**🚀 NEW in v0.5:** **768D Architecture & Enhanced Agent System**
+- **768D Embedding Architecture** with msmarco-distilbert-base-v4 for superior semantic understanding
+- **Intelligent Query Routing** with 5 distinct strategies and confidence-based selection
+- **Enhanced Agent System** with hybrid search combining messages and resources
+- **Multi-tier FAISS Support** for community, enhanced, and standard indices
+- **Query Analysis Transparency** showing users which search strategy is being used
+- **Enterprise-grade Error Handling** with comprehensive fallback mechanisms
+- **Production-Ready Architecture** with full backward compatibility and extensible design
+
+**✅ Previous v0.4 Features:**
 - **1000x Classification Performance** through intelligent LRU caching system
 - **Memory-efficient batch processing** eliminating OOM issues in large datasets
 - **Enhanced title/description generation** matching AI detector quality without AI costs
