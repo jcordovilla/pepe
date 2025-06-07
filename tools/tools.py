@@ -20,6 +20,11 @@ import re
 import numpy as np
 import faiss
 
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    SentenceTransformer = None
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
@@ -35,6 +40,53 @@ INDEX_DIR = config.faiss_index_path
 
 # Initialize FAISS store lazily
 _faiss_store = None
+_enhanced_faiss_store = None
+
+def _get_enhanced_faiss_store():
+    """Get or initialize enhanced FAISS store."""
+    global _enhanced_faiss_store
+    if _enhanced_faiss_store is None:
+        try:
+            # Find the most recent enhanced index
+            import glob
+            enhanced_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/enhanced_faiss_*.index")
+            if enhanced_indices:
+                # Get the most recent one
+                latest_index = max(enhanced_indices, key=lambda x: os.path.getctime(x))
+                base_name = latest_index.replace('.index', '')
+                metadata_file = f"{base_name}_metadata.json"
+                
+                logger.info(f"Loading enhanced FAISS index from {latest_index}")
+                # Load FAISS index
+                index = faiss.read_index(latest_index)
+                # Load metadata
+                with open(metadata_file, "r") as f:
+                    import json
+                    data = json.load(f)
+                    metadata = data["metadata"]
+                
+                _enhanced_faiss_store = {"index": index, "metadata": metadata}
+                logger.info(f"Loaded enhanced FAISS index with {index.ntotal} vectors")
+            else:
+                logger.warning("No enhanced FAISS index found")
+                _enhanced_faiss_store = None
+        except Exception as e:
+            logger.error(f"Failed to load enhanced FAISS index: {e}")
+            _enhanced_faiss_store = None
+    return _enhanced_faiss_store
+
+def _create_embedding_with_correct_model(text: str):
+    """Create embedding using the correct model that matches the enhanced index."""
+    try:
+        from sentence_transformers import SentenceTransformer
+        # Use the same model that was used to build the enhanced index
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        embedding = model.encode([text])
+        return embedding
+    except Exception as e:
+        logger.error(f"Failed to create embedding with correct model: {e}")
+        # Fall back to AI client
+        return ai_client.create_embeddings(text)
 
 def _get_faiss_store():
     """Get or initialize FAISS store."""
@@ -105,33 +157,73 @@ def search_messages(
         # If we have a query, use semantic search
         if query:
             try:
-                # Use FAISS store for semantic search
-                store = _get_faiss_store()
-                query_embedding = ai_client.create_embeddings(query)
+                # Try enhanced FAISS store first
+                enhanced_store = _get_enhanced_faiss_store()
                 
-                if store["index"].ntotal > 0:
-                    # Search in FAISS index
-                    distances, indices = store["index"].search(
-                        query_embedding.reshape(1, -1), min(k * 2, store["index"].ntotal)
+                semantic_results = []
+                
+                if enhanced_store and enhanced_store["index"].ntotal > 0:
+                    logger.info("Using enhanced FAISS index for semantic search")
+                    # Use correct embedding model for enhanced index
+                    try:
+                        if SentenceTransformer is not None:
+                            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+                            query_embedding = embedding_model.encode([query])
+                        else:
+                            query_embedding = ai_client.create_embeddings(query)
+                            query_embedding = query_embedding.reshape(1, -1)
+                    except Exception as e:
+                        logger.error(f"Failed to load correct embedding model: {e}")
+                        query_embedding = ai_client.create_embeddings(query)
+                        query_embedding = query_embedding.reshape(1, -1)
+                    
+                    # Search in enhanced FAISS index
+                    distances, indices = enhanced_store["index"].search(
+                        query_embedding, min(k * 2, enhanced_store["index"].ntotal)
                     )
                     
-                    # Map back to messages
-                    semantic_results = []
+                    logger.info(f"Enhanced search returned indices: {indices[0][:5]}")
+                    
+                    # Map back to messages using enhanced metadata
                     for idx, distance in zip(indices[0], distances[0]):
-                        if idx < len(store["metadata"]):
-                            meta = store["metadata"][idx]
+                        if 0 <= idx < len(enhanced_store["metadata"]):
+                            meta = enhanced_store["metadata"][idx]
                             # Find corresponding message in candidates
                             for msg in candidates:
-                                if (hasattr(meta, 'get') and meta.get('message_id') == msg.message_id) or \
-                                   (isinstance(meta, dict) and meta.get('message_id') == msg.message_id):
+                                if meta.get('message_id') == msg.message_id:
                                     semantic_results.append(msg)
+                                    logger.info(f"Found match for message_id: {msg.message_id}")
                                     break
+                        else:
+                            logger.warning(f"Invalid index {idx} (metadata size: {len(enhanced_store['metadata'])})")
                     
-                    # Use semantic results if found, otherwise fall back to candidates
-                    messages = semantic_results[:k] if semantic_results else candidates[:k]
-                else:
-                    # No index available, use database results
-                    messages = candidates[:k]
+                    logger.info(f"Enhanced search found {len(semantic_results)} semantic results")
+                
+                # If no enhanced results, fall back to regular FAISS
+                if not semantic_results:
+                    logger.info("Falling back to regular FAISS index")
+                    store = _get_faiss_store()
+                    
+                    if store["index"].ntotal > 0:
+                        # Search in regular FAISS index
+                        distances, indices = store["index"].search(
+                            query_embedding.reshape(1, -1), min(k * 2, store["index"].ntotal)
+                        )
+                        
+                        # Map back to messages
+                        for idx, distance in zip(indices[0], distances[0]):
+                            if idx < len(store["metadata"]):
+                                meta = store["metadata"][idx]
+                                # Find corresponding message in candidates
+                                for msg in candidates:
+                                    if (hasattr(meta, 'get') and meta.get('message_id') == msg.message_id) or \
+                                       (isinstance(meta, dict) and meta.get('message_id') == msg.message_id):
+                                        semantic_results.append(msg)
+                                        break
+                
+                # Use semantic results if found, otherwise fall back to candidates
+                messages = semantic_results[:k] if semantic_results else candidates[:k]
+                
             except Exception as e:
                 logger.error(f"Semantic search failed: {e}")
                 messages = candidates[:k]
@@ -469,3 +561,82 @@ def extract_skill_terms(query: str) -> List[str]:
             if term not in terms:
                 terms.append(term)
     return terms
+
+def test_enhanced_faiss_search(
+    query: str,
+    k: int = 5
+) -> Dict[str, Any]:
+    """
+    Test function specifically for enhanced FAISS index.
+    Returns detailed information about the search process and results.
+    """
+    logger.info(f"Testing enhanced FAISS search with query: {query}")
+    
+    try:
+        # Load enhanced FAISS store
+        enhanced_store = _get_enhanced_faiss_store()
+        if not enhanced_store:
+            return {
+                "status": "error",
+                "message": "Enhanced FAISS index not available",
+                "results": []
+            }
+        
+        # Create query embedding
+        if SentenceTransformer is not None:
+            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+            query_embedding = embedding_model.encode([query])
+        else:
+            query_embedding = ai_client.create_embeddings(query)
+            query_embedding = query_embedding.reshape(1, -1)
+        
+        logger.info(f"Query embedding shape: {query_embedding.shape}")
+        
+        # Search in enhanced index
+        distances, indices = enhanced_store["index"].search(
+            query_embedding.reshape(1, -1), min(k, enhanced_store["index"].ntotal)
+        )
+        
+        logger.info(f"Search returned {len(indices[0])} results")
+        logger.info(f"Distances: {distances[0]}")
+        logger.info(f"Indices: {indices[0]}")
+        
+        # Process results
+        results = []
+        for idx, distance in zip(indices[0], distances[0]):
+            if idx < len(enhanced_store["metadata"]):
+                meta = enhanced_store["metadata"][idx]
+                result = {
+                    "message_id": meta.get('message_id'),
+                    "author_name": meta.get('author_name'),
+                    "channel_name": meta.get('channel_name'),
+                    "content": meta.get('processed_content', meta.get('original_content', '')),
+                    "timestamp": meta.get('timestamp'),
+                    "distance": float(distance),
+                    "has_embeds": meta.get('has_embeds', False),
+                    "has_attachments": meta.get('has_attachments', False),
+                    "attachment_types": meta.get('attachment_types', []),
+                    "content_length": meta.get('content_length', 0)
+                }
+                results.append(result)
+            else:
+                logger.warning(f"Index {idx} out of range for metadata (size: {len(enhanced_store['metadata'])})")
+        
+        return {
+            "status": "success",
+            "index_info": {
+                "total_vectors": enhanced_store["index"].ntotal,
+                "metadata_count": len(enhanced_store["metadata"])
+            },
+            "query": query,
+            "results_count": len(results),
+            "results": results
+        }
+        
+    except Exception as e:
+        logger.error(f"Enhanced FAISS test failed: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "message": str(e),
+            "results": []
+        }

@@ -45,3 +45,23 @@ jc_logs/.DS_Store
 
 # FAISS index backups (keep current but ignore old backups)
 index_faiss_backup_*/
+
+# Data directories
+data/indices/
+data/reports/
+data/tests/
+
+# Enhanced FAISS indices (timestamped)
+enhanced_faiss_*.index
+enhanced_faiss_*_metadata.json
+enhanced_faiss_build_report_*.json
+
+# Content analysis reports
+content_preprocessing_analysis_*.json
+*_report_*.json
+
+# Temporary test files
+test_*.py
+
+# Discord database files
+*.db

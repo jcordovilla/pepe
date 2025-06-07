@@ -22,8 +22,8 @@ class ModelConfig:
     chat_max_tokens: int = 4096
     
     # Embedding Model 
-    embedding_model: str = "msmarco-distilbert-base-v4"  # Optimized for search/retrieval
-    embedding_dimension: int = 768
+    embedding_model: str = "all-MiniLM-L6-v2"  # Optimized for search/retrieval
+    embedding_dimension: int = 384
     
     # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
