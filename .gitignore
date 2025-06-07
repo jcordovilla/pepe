@@ -63,5 +63,7 @@ content_preprocessing_analysis_*.json
 # Temporary test files
 test_*.py
 
-# Discord database files
-*.db
+# Discord database files (but keep the main data directory)
+discord_bot.db
+*.db.backup
+*.sqlite.backup
