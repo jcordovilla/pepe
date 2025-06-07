@@ -1,30 +1,88 @@
 import re
+import hashlib
+from functools import lru_cache
+from typing import Dict, Optional
 from core.ai_client import get_ai_client
 
 ai_client = get_ai_client()
+
+# Cache for classification results to avoid re-classifying similar resources
+@lru_cache(maxsize=1000)
+def _classify_by_url_pattern(url: str, resource_type: str, context_hash: str) -> str:
+    """
+    Cached classification based on URL patterns and context.
+    Uses URL and context hash to determine if we've seen this pattern before.
+    """
+    return _regex_classify(url.lower(), resource_type, context_hash)
+
+def _regex_classify(url: str, resource_type: str, context_hash: str) -> str:
+    """Internal regex-based classification logic."""
+    # News domains - expanded list for better coverage
+    news_domains = [
+        "nytimes.com", "bbc.com", "cnn.com", "reuters.com", "theguardian.com", "washingtonpost.com",
+        "bloomberg.com", "forbes.com", "wsj.com", "nbcnews.com", "abcnews.go.com", "cbsnews.com",
+        "npr.org", "aljazeera.com", "apnews.com", "news.ycombinator.com", "medium.com", "substack.com",
+        "thetimes.com", "ft.com", "politico.com", "axios.com", "wired.com", "techcrunch.com", 
+        "engadget.com", "arstechnica.com", "nature.com", "sciencemag.org", "hackernews.com"
+    ]
+    
+    # Enhanced pattern matching with priority order
+    if any(x in url for x in [".pdf", "arxiv.org", "researchgate.net", "scholar.google", "acm.org", "ieee.org"]):
+        return "Paper"
+    if any(x in url for x in ["github.com", "gitlab.com", "bitbucket.org"]) and not url.endswith('/'):
+        return "Tool"  # Repositories, not user profiles
+    if any(x in url for x in ["docs.google.com", "notion.so", "gitbook.io", "confluence"]):
+        return "Tutorial"
+    if any(x in url for x in ["tutorial", "howto", "guide", "documentation", "learn", "course"]):
+        return "Tutorial"
+    if any(x in url for x in ["eventbrite", "meetup", "conference", "webinar", "event", "summit"]):
+        return "Event"
+    if any(x in url for x in ["jobs", "job", "opportunity", "careers", "hiring", "recruiter"]):
+        return "Job/Opportunity"
+    if any(domain in url for domain in news_domains):
+        return "News/Article"
+    if resource_type in ["video", "youtube"] or "youtube.com/watch" in url or "youtu.be" in url:
+        return "Tutorial"
+    if any(x in url for x in ["tool", "app", "software", "platform", "service"]):
+        return "Tool"
+    
+    return "Other"
 
 def classify_resource(resource: dict, use_llm: bool = True) -> str:
     """
     Classify a resource dict into one of:
     Tool, Paper, Tutorial, Event, Job/Opportunity, News/Article, Other.
-    Uses local AI if use_llm is True, else regex-based fallback.
+    Uses local AI if use_llm is True, else regex-based fallback with caching.
     """
     tags = ["Tool", "Paper", "Tutorial", "Event", "Job/Opportunity", "News/Article", "Other"]
+    
+    # Extract resource info
+    url = resource.get('url', '')
+    resource_type = resource.get('type', '')
+    context = resource.get('context_snippet', '')
+    
+    # Create context hash for caching (first 100 chars to avoid huge cache keys)
+    context_short = context[:100] if context else ''
+    context_hash = hashlib.md5(context_short.encode()).hexdigest()[:8]
 
-    if use_llm:
+    # For batch processing, prefer regex classification for speed
+    # unless explicitly requesting LLM
+    if not use_llm:
+        return _classify_by_url_pattern(url, resource_type, context_hash)
+
+    # LLM classification (slower but potentially more accurate)
+    if use_llm and ai_client:
         system_prompt = (
             "You are an assistant that classifies shared links into categories. "
             "The possible tags are: Tool, Paper, Tutorial, Event, Job/Opportunity, News/Article, Other. "
             "Assign the most appropriate tag based on the URL, file type, author, and context snippet. "
-            "If the resource is a news article, blog post, or media article, use 'News/Article'."
+            "If the resource is a news article, blog post, or media article, use 'News/Article'. "
+            "Respond with just the tag name, nothing else."
         )
         user_content = (
-            f"Resource info:\n"
-            f"URL: {resource.get('url')}\n"
-            f"Type: {resource.get('type')}\n"
-            f"Author: {resource.get('author')}\n"
-            f"Channel: {resource.get('channel')}\n"
-            f"Context: {resource.get('context_snippet')}\n"
+            f"URL: {url}\n"
+            f"Type: {resource_type}\n"
+            f"Context: {context_short}\n"
         )
         try:
             messages = [
@@ -35,48 +93,25 @@ def classify_resource(resource: dict, use_llm: bool = True) -> str:
             response = ai_client.chat_completion(
                 messages,
                 temperature=0.0,
-                max_tokens=50
+                max_tokens=20  # Reduced tokens since we just need the tag
             )
             
-            # Extract the tag from the assistant's reply
+            # Extract and normalize the tag
             tag = response.strip()
-            # Normalize to one of the allowed tags
             for t in tags:
                 if t.lower() in tag.lower():
                     return t
-            # Heuristic: if 'news' or 'article' in tag, return News/Article
+            
+            # Fallback heuristics
             if any(x in tag.lower() for x in ["news", "article", "blog"]):
                 return "News/Article"
-            return "Other"
+                
         except Exception as e:
-            print(f"Local AI error: {e}. Falling back to regex.")
-            # Fallback to regex if API fails
-
-    # Regex-based fallback
-    url = resource.get("url", "").lower()
-    context = resource.get("context_snippet", "").lower()
-    news_domains = [
-        "nytimes.com", "bbc.com", "cnn.com", "reuters.com", "theguardian.com", "washingtonpost.com",
-        "bloomberg.com", "forbes.com", "wsj.com", "nbcnews.com", "abcnews.go.com", "cbsnews.com",
-        "npr.org", "aljazeera.com", "apnews.com", "news.ycombinator.com", "medium.com", "substack.com",
-        "blog", "news", "article", "thetimes.com", "ft.com", "bloomberg.com", "politico.com", "axios.com",
-        "wired.com", "techcrunch.com", "engadget.com", "arstechnica.com", "nature.com", "sciencemag.org"
-    ]
-    if any(x in url for x in [".pdf", "arxiv.org", "researchgate.net"]):
-        return "Paper"
-    if any(x in url for x in ["github.com", "tool", "app", "software"]):
-        return "Tool"
-    if any(x in url for x in ["tutorial", "howto", "guide", "docs"]):
-        return "Tutorial"
-    if any(x in url for x in ["eventbrite", "meetup", "conference", "webinar", "event"]):
-        return "Event"
-    if any(x in url for x in ["jobs", "job", "opportunity", "careers", "hiring"]):
-        return "Job/Opportunity"
-    if any(domain in url for domain in news_domains) or any(word in context for word in ["news", "article", "blog", "newsletter", "press release"]):
-        return "News/Article"
-    if "video" in resource.get("type", ""):
-        return "Tutorial"
-    return "Other"
+            # Silently fall back to regex classification
+            pass
+    
+    # Fallback to regex classification
+    return _classify_by_url_pattern(url, resource_type, context_hash)
 
 if __name__ == "__main__":
     # Example resources for testing

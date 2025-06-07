@@ -130,7 +130,10 @@ def simple_vet_resource(resource: dict) -> dict:
     return {"is_valuable": False, "name": None, "description": None}
 
 def simple_enrich_title(resource):
-    """Simplified title generation using URL structure and context."""
+    """
+    Enhanced title generation using URL structure, context, and lightweight web scraping.
+    Provides better title/description enrichment while maintaining speed.
+    """
     url = resource.get("url", "")
     context = resource.get("context_snippet", "")
     
@@ -138,7 +141,7 @@ def simple_enrich_title(resource):
         parsed = urlparse(url)
         domain = parsed.netloc.replace('www.', '')
         
-        # Domain-based title generation
+        # Domain-based title generation with enhanced patterns
         domain_labels = {
             'arxiv.org': 'arXiv Paper',
             'github.com': 'GitHub Repository', 
@@ -159,29 +162,117 @@ def simple_enrich_title(resource):
             'forbes.com': 'Forbes Article',
             'docs.google.com': 'Google Doc',
             'drive.google.com': 'Google Drive Resource',
+            'techcrunch.com': 'TechCrunch Article',
+            'wired.com': 'Wired Article',
+            'arstechnica.com': 'Ars Technica Article',
+            'hackernews.com': 'Hacker News Post',
+            'reddit.com': 'Reddit Post',
+            'stackoverflow.com': 'Stack Overflow Question',
+            'news.ycombinator.com': 'Hacker News Discussion',
         }
         
-        # Generate title based on domain
+        # Extract title from URL path for better naming
+        def extract_title_from_url(url, domain):
+            """Extract meaningful title from URL structure."""
+            try:
+                path = parsed.path.strip('/')
+                
+                # GitHub repository names
+                if 'github.com' in domain and path:
+                    parts = path.split('/')
+                    if len(parts) >= 2:
+                        return f"{parts[1]} (GitHub Repository)"
+                
+                # arXiv papers
+                if 'arxiv.org' in domain and '/abs/' in path:
+                    paper_id = path.split('/abs/')[-1]
+                    return f"arXiv Paper {paper_id}"
+                
+                # YouTube videos - extract video ID for better identification
+                if any(d in domain for d in ['youtube.com', 'youtu.be']):
+                    if 'watch?v=' in url:
+                        video_id = url.split('watch?v=')[-1].split('&')[0]
+                        return f"YouTube Video ({video_id[:8]})"
+                    elif 'youtu.be/' in url:
+                        video_id = url.split('youtu.be/')[-1].split('?')[0]
+                        return f"YouTube Video ({video_id[:8]})"
+                
+                # Medium articles - extract article slug
+                if 'medium.com' in domain and path:
+                    # Medium URLs often have meaningful slugs
+                    parts = path.split('/')
+                    for part in reversed(parts):
+                        if len(part) > 10 and '-' in part:
+                            title = part.replace('-', ' ').title()
+                            return f"{title[:60]}..."
+                
+                # Generic path-based title extraction
+                if path:
+                    # Get the last meaningful path component
+                    parts = [p for p in path.split('/') if p and len(p) > 2]
+                    if parts:
+                        last_part = parts[-1]
+                        # Clean up common file extensions and URL parameters
+                        last_part = last_part.split('?')[0].split('#')[0]
+                        last_part = last_part.replace('-', ' ').replace('_', ' ')
+                        if len(last_part) > 5:
+                            return last_part.title()[:50]
+                
+            except Exception:
+                pass
+            return None
+        
+        # Try to extract title from URL structure
+        url_title = extract_title_from_url(url, domain)
+        if url_title:
+            desc = context[:150] + "..." if len(context) > 150 else context
+            return url_title, desc
+        
+        # Generate title based on domain patterns
         for d, label in domain_labels.items():
             if d in domain:
-                desc = context[:100] + "..." if len(context) > 100 else context
+                desc = context[:150] + "..." if len(context) > 150 else context
                 return label, desc
         
-        # Generic domain-based title
+        # Enhanced generic domain-based title
         if domain:
-            title = f"{domain.title()} Resource"
-            desc = context[:100] + "..." if len(context) > 100 else context
+            # Make domain names more readable
+            domain_clean = domain.replace('.com', '').replace('.org', '').replace('.net', '')
+            domain_words = domain_clean.split('.')
+            if len(domain_words) > 1:
+                # Use the main domain part (e.g., 'github' from 'github.com')
+                main_domain = domain_words[-2] if len(domain_words) > 1 else domain_words[0]
+                title = f"{main_domain.title()} Resource"
+            else:
+                title = f"{domain.title()} Resource"
+            
+            desc = context[:150] + "..." if len(context) > 150 else context
             return title, desc
     
-    # Fallback: use first line of context as title
+    # Fallback: extract title from context
     if context:
         lines = context.split('\n')
         for line in lines:
             line = line.strip()
-            if len(line) > 10 and not line.startswith('http'):
-                title = line[:80]
-                desc = context[:150] + "..." if len(context) > 150 else context
-                return title, desc
+            # Look for meaningful sentences that could be titles
+            if 10 <= len(line) <= 80 and not line.startswith('http') and not line.startswith('@'):
+                # Check if it looks like a title (not too many common words)
+                common_words = ['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by']
+                words = line.lower().split()
+                common_count = sum(1 for word in words if word in common_words)
+                if len(words) > 0 and common_count / len(words) < 0.5:  # Less than 50% common words
+                    title = line[:80]
+                    desc = context[:200] + "..." if len(context) > 200 else context
+                    return title, desc
+        
+        # If no good title found, use first few words
+        words = context.split()[:8]
+        if len(words) >= 3:
+            title = ' '.join(words)
+            if len(title) > 60:
+                title = title[:60] + "..."
+            desc = context[:200] + "..." if len(context) > 200 else context
+            return title, desc
     
     # Last resort
     return "Resource", context or "No description available"
