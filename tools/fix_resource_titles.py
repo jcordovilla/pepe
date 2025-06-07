@@ -1,19 +1,18 @@
 # Script to detect resources with a URL as title and message content as description, and use AI to generate better title/description
 import json
 import os
-from dotenv import load_dotenv
-from openai import OpenAI
+import sys
+from pathlib import Path
+
+# Add the project root to the path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+from core.ai_client import AIClient
 from tqdm import tqdm
 
-# Load environment variables
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable is not set")
-
-MODEL_NAME = os.getenv("GPT_MODEL", "gpt-4-turbo")
-
-client = OpenAI(api_key=OPENAI_API_KEY)
+# Initialize local AI client
+ai_client = AIClient()
 
 INPUT_PATH = "docs/resources/resources.json"
 OUTPUT_PATH = "docs/resources/resources_fixed.json"
@@ -36,15 +35,9 @@ Resource URL:
 
 Respond in JSON with keys 'title' and 'description'.
 """
-    response = client.chat.completions.create(
-        model=MODEL_NAME,
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200,
-        temperature=0.7,
-    )
+    response = ai_client.chat_completion([{"role": "user", "content": prompt}])
     try:
-        content = response.choices[0].message.content
-        data = json.loads(content)
+        data = json.loads(response)
         return data["title"], data["description"]
     except Exception:
         # fallback: just use the first 10 words of the message as title

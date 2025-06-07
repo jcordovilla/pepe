@@ -1,7 +1,47 @@
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
 .env
-Leeme_JC.txt
+.venv
+env/
 venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Project specific
+Leeme_JC.txt
 jc_logs/.DS_Store
+
+# Database backups
+*.db.backup
+*.sqlite.backup
+
+# FAISS index backups (keep current but ignore old backups)
+index_faiss_backup_*/

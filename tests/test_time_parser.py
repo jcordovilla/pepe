@@ -2,7 +2,7 @@
 import pytest
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
-from time_parser import parse_timeframe
+from tools.time_parser import parse_timeframe
 
 def test_explicit_range():
     start, end = parse_timeframe("2025-04-01 to 2025-04-07")

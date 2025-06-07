@@ -22,8 +22,8 @@ class ModelConfig:
     chat_max_tokens: int = 4096
     
     # Embedding Model 
-    embedding_model: str = "all-MiniLM-L6-v2"  # Sentence Transformers model
-    embedding_dimension: int = 384
+    embedding_model: str = "msmarco-distilbert-base-v4"  # Optimized for search/retrieval
+    embedding_dimension: int = 768
     
     # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
@@ -80,8 +80,8 @@ def load_config() -> AppConfig:
             chat_model=os.getenv("CHAT_MODEL", "llama2:latest"),
             chat_temperature=float(os.getenv("CHAT_TEMPERATURE", "0.0")),
             chat_max_tokens=int(os.getenv("CHAT_MAX_TOKENS", "4096")),
-            embedding_model=os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2"),
-            embedding_dimension=int(os.getenv("EMBEDDING_DIMENSION", "384")),
+            embedding_model=os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
+            embedding_dimension=int(os.getenv("EMBEDDING_DIMENSION", "768")),
             ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             ollama_timeout=int(os.getenv("OLLAMA_TIMEOUT", "300")),
         )

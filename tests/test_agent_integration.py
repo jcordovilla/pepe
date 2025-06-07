@@ -1,20 +1,20 @@
 import os
-import openai
 import pytest
 from core.agent import get_agent_answer
+from core.ai_client import AIClient
 
 # Note: These tests assume a test database with known data is available.
 # If not, they should be adapted to use fixtures/mocks or run in a controlled environment.
 
 def ai_validate_response(query, response, functionality=None):
     """
-    Use OpenAI to semantically validate the agent's response to the query.
+    Use local AI to semantically validate the agent's response to the query.
     Returns the model's evaluation string (should start with PASS or FAIL).
     """
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-    gpt_model = os.getenv("GPT_MODEL", "gpt-4-turbo")
-    if not openai_api_key:
-        pytest.skip("OPENAI_API_KEY not set; skipping AI validation.")
+    try:
+        ai_client = AIClient()
+    except Exception as e:
+        pytest.skip(f"Local AI not available for validation: {e}")
     # General app context
     app_context = (
         "You are evaluating the output of an AI assistant that helps users query and summarize Discord messages. "
@@ -70,11 +70,10 @@ def ai_validate_response(query, response, functionality=None):
     prompt = f"""
     {app_context}{func_context}\n\nUser Query: {query}\nAgent Response: {response}\n\nEvaluate if the agent's response correctly and fully answers the user's query. Reply with 'PASS' if it does, or 'FAIL' and a brief explanation if it does not.
     """
-    completion = openai.chat.completions.create(
-        model=gpt_model,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    result = completion.choices[0].message.content.strip()
+    
+    # Use local AI for validation
+    messages = [{"role": "user", "content": prompt}]
+    result = ai_client.chat_completion(messages).strip()
     return result
 
 # Balanced suite of 20 end-to-end test prompts

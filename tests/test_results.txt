@@ -1,0 +1,645 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/jose/Documents/discord-bot
+plugins: anyio-4.9.0, langsmith-0.3.42, cov-6.1.1
+collected 21 items
+
+tests/test_agent_integration.py ...F........FFF.FF.F.                    [100%]
+
+=================================== FAILURES ===================================
+_ test_balanced_suite[Search for \u2018use cases\u2019 with keyword \u2018roundtable\u2019 in #genai-use-case-roundtable, returning the top 3 results.-expected_behavior3] _
+
+query = 'Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.'
+expected_behavior = {'functionality': 'search'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+                assert expected_behavior["msg"].lower() in str(result).lower()
+            else:
+                ai_eval = ai_validate_response(query, result, functionality="error_handling")
+                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+            return
+        # JSON summary key validation
+        if expected_behavior.get("json_keys"):
+            assert isinstance(result, dict), "Expected JSON output"
+            for key in expected_behavior["json_keys"]:
+                assert key in result, f"Missing key '{key}' in JSON summary"
+        # Expect empty result
+        if expected_behavior.get("expect_empty"):
+            assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
+            return
+        # Standard AI validation
+        ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
+>       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+E       AssertionError: AI validation failed: FAIL
+E         
+E         Explanation: The user's query specifies searching for messages containing ‘use cases’, with the keyword ‘roundtable’, in the #genai-use-case-roundtable channel, and returning the top 3 results with metadata. The agent says it couldn't find any such messages, but does not demonstrate that it checked both keywords’ presence (as required: messages must contain both ‘use cases’ and ‘roundtable’), nor does it provide search details, message snippets, or metadata as would be expected for a complete and correct response. The wording also leaves ambiguity whether it searched for both terms together, or across all possibilities. A complete answer would list the top results if found (with required metadata), or explicitly confirm that a search was performed for messages meeting both criteria in the specified channel, and that no results matched, with a clear explanation.
+E       assert False
+E        +  where False = <built-in method startswith of str object at 0x110810000>('PASS')
+E        +    where <built-in method startswith of str object at 0x110810000> = "FAIL\n\nExplanation: The user's query specifies searching for messages containing ‘use cases’, with the keyword ‘roun...ed for messages meeting both criteria in the specified channel, and that no results matched, with a clear explanation.".startswith
+
+tests/test_agent_integration.py:148: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m
+Invoking: `search_messages` with `{'query': 'use cases', 'k': 3, 'keyword': 'roundtable', 'channel_name': 'genai-use-case-roundtable'}`
+
+
+[0m[36;1m[1;3m[][0m[32;1m[1;3mI couldn't find any messages containing both "use cases" and the keyword "roundtable" in the #genai-use-case-roundtable channel among the top 3 results. If you want to broaden the search or try different keywords, please let me know![0m
+
+[1m> Finished chain.[0m
+_ test_balanced_suite[Search messages from 2025-04-26 to 2025-04-23 in #\U0001f3d8general-chat.-expected_behavior12] _
+
+query = 'Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.'
+expected_behavior = {'functionality': 'error_handling', 'msg': 'End time must be after start time'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+>               assert expected_behavior["msg"].lower() in str(result).lower()
+E               AssertionError: assert 'end time must be after start time' in 'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please confirm the correct date range? should it be from 2025-04-23 to 2025-04-26? let me know so i can proceed with your request!'
+E                +  where 'end time must be after start time' = <built-in method lower of str object at 0x102d5e9f0>()
+E                +    where <built-in method lower of str object at 0x102d5e9f0> = 'End time must be after start time'.lower
+E                +  and   'it looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). could you please confirm the correct date range? should it be from 2025-04-23 to 2025-04-26? let me know so i can proceed with your request!' = <built-in method lower of str object at 0x102c4f390>()
+E                +    where <built-in method lower of str object at 0x102c4f390> = 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!'.lower
+E                +      where 'It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!' = str('It looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request!')
+
+tests/test_agent_integration.py:132: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3mIt looks like the date range you provided is reversed (from 2025-04-26 to 2025-04-23). Could you please confirm the correct date range? Should it be from 2025-04-23 to 2025-04-26? Let me know so I can proceed with your request![0m
+
+[1m> Finished chain.[0m
+_ test_balanced_suite[Search for \u2018bug\u2019 in #nonexistent-channel.-expected_behavior13] _
+
+query = 'Search for ‘bug’ in #nonexistent-channel.'
+expected_behavior = {'functionality': 'error_handling', 'msg': 'Unknown channel'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+>               assert expected_behavior["msg"].lower() in str(result).lower()
+E               assert 'unknown channel' in 'i couldn\'t find any messages containing "bug" in #nonexistent-channel. it\'s possible that the channel doesn\'t exist or there are no messages matching your search. if you need help searching in a different channel, please let me know!'
+E                +  where 'unknown channel' = <built-in method lower of str object at 0x102d62e30>()
+E                +    where <built-in method lower of str object at 0x102d62e30> = 'Unknown channel'.lower
+E                +  and   'i couldn\'t find any messages containing "bug" in #nonexistent-channel. it\'s possible that the channel doesn\'t exist or there are no messages matching your search. if you need help searching in a different channel, please let me know!' = <built-in method lower of str object at 0x106cc9450>()
+E                +    where <built-in method lower of str object at 0x106cc9450> = 'I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!'.lower
+E                +      where 'I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!' = str('I couldn\'t find any messages containing "bug" in #nonexistent-channel. It\'s possible that the channel doesn\'t exist or there are no messages matching your search. If you need help searching in a different channel, please let me know!')
+
+tests/test_agent_integration.py:132: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m
+Invoking: `search_messages` with `{'query': 'bug', 'channel_name': 'nonexistent-channel'}`
+
+
+[0m[36;1m[1;3m[][0m[32;1m[1;3mI couldn't find any messages containing "bug" in #nonexistent-channel. It's possible that the channel doesn't exist or there are no messages matching your search. If you need help searching in a different channel, please let me know![0m
+
+[1m> Finished chain.[0m
+___ test_balanced_suite[Tell me something interesting.-expected_behavior14] ____
+
+query = 'Tell me something interesting.'
+expected_behavior = {'functionality': 'error_handling', 'msg': 'Which channel, timeframe, or keyword'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+>               assert expected_behavior["msg"].lower() in str(result).lower()
+E               AssertionError: assert 'which channel, timeframe, or keyword' in 'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?'
+E                +  where 'which channel, timeframe, or keyword' = <built-in method lower of str object at 0x102d5ec90>()
+E                +    where <built-in method lower of str object at 0x102d5ec90> = 'Which channel, timeframe, or keyword'.lower
+E                +  and   'sure! did you know that octopuses have three hearts? two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. nature is full of surprises! would you like to hear more fun facts?' = <built-in method lower of str object at 0x107f463b0>()
+E                +    where <built-in method lower of str object at 0x107f463b0> = 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?'.lower
+E                +      where 'Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?' = str('Sure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the res...low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?')
+
+tests/test_agent_integration.py:132: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3mSure! Did you know that octopuses have three hearts? Two pump blood to the gills, while the third pumps it to the rest of the body. Even more fascinating, their blood is blue because it uses copper-based hemocyanin to transport oxygen, which is more efficient in cold, low-oxygen environments where many octopuses live. Nature is full of surprises! Would you like to hear more fun facts?[0m
+
+[1m> Finished chain.[0m
+_ test_balanced_suite[What was discussed about \u2018help\u2019 on 2025-04-18 in the discord-help channel?-expected_behavior16] _
+
+query = 'What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?'
+expected_behavior = {'functionality': 'search'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+                assert expected_behavior["msg"].lower() in str(result).lower()
+            else:
+                ai_eval = ai_validate_response(query, result, functionality="error_handling")
+                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+            return
+        # JSON summary key validation
+        if expected_behavior.get("json_keys"):
+            assert isinstance(result, dict), "Expected JSON output"
+            for key in expected_behavior["json_keys"]:
+                assert key in result, f"Missing key '{key}' in JSON summary"
+        # Expect empty result
+        if expected_behavior.get("expect_empty"):
+            assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
+            return
+        # Standard AI validation
+        ai_eval = ai_validate_response(query, result, functionality=expected_behavior["functionality"])
+>       assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+E       AssertionError: AI validation failed: FAIL
+E         
+E         Explanation: The agent should attempt to find the closest matching channel to "discord-help" or provide messages from similarly named channels if an exact match is not present in the data. The user query is clear, and asking for clarification without attempting a search or mentioning near matches is not acceptable. Additionally, the response does not mention searching by date or for the keyword "help" at all. The answer is not complete or sufficiently helpful.
+E       assert False
+E        +  where False = <built-in method startswith of str object at 0x106816b20>('PASS')
+E        +    where <built-in method startswith of str object at 0x106816b20> = 'FAIL\n\nExplanation: The agent should attempt to find the closest matching channel to "discord-help" or provide messa...es not mention searching by date or for the keyword "help" at all. The answer is not complete or sufficiently helpful.'.startswith
+
+tests/test_agent_integration.py:148: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m
+Invoking: `summarize_messages` with `{'start_iso': '2025-04-18T00:00:00Z', 'end_iso': '2025-04-18T23:59:59Z', 'channel_name': 'discord-help'}`
+
+
+[0m
+DEBUG: Query Parameters:
+Start ISO: 2025-04-18T00:00:00Z
+End ISO: 2025-04-18T23:59:59Z
+Guild ID: None
+Channel ID: None
+Channel Name: discord-help
+[33;1m[1;3mUnknown channel[0m[32;1m[1;3mIt appears that I couldn't find a channel named discord-help in the available data. Could you please confirm the exact channel name or provide more details? This will help me retrieve the correct information for you.[0m
+
+[1m> Finished chain.[0m
+_ test_balanced_suite[Summarize this week in #\u2753q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.-expected_behavior17] _
+
+query = 'Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.'
+expected_behavior = {'functionality': 'summarize', 'json_keys': ['summary', 'note']}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+                assert expected_behavior["msg"].lower() in str(result).lower()
+            else:
+                ai_eval = ai_validate_response(query, result, functionality="error_handling")
+                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+            return
+        # JSON summary key validation
+        if expected_behavior.get("json_keys"):
+>           assert isinstance(result, dict), "Expected JSON output"
+E           AssertionError: Expected JSON output
+E           assert False
+E            +  where False = isinstance('{\n  "summary": "This week in #❓q-and-a-questions, the main activity was the posting of thought-provoking questions f...ns. No major debates or answers were recorded in the channel this week—activity was primarily question submission."\n}', dict)
+
+tests/test_agent_integration.py:139: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m
+Invoking: `validate_data_availability` with `{}`
+
+
+[0m[38;5;200m[1;3m{'status': 'ok', 'message': 'Data available', 'count': 4492, 'channels': {'genai-use-case-roundtable': 8, 'showcase': 29, '❌💻non-coders-learning': 199, '❓buddy-support': 24, '❓q-and-a-questions': 25, '🌎-community': 97, '🌐official-site': 1, '🎓-classes': 8, '🎥meeting-recordings': 33, '🎯admin-onboarding': 9, '🎯onboarding': 5, '🏘admin-general-chat': 239, '🏘general-chat': 651, '🏛netarch-general': 379, '🏛🗣netarch-content': 15, '🏛🤖netarch-agents': 68, '👋admin-introductions': 2, '👋introductions': 140, '👾discord-managers': 174, '💠buddy-group1': 59, '💠buddy-group10': 50, '💠buddy-group11': 53, '💠buddy-group12': 19, '💠buddy-group2': 119, '💠buddy-group3': 63, '💠buddy-group5': 95, '💠buddy-group6': 41, '💠buddy-group7': 62, '💠buddy-group8': 92, '💠buddy-group9': 110, '💬convo-leaders-prompts': 6, '💬live-chat': 16, '💬questions-help': 5, '💵financial-services': 22, '💻learning-without-coding-skills': 20, '💼career-opportunities': 59, '📄papers-and-publications': 27, '📖resources-library': 29, '📚ai-philosophy-ethics': 151, '📝q-and-a-polls': 13, '📝welcome-rules': 6, '📣general-announcements': 50, '📥feedback-submissions': 27, '📥member-of-the-week-submissions': 14, '📥socialmedia-submissions': 2, '📩midweek-request': 1, '📸-social-media': 4, '📸content-creation-chat': 3, '🔐cyber‑report‑desk': 6, '🗂sgu-managers-resources': 23, '🗃gen-ai-use-cases': 37, '🗞genai-news': 30, '🗣convo-leaders-chat': 131, '🙋member-of-the-week-poll': 36, '\U0001f6dddiscord-pg': 142, '\U0001f6dddiscord-pg-sgu': 14, '🛠-workshops': 4, '🛠ai-practical-applications': 77, '🛠it-support': 62, '🤖agent-dev': 2, '🤖workshops': 56, '🤝find-a-buddy': 104, '🦾sgu-managers': 277, '🧠feedback-workshop': 80, '🧢buddy-group4': 87}, 'date_range': {'oldest': '2025-03-27T21:03:27.683000', 'newest': '2025-05-16T16:33:38.673000'}}[0m[32;1m[1;3m
+Invoking: `summarize_messages` with `{'start_iso': '2025-05-10T00:00:00Z', 'end_iso': '2025-05-16T23:59:59Z', 'channel_name': '❓q-and-a-questions', 'as_json': True}`
+
+
+[0m
+DEBUG: Query Parameters:
+Start ISO: 2025-05-10T00:00:00Z
+End ISO: 2025-05-16T23:59:59Z
+Guild ID: None
+Channel ID: None
+Channel Name: ❓q-and-a-questions
+[33;1m[1;3m{'summary': '', 'note': '', 'messages': [{'author': {'username': 'kiss_ambassador', 'display_name': '', 'id': '1362326150373966035'}, 'timestamp': '2025-05-15T10:23:06.040000', 'content': '🧢 Here is the question from **Buddy Group 4**:\n“As generative AI systems scale and integrate across domains (from content to decision-making tools), should we rethink ‘explainability’ as a system-level property rather than a model feature? What new patterns or architectural shifts could support end-to-end traceability and contextual reasoning in increasingly modular and agentic AI environments?”', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372519655444451369', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372519655444451369}, {'author': {'username': 'kiss_ambassador', 'display_name': '', 'id': '1362326150373966035'}, 'timestamp': '2025-05-15T10:29:30.285000', 'content': 'Special remark to <@1365074657446723624> you kept your question short an sweet. Well done👏', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372521267084918805', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372521267084918805}, {'author': {'username': 'apoorvgarg88', 'display_name': '', 'id': '1335299567440367757'}, 'timestamp': '2025-05-15T13:01:04.688000', 'content': '🏛️Here is the question from Buddy Group 8:\n\nWith U.S. research funding cuts — especially from the DOGE— top scientists are leaving for better support abroad, accelerating a growing brain drain (Business Insider, May 2025).\n\nCan AI meaningfully replace the loss of human scientific talent? Could generative AI or autonomous research tools fill this gap — or are we overestimating what AI can do without the insight, creativity, and mentorship of human scientists? \n\nSpecial remarks to <@1365814219932565615> for bringing this important topic for discussion!', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372559411775799296', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372559411775799296}, {'author': {'username': 'andreahickethier', 'display_name': '', 'id': '1361976806651068517'}, 'timestamp': '2025-05-15T14:07:57.013000', 'content': 'Buddy Group no 1, we are keeping the question from last week. In dynamic AI environments, how can we implement ISO-like governance frameworks (e.g. ISO/IEC 42001) without stifling agility and innovation? What are key design patterns that balance certifiability with adaptiveness?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372576240686338201', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372576240686338201}, {'author': {'username': 'eduardofadanelli', 'display_name': '', 'id': '1087795330067742760'}, 'timestamp': '2025-05-15T14:32:25.442000', 'content': 'Here is the question from Buddy Group 6:\n\nHow complex is it to integrate LLM models with existing enterprise systems such as CRMs, ERPs, or automation platforms, and what tools are available to ensure the traceability, explainability, and auditability of those models?\nThanks for Miguel Angel Calzada for bringing this topic for us.👍', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372582399724097637', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372582399724097637}, {'author': {'username': 'jhorden2211', 'display_name': '', 'id': '691008994789163020'}, 'timestamp': '2025-05-15T17:34:00.451000', 'content': 'Here is the question from Buddy Group 5:\n\nAs generative AI systems become increasingly agentic and capable of complex autonomous tasks, what design principles and architectural choices are essential to ensure maintainability and debuggability over time – especially to avoid the upfront efficiency gains being lost to long-term technical debt?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372628096704057344', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372628096704057344}, {'author': {'username': 'nura775', 'display_name': '', 'id': '1362171740104556584'}, 'timestamp': '2025-05-15T17:50:06.729000', 'content': 'Here is the question from Buddy Group 2: \n\nHow can companies adopt Generative AI to enhance employee productivity and engagement - without creating fear of job displacement?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372632149567475722', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372632149567475722}, {'author': {'username': 'georgi8865', 'display_name': '', 'id': '969571634027589643'}, 'timestamp': '2025-05-15T18:33:52.091000', 'content': "Question from buddy group 3: \n\nAs AI-driven multimodal interfaces become more fluent and human-like, how can we ensure that users don't mistake these systems' responses for true understanding or agency? What ethical responsibilities arise in shaping the cues of collaboration and intelligence in such systems?", 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372643161133940967', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372643161133940967}, {'author': {'username': 'shabana_39556', 'display_name': '', 'id': '1357376692384960524'}, 'timestamp': '2025-05-15T19:12:17.764000', 'content': 'Question from buddy group 7:                                                                                          With the recent launch of  China’s first AI hospital featuring 42 AI doctors . What are the potential ethical and practical challenges of AI driven docs into our healthcare systems?. How can we ensure that AI doctors build  and maintain trust , comply with medical regulations and work seamlessly alongside human healthcare providers to provide optimal patient care ?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372652831827300494', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372652831827300494}, {'author': {'username': 'apoorvgarg88', 'display_name': '', 'id': '1335299567440367757'}, 'timestamp': '2025-05-15T19:32:40.110000', 'content': '🗒️Question from Buddy Group 11 - How do we validate the behaviour of AI agents in production environments? Is continuous evaluation more important than pre-deployment certification?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372657958718017556', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372657958718017556}, {'author': {'username': 'silkefinken', 'display_name': '', 'id': '1075075819807985714'}, 'timestamp': '2025-05-15T22:01:30.139000', 'content': 'Question from buddy group 10:  What will be the right attitude of management with regards to AI resistance from employees? Some companies seem to push AI-first rather broadly, e.g. making AI usage part of performance reviews etc. but will that be the right way forward?', 'jump_url': 'https://discord.com/channels/1353058864810950737/1353449293717180467/1372695413974372444', 'channel_name': '❓q-and-a-questions', 'guild_id': 1353058864810950737, 'channel_id': 1353449293717180467, 'message_id': 1372695413974372444}]}[0m[32;1m[1;3m{
+  "summary": "This week in #❓q-and-a-questions, the main activity was the posting of thought-provoking questions from various Buddy Groups, focusing on the challenges and opportunities of integrating generative AI into different domains. Topics included: system-level explainability and traceability in modular AI, the impact of research funding cuts and whether AI can replace human scientific talent, balancing governance frameworks with innovation, integrating LLMs with enterprise systems, design principles for maintainability in agentic AI, ethical and practical challenges of AI in healthcare, validating AI agent behavior in production, and management attitudes toward employee AI resistance. The questions reflect a strong emphasis on ethics, governance, technical integration, and the human-AI relationship.",
+  "note": "Most questions were posted on May 15th, with each Buddy Group contributing a unique perspective. There was a notable focus on real-world implications, such as AI in healthcare and the workplace, as well as broader philosophical and technical concerns. No major debates or answers were recorded in the channel this week—activity was primarily question submission."
+}[0m
+
+[1m> Finished chain.[0m
+_ test_balanced_suite[Retrieve messages in channel ID 1364250555467300976 (\U0001f4e9midweek-request) between 2025-04-20 and 2025-04-25.-expected_behavior19] _
+
+query = 'Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.'
+expected_behavior = {'expect_empty': True, 'functionality': 'search'}
+
+    @pytest.mark.parametrize("query,expected_behavior", [
+        # 1. Validate data availability
+        ("What data is currently cached?", {"functionality": "data_availability"}),
+        # 2. Basic keyword search
+        ("Find messages containing ‘AI ethics’ in #📚ai-philosophy-ethics.", {"functionality": "search"}),
+        # 3. Top-K override
+        ("Show me the top 4 messages mentioning ‘welcome’ in #📝welcome-rules.", {"functionality": "search"}),
+        # 4. Hybrid keyword + semantic
+        ("Search for ‘use cases’ with keyword ‘roundtable’ in #genai-use-case-roundtable, returning the top 3 results.", {"functionality": "search"}),
+        # 5. Author filter
+        ("List all messages by cristian_72225 in #👋introductions.", {"functionality": "search"}),
+        # 6. Channel-ID filter with ISO times
+        ("Retrieve messages in channel ID 1365732945859444767 (📢announcements-admin) between 2025-04-20T00:00:00Z and 2025-04-25T23:59:59Z, top 5.", {"functionality": "search"}),
+        # 7. Plain-text summarization (relative)
+        ("Summarize messages from last weekend in #🏘general-chat.", {"functionality": "summarize"}),
+        # 8. JSON summarization (absolute)
+        ("Summarize messages from 2025-04-01 to 2025-04-30 in #🛠ai-practical-applications as JSON.", {"functionality": "summarize"}),
+        # 9. Plain-text summarization (absolute)
+        ("What were the key discussion points in #🤖intro-to-agentic-ai between 2025-04-22 and 2025-04-24?", {"functionality": "summarize"}),
+        # 10. Skill-term extraction
+        ("Extract all skills mentioned by darkgago in #🛠ai-practical-applications over the past month.", {"functionality": "search"}),
+        # 11. Semantic-only reranking
+        ("Find the 3 most semantically similar messages to ‘invite link restrictions’ across all channels.", {"functionality": "search"}),
+        # 12. Empty-query guard
+        ("", {"functionality": "error_handling", "raises": ValueError, "msg": "Query cannot be empty"}),
+        # 13. Invalid timeframe
+        ("Search messages from 2025-04-26 to 2025-04-23 in #🏘general-chat.", {"functionality": "error_handling", "msg": "End time must be after start time"}),
+        # 14. Unknown channel
+        ("Search for ‘bug’ in #nonexistent-channel.", {"functionality": "error_handling", "msg": "Unknown channel"}),
+        # 15. Fallback/clarification prompt
+        ("Tell me something interesting.", {"functionality": "error_handling", "msg": "Which channel, timeframe, or keyword"}),
+        # 16. Combined multi-criteria
+        ("In #📥feedback-submissions, find the top 2 messages about ‘suggestions’ by laura.neder between last Friday and yesterday, then summarize them.", {"functionality": "summarize"}),
+        # 17. Implicit channel name parsing
+        ("What was discussed about ‘help’ on 2025-04-18 in the discord-help channel?", {"functionality": "search"}),
+        # 18. JSON summary key validation
+        ("Summarize this week in #❓q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.", {"functionality": "summarize", "json_keys": ["summary", "note"]}),
+        # 19. Jump-URL accuracy
+        ("Give me the 5 most recent messages in #🏘general-chat with jump URLs.", {"functionality": "search"}),
+        # 20. Empty-channel search
+        ("Retrieve messages in channel ID 1364250555467300976 (📩midweek-request) between 2025-04-20 and 2025-04-25.", {"functionality": "search", "expect_empty": True}),
+    ])
+    def test_balanced_suite(query, expected_behavior):
+        if expected_behavior.get("raises"):
+            with pytest.raises(expected_behavior["raises"]):
+                get_agent_answer(query)
+            return
+        result = get_agent_answer(query)
+        # Error handling/clarification/fallback
+        if expected_behavior["functionality"] == "error_handling":
+            if "msg" in expected_behavior:
+                assert expected_behavior["msg"].lower() in str(result).lower()
+            else:
+                ai_eval = ai_validate_response(query, result, functionality="error_handling")
+                assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
+            return
+        # JSON summary key validation
+        if expected_behavior.get("json_keys"):
+            assert isinstance(result, dict), "Expected JSON output"
+            for key in expected_behavior["json_keys"]:
+                assert key in result, f"Missing key '{key}' in JSON summary"
+        # Expect empty result
+        if expected_behavior.get("expect_empty"):
+>           assert result == [] or result == {} or not result, "Expected empty result for empty channel search"
+E           AssertionError: Expected empty result for empty channel search
+E           assert ('There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!' == [] or 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!' == {} or not 'There are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know!')
+
+tests/test_agent_integration.py:144: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+
+[1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m
+Invoking: `summarize_messages` with `{'start_iso': '2025-04-20T00:00:00Z', 'end_iso': '2025-04-25T23:59:59Z', 'channel_id': 1364250555467300976}`
+
+
+[0m
+DEBUG: Query Parameters:
+Start ISO: 2025-04-20T00:00:00Z
+End ISO: 2025-04-25T23:59:59Z
+Guild ID: None
+Channel ID: 1364250555467300976
+Channel Name: None
+[33;1m[1;3m⚠️ No messages found in the specified timeframe.[0m[32;1m[1;3mThere are no messages in the channel 📩midweek-request (ID: 1364250555467300976) between April 20, 2025, and April 25, 2025. If you need information from a different date range or channel, please let me know![0m
+
+[1m> Finished chain.[0m
+=============================== warnings summary ===============================
+venv/lib/python3.9/site-packages/langchain/chat_models/__init__.py:33
+venv/lib/python3.9/site-packages/langchain/chat_models/__init__.py:33
+  /Users/jose/Documents/discord-bot/venv/lib/python3.9/site-packages/langchain/chat_models/__init__.py:33: LangChainDeprecationWarning: Importing chat models from langchain is deprecated. Importing from langchain will no longer be supported as of langchain==0.2.0. Please import from langchain-community instead:
+  
+  `from langchain_community.chat_models import ChatOpenAI`.
+  
+  To install langchain-community run `pip install -U langchain-community`.
+    warnings.warn(
+
+tools/tools.py:69
+  /Users/jose/Documents/discord-bot/tools/tools.py:69: LangChainDeprecationWarning: The class `OpenAIEmbeddings` was deprecated in LangChain 0.0.9 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-openai package and should be used instead. To use it run `pip install -U :class:`~langchain-openai` and import as `from :class:`~langchain_openai import OpenAIEmbeddings``.
+    _embedding = OpenAIEmbeddings(model=EMBED_MODEL, openai_api_key=OPENAI_API_KEY)
+
+core/agent.py:20
+  /Users/jose/Documents/discord-bot/core/agent.py:20: LangChainDeprecationWarning: The class `ChatOpenAI` was deprecated in LangChain 0.0.10 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-openai package and should be used instead. To use it run `pip install -U :class:`~langchain-openai` and import as `from :class:`~langchain_openai import ChatOpenAI``.
+    llm = ChatOpenAI(
+
+core/agent.py:82
+  /Users/jose/Documents/discord-bot/core/agent.py:82: LangChainDeprecationWarning: LangChain agents will continue to be supported, but it is recommended for new use cases to be built with LangGraph. LangGraph offers a more flexible and full-featured framework for building agents, including support for tool-calling, persistence of state, and human-in-the-loop workflows. For details, refer to the `LangGraph documentation <https://langchain-ai.github.io/langgraph/>`_ as well as guides for `Migrating from AgentExecutor <https://python.langchain.com/docs/how_to/migrate_agent/>`_ and LangGraph's `Pre-built ReAct agent <https://langchain-ai.github.io/langgraph/how-tos/create-react-agent/>`_.
+    agent = initialize_agent(
+
+tests/test_agent_integration.py::test_balanced_suite[What data is currently cached?-expected_behavior0]
+  /Users/jose/Documents/discord-bot/core/agent.py:111: LangChainDeprecationWarning: The method `Chain.run` was deprecated in langchain 0.1.0 and will be removed in 1.0. Use :meth:`~invoke` instead.
+    return agent.run(query)
+
+tests/test_agent_integration.py: 40 warnings
+  /Users/jose/Documents/discord-bot/venv/lib/python3.9/site-packages/langchain_community/chat_models/openai.py:495: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    response = response.dict()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search for \u2018use cases\u2019 with keyword \u2018roundtable\u2019 in #genai-use-case-roundtable, returning the top 3 results.-expected_behavior3]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search messages from 2025-04-26 to 2025-04-23 in #\U0001f3d8general-chat.-expected_behavior12]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Search for \u2018bug\u2019 in #nonexistent-channel.-expected_behavior13]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Tell me something interesting.-expected_behavior14]
+FAILED tests/test_agent_integration.py::test_balanced_suite[What was discussed about \u2018help\u2019 on 2025-04-18 in the discord-help channel?-expected_behavior16]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Summarize this week in #\u2753q-and-a-questions as JSON and ensure the output has both `summary` and `note` fields.-expected_behavior17]
+FAILED tests/test_agent_integration.py::test_balanced_suite[Retrieve messages in channel ID 1364250555467300976 (\U0001f4e9midweek-request) between 2025-04-20 and 2025-04-25.-expected_behavior19]
+============ 7 failed, 14 passed, 46 warnings in 109.54s (0:01:49) =============
