@@ -44,9 +44,9 @@ except ImportError:
 @dataclass
 class IndexConfig:
     """Configuration for FAISS index creation"""
-    model_name: str = "all-MiniLM-L6-v2"  # Lightweight, good performance
+    model_name: str = "msmarco-distilbert-base-v4"  # Superior performance model
     index_type: str = "flat"  # Options: flat, ivf, hnsw
-    dimension: int = 384  # Dimension for all-MiniLM-L6-v2
+    dimension: int = 768  # Dimension for msmarco-distilbert-base-v4
     nlist: int = 100  # For IVF index
     m: int = 16  # For HNSW index
     ef_construction: int = 200  # For HNSW index
@@ -336,7 +336,7 @@ def main():
     # Initialize preprocessor and index
     preprocessor = ContentPreprocessor()
     index_config = IndexConfig(
-        model_name="all-MiniLM-L6-v2",
+        model_name="msmarco-distilbert-base-v4",
         index_type="flat",  # Start with flat for testing
         batch_size=32
     )

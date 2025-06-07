@@ -44,7 +44,7 @@ class CommunityFAISSIndexBuilder:
     """Community-focused FAISS index builder with rich metadata and expert identification."""
     
     def __init__(self, 
-                 model_name: str = "all-MiniLM-L6-v2",
+                 model_name: str = "msmarco-distilbert-base-v4",
                  db_path: str = "data/discord_messages.db",
                  batch_size: int = 100):
         """
@@ -576,7 +576,7 @@ def main():
     """Main function to build community FAISS index."""
     # Initialize builder
     builder = CommunityFAISSIndexBuilder(
-        model_name="all-MiniLM-L6-v2",
+        model_name="msmarco-distilbert-base-v4",
         db_path="data/discord_messages.db",
         batch_size=50
     )

@@ -35,19 +35,23 @@ class LocalVectorStore:
         self.index_path = index_path
         self._index = None
         self._metadata = None
+        self._message_order = None
     
     def load(self):
         """Load FAISS index and metadata from disk."""
         import faiss
-        import pickle
+        import json
         
         try:
             logger.info("Loading vector store from disk")
             # Load FAISS index
-            self._index = faiss.read_index(f"{self.index_path}/index.faiss")
-            # Load metadata
-            with open(f"{self.index_path}/index.pkl", "rb") as f:
-                self._metadata = pickle.load(f)
+            self._index = faiss.read_index(f"{self.index_path}/faiss_index.index")
+            # Load metadata (JSON format)
+            with open(f"{self.index_path}/metadata.json", "r") as f:
+                data = json.load(f)
+                self._metadata = data.get('metadata', {})
+                # Support both message_order and id_mapping keys
+                self._message_order = data.get('message_order', data.get('id_mapping', []))
             logger.info(f"Loaded vector store with {self._index.ntotal} vectors")
         except Exception as e:
             logger.error(f"Failed to load vector store: {e}")
@@ -69,10 +73,12 @@ class LocalVectorStore:
         # Return metadata for found documents
         results = []
         for i, idx in enumerate(indices[0]):
-            if idx >= 0 and idx < len(self._metadata):
-                meta = self._metadata[idx].copy()
-                meta['score'] = float(scores[0][i])
-                results.append(meta)
+            if idx >= 0 and idx < len(self._message_order):
+                message_id = str(self._message_order[idx])
+                if message_id in self._metadata:
+                    meta = self._metadata[message_id].copy()
+                    meta['score'] = float(scores[0][i])
+                    results.append(meta)
         
         return results
 
@@ -310,6 +316,599 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
         duration = time.time() - start_time
         logger.info(f"Query completed in {duration:.2f} seconds")
 
+# ——— Resource Search Integration ———
+
+class ResourceVectorStore:
+    """Resource-specific vector store using FAISS with resource embeddings."""
+    
+    def __init__(self, 
+                 index_path: str = "data/indices/resource_faiss_20250607_220423.index",
+                 metadata_path: str = "data/indices/resource_faiss_20250607_220423_metadata.json",
+                 model_name: str = "msmarco-distilbert-base-v4"):
+        self.index_path = index_path
+        self.metadata_path = metadata_path
+        self.model_name = model_name
+        self._index = None
+        self._metadata = None
+        self._model = None
+    
+    def load(self):
+        """Load FAISS index, metadata, and embedding model."""
+        if self._index is None:
+            logger.info(f"Loading resource FAISS index from: {self.index_path}")
+            import faiss
+            self._index = faiss.read_index(self.index_path)
+            
+            logger.info(f"Loading resource metadata from: {self.metadata_path}")
+            with open(self.metadata_path, 'r') as f:
+                data = json.load(f)
+                self._metadata = data['metadata']
+            
+            logger.info(f"Loading sentence transformer model: {self.model_name}")
+            try:
+                from sentence_transformers import SentenceTransformer
+                self._model = SentenceTransformer(self.model_name)
+            except ImportError:
+                logger.error("sentence_transformers not installed. Resource search unavailable.")
+                raise ImportError("sentence_transformers required for resource search")
+            
+            logger.info(f"Resource store loaded: {self._index.ntotal} vectors, {len(self._metadata)} metadata entries")
+    
+    def search(self, query_text: str, k: int = 5, filters: Optional[Dict] = None) -> List[Dict[str, Any]]:
+        """Search for similar resources."""
+        if self._index is None:
+            self.load()
+        
+        # Create query embedding
+        query_embedding = self._model.encode([query_text])
+        
+        # Search FAISS index
+        scores, indices = self._index.search(query_embedding.astype('float32'), k * 2)
+        
+        # Return metadata for found resources
+        results = []
+        for score, idx in zip(scores[0], indices[0]):
+            if idx >= 0 and idx < len(self._metadata):
+                meta = self._metadata[idx].copy()
+                meta['similarity_score'] = float(score)
+                
+                # Apply filters if provided
+                if filters and not self._apply_filters(meta, filters):
+                    continue
+                
+                results.append(meta)
+                
+                if len(results) >= k:
+                    break
+        
+        return results
+    
+    def _apply_filters(self, resource: Dict, filters: Dict) -> bool:
+        """Apply optional filters to search results."""
+        for key, value in filters.items():
+            if key == 'tag' and resource.get('tag') != value:
+                return False
+            elif key == 'domain' and resource.get('domain') != value:
+                return False
+            elif key == 'is_tool' and resource.get('is_tool') != value:
+                return False
+            elif key == 'is_article' and resource.get('is_article') != value:
+                return False
+            elif key == 'is_youtube' and resource.get('is_youtube') != value:
+                return False
+            elif key == 'author' and resource.get('author') != value:
+                return False
+        return True
+
+# Global resource store instance
+_resource_store = None
+
+def load_resource_vectorstore() -> ResourceVectorStore:
+    """Load the resource vector store (singleton pattern)."""
+    global _resource_store
+    if _resource_store is None:
+        _resource_store = ResourceVectorStore()
+        try:
+            _resource_store.load()
+        except Exception as e:
+            logger.warning(f"Resource store unavailable: {e}")
+            return None
+    return _resource_store
+
+def get_top_k_resource_matches(
+    query: str,
+    k: int = 5,
+    filters: Optional[Dict] = None
+) -> List[Dict[str, Any]]:
+    """
+    Retrieve the top-k resource matches for 'query'.
+    """
+    try:
+        logger.info(f"Searching for resource matches: query='{query}', k={k}")
+        store = load_resource_vectorstore()
+        
+        if store is None:
+            logger.warning("Resource store not available")
+            return []
+        
+        # Get search results from resource vector store
+        results = store.search(query, k, filters)
+        
+        logger.info(f"Found {len(results)} resource matches")
+        return results
+    except Exception as e:
+        logger.error(f"Error in resource search: {e}")
+        return []
+
+def build_resource_prompt(
+    resource_matches: List[Dict[str, Any]],
+    question: str,
+    as_json: bool = False
+) -> List[Dict[str, str]]:
+    """
+    Construct a ChatML prompt with context from matching resources.
+    """
+    context_lines: List[str] = []
+    for r in resource_matches:
+        title = r.get("title", "Untitled Resource")
+        description = r.get("description", "No description")
+        url = r.get("resource_url", "")
+        domain = r.get("domain", "")
+        tag = r.get("tag", "Other")
+        author = r.get("author", "Unknown")
+        score = r.get("similarity_score", 0)
+        
+        line = f"**{title}** ({tag})\n"
+        line += f"📝 {description}\n"
+        line += f"🌐 Domain: {domain} | 👤 Shared by: {author} | 📊 Relevance: {score:.3f}"
+        if url:
+            line += f"\n🔗 [View Resource]({url})"
+        context_lines.append(line)
+
+    instructions = (
+        "You are a knowledgeable assistant with access to a curated collection of AI, technology, and educational resources.\n\n"
+        "Use the provided resource context to answer the user's question. "
+        "Include resource titles, descriptions, URLs, and relevance scores when helpful.\n"
+        "Focus on the most relevant resources and explain how they relate to the user's query.\n"
+    )
+    if as_json:
+        instructions += "Return results as a JSON array with fields: resource_id, title, description, resource_url, tag, domain, author, similarity_score.\n"
+
+    return [
+        {"role": "system", "content": "You are a resource discovery assistant for AI and technology resources."},
+        {"role": "user", "content": instructions + "\nResource Context:\n" + "\n\n".join(context_lines)
+                                  + f"\n\nUser's question: {question}\n"}
+    ]
+
+def get_resource_answer(
+    query: str,
+    k: int = 5,
+    as_json: bool = False,
+    return_matches: bool = False,
+    filters: Optional[Dict] = None
+) -> Any:
+    """
+    Perform a resource-based RAG query: retrieve resource matches, build a prompt, and ask AI.
+    Returns either a string (answer) or (answer, matches) if return_matches=True.
+    """
+    try:
+        matches = get_top_k_resource_matches(query, k, filters)
+        
+        if not matches and not return_matches:
+            return "⚠️ I couldn't find relevant resources. Try rephrasing your question or using different keywords."
+
+        chat_messages = build_resource_prompt(matches, query, as_json)
+        
+        if as_json:
+            # For JSON responses, add specific instruction
+            chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+        
+        answer = ai_client.chat_completion(
+            chat_messages,
+            temperature=0.7,
+            max_tokens=1500
+        )
+        
+        return (answer, matches) if return_matches else answer
+
+    except Exception as e:
+        err = f"❌ Error during resource retrieval: {e}"
+        return (err, []) if return_matches else err
+
+def get_hybrid_answer(
+    query: str,
+    k_messages: int = 3,
+    k_resources: int = 3,
+    as_json: bool = False,
+    return_matches: bool = False,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
+    channel_name: Optional[str] = None,
+    resource_filters: Optional[Dict] = None
+) -> Any:
+    """
+    Perform a hybrid RAG query combining both Discord messages and resources.
+    """
+    try:
+        # Get both message and resource matches
+        message_matches = get_top_k_matches(
+            query, k_messages,
+            guild_id=guild_id,
+            channel_id=channel_id,
+            channel_name=channel_name
+        )
+        
+        resource_matches = get_top_k_resource_matches(query, k_resources, resource_filters)
+        
+        if not message_matches and not resource_matches and not return_matches:
+            return "⚠️ I couldn't find relevant messages or resources. Try rephrasing your question or being more specific."
+
+        # Build hybrid context
+        context_lines: List[str] = []
+        
+        # Add message context
+        if message_matches:
+            context_lines.append("## Discord Messages Context")
+            for m in message_matches:
+                author = m.get("author", {})
+                author_name = author.get("display_name") or author.get("username") or "Unknown"
+                ts = m.get("timestamp", "")
+                ch_name = m.get("channel_name") or m.get("channel_id")
+                content = m.get("content", "").replace("\n", " ")
+                url = safe_jump_url(m)
+                line = f"**{author_name}** (_{ts}_ in **#{ch_name}**):\n{content}"
+                if url:
+                    line += f"\n[🔗 View Message]({url})"
+                context_lines.append(line)
+        
+        # Add resource context
+        if resource_matches:
+            context_lines.append("\n## Resource Library Context")
+            for r in resource_matches:
+                title = r.get("title", "Untitled Resource")
+                description = r.get("description", "No description")
+                url = r.get("resource_url", "")
+                domain = r.get("domain", "")
+                tag = r.get("tag", "Other")
+                author = r.get("author", "Unknown")
+                score = r.get("similarity_score", 0)
+                
+                line = f"**{title}** ({tag})\n"
+                line += f"📝 {description}\n"
+                line += f"🌐 Domain: {domain} | 👤 Shared by: {author} | 📊 Relevance: {score:.3f}"
+                if url:
+                    line += f"\n🔗 [View Resource]({url})"
+                context_lines.append(line)
+
+        instructions = (
+            "You are a knowledgeable assistant with access to both Discord community conversations and a curated resource library.\n\n"
+            "Use both the Discord messages and the resource context to provide a comprehensive answer. "
+            "Combine insights from community discussions with relevant resources when helpful.\n"
+            "Include author names, timestamps, URLs, and resource details when relevant.\n"
+        )
+        
+        if as_json:
+            instructions += "Return results as a JSON object with 'messages' and 'resources' arrays.\n"
+
+        chat_messages = [
+            {"role": "system", "content": "You are a comprehensive Discord community and resource assistant."},
+            {"role": "user", "content": instructions + "\nContext:\n" + "\n\n".join(context_lines)
+                                      + f"\n\nUser's question: {query}\n"}
+        ]
+        
+        if as_json:
+            chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+        
+        answer = ai_client.chat_completion(
+            chat_messages,
+            temperature=0.7,
+            max_tokens=2000
+        )
+        
+        all_matches = {
+            'messages': message_matches,
+            'resources': resource_matches
+        }
+        
+        return (answer, all_matches) if return_matches else answer
+
+    except Exception as e:
+        err = f"❌ Error during hybrid retrieval: {e}"
+        return (err, {'messages': [], 'resources': []}) if return_matches else err
+
 # Convenience aliases for the app
 search_messages = get_top_k_matches
+search_resources = get_top_k_resource_matches
 discord_rag_search = get_answer
+resource_rag_search = get_resource_answer
+hybrid_rag_search = get_hybrid_answer
+
+# ——— Resource Search Integration ———
+
+class ResourceVectorStore:
+    """Resource-specific vector store using FAISS with resource embeddings."""
+    
+    def __init__(self, 
+                 index_path: str = "data/indices/resource_faiss_20250607_220423.index",
+                 metadata_path: str = "data/indices/resource_faiss_20250607_220423_metadata.json",
+                 model_name: str = "msmarco-distilbert-base-v4"):
+        self.index_path = index_path
+        self.metadata_path = metadata_path
+        self.model_name = model_name
+        self._index = None
+        self._metadata = None
+        self._model = None
+    
+    def load(self):
+        """Load FAISS index, metadata, and embedding model."""
+        if self._index is None:
+            logger.info(f"Loading resource FAISS index from: {self.index_path}")
+            import faiss
+            self._index = faiss.read_index(self.index_path)
+            
+            logger.info(f"Loading resource metadata from: {self.metadata_path}")
+            with open(self.metadata_path, 'r') as f:
+                data = json.load(f)
+                self._metadata = data['metadata']
+            
+            logger.info(f"Loading sentence transformer model: {self.model_name}")
+            from sentence_transformers import SentenceTransformer
+            self._model = SentenceTransformer(self.model_name)
+            
+            logger.info(f"Resource store loaded: {self._index.ntotal} vectors, {len(self._metadata)} metadata entries")
+    
+    def search(self, query_text: str, k: int = 5, filters: Optional[Dict] = None) -> List[Dict[str, Any]]:
+        """Search for similar resources."""
+        if self._index is None:
+            self.load()
+        
+        # Create query embedding
+        query_embedding = self._model.encode([query_text])
+        
+        # Search FAISS index
+        scores, indices = self._index.search(query_embedding.astype('float32'), k * 2)
+        
+        # Return metadata for found resources
+        results = []
+        for score, idx in zip(scores[0], indices[0]):
+            if idx >= 0 and idx < len(self._metadata):
+                meta = self._metadata[idx].copy()
+                meta['similarity_score'] = float(score)
+                
+                # Apply filters if provided
+                if filters and not self._apply_filters(meta, filters):
+                    continue
+                
+                results.append(meta)
+                
+                if len(results) >= k:
+                    break
+        
+        return results
+    
+    def _apply_filters(self, resource: Dict, filters: Dict) -> bool:
+        """Apply optional filters to search results."""
+        for key, value in filters.items():
+            if key == 'tag' and resource.get('tag') != value:
+                return False
+            elif key == 'domain' and resource.get('domain') != value:
+                return False
+            elif key == 'is_tool' and resource.get('is_tool') != value:
+                return False
+            elif key == 'is_article' and resource.get('is_article') != value:
+                return False
+            elif key == 'is_youtube' and resource.get('is_youtube') != value:
+                return False
+            elif key == 'author' and resource.get('author') != value:
+                return False
+        return True
+
+# Global resource store instance
+_resource_store = None
+
+def load_resource_vectorstore() -> ResourceVectorStore:
+    """Load the resource vector store (singleton pattern)."""
+    global _resource_store
+    if _resource_store is None:
+        _resource_store = ResourceVectorStore()
+        _resource_store.load()
+    return _resource_store
+
+def get_top_k_resource_matches(
+    query: str,
+    k: int = 5,
+    filters: Optional[Dict] = None
+) -> List[Dict[str, Any]]:
+    """
+    Retrieve the top-k resource matches for 'query'.
+    """
+    try:
+        logger.info(f"Searching for resource matches: query='{query}', k={k}")
+        store = load_resource_vectorstore()
+        
+        # Get search results from resource vector store
+        results = store.search(query, k, filters)
+        
+        logger.info(f"Found {len(results)} resource matches")
+        return results
+    except Exception as e:
+        logger.error(f"Error in resource search: {e}")
+        return []
+
+def build_resource_prompt(
+    resource_matches: List[Dict[str, Any]],
+    question: str,
+    as_json: bool = False
+) -> List[Dict[str, str]]:
+    """
+    Construct a ChatML prompt with context from matching resources.
+    """
+    context_lines: List[str] = []
+    for r in resource_matches:
+        title = r.get("title", "Untitled Resource")
+        description = r.get("description", "No description")
+        url = r.get("resource_url", "")
+        domain = r.get("domain", "")
+        tag = r.get("tag", "Other")
+        author = r.get("author", "Unknown")
+        score = r.get("similarity_score", 0)
+        
+        line = f"**{title}** ({tag})\n"
+        line += f"📝 {description}\n"
+        line += f"🌐 Domain: {domain} | 👤 Shared by: {author} | 📊 Relevance: {score:.3f}"
+        if url:
+            line += f"\n🔗 [View Resource]({url})"
+        context_lines.append(line)
+
+    instructions = (
+        "You are a knowledgeable assistant with access to a curated collection of AI, technology, and educational resources.\n\n"
+        "Use the provided resource context to answer the user's question. "
+        "Include resource titles, descriptions, URLs, and relevance scores when helpful.\n"
+        "Focus on the most relevant resources and explain how they relate to the user's query.\n"
+    )
+    if as_json:
+        instructions += "Return results as a JSON array with fields: resource_id, title, description, resource_url, tag, domain, author, similarity_score.\n"
+
+    return [
+        {"role": "system", "content": "You are a resource discovery assistant for AI and technology resources."},
+        {"role": "user", "content": instructions + "\nResource Context:\n" + "\n\n".join(context_lines)
+                                  + f"\n\nUser's question: {question}\n"}
+    ]
+
+def get_resource_answer(
+    query: str,
+    k: int = 5,
+    as_json: bool = False,
+    return_matches: bool = False,
+    filters: Optional[Dict] = None
+) -> Any:
+    """
+    Perform a resource-based RAG query: retrieve resource matches, build a prompt, and ask AI.
+    Returns either a string (answer) or (answer, matches) if return_matches=True.
+    """
+    try:
+        matches = get_top_k_resource_matches(query, k, filters)
+        
+        if not matches and not return_matches:
+            return "⚠️ I couldn't find relevant resources. Try rephrasing your question or using different keywords."
+
+        chat_messages = build_resource_prompt(matches, query, as_json)
+        
+        if as_json:
+            # For JSON responses, add specific instruction
+            chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+        
+        answer = ai_client.chat_completion(
+            chat_messages,
+            temperature=0.7,
+            max_tokens=1500
+        )
+        
+        return (answer, matches) if return_matches else answer
+
+    except Exception as e:
+        err = f"❌ Error during resource retrieval: {e}"
+        return (err, []) if return_matches else err
+
+def get_hybrid_answer(
+    query: str,
+    k_messages: int = 3,
+    k_resources: int = 3,
+    as_json: bool = False,
+    return_matches: bool = False,
+    guild_id: Optional[int] = None,
+    channel_id: Optional[int] = None,
+    channel_name: Optional[str] = None,
+    resource_filters: Optional[Dict] = None
+) -> Any:
+    """
+    Perform a hybrid RAG query combining both Discord messages and resources.
+    """
+    try:
+        # Get both message and resource matches
+        message_matches = get_top_k_matches(
+            query, k_messages,
+            guild_id=guild_id,
+            channel_id=channel_id,
+            channel_name=channel_name
+        )
+        
+        resource_matches = get_top_k_resource_matches(query, k_resources, resource_filters)
+        
+        if not message_matches and not resource_matches and not return_matches:
+            return "⚠️ I couldn't find relevant messages or resources. Try rephrasing your question or being more specific."
+
+        # Build hybrid context
+        context_lines: List[str] = []
+        
+        # Add message context
+        if message_matches:
+            context_lines.append("## Discord Messages Context")
+            for m in message_matches:
+                author = m.get("author", {})
+                author_name = author.get("display_name") or author.get("username") or "Unknown"
+                ts = m.get("timestamp", "")
+                ch_name = m.get("channel_name") or m.get("channel_id")
+                content = m.get("content", "").replace("\n", " ")
+                url = safe_jump_url(m)
+                line = f"**{author_name}** (_{ts}_ in **#{ch_name}**):\n{content}"
+                if url:
+                    line += f"\n[🔗 View Message]({url})"
+                context_lines.append(line)
+        
+        # Add resource context
+        if resource_matches:
+            context_lines.append("\n## Resource Library Context")
+            for r in resource_matches:
+                title = r.get("title", "Untitled Resource")
+                description = r.get("description", "No description")
+                url = r.get("resource_url", "")
+                domain = r.get("domain", "")
+                tag = r.get("tag", "Other")
+                author = r.get("author", "Unknown")
+                score = r.get("similarity_score", 0)
+                
+                line = f"**{title}** ({tag})\n"
+                line += f"📝 {description}\n"
+                line += f"🌐 Domain: {domain} | 👤 Shared by: {author} | 📊 Relevance: {score:.3f}"
+                if url:
+                    line += f"\n🔗 [View Resource]({url})"
+                context_lines.append(line)
+
+        instructions = (
+            "You are a knowledgeable assistant with access to both Discord community conversations and a curated resource library.\n\n"
+            "Use both the Discord messages and the resource context to provide a comprehensive answer. "
+            "Combine insights from community discussions with relevant resources when helpful.\n"
+            "Include author names, timestamps, URLs, and resource details when relevant.\n"
+        )
+        
+        if as_json:
+            instructions += "Return results as a JSON object with 'messages' and 'resources' arrays.\n"
+
+        chat_messages = [
+            {"role": "system", "content": "You are a comprehensive Discord community and resource assistant."},
+            {"role": "user", "content": instructions + "\nContext:\n" + "\n\n".join(context_lines)
+                                      + f"\n\nUser's question: {query}\n"}
+        ]
+        
+        if as_json:
+            chat_messages[-1]["content"] += "\n\nIMPORTANT: Return only valid JSON, no other text."
+        
+        answer = ai_client.chat_completion(
+            chat_messages,
+            temperature=0.7,
+            max_tokens=2000
+        )
+        
+        all_matches = {
+            'messages': message_matches,
+            'resources': resource_matches
+        }
+        
+        return (answer, all_matches) if return_matches else answer
+
+    except Exception as e:
+        err = f"❌ Error during hybrid retrieval: {e}"
+        return (err, {'messages': [], 'resources': []}) if return_matches else err
+
+# ——— Enhanced Convenience Functions ———

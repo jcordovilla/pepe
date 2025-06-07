@@ -22,8 +22,8 @@ class ModelConfig:
     chat_max_tokens: int = 4096
     
     # Embedding Model 
-    embedding_model: str = "all-MiniLM-L6-v2"  # Optimized for search/retrieval
-    embedding_dimension: int = 384
+    embedding_model: str = "msmarco-distilbert-base-v4"  # Best performing model from evaluation
+    embedding_dimension: int = 768
     
     # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
@@ -43,7 +43,7 @@ class AppConfig:
     database_url: str = "sqlite:///data/discord_messages.db"
     
     # Vector Store
-    faiss_index_path: str = "index_faiss"
+    faiss_index_path: str = "data/indices/index_20250607_221104"
     
     # Logging
     log_level: str = "INFO"
@@ -71,7 +71,7 @@ def load_config() -> AppConfig:
     config = AppConfig(
         discord_token=discord_token,
         database_url=os.getenv("DATABASE_URL", "sqlite:///data/discord_messages.db"),
-        faiss_index_path=os.getenv("FAISS_INDEX_PATH", "index_faiss"),
+        faiss_index_path=os.getenv("FAISS_INDEX_PATH", "data/indices/index_20250607_221104"),
         log_level=os.getenv("LOG_LEVEL", "INFO"),
         log_file=os.getenv("LOG_FILE", "bot.log"),
         batch_size=int(os.getenv("BATCH_SIZE", "100")),

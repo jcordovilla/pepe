@@ -36,7 +36,7 @@ class EnhancedFAISSIndexBuilder:
     """Enhanced FAISS index builder with rich metadata and optimized structure."""
     
     def __init__(self, 
-                 model_name: str = "all-MiniLM-L6-v2",
+                 model_name: str = "msmarco-distilbert-base-v4",
                  db_path: str = "data/discord_messages.db",
                  batch_size: int = 100):
         """
@@ -382,7 +382,7 @@ def main():
     """Main function to build enhanced FAISS index."""
     # Initialize builder
     builder = EnhancedFAISSIndexBuilder(
-        model_name="all-MiniLM-L6-v2",
+        model_name="msmarco-distilbert-base-v4",
         db_path="data/discord_messages.db",
         batch_size=50
     )

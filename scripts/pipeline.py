@@ -268,7 +268,7 @@ def main():
     parser.add_argument("--limit", type=int, help="Limit number of messages to process")
     parser.add_argument("--index-type", choices=["flat", "ivf", "hnsw"], default="flat", 
                        help="FAISS index type")
-    parser.add_argument("--model", default="all-MiniLM-L6-v2", 
+    parser.add_argument("--model", default="msmarco-distilbert-base-v4", 
                        help="Sentence transformer model name")
     parser.add_argument("--no-save", action="store_true", help="Don't save index to disk")
     parser.add_argument("--index-name", help="Custom name for saved index")

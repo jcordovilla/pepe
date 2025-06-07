@@ -49,7 +49,7 @@ class PreprocessingPipeline:
     
     def __init__(self, 
                  db_path: str = "data/discord_messages.db",
-                 model_name: str = "all-MiniLM-L6-v2",
+                 model_name: str = "msmarco-distilbert-base-v4",
                  batch_size: int = 50):
         """
         Initialize the preprocessing pipeline.
@@ -533,7 +533,7 @@ def main():
     parser.add_argument("--skip-community", action="store_true", help="Skip community preprocessing")
     parser.add_argument("--skip-enhanced", action="store_true", help="Skip enhanced FAISS index")
     parser.add_argument("--skip-community-index", action="store_true", help="Skip community FAISS index")
-    parser.add_argument("--model", default="all-MiniLM-L6-v2", help="Sentence transformer model")
+    parser.add_argument("--model", default="msmarco-distilbert-base-v4", help="Sentence transformer model")
     parser.add_argument("--batch-size", type=int, default=50, help="Processing batch size")
     
     args = parser.parse_args()

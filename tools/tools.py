@@ -114,7 +114,7 @@ def _create_embedding_with_correct_model(text: str):
     try:
         from sentence_transformers import SentenceTransformer
         # Use the same model that was used to build the enhanced index
-        model = SentenceTransformer("all-MiniLM-L6-v2")
+        model = SentenceTransformer("msmarco-distilbert-base-v4")
         embedding = model.encode([text])
         return embedding
     except Exception as e:
@@ -202,7 +202,7 @@ def search_messages(
                     # Use correct embedding model for community index
                     try:
                         if SentenceTransformer is not None:
-                            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+                            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
                             query_embedding = embedding_model.encode([query])
                         else:
                             query_embedding = ai_client.create_embeddings(query)
@@ -265,7 +265,7 @@ def search_messages(
                     # Use correct embedding model for enhanced index
                     try:
                         if SentenceTransformer is not None:
-                            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+                            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
                             query_embedding = embedding_model.encode([query])
                         else:
                             query_embedding = ai_client.create_embeddings(query)
@@ -682,7 +682,7 @@ def test_enhanced_faiss_search(
         
         # Create query embedding
         if SentenceTransformer is not None:
-            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
             query_embedding = embedding_model.encode([query])
         else:
             query_embedding = ai_client.create_embeddings(query)
@@ -769,7 +769,7 @@ def find_community_experts(
         
         # Create query embedding
         if SentenceTransformer is not None:
-            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
             query_embedding = embedding_model.encode([skill_or_topic])
         else:
             query_embedding = ai_client.create_embeddings(skill_or_topic)
@@ -898,7 +898,7 @@ def search_conversation_threads(
         
         # Create query embedding
         if SentenceTransformer is not None:
-            embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+            embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
             query_embedding = embedding_model.encode([query])
         else:
             query_embedding = ai_client.create_embeddings(query)
@@ -1283,7 +1283,7 @@ def test_community_search(
         else:  # general search
             # Create query embedding
             if SentenceTransformer is not None:
-                embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+                embedding_model = SentenceTransformer("msmarco-distilbert-base-v4")
                 query_embedding = embedding_model.encode([query])
             else:
                 query_embedding = ai_client.create_embeddings(query)
