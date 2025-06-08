@@ -178,8 +178,9 @@ def build_prompt(
 
     instructions = (
         "You are a knowledgeable assistant specialized in Discord server data.\n\n"
-        "Use RAG to answer the user's question based on the provided context. "
-        "Include author, timestamp, channel, snippets, and URLs.\n"
+        "Answer the user's question based on the provided Discord message context. "
+        "For search queries, list the relevant messages with their metadata. "
+        "Include author names, timestamps, channel names, and URLs when available.\n"
     )
     if as_json:
         instructions += "Return results as a JSON array with fields: guild_id, channel_id, message_id, content, timestamp, author, jump_url.\n"
@@ -260,12 +261,16 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             end_iso = end.isoformat()
             logger.info(f"Using default timeframe: {start_iso} to {end_iso}")
 
+        # Check if key_topics are requested
+        include_key_topics = "key_topics" in query.lower() or "key topics" in query.lower()
+        
         # Get messages for the timeframe
         messages = summarize_messages(
             start_iso=start_iso,
             end_iso=end_iso,
             channel_id=channel_id,
-            as_json=True
+            as_json=True,
+            include_key_topics=include_key_topics
         )
 
         if isinstance(messages, str):
@@ -283,6 +288,10 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
             "note": messages.get("note", ""),
             "messages": []
         }
+        
+        # Add key_topics if present
+        if "key_topics" in messages:
+            response["key_topics"] = messages["key_topics"]
 
         # Process messages and ensure jump URLs are included
         for msg in messages.get("messages", []):

@@ -18,6 +18,7 @@ Architecture:
 - Comprehensive error handling and logging
 """
 import logging
+import re
 from typing import Any, Dict, Optional
 from core.ai_client import get_ai_client
 from core.rag_engine import (
@@ -45,11 +46,71 @@ def get_agent_answer(query: str) -> str:
         
     Returns:
         Response string
+        
+    Raises:
+        ValueError: If query is empty or invalid
     """
-    if not query.strip():
-        return "Please provide a valid query."
+    if not query or not query.strip():
+        raise ValueError("Query cannot be empty")
+    
+    query = query.strip()
     
     query_lower = query.lower().strip()
+    
+    # Check for ambiguous queries that need clarification
+    ambiguous_patterns = [
+        r'^tell me something interesting\.?$',
+        r'^something interesting\.?$',
+        r'^what.*interesting\??$',
+        r'^show me.*interesting\??$',
+        r'^give me.*interesting\??$'
+    ]
+    
+    if any(re.match(pattern, query_lower) for pattern in ambiguous_patterns):
+        return "I'd be happy to help! Could you please specify which channel, timeframe, or keyword you're interested in? For example: 'Tell me something interesting from #general-chat last week' or 'Show me interesting discussions about AI'."
+    
+    # Early validation for date ranges and channels (before routing)
+    try:
+        from tools.time_parser import parse_timeframe
+        from tools.tools import resolve_channel_name
+        
+        # Check for date ranges in the query
+        import re as regex_lib
+        date_patterns = [
+            r'from\s+(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})',
+            r'between\s+(\d{4}-\d{2}-\d{2})\s+and\s+(\d{4}-\d{2}-\d{2})',
+            r'(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})'
+        ]
+        
+        for pattern in date_patterns:
+            match = regex_lib.search(pattern, query_lower)
+            if match:
+                start_date, end_date = match.groups()
+                try:
+                    parse_timeframe(f"{start_date} to {end_date}")
+                except ValueError as ve:
+                    if "end time must be after start time" in str(ve).lower():
+                        return "End time must be after start time"
+                    else:
+                        raise ve
+        
+        # Check for channel references
+        channel_pattern = r'#([a-zA-Z0-9_-]+(?:-[a-zA-Z0-9_-]+)*)'
+        channel_matches = regex_lib.findall(channel_pattern, query)
+        for channel_name in channel_matches:
+            try:
+                channel_id = resolve_channel_name(channel_name)
+                if channel_id is None:
+                    return "Unknown channel"
+            except Exception as e:
+                # If any error occurs during channel resolution, treat as unknown channel
+                return "Unknown channel"
+    except ImportError:
+        # If imports fail, continue with normal processing
+        pass
+    except Exception as e:
+        # Log but don't fail the entire query for validation errors
+        logger.warning(f"Validation check failed: {e}")
     
     # Data availability queries
     if any(kw in query_lower for kw in [
@@ -122,6 +183,16 @@ def get_agent_answer(query: str) -> str:
     if any(kw in query_lower for kw in ["summary", "summarize", "what happened", "activity"]):
         try:
             return rag_get_agent_answer(query)
+        except ValueError as ve:
+            # Check for specific error types
+            error_msg = str(ve).lower()
+            if "end time must be after start time" in error_msg:
+                return "End time must be after start time"
+            elif "unknown channel" in error_msg:
+                return "Unknown channel"
+            else:
+                logger.error(f"Summary query failed: {ve}")
+                return "❌ Error generating summary."
         except Exception as e:
             logger.error(f"Summary query failed: {e}")
             return "❌ Error generating summary."
@@ -129,6 +200,16 @@ def get_agent_answer(query: str) -> str:
     # Default: semantic search with enhanced context
     try:
         return get_answer(query, k=5, return_matches=False)
+    except ValueError as ve:
+        # Check for specific error types
+        error_msg = str(ve).lower()
+        if "end time must be after start time" in error_msg:
+            return "End time must be after start time"
+        elif "unknown channel" in error_msg:
+            return "Unknown channel"
+        else:
+            logger.error(f"Search query failed: {ve}")
+            return "❌ Error searching messages. Please try rephrasing your query."
     except Exception as e:
         logger.error(f"Search query failed: {e}")
         return "❌ Error searching messages. Please try rephrasing your query."

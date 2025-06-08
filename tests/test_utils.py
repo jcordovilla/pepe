@@ -1,6 +1,8 @@
 import pytest
 from utils.helpers import build_jump_url
 
+pytestmark = [pytest.mark.unit, pytest.mark.utils]
+
 def test_build_jump_url_valid():
     url = build_jump_url(1, 2, 3)
     assert url == "https://discord.com/channels/1/2/3"

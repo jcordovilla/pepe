@@ -569,7 +569,8 @@ def summarize_messages(
     guild_id: Optional[int] = None,
     channel_id: Optional[int] = None,
     channel_name: Optional[str] = None,
-    as_json: bool = False
+    as_json: bool = False,
+    include_key_topics: bool = False
 ) -> Union[str, Dict[str, Any]]:
     """
     Generate a summary of messages using local AI models.
@@ -581,6 +582,7 @@ def summarize_messages(
         channel_id (int): Optional channel ID filter
         channel_name (str): Optional channel name filter
         as_json (bool): Return JSON format if True
+        include_key_topics (bool): Include key_topics field in JSON response
         
     Returns:
         Summary text or JSON with messages and metadata
@@ -598,11 +600,14 @@ def summarize_messages(
         messages = q.order_by(Message.timestamp).all()
         
         if not messages:
-            return {
+            result = {
                 "summary": "",
                 "note": "No messages found in timeframe",
                 "messages": []
-            } if as_json else "No messages found in timeframe"
+            }
+            if include_key_topics:
+                result["key_topics"] = []
+            return result if as_json else "No messages found in timeframe"
         
         # Prepare messages for summarization
         message_texts = []
@@ -615,21 +620,47 @@ def summarize_messages(
         combined_text = "\n".join(message_texts)
         
         # Generate summary using local AI
-        prompt = f"""Analyze and summarize the following Discord messages. 
+        if include_key_topics:
+            prompt = f"""Analyze and summarize the following Discord messages. 
+Provide both a summary and key topics discussed. Be concise but informative:
+
+{combined_text}
+
+Please provide:
+1. A brief summary of the conversation
+2. A list of key topics discussed (3-5 main topics)
+
+Format your response as:
+Summary: [your summary here]
+Key Topics: [topic 1], [topic 2], [topic 3], etc."""
+        else:
+            prompt = f"""Analyze and summarize the following Discord messages. 
 Focus on key topics, discussions, and insights. Be concise but informative:
 
 {combined_text}
 
 Summary:"""
         
-        summary = ai_client.chat_completion([
+        ai_response = ai_client.chat_completion([
             {"role": "system", "content": "You are a helpful assistant that summarizes Discord conversations concisely."},
             {"role": "user", "content": prompt}
         ])
         
+        # Parse AI response if key topics are requested
+        summary = ai_response
+        key_topics = []
+        
+        if include_key_topics and "Key Topics:" in ai_response:
+            parts = ai_response.split("Key Topics:")
+            if len(parts) == 2:
+                summary = parts[0].replace("Summary:", "").strip()
+                topics_text = parts[1].strip()
+                # Parse topics from comma-separated list
+                key_topics = [topic.strip() for topic in topics_text.split(",") if topic.strip()]
+        
         # Format output
         if as_json:
-            return {
+            result = {
                 "summary": summary,
                 "timeframe": f"{start_iso} to {end_iso}",
                 "message_count": len(messages),
@@ -644,13 +675,22 @@ Summary:"""
                     for msg in messages[:10]  # Limit to first 10 messages
                 ]
             }
+            if include_key_topics:
+                result["key_topics"] = key_topics
+            return result
         else:
-            return f"**Summary ({len(messages)} messages from {start_iso} to {end_iso}):**\n{summary}"
+            if include_key_topics and key_topics:
+                return f"**Summary ({len(messages)} messages from {start_iso} to {end_iso}):**\n{summary}\n\n**Key Topics:** {', '.join(key_topics)}"
+            else:
+                return f"**Summary ({len(messages)} messages from {start_iso} to {end_iso}):**\n{summary}"
             
     except Exception as e:
         logger.error(f"Error summarizing messages: {e}")
         error_msg = f"Error generating summary: {str(e)}"
-        return {"error": error_msg} if as_json else error_msg
+        result = {"error": error_msg}
+        if include_key_topics:
+            result["key_topics"] = []
+        return result if as_json else error_msg
     finally:
         session.close()
 

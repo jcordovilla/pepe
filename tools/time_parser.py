@@ -463,6 +463,11 @@ def parse_timeframe(query: str, now: Optional[datetime] = None) -> Tuple[datetim
         if match:
             try:
                 start_dt, end_dt = handler(match)
+                
+                # Validate that start time is before end time
+                if start_dt >= end_dt:
+                    raise ValueError("End time must be after start time")
+                
                 logger.info(f"Parsed timeframe '{query}' -> {start_dt} to {end_dt}")
                 return start_dt, end_dt
             except (ValueError, AttributeError) as e:

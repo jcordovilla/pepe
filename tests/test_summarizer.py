@@ -4,6 +4,10 @@ from datetime import datetime
 from tools.time_parser import parse_timeframe
 from tools.tools import summarize_messages
 
+import pytest
+
+pytestmark = [pytest.mark.unit, pytest.mark.summarizer]
+
 
 def test_summarizer_empty_range_text():
     # Use a far-future date range to ensure no messages exist
