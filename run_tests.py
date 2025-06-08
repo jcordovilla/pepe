@@ -121,10 +121,16 @@ class TestRunner:
             files=["tests/test_summarizer.py"]
         )
         
-        # 7. Performance Tests (slower)
+        # 7. Integration Tests (AI, search, etc.)
+        self.results['integration_tests'] = self.run_test_suite(
+            "Integration Tests",
+            files=["tests/integration/test_local_ai.py", "tests/integration/test_resource_search.py"]
+        )
+        
+        # 8. Performance Tests (slower)
         self.results['performance'] = self.run_test_suite(
             "Performance Tests",
-            files=["tests/test_performance.py"]
+            files=["tests/performance/test_embedding_performance.py"]
         )
     
     def run_quick_suite(self):

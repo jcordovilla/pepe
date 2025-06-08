@@ -6,12 +6,19 @@ This directory contains comprehensive tests for the Discord Agent System, includ
 
 ### Test Files
 - **`test_agent_integration.py`** - End-to-end agent functionality tests (26 tests)
-- **`test_enhanced_k_determination.py`** - Enhanced K Determination system tests (NEW)
-- **`test_performance.py`** - Performance and load testing (NEW)
-- **`test_database_integration.py`** - Database operations and FAISS integration (NEW)
-- **`test_time_parser_comprehensive.py`** - Time parsing functionality (15 tests)
-- **`test_summarizer.py`** - Message summarization tests (enhanced)
+- **`test_enhanced_k_determination.py`** - Enhanced K Determination system tests (15 tests)
+- **`test_time_parser_comprehensive.py`** - Time parsing functionality (11 tests)
+- **`test_summarizer.py`** - Message summarization tests (10 tests)
+- **`test_database_integration.py`** - Database operations and FAISS integration
+- **`test_performance.py`** - Main performance and load testing
 - **`test_utils.py`** - Utility function tests (3 tests)
+
+#### Integration Tests (`integration/`)
+- **`test_local_ai.py`** - Local AI setup validation and testing
+- **`test_resource_search.py`** - Resource FAISS index search functionality
+
+#### Performance Tests (`performance/`)
+- **`test_embedding_performance.py`** - Embedding model speed and quality benchmarks
 
 ### Test Categories (Markers)
 - **`unit`** - Fast, isolated unit tests
