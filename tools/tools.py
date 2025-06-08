@@ -22,7 +22,7 @@ Architecture:
 import os
 import json
 from typing import Any, Dict, List, Optional, Union
-from datetime import datetime
+from datetime import datetime, timedelta
 from db import SessionLocal, Message
 from core.ai_client import get_ai_client
 from core.config import get_config
@@ -34,10 +34,12 @@ from utils import (
 from utils.helpers import build_jump_url
 import time
 import logging
-from sqlalchemy import func
+from sqlalchemy import func, and_
 import re
 import numpy as np
 import faiss
+
+# Statistical analysis functionality will be added as functions below
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -1498,3 +1500,619 @@ def test_community_search(
             "message": str(e),
             "results": []
         }
+
+# =====================================
+# STATISTICAL ANALYSIS FUNCTIONS
+# =====================================
+
+def get_message_statistics(
+    channel_name: Optional[str] = None,
+    author_name: Optional[str] = None,
+    days_back: int = 30,
+    guild_id: Optional[int] = None
+) -> Dict[str, Any]:
+    """
+    Get comprehensive message statistics including counts, averages, min/max, and percentiles.
+    
+    Args:
+        channel_name: Filter by channel name (partial match)
+        author_name: Filter by author username
+        days_back: Number of days to analyze (default: 30)
+        guild_id: Filter by guild ID
+    
+    Returns:
+        Dictionary with comprehensive statistics
+    """
+    logger.info(f"Calculating message statistics for channel={channel_name}, author={author_name}, days={days_back}")
+    
+    try:
+        session = SessionLocal()
+        
+        # Build query with filters
+        query = session.query(Message)
+        
+        if days_back > 0:
+            cutoff_date = datetime.utcnow() - timedelta(days=days_back)
+            query = query.filter(Message.timestamp >= cutoff_date)
+        
+        if channel_name:
+            query = query.filter(Message.channel_name.ilike(f"%{channel_name}%"))
+        
+        if author_name:
+            query = query.filter(func.json_extract(Message.author, '$.username') == author_name)
+        
+        if guild_id:
+            query = query.filter(Message.guild_id == guild_id)
+        
+        # Get all messages matching filters
+        messages = query.all()
+        
+        if not messages:
+            return {
+                "status": "no_data",
+                "message": "No messages found with the specified filters",
+                "filters": {
+                    "channel_name": channel_name,
+                    "author_name": author_name,
+                    "days_back": days_back,
+                    "guild_id": guild_id
+                }
+            }
+        
+        # Calculate content length statistics
+        content_lengths = [len(msg.content or '') for msg in messages]
+        
+        # Calculate engagement statistics
+        messages_with_reactions = sum(1 for msg in messages if msg.reactions)
+        messages_with_attachments = sum(1 for msg in messages if msg.attachments)
+        messages_with_embeds = sum(1 for msg in messages if msg.embeds)
+        reply_messages = sum(1 for msg in messages if msg.reference)
+        
+        # Calculate author and channel diversity
+        unique_authors = len(set(
+            msg.author.get('username') for msg in messages 
+            if msg.author and msg.author.get('username')
+        ))
+        unique_channels = len(set(msg.channel_name for msg in messages if msg.channel_name))
+        
+        # Temporal analysis
+        timestamps = [msg.timestamp for msg in messages]
+        earliest = min(timestamps)
+        latest = max(timestamps)
+        time_span_days = (latest - earliest).days
+        
+        # Calculate statistics
+        stats = {
+            "summary": {
+                "total_messages": len(messages),
+                "unique_authors": unique_authors,
+                "unique_channels": unique_channels,
+                "time_span_days": time_span_days,
+                "messages_per_day": len(messages) / max(time_span_days, 1)
+            },
+            "content_statistics": {
+                "average_length": np.mean(content_lengths),
+                "median_length": np.median(content_lengths),
+                "min_length": np.min(content_lengths),
+                "max_length": np.max(content_lengths),
+                "std_deviation": np.std(content_lengths),
+                "percentiles": {
+                    "25th": np.percentile(content_lengths, 25),
+                    "75th": np.percentile(content_lengths, 75),
+                    "90th": np.percentile(content_lengths, 90),
+                    "95th": np.percentile(content_lengths, 95)
+                }
+            },
+            "engagement_statistics": {
+                "messages_with_reactions": messages_with_reactions,
+                "messages_with_attachments": messages_with_attachments,
+                "messages_with_embeds": messages_with_embeds,
+                "reply_messages": reply_messages,
+                "reaction_rate": messages_with_reactions / len(messages),
+                "attachment_rate": messages_with_attachments / len(messages),
+                "embed_rate": messages_with_embeds / len(messages),
+                "reply_rate": reply_messages / len(messages)
+            },
+            "content_distribution": {
+                "empty_messages": sum(1 for l in content_lengths if l == 0),
+                "very_short": sum(1 for l in content_lengths if 0 < l <= 10),
+                "short": sum(1 for l in content_lengths if 10 < l <= 50),
+                "medium": sum(1 for l in content_lengths if 50 < l <= 200),
+                "long": sum(1 for l in content_lengths if 200 < l <= 500),
+                "very_long": sum(1 for l in content_lengths if l > 500)
+            },
+            "temporal_analysis": {
+                "earliest_message": earliest.isoformat(),
+                "latest_message": latest.isoformat(),
+                "time_span_days": time_span_days
+            },
+            "analysis_metadata": {
+                "filters_applied": {
+                    "channel_name": channel_name,
+                    "author_name": author_name,
+                    "days_back": days_back,
+                    "guild_id": guild_id
+                },
+                "analysis_timestamp": datetime.utcnow().isoformat()
+            }
+        }
+        
+        session.close()
+        return stats
+        
+    except Exception as e:
+        logger.error(f"Error calculating message statistics: {e}")
+        return {"error": str(e)}
+
+def analyze_user_activity_stats(
+    time_period_days: int = 30,
+    channel_name: Optional[str] = None,
+    min_messages: int = 1
+) -> Dict[str, Any]:
+    """
+    Analyze user activity patterns with engagement scoring.
+    
+    Args:
+        time_period_days: Number of days to analyze
+        channel_name: Filter by channel name
+        min_messages: Minimum messages required for inclusion
+    
+    Returns:
+        Dictionary with user activity analytics
+    """
+    logger.info(f"Analyzing user activity for {time_period_days} days, channel={channel_name}, min_messages={min_messages}")
+    
+    try:
+        from collections import defaultdict
+        from datetime import timedelta
+        
+        session = SessionLocal()
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        # Build query
+        query = session.query(Message).filter(Message.timestamp >= cutoff_date)
+        
+        if channel_name:
+            query = query.filter(Message.channel_name.ilike(f"%{channel_name}%"))
+        
+        messages = query.all()
+        
+        if not messages:
+            return {
+                "status": "no_data",
+                "message": "No messages found in the specified time period",
+                "period": f"{time_period_days} days"
+            }
+        
+        # Analyze user activity
+        user_analytics = defaultdict(lambda: {
+            'total_messages': 0,
+            'channels_active': set(),
+            'total_chars': 0,
+            'messages_with_attachments': 0,
+            'messages_with_embeds': 0,
+            'messages_with_reactions': 0,
+            'reply_messages': 0,
+            'help_indicators': 0,
+            'technical_indicators': 0,
+            'first_message': None,
+            'last_message': None
+        })
+        
+        # Process messages
+        for msg in messages:
+            if not msg.author or not msg.author.get('username'):
+                continue
+                
+            username = msg.author.get('username')
+            user_data = user_analytics[username]
+            
+            user_data['total_messages'] += 1
+            user_data['channels_active'].add(msg.channel_name)
+            user_data['total_chars'] += len(msg.content or '')
+            
+            if msg.attachments:
+                user_data['messages_with_attachments'] += 1
+            if msg.embeds:
+                user_data['messages_with_embeds'] += 1
+            if msg.reactions:
+                user_data['messages_with_reactions'] += 1
+            if msg.reference:
+                user_data['reply_messages'] += 1
+            
+            # Content analysis
+            content = (msg.content or '').lower()
+            if any(word in content for word in ['help', 'question', '?', 'how to', 'please']):
+                user_data['help_indicators'] += 1
+            if any(word in content for word in ['code', 'function', 'api', 'technical', 'python', 'javascript']):
+                user_data['technical_indicators'] += 1
+            
+            # Track message timing
+            if not user_data['first_message'] or msg.timestamp < user_data['first_message']:
+                user_data['first_message'] = msg.timestamp
+            if not user_data['last_message'] or msg.timestamp > user_data['last_message']:
+                user_data['last_message'] = msg.timestamp
+        
+        # Process and filter results
+        processed_analytics = {}
+        
+        for username, data in user_analytics.items():
+            if data['total_messages'] < min_messages:
+                continue
+                
+            # Calculate derived metrics
+            data['channels_active'] = len(data['channels_active'])
+            data['avg_message_length'] = data['total_chars'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['engagement_score'] = (
+                (data['messages_with_reactions'] + data['reply_messages']) / data['total_messages']
+            ) if data['total_messages'] > 0 else 0
+            data['help_ratio'] = data['help_indicators'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['technical_ratio'] = data['technical_indicators'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['multimedia_ratio'] = (
+                (data['messages_with_attachments'] + data['messages_with_embeds']) / data['total_messages']
+            ) if data['total_messages'] > 0 else 0
+            
+            # Convert timestamps for JSON serialization
+            data['first_message'] = data['first_message'].isoformat() if data['first_message'] else None
+            data['last_message'] = data['last_message'].isoformat() if data['last_message'] else None
+            
+            processed_analytics[username] = data
+        
+        # Generate summary
+        total_users = len(processed_analytics)
+        total_messages = sum(data['total_messages'] for data in processed_analytics.values())
+        
+        # Top users by activity
+        top_active = sorted(
+            processed_analytics.items(),
+            key=lambda x: x[1]['total_messages'],
+            reverse=True
+        )[:10]
+        
+        # Top users by engagement
+        top_engaged = sorted(
+            processed_analytics.items(),
+            key=lambda x: x[1]['engagement_score'],
+            reverse=True
+        )[:10]
+        
+        summary = {
+            "total_active_users": total_users,
+            "total_messages_analyzed": total_messages,
+            "avg_messages_per_user": total_messages / total_users if total_users > 0 else 0,
+            "top_active_users": [{"username": user, "messages": data['total_messages']} for user, data in top_active],
+            "top_engaged_users": [{"username": user, "engagement_score": data['engagement_score']} for user, data in top_engaged]
+        }
+        
+        session.close()
+        
+        return {
+            "summary": summary,
+            "user_analytics": processed_analytics,
+            "analysis_period": {
+                "days": time_period_days,
+                "start_date": cutoff_date.isoformat(),
+                "end_date": datetime.utcnow().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error analyzing user activity: {e}")
+        return {"error": str(e)}
+
+def analyze_channel_performance_stats(
+    time_period_days: int = 30,
+    include_empty: bool = False
+) -> Dict[str, Any]:
+    """
+    Analyze channel performance metrics and rankings.
+    
+    Args:
+        time_period_days: Number of days to analyze
+        include_empty: Whether to include channels with no activity
+    
+    Returns:
+        Dictionary with channel performance analytics
+    """
+    logger.info(f"Analyzing channel performance for {time_period_days} days, include_empty={include_empty}")
+    
+    try:
+        from collections import defaultdict
+        from datetime import timedelta
+        
+        session = SessionLocal()
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        messages = session.query(Message).filter(Message.timestamp >= cutoff_date).all()
+        
+        if not messages:
+            return {
+                "status": "no_data",
+                "message": "No messages found in the specified time period",
+                "period": f"{time_period_days} days"
+            }
+        
+        # Analyze channel activity
+        channel_analytics = defaultdict(lambda: {
+            'total_messages': 0,
+            'unique_authors': set(),
+            'total_chars': 0,
+            'messages_with_attachments': 0,
+            'messages_with_embeds': 0,
+            'messages_with_reactions': 0,
+            'reply_messages': 0,
+            'help_seeking_messages': 0,
+            'help_providing_messages': 0,
+            'technical_discussions': 0
+        })
+        
+        # Process messages
+        for msg in messages:
+            if not msg.channel_name:
+                continue
+                
+            channel = msg.channel_name
+            data = channel_analytics[channel]
+            
+            data['total_messages'] += 1
+            data['total_chars'] += len(msg.content or '')
+            
+            if msg.author and msg.author.get('username'):
+                data['unique_authors'].add(msg.author.get('username'))
+            
+            if msg.attachments:
+                data['messages_with_attachments'] += 1
+            if msg.embeds:
+                data['messages_with_embeds'] += 1
+            if msg.reactions:
+                data['messages_with_reactions'] += 1
+            if msg.reference:
+                data['reply_messages'] += 1
+            
+            # Content analysis
+            content = (msg.content or '').lower()
+            if any(word in content for word in ['help', 'question', '?', 'how to']):
+                data['help_seeking_messages'] += 1
+            if any(word in content for word in ['answer', 'solution', 'here is', 'try this']):
+                data['help_providing_messages'] += 1
+            if any(word in content for word in ['code', 'api', 'technical', 'algorithm']):
+                data['technical_discussions'] += 1
+        
+        # Process results
+        processed_channels = {}
+        
+        for channel, data in channel_analytics.items():
+            if not include_empty and data['total_messages'] == 0:
+                continue
+                
+            data['unique_authors'] = len(data['unique_authors'])
+            data['avg_message_length'] = data['total_chars'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['author_diversity'] = data['unique_authors'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['engagement_rate'] = (
+                data['messages_with_reactions'] + data['reply_messages']
+            ) / data['total_messages'] if data['total_messages'] > 0 else 0
+            data['help_response_ratio'] = (
+                data['help_providing_messages'] / max(data['help_seeking_messages'], 1)
+            )
+            data['technical_ratio'] = data['technical_discussions'] / data['total_messages'] if data['total_messages'] > 0 else 0
+            
+            processed_channels[channel] = data
+        
+        # Generate rankings
+        rankings = {
+            "most_active": sorted(
+                processed_channels.items(),
+                key=lambda x: x[1]['total_messages'],
+                reverse=True
+            )[:10],
+            "highest_engagement": sorted(
+                processed_channels.items(),
+                key=lambda x: x[1]['engagement_rate'],
+                reverse=True
+            )[:10],
+            "most_technical": sorted(
+                processed_channels.items(),
+                key=lambda x: x[1]['technical_ratio'],
+                reverse=True
+            )[:10],
+            "best_help_ratio": sorted(
+                processed_channels.items(),
+                key=lambda x: x[1]['help_response_ratio'],
+                reverse=True
+            )[:10]
+        }
+        
+        # Generate summary
+        total_channels = len(processed_channels)
+        total_messages = sum(data['total_messages'] for data in processed_channels.values())
+        
+        summary = {
+            "total_active_channels": total_channels,
+            "total_messages_analyzed": total_messages,
+            "avg_messages_per_channel": total_messages / total_channels if total_channels > 0 else 0,
+            "most_active_channel": rankings["most_active"][0][0] if rankings["most_active"] else None
+        }
+        
+        session.close()
+        
+        return {
+            "summary": summary,
+            "channel_analytics": processed_channels,
+            "rankings": rankings,
+            "analysis_period": {
+                "days": time_period_days,
+                "start_date": cutoff_date.isoformat(),
+                "end_date": datetime.utcnow().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error analyzing channel performance: {e}")
+        return {"error": str(e)}
+
+def compare_channels_stats(
+    channel_names: List[str],
+    time_period_days: int = 30
+) -> Dict[str, Any]:
+    """
+    Compare multiple channels across key metrics.
+    
+    Args:
+        channel_names: List of channel names to compare
+        time_period_days: Number of days to analyze
+    
+    Returns:
+        Dictionary with comparative analysis
+    """
+    logger.info(f"Comparing channels: {channel_names} over {time_period_days} days")
+    
+    try:
+        from datetime import timedelta
+        
+        session = SessionLocal()
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        comparison_data = {}
+        
+        for channel_name in channel_names:
+            messages = session.query(Message).filter(
+                and_(
+                    Message.timestamp >= cutoff_date,
+                    Message.channel_name.ilike(f"%{channel_name}%")
+                )
+            ).all()
+            
+            if messages:
+                total_messages = len(messages)
+                content_lengths = [len(msg.content or '') for msg in messages]
+                unique_authors = len(set(
+                    msg.author.get('username') for msg in messages
+                    if msg.author and msg.author.get('username')
+                ))
+                
+                stats = {
+                    "total_messages": total_messages,
+                    "unique_authors": unique_authors,
+                    "avg_message_length": np.mean(content_lengths),
+                    "messages_with_reactions": sum(1 for msg in messages if msg.reactions),
+                    "messages_with_attachments": sum(1 for msg in messages if msg.attachments),
+                    "reply_messages": sum(1 for msg in messages if msg.reference),
+                    "author_diversity": unique_authors / total_messages if total_messages > 0 else 0,
+                    "engagement_rate": sum(1 for msg in messages if msg.reactions or msg.reference) / total_messages if total_messages > 0 else 0
+                }
+                
+                comparison_data[channel_name] = stats
+            else:
+                comparison_data[channel_name] = {"status": "no_data", "message": "No messages found"}
+        
+        # Generate comparative insights
+        valid_channels = {k: v for k, v in comparison_data.items() if 'status' not in v}
+        
+        insights = {}
+        if len(valid_channels) >= 2:
+            most_active = max(valid_channels.items(), key=lambda x: x[1]['total_messages'])
+            highest_engagement = max(valid_channels.items(), key=lambda x: x[1]['engagement_rate'])
+            
+            insights = {
+                "most_active_channel": {"name": most_active[0], "messages": most_active[1]['total_messages']},
+                "highest_engagement_channel": {"name": highest_engagement[0], "rate": highest_engagement[1]['engagement_rate']},
+                "total_channels_compared": len(valid_channels)
+            }
+        
+        session.close()
+        
+        return {
+            "channel_comparisons": comparison_data,
+            "comparative_insights": insights,
+            "analysis_period": {
+                "days": time_period_days,
+                "start_date": cutoff_date.isoformat(),
+                "end_date": datetime.utcnow().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error comparing channels: {e}")
+        return {"error": str(e)}
+
+def compare_users_stats(
+    usernames: List[str],
+    time_period_days: int = 30
+) -> Dict[str, Any]:
+    """
+    Compare multiple users across key metrics.
+    
+    Args:
+        usernames: List of usernames to compare
+        time_period_days: Number of days to analyze
+    
+    Returns:
+        Dictionary with comparative analysis
+    """
+    logger.info(f"Comparing users: {usernames} over {time_period_days} days")
+    
+    try:
+        from datetime import timedelta
+        
+        session = SessionLocal()
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        comparison_data = {}
+        
+        for username in usernames:
+            messages = session.query(Message).filter(
+                and_(
+                       Message.timestamp >= cutoff_date,
+                    func.json_extract(Message.author, '$.username') == username
+                )
+            ).all()
+            
+            if messages:
+                total_messages = len(messages)
+                content_lengths = [len(msg.content or '') for msg in messages]
+                unique_channels = len(set(msg.channel_name for msg in messages if msg.channel_name))
+                
+                stats = {
+                    "total_messages": total_messages,
+                    "unique_channels": unique_channels,
+                    "avg_message_length": np.mean(content_lengths),
+                    "messages_with_reactions": sum(1 for msg in messages if msg.reactions),
+                    "messages_with_attachments": sum(1 for msg in messages if msg.attachments),
+                    "reply_messages": sum(1 for msg in messages if msg.reference),
+                    "channel_diversity": unique_channels / total_messages if total_messages > 0 else 0,
+                    "interaction_rate": sum(1 for msg in messages if msg.reactions or msg.reference) / total_messages if total_messages > 0 else 0
+                }
+                
+                comparison_data[username] = stats
+            else:
+                comparison_data[username] = {"status": "no_data", "message": "No messages found"}
+        
+        # Generate comparative insights
+        valid_users = {k: v for k, v in comparison_data.items() if 'status' not in v}
+        
+        insights = {}
+        if len(valid_users) >= 2:
+            most_active = max(valid_users.items(), key=lambda x: x[1]['total_messages'])
+            highest_interaction = max(valid_users.items(), key=lambda x: x[1]['interaction_rate'])
+            
+            insights = {
+                "most_active_user": {"name": most_active[0], "messages": most_active[1]['total_messages']},
+                "highest_interaction_user": {"name": highest_interaction[0], "rate": highest_interaction[1]['interaction_rate']},
+                "total_users_compared": len(valid_users)
+            }
+        
+        session.close()
+        
+        return {
+            "user_comparisons": comparison_data,
+            "comparative_insights": insights,
+            "analysis_period": {
+                "days": time_period_days,
+                "start_date": cutoff_date.isoformat(),
+                "end_date": datetime.utcnow().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error comparing users: {e}")
+        return {"error": str(e)}
