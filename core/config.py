@@ -17,9 +17,9 @@ logger = logging.getLogger(__name__)
 class ModelConfig:
     """Configuration for AI models."""
     # Language Model (Ollama)
-    chat_model: str = "llama2:latest"
+    chat_model: str = "llama3.1:8b"  # Upgraded to 128K context window
     chat_temperature: float = 0.0
-    chat_max_tokens: int = 4096
+    chat_max_tokens: int = 128000  # 128K context window for large digests
     
     # Embedding Model 
     embedding_model: str = "msmarco-distilbert-base-v4"  # Best performing model from evaluation
@@ -27,7 +27,7 @@ class ModelConfig:
     
     # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
-    ollama_timeout: int = 300  # 5 minutes for longer responses
+    ollama_timeout: int = 600  # 10 minutes for longer responses with large context
 
 
 @dataclass

@@ -37,6 +37,93 @@ from tools.tools import (
 
 logger = logging.getLogger(__name__)
 
+def _determine_optimal_k(
+    query: str, 
+    channel_id: Optional[int] = None, 
+    channel_name: Optional[str] = None, 
+    guild_id: Optional[int] = None
+) -> int:
+    """
+    Determine optimal k parameter using enhanced database-driven analysis.
+    
+    Args:
+        query: User query string
+        channel_id: Optional channel ID for context
+        channel_name: Optional channel name for context
+        guild_id: Optional guild ID for context
+        
+    Returns:
+        Optimal k value for retrieval
+    """
+    try:
+        from .enhanced_k_determination import determine_optimal_k
+        return determine_optimal_k(query, channel_id, channel_name, guild_id, use_enhanced_analysis=True)
+    except Exception as e:
+        logger.warning(f"Enhanced k determination failed, using fallback: {e}")
+        return _determine_optimal_k_fallback(query)
+
+
+def _determine_optimal_k_fallback(query: str) -> int:
+    """
+    Fallback k determination using original logic.
+    Used when enhanced analysis fails.
+    """
+    query_lower = query.lower().strip()
+    
+    # Comprehensive queries that need more context
+    comprehensive_keywords = [
+        "digest", "summary", "overview", "highlights", "weekly", "monthly", 
+        "trending", "popular", "most", "best", "top", "all", "everything",
+        "comprehensive", "complete", "full", "entire", "total", "overall"
+    ]
+    
+    # Broad scope indicators
+    broad_scope_keywords = [
+        "community", "server", "discord", "channels", "everyone", "users",
+        "discussions", "conversations", "activity", "what happened", "latest"
+    ]
+    
+    # Specific/narrow queries
+    specific_keywords = [
+        "specific", "particular", "exact", "precise", "certain", "single",
+        "one", "individual", "unique"
+    ]
+    
+    # Question complexity indicators
+    complex_indicators = [
+        "compare", "analysis", "analyze", "explain", "detailed", "in-depth",
+        "comprehensive", "thorough", "extensive"
+    ]
+    
+    # Count matches
+    comprehensive_matches = sum(1 for kw in comprehensive_keywords if kw in query_lower)
+    broad_matches = sum(1 for kw in broad_scope_keywords if kw in query_lower)
+    specific_matches = sum(1 for kw in specific_keywords if kw in query_lower)
+    complex_matches = sum(1 for kw in complex_indicators if kw in query_lower)
+    
+    # Query length factor
+    word_count = len(query.split())
+    
+    # Determine k based on analysis
+    if comprehensive_matches >= 2 or "weekly digest" in query_lower or "monthly digest" in query_lower:
+        # High-level digest queries need extensive context
+        return 30
+    elif comprehensive_matches >= 1 or broad_matches >= 2:
+        # Broad queries need good coverage
+        return 20
+    elif complex_matches >= 2 or word_count >= 8:
+        # Complex analytical queries need substantial context
+        return 15
+    elif broad_matches >= 1 or word_count >= 5:
+        # Medium scope queries
+        return 10
+    elif specific_matches >= 1:
+        # Very targeted queries can use fewer results
+        return 3
+    else:
+        # Default for simple queries
+        return 5
+
 def get_agent_answer(query: str) -> str:
     """
     Simplified agent that routes queries to appropriate handlers.
@@ -152,12 +239,14 @@ def get_agent_answer(query: str) -> str:
         "official", "reference", "manual", "how to", "setup", "install", "configure"
     ]):
         try:
-            return get_resource_answer(query, k=5, return_matches=False)
+            k = min(_determine_optimal_k(query), 10)  # Cap at 10 for resources
+            return get_resource_answer(query, k=k, return_matches=False)
         except Exception as e:
             logger.error(f"Resource query failed: {e}")
             # Fallback to regular search
             try:
-                return get_answer(query, k=5, return_matches=False)
+                k = _determine_optimal_k(query)
+                return get_answer(query, k=k, return_matches=False)
             except Exception as fallback_e:
                 logger.error(f"Fallback search also failed: {fallback_e}")
                 return "❌ Error searching resources and messages. Please try rephrasing your query."
@@ -169,7 +258,10 @@ def get_agent_answer(query: str) -> str:
         "problem", "issue", "troubleshoot", "error", "fix", "solution"
     ]):
         try:
-            return get_hybrid_answer(query, k_messages=3, k_resources=3, return_matches=False)
+            k = _determine_optimal_k(query)
+            k_messages = min(k // 2, 10)  # Split k between messages and resources
+            k_resources = min(k - k_messages, 5)  # Fewer resources needed
+            return get_hybrid_answer(query, k_messages=k_messages, k_resources=k_resources, return_matches=False)
         except Exception as e:
             logger.error(f"Hybrid query failed: {e}")
             # Fallback to regular search
@@ -199,7 +291,10 @@ def get_agent_answer(query: str) -> str:
     
     # Default: semantic search with enhanced context
     try:
-        return get_answer(query, k=5, return_matches=False)
+        # Use adaptive k parameter based on query scope
+        k = _determine_optimal_k(query)
+        logger.info(f"Using adaptive k={k} for query: {query}")
+        return get_answer(query, k=k, return_matches=False)
     except ValueError as ve:
         # Check for specific error types
         error_msg = str(ve).lower()

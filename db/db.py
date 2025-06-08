@@ -118,6 +118,16 @@ class Message(Base):
     # Additional mention data
     channel_mentions = Column(JSON, nullable=True)    # mentioned channel IDs
     role_mentions = Column(JSON, nullable=True)       # mentioned role IDs
+    
+    # Preprocessing fields for enhanced content analysis
+    enhanced_content = Column(Text, nullable=True)    # AI-enhanced content with context
+    topics = Column(JSON, nullable=True)              # extracted topics/themes
+    keywords = Column(JSON, nullable=True)            # extracted keywords/entities
+    intent = Column(String, nullable=True)            # message intent classification
+    sentiment = Column(String, nullable=True)         # sentiment analysis result
+    engagement_score = Column(JSON, nullable=True)    # engagement metrics (reactions, replies)
+    content_type = Column(String, nullable=True)      # content type classification
+    mentioned_technologies = Column(JSON, nullable=True)  # technical terms/frameworks mentioned
 
 class Resource(Base):
     __tablename__ = "resources"
