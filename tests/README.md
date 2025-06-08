@@ -1,34 +1,53 @@
-# Test Suite Documentation
+# Discord Agent System Test Suite
 
-## Overview
-This test suite validates the Discord bot's functionality with comprehensive coverage across all major components.
+This directory contains comprehensive tests for the Discord Agent System, including unit tests, integration tests, and performance benchmarks.
 
-## Test Files
+## 🧪 Test Organization
 
-### `test_agent_integration.py` - Integration Tests
-- **26 comprehensive integration tests** 
-- Tests the complete agent workflow including query routing, validation, and response generation
-- Covers error handling, date validation, channel resolution, and AI response validation
-- **Marker**: `@pytest.mark.integration`
-- **Runtime**: Moderate (uses real database and AI validation)
+### Test Files
+- **`test_agent_integration.py`** - End-to-end agent functionality tests (26 tests)
+- **`test_enhanced_k_determination.py`** - Enhanced K Determination system tests (NEW)
+- **`test_performance.py`** - Performance and load testing (NEW)
+- **`test_database_integration.py`** - Database operations and FAISS integration (NEW)
+- **`test_time_parser_comprehensive.py`** - Time parsing functionality (15 tests)
+- **`test_summarizer.py`** - Message summarization tests (enhanced)
+- **`test_utils.py`** - Utility function tests (3 tests)
 
-### `test_time_parser_comprehensive.py` - Time Parser Tests  
-- **15 extensive time parsing tests**
-- Covers natural language time expressions, relative dates, and edge cases
-- Tests date range validation and timezone handling
-- **Markers**: `@pytest.mark.unit`, `@pytest.mark.time_parser`
-- **Runtime**: Fast
+### Test Categories (Markers)
+- **`unit`** - Fast, isolated unit tests
+- **`integration`** - Multi-component integration tests  
+- **`performance`** - Performance and load tests (slow)
+- **`enhanced_k`** - Enhanced K Determination system tests
+- **`database`** - Tests requiring database access
+- **`faiss`** - Tests requiring FAISS indices
+- **`slow`** - Tests that take significant time
 
-### `test_summarizer.py` - Summarizer Tests
-- **3 focused unit tests**
-- Tests message summarization functionality
-- Covers empty ranges and basic summarization logic
-- **Markers**: `@pytest.mark.unit`, `@pytest.mark.summarizer`  
-- **Runtime**: Fast
+## 🚀 Running Tests
 
-### `test_utils.py` - Utility Tests
-- **3 utility function tests**
-- Tests helper functions like URL building
+### Quick Test Suite (recommended for development)
+```bash
+python run_tests.py --suite quick
+```
+
+### All Tests (comprehensive)
+```bash
+python run_tests.py --suite all
+```
+
+### Specific Test Categories
+```bash
+# Run only unit tests
+pytest -m "unit and not slow"
+
+# Run Enhanced K tests
+pytest tests/test_enhanced_k_determination.py
+
+# Run integration tests
+pytest -m integration
+
+# Run performance tests
+pytest -m performance
+```
 - Covers parameter validation and edge cases
 - **Markers**: `@pytest.mark.unit`, `@pytest.mark.utils`
 - **Runtime**: Fast

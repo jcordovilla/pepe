@@ -167,21 +167,95 @@ def test_improved_suite(query, expected_behavior):
     assert ai_eval.startswith("PASS"), f"AI validation failed: {ai_eval}"
 
 def test_empty_query():
-    with pytest.raises(ValueError):
-        get_agent_answer("")
-
-# Additional test for agent routing strategy validation
-@pytest.mark.parametrize("query,expected_routing", [
-    # Test agent routing strategies based on query patterns
-    ("What's the status of our database?", "data_status"),  # Meta query
-    ("Find Python tutorials", "resources_only"),  # Resource query
-    ("Summarize last week's discussions", "agent_summary"),  # Summary query
-    ("Search for messages about AI ethics", "messages_only"),  # Semantic query
-    ("Find documentation and recent discussions about machine learning", "hybrid_search"),  # Complex query
-])
-def test_agent_routing_strategies(query, expected_routing):
-    """Test that the agent routes queries to appropriate strategies with expected confidence levels."""
-    result = get_agent_answer(query)
-    # This is a behavioral test - we expect different types of responses based on routing
+    """Test that empty queries are handled appropriately"""
+    result = get_agent_answer("")
+    # Agent should handle empty queries gracefully rather than raising exception
     assert result is not None
-    assert len(str(result)) > 0  # Should return some meaningful response
+    assert len(str(result)) > 0
+    # Should indicate clarification needed or provide help
+    result_lower = str(result).lower()
+    clarification_indicators = ["clarify", "specify", "help", "what", "how can"]
+    assert any(indicator in result_lower for indicator in clarification_indicators), \
+        "Empty query should prompt for clarification"
+
+# Additional test for agent routing strategy validation  
+@pytest.mark.parametrize("query,expected_routing,min_confidence", [
+    # Test agent routing strategies based on query patterns
+    ("What's the status of our database?", "data_status", 0.85),  # Meta query
+    ("Find Python tutorials", "resources_only", 0.75),  # Resource query
+    ("Summarize last week's discussions", "agent_summary", 0.80),  # Summary query
+    ("Search for messages about AI ethics", "messages_only", 0.70),  # Semantic query
+    ("Find documentation and recent discussions about machine learning", "hybrid_search", 0.80),  # Complex query
+])
+def test_agent_routing_strategies(query, expected_routing, min_confidence):
+    """Test that the agent routes queries to appropriate strategies with expected confidence levels."""
+    from core.agent import analyze_query_type
+    
+    # Test query analysis
+    analysis = analyze_query_type(query)
+    assert analysis is not None, f"Query analysis failed for: {query}"
+    assert 'strategy' in analysis, "Analysis should include strategy"
+    assert 'confidence' in analysis, "Analysis should include confidence"
+    
+    # Verify strategy and confidence
+    assert analysis['strategy'] == expected_routing, \
+        f"Expected strategy {expected_routing}, got {analysis['strategy']} for query: {query}"
+    assert analysis['confidence'] >= min_confidence, \
+        f"Confidence {analysis['confidence']:.2f} below minimum {min_confidence} for query: {query}"
+    
+    # Test that agent actually returns results
+    result = get_agent_answer(query)
+    assert result is not None
+    assert len(str(result)) > 0  # Should return meaningful response
+
+def test_enhanced_k_integration():
+    """Test that Enhanced K Determination is integrated with agent queries"""
+    from core.agent import _determine_optimal_k
+    
+    # Test different query types get different k values
+    test_cases = [
+        ("hi", 5, 30),  # Simple query
+        ("weekly digest", 40, 200),  # Temporal query
+        ("monthly summary", 200, 1500),  # Larger temporal query  
+        ("machine learning tutorials", 15, 50),  # Technical query
+        ("quarterly business analysis", 500, 2000)  # Large temporal query
+    ]
+    
+    k_results = {}
+    for query, min_k, max_k in test_cases:
+        k = _determine_optimal_k(query)
+        k_results[query] = k
+        
+        assert min_k <= k <= max_k, f"Query '{query}' k={k} outside expected range [{min_k}, {max_k}]"
+    
+    # Test temporal queries get higher k than non-temporal
+    assert k_results["weekly digest"] > k_results["hi"], "Temporal queries should get higher k"
+    assert k_results["monthly summary"] > k_results["weekly digest"], "Monthly should get higher k than weekly"
+
+def test_context_window_management():
+    """Test that the system respects context window limits"""
+    # Test with a query that might generate large k
+    large_temporal_query = "comprehensive quarterly analysis with detailed monthly breakdowns"
+    
+    result = get_agent_answer(large_temporal_query)
+    assert result is not None, "Large temporal query should return result"
+    assert len(str(result)) > 0, "Large temporal query should return meaningful content"
+    
+    # Result should be within reasonable bounds (not truncated due to context overflow)
+    assert len(str(result)) < 50000, "Result should not be excessively large"
+
+def test_preprocessing_field_usage():
+    """Test that the system uses preprocessing fields when available"""
+    # Query that would benefit from preprocessing fields
+    technical_query = "detailed analysis of machine learning algorithms and frameworks"
+    
+    result = get_agent_answer(technical_query)
+    assert result is not None
+    assert len(str(result)) > 100, "Technical query should return substantial result"
+    
+    # Should contain technical terms if preprocessing fields are working
+    result_lower = str(result).lower()
+    technical_indicators = ["machine", "learning", "algorithm", "framework", "model", "data"]
+    found_indicators = sum(1 for indicator in technical_indicators if indicator in result_lower)
+    
+    assert found_indicators >= 2, f"Technical query should contain technical terms, found: {found_indicators}"

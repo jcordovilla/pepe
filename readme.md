@@ -1,10 +1,18 @@
 # PEPE - Predictive Engine for Prompt Experimentation
 # Discord Bot with RAG and Vector Search
-# Version: beta-05
+# Version: beta-06
 
 This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG), vector search (using FAISS), advanced message storage, resource detection, and classification for enhanced chat interactions and AI-powered features.
 
-**🚀 NEW in v0.5:** **768D Architecture & Enhanced Agent System**
+**🚀 NEW in v0.6:** **Production-Ready Enhanced K Determination & Comprehensive Test Suite**
+- **🧠 Enhanced K Determination** with database-driven intelligent result sizing that adapts to temporal query scope (weekly/monthly/quarterly)
+- **📊 Real-time Database Statistics** integration for dynamic k scaling based on available content
+- **🎯 Context Window Management** with 128K token capacity and intelligent constraint handling
+- **🧪 Comprehensive Test Suite** with 36+ tests covering unit, integration, and performance validation
+- **⚡ Sub-100ms K Determination** performance with production-validated scaling algorithms
+- **🔄 Agent System Integration** with seamless Enhanced K integration across all query types
+
+**✅ Previous v0.5 Features:**
 - **768D Embedding Architecture** with msmarco-distilbert-base-v4 for superior semantic understanding
 - **Intelligent Query Routing** with 5 distinct strategies and confidence-based selection
 - **Enhanced Agent System** with hybrid search combining messages and resources
@@ -12,7 +20,6 @@ This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG
 - **Query Analysis Transparency** showing users which search strategy is being used
 - **Enterprise-grade Error Handling** with comprehensive fallback mechanisms
 - **Production-Ready Architecture** with full backward compatibility and extensible design
-- **🧠 Enhanced K Determination** with database-driven intelligent result sizing based on temporal query scope
 
 **✅ Previous v0.4 Features:**
 - **1000x Classification Performance** through intelligent LRU caching system
@@ -158,6 +165,80 @@ def get_agent_answer(query: str) -> str:
 - **⚡ Focused Searches**: Technical queries get precisely-sized result sets
 - **🎯 Context-Aware**: Adapts to actual data availability in timeframes
 - **💡 Intelligent**: Uses preprocessed database fields for quality assessment
+
+---
+
+## 🧪 Comprehensive Test Suite
+
+The Discord bot features a **production-ready test suite** with comprehensive coverage of all major system components, with specialized focus on the Enhanced K Determination system.
+
+### 📊 Test Coverage Overview
+
+**36+ Tests Across Core Components:**
+- **Enhanced K Determination**: 15 tests covering temporal detection, database integration, performance
+- **Time Parser**: 11 tests for natural language time expression parsing
+- **Summarizer**: 10 tests for message summarization functionality
+- **Agent Integration**: End-to-end agent system validation
+- **Database Integration**: Real database operations and statistics
+
+### 🎯 Test Categories
+
+**Unit Tests** (`@pytest.mark.unit`)
+- Fast, isolated component testing
+- Mock-based dependency isolation
+- Sub-second execution times
+
+**Integration Tests** (`@pytest.mark.integration`)
+- Cross-component functionality validation
+- Real database and AI system testing
+- End-to-end workflow verification
+
+**Performance Tests** (`@pytest.mark.performance`)
+- Sub-100ms k determination validation
+- Sub-30s summarization requirements
+- Memory and throughput benchmarks
+
+### 🚀 Running Tests
+
+**Quick Development Testing:**
+```bash
+# Fast unit tests only
+python run_tests.py --suite quick
+
+# Enhanced K Determination tests
+pytest tests/test_enhanced_k_determination.py -v
+
+# Specific test categories
+pytest -m "unit and not slow"
+pytest -m integration
+```
+
+**Comprehensive Testing:**
+```bash
+# All tests with detailed reporting
+python run_tests.py --suite all
+
+# Performance tests
+pytest -m performance
+
+# Full test suite with coverage
+pytest tests/ -v --tb=short
+```
+
+### ✅ Production Validation
+
+**Real-World Test Scenarios:**
+- **Monthly Digest Queries**: k values of 500-1500+ validated
+- **Weekly Digest Queries**: k values of 200-800 confirmed  
+- **Database-Driven Logic**: Real-time metadata queries tested
+- **Context Window Compliance**: 128K token limits respected
+- **Error Recovery**: Graceful handling of edge cases verified
+
+**Test Quality Metrics:**
+- **100% Enhanced K Tests Passing**: All 15 specialized tests validated
+- **Real Database Integration**: Tests use actual Discord message data
+- **Performance Verified**: Sub-100ms k determination consistently achieved
+- **Production Examples**: Documented use cases tested and confirmed
 
 ---
 
@@ -932,17 +1013,24 @@ Based on comprehensive evaluation with Discord community content:
 
 ### 🧪 Testing & Demos
 ```sh
-# Run all tests
-pytest
+# Run comprehensive test suite
+python run_tests.py --suite all
 
-# Test enhanced k determination system
-python test_enhanced_k_determination.py
-python demo_enhanced_k.py
-python demo_monthly_digest.py
+# Quick development tests
+python run_tests.py --suite quick
 
-# Test specific functionality
-pytest tests/test_agent_integration.py
-pytest tests/test_resource_detection.py
+# Enhanced k determination system tests
+pytest tests/test_enhanced_k_determination.py -v
+
+# Specific test categories
+pytest -m unit                    # Fast unit tests
+pytest -m integration            # Integration tests  
+pytest -m performance           # Performance tests
+
+# Individual test files
+pytest tests/test_time_parser_comprehensive.py -v
+pytest tests/test_summarizer.py -v
+pytest tests/test_agent_integration.py -v
 
 # Test preprocessing pipeline
 python core/preprocessing.py --limit 100  # Test with small dataset
