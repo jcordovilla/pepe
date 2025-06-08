@@ -180,3 +180,10 @@ def execute_query(query_func):
 
 # 4. Create tables if they don't exist
 Base.metadata.create_all(engine)
+
+# Import query logging models to ensure they're registered
+try:
+    from db.query_logs import QueryLog
+    logger.info("Query logging table initialized")
+except ImportError as e:
+    logger.warning(f"Could not import query logging models: {e}")

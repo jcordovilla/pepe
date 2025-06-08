@@ -9,7 +9,11 @@ import threading
 import asyncio
 import logging
 import json
+import time
 from datetime import datetime
+
+# Import query logging system
+from db.query_logs import log_query_start, update_query_analysis, log_query_completion, log_simple_query
 
 # Load configuration
 config = get_config()
@@ -64,15 +68,30 @@ async def on_ready():
 @bot.tree.command(name="pepe", description="Ask Pepe the AI assistant something")
 @app_commands.describe(query="Your question for Pepe")
 async def pepe(interaction: discord.Interaction, query: str):
+    query_log_id = -1
+    start_time = time.time()
+    
     try:
-        # Log the incoming query
+        # Start query logging
+        channel_name = interaction.channel.name if hasattr(interaction.channel, 'name') else None
+        query_log_id = log_query_start(
+            user_id=str(interaction.user.id),
+            username=str(interaction.user),
+            query_text=query,
+            guild_id=str(interaction.guild_id) if interaction.guild else None,
+            channel_id=str(interaction.channel_id),
+            channel_name=channel_name
+        )
+        
+        # Log the incoming query (legacy logging)
         log_data = {
             'timestamp': datetime.utcnow().isoformat(),
             'user_id': interaction.user.id,
             'username': str(interaction.user),
             'query': query,
             'channel_id': interaction.channel_id,
-            'guild_id': interaction.guild_id if interaction.guild else None
+            'guild_id': interaction.guild_id if interaction.guild else None,
+            'query_log_id': query_log_id
         }
         logger.info(f"Query received: {json.dumps(log_data)}")
         
@@ -86,10 +105,18 @@ async def pepe(interaction: discord.Interaction, query: str):
         query_analysis = analyze_query_type(query)
         logger.info(f"Query analysis: {json.dumps(query_analysis)}")
         
+        # Update query log with analysis
+        if query_log_id > 0:
+            update_query_analysis(query_log_id, query_analysis)
+        
         # Get the response from the enhanced agent
+        response_start_time = time.time()
         response = get_agent_answer(query)
+        response_time = int((time.time() - response_start_time) * 1000)
+        
+        total_processing_time = int((time.time() - start_time) * 1000)
 
-        # Log the agent's response with analysis info
+        # Log the agent's response with analysis info (legacy logging)
         response_log = {
             'timestamp': datetime.utcnow().isoformat(),
             'query': query,
@@ -98,8 +125,40 @@ async def pepe(interaction: discord.Interaction, query: str):
             'confidence': query_analysis.get('confidence', 0.0),
             'response_type': type(response).__name__,
             'response_length': len(str(response)) if isinstance(response, (str, list, dict)) else 0,
+            'processing_time_ms': total_processing_time,
+            'query_log_id': query_log_id
         }
         logger.info(f"Agent response: {json.dumps(response_log, ensure_ascii=False)}")
+
+        # Complete query logging
+        if query_log_id > 0:
+            response_text = str(response) if response else None
+            search_results_count = len(response) if isinstance(response, list) else (len(response.get('messages', [])) if isinstance(response, dict) else None)
+            
+            log_query_completion(
+                query_log_id=query_log_id,
+                response_text=response_text,
+                response_type=type(response).__name__,
+                response_status='success',
+                processing_time_ms=total_processing_time,
+                search_results_count=search_results_count,
+                performance_metrics={
+                    'llm_generation_time_ms': response_time,
+                    'k_parameter': query_analysis.get('k_parameter'),
+                    'strategy': query_analysis.get('strategy')
+                }
+            )
+
+            # Also log to simple text file for easy searching
+            log_simple_query(
+                user_id=str(interaction.user.id),
+                username=str(interaction.user),
+                query_text=query,
+                response_text=str(response),
+                interface="discord",
+                guild_id=str(interaction.guild_id) if interaction.guild else None,
+                channel_name=interaction.channel.name if hasattr(interaction.channel, 'name') else None
+            )
 
         # Add enhanced header with query analysis for transparency
         strategy_emojis = {
@@ -221,8 +280,48 @@ async def pepe(interaction: discord.Interaction, query: str):
 
     except discord.NotFound:
         logger.warning("Interaction not found - it may have timed out")
+        # Log the failure
+        if query_log_id > 0:
+            log_query_completion(
+                query_log_id=query_log_id,
+                response_text=None,
+                response_type='None',
+                response_status='timeout',
+                processing_time_ms=int((time.time() - start_time) * 1000),
+                error_message="Interaction timed out"
+            )
+        
+        # Log simple error entry for timeout
+        log_simple_query(
+            user_id=str(interaction.user.id) if hasattr(interaction, 'user') else 'unknown',
+            username=str(interaction.user) if hasattr(interaction, 'user') else 'Unknown User',
+            query_text=query if 'query' in locals() else 'Unknown Query',
+            response_text="ERROR: Interaction timed out",
+            interface="discord"
+        )
+
     except Exception as e:
         logger.error(f"Error in pepe command: {str(e)}", exc_info=True)
+        # Log the failure
+        if query_log_id > 0:
+            log_query_completion(
+                query_log_id=query_log_id,
+                response_text=None,
+                response_type='None',
+                response_status='error',
+                processing_time_ms=int((time.time() - start_time) * 1000),
+                error_message=str(e)
+            )
+        
+        # Log simple error entry
+        log_simple_query(
+            user_id=str(interaction.user.id) if hasattr(interaction, 'user') else 'unknown',
+            username=str(interaction.user) if hasattr(interaction, 'user') else 'Unknown User',
+            query_text=query if 'query' in locals() else 'Unknown Query',
+            response_text=f"ERROR: {str(e)}",
+            interface="discord"
+        )
+        
         try:
             await interaction.followup.send(f"An error occurred: {str(e)}")
         except:

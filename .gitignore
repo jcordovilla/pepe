@@ -29,11 +29,15 @@ Thumbs.db
 # Logs
 *.log
 logs/*.log
+logs/bot_*.log
+logs/simple_logs/
+logs/query_logs/
 
 # Temporary files
 *.tmp
 *.bak
 *.orig
+*.temp
 
 # Project specific
 Leeme_JC.txt
@@ -67,3 +71,6 @@ test_*.py
 discord_bot.db
 *.db.backup
 *.sqlite.backup
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/

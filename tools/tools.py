@@ -609,40 +609,93 @@ def summarize_messages(
                 result["key_topics"] = []
             return result if as_json else "No messages found in timeframe"
         
-        # Prepare messages for summarization
+        # Prepare messages for summarization with intelligent content limiting
         message_texts = []
         for msg in messages:
-            author_name = msg.author.get('username', 'Unknown')
+            # Safely extract author name with defensive coding
+            if isinstance(msg.author, dict):
+                author_name = msg.author.get('username', 'Unknown')
+            elif isinstance(msg.author, str):
+                author_name = msg.author
+            elif msg.author is None:
+                author_name = 'Unknown'
+            else:
+                author_name = str(msg.author)
+                
             timestamp = msg.timestamp.strftime('%Y-%m-%d %H:%M')
-            message_texts.append(f"[{timestamp}] {author_name}: {msg.content}")
+            # Truncate very long messages to avoid overwhelming the AI
+            content = msg.content[:300] + '...' if len(msg.content) > 300 else msg.content
+            message_texts.append(f"[{timestamp}] {author_name}: {content}")
+        
+        # Limit total content to avoid token limits (approximately 50-100 messages max)
+        if len(message_texts) > 100:
+            # Sample from beginning, middle, and end to get representative content
+            start_msgs = message_texts[:30]
+            middle_msgs = message_texts[len(message_texts)//2-15:len(message_texts)//2+15]
+            end_msgs = message_texts[-30:]
+            message_texts = start_msgs + ['[... additional messages omitted for brevity ...]'] + middle_msgs + ['[... additional messages omitted for brevity ...]'] + end_msgs
         
         # Create combined text for summarization
         combined_text = "\n".join(message_texts)
         
-        # Generate summary using local AI
+        # Generate summary using local AI with improved prompts
+        total_messages = len(messages)
+        
+        # Safely calculate unique authors with defensive coding
+        author_names = []
+        for msg in messages:
+            if isinstance(msg.author, dict):
+                author_name = msg.author.get('username', 'Unknown')
+            elif isinstance(msg.author, str):
+                author_name = msg.author
+            elif msg.author is None:
+                author_name = 'Unknown'
+            else:
+                author_name = str(msg.author)
+            author_names.append(author_name)
+        
+        unique_authors = len(set(author_names))
+        
         if include_key_topics:
-            prompt = f"""Analyze and summarize the following Discord messages. 
-Provide both a summary and key topics discussed. Be concise but informative:
+            prompt = f"""You are analyzing Discord community activity. 
 
+ACTIVITY OVERVIEW:
+- Time Period: {start_iso} to {end_iso}
+- Total Messages: {total_messages}
+- Active Users: {unique_authors}
+
+MESSAGES TO ANALYZE:
 {combined_text}
 
-Please provide:
-1. A brief summary of the conversation
-2. A list of key topics discussed (3-5 main topics)
+Provide a comprehensive community activity summary focusing on:
+1. Overall engagement patterns and community trends
+2. Key discussion themes and topics
+3. Notable events, announcements, or collaborative activities
+4. Community interactions and dynamics
 
 Format your response as:
-Summary: [your summary here]
+Summary: [Write a comprehensive summary of community activity, trends, and engagement patterns]
 Key Topics: [topic 1], [topic 2], [topic 3], etc."""
         else:
-            prompt = f"""Analyze and summarize the following Discord messages. 
-Focus on key topics, discussions, and insights. Be concise but informative:
+            prompt = f"""You are analyzing Discord community activity for the period {start_iso} to {end_iso}.
 
+ACTIVITY OVERVIEW:
+- Total Messages: {total_messages}
+- Active Users: {unique_authors}
+
+MESSAGES TO ANALYZE:
 {combined_text}
 
-Summary:"""
+Provide a comprehensive community activity summary focusing on:
+- Overall engagement patterns and community trends
+- Key discussion themes and topics
+- Notable events, announcements, or collaborative activities
+- Community interactions and dynamics
+
+Write a professional summary that captures the essence of community activity rather than listing individual messages."""
         
         ai_response = ai_client.chat_completion([
-            {"role": "system", "content": "You are a helpful assistant that summarizes Discord conversations concisely."},
+            {"role": "system", "content": "You are an expert community analyst who specializes in summarizing Discord community activity. Focus on engagement patterns, discussion themes, collaborative activities, and community trends rather than listing individual messages."},
             {"role": "user", "content": prompt}
         ])
         
@@ -664,17 +717,29 @@ Summary:"""
                 "summary": summary,
                 "timeframe": f"{start_iso} to {end_iso}",
                 "message_count": len(messages),
-                "messages": [
-                    {
-                        "author": msg.author.get('username', 'Unknown'),
-                        "content": msg.content,
-                        "timestamp": msg.timestamp.isoformat(),
-                        "channel_name": msg.channel_name,
-                        "jump_url": build_jump_url(msg.guild_id, msg.channel_id, msg.message_id)
-                    }
-                    for msg in messages[:10]  # Limit to first 10 messages
-                ]
+                "messages": []
             }
+            
+            # Safely build message list with defensive coding
+            for msg in messages[:10]:  # Limit to first 10 messages
+                # Safely extract author name
+                if isinstance(msg.author, dict):
+                    author_name = msg.author.get('username', 'Unknown')
+                elif isinstance(msg.author, str):
+                    author_name = msg.author
+                elif msg.author is None:
+                    author_name = 'Unknown'
+                else:
+                    author_name = str(msg.author)
+                    
+                result["messages"].append({
+                    "author": author_name,
+                    "content": msg.content,
+                    "timestamp": msg.timestamp.isoformat(),
+                    "channel_name": msg.channel_name,
+                    "jump_url": build_jump_url(msg.guild_id, msg.channel_id, msg.message_id)
+                })
+                
             if include_key_topics:
                 result["key_topics"] = key_topics
             return result
