@@ -23,7 +23,7 @@ class TestRunner:
         print(f"RUNNING TEST SUITE: {name.upper()}")
         print(f"{'='*60}")
         
-        cmd = ["python", "-m", "pytest"]
+        cmd = ["python3", "-m", "pytest"]
         
         # Add markers if specified
         if markers:
