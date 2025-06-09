@@ -331,43 +331,101 @@ def get_agent_answer(query: str, channel_id: Optional[int] = None) -> str:
         if not messages or not messages.get("messages"):
             return f"⚠️ No messages found in the specified timeframe ({start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')})"
 
-        # Build a more structured response
-        response = {
-            "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC",
-            "channel": f"Channel: {messages.get('channel_name', 'All channels')}",
-            "summary": messages.get("summary", ""),
-            "note": messages.get("note", ""),
-            "messages": []
-        }
+        # Check if this is a digest query - if so, format as readable text
+        is_digest_query = any(word in query.lower() for word in ['digest', 'summary', 'summarize'])
         
-        # Add key_topics if present
-        if "key_topics" in messages:
-            response["key_topics"] = messages["key_topics"]
+        if is_digest_query:
+            # Format as a proper digest
+            timeframe_str = f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC"
+            channel_str = messages.get('channel_name', 'All channels')
+            summary_text = messages.get("summary", "")
+            note_text = messages.get("note", "")
+            
+            # Build formatted digest
+            digest = f"""# 📊 Weekly Community Digest
 
-        # Process messages and ensure jump URLs are included
-        for msg in messages.get("messages", []):
-            processed_msg = {
-                "author": msg.get("author", {}),
-                "timestamp": msg.get("timestamp", ""),
-                "content": msg.get("content", ""),
-                "channel_name": msg.get("channel_name", ""),
-                "jump_url": msg.get("jump_url", "")
+**📅 Timeframe:** {timeframe_str}  
+**📍 Scope:** {channel_str}
+
+## 🎯 Executive Summary
+
+{summary_text}
+
+"""
+            
+            # Add key topics if available
+            if "key_topics" in messages and messages["key_topics"]:
+                digest += "## 🔑 Key Topics\n\n"
+                for topic in messages["key_topics"]:
+                    digest += f"• {topic}\n"
+                digest += "\n"
+            
+            # Add note if present
+            if note_text:
+                digest += f"## 📝 Additional Notes\n\n{note_text}\n\n"
+            
+            # Add message highlights
+            message_list = messages.get("messages", [])
+            if message_list:
+                digest += f"## 💬 Message Highlights ({len(message_list)} messages)\n\n"
+                for i, msg in enumerate(message_list[:10]):  # Limit to top 10
+                    author = msg.get("author", "Unknown")
+                    timestamp = msg.get("timestamp", "")
+                    content = msg.get("content", "")[:200] + ("..." if len(msg.get("content", "")) > 200 else "")
+                    channel = msg.get("channel_name", "")
+                    jump_url = msg.get("jump_url", "")
+                    
+                    digest += f"**{author}** in #{channel} ({timestamp})\n"
+                    digest += f"{content}\n"
+                    if jump_url:
+                        digest += f"[🔗 View Message]({jump_url})\n"
+                    digest += "\n---\n\n"
+                
+                if len(message_list) > 10:
+                    digest += f"*...and {len(message_list) - 10} more messages*\n\n"
+            
+            digest += f"---\n\n*Generated on {datetime.now().strftime('%Y-%m-%d at %H:%M UTC')}*"
+            
+            return digest
+        
+        else:
+            # For non-digest queries, return the structured data
+            response = {
+                "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC",
+                "channel": f"Channel: {messages.get('channel_name', 'All channels')}",
+                "summary": messages.get("summary", ""),
+                "note": messages.get("note", ""),
+                "messages": []
             }
             
-            # If jump_url is missing, try to build it
-            if not processed_msg["jump_url"]:
-                try:
-                    guild_id = msg.get("guild_id")
-                    channel_id = msg.get("channel_id")
-                    message_id = msg.get("message_id")
-                    if all([guild_id, channel_id, message_id]):
-                        processed_msg["jump_url"] = build_jump_url(guild_id, channel_id, message_id)
-                except Exception as e:
-                    logger.warning(f"Failed to build jump URL: {e}")
-            
-            response["messages"].append(processed_msg)
+            # Add key_topics if present
+            if "key_topics" in messages:
+                response["key_topics"] = messages["key_topics"]
 
-        return response
+            # Process messages and ensure jump URLs are included
+            for msg in messages.get("messages", []):
+                processed_msg = {
+                    "author": msg.get("author", {}),
+                    "timestamp": msg.get("timestamp", ""),
+                    "content": msg.get("content", ""),
+                    "channel_name": msg.get("channel_name", ""),
+                    "jump_url": msg.get("jump_url", "")
+                }
+                
+                # If jump_url is missing, try to build it
+                if not processed_msg["jump_url"]:
+                    try:
+                        guild_id = msg.get("guild_id")
+                        channel_id = msg.get("channel_id")
+                        message_id = msg.get("message_id")
+                        if all([guild_id, channel_id, message_id]):
+                            processed_msg["jump_url"] = build_jump_url(guild_id, channel_id, message_id)
+                    except Exception as e:
+                        logger.warning(f"Failed to build jump URL: {e}")
+                
+                response["messages"].append(processed_msg)
+
+            return response
 
     except Exception as e:
         logger.error(f"Error processing query: {e}")
