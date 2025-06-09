@@ -623,18 +623,20 @@ def main():
         if default_query:
             st.session_state.example_query = ""  # Clear after use
         
-        col1, col2 = st.columns([4, 1])
-        
-        with col1:
-            query = st.text_input(
-                "Search query",
-                value=default_query,
-                placeholder="e.g., 'messages about AI from last week' or 'what did the team discuss?'",
-                help="Use natural language - the AI understands context and time references."
-            )
-        
-        with col2:
-            search_clicked = st.button("Search", key="search_button", use_container_width=True, type="primary")
+        # Use form to enable Enter key functionality
+        with st.form("search_form", clear_on_submit=False):
+            col1, col2 = st.columns([4, 1])
+            
+            with col1:
+                query = st.text_input(
+                    "Search query",
+                    value=default_query,
+                    placeholder="e.g., 'messages about AI from last week' or 'what did the team discuss?'",
+                    help="Use natural language - the AI understands context and time references. Press Enter to search!"
+                )
+            
+            with col2:
+                search_clicked = st.form_submit_button("Search", use_container_width=True, type="primary")
         
         # Quick search chips
         if not query:
