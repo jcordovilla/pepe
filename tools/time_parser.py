@@ -33,6 +33,12 @@ def extract_time_reference(query: str) -> Optional[str]:
         r'last (?:week|month|year|hour|day)',
         r'previous (?:week|month|year|hour|day)',
         
+        # Digest patterns - NEW
+        r'(?:weekly|monthly|daily|quarterly|yearly) digest',
+        r'digest (?:for|of) (?:the )?(?:week|month|day|quarter|year)',
+        r'(?:week|month|day|quarter|year)ly summary',
+        r'summary (?:for|of) (?:the )?(?:past|last) (?:week|month|day|quarter|year)',
+        
         # Today/yesterday/time of day
         r'today',
         r'yesterday',
@@ -360,6 +366,26 @@ def parse_timeframe(query: str, now: Optional[datetime] = None) -> Tuple[datetim
         r'past hour': lambda m: (now - timedelta(hours=1), now),
         r'last hour': lambda m: (now - timedelta(hours=1), now),
         r'this hour': lambda m: (now.replace(minute=0, second=0, microsecond=0), now),
+        
+        # Digest patterns - NEW
+        r'weekly digest': lambda m: (now - timedelta(days=7), now),
+        r'daily digest': lambda m: (now - timedelta(days=1), now),
+        r'monthly digest': lambda m: (now - timedelta(days=30), now),
+        r'quarterly digest': lambda m: (now - timedelta(days=90), now),
+        r'yearly digest': lambda m: (now - timedelta(days=365), now),
+        r'digest for (?:the )?week': lambda m: (now - timedelta(days=7), now),
+        r'digest of (?:the )?week': lambda m: (now - timedelta(days=7), now),
+        r'digest for (?:the )?month': lambda m: (now - timedelta(days=30), now),
+        r'digest of (?:the )?month': lambda m: (now - timedelta(days=30), now),
+        r'digest for (?:the )?day': lambda m: (now - timedelta(days=1), now),
+        r'digest of (?:the )?day': lambda m: (now - timedelta(days=1), now),
+        r'weekly summary': lambda m: (now - timedelta(days=7), now),
+        r'daily summary': lambda m: (now - timedelta(days=1), now),
+        r'monthly summary': lambda m: (now - timedelta(days=30), now),
+        r'summary for (?:the )?(?:past|last) week': lambda m: (now - timedelta(days=7), now),
+        r'summary of (?:the )?(?:past|last) week': lambda m: (now - timedelta(days=7), now),
+        r'summary for (?:the )?(?:past|last) month': lambda m: (now - timedelta(days=30), now),
+        r'summary of (?:the )?(?:past|last) month': lambda m: (now - timedelta(days=30), now),
         
         # Today/yesterday/time of day
         r'today': lambda m: get_time_of_day_boundaries('today', now),

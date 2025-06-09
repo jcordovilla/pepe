@@ -297,7 +297,7 @@ def get_agent_answer(query: str) -> str:
                 return "❌ Error performing channel analysis."
 
     # Time-based summary queries
-    if any(kw in query_lower for kw in ["summary", "summarize", "what happened", "activity"]):
+    if any(kw in query_lower for kw in ["summary", "summarize", "digest", "what happened", "activity"]):
         try:
             return rag_get_agent_answer(query)
         except ValueError as ve:
