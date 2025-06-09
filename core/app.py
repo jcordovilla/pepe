@@ -404,8 +404,17 @@ def create_recent_queries_sidebar():
 def enhanced_format_message(message: Dict[str, Any]) -> str:
     """Enhanced message formatting with better visual hierarchy."""
     author_info = message.get("author", {})
-    display_name = author_info.get("display_name", "")
-    username = author_info.get("username", "Unknown")
+    
+    # Handle both string and dict author formats
+    if isinstance(author_info, str):
+        # Author is just a string (username)
+        display_name = ""
+        username = author_info
+    else:
+        # Author is a dictionary with display_name and username
+        display_name = author_info.get("display_name", "")
+        username = author_info.get("username", "Unknown")
+    
     timestamp = message.get("timestamp", "")
     content = message.get("content", "")
     jump_url = message.get("jump_url", None)
@@ -474,8 +483,17 @@ def enhanced_format_message(message: Dict[str, Any]) -> str:
 def format_message(message: Dict[str, Any]) -> str:
     """Format a message for display with enhanced link handling. Always includes jump_url."""
     author_info = message.get("author", {})
-    display_name = author_info.get("display_name", "")
-    username = author_info.get("username", "Unknown")
+    
+    # Handle both string and dict author formats
+    if isinstance(author_info, str):
+        # Author is just a string (username)
+        display_name = ""
+        username = author_info
+    else:
+        # Author is a dictionary with display_name and username
+        display_name = author_info.get("display_name", "")
+        username = author_info.get("username", "Unknown")
+    
     timestamp = message.get("timestamp", "")
     content = message.get("content", "")
     jump_url = message.get("jump_url", None)
@@ -516,8 +534,17 @@ def format_summary(messages: List[Dict[str, Any]]) -> str:
     author_messages = {}
     for msg in messages:
         author_info = msg.get("author", {})
-        display_name = author_info.get("display_name", "")
-        username = author_info.get("username", "Unknown")
+        
+        # Handle both string and dict author formats
+        if isinstance(author_info, str):
+            # Author is just a string (username)
+            display_name = ""
+            username = author_info
+        else:
+            # Author is a dictionary with display_name and username
+            display_name = author_info.get("display_name", "")
+            username = author_info.get("username", "Unknown")
+        
         author_key = display_name if display_name else username
         if author_key not in author_messages:
             author_messages[author_key] = {
