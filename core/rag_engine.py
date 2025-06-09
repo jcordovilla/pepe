@@ -59,7 +59,7 @@ class LocalVectorStore:
                 self._index = faiss.read_index(f"{self.index_path}.index")
                 with open(f"{self.index_path}_metadata.json", "r") as f:
                     data = json.load(f)
-                    self._metadata = data.get('metadata', {})
+                    self._metadata = data.get('metadata', [])  # Fixed: use [] not {} for list fallback
                     self._message_order = data.get('message_order', data.get('id_mapping', []))
                 logger.info(f"Loaded enhanced vector store with {self._index.ntotal} vectors")
             else:
@@ -67,7 +67,7 @@ class LocalVectorStore:
                 self._index = faiss.read_index(f"{self.index_path}/faiss_index.index")
                 with open(f"{self.index_path}/metadata.json", "r") as f:
                     data = json.load(f)
-                    self._metadata = data.get('metadata', {})
+                    self._metadata = data.get('metadata', [])  # Fixed: use [] not {} for list fallback
                     self._message_order = data.get('message_order', data.get('id_mapping', []))
                 logger.info(f"Loaded standard vector store with {self._index.ntotal} vectors")
                 
@@ -91,12 +91,14 @@ class LocalVectorStore:
         # Return metadata for found documents
         results = []
         for i, idx in enumerate(indices[0]):
-            if idx >= 0 and idx < len(self._message_order):
-                message_id = str(self._message_order[idx])
-                if message_id in self._metadata:
-                    meta = self._metadata[message_id].copy()
-                    meta['score'] = float(scores[0][i])
-                    results.append(meta)
+            if idx >= 0 and idx < len(self._metadata):
+                # Direct index lookup since metadata is a list ordered by faiss_index
+                meta = self._metadata[idx].copy()
+                meta['score'] = float(scores[0][i])
+                # Ensure content field exists
+                if 'content' not in meta:
+                    meta['content'] = meta.get('processed_content', meta.get('original_content', ''))
+                results.append(meta)
         
         return results
 
