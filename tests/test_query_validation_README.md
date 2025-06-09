@@ -13,6 +13,11 @@ This directory contains comprehensive tests for the Discord Agent System, includ
 - **`test_performance.py`** - Main performance and load testing
 - **`test_utils.py`** - Utility function tests (3 tests)
 
+#### Comprehensive Query Tests
+- **`test_queries.json`** - 20 comprehensive test queries covering all agent capabilities
+- **`test_query_validation.py`** - Automated validation script for comprehensive query testing
+- **Query Coverage**: Server data analysis, feedback summarization, trending topics, Q&A concepts, statistics generation, server structure analysis
+
 #### Integration Tests (`integration/`)
 - **`test_local_ai.py`** - Local AI setup validation and testing
 - **`test_resource_search.py`** - Resource FAISS index search functionality

@@ -2221,3 +2221,137 @@ def compare_users_stats(
     except Exception as e:
         logger.error(f"Error comparing users: {e}")
         return {"error": str(e)}
+
+def get_buddy_group_analysis(query: str) -> Dict[str, Any]:
+    """
+    Analyze buddy group activity patterns based on natural language query.
+    
+    Args:
+        query: Natural language query about buddy group analysis
+        
+    Returns:
+        Dict containing analysis results
+    """
+    from db import SessionLocal, Message
+    from tools.time_parser import extract_time_reference, parse_timeframe
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    import json
+    
+    # Extract time reference
+    time_ref = extract_time_reference(query)
+    if time_ref:
+        start, end = parse_timeframe(time_ref)
+    else:
+        # Default to last 30 days for analysis
+        end = datetime.now(ZoneInfo("UTC"))
+        start = end - timedelta(days=30)
+    
+    session = SessionLocal()
+    try:
+        # Get all buddy group channels
+        buddy_groups = session.query(Message.channel_name).filter(
+            Message.channel_name.like('%buddy-group%')
+        ).distinct().all()
+        
+        if not buddy_groups:
+            return {
+                "error": "No buddy group channels found in the database",
+                "timeframe": f"{start.isoformat()} to {end.isoformat()}"
+            }
+        
+        # Analyze each buddy group
+        group_stats = {}
+        total_messages = 0
+        total_authors = set()
+        
+        for bg in buddy_groups:
+            channel_name = bg[0]
+            
+            # Get messages for this buddy group in timeframe
+            messages = session.query(Message).filter(
+                Message.channel_name == channel_name,
+                Message.timestamp.between(start, end)
+            ).all()
+            
+            if messages:
+                # Calculate statistics
+                message_count = len(messages)
+                authors = set()
+                content_length = 0
+                
+                for msg in messages:
+                    if isinstance(msg.author, dict):
+                        username = msg.author.get('username', 'Unknown')
+                    elif isinstance(msg.author, str):
+                        username = msg.author
+                    else:
+                        username = 'Unknown'
+                    
+                    authors.add(username)
+                    content_length += len(msg.content or "")
+                
+                group_stats[channel_name] = {
+                    "message_count": message_count,
+                    "unique_authors": len(authors),
+                    "avg_message_length": content_length / message_count if message_count > 0 else 0,
+                    "author_list": list(authors)[:5]  # First 5 authors
+                }
+                
+                total_messages += message_count
+                total_authors.update(authors)
+        
+        if not group_stats:
+            return {
+                "summary": f"No messages found in buddy groups for the timeframe {start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')}",
+                "timeframe": f"{start.isoformat()} to {end.isoformat()}",
+                "buddy_groups": []
+            }
+        
+        # Sort by activity level
+        sorted_groups = sorted(group_stats.items(), key=lambda x: x[1]["message_count"], reverse=True)
+        
+        # Generate summary using AI
+        ai_client = get_ai_client()
+        analysis_prompt = f"""Analyze this buddy group activity data from {start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')}:
+
+BUDDY GROUP STATISTICS:
+Total Messages: {total_messages}
+Total Active Authors: {len(total_authors)}
+Active Buddy Groups: {len(group_stats)}
+
+GROUP BREAKDOWN:
+{json.dumps(dict(sorted_groups), indent=2)}
+
+Provide a comprehensive analysis covering:
+1. Activity patterns and distribution across buddy groups
+2. Engagement levels and participation rates
+3. Most and least active groups with specific data
+4. Insights about community collaboration and group dynamics
+5. Recommendations for community managers
+
+Focus on actionable insights and specific metrics."""
+
+        ai_summary = ai_client.chat_completion([
+            {"role": "system", "content": "You are a community analytics expert specializing in Discord server analysis. Provide detailed, data-driven insights with specific numbers and actionable recommendations."},
+            {"role": "user", "content": analysis_prompt}
+        ])
+        
+        return {
+            "summary": ai_summary,
+            "timeframe": f"From {start.strftime('%Y-%m-%d %H:%M')} to {end.strftime('%Y-%m-%d %H:%M')} UTC",
+            "total_messages": total_messages,
+            "total_authors": len(total_authors),
+            "active_groups": len(group_stats),
+            "group_statistics": dict(sorted_groups),
+            "analysis_type": "buddy_group_analysis"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in buddy group analysis: {e}")
+        return {
+            "error": f"Error analyzing buddy groups: {str(e)}",
+            "timeframe": f"{start.isoformat()} to {end.isoformat()}"
+        }
+    finally:
+        session.close()

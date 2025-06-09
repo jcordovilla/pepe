@@ -32,7 +32,8 @@ from tools.tools import (
     summarize_messages,
     validate_data_availability,
     get_channels,
-    resolve_channel_name
+    resolve_channel_name,
+    get_buddy_group_analysis
 )
 
 logger = logging.getLogger(__name__)
@@ -271,6 +272,30 @@ def get_agent_answer(query: str) -> str:
                 logger.error(f"Fallback search also failed: {fallback_e}")
                 return "❌ Error performing hybrid search. Please try rephrasing your query."
     
+    # Enhanced analysis queries (buddy groups, specific channel patterns, etc.)
+    analysis_patterns = [
+        "analyze", "analysis", "patterns", "compare", "comparison", "activity patterns",
+        "engagement patterns", "distribution", "breakdown", "statistics"
+    ]
+    
+    if any(pattern in query_lower for pattern in analysis_patterns):
+        # Check for specific channel groups or patterns
+        if "buddy group" in query_lower or "buddy-group" in query_lower:
+            try:
+                return get_buddy_group_analysis(query)
+            except Exception as e:
+                logger.error(f"Buddy group analysis failed: {e}")
+                # Fallback to regular analysis
+                return rag_get_agent_answer(query)
+        
+        # Check for specific channel analysis
+        elif "#" in query or "channel" in query_lower:
+            try:
+                return rag_get_agent_answer(query)
+            except Exception as e:
+                logger.error(f"Channel analysis failed: {e}")
+                return "❌ Error performing channel analysis."
+
     # Time-based summary queries
     if any(kw in query_lower for kw in ["summary", "summarize", "what happened", "activity"]):
         try:
@@ -304,10 +329,53 @@ def get_agent_answer(query: str) -> str:
             return "Unknown channel"
         else:
             logger.error(f"Search query failed: {ve}")
-            return "❌ Error searching messages. Please try rephrasing your query."
+            # Use enhanced fallback system for better error handling
+            try:
+                from core.enhanced_fallback_system import EnhancedFallbackSystem
+                fallback_system = EnhancedFallbackSystem()
+                
+                # Determine capability for better fallback
+                capability = "general"
+                if any(kw in query_lower for kw in ["analyze", "analysis", "patterns", "data"]):
+                    capability = "server_data_analysis"
+                elif any(kw in query_lower for kw in ["feedback", "summary", "summarize"]):
+                    capability = "feedback_summarization"
+                elif any(kw in query_lower for kw in ["trending", "popular", "topics"]):
+                    capability = "trending_topics"
+                elif any(kw in query_lower for kw in ["question", "answer", "qa"]):
+                    capability = "qa_concepts"
+                elif any(kw in query_lower for kw in ["statistics", "stats", "metrics"]):
+                    capability = "statistics_generation"
+                elif any(kw in query_lower for kw in ["channel", "structure", "organization"]):
+                    capability = "server_structure_analysis"
+                
+                fallback_response = fallback_system.generate_intelligent_fallback(
+                    query=query,
+                    capability=capability
+                )
+                
+                return fallback_response["response"]
+                
+            except Exception as fallback_error:
+                logger.error(f"Fallback system failed: {fallback_error}")
+                return "❌ Error searching messages. Please try rephrasing your query."
     except Exception as e:
         logger.error(f"Search query failed: {e}")
-        return "❌ Error searching messages. Please try rephrasing your query."
+        # Use enhanced fallback for unexpected errors too
+        try:
+            from core.enhanced_fallback_system import EnhancedFallbackSystem
+            fallback_system = EnhancedFallbackSystem()
+            
+            fallback_response = fallback_system.generate_intelligent_fallback(
+                query=query,
+                capability="general"
+            )
+            
+            return fallback_response["response"]
+            
+        except Exception as fallback_error:
+            logger.error(f"Fallback system failed: {fallback_error}")
+            return "❌ Error searching messages. Please try rephrasing your query."
 
 def process_query(query: str, channel_id: int = None, enable_hybrid: bool = True) -> str:
     """
@@ -444,6 +512,20 @@ def analyze_query_type(query: str) -> Dict[str, Any]:
         })
         return analysis
     
+    # Enhanced analysis queries (buddy groups, specific channel patterns, etc.)
+    analysis_patterns = [
+        "analyze", "analysis", "patterns", "compare", "comparison", "activity patterns",
+        "engagement patterns", "distribution", "breakdown", "statistics"
+    ]
+    
+    if any(pattern in query_lower for pattern in analysis_patterns):
+        analysis["query_type"] = "analysis_query"
+        analysis["strategy"] = "dynamic_analysis"
+        analysis["confidence"] = 0.9
+        analysis["keywords"] = [pattern for pattern in analysis_patterns if pattern in query_lower]
+        analysis["reasoning"] = "Query requesting detailed analysis or comparison"
+        return analysis
+
     # Enhanced confidence for semantic search based on query characteristics
     if len(query.split()) > 5:
         analysis["confidence"] = 0.7

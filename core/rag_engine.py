@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional, Union
 import numpy as np
 from core.ai_client import get_ai_client
 from core.config import get_config
+from core.enhanced_fallback_system import EnhancedFallbackSystem
 from utils.helpers import build_jump_url
 from tools.tools import resolve_channel_name, summarize_messages, validate_data_availability
 from tools.time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
@@ -41,18 +42,35 @@ class LocalVectorStore:
         """Load FAISS index and metadata from disk."""
         import faiss
         import json
+        import os
+        
+    def load(self):
+        """Load FAISS index and metadata from disk."""
+        import faiss
+        import json
+        import os
         
         try:
             logger.info("Loading vector store from disk")
-            # Load FAISS index
-            self._index = faiss.read_index(f"{self.index_path}/faiss_index.index")
-            # Load metadata (JSON format)
-            with open(f"{self.index_path}/metadata.json", "r") as f:
-                data = json.load(f)
-                self._metadata = data.get('metadata', {})
-                # Support both message_order and id_mapping keys
-                self._message_order = data.get('message_order', data.get('id_mapping', []))
-            logger.info(f"Loaded vector store with {self._index.ntotal} vectors")
+            
+            # Check if enhanced index format (single files)
+            if os.path.exists(f"{self.index_path}.index"):
+                # Enhanced index format
+                self._index = faiss.read_index(f"{self.index_path}.index")
+                with open(f"{self.index_path}_metadata.json", "r") as f:
+                    data = json.load(f)
+                    self._metadata = data.get('metadata', {})
+                    self._message_order = data.get('message_order', data.get('id_mapping', []))
+                logger.info(f"Loaded enhanced vector store with {self._index.ntotal} vectors")
+            else:
+                # Standard index format (directory structure)
+                self._index = faiss.read_index(f"{self.index_path}/faiss_index.index")
+                with open(f"{self.index_path}/metadata.json", "r") as f:
+                    data = json.load(f)
+                    self._metadata = data.get('metadata', {})
+                    self._message_order = data.get('message_order', data.get('id_mapping', []))
+                logger.info(f"Loaded standard vector store with {self._index.ntotal} vectors")
+                
         except Exception as e:
             logger.error(f"Failed to load vector store: {e}")
             raise
@@ -212,7 +230,38 @@ def get_answer(
             channel_name=channel_name
         )
         if not matches and not return_matches:
-            return "⚠️ I couldn't find relevant messages. Try rephrasing your question or being more specific."
+            # Use enhanced fallback system to provide intelligent response
+            try:
+                from core.enhanced_fallback_system import EnhancedFallbackSystem
+                fallback_system = EnhancedFallbackSystem()
+                
+                # Determine capability based on query patterns
+                capability = "general"
+                if any(kw in query.lower() for kw in ["analyze", "analysis", "patterns", "data", "statistics"]):
+                    capability = "server_data_analysis"
+                elif any(kw in query.lower() for kw in ["feedback", "summary", "summarize"]):
+                    capability = "feedback_summarization"
+                elif any(kw in query.lower() for kw in ["trending", "popular", "topics"]):
+                    capability = "trending_topics"
+                elif any(kw in query.lower() for kw in ["question", "answer", "qa", "q&a"]):
+                    capability = "qa_concepts"
+                elif any(kw in query.lower() for kw in ["engagement", "statistics", "stats", "metrics"]):
+                    capability = "statistics_generation"
+                elif any(kw in query.lower() for kw in ["channel", "structure", "organization"]):
+                    capability = "server_structure_analysis"
+                
+                fallback_response = fallback_system.generate_intelligent_fallback(
+                    query=query,
+                    capability=capability,
+                    available_channels=None,  # Could enhance with channel list
+                    timeframe=None  # Could enhance with timeframe detection
+                )
+                
+                return fallback_response["response"]
+                
+            except Exception as fallback_error:
+                logger.error(f"Fallback system failed: {fallback_error}")
+                return "⚠️ I couldn't find relevant messages. Try rephrasing your question or being more specific."
 
         chat_messages = build_prompt(matches, query, as_json)
         

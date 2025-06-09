@@ -1,0 +1,32 @@
+{
+  "description": "Sample test queries for validation testing",
+  "created": "2025-06-09",
+  "total_queries": 2,
+  "queries": [
+    {
+      "id": 1,
+      "capability": "server_data_analysis",
+      "query": "Analyze message activity patterns across all buddy groups in the last 30 days",
+      "description": "Tests ability to analyze cross-channel data and identify patterns in group activities",
+      "expected_elements": [
+        "message counts",
+        "activity distribution",
+        "engagement levels",
+        "buddy group comparison"
+      ],
+      "target_audience": "community_managers"
+    },
+    {
+      "id": 2,
+      "capability": "server_data_analysis",
+      "query": "What are the most engaging discussion topics in the agent-ops channel this week?",
+      "description": "Tests analysis of technical discussions and engagement metrics",
+      "expected_elements": [
+        "topic identification",
+        "engagement analysis",
+        "technical content summary"
+      ],
+      "target_audience": "technical_leads"
+    }
+  ]
+}

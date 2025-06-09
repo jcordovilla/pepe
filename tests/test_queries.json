@@ -1,0 +1,187 @@
+{
+  "description": "Comprehensive test queries for Discord AI Agent covering all core capabilities",
+  "created": "2025-06-09",
+  "total_queries": 20,
+  "capability_coverage": {
+    "server_data_analysis": [1, 2, 3, 4, 5],
+    "feedback_summarization": [6, 7, 8],
+    "trending_topics": [9, 10, 11],
+    "qa_concepts": [12, 13, 14],
+    "statistics_generation": [15, 16, 17],
+    "server_structure_analysis": [18, 19, 20]
+  },
+  "queries": [
+    {
+      "id": 1,
+      "capability": "server_data_analysis",
+      "query": "Analyze message activity patterns across all buddy groups in the last 30 days",
+      "description": "Tests ability to analyze cross-channel data and identify patterns in group activities",
+      "expected_elements": ["message counts", "activity distribution", "engagement levels", "buddy group comparison"],
+      "target_audience": "community_managers"
+    },
+    {
+      "id": 2,
+      "capability": "server_data_analysis", 
+      "query": "What are the most engaging discussion topics in the agent-ops channel this week?",
+      "description": "Tests analysis of technical discussions and engagement metrics",
+      "expected_elements": ["topic identification", "engagement analysis", "technical content summary"],
+      "target_audience": "technical_leads"
+    },
+    {
+      "id": 3,
+      "capability": "server_data_analysis",
+      "query": "Show me conversation threads that generated the most responses and mentions in general-chat",
+      "description": "Tests thread analysis and response tracking capabilities",
+      "expected_elements": ["thread identification", "response counts", "mention analysis", "conversation starters"],
+      "target_audience": "conversation_leaders"
+    },
+    {
+      "id": 4,
+      "capability": "server_data_analysis",
+      "query": "Identify users who are most active in sharing resources and links across all channels",
+      "description": "Tests user behavior analysis and resource sharing patterns",
+      "expected_elements": ["user identification", "sharing frequency", "resource types", "cross-channel activity"],
+      "target_audience": "community_managers"
+    },
+    {
+      "id": 5,
+      "capability": "server_data_analysis",
+      "query": "Analyze the flow of information from announcements to community responses in the last week",
+      "description": "Tests information flow analysis and community response tracking",
+      "expected_elements": ["announcement identification", "response tracking", "information propagation", "community engagement"],
+      "target_audience": "discord_managers"
+    },
+    {
+      "id": 6,
+      "capability": "feedback_summarization",
+      "query": "Summarize all feedback and suggestions made about AI practical applications workshops",
+      "description": "Tests feedback aggregation and workshop improvement insights",
+      "expected_elements": ["feedback compilation", "workshop evaluation", "improvement suggestions", "participant sentiment"],
+      "target_audience": "workshop_organizers"
+    },
+    {
+      "id": 7,
+      "capability": "feedback_summarization",
+      "query": "Create a summary of member experiences and challenges shared in the non-coders learning channel",
+      "description": "Tests educational feedback summarization for learning programs",
+      "expected_elements": ["learning challenges", "member experiences", "educational gaps", "success stories"],
+      "target_audience": "educational_coordinators"
+    },
+    {
+      "id": 8,
+      "capability": "feedback_summarization",
+      "query": "Summarize community feedback on Discord server structure and channel organization",
+      "description": "Tests server improvement feedback analysis",
+      "expected_elements": ["structure feedback", "channel suggestions", "navigation issues", "organizational improvements"],
+      "target_audience": "discord_managers"
+    },
+    {
+      "id": 9,
+      "capability": "trending_topics",
+      "query": "What AI topics and technologies are trending in discussions this month?",
+      "description": "Tests AI trend identification and technology tracking",
+      "expected_elements": ["AI technology trends", "discussion frequency", "emerging topics", "community interest"],
+      "target_audience": "community_managers"
+    },
+    {
+      "id": 10,
+      "capability": "trending_topics",
+      "query": "Identify emerging collaboration patterns and project ideas mentioned across buddy groups",
+      "description": "Tests collaborative trend analysis and project identification",
+      "expected_elements": ["collaboration patterns", "project ideas", "group dynamics", "innovative concepts"],
+      "target_audience": "collaboration_facilitators"
+    },
+    {
+      "id": 11,
+      "capability": "trending_topics",
+      "query": "Track the evolution of agent-ops discussions and identify trending methodologies",
+      "description": "Tests technical trend tracking in specialized channels",
+      "expected_elements": ["methodology trends", "technical evolution", "best practices", "implementation patterns"],
+      "target_audience": "technical_leads"
+    },
+    {
+      "id": 12,
+      "capability": "qa_concepts",
+      "query": "Compile all questions about AI model training and the answers provided by community experts",
+      "description": "Tests Q&A extraction and knowledge compilation for AI training topics",
+      "expected_elements": ["question compilation", "expert answers", "training concepts", "knowledge gaps"],
+      "target_audience": "knowledge_managers"
+    },
+    {
+      "id": 13,
+      "capability": "qa_concepts",
+      "query": "What are the most frequently asked questions about prompt engineering and optimization?",
+      "description": "Tests FAQ identification and prompt engineering knowledge extraction",
+      "expected_elements": ["frequent questions", "prompt engineering concepts", "optimization techniques", "common challenges"],
+      "target_audience": "educational_coordinators"
+    },
+    {
+      "id": 14,
+      "capability": "qa_concepts",
+      "query": "Extract questions and solutions shared about AI implementation challenges in business contexts",
+      "description": "Tests business-focused AI Q&A extraction",
+      "expected_elements": ["business challenges", "implementation solutions", "practical advice", "real-world applications"],
+      "target_audience": "business_community"
+    },
+    {
+      "id": 15,
+      "capability": "statistics_generation",
+      "query": "Generate engagement statistics for the top 10 most active channels over the past month",
+      "description": "Tests comprehensive channel engagement analytics",
+      "expected_elements": ["message counts", "user participation", "engagement rates", "activity trends"],
+      "target_audience": "community_managers"
+    },
+    {
+      "id": 16,
+      "capability": "statistics_generation",
+      "query": "Provide statistics on new member onboarding and introduction patterns",
+      "description": "Tests new member analytics and onboarding effectiveness",
+      "expected_elements": ["new member counts", "introduction patterns", "onboarding success", "retention indicators"],
+      "target_audience": "growth_team"
+    },
+    {
+      "id": 17,
+      "capability": "statistics_generation",
+      "query": "Calculate response times and interaction rates for questions posted in help and Q&A channels",
+      "description": "Tests support effectiveness and community responsiveness metrics",
+      "expected_elements": ["response times", "interaction rates", "resolution statistics", "support quality"],
+      "target_audience": "support_team"
+    },
+    {
+      "id": 18,
+      "capability": "server_structure_analysis",
+      "query": "Analyze channel utilization and suggest which buddy groups might benefit from merging or splitting",
+      "description": "Tests channel optimization and structural recommendations",
+      "expected_elements": ["utilization analysis", "merge recommendations", "split suggestions", "optimal group sizes"],
+      "target_audience": "discord_managers"
+    },
+    {
+      "id": 19,
+      "capability": "server_structure_analysis",
+      "query": "Examine information flow between admin channels and general community channels to identify communication gaps",
+      "description": "Tests communication flow analysis and identifies structural improvements",
+      "expected_elements": ["information flow mapping", "communication gaps", "structural issues", "flow optimization"],
+      "target_audience": "organizational_design"
+    },
+    {
+      "id": 20,
+      "capability": "server_structure_analysis",
+      "query": "Recommend best practices for channel engagement based on analysis of most and least active channels",
+      "description": "Tests engagement pattern analysis and best practice identification",
+      "expected_elements": ["engagement patterns", "success factors", "best practices", "activation strategies"],
+      "target_audience": "conversation_leaders"
+    }
+  ],
+  "usage_instructions": {
+    "testing": "Use these queries to validate agent capabilities across all core functions",
+    "benchmarking": "Measure response quality, accuracy, and completeness for each capability area",
+    "development": "Identify areas needing improvement based on query performance",
+    "community_value": "Queries designed to provide actionable insights for community management"
+  },
+  "success_criteria": {
+    "accuracy": "Responses should be factually correct based on actual Discord data",
+    "completeness": "All expected elements should be addressed in responses",
+    "actionability": "Insights should be practical and implementable by target audiences",
+    "relevance": "Responses should directly address the specific community context"
+  }
+}
