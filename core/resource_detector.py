@@ -40,6 +40,31 @@ TRASH_PATTERNS = [
     r'cdn\.discordapp\.com',
     r'giphy\.com',
     r'tenor\.com',
+    
+    # Meeting recordings and internal content (NEW)
+    r'fathom\.video',               # Fathom meeting recordings
+    r'loom\.com',                   # Loom screen recordings
+    r'otter\.ai',                   # Otter.ai meeting transcripts
+    r'fireflies\.ai',               # Fireflies meeting notes
+    r'grain\.com',                  # Grain meeting recordings
+    r'chorus\.ai',                  # Chorus meeting analysis
+    r'gong\.io',                    # Gong meeting recordings
+    r'recall\.ai',                  # Recall meeting summaries
+    r'tldv\.io',                    # TLDV meeting recordings
+    r'us06web\.zoom\.us/rec/',      # Zoom cloud recordings
+    r'recordings\.zoom\.us',        # Zoom recordings
+    r'drive\.google\.com.*recording', # Google Drive recordings
+    r'onedrive.*recording',         # OneDrive recordings
+    r'dropbox.*recording',          # Dropbox recordings
+    r'teams\.microsoft\.com.*recording', # Teams recordings
+    
+    # Internal meeting identifiers in URLs
+    r'[?&]meeting[_-]?id=',         # Meeting ID parameters
+    r'[?&]session[_-]?id=',         # Session ID parameters
+    r'/rec/share/',                 # Recording share paths
+    r'/meeting[_-]?recording',      # Meeting recording paths
+    r'/internal[_-]?meeting',       # Internal meeting paths
+    
     # Social media profiles (not valuable as resources)
     r'linkedin\.com/in/',           # LinkedIn user profiles
     r'twitter\.com/[^/]+/?$',       # Twitter user profiles
@@ -104,6 +129,23 @@ def simple_vet_resource(resource: dict) -> dict:
     
     # Check if it's a valuable resource URL (not just a profile)
     if not is_valuable_resource_url(url):
+        return {"is_valuable": False, "name": None, "description": None}
+    
+    # Filter out internal meeting content based on context/content patterns
+    meeting_content_patterns = [
+        'meeting summary', 'meeting recap', 'meeting notes', 
+        'admin meeting', 'internal meeting', 'team meeting',
+        'quick recap', 'next steps', 'action items',
+        'heads of department', 'conversational leaders',
+        'admin drop-ins', 'all-admins meeting',
+        'zoom links', 'meeting recording', 'passcode:',
+        'who\'s who', 'admin-level member', 'admin onboarding',
+        'mit collaboration', 'roadmap meeting'
+    ]
+    
+    # Check if context contains meeting-related content
+    context_lower = context.lower()
+    if any(pattern in context_lower for pattern in meeting_content_patterns):
         return {"is_valuable": False, "name": None, "description": None}
     
     # Basic valuable resource patterns
