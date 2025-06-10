@@ -1,5 +1,5 @@
-# 🔗 **Corrected System Architecture & Dependencies**
-*Updated: June 10, 2025 - Based on Actual Code Analysis*
+# 🔗 **System Architecture & Dependencies**
+*Updated: June 11, 2025 - Post-Cleanup Analysis*
 
 ## 🎯 **Core System Flow (Production)**
 
@@ -165,7 +165,9 @@ graph LR
 
 ### **Required Environment Variables**
 - `DISCORD_TOKEN` - Used by `core/fetch_messages.py`, `core/bot.py`
-- `OLLAMA_URL` - Used by `core/ai_client.py` (default: http://localhost:11434)
+- `OLLAMA_BASE_URL` - Used by `core/ai_client.py` (default: http://localhost:11434)
+- `CHAT_MODEL` - Ollama model name (default: llama3.1:8b)
+- `EMBEDDING_MODEL` - Sentence transformer model (default: msmarco-distilbert-base-v4)
 - Various config settings in `core/config.py`
 
 ### **External Libraries**
@@ -175,26 +177,27 @@ graph LR
 - **Sentence Transformers** - Text embeddings
 - **SQLAlchemy** - Database ORM
 - **Ollama** - Local LLM integration
-- `GPT_MODEL`: Used by multiple modules for OpenAI calls
+- **Requests** - HTTP client for Ollama API
 
 ### Database
 - SQLAlchemy models referenced across multiple modules
 - Alembic migrations for schema changes
 
 ### File System
-- `data/resources/`: Used for logging and resource storage
-- `index_faiss/`: Used for vector store operations
-- `bot.log`: Used for application logging
+- `data/resources/` - Resource storage and logging
+- `data/indices/` - FAISS vector indices
+- `logs/` - Application and query logging
+- `.env` - Environment configuration
 
 ## Circular Dependencies
 - `core/agent.py` ↔ `tools/tools.py`: Potential circular import risk
 - `core/rag_engine.py` ↔ `core/agent.py`: Potential circular import risk
 
 ## External Service Dependencies
-- OpenAI API (used by multiple modules)
-- Discord API (used by `bot.py`)
-- Vector store (FAISS)
-- SQL database
+- **Ollama Local LLM** - All AI text generation
+- **Discord API** - Discord bot integration
+- **FAISS Vector Store** - Semantic search
+- **SQLite Database** - Message and metadata storage
 
 ## 📋 **Data Flow Analysis**
 
@@ -237,46 +240,65 @@ Messages → core/resource_detector.py → core/classifier.py → Resource Class
 - **Index builders** - No semantic search
 - **Pipelines** - No data processing automation
 
-## 🧹 **Cleanup Recommendations (Updated Post-Legacy Removal)**
+## 🧹 **Cleanup Status (Updated June 11, 2025)**
 
-### **✅ COMPLETED - Legacy Pipeline Removed**
+### **✅ COMPLETED CLEANUPS**
+
+#### **Legacy Pipeline Removal (June 11)**
 Successfully archived to `archive/legacy_pipeline_removed_20250611/`:
 - Complete legacy pipeline (9 files)
 - Obsolete migration scripts  
 - Legacy log files
 
-### **NEXT - Archive Remaining Migrations (2 files)**
-Move to `archive/migrations/`:
-- `scripts/migrate_add_preprocessing_fields.py` - One-time database migration (complete)
-- `scripts/populate_preprocessing_data.py` - One-time data population (complete)
+#### **Documentation Cleanup (June 11)**
+Successfully archived to `archive/docs_historical_20250611/`:
+- 29 redundant "COMPLETE" and "FINAL" documentation files
+- Historical upgrade and status documentation
+- Outdated project analysis files
 
-### **ORGANIZE - Development Tools (7+ files)**
-Move to `scripts/analysis/`:
-- All `analyze_*.py` scripts (4 files)
-- `evaluate_embedding_models.py`
-- `enhanced_community_preprocessor.py`
-- `cleanup_root.py`
+#### **Test Results Cleanup (June 11)**
+Successfully archived to `archive/test_results_historical_20250611/`:
+- Historical JSON test result files
+- Outdated test analysis documentation
 
-## 🎯 **Final Architecture Summary**
+### **CURRENT SYSTEM STATUS**
+- **Core Files**: ~32 essential production files
+- **Documentation**: 6 organized files in docs/
+- **Tests**: 12 essential test files + organized docs
+- **Archive**: All historical files preserved but organized
 
-**ESSENTIAL CORE (24 files):**
-- User Interfaces: 3 files
-- AI/RAG Engine: 4 files  
-- Data Processing: 3 files
-- Database: 3 files
-- Enhanced Features: 5 files
-- Production Pipelines: 3 files
-- Index Builders: 3 files
+### **REMOVED DEPENDENCIES**
+- ❌ **OpenAI API** - Fully replaced with Ollama local LLM
+- ❌ **GPT_MODEL environment variable** - No longer used
+- ❌ **OPENAI_API_KEY environment variable** - No longer required
+- ❌ **Legacy embedding systems** - Replaced with msmarco-distilbert-base-v4
 
-**SUPPORT SYSTEM (8 files):**
-- Tools & Utilities: 2 files
-- Analytics: 3 files
-- Testing: 3 files
+## 🎯 **Current Architecture Summary**
 
-**CLEANUP CANDIDATES (25+ files):**
-- Legacy: 4 files
-- Migrations: 3 files
-- Development: 10+ files
-- Analysis: 7+ files
+**PRODUCTION SYSTEM (32 core files):**
+- **User Interfaces**: 2 files (Streamlit + Discord bot)
+- **AI/RAG Engine**: 6 files (agent, rag_engine, ai_client, config, fallback, k_determination)  
+- **Data Processing**: 4 files (fetch_messages, content_preprocessor, enhanced_faiss_index, pipeline)
+- **Database Layer**: 3 files (db.py, models.py, query_logs.py)
+- **Enhanced Features**: 3 files (resource_detector, classifier, query_capability_detector)
+- **Tools & Utilities**: 4 files (tools.py, time_parser.py, helpers.py, logger.py)
+- **Index Builders**: 3 files (build_community_faiss_index, build_enhanced_faiss_index, build_resource_faiss_index)
+- **Analytics & Scripts**: 7 remaining analysis scripts
 
-**Result:** Clean, focused codebase with **32 core files** instead of **60+ mixed files**
+**ORGANIZED DOCUMENTATION (6 files):**
+- Architecture and dependencies documentation
+- Database schema reference
+- Usage examples and guides
+- Documentation index
+
+**COMPREHENSIVE TESTING (12 files):**
+- Core system integration tests
+- Performance and quality validation
+- Organized test documentation
+
+**CLEAN ARCHIVE STRUCTURE:**
+- Historical documentation preserved
+- Legacy code archived by date
+- Test results organized chronologically
+
+**Result:** Transformed from **60+ chaotic files** to **32 focused production files** with clear organization and comprehensive archives.
