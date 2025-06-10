@@ -1,54 +1,201 @@
-# Dependency Graph
+# 🔗 **Corrected System Architecture & Dependencies**
+*Updated: June 10, 2025 - Based on Actual Code Analysis*
 
-## Direct Dependencies (Import-based)
+## 🎯 **Core System Flow (Production)**
 
-### `core/agent.py`
-- Depends on:
-  - `tools.tools` (direct)
-  - `langchain` packages (direct)
-  - `os` and `dotenv` (direct)
+```mermaid
+graph TD
+    %% Data Ingestion
+    A[Discord Server] --> B[core/fetch_messages.py]
+    B --> C[data/discord_messages.db]
+    
+    %% User Interfaces
+    D[User Query] --> E{Interface}
+    E -->|Web UI| F[core/app.py - Streamlit]
+    E -->|Discord| G[core/bot.py - Discord Bot]
+    
+    %% Core Processing
+    F --> H[core/agent.py - AI Agent]
+    G --> H
+    H --> I[core/rag_engine.py - RAG Engine]
+    
+    %% RAG Engine Dependencies
+    I --> J[core/ai_client.py - Ollama]
+    I --> K[tools/tools.py - Message Utils]
+    I --> L[tools/time_parser.py - Time Parsing]
+    I --> M[core/enhanced_fallback_system.py]
+    I --> N[core/enhanced_k_determination.py]
+    
+    %% Data Sources
+    K --> C
+    I --> O[data/indices/ - FAISS Indices]
+    
+    %% Configuration
+    J --> P[core/config.py]
+    B --> P
+```
 
-### `core/bot.py`
-- Depends on:
-  - `core.agent` (direct)
-  - `discord` packages (direct)
-  - `flask` (direct)
-  - `os` and `dotenv` (direct)
+## 🏗️ **Data Processing Pipeline**
 
-### `core/rag_engine.py`
-- Depends on:
-  - `openai` (direct)
-  - `core.agent` (direct)
-  - Various utility functions (direct)
+```mermaid
+graph LR
+    %% Current Production Pipeline
+    A[Raw Discord Messages] --> B[scripts/pipeline.py]
+    B --> C[scripts/content_preprocessor.py]
+    C --> D[Preprocessing & Filtering]
+    D --> E[scripts/enhanced_faiss_index.py]
+    E --> F[Vector Embeddings]
+    F --> G[FAISS Index Creation]
+    G --> H[data/indices/]
+    
+    %% Resource Processing
+    A --> I[core/resource_detector.py]
+    I --> J[Resource Extraction]
+    J --> K[core/classifier.py]
+    K --> L[Resource Classification]
+    
+    %% Enhanced Pipeline
+    M[scripts/enhanced_pipeline_with_resources.py] --> C
+    M --> I
+```
 
-### `core/resource_detector.py`
-- Depends on:
-  - `openai` (direct)
-  - URL processing utilities (direct)
-  - Message processing utilities (direct)
+## 📊 **Legacy Pipeline (Still Active)**
 
-### `core/classifier.py`
-- Depends on:
-  - `openai` (direct)
-  - Regular expression utilities (direct)
+```mermaid
+graph LR
+    A[tools/full_pipeline.py] --> B[core/fetch_messages.py]
+    A --> C[core/embed_store.py]
+    A --> D[core/batch_detect.py]
+    A --> E[core/repo_sync.py]
+    
+    B --> F[Discord API]
+    C --> G[Legacy FAISS Index]
+    D --> H[Resource Detection]
+    E --> I[JSON/Markdown Export]
+```
 
-### `core/app.py`
-- Depends on:
-  - `streamlit` (direct)
-  - `core.agent` (direct)
-  - Formatting utilities (direct)
+## 🔍 **Actual Dependencies (Import Analysis)**
 
-### `core/batch_detect.py`
-- Depends on:
-  - Database models (direct)
-  - Resource detection utilities (direct)
-  - Message processing utilities (direct)
+### **⭐ TIER 1: ESSENTIAL CORE**
 
-## Implicit Dependencies
+#### **Main Applications**
+- **`core/app.py`** (Streamlit Web UI)
+  - → `tools.tools` (get_channels)
+  - → `core.agent` (get_agent_answer, analyze_query_type)
+  - → `db.query_logs` (logging functions)
 
-### Environment Variables
-- `OPENAI_API_KEY`: Used by multiple modules
-- `DISCORD_TOKEN`: Used by `bot.py`
+- **`core/bot.py`** (Discord Bot)
+  - → `core.agent` (get_agent_answer)
+  - → `core.config` (get_config)
+  - → `db.query_logs` (logging functions)
+
+- **`core/fetch_messages.py`** (Data Ingestion) ⚠️ **CORRECTED**
+  - → `db` (SessionLocal, Message)
+  - → `discord` library
+  - → `utils.logger`
+
+#### **Core Intelligence**
+- **`core/agent.py`** (AI Orchestrator)
+  - → `core.ai_client` (get_ai_client)
+  - → `core.rag_engine` (get_answer, get_agent_answer, etc.)
+  - → `core.enhanced_fallback_system` (conditional import)
+  - → `tools.tools` (search_messages, etc.)
+
+- **`core/rag_engine.py`** (RAG Engine)
+  - → `core.ai_client` (get_ai_client)
+  - → `core.config` (get_config)
+  - → `core.enhanced_fallback_system` (EnhancedFallbackSystem)
+  - → `tools.tools` (resolve_channel_name, summarize_messages, etc.)
+  - → `tools.time_parser` (parse_timeframe, extract_time_reference, etc.)
+
+- **`core/ai_client.py`** (LLM Client)
+  - → `core.config` (get_config)
+
+- **`core/config.py`** (Configuration)
+  - → Environment variables and settings
+
+#### **Data Processing**
+- **`scripts/pipeline.py`** (Main Pipeline)
+  - → `scripts.content_preprocessor` (ContentPreprocessor, PreprocessingConfig)
+  - → `scripts.enhanced_faiss_index` (EnhancedFAISSIndex, IndexConfig, SearchResult)
+  - → `utils.logger`
+
+- **`scripts/content_preprocessor.py`** (Message Preprocessing)
+  - → `db` (SessionLocal, Message)
+  - → `utils.logger`
+
+- **`scripts/enhanced_faiss_index.py`** (Vector Index Builder)
+  - → `sentence_transformers`
+  - → `faiss`
+  - → `db`
+
+#### **Database Layer**
+- **`db/db.py`** - Database connection
+- **`db/models.py`** - ORM models  
+- **`db/query_logs.py`** - Query logging
+
+### **🟡 TIER 2: PRODUCTION FEATURES**
+
+#### **Enhanced Systems**
+- **`core/enhanced_fallback_system.py`**
+  - → `core.ai_client`
+  - → `core.config`
+
+- **`core/enhanced_k_determination.py`**
+  - → `db` (database queries)
+
+- **`core/resource_detector.py`**
+  - → `core.classifier` (classify_resource)
+
+- **`core/classifier.py`**
+  - → Regex patterns and classification logic
+
+#### **Production Pipelines**
+- **`scripts/enhanced_pipeline_with_resources.py`**
+  - → `scripts.content_preprocessor`
+  - → `scripts.enhanced_faiss_index`
+  - → `core.resource_detector`
+
+- **`tools/full_pipeline.py`** (Legacy but Active)
+  - → Calls: `core/fetch_messages.py`, `core/embed_store.py`, `core/batch_detect.py`, `core/repo_sync.py`
+
+### **🔵 TIER 3: UTILITIES & TOOLS**
+
+- **`tools/tools.py`** (Message Utilities)
+  - → `db` (SessionLocal, Message)
+  - → Various utility functions
+
+- **`tools/time_parser.py`** (Time Parsing)
+  - → Standalone natural language processing
+
+### **🔴 TIER 5: LEGACY (Archive Candidates)**
+
+- **`core/embed_store.py`** (Legacy Index Builder)
+  - → `db`, `core.config`, `sentence_transformers`, `faiss`
+  - **Used by:** `tools/full_pipeline.py`, `scripts/fix_embedding_model.py`
+
+- **`core/batch_detect.py`** (Legacy Resource Detection)
+  - → `db.db`, `core.resource_detector`
+  - **Used by:** `tools/full_pipeline.py`
+
+- **`core/repo_sync.py`** (Export Tool)
+  - → `db.db`, `core.resource_detector`
+  - **Used by:** `tools/full_pipeline.py`
+
+## 🎯 **Environment Dependencies**
+
+### **Required Environment Variables**
+- `DISCORD_TOKEN` - Used by `core/fetch_messages.py`, `core/bot.py`
+- `OLLAMA_URL` - Used by `core/ai_client.py` (default: http://localhost:11434)
+- Various config settings in `core/config.py`
+
+### **External Libraries**
+- **Discord.py** - Discord API integration
+- **Streamlit** - Web interface
+- **FAISS** - Vector similarity search
+- **Sentence Transformers** - Text embeddings
+- **SQLAlchemy** - Database ORM
+- **Ollama** - Local LLM integration
 - `GPT_MODEL`: Used by multiple modules for OpenAI calls
 
 ### Database
@@ -68,4 +215,94 @@
 - OpenAI API (used by multiple modules)
 - Discord API (used by `bot.py`)
 - Vector store (FAISS)
-- SQL database 
+- SQL database
+
+## 📋 **Data Flow Analysis**
+
+### **1. Message Ingestion Flow**
+```
+Discord Server → core/fetch_messages.py → data/discord_messages.db
+```
+
+### **2. Index Building Flow**
+```
+data/discord_messages.db → scripts/content_preprocessor.py → scripts/enhanced_faiss_index.py → data/indices/
+```
+
+### **3. Query Processing Flow**
+```
+User Query → core/app.py|core/bot.py → core/agent.py → core/rag_engine.py → tools/tools.py → Database + FAISS → Response
+```
+
+### **4. Resource Detection Flow**
+```
+Messages → core/resource_detector.py → core/classifier.py → Resource Classification
+```
+
+## ⚠️ **Critical Dependencies**
+
+### **System Cannot Function Without:**
+1. **`core/fetch_messages.py`** - No data without this
+2. **`core/agent.py`** - No AI processing without this
+3. **`core/rag_engine.py`** - No search without this
+4. **`core/ai_client.py`** - No LLM integration without this
+5. **Database layer** (`db/`) - No data persistence without this
+
+### **System Degraded Without:**
+- **`core/enhanced_fallback_system.py`** - Errors become generic
+- **`tools/tools.py`** - Limited search capabilities
+- **`tools/time_parser.py`** - No time-based queries
+
+### **Features Missing Without:**
+- **`core/resource_detector.py`** - No resource detection
+- **Index builders** - No semantic search
+- **Pipelines** - No data processing automation
+
+## 🧹 **Cleanup Recommendations (Corrected)**
+
+### **IMMEDIATE - Archive Legacy (4 files)**
+Move to `archive/legacy/`:
+- `core/embed_store.py` - Superseded by enhanced_faiss_index.py
+- `core/preprocessing.py` - Pipeline orchestrator not in use
+- `core/repo_sync_backup.py` - Backup file
+
+### **NEXT - Archive Migrations (3 files)**
+Move to `archive/migrations/`:
+- `scripts/migrate_add_preprocessing_fields.py`
+- `scripts/populate_preprocessing_data.py`
+- `scripts/fix_embedding_model.py`
+
+### **CAREFUL - Legacy Pipeline Components (2 files)**
+**Still used by `tools/full_pipeline.py`:**
+- `core/batch_detect.py` - Consider migrating functionality first
+- `core/repo_sync.py` - Consider migrating functionality first
+
+### **ORGANIZE - Development Tools (10+ files)**
+Move to `scripts/analysis/`:
+- All `analyze_*.py` scripts
+- `evaluate_embedding_models.py`
+- `enhanced_community_preprocessor.py`
+
+## 🎯 **Final Architecture Summary**
+
+**ESSENTIAL CORE (24 files):**
+- User Interfaces: 3 files
+- AI/RAG Engine: 4 files  
+- Data Processing: 3 files
+- Database: 3 files
+- Enhanced Features: 5 files
+- Production Pipelines: 3 files
+- Index Builders: 3 files
+
+**SUPPORT SYSTEM (8 files):**
+- Tools & Utilities: 2 files
+- Analytics: 3 files
+- Testing: 3 files
+
+**CLEANUP CANDIDATES (25+ files):**
+- Legacy: 4 files
+- Migrations: 3 files
+- Development: 10+ files
+- Analysis: 7+ files
+
+**Result:** Clean, focused codebase with **32 core files** instead of **60+ mixed files**
