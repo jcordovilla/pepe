@@ -350,12 +350,6 @@ I don't have sufficient recent data to identify trending methodologies.
 - `core/rag_engine.py` - Integrated fallback triggers for zero-result searches
 - `core/agent.py` - Enhanced error recovery and user guidance
 
-**Testing & Validation:**
-- Comprehensive test suite with 20+ query scenarios
-- AI-powered quality evaluation framework
-- Integration testing with existing agent system
-- Performance monitoring and continuous improvement
-
 ---
 
 ## 🚀 Complete Preprocessing Pipeline
@@ -560,6 +554,7 @@ python -c "from scripts.build_community_faiss_index import CommunityFAISSIndexBu
 **Directory Structure:**
 - ✅ `data/indices/` - For FAISS indexes and metadata
 - ✅ `data/reports/` - For preprocessing reports and statistics
+- ✅ `data/resources/` - For resource logs and exports
 
 **Dependencies:**
 - ✅ `sentence-transformers` - For embedding generation
@@ -567,352 +562,43 @@ python -c "from scripts.build_community_faiss_index import CommunityFAISSIndexBu
 - ✅ `numpy` - For numerical operations
 - ✅ `sqlalchemy` - For database operations
 
-### 📊 Pipeline Execution Flow
+### 📁 **Project Structure**
 
-```mermaid
-graph TD
-    A[Prerequisites Check] --> B[Content Preprocessing]
-    B --> C[Community Preprocessing]
-    C --> D[Enhanced FAISS Index]
-    D --> E[Community FAISS Index]
-    E --> F[Generate Reports]
-    
-    B --> B1[Clean Content]
-    B --> B2[Extract URLs]
-    B --> B3[Process Embeds]
-    B --> B4[Filter Messages]
-    
-    C --> C1[Detect Experts]
-    C --> C2[Extract Skills]
-    C --> C3[Analyze Q&A]
-    C --> C4[Calculate Engagement]
-    
-    D --> D1[Load Messages]
-    D --> D2[Create Embeddings]
-    D --> D3[Build Index]
-    D --> D4[Save Metadata]
-    
-    E --> E1[Community Analysis]
-    E --> E2[Expert Indexing]
-    E --> E3[Skill Tagging]
-    E --> E4[Context Enrichment]
+```
+discord-bot/
+├── 📊 Core System
+│   ├── core/              # Core modules (RAG, AI, agent system)
+│   ├── db/                # Database models and query logging
+│   ├── tools/             # Search tools and utilities
+│   └── utils/             # Helper utilities
+│
+├── 🔧 Processing & Scripts  
+│   ├── scripts/           # Processing pipelines and utilities
+│   │   └── examples/      # Example scripts and templates
+│   └── tests/             # Test suite and validation
+│
+├── 📚 Data & Documentation
+│   ├── data/              # Data storage and indices
+│   │   ├── indices/       # FAISS indices and embeddings
+│   │   ├── reports/       # Pipeline and analysis reports
+│   │   └── resources/     # Resource classifications
+│   ├── docs/              # Documentation and status reports
+│   ├── logs/              # Application logs
+│   └── architecture/      # System architecture docs
+│
+└── ⚙️ Configuration
+    ├── .env               # Environment variables
+    ├── requirements.txt   # Python dependencies
+    ├── pytest.ini        # Test configuration
+    └── mkdocs.yml         # Documentation configuration
 ```
 
-### 📈 Performance Metrics
-
-**Typical Processing Times:**
-- **Content Preprocessing:** ~2-5 minutes for 10K messages
-- **Community Preprocessing:** ~5-10 minutes for 10K messages  
-- **Enhanced Index Build:** ~10-15 minutes for 10K messages
-- **Community Index Build:** ~15-20 minutes for 10K messages
-- **Complete Pipeline:** ~30-50 minutes for 10K messages
-
-**Resource Requirements:**
-- **Memory:** 4-8GB RAM for large datasets (>10K messages)
-- **Storage:** ~100-200MB for complete indexes
-- **CPU:** Optimized for multi-core processing
-
-### 🗂️ Generated Reports
-
-**Pipeline Report Structure:**
-```json
-{
-  "pipeline_summary": {
-    "start_time": "2025-06-07T19:52:27.123456",
-    "end_time": "2025-06-07T20:22:15.654321", 
-    "total_duration_minutes": 29.8,
-    "steps_completed": 4,
-    "steps_failed": 0,
-    "overall_success": true
-  },
-  "detailed_statistics": {
-    "content_preprocessing": {
-      "status": "completed",
-      "duration_minutes": 3.2,
-      "statistics": {
-        "total_messages_analyzed": 5816,
-        "filter_rate": 0.15,
-        "avg_content_length": 127.5,
-        "messages_with_embeds": 892,
-        "total_urls_extracted": 234
-      }
-    },
-    "enhanced_index_build": {
-      "status": "completed", 
-      "index_path": "data/indices/enhanced_faiss_20250607_195227.index",
-      "metadata_path": "data/indices/enhanced_faiss_20250607_195227_metadata.json",
-      "statistics": {
-        "total_messages_processed": 4944,
-        "embedding_dimension": 384,
-        "index_type": "IndexFlatIP"
-      }
-    }
-  }
-}
-```
-
-### 🔧 Troubleshooting
-
-**Common Issues:**
-- **"No messages found":** Run `python core/fetch_messages.py` first
-- **Memory errors:** Reduce batch size with `--batch-size 16`
-- **Model loading issues:** Check `sentence-transformers` installation
-- **Permission errors:** Ensure write access to `data/` directories
-
-**Debug Commands:**
-```bash
-# Check database status
-python -c "from core.preprocessing import PreprocessingPipeline; pipeline = PreprocessingPipeline(); pipeline.check_prerequisites()"
-
-# Test individual components
-python scripts/content_preprocessor.py
-python scripts/enhanced_community_preprocessor.py
-
-# Verify generated indexes
-python -c "import faiss; print(faiss.read_index('data/indices/community_faiss_latest.index').ntotal)"
-```
-
----
-
-## 🚀 Performance Optimization & Enhancement Suite (v0.6)
-
-**MAJOR PERFORMANCE BREAKTHROUGH:** Complete optimization of the resource detection and processing pipeline with dramatic performance improvements across all core components.
-
-### 📈 Performance Metrics Achieved
-
-| Component | Previous Performance | Optimized Performance | Improvement |
-|-----------|---------------------|----------------------|-------------|
-| **Resource Detection** | 6,121 msgs/sec | 6,121 msgs/sec | ✅ Maintained high speed |
-| **Classification** | ~1,000 classifications/sec | >1,000,000 classifications/sec | **1000x improvement** |
-| **Batch Processing** | Memory bottlenecks | Memory-efficient batching | ✅ Eliminated OOM issues |
-| **Database Operations** | Single connections | Connection pooling + retries | ✅ Enhanced reliability |
-| **Title Quality** | Basic URL extraction | AI-quality enrichment | ✅ Matching AI detector |
-
-### 🎯 Core Optimizations Delivered
-
-#### 1. **🏃‍♂️ Classifier Performance Explosion (`core/classifier.py`)**
-- **LRU Caching System:** Added `@lru_cache(maxsize=1000)` for pattern-based classification
-- **Expanded Domain Patterns:** Enhanced news domain detection and regex patterns
-- **Token Efficiency:** Reduced LLM usage from 50 to 20 tokens for cost optimization
-- **Cached Function:** New `_classify_by_url_pattern()` with microsecond response times
-
-```python
-# Before: ~1,000 classifications/second
-# After: >1,000,000 classifications/second (1000x improvement)
-```
-
-#### 2. **⚡ Batch Detection System Overhaul (`core/batch_detect.py`)**
-- **Memory-Efficient Batching:** Process 1000 messages per batch to prevent OOM issues
-- **Database Integration:** Full integration with optimized `get_db_session` and `execute_query`
-- **Performance Monitoring:** Real-time metrics tracking (messages/second, detection rates)
-- **Enhanced Error Handling:** Comprehensive try-catch blocks with graceful recovery
-- **Progress Tracking:** tqdm progress bars with detailed performance reporting
-- **Test Mode Support:** `BATCH_DETECT_TEST` environment variable for development
-
-#### 3. **🎨 Enhanced Title/Description Generation (`core/resource_detector.py`)**
-- **Advanced URL Parsing:** Enhanced path analysis for better title extraction
-- **GitHub Intelligence:** Improved repository name and README detection
-- **arXiv Enhancement:** Better paper ID detection and title formatting
-- **YouTube Integration:** Video ID extraction and metadata parsing
-- **Medium Article Processing:** Enhanced slug parsing and title extraction
-- **Domain Intelligence:** Expanded label mappings (TechCrunch, Wired, Ars Technica, etc.)
-- **Context-Aware Fallbacks:** Intelligent title generation from URL context
-
-#### 4. **📊 Repository Sync Complete Rewrite (`core/repo_sync.py`)**
-- **Modern Database Patterns:** Full integration with optimized database layer
-- **Title Enrichment Integration:** Built-in `simple_enrich_title()` capabilities
-- **Flexible Export Options:** JSON and Markdown formats with CLI interface
-- **Advanced Filtering:** Tag-based filtering and resource limits
-- **Domain Analysis:** Automatic domain extraction and statistics
-- **Comprehensive CLI:** Full argparse interface with help documentation
-
-```bash
-# New CLI capabilities
-python core/repo_sync.py --format both --tag Paper --max 100 --no-enrich
-```
-
-### 🔧 Database Layer Enhancements
-
-All components now use the **optimized database layer**:
-- **Connection Pooling:** Efficient resource management
-- **Retry Mechanisms:** Automatic retry logic for failed operations
-- **Batch Operations:** Efficient bulk database operations
-- **Error Recovery:** Graceful handling of database failures
-
-### 📊 Architecture Improvements
-
-#### **Consistent Import Patterns:**
-```python
-from db.db import get_db_session, Resource, execute_query
-from core.resource_detector import simple_enrich_title
-```
-
-#### **Memory Management:**
-- **Batch Processing:** 1000-message chunks prevent memory exhaustion
-- **Efficient Queries:** Optimized SQL queries with pagination support
-- **Resource Cleanup:** Proper session management and connection cleanup
-
-#### **Error Handling Excellence:**
-- **Comprehensive Logging:** Detailed error reporting with context
-- **Graceful Degradation:** Continue processing even with individual failures
-- **Performance Metrics:** Real-time monitoring of processing rates
-- **User Feedback:** Clear progress indicators and status reporting
-
-### 🎯 Integration Testing Results
-
-**✅ All Performance Tests Passed:**
-- Resource detection pipeline: **6,121 messages/second maintained**
-- Classification with caching: **>1M classifications/second achieved**
-- Batch processing: **Memory-efficient operation confirmed**
-- Repository sync: **Both JSON and Markdown export working**
-- Title enrichment: **AI-quality results delivered**
-- Database operations: **Reliable with connection pooling**
-
-### 🛠️ Usage Examples
-
-#### **Enhanced Batch Detection:**
-```bash
-cd /Users/jose/Documents/apps/discord-bot
-PYTHONPATH=/Users/jose/Documents/apps/discord-bot python3 core/batch_detect.py
-```
-
-#### **Repository Sync with Options:**
-```bash
-# Export to JSON with enrichment
-python3 core/repo_sync.py --format json --max 100
-
-# Export filtered resources
-python3 core/repo_sync.py --tag "Paper" --output papers.json
-
-# Export both formats
-python3 core/repo_sync.py --format both --output docs/export
-```
-
-#### **Test Mode for Development:**
-```bash
-# Enable test mode for batch detection
-export BATCH_DETECT_TEST=1
-python3 core/batch_detect.py
-```
-
-### 📈 Performance Benefits Summary
-
-1. **🚀 Classification Speed:** 1000x performance improvement through intelligent caching
-2. **💾 Memory Efficiency:** Eliminated OOM issues with smart batch processing  
-3. **🔄 Database Reliability:** Enhanced connection pooling and retry mechanisms
-4. **📝 Content Quality:** AI-level title/description enrichment without AI costs
-5. **🔧 Developer Experience:** Comprehensive CLI tools and error reporting
-6. **📊 Monitoring:** Real-time performance metrics and detailed logging
-
-**Result:** A production-ready, high-performance resource detection and processing pipeline that maintains speed while dramatically improving reliability, memory efficiency, and content quality.
-
----
-
-## Project Structure
-```
-mkdocs.yml                # MkDocs documentation config
-readme.md                 # Project documentation (this file)
-requirements.txt          # Python dependencies
-render.yaml              # Deployment configuration
-
-core/                     # Core logic and orchestration
-    __init__.py
-    preprocessing.py      # 🚀 UNIFIED PREPROCESSING PIPELINE - Single entry point
-    agent.py              # AI agent orchestration and Discord bot logic
-    app.py                # Streamlit UI / bot runner
-    classifier.py         # ⚡ OPTIMIZED: 1000x faster classification with LRU caching
-    resource_detector.py  # 🎨 ENHANCED: AI-quality title/description enrichment
-    rag_engine.py         # Retrieval-Augmented Generation engine (FAISS, local models)
-    ai_client.py          # AI client for embeddings and chat (SentenceTransformers)
-    config.py             # Configuration management
-    repo_sync.py          # 📊 REWRITTEN: Modern database patterns + CLI interface  
-    batch_detect.py       # ⚡ OPTIMIZED: Memory-efficient batch processing + metrics
-    fetch_messages.py     # Fetch and store Discord messages
-    bot.py                # Discord bot entrypoint
-    embed_store.py        # Embedding and vector store logic
-
-scripts/                  # Utility and maintenance scripts + PREPROCESSING COMPONENTS
-    # 🚀 PREPROCESSING PIPELINE COMPONENTS:
-    content_preprocessor.py        # Step 1: Basic content cleaning and standardization  
-    enhanced_community_preprocessor.py # Step 2: Community analysis and expert identification
-    build_enhanced_faiss_index.py # Step 3: Standard semantic search index with rich metadata
-    build_community_faiss_index.py# Step 4: Community-focused search with expert detection
-    enhanced_faiss_index.py       # Enhanced FAISS index utilities and testing
-    
-    # 🔧 OPTIMIZATION & ANALYSIS SCRIPTS:
-    fix_embedding_model.py         # Fix dimension mismatches and rebuild FAISS index
-    evaluate_embedding_models.py   # Comprehensive model evaluation framework
-    test_embedding_performance.py  # Performance testing and benchmarks
-    test_local_ai.py              # Local AI model testing
-    analyze_index.py              # FAISS index analysis tools
-    analyze_content_preprocessing.py # Content preprocessing analysis
-    analyze_deep_content.py       # Deep content analysis and statistics
-    analyze_enhanced_fields.py    # Enhanced Discord field analysis
-
-tools/                    # Custom tools and agent functions
-    __init__.py
-    tools.py              # Tool registry and main tool functions
-    tools_metadata.py     # Tool metadata for agent/LLM tool-calling
-    time_parser.py        # Natural language time parsing
-    clean_resources_db.py # Clean, deduplicate, and re-enrich resources in DB
-    dedup_resources.py    # Deduplicate JSON resources by URL/title (CLI)
-    fix_resource_titles.py# AI-based title/description enrichment for resources
-    full_pipeline.py      # Run full pipeline (fetch, embed, detect, export)
-
-
-db/                       # Database models and migrations
-    __init__.py
-    db.py                 # Database session management, engine, and models
-    models.py             # Data models
-    alembic.ini           # Alembic config
-    alembic/              # Alembic migrations
-
-data/                     # Data files and vector indexes
-    discord_messages.db   # Main SQLite database
-    indices/              # 🔍 FAISS VECTOR INDEXES:
-        enhanced_faiss_YYYYMMDD_HHMMSS.index      # Enhanced semantic search index
-        enhanced_faiss_YYYYMMDD_HHMMSS_metadata.json # Enhanced index metadata
-        community_faiss_YYYYMMDD_HHMMSS.index     # Community-focused search index  
-        community_faiss_YYYYMMDD_HHMMSS_metadata.json # Community index metadata
-    reports/              # 📊 PREPROCESSING REPORTS:
-        content_preprocessing_report_YYYYMMDD_HHMMSS.json # Content analysis reports
-        preprocessing_pipeline_report_YYYYMMDD_HHMMSS.json # Complete pipeline reports
-        enhanced_faiss_build_report_YYYYMMDD_HHMMSS.json # Enhanced index build reports
-        community_faiss_build_report_YYYYMMDD_HHMMSS.json # Community index build reports
-    resources/            # Resource logs and exports
-        *.json, *.jsonl   # Message and chat history exports
-
-index_faiss/              # High-performance FAISS vector index (768D embeddings)
-    index.faiss           # Optimized vector index using msmarco-distilbert-base-v4
-    index.pkl             # Metadata and configuration
-
-utils/                    # Utility functions and helpers
-    __init__.py
-    helpers.py            # Helper functions (jump URLs, validation, etc.)
-    logger.py             # Logging setup
-    embed_store.py        # Embedding helpers
-
-tests/                    # Unit and integration tests
-    test_*.py             # Test modules (run with pytest)
-    conftest.py           # Pytest fixtures
-    embedding_evaluation_results.json# Model evaluation results
-    query_test_results.json# Query test results
-    test_results.txt      # Test execution logs
-
-docs/                     # Project documentation (Markdown, resources)
-    index.md              # Main documentation
-    example_queries.md    # Example queries and usage patterns
-    MIGRATION_COMPLETE.md # Migration documentation
-    resources/
-        resources.json    # Exported/curated resources
-
-logs/                     # Application and system logs
-    bot_*.log            # Discord bot execution logs
-    *.log                # Other application logs
-
-jc_logs/                  # Performance and architecture logs (gitignored)
-    *.md                 # Development and performance analysis
-```
+### **Key Components:**
+- **`core/`** - Main application logic (RAG engine, AI client, agent system)
+- **`scripts/`** - Data processing pipelines and maintenance utilities  
+- **`data/`** - All data storage (databases, indices, reports) 
+- **`docs/`** - Complete documentation and project status
+- **`tests/`** - Comprehensive test suite with 36+ test cases
 
 ---
 
