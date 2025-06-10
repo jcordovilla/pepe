@@ -137,9 +137,11 @@ class EnhancedDiscordMessagePipeline:
             if index_name is None:
                 index_name = f"enhanced_discord_index_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
-            self.faiss_index.save_index(index_name)
+            # Ensure index is saved in the correct location
+            index_path = os.path.join("data", "indices", index_name)
+            self.faiss_index.save_index(index_path)
             save_time = (datetime.now() - save_start).total_seconds()
-            log.info(f"Index saved to '{index_name}' in {save_time:.1f}s")
+            log.info(f"Index saved to '{index_path}' in {save_time:.1f}s")
         
         # Generate enhanced pipeline statistics
         total_time = (datetime.now() - pipeline_start).total_seconds()
@@ -171,7 +173,7 @@ class EnhancedDiscordMessagePipeline:
         }
         
         if save_index:
-            self.pipeline_stats['index_saved_to'] = index_name
+            self.pipeline_stats['index_saved_to'] = index_path
         
         log.info(f"Enhanced pipeline completed successfully in {total_time:.1f}s")
         log.info(f"Processing rate: {self.pipeline_stats['processing_rate_messages_per_second']:.1f} messages/second")

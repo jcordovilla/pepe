@@ -34,7 +34,7 @@ class ResourceFAISSIndexBuilder:
     
     def __init__(self, 
                  model_name: str = "msmarco-distilbert-base-v4",
-                 resources_path: str = "data/resources/test_resources.json",
+                 resources_path: str = "data/resources/detected_resources.json",
                  batch_size: int = 100):
         """
         Initialize the resource FAISS index builder.
@@ -403,7 +403,7 @@ def main():
     parser = argparse.ArgumentParser(description="Build FAISS index for resources")
     parser.add_argument("--model", default="msmarco-distilbert-base-v4", 
                        help="Sentence transformer model name")
-    parser.add_argument("--resources", default="data/resources/test_resources.json",
+    parser.add_argument("--resources", default="data/resources/detected_resources.json",
                        help="Path to resources JSON file")
     parser.add_argument("--batch-size", type=int, default=100,
                        help="Batch size for processing")

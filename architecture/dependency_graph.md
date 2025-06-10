@@ -59,21 +59,6 @@ graph LR
     M --> I
 ```
 
-## 📊 **Legacy Pipeline (Still Active)**
-
-```mermaid
-graph LR
-    A[tools/full_pipeline.py] --> B[core/fetch_messages.py]
-    A --> C[core/embed_store.py]
-    A --> D[core/batch_detect.py]
-    A --> E[core/repo_sync.py]
-    
-    B --> F[Discord API]
-    C --> G[Legacy FAISS Index]
-    D --> H[Resource Detection]
-    E --> I[JSON/Markdown Export]
-```
-
 ## 🔍 **Actual Dependencies (Import Analysis)**
 
 ### **⭐ TIER 1: ESSENTIAL CORE**
@@ -156,9 +141,6 @@ graph LR
   - → `scripts.enhanced_faiss_index`
   - → `core.resource_detector`
 
-- **`tools/full_pipeline.py`** (Legacy but Active)
-  - → Calls: `core/fetch_messages.py`, `core/embed_store.py`, `core/batch_detect.py`, `core/repo_sync.py`
-
 ### **🔵 TIER 3: UTILITIES & TOOLS**
 
 - **`tools/tools.py`** (Message Utilities)
@@ -168,19 +150,16 @@ graph LR
 - **`tools/time_parser.py`** (Time Parsing)
   - → Standalone natural language processing
 
-### **🔴 TIER 5: LEGACY (Archive Candidates)**
+### **🔴 TIER 5: ARCHIVED (Already Removed)**
 
-- **`core/embed_store.py`** (Legacy Index Builder)
-  - → `db`, `core.config`, `sentence_transformers`, `faiss`
-  - **Used by:** `tools/full_pipeline.py`, `scripts/fix_embedding_model.py`
-
-- **`core/batch_detect.py`** (Legacy Resource Detection)
-  - → `db.db`, `core.resource_detector`
-  - **Used by:** `tools/full_pipeline.py`
-
-- **`core/repo_sync.py`** (Export Tool)
-  - → `db.db`, `core.resource_detector`
-  - **Used by:** `tools/full_pipeline.py`
+**✅ Successfully Archived to `archive/legacy_pipeline_removed_20250611/`:**
+- `core/embed_store.py` - Legacy Index Builder (superseded by enhanced_faiss_index.py)
+- `core/batch_detect.py` - Legacy Resource Detection  
+- `core/repo_sync.py` - Export Tool
+- `core/preprocessing.py` - Unused Pipeline Orchestrator
+- `tools/full_pipeline.py` - Legacy Pipeline Orchestrator
+- `scripts/fix_embedding_model.py` - One-time migration (complete)
+- `tools/fix_resource_titles.py` - Obsolete utility tool
 
 ## 🎯 **Environment Dependencies**
 
@@ -258,30 +237,25 @@ Messages → core/resource_detector.py → core/classifier.py → Resource Class
 - **Index builders** - No semantic search
 - **Pipelines** - No data processing automation
 
-## 🧹 **Cleanup Recommendations (Corrected)**
+## 🧹 **Cleanup Recommendations (Updated Post-Legacy Removal)**
 
-### **IMMEDIATE - Archive Legacy (4 files)**
-Move to `archive/legacy/`:
-- `core/embed_store.py` - Superseded by enhanced_faiss_index.py
-- `core/preprocessing.py` - Pipeline orchestrator not in use
-- `core/repo_sync_backup.py` - Backup file
+### **✅ COMPLETED - Legacy Pipeline Removed**
+Successfully archived to `archive/legacy_pipeline_removed_20250611/`:
+- Complete legacy pipeline (9 files)
+- Obsolete migration scripts  
+- Legacy log files
 
-### **NEXT - Archive Migrations (3 files)**
+### **NEXT - Archive Remaining Migrations (2 files)**
 Move to `archive/migrations/`:
-- `scripts/migrate_add_preprocessing_fields.py`
-- `scripts/populate_preprocessing_data.py`
-- `scripts/fix_embedding_model.py`
+- `scripts/migrate_add_preprocessing_fields.py` - One-time database migration (complete)
+- `scripts/populate_preprocessing_data.py` - One-time data population (complete)
 
-### **CAREFUL - Legacy Pipeline Components (2 files)**
-**Still used by `tools/full_pipeline.py`:**
-- `core/batch_detect.py` - Consider migrating functionality first
-- `core/repo_sync.py` - Consider migrating functionality first
-
-### **ORGANIZE - Development Tools (10+ files)**
+### **ORGANIZE - Development Tools (7+ files)**
 Move to `scripts/analysis/`:
-- All `analyze_*.py` scripts
+- All `analyze_*.py` scripts (4 files)
 - `evaluate_embedding_models.py`
 - `enhanced_community_preprocessor.py`
+- `cleanup_root.py`
 
 ## 🎯 **Final Architecture Summary**
 
