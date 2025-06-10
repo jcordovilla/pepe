@@ -223,18 +223,90 @@ async def pepe(interaction: discord.Interaction, query: str):
                     logger.error(f"Error sending final chunk: {str(e)}", exc_info=True)
 
         elif isinstance(response, dict):
-            # Format dictionary response with header
-            formatted_response = header
+            # Format dictionary response with proper chunking
+            async def send_chunk(chunk_content):
+                """Helper function to send a chunk with error handling"""
+                if chunk_content and chunk_content.strip():
+                    try:
+                        await interaction.followup.send(chunk_content)
+                    except discord.NotFound:
+                        logger.warning("Interaction not found when sending chunk")
+                        return False
+                    except Exception as e:
+                        logger.error(f"Error sending chunk: {str(e)}", exc_info=True)
+                        return False
+                return True
+            
+            # Start with header
+            current_chunk = header
+            
+            # Add timeframe if present
             if "timeframe" in response:
-                formatted_response += f"**Timeframe:** {response['timeframe']}\n"
+                timeframe_text = f"**Timeframe:** {response['timeframe']}\n"
+                if len(current_chunk) + len(timeframe_text) > 1900:
+                    if not await send_chunk(current_chunk):
+                        return
+                    current_chunk = timeframe_text
+                else:
+                    current_chunk += timeframe_text
+            
+            # Add channel if present
             if "channel" in response:
-                formatted_response += f"**Channel:** {response['channel']}\n"
+                channel_text = f"**Channel:** {response['channel']}\n"
+                if len(current_chunk) + len(channel_text) > 1900:
+                    if not await send_chunk(current_chunk):
+                        return
+                    current_chunk = channel_text
+                else:
+                    current_chunk += channel_text
+            
+            # Add summary if present (this might be very long)
             if "summary" in response:
-                formatted_response += f"\n{response['summary']}\n"
+                summary_text = f"\n{response['summary']}\n"
+                
+                # If summary is too long, split it
+                if len(summary_text) > 1800:
+                    # Send current chunk first
+                    if current_chunk.strip():
+                        if not await send_chunk(current_chunk):
+                            return
+                    
+                    # Split summary into smaller chunks
+                    summary_lines = summary_text.split('\n')
+                    summary_chunk = ""
+                    for line in summary_lines:
+                        if len(summary_chunk) + len(line) + 1 > 1900:
+                            if summary_chunk.strip():
+                                if not await send_chunk(summary_chunk):
+                                    return
+                            summary_chunk = line + '\n'
+                        else:
+                            summary_chunk += line + '\n'
+                    current_chunk = summary_chunk
+                else:
+                    # Summary fits, check if it fits with current chunk
+                    if len(current_chunk) + len(summary_text) > 1900:
+                        if not await send_chunk(current_chunk):
+                            return
+                        current_chunk = summary_text
+                    else:
+                        current_chunk += summary_text
+            
+            # Add messages if present
             if "messages" in response and response["messages"]:
-                formatted_response += "\n**Messages:**\n"
+                messages_header = "\n**Messages:**\n"
+                if len(current_chunk) + len(messages_header) > 1900:
+                    if not await send_chunk(current_chunk):
+                        return
+                    current_chunk = messages_header
+                else:
+                    current_chunk += messages_header
+                
                 for msg in response["messages"]:
-                    author = msg.get("author", {}).get("username", "Unknown")
+                    # Handle author field - it can be either a string or dict
+                    author = msg.get("author", "Unknown")
+                    if isinstance(author, dict):
+                        author = author.get("username", "Unknown")
                     timestamp = msg.get("timestamp", "")
                     content = msg.get("content", "")
                     jump_url = msg.get("jump_url", "")
@@ -242,26 +314,18 @@ async def pepe(interaction: discord.Interaction, query: str):
                     if jump_url:
                         msg_str += f"[View message]({jump_url})\n"
                     msg_str += "---\n"
-                    # Chunking for Discord 2000 char limit
-                    if len(formatted_response) + len(msg_str) > 1900:
-                        try:
-                            await interaction.followup.send(formatted_response)
-                        except discord.NotFound:
-                            logger.warning("Interaction not found when sending dictionary chunk")
+                    
+                    # Check if this message fits in current chunk
+                    if len(current_chunk) + len(msg_str) > 1900:
+                        if not await send_chunk(current_chunk):
                             return
-                        except Exception as e:
-                            logger.error(f"Error sending dictionary chunk: {str(e)}", exc_info=True)
-                            return
-                        formatted_response = msg_str
+                        current_chunk = msg_str
                     else:
-                        formatted_response += msg_str
-                if formatted_response:
-                    try:
-                        await interaction.followup.send(formatted_response)
-                    except discord.NotFound:
-                        logger.warning("Interaction not found when sending final dictionary chunk")
-                    except Exception as e:
-                        logger.error(f"Error sending final dictionary chunk: {str(e)}", exc_info=True)
+                        current_chunk += msg_str
+            
+            # Send final chunk
+            if current_chunk and current_chunk.strip():
+                await send_chunk(current_chunk)
         else:
             # Format string response with header
             formatted_response = header + str(response)
