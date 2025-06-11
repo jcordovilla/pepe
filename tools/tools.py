@@ -706,7 +706,7 @@ to new members who may not be familiar with the ongoing discussions or activitie
              "Focus on engagement trends, discussion themes, collaborative activities, and behavioral patterns. "
              "Provide insights suitable for community managers and new members alike."},
             {"role": "user", "content": prompt}
-        ])
+        ], temperature=config.models.temp_analytical)  # 0.1 - professional analysis with slight variation
         
         # Parse AI response if key topics are requested
         summary = ai_response
@@ -2348,7 +2348,7 @@ Focus on actionable insights and specific metrics."""
              "Focus on group health indicators, participation equity, and collaborative learning effectiveness. "
              "Your analysis helps community managers optimize group structures and engagement strategies."},
             {"role": "user", "content": analysis_prompt}
-        ])
+        ], temperature=config.models.temp_analytical)  # 0.1 - consistent analytical insights
         
         return {
             "summary": ai_summary,

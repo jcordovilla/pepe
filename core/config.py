@@ -18,12 +18,18 @@ class ModelConfig:
     """Configuration for AI models."""
     # Language Model (Ollama)
     chat_model: str = "llama3.1:8b"  # Upgraded to 128K context window
-    chat_temperature: float = 0.0
+    chat_temperature: float = 0.2  # Analytical baseline - professional but not robotic
     chat_max_tokens: int = 128000  # 128K context window for large digests
     
     # Embedding Model 
     embedding_model: str = "msmarco-distilbert-base-v4"  # Best performing model from evaluation
     embedding_dimension: int = 768
+    
+    # Function-specific temperature constants
+    temp_classification: float = 0.0    # Deterministic for JSON/classification
+    temp_analytical: float = 0.1        # Community analysis, statistics  
+    temp_search_rag: float = 0.3        # Message analysis, resource discovery
+    temp_user_facing: float = 0.5       # Help responses, explanations
     
     # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
@@ -77,9 +83,9 @@ def load_config() -> AppConfig:
         batch_size=int(os.getenv("BATCH_SIZE", "100")),
         max_search_results=int(os.getenv("MAX_SEARCH_RESULTS", "20")),
         models=ModelConfig(
-            chat_model=os.getenv("CHAT_MODEL", "llama2:latest"),
-            chat_temperature=float(os.getenv("CHAT_TEMPERATURE", "0.0")),
-            chat_max_tokens=int(os.getenv("CHAT_MAX_TOKENS", "4096")),
+            chat_model=os.getenv("CHAT_MODEL", "llama3.1:8b"),
+            chat_temperature=float(os.getenv("CHAT_TEMPERATURE", "0.2")),  # Updated default
+            chat_max_tokens=int(os.getenv("CHAT_MAX_TOKENS", "128000")),
             embedding_model=os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
             embedding_dimension=int(os.getenv("EMBEDDING_DIMENSION", "768")),
             ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),

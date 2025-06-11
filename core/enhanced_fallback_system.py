@@ -87,7 +87,7 @@ Respond in JSON format:
                  "Focus on understanding the user's analytical needs and information goals. "
                  "Respond only with valid JSON containing structured intent analysis."},
                 {"role": "user", "content": analysis_prompt}
-            ])
+            ], temperature=0.0)  # Deterministic for reliable JSON structure
             
             import json
             import re

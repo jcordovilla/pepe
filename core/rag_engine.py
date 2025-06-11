@@ -282,7 +282,7 @@ def get_answer(
         
         answer = ai_client.chat_completion(
             chat_messages,
-            temperature=0.7,
+            temperature=config.models.temp_search_rag,  # 0.3 - balanced for message analysis
             max_tokens=1000
         )
         
@@ -645,7 +645,7 @@ def get_resource_answer(
         
         answer = ai_client.chat_completion(
             chat_messages,
-            temperature=0.7,
+            temperature=config.models.temp_search_rag,  # 0.3 - balanced for resource discovery
             max_tokens=1500
         )
         
@@ -747,7 +747,7 @@ def get_hybrid_answer(
         
         answer = ai_client.chat_completion(
             chat_messages,
-            temperature=0.7,
+            temperature=config.models.temp_search_rag,  # 0.3 - balanced for hybrid analysis
             max_tokens=2000
         )
         
