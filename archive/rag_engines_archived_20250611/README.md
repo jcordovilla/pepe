@@ -14,6 +14,11 @@ This directory contains archived versions of the RAG engine modules that were re
 - **Date Archived**: June 11, 2025
 - **Reason**: No longer needed after successful mention resolution implementation
 
+### `rag_engine_clean.py`
+- **Purpose**: Additional variant/cleaned version of the RAG engine
+- **Date Archived**: June 11, 2025
+- **Reason**: Redundant after consolidation to single improved RAG engine
+
 ## Issue Resolved
 
 **Problem**: Discord bot responses showed generic placeholders like "User 123", "User 456", "User 789" instead of actual usernames.

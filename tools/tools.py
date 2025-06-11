@@ -201,9 +201,9 @@ def _get_enhanced_faiss_store():
     global _enhanced_faiss_store
     if _enhanced_faiss_store is None:
         try:
-            # Find the most recent enhanced index
+            # Find the most recent enhanced index in the correct directory
             import glob
-            enhanced_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/enhanced_faiss_*.index")
+            enhanced_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/data/indices/enhanced_faiss_*.index")
             if enhanced_indices:
                 # Get the most recent one
                 latest_index = max(enhanced_indices, key=lambda x: os.path.getctime(x))
@@ -238,6 +238,32 @@ def _get_faiss_store():
     global _faiss_store
     if _faiss_store is None:
         try:
+            # First try to find enhanced FAISS indices as fallback for standard
+            import glob
+            enhanced_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/data/indices/enhanced_faiss_*.index")
+            if enhanced_indices:
+                # Use the most recent enhanced index as standard fallback
+                latest_index = max(enhanced_indices, key=lambda x: os.path.getctime(x))
+                base_name = latest_index.replace('.index', '')
+                metadata_file = f"{base_name}_metadata.json"
+                
+                logger.info(f"Loading enhanced FAISS index as standard fallback from {latest_index}")
+                # Load FAISS index
+                index = faiss.read_index(latest_index)
+                # Load metadata
+                if os.path.exists(metadata_file):
+                    with open(metadata_file, "r") as f:
+                        data = json.load(f)
+                        metadata = data.get("metadata", [])
+                else:
+                    logger.warning(f"Metadata file not found: {metadata_file}")
+                    metadata = []
+                    
+                _faiss_store = {"index": index, "metadata": metadata}
+                logger.info(f"Loaded enhanced FAISS index as standard with {index.ntotal} vectors")
+                return _faiss_store
+            
+            # Fallback to old standard format if enhanced not available
             logger.info(f"Loading standard FAISS index from {INDEX_DIR}")
             index_path = f"{INDEX_DIR}/index.faiss"
             metadata_path = f"{INDEX_DIR}/index.pkl"
