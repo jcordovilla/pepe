@@ -125,6 +125,53 @@ def _determine_optimal_k_fallback(query: str) -> int:
         # Default for simple queries
         return 5
 
+def preprocess_discord_mentions(query: str) -> tuple[str, Optional[int]]:
+    """
+    Preprocess a query to extract Discord channel mentions and convert them to usable format.
+    
+    Args:
+        query: Raw query string potentially containing Discord mentions
+        
+    Returns:
+        tuple: (cleaned_query, channel_id)
+            - cleaned_query: Query with Discord mentions replaced with channel names
+            - channel_id: Extracted channel ID if found, None otherwise
+    """
+    import re
+    
+    # Pattern to match Discord channel mentions
+    discord_mention_pattern = r'<#(\d+)>'
+    matches = re.findall(discord_mention_pattern, query)
+    
+    if not matches:
+        return query, None
+    
+    # Take the first channel mention found
+    channel_id = int(matches[0])
+    
+    # Try to resolve channel ID to name for better query readability
+    try:
+        from db.db import SessionLocal, Message
+        session = SessionLocal()
+        try:
+            result = session.query(Message.channel_name).filter(Message.channel_id == channel_id).first()
+            if result:
+                channel_name = result[0]
+                # Replace Discord mention with readable channel name
+                cleaned_query = re.sub(discord_mention_pattern, f"#{channel_name}", query)
+                logger.info(f"Converted Discord mention <#{channel_id}> to #{channel_name}")
+                return cleaned_query, channel_id
+        finally:
+            session.close()
+    except Exception as e:
+        logger.warning(f"Failed to resolve channel ID {channel_id} to name: {e}")
+    
+    # Fallback: remove the Discord mention entirely
+    cleaned_query = re.sub(discord_mention_pattern, "", query).strip()
+    logger.info(f"Removed Discord mention <#{channel_id}> from query")
+    return cleaned_query, channel_id
+
+
 def get_agent_answer(query: str) -> str:
     """
     Simplified agent that routes queries to appropriate handlers.
@@ -143,7 +190,13 @@ def get_agent_answer(query: str) -> str:
     
     query = query.strip()
     
-    query_lower = query.lower().strip()
+    # Preprocess Discord mentions before any other processing
+    processed_query, extracted_channel_id = preprocess_discord_mentions(query)
+    if extracted_channel_id:
+        logger.info(f"Extracted channel ID {extracted_channel_id} from Discord mention")
+    
+    # Use processed query for all subsequent analysis
+    query_lower = processed_query.lower().strip()
     
     # Check for ambiguous queries that need clarification
     ambiguous_patterns = [
@@ -156,49 +209,6 @@ def get_agent_answer(query: str) -> str:
     
     if any(re.match(pattern, query_lower) for pattern in ambiguous_patterns):
         return "I'd be happy to help! Could you please specify which channel, timeframe, or keyword you're interested in? For example: 'Tell me something interesting from #general-chat last week' or 'Show me interesting discussions about AI'."
-    
-    # Early validation for date ranges and channels (before routing)
-    try:
-        from tools.time_parser import parse_timeframe
-        from tools.tools import resolve_channel_name
-        
-        # Check for date ranges in the query
-        import re as regex_lib
-        date_patterns = [
-            r'from\s+(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})',
-            r'between\s+(\d{4}-\d{2}-\d{2})\s+and\s+(\d{4}-\d{2}-\d{2})',
-            r'(\d{4}-\d{2}-\d{2})\s+to\s+(\d{4}-\d{2}-\d{2})'
-        ]
-        
-        for pattern in date_patterns:
-            match = regex_lib.search(pattern, query_lower)
-            if match:
-                start_date, end_date = match.groups()
-                try:
-                    parse_timeframe(f"{start_date} to {end_date}")
-                except ValueError as ve:
-                    if "end time must be after start time" in str(ve).lower():
-                        return "End time must be after start time"
-                    else:
-                        raise ve
-        
-        # Check for channel references
-        channel_pattern = r'#([a-zA-Z0-9_-]+(?:-[a-zA-Z0-9_-]+)*)'
-        channel_matches = regex_lib.findall(channel_pattern, query)
-        for channel_name in channel_matches:
-            try:
-                channel_id = resolve_channel_name(channel_name)
-                if channel_id is None:
-                    return "Unknown channel"
-            except Exception as e:
-                # If any error occurs during channel resolution, treat as unknown channel
-                return "Unknown channel"
-    except ImportError:
-        # If imports fail, continue with normal processing
-        pass
-    except Exception as e:
-        # Log but don't fail the entire query for validation errors
-        logger.warning(f"Validation check failed: {e}")
     
     # Data availability queries
     if any(kw in query_lower for kw in [
@@ -240,14 +250,14 @@ def get_agent_answer(query: str) -> str:
         "official", "reference", "manual", "how to", "setup", "install", "configure"
     ]):
         try:
-            k = min(_determine_optimal_k(query), 10)  # Cap at 10 for resources
-            return get_resource_answer(query, k=k, return_matches=False)
+            k = min(_determine_optimal_k(processed_query), 10)  # Cap at 10 for resources
+            return get_resource_answer(processed_query, k=k, return_matches=False)
         except Exception as e:
             logger.error(f"Resource query failed: {e}")
             # Fallback to regular search
             try:
-                k = _determine_optimal_k(query)
-                return get_answer(query, k=k, return_matches=False)
+                k = _determine_optimal_k(processed_query)
+                return get_answer(processed_query, k=k, return_matches=False)
             except Exception as fallback_e:
                 logger.error(f"Fallback search also failed: {fallback_e}")
                 return "❌ Error searching resources and messages. Please try rephrasing your query."
@@ -259,10 +269,10 @@ def get_agent_answer(query: str) -> str:
         "problem", "issue", "troubleshoot", "error", "fix", "solution"
     ]):
         try:
-            k = _determine_optimal_k(query)
+            k = _determine_optimal_k(processed_query)
             k_messages = min(k // 2, 10)  # Split k between messages and resources
             k_resources = min(k - k_messages, 5)  # Fewer resources needed
-            return get_hybrid_answer(query, k_messages=k_messages, k_resources=k_resources, return_matches=False)
+            return get_hybrid_answer(processed_query, k_messages=k_messages, k_resources=k_resources, return_matches=False)
         except Exception as e:
             logger.error(f"Hybrid query failed: {e}")
             # Fallback to regular search
@@ -282,16 +292,22 @@ def get_agent_answer(query: str) -> str:
         # Check for specific channel groups or patterns
         if "buddy group" in query_lower or "buddy-group" in query_lower:
             try:
-                return get_buddy_group_analysis(query)
+                return get_buddy_group_analysis(processed_query)
             except Exception as e:
                 logger.error(f"Buddy group analysis failed: {e}")
                 # Fallback to regular analysis
-                return rag_get_agent_answer(query)
+                return rag_get_agent_answer(processed_query)
         
         # Check for specific channel analysis
-        elif "#" in query or "channel" in query_lower:
+        elif "#" in processed_query or "channel" in query_lower or extracted_channel_id:
             try:
-                return rag_get_agent_answer(query)
+                # Use processed query and pass channel ID if available
+                if extracted_channel_id:
+                    # For channel-specific queries, use get_answer with channel_id parameter
+                    k = _determine_optimal_k(processed_query)
+                    return get_answer(processed_query, k=k, channel_id=extracted_channel_id, return_matches=False)
+                else:
+                    return rag_get_agent_answer(processed_query)
             except Exception as e:
                 logger.error(f"Channel analysis failed: {e}")
                 return "❌ Error performing channel analysis."
@@ -299,7 +315,7 @@ def get_agent_answer(query: str) -> str:
     # Time-based summary queries
     if any(kw in query_lower for kw in ["summary", "summarize", "digest", "what happened", "activity", "highlights", "highlight"]):
         try:
-            return rag_get_agent_answer(query)
+            return rag_get_agent_answer(processed_query)
         except ValueError as ve:
             # Check for specific error types
             error_msg = str(ve).lower()
@@ -317,9 +333,9 @@ def get_agent_answer(query: str) -> str:
     # Default: semantic search with enhanced context
     try:
         # Use adaptive k parameter based on query scope
-        k = _determine_optimal_k(query)
-        logger.info(f"Using adaptive k={k} for query: {query}")
-        return get_answer(query, k=k, return_matches=False)
+        k = _determine_optimal_k(processed_query)
+        logger.info(f"Using adaptive k={k} for query: {processed_query}")
+        return get_answer(processed_query, k=k, return_matches=False)
     except ValueError as ve:
         # Check for specific error types
         error_msg = str(ve).lower()
