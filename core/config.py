@@ -27,8 +27,9 @@ class ModelConfig:
     
     # Function-specific temperature constants
     temp_classification: float = 0.0    # Deterministic for JSON/classification
-    temp_analytical: float = 0.1        # Community analysis, statistics  
-    temp_search_rag: float = 0.3        # Message analysis, resource discovery
+    temp_analytical: float = 0.2        # Community analysis, summaries - increased for better insights
+    temp_search_rag: float = 0.4         # Message analysis, resource discovery - increased for helpfulness
+    temp_statistics: float = 0.3         # Statistics generation and data analysis - new category
     temp_user_facing: float = 0.5       # Help responses, explanations
     
     # Ollama Configuration

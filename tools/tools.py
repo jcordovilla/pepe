@@ -23,6 +23,7 @@ import os
 import json
 from typing import Any, Dict, List, Optional, Union
 from datetime import datetime, timedelta
+from collections import defaultdict
 from db import SessionLocal, Message
 from core.ai_client import get_ai_client
 from core.config import get_config
@@ -700,13 +701,15 @@ to new members who may not be familiar with the ongoing discussions or activitie
 """
         
         ai_response = ai_client.chat_completion([
-            {"role": "system", "content": "You are a community engagement analyst specializing in Discord server activity. "
-             "Analyze communication patterns, collaboration dynamics, and community health indicators. "
-             "Write professional summaries that capture community essence rather than listing individual messages. "
-             "Focus on engagement trends, discussion themes, collaborative activities, and behavioral patterns. "
-             "Provide insights suitable for community managers and new members alike."},
+            {"role": "system", "content": "You are a community data analyst specializing in Discord server statistics and engagement metrics. "
+             "Always extract and present specific numbers, counts, percentages, and quantitative insights from the provided data. "
+             "When analyzing discussions, provide concrete engagement metrics like message counts, participant numbers, response rates, and activity patterns. "
+             "For statistics queries, calculate actual percentages, trends, and comparative metrics. "
+             "Never refuse to analyze available data - always extract actionable insights and present specific numerical findings. "
+             "Write professional summaries that capture community essence with concrete data points rather than generic descriptions. "
+             "Focus on measurable engagement patterns, quantifiable trends, and data-driven community health indicators."},
             {"role": "user", "content": prompt}
-        ], temperature=config.models.temp_analytical)  # 0.1 - professional analysis with slight variation
+        ], temperature=config.models.temp_statistics)  # 0.3 - enhanced for statistics and data analysis
         
         # Parse AI response if key topics are requested
         summary = ai_response
@@ -2020,7 +2023,7 @@ def analyze_channel_performance_stats(
                 reverse=True
             )[:10],
             "highest_engagement": sorted(
-                processed_channels.items(),
+                               processed_channels.items(),
                 key=lambda x: x[1]['engagement_rate'],
                 reverse=True
             )[:10],
@@ -2366,5 +2369,263 @@ Focus on actionable insights and specific metrics."""
             "error": f"Error analyzing buddy groups: {str(e)}",
             "timeframe": f"{start.isoformat()} to {end.isoformat()}"
         }
+    finally:
+        session.close()
+
+def generate_channel_engagement_statistics(
+    time_period_days: int = 30,
+    top_n: int = 10
+) -> Dict[str, Any]:
+    """
+    Generate comprehensive engagement statistics for top N channels.
+    Specifically designed to handle statistics generation queries.
+    
+    Args:
+        time_period_days: Number of days to analyze (default: 30)
+        top_n: Number of top channels to include (default: 10)
+    
+    Returns:
+        Dictionary with detailed channel engagement statistics
+    """
+    logger.info(f"Generating engagement statistics for top {top_n} channels over {time_period_days} days")
+    
+    try:
+        session = SessionLocal()
+        
+        # Calculate cutoff date
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        # Get all messages within time period
+        messages = session.query(Message).filter(
+            Message.timestamp >= cutoff_date
+        ).all()
+        
+        if not messages:
+            return {
+                "error": "No messages found in the specified time period",
+                "period_days": time_period_days,
+                "top_n": top_n
+            }
+        
+        # Analyze channel engagement
+        channel_stats = defaultdict(lambda: {
+            'message_count': 0,
+            'unique_authors': set(),
+            'total_chars': 0,
+            'reactions_received': 0,
+            'replies_generated': 0,
+            'avg_message_length': 0,
+            'engagement_rate': 0,
+            'activity_score': 0
+        })
+        
+        # Process messages
+        for msg in messages:
+            if not msg.channel_name:
+                continue
+                
+            channel = msg.channel_name
+            stats = channel_stats[channel]
+            
+            stats['message_count'] += 1
+            stats['total_chars'] += len(msg.content or '')
+            
+            if msg.author and msg.author.get('username'):
+                stats['unique_authors'].add(msg.author.get('username'))
+            
+            if msg.reactions:
+                stats['reactions_received'] += len(msg.reactions)
+            
+            if msg.reference:
+                stats['replies_generated'] += 1
+        
+        # Calculate derived metrics and get top channels
+        processed_stats = {}
+        for channel, stats in channel_stats.items():
+            if stats['message_count'] == 0:
+                continue
+                
+            stats['unique_authors'] = len(stats['unique_authors'])
+            stats['avg_message_length'] = stats['total_chars'] / stats['message_count']
+            stats['engagement_rate'] = (stats['reactions_received'] + stats['replies_generated']) / stats['message_count']
+            stats['activity_score'] = (
+                stats['message_count'] * 0.4 + 
+                stats['unique_authors'] * 0.3 + 
+                stats['engagement_rate'] * 100 * 0.3
+            )
+            
+            processed_stats[channel] = stats
+        
+        # Get top N channels by activity score
+        top_channels = sorted(
+            processed_stats.items(),
+            key=lambda x: x[1]['activity_score'],
+            reverse=True
+        )[:top_n]
+        
+        # Generate summary statistics
+        total_messages = sum(stats['message_count'] for stats in processed_stats.values())
+        total_channels = len(processed_stats)
+        avg_messages_per_channel = total_messages / total_channels if total_channels > 0 else 0
+        
+        return {
+            "summary": {
+                "analysis_period": f"{time_period_days} days",
+                "total_channels_analyzed": total_channels,
+                "total_messages": total_messages,
+                "average_messages_per_channel": round(avg_messages_per_channel, 2),
+                "most_active_channel": top_channels[0][0] if top_channels else None
+            },
+            "top_channels": [
+                {
+                    "rank": i + 1,
+                    "channel_name": channel,
+                    "message_count": stats['message_count'],
+                    "unique_authors": stats['unique_authors'],
+                    "avg_message_length": round(stats['avg_message_length'], 1),
+                    "engagement_rate": round(stats['engagement_rate'], 3),
+                    "activity_score": round(stats['activity_score'], 2),
+                    "reactions_received": stats['reactions_received'],
+                    "replies_generated": stats['replies_generated']
+                }
+                for i, (channel, stats) in enumerate(top_channels)
+            ],
+            "metadata": {
+                "generated_at": datetime.utcnow().isoformat(),
+                "methodology": "Activity score = (messages * 0.4) + (unique_authors * 0.3) + (engagement_rate * 100 * 0.3)"
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error generating channel engagement statistics: {e}")
+        return {"error": str(e)}
+    finally:
+        session.close()
+
+
+def calculate_response_time_statistics(
+    channel_names: Optional[List[str]] = None,
+    time_period_days: int = 30
+) -> Dict[str, Any]:
+    """
+    Calculate response times and interaction rates for questions in help/Q&A channels.
+    Specifically designed to handle response time analysis queries.
+    
+    Args:
+        channel_names: List of channel names to analyze (default: help/Q&A channels)
+        time_period_days: Number of days to analyze (default: 30)
+    
+    Returns:
+        Dictionary with response time and interaction statistics
+    """
+    logger.info(f"Calculating response time statistics for {time_period_days} days")
+    
+    try:
+        session = SessionLocal()
+        
+        # Default to help/Q&A channels if none specified
+        if not channel_names:
+            channel_names = ['q-and-a-questions', 'buddy-support', 'questions-help', 'it-support']
+        
+        # Calculate cutoff date
+        cutoff_date = datetime.utcnow() - timedelta(days=time_period_days)
+        
+        # Get messages from specified channels
+        messages = session.query(Message).filter(
+            Message.timestamp >= cutoff_date,
+            Message.channel_name.in_(channel_names)
+        ).order_by(Message.timestamp).all()
+        
+        if not messages:
+            return {
+                "error": "No messages found in specified help/Q&A channels",
+                "channels_searched": channel_names,
+                "period_days": time_period_days
+            }
+        
+        # Analyze questions and responses
+        question_indicators = ['?', 'help', 'how to', 'can someone', 'question', 'issue', 'problem']
+        response_indicators = ['answer', 'solution', 'try this', 'here is', 'you can', 'should']
+        
+        questions = []
+        responses = []
+        question_response_pairs = []
+        
+        for msg in messages:
+            content = (msg.content or '').lower()
+            
+            # Identify questions
+            if any(indicator in content for indicator in question_indicators):
+                questions.append(msg)
+            
+            # Identify responses
+            if any(indicator in content for indicator in response_indicators):
+                responses.append(msg)
+        
+        # Calculate response times (simplified analysis)
+        total_questions = len(questions)
+        total_responses = len(responses)
+        
+        # Estimate response times based on message timing
+        avg_response_time_minutes = 0
+        if total_questions > 0 and total_responses > 0:
+            # Simplified calculation: average time between questions and subsequent responses
+            response_times = []
+            for question in questions:
+                next_responses = [r for r in responses if r.timestamp > question.timestamp]
+                if next_responses:
+                    next_response = min(next_responses, key=lambda x: x.timestamp)
+                    response_time = (next_response.timestamp - question.timestamp).total_seconds() / 60
+                    if response_time < 1440:  # Only consider responses within 24 hours
+                        response_times.append(response_time)
+            
+            if response_times:
+                avg_response_time_minutes = sum(response_times) / len(response_times)
+        
+        # Calculate interaction rates
+        response_rate = (total_responses / total_questions) if total_questions > 0 else 0
+        
+        # Channel-specific analysis
+        channel_stats = {}
+        for channel in channel_names:
+            channel_messages = [m for m in messages if m.channel_name == channel]
+            channel_questions = [m for m in channel_messages if any(indicator in (m.content or '').lower() for indicator in question_indicators)]
+            channel_responses = [m for m in channel_messages if any(indicator in (m.content or '').lower() for indicator in response_indicators)]
+            
+            if channel_messages:
+                channel_stats[channel] = {
+                    "total_messages": len(channel_messages),
+                    "questions_identified": len(channel_questions),
+                    "responses_identified": len(channel_responses),
+                    "response_rate": len(channel_responses) / len(channel_questions) if channel_questions else 0,
+                    "unique_authors": len(set(m.author.get('username') for m in channel_messages if m.author and m.author.get('username')))
+                }
+        
+        return {
+            "summary": {
+                "analysis_period": f"{time_period_days} days",
+                "channels_analyzed": [ch for ch in channel_names if any(m.channel_name == ch for m in messages)],
+                "total_messages": len(messages),
+                "questions_identified": total_questions,
+                "responses_identified": total_responses,
+                "overall_response_rate": round(response_rate, 3),
+                "avg_response_time_minutes": round(avg_response_time_minutes, 1) if avg_response_time_minutes > 0 else "Insufficient data"
+            },
+            "channel_breakdown": channel_stats,
+            "insights": {
+                "most_active_help_channel": max(channel_stats.items(), key=lambda x: x[1]['total_messages'])[0] if channel_stats else None,
+                "best_response_rate_channel": max(channel_stats.items(), key=lambda x: x[1]['response_rate'])[0] if channel_stats else None,
+                "support_quality": "Good" if response_rate > 0.7 else "Moderate" if response_rate > 0.4 else "Needs Improvement"
+            },
+            "metadata": {
+                "generated_at": datetime.utcnow().isoformat(),
+                "methodology": "Questions identified by keywords: " + ", ".join(question_indicators),
+                "limitations": "Response time calculation is estimated based on message timing patterns"
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error calculating response time statistics: {e}")
+        return {"error": str(e)}
     finally:
         session.close()
