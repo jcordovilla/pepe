@@ -6,6 +6,7 @@ import numpy as np
 from core.ai_client import get_ai_client
 from core.config import get_config
 from core.enhanced_fallback_system import EnhancedFallbackSystem
+from core.mention_resolver import resolve_mentions
 from utils.helpers import build_jump_url
 from tools.tools import resolve_channel_name, summarize_messages, validate_data_availability
 from tools.time_parser import parse_timeframe, extract_time_reference, extract_channel_reference, extract_content_reference
@@ -89,9 +90,13 @@ class LocalVectorStore:
                 # Direct index lookup since metadata is a list ordered by faiss_index
                 meta = self._metadata[idx].copy()
                 meta['score'] = float(scores[0][i])
-                # Ensure content field exists
+                
+                # Ensure content field exists - prioritize original_content over processed
                 if 'content' not in meta:
-                    meta['content'] = meta.get('processed_content', meta.get('original_content', ''))
+                    meta['content'] = (meta.get('original_content') or 
+                                     meta.get('processed_content') or 
+                                     '')
+                
                 results.append(meta)
         
         return results
@@ -193,11 +198,23 @@ def build_prompt(
     # Build context lines
     context_lines = []
     for m in matches:
+        # Get author name - handle both nested author object and direct author_name field
         author = m.get("author", {})
-        name = author.get("display_name") or author.get("username") or "Unknown"
+        name = (author.get("display_name") or 
+                author.get("username") or 
+                m.get("author_name") or 
+                "Unknown")
+        
         ts   = m.get("timestamp", "")
         ch   = m.get("channel_name") or m.get("channel_id", "unknown-channel")
-        text = m.get("content", "").replace("\n", " ").strip()
+        
+        # Use original_content (with real Discord mentions) instead of processed content
+        text = (m.get("original_content") or 
+                m.get("content", "")).replace("\n", " ").strip()
+        
+        # Resolve Discord mentions to actual usernames
+        text = resolve_mentions(text)
+        
         url  = safe_jump_url(m) or ""
         
         # Create clean, compact context line
