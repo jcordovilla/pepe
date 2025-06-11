@@ -82,7 +82,10 @@ Respond in JSON format:
 
         try:
             response = self.ai_client.chat_completion([
-                {"role": "system", "content": "You are a query intent analyzer. Respond only with valid JSON."},
+                {"role": "system", "content": "You are a query intent analyzer for Discord community analysis. "
+                 "Extract user intentions, identify mentioned entities, and determine expected output formats. "
+                 "Focus on understanding the user's analytical needs and information goals. "
+                 "Respond only with valid JSON containing structured intent analysis."},
                 {"role": "user", "content": analysis_prompt}
             ])
             

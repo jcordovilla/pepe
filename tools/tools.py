@@ -692,10 +692,19 @@ Provide a comprehensive community activity summary focusing on:
 - Notable events, announcements, or collaborative activities
 - Community interactions and dynamics
 
-Write a professional summary that captures the essence of community activity rather than listing individual messages."""
+Write a professional summary that captures the essence of community activity rather than listing individual messages.
+The summary must avoid being too generic or repetitive, must highlight remarkable discussions or topics and should provide insights into how the community is engaging with each other,
+the types of discussions happening, and any significant trends or changes in behavior.
+This summary should be suitable for community managers or analysts to understand the health and dynamics of the community, but also
+to new members who may not be familiar with the ongoing discussions or activities.
+"""
         
         ai_response = ai_client.chat_completion([
-            {"role": "system", "content": "You are an expert community analyst who specializes in summarizing Discord community activity. Focus on engagement patterns, discussion themes, collaborative activities, and community trends rather than listing individual messages."},
+            {"role": "system", "content": "You are a community engagement analyst specializing in Discord server activity. "
+             "Analyze communication patterns, collaboration dynamics, and community health indicators. "
+             "Write professional summaries that capture community essence rather than listing individual messages. "
+             "Focus on engagement trends, discussion themes, collaborative activities, and behavioral patterns. "
+             "Provide insights suitable for community managers and new members alike."},
             {"role": "user", "content": prompt}
         ])
         
@@ -2333,7 +2342,11 @@ Provide a comprehensive analysis covering:
 Focus on actionable insights and specific metrics."""
 
         ai_summary = ai_client.chat_completion([
-            {"role": "system", "content": "You are a community analytics expert specializing in Discord server analysis. Provide detailed, data-driven insights with specific numbers and actionable recommendations."},
+            {"role": "system", "content": "You are a buddy group dynamics analyst for Discord learning communities. "
+             "Analyze group collaboration patterns, participation distribution, and community engagement metrics. "
+             "Provide data-driven insights with specific statistics and actionable recommendations. "
+             "Focus on group health indicators, participation equity, and collaborative learning effectiveness. "
+             "Your analysis helps community managers optimize group structures and engagement strategies."},
             {"role": "user", "content": analysis_prompt}
         ])
         
