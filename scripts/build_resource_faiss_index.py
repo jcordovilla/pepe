@@ -263,8 +263,18 @@ class ResourceFAISSIndexBuilder:
                                base_filename: str = None) -> Tuple[str, str]:
         """Save FAISS index and metadata to files."""
         if base_filename is None:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            base_filename = f"resource_faiss_{timestamp}"
+            # Use canonical resource index name
+            base_filename = "resource_faiss_index"
+            
+            # Backup existing index if it exists
+            existing_index = f"data/indices/{base_filename}.index"
+            if os.path.exists(existing_index):
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                backup_name = f"data/indices/{base_filename}_backup_{timestamp}"
+                logger.info(f"Backing up existing resource index to: {backup_name}")
+                os.rename(existing_index, f"{backup_name}.index")
+                if os.path.exists(f"data/indices/{base_filename}_metadata.json"):
+                    os.rename(f"data/indices/{base_filename}_metadata.json", f"{backup_name}_metadata.json")
             
         # Ensure we save to data/indices directory
         os.makedirs("data/indices", exist_ok=True)
@@ -355,7 +365,8 @@ class ResourceFAISSIndexBuilder:
         }
     
     def build_complete_index(self, 
-                           save_filename: str = None) -> Tuple[str, str, Dict]:
+                           save_filename: str = None,
+                           force_rebuild: bool = False) -> Tuple[str, str, Dict]:
         """Build complete resource-focused FAISS index with all steps."""
         logger.info("Starting complete resource FAISS index build...")
         
@@ -366,7 +377,33 @@ class ResourceFAISSIndexBuilder:
         processed_resources = self.preprocess_resources(resources)
         
         if not processed_resources:
-            raise ValueError("No resources found after preprocessing")
+            if force_rebuild:
+                # Force rebuild was requested but no resources to process
+                raise ValueError("No resources available for processing. Check your resource detection or preprocessing.")
+            
+            logger.info("✅ Resource index is up to date - no new resources to process")
+            
+            # Check if existing index exists
+            existing_index_path = f"data/indices/{save_filename}.faiss"
+            existing_metadata_path = f"data/indices/{save_filename}_metadata.json"
+            
+            if os.path.exists(existing_index_path) and os.path.exists(existing_metadata_path):
+                # Return existing index info
+                with open(existing_metadata_path, 'r') as f:
+                    existing_metadata = json.load(f)
+                
+                stats = {
+                    "resources_processed": 0,
+                    "resources_indexed": 0,
+                    "existing_index_entries": existing_metadata.get('total_resources', 0),
+                    "status": "up_to_date",
+                    "message": "Index is current - no new resources to process"
+                }
+                
+                return existing_index_path, existing_metadata_path, stats
+            else:
+                # No existing index and no resources to process
+                raise ValueError("No existing index found and no resources to process. Run with --force to rebuild.")
             
         # Step 3: Create embeddings
         embeddings = self.create_embeddings(processed_resources)

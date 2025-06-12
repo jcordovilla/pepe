@@ -109,36 +109,42 @@ class CommunityFAISSIndexBuilder:
         processed_messages = []
         filtered_count = 0
         
-        # Create database session for preprocessor
-        conn = sqlite3.connect(self.db_path)
+        # Create SQLAlchemy session for preprocessor (fixed: was using raw sqlite3.connect)
+        from db.db import SessionLocal
+        session = SessionLocal()
         
-        for message in messages:
-            # Parse author JSON field
-            author_data = json.loads(message['author']) if message['author'] else {}
-            author_id = author_data.get('id', 'unknown')
-            
-            # Convert database row to message object for preprocessors
-            class MockMessage:
-                def __init__(self, data):
-                    self.message_id = data['message_id']
-                    self.content = data['content'] or ''
-                    self.embeds = json.loads(data['embeds']) if data['embeds'] else []
-                    self.attachments = json.loads(data['attachments']) if data['attachments'] else []
-                    self.stickers = json.loads(data['stickers']) if data['stickers'] else []
-                    self.reference = json.loads(data['reference']) if data['reference'] else None
-                    self.author = author_data
-                    self.timestamp = data['timestamp']
-                    self.channel_id = data['channel_id']
-                    self.guild_id = data['guild_id']
-                    self.type = data.get('message_type', 'default')
-                    self.pinned = bool(data.get('pinned', False))
-                    self.reactions = json.loads(data.get('reactions', '[]')) if data.get('reactions') else []
-                    self.mention_ids = json.loads(data.get('raw_mentions', '[]')) if data.get('raw_mentions') else []
-                    
-            mock_message = MockMessage(message)
-            
-            # Basic content preprocessing
-            content_processed = self.content_preprocessor.preprocess_message(mock_message, conn)
+        try:
+            for message in messages:
+                # Parse author JSON field
+                author_data = json.loads(message['author']) if message['author'] else {}
+                author_id = author_data.get('id', 'unknown')
+                
+                # Convert database row to message object for preprocessors
+                class MockMessage:
+                    def __init__(self, data):
+                        self.message_id = data['message_id']
+                        self.content = data['content'] or ''
+                        self.embeds = json.loads(data['embeds']) if data['embeds'] else []
+                        self.attachments = json.loads(data['attachments']) if data['attachments'] else []
+                        self.stickers = json.loads(data['stickers']) if data['stickers'] else []
+                        self.reference = json.loads(data['reference']) if data['reference'] else None
+                        self.author = author_data
+                        self.timestamp = data['timestamp']
+                        self.channel_id = data['channel_id']
+                        self.guild_id = data['guild_id']
+                        self.type = data.get('message_type', 'default')
+                        self.pinned = bool(data.get('pinned', False))
+                        self.reactions = json.loads(data.get('reactions', '[]')) if data.get('reactions') else []
+                        self.mention_ids = json.loads(data.get('raw_mentions', '[]')) if data.get('raw_mentions') else []
+                        
+                mock_message = MockMessage(message)
+                
+                # Basic content preprocessing (now with proper SQLAlchemy session)
+                content_processed = self.content_preprocessor.preprocess_message(mock_message, session)
+                
+                # Debug: Log first few results
+                if len(processed_messages) < 3:
+                    logger.info(f"DEBUG: Message {message['message_id']} - Content: '{(mock_message.content or '')[:50]}...' - Processed: {content_processed is not None}")
             
             if content_processed:  # Not filtered out
                 # Enhanced community preprocessing
@@ -176,7 +182,9 @@ class CommunityFAISSIndexBuilder:
             else:
                 filtered_count += 1
                 
-        conn.close()
+        finally:
+            session.close()
+            
         logger.info(f"Community preprocessing complete. {len(processed_messages)} messages processed, {filtered_count} filtered")
         return processed_messages
         
@@ -425,8 +433,18 @@ class CommunityFAISSIndexBuilder:
                                base_filename: str = None) -> Tuple[str, str]:
         """Save FAISS index and metadata to files."""
         if base_filename is None:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            base_filename = f"community_faiss_{timestamp}"
+            # Use canonical community index name
+            base_filename = "community_faiss_index"
+            
+            # Backup existing index if it exists
+            existing_index = f"data/indices/{base_filename}.index"
+            if os.path.exists(existing_index):
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                backup_name = f"data/indices/{base_filename}_backup_{timestamp}"
+                logger.info(f"Backing up existing community index to: {backup_name}")
+                os.rename(existing_index, f"{backup_name}.index")
+                if os.path.exists(f"data/indices/{base_filename}_metadata.json"):
+                    os.rename(f"data/indices/{base_filename}_metadata.json", f"{backup_name}_metadata.json")
             
         # Ensure we save to data/indices directory
         os.makedirs("data/indices", exist_ok=True)
@@ -473,7 +491,8 @@ class CommunityFAISSIndexBuilder:
         
     def build_complete_index(self, 
                            limit: Optional[int] = None,
-                           save_filename: str = None) -> Tuple[str, str, Dict]:
+                           save_filename: str = None,
+                           force_rebuild: bool = False) -> Tuple[str, str, Dict]:
         """Build complete community-focused FAISS index with all steps."""
         logger.info("Starting complete community FAISS index build...")
         
@@ -484,7 +503,33 @@ class CommunityFAISSIndexBuilder:
         processed_messages = self.preprocess_messages(messages)
         
         if not processed_messages:
-            raise ValueError("No messages remaining after preprocessing")
+            if force_rebuild:
+                # Force rebuild was requested but no messages to process
+                raise ValueError("No messages available for processing. Check your database or preprocessing filters.")
+            
+            logger.info("✅ Community index is up to date - no new messages to process")
+            
+            # Check if existing index exists
+            existing_index_path = f"data/indices/{save_filename}.faiss"
+            existing_metadata_path = f"data/indices/{save_filename}_metadata.json"
+            
+            if os.path.exists(existing_index_path) and os.path.exists(existing_metadata_path):
+                # Return existing index info
+                with open(existing_metadata_path, 'r') as f:
+                    existing_metadata = json.load(f)
+                
+                stats = {
+                    "messages_processed": 0,
+                    "messages_indexed": 0,
+                    "existing_index_entries": existing_metadata.get('total_messages', 0),
+                    "status": "up_to_date",
+                    "message": "Index is current - no new messages to process"
+                }
+                
+                return existing_index_path, existing_metadata_path, stats
+            else:
+                # No existing index and no messages to process
+                raise ValueError("No existing index found and no messages to process. Run with --force to rebuild.")
             
         # Step 3: Create embeddings
         embeddings = self.create_embeddings(processed_messages)

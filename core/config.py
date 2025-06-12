@@ -3,6 +3,7 @@ Unified configuration system for PEPE Discord Bot.
 Manages all settings, model configurations, and environment variables.
 """
 import os
+import glob
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 from dotenv import load_dotenv
@@ -12,6 +13,33 @@ import logging
 load_dotenv()
 
 logger = logging.getLogger(__name__)
+
+def get_latest_enhanced_index_path() -> str:
+    """
+    Find the most recent enhanced FAISS index automatically.
+    Fallback to default if none found.
+    """
+    try:
+        # Look for enhanced FAISS indices
+        enhanced_indices = glob.glob("data/indices/enhanced_faiss_*.index")
+        if enhanced_indices:
+            # Get the most recent one by creation time
+            latest_index = max(enhanced_indices, key=lambda x: os.path.getctime(x))
+            # Return the directory path (remove .index extension)
+            return latest_index.replace('.index', '')
+        
+        # Look for enhanced discord indices as fallback
+        enhanced_dirs = glob.glob("data/indices/enhanced_discord_index_*")
+        if enhanced_dirs:
+            latest_dir = max(enhanced_dirs, key=lambda x: os.path.getctime(x))
+            return latest_dir
+            
+        # Final fallback to original index
+        return "data/indices/index_20250607_221104"
+        
+    except Exception as e:
+        logger.warning(f"Failed to find latest enhanced index: {e}")
+        return "data/indices/index_20250607_221104"
 
 @dataclass
 class ModelConfig:
@@ -78,7 +106,7 @@ def load_config() -> AppConfig:
     config = AppConfig(
         discord_token=discord_token,
         database_url=os.getenv("DATABASE_URL", "sqlite:///data/discord_messages.db"),
-        faiss_index_path=os.getenv("FAISS_INDEX_PATH", "data/indices/index_20250607_221104"),
+        faiss_index_path=os.getenv("FAISS_INDEX_PATH", get_latest_enhanced_index_path()),
         log_level=os.getenv("LOG_LEVEL", "INFO"),
         log_file=os.getenv("LOG_FILE", "bot.log"),
         batch_size=int(os.getenv("BATCH_SIZE", "100")),

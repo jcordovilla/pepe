@@ -230,6 +230,44 @@ def get_agent_answer(query: str) -> str:
             logger.error(f"Data availability check failed: {e}")
             return "❌ Unable to check data availability at this time."
     
+    # Community expert/skill queries
+    if any(kw in query_lower for kw in ["users with skills", "find users", "experience in", "skills in", 
+                                       "expertise in", "expert in", "experts", "skilled in", "professionals with", 
+                                       "people with experience"]):
+        try:
+            from tools.tools import find_community_experts
+            # Extract the skill/topic from the query
+            skill_query = processed_query
+            for remove_phrase in ["users with skills in", "find users", "people with experience in", 
+                                 "expertise in", "expert in", "skilled in", "professionals with"]:
+                skill_query = skill_query.replace(remove_phrase, "").strip()
+            
+            experts = find_community_experts(skill_query, k=10, min_expertise_score=0.2)
+            
+            if not experts:
+                return f"No users found with expertise in '{skill_query}'. Try searching for related skills or browse the community channels."
+            
+            # Format expert results
+            response = f"**Users with experience in {skill_query}:**\n\n"
+            for i, expert in enumerate(experts[:5], 1):
+                response += f"**{i}. {expert['author_name']}**\n"
+                response += f"   • Expertise Score: {expert['expertise_score']:.2f}\n"
+                response += f"   • Skills: {', '.join(list(expert['skills'])[:3])}\n"
+                response += f"   • Active Channels: {', '.join(expert['channels_active'])}\n"
+                if expert['example_messages']:
+                    example = expert['example_messages'][0]
+                    response += f"   • Example: \"{example['content'][:100]}...\"\n"
+                    if example.get('jump_url'):
+                        response += f"   • [View Message]({example['jump_url']})\n"
+                response += "\n"
+            
+            return response
+            
+        except Exception as e:
+            logger.error(f"Community expert search failed: {e}")
+            # Fallback to regular search
+            return get_answer(processed_query, k=10, return_matches=False)
+    
     # Channel list queries
     if any(kw in query_lower for kw in ["list channels", "show channels", "what channels", "available channels"]):
         try:
@@ -474,6 +512,19 @@ def analyze_query_type(query: str) -> Dict[str, Any]:
             "confidence": 0.9,
             "keywords": [kw for kw in data_keywords if kw in query_lower],
             "reasoning": "Query about data availability and status"
+        })
+        return analysis
+    
+    # Community expert/skill queries
+    skill_keywords = ["users with skills", "find users", "experience in", "skills in", "expertise in", 
+                     "expert in", "experts", "skilled in", "professionals with", "people with experience"]
+    if any(kw in query_lower for kw in skill_keywords):
+        analysis.update({
+            "query_type": "community_search",
+            "strategy": "community_experts",
+            "confidence": 0.9,
+            "keywords": [kw for kw in skill_keywords if kw in query_lower],
+            "reasoning": "Query about finding users with specific skills or expertise"
         })
         return analysis
     

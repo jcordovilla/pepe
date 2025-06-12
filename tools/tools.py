@@ -164,33 +164,49 @@ def _get_community_faiss_store():
     global _community_faiss_store
     if _community_faiss_store is None:
         try:
-            # Find the most recent community index
-            import glob
-            community_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/data/indices/community_faiss_*.index")
-            if community_indices:
-                # Get the most recent one
-                latest_index = max(community_indices, key=lambda x: os.path.getctime(x))
-                base_name = latest_index.replace('.index', '')
-                metadata_file = f"{base_name}_metadata.json"
-                
-                if not os.path.exists(metadata_file):
-                    logger.error(f"Metadata file not found: {metadata_file}")
-                    _community_faiss_store = None
-                    return None
-                
-                logger.info(f"Loading community FAISS index from {latest_index}")
+            # Use canonical community index
+            canonical_index = "data/indices/community_faiss_index.index"
+            canonical_metadata = "data/indices/community_faiss_index_metadata.json"
+            
+            if os.path.exists(canonical_index) and os.path.exists(canonical_metadata):
+                logger.info(f"Loading canonical community FAISS index from {canonical_index}")
                 # Load FAISS index
-                index = faiss.read_index(latest_index)
+                index = faiss.read_index(canonical_index)
                 # Load metadata
-                with open(metadata_file, "r") as f:
+                with open(canonical_metadata, "r") as f:
                     data = json.load(f)
                     metadata = data.get("metadata", [])
                 
                 _community_faiss_store = {"index": index, "metadata": metadata}
                 logger.info(f"Loaded community FAISS index with {index.ntotal} vectors")
             else:
-                logger.warning("No community FAISS index found")
-                _community_faiss_store = None
+                # Fallback to find the most recent community index if canonical doesn't exist
+                import glob
+                community_indices = glob.glob("/Users/jose/Documents/apps/discord-bot/data/indices/community_faiss_*.index")
+                if community_indices:
+                    # Get the most recent one
+                    latest_index = max(community_indices, key=lambda x: os.path.getctime(x))
+                    base_name = latest_index.replace('.index', '')
+                    metadata_file = f"{base_name}_metadata.json"
+                    
+                    if not os.path.exists(metadata_file):
+                        logger.error(f"Metadata file not found: {metadata_file}")
+                        _community_faiss_store = None
+                        return None
+                    
+                    logger.info(f"Loading community FAISS index from {latest_index}")
+                    # Load FAISS index
+                    index = faiss.read_index(latest_index)
+                    # Load metadata
+                    with open(metadata_file, "r") as f:
+                        data = json.load(f)
+                        metadata = data.get("metadata", [])
+                
+                    _community_faiss_store = {"index": index, "metadata": metadata}
+                    logger.info(f"Loaded community FAISS index with {index.ntotal} vectors")
+                else:
+                    logger.warning("No community FAISS index found")
+                    _community_faiss_store = None
         except Exception as e:
             logger.error(f"Failed to load community FAISS index: {e}")
             _community_faiss_store = None

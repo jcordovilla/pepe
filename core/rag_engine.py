@@ -105,10 +105,22 @@ class LocalVectorStore:
 _vector_store = None
 
 def load_vectorstore() -> LocalVectorStore:
-    """Load the locally saved FAISS index from disk."""
+    """Load the canonical FAISS index from disk."""
     global _vector_store
     if _vector_store is None:
-        _vector_store = LocalVectorStore(INDEX_DIR)
+        # Use canonical index path - single source of truth
+        canonical_index = "data/indices/discord_messages_index"
+        
+        if os.path.exists(f"{canonical_index}.index"):
+            logger.info(f"Loading canonical FAISS index: {canonical_index}")
+            index_dir = canonical_index
+        else:
+            # If canonical doesn't exist, create it first
+            logger.error(f"Canonical index not found at {canonical_index}")
+            logger.error("Please run: python scripts/build_canonical_index.py")
+            raise FileNotFoundError(f"Canonical FAISS index not found. Run index builder first.")
+            
+        _vector_store = LocalVectorStore(index_dir)
         _vector_store.load()
     return _vector_store
 
@@ -468,8 +480,8 @@ class ResourceVectorStore:
     """Resource-specific vector store using FAISS with resource embeddings."""
     
     def __init__(self, 
-                 index_path: str = "data/indices/resource_faiss_20250607_220423.index",
-                 metadata_path: str = "data/indices/resource_faiss_20250607_220423_metadata.json",
+                 index_path: str = "data/indices/resource_faiss_index.index",
+                 metadata_path: str = "data/indices/resource_faiss_index_metadata.json",
                  model_name: str = "msmarco-distilbert-base-v4"):
         self.index_path = index_path
         self.metadata_path = metadata_path
