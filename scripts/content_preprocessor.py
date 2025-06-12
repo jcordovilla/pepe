@@ -160,9 +160,13 @@ class ContentPreprocessor:
             if not (message.embeds or message.attachments or message.stickers):
                 return True, "too_short"
         
+        # Filter specific calendar bot "sesh" (based on database analysis)
+        author = message.author or {}
+        if author.get('username') == 'sesh':
+            return True, "calendar_bot"
+        
         # Filter bot messages if configured
         if self.config.filter_bot_messages:
-            author = message.author or {}
             if author.get('username', '').endswith('Bot') or author.get('discriminator') == '0000':
                 return True, "bot_message"
         

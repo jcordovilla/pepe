@@ -496,6 +496,10 @@ class CommunityFAISSIndexBuilder:
         """Build complete community-focused FAISS index with all steps."""
         logger.info("Starting complete community FAISS index build...")
         
+        # Set default filename if not provided
+        if save_filename is None:
+            save_filename = "community_faiss_index"
+        
         # Step 1: Load messages
         messages = self.load_messages_from_db(limit)
         
@@ -509,8 +513,8 @@ class CommunityFAISSIndexBuilder:
             
             logger.info("✅ Community index is up to date - no new messages to process")
             
-            # Check if existing index exists
-            existing_index_path = f"data/indices/{save_filename}.faiss"
+            # Check if existing index exists (use correct .index extension)
+            existing_index_path = f"data/indices/{save_filename}.index"
             existing_metadata_path = f"data/indices/{save_filename}_metadata.json"
             
             if os.path.exists(existing_index_path) and os.path.exists(existing_metadata_path):
