@@ -137,10 +137,11 @@ class AgentOrchestrator:
         try:
             query = state["user_context"]["query"]
             analysis = await self.query_analyzer.analyze(query, state["user_context"])
-            
+
             state["metadata"]["query_analysis"] = analysis
             state["metadata"]["intent"] = analysis.get("intent", "unknown")
             state["metadata"]["entities"] = analysis.get("entities", [])
+            state["entities"] = analysis.get("grouped_entities", {})
             
             logger.info(f"Query analyzed: intent={analysis.get('intent')}")
             return state
