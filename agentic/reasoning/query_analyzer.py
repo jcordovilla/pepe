@@ -7,7 +7,7 @@ the appropriate execution strategy.
 
 import re
 from typing import Dict, List, Any, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
 from openai import OpenAI
@@ -113,6 +113,8 @@ class QueryAnalyzer:
                 "context": context or {},
                 "timestamp": datetime.utcnow().isoformat()
             }
+
+            analysis["grouped_entities"] = self._group_entities(analysis["entities"])
             
             # Enhance with LLM analysis for complex queries
             if analysis["complexity"] > 0.7:
@@ -245,6 +247,25 @@ class QueryAnalyzer:
                         "end": match.end(),
                         "confidence": 0.8  # Rule-based confidence
                     }
+                elif entity_type == "time_range":
+                    parsed = self._parse_time_range(value)
+                    if parsed:
+                        entity = {
+                            "type": entity_type,
+                            "value": value,
+                            "start": match.start(),
+                            "end": match.end(),
+                            "confidence": 0.9,
+                            **parsed,
+                        }
+                    else:
+                        entity = {
+                            "type": entity_type,
+                            "value": value,
+                            "start": match.start(),
+                            "end": match.end(),
+                            "confidence": 0.5,
+                        }
                 else:
                     entity = {
                         "type": entity_type,
@@ -257,6 +278,64 @@ class QueryAnalyzer:
                 entities.append(entity)
         
         return entities
+
+    def _parse_time_range(self, text: str) -> Optional[Dict[str, str]]:
+        """Parse a natural language time expression into a start/end range."""
+        try:
+            value = text.lower().strip()
+            now = datetime.utcnow()
+
+            # Simple relative ranges
+            if value in {"yesterday"}:
+                start = (now - timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+                end = start + timedelta(days=1)
+            elif value in {"today"}:
+                start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+                end = now
+            elif value in {"last week", "past week", "previous week"}:
+                start = now - timedelta(days=7)
+                end = now
+            elif value in {"last month", "past month", "previous month"}:
+                start = now - timedelta(days=30)
+                end = now
+            else:
+                m = re.search(r"(?:last|past)\s+(\d+)\s+days?", value)
+                if m:
+                    start = now - timedelta(days=int(m.group(1)))
+                    end = now
+                else:
+                    m = re.search(r"(?:last|past)\s+(\d+)\s+weeks?", value)
+                    if m:
+                        start = now - timedelta(weeks=int(m.group(1)))
+                        end = now
+                    else:
+                        m = re.search(r"(?:last|past)\s+(\d+)\s+months?", value)
+                        if m:
+                            start = now - timedelta(days=30 * int(m.group(1)))
+                            end = now
+                        else:
+                            m = re.search(r"between\s+(\d{4}-\d{2}-\d{2})\s+and\s+(\d{4}-\d{2}-\d{2})", value)
+                            if m:
+                                start = datetime.fromisoformat(m.group(1))
+                                end = datetime.fromisoformat(m.group(2))
+                            else:
+                                return None
+
+            return {"start": start.isoformat(), "end": end.isoformat()}
+        except Exception:
+            return None
+
+    def _group_entities(self, entities: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Group extracted entities by type for easy access."""
+        grouped: Dict[str, Any] = {}
+        for ent in entities:
+            etype = ent["type"]
+            if etype == "time_range":
+                grouped["time_range"] = {"start": ent.get("start"), "end": ent.get("end")}
+            else:
+                key = f"{etype}s"
+                grouped.setdefault(key, []).append(ent.get("value"))
+        return grouped
     
     def _assess_complexity(self, query: str) -> float:
         """Assess query complexity (0.0 to 1.0)"""

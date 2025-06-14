@@ -113,6 +113,11 @@ class TaskPlanner:
                             k = int(entity_value)
                         except (ValueError, TypeError):
                             k = self.default_k
+                    elif entity_type == "time_range":
+                        start = entity.get("start")
+                        end = entity.get("end")
+                        if start and end:
+                            filters["timestamp"] = {"$gte": start, "$lte": end}
                 
                 # Determine search type based on query intent
                 search_type = "search"  # Default semantic search

@@ -270,6 +270,8 @@ class SearchAgent(BaseAgent):
             
             # Build comprehensive filters from entities
             entities = state.get("entities", {})
+            if not entities:
+                entities = state.get("metadata", {}).get("entities", {})
             
             # Add channel filters
             if "channels" in entities:
