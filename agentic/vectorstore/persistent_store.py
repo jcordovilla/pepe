@@ -195,7 +195,8 @@ class PersistentVectorStore:
                 
                 try:
                     assert self.collection is not None, "Collection not initialized"
-                    self.collection.upsert(
+                    await asyncio.to_thread(
+                        self.collection.upsert,
                         documents=batch_docs,
                         metadatas=batch_metas,
                         ids=batch_ids
@@ -206,7 +207,7 @@ class PersistentVectorStore:
             
             # Update stats
             assert self.collection is not None, "Collection not initialized"
-            self.stats["total_documents"] = self.collection.count()
+            self.stats["total_documents"] = await asyncio.to_thread(self.collection.count)
             self.stats["index_updates"] += 1
             
             logger.info(f"Added {len(documents)} messages to vector store")
@@ -249,7 +250,8 @@ class PersistentVectorStore:
             
             # Perform similarity search
             assert self.collection is not None, "Collection not initialized"
-            results = self.collection.query(
+            results = await asyncio.to_thread(
+                self.collection.query,
                 query_texts=[query],
                 n_results=k,
                 where=where_clause,
@@ -306,7 +308,8 @@ class PersistentVectorStore:
             keyword_query = " ".join(keywords)
             
             assert self.collection is not None, "Collection not initialized"
-            results = self.collection.query(
+            results = await asyncio.to_thread(
+                self.collection.query,
                 query_texts=[keyword_query],
                 n_results=k * 2,  # Get more results to filter
                 where=where_clause,
@@ -363,7 +366,8 @@ class PersistentVectorStore:
             # Get all matching documents (ChromaDB doesn't support sorting directly)
             # We'll retrieve more than needed and sort in Python
             assert self.collection is not None, "Collection not initialized"
-            results = self.collection.get(
+            results = await asyncio.to_thread(
+                self.collection.get,
                 where=where_clause,
                 limit=k * 5,  # Get more to allow for sorting
                 include=["documents", "metadatas"]
@@ -437,14 +441,14 @@ class PersistentVectorStore:
                 
                 try:
                     assert self.collection is not None, "Collection not initialized"
-                    self.collection.delete(ids=batch_ids)
+                    await asyncio.to_thread(self.collection.delete, ids=batch_ids)
                 except Exception as e:
                     logger.error(f"Error deleting batch {i//self.batch_size + 1}: {e}")
                     continue
             
             # Update stats
             assert self.collection is not None, "Collection not initialized"
-            self.stats["total_documents"] = self.collection.count()
+            self.stats["total_documents"] = await asyncio.to_thread(self.collection.count)
             
             logger.info(f"Deleted {len(message_ids)} messages from vector store")
             return True
@@ -495,7 +499,8 @@ class PersistentVectorStore:
             
             # Update using upsert
             assert self.collection is not None, "Collection not initialized"
-            self.collection.upsert(
+            await asyncio.to_thread(
+                self.collection.upsert,
                 documents=[content],
                 metadatas=[metadata],
                 ids=[message_id]
@@ -732,7 +737,8 @@ class PersistentVectorStore:
             
             # Get messages with reactions - fetch more to allow for sorting
             assert self.collection is not None, "Collection not initialized"
-            results = self.collection.get(
+            results = await asyncio.to_thread(
+                self.collection.get,
                 where=where_clause,
                 limit=k * 3,  # Get more results to allow for proper sorting
                 include=["documents", "metadatas"]
@@ -809,10 +815,11 @@ class PersistentVectorStore:
         try:
             # Get basic count
             assert self.collection is not None, "Collection not initialized"
-            total_count = self.collection.count()
+            total_count = await asyncio.to_thread(self.collection.count)
             
             # Get sample of documents to analyze
-            sample_results = self.collection.get(
+            sample_results = await asyncio.to_thread(
+                self.collection.get,
                 limit=min(1000, total_count),
                 include=["metadatas"]
             )
@@ -934,7 +941,7 @@ class PersistentVectorStore:
             # Check ChromaDB connection
             try:
                 assert self.collection is not None, "Collection not initialized"
-                count = self.collection.count()
+                count = await asyncio.to_thread(self.collection.count)
                 health["checks"]["chromadb"] = {
                     "status": "healthy",
                     "document_count": count
@@ -1020,7 +1027,7 @@ class PersistentVectorStore:
             
             # Get current collection stats
             assert self.collection is not None, "Collection not initialized"
-            current_count = self.collection.count()
+            current_count = await asyncio.to_thread(self.collection.count)
             logger.info(f"Current collection has {current_count} documents")
             
             # Update internal stats

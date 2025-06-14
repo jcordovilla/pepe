@@ -859,15 +859,27 @@ class DiscordInterface:
     
     def _transform_agent_response(self, result: Dict[str, Any]) -> Dict[str, Any]:
         """Transform agent API response to Discord interface expected format"""
-        if not result.get("success"):
+        # Allow either `success` boolean or legacy `status` string
+        success = result.get("success")
+        if success is None:
+            success = result.get("status") == "success"
+
+        if not success:
             return {
                 "status": "error",
                 "message": result.get("error", "Unknown error occurred")
             }
         
         # Get the sources (search results)
-        sources = result.get("sources", [])
-        answer = result.get("answer", "")
+        response_payload = result.get("response", {}) if isinstance(result.get("response"), dict) else {}
+
+        sources = result.get("sources")
+        if sources is None:
+            sources = response_payload.get("messages") or response_payload.get("sources") or []
+
+        answer = result.get("answer")
+        if answer is None:
+            answer = response_payload.get("answer", "")
         
         # Determine response type based on sources content
         if sources and isinstance(sources, list) and len(sources) > 0:
