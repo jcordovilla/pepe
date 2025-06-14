@@ -97,6 +97,27 @@ class PersistentVectorStore:
                     embedding_function=self.embedding_function
                 )
                 logger.info(f"Loaded existing collection: {self.collection_name}")
+            except ValueError as embedding_error:
+                # Handle embedding function mismatch - recreate collection
+                if "Embedding function name mismatch" in str(embedding_error):
+                    logger.warning(f"Embedding function mismatch detected, recreating collection")
+                    try:
+                        # Delete the existing collection
+                        self.client.delete_collection(name=self.collection_name)
+                        logger.info(f"Deleted collection with mismatched embedding function")
+                        
+                        # Create new collection with correct embedding function
+                        self.collection = self.client.create_collection(
+                            name=self.collection_name,
+                            embedding_function=self.embedding_function,
+                            metadata={"description": "Discord messages vector store"}
+                        )
+                        logger.info(f"Created new collection with correct embedding function: {self.collection_name}")
+                    except Exception as recreate_error:
+                        logger.error(f"Failed to recreate collection: {recreate_error}")
+                        raise recreate_error
+                else:
+                    raise embedding_error
             except Exception as get_error:
                 try:
                     self.collection = self.client.create_collection(
@@ -161,39 +182,188 @@ class PersistentVectorStore:
             ids = []
             
             for msg in messages:
-                # Create document text
-                content = msg.get("content", "").strip()
-                if not content:
+                try:
+                    # Ensure msg is a dictionary
+                    if not isinstance(msg, dict):
+                        logger.warning(f"Skipping non-dict message: {type(msg)}")
+                        continue
+                    
+                    # Create document text - handle empty content gracefully
+                    content = msg.get("content", "").strip()
+                    
+                    # If no text content, create a description from other elements
+                    if not content:
+                        content_parts = []
+                        
+                        # Add attachment info
+                        attachments = msg.get("attachments", [])
+                        if self._safe_len(attachments) > 0:
+                            attachment_names = []
+                            for att in attachments[:3]:  # Max 3 attachment names
+                                if isinstance(att, dict) and att.get("filename"):
+                                    attachment_names.append(att["filename"])
+                            if attachment_names:
+                                content_parts.append(f"Attachments: {', '.join(attachment_names)}")
+                        
+                        # Add embed info  
+                        embeds = msg.get("embeds", [])
+                        if self._safe_len(embeds) > 0:
+                            content_parts.append(f"Rich embed content ({self._safe_len(embeds)} embeds)")
+                        
+                        # Add system message info
+                        message_type = msg.get("type", "")
+                        if message_type and str(message_type) != "MessageType.default":
+                            content_parts.append(f"System message: {message_type}")
+                        
+                        # Create synthetic content for indexing
+                        if content_parts:
+                            content = " | ".join(content_parts)
+                        else:
+                            # Skip truly empty messages
+                            continue
+                    
+                    # Create unique ID
+                    message_id = str(msg.get("message_id", ""))
+                    if not message_id:
+                        continue
+                
+                    # Prepare comprehensive metadata with all available Discord fields
+                    # Handle reactions - can be list or int
+                    reactions = msg.get("reactions", [])
+                    if isinstance(reactions, list):
+                        total_reactions = sum(r.get("count", 0) for r in reactions) if reactions else 0
+                        reaction_emojis = [r.get("emoji", "") for r in reactions] if reactions else []
+                    elif isinstance(reactions, int):
+                        total_reactions = reactions
+                        reaction_emojis = []
+                    else:
+                        total_reactions = 0
+                        reaction_emojis = []
+                    
+                    # Author information (comprehensive) - handle string author fields
+                    author = msg.get("author", {})
+                    if isinstance(author, str):
+                        # Handle case where author is a string (username only)
+                        author = {"username": author, "display_name": author}
+                    elif not isinstance(author, dict):
+                        author = {}
+                    
+                    # Handle mentions - can be list or int
+                    mentions = msg.get("mentions", [])
+                    if isinstance(mentions, list):
+                        mentioned_user_ids = [str(m.get("id", "")) for m in mentions] if mentions else []
+                        mentioned_user_names = [m.get("display_name", m.get("username", "")) for m in mentions] if mentions else []
+                        mention_count = len(mentions)
+                    elif isinstance(mentions, int):
+                        mentioned_user_ids = []
+                        mentioned_user_names = []
+                        mention_count = mentions
+                    else:
+                        mentioned_user_ids = []
+                        mentioned_user_names = []
+                        mention_count = 0
+                    
+                    # Handle attachments - can be list or int
+                    attachments = msg.get("attachments", [])
+                    if isinstance(attachments, list):
+                        attachment_urls = [a.get("url", "") for a in attachments] if attachments else []
+                        attachment_filenames = [a.get("filename", "") for a in attachments] if attachments else []
+                        attachment_types = [a.get("content_type", "") for a in attachments] if attachments else []
+                        attachment_sizes = [a.get("size", 0) for a in attachments] if attachments else []
+                        attachment_count = len(attachments)
+                    elif isinstance(attachments, int):
+                        attachment_urls = []
+                        attachment_filenames = []
+                        attachment_types = []
+                        attachment_sizes = []
+                        attachment_count = attachments
+                    else:
+                        attachment_urls = []
+                        attachment_filenames = []
+                        attachment_types = []
+                        attachment_sizes = []
+                        attachment_count = 0
+                    
+                    # Embed information - handle both int and list formats
+                    embeds = msg.get("embeds", [])
+                    if isinstance(embeds, int):
+                        embed_count = embeds  # Discord sometimes stores embed count as int
+                    elif isinstance(embeds, list):
+                        embed_count = len(embeds)
+                    else:
+                        embed_count = 0
+                    
+                    # Content analysis
+                    import re
+                    has_code_block = bool(re.search(r'```|`[^`]+`', content))
+                    has_urls = bool(re.search(r'https?://', content))
+                    word_count = len(content.split()) if content else 0
+                    
+                    # Reference information (for replies)
+                    reference = msg.get("reference")
+                    reply_to_message_id = str(reference.get("message_id", "")) if reference else ""
+                    
+                    metadata = {
+                        # Core message fields
+                        "message_id": message_id,
+                        "channel_id": str(msg.get("channel_id", "")),
+                        "channel_name": msg.get("channel_name", ""),
+                        "guild_id": str(msg.get("guild_id", "")),
+                        "guild_name": msg.get("guild_name", ""),
+                        "timestamp": msg.get("timestamp", ""),
+                        "jump_url": msg.get("jump_url", ""),
+                        
+                        # Author fields (comprehensive)
+                        "author_id": str(author.get("id", "")),
+                        "author_username": author.get("username", ""),
+                        "author_display_name": author.get("display_name", ""),
+                        "author_discriminator": author.get("discriminator", ""),
+                        "author_bot": author.get("bot", False),
+                        
+                        # Message metadata
+                        "message_type": str(msg.get("type", "default")),
+                        "pinned": msg.get("pinned", False),
+                        "reply_to_message_id": reply_to_message_id,
+                        
+                        # Content analysis
+                        "content_length": len(content),
+                        "word_count": word_count,
+                        "has_code_block": has_code_block,
+                        "has_urls": has_urls,
+                        
+                        # Reactions (enhanced)
+                        "total_reactions": total_reactions,
+                        "reaction_emojis": ",".join(reaction_emojis),
+                        "reaction_details": json.dumps(reactions) if isinstance(reactions, list) else str(reactions),
+                        
+                        # Mentions (comprehensive)
+                        "mentioned_user_ids": ",".join(mentioned_user_ids),
+                        "mentioned_user_names": ",".join(mentioned_user_names),
+                        "mention_count": mention_count,
+                        
+                        # Attachments (comprehensive)
+                        "attachment_urls": ",".join(attachment_urls),
+                        "attachment_filenames": ",".join(attachment_filenames), 
+                        "attachment_types": ",".join(attachment_types),
+                        "attachment_sizes": ",".join(str(s) for s in attachment_sizes),
+                        "attachment_count": attachment_count,
+                        
+                        # Embeds
+                        "embed_count": embed_count,
+                        "has_embeds": embed_count > 0,
+                        
+                        # System metadata
+                        "indexed_at": datetime.utcnow().isoformat(),
+                        "processing_version": "2.0",  # Track data structure version
+                    }
+                    
+                    documents.append(content)
+                    metadatas.append(metadata)
+                    ids.append(message_id)
+                    
+                except Exception as msg_error:
+                    logger.warning(f"Error processing message {msg.get('message_id', 'unknown') if isinstance(msg, dict) else 'non-dict'}: {msg_error}")
                     continue
-                
-                # Create unique ID
-                message_id = str(msg.get("message_id", ""))
-                if not message_id:
-                    continue
-                
-                # Prepare metadata with reactions
-                reactions = msg.get("reactions", [])
-                total_reactions = sum(r.get("count", 0) for r in reactions) if reactions else 0
-                reaction_emojis = [r.get("emoji", "") for r in reactions] if reactions else []
-                
-                metadata = {
-                    "message_id": message_id,
-                    "channel_id": str(msg.get("channel_id", "")),
-                    "channel_name": msg.get("channel_name", ""),
-                    "guild_id": str(msg.get("guild_id", "")),
-                    "author_id": str(msg.get("author", {}).get("id", "")),
-                    "author_username": msg.get("author", {}).get("username", ""),
-                    "timestamp": msg.get("timestamp", ""),
-                    "jump_url": msg.get("jump_url", ""),
-                    "content_length": len(content),
-                    "total_reactions": total_reactions,
-                    "reaction_emojis": ",".join(reaction_emojis),
-                    "indexed_at": datetime.utcnow().isoformat()
-                }
-                
-                documents.append(content)
-                metadatas.append(metadata)
-                ids.append(message_id)
             
             if not documents:
                 logger.warning("No valid documents to add")
@@ -500,6 +670,7 @@ class PersistentVectorStore:
                 "guild_id": str(updated_data.get("guild_id", "")),
                 "author_id": str(updated_data.get("author", {}).get("id", "")),
                 "author_username": updated_data.get("author", {}).get("username", ""),
+                "author_display_name": updated_data.get("author", {}).get("display_name", ""),
                 "timestamp": updated_data.get("timestamp", ""),
                 "jump_url": updated_data.get("jump_url", ""),
                 "content_length": len(content),
@@ -1067,3 +1238,16 @@ class PersistentVectorStore:
             
         except Exception as e:
             logger.error(f"Error closing vector store: {e}")
+    
+    def _safe_len(self, obj):
+        """Safely get length of an object, handling cases where it might be an int or other non-iterable"""
+        try:
+            if obj is None:
+                return 0
+            if isinstance(obj, (list, tuple, str, dict)):
+                return len(obj)
+            if isinstance(obj, int):
+                return obj if obj > 0 else 0
+            return 0
+        except:
+            return 0

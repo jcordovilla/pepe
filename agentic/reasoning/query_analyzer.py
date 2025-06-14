@@ -71,7 +71,7 @@ class QueryAnalyzer:
         
         # Entity extraction patterns
         self.entity_patterns = {
-            "channel": r"(?:in|from)\s+(?:the\s+)?#?([\w-]+(?:\s+[\w-]+)*)\s+channel|#([\w🦾🤖🏛🗂❌💻📚🛠❓🌎🏘👋💠-]+)|(?:in|from)\s+([\w-]+-(?:ops|dev|agents|chat|help|support|resources))",
+            "channel": r"<#(\d+)>|(?:in|from)\s+(?:the\s+)?#?([\w-]+(?:\s+[\w-]+)*)\s+channel|#([\w🦾🤖🏛🗂❌💻📚🛠❓🌎🏘👋💠-]+)|(?:in|from)\s+([\w-]+-(?:ops|dev|agents|chat|help|support|resources))",
             "user": r"@[\w.-]+|by\s+([\w.-]+)|from\s+([\w.-]+)",
             "time_range": r"(last|past|previous)\s+\w+|between\s+[\d-]+\s+and\s+[\d-]+",
             "keyword": r"'([^']+)'|\"([^\"]+)\"|about\s+(\w+)",
@@ -153,31 +153,65 @@ class QueryAnalyzer:
                 
                 # Clean up the value
                 if entity_type == "channel":
-                    channel_name = value.lstrip("#").strip()
+                    # Get all groups to understand what we matched
+                    groups = match.groups()
                     
-                    # Resolve channel name to ID
-                    channel_id = self.channel_resolver.resolve_channel_name(channel_name)
-                    
-                    if channel_id:
-                        # Store both channel_id and original name
-                        entity = {
-                            "type": "channel",
-                            "value": channel_name,  # Keep original for display
-                            "channel_id": channel_id,  # Add resolved ID
-                            "start": match.start(),
-                            "end": match.end(),
-                            "confidence": 0.9  # High confidence for resolved channels
-                        }
+                    # Check if the first group (Discord mention ID) is populated
+                    if groups[0]:  # This is a Discord mention <#ID>
+                        channel_id = groups[0]  # The captured ID
+                        
+                        # Use our new method to resolve ID to name
+                        from ..services.channel_resolver import ChannelResolver
+                        resolver = ChannelResolver()
+                        resolved_name = resolver.resolve_channel_id_to_name(channel_id)
+                        
+                        if resolved_name:
+                            entity = {
+                                "type": "channel",
+                                "value": resolved_name,  # Use resolved name
+                                "channel_id": channel_id,  # Keep the ID
+                                "start": match.start(),
+                                "end": match.end(),
+                                "confidence": 0.95  # Very high confidence for Discord mentions
+                            }
+                        else:
+                            # Channel ID not found in our data
+                            entity = {
+                                "type": "channel",
+                                "value": f"channel-{channel_id}",  # Fallback name
+                                "channel_id": channel_id,
+                                "start": match.start(),
+                                "end": match.end(),
+                                "confidence": 0.5  # Medium confidence - valid format but not in our data
+                            }
                     else:
-                        # Channel not found, keep as is but lower confidence
-                        entity = {
-                            "type": "channel",
-                            "value": channel_name,
-                            "channel_id": None,
-                            "start": match.start(),
-                            "end": match.end(),
-                            "confidence": 0.3  # Low confidence for unresolved channels
-                        }
+                        # Regular channel name (not a Discord mention)
+                        # value is from one of the other groups
+                        channel_name = value.lstrip("#").strip()
+                        
+                        # Resolve channel name to ID using existing method
+                        channel_id = self.channel_resolver.resolve_channel_name(channel_name)
+                        
+                        if channel_id:
+                            # Store both channel_id and original name
+                            entity = {
+                                "type": "channel",
+                                "value": channel_name,  # Keep original for display
+                                "channel_id": channel_id,  # Add resolved ID
+                                "start": match.start(),
+                                "end": match.end(),
+                                "confidence": 0.9  # High confidence for resolved channels
+                            }
+                        else:
+                            # Channel not found, keep as is but lower confidence
+                            entity = {
+                                "type": "channel",
+                                "value": channel_name,
+                                "channel_id": None,
+                                "start": match.start(),
+                                "end": match.end(),
+                                "confidence": 0.3  # Low confidence for unresolved channels
+                            }
                 elif entity_type == "user":
                     value = value.lstrip("@").strip()
                     entity = {

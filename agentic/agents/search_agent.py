@@ -266,6 +266,7 @@ class SearchAgent(BaseAgent):
         try:
             filters = subtask.parameters.get("filters", {})
             k = subtask.parameters.get("k", self.default_k)
+            sort_by = subtask.parameters.get("sort_by", "timestamp")  # Get sort parameter
             
             # Build comprehensive filters from entities
             entities = state.get("entities", {})
@@ -286,22 +287,25 @@ class SearchAgent(BaseAgent):
             if "authors" in entities:
                 filters["author.username"] = {"$in": entities["authors"]}
             
+            logger.info(f"Performing filtered search with sort_by='{sort_by}', filters={filters}")
+            
             # Perform filtered search
-            if subtask.parameters.get("query"):
-                # Semantic search with filters
+            if subtask.parameters.get("query") and not sort_by:
+                # Semantic search with filters (only if no temporal sorting needed)
                 results = await self.vector_store.similarity_search(
                     query=subtask.parameters["query"],
                     k=min(k, self.max_k),
                     filters=filters
                 )
             else:
-                # Pure filter-based search
+                # Pure filter-based search with sorting (for temporal queries)
                 results = await self.vector_store.filter_search(
                     filters=filters,
-                    k=min(k, self.max_k)
+                    k=min(k, self.max_k),
+                    sort_by=sort_by
                 )
             
-            logger.info(f"Filtered search found {len(results)} results")
+            logger.info(f"Filtered search found {len(results)} results sorted by {sort_by}")
             return results
             
         except Exception as e:

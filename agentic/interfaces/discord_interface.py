@@ -381,15 +381,54 @@ class DiscordInterface:
         current_chunk += "\n**Messages:**\n\n"
         
         for msg in messages:
-            author = msg.get('author', {})
-            author_name = author.get('username', 'Unknown')
+            # Fix username extraction - prefer author_display_name, fallback to author_username
+            author_name = msg.get('author_display_name') or msg.get('author_username') or msg.get('author', {}).get('display_name') or msg.get('author', {}).get('username') or 'Unknown'
+            
+            # Fix timestamp formatting - convert from ISO to readable format
             timestamp = msg.get('timestamp', '')
+            if timestamp:
+                try:
+                    from datetime import datetime
+                    # Parse the ISO format timestamp
+                    dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                    # Format to readable format: "May 29, 11:31 PM"
+                    formatted_timestamp = dt.strftime("%b %d, %I:%M %p")
+                except Exception:
+                    # Fallback to original if parsing fails
+                    formatted_timestamp = timestamp[:16]  # Just the date and time part
+            else:
+                formatted_timestamp = 'Unknown time'
+            
             content = msg.get('content', '')
             jump_url = msg.get('jump_url', '')
             channel_name = msg.get('channel_name', 'Unknown Channel')
             
-            # Format message
-            msg_str = f"**{author_name}** ({timestamp}) in **#{channel_name}**\n{content}\n"
+            # Enhanced message formatting with additional metadata
+            msg_str = f"**{author_name}** ({formatted_timestamp}) in **#{channel_name}**\n{content}\n"
+            
+            # Add attachment info if present
+            attachment_count = msg.get('attachment_count', 0)
+            if attachment_count > 0:
+                attachment_filenames = msg.get('attachment_filenames', '')
+                if attachment_filenames:
+                    files = attachment_filenames.split(',')[:3]  # Show max 3 filenames
+                    file_list = ', '.join(files)
+                    if attachment_count > 3:
+                        file_list += f" (+{attachment_count - 3} more)"
+                    msg_str += f"📎 Attachments: {file_list}\n"
+                else:
+                    msg_str += f"📎 {attachment_count} attachment(s)\n"
+            
+            # Add reaction info if present
+            total_reactions = msg.get('total_reactions', 0)
+            if total_reactions > 0:
+                reaction_emojis = msg.get('reaction_emojis', '')
+                if reaction_emojis:
+                    emoji_list = reaction_emojis.replace(',', ' ')
+                    msg_str += f"😊 Reactions: {emoji_list} ({total_reactions})\n"
+                else:
+                    msg_str += f"😊 {total_reactions} reaction(s)\n"
+            
             if jump_url:
                 msg_str += f"[View message]({jump_url})\n"
             msg_str += "───\n"

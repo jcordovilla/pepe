@@ -310,3 +310,57 @@ class ChannelResolver:
             return overlap / total if total > 0 else 0.0
         
         return 0.0
+    
+    def resolve_channel_id_to_name(self, channel_id: str) -> Optional[str]:
+        """
+        Resolve a channel ID to its full name (with emojis) from the vector store.
+        
+        This is critical for Discord mentions like <#1371647370911154228> which need
+        to be mapped to actual channel names in the vector store.
+        """
+        if not channel_id:
+            return None
+        
+        # Check cache first
+        if channel_id in self._channel_cache:
+            return self._channel_cache[channel_id].name
+        
+        # Query the vector store directly for this channel ID
+        try:
+            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            config = {
+                "collection_name": "discord_messages",
+                "persist_directory": "./data/chromadb",
+                "embedding_model": "text-embedding-3-small"
+            }
+            vector_store = PersistentVectorStore(config)
+            
+            if vector_store.collection:
+                # Get metadata for this channel ID
+                results = vector_store.collection.get(
+                    where={"channel_id": channel_id},
+                    limit=1,
+                    include=["metadatas"]
+                )
+                
+                if results and results.get("metadatas"):
+                    metadata = results["metadatas"][0]
+                    channel_name = metadata.get("channel_name", "")
+                    if channel_name:
+                        # Cache the result
+                        channel_info = ChannelInfo(
+                            id=channel_id,
+                            name=channel_name,
+                            guild_id=metadata.get("guild_id", ""),
+                            message_count=1,
+                            aliases=[]
+                        )
+                        self._channel_cache[channel_id] = channel_info
+                        self._name_to_id_cache[channel_name] = channel_id
+                        logger.info(f"Resolved channel ID {channel_id} -> '{channel_name}'")
+                        return channel_name
+                        
+        except Exception as e:
+            logger.error(f"Error resolving channel ID {channel_id}: {e}")
+        
+        return None

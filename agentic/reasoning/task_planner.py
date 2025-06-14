@@ -88,11 +88,21 @@ class TaskPlanner:
                     entity_value = entity["value"]
                     
                     if entity_type == "channel":
-                        # Use channel_id if available, otherwise fall back to name
+                        # Use channel_id if available, resolve to channel name
                         channel_id = entity.get("channel_id")
                         if channel_id:
-                            filters["channel_id"] = channel_id
-                            logger.info(f"Using channel_id filter: {channel_id} for channel '{entity_value}'")
+                            # Import channel resolver to get the full channel name
+                            from ..services.channel_resolver import ChannelResolver
+                            resolver = ChannelResolver()
+                            resolved_name = resolver.resolve_channel_id_to_name(channel_id)
+                            
+                            if resolved_name:
+                                filters["channel_name"] = resolved_name
+                                logger.info(f"Resolved channel ID {channel_id} to '{resolved_name}'")
+                            else:
+                                # Fallback to channel_id filter if resolution fails
+                                filters["channel_id"] = channel_id
+                                logger.warning(f"Could not resolve channel ID {channel_id}, using as filter")
                         else:
                             filters["channel_name"] = entity_value
                             logger.warning(f"Channel ID not resolved for '{entity_value}', using channel_name filter")
@@ -104,16 +114,29 @@ class TaskPlanner:
                         except (ValueError, TypeError):
                             k = self.default_k
                 
+                # Determine search type based on query intent
+                search_type = "search"  # Default semantic search
+                sort_by = None
+                
+                # Check if this is a temporal query (last X, recent X, etc.)
+                query_lower = query.lower()
+                temporal_keywords = ["last", "recent", "latest", "newest", "chronological"]
+                if any(keyword in query_lower for keyword in temporal_keywords):
+                    search_type = "filtered_search"  # Use filtered search for temporal queries
+                    sort_by = "timestamp"  # Sort by timestamp (newest first)
+                    logger.info(f"Detected temporal query, using filtered search with timestamp sorting")
+                
                 # Create search subtask
                 subtask = SubTask(
                     id=f"search_{uuid.uuid4().hex[:8]}",
                     description="Search for relevant messages",
                     agent_role=AgentRole.SEARCHER,
-                    task_type="search",  # Add task_type
+                    task_type=search_type,  # Use determined search type
                     parameters={
                         "query": query,
                         "filters": filters,
-                        "k": k
+                        "k": k,
+                        "sort_by": sort_by  # Add sorting parameter
                     },
                     dependencies=[],
                     created_at=datetime.utcnow()

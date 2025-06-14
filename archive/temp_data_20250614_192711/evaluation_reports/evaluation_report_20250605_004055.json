@@ -1,0 +1,376 @@
+{
+  "metadata": {
+    "evaluation_timestamp": "2025-06-05T00:40:55.004651",
+    "total_conversations": 20,
+    "report_version": "1.0"
+  },
+  "summary": {
+    "engagement_score": {
+      "mean": 0.714,
+      "median": 0.713,
+      "std_dev": 0.008,
+      "min": 0.704,
+      "max": 0.738,
+      "q1": 0.707,
+      "q3": 0.719,
+      "count": 20
+    },
+    "helpfulness_score": {
+      "mean": 0.372,
+      "median": 0.357,
+      "std_dev": 0.1,
+      "min": 0.193,
+      "max": 0.541,
+      "q1": 0.307,
+      "q3": 0.457,
+      "count": 20
+    },
+    "conversation_flow_score": {
+      "mean": 0.545,
+      "median": 0.54,
+      "std_dev": 0.084,
+      "min": 0.37,
+      "max": 0.736,
+      "q1": 0.483,
+      "q3": 0.611,
+      "count": 20
+    },
+    "response_quality_score": {
+      "mean": 0.723,
+      "median": 0.728,
+      "std_dev": 0.05,
+      "min": 0.626,
+      "max": 0.814,
+      "q1": 0.68,
+      "q3": 0.767,
+      "count": 20
+    },
+    "overall_score": {
+      "mean": 0.571,
+      "median": 0.573,
+      "std_dev": 0.045,
+      "min": 0.484,
+      "max": 0.633,
+      "q1": 0.54,
+      "q3": 0.618,
+      "count": 20
+    },
+    "message_count": {
+      "mean": 99.75,
+      "median": 81.0,
+      "std_dev": 78.998,
+      "min": 33,
+      "max": 319,
+      "q1": 44.0,
+      "q3": 111.25,
+      "count": 20
+    },
+    "participant_count": {
+      "mean": 14.55,
+      "median": 11.0,
+      "std_dev": 10.615,
+      "min": 5,
+      "max": 51,
+      "q1": 9.0,
+      "q3": 18.25,
+      "count": 20
+    }
+  },
+  "performance_analysis": {
+    "top_performers": [
+      {
+        "rank": 1,
+        "conversation_index": 14,
+        "overall_score": 0.6331609097602426,
+        "message_count": 33,
+        "participants": 10
+      },
+      {
+        "rank": 2,
+        "conversation_index": 10,
+        "overall_score": 0.6293404642623034,
+        "message_count": 52,
+        "participants": 9
+      },
+      {
+        "rank": 3,
+        "conversation_index": 15,
+        "overall_score": 0.6261524884034875,
+        "message_count": 35,
+        "participants": 9
+      },
+      {
+        "rank": 4,
+        "conversation_index": 7,
+        "overall_score": 0.6229491716695384,
+        "message_count": 79,
+        "participants": 28
+      },
+      {
+        "rank": 5,
+        "conversation_index": 16,
+        "overall_score": 0.6181540324078965,
+        "message_count": 98,
+        "participants": 23
+      }
+    ],
+    "improvement_needed": [
+      {
+        "rank": 20,
+        "conversation_index": 8,
+        "overall_score": 0.5383221777646051,
+        "message_count": 80,
+        "participants": 12
+      },
+      {
+        "rank": 19,
+        "conversation_index": 19,
+        "overall_score": 0.5271691578970422,
+        "message_count": 106,
+        "participants": 24
+      },
+      {
+        "rank": 18,
+        "conversation_index": 18,
+        "overall_score": 0.5158803562185599,
+        "message_count": 42,
+        "participants": 5
+      },
+      {
+        "rank": 17,
+        "conversation_index": 0,
+        "overall_score": 0.5020769958224631,
+        "message_count": 319,
+        "participants": 19
+      },
+      {
+        "rank": 16,
+        "conversation_index": 13,
+        "overall_score": 0.4838961529702132,
+        "message_count": 92,
+        "participants": 16
+      }
+    ],
+    "correlation_analysis": {
+      "message_count_vs_engagement": -0.503,
+      "participants_vs_engagement": -0.17,
+      "helpfulness_vs_quality": 0.381,
+      "flow_vs_engagement": -0.018,
+      "message_count_vs_helpfulness": -0.152
+    },
+    "distribution_analysis": {
+      "excellent": 0,
+      "good": 6,
+      "moderate": 14,
+      "needs_improvement": 0,
+      "percentages": {
+        "excellent": 0.0,
+        "good": 30.0,
+        "moderate": 70.0,
+        "needs_improvement": 0.0
+      }
+    }
+  },
+  "conversation_insights": [
+    "✅ Conversation quality is moderate with room for targeted improvements.",
+    "💪 Strongest area: Quality (avg: 0.723)",
+    "🔧 Area needing most attention: Helpfulness (avg: 0.372)",
+    "📊 Average conversation size: 99.8 messages with 14.6 participants",
+    "⚖️ Conversation length doesn't strongly correlate with quality"
+  ],
+  "recommendations": [
+    "✅ ENGAGEMENT: Maintain current engagement strategies - they're working well!",
+    "🛠️ HELPFULNESS: Provide more detailed, technical responses with concrete examples",
+    "🔗 HELPFULNESS: Include more resource links, documentation, and code snippets in responses",
+    "📚 HELPFULNESS: Create a knowledge base of common solutions to reference in conversations",
+    "🤖 HELPFULNESS: Train bot responses to be more solution-oriented and actionable",
+    "🌊 FLOW: Use natural transition phrases to maintain conversation coherence",
+    "⏱️ FLOW: Implement response timing optimization to encourage better conversation rhythm",
+    "🎭 FLOW: Train for more natural conversation patterns and topic continuity",
+    "🚀 SYSTEM: Implement comprehensive conversation coaching features",
+    "📊 SYSTEM: Set up regular evaluation cycles to track improvement over time",
+    "🔄 SYSTEM: Create feedback loops to continuously improve conversation quality"
+  ],
+  "detailed_metrics": [
+    {
+      "engagement_score": 0.7055555555555556,
+      "helpfulness_score": 0.22429467084639498,
+      "conversation_flow_score": 0.5327586206896552,
+      "response_quality_score": 0.6260502525362095,
+      "overall_score": 0.5020769958224631,
+      "message_count": 319,
+      "participant_count": 19
+    },
+    {
+      "engagement_score": 0.7130434782608696,
+      "helpfulness_score": 0.5141931684334512,
+      "conversation_flow_score": 0.5917876109096554,
+      "response_quality_score": 0.6788596549010387,
+      "overall_score": 0.6162376538028743,
+      "message_count": 283,
+      "participant_count": 51
+    },
+    {
+      "engagement_score": 0.7057692307692308,
+      "helpfulness_score": 0.4578947368421052,
+      "conversation_flow_score": 0.5442982456140351,
+      "response_quality_score": 0.7306810870947235,
+      "overall_score": 0.5960215075673927,
+      "message_count": 114,
+      "participant_count": 11
+    },
+    {
+      "engagement_score": 0.7096774193548387,
+      "helpfulness_score": 0.30619469026548674,
+      "conversation_flow_score": 0.6398230088495575,
+      "response_quality_score": 0.733203785554237,
+      "overall_score": 0.5758742712415925,
+      "message_count": 113,
+      "participant_count": 12
+    },
+    {
+      "engagement_score": 0.7040540540540541,
+      "helpfulness_score": 0.32803819444444443,
+      "conversation_flow_score": 0.544898014834206,
+      "response_quality_score": 0.6738564012651266,
+      "overall_score": 0.5454207558084236,
+      "message_count": 192,
+      "participant_count": 8
+    },
+    {
+      "engagement_score": 0.7090909090909091,
+      "helpfulness_score": 0.3396341463414634,
+      "conversation_flow_score": 0.4774616079494129,
+      "response_quality_score": 0.7425029810298104,
+      "overall_score": 0.5470289693684817,
+      "message_count": 82,
+      "participant_count": 10
+    },
+    {
+      "engagement_score": 0.7107142857142857,
+      "helpfulness_score": 0.3515306122448979,
+      "conversation_flow_score": 0.47989690721649486,
+      "response_quality_score": 0.7796094407228541,
+      "overall_score": 0.5590338700507353,
+      "message_count": 98,
+      "participant_count": 7
+    },
+    {
+      "engagement_score": 0.71875,
+      "helpfulness_score": 0.5310126582278482,
+      "conversation_flow_score": 0.5465117844704167,
+      "response_quality_score": 0.736649640417899,
+      "overall_score": 0.6229491716695384,
+      "message_count": 79,
+      "participant_count": 28
+    },
+    {
+      "engagement_score": 0.7142857142857143,
+      "helpfulness_score": 0.3075,
+      "conversation_flow_score": 0.4925,
+      "response_quality_score": 0.7218787459658829,
+      "overall_score": 0.5383221777646051,
+      "message_count": 80,
+      "participant_count": 12
+    },
+    {
+      "engagement_score": 0.7214285714285714,
+      "helpfulness_score": 0.36219512195121945,
+      "conversation_flow_score": 0.5355467915711951,
+      "response_quality_score": 0.7363780757012869,
+      "overall_score": 0.5701779924755648,
+      "message_count": 41,
+      "participant_count": 9
+    },
+    {
+      "engagement_score": 0.7125,
+      "helpfulness_score": 0.541025641025641,
+      "conversation_flow_score": 0.5243778280542987,
+      "response_quality_score": 0.7890665747051823,
+      "overall_score": 0.6293404642623034,
+      "message_count": 52,
+      "participant_count": 9
+    },
+    {
+      "engagement_score": 0.72,
+      "helpfulness_score": 0.315,
+      "conversation_flow_score": 0.6178504913852563,
+      "response_quality_score": 0.7751978980632007,
+      "overall_score": 0.5840022024589542,
+      "message_count": 50,
+      "participant_count": 11
+    },
+    {
+      "engagement_score": 0.715,
+      "helpfulness_score": 0.4544117647058824,
+      "conversation_flow_score": 0.37018716577540106,
+      "response_quality_score": 0.6788474063586046,
+      "overall_score": 0.5433898021273359,
+      "message_count": 34,
+      "participant_count": 6
+    },
+    {
+      "engagement_score": 0.7061224489795919,
+      "helpfulness_score": 0.1934782608695652,
+      "conversation_flow_score": 0.45133779264214047,
+      "response_quality_score": 0.6824380715195529,
+      "overall_score": 0.4838961529702132,
+      "message_count": 92,
+      "participant_count": 16
+    },
+    {
+      "engagement_score": 0.71875,
+      "helpfulness_score": 0.41515151515151516,
+      "conversation_flow_score": 0.7357011882169411,
+      "response_quality_score": 0.7250132908027644,
+      "overall_score": 0.6331609097602426,
+      "message_count": 33,
+      "participant_count": 10
+    },
+    {
+      "engagement_score": 0.7214285714285714,
+      "helpfulness_score": 0.40714285714285714,
+      "conversation_flow_score": 0.6435918930722613,
+      "response_quality_score": 0.813772575677111,
+      "overall_score": 0.6261524884034875,
+      "message_count": 35,
+      "participant_count": 9
+    },
+    {
+      "engagement_score": 0.7066666666666666,
+      "helpfulness_score": 0.45782312925170066,
+      "conversation_flow_score": 0.6465064169997896,
+      "response_quality_score": 0.7125691135788612,
+      "overall_score": 0.6181540324078965,
+      "message_count": 98,
+      "participant_count": 23
+    },
+    {
+      "engagement_score": 0.7130434782608696,
+      "helpfulness_score": 0.3903846153846154,
+      "conversation_flow_score": 0.5278846153846154,
+      "response_quality_score": 0.7815561704482568,
+      "overall_score": 0.5836586421164072,
+      "message_count": 52,
+      "participant_count": 11
+    },
+    {
+      "engagement_score": 0.7375,
+      "helpfulness_score": 0.2964285714285714,
+      "conversation_flow_score": 0.4475900116144019,
+      "response_quality_score": 0.65339640943194,
+      "overall_score": 0.5158803562185599,
+      "message_count": 42,
+      "participant_count": 5
+    },
+    {
+      "engagement_score": 0.715,
+      "helpfulness_score": 0.2460691823899371,
+      "conversation_flow_score": 0.5504716981132076,
+      "response_quality_score": 0.6849023932587961,
+      "overall_score": 0.5271691578970422,
+      "message_count": 106,
+      "participant_count": 24
+    }
+  ]
+}

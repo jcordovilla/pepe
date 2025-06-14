@@ -225,7 +225,8 @@ class StandalonePipelineRunner:
             logger.error(f"❌ Pipeline failed: {e}")
             results["error"] = str(e)
             return results
-     async def _fetch_discord_messages(
+
+    async def _fetch_discord_messages(
         self,
         guild_id: Optional[str],
         channel_ids: Optional[List[str]],

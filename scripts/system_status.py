@@ -11,6 +11,10 @@ import sqlite3
 import json
 from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def print_header(title):
     """Print formatted section header"""

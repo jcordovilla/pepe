@@ -9,6 +9,10 @@ import sys
 import asyncio
 import time
 from typing import Dict, Any
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Add parent directory to path for importing agentic modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

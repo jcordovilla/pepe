@@ -1,0 +1,31 @@
+{
+  "cleanup_date": "20250614_192711",
+  "description": "Comprehensive codebase cleanup before final commit",
+  "categories_processed": [
+    "debug_scripts",
+    "temporary_data",
+    "legacy_scripts",
+    "log_files",
+    "obsolete_tests"
+  ],
+  "statistics": {
+    "archived_files": 48,
+    "removed_files": 19,
+    "archived_dirs": 3,
+    "removed_dirs": 112
+  },
+  "preserved_files": [
+    "Main production code (agentic/)",
+    "Core scripts (scripts/streaming_discord_indexer.py, scripts/system_status.py)",
+    "Essential tests (tests/README.md and key integration tests)",
+    "Documentation (docs/)",
+    "Configuration files (.env, requirements.txt, etc.)",
+    "Current data (data/chromadb/, data/cache/)"
+  ],
+  "archived_locations": [
+    "archive/debug_scripts_20250614_192711",
+    "archive/temp_data_20250614_192711",
+    "archive/legacy_scripts_20250614_192711",
+    "archive/logs_20250614_192711"
+  ]
+}
