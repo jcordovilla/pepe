@@ -79,6 +79,18 @@ class QueryAnalyzer:
             "reaction": r"(👍|❤️|😂|👀|🎉|🚀|👏|👌)|(:\w+:)|emoji|reaction"
         }
         
+        # Combined patterns for enhanced analysis
+        self.combined_patterns = {
+            "intent": r"(?:search|find|get|fetch|show|list|give|tell|what|how|when|where|who|digest|summary|summarize|analyze)",
+            "channel": r"<#(\d+)>|(?:in|from)\s+(?:the\s+)?#?([\w-]+(?:\s+[\w-]+)*)\s+channel|#([\w🦾🤖🏛🗂❌💻📚🛠❓🌎🏘👋💠-]+)|(?:in|from)\s+([\w-]+-(?:ops|dev|agents|chat|help|support|resources))",
+            "user": r"(?:by|from)\s+(?:user\s+)?@?(\w+)|<@!?(\d+)>",
+            "count": r"(?:last|first|recent|latest|newest)\s+(\d+)|(\d+)\s+(?:messages?|results?)",
+            "temporal": r"(weekly|daily|monthly|yesterday|today|this\s+week|last\s+week|past\s+week|this\s+month|last\s+month|past\s+month)\s*(?:digest|summary|report)?",
+            "digest": r"(digest|summary|report|overview|recap)\s*(?:of|for)?\s*(?:the|this|last)?\s*(week|month|day|period)?",
+            "timeframe": r"(?:in|from|during)\s+(?:the\s+)?(?:last|past|recent)\s+(\d+)\s+(days?|weeks?|months?|hours?)",
+            "content_type": r"(discussions?|messages?|posts?|content|activity|highlights?|key\s+points?|trending|popular)"
+        }
+        
         logger.info("Query analyzer initialized")
     
     async def analyze(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
