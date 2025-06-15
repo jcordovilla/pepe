@@ -19,7 +19,8 @@ async def test_query_analysis():
     # Initialize analyzer
     config = {
         "model": "gpt-4-turbo",
-        "chromadb_path": "./data/chromadb/chroma.sqlite3"
+        "chromadb_path": "./data/chromadb/chroma.sqlite3",
+        "llm_complexity_threshold": 0.85,
     }
     analyzer = QueryAnalyzer(config)
     

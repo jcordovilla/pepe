@@ -179,6 +179,7 @@ BOT_PREFIX=!
 MAX_RESPONSE_LENGTH=2000
 CACHE_TTL=3600
 ANALYSIS_CACHE_TTL=86400
+LLM_COMPLEXITY_THRESHOLD=0.85
 LOG_LEVEL=INFO
 ```
 
@@ -186,6 +187,7 @@ LOG_LEVEL=INFO
 Located in `agentic/config/modernized_config.py`:
 - **Vector store settings** (embedding model, similarity threshold)
 - **Agent configuration** (timeout, retry logic)
+- **LLM complexity threshold** (`llm_complexity_threshold`)
 - **Performance tuning** (batch sizes, cache limits)
 
 ## 🧪 Testing

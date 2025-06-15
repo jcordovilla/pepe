@@ -19,6 +19,7 @@ All core components have been tested and verified:
 export OPENAI_API_KEY="your_openai_api_key_here"
 export DISCORD_TOKEN="your_discord_bot_token_here" 
 export GUILD_ID="your_discord_guild_id_here"
+export LLM_COMPLEXITY_THRESHOLD="0.85"
 ```
 
 ### Python Requirements
