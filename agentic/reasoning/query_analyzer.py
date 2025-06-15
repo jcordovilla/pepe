@@ -9,9 +9,12 @@ import re
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 import logging
+import hashlib
 
 from openai import OpenAI
 import os
+
+from ..cache.smart_cache import SmartCache
 
 from ..services.channel_resolver import ChannelResolver
 
@@ -30,6 +33,10 @@ class QueryAnalyzer:
         self.config = config
         self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.model = config.get("model", "gpt-4-turbo")
+
+        # Initialize cache for LLM enhancements
+        self.cache = SmartCache(config.get("cache", {}))
+        self.analysis_cache_ttl = int(config.get("analysis_cache_ttl", 86400))
         
         # Initialize channel resolver
         chromadb_path = config.get("chromadb_path", "./data/chromadb/chroma.sqlite3")
@@ -363,6 +370,11 @@ class QueryAnalyzer:
     async def _llm_enhance_analysis(self, query: str, base_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Use LLM to enhance analysis for complex queries"""
         try:
+            cache_key = f"llm_analysis:{hashlib.sha256(query.encode()).hexdigest()}"
+            cached = await self.cache.get(cache_key)
+            if cached:
+                return cached
+
             system_prompt = """
             You are a query analysis expert. Analyze the user query and provide enhanced insights.
             Focus on:
@@ -393,14 +405,17 @@ class QueryAnalyzer:
             
             import json
             enhanced = json.loads(response.choices[0].message.content)
-            
-            return {
+
+            result = {
                 "enhanced_intent": enhanced.get("enhanced_intent"),
                 "additional_entities": enhanced.get("additional_entities", []),
                 "sub_queries": enhanced.get("sub_queries", []),
                 "execution_hints": enhanced.get("execution_hints", [])
             }
-            
+
+            await self.cache.set(cache_key, result, ttl=self.analysis_cache_ttl)
+            return result
+
         except Exception as e:
             logger.error(f"Error in LLM enhancement: {str(e)}")
             return {}
