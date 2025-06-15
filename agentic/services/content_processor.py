@@ -6,11 +6,13 @@ Modernized content classification and processing with AI integration
 import re
 import json
 import logging
+import hashlib
 from typing import Dict, List, Any, Optional
 from urllib.parse import urlparse
 from datetime import datetime
 
 from openai import OpenAI
+from ..cache.smart_cache import SmartCache
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +27,10 @@ class ContentProcessingService:
     - Attachment processing logic
     """
     
-    def __init__(self, openai_client: OpenAI):
+    def __init__(self, openai_client: OpenAI, cache_config: Optional[Dict[str, Any]] = None):
         self.openai_client = openai_client
+        self.cache = SmartCache(cache_config or {})
+        self.classification_cache_ttl = int((cache_config or {}).get("classification_cache_ttl", 86400))
         
         # Legacy-proven patterns
         self.url_pattern = re.compile(
@@ -168,63 +172,17 @@ class ContentProcessingService:
         Completely overhauled AI-powered content classification with expanded categories and aggressive detection
         """
         try:
-            # Aggressive AI classification with comprehensive categories
-            system_prompt = """You are an expert content curator for a high-quality Discord community focused on AI, machine learning, and technical discussions.
+            cache_key = f"content_class:{hashlib.sha256(content.encode()).hexdigest()}"
+            cached = await self.cache.get(cache_key)
+            if cached:
+                return cached
 
-Your primary goals:
-1. AGGRESSIVE CLASSIFICATION: Detect ALL relevant categories, don't be conservative
-2. COMPREHENSIVE COVERAGE: Use the full range of available categories
-3. QUALITY ASSESSMENT: Accurately identify content value and type
-
-EXPANDED CLASSIFICATION CATEGORIES (choose ALL that apply, up to 4):
-- "question": Any questions seeking help, clarification, or information
-- "code_help": Programming assistance, debugging, code review, or technical implementation
-- "resource_sharing": Sharing resources: papers, articles, datasets, tools, documentation, links
-- "technical": Technical discussions about AI/ML, algorithms, frameworks, research, implementation
-- "educational": Tutorials, explanations, teaching content, learning materials, how-to content
-- "project": Project showcases, demos, collaboration requests, technical achievements
-- "discussion": Conversations, analysis, opinion sharing, thoughtful exchanges
-- "documentation": Official docs, guides, references, technical specifications, manuals
-- "research": Academic papers, studies, research findings, scientific content, arxiv papers
-- "tutorial": Step-by-step guides, walkthroughs, instructional content, learning paths
-- "meme": Humorous content, jokes, memes, casual funny posts
-- "casual": Light conversation, greetings, social chat, informal updates
-- "general": Brief updates, announcements, or general conversation
-- "low_quality": Spam, very short posts, off-topic content with no educational value
-
-AGGRESSIVE DETECTION RULES:
-- If content mentions "paper", "research", "study", "arxiv" → ADD "research"
-- If content has "tutorial", "guide", "how to", "step by step" → ADD "tutorial"  
-- If content mentions "documentation", "docs", "manual", "reference" → ADD "documentation"
-- If content has "lol", "meme", "funny", "hilarious" → ADD "meme"
-- If content is greeting/social without substance → ADD "casual"
-- If discussing AI/ML/tech concepts substantively → ADD "technical"
-- If sharing ANY links or resources → ADD "resource_sharing"
-- If showing code or asking for code help → ADD "code_help"
-- If teaching or explaining concepts → ADD "educational"
-
-CLASSIFICATION EXAMPLES:
-Content: "Check out this research paper on transformers: https://arxiv.org/abs/2023.12345 - revolutionary work on attention"
-Output: ["resource_sharing", "technical", "research"]
-
-Content: "Here's my code for preprocessing: [code]. Check my GitHub repo too."
-Output: ["code_help", "resource_sharing", "technical"]
-
-Content: "Great tutorial on ML basics: [youtube link] - perfect for beginners!"
-Output: ["resource_sharing", "educational", "tutorial"]
-
-Content: "Here's the whitepaper with detailed methodology and results."
-Output: ["resource_sharing", "technical", "documentation", "research"]
-
-Content: "lol this AI meme is hilarious 😂"
-Output: ["meme", "casual"]
-
-Content: "For the AI project, here are resources: dataset, code, paper"
-Output: ["resource_sharing", "technical", "project", "research"]
-
-BE AGGRESSIVE - if there's any doubt, include the category. Better to over-classify than under-classify.
-
-Respond with ONLY a valid JSON array. No explanations."""
+            system_prompt = (
+                "You curate AI community content. Categories: question, code_help, "
+                "resource_sharing, technical, educational, project, discussion, "
+                "documentation, research, tutorial, meme, casual, general, low_quality. "
+                "Choose up to 3 and reply with a JSON array."
+            )
 
             response = self.openai_client.chat.completions.create(
                 model="gpt-4",
@@ -270,22 +228,39 @@ Respond with ONLY a valid JSON array. No explanations."""
                 if isinstance(parsed, list):
                     validated = [cat for cat in parsed if cat in valid_categories]
                     if validated:
+                        await self.cache.set(
+                            cache_key, validated[:3], ttl=self.classification_cache_ttl
+                        )
                         return validated[:3]  # Max 3 categories
                     else:
                         logger.warning(f"AI returned invalid categories: {parsed}")
-                        return self._classify_content_heuristic(content)
+                        heuristic = self._classify_content_heuristic(content)
+                        await self.cache.set(
+                            cache_key, heuristic, ttl=self.classification_cache_ttl
+                        )
+                        return heuristic
                 else:
                     logger.warning(f"AI returned non-list result: {parsed}")
-                    return self._classify_content_heuristic(content)
+                    heuristic = self._classify_content_heuristic(content)
+                    await self.cache.set(
+                        cache_key, heuristic, ttl=self.classification_cache_ttl
+                    )
+                    return heuristic
             else:
-                return self._classify_content_heuristic(content)
+                heuristic = self._classify_content_heuristic(content)
+                await self.cache.set(cache_key, heuristic, ttl=self.classification_cache_ttl)
+                return heuristic
             
         except json.JSONDecodeError as e:
             logger.warning(f"AI classification JSON parse error for content '{content[:50]}...': {e}")
-            return self._classify_content_heuristic(content)
+            heuristic = self._classify_content_heuristic(content)
+            await self.cache.set(cache_key, heuristic, ttl=self.classification_cache_ttl)
+            return heuristic
         except Exception as e:
             logger.warning(f"AI classification failed for content '{content[:50]}...': {e}")
-            return self._classify_content_heuristic(content)
+            heuristic = self._classify_content_heuristic(content)
+            await self.cache.set(cache_key, heuristic, ttl=self.classification_cache_ttl)
+            return heuristic
 
     def _classify_content_heuristic(self, content: str) -> List[str]:
         """Enhanced fallback heuristic classification with improved accuracy and quality focus"""
