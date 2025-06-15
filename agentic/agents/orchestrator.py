@@ -7,8 +7,7 @@ Uses LangGraph for state management and workflow orchestration.
 
 import asyncio
 import time
-from typing import Dict, List, Any, Optional
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Set
 from datetime import datetime
 import logging
 
@@ -178,41 +177,58 @@ class AgentOrchestrator:
                 return state
             
             results = []
-            
-            # Execute subtasks in dependency order
-            for subtask in plan.subtasks:
+
+            async def _run_subtask(subtask: SubTask):
+                """Execute a single subtask in isolation."""
                 agent = agent_registry.find_capable_agent(subtask)
                 if not agent:
                     logger.warning(f"No agent found for task: {subtask.description}")
                     subtask.status = TaskStatus.FAILED
                     subtask.error = "No capable agent found"
-                    continue
-                
+                    return subtask.id, None, []
+
                 try:
-                    # Prepare task-specific state
                     task_state = state.copy()
                     task_state["current_subtask"] = subtask
-                    
-                    # Execute subtask
                     result_state = await agent.process(task_state)
-                    
-                    # Update subtask with results
+
                     subtask.status = TaskStatus.COMPLETED
                     subtask.result = result_state.get("task_result")
-                    results.append(subtask.result)
-                    
-                    # Merge results back to main state
-                    if "search_results" in result_state:
-                        state["search_results"].extend(result_state["search_results"])
-                    
+                    extra_results = result_state.get("search_results", [])
+                    return subtask.id, subtask.result, extra_results
                 except Exception as e:
                     logger.error(f"Error executing subtask {subtask.id}: {str(e)}")
                     subtask.status = TaskStatus.FAILED
                     subtask.error = str(e)
-            
+                    return subtask.id, None, []
+
+            completed: Set[str] = set()
+            result_map: Dict[str, Any] = {}
+
+            while len(completed) < len(plan.subtasks):
+                ready = [
+                    t for t in plan.subtasks
+                    if t.id not in completed and all(dep in completed for dep in t.dependencies)
+                ]
+
+                if not ready:
+                    # Prevent deadlock on circular dependencies
+                    ready = [next(t for t in plan.subtasks if t.id not in completed)]
+
+                gather_results = await asyncio.gather(*[_run_subtask(t) for t in ready])
+
+                for sid, res, extras in gather_results:
+                    completed.add(sid)
+                    result_map[sid] = res
+                    if extras:
+                        state["search_results"].extend(extras)
+
+            for task in plan.subtasks:
+                results.append(result_map.get(task.id))
+
             plan.status = TaskStatus.COMPLETED
             state["metadata"]["execution_results"] = results
-            
+
             logger.info(f"Plan execution completed with {len(results)} results")
             return state
             
