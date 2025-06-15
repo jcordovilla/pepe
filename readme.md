@@ -113,7 +113,7 @@ Real-time Index → Content Analysis → Metadata Enhanced → Fast Retrieval �
 
 ### **Storage Architecture**
 - **📚 Vector Store**: ChromaDB with 7,157+ indexed messages
-- **🧠 Memory System**: SQLite for conversation context
+- **🧠 Memory System**: SQLite for conversation context with history summarization
 - **⚡ Smart Cache**: Multi-level caching for performance
 - **📊 Analytics DB**: Query tracking and performance metrics
 

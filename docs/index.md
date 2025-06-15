@@ -20,7 +20,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for complete setup instructions.
 The system uses a modular agentic architecture with:
 - **Orchestrator**: LangGraph-based workflow coordination
 - **Specialized Agents**: Search, Analysis, and Planning agents
-- **Memory System**: Conversation history and user preferences
+- **Memory System**: Conversation history with automatic summarization
 - **Vector Store**: Semantic search capabilities
 - **Interfaces**: Discord and API endpoints
 

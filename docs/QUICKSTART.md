@@ -32,7 +32,7 @@ python scripts/maintenance/check_channels.py
 
 **Current Status:**
 - ✅ ChromaDB Vector Store: 4,943 records
-- ✅ Conversation Memory: 138 conversations  
+- ✅ Conversation Memory: 138 conversations (older history summarized)
 - ✅ Analytics Database: Functional
 - ❌ SQLite Database: Missing (discord_messages.db)
 
