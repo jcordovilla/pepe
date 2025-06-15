@@ -37,6 +37,9 @@ class QueryAnalyzer:
         # Initialize cache for LLM enhancements
         self.cache = SmartCache(config.get("cache", {}))
         self.analysis_cache_ttl = int(config.get("analysis_cache_ttl", 86400))
+        self.llm_complexity_threshold = float(
+            config.get("llm_complexity_threshold", 0.85)
+        )
         
         # Initialize channel resolver
         chromadb_path = config.get("chromadb_path", "./data/chromadb/chroma.sqlite3")
@@ -124,7 +127,7 @@ class QueryAnalyzer:
             analysis["grouped_entities"] = self._group_entities(analysis["entities"])
             
             # Enhance with LLM analysis for complex queries
-            if analysis["complexity"] > 0.7:
+            if analysis["complexity"] > self.llm_complexity_threshold:
                 llm_analysis = await self._llm_enhance_analysis(query, analysis)
                 analysis.update(llm_analysis)
             

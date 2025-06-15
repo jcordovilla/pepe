@@ -7,7 +7,7 @@ from agentic.reasoning.query_analyzer import QueryAnalyzer
 
 def test_time_bound_queries():
     os.environ['OPENAI_API_KEY'] = 'test-key-for-testing'
-    analyzer = QueryAnalyzer({})
+    analyzer = QueryAnalyzer({"llm_complexity_threshold": 0.85})
     analysis = asyncio.run(analyzer.analyze("show messages from last week"))
     assert analysis['grouped_entities'].get('time_range') is not None
     tr = analysis['grouped_entities']['time_range']
