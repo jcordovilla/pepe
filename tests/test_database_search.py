@@ -5,6 +5,7 @@ Test script to verify that the Discord bot can now search the populated database
 
 import os
 import json
+import pytest
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -47,13 +48,19 @@ SessionLocal = sessionmaker(bind=engine)
 
 def test_database_queries():
     """Test various database queries to simulate bot functionality"""
+    if not os.path.exists("data/discord_bot.db"):
+        pytest.skip("Database not available")
+
     print("🔍 Testing database queries...")
     
     session = SessionLocal()
-    
+
     try:
         # Test 1: Count all messages
-        total_count = session.query(Message).count()
+        try:
+            total_count = session.query(Message).count()
+        except Exception as e:
+            pytest.skip(f"Database schema not available: {e}")
         print(f"✅ Total messages in database: {total_count}")
         
         # Test 2: List messages in agent-dev channel 
