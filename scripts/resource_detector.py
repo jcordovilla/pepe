@@ -16,6 +16,7 @@ import sys
 from datetime import datetime
 import requests
 import os
+from tqdm import tqdm
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -122,21 +123,37 @@ class FreshResourceDetector:
         json_files = list(messages_dir.glob('*.json'))
         print(f"📁 Found {len(json_files)} message files to analyze")
         
-        for i, json_file in enumerate(json_files):
-            print(f"📄 Processing {json_file.name} ({i+1}/{len(json_files)})")
-            
-            try:
-                with open(json_file, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+        # Progress bar for file processing
+        with tqdm(json_files, desc="📄 Processing files", unit="file") as file_pbar:
+            for json_file in file_pbar:
+                file_pbar.set_postfix({"file": json_file.name[:30] + "..." if len(json_file.name) > 30 else json_file.name})
                 
-                messages = data.get('messages', [])
-                channel_name = data.get('channel_name', 'Unknown')
-                
-                for message in messages:
-                    self._analyze_message(message, channel_name, analyze_unknown)
-                
-            except Exception as e:
-                print(f"   ❌ Error processing {json_file.name}: {e}")
+                try:
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    messages = data.get('messages', [])
+                    channel_name = data.get('channel_name', 'Unknown')
+                    
+                    # Progress bar for message processing within each file
+                    with tqdm(messages, desc=f"  📝 Messages in {channel_name}", unit="msg", leave=False) as msg_pbar:
+                        for message in msg_pbar:
+                            self._analyze_message(message, channel_name, analyze_unknown)
+                            msg_pbar.set_postfix({"resources": len(self.detected_resources)})
+                    
+                except Exception as e:
+                    print(f"   ❌ Error processing {json_file.name}: {e}")
+        
+        # Progress bar for description generation
+        if self.detected_resources:
+            print(f"\n🤖 Generating AI descriptions for {len(self.detected_resources)} resources...")
+            with tqdm(self.detected_resources, desc="🤖 Generating descriptions", unit="resource") as desc_pbar:
+                for i, resource in enumerate(desc_pbar):
+                    # Re-generate description with progress tracking
+                    message = {'content': f"Resource: {resource['url']}", 'author': {'username': resource['author']}}
+                    description = self._generate_description(message, resource['url'])
+                    self.detected_resources[i]['description'] = description
+                    desc_pbar.set_postfix({"domain": resource['domain'][:20]})
         
         return self._generate_report(analyze_unknown)
     
@@ -231,7 +248,10 @@ class FreshResourceDetector:
             except Exception:
                 ts_str = raw_ts[:10] if raw_ts else ''
             jump_url = message.get('jump_url')
+            
+            # Generate description with progress indication
             description = self._generate_description(message, url)
+            
             resource = {
                 'url': url,
                 'domain': domain,
