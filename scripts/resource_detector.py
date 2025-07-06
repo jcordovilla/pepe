@@ -455,43 +455,34 @@ class FreshResourceDetector:
 def main():
     parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
     parser.add_argument('--fast-model', action='store_true', 
-                       help='Use fast model (llama3.1:1b) for faster processing')
+                       help='Use fast model (phi3:mini) for faster processing')
     parser.add_argument('--standard-model', action='store_true',
                        help='Use standard model (llama3.1:8b) for better quality')
     parser.add_argument('--reset-cache', action='store_true',
                        help='Reset processed URLs cache and reprocess all resources')
-    
     args = parser.parse_args()
-    
-    # Determine model choice
+
     use_fast_model = args.fast_model or (not args.standard_model)  # Default to fast model
-    
+
     if args.reset_cache:
         cache_file = project_root / 'data' / 'processed_resources.json'
         if cache_file.exists():
             cache_file.unlink()
             print("🗑️ Reset processed URLs cache")
-    
+
     detector = FreshResourceDetector(use_fast_model=use_fast_model)
-    
-    # Show model being used
     model_name = detector.fast_model if use_fast_model else detector.standard_model
     print(f"🤖 Using model: {model_name} ({'fast' if use_fast_model else 'standard'} mode)")
-    
-    # Check if we have the SQLite database
+
     db_path = project_root / 'data' / 'discord_messages.db'
-    
     if not db_path.exists():
         print(f"❌ Message database not found: {db_path}")
         print("💡 Run 'pepe-admin sync' first to fetch Discord messages")
         return
-    
+
     print("🔍 Running resource detection from SQLite database...")
-    
-    # Read messages from SQLite database
     import sqlite3
     messages = []
-    
     try:
         with sqlite3.connect(db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -500,9 +491,7 @@ def main():
                 WHERE content IS NOT NULL AND content != ''
                 ORDER BY timestamp DESC
             """)
-            
             for row in cursor:
-                # Convert SQLite row to message dict format
                 message_dict = {
                     'content': row['content'],
                     'author': {
@@ -515,22 +504,53 @@ def main():
                     'channel_name': row['channel_name']
                 }
                 messages.append(message_dict)
-        
         print(f"📊 Found {len(messages):,} messages to analyze")
-        
     except Exception as e:
         print(f"❌ Error reading database: {e}")
         return
-    
-    # Analyze messages
-    print("🔍 Analyzing messages for resources...")
-    for message in messages:
-        detector._analyze_message(message, message['channel_name'], analyze_unknown=False)
-    
+
+    # Analyze messages with progress bar and incremental logic
+    print("🔍 Analyzing messages for resources (incremental, with progress bar)...")
+    skipped = 0
+    processed = 0
+    with tqdm(messages, desc="📝 Analyzing messages", unit="msg") as msg_pbar:
+        for message in msg_pbar:
+            content = message.get('content', '')
+            if not content:
+                continue
+            urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
+            new_url_found = False
+            for url in urls:
+                if detector._is_url_processed(url):
+                    skipped += 1
+                    continue
+                resource = detector._evaluate_url(url, message, message['channel_name'], analyze_unknown=False)
+                if resource:
+                    detector.detected_resources.append(resource)
+                    detector.stats['total_resources'] += 1
+                    detector.stats[f'category_{resource["category"]}'] += 1
+                    processed += 1
+                    new_url_found = True
+            msg_pbar.set_postfix({"processed": processed, "skipped": skipped})
+
+    # Progress bar for description generation (for any resources missing description)
+    resources_to_describe = [r for r in detector.detected_resources if not r.get('description') or r['description'].startswith('AI/ML resource from')]
+    if resources_to_describe:
+        print(f"\n🤖 Generating AI descriptions for {len(resources_to_describe)} new resources...")
+        with tqdm(resources_to_describe, desc="🤖 Generating descriptions", unit="resource") as desc_pbar:
+            for resource in desc_pbar:
+                message = {'content': f"Resource: {resource['url']}", 'author': {'username': resource['author']}}
+                description = detector._generate_description(message, resource['url'])
+                resource['description'] = description
+                desc_pbar.set_postfix({"domain": resource['domain'][:20]})
+
+    # Save processed URLs for incremental processing
+    detector._save_processed_urls()
+
     # Save results to JSON file
     output_path = project_root / 'data' / 'optimized_fresh_resources.json'
     report = detector.save_resources(output_path, analyze_unknown=False)
-    
+
     # Also save a simplified export file with just the resources list
     export_path = project_root / 'data' / 'resources_export.json'
     export_data = {
@@ -538,28 +558,24 @@ def main():
         'total_resources': len(report['resources']),
         'resources': report['resources']
     }
-    
     with open(export_path, 'w', encoding='utf-8') as f:
         json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
-    
     print(f"📄 Export file created: {export_path}")
-    
+
     print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
     print(f"✅ Found {report['statistics']['total_found']} high-quality resources!")
+    print(f"⏭️ Skipped (already processed): {skipped}")
     print(f"❌ Excluded {report['statistics']['excluded_count']} low-quality URLs")
     print(f"❓ Unknown domains: {report['statistics']['unknown_count']}")
-    
+
     # Quality assessment
     stats = report['statistics']
     excellent = stats['quality_distribution']['excellent']
     high = stats['quality_distribution']['high']
     total = stats['total_found']
-    
     quality_percentage = ((excellent + high) / total * 100) if total > 0 else 0
-    
     print(f"\n📊 Quality Assessment:")
     print(f"   Excellent + High Quality: {excellent + high}/{total} ({quality_percentage:.1f}%)")
-    
     if quality_percentage >= 80:
         print(f"🎉 EXCELLENT! {quality_percentage:.1f}% high-quality resources detected!")
         print("✅ This collection is ready for import into your resource database.")
@@ -571,8 +587,7 @@ def main():
     else:
         print(f"⚠️ MIXED: Only {quality_percentage:.1f}% high-quality resources.")
         print("❓ You may want to review and adjust criteria.")
-        recommendation = "REVIEW"
-    
+
     # Show top categories
     categories = stats['categories']
     print(f"\n📁 Resource Categories Found:")

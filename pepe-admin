@@ -476,7 +476,7 @@ class PepeAdminSimplified:
             print("\n📥 Step 1: Detecting resources from Discord messages...")
             
             # Build command with options
-            cmd = ["python", "scripts/resource_detector.py"]
+            cmd = ["python3", "scripts/resource_detector.py"]
             if fast_model:
                 cmd.append("--fast-model")
             elif standard_model:
