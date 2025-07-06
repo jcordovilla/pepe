@@ -97,10 +97,12 @@ class DiscordMessageFetcher:
             # Get channels
             channels = await guild.fetch_channels()
             text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel)]
+            forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel)]
             
             # Filter channels if specified
             if channel_ids:
                 text_channels = [ch for ch in text_channels if str(ch.id) in channel_ids]
+                forum_channels = [ch for ch in forum_channels if str(ch.id) in channel_ids]
             
             results = {
                 "guild_id": guild_id,
@@ -110,7 +112,9 @@ class DiscordMessageFetcher:
                 "files_created": [],
                 "files_updated": [],
                 "errors": [],
-                "incremental_mode": incremental
+                "incremental_mode": incremental,
+                "forum_channels_processed": 0,
+                "total_threads_processed": 0
             }
             
             for channel in text_channels:
@@ -149,7 +153,46 @@ class DiscordMessageFetcher:
                         "error": str(e)
                     })
             
-            logger.info(f"✅ Guild fetch complete: {results['channels_processed']} channels, {results['total_messages']} messages")
+            # Process forum channels and their threads
+            logger.info(f"📋 Processing {len(forum_channels)} forum channels...")
+            for forum_channel in forum_channels:
+                try:
+                    logger.info(f"📋 Fetching from forum #{forum_channel.name} ({forum_channel.id})")
+                    
+                    forum_result = await self.fetch_forum_channel(
+                        guild_id=guild_id,
+                        guild_name=guild.name,
+                        forum_channel=forum_channel,
+                        limit=limit_per_channel,
+                        incremental=incremental
+                    )
+                    
+                    if forum_result["success"]:
+                        results["forum_channels_processed"] += 1
+                        results["total_messages"] += forum_result["message_count"]
+                        results["total_threads_processed"] += forum_result["threads_processed"]
+                        
+                        if forum_result.get("files_created"):
+                            results["files_created"].extend(forum_result["files_created"])
+                        if forum_result.get("files_updated"):
+                            results["files_updated"].extend(forum_result["files_updated"])
+                    else:
+                        results["errors"].append({
+                            "channel": f"📋#{forum_channel.name}",
+                            "error": forum_result.get("error", "Unknown error")
+                        })
+                    
+                    # Rate limiting
+                    await asyncio.sleep(self.rate_limit_delay)
+                    
+                except Exception as e:
+                    logger.error(f"❌ Error fetching from forum #{forum_channel.name}: {e}")
+                    results["errors"].append({
+                        "channel": f"📋#{forum_channel.name}",
+                        "error": str(e)
+                    })
+            
+            logger.info(f"✅ Guild fetch complete: {results['channels_processed']} text channels, {results['forum_channels_processed']} forum channels, {results['total_threads_processed']} threads, {results['total_messages']} messages")
             return {"success": True, **results}
             
         except Exception as e:
@@ -295,6 +338,313 @@ class DiscordMessageFetcher:
             
         except Exception as e:
             logger.error(f"❌ Error fetching channel messages: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def fetch_forum_channel(
+        self,
+        guild_id: str,
+        guild_name: str,
+        forum_channel: discord.ForumChannel,
+        limit: Optional[int] = None,
+        incremental: bool = True
+    ) -> Dict[str, Any]:
+        """
+        Fetch messages from all threads in a forum channel
+        
+        Args:
+            guild_id: Discord guild ID
+            guild_name: Discord guild name
+            forum_channel: Discord forum channel object
+            limit: Optional limit of messages per thread
+            incremental: Whether to use incremental fetching based on state
+            
+        Returns:
+            Dictionary with fetch results
+        """
+        try:
+            all_messages = []
+            total_messages = 0
+            threads_processed = 0
+            files_created = []
+            files_updated = []
+            
+            # Get all threads (active + archived)
+            threads = []
+            
+            # Get active threads
+            for thread in forum_channel.threads:
+                threads.append(thread)
+            
+            # Get archived threads
+            try:
+                async for thread in forum_channel.archived_threads(limit=None):
+                    threads.append(thread)
+            except discord.Forbidden:
+                logger.warning(f"⚠️ No permission to access archived threads in #{forum_channel.name}")
+            except Exception as e:
+                logger.warning(f"⚠️ Error fetching archived threads from #{forum_channel.name}: {e}")
+            
+            logger.info(f"  🧵 Found {len(threads)} threads in forum #{forum_channel.name}")
+            
+            if not threads:
+                logger.info(f"  📋 No threads found in forum #{forum_channel.name}")
+                return {
+                    "success": True,
+                    "channel_id": str(forum_channel.id),
+                    "channel_name": forum_channel.name,
+                    "message_count": 0,
+                    "threads_processed": 0,
+                    "files_created": [],
+                    "files_updated": []
+                }
+            
+            # Process each thread
+            for thread in threads:
+                try:
+                    logger.info(f"    🧵 Processing thread: {thread.name}")
+                    
+                    thread_result = await self.fetch_thread_messages(
+                        guild_id=guild_id,
+                        guild_name=guild_name,
+                        forum_channel=forum_channel,
+                        thread=thread,
+                        limit=limit,
+                        incremental=incremental
+                    )
+                    
+                    if thread_result["success"]:
+                        threads_processed += 1
+                        total_messages += thread_result["message_count"]
+                        
+                        if thread_result.get("file_created"):
+                            files_created.append(thread_result["file_path"])
+                        elif thread_result.get("file_updated"):
+                            files_updated.append(thread_result["file_path"])
+                        
+                        # Add thread messages to overall collection
+                        all_messages.extend(thread_result.get("messages", []))
+                    else:
+                        logger.warning(f"    ⚠️ Failed to fetch thread {thread.name}: {thread_result.get('error')}")
+                    
+                    # Rate limiting between threads
+                    await asyncio.sleep(self.rate_limit_delay * 0.5)
+                    
+                except Exception as e:
+                    logger.error(f"    ❌ Error processing thread {thread.name}: {e}")
+                    continue
+            
+            # Create forum-level summary file
+            if all_messages:
+                forum_filename = f"{guild_id}_{forum_channel.id}_forum_messages.json"
+                forum_file_path = self.output_dir / forum_filename
+                
+                forum_data = {
+                    "guild_id": guild_id,
+                    "guild_name": guild_name,
+                    "channel_id": str(forum_channel.id),
+                    "channel_name": forum_channel.name,
+                    "channel_type": "forum",
+                    "threads_processed": threads_processed,
+                    "total_messages": total_messages,
+                    "last_update_timestamp": datetime.now(timezone.utc).isoformat(),
+                    "messages": all_messages
+                }
+                
+                with open(forum_file_path, 'w', encoding='utf-8') as f:
+                    json.dump(forum_data, f, indent=2, ensure_ascii=False)
+                
+                logger.info(f"  💾 Created forum summary: {forum_filename} with {total_messages} messages from {threads_processed} threads")
+            
+            return {
+                "success": True,
+                "channel_id": str(forum_channel.id),
+                "channel_name": forum_channel.name,
+                "message_count": total_messages,
+                "threads_processed": threads_processed,
+                "files_created": files_created,
+                "files_updated": files_updated,
+                "messages": all_messages
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Error fetching forum channel: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def fetch_thread_messages(
+        self,
+        guild_id: str,
+        guild_name: str,
+        forum_channel: discord.ForumChannel,
+        thread: discord.Thread,
+        limit: Optional[int] = None,
+        incremental: bool = True
+    ) -> Dict[str, Any]:
+        """
+        Fetch messages from a specific thread
+        
+        Args:
+            guild_id: Discord guild ID
+            guild_name: Discord guild name
+            forum_channel: Discord forum channel object
+            thread: Discord thread object
+            limit: Optional limit of messages to fetch
+            incremental: Whether to use incremental fetching based on state
+            
+        Returns:
+            Dictionary with fetch results
+        """
+        try:
+            messages = []
+            message_count = 0
+            newest_timestamp = None
+            
+            # Determine starting point for incremental fetching
+            after_datetime = None
+            if incremental:
+                # Use thread-specific state key
+                state_key = f"{guild_id}_{forum_channel.id}_{thread.id}"
+                last_fetch_time = self.state_manager.get_channel_last_fetch(guild_id, state_key)
+                if last_fetch_time:
+                    after_datetime = last_fetch_time
+                    logger.info(f"      📈 Incremental fetch from thread {thread.name} after {last_fetch_time}")
+                else:
+                    logger.info(f"      🆕 First fetch from thread {thread.name} (no previous state)")
+            else:
+                logger.info(f"      📥 Full fetch from thread {thread.name}")
+            
+            # Fetch messages from thread
+            if after_datetime and incremental:
+                async for message in thread.history(limit=limit, after=after_datetime, oldest_first=True):
+                    try:
+                        message_data = await self._convert_message_to_dict(message)
+                        # Add thread-specific metadata
+                        message_data.update({
+                            "thread_id": str(thread.id),
+                            "thread_name": thread.name,
+                            "forum_channel_id": str(forum_channel.id),
+                            "forum_channel_name": forum_channel.name,
+                            "is_forum_thread": True
+                        })
+                        messages.append(message_data)
+                        message_count += 1
+                        
+                        if newest_timestamp is None or message.created_at > newest_timestamp:
+                            newest_timestamp = message.created_at
+                        
+                    except Exception as e:
+                        logger.warning(f"        ⚠️ Error processing message {message.id}: {e}")
+                        continue
+            else:
+                async for message in thread.history(limit=limit):
+                    try:
+                        message_data = await self._convert_message_to_dict(message)
+                        # Add thread-specific metadata
+                        message_data.update({
+                            "thread_id": str(thread.id),
+                            "thread_name": thread.name,
+                            "forum_channel_id": str(forum_channel.id),
+                            "forum_channel_name": forum_channel.name,
+                            "is_forum_thread": True
+                        })
+                        messages.append(message_data)
+                        message_count += 1
+                        
+                        if newest_timestamp is None or message.created_at > newest_timestamp:
+                            newest_timestamp = message.created_at
+                        
+                    except Exception as e:
+                        logger.warning(f"        ⚠️ Error processing message {message.id}: {e}")
+                        continue
+            
+            if not messages:
+                if incremental and after_datetime:
+                    logger.info(f"        ✨ No new messages in thread {thread.name} since last fetch")
+                    return {"success": True, "message_count": 0, "no_new_messages": True}
+                else:
+                    logger.info(f"        📋 No messages found in thread {thread.name}")
+                    return {"success": True, "message_count": 0}
+            
+            # Create thread-specific file
+            thread_filename = f"{guild_id}_{forum_channel.id}_{thread.id}_thread_messages.json"
+            thread_file_path = self.output_dir / thread_filename
+            file_created = not thread_file_path.exists()
+            file_updated = False
+            
+            thread_data = {
+                "guild_id": guild_id,
+                "guild_name": guild_name,
+                "forum_channel_id": str(forum_channel.id),
+                "forum_channel_name": forum_channel.name,
+                "thread_id": str(thread.id),
+                "thread_name": thread.name,
+                "last_update_timestamp": datetime.now(timezone.utc).isoformat(),
+                "message_count": len(messages),
+                "messages": messages
+            }
+            
+            if incremental and thread_file_path.exists():
+                # Merge with existing thread data
+                try:
+                    with open(thread_file_path, 'r', encoding='utf-8') as f:
+                        existing_data = json.load(f)
+                    
+                    existing_messages = existing_data.get("messages", [])
+                    existing_ids = {msg.get("message_id") for msg in existing_messages}
+                    
+                    unique_new_messages = [
+                        msg for msg in messages 
+                        if msg.get("message_id") not in existing_ids
+                    ]
+                    
+                    if unique_new_messages:
+                        merged_messages = existing_messages + list(reversed(unique_new_messages))
+                        thread_data["messages"] = merged_messages
+                        thread_data["message_count"] = len(merged_messages)
+                        file_updated = True
+                        logger.info(f"        🔄 Updated thread file with {len(unique_new_messages)} new messages")
+                    else:
+                        logger.info(f"        📄 No new messages to add to thread file")
+                        return {"success": True, "message_count": 0, "no_new_messages": True}
+                        
+                except Exception as e:
+                    logger.warning(f"        ⚠️ Error merging thread data: {e}")
+                    # Fallback to overwrite
+                    file_created = True
+            
+            # Save thread data
+            with open(thread_file_path, 'w', encoding='utf-8') as f:
+                json.dump(thread_data, f, indent=2, ensure_ascii=False)
+            
+            if file_created:
+                logger.info(f"        💾 Created thread file: {thread_filename} with {len(messages)} messages")
+            elif file_updated:
+                logger.info(f"        🔄 Updated thread file: {thread_filename}")
+            
+            # Update state for incremental fetching
+            if newest_timestamp:
+                state_key = f"{guild_id}_{forum_channel.id}_{thread.id}"
+                self.state_manager.update_channel_state(
+                    guild_id=guild_id,
+                    channel_id=state_key,
+                    channel_name=f"{forum_channel.name}/{thread.name}",
+                    last_message_timestamp=newest_timestamp.isoformat(),
+                    message_count=len(messages),
+                    fetch_mode="incremental" if incremental else "full"
+                )
+            
+            return {
+                "success": True,
+                "thread_id": str(thread.id),
+                "thread_name": thread.name,
+                "message_count": len(messages),
+                "file_path": str(thread_file_path),
+                "file_created": file_created,
+                "file_updated": file_updated,
+                "messages": messages
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Error fetching thread messages: {e}")
             return {"success": False, "error": str(e)}
     
     async def _convert_message_to_dict(self, message: discord.Message) -> Dict[str, Any]:

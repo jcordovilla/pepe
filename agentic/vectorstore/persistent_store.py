@@ -115,7 +115,6 @@ class PersistentVectorStore:
                         # Delete the existing collection
                         self.client.delete_collection(name=self.collection_name)
                         logger.info(f"Deleted collection with mismatched embedding function")
-                        
                         # Create new collection with correct embedding function
                         self.collection = self.client.create_collection(
                             name=self.collection_name,
@@ -126,6 +125,18 @@ class PersistentVectorStore:
                     except Exception as recreate_error:
                         logger.error(f"Failed to recreate collection: {recreate_error}")
                         raise recreate_error
+                elif "does not exist" in str(embedding_error):
+                    logger.warning(f"Collection does not exist, creating new collection: {self.collection_name}")
+                    try:
+                        self.collection = self.client.create_collection(
+                            name=self.collection_name,
+                            embedding_function=self.embedding_function,
+                            metadata={"description": "Discord messages vector store"}
+                        )
+                        logger.info(f"Created new collection: {self.collection_name}")
+                    except Exception as create_error:
+                        logger.error(f"Failed to create collection: {create_error}")
+                        raise create_error
                 else:
                     raise embedding_error
             except Exception as get_error:

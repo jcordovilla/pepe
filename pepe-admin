@@ -10,6 +10,9 @@ Usage:
     pepe-admin info               # System status, stats, and health monitoring  
     pepe-admin maintain           # Maintenance, backup, and optimization
     pepe-admin test               # Comprehensive system testing
+    pepe-admin resources detect   # Detect resources from messages
+    pepe-admin resources migrate  # Migrate to enhanced database
+    pepe-admin resources status   # Show resource database status
 
 Poetry Usage:
     poetry run ./pepe-admin <command>
@@ -149,60 +152,94 @@ class PepeAdminSimplified:
         return setup_success
     
     async def sync(self, args):
-        """🔄 Discord data sync with comprehensive statistics"""
-        print("🔄 Pepe Admin - Discord Data Sync")
+        """🔄 Discord data sync using new fetcher and indexer scripts
+        Usage:
+            pepe-admin sync                # Both fetch and index (default)
+            pepe-admin sync --fetch-only   # Only fetch messages to DB
+            pepe-admin sync --index-only   # Only index/embed from DB
+        """
+        print("🔄 Pepe Admin - Discord Data Sync (Modern Workflow)")
         print("=" * 60)
-        
+        import subprocess
+        import sqlite3
+        from pathlib import Path
+
+        fetch_only = getattr(args, 'fetch_only', False)
+        index_only = getattr(args, 'index_only', False)
+
         try:
-            # Initialize components
-            from agentic.interfaces.agent_api import AgentAPI
-            agent_api = AgentAPI(self.config)
-            
-            # Initialize comprehensive sync statistics
-            sync_stats = {
-                'total_channels': 0,
-                'text_channels': 0,
-                'voice_channels': 0,
-                'forum_channels': 0,
-                'channels_with_data': 0,
-                'channels_without_data': 0,
-                'forums_with_threads': 0,
-                'forums_without_threads': 0,
-                'total_threads_found': 0,
-                'total_messages_processed': 0,
-                'total_messages_indexed': 0,
-                'total_json_files': 0,
-                'processing_errors': 0,
-                'indexing_errors': 0,
-                'fetched_channels': set(),
-                'forum_thread_counts': {},
-                'all_channels': {},
-                'start_time': datetime.now()
-            }
-            
-            # Determine sync type
-            is_full_sync = hasattr(args, 'full') and args.full
-            sync_type = "Full Initial Sync" if is_full_sync else "Incremental Sync"
-            
-            print(f"📊 Sync Type: {sync_type}")
-            print("-" * 40)
-            
-            # Process existing data
-            await self._process_existing_data(sync_stats, is_full_sync)
-            
-            # Get Discord server information
-            await self._gather_discord_server_info(sync_stats)
-            
-            # Display comprehensive sync statistics
-            await self._display_comprehensive_sync_stats(sync_stats)
-            
+            if fetch_only and index_only:
+                print("❌ Cannot use --fetch-only and --index-only together.")
+                return False
+
+            if fetch_only:
+                print("\n📥 Fetching messages from Discord (fetch-only mode)...")
+                fetch_result = subprocess.run([
+                    "python", "scripts/discord_message_fetcher.py"
+                ], capture_output=True, text=True)
+                print(fetch_result.stdout)
+                if fetch_result.returncode != 0:
+                    print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                    return False
+                print("\n✅ Fetch completed successfully!")
+                return True
+
+            if index_only:
+                print("\n🔎 Indexing messages into vector store (index-only mode)...")
+                index_result = subprocess.run([
+                    "python", "scripts/index_database_messages.py"
+                ], capture_output=True, text=True)
+                print(index_result.stdout)
+                if index_result.returncode != 0:
+                    print(f"❌ Indexer script failed: {index_result.stderr}")
+                    return False
+                print("\n✅ Indexing completed successfully!")
+                return True
+
+            # Default: run both fetch and index
+            print("\n📥 Step 1: Fetching messages from Discord...")
+            fetch_result = subprocess.run([
+                "python", "scripts/discord_message_fetcher.py"
+            ], capture_output=True, text=True)
+            print(fetch_result.stdout)
+            if fetch_result.returncode != 0:
+                print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                return False
+
+            print("\n🔎 Step 2: Indexing messages into vector store...")
+            index_result = subprocess.run([
+                "python", "scripts/index_database_messages.py"
+            ], capture_output=True, text=True)
+            print(index_result.stdout)
+            if index_result.returncode != 0:
+                print(f"❌ Indexer script failed: {index_result.stderr}")
+                return False
+
+            # Step 3: Summarize results from the database
+            db_path = Path("data/discord_messages.db")
+            if db_path.exists():
+                with sqlite3.connect(db_path) as conn:
+                    cursor = conn.execute("SELECT COUNT(*) FROM messages")
+                    total_messages = cursor.fetchone()[0]
+                    cursor = conn.execute("SELECT COUNT(DISTINCT channel_id) FROM messages")
+                    total_channels = cursor.fetchone()[0]
+                    cursor = conn.execute("SELECT COUNT(DISTINCT thread_id) FROM messages WHERE thread_id IS NOT NULL")
+                    total_threads = cursor.fetchone()[0]
+                print(f"\n📊 Sync Summary:")
+                print(f"   📝 Total Messages: {total_messages:,}")
+                print(f"   💬 Channels: {total_channels}")
+                print(f"   🧵 Threads: {total_threads}")
+            else:
+                print("❌ Database not found after fetch.")
+
             print("\n✅ Sync completed successfully!")
-            
+            return True
+
         except Exception as e:
             print(f"❌ Sync failed: {e}")
+            import traceback
+            traceback.print_exc()
             return False
-        
-        return True
     
     async def info(self, args):
         """📊 Complete system information: status, statistics, and monitoring"""
@@ -322,6 +359,136 @@ class PepeAdminSimplified:
         
         return success_rate >= 70
     
+    async def resources(self, args):
+        """🔍 Resource management: detect, export, and migrate Discord resources
+        Usage:
+            pepe-admin resources              # Complete resource processing
+            pepe-admin resources status       # Show resource database status
+        """
+        print("🔍 Pepe Admin - Resource Management")
+        print("=" * 60)
+        import subprocess
+        from pathlib import Path
+
+        action = getattr(args, 'action', None)
+        
+        if action == 'status':
+            print("\n📊 Resource Database Status")
+            print("-" * 40)
+            
+            # Check resource files
+            resources_file = Path("data/optimized_fresh_resources.json")
+            export_file = Path("data/resources_export.json")
+            
+            if resources_file.exists():
+                try:
+                    import json
+                    with open(resources_file, 'r') as f:
+                        data = json.load(f)
+                    total_resources = data.get('statistics', {}).get('total_found', 0)
+                    print(f"📄 Detected Resources: {total_resources:,}")
+                    
+                    # Show categories
+                    categories = data.get('statistics', {}).get('categories', {})
+                    if categories:
+                        print("\n📁 Resource Categories:")
+                        for category, count in sorted(categories.items(), key=lambda x: x[1], reverse=True)[:5]:
+                            print(f"   • {category}: {count}")
+                except Exception as e:
+                    print(f"   ❌ Error reading resources file: {e}")
+            else:
+                print("📄 Detected Resources: None (run 'resources' first)")
+            
+            # Check export file
+            if export_file.exists():
+                try:
+                    import json
+                    with open(export_file, 'r') as f:
+                        data = json.load(f)
+                    export_count = data.get('total_resources', 0)
+                    export_date = data.get('export_date', 'Unknown')
+                    print(f"📤 Export File: {export_count:,} resources (exported: {export_date})")
+                except Exception as e:
+                    print(f"   ❌ Error reading export file: {e}")
+            else:
+                print("📤 Export File: None (run 'resources' first)")
+            
+            # Check enhanced database
+            enhanced_db = Path("data/enhanced_resources.db")
+            if enhanced_db.exists():
+                try:
+                    import sqlite3
+                    with sqlite3.connect(enhanced_db) as conn:
+                        cursor = conn.execute("SELECT COUNT(*) FROM resources")
+                        count = cursor.fetchone()[0]
+                        print(f"🗄️ Enhanced Database: {count:,} resources")
+                except Exception as e:
+                    print(f"   ❌ Error reading enhanced database: {e}")
+            else:
+                print("🗄️ Enhanced Database: Not initialized (run 'resources' first)")
+            
+            return True
+
+        else:
+            # Default action: complete resource processing
+            print("\n🚀 Complete Resource Processing")
+            print("This will detect, export, and migrate resources from Discord messages.")
+            
+            # Check if we have messages to analyze
+            db_path = Path("data/discord_messages.db")
+            if not db_path.exists():
+                print("❌ No message database found. Run 'pepe-admin sync' first.")
+                return False
+            
+            # Step 1: Detect resources
+            print("\n📥 Step 1: Detecting resources from Discord messages...")
+            detect_result = subprocess.run([
+                "python", "scripts/resource_detector.py"
+            ], capture_output=True, text=True)
+            print(detect_result.stdout)
+            if detect_result.returncode != 0:
+                print(f"❌ Resource detection failed: {detect_result.stderr}")
+                return False
+            
+            # Step 2: Migrate to enhanced database
+            print("\n🔄 Step 2: Migrating resources to enhanced database...")
+            
+            # Check if we have resources to migrate
+            resources_file = Path("data/optimized_fresh_resources.json")
+            if not resources_file.exists():
+                print("❌ No resources file found after detection.")
+                return False
+            
+            # Run migration
+            migrate_result = subprocess.run([
+                "python", "scripts/migrate_to_enhanced_resources.py"
+            ], capture_output=True, text=True)
+            print(migrate_result.stdout)
+            if migrate_result.returncode != 0:
+                print(f"❌ Resource migration failed: {migrate_result.stderr}")
+                return False
+            
+            # Step 3: Show results
+            print("\n✅ Complete resource processing finished!")
+            
+            # Show information about created files
+            detailed_report = Path("data/optimized_fresh_resources.json")
+            export_file = Path("data/resources_export.json")
+            
+            if detailed_report.exists():
+                try:
+                    import json
+                    with open(detailed_report, 'r') as f:
+                        data = json.load(f)
+                    total_resources = data.get('statistics', {}).get('total_found', 0)
+                    print(f"\n📄 Files created:")
+                    print(f"   • Detailed report: {detailed_report} ({total_resources:,} resources)")
+                    print(f"   • Export file: {export_file} (simplified format for external use)")
+                except Exception as e:
+                    print(f"   ❌ Error reading report: {e}")
+            
+            return True
+    
     # Helper methods for core functionality
     async def _process_existing_data(self, sync_stats, is_full_sync):
         """Process existing Discord message data"""
@@ -380,6 +547,9 @@ class PepeAdminSimplified:
         """Analyze Discord channels comprehensively"""
         import discord
         
+        # Initialize inaccessible channels tracking
+        sync_stats['inaccessible_channels'] = []
+        
         for channel in guild.channels:
             channel_info = {
                 'name': channel.name,
@@ -411,12 +581,38 @@ class PepeAdminSimplified:
                     
                     channel_info['thread_count'] = thread_count
                     
+                except discord.Forbidden:
+                    # Track inaccessible forum channels
+                    sync_stats['inaccessible_channels'].append({
+                        'name': channel.name,
+                        'id': str(channel.id),
+                        'type': 'forum',
+                        'category': channel.category.name if channel.category else 'No Category',
+                        'reason': 'No permission to read threads'
+                    })
+                    sync_stats['forums_without_threads'] += 1
+                    channel_info['thread_count'] = 0
                 except Exception as e:
                     sync_stats['forums_without_threads'] += 1
                     channel_info['thread_count'] = 0
             
             elif isinstance(channel, discord.TextChannel):
                 sync_stats['text_channels'] += 1
+                # Check if we have permission to read this text channel
+                try:
+                    # Test permissions by trying to get channel permissions
+                    permissions = channel.permissions_for(guild.me)
+                    if not permissions.read_messages:
+                        sync_stats['inaccessible_channels'].append({
+                            'name': channel.name,
+                            'id': str(channel.id),
+                            'type': 'text',
+                            'category': channel.category.name if channel.category else 'No Category',
+                            'reason': 'No read permission'
+                        })
+                except Exception:
+                    # If we can't check permissions, assume it's accessible
+                    pass
             elif isinstance(channel, discord.VoiceChannel):
                 sync_stats['voice_channels'] += 1
             
@@ -437,17 +633,25 @@ class PepeAdminSimplified:
             # Extract channel information - prioritize readable names
             channel_name = "Unknown Channel"
             channel_id = "unknown"
+            channel_type = "text"
             
             if isinstance(messages, dict):
                 channel_name = messages.get('channel_name', 'Unknown Channel')
                 channel_id = messages.get('channel_id', 'unknown')
+                channel_type = messages.get('channel_type', 'text')
             
             # Fallback to filename parsing if no channel info in JSON
             filename_parts = json_file.stem.split('_')
             if len(filename_parts) >= 2 and channel_id == 'unknown':
                 channel_id = filename_parts[1]
             
-            sync_stats['fetched_channels'].add(channel_id)
+            # Handle forum files differently
+            if channel_type == "forum":
+                sync_stats['forum_channels_processed'] += 1
+                sync_stats['total_threads_processed'] += messages.get('threads_processed', 0)
+                print(f"     📋 Forum #{channel_name}: {messages.get('total_messages', 0)} messages from {messages.get('threads_processed', 0)} threads")
+            else:
+                sync_stats['fetched_channels'].add(channel_id)
             
             if messages:
                 # Extract actual messages from the JSON structure
@@ -568,12 +772,32 @@ class PepeAdminSimplified:
                 coverage = (stats['channels_with_data'] / stats['text_channels']) * 100
                 print(f"   📊 Coverage: {coverage:.1f}%")
         
+        # Inaccessible channels
+        if 'inaccessible_channels' in stats and stats['inaccessible_channels']:
+            print(f"\n🚫 Inaccessible Channels ({len(stats['inaccessible_channels'])}):")
+            # Group by category for better organization
+            by_category = {}
+            for channel in stats['inaccessible_channels']:
+                category = channel['category']
+                if category not in by_category:
+                    by_category[category] = []
+                by_category[category].append(channel)
+            
+            for category, channels in by_category.items():
+                print(f"   📂 {category}:")
+                for channel in channels:
+                    print(f"      ❌ #{channel['name']} ({channel['type']}) - {channel['reason']}")
+        else:
+            print(f"\n✅ All channels are accessible")
+        
         # Recommendations
         print(f"\n💡 Recommendations:")
         if stats['channels_without_data'] > 0:
             print(f"   📥 Consider syncing {stats['channels_without_data']} missing channels")
         if stats['forum_channels'] > 0:
             print(f"   📋 Found {stats['total_threads_found']} forum threads to potentially index")
+        if 'inaccessible_channels' in stats and stats['inaccessible_channels']:
+            print(f"   🔐 Review permissions for {len(stats['inaccessible_channels'])} inaccessible channels")
         print(f"   🚀 Run 'python main.py' to start real-time processing")
     
     async def _run_health_checks(self):
@@ -799,6 +1023,7 @@ Simplified Commands:
   info                          Status, statistics, and monitoring
   maintain                      Cleanup, backup, and optimization
   test                          Comprehensive system testing
+  resources [status]            Resource detection and migration
 
 Examples:
   pepe-admin setup              # Initial setup
@@ -806,6 +1031,8 @@ Examples:
   pepe-admin info               # System dashboard
   pepe-admin maintain           # Complete maintenance
   pepe-admin test               # Test all systems
+  pepe-admin resources          # Complete resource processing
+  pepe-admin resources status   # Show resource status
         """
     )
     
@@ -817,6 +1044,8 @@ Examples:
     # Sync command
     sync_parser = subparsers.add_parser('sync', help='Discord data sync')
     sync_parser.add_argument('--full', action='store_true', help='Full sync (vs incremental)')
+    sync_parser.add_argument('--fetch-only', action='store_true', help='Only fetch messages to DB')
+    sync_parser.add_argument('--index-only', action='store_true', help='Only index/embed from DB')
     
     # Info command (replaces status, stats, monitor)
     info_parser = subparsers.add_parser('info', help='System information dashboard')
@@ -826,6 +1055,10 @@ Examples:
     
     # Test command
     test_parser = subparsers.add_parser('test', help='Comprehensive testing')
+    
+    # Resources command
+    resources_parser = subparsers.add_parser('resources', help='Resource management')
+    resources_parser.add_argument('action', nargs='?', choices=['status'], help='Show resource status (optional)')
     
     args = parser.parse_args()
     
@@ -848,6 +1081,8 @@ Examples:
             success = asyncio.run(admin.maintain(args))
         elif args.command == 'test':
             success = asyncio.run(admin.test(args))
+        elif args.command == 'resources':
+            success = asyncio.run(admin.resources(args))
         else:
             print(f"Unknown command: {args.command}")
             return 1

@@ -1,4 +1,27 @@
-# 🤖 Discord Bot Agentic Architecture v2 - Agentic RAG System
+# 🤖 Pepe Discord Bot - Agentic RAG System
+
+**Intelligent Discord bot with agentic architecture for conversation analysis and insights.**
+
+---
+
+## ⚡ Quick Start (for Users)
+
+```
+/pepe your question here
+```
+That's it! Single command for all queries.
+
+---
+
+## 🎯 What Can It Do?
+- **🔍 Smart Search**: Find messages by content, user, channel, or timeframe
+- **📊 Analytics**: Generate summaries, trends, and activity reports
+- **🤖 Capability Awareness**: Ask about the bot's features and get helpful responses
+- **⚡ Real-time Processing**: Automatically indexes new messages as they arrive
+
+---
+
+# Discord Bot Agentic Architecture v2 - Agentic RAG System
 
 An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built with **LangGraph** for multi-agent orchestration. Features real-time message indexing, semantic search, and **automated weekly digest generation**.
 
@@ -27,9 +50,10 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9+
+- Python 3.11+
 - Discord Bot Token
 - OpenAI API Key
+- Ollama (for local Llama model)
 - 4GB+ RAM recommended
 
 ### Installation
@@ -67,6 +91,46 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
    /pepe give me a weekly digest
    /pepe find discussions about AI in <#channel>
    ```
+
+### **Admin CLI Commands**
+```bash
+# Check system status
+./pepe-admin status
+
+# Setup/initialize the system
+./pepe-admin setup
+
+# Sync Discord messages (basic sync)
+./pepe-admin sync
+
+# Full data sync with preprocessing
+./pepe-admin sync --full
+
+# View system health
+./pepe-admin health
+
+# Get help
+./pepe-admin --help
+```
+
+### **Complete Data Setup Process**
+For a fully functional system with up-to-date data and resources:
+
+```bash
+# 1. Initial setup
+./pepe-admin setup
+
+# 2. Full Discord data sync and indexing
+./pepe-admin sync --full
+
+# 3. Extract and categorize links/resources (optional but recommended)
+python scripts/resource_detector.py
+
+# 4. Verify system health
+./pepe-admin health
+```
+
+**Note**: The `sync --full` command handles Discord message indexing. The resource detector extracts and categorizes high-quality links from messages for better search capabilities.
 
 ## 💬 Usage Examples
 
@@ -183,12 +247,52 @@ Real-time Index → Content Analysis → Metadata Enhanced → Fast Retrieval �
 
 ## 🔧 Configuration
 
+### **LLM Configuration (Local Llama Model)**
+The system uses a **local Llama model** for all AI processing via Ollama:
+
+```bash
+# LLM Settings (Local Llama via Ollama)
+LLM_ENDPOINT=http://localhost:11434/api/generate
+LLM_MODEL=llama3.1:8b                    # Recommended: newer, better model
+LLM_MAX_TOKENS=2048
+LLM_TEMPERATURE=0.1
+LLM_TIMEOUT=30
+LLM_RETRY_ATTEMPTS=3
+
+# OpenAI (for embeddings only)
+OPENAI_API_KEY=your_openai_key
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+```
+
+**Setup Ollama:**
+```bash
+# Install Ollama (if not already installed)
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Pull the recommended model
+ollama pull llama3.1:8b
+
+# Start Ollama service
+ollama serve
+```
+
 ### **Environment Variables**
 ```bash
 # Required
 DISCORD_TOKEN=your_bot_token
 OPENAI_API_KEY=your_openai_key
 GUILD_ID=your_server_id
+
+# LLM Configuration (Local Llama)
+LLM_ENDPOINT=http://localhost:11434/api/generate
+LLM_MODEL=llama3.1:8b
+LLM_MAX_TOKENS=2048
+LLM_TEMPERATURE=0.1
+LLM_TIMEOUT=30
+LLM_RETRY_ATTEMPTS=3
+
+# OpenAI Embeddings
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 
 # Optional Performance & Caching
 CACHE_TTL=3600
@@ -331,3 +435,8 @@ git clone <repo> && cd discord-bot-agentic && pip install -r requirements.txt &&
 Your Discord bot will be online with advanced search and **weekly digest capabilities**! 🎉
 
 **Need help?** Check our [documentation](docs/) or open an issue.
+
+## 📚 Further Documentation
+
+- [Operations Guide](docs/OPERATIONS.md)
+- [Project Structure](docs/PROJECT_STRUCTURE.md)

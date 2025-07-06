@@ -13,6 +13,7 @@ from collections import Counter, defaultdict
 from urllib.parse import urlparse
 from typing import Dict, List, Any
 import sys
+from datetime import datetime
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -378,20 +379,71 @@ class FreshResourceDetector:
 def main():
     detector = FreshResourceDetector()
     
-    # Analyze Discord messages
-    messages_dir = project_root / 'data' / 'fetched_messages'
+    # Check if we have the SQLite database
+    db_path = project_root / 'data' / 'discord_messages.db'
     
-    if not messages_dir.exists():
-        print(f"❌ Messages directory not found: {messages_dir}")
+    if not db_path.exists():
+        print(f"❌ Message database not found: {db_path}")
+        print("💡 Run 'pepe-admin sync' first to fetch Discord messages")
         return
     
-    # Run detection with expanded domains
-    print("🔍 Running FINAL analysis with expanded high-quality domains...")
-    detector.analyze_discord_messages(messages_dir, analyze_unknown=False)
+    print("🔍 Running resource detection from SQLite database...")
     
-    # Save results
+    # Read messages from SQLite database
+    import sqlite3
+    messages = []
+    
+    try:
+        with sqlite3.connect(db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute("""
+                SELECT * FROM messages 
+                WHERE content IS NOT NULL AND content != ''
+                ORDER BY timestamp DESC
+            """)
+            
+            for row in cursor:
+                # Convert SQLite row to message dict format
+                message_dict = {
+                    'content': row['content'],
+                    'author': {
+                        'username': row['author_username'],
+                        'display_name': row['author_display_name'] or row['author_username']
+                    },
+                    'timestamp': row['timestamp'],
+                    'message_id': row['message_id'],
+                    'channel_id': row['channel_id'],
+                    'channel_name': row['channel_name']
+                }
+                messages.append(message_dict)
+        
+        print(f"📊 Found {len(messages):,} messages to analyze")
+        
+    except Exception as e:
+        print(f"❌ Error reading database: {e}")
+        return
+    
+    # Analyze messages
+    print("🔍 Analyzing messages for resources...")
+    for message in messages:
+        detector._analyze_message(message, message['channel_name'], analyze_unknown=False)
+    
+    # Save results to JSON file
     output_path = project_root / 'data' / 'optimized_fresh_resources.json'
     report = detector.save_resources(output_path, analyze_unknown=False)
+    
+    # Also save a simplified export file with just the resources list
+    export_path = project_root / 'data' / 'resources_export.json'
+    export_data = {
+        'export_date': datetime.now().isoformat(),
+        'total_resources': len(report['resources']),
+        'resources': report['resources']
+    }
+    
+    with open(export_path, 'w', encoding='utf-8') as f:
+        json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
+    
+    print(f"📄 Export file created: {export_path}")
     
     print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
     print(f"✅ Found {report['statistics']['total_found']} high-quality resources!")
@@ -431,12 +483,14 @@ def main():
     print(f"\n💡 RECOMMENDATION: {recommendation}")
     if recommendation == "PROCEED":
         print("🚀 Next step: Import these optimized resources")
-        print(f"   Command: poetry run ./pepe-admin migrate")
+        print(f"   Command: ./pepe-admin resources migrate")
         print(f"   (This will use: {output_path})")
     else:
         print("🔍 Next step: Review results and adjust quality criteria")
     
-    print(f"\n📄 Detailed results saved to: {output_path}")
+    print(f"\n📄 Files created:")
+    print(f"   • Detailed report: {output_path}")
+    print(f"   • Export file: {export_path}")
     
     return report
 
