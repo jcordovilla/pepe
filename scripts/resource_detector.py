@@ -14,6 +14,8 @@ from urllib.parse import urlparse
 from typing import Dict, List, Any
 import sys
 from datetime import datetime
+import requests
+import os
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -154,31 +156,53 @@ class FreshResourceDetector:
                 self.stats['total_resources'] += 1
                 self.stats[f'category_{resource["category"]}'] += 1
     
+    def _generate_description(self, message, url):
+        """Generate an AI description for the resource using the LLM."""
+        llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
+        llm_model = os.getenv('LLM_MODEL', 'llama3.1:8b')
+        
+        # Extract key content for faster processing
+        content = message.get('content', '')[:200]  # Limit content length
+        domain = urlparse(url).netloc.lower()
+        
+        # Lean, focused prompt
+        prompt = f"AI resource: {url}\nContext: {content}\nBrief AI/ML description (50 words max):"
+        
+        try:
+            response = requests.post(llm_endpoint, json={
+                "model": llm_model,
+                "prompt": prompt,
+                "max_tokens": 80,  # Reduced for faster generation
+                "temperature": 0.1,  # Lower for more consistent, faster responses
+                "top_p": 0.9,  # Add top_p for better quality/speed balance
+                "stream": False  # Ensure no streaming for faster response
+            }, timeout=10)  # Reduced timeout
+            
+            if response.status_code == 200:
+                data = response.json()
+                description = data.get('response', '').strip()
+                return description if description else f"AI/ML resource from {domain}"
+            else:
+                return f"AI/ML resource from {domain}"
+        except Exception as e:
+            return f"AI/ML resource from {domain}"
+
     def _evaluate_url(self, url: str, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Evaluate if a URL is a high-quality resource"""
-        
         try:
             parsed = urlparse(url)
             domain = parsed.netloc.lower()
-            
-            # Remove www. prefix
             if domain.startswith('www.'):
                 domain = domain[4:]
-            
-            # Check if domain is excluded
             if any(excluded in domain for excluded in self.excluded_domains):
                 self.stats['excluded_domains'] += 1
                 return None
-            
-            # Check if domain is high-quality
             domain_info = None
             for hq_domain, info in self.high_quality_domains.items():
                 if hq_domain in domain:
                     domain_info = info
                     break
-            
             if not domain_info:
-                # Check for quality file extensions
                 path = parsed.path.lower()
                 quality_score = 0
                 for ext, score in self.quality_extensions.items():
@@ -186,72 +210,46 @@ class FreshResourceDetector:
                         quality_score = score
                         domain_info = {'category': 'Documents', 'score': score}
                         break
-                
                 if not domain_info:
                     self.stats['unknown_domains'] += 1
-                    
-                    # Track unknown domains for analysis
                     if analyze_unknown:
                         self.unknown_domains[domain] += 1
-                        if len(self.unknown_samples[domain]) < 3:  # Keep up to 3 sample URLs per domain
+                        if len(self.unknown_samples[domain]) < 3:
                             self.unknown_samples[domain].append({
                                 'url': url,
-                                'context': message.get('content', '')[:200],
                                 'channel': channel_name,
                                 'author': message.get('author', {}).get('username', 'Unknown')
                             })
-                    
                     return None
-            
-            # Create resource metadata
+            # --- NEW EXPORT STRUCTURE ---
+            author_display = message.get('author', {}).get('display_name') or message.get('author', {}).get('username', 'Unknown')
+            # Format timestamp as YYYY-MM-DD
+            raw_ts = message.get('timestamp')
+            try:
+                ts = datetime.fromisoformat(raw_ts)
+                ts_str = ts.strftime('%Y-%m-%d')
+            except Exception:
+                ts_str = raw_ts[:10] if raw_ts else ''
+            jump_url = message.get('jump_url')
+            description = self._generate_description(message, url)
             resource = {
                 'url': url,
                 'domain': domain,
                 'category': domain_info['category'],
                 'quality_score': domain_info['score'],
-                'message_id': message.get('message_id'),
                 'channel_name': channel_name,
-                'author': message.get('author', {}).get('username', 'Unknown'),
-                'timestamp': message.get('timestamp'),
-                'content_preview': self._extract_content_preview(message.get('content', '')),
-                'context': self._extract_context(message.get('content', ''), url)
+                'author': author_display,
+                'timestamp': ts_str,
+                'jump_url': jump_url,
+                'description': description
             }
-            
-            # Boost score for certain contexts
             content_lower = message.get('content', '').lower()
             if any(keyword in content_lower for keyword in ['paper', 'research', 'study', 'tutorial']):
                 resource['quality_score'] = min(1.0, resource['quality_score'] + 0.1)
-            
             return resource
-            
         except Exception as e:
             self.stats['parsing_errors'] += 1
             return None
-    
-    def _extract_content_preview(self, content: str) -> str:
-        """Extract a clean preview of the message content"""
-        # Remove URLs from preview
-        preview = re.sub(r'https?://[^\s\n\r<>"\']+', '[URL]', content)
-        
-        # Clean up whitespace
-        preview = ' '.join(preview.split())
-        
-        # Truncate to reasonable length
-        return preview[:300] + '...' if len(preview) > 300 else preview
-    
-    def _extract_context(self, content: str, url: str) -> str:
-        """Extract context around the URL"""
-        # Find the sentence containing the URL
-        sentences = content.split('.')
-        for sentence in sentences:
-            if url in sentence:
-                return sentence.strip()
-        
-        # Fallback to first sentence
-        if sentences:
-            return sentences[0].strip()
-        
-        return ""
     
     def _generate_report(self, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Generate comprehensive analysis report"""
@@ -292,7 +290,6 @@ class FreshResourceDetector:
                 samples = self.unknown_samples[domain]
                 for i, sample in enumerate(samples[:2]):  # Show first 2 samples
                     print(f"      {i+1}. {sample['url'][:70]}...")
-                    print(f"         Context: {sample['context'][:80]}...")
                     print(f"         Channel: {sample['channel']} | Author: {sample['author']}")
                 print()
             
@@ -319,7 +316,7 @@ class FreshResourceDetector:
         for i, resource in enumerate(sorted_resources[:10]):
             print(f"   {i+1}. [{resource['category']}] {resource['url']}")
             print(f"      Quality: {resource['quality_score']:.2f} | Author: {resource['author']}")
-            print(f"      Context: {resource['context'][:80]}...")
+            print(f"      Description: {resource['description'][:80]}...")
             print()
         
         return {
