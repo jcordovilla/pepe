@@ -1,104 +1,120 @@
-# Test Suite Documentation
+# Discord Bot Test Suite
 
-This directory contains all test files for the Discord Bot v2 project.
+## Overview
 
-## Directory Structure
+Streamlined test suite focused on Discord bot core functionality and production readiness.
 
-### `/reaction_search/` - Reaction Search Functionality Tests
-- `test_reaction_functionality.py` - Comprehensive test of all reaction search components
-- `test_production_reaction_search.py` - Production-ready test with realistic Discord data
-- `test_simple_reaction_search.py` - Simple test for existing data verification
+## Test Structure
 
-### `/debug/` - Debug and Development Tests
-- `test_chromadb_embedding_fix.py` - ChromaDB compatibility diagnostics
-- `test_chromadb_isolated.py` - Isolated ChromaDB functionality test
-- `test_vector_store_simple.py` - Basic vector store operations test
-- `debug_batch_operations.py` - Batch processing debugging
-- `debug_collection_operations.py` - Collection operations debugging
+### Core Test Files
 
-### Root Level Analytics Tests
-- `test_analytics_integration.py` - Analytics system integration test
-- `test_analytics_structure.py` - Analytics database structure validation
+- **`test_discord_bot_core.py`** - Core functionality tests
+  - Vector store operations
+  - Agent API functionality  
+  - Discord bot commands
+  - Forum channel support
+  - Sync operations
+  - Resource management
+
+- **`test_integration.py`** - Integration tests
+  - End-to-end workflows
+  - Admin CLI integration
+  - Resource management integration
+  - Performance testing
+
+- **`run_all_tests.py`** - Unified test runner
+  - Quick smoke tests
+  - Core functionality tests
+  - Integration tests
+  - Performance benchmarks
+  - Comprehensive reporting
 
 ## Running Tests
 
-**Important**: All tests must be run from the project root directory to ensure correct module imports.
-
-### Reaction Search Tests
+### Quick Start
 ```bash
-# Run comprehensive reaction search test
-python3 -m tests.reaction_search.test_reaction_functionality
+# Run all tests
+python tests/run_all_tests.py
 
-# Run production test with realistic data
-python3 -m tests.reaction_search.test_production_reaction_search
+# Quick smoke tests only
+python tests/run_all_tests.py --quick
 
-# Run production test (moved from root)
-python3 -m tests.reaction_search.test_production_real
+# Core functionality only  
+python tests/run_all_tests.py --core
 
-# Test with existing data
-python3 -m tests.reaction_search.test_simple_reaction_search
+# Integration tests only
+python tests/run_all_tests.py --integration
+
+# Performance benchmarks
+python tests/run_all_tests.py --performance
 ```
 
-### Main Bot Integration Tests
+### Individual Test Suites
 ```bash
-# Test main bot integration
-python3 -m tests.test_main_bot_integration
+# Core functionality tests
+pytest tests/test_discord_bot_core.py -v
+
+# Integration tests
+pytest tests/test_integration.py -m integration -v
 ```
 
-### Debug Tests
-```bash
-# Test ChromaDB compatibility
-python3 tests/debug/test_chromadb_embedding_fix.py
+## Test Categories
 
-# Test isolated ChromaDB operations
-python3 tests/debug/test_chromadb_isolated.py
+### 🚀 Quick Tests (< 30 seconds)
+- Environment validation
+- Module imports
+- Basic configuration
+- System initialization
 
-# Debug batch operations
-python3 tests/debug/debug_batch_operations.py
-```
+### 🔧 Core Tests (1-3 minutes)
+- Vector store functionality
+- Agent API operations
+- Discord command processing
+- Data sync operations
 
-### Analytics Tests
-```bash
-# Test analytics integration
-python3 tests/test_analytics_integration.py
+### 🔗 Integration Tests (3-5 minutes)
+- End-to-end workflows
+- Admin CLI operations
+- Multi-component interactions
+- Resource management
 
-# Validate analytics structure
-python3 tests/test_analytics_structure.py
-```
+### 📊 Performance Tests (2-5 minutes)
+- Response time benchmarks
+- Concurrent operation handling
+- Memory usage validation
+- Bulk processing performance
 
-## Test Status
+## Production Readiness
 
-✅ **All reaction search functionality tests PASSING**
-✅ **ChromaDB compatibility issues RESOLVED**
-✅ **Analytics integration tests PASSING**
-✅ **System ready for production deployment**
+The test suite assesses production readiness based on:
 
-## Recent Achievements
+- **95%+ Success Rate**: Production ready 🎉
+- **80-94% Success Rate**: Mostly ready, minor issues ⚠️
+- **<80% Success Rate**: Critical issues, not ready ❌
 
-- **June 3, 2025**: Completed reaction search functionality implementation
-- **June 3, 2025**: Resolved ChromaDB embedding compatibility issues
-- **June 3, 2025**: Successfully validated production-ready scenarios
-- **June 3, 2025**: All integration tests passing
+## Test Reports
 
-## Key Features Tested
+Test reports are automatically generated in `tests/reports/` with:
+- Detailed test results
+- Performance metrics
+- Environment information
+- Production readiness assessment
 
-1. **Reaction Search Capabilities**
-   - Search messages by specific emoji reactions
-   - Find most reacted messages overall
-   - Channel-specific reaction searches
-   - Time-based reaction filtering
+## Legacy Tests
 
-2. **Multi-Agent Integration**
-   - SearchAgent reaction search methods
-   - QueryAnalyzer pattern recognition
-   - Vector store API integration
+Legacy and redundant tests have been archived in `tests/archive/legacy_tests_*/`
+for reference but are not part of the active test suite.
 
-3. **System Performance**
-   - Concurrent search handling
-   - Caching optimization
-   - Error handling and recovery
+## Requirements
 
-4. **Production Readiness**
-   - Real Discord data simulation
-   - Performance benchmarking
-   - Health monitoring
+- Python 3.11+
+- Poetry environment
+- OpenAI API key
+- Discord bot token
+- All project dependencies installed
+
+## Continuous Integration
+
+This test suite is designed for CI/CD integration with clear exit codes:
+- Exit 0: Tests passed (≥80% success rate)
+- Exit 1: Tests failed (<80% success rate)
