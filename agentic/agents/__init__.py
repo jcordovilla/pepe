@@ -10,6 +10,7 @@ from .planning_agent import PlanningAgent
 from .search_agent import SearchAgent
 from .analysis_agent import AnalysisAgent
 from .digest_agent import DigestAgent
+from .query_interpreter_agent import QueryInterpreterAgent
 
 __all__ = [
     "BaseAgent",
@@ -22,5 +23,6 @@ __all__ = [
     "PlanningAgent",
     "SearchAgent", 
     "AnalysisAgent",
-    "DigestAgent"
+    "DigestAgent",
+    "QueryInterpreterAgent"
 ]

@@ -1,0 +1,543 @@
+{
+  "timestamp": "2025-07-06T21:24:22.670762",
+  "test_type": "query_interpreter_agent",
+  "results": [
+    {
+      "query": "summarise the messages from #general in the past week",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.010005,
+      "success": true
+    },
+    {
+      "query": "what can you do?",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.003384,
+      "success": true
+    },
+    {
+      "query": "search for messages about Python programming",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.005336,
+      "success": true
+    },
+    {
+      "query": "find messages with reactions in #help",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.00501,
+      "success": true
+    },
+    {
+      "query": "analyze the discussion trends in the last month",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.00493,
+      "success": true
+    },
+    {
+      "query": "extract skills mentioned in the tech channel",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.003283,
+      "success": true
+    },
+    {
+      "query": "show me the latest messages from @john",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.002864,
+      "success": true
+    },
+    {
+      "query": "what resources were shared recently?",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.002506,
+      "success": true
+    },
+    {
+      "query": "create a weekly digest of activity",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.00252,
+      "success": true
+    },
+    {
+      "query": "search for messages containing 'bug' or 'error'",
+      "interpretation": {
+        "intent": "summarize",
+        "entities": [
+          {
+            "type": "channel",
+            "value": "1371647370911154228",
+            "confidence": 0.95
+          },
+          {
+            "type": "time_range",
+            "value": "past week",
+            "confidence": 0.9
+          }
+        ],
+        "subtasks": [
+          {
+            "task_type": "filtered_search",
+            "description": "Retrieve messages from the specified channel in the past week",
+            "parameters": {
+              "query": "messages from past week",
+              "filters": {
+                "channel_id": "1371647370911154228",
+                "time_range": "past week"
+              },
+              "k": 50,
+              "sort_by": "timestamp"
+            },
+            "dependencies": []
+          },
+          {
+            "task_type": "summarize",
+            "description": "Create a summary of the retrieved messages",
+            "parameters": {
+              "content_source": "search_results",
+              "summary_type": "overview",
+              "focus_areas": [
+                "key topics",
+                "main discussions"
+              ]
+            },
+            "dependencies": [
+              "filtered_search"
+            ]
+          }
+        ],
+        "confidence": 0.95,
+        "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+      },
+      "duration": 0.002983,
+      "success": true
+    }
+  ],
+  "summary": {
+    "total_tests": 10,
+    "successful_tests": 10,
+    "failed_tests": 0,
+    "avg_duration": 0.0042821,
+    "avg_confidence": 0.95
+  }
+}

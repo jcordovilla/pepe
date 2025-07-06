@@ -435,7 +435,6 @@ class ComprehensiveAgentQualityTest:
         config = {
             "agents": {},
             "memory": {"db_path": "data/conversation_memory.db"},
-            "query_analyzer": {},
             "task_planner": {}
         }
         

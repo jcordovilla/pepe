@@ -41,31 +41,11 @@ async def main():
         # Import and initialize the Discord interface
         from agentic.interfaces.discord_interface import DiscordInterface
         
+        # Import modernized configuration
+        from agentic.config.modernized_config import get_modernized_config
+        
         # Configuration for the agentic system
-        config = {
-            'orchestrator': {
-                'memory_config': {
-                    'db_path': 'data/conversation_memory.db',
-                    'max_history_length': 50,
-                    'context_window_hours': 24
-                }
-            },
-            'vector_store': {
-                'persist_directory': './data/chromadb',
-                'collection_name': 'discord_messages',
-                'embedding_model': 'text-embedding-3-small',
-                'batch_size': 100
-            },
-            'cache': {
-                'redis_url': 'redis://localhost:6379',
-                'default_ttl': 3600
-            },
-            'discord': {
-                'token': os.getenv('DISCORD_TOKEN'),
-                'guild_id': os.getenv('GUILD_ID'),
-                'command_prefix': '!'
-            }
-        }
+        config = get_modernized_config()
         
         # Initialize Discord interface
         discord_bot = DiscordInterface(config)

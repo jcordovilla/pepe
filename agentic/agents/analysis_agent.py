@@ -363,9 +363,23 @@ Summary requirements:
         return base_prompt
     
     async def _generate_llm_summary(self, prompt: str) -> str:
-        """Generate summary using LLM (placeholder for actual implementation)."""
-        # TODO: Implement actual LLM call
-        return "Summary placeholder - implement LLM integration"
+        """Generate summary using the unified LLM client."""
+        try:
+            from ..services.llm_client import get_llm_client
+            llm_client = get_llm_client()
+            
+            # Generate summary using the same Llama model
+            summary = await llm_client.generate(
+                prompt=prompt,
+                max_tokens=self.summary_length * 2,  # Allow for longer summaries
+                temperature=0.3  # Slightly higher temperature for creative summaries
+            )
+            
+            return summary.strip()
+            
+        except Exception as e:
+            logger.error(f"Error generating LLM summary: {e}")
+            return "Unable to generate summary due to LLM error."
     
     def _compile_skill_patterns(self) -> List[re.Pattern]:
         """Compile regex patterns for skill extraction."""

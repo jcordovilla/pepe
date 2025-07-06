@@ -22,12 +22,23 @@ def get_modernized_config() -> Dict[str, Any]:
             "max_retries": 3  # From legacy error handling
         },
         
+        # Unified LLM configuration for all modules
+        "llm": {
+            "endpoint": os.getenv("LLM_ENDPOINT", "http://localhost:11434/api/generate"),
+            "model": os.getenv("LLM_MODEL", "llama3.1:8b"),  # Recommended: newer, better model
+            "max_tokens": int(os.getenv("LLM_MAX_TOKENS", "2048")),
+            "temperature": float(os.getenv("LLM_TEMPERATURE", "0.1")),
+            "timeout": int(os.getenv("LLM_TIMEOUT", "30")),
+            "retry_attempts": int(os.getenv("LLM_RETRY_ATTEMPTS", "3")),
+            "fallback_model": "llama2:latest"  # Fallback if primary model fails
+        },
+        
         # Modern unified data layer
         "data": {
             "vector_config": {
                 "persist_directory": "./data/chromadb",
                 "collection_name": "discord_messages",
-                "embedding_model": "text-embedding-3-small",  # Modernized from ada-002
+                "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
                 "batch_size": 100  # From legacy batch processing
             },
             "memory_config": {
@@ -46,11 +57,10 @@ def get_modernized_config() -> Dict[str, Any]:
             }
         },
         
-        # Enhanced OpenAI configuration
+        # Enhanced OpenAI configuration (for embeddings only)
         "openai": {
             "api_key": os.getenv("OPENAI_API_KEY"),
-            "embedding_model": "text-embedding-3-small",  # Modernized
-            "llm_model": "gpt-4",  # Enhanced from legacy
+            "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
             "max_tokens": 4000,
             "temperature": 0.1  # From legacy proven settings
         },

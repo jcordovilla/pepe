@@ -12,8 +12,7 @@ import asyncio
 import json
 from collections import defaultdict
 
-from openai import OpenAI
-import os
+from ..services.llm_client import get_llm_client
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +20,7 @@ logger = logging.getLogger(__name__)
 class EnhancedConversationMemory:
     """
     Advanced conversation memory with intelligent features:
-    - Smart summarization using LLM
+    - Smart summarization using unified LLM
     - User preference learning
     - Context-aware retrieval
     - Semantic clustering of conversations
@@ -29,7 +28,7 @@ class EnhancedConversationMemory:
     
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-        self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.llm_client = get_llm_client()
         
         # Memory configuration
         self.max_active_memory = config.get("max_active_memory", 50)
@@ -228,18 +227,12 @@ class EnhancedConversationMemory:
             Provide a concise but comprehensive summary:
             """
             
-            response = await asyncio.to_thread(
-                self.openai_client.chat.completions.create,
-                model="gpt-4-turbo",
-                messages=[
-                    {"role": "system", "content": "You are an expert at conversation summarization."},
-                    {"role": "user", "content": summary_prompt}
-                ],
+            summary = await self.llm_client.generate(
+                prompt=summary_prompt,
+                system_prompt="You are an expert at conversation summarization.",
                 max_tokens=500,
                 temperature=0.1
             )
-            
-            summary = response.choices[0].message.content
             return summary or "No significant conversation patterns identified."
             
         except Exception as e:

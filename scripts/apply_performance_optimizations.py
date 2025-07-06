@@ -29,7 +29,7 @@ def optimize_vector_store_config():
     config = {
         "collection_name": "discord_messages",
         "persist_directory": "./data/chromadb",
-        "embedding_model": "text-embedding-3-small",
+        "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
         "batch_size": 150,  # Increased for better performance
         "max_workers": 3,   # Parallel processing
         "cache": {

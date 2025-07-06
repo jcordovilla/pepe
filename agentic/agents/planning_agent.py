@@ -9,7 +9,6 @@ import logging
 from datetime import datetime
 
 from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, agent_registry
-from ..reasoning.query_analyzer import QueryAnalyzer
 from ..reasoning.task_planner import TaskPlanner
 
 logger = logging.getLogger(__name__)
@@ -28,7 +27,6 @@ class PlanningAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.PLANNER, config)
         
-        self.query_analyzer = QueryAnalyzer(config.get("query_analyzer", {}))
         self.task_planner = TaskPlanner(config.get("task_planner", {}))
         
         # Planning configuration
@@ -57,19 +55,15 @@ class PlanningAgent(BaseAgent):
             
             # Step 1: Analyze the query
             logger.info(f"Analyzing query: {query[:100]}...")
-            analysis = await self.query_analyzer.analyze(query)
             
             # Update state with analysis
-            state["query_analysis"] = analysis
-            state["intent"] = analysis["intent"]
-            state["entities"] = analysis["entities"]
-            state["complexity_score"] = analysis.get("complexity_score", 0.5)
+            state["complexity_score"] = 0.5
             
             # Step 2: Create execution plan
-            logger.info(f"Creating execution plan for intent: {analysis['intent']}")
+            logger.info(f"Creating execution plan for intent: {state['intent']}")
             execution_plan = await self.task_planner.create_plan(
                 query=query,
-                analysis=analysis,
+                analysis=state,
                 context=state.get("context", {})
             )
             
@@ -87,7 +81,7 @@ class PlanningAgent(BaseAgent):
             state["metadata"]["planning_agent"] = {
                 "analysis_time": datetime.utcnow().isoformat(),
                 "subtask_count": len(optimized_plan.subtasks),
-                "complexity_score": analysis.get("complexity_score", 0.5),
+                "complexity_score": state.get("complexity_score", 0.5),
                 "optimization_applied": optimized_plan != execution_plan
             }
             
@@ -197,8 +191,7 @@ class PlanningAgent(BaseAgent):
             Complexity score between 0.0 and 1.0
         """
         try:
-            analysis = await self.query_analyzer.analyze(query)
-            return analysis.get("complexity_score", 0.5)
+            return 0.5
         except Exception as e:
             logger.error(f"Error estimating complexity: {e}")
             return 0.5

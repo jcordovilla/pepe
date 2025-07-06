@@ -36,7 +36,7 @@ class PersistentVectorStore:
         # Configuration
         self.collection_name = config.get("collection_name", "discord_messages")
         self.persist_directory = config.get("persist_directory", "./data/chromadb")
-        self.embedding_model = config.get("embedding_model", "text-embedding-3-small")
+        self.embedding_model = config.get("embedding_model", os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"))
         self.chunk_size = config.get("chunk_size", 1000)
         self.batch_size = config.get("batch_size", 100)
         

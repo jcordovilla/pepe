@@ -331,7 +331,7 @@ class ChannelResolver:
             config = {
                 "collection_name": "discord_messages",
                 "persist_directory": "./data/chromadb",
-                "embedding_model": "text-embedding-3-small"
+                "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
             }
             vector_store = PersistentVectorStore(config)
             

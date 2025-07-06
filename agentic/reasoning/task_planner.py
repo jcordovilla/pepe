@@ -77,11 +77,11 @@ class TaskPlanner:
         context: Dict[str, Any]
     ) -> ExecutionPlan:
         """
-        Create an execution plan based on query analysis.
+        Create an execution plan based on LLM query interpretation.
         
         Args:
             query: User's query
-            analysis: Query analysis results
+            analysis: Query interpretation results from QueryInterpreterAgent
             context: Additional context
             
         Returns:
@@ -91,128 +91,106 @@ class TaskPlanner:
             # Generate unique plan ID
             plan_id = f"plan_{int(time.time())}_{uuid.uuid4().hex[:8]}"
             
-            # Create subtasks based on intent
+            # Get interpretation results
+            interpretation = analysis.get("query_interpretation", {})
+            suggested_subtasks = interpretation.get("subtasks", [])
+            
+            # Create subtasks from LLM interpretation
             subtasks = []
             
-            intent = analysis.get("intent")
+            for i, suggested_subtask in enumerate(suggested_subtasks):
+                # Map task_type to agent role
+                agent_role = self._map_task_type_to_role(suggested_subtask.get("task_type", "search"))
+                
+                # Create SubTask from LLM suggestion
+                subtask = SubTask(
+                    id=f"{suggested_subtask.get('task_type', 'task')}_{i}_{uuid.uuid4().hex[:8]}",
+                    description=suggested_subtask.get("description", f"Perform {suggested_subtask.get('task_type', 'task')}"),
+                    agent_role=agent_role,
+                    task_type=suggested_subtask.get("task_type", "search"),
+                    parameters=suggested_subtask.get("parameters", {}),
+                    dependencies=suggested_subtask.get("dependencies", []),
+                    created_at=datetime.utcnow()
+                )
+                subtasks.append(subtask)
             
-            if intent == "capability":
-                # Handle capability/meta queries
-                subtask = SubTask(
-                    id=f"capability_{uuid.uuid4().hex[:8]}",
-                    description="Generate capability information and help documentation",
-                    agent_role=AgentRole.ANALYZER,
-                    task_type="capability_response",
-                    parameters={
-                        "query": query,
-                        "response_type": "capability"
-                    },
-                    dependencies=[],
-                    created_at=datetime.utcnow()
-                )
-                subtasks.append(subtask)
-                
-            elif intent in self.task_templates:
-                # Use template-based planning for known intents
-                template = self.task_templates[intent]
-                for i, task_def in enumerate(template):
-                    subtask = SubTask(
-                        id=f"{intent}_{i}_{uuid.uuid4().hex[:8]}",
-                        description=task_def["description"],
-                        agent_role=task_def["role"],
-                        task_type=task_def.get("task_type", intent),
-                        parameters=self._build_task_parameters(query, analysis, analysis.get("entities", []), context),
-                        dependencies=self._determine_dependencies(i, template),
-                        created_at=datetime.utcnow()
-                    )
-                    subtasks.append(subtask)
-                    
-            elif analysis.get("intent") == "search":
-                # Extract entities and build filters
-                entities = analysis.get("entities", [])
-                filters = {}
-                k = self.default_k
-                
-                # Build filters from entities
-                for entity in entities:
-                    entity_type = entity["type"]
-                    entity_value = entity["value"]
-                    
-                    if entity_type == "channel":
-                        # Use channel_id if available, resolve to channel name
-                        channel_id = entity.get("channel_id")
-                        if channel_id:
-                            # Import channel resolver to get the full channel name
-                            from ..services.channel_resolver import ChannelResolver
-                            resolver = ChannelResolver()
-                            resolved_name = resolver.resolve_channel_id_to_name(channel_id)
-                            
-                            if resolved_name:
-                                filters["channel_name"] = resolved_name
-                                logger.info(f"Resolved channel ID {channel_id} to '{resolved_name}'")
-                            else:
-                                # Fallback to channel_id filter if resolution fails
-                                filters["channel_id"] = channel_id
-                                logger.warning(f"Could not resolve channel ID {channel_id}, using as filter")
-                        else:
-                            filters["channel_name"] = entity_value
-                            logger.warning(f"Channel ID not resolved for '{entity_value}', using channel_name filter")
-                    elif entity_type == "user":
-                        filters["author_username"] = entity_value
-                    elif entity_type == "count":
-                        try:
-                            k = int(entity_value)
-                        except (ValueError, TypeError):
-                            k = self.default_k
-                    elif entity_type == "time_range":
-                        start = entity.get("start")
-                        end = entity.get("end")
-                        if start and end:
-                            filters["timestamp"] = {"$gte": start, "$lte": end}
-                
-                # Determine search type based on query intent
-                search_type = "search"  # Default semantic search
-                sort_by = None
-                
-                # Check if this is a temporal query (last X, recent X, etc.)
-                query_lower = query.lower()
-                temporal_keywords = ["last", "recent", "latest", "newest", "chronological"]
-                if any(keyword in query_lower for keyword in temporal_keywords):
-                    search_type = "filtered_search"  # Use filtered search for temporal queries
-                    sort_by = "timestamp"  # Sort by timestamp (newest first)
-                    logger.info(f"Detected temporal query, using filtered search with timestamp sorting")
-                
-                # Create search subtask
-                subtask = SubTask(
-                    id=f"search_{uuid.uuid4().hex[:8]}",
-                    description="Search for relevant messages",
+            # If no subtasks were suggested, create a fallback search task
+            if not subtasks:
+                logger.warning("No subtasks suggested by LLM, creating fallback search task")
+                fallback_subtask = SubTask(
+                    id=f"fallback_search_{uuid.uuid4().hex[:8]}",
+                    description="Search for relevant messages (fallback)",
                     agent_role=AgentRole.SEARCHER,
-                    task_type=search_type,  # Use determined search type
+                    task_type="semantic_search",
                     parameters={
                         "query": query,
-                        "filters": filters,
-                        "k": k,
-                        "sort_by": sort_by  # Add sorting parameter
+                        "filters": {},
+                        "k": self.default_k
                     },
                     dependencies=[],
                     created_at=datetime.utcnow()
                 )
-                subtasks.append(subtask)
+                subtasks.append(fallback_subtask)
             
             # Create execution plan
             plan = ExecutionPlan(
                 id=plan_id,
-                query=query,
                 subtasks=subtasks,
+                status=TaskStatus.PENDING,
                 created_at=datetime.utcnow()
             )
             
-            logger.info(f"Created execution plan with {len(subtasks)} subtasks for intent: {analysis.get('intent')}")
+            # Optimize the plan
+            plan = await self.optimize_plan(plan)
+            
+            logger.info(f"Created execution plan with {len(subtasks)} subtasks from LLM interpretation")
             return plan
             
         except Exception as e:
             logger.error(f"Error creating execution plan: {e}")
-            raise
+            # Return minimal fallback plan
+            fallback_subtask = SubTask(
+                id=f"error_fallback_{uuid.uuid4().hex[:8]}",
+                description="Search for relevant messages (error fallback)",
+                agent_role=AgentRole.SEARCHER,
+                task_type="semantic_search",
+                parameters={"query": query, "filters": {}, "k": self.default_k},
+                dependencies=[],
+                created_at=datetime.utcnow()
+            )
+            
+            return ExecutionPlan(
+                id=f"error_plan_{int(time.time())}_{uuid.uuid4().hex[:8]}",
+                subtasks=[fallback_subtask],
+                status=TaskStatus.PENDING,
+                created_at=datetime.utcnow()
+            )
+    
+    def _map_task_type_to_role(self, task_type: str) -> AgentRole:
+        """
+        Map task type to appropriate agent role.
+        
+        Args:
+            task_type: Type of task
+            
+        Returns:
+            Agent role for the task
+        """
+        search_tasks = ["search", "semantic_search", "keyword_search", "filtered_search", "reaction_search"]
+        analysis_tasks = ["summarize", "analyze", "extract_insights", "classify_content", "extract_skills", "analyze_trends", "capability_response"]
+        digest_tasks = ["weekly_digest", "monthly_digest"]
+        resource_tasks = ["resource_search"]
+        
+        if task_type in search_tasks:
+            return AgentRole.SEARCHER
+        elif task_type in analysis_tasks:
+            return AgentRole.ANALYZER
+        elif task_type in digest_tasks:
+            return AgentRole.ANALYZER  # Digest tasks use analyzer
+        elif task_type in resource_tasks:
+            return AgentRole.RESOURCE_MANAGER
+        else:
+            return AgentRole.SEARCHER  # Default to searcher
     
     def _build_task_parameters(
         self, 

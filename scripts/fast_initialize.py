@@ -99,7 +99,7 @@ async def fast_vector_store_init() -> bool:
         config = {
             "collection_name": "discord_messages",
             "persist_directory": "./data/chromadb", 
-            "embedding_model": "text-embedding-3-small",
+            "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
             "batch_size": 100,  # Larger batches for speed
             "cache": {"type": "memory", "ttl": 3600}
         }
@@ -276,7 +276,7 @@ async def verify_system() -> bool:
         vector_config = {
             "collection_name": "discord_messages",
             "persist_directory": "./data/chromadb",
-            "embedding_model": "text-embedding-3-small"
+            "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
         }
         vector_store = PersistentVectorStore(vector_config)
         if vector_store.collection is not None:

@@ -10,11 +10,10 @@ __author__ = "Jose Cordovilla"
 
 from .agents import AgentOrchestrator
 from .memory import ConversationMemory
-from .reasoning import QueryAnalyzer, TaskPlanner
+from .reasoning import TaskPlanner
 
 __all__ = [
     "AgentOrchestrator",
     "ConversationMemory",
-    "QueryAnalyzer",
     "TaskPlanner"
 ]

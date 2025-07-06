@@ -76,7 +76,6 @@ print("     • Proper error handling and fallback mechanisms")
 print("\n📁 KEY FILES MODIFIED:")
 print("  • agentic/vectorstore/persistent_store.py - Main reaction search logic")
 print("  • agentic/agents/search_agent.py - Agent integration")
-print("  • agentic/reasoning/query_analyzer.py - Query pattern recognition")
 print("  • agentic/services/discord_message_service.py - Message and reaction data capture")
 print("  • test_reaction_functionality.py - Comprehensive test suite")
 

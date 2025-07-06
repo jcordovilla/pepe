@@ -16,7 +16,7 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, ExecutionPlan, TaskStatus, agent_registry
 from ..memory.conversation_memory import ConversationMemory
-from ..reasoning.query_analyzer import QueryAnalyzer
+from .query_interpreter_agent import QueryInterpreterAgent
 from ..reasoning.task_planner import TaskPlanner
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ class AgentOrchestrator:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.conversation_memory = ConversationMemory(config.get("memory", {}))
-        self.query_analyzer = QueryAnalyzer(config.get("query_analyzer", {}))
+        self.query_interpreter_agent = QueryInterpreterAgent(config.get("query_interpreter", {}))
         self.task_planner = TaskPlanner(config.get("task_planner", {}))
         
         # Initialize LangGraph workflow
@@ -132,35 +132,43 @@ class AgentOrchestrator:
             }
     
     async def _analyze_query_node(self, state: AgentState) -> AgentState:
-        """Analyze the user query to understand intent and extract entities"""
+        """Interpret the user query using LLM to understand intent and extract entities"""
         try:
-            query = state["user_context"]["query"]
-            analysis = await self.query_analyzer.analyze(query, state["user_context"])
-
-            state["metadata"]["query_analysis"] = analysis
-            state["metadata"]["intent"] = analysis.get("intent", "unknown")
-            state["metadata"]["entities"] = analysis.get("entities", [])
-            state["entities"] = analysis.get("grouped_entities", {})
+            # Use QueryInterpreterAgent to interpret the query
+            interpretation_state = await self.query_interpreter_agent.process(state)
             
-            logger.info(f"Query analyzed: intent={analysis.get('intent')}")
+            # Extract interpretation results
+            interpretation = interpretation_state.get("query_interpretation", {})
+            
+            # Update state with interpretation results
+            state["query_interpretation"] = interpretation
+            state["metadata"]["intent"] = interpretation.get("intent", "unknown")
+            state["metadata"]["entities"] = interpretation.get("entities", [])
+            state["metadata"]["interpretation_confidence"] = interpretation.get("confidence", 0.0)
+            state["metadata"]["interpretation_rationale"] = interpretation.get("rationale", "")
+            
+            logger.info(f"Query interpreted: intent={interpretation.get('intent')}, confidence={interpretation.get('confidence', 0.0)}")
             return state
             
         except Exception as e:
-            logger.error(f"Error in query analysis: {str(e)}")
-            state["metadata"]["analysis_error"] = str(e)
+            logger.error(f"Error in query interpretation: {str(e)}")
+            state["metadata"]["interpretation_error"] = str(e)
             return state
     
     async def _plan_execution_node(self, state: AgentState) -> AgentState:
-        """Create an execution plan based on query analysis"""
+        """Create an execution plan based on LLM query interpretation"""
         try:
             query = state["user_context"]["query"]
-            analysis = state["metadata"].get("query_analysis", {})
+            # Use the interpretation results instead of analysis
+            interpretation_data = {
+                "query_interpretation": state.get("query_interpretation", {})
+            }
             
-            # Create execution plan
-            plan = await self.task_planner.create_plan(query, analysis, state["user_context"])
+            # Create execution plan using interpretation
+            plan = await self.task_planner.create_plan(query, interpretation_data, state["user_context"])
             state["task_plan"] = plan
             
-            logger.info(f"Execution plan created with {len(plan.subtasks)} subtasks")
+            logger.info(f"Execution plan created with {len(plan.subtasks)} subtasks from LLM interpretation")
             return state
             
         except Exception as e:
