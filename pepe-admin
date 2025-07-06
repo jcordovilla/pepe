@@ -149,12 +149,17 @@ class PepeAdmin:
                 'total_channels': 0,
                 'text_channels': 0,
                 'voice_channels': 0,
+                'forum_channels': 0,
                 'channels_with_data': 0,
                 'channels_without_data': 0,
+                'forums_with_threads': 0,
+                'forums_without_threads': 0,
+                'total_threads_found': 0,
                 'total_messages_processed': 0,
                 'total_json_files': 0,
                 'processing_errors': 0,
                 'fetched_channels': set(),
+                'forum_thread_counts': {},
                 'all_channels': {},
                 'start_time': datetime.now()
             }
@@ -242,20 +247,53 @@ class PepeAdmin:
                             
                             # Gather channel statistics
                             for channel in guild.channels:
-                                sync_stats['all_channels'][str(channel.id)] = {
+                                channel_info = {
                                     'name': channel.name,
                                     'type': str(channel.type),
                                     'category': channel.category.name if channel.category else 'No Category'
                                 }
                                 
-                                if isinstance(channel, discord.TextChannel):
+                                # Handle forum channels specially
+                                if isinstance(channel, discord.ForumChannel):
+                                    sync_stats['forum_channels'] += 1
+                                    channel_info['type'] = 'forum'
+                                    
+                                    # Get forum threads
+                                    try:
+                                        threads = []
+                                        async for thread in channel.archived_threads(limit=None):
+                                            threads.append(thread)
+                                        
+                                        # Get active threads
+                                        for thread in channel.threads:
+                                            threads.append(thread)
+                                        
+                                        thread_count = len(threads)
+                                        sync_stats['forum_thread_counts'][str(channel.id)] = thread_count
+                                        sync_stats['total_threads_found'] += thread_count
+                                        
+                                        if thread_count > 0:
+                                            sync_stats['forums_with_threads'] += 1
+                                        else:
+                                            sync_stats['forums_without_threads'] += 1
+                                        
+                                        channel_info['thread_count'] = thread_count
+                                        print(f"   📋 Forum #{channel.name}: {thread_count} threads")
+                                        
+                                    except Exception as e:
+                                        print(f"   ⚠️ Error fetching threads for forum #{channel.name}: {e}")
+                                        sync_stats['forums_without_threads'] += 1
+                                        channel_info['thread_count'] = 0
+                                
+                                elif isinstance(channel, discord.TextChannel):
                                     sync_stats['text_channels'] += 1
                                 elif isinstance(channel, discord.VoiceChannel):
                                     sync_stats['voice_channels'] += 1
                                 
+                                sync_stats['all_channels'][str(channel.id)] = channel_info
                                 sync_stats['total_channels'] += 1
                             
-                            # Calculate channels with/without data
+                            # Calculate channels with/without data (excluding forum channels for now)
                             sync_stats['channels_with_data'] = len(sync_stats['fetched_channels'])
                             sync_stats['channels_without_data'] = sync_stats['text_channels'] - sync_stats['channels_with_data']
                             
@@ -303,6 +341,17 @@ class PepeAdmin:
             print(f"   📊 Total Channels: {stats['total_channels']}")
             print(f"   💬 Text Channels: {stats['text_channels']}")
             print(f"   🔊 Voice Channels: {stats['voice_channels']}")
+            print(f"   📋 Forum Channels: {stats['forum_channels']}")
+            
+            # Forum channel statistics
+            if stats['forum_channels'] > 0:
+                print(f"\n📋 Forum Channel Analysis:")
+                print(f"   🧵 Total Threads Found: {stats['total_threads_found']}")
+                print(f"   ✅ Forums with Threads: {stats['forums_with_threads']}")
+                print(f"   ❌ Forums without Threads: {stats['forums_without_threads']}")
+                if stats['forums_with_threads'] > 0:
+                    avg_threads = stats['total_threads_found'] / stats['forums_with_threads']
+                    print(f"   📊 Average Threads per Active Forum: {avg_threads:.1f}")
             
             # Channel data coverage
             print(f"\n📈 Data Coverage:")
@@ -346,6 +395,10 @@ class PepeAdmin:
                         if channel['type'] == 'text':
                             status = "✅" if channel['has_data'] else "❌"
                             print(f"      {status} #{channel['name']}")
+                        elif channel['type'] == 'forum':
+                            thread_count = stats['forum_thread_counts'].get(channel['id'], 0)
+                            thread_indicator = f"({thread_count} threads)" if thread_count > 0 else "(no threads)"
+                            print(f"      📋 #{channel['name']} {thread_indicator}")
                 
                 if uncategorized:
                     print(f"   📂 Uncategorized:")
@@ -353,12 +406,23 @@ class PepeAdmin:
                         if channel['type'] == 'text':
                             status = "✅" if channel['has_data'] else "❌"
                             print(f"      {status} #{channel['name']}")
+                        elif channel['type'] == 'forum':
+                            thread_count = stats['forum_thread_counts'].get(channel['id'], 0)
+                            thread_indicator = f"({thread_count} threads)" if thread_count > 0 else "(no threads)"
+                            print(f"      📋 #{channel['name']} {thread_indicator}")
         
         # Recommendations
         print(f"\n💡 Recommendations:")
         if stats['channels_without_data'] > 0:
             print(f"   📥 Consider fetching data from {stats['channels_without_data']} channels without data")
             print(f"   🤖 Use the Discord bot to automatically sync new messages")
+        
+        if stats['forum_channels'] > 0:
+            if stats['total_threads_found'] > 0:
+                print(f"   📋 Found {stats['total_threads_found']} threads in {stats['forums_with_threads']} forum channels")
+                print(f"   🧵 Consider implementing thread-specific data fetching for forum channels")
+            if stats['forums_without_threads'] > 0:
+                print(f"   📋 {stats['forums_without_threads']} forum channels have no threads yet")
         
         if stats['processing_errors'] > 0:
             print(f"   🔧 Review and fix {stats['processing_errors']} processing errors")
