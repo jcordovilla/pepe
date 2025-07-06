@@ -434,11 +434,20 @@ class PepeAdminSimplified:
             with open(json_file, 'r') as f:
                 messages = json.load(f)
             
-            # Extract channel ID
+            # Extract channel information - prioritize readable names
+            channel_name = "Unknown Channel"
+            channel_id = "unknown"
+            
+            if isinstance(messages, dict):
+                channel_name = messages.get('channel_name', 'Unknown Channel')
+                channel_id = messages.get('channel_id', 'unknown')
+            
+            # Fallback to filename parsing if no channel info in JSON
             filename_parts = json_file.stem.split('_')
-            if len(filename_parts) >= 2:
+            if len(filename_parts) >= 2 and channel_id == 'unknown':
                 channel_id = filename_parts[1]
-                sync_stats['fetched_channels'].add(channel_id)
+            
+            sync_stats['fetched_channels'].add(channel_id)
             
             if messages:
                 # Extract actual messages from the JSON structure
@@ -461,16 +470,16 @@ class PepeAdminSimplified:
                         success = await vector_store.add_messages(actual_messages)
                         if success:
                             sync_stats['total_messages_indexed'] += len(actual_messages)
-                            print(f"     ✅ {json_file.name}: {len(actual_messages)} messages indexed")
+                            print(f"     ✅ #{channel_name}: {len(actual_messages)} messages indexed")
                         else:
-                            print(f"     ⚠️ {json_file.name}: {len(actual_messages)} messages (indexing failed)")
+                            print(f"     ⚠️ #{channel_name}: {len(actual_messages)} messages (indexing failed)")
                             sync_stats['indexing_errors'] += 1
                     else:
-                        print(f"     ⚠️ {json_file.name}: No valid messages found")
+                        print(f"     ⚠️ #{channel_name}: No valid messages found")
                         sync_stats['indexing_errors'] += 1
                         
                 except Exception as vector_error:
-                    print(f"     ❌ {json_file.name}: Vector store error - {vector_error}")
+                    print(f"     ❌ #{channel_name}: Vector store error - {vector_error}")
                     sync_stats['indexing_errors'] += 1
                 
                 # Count total messages for stats (use actual_messages count)
@@ -488,13 +497,26 @@ class PepeAdminSimplified:
             with open(json_file, 'r') as f:
                 messages = json.load(f)
             
+            # Extract channel information - prioritize readable names  
+            channel_name = "Unknown Channel"
+            channel_id = "unknown"
+            
+            if isinstance(messages, dict):
+                channel_name = messages.get('channel_name', 'Unknown Channel')
+                channel_id = messages.get('channel_id', 'unknown')
+                
+            # Fallback to filename parsing if no channel info in JSON
             filename_parts = json_file.stem.split('_')
-            if len(filename_parts) >= 2:
+            if len(filename_parts) >= 2 and channel_id == 'unknown':
                 channel_id = filename_parts[1]
-                sync_stats['fetched_channels'].add(channel_id)
+                
+            sync_stats['fetched_channels'].add(channel_id)
             
             if messages:
-                sync_stats['total_messages_processed'] += len(messages)
+                # Extract actual messages count from JSON structure
+                actual_messages = messages.get('messages', []) if isinstance(messages, dict) else messages
+                message_count = len(actual_messages) if actual_messages else 0
+                sync_stats['total_messages_processed'] += message_count
                 
         except Exception as e:
             sync_stats['processing_errors'] += 1
