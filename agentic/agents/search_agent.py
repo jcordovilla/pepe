@@ -151,12 +151,16 @@ class SearchAgent(BaseAgent):
         Returns:
             True if task is search-related
         """
+        if not task or not task.task_type:
+            return False
+            
         search_types = [
             "search", "semantic_search", "keyword_search", 
             "filtered_search", "hybrid_search", "vector_search",
             "reaction_search"  # Add reaction search support
         ]
-        return any(search_type in task.task_type.lower() for search_type in search_types)
+        task_type = task.task_type.lower() if task.task_type else ""
+        return any(search_type in task_type for search_type in search_types)
     
     async def _semantic_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """

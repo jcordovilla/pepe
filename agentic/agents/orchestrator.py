@@ -255,7 +255,10 @@ class AgentOrchestrator:
             # Check if this is a capability response
             if "capability_response" in analysis_results:
                 capability_data = analysis_results["capability_response"]
-                state["response"] = capability_data.get("capability_response", "I can help you search and analyze Discord conversations.")
+                if capability_data and isinstance(capability_data, dict):
+                    state["response"] = capability_data.get("capability_response", "I can help you search and analyze Discord conversations.")
+                else:
+                    state["response"] = "I can help you search and analyze Discord conversations."
                 logger.info("Capability response synthesized successfully")
                 return state
             

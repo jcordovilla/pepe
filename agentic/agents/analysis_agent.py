@@ -117,11 +117,15 @@ class AnalysisAgent(BaseAgent):
         Returns:
             True if task is analysis-related
         """
+        if not task or not task.task_type:
+            return False
+            
         analysis_types = [
             "summarize", "analyze", "extract", "classify",
             "insights", "trends", "skills", "topics", "capability_response"
         ]
-        return any(analysis_type in task.task_type.lower() for analysis_type in analysis_types)
+        task_type = task.task_type.lower() if task.task_type else ""
+        return any(analysis_type in task_type for analysis_type in analysis_types)
     
     async def _summarize_content(self, subtask: SubTask, state: AgentState) -> Dict[str, Any]:
         """

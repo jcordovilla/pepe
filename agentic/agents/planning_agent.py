@@ -110,8 +110,12 @@ class PlanningAgent(BaseAgent):
         Returns:
             True if task is related to planning or analysis
         """
+        if not task or not task.task_type:
+            return False
+            
         planning_types = ["analyze", "plan", "decompose", "optimize"]
-        return any(task_type in task.task_type.lower() for task_type in planning_types)
+        task_type = task.task_type.lower() if task.task_type else ""
+        return any(planning_type in task_type for planning_type in planning_types)
     
     async def _optimize_plan(self, plan: Any, state: AgentState) -> Any:
         """

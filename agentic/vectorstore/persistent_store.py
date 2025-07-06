@@ -69,13 +69,23 @@ class PersistentVectorStore:
             os.makedirs(self.persist_directory, exist_ok=True)
             
             # Initialize ChromaDB client with persistence
-            self.client = chromadb.PersistentClient(
-                path=self.persist_directory,
-                settings=Settings(
-                    anonymized_telemetry=False,
-                    allow_reset=False  # FIXED: Prevent accidental resets that cause data loss
+            # Set environment variables to disable telemetry completely
+            os.environ["ANONYMIZED_TELEMETRY"] = "False"
+            os.environ["CHROMA_TELEMETRY_CAPTURE"] = "False"
+            os.environ["CHROMA_TELEMETRY_ENABLED"] = "False"
+            
+            try:
+                self.client = chromadb.PersistentClient(
+                    path=self.persist_directory,
+                    settings=Settings(
+                        anonymized_telemetry=False,
+                        allow_reset=False  # FIXED: Prevent accidental resets that cause data loss
+                    )
                 )
-            )
+            except Exception as client_error:
+                # Fallback without settings if there are compatibility issues
+                logger.warning(f"Error creating client with settings, trying fallback: {client_error}")
+                self.client = chromadb.PersistentClient(path=self.persist_directory)
             
             # Initialize embedding function - use single OpenAI API key
             api_key = os.getenv("OPENAI_API_KEY")

@@ -376,6 +376,8 @@ class PepeAdminSimplified:
     
     async def _analyze_discord_channels(self, guild, sync_stats):
         """Analyze Discord channels comprehensively"""
+        import discord
+        
         for channel in guild.channels:
             channel_info = {
                 'name': channel.name,
