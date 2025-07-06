@@ -4,6 +4,39 @@
 
 ---
 
+## 🚀 Modern Data Sync Workflow
+
+To keep your system up-to-date and ready for semantic search, follow this two-step process:
+
+1. **Fetch Discord Messages to Database**
+   ```bash
+   python scripts/discord_message_fetcher.py
+   ```
+   This script fetches all messages (including forum threads) from your Discord server and stores them directly in `data/discord_messages.db` (SQLite).
+
+2. **Index and Embed Messages**
+   ```bash
+   python scripts/index_database_messages.py
+   ```
+   This script reads all messages from the database and creates vector embeddings in the ChromaDB vector store for semantic search.
+
+Or, simply run:
+```bash
+./pepe-admin sync
+```
+This will run both steps in sequence and summarize the results.
+
+**Sync Options:**
+```bash
+./pepe-admin sync              # Run both fetch and index (default)
+./pepe-admin sync --fetch-only # Only fetch messages to database
+./pepe-admin sync --index-only # Only index/embed from database
+```
+
+**No JSON files are used or required.**
+
+---
+
 ## ⚡ Quick Start (for Users)
 
 ```
@@ -46,6 +79,7 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
 - **🧠 Smart Memory Summarization**: Automatic conversation history compression
 - **⚡ Content Classification Caching**: Improved performance with intelligent caching
 - **⏰ Time-bound Query Support**: Enhanced temporal query processing ("last week", "yesterday")
+- **🤖 AI-Powered Resource Descriptions**: Community-focused descriptions for AI/ML resources
 
 ## 🚀 Quick Start
 
@@ -76,9 +110,9 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
 
 3. **Initialize Vector Database**:
    ```bash
-   python scripts/streaming_discord_indexer.py
+   ./pepe-admin sync --full
    ```
-   *This will index all Discord messages (~3-5 minutes for typical servers)*
+   *This will fetch and index all Discord messages (~3-5 minutes for typical servers)*
 
 4. **Start the Bot**:
    ```bash
@@ -95,7 +129,7 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
 ### **Admin CLI Commands**
 ```bash
 # Check system status
-./pepe-admin status
+./pepe-admin info
 
 # Setup/initialize the system
 ./pepe-admin setup
@@ -106,8 +140,13 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
 # Full data sync with preprocessing
 ./pepe-admin sync --full
 
-# View system health
-./pepe-admin health
+# Resource management
+./pepe-admin resources          # Complete resource processing
+./pepe-admin resources status   # Show resource database status
+
+# System maintenance
+./pepe-admin maintain           # Complete maintenance
+./pepe-admin test               # Comprehensive testing
 
 # Get help
 ./pepe-admin --help
@@ -124,10 +163,10 @@ For a fully functional system with up-to-date data and resources:
 ./pepe-admin sync --full
 
 # 3. Extract and categorize links/resources (optional but recommended)
-python scripts/resource_detector.py
+./pepe-admin resources
 
 # 4. Verify system health
-./pepe-admin health
+./pepe-admin info
 ```
 
 **Note**: The `sync --full` command handles Discord message indexing. The resource detector extracts and categorizes high-quality links from messages for better search capabilities.
@@ -247,13 +286,14 @@ Real-time Index → Content Analysis → Metadata Enhanced → Fast Retrieval �
 
 ## 🔧 Configuration
 
-### **LLM Configuration (Local Llama Model)**
-The system uses a **local Llama model** for all AI processing via Ollama:
+### **LLM Configuration (Local Llama Models)**
+The system uses **local Llama models** for AI processing via Ollama with a dual-model approach:
 
 ```bash
 # LLM Settings (Local Llama via Ollama)
 LLM_ENDPOINT=http://localhost:11434/api/generate
-LLM_MODEL=llama3.1:8b                    # Recommended: newer, better model
+LLM_MODEL=llama3.1:8b                    # Standard model for main tasks (4.9GB)
+LLM_FAST_MODEL=phi3:mini                 # Fast model for resource detection (2.2GB)
 LLM_MAX_TOKENS=2048
 LLM_TEMPERATURE=0.1
 LLM_TIMEOUT=30
@@ -269,12 +309,17 @@ OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 # Install Ollama (if not already installed)
 curl -fsSL https://ollama.ai/install.sh | sh
 
-# Pull the recommended model
-ollama pull llama3.1:8b
+# Pull the recommended models
+ollama pull llama3.1:8b    # Standard model (4.9GB)
+ollama pull phi3:mini      # Fast model (2.2GB)
 
 # Start Ollama service
 ollama serve
 ```
+
+**Model Usage:**
+- **Standard Model** (`llama3.1:8b`): Main tasks, complex analysis, high quality
+- **Fast Model** (`phi3:mini`): Resource detection, 2-3x faster processing
 
 ### **Environment Variables**
 ```bash
@@ -286,6 +331,7 @@ GUILD_ID=your_server_id
 # LLM Configuration (Local Llama)
 LLM_ENDPOINT=http://localhost:11434/api/generate
 LLM_MODEL=llama3.1:8b
+LLM_FAST_MODEL=phi3:mini
 LLM_MAX_TOKENS=2048
 LLM_TEMPERATURE=0.1
 LLM_TIMEOUT=30
@@ -400,9 +446,9 @@ discord-bot-agentic/
 - **Tune embeddings**: Adjust similarity thresholds
 
 ### **Data Issues**
-- **Re-index messages**: Run `python scripts/streaming_discord_indexer.py`
+- **Re-index messages**: Run `./pepe-admin sync --index-only`
 - **Clear cache**: Delete `data/cache/` directory
-- **Reset database**: Delete `data/chromadb/` and re-index
+- **Reset database**: Delete `data/chromadb/` and re-index with `./pepe-admin sync --full`
 
 ## 🤝 Contributing
 
@@ -429,7 +475,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ```bash
 # One-command setup (after configuring .env)
-git clone <repo> && cd discord-bot-agentic && pip install -r requirements.txt && python scripts/streaming_discord_indexer.py && python main.py
+git clone <repo> && cd discord-bot-agentic && pip install -r requirements.txt && ./pepe-admin sync --full && python main.py
 ```
 
 Your Discord bot will be online with advanced search and **weekly digest capabilities**! 🎉
@@ -440,3 +486,47 @@ Your Discord bot will be online with advanced search and **weekly digest capabil
 
 - [Operations Guide](docs/OPERATIONS.md)
 - [Project Structure](docs/PROJECT_STRUCTURE.md)
+
+### **Resource Management**
+The system automatically detects and categorizes high-quality resources from Discord messages with **AI-generated descriptions** using optimized models:
+
+```bash
+# Complete resource processing (detect, export, and migrate)
+./pepe-admin resources
+
+# Use fast model for processing (default)
+./pepe-admin resources --fast-model
+
+# Use standard model for better quality
+./pepe-admin resources --standard-model
+
+# Reset cache and reprocess all resources
+./pepe-admin resources --reset-cache
+
+# Check resource status
+./pepe-admin resources status
+```
+
+**What it does:**
+1. **Detects** high-quality resources from Discord messages
+2. **Generates** AI-powered descriptions optimized for AI/ML community
+3. **Creates** JSON export files for external use
+4. **Migrates** resources to enhanced database with vector store integration
+
+**AI Description Features:**
+- **Community-focused**: Tailored for generative AI enthusiasts and practitioners
+- **Fast & Lean**: Uses phi3:mini (2.2GB) for 2-3x faster processing
+- **Practical**: Focuses on AI/ML techniques, tools, and learning value
+- **Concise**: 50-word descriptions with immediate practical utility
+- **Smart Fallbacks**: Always provides useful descriptions even if LLM fails
+- **Incremental Processing**: Skips already processed URLs for faster subsequent runs
+
+**Model Usage:**
+- **Fast Model** (`phi3:mini`): Default for resource detection, 2-3x faster
+- **Standard Model** (`llama3.1:8b`): Optional for higher quality descriptions
+
+**Files Created:**
+- `data/optimized_fresh_resources.json` - Detailed report with AI descriptions and statistics
+- `data/resources_export.json` - Simplified export format for external use
+- `data/enhanced_resources.db` - SQLite database with vector store integration
+- `data/processed_resources.json` - Cache of processed URLs for incremental processing
