@@ -7,24 +7,27 @@ import re
 import json
 import logging
 import hashlib
+import asyncio
 from typing import Dict, List, Any, Optional
 from urllib.parse import urlparse
 from datetime import datetime
 
 from openai import OpenAI
 from ..cache.smart_cache import SmartCache
+from .enhanced_resource_detector import EnhancedResourceDetector, ResourceMetadata
+from .resource_validation_pipeline import ResourceValidationPipeline
 
 logger = logging.getLogger(__name__)
 
 class ContentProcessingService:
     """
-    Modern content processing with legacy-proven classification patterns
+    Modern content processing with enhanced resource detection and validation
     
-    Preserves battle-tested:
-    - URL analysis and filtering
-    - Code detection patterns
-    - Resource classification rules
-    - Attachment processing logic
+    Features:
+    - Advanced resource type detection
+    - Semantic quality scoring
+    - Resource validation pipeline
+    - Comprehensive content analysis
     """
     
     def __init__(self, openai_client: OpenAI, cache_config: Optional[Dict[str, Any]] = None):
@@ -32,7 +35,13 @@ class ContentProcessingService:
         self.cache = SmartCache(cache_config or {})
         self.classification_cache_ttl = int((cache_config or {}).get("classification_cache_ttl", 86400))
         
-        # Legacy-proven patterns
+        # Enhanced resource detection
+        self.resource_detector = EnhancedResourceDetector(openai_client, cache_config)
+        
+        # Resource validation pipeline
+        self.validation_pipeline = ResourceValidationPipeline(cache_config)
+        
+        # Legacy-proven patterns (kept for backward compatibility)
         self.url_pattern = re.compile(
             r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
         )
@@ -45,12 +54,11 @@ class ContentProcessingService:
             'imgur.com', 'zoom.us', 'meet.google.com', 'teams.microsoft.com'
         }
         
-        logger.info("🔍 Content processor initialized with legacy patterns")
+        logger.info("🔍 Enhanced content processor initialized with advanced resource detection")
     
     async def analyze_message_content(self, message: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Comprehensive message content analysis
-        Enhanced from legacy detection patterns
+        Comprehensive message content analysis with enhanced resource detection
         """
         content = message.get('content', '')
         attachments = message.get('attachments', [])
@@ -62,36 +70,72 @@ class ContentProcessingService:
             "code_snippets": [],
             "urls": [],
             "attachments_processed": [],
-            "classifications": []
+            "classifications": [],
+            "quality_score": 0.0,
+            "resource_metadata": []
         }
         
         if not content and not attachments:
             return analysis
         
-        # Legacy URL extraction and analysis
-        urls = self.url_pattern.findall(content)
-        for url in urls:
-            url_analysis = await self._analyze_url(url, message)
-            if url_analysis:
-                analysis["urls"].append(url_analysis)
+        # Enhanced resource detection
+        detected_resources = await self.resource_detector.detect_resources(message)
         
-        # Legacy code detection
-        code_blocks = self.code_pattern.findall(content)
-        for code in code_blocks:
-            code_analysis = await self._analyze_code_snippet(code, message)
-            if code_analysis:
-                analysis["code_snippets"].append(code_analysis)
+        # Validate resources
+        validated_resources = await self.validation_pipeline.validate_resources(detected_resources)
         
-        # Legacy attachment processing
-        for attachment in attachments:
-            attachment_analysis = await self._analyze_attachment(attachment, message)
-            if attachment_analysis:
-                analysis["attachments_processed"].append(attachment_analysis)
+        # Process validation results
+        for resource, validation_result in validated_resources:
+            # Convert enhanced resource to legacy format for backward compatibility
+            if resource.type.value in ['research_paper', 'preprint', 'academic_article', 'blog_post', 'news_article']:
+                if resource.url:
+                    analysis["urls"].append({
+                        "url": resource.url,
+                        "domain": resource.domain,
+                        "type": resource.type.value,
+                        "title": resource.title,
+                        "quality_score": resource.quality_score,
+                        "validation_status": validation_result.status.value,
+                        "message_id": message.get('message_id'),
+                        "timestamp": message.get('timestamp'),
+                        "author": message.get('author', {}).get('username')
+                    })
+            
+            elif resource.type.value == 'code_snippet':
+                analysis["code_snippets"].append({
+                    "code": resource.description,
+                    "language": resource.language,
+                    "quality_score": resource.quality_score,
+                    "validation_status": validation_result.status.value,
+                    "message_id": message.get('message_id'),
+                    "author": message.get('author', {}).get('username')
+                })
+            
+            elif resource.type.value in ['pdf_document', 'presentation', 'image', 'spreadsheet']:
+                analysis["attachments_processed"].append({
+                    "filename": resource.title,
+                    "type": resource.type.value,
+                    "quality_score": resource.quality_score,
+                    "validation_status": validation_result.status.value,
+                    "content_type": resource.content_type,
+                    "file_size": resource.file_size,
+                    "message_id": message.get('message_id'),
+                    "author": message.get('author', {}).get('username')
+                })
+            
+            # Store full resource metadata
+            analysis["resource_metadata"].append({
+                "resource": resource,
+                "validation": validation_result
+            })
         
-        # Enhanced AI-powered classification (modern addition)
+        # Legacy classification for backward compatibility
         if content:
             classifications = await self._classify_content_ai(content)
             analysis["classifications"] = classifications
+        
+        # Calculate overall quality score
+        analysis["quality_score"] = self._calculate_overall_quality_score(detected_resources, analysis)
         
         return analysis
     
@@ -184,7 +228,8 @@ class ContentProcessingService:
                 "Choose up to 3 and reply with a JSON array."
             )
 
-            response = self.openai_client.chat.completions.create(
+            response = await asyncio.to_thread(
+                self.openai_client.chat.completions.create,
                 model="gpt-4",
                 messages=[
                     {
@@ -662,3 +707,49 @@ class ContentProcessingService:
         
         # Default: strict quality filtering
         return False
+    
+    def _calculate_overall_quality_score(self, resources: List[ResourceMetadata], analysis: Dict[str, Any]) -> float:
+        """
+        Calculate overall quality score for the message based on resources and content
+        """
+        if not resources:
+            return 0.0
+        
+        # Average resource quality scores
+        resource_scores = [r.quality_score for r in resources if r.quality_score > 0]
+        if not resource_scores:
+            return 0.0
+        
+        avg_resource_score = sum(resource_scores) / len(resource_scores)
+        
+        # Bonus for diversity of resource types
+        resource_types = set(r.type.value for r in resources)
+        diversity_bonus = min(0.2, len(resource_types) * 0.05)
+        
+        # Bonus for validation status
+        validation_bonus = 0.0
+        for metadata in analysis.get("resource_metadata", []):
+            if metadata["validation"].status.value == "healthy":
+                validation_bonus += 0.1
+        
+        validation_bonus = min(0.3, validation_bonus)
+        
+        # Classification quality bonus
+        classifications = analysis.get("classifications", [])
+        if any(cls in ["research", "technical", "educational", "resource_sharing"] for cls in classifications):
+            classification_bonus = 0.1
+        else:
+            classification_bonus = 0.0
+        
+        total_score = avg_resource_score + diversity_bonus + validation_bonus + classification_bonus
+        return min(1.0, max(0.0, total_score))
+    
+    async def cleanup(self):
+        """
+        Cleanup resources and close connections
+        """
+        if hasattr(self, 'resource_detector'):
+            await self.resource_detector.cleanup()
+        
+        if hasattr(self, 'validation_pipeline'):
+            await self.validation_pipeline.cleanup()

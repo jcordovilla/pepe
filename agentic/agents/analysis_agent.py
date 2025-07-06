@@ -11,7 +11,7 @@ import asyncio
 import re
 from collections import Counter
 
-from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus
+from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus, agent_registry
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +41,9 @@ class AnalysisAgent(BaseAgent):
         self.topic_patterns = self._compile_topic_patterns()
         
         logger.info(f"AnalysisAgent initialized with model={self.summarization_model}")
+        
+        # Register this agent
+        agent_registry.register_agent(self)
     
     async def process(self, state: AgentState) -> AgentState:
         """
@@ -75,6 +78,8 @@ class AnalysisAgent(BaseAgent):
                     result = await self._extract_skills(subtask, state)
                 elif subtask.task_type == "analyze_trends":
                     result = await self._analyze_trends(subtask, state)
+                elif subtask.task_type == "capability_response":
+                    result = await self._generate_capability_response(subtask, state)
                 else:
                     logger.warning(f"Unknown analysis task type: {subtask.task_type}")
                     continue
@@ -114,7 +119,7 @@ class AnalysisAgent(BaseAgent):
         """
         analysis_types = [
             "summarize", "analyze", "extract", "classify",
-            "insights", "trends", "skills", "topics"
+            "insights", "trends", "skills", "topics", "capability_response"
         ]
         return any(analysis_type in task.task_type.lower() for analysis_type in analysis_types)
     
@@ -557,3 +562,130 @@ Summary requirements:
     async def _analyze_volume_trends(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Analyze content volume trends."""
         return {"volume_trends": f"Total messages analyzed: {len(results)}"}
+    
+    async def _generate_capability_response(self, subtask: SubTask, state: AgentState) -> Dict[str, Any]:
+        """
+        Generate a comprehensive capability response for meta-queries.
+        
+        Args:
+            subtask: Capability response subtask
+            state: Current agent state
+            
+        Returns:
+            Capability information and help documentation
+        """
+        try:
+            query = subtask.parameters.get("query", "")
+            
+            # Build comprehensive capability response
+            capabilities = {
+                "search_capabilities": [
+                    "**Message Search**: Find specific messages by content, author, or channel",
+                    "**Semantic Search**: Understand context and find related discussions",
+                    "**Filtered Search**: Search within specific channels, time ranges, or by specific users",
+                    "**Keyword Search**: Find messages containing specific terms or phrases"
+                ],
+                "analysis_capabilities": [
+                    "**Content Summarization**: Create summaries of conversations or topics",
+                    "**Trend Analysis**: Identify patterns in discussions and user activity",
+                    "**Topic Classification**: Categorize messages by type and subject",
+                    "**Insight Extraction**: Find key themes and important information",
+                    "**User Activity Analysis**: Track participation and engagement patterns"
+                ],
+                "special_features": [
+                    "**Reaction Analysis**: Find most-reacted or popular messages",
+                    "**Resource Detection**: Identify shared links, documents, and tools",
+                    "**Time-based Queries**: Search within specific time periods",
+                    "**Channel-specific Search**: Focus on particular channels or topics",
+                    "**Cross-conversation Context**: Understand discussions across multiple messages"
+                ],
+                "data_sources": [
+                    "**Discord Messages**: Access to historical Discord conversations",
+                    "**User Interactions**: Track of user activities and patterns",
+                    "**Shared Resources**: Links, documents, and tools shared in conversations",
+                    "**Reaction Data**: Community engagement through reactions and responses"
+                ]
+            }
+            
+            # Generate contextual response based on query
+            response_parts = []
+            
+            # Main capabilities introduction
+            response_parts.append("## 🤖 AI Assistant Capabilities")
+            response_parts.append("I'm an intelligent Discord bot that can help you explore and analyze your server's conversations. Here's what I can do:")
+            
+            # Add search capabilities
+            response_parts.append("\n### 🔍 **Search & Discovery**")
+            response_parts.extend(capabilities["search_capabilities"])
+            
+            # Add analysis capabilities
+            response_parts.append("\n### 📊 **Analysis & Insights**")
+            response_parts.extend(capabilities["analysis_capabilities"])
+            
+            # Add special features
+            response_parts.append("\n### ⚡ **Special Features**")
+            response_parts.extend(capabilities["special_features"])
+            
+            # Add data sources
+            response_parts.append("\n### 📁 **Data Sources**")
+            response_parts.extend(capabilities["data_sources"])
+            
+            # Add examples section
+            response_parts.append("\n### 💡 **Example Questions You Can Ask**")
+            examples = [
+                "• `Find messages about AI from last week`",
+                "• `Summarize the discussion in #general channel`",
+                "• `What are the most popular topics this month?`",
+                "• `Show me messages with the most reactions`",
+                "• `Find resources shared about Python programming`",
+                "• `Who are the most active users in #development?`",
+                "• `What was discussed about machine learning recently?`",
+                "• `Give me a digest of last week's conversations`"
+            ]
+            response_parts.extend(examples)
+            
+            # Add usage tips
+            response_parts.append("\n### 📝 **Usage Tips**")
+            tips = [
+                "• **Be specific**: Include channel names, timeframes, or topics for better results",
+                "• **Use natural language**: Ask questions as you would to a colleague",
+                "• **Combine filters**: Search by channel, user, and time period together",
+                "• **Ask follow-ups**: Build on previous queries for deeper insights"
+            ]
+            response_parts.extend(tips)
+            
+            # Add technical details
+            response_parts.append("\n### 🛠 **Technical Details**")
+            tech_details = [
+                "• **AI-Powered**: Uses advanced language models for understanding context",
+                "• **Vector Search**: Semantic similarity matching for relevant results",
+                "• **Multi-Agent System**: Specialized agents for different types of analysis",
+                "• **Real-time Processing**: Continuously indexes new messages as they arrive"
+            ]
+            response_parts.extend(tech_details)
+            
+            # Final response
+            response_parts.append("\n---")
+            response_parts.append("💬 **Ready to help!** Ask me anything about your Discord server's conversations and I'll provide intelligent, contextual responses.")
+            
+            full_response = "\n".join(response_parts)
+            
+            return {
+                "capability_response": full_response,
+                "response_type": "capability",
+                "generated_at": datetime.utcnow().isoformat(),
+                "sections": {
+                    "search": capabilities["search_capabilities"],
+                    "analysis": capabilities["analysis_capabilities"],
+                    "features": capabilities["special_features"],
+                    "data_sources": capabilities["data_sources"]
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error generating capability response: {e}")
+            return {
+                "capability_response": f"I'm an AI assistant that can help you search and analyze Discord conversations. I can find messages, create summaries, analyze trends, and provide insights about your server's discussions. However, I encountered an error generating the full capability information: {str(e)}",
+                "response_type": "capability",
+                "error": str(e)
+            }

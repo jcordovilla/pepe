@@ -1,0 +1,154 @@
+{
+  "timestamp": "2025-06-15T20:01:53.414685",
+  "overall_health_score": 6.45,
+  "performance_by_category": {
+    "digest_generation": 5.5,
+    "multi_intent": 3.8,
+    "error_handling": 9.3,
+    "performance_analysis": 5,
+    "ambiguous_query": 7.6,
+    "user_specific": 7.9,
+    "basic_search": 8.8,
+    "temporal_search": 5.9,
+    "channel_analysis": 5.4,
+    "complex_analysis": 5.3
+  },
+  "performance_by_complexity": {
+    "simple": 6.45
+  },
+  "response_time_analysis": {
+    "average": 0.7036431789398193,
+    "median": 0.01574552059173584,
+    "p95": 3.7680941820144587,
+    "max": 6.557882308959961
+  },
+  "quality_distribution": {
+    "ResponseQuality.GOOD": 3,
+    "ResponseQuality.ACCEPTABLE": 5,
+    "ResponseQuality.POOR": 1,
+    "ResponseQuality.EXCELLENT": 1
+  },
+  "agent_utilization": {},
+  "system_bottlenecks": [
+    "Overall quality scores consistently below acceptable threshold",
+    "Accuracy scores indicate factual correctness issues"
+  ],
+  "critical_issues": [],
+  "improvement_priorities": [
+    {
+      "category": "temporal_search",
+      "current_performance": 5.9,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Inaccurate entity recognition",
+        "Lack of useful results"
+      ],
+      "optimization_opportunities": [
+        "Address Inaccurate entity recognition",
+        "Address Lack of useful results"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving temporal_search responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "digest_generation",
+      "current_performance": 5.5,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of actionable results",
+        "Low confidence in entity recognition"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of actionable results",
+        "Address Low confidence in entity recognition"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving digest_generation responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "channel_analysis",
+      "current_performance": 5.4,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of actionable results",
+        "Inability to fulfill the user's request"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of actionable results",
+        "Address Inability to fulfill the user's request"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving channel_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "complex_analysis",
+      "current_performance": 5.3,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of specific results",
+        "Misinterpretation of 'the' as a user entity"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of specific results",
+        "Address Misinterpretation of 'the' as a user entity"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving complex_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "performance_analysis",
+      "current_performance": 5,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of specific results",
+        "Low usefulness due to absence of actionable data"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of specific results",
+        "Address Low usefulness due to absence of actionable data"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving performance_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    }
+  ],
+  "technical_recommendations": [
+    "Improve fact-checking mechanisms",
+    "Enhance data validation processes",
+    "Implement confidence scoring for responses"
+  ],
+  "user_experience_recommendations": [
+    "Include more actionable insights in responses",
+    "Add follow-up suggestions and related queries",
+    "Provide context and explanation for results"
+  ]
+}

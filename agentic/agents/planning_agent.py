@@ -8,7 +8,7 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 
-from .base_agent import BaseAgent, AgentRole, AgentState, SubTask
+from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, agent_registry
 from ..reasoning.query_analyzer import QueryAnalyzer
 from ..reasoning.task_planner import TaskPlanner
 
@@ -36,6 +36,9 @@ class PlanningAgent(BaseAgent):
         self.complexity_threshold = config.get("complexity_threshold", 0.7)
         
         logger.info(f"PlanningAgent initialized with max_subtasks={self.max_subtasks}")
+        
+        # Register this agent
+        agent_registry.register_agent(self)
     
     async def process(self, state: AgentState) -> AgentState:
         """
@@ -176,7 +179,7 @@ class PlanningAgent(BaseAgent):
             True if task can be parallelized
         """
         # Tasks with no dependencies can be parallelized
-        task_deps = dependencies.get(subtask.task_id, [])
+        task_deps = dependencies.get(subtask.id, [])
         return len(task_deps) == 0
     
     async def estimate_complexity(self, query: str) -> float:

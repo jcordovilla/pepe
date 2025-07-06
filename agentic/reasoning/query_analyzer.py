@@ -6,6 +6,7 @@ the appropriate execution strategy.
 """
 
 import re
+import asyncio
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 import logging
@@ -47,6 +48,16 @@ class QueryAnalyzer:
         
         # Intent patterns
         self.intent_patterns = {
+            "capability": [
+                r"what (can you|are you able to|do you|kind of|type of|sorts of).*(do|answer|help|handle|questions|queries)",
+                r"what (are your|is your).*(capabilities|functions|features)",
+                r"(how do you|can you help|what can you help)",
+                r"(tell me about|explain).*(what you do|your purpose|your function)",
+                r"what (questions|queries|things) (can|do) (you|i) (ask|answer|search)",
+                r"(help|assistance|support).*(what|how)",
+                r"how does this (work|bot|system|ai)",
+                r"what (is this|are you|do you do)"
+            ],
             "search": [
                 r"find|search|look for|show me|get|retrieve",
                 r"messages? (about|containing|with|mentioning)",
@@ -79,21 +90,21 @@ class QueryAnalyzer:
             ]
         }
         
-        # Entity extraction patterns
+        # Entity extraction patterns - more precise to avoid false positives
         self.entity_patterns = {
             "channel": r"<#(\d+)>|(?:in|from)\s+(?:the\s+)?#?([\w-]+(?:\s+[\w-]+)*)\s+channel|#([\w🦾🤖🏛🗂❌💻📚🛠❓🌎🏘👋💠-]+)|(?:in|from)\s+([\w-]+-(?:ops|dev|agents|chat|help|support|resources))",
-            "user": r"@[\w.-]+|by\s+([\w.-]+)|from\s+([\w.-]+)",
-            "time_range": r"(last|past|previous)\s+\w+|between\s+[\d-]+\s+and\s+[\d-]+",
+            "user": r"@([\w.-]+)|<@!?(\d+)>|(?:by|from)\s+user\s+([\w.-]+)",  # More specific user patterns
+            "time_range": r"(last|past|previous)\s+(week|month|day|year|hour)|between\s+[\d-]+\s+and\s+[\d-]+|(yesterday|today|this\s+week|this\s+month)",
             "keyword": r"'([^']+)'|\"([^\"]+)\"|about\s+(\w+)",
             "count": r"(\d+)\s+(last|recent|messages)|top\s+(\d+)|(\d+)\s+results|limit\s+(\d+)",
             "reaction": r"(👍|❤️|😂|👀|🎉|🚀|👏|👌)|(:\w+:)|emoji|reaction"
         }
         
-        # Combined patterns for enhanced analysis
+        # Combined patterns for enhanced analysis - more precise
         self.combined_patterns = {
             "intent": r"(?:search|find|get|fetch|show|list|give|tell|what|how|when|where|who|digest|summary|summarize|analyze)",
             "channel": r"<#(\d+)>|(?:in|from)\s+(?:the\s+)?#?([\w-]+(?:\s+[\w-]+)*)\s+channel|#([\w🦾🤖🏛🗂❌💻📚🛠❓🌎🏘👋💠-]+)|(?:in|from)\s+([\w-]+-(?:ops|dev|agents|chat|help|support|resources))",
-            "user": r"(?:by|from)\s+(?:user\s+)?@?(\w+)|<@!?(\d+)>",
+            "user": r"(?:by|from)\s+(?:user\s+)?@?(\w+)|<@!?(\d+)>|@(\w+)",  # More precise user matching
             "count": r"(?:last|first|recent|latest|newest)\s+(\d+)|(\d+)\s+(?:messages?|results?)",
             "temporal": r"(weekly|daily|monthly|yesterday|today|this\s+week|last\s+week|past\s+week|this\s+month|last\s+month|past\s+month)\s*(?:digest|summary|report)?",
             "digest": r"(digest|summary|report|overview|recap)\s*(?:of|for)?\s*(?:the|this|last)?\s*(week|month|day|period)?",
@@ -103,7 +114,7 @@ class QueryAnalyzer:
         
         logger.info("Query analyzer initialized")
     
-    async def analyze(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+    async def analyze(self, query: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Analyze a user query to extract intent, entities, and execution hints.
         
@@ -396,7 +407,8 @@ class QueryAnalyzer:
             Provide enhanced analysis as JSON.
             """
             
-            response = await self.openai_client.chat.completions.create(
+            response = await asyncio.to_thread(
+                self.openai_client.chat.completions.create,
                 model=self.model,
                 messages=[
                     {"role": "system", "content": system_prompt},
@@ -407,7 +419,11 @@ class QueryAnalyzer:
             )
             
             import json
-            enhanced = json.loads(response.choices[0].message.content)
+            content = response.choices[0].message.content
+            if content:
+                enhanced = json.loads(content)
+            else:
+                enhanced = {}
 
             result = {
                 "enhanced_intent": enhanced.get("enhanced_intent"),

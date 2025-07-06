@@ -1,0 +1,153 @@
+{
+  "timestamp": "2025-06-15T19:56:09.135917",
+  "overall_health_score": 6.25,
+  "performance_by_category": {
+    "user_specific": 7.2,
+    "performance_analysis": 4.9,
+    "ambiguous_query": 7.7,
+    "multi_intent": 3.9,
+    "temporal_search": 5.5,
+    "channel_analysis": 5.6,
+    "complex_analysis": 4.2,
+    "error_handling": 8.8,
+    "basic_search": 8.9,
+    "digest_generation": 5.8
+  },
+  "performance_by_complexity": {
+    "simple": 6.25
+  },
+  "response_time_analysis": {
+    "average": 0.7839888095855713,
+    "median": 0.015272855758666992,
+    "p95": 4.217221903800957,
+    "max": 7.374988079071045
+  },
+  "quality_distribution": {
+    "ResponseQuality.GOOD": 4,
+    "ResponseQuality.ACCEPTABLE": 3,
+    "ResponseQuality.POOR": 3
+  },
+  "agent_utilization": {},
+  "system_bottlenecks": [
+    "Overall quality scores consistently below acceptable threshold",
+    "Accuracy scores indicate factual correctness issues"
+  ],
+  "critical_issues": [],
+  "improvement_priorities": [
+    {
+      "category": "digest_generation",
+      "current_performance": 5.8,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of actionable results",
+        "Low confidence in entity recognition"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of actionable results",
+        "Address Low confidence in entity recognition"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving digest_generation responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "channel_analysis",
+      "current_performance": 5.6,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of actionable results",
+        "Incomplete response"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of actionable results",
+        "Address Incomplete response"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving channel_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "temporal_search",
+      "current_performance": 5.5,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "The bot failed to provide the requested information.",
+        "The bot incorrectly identified 'last' as a user entity."
+      ],
+      "optimization_opportunities": [
+        "Address The bot failed to provide the requested information.",
+        "Address The bot incorrectly identified 'last' as a user entity."
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving temporal_search responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "performance_analysis",
+      "current_performance": 4.9,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of specific results",
+        "Low usefulness due to absence of actionable data"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of specific results",
+        "Address Low usefulness due to absence of actionable data"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving performance_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    },
+    {
+      "category": "complex_analysis",
+      "current_performance": 4.2,
+      "performance_trend": "declining",
+      "bottlenecks": [
+        "Lack of relevant results",
+        "Misinterpretation of user entity"
+      ],
+      "optimization_opportunities": [
+        "Address Lack of relevant results",
+        "Address Misinterpretation of user entity"
+      ],
+      "priority_level": "high",
+      "estimated_impact": "significant",
+      "implementation_complexity": "medium",
+      "recommended_actions": [
+        "Focus on improving complex_analysis responses",
+        "Analyze failure patterns in this category",
+        "Implement targeted optimizations"
+      ]
+    }
+  ],
+  "technical_recommendations": [
+    "Improve fact-checking mechanisms",
+    "Enhance data validation processes",
+    "Implement confidence scoring for responses"
+  ],
+  "user_experience_recommendations": [
+    "Include more actionable insights in responses",
+    "Add follow-up suggestions and related queries",
+    "Provide context and explanation for results"
+  ]
+}

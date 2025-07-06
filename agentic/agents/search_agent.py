@@ -9,7 +9,7 @@ import logging
 from datetime import datetime
 import asyncio
 
-from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus
+from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus, agent_registry
 from ..vectorstore.persistent_store import PersistentVectorStore
 from ..cache.smart_cache import SmartCache
 
@@ -48,6 +48,9 @@ class SearchAgent(BaseAgent):
         }
         
         logger.info(f"SearchAgent initialized with default_k={self.default_k}")
+        
+        # Register this agent
+        agent_registry.register_agent(self)
     
     async def process(self, state: AgentState) -> AgentState:
         """

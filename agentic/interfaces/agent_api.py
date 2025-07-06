@@ -15,7 +15,7 @@ from ..memory.conversation_memory import ConversationMemory
 from ..agents.pipeline_agent import PipelineAgent
 from ..analytics import QueryAnswerRepository, PerformanceMonitor, ValidationSystem, AnalyticsDashboard
 from ..analytics.query_answer_repository import QueryMetrics
-from ..agents import agent_registry, SearchAgent, PlanningAgent, AnalysisAgent
+from ..agents import agent_registry, SearchAgent, PlanningAgent, AnalysisAgent, DigestAgent
 
 logger = logging.getLogger(__name__)
 
@@ -40,10 +40,12 @@ class AgentAPI:
         search_agent = SearchAgent(config.get("search_agent", {}))
         planning_agent = PlanningAgent(config.get("planning_agent", {}))
         analysis_agent = AnalysisAgent(config.get("analysis_agent", {}))
+        digest_agent = DigestAgent(config.get("digest_agent", {}))
         
         agent_registry.register_agent(search_agent)
         agent_registry.register_agent(planning_agent)
         agent_registry.register_agent(analysis_agent)
+        agent_registry.register_agent(digest_agent)
         
         # Initialize analytics components
         analytics_config = config.get("analytics", {})

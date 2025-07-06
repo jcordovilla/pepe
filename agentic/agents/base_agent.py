@@ -58,6 +58,7 @@ class ExecutionPlan:
     id: str
     query: str
     subtasks: List[SubTask]
+    dependencies: Optional[Dict[str, List[str]]] = None
     status: TaskStatus = TaskStatus.PENDING
     created_at: Optional[datetime] = None
     
@@ -79,6 +80,14 @@ class AgentState(TypedDict):
     errors: List[str]  # Added for error tracking
     metadata: Dict[str, Any]
     response: Optional[str]  # Added for final response
+    # Additional fields for agent coordination
+    query_analysis: Optional[Dict[str, Any]]
+    intent: Optional[str]
+    entities: Optional[Dict[str, Any]]
+    complexity_score: Optional[float]
+    execution_plan: Optional[ExecutionPlan]
+    subtasks: Optional[List[SubTask]]
+    dependencies: Optional[Dict[str, List[str]]]
 
 
 class BaseAgent(ABC):

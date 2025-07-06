@@ -195,6 +195,13 @@ class AgentOrchestrator:
                     subtask.status = TaskStatus.COMPLETED
                     subtask.result = result_state.get("task_result")
                     extra_results = result_state.get("search_results", [])
+                    
+                    # Extract analysis results if present
+                    analysis_results = result_state.get("analysis_results", {})
+                    if analysis_results:
+                        state["analysis_results"] = state.get("analysis_results", {})
+                        state["analysis_results"].update(analysis_results)
+                    
                     return subtask.id, subtask.result, extra_results
                 except Exception as e:
                     logger.error(f"Error executing subtask {subtask.id}: {str(e)}")
@@ -243,8 +250,16 @@ class AgentOrchestrator:
             search_results = state.get("search_results", [])
             plan = state.get("task_plan")
             query = state.get("user_context", {}).get("query", "")
+            analysis_results = state.get("analysis_results", {})
             
-            if not search_results and not plan:
+            # Check if this is a capability response
+            if "capability_response" in analysis_results:
+                capability_data = analysis_results["capability_response"]
+                state["response"] = capability_data.get("capability_response", "I can help you search and analyze Discord conversations.")
+                logger.info("Capability response synthesized successfully")
+                return state
+            
+            if not search_results and not plan and not analysis_results:
                 state["response"] = "I couldn't find any relevant information for your query."
                 return state
             

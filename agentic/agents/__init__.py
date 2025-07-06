@@ -9,6 +9,7 @@ from .orchestrator import AgentOrchestrator
 from .planning_agent import PlanningAgent
 from .search_agent import SearchAgent
 from .analysis_agent import AnalysisAgent
+from .digest_agent import DigestAgent
 
 __all__ = [
     "BaseAgent",
@@ -20,5 +21,6 @@ __all__ = [
     "AgentOrchestrator",
     "PlanningAgent",
     "SearchAgent", 
-    "AnalysisAgent"
+    "AnalysisAgent",
+    "DigestAgent"
 ]

@@ -1,0 +1,537 @@
+[
+  {
+    "query": "Find messages about Python",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012134.82482,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Find messages about Python\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"keyword\",\n          \"value\": \"Python\",\n          \"start\": 14,\n          \"end\": 26,\n          \"confidence\": 0.8\n        }\n      ],\n      \"complexity\": 0.38,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Find messages about Python\",\n        \"timestamp\": \"2025-06-15T18:28:54.825037\",\n        \"test_scenario\": true,\n        \"category\": \"basic_search\"\n      },\n      \"timestamp\": \"2025-06-15T18:28:54.825543\",\n      \"grouped_entities\": {\n        \"keywords\": [\n          \"Python\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"keyword\",\n        \"value\": \"Python\",\n        \"start\": 14,\n        \"end\": 26,\n        \"confidence\": 0.8\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.0033347606658935547,\n    \"success\": true\n  }\n}",
+    "category": "basic_search",
+    "complexity": "simple",
+    "accuracy_score": 10,
+    "relevance_score": 10,
+    "completeness_score": 8,
+    "clarity_score": 10,
+    "usefulness_score": 5,
+    "factual_correctness": 10,
+    "context_understanding": 10,
+    "technical_precision": 10,
+    "user_experience_score": 7,
+    "overall_score": 8.9,
+    "response_time": 0.0033431053161621094,
+    "processing_steps": 1,
+    "agents_involved": [
+      "search"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and concise response",
+      "Excellent understanding of the query",
+      "Detailed metadata"
+    ],
+    "weaknesses": [
+      "Lack of actionable results",
+      "Verbose metadata may not be useful to all users"
+    ],
+    "specific_issues": [
+      "No results found for the query",
+      "Metadata may be overwhelming for some users"
+    ],
+    "improvement_suggestions": [
+      "Improve search capabilities to provide results",
+      "Consider simplifying metadata for user-friendly experience"
+    ],
+    "user_experience_notes": [
+      "User may be disappointed with lack of results",
+      "User may appreciate detailed metadata"
+    ],
+    "query_understanding_quality": "excellent",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "excellent",
+    "error_handling_quality": "excellent",
+    "confidence_level": 9,
+    "consistency_score": 8.27,
+    "robustness_indicator": "high"
+  },
+  {
+    "query": "Show me discussions from last week about machine learning",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012145.176417,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Show me discussions from last week about machine learning\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"user\",\n          \"value\": \"last\",\n          \"start\": 20,\n          \"end\": 29,\n          \"confidence\": 0.8\n        },\n        {\n          \"type\": \"time_range\",\n          \"value\": \"last\",\n          \"start\": 25,\n          \"end\": 34,\n          \"confidence\": 0.5\n        },\n        {\n          \"type\": \"keyword\",\n          \"value\": \"machine\",\n          \"start\": 35,\n          \"end\": 48,\n          \"confidence\": 0.8\n        }\n      ],\n      \"complexity\": 0.5800000000000001,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Show me discussions from last week about machine learning\",\n        \"timestamp\": \"2025-06-15T18:29:05.178001\",\n        \"test_scenario\": true,\n        \"category\": \"temporal_search\"\n      },\n      \"timestamp\": \"2025-06-15T18:29:05.182914\",\n      \"grouped_entities\": {\n        \"users\": [\n          \"last\"\n        ],\n        \"time_range\": {\n          \"start\": 25,\n          \"end\": 34\n        },\n        \"keywords\": [\n          \"machine\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"user\",\n        \"value\": \"last\",\n        \"start\": 20,\n        \"end\": 29,\n        \"confidence\": 0.8\n      },\n      {\n        \"type\": \"time_range\",\n        \"value\": \"last\",\n        \"start\": 25,\n        \"end\": 34,\n        \"confidence\": 0.5\n      },\n      {\n        \"type\": \"keyword\",\n        \"value\": \"machine\",\n        \"start\": 35,\n        \"end\": 48,\n        \"confidence\": 0.8\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.014744043350219727,\n    \"success\": true\n  }\n}",
+    "category": "temporal_search",
+    "complexity": "simple",
+    "accuracy_score": 5,
+    "relevance_score": 5,
+    "completeness_score": 6,
+    "clarity_score": 8,
+    "usefulness_score": 4,
+    "factual_correctness": 5,
+    "context_understanding": 5,
+    "technical_precision": 7,
+    "user_experience_score": 5,
+    "overall_score": 5.5,
+    "response_time": 0.014795064926147461,
+    "processing_steps": 2,
+    "agents_involved": [
+      "search",
+      "analysis"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Detailed metadata",
+      "Clear structure and readability"
+    ],
+    "weaknesses": [
+      "Misinterpretation of 'last' as a user",
+      "Lack of useful results"
+    ],
+    "specific_issues": [
+      "Misinterpretation of 'last' as a user",
+      "No results provided"
+    ],
+    "improvement_suggestions": [
+      "Improve entity recognition to correctly identify 'last week' as a time entity",
+      "Enhance search capabilities to provide relevant results"
+    ],
+    "user_experience_notes": [
+      "User might be confused by the lack of results",
+      "Misinterpretation could lead to user frustration"
+    ],
+    "query_understanding_quality": "fair",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "good",
+    "error_handling_quality": "good",
+    "confidence_level": 5,
+    "consistency_score": 8.83,
+    "robustness_indicator": "low"
+  },
+  {
+    "query": "Create a weekly digest for #ai-research channel",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012154.803307,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Create a weekly digest for #ai-research channel\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"channel\",\n          \"value\": \"ai-research\",\n          \"channel_id\": null,\n          \"start\": 27,\n          \"end\": 39,\n          \"confidence\": 0.3\n        }\n      ],\n      \"complexity\": 0.44,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Create a weekly digest for #ai-research channel\",\n        \"timestamp\": \"2025-06-15T18:29:14.805507\",\n        \"test_scenario\": true,\n        \"category\": \"digest_generation\"\n      },\n      \"timestamp\": \"2025-06-15T18:29:14.867087\",\n      \"grouped_entities\": {\n        \"channels\": [\n          \"ai-research\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"channel\",\n        \"value\": \"ai-research\",\n        \"channel_id\": null,\n        \"start\": 27,\n        \"end\": 39,\n        \"confidence\": 0.3\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.06768298149108887,\n    \"success\": true\n  }\n}",
+    "category": "digest_generation",
+    "complexity": "simple",
+    "accuracy_score": 5,
+    "relevance_score": 6,
+    "completeness_score": 5,
+    "clarity_score": 8,
+    "usefulness_score": 4,
+    "factual_correctness": 5,
+    "context_understanding": 6,
+    "technical_precision": 7,
+    "user_experience_score": 5,
+    "overall_score": 5.6,
+    "response_time": 0.0677030086517334,
+    "processing_steps": 3,
+    "agents_involved": [
+      "search",
+      "digest",
+      "analysis"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Detailed metadata provided",
+      "Clear and understandable response"
+    ],
+    "weaknesses": [
+      "Lack of actionable results",
+      "Low confidence in entity recognition"
+    ],
+    "specific_issues": [
+      "No specific results found",
+      "Low confidence score for the recognized entity"
+    ],
+    "improvement_suggestions": [
+      "Improve entity recognition and increase confidence score",
+      "Provide more actionable results or suggestions for the user"
+    ],
+    "user_experience_notes": [
+      "User may feel frustrated due to lack of results",
+      "Response may not be very useful for the user"
+    ],
+    "query_understanding_quality": "good",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "good",
+    "confidence_level": 5,
+    "consistency_score": 8.85,
+    "robustness_indicator": "low"
+  },
+  {
+    "query": "Analyze engagement patterns and identify trending topics from the past month",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012164.464632,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Analyze engagement patterns and identify trending topics from the past month\",\n      \"intent\": \"analyze\",\n      \"entities\": [\n        {\n          \"type\": \"user\",\n          \"value\": \"the\",\n          \"start\": 57,\n          \"end\": 65,\n          \"confidence\": 0.8\n        },\n        {\n          \"type\": \"time_range\",\n          \"value\": \"past\",\n          \"start\": 66,\n          \"end\": 76,\n          \"confidence\": 0.5\n        }\n      ],\n      \"complexity\": 0.72,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Analyze engagement patterns and identify trending topics from the past month\",\n        \"timestamp\": \"2025-06-15T18:29:24.467462\",\n        \"test_scenario\": true,\n        \"category\": \"complex_analysis\"\n      },\n      \"timestamp\": \"2025-06-15T18:29:24.471449\",\n      \"grouped_entities\": {\n        \"users\": [\n          \"the\"\n        ],\n        \"time_range\": {\n          \"start\": 66,\n          \"end\": 76\n        }\n      }\n    },\n    \"intent\": \"analyze\",\n    \"entities\": [\n      {\n        \"type\": \"user\",\n        \"value\": \"the\",\n        \"start\": 57,\n        \"end\": 65,\n        \"confidence\": 0.8\n      },\n      {\n        \"type\": \"time_range\",\n        \"value\": \"past\",\n        \"start\": 66,\n        \"end\": 76,\n        \"confidence\": 0.5\n      }\n    ],\n    \"execution_results\": [],\n    \"duration\": 0.014883756637573242,\n    \"success\": true\n  }\n}",
+    "category": "complex_analysis",
+    "complexity": "simple",
+    "accuracy_score": 5,
+    "relevance_score": 5,
+    "completeness_score": 5,
+    "clarity_score": 8,
+    "usefulness_score": 3,
+    "factual_correctness": 5,
+    "context_understanding": 4,
+    "technical_precision": 6,
+    "user_experience_score": 4,
+    "overall_score": 5,
+    "response_time": 0.01491093635559082,
+    "processing_steps": 3,
+    "agents_involved": [
+      "search",
+      "analysis",
+      "digest"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and concise response",
+      "Detailed metadata provided"
+    ],
+    "weaknesses": [
+      "Lack of specific results",
+      "Misinterpretation of 'the' as a user entity"
+    ],
+    "specific_issues": [
+      "The bot failed to provide the requested analysis",
+      "The bot incorrectly identified 'the' as a user entity"
+    ],
+    "improvement_suggestions": [
+      "Improve the bot's ability to perform complex analysis",
+      "Refine entity recognition to avoid misinterpretation of common words as entities"
+    ],
+    "user_experience_notes": [
+      "The user might be confused by the lack of results",
+      "The user might be frustrated by the bot's inability to perform the requested analysis"
+    ],
+    "query_understanding_quality": "fair",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "good",
+    "confidence_level": 5,
+    "consistency_score": 8.67,
+    "robustness_indicator": "low"
+  },
+  {
+    "query": "Find Python discussions from yesterday, summarize key points, and identify who was most active",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012178.161713,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Find Python discussions from yesterday, summarize key points, and identify who was most active\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"user\",\n          \"value\": \"yesterday\",\n          \"start\": 24,\n          \"end\": 38,\n          \"confidence\": 0.8\n        }\n      ],\n      \"complexity\": 1.0,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Find Python discussions from yesterday, summarize key points, and identify who was most active\",\n        \"timestamp\": \"2025-06-15T18:29:38.164892\",\n        \"test_scenario\": true,\n        \"category\": \"multi_intent\"\n      },\n      \"timestamp\": \"2025-06-15T18:29:38.168169\",\n      \"grouped_entities\": {\n        \"users\": [\n          \"yesterday\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"user\",\n        \"value\": \"yesterday\",\n        \"start\": 24,\n        \"end\": 38,\n        \"confidence\": 0.8\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 8.163081169128418,\n    \"success\": true\n  }\n}",
+    "category": "multi_intent",
+    "complexity": "simple",
+    "accuracy_score": 2,
+    "relevance_score": 2,
+    "completeness_score": 2,
+    "clarity_score": 8,
+    "usefulness_score": 1,
+    "factual_correctness": 2,
+    "context_understanding": 2,
+    "technical_precision": 2,
+    "user_experience_score": 3,
+    "overall_score": 2.8,
+    "response_time": 8.163113117218018,
+    "processing_steps": 3,
+    "agents_involved": [
+      "search",
+      "analysis",
+      "digest"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and structured response",
+      "Detailed metadata"
+    ],
+    "weaknesses": [
+      "Incorrect entity recognition",
+      "Lack of useful results"
+    ],
+    "specific_issues": [
+      "Misinterpretation of 'yesterday' as a user",
+      "No actual search results provided"
+    ],
+    "improvement_suggestions": [
+      "Improve entity recognition to correctly identify 'yesterday' as a time entity",
+      "Ensure the bot can provide actual search results"
+    ],
+    "user_experience_notes": [
+      "User may be frustrated by lack of results",
+      "Misinterpretation may confuse the user"
+    ],
+    "query_understanding_quality": "poor",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "good",
+    "confidence_level": 2,
+    "consistency_score": 8.06,
+    "robustness_indicator": "low"
+  },
+  {
+    "query": "Show me messages from #nonexistent-channel-12345",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012197.481677,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Show me messages from #nonexistent-channel-12345\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"channel\",\n          \"value\": \"nonexistent-channel-12345\",\n          \"channel_id\": null,\n          \"start\": 22,\n          \"end\": 48,\n          \"confidence\": 0.3\n        }\n      ],\n      \"complexity\": 0.4,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Show me messages from #nonexistent-channel-12345\",\n        \"timestamp\": \"2025-06-15T18:29:57.484355\",\n        \"test_scenario\": true,\n        \"category\": \"error_handling\"\n      },\n      \"timestamp\": \"2025-06-15T18:29:57.487881\",\n      \"grouped_entities\": {\n        \"channels\": [\n          \"nonexistent-channel-12345\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"channel\",\n        \"value\": \"nonexistent-channel-12345\",\n        \"channel_id\": null,\n        \"start\": 22,\n        \"end\": 48,\n        \"confidence\": 0.3\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.015733957290649414,\n    \"success\": true\n  }\n}",
+    "category": "error_handling",
+    "complexity": "simple",
+    "accuracy_score": 10,
+    "relevance_score": 10,
+    "completeness_score": 10,
+    "clarity_score": 9,
+    "usefulness_score": 8,
+    "factual_correctness": 10,
+    "context_understanding": 10,
+    "technical_precision": 10,
+    "user_experience_score": 8,
+    "overall_score": 9.4,
+    "response_time": 0.015769004821777344,
+    "processing_steps": 1,
+    "agents_involved": [
+      "search"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Accurate response",
+      "Relevant to the query",
+      "Comprehensive and clear",
+      "Good context understanding",
+      "Technically precise"
+    ],
+    "weaknesses": [
+      "Could provide more user-friendly message",
+      "Low confidence score on entity recognition"
+    ],
+    "specific_issues": [
+      "The bot's response could be more conversational and user-friendly",
+      "Low confidence score on entity recognition might indicate issues with understanding channel names"
+    ],
+    "improvement_suggestions": [
+      "Make the bot's responses more conversational and engaging",
+      "Improve entity recognition for channel names",
+      "When no results are found, the bot could suggest checking the channel name or provide other helpful guidance"
+    ],
+    "user_experience_notes": [
+      "The response is technically correct but could be more engaging",
+      "The bot could provide suggestions or guidance when it doesn't find the requested information"
+    ],
+    "query_understanding_quality": "excellent",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "excellent",
+    "error_handling_quality": "good",
+    "confidence_level": 9,
+    "consistency_score": 9.17,
+    "robustness_indicator": "high"
+  },
+  {
+    "query": "What's been happening?",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012210.520829,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"What's been happening?\",\n      \"intent\": \"search\",\n      \"entities\": [],\n      \"complexity\": 0.06,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"What's been happening?\",\n        \"timestamp\": \"2025-06-15T18:30:10.523724\",\n        \"test_scenario\": true,\n        \"category\": \"ambiguous_query\"\n      },\n      \"timestamp\": \"2025-06-15T18:30:10.527157\",\n      \"grouped_entities\": {}\n    },\n    \"intent\": \"search\",\n    \"entities\": [],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.016473054885864258,\n    \"success\": true\n  }\n}",
+    "category": "ambiguous_query",
+    "complexity": "simple",
+    "accuracy_score": 10,
+    "relevance_score": 5,
+    "completeness_score": 7,
+    "clarity_score": 10,
+    "usefulness_score": 4,
+    "factual_correctness": 10,
+    "context_understanding": 5,
+    "technical_precision": 10,
+    "user_experience_score": 6,
+    "overall_score": 7.4,
+    "response_time": 0.016509056091308594,
+    "processing_steps": 2,
+    "agents_involved": [
+      "search",
+      "analysis"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and concise response",
+      "Detailed metadata",
+      "Correct identification of query as ambiguous"
+    ],
+    "weaknesses": [
+      "Lack of specific information in response",
+      "Limited context understanding"
+    ],
+    "specific_issues": [
+      "The bot failed to provide any specific results or insights"
+    ],
+    "improvement_suggestions": [
+      "Improve context understanding to provide more relevant responses",
+      "Consider providing suggestions or alternatives when specific results can't be found"
+    ],
+    "user_experience_notes": [
+      "The user might be confused or unsatisfied due to lack of specific information"
+    ],
+    "query_understanding_quality": "good",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "excellent",
+    "confidence_level": 7,
+    "consistency_score": 7.59,
+    "robustness_indicator": "medium"
+  },
+  {
+    "query": "What has @john_doe been working on recently?",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012219.1243699,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"What has @john_doe been working on recently?\",\n      \"intent\": \"search\",\n      \"entities\": [\n        {\n          \"type\": \"user\",\n          \"value\": \"john_doe\",\n          \"start\": 9,\n          \"end\": 18,\n          \"confidence\": 0.8\n        }\n      ],\n      \"complexity\": 0.14,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"What has @john_doe been working on recently?\",\n        \"timestamp\": \"2025-06-15T18:30:19.127077\",\n        \"test_scenario\": true,\n        \"category\": \"user_specific\"\n      },\n      \"timestamp\": \"2025-06-15T18:30:19.130536\",\n      \"grouped_entities\": {\n        \"users\": [\n          \"john_doe\"\n        ]\n      }\n    },\n    \"intent\": \"search\",\n    \"entities\": [\n      {\n        \"type\": \"user\",\n        \"value\": \"john_doe\",\n        \"start\": 9,\n        \"end\": 18,\n        \"confidence\": 0.8\n      }\n    ],\n    \"execution_results\": [\n      null\n    ],\n    \"duration\": 0.017190217971801758,\n    \"success\": true\n  }\n}",
+    "category": "user_specific",
+    "complexity": "simple",
+    "accuracy_score": 10,
+    "relevance_score": 5,
+    "completeness_score": 5,
+    "clarity_score": 10,
+    "usefulness_score": 3,
+    "factual_correctness": 10,
+    "context_understanding": 7,
+    "technical_precision": 10,
+    "user_experience_score": 6,
+    "overall_score": 7.3,
+    "response_time": 0.017225980758666992,
+    "processing_steps": 1,
+    "agents_involved": [
+      "search"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and concise response",
+      "Excellent technical precision",
+      "Accurate factual correctness"
+    ],
+    "weaknesses": [
+      "Lack of specific results",
+      "Low usefulness due to lack of actionable information"
+    ],
+    "specific_issues": [
+      "No specific results found for the query"
+    ],
+    "improvement_suggestions": [
+      "Improve the search algorithm to provide more specific results",
+      "Consider providing suggestions or alternatives when no specific results are found"
+    ],
+    "user_experience_notes": [
+      "The user might be disappointed due to lack of specific results",
+      "The user might appreciate the clear and concise response"
+    ],
+    "query_understanding_quality": "excellent",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "good",
+    "error_handling_quality": "excellent",
+    "confidence_level": 7,
+    "consistency_score": 7.42,
+    "robustness_indicator": "medium"
+  },
+  {
+    "query": "How active has our server been this month compared to last month?",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012229.014595,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"How active has our server been this month compared to last month?\",\n      \"intent\": \"analyze\",\n      \"entities\": [\n        {\n          \"type\": \"time_range\",\n          \"value\": \"last\",\n          \"start\": 54,\n          \"end\": 64,\n          \"confidence\": 0.5\n        }\n      ],\n      \"complexity\": 0.54,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"How active has our server been this month compared to last month?\",\n        \"timestamp\": \"2025-06-15T18:30:29.018012\",\n        \"test_scenario\": true,\n        \"category\": \"performance_analysis\"\n      },\n      \"timestamp\": \"2025-06-15T18:30:29.021423\",\n      \"grouped_entities\": {\n        \"time_range\": {\n          \"start\": 54,\n          \"end\": 64\n        }\n      }\n    },\n    \"intent\": \"analyze\",\n    \"entities\": [\n      {\n        \"type\": \"time_range\",\n        \"value\": \"last\",\n        \"start\": 54,\n        \"end\": 64,\n        \"confidence\": 0.5\n      }\n    ],\n    \"execution_results\": [],\n    \"duration\": 0.016113996505737305,\n    \"success\": true\n  }\n}",
+    "category": "performance_analysis",
+    "complexity": "simple",
+    "accuracy_score": 5,
+    "relevance_score": 5,
+    "completeness_score": 3,
+    "clarity_score": 8,
+    "usefulness_score": 2,
+    "factual_correctness": 5,
+    "context_understanding": 6,
+    "technical_precision": 7,
+    "user_experience_score": 4,
+    "overall_score": 5,
+    "response_time": 0.016141891479492188,
+    "processing_steps": 2,
+    "agents_involved": [
+      "search",
+      "analysis"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and concise response",
+      "Detailed metadata"
+    ],
+    "weaknesses": [
+      "Lack of specific results",
+      "Low usefulness due to lack of actionable data"
+    ],
+    "specific_issues": [
+      "No specific results found for the query",
+      "Low confidence in entity recognition"
+    ],
+    "improvement_suggestions": [
+      "Improve entity recognition to increase confidence level",
+      "Enhance data retrieval capabilities to provide specific results"
+    ],
+    "user_experience_notes": [
+      "User may be frustrated due to lack of results",
+      "User may appreciate the detailed metadata"
+    ],
+    "query_understanding_quality": "good",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "excellent",
+    "confidence_level": 5,
+    "consistency_score": 8.24,
+    "robustness_indicator": "low"
+  },
+  {
+    "query": "Analyze conversation patterns in #general and identify peak activity times",
+    "response": "{\n  \"response\": \"I processed your query but didn't find specific results.\",\n  \"results\": [],\n  \"metadata\": {\n    \"start_time\": 1750012238.269856,\n    \"version\": \"1.0.0\",\n    \"query_analysis\": {\n      \"query\": \"Analyze conversation patterns in #general and identify peak activity times\",\n      \"intent\": \"analyze\",\n      \"entities\": [\n        {\n          \"type\": \"channel\",\n          \"value\": \"general\",\n          \"channel_id\": \"1365732945859444767\",\n          \"start\": 33,\n          \"end\": 41,\n          \"confidence\": 0.9\n        }\n      ],\n      \"complexity\": 0.7,\n      \"context\": {\n        \"user_id\": \"test_user\",\n        \"query\": \"Analyze conversation patterns in #general and identify peak activity times\",\n        \"timestamp\": \"2025-06-15T18:30:38.272810\",\n        \"test_scenario\": true,\n        \"category\": \"channel_analysis\"\n      },\n      \"timestamp\": \"2025-06-15T18:30:38.275932\",\n      \"grouped_entities\": {\n        \"channels\": [\n          \"general\"\n        ]\n      }\n    },\n    \"intent\": \"analyze\",\n    \"entities\": [\n      {\n        \"type\": \"channel\",\n        \"value\": \"general\",\n        \"channel_id\": \"1365732945859444767\",\n        \"start\": 33,\n        \"end\": 41,\n        \"confidence\": 0.9\n      }\n    ],\n    \"execution_results\": [],\n    \"duration\": 0.01389002799987793,\n    \"success\": true\n  }\n}",
+    "category": "channel_analysis",
+    "complexity": "simple",
+    "accuracy_score": 6,
+    "relevance_score": 7,
+    "completeness_score": 5,
+    "clarity_score": 8,
+    "usefulness_score": 4,
+    "factual_correctness": 6,
+    "context_understanding": 8,
+    "technical_precision": 7,
+    "user_experience_score": 5,
+    "overall_score": 6.2,
+    "response_time": 0.01391911506652832,
+    "processing_steps": 2,
+    "agents_involved": [
+      "search",
+      "analysis"
+    ],
+    "memory_usage": null,
+    "api_calls_made": 1,
+    "cache_hit_rate": 0.0,
+    "strengths": [
+      "Clear and structured response",
+      "Good understanding of the query and context"
+    ],
+    "weaknesses": [
+      "Lack of actionable results",
+      "Inability to provide specific analysis"
+    ],
+    "specific_issues": [
+      "No specific results provided",
+      "Lack of information on why no results were found"
+    ],
+    "improvement_suggestions": [
+      "Improve the bot's ability to analyze and provide specific results",
+      "Provide more information on why no results were found",
+      "Consider providing suggestions or alternatives when no results can be found"
+    ],
+    "user_experience_notes": [
+      "User might be frustrated with lack of results",
+      "User might appreciate the clarity and structure of the response"
+    ],
+    "query_understanding_quality": "excellent",
+    "task_decomposition_quality": "unknown",
+    "agent_coordination_quality": "unknown",
+    "response_synthesis_quality": "fair",
+    "error_handling_quality": "good",
+    "confidence_level": 6,
+    "consistency_score": 8.69,
+    "robustness_indicator": "medium"
+  }
+]

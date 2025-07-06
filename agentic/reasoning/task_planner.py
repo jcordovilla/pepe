@@ -30,12 +30,27 @@ class TaskPlanner:
         
         # Task templates for common patterns
         self.task_templates = {
+            "capability": [
+                {"role": AgentRole.ANALYZER, "description": "Generate capability information", "task_type": "capability_response"}
+            ],
             "search": [
                 {"role": AgentRole.SEARCHER, "description": "Search for relevant messages"}
             ],
             "summarize": [
                 {"role": AgentRole.SEARCHER, "description": "Retrieve messages in time range"},
                 {"role": AgentRole.ANALYZER, "description": "Summarize retrieved messages"}
+            ],
+            "digest": [
+                {"role": AgentRole.SEARCHER, "description": "Retrieve messages for digest period"},
+                {"role": AgentRole.ANALYZER, "description": "Generate comprehensive digest"}
+            ],
+            "weekly_digest": [
+                {"role": AgentRole.SEARCHER, "description": "Retrieve last week's messages", "task_type": "filtered_search"},
+                {"role": AgentRole.ANALYZER, "description": "Generate weekly digest", "task_type": "weekly_digest"}
+            ],
+            "monthly_digest": [
+                {"role": AgentRole.SEARCHER, "description": "Retrieve last month's messages", "task_type": "filtered_search"},
+                {"role": AgentRole.ANALYZER, "description": "Generate monthly digest", "task_type": "monthly_digest"}
             ],
             "analyze": [
                 {"role": AgentRole.SEARCHER, "description": "Search for relevant data"},
@@ -47,6 +62,9 @@ class TaskPlanner:
             ],
             "data_availability": [
                 {"role": AgentRole.SEARCHER, "description": "Query data availability metrics"}
+            ],
+            "reactions": [
+                {"role": AgentRole.SEARCHER, "description": "Search for messages with reactions", "task_type": "reaction_search"}
             ]
         }
         
@@ -76,7 +94,40 @@ class TaskPlanner:
             # Create subtasks based on intent
             subtasks = []
             
-            if analysis.get("intent") == "search":
+            intent = analysis.get("intent")
+            
+            if intent == "capability":
+                # Handle capability/meta queries
+                subtask = SubTask(
+                    id=f"capability_{uuid.uuid4().hex[:8]}",
+                    description="Generate capability information and help documentation",
+                    agent_role=AgentRole.ANALYZER,
+                    task_type="capability_response",
+                    parameters={
+                        "query": query,
+                        "response_type": "capability"
+                    },
+                    dependencies=[],
+                    created_at=datetime.utcnow()
+                )
+                subtasks.append(subtask)
+                
+            elif intent in self.task_templates:
+                # Use template-based planning for known intents
+                template = self.task_templates[intent]
+                for i, task_def in enumerate(template):
+                    subtask = SubTask(
+                        id=f"{intent}_{i}_{uuid.uuid4().hex[:8]}",
+                        description=task_def["description"],
+                        agent_role=task_def["role"],
+                        task_type=task_def.get("task_type", intent),
+                        parameters=self._build_task_parameters(query, analysis, analysis.get("entities", []), context),
+                        dependencies=self._determine_dependencies(i, template),
+                        created_at=datetime.utcnow()
+                    )
+                    subtasks.append(subtask)
+                    
+            elif analysis.get("intent") == "search":
                 # Extract entities and build filters
                 entities = analysis.get("entities", [])
                 filters = {}
