@@ -26,7 +26,7 @@ class FreshResourceDetector:
     def __init__(self, use_fast_model: bool = True):
         # Model selection for resource detection
         self.use_fast_model = use_fast_model
-        self.fast_model = os.getenv('LLM_FAST_MODEL', 'llama3.1:1b')  # Smaller, faster model
+        self.fast_model = os.getenv('LLM_FAST_MODEL', 'phi3:mini')  # Smaller, faster model
         self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
         
         # Incremental processing tracking
