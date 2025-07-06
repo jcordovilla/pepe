@@ -372,7 +372,12 @@ class PersistentVectorStore:
                     ids.append(message_id)
                     
                 except Exception as msg_error:
-                    logger.warning(f"Error processing message {msg.get('message_id', 'unknown') if isinstance(msg, dict) else 'non-dict'}: {msg_error}")
+                    # Handle both dict and non-dict messages in error reporting
+                    if isinstance(msg, dict):
+                        message_id = msg.get('message_id', 'unknown')
+                    else:
+                        message_id = f"string-{type(msg).__name__}"
+                    logger.warning(f"Error processing message {message_id}: {msg_error}")
                     continue
             
             if not documents:
