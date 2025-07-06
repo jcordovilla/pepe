@@ -247,10 +247,11 @@ class AgentOrchestrator:
     async def _synthesize_results_node(self, state: AgentState) -> AgentState:
         """Synthesize results from all subtasks into a coherent response"""
         try:
-            search_results = state.get("search_results", [])
+            # Ensure all collections are properly initialized
+            search_results = state.get("search_results", []) or []
             plan = state.get("task_plan")
             query = state.get("user_context", {}).get("query", "")
-            analysis_results = state.get("analysis_results", {})
+            analysis_results = state.get("analysis_results", {}) or {}
             
             # Check if this is a capability response
             if "capability_response" in analysis_results:
@@ -262,12 +263,13 @@ class AgentOrchestrator:
                 logger.info("Capability response synthesized successfully")
                 return state
             
+            # Handle case where no results or plan exists
             if not search_results and not plan and not analysis_results:
-                state["response"] = "I couldn't find any relevant information for your query."
+                state["response"] = "I can help you search and analyze Discord conversations. What would you like to know about?"
                 return state
             
             # Return the actual search results for the agent API to process
-            if search_results:
+            if search_results and len(search_results) > 0:
                 # Create a response that includes both summary and results
                 result_count = len(search_results)
                 if result_count == 1:
@@ -280,7 +282,8 @@ class AgentOrchestrator:
                 # Ensure search_results are preserved for the agent API
                 logger.info(f"Results synthesized successfully: {result_count} results")
             else:
-                state["response"] = "I processed your query but didn't find specific results."
+                # Provide a helpful response when no specific results are found
+                state["response"] = "I can help you search through Discord conversations. Try asking me to find specific topics, users, or messages. For example: 'Find messages about Python programming' or 'Show me recent discussions about AI'."
             
             return state
             
