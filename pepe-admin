@@ -364,6 +364,9 @@ class PepeAdminSimplified:
         Usage:
             pepe-admin resources              # Complete resource processing
             pepe-admin resources status       # Show resource database status
+            pepe-admin resources --fast-model # Use fast model for processing
+            pepe-admin resources --standard-model # Use standard model for quality
+            pepe-admin resources --reset-cache # Reset cache and reprocess all
         """
         print("🔍 Pepe Admin - Resource Management")
         print("=" * 60)
@@ -371,6 +374,9 @@ class PepeAdminSimplified:
         from pathlib import Path
 
         action = getattr(args, 'action', None)
+        fast_model = getattr(args, 'fast_model', False)
+        standard_model = getattr(args, 'standard_model', False)
+        reset_cache = getattr(args, 'reset_cache', False)
         
         if action == 'status':
             print("\n📊 Resource Database Status")
@@ -427,12 +433,38 @@ class PepeAdminSimplified:
             else:
                 print("🗄️ Enhanced Database: Not initialized (run 'resources' first)")
             
+            # Check processed URLs cache
+            cache_file = Path("data/processed_resources.json")
+            if cache_file.exists():
+                try:
+                    import json
+                    with open(cache_file, 'r') as f:
+                        data = json.load(f)
+                    total_processed = data.get('total_processed', 0)
+                    last_updated = data.get('last_updated', 'Unknown')
+                    print(f"💾 Processed URLs Cache: {total_processed:,} URLs (updated: {last_updated[:10]})")
+                except Exception as e:
+                    print(f"   ❌ Error reading cache: {e}")
+            else:
+                print("💾 Processed URLs Cache: None (no incremental processing)")
+            
             return True
 
         else:
             # Default action: complete resource processing
             print("\n🚀 Complete Resource Processing")
             print("This will detect, export, and migrate resources from Discord messages.")
+            
+            # Show processing options
+            if fast_model:
+                print("⚡ Using fast model (llama3.1:1b) for faster processing")
+            elif standard_model:
+                print("🎯 Using standard model (llama3.1:8b) for better quality")
+            else:
+                print("⚡ Using fast model (llama3.1:1b) by default")
+            
+            if reset_cache:
+                print("🗑️ Will reset cache and reprocess all resources")
             
             # Check if we have messages to analyze
             db_path = Path("data/discord_messages.db")
@@ -442,9 +474,17 @@ class PepeAdminSimplified:
             
             # Step 1: Detect resources
             print("\n📥 Step 1: Detecting resources from Discord messages...")
-            detect_result = subprocess.run([
-                "python", "scripts/resource_detector.py"
-            ], capture_output=True, text=True)
+            
+            # Build command with options
+            cmd = ["python", "scripts/resource_detector.py"]
+            if fast_model:
+                cmd.append("--fast-model")
+            elif standard_model:
+                cmd.append("--standard-model")
+            if reset_cache:
+                cmd.append("--reset-cache")
+            
+            detect_result = subprocess.run(cmd, capture_output=True, text=True)
             print(detect_result.stdout)
             if detect_result.returncode != 0:
                 print(f"❌ Resource detection failed: {detect_result.stderr}")
@@ -1059,6 +1099,9 @@ Examples:
     # Resources command
     resources_parser = subparsers.add_parser('resources', help='Resource management')
     resources_parser.add_argument('action', nargs='?', choices=['status'], help='Show resource status (optional)')
+    resources_parser.add_argument('--fast-model', action='store_true', help='Use fast model (llama3.1:1b) for faster processing')
+    resources_parser.add_argument('--standard-model', action='store_true', help='Use standard model (llama3.1:8b) for better quality')
+    resources_parser.add_argument('--reset-cache', action='store_true', help='Reset processed URLs cache and reprocess all resources')
     
     args = parser.parse_args()
     

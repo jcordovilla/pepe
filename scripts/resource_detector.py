@@ -17,12 +17,22 @@ from datetime import datetime
 import requests
 import os
 from tqdm import tqdm
+import argparse
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 class FreshResourceDetector:
-    def __init__(self):
+    def __init__(self, use_fast_model: bool = True):
+        # Model selection for resource detection
+        self.use_fast_model = use_fast_model
+        self.fast_model = os.getenv('LLM_FAST_MODEL', 'llama3.1:1b')  # Smaller, faster model
+        self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
+        
+        # Incremental processing tracking
+        self.processed_urls_file = Path('data/processed_resources.json')
+        self.processed_urls = self._load_processed_urls()
+        
         # High-quality domains (curated list)
         self.high_quality_domains = {
             # Research & Academic
@@ -114,6 +124,41 @@ class FreshResourceDetector:
         self.unknown_domains = Counter()  # Track unknown domains
         self.unknown_samples = defaultdict(list)  # Sample URLs for each unknown domain
     
+    def _load_processed_urls(self) -> set:
+        """Load previously processed URLs for incremental processing"""
+        if self.processed_urls_file.exists():
+            try:
+                with open(self.processed_urls_file, 'r') as f:
+                    data = json.load(f)
+                    return set(data.get('processed_urls', []))
+            except Exception as e:
+                print(f"⚠️ Warning: Could not load processed URLs: {e}")
+        return set()
+    
+    def _save_processed_urls(self):
+        """Save processed URLs for future incremental processing"""
+        try:
+            # Ensure data directory exists
+            self.processed_urls_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Get all processed URLs
+            all_urls = self.processed_urls.union(
+                {resource['url'] for resource in self.detected_resources}
+            )
+            
+            with open(self.processed_urls_file, 'w') as f:
+                json.dump({
+                    'processed_urls': list(all_urls),
+                    'last_updated': datetime.now().isoformat(),
+                    'total_processed': len(all_urls)
+                }, f, indent=2)
+        except Exception as e:
+            print(f"⚠️ Warning: Could not save processed URLs: {e}")
+    
+    def _is_url_processed(self, url: str) -> bool:
+        """Check if a URL has already been processed"""
+        return url in self.processed_urls
+    
     def analyze_discord_messages(self, messages_dir: Path, analyze_unknown: bool = False) -> List[Dict[str, Any]]:
         """Analyze Discord messages and extract high-quality resources"""
         
@@ -155,6 +200,9 @@ class FreshResourceDetector:
                     self.detected_resources[i]['description'] = description
                     desc_pbar.set_postfix({"domain": resource['domain'][:20]})
         
+        # Save processed URLs for incremental processing
+        self._save_processed_urls()
+        
         return self._generate_report(analyze_unknown)
     
     def _analyze_message(self, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False):
@@ -176,7 +224,7 @@ class FreshResourceDetector:
     def _generate_description(self, message, url):
         """Generate an AI description for the resource using the LLM."""
         llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
-        llm_model = os.getenv('LLM_MODEL', 'llama3.1:8b')
+        llm_model = self.fast_model if self.use_fast_model else self.standard_model
         
         # Extract key content for faster processing
         content = message.get('content', '')[:200]  # Limit content length
@@ -206,6 +254,11 @@ class FreshResourceDetector:
 
     def _evaluate_url(self, url: str, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Evaluate if a URL is a high-quality resource"""
+        # Check if URL has already been processed
+        if self._is_url_processed(url):
+            self.stats['skipped_processed'] += 1
+            return None
+            
         try:
             parsed = urlparse(url)
             domain = parsed.netloc.lower()
@@ -293,9 +346,15 @@ class FreshResourceDetector:
         print("\n📊 Fresh Resource Detection Results")
         print("=" * 40)
         print(f"✅ High-quality resources found: {len(sorted_resources)}")
+        print(f"⏭️ Skipped (already processed): {self.stats.get('skipped_processed', 0)}")
         print(f"❌ Excluded low-quality URLs: {self.stats['excluded_domains']}")
         print(f"❓ Unknown domains skipped: {self.stats['unknown_domains']}")
         print(f"⚠️ Parsing errors: {self.stats['parsing_errors']}")
+        
+        # Show incremental processing info
+        if self.processed_urls:
+            print(f"📈 Total URLs processed (all time): {len(self.processed_urls)}")
+            print(f"🚀 Incremental processing: Enabled")
         
         if analyze_unknown and self.unknown_domains:
             print(f"\n🔍 Unknown Domains Analysis ({len(self.unknown_domains)} unique domains):")
@@ -394,7 +453,30 @@ class FreshResourceDetector:
         return report
 
 def main():
-    detector = FreshResourceDetector()
+    parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
+    parser.add_argument('--fast-model', action='store_true', 
+                       help='Use fast model (llama3.1:1b) for faster processing')
+    parser.add_argument('--standard-model', action='store_true',
+                       help='Use standard model (llama3.1:8b) for better quality')
+    parser.add_argument('--reset-cache', action='store_true',
+                       help='Reset processed URLs cache and reprocess all resources')
+    
+    args = parser.parse_args()
+    
+    # Determine model choice
+    use_fast_model = args.fast_model or (not args.standard_model)  # Default to fast model
+    
+    if args.reset_cache:
+        cache_file = project_root / 'data' / 'processed_resources.json'
+        if cache_file.exists():
+            cache_file.unlink()
+            print("🗑️ Reset processed URLs cache")
+    
+    detector = FreshResourceDetector(use_fast_model=use_fast_model)
+    
+    # Show model being used
+    model_name = detector.fast_model if use_fast_model else detector.standard_model
+    print(f"🤖 Using model: {model_name} ({'fast' if use_fast_model else 'standard'} mode)")
     
     # Check if we have the SQLite database
     db_path = project_root / 'data' / 'discord_messages.db'
