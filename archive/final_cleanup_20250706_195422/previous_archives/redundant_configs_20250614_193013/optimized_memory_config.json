@@ -1,0 +1,16 @@
+{
+  "conversation_memory": {
+    "db_path": "data/conversation_memory.db",
+    "max_history_length": 50,
+    "context_window_hours": 24,
+    "batch_size": 100,
+    "connection_pool_size": 5,
+    "cache_size": 1000,
+    "enable_compression": true
+  },
+  "cache_settings": {
+    "max_memory_usage_mb": 512,
+    "cleanup_interval_seconds": 300,
+    "auto_cleanup_enabled": true
+  }
+}

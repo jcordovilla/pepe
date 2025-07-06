@@ -1,0 +1,24 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "interval_seconds": 60,
+    "metrics": [
+      "response_time",
+      "memory_usage",
+      "cache_hit_rate",
+      "query_success_rate",
+      "vector_store_performance"
+    ],
+    "alerts": {
+      "email_enabled": false,
+      "log_enabled": true,
+      "threshold_checks": true
+    }
+  },
+  "performance_targets": {
+    "average_response_time_ms": 2000,
+    "cache_hit_rate_percent": 80,
+    "success_rate_percent": 95,
+    "memory_usage_limit_mb": 1000
+  }
+}

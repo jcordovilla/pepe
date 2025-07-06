@@ -55,3 +55,12 @@ debug/test_*.json
 
 # Legacy archive (post-migration)
 legacy_archive/
+# Final cleanup additions
+# Final cleanup - temporary files
+*.tmp
+*_temp_*
+# Development artifacts
+*.debug
+# Backups
+backup_*/
+*_backup_*/
