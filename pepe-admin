@@ -170,8 +170,10 @@ class PepeAdminSimplified:
                 'forums_without_threads': 0,
                 'total_threads_found': 0,
                 'total_messages_processed': 0,
+                'total_messages_indexed': 0,
                 'total_json_files': 0,
                 'processing_errors': 0,
+                'indexing_errors': 0,
                 'fetched_channels': set(),
                 'forum_thread_counts': {},
                 'all_channels': {},
@@ -439,9 +441,41 @@ class PepeAdminSimplified:
                 sync_stats['fetched_channels'].add(channel_id)
             
             if messages:
-                # Add to vector store (in real implementation)
-                sync_stats['total_messages_processed'] += len(messages)
-                print(f"     ✅ {json_file.name}: {len(messages)} messages")
+                # Extract actual messages from the JSON structure
+                actual_messages = messages.get('messages', []) if isinstance(messages, dict) else messages
+                
+                # Actually add messages to vector store
+                try:
+                    from agentic.vectorstore.persistent_store import PersistentVectorStore
+                    # Use correct config structure
+                    vector_config = {
+                        "collection_name": "discord_messages", 
+                        "persist_directory": "./data/chromadb",
+                        "embedding_model": "text-embedding-3-small",
+                        "batch_size": 100
+                    }
+                    vector_store = PersistentVectorStore(vector_config)
+                    
+                    # Add messages to vector store - use actual_messages array
+                    if actual_messages and len(actual_messages) > 0:
+                        success = await vector_store.add_messages(actual_messages)
+                        if success:
+                            sync_stats['total_messages_indexed'] += len(actual_messages)
+                            print(f"     ✅ {json_file.name}: {len(actual_messages)} messages indexed")
+                        else:
+                            print(f"     ⚠️ {json_file.name}: {len(actual_messages)} messages (indexing failed)")
+                            sync_stats['indexing_errors'] += 1
+                    else:
+                        print(f"     ⚠️ {json_file.name}: No valid messages found")
+                        sync_stats['indexing_errors'] += 1
+                        
+                except Exception as vector_error:
+                    print(f"     ❌ {json_file.name}: Vector store error - {vector_error}")
+                    sync_stats['indexing_errors'] += 1
+                
+                # Count total messages for stats (use actual_messages count)
+                message_count = len(actual_messages) if actual_messages else 0
+                sync_stats['total_messages_processed'] += message_count
                 
         except Exception as e:
             sync_stats['processing_errors'] += 1
@@ -475,8 +509,18 @@ class PepeAdminSimplified:
         print(f"⏱️  Duration: {duration:.1f} seconds")
         print(f"📁 JSON Files: {stats['total_json_files']:,}")
         print(f"📝 Messages: {stats['total_messages_processed']:,}")
+        
+        # Indexing statistics
+        if 'total_messages_indexed' in stats and stats['total_messages_indexed'] > 0:
+            print(f"🔍 Indexed: {stats['total_messages_indexed']:,}")
+            indexing_rate = (stats['total_messages_indexed'] / stats['total_messages_processed'] * 100) if stats['total_messages_processed'] > 0 else 0
+            print(f"📊 Indexing Success: {indexing_rate:.1f}%")
+        
+        # Error reporting
         if stats['processing_errors'] > 0:
-            print(f"❌ Errors: {stats['processing_errors']}")
+            print(f"❌ Processing Errors: {stats['processing_errors']}")
+        if 'indexing_errors' in stats and stats['indexing_errors'] > 0:
+            print(f"⚠️ Indexing Errors: {stats['indexing_errors']}")
         
         # Discord server overview
         if stats['total_channels'] > 0:
