@@ -144,12 +144,28 @@ class PepeAdmin:
             from agentic.interfaces.agent_api import AgentAPI
             agent_api = AgentAPI(self.config)
             
+            # Initialize sync statistics
+            sync_stats = {
+                'total_channels': 0,
+                'text_channels': 0,
+                'voice_channels': 0,
+                'channels_with_data': 0,
+                'channels_without_data': 0,
+                'total_messages_processed': 0,
+                'total_json_files': 0,
+                'processing_errors': 0,
+                'fetched_channels': set(),
+                'all_channels': {},
+                'start_time': datetime.now()
+            }
+            
             if hasattr(args, 'initial') and args.initial:
                 print("📥 Performing initial data sync...")
                 # Load existing JSON files if any
                 data_dir = self.project_root / 'data' / 'fetched_messages'
                 if data_dir.exists():
                     json_files = list(data_dir.glob('*.json'))
+                    sync_stats['total_json_files'] = len(json_files)
                     print(f"   Found {len(json_files)} message files")
                     
                     for json_file in json_files:
@@ -159,17 +175,106 @@ class PepeAdmin:
                             with open(json_file, 'r') as f:
                                 messages = json.load(f)
                             
+                            # Extract channel ID from filename (format: guild_id_channel_id_messages.json)
+                            filename_parts = json_file.stem.split('_')
+                            if len(filename_parts) >= 2:
+                                channel_id = filename_parts[1]
+                                sync_stats['fetched_channels'].add(channel_id)
+                            
                             # Add to vector store
                             if messages:
                                 await agent_api.add_documents(messages, source="discord_sync")
+                                sync_stats['total_messages_processed'] += len(messages)
                                 print(f"   ✅ Added {len(messages)} messages")
                         except Exception as e:
+                            sync_stats['processing_errors'] += 1
                             print(f"   ❌ Error processing {json_file.name}: {e}")
             else:
                 print("🔄 Performing incremental sync...")
                 # Real-time sync is handled by the Discord bot
                 print("   💡 Real-time sync is automatic via Discord bot")
                 print("   💡 Run 'python main.py' to start real-time processing")
+                
+                # Still analyze existing data for stats
+                data_dir = self.project_root / 'data' / 'fetched_messages'
+                if data_dir.exists():
+                    json_files = list(data_dir.glob('*.json'))
+                    sync_stats['total_json_files'] = len(json_files)
+                    
+                    for json_file in json_files:
+                        try:
+                            import json
+                            with open(json_file, 'r') as f:
+                                messages = json.load(f)
+                            
+                            # Extract channel ID from filename
+                            filename_parts = json_file.stem.split('_')
+                            if len(filename_parts) >= 2:
+                                channel_id = filename_parts[1]
+                                sync_stats['fetched_channels'].add(channel_id)
+                            
+                            if messages:
+                                sync_stats['total_messages_processed'] += len(messages)
+                        except Exception as e:
+                            sync_stats['processing_errors'] += 1
+            
+            # Get Discord server channel information
+            print("\n📊 Gathering Discord server information...")
+            try:
+                import discord
+                from discord.ext import commands
+                
+                # Initialize Discord client
+                intents = discord.Intents.default()
+                intents.message_content = True
+                intents.guilds = True
+                client = discord.Client(intents=intents)
+                
+                # Get guild and channel information
+                guild_id = int(self.config['discord']['guild_id'])
+                
+                @client.event
+                async def on_ready():
+                    try:
+                        guild = client.get_guild(guild_id)
+                        if guild:
+                            print(f"   🏛️ Connected to guild: {guild.name}")
+                            
+                            # Gather channel statistics
+                            for channel in guild.channels:
+                                sync_stats['all_channels'][str(channel.id)] = {
+                                    'name': channel.name,
+                                    'type': str(channel.type),
+                                    'category': channel.category.name if channel.category else 'No Category'
+                                }
+                                
+                                if isinstance(channel, discord.TextChannel):
+                                    sync_stats['text_channels'] += 1
+                                elif isinstance(channel, discord.VoiceChannel):
+                                    sync_stats['voice_channels'] += 1
+                                
+                                sync_stats['total_channels'] += 1
+                            
+                            # Calculate channels with/without data
+                            sync_stats['channels_with_data'] = len(sync_stats['fetched_channels'])
+                            sync_stats['channels_without_data'] = sync_stats['text_channels'] - sync_stats['channels_with_data']
+                            
+                        else:
+                            print(f"   ❌ Guild not found: {guild_id}")
+                    except Exception as e:
+                        print(f"   ❌ Error fetching guild info: {e}")
+                    finally:
+                        await client.close()
+                
+                # Connect to Discord temporarily to get stats
+                await client.start(self.config['discord']['token'])
+                
+            except Exception as e:
+                print(f"   ⚠️ Could not connect to Discord for channel stats: {e}")
+                print(f"   💡 Proceeding with local file analysis only")
+            
+            # Display comprehensive sync statistics
+            await self._display_sync_stats(sync_stats)
             
             print("\n✅ Sync completed successfully!")
             
@@ -178,6 +283,91 @@ class PepeAdmin:
             return False
         
         return True
+    
+    async def _display_sync_stats(self, stats):
+        """Display comprehensive sync statistics"""
+        print("\n📊 Sync Statistics Summary")
+        print("=" * 60)
+        
+        # Basic statistics
+        duration = (datetime.now() - stats['start_time']).total_seconds()
+        print(f"⏱️  Sync Duration: {duration:.1f} seconds")
+        print(f"📁 JSON Files Processed: {stats['total_json_files']:,}")
+        print(f"📝 Total Messages: {stats['total_messages_processed']:,}")
+        if stats['processing_errors'] > 0:
+            print(f"❌ Processing Errors: {stats['processing_errors']}")
+        
+        # Discord server statistics
+        if stats['total_channels'] > 0:
+            print(f"\n🏛️ Discord Server Overview:")
+            print(f"   📊 Total Channels: {stats['total_channels']}")
+            print(f"   💬 Text Channels: {stats['text_channels']}")
+            print(f"   🔊 Voice Channels: {stats['voice_channels']}")
+            
+            # Channel data coverage
+            print(f"\n📈 Data Coverage:")
+            print(f"   ✅ Channels with Data: {stats['channels_with_data']}")
+            print(f"   ❌ Channels without Data: {stats['channels_without_data']}")
+            
+            if stats['text_channels'] > 0:
+                coverage_percent = (stats['channels_with_data'] / stats['text_channels']) * 100
+                print(f"   📊 Coverage Percentage: {coverage_percent:.1f}%")
+            
+            # Detailed channel breakdown
+            if stats['all_channels']:
+                print(f"\n📺 Channel Details:")
+                
+                # Group channels by category
+                categories = {}
+                uncategorized = []
+                
+                for channel_id, channel_info in stats['all_channels'].items():
+                    category = channel_info['category']
+                    has_data = channel_id in stats['fetched_channels']
+                    
+                    channel_entry = {
+                        'name': channel_info['name'],
+                        'type': channel_info['type'],
+                        'has_data': has_data,
+                        'id': channel_id
+                    }
+                    
+                    if category == 'No Category':
+                        uncategorized.append(channel_entry)
+                    else:
+                        if category not in categories:
+                            categories[category] = []
+                        categories[category].append(channel_entry)
+                
+                # Display by category
+                for category, channels in categories.items():
+                    print(f"   📂 {category}:")
+                    for channel in channels:
+                        if channel['type'] == 'text':
+                            status = "✅" if channel['has_data'] else "❌"
+                            print(f"      {status} #{channel['name']}")
+                
+                if uncategorized:
+                    print(f"   📂 Uncategorized:")
+                    for channel in uncategorized:
+                        if channel['type'] == 'text':
+                            status = "✅" if channel['has_data'] else "❌"
+                            print(f"      {status} #{channel['name']}")
+        
+        # Recommendations
+        print(f"\n💡 Recommendations:")
+        if stats['channels_without_data'] > 0:
+            print(f"   📥 Consider fetching data from {stats['channels_without_data']} channels without data")
+            print(f"   🤖 Use the Discord bot to automatically sync new messages")
+        
+        if stats['processing_errors'] > 0:
+            print(f"   🔧 Review and fix {stats['processing_errors']} processing errors")
+        
+        if stats['total_messages_processed'] > 0:
+            avg_messages_per_channel = stats['total_messages_processed'] / max(1, stats['channels_with_data'])
+            print(f"   📊 Average messages per channel: {avg_messages_per_channel:.1f}")
+        
+        print(f"   🚀 Run 'poetry run python main.py' to start real-time message processing")
     
     async def status(self, args):
         """📊 System health and status check"""
