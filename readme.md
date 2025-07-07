@@ -1,101 +1,267 @@
-# 🤖 Pepe Discord Bot - Agentic RAG System
+# Pepe - Advanced Discord Bot with Agentic RAG Architecture
 
-**Intelligent Discord bot with agentic architecture for conversation analysis and insights.**
+Python 3.11+ Poetry Code style: black
 
----
+**Pepe** is an intelligent Discord bot powered by advanced agentic RAG (Retrieval-Augmented Generation) architecture. It transforms Discord conversations into actionable insights through semantic search, automated analysis, and multi-agent orchestration. Whether you're managing a community, analyzing discussions, or extracting knowledge from conversations, Pepe provides deep intelligence about user behavior, conversation patterns, and community dynamics.
 
-## 🚀 Modern Data Sync Workflow
+> **🚀 New to Pepe?** Jump straight to the Discord Bot Quick Start Guide for immediate hands-on testing!
 
-To keep your system up-to-date and ready for semantic search, follow this two-step process:
+## 🎯 What Pepe Does
 
-1. **Fetch Discord Messages to Database**
-   ```bash
-   python scripts/discord_message_fetcher.py
-   ```
-   This script fetches all messages (including forum threads) from your Discord server and stores them directly in `data/discord_messages.db` (SQLite).
+### **Core Purpose**
 
-2. **Index and Embed Messages**
-   ```bash
-   python scripts/index_database_messages.py
-   ```
-   This script reads all messages from the database and creates vector embeddings in the ChromaDB vector store for semantic search.
+Pepe analyzes Discord server activity to help you:
 
-Or, simply run:
-```bash
-./pepe-admin sync
-```
-This will run both steps in sequence and summarize the results.
+* **Understand Your Community**: Who are your most active members? When is your server busiest?
+* **Extract Knowledge**: Find specific discussions, resources, and insights from message history
+* **Generate Automated Digests**: Get weekly summaries with engagement analysis
+* **Semantic Search**: Find content by meaning, not just keywords
+* **Make Data-Driven Decisions**: Use real insights instead of gut feelings
 
-**Sync Options:**
-```bash
-./pepe-admin sync              # Run both fetch and index (default)
-./pepe-admin sync --fetch-only # Only fetch messages to database
-./pepe-admin sync --index-only # Only index/embed from database
-```
+### **Advanced Features**
 
-**No JSON files are used or required.**
+* **🤖 Multi-Agent Architecture**: Specialized agents for search, analysis, and digest generation
+* **🧠 AI-Powered Resource Detection**: Automatically extract and categorize links and resources
+* **📊 Real-time Analytics**: Performance monitoring and query tracking
+* **⚡ Streaming Processing**: 42.4 messages/second indexing with sub-second response times
+* **🌐 Multiple Interfaces**: Discord bot, web dashboard, REST API
 
----
+## 🚀 Discord Bot Quick Start Guide
 
-## ⚡ Quick Start (for Users)
+**For colleagues testing the bot for the first time** 🤖
 
-```
-/pepe your question here
-```
-That's it! Single command for all queries.
+This is a simple guide to try out the Discord bot commands. No setup needed - just type and see what happens!
+
+### 🚀 Getting Started
+
+1. **Find the bot** in your Discord server (look for "Pepe" in the member list)
+2. **Type `/pepe`** in any channel to see available commands
+3. **Try the commands below** - they all start with `/pepe`
 
 ---
 
-## 🎯 What Can It Do?
-- **🔍 Smart Search**: Find messages by content, user, channel, or timeframe
-- **📊 Analytics**: Generate summaries, trends, and activity reports
-- **🤖 Capability Awareness**: Ask about the bot's features and get helpful responses
-- **⚡ Real-time Processing**: Automatically indexes new messages as they arrive
+### 📋 Essential Commands to Try
+
+#### 🏠 **Server Overview**
+
+```
+/pepe what discussions happened today?
+/pepe show me recent activity in #general
+```
+
+**What it shows**: Overall server stats, recent discussions, activity trends
+**Good for**: Getting a bird's eye view of your Discord server
+
+**Example output**: Recent messages, active users, discussion topics, engagement metrics
 
 ---
 
-# Discord Bot Agentic RAG System
+#### 🔍 **Semantic Search**
 
-An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built with **LangGraph** for multi-agent orchestration. Features real-time message indexing, semantic search, and **automated weekly digest generation**.
+```
+/pepe find messages about machine learning
+/pepe what did people say about the project?
+```
 
-## ✨ Key Features
+**What it shows**: Messages matching your query by meaning, not just keywords
+**Good for**: Finding specific discussions and insights
 
-### 🎯 **Core Capabilities**
-- **🔍 Semantic Search**: Vector-based content discovery across Discord messages
-- **📅 Weekly Digests**: Automated content summarization with engagement analysis
-- **⚡ Real-time Processing**: Streaming message indexing and instant responses
-- **🤖 Multi-Agent Architecture**: Specialized agents for search, analysis, and digest generation
-- **📊 Rich Analytics**: Performance monitoring and query tracking
-- **🌐 Multiple Interfaces**: Discord bot, web dashboard, REST API
+**Example output**: Relevant messages with context, user attribution, timestamps
 
-### 🎉 **Recent Major Enhancements**
-- **📈 10x Performance Improvement**: Streaming indexer (42.4 msg/sec processing)
-- **👥 User-Friendly Display Names**: Shows "John Smith" instead of "john_smith_123"
-- **📋 Weekly Digest Generation**: Automated content summaries with engagement metrics
-- **🔄 Enhanced Metadata**: 34 fields per message (vs 12 previously)
-- **⚡ Sub-second Response Times**: ~0.5-0.9 seconds per query
-- **🧹 Production-Ready**: Clean codebase with comprehensive error handling
-- **🚀 Concurrent Task Execution**: Parallel subtask processing for faster responses
-- **🧠 Smart Memory Summarization**: Automatic conversation history compression
-- **⚡ Content Classification Caching**: Improved performance with intelligent caching
-- **⏰ Time-bound Query Support**: Enhanced temporal query processing ("last week", "yesterday")
-- **🤖 AI-Powered Resource Descriptions**: Community-focused descriptions for AI/ML resources
+---
 
-## 🚀 Quick Start
+#### 📊 **Weekly Digests**
 
-### Prerequisites
-- Python 3.11+
-- Discord Bot Token
-- OpenAI API Key
-- Ollama (for local Llama model)
-- 4GB+ RAM recommended
+```
+/pepe give me a weekly digest
+/pepe summary of last week's discussions
+```
 
-### Installation
+**What it shows**: Automated summaries of recent activity with engagement analysis
+**Good for**: Understanding trends and community health
+
+**Example output**: Top discussions, most active users, engagement metrics, key topics
+
+---
+
+#### 👤 **User Analysis**
+
+```
+/pepe what did @username say about AI?
+/pepe find shared resources from @username
+```
+
+**What it shows**: Deep dive into a specific user's activity and contributions
+**Good for**: Understanding individual member behavior and expertise
+
+**Example output**: User's messages, shared resources, discussion topics, activity patterns
+
+---
+
+#### 📈 **Channel Analysis**
+
+```
+/pepe analyze activity patterns in #general
+/pepe what topics are discussed in #ai-research?
+```
+
+**What it shows**: Complete health check of specific channels
+**Good for**: Understanding how well channels are performing
+
+**Example output**: Message volume, top contributors, response times, engagement metrics
+
+---
+
+#### 🎯 **Resource Discovery**
+
+```
+/pepe find shared resources about Python
+/pepe what links were shared in #resources?
+```
+
+**What it shows**: Automatically extracted and categorized links from conversations
+**Good for**: Discovering valuable resources shared by the community
+
+**Example output**: Categorized links with descriptions, sharing context, user attribution
+
+---
+
+### 🎨 What to Expect
+
+#### **📊 Rich Analytics**
+
+Some commands include detailed analytics showing:
+
+* Daily activity patterns
+* User engagement metrics
+* Channel growth trends
+* Discussion topic evolution
+
+#### **🤖 Smart Analysis**
+
+The bot automatically chooses the best analysis method:
+
+* **Semantic Search** for finding specific content
+* **Pattern Recognition** for activity analysis
+* **AI-Powered Summarization** for digests
+
+#### **⏱️ Response Times**
+
+* Simple queries: Instant
+* Search commands: 0.5-0.9 seconds
+* Complex analysis: Up to 30 seconds
+* Weekly digests: 1-2 minutes
+
+---
+
+### 💡 Pro Tips
+
+#### **🔍 Use Natural Language**
+
+* Ask questions naturally: "What did people say about the new feature?"
+* Use time references: "last week", "yesterday", "this month"
+* Mention users: "@username said something about..."
+
+#### **📅 Try Different Time Periods**
+
+```
+/pepe what happened yesterday?
+/pepe discussions from last week
+/pepe activity this month
+```
+
+#### **🎯 Start Simple**
+
+1. Try `/pepe what discussions happened today?` first
+2. Then search for topics: `/pepe find messages about AI`
+3. Then try user analysis: `/pepe what did @username say?`
+
+#### **📱 Works Everywhere**
+
+* Any channel (the bot will analyze the right data)
+* Desktop and mobile Discord
+* DMs with the bot
+
+---
+
+### 🤔 Common Questions
+
+**Q: "No data found" - what's wrong?**
+A: The bot needs to sync data first. Ask the admin to run a sync, or try a different channel/user.
+
+**Q: Search is taking forever?**
+A: Large servers take longer. Try being more specific or use time limits like "last week".
+
+**Q: Can I break anything?**
+A: Nope! These are read-only commands. You're just viewing data, not changing anything.
+
+**Q: Commands not showing up?**
+A: Make sure you type `/pepe` and the bot has proper permissions.
+
+---
+
+### 🎯 Quick Command Cheat Sheet
+
+| What you want to know                | Command to use                                    |
+| ------------------------------------ | ------------------------------------------------- |
+| "What happened today?"               | /pepe what discussions happened today?            |
+| "Find AI discussions"                | /pepe find messages about AI                      |
+| "Weekly summary"                     | /pepe give me a weekly digest                     |
+| "What did Alice say?"                | /pepe what did @alice say about the project?      |
+| "Channel activity"                   | /pepe analyze activity patterns in #general       |
+| "Shared resources"                   | /pepe find shared resources about Python          |
+
+---
+
+### 🚀 Have Fun Exploring!
+
+The bot is designed to be intuitive - just ask questions naturally and see what insights you discover about your Discord community!
+
+**Questions?** Ask in the channel or DM the person who set up the bot.
+
+---
+
+_This bot analyzes your Discord conversations to provide insights about community activity, user behavior, and discussion topics. All analysis is based on message history the bot can access._
+
+---
+
+## 🏗️ Architecture Overview
+
+### **Multi-Agent System**
+
+Pepe uses a sophisticated multi-agent architecture:
+
+* **🔍 Search Agent**: Handles semantic search and content discovery
+* **📊 Analysis Agent**: Processes analytics and generates insights
+* **🤖 Planning Agent**: Orchestrates complex multi-step queries
+* **📝 Digest Agent**: Creates automated weekly summaries
+* **🎯 Query Interpreter**: Understands natural language requests
+
+### **Technology Stack**
+
+* **LangGraph**: Multi-agent orchestration and workflow management
+* **ChromaDB**: Vector database for semantic search
+* **OpenAI GPT-4**: Primary LLM for analysis and generation
+* **Ollama (Llama)**: Local model for resource detection
+* **SQLite**: Message storage and metadata
+* **Discord.py**: Bot interface and message handling
+
+## 🚀 Installation & Setup
+
+### **Prerequisites**
+
+* Python 3.11+
+* Discord Bot Token
+* OpenAI API Key
+* Ollama (for local Llama model)
+* 4GB+ RAM recommended
+
+### **Quick Setup**
 
 1. **Clone and Setup**:
    ```bash
-   git clone <repository-url>
-   cd discord-bot-agentic
+   git clone https://github.com/jcordovilla/pepe
+   cd pepe
    pip install -r requirements.txt
    ```
 
@@ -108,425 +274,181 @@ An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built w
    # GUILD_ID=your_discord_server_id
    ```
 
-3. **Initialize Vector Database**:
+3. **Initialize System**:
    ```bash
+   ./pepe-admin setup
    ./pepe-admin sync --full
    ```
-   *This will fetch and index all Discord messages (~3-5 minutes for typical servers)*
 
 4. **Start the Bot**:
    ```bash
    python main.py
    ```
 
-5. **Test in Discord**:
-   ```
-   /pepe hello world
-   /pepe give me a weekly digest
-   /pepe find discussions about AI in <#channel>
-   ```
-
-### **Admin CLI Commands**
-```bash
-# Check system status
-./pepe-admin info
-
-# Setup/initialize the system
-./pepe-admin setup
-
-# Sync Discord messages (basic sync)
-./pepe-admin sync
-
-# Full data sync with preprocessing
-./pepe-admin sync --full
-
-# Resource management
-./pepe-admin resources          # Complete resource processing
-./pepe-admin resources status   # Show resource database status
-
-# System maintenance
-./pepe-admin maintain           # Complete maintenance
-./pepe-admin test               # Comprehensive testing
-
-# Get help
-./pepe-admin --help
-```
-
-### **Complete Data Setup Process**
-For a fully functional system with up-to-date data and resources:
+### **Admin Commands**
 
 ```bash
-# 1. Initial setup
-./pepe-admin setup
-
-# 2. Full Discord data sync and indexing
-./pepe-admin sync --full
-
-# 3. Extract and categorize links/resources (optional but recommended)
-./pepe-admin resources
-
-# 4. Verify system health
-./pepe-admin info
+# System management
+./pepe-admin info              # Check system status
+./pepe-admin setup             # Initial setup
+./pepe-admin sync              # Sync Discord messages
+./pepe-admin resources         # Process shared resources
+./pepe-admin maintain          # System maintenance
+./pepe-admin test              # Run tests
 ```
 
-**Note**: The `sync --full` command handles Discord message indexing. The resource detector extracts and categorizes high-quality links from messages for better search capabilities.
+## 🤝 Collaboration Guidelines
 
-## 💬 Usage Examples
+### **Contributing to Pepe**
 
-### Basic Queries
-```
-/pepe what discussions happened today?
-/pepe find messages about machine learning
-/pepe show me recent activity in #general
-```
+We welcome contributions! Here's how to get started:
 
-### Weekly Digests ⭐ **NEW**
-```
-/pepe give me a weekly digest
-/pepe summary of last week's discussions
-/pepe digest for #ai-research channel
-/pepe monthly report with engagement metrics
-```
+#### **Development Setup**
 
-### Advanced Queries
-```
-/pepe last 10 messages from <#1234567890>
-/pepe find shared resources about Python
-/pepe what did @username say about the project?
-/pepe show me discussions from last week
-/pepe analyze activity patterns in #general
-```
+1. **Fork the Repository**
+   ```bash
+   git clone https://github.com/your-username/pepe
+   cd pepe
+   ```
 
-## 🏗️ Architecture Overview
+2. **Install Development Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt  # If available
+   ```
 
-### **Multi-Agent System**
-```
-🤖 Query Processing Flow:
-User Query → Query Analysis → Task Planning → Concurrent Agent Execution → Response Synthesis
+3. **Set Up Pre-commit Hooks**
+   ```bash
+   pre-commit install
+   ```
 
-Available Agents:
-├── 🔍 SearchAgent     - Vector & filtered search with time-bound queries
-├── 📊 DigestAgent     - Weekly/monthly summaries  
-├── 🧠 AnalysisAgent   - Content analysis & insights
-├── 📋 PlanningAgent   - Query decomposition with dependency tracking
-└── 🔄 PipelineAgent   - Data processing workflows
+#### **Code Standards**
 
-🚀 New Capabilities:
-├── ⚡ Concurrent Execution - Parallel subtask processing
-├── 🧠 Smart Memory - Automatic conversation summarization  
-├── ⚡ Content Caching - Intelligent classification caching
-└── ⏰ Time Intelligence - Enhanced temporal query understanding
-```
+* **Python Style**: Follow PEP 8 with black formatting
+* **Type Hints**: Use type hints for all function parameters and returns
+* **Documentation**: Docstrings for all public functions and classes
+* **Testing**: Write tests for new features (aim for 90%+ coverage)
+* **Commits**: Use conventional commit messages
 
-### **Data Pipeline**
-```
-📥 Data Flow:
-Discord API → Streaming Indexer → Vector Embeddings → ChromaDB → Search Results
-     ↓              ↓                    ↓               ↓           ↓
-Real-time Index → Content Analysis → Metadata Enhanced → Fast Retrieval → User Response
-```
+#### **Development Workflow**
 
-### **Storage Architecture**
-- **📚 Vector Store**: ChromaDB with 7,157+ indexed messages
-- **🧠 Memory System**: SQLite for conversation context with intelligent history summarization
-- **⚡ Smart Cache**: Multi-level caching with content classification optimization
-- **📊 Analytics DB**: Query tracking and performance metrics
-- **🕐 Temporal Intelligence**: Advanced time-bound query processing
+1. **Create a Feature Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-## 🎯 Digest Generation Features
+2. **Make Your Changes**
+   - Write code following the style guide
+   - Add tests for new functionality
+   - Update documentation as needed
 
-### **Temporal Intelligence**
-- **Weekly/Monthly/Daily** digest periods
-- **Smart date range** calculation
-- **Flexible timeframes** ("last 2 weeks", "this month")
+3. **Test Your Changes**
+   ```bash
+   python -m pytest tests/
+   ./pepe-admin test
+   ```
 
-### **Content Analysis**
-- **📈 Engagement metrics** (reactions, attachments)
-- **👥 User activity** tracking and leaderboards  
-- **🏷️ Channel categorization** with message counts
-- **🔥 Trending content** identification
+4. **Submit a Pull Request**
+   - Provide a clear description of changes
+   - Include any relevant issue numbers
+   - Ensure all tests pass
 
-### **Rich Formatting**
-```markdown
-# 📊 Weekly Digest
-**Period**: May 15 to May 22, 2024
-**Total Messages**: 234
-**Active Users**: 18
+#### **Code Review Process**
 
-## 👥 Most Active Users
-• John Smith: 45 messages
-• Sarah Johnson: 32 messages
+* All PRs require at least one review
+* Address review comments promptly
+* Maintainers will merge after approval
+* Follow the existing code patterns and architecture
 
-## 📋 Channel Activity
-### #ai-research (89 messages)
-• **Mike Chen** (May 20, 2:30 PM): Just published our paper on...
-• **Dr. Williams** (May 21, 9:15 AM): Great insights on transformer...
+#### **Reporting Issues**
 
-## 🔥 High Engagement Content
-• **Alice Cooper** in **#general**: Check out this breakthrough in AGI!
-  *8 reactions, 2 attachments*
-```
+When reporting bugs or requesting features:
 
-## 📊 System Metrics
+* Use the GitHub issue template
+* Provide clear reproduction steps
+* Include relevant logs and error messages
+* Specify your environment (Python version, OS, etc.)
 
-### **Performance Benchmarks**
-- **Response Time**: 0.5-0.9 seconds average (with concurrent processing)
-- **Indexing Rate**: 42.4 messages/second
-- **Storage Efficiency**: 50% reduction vs JSON approach
-- **Query Success Rate**: 98.7% (7,157 messages indexed)
-- **Concurrent Tasks**: Up to 10 parallel subtasks execution
-- **Cache Hit Rate**: 85%+ for content classification
-- **Memory Optimization**: Automatic history summarization for long conversations
+#### **Community Guidelines**
 
-### **Capacity**
-- **Messages Supported**: 10,000+ (tested with 7,157)
-- **Concurrent Users**: 50+ simultaneous queries
-- **Memory Usage**: ~2GB RAM for full operation
-- **API Efficiency**: Smart caching reduces OpenAI costs by 60%
+* **Be Respectful**: Treat all contributors with respect
+* **Help Others**: Answer questions and help new contributors
+* **Stay On Topic**: Keep discussions relevant to the project
+* **Follow Discord Guidelines**: Respect Discord's terms of service
+
+### **Getting Help**
+
+* **GitHub Issues**: Bug reports and feature requests
+* **Discussions**: Questions and community help
+* **Documentation**: Check the docs/ directory for detailed guides
 
 ## 🔧 Configuration
 
-### **LLM Configuration (Local Llama Models)**
-The system uses **local Llama models** for AI processing via Ollama with a dual-model approach:
-
-```bash
-# LLM Settings (Local Llama via Ollama)
-LLM_ENDPOINT=http://localhost:11434/api/generate
-LLM_MODEL=llama3.1:8b                    # Standard model for main tasks (4.9GB)
-LLM_FAST_MODEL=phi3:mini                 # Fast model for resource detection (2.2GB)
-LLM_MAX_TOKENS=2048
-LLM_TEMPERATURE=0.1
-LLM_TIMEOUT=30
-LLM_RETRY_ATTEMPTS=3
-
-# OpenAI (for embeddings only)
-OPENAI_API_KEY=your_openai_key
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-```
-
-**Setup Ollama:**
-```bash
-# Install Ollama (if not already installed)
-curl -fsSL https://ollama.ai/install.sh | sh
-
-# Pull the recommended models
-ollama pull llama3.1:8b    # Standard model (4.9GB)
-ollama pull phi3:mini      # Fast model (2.2GB)
-
-# Start Ollama service
-ollama serve
-```
-
-**Model Usage:**
-- **Standard Model** (`llama3.1:8b`): Main tasks, complex analysis, high quality
-- **Fast Model** (`phi3:mini`): Resource detection, 2-3x faster processing
-
 ### **Environment Variables**
+
 ```bash
 # Required
-DISCORD_TOKEN=your_bot_token
-OPENAI_API_KEY=your_openai_key
-GUILD_ID=your_server_id
+DISCORD_TOKEN=your_discord_bot_token
+OPENAI_API_KEY=your_openai_api_key
+GUILD_ID=your_discord_server_id
 
-# LLM Configuration (Local Llama)
-LLM_ENDPOINT=http://localhost:11434/api/generate
-LLM_MODEL=llama3.1:8b
-LLM_FAST_MODEL=phi3:mini
-LLM_MAX_TOKENS=2048
-LLM_TEMPERATURE=0.1
-LLM_TIMEOUT=30
-LLM_RETRY_ATTEMPTS=3
-
-# OpenAI Embeddings
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-
-# Optional Performance & Caching
-CACHE_TTL=3600
-ANALYSIS_CACHE_TTL=86400
-CLASSIFICATION_CACHE_TTL=86400
-LLM_COMPLEXITY_THRESHOLD=0.85
-MAX_CONCURRENT_TASKS=10
-ENABLE_MEMORY_SUMMARIZATION=true
-LOG_LEVEL=INFO
+# Optional
+ENABLE_CHARTS=true              # Enable chart generation
+MAX_MESSAGES=10000              # Limit message processing
+ANALYSIS_TIMEOUT=300            # Analysis timeout in seconds
+ENABLE_RESOURCE_DETECTION=true  # Enable AI resource detection
 ```
 
-### **System Settings**
-Located in `agentic/config/modernized_config.py`:
-- **Vector store settings** (embedding model, similarity threshold)
-- **Agent configuration** (timeout, retry logic)
-- **LLM complexity threshold** (`llm_complexity_threshold`)
-- **Performance tuning** (batch sizes, cache limits)
+### **Performance Tuning**
 
-## 🧪 Testing
+For large servers:
 
-### **Run System Tests**
 ```bash
-# Full system validation
-python scripts/system_status.py
+# Optimize database
+PRAGMA journal_mode=WAL;
+PRAGMA synchronous=NORMAL;
 
-# Integration tests
-python -m pytest tests/integration/
+# Limit analysis scope
+MAX_MESSAGES=10000
+ANALYSIS_TIMEOUT=300
 
-# Performance benchmarks
-python scripts/test_system.py
+# Use faster sync
+./pepe-admin sync --incremental
 ```
 
-### **Health Monitoring**
-```bash
-# Check bot status
-python scripts/validate_deployment.py
+## 📚 Documentation
 
-# Monitor performance
-python scripts/performance_monitor.py
-```
+### **Guides**
 
-## 🎛️ Advanced Features
+* **Operations Guide** - Complete setup and configuration
+* **Bot Operations** - Discord bot management
+* **Architecture** - Technical implementation details
+* **Testing Guide** - Development and testing procedures
 
-### **Web Dashboard** (Streamlit)
-```bash
-streamlit run agentic/interfaces/streamlit_interface.py
-```
-- 📊 Analytics dashboard
-- 🔍 Search interface
-- ⚙️ Configuration management
-- 📈 Performance monitoring
+### **API Reference**
 
-### **REST API**
-```python
-# Access via REST
-POST /api/query
-{
-  "query": "weekly digest",
-  "channel_id": "1234567890"
-}
-```
+* **Agent API** - Multi-agent system documentation
+* **Discord Interface** - Bot command reference
+* **Analytics API** - Data analysis endpoints
 
-### **Custom Agents**
-Extend functionality by creating custom agents:
-```python
-from agentic.agents.base_agent import BaseAgent
+## 🎉 What's New
 
-class CustomAgent(BaseAgent):
-    def execute_task(self, task):
-        # Your custom logic
-        return result
-```
+### **Latest Features**
 
-## 🛠️ Development
+* **🧠 Multi-Agent Architecture**: Specialized agents for different tasks
+* **📊 Automated Weekly Digests**: AI-generated summaries with engagement metrics
+* **⚡ Streaming Processing**: 42.4 messages/second indexing
+* **🎯 AI-Powered Resource Detection**: Automatic link extraction and categorization
+* **🏗️ Production-Ready**: Clean codebase with comprehensive error handling
 
-### **Project Structure**
-```
-discord-bot-agentic/
-├── agentic/          # Core framework
-│   ├── agents/       # Multi-agent system
-│   ├── reasoning/    # Query analysis & planning
-│   ├── vectorstore/  # Data storage
-│   └── interfaces/   # User interfaces
-├── scripts/          # Utilities & tools
-├── tests/           # Test suite
-└── docs/            # Documentation
-```
+### **Recent Improvements**
 
-### **Adding New Features**
-1. **Create Agent**: Extend `BaseAgent` for new capabilities
-2. **Update Orchestrator**: Register agent in `orchestrator.py`
-3. **Enhance Query Analysis**: Add patterns in `query_analyzer.py`
-4. **Test**: Add integration tests in `tests/`
-
-## 📋 Troubleshooting
-
-### **Common Issues**
-- **"No results found"**: Check if messages are indexed (`python scripts/system_status.py`)
-- **Slow responses**: Verify OpenAI API key and rate limits
-- **Bot offline**: Check Discord token and permissions
-
-### **Performance Optimization**
-- **Increase batch size**: Modify `BATCH_SIZE` in config
-- **Enable caching**: Set `ENABLE_CACHE=true`
-- **Tune embeddings**: Adjust similarity thresholds
-
-### **Data Issues**
-- **Re-index messages**: Run `./pepe-admin sync --index-only`
-- **Clear cache**: Delete `data/cache/` directory
-- **Reset database**: Delete `data/chromadb/` and re-index with `./pepe-admin sync --full`
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Make changes with tests
-4. Run tests: `python -m pytest`
-5. Submit pull request
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **LangGraph** for multi-agent orchestration
-- **ChromaDB** for vector storage
-- **OpenAI** for embeddings and language models
-- **Discord.py** for Discord integration
+* **Performance**: 10x faster processing with streaming indexer
+* **Accuracy**: Better semantic search with enhanced embeddings
+* **Usability**: Natural language queries and intelligent responses
+* **Reliability**: Comprehensive test suite and error handling
+* **Documentation**: Complete guides for all user types
 
 ---
 
-## 🚀 **Ready to Get Started?**
-
-```bash
-# One-command setup (after configuring .env)
-git clone <repo> && cd discord-bot-agentic && pip install -r requirements.txt && ./pepe-admin sync --full && python main.py
-```
-
-Your Discord bot will be online with advanced search and **weekly digest capabilities**! 🎉
-
-**Need help?** Check our [documentation](docs/) or open an issue.
-
-## 📚 Further Documentation
-
-- [Operations Guide](docs/OPERATIONS.md)
-- [Project Structure](docs/PROJECT_STRUCTURE.md)
-
-### **Resource Management**
-The system automatically detects and categorizes high-quality resources from Discord messages with **AI-generated descriptions** using optimized models:
-
-```bash
-# Complete resource processing (detect, export, and migrate)
-./pepe-admin resources
-
-# Use fast model for processing (default)
-./pepe-admin resources --fast-model
-
-# Use standard model for better quality
-./pepe-admin resources --standard-model
-
-# Reset cache and reprocess all resources
-./pepe-admin resources --reset-cache
-
-# Check resource status
-./pepe-admin resources status
-```
-
-**What it does:**
-1. **Detects** high-quality resources from Discord messages
-2. **Generates** AI-powered descriptions optimized for AI/ML community
-3. **Creates** JSON export files for external use
-4. **Migrates** resources to enhanced database with vector store integration
-
-**AI Description Features:**
-- **Community-focused**: Tailored for generative AI enthusiasts and practitioners
-- **Fast & Lean**: Uses phi3:mini (2.2GB) for 2-3x faster processing
-- **Practical**: Focuses on AI/ML techniques, tools, and learning value
-- **Concise**: 50-word descriptions with immediate practical utility
-- **Smart Fallbacks**: Always provides useful descriptions even if LLM fails
-- **Incremental Processing**: Skips already processed URLs for faster subsequent runs
-
-**Model Usage:**
-- **Fast Model** (`phi3:mini`): Default for resource detection, 2-3x faster
-- **Standard Model** (`llama3.1:8b`): Optional for higher quality descriptions
-
-**Files Created:**
-- `data/optimized_fresh_resources.json` - Detailed report with AI descriptions and statistics
-- `data/resources_export.json` - Simplified export format for external use
-- `data/enhanced_resources.db` - SQLite database with vector store integration
-- `data/processed_resources.json` - Cache of processed URLs for incremental processing
+**Ready to unlock insights from your Discord community?** Start with the quick setup and explore what Pepe can reveal about your server! 🚀
