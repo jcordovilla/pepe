@@ -28,6 +28,33 @@ Pepe analyzes Discord server activity to help you:
 * **⚡ Streaming Processing**: 42.4 messages/second indexing with sub-second response times
 * **🌐 Multiple Interfaces**: Discord bot, web dashboard, REST API
 
+## 🤝 Community & Contributing
+
+Hey there! 👋 I'm José, and I built Pepe to help Discord communities get more insights from their conversations. This project has evolved from a simple bot to a full agentic RAG system, and I'd love your help making it even better!
+
+### **Want to Contribute?**
+
+**Simple stuff first:**
+- Found a bug? Open an issue with clear steps to reproduce
+- Have an idea? Let's discuss it in GitHub Discussions
+- Want to help with docs? That's always appreciated!
+
+**For code contributions:**
+1. Fork the repo and create a feature branch
+2. Keep it simple - one feature per PR
+3. Add tests if you're adding new functionality
+4. Use black for formatting (just run `black .` before committing)
+
+**What I'm looking for:**
+- Bug fixes and performance improvements
+- Better error handling and user experience
+- Documentation improvements
+- Ideas for new features that would help Discord communities
+
+**Questions?** Just ask! I'm pretty responsive and love discussing ideas. The goal is to make Discord communities more insightful and engaging.
+
+---
+
 ## 🚀 Discord Bot Quick Start Guide
 
 **For colleagues testing the bot for the first time** 🤖
@@ -299,90 +326,7 @@ Pepe uses a sophisticated multi-agent architecture:
 ./pepe-admin test              # Run tests
 ```
 
-## 🤝 Collaboration Guidelines
 
-### **Contributing to Pepe**
-
-We welcome contributions! Here's how to get started:
-
-#### **Development Setup**
-
-1. **Fork the Repository**
-   ```bash
-   git clone https://github.com/your-username/pepe
-   cd pepe
-   ```
-
-2. **Install Development Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   pip install -r requirements-dev.txt  # If available
-   ```
-
-3. **Set Up Pre-commit Hooks**
-   ```bash
-   pre-commit install
-   ```
-
-#### **Code Standards**
-
-* **Python Style**: Follow PEP 8 with black formatting
-* **Type Hints**: Use type hints for all function parameters and returns
-* **Documentation**: Docstrings for all public functions and classes
-* **Testing**: Write tests for new features (aim for 90%+ coverage)
-* **Commits**: Use conventional commit messages
-
-#### **Development Workflow**
-
-1. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Make Your Changes**
-   - Write code following the style guide
-   - Add tests for new functionality
-   - Update documentation as needed
-
-3. **Test Your Changes**
-   ```bash
-   python -m pytest tests/
-   ./pepe-admin test
-   ```
-
-4. **Submit a Pull Request**
-   - Provide a clear description of changes
-   - Include any relevant issue numbers
-   - Ensure all tests pass
-
-#### **Code Review Process**
-
-* All PRs require at least one review
-* Address review comments promptly
-* Maintainers will merge after approval
-* Follow the existing code patterns and architecture
-
-#### **Reporting Issues**
-
-When reporting bugs or requesting features:
-
-* Use the GitHub issue template
-* Provide clear reproduction steps
-* Include relevant logs and error messages
-* Specify your environment (Python version, OS, etc.)
-
-#### **Community Guidelines**
-
-* **Be Respectful**: Treat all contributors with respect
-* **Help Others**: Answer questions and help new contributors
-* **Stay On Topic**: Keep discussions relevant to the project
-* **Follow Discord Guidelines**: Respect Discord's terms of service
-
-### **Getting Help**
-
-* **GitHub Issues**: Bug reports and feature requests
-* **Discussions**: Questions and community help
-* **Documentation**: Check the docs/ directory for detailed guides
 
 ## 🔧 Configuration
 
@@ -454,3 +398,7 @@ ANALYSIS_TIMEOUT=300
 ---
 
 **Ready to unlock insights from your Discord community?** Start with the quick setup and explore what Pepe can reveal about your server! 🚀
+
+---
+
+Made with vibecoding tools like Github Copilot and Cursor by Jose Cordovilla, Volunteer Network Architect at MIT Professional Education's GenAI Global Community
