@@ -1,5 +1,5 @@
 # Discord Bot with RAG and Vector Search
-# Version: beta-03
+# Version: RAG-workflow
 
 This project is a Discord bot that leverages Retrieval-Augmented Generation (RAG), vector search (using FAISS), and advanced message storage for enhanced chat interactions and AI-powered features.
 
