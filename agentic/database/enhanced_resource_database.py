@@ -506,27 +506,61 @@ class EnhancedResourceDatabase:
         return dict(row) if row else None
     
     async def cleanup_old_resources(self, days: int = 90):
-        """Cleanup old, low-quality resources"""
-        cutoff_date = (datetime.now() - timedelta(days=days)).isoformat()
+        """Clean up old resources based on age and quality"""
+        cutoff_date = datetime.now() - timedelta(days=days)
         
-        # Mark old, low-quality resources as inactive
+        # Get resources to clean up
         cursor = self.connection.execute("""
-            UPDATE resources 
-            SET is_active = FALSE, updated_at = CURRENT_TIMESTAMP
-            WHERE created_at < ? 
-              AND quality_score < 0.3 
-              AND access_count < 5
-              AND validation_status IN ('broken', 'spam')
+            SELECT id FROM resources 
+            WHERE created_at < ? AND quality_score < 0.3
         """, (cutoff_date,))
         
-        cleaned_count = cursor.rowcount
-        self.connection.commit()
+        old_resources = cursor.fetchall()
         
-        logger.info(f"🧹 Cleaned up {cleaned_count} old, low-quality resources")
-        return cleaned_count
+        if old_resources:
+            resource_ids = [row[0] for row in old_resources]
+            
+            # Delete related data first
+            self.connection.execute("DELETE FROM resource_metadata WHERE resource_id IN ({})".format(
+                ','.join(['?' for _ in resource_ids])), resource_ids)
+            self.connection.execute("DELETE FROM resource_validation_history WHERE resource_id IN ({})".format(
+                ','.join(['?' for _ in resource_ids])), resource_ids)
+            self.connection.execute("DELETE FROM resource_relationships WHERE source_resource_id IN ({}) OR target_resource_id IN ({})".format(
+                ','.join(['?' for _ in resource_ids]), ','.join(['?' for _ in resource_ids])), resource_ids + resource_ids)
+            self.connection.execute("DELETE FROM resource_usage_analytics WHERE resource_id IN ({})".format(
+                ','.join(['?' for _ in resource_ids])), resource_ids)
+            self.connection.execute("DELETE FROM resource_quality_history WHERE resource_id IN ({})".format(
+                ','.join(['?' for _ in resource_ids])), resource_ids)
+            
+            # Delete main resources
+            self.connection.execute("DELETE FROM resources WHERE id IN ({})".format(
+                ','.join(['?' for _ in resource_ids])), resource_ids)
+            
+            self.connection.commit()
+            logger.info(f"🧹 Cleaned up {len(old_resources)} old resources")
     
+    async def clear_all_resources(self):
+        """Clear all resources from the database (for complete reset)"""
+        logger.info("🗑️ Clearing all resources from database")
+        
+        # Delete all data from all tables
+        tables = [
+            'resource_usage_analytics',
+            'resource_quality_history', 
+            'resource_relationships',
+            'resource_validation_history',
+            'resource_metadata',
+            'resources'
+        ]
+        
+        for table in tables:
+            self.connection.execute(f"DELETE FROM {table}")
+        
+        self.connection.commit()
+        logger.info("✅ All resources cleared from database")
+
     async def close(self):
         """Close database connection"""
         if self.connection:
             self.connection.close()
-            self.connection = None 
+            logger.info("🔒 Enhanced resource database connection closed") 

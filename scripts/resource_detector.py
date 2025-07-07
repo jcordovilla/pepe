@@ -19,6 +19,9 @@ import os
 from tqdm import tqdm
 import argparse
 
+# Configure tqdm for better progress bar visibility
+tqdm.monitor_interval = 0.05  # Update more frequently
+
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
@@ -169,7 +172,7 @@ class FreshResourceDetector:
         print(f"📁 Found {len(json_files)} message files to analyze")
         
         # Progress bar for file processing
-        with tqdm(json_files, desc="📄 Processing files", unit="file") as file_pbar:
+        with tqdm(json_files, desc="📄 Processing files", unit="file", position=0, leave=True) as file_pbar:
             for json_file in file_pbar:
                 file_pbar.set_postfix({"file": json_file.name[:30] + "..." if len(json_file.name) > 30 else json_file.name})
                 
@@ -181,7 +184,7 @@ class FreshResourceDetector:
                     channel_name = data.get('channel_name', 'Unknown')
                     
                     # Progress bar for message processing within each file
-                    with tqdm(messages, desc=f"  📝 Messages in {channel_name}", unit="msg", leave=False) as msg_pbar:
+                    with tqdm(messages, desc=f"  📝 Messages in {channel_name}", unit="msg", position=1, leave=False) as msg_pbar:
                         for message in msg_pbar:
                             self._analyze_message(message, channel_name, analyze_unknown)
                             msg_pbar.set_postfix({"resources": len(self.detected_resources)})
@@ -192,7 +195,7 @@ class FreshResourceDetector:
         # Progress bar for description generation
         if self.detected_resources:
             print(f"\n🤖 Generating AI descriptions for {len(self.detected_resources)} resources...")
-            with tqdm(self.detected_resources, desc="🤖 Generating descriptions", unit="resource") as desc_pbar:
+            with tqdm(self.detected_resources, desc="🤖 Generating descriptions", unit="resource", position=0, leave=True) as desc_pbar:
                 for i, resource in enumerate(desc_pbar):
                     # Re-generate description with progress tracking
                     message = {'content': f"Resource: {resource['url']}", 'author': {'username': resource['author']}}
@@ -222,35 +225,106 @@ class FreshResourceDetector:
                 self.stats[f'category_{resource["category"]}'] += 1
     
     def _generate_description(self, message, url):
-        """Generate an AI description for the resource using the LLM."""
+        """Generate an AI description for the resource using the Llama model."""
         llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
         llm_model = self.fast_model if self.use_fast_model else self.standard_model
         
-        # Extract key content for faster processing
-        content = message.get('content', '')[:200]  # Limit content length
+        # Extract key content and context for better description generation
+        content = message.get('content', '')[:300]  # Increase content length for better context
         domain = urlparse(url).netloc.lower()
+        parsed_url = urlparse(url)
         
-        # Lean, focused prompt
-        prompt = f"AI resource: {url}\nContext: {content}\nBrief AI/ML description (50 words max):"
+        # Create more sophisticated prompt based on domain and URL structure
+        if 'arxiv.org' in domain:
+            prompt_context = f"This is a research paper from arXiv (URL: {url}). Context from message: {content}\n\nGenerate a clear, informative description of this research paper including its key contributions and domain. Keep it under 80 words:"
+        elif 'github.com' in domain:
+            repo_path = parsed_url.path.strip('/')
+            prompt_context = f"This is a GitHub repository: {repo_path} (URL: {url}). Context: {content}\n\nDescribe this code repository, its purpose, and what it implements. Focus on the technical aspects. Keep it under 80 words:"
+        elif 'huggingface.co' in domain:
+            prompt_context = f"This is a resource from Hugging Face (URL: {url}). Context: {content}\n\nDescribe this AI/ML model, dataset, or tool from Hugging Face, including its capabilities and use cases. Keep it under 80 words:"
+        elif 'youtube.com' in domain or 'youtu.be' in domain:
+            prompt_context = f"This is a YouTube video (URL: {url}). Context: {content}\n\nDescribe this educational video content and what viewers can learn from it. Keep it under 80 words:"
+        elif any(news_domain in domain for news_domain in ['techcrunch.com', 'theverge.com', 'wired.com', 'arstechnica.com']):
+            prompt_context = f"This is a tech news article from {domain} (URL: {url}). Context: {content}\n\nSummarize this tech news article and its key points. Keep it under 80 words:"
+        elif '.pdf' in url.lower():
+            prompt_context = f"This is a PDF document (URL: {url}). Context: {content}\n\nDescribe this document and its likely content based on the context. Keep it under 80 words:"
+        else:
+            # Generic but more informative prompt
+            prompt_context = f"Resource URL: {url}\nDomain: {domain}\nContext from message: {content}\n\nBased on the URL and context, provide a clear, informative description of this resource and its value. Keep it under 80 words:"
         
         try:
             response = requests.post(llm_endpoint, json={
                 "model": llm_model,
-                "prompt": prompt,
-                "max_tokens": 80,  # Reduced for faster generation
-                "temperature": 0.1,  # Lower for more consistent, faster responses
-                "top_p": 0.9,  # Add top_p for better quality/speed balance
-                "stream": False  # Ensure no streaming for faster response
-            }, timeout=10)  # Reduced timeout
+                "prompt": prompt_context,
+                "stream": False,
+                "options": {
+                    "temperature": 0.2,  # Slightly higher for more natural language
+                    "top_p": 0.9,
+                    "num_predict": 100,  # Ollama uses num_predict instead of max_tokens
+                    "stop": ["\n\n", "---"]  # Stop tokens to prevent rambling
+                }
+            }, timeout=20)  # Increase timeout for better quality
             
             if response.status_code == 200:
                 data = response.json()
                 description = data.get('response', '').strip()
-                return description if description else f"AI/ML resource from {domain}"
+                
+                # Clean up the description
+                if description:
+                    # Remove common prefixes that the model might add
+                    prefixes_to_remove = [
+                        "This is a ", "This appears to be ", "Based on the URL", 
+                        "According to the context", "The resource is"
+                    ]
+                    for prefix in prefixes_to_remove:
+                        if description.startswith(prefix):
+                            description = description[len(prefix):].lstrip()
+                    
+                    # Ensure it doesn't exceed reasonable length
+                    if len(description) > 300:
+                        description = description[:297] + "..."
+                    
+                    return description
+                else:
+                    return self._generate_fallback_description(url, domain, content)
             else:
-                return f"AI/ML resource from {domain}"
+                print(f"⚠️ LLM API error (status {response.status_code}) for {url[:50]}...")
+                return self._generate_fallback_description(url, domain, content)
+                
         except Exception as e:
-            return f"AI/ML resource from {domain}"
+            print(f"⚠️ LLM connection error for {url[:50]}...: {e}")
+            return self._generate_fallback_description(url, domain, content)
+    
+    def _generate_fallback_description(self, url, domain, content):
+        """Generate a fallback description when LLM is unavailable."""
+        parsed_url = urlparse(url)
+        
+        # Create intelligent fallback descriptions based on URL patterns
+        if 'arxiv.org' in domain:
+            paper_id = parsed_url.path.split('/')[-1] if parsed_url.path else "unknown"
+            return f"Research paper from arXiv - {paper_id}"
+        elif 'github.com' in domain:
+            repo_path = parsed_url.path.strip('/')
+            return f"GitHub repository: {repo_path}"
+        elif 'huggingface.co' in domain:
+            path_parts = parsed_url.path.strip('/').split('/')
+            if len(path_parts) >= 2:
+                return f"Hugging Face {path_parts[0]}: {'/'.join(path_parts[1:])}"
+            return "Hugging Face AI/ML resource"
+        elif 'youtube.com' in domain or 'youtu.be' in domain:
+            return "Educational video content from YouTube"
+        elif '.pdf' in url.lower():
+            filename = parsed_url.path.split('/')[-1] if parsed_url.path else "document"
+            return f"PDF document: {filename}"
+        elif any(news_domain in domain for news_domain in ['techcrunch.com', 'theverge.com', 'wired.com']):
+            return f"Tech news article from {domain}"
+        else:
+            # Extract meaningful info from URL structure
+            if parsed_url.path and len(parsed_url.path) > 1:
+                path_parts = [p for p in parsed_url.path.split('/') if p]
+                if path_parts:
+                    return f"Resource from {domain}: {'/'.join(path_parts[:2])}"
+            return f"Resource from {domain}"
 
     def _evaluate_url(self, url: str, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Evaluate if a URL is a high-quality resource"""
@@ -481,6 +555,10 @@ def main():
         return
 
     print("🔍 Running resource detection from SQLite database...")
+    print("📊 Loading messages from database...")
+    print("⏳ This may take a while - you'll see progress bars below...")
+    print("-" * 60)
+    
     import sqlite3
     messages = []
     try:
@@ -491,62 +569,152 @@ def main():
                 WHERE content IS NOT NULL AND content != ''
                 ORDER BY timestamp DESC
             """)
-            for row in cursor:
-                message_dict = {
-                    'content': row['content'],
-                    'author': {
-                        'username': row['author_username'],
-                        'display_name': row['author_display_name'] or row['author_username']
-                    },
-                    'timestamp': row['timestamp'],
-                    'message_id': row['message_id'],
-                    'channel_id': row['channel_id'],
-                    'channel_name': row['channel_name']
-                }
-                messages.append(message_dict)
-        print(f"📊 Found {len(messages):,} messages to analyze")
+            
+            # First, count total messages for progress bar
+            count_cursor = conn.execute("""
+                SELECT COUNT(*) as count FROM messages 
+                WHERE content IS NOT NULL AND content != ''
+            """)
+            total_messages = count_cursor.fetchone()['count']
+            print(f"📊 Found {total_messages:,} messages to analyze")
+            
+            # Load messages with progress bar
+            with tqdm(total=total_messages, desc="📥 Loading messages", unit="msg", position=0, leave=True) as load_pbar:
+                for row in cursor:
+                    message_dict = {
+                        'content': row['content'],
+                        'author': {
+                            'username': row['author_username'],
+                            'display_name': row['author_display_name'] or row['author_username']
+                        },
+                        'timestamp': row['timestamp'],
+                        'message_id': row['message_id'],
+                        'channel_id': row['channel_id'],
+                        'channel_name': row['channel_name']
+                    }
+                    messages.append(message_dict)
+                    load_pbar.update(1)
+                    load_pbar.set_postfix({"loaded": len(messages)})
+                    
     except Exception as e:
         print(f"❌ Error reading database: {e}")
         return
 
+    print(f"✅ Loaded {len(messages):,} messages successfully")
+    print("🔍 Starting resource analysis...")
+
     # Analyze messages with progress bar and incremental logic
-    print("🔍 Analyzing messages for resources (incremental, with progress bar)...")
     skipped = 0
     processed = 0
-    with tqdm(messages, desc="📝 Analyzing messages", unit="msg") as msg_pbar:
-        for message in msg_pbar:
+    resources_found = 0
+    
+    with tqdm(messages, desc="📝 Analyzing messages", unit="msg", position=0, leave=True) as msg_pbar:
+        for i, message in enumerate(msg_pbar):
             content = message.get('content', '')
             if not content:
                 continue
+                
             urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
             new_url_found = False
+            
             for url in urls:
                 if detector._is_url_processed(url):
                     skipped += 1
                     continue
+                    
                 resource = detector._evaluate_url(url, message, message['channel_name'], analyze_unknown=False)
                 if resource:
                     detector.detected_resources.append(resource)
                     detector.stats['total_resources'] += 1
                     detector.stats[f'category_{resource["category"]}'] += 1
                     processed += 1
+                    resources_found += 1
                     new_url_found = True
-            msg_pbar.set_postfix({"processed": processed, "skipped": skipped})
+            
+            # Update progress bar with detailed stats
+            msg_pbar.set_postfix({
+                "processed": processed,
+                "skipped": skipped,
+                "resources": resources_found,
+                "progress": f"{i+1}/{len(messages)}"
+            })
+            
+            # Force update every 100 messages to ensure progress is visible
+            if (i + 1) % 100 == 0:
+                msg_pbar.refresh()
+
+    print(f"\n✅ Analysis complete!")
+    print(f"📊 Results: {resources_found} new resources found, {skipped} URLs skipped (already processed)")
 
     # Progress bar for description generation (for any resources missing description)
     resources_to_describe = [r for r in detector.detected_resources if not r.get('description') or r['description'].startswith('AI/ML resource from')]
     if resources_to_describe:
-        print(f"\n🤖 Generating AI descriptions for {len(resources_to_describe)} new resources...")
-        with tqdm(resources_to_describe, desc="🤖 Generating descriptions", unit="resource") as desc_pbar:
-            for resource in desc_pbar:
-                message = {'content': f"Resource: {resource['url']}", 'author': {'username': resource['author']}}
-                description = detector._generate_description(message, resource['url'])
+        # Limit to first 50 resources to prevent getting stuck on large datasets
+        if len(resources_to_describe) > 50:
+            print(f"⚠️ Limiting description generation to first 50 resources (found {len(resources_to_describe)} total)")
+            resources_to_describe = resources_to_describe[:50]
+            
+        print(f"\n🤖 Generating AI descriptions using {model_name} for {len(resources_to_describe)} new resources...")
+        print("📡 This will use the local Ollama server for intelligent descriptions")
+        
+        # Test LLM connection first
+        llm_available = False
+        try:
+            test_response = requests.get('http://localhost:11434/api/tags', timeout=5)
+            if test_response.status_code == 200:
+                llm_available = True
+                print("✅ Ollama server is connected and ready")
+            else:
+                print("⚠️ Ollama server not responding - using intelligent fallback descriptions")
+        except Exception:
+            print("⚠️ Ollama server not available - using intelligent fallback descriptions")
+        
+        llm_success_count = 0
+        fallback_count = 0
+        
+        with tqdm(resources_to_describe, desc="🤖 Generating descriptions", unit="resource", position=0, leave=True) as desc_pbar:
+            for i, resource in enumerate(desc_pbar):
+                # Create a proper message structure for better context
+                original_message = {
+                    'content': f"Shared by {resource['author']} in #{resource['channel_name']}: {resource['url']}",
+                    'author': {'username': resource['author']}
+                }
+                
+                old_description = resource.get('description', '')
+                description = detector._generate_description(original_message, resource['url'])
                 resource['description'] = description
-                desc_pbar.set_postfix({"domain": resource['domain'][:20]})
+                
+                # Track success/fallback
+                if description != old_description and not description.startswith('AI/ML resource from'):
+                    # Check if it's an LLM-generated description vs fallback
+                    if any(indicator in description.lower() for indicator in ['research', 'repository', 'implements', 'provides', 'framework', 'tool', 'paper', 'article']):
+                        llm_success_count += 1
+                    else:
+                        fallback_count += 1
+                else:
+                    fallback_count += 1
+                
+                desc_pbar.set_postfix({
+                    "domain": resource['domain'][:20],
+                    "AI": llm_success_count,
+                    "fallback": fallback_count,
+                    "progress": f"{i+1}/{len(resources_to_describe)}"
+                })
+                
+                # Force update every 5 resources for better feedback
+                if (i + 1) % 5 == 0:
+                    desc_pbar.refresh()
+        
+        print(f"✅ Description generation complete:")
+        print(f"   🤖 AI-generated descriptions: {llm_success_count}")
+        print(f"   🔄 Intelligent fallback descriptions: {fallback_count}")
+        if llm_success_count > 0:
+            print(f"   📊 LLM success rate: {(llm_success_count / len(resources_to_describe)) * 100:.1f}%")
 
-    # Save processed URLs for incremental processing
+    print("💾 Saving processed URLs for incremental processing...")
     detector._save_processed_urls()
 
+    print("📄 Saving results to files...")
     # Save results to JSON file
     output_path = project_root / 'data' / 'optimized_fresh_resources.json'
     report = detector.save_resources(output_path, analyze_unknown=False)
@@ -587,6 +755,7 @@ def main():
     else:
         print(f"⚠️ MIXED: Only {quality_percentage:.1f}% high-quality resources.")
         print("❓ You may want to review and adjust criteria.")
+        recommendation = "REVIEW" if total > 0 else "NO_RESOURCES"
 
     # Show top categories
     categories = stats['categories']

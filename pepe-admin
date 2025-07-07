@@ -499,10 +499,12 @@ class PepeAdminSimplified:
                 print("❌ No resources file found after detection.")
                 return False
             
-            # Run migration
-            migrate_result = subprocess.run([
-                "python", "scripts/migrate_to_enhanced_resources.py"
-            ], capture_output=True, text=True)
+            # Run clean migration
+            migrate_cmd = ["python3", "scripts/clean_migration.py"]
+            if reset_cache:
+                migrate_cmd.append("--reset-cache")
+            
+            migrate_result = subprocess.run(migrate_cmd, capture_output=True, text=True)
             print(migrate_result.stdout)
             if migrate_result.returncode != 0:
                 print(f"❌ Resource migration failed: {migrate_result.stderr}")
