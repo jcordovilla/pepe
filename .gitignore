@@ -15,6 +15,7 @@ data/conversation_memory.db
 data/cache/
 data/vectorstore/
 data/chromadb/
+data/fetched_messages/
 data/test_*/
 data/debug_*/
 *.db
