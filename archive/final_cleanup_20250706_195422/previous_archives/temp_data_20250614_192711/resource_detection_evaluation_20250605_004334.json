@@ -1,0 +1,208 @@
+{
+  "timestamp": "2025-06-05T00:43:27.202722",
+  "total_tests": 6,
+  "test_results": [
+    {
+      "test_id": "test_001",
+      "content_preview": "Check out this amazing research paper on transformers: https://arxiv.org/abs/1706.03762 - it's the a...",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.3333333333333333,
+        "semantic_similarity": 0.3333333333333333
+      },
+      "quality_assessment": {
+        "score": 0.65,
+        "calculated_quality": 0.55,
+        "expected_quality": 0.9
+      },
+      "overall_score": 0.7966666666666666
+    },
+    {
+      "test_id": "test_002",
+      "content_preview": "Here's a Python function for data preprocessing:\n```python\ndef preprocess_data(df):\n    return df.dr...",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.6666666666666666,
+        "semantic_similarity": 0.6666666666666666
+      },
+      "quality_assessment": {
+        "score": 0.9,
+        "calculated_quality": 0.75,
+        "expected_quality": 0.85
+      },
+      "overall_score": 0.9133333333333333
+    },
+    {
+      "test_id": "test_003",
+      "content_preview": "Great tutorial on machine learning basics: https://www.youtube.com/watch?v=example123 - perfect for ...",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.6666666666666666,
+        "semantic_similarity": 0.6666666666666666
+      },
+      "quality_assessment": {
+        "score": 0.75,
+        "calculated_quality": 0.55,
+        "expected_quality": 0.8
+      },
+      "overall_score": 0.8833333333333332
+    },
+    {
+      "test_id": "test_004",
+      "content_preview": "Here's the whitepaper I mentioned earlier. Contains detailed methodology and results.",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.0,
+        "semantic_similarity": 0.0
+      },
+      "quality_assessment": {
+        "score": 0.4,
+        "calculated_quality": 0.35,
+        "expected_quality": 0.95
+      },
+      "overall_score": 0.6799999999999999
+    },
+    {
+      "test_id": "test_005",
+      "content_preview": "lol check this meme https://tenor.com/view/funny-cat-gif",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.5,
+        "semantic_similarity": 0.5
+      },
+      "quality_assessment": {
+        "score": 0.7999999999999999,
+        "calculated_quality": 0.30000000000000004,
+        "expected_quality": 0.1
+      },
+      "overall_score": 0.86
+    },
+    {
+      "test_id": "test_006",
+      "content_preview": "For the AI project, here are useful resources:\n1. Dataset: https://huggingface.co/datasets/example\n2...",
+      "url_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "code_detection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "attachment_processing": {
+        "accuracy": 1.0
+      },
+      "ai_classification": {
+        "accuracy": 0.6666666666666666,
+        "semantic_similarity": 0.6666666666666666
+      },
+      "quality_assessment": {
+        "score": 0.95,
+        "calculated_quality": 0.9500000000000001,
+        "expected_quality": 0.9
+      },
+      "overall_score": 0.9233333333333332
+    }
+  ],
+  "metrics": {
+    "url_detection": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "code_detection": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "attachment_processing": {
+      "accuracy": 1.0
+    },
+    "ai_classification": {
+      "accuracy": 0.47222222222222215,
+      "semantic_similarity": 0.47222222222222215
+    },
+    "quality_assessment": {
+      "score": 0.7416666666666666
+    },
+    "overall_performance": 0.8427777777777777
+  },
+  "summary": {
+    "overall_performance": {
+      "score": 0.8427777777777777,
+      "grade": "B (Good)"
+    },
+    "strengths": [
+      "Strong URL detection and classification",
+      "Reliable attachment processing"
+    ],
+    "weaknesses": [
+      "AI classification accuracy below target"
+    ],
+    "recommendations": [
+      "Fine-tune AI classification prompts or consider domain-specific models",
+      "Implement continuous monitoring with real-world data validation"
+    ]
+  }
+}

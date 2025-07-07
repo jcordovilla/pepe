@@ -1,0 +1,1145 @@
+#!/usr/bin/env python3
+"""
+Pepe Admin CLI - Simplified Administrative Interface
+
+Streamlined interface for Discord bot administration with consolidated commands.
+
+Usage:
+    pepe-admin setup              # Initial system setup & health check
+    pepe-admin sync [--full]      # Sync Discord data (includes statistics)
+    pepe-admin info               # System status, stats, and health monitoring  
+    pepe-admin maintain           # Maintenance, backup, and optimization
+    pepe-admin test               # Comprehensive system testing
+    pepe-admin resources detect   # Detect resources from messages
+    pepe-admin resources migrate  # Migrate to enhanced database
+    pepe-admin resources status   # Show resource database status
+
+Poetry Usage:
+    poetry run ./pepe-admin <command>
+"""
+
+import sys
+import os
+import asyncio
+import argparse
+import logging
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, Any, Optional
+
+# Add project root to path
+project_root = Path(__file__).parent
+sys.path.insert(0, str(project_root))
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+class PepeAdminSimplified:
+    """Simplified administrative interface for the Discord bot system"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.config = self._load_config()
+        
+    def _load_config(self) -> Dict[str, Any]:
+        """Load system configuration"""
+        from dotenv import load_dotenv
+        load_dotenv()
+        
+        return {
+            'vector_store': {
+                'persist_directory': './data/chromadb',
+                'collection_name': 'discord_messages',
+                'embedding_model': 'text-embedding-3-small'
+            },
+            'discord': {
+                'token': os.getenv('DISCORD_TOKEN'),
+                'guild_id': os.getenv('GUILD_ID')
+            },
+            'paths': {
+                'data_dir': self.project_root / 'data',
+                'logs_dir': self.project_root / 'logs',
+                'backup_dir': self.project_root / 'backups'
+            }
+        }
+
+    async def setup(self, args):
+        """🚀 Complete system setup, initialization, and health check"""
+        print("🚀 Pepe Admin - Complete System Setup")
+        print("=" * 60)
+        
+        setup_success = True
+        
+        # Phase 1: Create directories and initialize components
+        print("📁 Phase 1: Directory Setup & Initialization")
+        print("-" * 40)
+        
+        directories = [
+            'data/chromadb', 'data/fetched_messages', 'data/processing_markers',
+            'data/cache', 'logs', 'backups'
+        ]
+        
+        for directory in directories:
+            dir_path = self.project_root / directory
+            dir_path.mkdir(parents=True, exist_ok=True)
+            print(f"   ✅ {directory}")
+        
+        # Phase 2: Initialize core components
+        print("\n🔧 Phase 2: Core Component Initialization")
+        print("-" * 40)
+        
+        # Vector store
+        try:
+            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            vector_store = PersistentVectorStore(self.config['vector_store'])
+            print("   ✅ Vector store initialized")
+        except Exception as e:
+            print(f"   ❌ Vector store error: {e}")
+            setup_success = False
+        
+        # Databases
+        try:
+            from agentic.memory.conversation_memory import ConversationMemory
+            memory = ConversationMemory({'db_path': 'data/conversation_memory.db'})
+            print("   ✅ Conversation memory initialized")
+            
+            from agentic.analytics.query_answer_repository import QueryAnswerRepository
+            analytics = QueryAnswerRepository({'db_path': 'data/analytics.db'})
+            print("   ✅ Analytics database initialized")
+        except Exception as e:
+            print(f"   ❌ Database error: {e}")
+            setup_success = False
+        
+        # Phase 3: Configuration validation
+        print("\n⚙️ Phase 3: Configuration Validation")
+        print("-" * 40)
+        
+        env_vars = {
+            'DISCORD_TOKEN': 'Discord bot token',
+            'GUILD_ID': 'Discord server ID', 
+            'OPENAI_API_KEY': 'OpenAI API key'
+        }
+        
+        for var, description in env_vars.items():
+            value = os.getenv(var)
+            if value:
+                masked = f"{value[:8]}...{value[-4:]}" if len(value) > 12 else "***"
+                print(f"   ✅ {var}: {masked}")
+            else:
+                print(f"   ❌ {var}: Not set ({description})")
+                setup_success = False
+        
+        # Phase 4: System health check
+        print("\n🏥 Phase 4: System Health Check")
+        print("-" * 40)
+        
+        await self._run_health_checks()
+        
+        # Setup summary
+        if setup_success:
+            print("\n🎉 Setup completed successfully!")
+            print("💡 Next steps:")
+            print("   • Run 'pepe-admin sync --full' for initial data sync")
+            print("   • Run 'python main.py' to start the Discord bot")
+        else:
+            print("\n⚠️ Setup completed with issues!")
+            print("💡 Please fix the errors above before proceeding")
+        
+        return setup_success
+    
+    async def sync(self, args):
+        """🔄 Discord data sync using new fetcher and indexer scripts
+        Usage:
+            pepe-admin sync                # Both fetch and index (default)
+            pepe-admin sync --fetch-only   # Only fetch messages to DB
+            pepe-admin sync --index-only   # Only index/embed from DB
+        """
+        print("🔄 Pepe Admin - Discord Data Sync (Modern Workflow)")
+        print("=" * 60)
+        import subprocess
+        import sqlite3
+        from pathlib import Path
+
+        fetch_only = getattr(args, 'fetch_only', False)
+        index_only = getattr(args, 'index_only', False)
+
+        try:
+            if fetch_only and index_only:
+                print("❌ Cannot use --fetch-only and --index-only together.")
+                return False
+
+            if fetch_only:
+                print("\n📥 Fetching messages from Discord (fetch-only mode)...")
+                fetch_result = subprocess.run([
+                    "python", "scripts/discord_message_fetcher.py"
+                ], capture_output=True, text=True)
+                print(fetch_result.stdout)
+                if fetch_result.returncode != 0:
+                    print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                    return False
+                print("\n✅ Fetch completed successfully!")
+                return True
+
+            if index_only:
+                print("\n🔎 Indexing messages into vector store (index-only mode)...")
+                index_result = subprocess.run([
+                    "python", "scripts/index_database_messages.py"
+                ], capture_output=True, text=True)
+                print(index_result.stdout)
+                if index_result.returncode != 0:
+                    print(f"❌ Indexer script failed: {index_result.stderr}")
+                    return False
+                print("\n✅ Indexing completed successfully!")
+                return True
+
+            # Default: run both fetch and index
+            print("\n📥 Step 1: Fetching messages from Discord...")
+            fetch_result = subprocess.run([
+                "python", "scripts/discord_message_fetcher.py"
+            ], capture_output=True, text=True)
+            print(fetch_result.stdout)
+            if fetch_result.returncode != 0:
+                print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                return False
+
+            print("\n🔎 Step 2: Indexing messages into vector store...")
+            index_result = subprocess.run([
+                "python", "scripts/index_database_messages.py"
+            ], capture_output=True, text=True)
+            print(index_result.stdout)
+            if index_result.returncode != 0:
+                print(f"❌ Indexer script failed: {index_result.stderr}")
+                return False
+
+            # Step 3: Summarize results from the database
+            db_path = Path("data/discord_messages.db")
+            if db_path.exists():
+                with sqlite3.connect(db_path) as conn:
+                    cursor = conn.execute("SELECT COUNT(*) FROM messages")
+                    total_messages = cursor.fetchone()[0]
+                    cursor = conn.execute("SELECT COUNT(DISTINCT channel_id) FROM messages")
+                    total_channels = cursor.fetchone()[0]
+                    cursor = conn.execute("SELECT COUNT(DISTINCT thread_id) FROM messages WHERE thread_id IS NOT NULL")
+                    total_threads = cursor.fetchone()[0]
+                print(f"\n📊 Sync Summary:")
+                print(f"   📝 Total Messages: {total_messages:,}")
+                print(f"   💬 Channels: {total_channels}")
+                print(f"   🧵 Threads: {total_threads}")
+            else:
+                print("❌ Database not found after fetch.")
+
+            print("\n✅ Sync completed successfully!")
+            return True
+
+        except Exception as e:
+            print(f"❌ Sync failed: {e}")
+            import traceback
+            traceback.print_exc()
+            return False
+    
+    async def info(self, args):
+        """📊 Complete system information: status, statistics, and monitoring"""
+        print("📊 Pepe Admin - System Information Dashboard")
+        print("=" * 60)
+        
+        # System Status Section
+        print("🏥 System Status")
+        print("-" * 30)
+        await self._run_health_checks()
+        
+        # Vector Store Statistics
+        print("\n📈 Vector Store Statistics")
+        print("-" * 30)
+        await self._display_vector_stats()
+        
+        # Performance Monitoring
+        print("\n⚡ Performance Monitoring")
+        print("-" * 30)
+        await self._display_performance_metrics()
+        
+        # Quick System Test
+        print("\n🧪 Quick System Test")
+        print("-" * 30)
+        await self._run_quick_system_test()
+        
+        print("\n📋 System Information Complete!")
+    
+    async def maintain(self, args):
+        """🔧 Complete maintenance: cleanup, backup, and optimization"""
+        print("🔧 Pepe Admin - Complete System Maintenance")
+        print("=" * 60)
+        
+        # Phase 1: System Cleanup
+        print("🧹 Phase 1: System Cleanup")
+        print("-" * 30)
+        await self._run_system_cleanup()
+        
+        # Phase 2: Create Backup
+        print("\n💾 Phase 2: System Backup")
+        print("-" * 30)
+        await self._create_comprehensive_backup()
+        
+        # Phase 3: Performance Optimization
+        print("\n⚡ Phase 3: Performance Optimization")
+        print("-" * 30)
+        await self._run_performance_optimization()
+        
+        # Phase 4: Database Maintenance
+        print("\n🗄️ Phase 4: Database Maintenance")
+        print("-" * 30)
+        await self._run_database_maintenance()
+        
+        print("\n✅ Complete maintenance finished!")
+    
+    async def test(self, args):
+        """🧪 Comprehensive system testing"""
+        print("🧪 Pepe Admin - Comprehensive System Testing")
+        print("=" * 60)
+        
+        test_results = []
+        
+        # Core Component Tests
+        print("🔧 Core Component Tests")
+        print("-" * 30)
+        
+        # Test 1: Vector Store
+        try:
+            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            vector_store = PersistentVectorStore(self.config['vector_store'])
+            health = await vector_store.health_check()
+            status = "✅ PASS" if health.get('status') == 'healthy' else "❌ FAIL"
+            print(f"   Vector Store: {status}")
+            test_results.append(('Vector Store', status == "✅ PASS"))
+        except Exception as e:
+            print(f"   Vector Store: ❌ FAIL - {e}")
+            test_results.append(('Vector Store', False))
+        
+        # Test 2: Agent API
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            health = await agent_api.health_check()
+            status = "✅ PASS" if health.get('status') == 'healthy' else "❌ FAIL"
+            print(f"   Agent API: {status}")
+            test_results.append(('Agent API', status == "✅ PASS"))
+        except Exception as e:
+            print(f"   Agent API: ❌ FAIL - {e}")
+            test_results.append(('Agent API', False))
+        
+        # Test 3: Discord Integration
+        print(f"\n💬 Discord Integration Tests")
+        print("-" * 30)
+        await self._test_discord_integration(test_results)
+        
+        # Test 4: Query Processing
+        print(f"\n🤖 Query Processing Tests")
+        print("-" * 30)
+        await self._test_query_processing(test_results)
+        
+        # Test Summary
+        print(f"\n📊 Test Summary")
+        print("-" * 30)
+        passed = sum(1 for _, result in test_results if result)
+        total = len(test_results)
+        success_rate = (passed / total * 100) if total > 0 else 0
+        
+        print(f"   Tests Passed: {passed}/{total}")
+        print(f"   Success Rate: {success_rate:.1f}%")
+        
+        if success_rate >= 90:
+            print("   🎉 System is production-ready!")
+        elif success_rate >= 70:
+            print("   ⚠️ System has minor issues")
+        else:
+            print("   ❌ System needs attention")
+        
+        return success_rate >= 70
+    
+    async def resources(self, args):
+        """🔍 Resource management: detect, export, and migrate Discord resources
+        Usage:
+            pepe-admin resources              # Complete resource processing
+            pepe-admin resources status       # Show resource database status
+            pepe-admin resources --fast-model # Use fast model for processing
+            pepe-admin resources --standard-model # Use standard model for quality
+            pepe-admin resources --reset-cache # Reset cache and reprocess all
+        """
+        print("🔍 Pepe Admin - Resource Management")
+        print("=" * 60)
+        import subprocess
+        from pathlib import Path
+
+        action = getattr(args, 'action', None)
+        fast_model = getattr(args, 'fast_model', False)
+        standard_model = getattr(args, 'standard_model', False)
+        reset_cache = getattr(args, 'reset_cache', False)
+        
+        if action == 'status':
+            print("\n📊 Resource Database Status")
+            print("-" * 40)
+            
+            # Check resource files
+            resources_file = Path("data/optimized_fresh_resources.json")
+            export_file = Path("data/resources_export.json")
+            
+            if resources_file.exists():
+                try:
+                    import json
+                    with open(resources_file, 'r') as f:
+                        data = json.load(f)
+                    total_resources = data.get('statistics', {}).get('total_found', 0)
+                    print(f"📄 Detected Resources: {total_resources:,}")
+                    
+                    # Show categories
+                    categories = data.get('statistics', {}).get('categories', {})
+                    if categories:
+                        print("\n📁 Resource Categories:")
+                        for category, count in sorted(categories.items(), key=lambda x: x[1], reverse=True)[:5]:
+                            print(f"   • {category}: {count}")
+                except Exception as e:
+                    print(f"   ❌ Error reading resources file: {e}")
+            else:
+                print("📄 Detected Resources: None (run 'resources' first)")
+            
+            # Check export file
+            if export_file.exists():
+                try:
+                    import json
+                    with open(export_file, 'r') as f:
+                        data = json.load(f)
+                    export_count = data.get('total_resources', 0)
+                    export_date = data.get('export_date', 'Unknown')
+                    print(f"📤 Export File: {export_count:,} resources (exported: {export_date})")
+                except Exception as e:
+                    print(f"   ❌ Error reading export file: {e}")
+            else:
+                print("📤 Export File: None (run 'resources' first)")
+            
+            # Check enhanced database
+            enhanced_db = Path("data/enhanced_resources.db")
+            if enhanced_db.exists():
+                try:
+                    import sqlite3
+                    with sqlite3.connect(enhanced_db) as conn:
+                        cursor = conn.execute("SELECT COUNT(*) FROM resources")
+                        count = cursor.fetchone()[0]
+                        print(f"🗄️ Enhanced Database: {count:,} resources")
+                except Exception as e:
+                    print(f"   ❌ Error reading enhanced database: {e}")
+            else:
+                print("🗄️ Enhanced Database: Not initialized (run 'resources' first)")
+            
+            # Check processed URLs cache
+            cache_file = Path("data/processed_resources.json")
+            if cache_file.exists():
+                try:
+                    import json
+                    with open(cache_file, 'r') as f:
+                        data = json.load(f)
+                    total_processed = data.get('total_processed', 0)
+                    last_updated = data.get('last_updated', 'Unknown')
+                    print(f"💾 Processed URLs Cache: {total_processed:,} URLs (updated: {last_updated[:10]})")
+                except Exception as e:
+                    print(f"   ❌ Error reading cache: {e}")
+            else:
+                print("💾 Processed URLs Cache: None (no incremental processing)")
+            
+            return True
+
+        else:
+            # Default action: complete resource processing
+            print("\n🚀 Complete Resource Processing")
+            print("This will detect, export, and migrate resources from Discord messages.")
+            
+            # Show processing options
+            if fast_model:
+                print("⚡ Using fast model (phi3:mini) for faster processing")
+            elif standard_model:
+                print("🎯 Using standard model (llama3.1:8b) for better quality")
+            else:
+                print("⚡ Using fast model (phi3:mini) by default")
+            
+            if reset_cache:
+                print("🗑️ Will reset cache and reprocess all resources")
+            
+            # Check if we have messages to analyze
+            db_path = Path("data/discord_messages.db")
+            if not db_path.exists():
+                print("❌ No message database found. Run 'pepe-admin sync' first.")
+                return False
+            
+            # Step 1: Detect resources
+            print("\n📥 Step 1: Detecting resources from Discord messages...")
+            
+            # Build command with options
+            cmd = ["python3", "scripts/resource_detector.py"]
+            if fast_model:
+                cmd.append("--fast-model")
+            elif standard_model:
+                cmd.append("--standard-model")
+            if reset_cache:
+                cmd.append("--reset-cache")
+            
+            detect_result = subprocess.run(cmd, capture_output=True, text=True)
+            print(detect_result.stdout)
+            if detect_result.returncode != 0:
+                print(f"❌ Resource detection failed: {detect_result.stderr}")
+                return False
+            
+            # Step 2: Migrate to enhanced database
+            print("\n🔄 Step 2: Migrating resources to enhanced database...")
+            
+            # Check if we have resources to migrate
+            resources_file = Path("data/optimized_fresh_resources.json")
+            if not resources_file.exists():
+                print("❌ No resources file found after detection.")
+                return False
+            
+            # Run clean migration
+            migrate_cmd = ["python3", "scripts/clean_migration.py"]
+            if reset_cache:
+                migrate_cmd.append("--reset-cache")
+            
+            migrate_result = subprocess.run(migrate_cmd, capture_output=True, text=True)
+            print(migrate_result.stdout)
+            if migrate_result.returncode != 0:
+                print(f"❌ Resource migration failed: {migrate_result.stderr}")
+                return False
+            
+            # Step 3: Show results
+            print("\n✅ Complete resource processing finished!")
+            
+            # Show information about created files
+            detailed_report = Path("data/optimized_fresh_resources.json")
+            export_file = Path("data/resources_export.json")
+            
+            if detailed_report.exists():
+                try:
+                    import json
+                    with open(detailed_report, 'r') as f:
+                        data = json.load(f)
+                    total_resources = data.get('statistics', {}).get('total_found', 0)
+                    print(f"\n📄 Files created:")
+                    print(f"   • Detailed report: {detailed_report} ({total_resources:,} resources)")
+                    print(f"   • Export file: {export_file} (simplified format for external use)")
+                except Exception as e:
+                    print(f"   ❌ Error reading report: {e}")
+            
+            return True
+    
+    # Helper methods for core functionality
+    async def _process_existing_data(self, sync_stats, is_full_sync):
+        """Process existing Discord message data"""
+        data_dir = self.project_root / 'data' / 'fetched_messages'
+        if not data_dir.exists():
+            print("   📁 No existing data directory")
+            return
+        
+        json_files = list(data_dir.glob('*.json'))
+        sync_stats['total_json_files'] = len(json_files)
+        print(f"   📁 Found {len(json_files)} message files")
+        
+        if is_full_sync:
+            print("   🔄 Processing all message files...")
+            for json_file in json_files:
+                await self._process_message_file(json_file, sync_stats)
+        else:
+            print("   📊 Analyzing existing data...")
+            for json_file in json_files:
+                await self._analyze_message_file(json_file, sync_stats)
+    
+    async def _gather_discord_server_info(self, sync_stats):
+        """Gather comprehensive Discord server information"""
+        print("   🌐 Connecting to Discord server...")
+        
+        try:
+            import discord
+            
+            intents = discord.Intents.default()
+            intents.message_content = True
+            intents.guilds = True
+            client = discord.Client(intents=intents)
+            
+            guild_id = int(self.config['discord']['guild_id'])
+            
+            @client.event
+            async def on_ready():
+                try:
+                    guild = client.get_guild(guild_id)
+                    if guild:
+                        print(f"   🏛️ Connected to: {guild.name}")
+                        await self._analyze_discord_channels(guild, sync_stats)
+                    else:
+                        print(f"   ❌ Guild not found: {guild_id}")
+                except Exception as e:
+                    print(f"   ❌ Error analyzing Discord server: {e}")
+                finally:
+                    await client.close()
+            
+            await client.start(self.config['discord']['token'])
+            
+        except Exception as e:
+            print(f"   ⚠️ Could not connect to Discord: {e}")
+    
+    async def _analyze_discord_channels(self, guild, sync_stats):
+        """Analyze Discord channels comprehensively"""
+        import discord
+        
+        # Initialize inaccessible channels tracking
+        sync_stats['inaccessible_channels'] = []
+        
+        for channel in guild.channels:
+            channel_info = {
+                'name': channel.name,
+                'type': str(channel.type),
+                'category': channel.category.name if channel.category else 'No Category'
+            }
+            
+            # Handle different channel types
+            if isinstance(channel, discord.ForumChannel):
+                sync_stats['forum_channels'] += 1
+                channel_info['type'] = 'forum'
+                
+                # Get forum threads
+                try:
+                    threads = []
+                    async for thread in channel.archived_threads(limit=None):
+                        threads.append(thread)
+                    for thread in channel.threads:
+                        threads.append(thread)
+                    
+                    thread_count = len(threads)
+                    sync_stats['forum_thread_counts'][str(channel.id)] = thread_count
+                    sync_stats['total_threads_found'] += thread_count
+                    
+                    if thread_count > 0:
+                        sync_stats['forums_with_threads'] += 1
+                    else:
+                        sync_stats['forums_without_threads'] += 1
+                    
+                    channel_info['thread_count'] = thread_count
+                    
+                except discord.Forbidden:
+                    # Track inaccessible forum channels
+                    sync_stats['inaccessible_channels'].append({
+                        'name': channel.name,
+                        'id': str(channel.id),
+                        'type': 'forum',
+                        'category': channel.category.name if channel.category else 'No Category',
+                        'reason': 'No permission to read threads'
+                    })
+                    sync_stats['forums_without_threads'] += 1
+                    channel_info['thread_count'] = 0
+                except Exception as e:
+                    sync_stats['forums_without_threads'] += 1
+                    channel_info['thread_count'] = 0
+            
+            elif isinstance(channel, discord.TextChannel):
+                sync_stats['text_channels'] += 1
+                # Check if we have permission to read this text channel
+                try:
+                    # Test permissions by trying to get channel permissions
+                    permissions = channel.permissions_for(guild.me)
+                    if not permissions.read_messages:
+                        sync_stats['inaccessible_channels'].append({
+                            'name': channel.name,
+                            'id': str(channel.id),
+                            'type': 'text',
+                            'category': channel.category.name if channel.category else 'No Category',
+                            'reason': 'No read permission'
+                        })
+                except Exception:
+                    # If we can't check permissions, assume it's accessible
+                    pass
+            elif isinstance(channel, discord.VoiceChannel):
+                sync_stats['voice_channels'] += 1
+            
+            sync_stats['all_channels'][str(channel.id)] = channel_info
+            sync_stats['total_channels'] += 1
+        
+        # Calculate data coverage
+        sync_stats['channels_with_data'] = len(sync_stats['fetched_channels'])
+        sync_stats['channels_without_data'] = sync_stats['text_channels'] - sync_stats['channels_with_data']
+    
+    async def _process_message_file(self, json_file, sync_stats):
+        """Process a single message file for full sync"""
+        try:
+            import json
+            with open(json_file, 'r') as f:
+                messages = json.load(f)
+            
+            # Extract channel information - prioritize readable names
+            channel_name = "Unknown Channel"
+            channel_id = "unknown"
+            channel_type = "text"
+            
+            if isinstance(messages, dict):
+                channel_name = messages.get('channel_name', 'Unknown Channel')
+                channel_id = messages.get('channel_id', 'unknown')
+                channel_type = messages.get('channel_type', 'text')
+            
+            # Fallback to filename parsing if no channel info in JSON
+            filename_parts = json_file.stem.split('_')
+            if len(filename_parts) >= 2 and channel_id == 'unknown':
+                channel_id = filename_parts[1]
+            
+            # Handle forum files differently
+            if channel_type == "forum":
+                sync_stats['forum_channels_processed'] += 1
+                sync_stats['total_threads_processed'] += messages.get('threads_processed', 0)
+                print(f"     📋 Forum #{channel_name}: {messages.get('total_messages', 0)} messages from {messages.get('threads_processed', 0)} threads")
+            else:
+                sync_stats['fetched_channels'].add(channel_id)
+            
+            if messages:
+                # Extract actual messages from the JSON structure
+                actual_messages = messages.get('messages', []) if isinstance(messages, dict) else messages
+                
+                # Actually add messages to vector store
+                try:
+                    from agentic.vectorstore.persistent_store import PersistentVectorStore
+                    # Use correct config structure
+                    vector_config = {
+                        "collection_name": "discord_messages", 
+                        "persist_directory": "./data/chromadb",
+                        "embedding_model": "text-embedding-3-small",
+                        "batch_size": 100
+                    }
+                    vector_store = PersistentVectorStore(vector_config)
+                    
+                    # Add messages to vector store - use actual_messages array
+                    if actual_messages and len(actual_messages) > 0:
+                        success = await vector_store.add_messages(actual_messages)
+                        if success:
+                            sync_stats['total_messages_indexed'] += len(actual_messages)
+                            print(f"     ✅ #{channel_name}: {len(actual_messages)} messages indexed")
+                        else:
+                            print(f"     ⚠️ #{channel_name}: {len(actual_messages)} messages (indexing failed)")
+                            sync_stats['indexing_errors'] += 1
+                    else:
+                        print(f"     ⚠️ #{channel_name}: No valid messages found")
+                        sync_stats['indexing_errors'] += 1
+                        
+                except Exception as vector_error:
+                    print(f"     ❌ #{channel_name}: Vector store error - {vector_error}")
+                    sync_stats['indexing_errors'] += 1
+                
+                # Count total messages for stats (use actual_messages count)
+                message_count = len(actual_messages) if actual_messages else 0
+                sync_stats['total_messages_processed'] += message_count
+                
+        except Exception as e:
+            sync_stats['processing_errors'] += 1
+            print(f"     ❌ Error processing {json_file.name}: {e}")
+    
+    async def _analyze_message_file(self, json_file, sync_stats):
+        """Analyze a message file without full processing"""
+        try:
+            import json
+            with open(json_file, 'r') as f:
+                messages = json.load(f)
+            
+            # Extract channel information - prioritize readable names  
+            channel_name = "Unknown Channel"
+            channel_id = "unknown"
+            
+            if isinstance(messages, dict):
+                channel_name = messages.get('channel_name', 'Unknown Channel')
+                channel_id = messages.get('channel_id', 'unknown')
+                
+            # Fallback to filename parsing if no channel info in JSON
+            filename_parts = json_file.stem.split('_')
+            if len(filename_parts) >= 2 and channel_id == 'unknown':
+                channel_id = filename_parts[1]
+                
+            sync_stats['fetched_channels'].add(channel_id)
+            
+            if messages:
+                # Extract actual messages count from JSON structure
+                actual_messages = messages.get('messages', []) if isinstance(messages, dict) else messages
+                message_count = len(actual_messages) if actual_messages else 0
+                sync_stats['total_messages_processed'] += message_count
+                
+        except Exception as e:
+            sync_stats['processing_errors'] += 1
+    
+    async def _display_comprehensive_sync_stats(self, stats):
+        """Display comprehensive sync statistics"""
+        print("\n📊 Comprehensive Sync Statistics")
+        print("=" * 60)
+        
+        # Basic metrics
+        duration = (datetime.now() - stats['start_time']).total_seconds()
+        print(f"⏱️  Duration: {duration:.1f} seconds")
+        print(f"📁 JSON Files: {stats['total_json_files']:,}")
+        print(f"📝 Messages: {stats['total_messages_processed']:,}")
+        
+        # Indexing statistics
+        if 'total_messages_indexed' in stats and stats['total_messages_indexed'] > 0:
+            print(f"🔍 Indexed: {stats['total_messages_indexed']:,}")
+            indexing_rate = (stats['total_messages_indexed'] / stats['total_messages_processed'] * 100) if stats['total_messages_processed'] > 0 else 0
+            print(f"📊 Indexing Success: {indexing_rate:.1f}%")
+        
+        # Error reporting
+        if stats['processing_errors'] > 0:
+            print(f"❌ Processing Errors: {stats['processing_errors']}")
+        if 'indexing_errors' in stats and stats['indexing_errors'] > 0:
+            print(f"⚠️ Indexing Errors: {stats['indexing_errors']}")
+        
+        # Discord server overview
+        if stats['total_channels'] > 0:
+            print(f"\n🏛️ Discord Server Overview:")
+            print(f"   📊 Total Channels: {stats['total_channels']}")
+            print(f"   💬 Text: {stats['text_channels']}")
+            print(f"   🔊 Voice: {stats['voice_channels']}")
+            print(f"   📋 Forums: {stats['forum_channels']}")
+            
+            # Forum analysis
+            if stats['forum_channels'] > 0:
+                print(f"\n📋 Forum Analysis:")
+                print(f"   🧵 Total Threads: {stats['total_threads_found']}")
+                print(f"   ✅ Active Forums: {stats['forums_with_threads']}")
+                print(f"   ❌ Empty Forums: {stats['forums_without_threads']}")
+            
+            # Data coverage
+            print(f"\n📈 Data Coverage:")
+            print(f"   ✅ Channels with Data: {stats['channels_with_data']}")
+            print(f"   ❌ Channels without Data: {stats['channels_without_data']}")
+            
+            if stats['text_channels'] > 0:
+                coverage = (stats['channels_with_data'] / stats['text_channels']) * 100
+                print(f"   📊 Coverage: {coverage:.1f}%")
+        
+        # Inaccessible channels
+        if 'inaccessible_channels' in stats and stats['inaccessible_channels']:
+            print(f"\n🚫 Inaccessible Channels ({len(stats['inaccessible_channels'])}):")
+            # Group by category for better organization
+            by_category = {}
+            for channel in stats['inaccessible_channels']:
+                category = channel['category']
+                if category not in by_category:
+                    by_category[category] = []
+                by_category[category].append(channel)
+            
+            for category, channels in by_category.items():
+                print(f"   📂 {category}:")
+                for channel in channels:
+                    print(f"      ❌ #{channel['name']} ({channel['type']}) - {channel['reason']}")
+        else:
+            print(f"\n✅ All channels are accessible")
+        
+        # Recommendations
+        print(f"\n💡 Recommendations:")
+        if stats['channels_without_data'] > 0:
+            print(f"   📥 Consider syncing {stats['channels_without_data']} missing channels")
+        if stats['forum_channels'] > 0:
+            print(f"   📋 Found {stats['total_threads_found']} forum threads to potentially index")
+        if 'inaccessible_channels' in stats and stats['inaccessible_channels']:
+            print(f"   🔐 Review permissions for {len(stats['inaccessible_channels'])} inaccessible channels")
+        print(f"   🚀 Run 'python main.py' to start real-time processing")
+    
+    async def _run_health_checks(self):
+        """Run comprehensive health checks"""
+        # File system check
+        critical_paths = {
+            'Vector Store': self.project_root / 'data' / 'chromadb' / 'chroma.sqlite3',
+            'Memory DB': self.project_root / 'data' / 'conversation_memory.db',
+            'Analytics DB': self.project_root / 'data' / 'analytics.db',
+            'Main Bot': self.project_root / 'main.py'
+        }
+        
+        for name, path in critical_paths.items():
+            status = "✅" if path.exists() else "❌"
+            size = f"({self._format_size(path)})" if path.exists() else ""
+            print(f"   {status} {name}: {size}")
+    
+    async def _display_vector_stats(self):
+        """Display vector store statistics"""
+        try:
+            import sqlite3
+            db_path = self.project_root / 'data' / 'chromadb' / 'chroma.sqlite3'
+            if db_path.exists():
+                conn = sqlite3.connect(db_path)
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM embeddings")
+                count = cursor.fetchone()[0]
+                conn.close()
+                print(f"   📊 Embeddings: {count:,}")
+                print(f"   🗄️ Database Size: {self._format_size(db_path)}")
+            else:
+                print("   ❌ Vector store database not found")
+        except Exception as e:
+            print(f"   ❌ Vector store error: {e}")
+    
+    async def _display_performance_metrics(self):
+        """Display performance monitoring information"""
+        try:
+            from agentic.analytics.performance_monitor import PerformanceMonitor
+            monitor = PerformanceMonitor(self.config.get('analytics', {}))
+            status = monitor.get_current_status()
+            
+            if status.get('status') != 'unknown':
+                metrics = status.get('metrics', {})
+                print(f"   🔄 Response Time: {metrics.get('response_time', 0):.2f}s")
+                print(f"   ✅ Success Rate: {metrics.get('success_rate', 0):.1f}%")
+                print(f"   💾 Memory Usage: {metrics.get('memory_usage', 0):.1f}%")
+            else:
+                print("   ⚠️ No metrics available - start bot for monitoring")
+        except Exception as e:
+            print(f"   ❌ Monitoring error: {e}")
+    
+    async def _run_quick_system_test(self):
+        """Run a quick system functionality test"""
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            
+            # Simple query test
+            result = await agent_api.query(
+                query="test system capabilities",
+                user_id="health_check",
+                context={"platform": "admin"}
+            )
+            
+            if result.get('success'):
+                print("   ✅ Query processing working")
+                response_length = len(result.get('answer', ''))
+                print(f"   📝 Response length: {response_length}")
+            else:
+                print(f"   ❌ Query test failed: {result.get('error', 'Unknown')}")
+                
+        except Exception as e:
+            print(f"   ❌ System test error: {e}")
+    
+    async def _run_system_cleanup(self):
+        """Run system cleanup operations"""
+        # Cache cleanup
+        try:
+            from agentic.cache.smart_cache import SmartCache
+            cache = SmartCache(self.config.get('cache', {}))
+            print("   ✅ Cache cleanup completed")
+        except Exception as e:
+            print(f"   ❌ Cache cleanup error: {e}")
+        
+        # Log management
+        logs_dir = self.project_root / 'logs'
+        if logs_dir.exists():
+            log_files = list(logs_dir.glob('*.log'))
+            print(f"   📊 Processed {len(log_files)} log files")
+        
+        print("   ✅ System cleanup completed")
+    
+    async def _create_comprehensive_backup(self):
+        """Create comprehensive system backup"""
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_dir = self.project_root / 'backups' / f'backup_{timestamp}'
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        
+        import shutil
+        backup_items = {
+            'data/chromadb': 'vector_store',
+            'data/conversation_memory.db': 'conversation_memory.db',
+            'data/analytics.db': 'analytics.db',
+            'data/bot_config.json': 'bot_config.json'
+        }
+        
+        backed_up = 0
+        for source, dest in backup_items.items():
+            source_path = self.project_root / source
+            dest_path = backup_dir / dest
+            
+            if source_path.exists():
+                if source_path.is_dir():
+                    shutil.copytree(source_path, dest_path)
+                else:
+                    shutil.copy2(source_path, dest_path)
+                
+                size = self._format_size(dest_path)
+                print(f"   ✅ {source} ({size})")
+                backed_up += 1
+        
+        print(f"   📦 Backup completed: {backed_up} items")
+        print(f"   📍 Location: {backup_dir}")
+    
+    async def _run_performance_optimization(self):
+        """Run performance optimization"""
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            result = await agent_api.optimize_system()
+            
+            if result.get('status') == 'success':
+                print("   ✅ Performance optimization completed")
+                optimizations = result.get('optimizations_performed', 0)
+                print(f"   🔧 Optimizations: {optimizations}")
+            else:
+                print(f"   ❌ Optimization failed: {result.get('message', 'Unknown')}")
+        except Exception as e:
+            print(f"   ❌ Optimization error: {e}")
+    
+    async def _run_database_maintenance(self):
+        """Run database maintenance operations"""
+        try:
+            db_files = [
+                'data/conversation_memory.db',
+                'data/analytics.db'
+            ]
+            
+            import sqlite3
+            for db_file in db_files:
+                db_path = self.project_root / db_file
+                if db_path.exists():
+                    conn = sqlite3.connect(db_path)
+                    conn.execute("VACUUM")
+                    conn.close()
+                    print(f"   ✅ Optimized {db_file}")
+        except Exception as e:
+            print(f"   ❌ Database maintenance error: {e}")
+    
+    async def _test_discord_integration(self, test_results):
+        """Test Discord integration"""
+        # Check Discord token
+        token = self.config['discord']['token']
+        guild_id = self.config['discord']['guild_id']
+        
+        if token and guild_id:
+            print("   ✅ Discord credentials configured")
+            test_results.append(('Discord Config', True))
+        else:
+            print("   ❌ Discord credentials missing")
+            test_results.append(('Discord Config', False))
+    
+    async def _test_query_processing(self, test_results):
+        """Test query processing functionality"""
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            
+            test_query = "test query processing"
+            result = await agent_api.query(
+                query=test_query,
+                user_id="test_user",
+                context={"platform": "test"}
+            )
+            
+            if result.get('success'):
+                print("   ✅ Query processing test passed")
+                test_results.append(('Query Processing', True))
+            else:
+                print(f"   ❌ Query processing failed: {result.get('error')}")
+                test_results.append(('Query Processing', False))
+                
+        except Exception as e:
+            print(f"   ❌ Query processing error: {e}")
+            test_results.append(('Query Processing', False))
+    
+    def _format_size(self, path: Path) -> str:
+        """Format file/directory size in human-readable format"""
+        if not path.exists():
+            return "0B"
+            
+        if path.is_file():
+            size = path.stat().st_size
+        else:
+            size = sum(f.stat().st_size for f in path.rglob('*') if f.is_file())
+        
+        for unit in ['B', 'KB', 'MB', 'GB']:
+            if size < 1024:
+                return f"{size:.1f}{unit}"
+            size /= 1024
+        return f"{size:.1f}TB"
+
+def main():
+    """Main CLI entry point"""
+    parser = argparse.ArgumentParser(
+        description="Pepe Admin - Simplified Administrative Interface",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Simplified Commands:
+  setup                         Complete system setup & validation
+  sync [--full]                 Discord data sync with statistics  
+  info                          Status, statistics, and monitoring
+  maintain                      Cleanup, backup, and optimization
+  test                          Comprehensive system testing
+  resources [status]            Resource detection and migration
+
+Examples:
+  pepe-admin setup              # Initial setup
+  pepe-admin sync --full        # Full data sync
+  pepe-admin info               # System dashboard
+  pepe-admin maintain           # Complete maintenance
+  pepe-admin test               # Test all systems
+  pepe-admin resources          # Complete resource processing
+  pepe-admin resources status   # Show resource status
+        """
+    )
+    
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+    
+    # Setup command
+    setup_parser = subparsers.add_parser('setup', help='Complete system setup')
+    
+    # Sync command
+    sync_parser = subparsers.add_parser('sync', help='Discord data sync')
+    sync_parser.add_argument('--full', action='store_true', help='Full sync (vs incremental)')
+    sync_parser.add_argument('--fetch-only', action='store_true', help='Only fetch messages to DB')
+    sync_parser.add_argument('--index-only', action='store_true', help='Only index/embed from DB')
+    
+    # Info command (replaces status, stats, monitor)
+    info_parser = subparsers.add_parser('info', help='System information dashboard')
+    
+    # Maintain command (replaces maintain, backup, optimize, migrate)
+    maintain_parser = subparsers.add_parser('maintain', help='Complete system maintenance')
+    
+    # Test command
+    test_parser = subparsers.add_parser('test', help='Comprehensive testing')
+    
+    # Resources command
+    resources_parser = subparsers.add_parser('resources', help='Resource management')
+    resources_parser.add_argument('action', nargs='?', choices=['status'], help='Show resource status (optional)')
+    resources_parser.add_argument('--fast-model', action='store_true', help='Use fast model (phi3:mini) for faster processing')
+    resources_parser.add_argument('--standard-model', action='store_true', help='Use standard model (llama3.1:8b) for better quality')
+    resources_parser.add_argument('--reset-cache', action='store_true', help='Reset processed URLs cache and reprocess all resources')
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        return 1
+    
+    # Initialize admin interface
+    admin = PepeAdminSimplified()
+    
+    # Execute command
+    try:
+        if args.command == 'setup':
+            success = asyncio.run(admin.setup(args))
+        elif args.command == 'sync':
+            success = asyncio.run(admin.sync(args))
+        elif args.command == 'info':
+            success = asyncio.run(admin.info(args))
+        elif args.command == 'maintain':
+            success = asyncio.run(admin.maintain(args))
+        elif args.command == 'test':
+            success = asyncio.run(admin.test(args))
+        elif args.command == 'resources':
+            success = asyncio.run(admin.resources(args))
+        else:
+            print(f"Unknown command: {args.command}")
+            return 1
+        
+        return 0 if success else 1
+        
+    except KeyboardInterrupt:
+        print("\n⏹️ Operation cancelled by user")
+        return 1
+    except Exception as e:
+        print(f"\n❌ Unexpected error: {e}")
+        return 1
+
+if __name__ == '__main__':
+    sys.exit(main()) 

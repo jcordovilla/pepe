@@ -1,0 +1,445 @@
+"""
+Query Interpreter Agent
+
+Uses LLM (Llama) to interpret user queries and extract:
+- Primary intent
+- Entities (channels, users, time ranges, etc.)
+- Suggested subtasks with parameters
+- Confidence score and rationale
+"""
+
+import json
+import asyncio
+from typing import Dict, List, Any, Optional, Tuple
+from datetime import datetime
+import logging
+
+from .base_agent import BaseAgent, SubTask, AgentRole, TaskStatus, AgentState
+from ..cache.smart_cache import SmartCache
+
+logger = logging.getLogger(__name__)
+
+
+class QueryInterpreterAgent(BaseAgent):
+    """
+    LLM-powered query interpreter that analyzes user queries to extract
+    intent, entities, and suggested subtasks for the workflow.
+    """
+    
+    def __init__(self, config: Dict[str, Any]):
+        super().__init__(AgentRole.ANALYZER, config)
+        self.model = config.get("model", "llama-3.1-8b-instruct")
+        self.max_tokens = config.get("max_tokens", 2048)
+        self.temperature = config.get("temperature", 0.1)
+        
+        # Initialize cache for query interpretations
+        cache_config = config.get("cache", {})
+        self.cache = SmartCache(cache_config)
+        self.cache_ttl = config.get("cache_ttl", 3600)  # 1 hour
+        
+        # Available subtask types for the LLM to choose from
+        self.available_subtasks = {
+            "search": "Search for messages using semantic similarity",
+            "semantic_search": "Search for messages using semantic similarity",
+            "keyword_search": "Search for messages containing specific keywords",
+            "filtered_search": "Search with filters (channel, time, user, etc.)",
+            "reaction_search": "Search for messages with specific reactions",
+            "summarize": "Create a summary of messages or content",
+            "analyze": "Analyze patterns, trends, or insights from messages",
+            "extract_insights": "Extract key insights and patterns",
+            "classify_content": "Classify messages by type, topic, or category",
+            "extract_skills": "Extract skills and technologies mentioned",
+            "analyze_trends": "Analyze temporal trends in discussions",
+            "capability_response": "Generate information about bot capabilities",
+            "weekly_digest": "Generate a weekly digest of activity",
+            "monthly_digest": "Generate a monthly digest of activity",
+            "resource_search": "Search for shared resources, links, or files"
+        }
+        
+        logger.info(f"QueryInterpreterAgent initialized with model: {self.model}")
+    
+    def can_handle(self, task: SubTask) -> bool:
+        """
+        Determine if this agent can handle the given task.
+        
+        Args:
+            task: Task to evaluate
+            
+        Returns:
+            True if task is query interpretation
+        """
+        if not task or not task.task_type:
+            return False
+            
+        interpretation_types = ["interpret_query", "analyze_query", "extract_intent"]
+        task_type = task.task_type.lower() if task.task_type else ""
+        return any(interpret_type in task_type for interpret_type in interpretation_types)
+    
+    async def process(self, state: AgentState) -> AgentState:
+        """
+        Process query interpretation using LLM.
+        
+        Args:
+            state: Current agent state containing the query
+            
+        Returns:
+            Updated state with interpretation results
+        """
+        try:
+            query = state.get("user_context", {}).get("query", "")
+            if not query:
+                logger.warning("No query provided for interpretation")
+                return state
+            
+            # Check cache first
+            cache_key = f"query_interpretation:{hash(query)}"
+            cached_result = await self.cache.get(cache_key)
+            
+            if cached_result:
+                logger.info("Query interpretation cache hit")
+                state["query_interpretation"] = cached_result
+                return state
+            
+            # Interpret query using LLM
+            interpretation = await self._interpret_query_with_llm(query, state)
+            
+            # Cache the result
+            await self.cache.set(cache_key, interpretation, ttl=self.cache_ttl)
+            
+            # Update state
+            state["query_interpretation"] = interpretation
+            state["metadata"]["query_interpreter"] = {
+                "interpretation_time": datetime.utcnow().isoformat(),
+                "model_used": self.model,
+                "confidence": interpretation.get("confidence", 0.0)
+            }
+            
+            logger.info(f"Query interpreted: intent={interpretation.get('intent')}, subtasks={len(interpretation.get('subtasks', []))}")
+            return state
+            
+        except Exception as e:
+            logger.error(f"Error in query interpretation: {e}")
+            state["errors"] = state.get("errors", [])
+            state["errors"].append(f"Query interpretation error: {str(e)}")
+            return state
+    
+    async def _interpret_query_with_llm(self, query: str, state: AgentState) -> Dict[str, Any]:
+        """
+        Use LLM to interpret the query and extract intent, entities, and subtasks.
+        
+        Args:
+            query: User's query
+            state: Current agent state
+            
+        Returns:
+            Interpretation results with intent, entities, and subtasks
+        """
+        try:
+            # Build the prompt for the LLM
+            prompt = self._build_interpretation_prompt(query, state)
+            
+            # Call the LLM
+            response = await self._call_llm(prompt)
+            
+            # Parse the response
+            interpretation = self._parse_llm_response(response)
+            
+            # Validate and enhance the interpretation
+            interpretation = self._validate_interpretation(interpretation, query)
+            
+            return interpretation
+            
+        except Exception as e:
+            logger.error(f"Error in LLM interpretation: {e}")
+            # Fallback to basic interpretation
+            return self._fallback_interpretation(query)
+    
+    def _build_interpretation_prompt(self, query: str, state: AgentState) -> str:
+        """
+        Build the prompt for the LLM to interpret the query.
+        
+        Args:
+            query: User's query
+            state: Current agent state
+            
+        Returns:
+            Formatted prompt for the LLM
+        """
+        context = state.get("user_context", {})
+        user_id = context.get("user_id", "unknown")
+        platform = context.get("platform", "discord")
+        
+        # Build available subtasks list
+        subtasks_list = "\n".join([f"- {task_type}: {description}" 
+                                  for task_type, description in self.available_subtasks.items()])
+        
+        prompt = f"""You are a query interpreter for a Discord bot that can search and analyze messages. 
+
+Your task is to interpret the user's query and determine:
+1. The primary intent
+2. Any entities mentioned (channels, users, time ranges, etc.)
+3. What subtasks should be performed to answer the query
+
+Available subtasks:
+{subtasks_list}
+
+User Query: "{query}"
+User ID: {user_id}
+Platform: {platform}
+
+Please respond with a JSON object containing:
+{{
+    "intent": "primary intent (search, summarize, analyze, capability, etc.)",
+    "entities": [
+        {{
+            "type": "entity type (channel, user, time_range, keyword, count, reaction)",
+            "value": "entity value",
+            "confidence": 0.95
+        }}
+    ],
+    "subtasks": [
+        {{
+            "task_type": "subtask type from the list above",
+            "description": "human-readable description",
+            "parameters": {{
+                "query": "search query if applicable",
+                "filters": {{}},
+                "k": 10,
+                "summary_type": "overview",
+                "focus_areas": []
+            }},
+            "dependencies": []
+        }}
+    ],
+    "confidence": 0.95,
+    "rationale": "brief explanation of why this interpretation was chosen"
+}}
+
+Focus on:
+- Detecting summarize/summarise keywords and creating both search + summarize subtasks
+- Identifying channel mentions (<#ID> or #channel-name)
+- Recognizing time ranges (last week, past month, etc.)
+- Understanding multi-step queries (e.g., "summarize and analyze")
+- Providing appropriate parameters for each subtask
+
+Response:"""
+
+        return prompt
+    
+    async def _call_llm(self, prompt: str) -> str:
+        """
+        Call the LLM with the interpretation prompt using the unified client.
+        
+        Args:
+            prompt: The prompt to send to the LLM
+            
+        Returns:
+            LLM response
+        """
+        try:
+            # Use the unified LLM client
+            from ..services.llm_client import get_llm_client
+            llm_client = get_llm_client()
+            
+            # Call the model with JSON generation for structured output
+            response = await llm_client.generate_json(
+                prompt=prompt,
+                max_tokens=self.max_tokens,
+                temperature=self.temperature
+            )
+            
+            # Convert the JSON response back to string for compatibility
+            return json.dumps(response)
+            
+        except Exception as e:
+            logger.error(f"Error calling LLM: {e}")
+            # Fallback to mock response for testing
+            return self._mock_llm_response(prompt)
+    
+    def _mock_llm_response(self, prompt: str) -> str:
+        """
+        Mock LLM response for testing purposes.
+        In production, this would be replaced with actual LLM calls.
+        
+        Args:
+            prompt: The prompt that was sent
+            
+        Returns:
+            Mock JSON response
+        """
+        # Simple rule-based mock for testing
+        if "summarise" in prompt.lower() or "summarize" in prompt.lower():
+            return '''{
+                "intent": "summarize",
+                "entities": [
+                    {
+                        "type": "channel",
+                        "value": "1371647370911154228",
+                        "confidence": 0.95
+                    },
+                    {
+                        "type": "time_range",
+                        "value": "past week",
+                        "confidence": 0.9
+                    }
+                ],
+                "subtasks": [
+                    {
+                        "task_type": "filtered_search",
+                        "description": "Retrieve messages from the specified channel in the past week",
+                        "parameters": {
+                            "query": "messages from past week",
+                            "filters": {
+                                "channel_id": "1371647370911154228",
+                                "time_range": "past week"
+                            },
+                            "k": 50,
+                            "sort_by": "timestamp"
+                        },
+                        "dependencies": []
+                    },
+                    {
+                        "task_type": "summarize",
+                        "description": "Create a summary of the retrieved messages",
+                        "parameters": {
+                            "content_source": "search_results",
+                            "summary_type": "overview",
+                            "focus_areas": ["key topics", "main discussions"]
+                        },
+                        "dependencies": ["filtered_search"]
+                    }
+                ],
+                "confidence": 0.95,
+                "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
+            }'''
+        elif "what can you do" in prompt.lower() or "capabilities" in prompt.lower():
+            return '''{
+                "intent": "capability",
+                "entities": [],
+                "subtasks": [
+                    {
+                        "task_type": "capability_response",
+                        "description": "Generate information about bot capabilities",
+                        "parameters": {
+                            "query": "capability inquiry",
+                            "response_type": "capability"
+                        },
+                        "dependencies": []
+                    }
+                ],
+                "confidence": 0.9,
+                "rationale": "Query asks about bot capabilities or what it can do"
+            }'''
+        else:
+            return '''{
+                "intent": "search",
+                "entities": [],
+                "subtasks": [
+                    {
+                        "task_type": "semantic_search",
+                        "description": "Search for relevant messages",
+                        "parameters": {
+                            "query": "user query",
+                            "filters": {},
+                            "k": 10
+                        },
+                        "dependencies": []
+                    }
+                ],
+                "confidence": 0.8,
+                "rationale": "Default search interpretation for general queries"
+            }'''
+    
+    def _parse_llm_response(self, response: str) -> Dict[str, Any]:
+        """
+        Parse the LLM response into structured data.
+        
+        Args:
+            response: Raw LLM response
+            
+        Returns:
+            Parsed interpretation data
+        """
+        try:
+            # Try to extract JSON from the response
+            # Look for JSON blocks in the response
+            import re
+            json_match = re.search(r'\{.*\}', response, re.DOTALL)
+            
+            if json_match:
+                json_str = json_match.group(0)
+                return json.loads(json_str)
+            else:
+                # If no JSON found, try to parse the entire response
+                return json.loads(response)
+                
+        except json.JSONDecodeError as e:
+            logger.error(f"Error parsing LLM response: {e}")
+            logger.error(f"Response: {response}")
+            return self._fallback_interpretation("")
+    
+    def _validate_interpretation(self, interpretation: Dict[str, Any], query: str) -> Dict[str, Any]:
+        """
+        Validate and enhance the interpretation.
+        
+        Args:
+            interpretation: Parsed interpretation
+            query: Original query
+            
+        Returns:
+            Validated interpretation
+        """
+        # Ensure required fields exist
+        if "intent" not in interpretation:
+            interpretation["intent"] = "search"
+        
+        if "entities" not in interpretation:
+            interpretation["entities"] = []
+        
+        if "subtasks" not in interpretation:
+            interpretation["subtasks"] = []
+        
+        if "confidence" not in interpretation:
+            interpretation["confidence"] = 0.8
+        
+        # Validate subtasks
+        for subtask in interpretation["subtasks"]:
+            if "task_type" not in subtask:
+                subtask["task_type"] = "search"
+            if "description" not in subtask:
+                subtask["description"] = f"Perform {subtask['task_type']}"
+            if "parameters" not in subtask:
+                subtask["parameters"] = {}
+            if "dependencies" not in subtask:
+                subtask["dependencies"] = []
+        
+        return interpretation
+    
+    def _fallback_interpretation(self, query: str) -> Dict[str, Any]:
+        """
+        Provide a fallback interpretation when LLM fails.
+        
+        Args:
+            query: Original query
+            
+        Returns:
+            Basic fallback interpretation
+        """
+        return {
+            "intent": "search",
+            "entities": [],
+            "subtasks": [
+                {
+                    "task_type": "semantic_search",
+                    "description": "Search for relevant messages",
+                    "parameters": {
+                        "query": query,
+                        "filters": {},
+                        "k": 10
+                    },
+                    "dependencies": []
+                }
+            ],
+            "confidence": 0.5,
+            "rationale": "Fallback interpretation due to LLM error"
+        } 

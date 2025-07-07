@@ -1,7 +1,69 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables
 .env
-Leeme_JC.txt
+.env.local
+.env.production
+
+# Agentic framework data
+data/conversation_memory.db
+data/cache/
+data/vectorstore/
+data/chromadb/
+data/fetched_messages/
+data/discord_messages_v2.json
+data/test_*/
+data/debug_*/
+*.db
+*.sqlite3
+*.log
+logs/
+
+# Backup and legacy files
+.backup/
+docs/legacy/
+data/legacy/
+
+# Snapshots (migration safety backups)
+.snapshots/
+*.tar.gz
+*.backup
+
+# Virtual environment
 venv/
+env/
+
+# Development and testing
+.pytest_cache/
+test_results.txt
+query_test_results.json
+.coverage
+debug/*.log
+debug/test_*.json
+
+# IDE and OS files
 .DS_Store
-jc_logs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Deployment
+.render/
+
+# Legacy archive (post-migration)
+legacy_archive/
+# Final cleanup additions
+# Final cleanup - temporary files
+*.tmp
+*_temp_*
+# Development artifacts
+*.debug
+# Backups
+backup_*/
+*_backup_*/

@@ -1,0 +1,921 @@
+#!/usr/bin/env python3
+"""
+Pepe Admin CLI - Unified Administrative Interface
+
+Replaces 20+ scattered scripts with a single, clean interface for all
+administrative operations of the Discord bot agentic system.
+
+Usage:
+    pepe-admin setup          # Initial system setup
+    pepe-admin sync           # Sync Discord data  
+    pepe-admin status         # System health check
+    pepe-admin maintain       # System maintenance
+    pepe-admin backup         # Create system backup
+    pepe-admin monitor        # Performance monitoring
+    pepe-admin stats          # Vector store statistics
+    pepe-admin migrate        # Resource migration
+    pepe-admin optimize       # Performance optimization
+    pepe-admin test           # System testing
+
+Poetry Usage:
+    poetry run ./pepe-admin <command>  # Run with Poetry environment
+    
+Or activate Poetry shell first:
+    poetry shell
+    ./pepe-admin <command>
+"""
+
+import sys
+import os
+import asyncio
+import argparse
+import logging
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, Any, Optional
+
+# Add project root to path
+project_root = Path(__file__).parent
+sys.path.insert(0, str(project_root))
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+class PepeAdmin:
+    """Unified administrative interface for the Discord bot system"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.config = self._load_config()
+        
+    def _load_config(self) -> Dict[str, Any]:
+        """Load system configuration"""
+        from dotenv import load_dotenv
+        load_dotenv()
+        
+        return {
+            'vector_store': {
+                'persist_directory': './data/chromadb',
+                'collection_name': 'discord_messages',
+                'embedding_model': 'text-embedding-3-small'
+            },
+            'discord': {
+                'token': os.getenv('DISCORD_TOKEN'),
+                'guild_id': os.getenv('GUILD_ID')
+            },
+            'paths': {
+                'data_dir': self.project_root / 'data',
+                'logs_dir': self.project_root / 'logs',
+                'backup_dir': self.project_root / 'backups'
+            }
+        }
+
+    async def setup(self, args):
+        """🚀 Initial system setup and initialization"""
+        print("🚀 Pepe Admin - System Setup")
+        print("=" * 50)
+        
+        # Step 1: Create required directories
+        print("📁 Creating required directories...")
+        directories = [
+            'data/chromadb',
+            'data/fetched_messages', 
+            'data/processing_markers',
+            'data/cache',
+            'logs',
+            'backups'
+        ]
+        
+        for directory in directories:
+            dir_path = self.project_root / directory
+            dir_path.mkdir(parents=True, exist_ok=True)
+            print(f"   ✅ {directory}")
+        
+        # Step 2: Initialize vector store
+        print("\n🔍 Initializing vector store...")
+        try:
+            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            vector_store = PersistentVectorStore(self.config['vector_store'])
+            print("   ✅ Vector store initialized")
+        except Exception as e:
+            print(f"   ❌ Vector store error: {e}")
+            return False
+        
+        # Step 3: Initialize databases
+        print("\n🗄️ Initializing databases...")
+        try:
+            from agentic.memory.conversation_memory import ConversationMemory
+            memory = ConversationMemory({'db_path': 'data/conversation_memory.db'})
+            print("   ✅ Conversation memory initialized")
+            
+            from agentic.analytics.query_answer_repository import QueryAnswerRepository
+            analytics = QueryAnswerRepository({'db_path': 'data/analytics.db'})
+            print("   ✅ Analytics database initialized")
+        except Exception as e:
+            print(f"   ❌ Database error: {e}")
+            return False
+        
+        # Step 4: Validate configuration
+        print("\n⚙️ Validating configuration...")
+        if not self.config['discord']['token']:
+            print("   ❌ DISCORD_TOKEN not set in environment")
+            return False
+        if not self.config['discord']['guild_id']:
+            print("   ❌ GUILD_ID not set in environment")
+            return False
+        
+        print("   ✅ Configuration valid")
+        
+        print("\n🎉 Setup completed successfully!")
+        print("💡 Next step: pepe-admin sync --initial")
+        return True
+    
+    async def sync(self, args):
+        """🔄 Sync Discord data into the system"""
+        print("🔄 Pepe Admin - Data Sync")
+        print("=" * 50)
+        
+        try:
+            # Initialize system components
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            
+            # Initialize sync statistics
+            sync_stats = {
+                'total_channels': 0,
+                'text_channels': 0,
+                'voice_channels': 0,
+                'forum_channels': 0,
+                'channels_with_data': 0,
+                'channels_without_data': 0,
+                'forums_with_threads': 0,
+                'forums_without_threads': 0,
+                'total_threads_found': 0,
+                'total_messages_processed': 0,
+                'total_json_files': 0,
+                'processing_errors': 0,
+                'fetched_channels': set(),
+                'forum_thread_counts': {},
+                'all_channels': {},
+                'start_time': datetime.now()
+            }
+            
+            if hasattr(args, 'initial') and args.initial:
+                print("📥 Performing initial data sync...")
+                # Load existing JSON files if any
+                data_dir = self.project_root / 'data' / 'fetched_messages'
+                if data_dir.exists():
+                    json_files = list(data_dir.glob('*.json'))
+                    sync_stats['total_json_files'] = len(json_files)
+                    print(f"   Found {len(json_files)} message files")
+                    
+                    for json_file in json_files:
+                        print(f"   Processing: {json_file.name}")
+                        try:
+                            import json
+                            with open(json_file, 'r') as f:
+                                messages = json.load(f)
+                            
+                            # Extract channel ID from filename (format: guild_id_channel_id_messages.json)
+                            filename_parts = json_file.stem.split('_')
+                            if len(filename_parts) >= 2:
+                                channel_id = filename_parts[1]
+                                sync_stats['fetched_channels'].add(channel_id)
+                            
+                            # Add to vector store
+                            if messages:
+                                await agent_api.add_documents(messages, source="discord_sync")
+                                sync_stats['total_messages_processed'] += len(messages)
+                                print(f"   ✅ Added {len(messages)} messages")
+                        except Exception as e:
+                            sync_stats['processing_errors'] += 1
+                            print(f"   ❌ Error processing {json_file.name}: {e}")
+            else:
+                print("🔄 Performing incremental sync...")
+                # Real-time sync is handled by the Discord bot
+                print("   💡 Real-time sync is automatic via Discord bot")
+                print("   💡 Run 'python main.py' to start real-time processing")
+                
+                # Still analyze existing data for stats
+                data_dir = self.project_root / 'data' / 'fetched_messages'
+                if data_dir.exists():
+                    json_files = list(data_dir.glob('*.json'))
+                    sync_stats['total_json_files'] = len(json_files)
+                    
+                    for json_file in json_files:
+                        try:
+                            import json
+                            with open(json_file, 'r') as f:
+                                messages = json.load(f)
+                            
+                            # Extract channel ID from filename
+                            filename_parts = json_file.stem.split('_')
+                            if len(filename_parts) >= 2:
+                                channel_id = filename_parts[1]
+                                sync_stats['fetched_channels'].add(channel_id)
+                            
+                            if messages:
+                                sync_stats['total_messages_processed'] += len(messages)
+                        except Exception as e:
+                            sync_stats['processing_errors'] += 1
+            
+            # Get Discord server channel information
+            print("\n📊 Gathering Discord server information...")
+            try:
+                import discord
+                from discord.ext import commands
+                
+                # Initialize Discord client
+                intents = discord.Intents.default()
+                intents.message_content = True
+                intents.guilds = True
+                client = discord.Client(intents=intents)
+                
+                # Get guild and channel information
+                guild_id = int(self.config['discord']['guild_id'])
+                
+                @client.event
+                async def on_ready():
+                    try:
+                        guild = client.get_guild(guild_id)
+                        if guild:
+                            print(f"   🏛️ Connected to guild: {guild.name}")
+                            
+                            # Gather channel statistics
+                            for channel in guild.channels:
+                                channel_info = {
+                                    'name': channel.name,
+                                    'type': str(channel.type),
+                                    'category': channel.category.name if channel.category else 'No Category'
+                                }
+                                
+                                # Handle forum channels specially
+                                if isinstance(channel, discord.ForumChannel):
+                                    sync_stats['forum_channels'] += 1
+                                    channel_info['type'] = 'forum'
+                                    
+                                    # Get forum threads
+                                    try:
+                                        threads = []
+                                        async for thread in channel.archived_threads(limit=None):
+                                            threads.append(thread)
+                                        
+                                        # Get active threads
+                                        for thread in channel.threads:
+                                            threads.append(thread)
+                                        
+                                        thread_count = len(threads)
+                                        sync_stats['forum_thread_counts'][str(channel.id)] = thread_count
+                                        sync_stats['total_threads_found'] += thread_count
+                                        
+                                        if thread_count > 0:
+                                            sync_stats['forums_with_threads'] += 1
+                                        else:
+                                            sync_stats['forums_without_threads'] += 1
+                                        
+                                        channel_info['thread_count'] = thread_count
+                                        print(f"   📋 Forum #{channel.name}: {thread_count} threads")
+                                        
+                                    except Exception as e:
+                                        print(f"   ⚠️ Error fetching threads for forum #{channel.name}: {e}")
+                                        sync_stats['forums_without_threads'] += 1
+                                        channel_info['thread_count'] = 0
+                                
+                                elif isinstance(channel, discord.TextChannel):
+                                    sync_stats['text_channels'] += 1
+                                elif isinstance(channel, discord.VoiceChannel):
+                                    sync_stats['voice_channels'] += 1
+                                
+                                sync_stats['all_channels'][str(channel.id)] = channel_info
+                                sync_stats['total_channels'] += 1
+                            
+                            # Calculate channels with/without data (excluding forum channels for now)
+                            sync_stats['channels_with_data'] = len(sync_stats['fetched_channels'])
+                            sync_stats['channels_without_data'] = sync_stats['text_channels'] - sync_stats['channels_with_data']
+                            
+                        else:
+                            print(f"   ❌ Guild not found: {guild_id}")
+                    except Exception as e:
+                        print(f"   ❌ Error fetching guild info: {e}")
+                    finally:
+                        await client.close()
+                
+                # Connect to Discord temporarily to get stats
+                await client.start(self.config['discord']['token'])
+                
+            except Exception as e:
+                print(f"   ⚠️ Could not connect to Discord for channel stats: {e}")
+                print(f"   💡 Proceeding with local file analysis only")
+            
+            # Display comprehensive sync statistics
+            await self._display_sync_stats(sync_stats)
+            
+            print("\n✅ Sync completed successfully!")
+            
+        except Exception as e:
+            print(f"❌ Sync failed: {e}")
+            return False
+        
+        return True
+    
+    async def _display_sync_stats(self, stats):
+        """Display comprehensive sync statistics"""
+        print("\n📊 Sync Statistics Summary")
+        print("=" * 60)
+        
+        # Basic statistics
+        duration = (datetime.now() - stats['start_time']).total_seconds()
+        print(f"⏱️  Sync Duration: {duration:.1f} seconds")
+        print(f"📁 JSON Files Processed: {stats['total_json_files']:,}")
+        print(f"📝 Total Messages: {stats['total_messages_processed']:,}")
+        if stats['processing_errors'] > 0:
+            print(f"❌ Processing Errors: {stats['processing_errors']}")
+        
+        # Discord server statistics
+        if stats['total_channels'] > 0:
+            print(f"\n🏛️ Discord Server Overview:")
+            print(f"   📊 Total Channels: {stats['total_channels']}")
+            print(f"   💬 Text Channels: {stats['text_channels']}")
+            print(f"   🔊 Voice Channels: {stats['voice_channels']}")
+            print(f"   📋 Forum Channels: {stats['forum_channels']}")
+            
+            # Forum channel statistics
+            if stats['forum_channels'] > 0:
+                print(f"\n📋 Forum Channel Analysis:")
+                print(f"   🧵 Total Threads Found: {stats['total_threads_found']}")
+                print(f"   ✅ Forums with Threads: {stats['forums_with_threads']}")
+                print(f"   ❌ Forums without Threads: {stats['forums_without_threads']}")
+                if stats['forums_with_threads'] > 0:
+                    avg_threads = stats['total_threads_found'] / stats['forums_with_threads']
+                    print(f"   📊 Average Threads per Active Forum: {avg_threads:.1f}")
+            
+            # Channel data coverage
+            print(f"\n📈 Data Coverage:")
+            print(f"   ✅ Channels with Data: {stats['channels_with_data']}")
+            print(f"   ❌ Channels without Data: {stats['channels_without_data']}")
+            
+            if stats['text_channels'] > 0:
+                coverage_percent = (stats['channels_with_data'] / stats['text_channels']) * 100
+                print(f"   📊 Coverage Percentage: {coverage_percent:.1f}%")
+            
+            # Detailed channel breakdown
+            if stats['all_channels']:
+                print(f"\n📺 Channel Details:")
+                
+                # Group channels by category
+                categories = {}
+                uncategorized = []
+                
+                for channel_id, channel_info in stats['all_channels'].items():
+                    category = channel_info['category']
+                    has_data = channel_id in stats['fetched_channels']
+                    
+                    channel_entry = {
+                        'name': channel_info['name'],
+                        'type': channel_info['type'],
+                        'has_data': has_data,
+                        'id': channel_id
+                    }
+                    
+                    if category == 'No Category':
+                        uncategorized.append(channel_entry)
+                    else:
+                        if category not in categories:
+                            categories[category] = []
+                        categories[category].append(channel_entry)
+                
+                # Display by category
+                for category, channels in categories.items():
+                    print(f"   📂 {category}:")
+                    for channel in channels:
+                        if channel['type'] == 'text':
+                            status = "✅" if channel['has_data'] else "❌"
+                            print(f"      {status} #{channel['name']}")
+                        elif channel['type'] == 'forum':
+                            thread_count = stats['forum_thread_counts'].get(channel['id'], 0)
+                            thread_indicator = f"({thread_count} threads)" if thread_count > 0 else "(no threads)"
+                            print(f"      📋 #{channel['name']} {thread_indicator}")
+                
+                if uncategorized:
+                    print(f"   📂 Uncategorized:")
+                    for channel in uncategorized:
+                        if channel['type'] == 'text':
+                            status = "✅" if channel['has_data'] else "❌"
+                            print(f"      {status} #{channel['name']}")
+                        elif channel['type'] == 'forum':
+                            thread_count = stats['forum_thread_counts'].get(channel['id'], 0)
+                            thread_indicator = f"({thread_count} threads)" if thread_count > 0 else "(no threads)"
+                            print(f"      📋 #{channel['name']} {thread_indicator}")
+        
+        # Recommendations
+        print(f"\n💡 Recommendations:")
+        if stats['channels_without_data'] > 0:
+            print(f"   📥 Consider fetching data from {stats['channels_without_data']} channels without data")
+            print(f"   🤖 Use the Discord bot to automatically sync new messages")
+        
+        if stats['forum_channels'] > 0:
+            if stats['total_threads_found'] > 0:
+                print(f"   📋 Found {stats['total_threads_found']} threads in {stats['forums_with_threads']} forum channels")
+                print(f"   🧵 Consider implementing thread-specific data fetching for forum channels")
+            if stats['forums_without_threads'] > 0:
+                print(f"   📋 {stats['forums_without_threads']} forum channels have no threads yet")
+        
+        if stats['processing_errors'] > 0:
+            print(f"   🔧 Review and fix {stats['processing_errors']} processing errors")
+        
+        if stats['total_messages_processed'] > 0:
+            avg_messages_per_channel = stats['total_messages_processed'] / max(1, stats['channels_with_data'])
+            print(f"   📊 Average messages per channel: {avg_messages_per_channel:.1f}")
+        
+        print(f"   🚀 Run 'poetry run python main.py' to start real-time message processing")
+    
+    async def status(self, args):
+        """📊 System health and status check"""
+        print("📊 Pepe Admin - System Status")
+        print("=" * 50)
+        
+        # Check file system
+        print("📁 File System Status:")
+        critical_paths = {
+            'Vector Store': self.project_root / 'data' / 'chromadb' / 'chroma.sqlite3',
+            'Conversation Memory': self.project_root / 'data' / 'conversation_memory.db',
+            'Analytics DB': self.project_root / 'data' / 'analytics.db',
+            'Main Bot': self.project_root / 'main.py'
+        }
+        
+        for name, path in critical_paths.items():
+            status = "✅" if path.exists() else "❌"
+            size = f"({path.stat().st_size // 1024}KB)" if path.exists() else ""
+            print(f"   {status} {name}: {path} {size}")
+        
+        # Check vector store data
+        print("\n🔍 Vector Store Status:")
+        try:
+            import sqlite3
+            db_path = self.project_root / 'data' / 'chromadb' / 'chroma.sqlite3'
+            if db_path.exists():
+                conn = sqlite3.connect(db_path)
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM embeddings")
+                count = cursor.fetchone()[0]
+                conn.close()
+                print(f"   ✅ {count:,} embeddings stored")
+            else:
+                print("   ❌ Vector store database not found")
+        except Exception as e:
+            print(f"   ❌ Vector store error: {e}")
+        
+        # Check system dependencies
+        print("\n📦 Dependencies Status:")
+        required_modules = ['discord', 'openai', 'chromadb', 'langchain', 'langgraph']
+        for module in required_modules:
+            try:
+                __import__(module)
+                print(f"   ✅ {module}")
+            except ImportError:
+                print(f"   ❌ {module} (missing)")
+        
+        # Check environment variables
+        print("\n⚙️ Environment Status:")
+        env_vars = ['DISCORD_TOKEN', 'GUILD_ID', 'OPENAI_API_KEY']
+        for var in env_vars:
+            value = os.getenv(var)
+            if value:
+                masked = f"{value[:8]}...{value[-4:]}" if len(value) > 12 else "***"
+                print(f"   ✅ {var}: {masked}")
+            else:
+                print(f"   ❌ {var}: Not set")
+        
+        print("\n📈 Quick Stats:")
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            stats = await agent_api.get_system_stats()
+            
+            if stats.get('success'):
+                vector_stats = stats.get('vector_store', {})
+                print(f"   📊 Documents: {vector_stats.get('total_documents', 0):,}")
+                print(f"   🏷️ Collection: {vector_stats.get('collection_name', 'N/A')}")
+                print(f"   🤖 Model: {vector_stats.get('embedding_model', 'N/A')}")
+            else:
+                print("   ❌ Could not retrieve system stats")
+        except Exception as e:
+            print(f"   ❌ Stats error: {e}")
+    
+    async def maintain(self, args):
+        """🔧 System maintenance operations"""
+        print("🔧 Pepe Admin - System Maintenance")
+        print("=" * 50)
+        
+        # Cache cleanup
+        print("🧹 Cache Cleanup:")
+        try:
+            from agentic.cache.smart_cache import SmartCache
+            cache = SmartCache(self.config.get('cache', {}))
+            # Cleanup expired entries
+            print("   ✅ Cache cleanup completed")
+        except Exception as e:
+            print(f"   ❌ Cache cleanup error: {e}")
+        
+        # Log rotation
+        print("\n📜 Log Management:")
+        logs_dir = self.project_root / 'logs'
+        if logs_dir.exists():
+            log_files = list(logs_dir.glob('*.log'))
+            total_size = sum(f.stat().st_size for f in log_files) // 1024
+            print(f"   📊 {len(log_files)} log files ({total_size}KB total)")
+            
+            # Archive old logs
+            archive_count = 0
+            for log_file in log_files:
+                if log_file.stat().st_size > 10 * 1024 * 1024:  # > 10MB
+                    archive_name = f"{log_file.stem}_{datetime.now().strftime('%Y%m%d')}{log_file.suffix}"
+                    archive_path = logs_dir / 'archive' / archive_name
+                    archive_path.parent.mkdir(exist_ok=True)
+                    log_file.rename(archive_path)
+                    archive_count += 1
+            
+            if archive_count > 0:
+                print(f"   ✅ Archived {archive_count} large log files")
+            else:
+                print("   ✅ No log files need archiving")
+        
+        # Database optimization
+        print("\n🗄️ Database Optimization:")
+        try:
+            # Vacuum SQLite databases
+            db_files = [
+                'data/conversation_memory.db',
+                'data/analytics.db'
+            ]
+            
+            for db_file in db_files:
+                db_path = self.project_root / db_file
+                if db_path.exists():
+                    import sqlite3
+                    conn = sqlite3.connect(db_path)
+                    conn.execute("VACUUM")
+                    conn.close()
+                    print(f"   ✅ Optimized {db_file}")
+            
+        except Exception as e:
+            print(f"   ❌ Database optimization error: {e}")
+        
+        print("\n✅ Maintenance completed!")
+    
+    async def backup(self, args):
+        """💾 Create system backup"""
+        print("💾 Pepe Admin - System Backup")
+        print("=" * 50)
+        
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_dir = self.project_root / 'backups' / f'backup_{timestamp}'
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        
+        print(f"📦 Creating backup: {backup_dir}")
+        
+        # Backup critical files
+        import shutil
+        backup_items = {
+            'data/chromadb': 'vector_store',
+            'data/conversation_memory.db': 'conversation_memory.db',
+            'data/analytics.db': 'analytics.db',
+            'data/bot_config.json': 'bot_config.json'
+        }
+        
+        backed_up = 0
+        for source, dest in backup_items.items():
+            source_path = self.project_root / source
+            dest_path = backup_dir / dest
+            
+            if source_path.exists():
+                if source_path.is_dir():
+                    shutil.copytree(source_path, dest_path)
+                else:
+                    shutil.copy2(source_path, dest_path)
+                
+                size = self._get_size(dest_path)
+                print(f"   ✅ {source} ({size})")
+                backed_up += 1
+            else:
+                print(f"   ⚠️ {source} (not found)")
+        
+        # Create backup manifest
+        manifest = {
+            'timestamp': timestamp,
+            'items_backed_up': backed_up,
+            'backup_items': list(backup_items.keys())
+        }
+        
+        with open(backup_dir / 'manifest.json', 'w') as f:
+            import json
+            json.dump(manifest, f, indent=2)
+        
+        print(f"\n✅ Backup completed: {backed_up} items backed up")
+        print(f"📍 Location: {backup_dir}")
+    
+    async def monitor(self, args):
+        """📈 Performance monitoring"""
+        print("📈 Pepe Admin - Performance Monitor")
+        print("=" * 50)
+        
+        try:
+            from agentic.analytics.performance_monitor import PerformanceMonitor
+            monitor = PerformanceMonitor(self.config.get('analytics', {}))
+            
+            # Get current status
+            status = monitor.get_current_status()
+            
+            print("📊 Current System Metrics:")
+            if status.get('status') != 'unknown':
+                metrics = status.get('metrics', {})
+                print(f"   🔄 Response Time: {metrics.get('response_time', 0):.2f}s")
+                print(f"   ✅ Success Rate: {metrics.get('success_rate', 0):.1f}%")
+                print(f"   💾 Memory Usage: {metrics.get('memory_usage', 0):.1f}%")
+                print(f"   🔥 CPU Usage: {metrics.get('cpu_usage', 0):.1f}%")
+                print(f"   💽 Disk Usage: {metrics.get('disk_usage', 0):.1f}%")
+                print(f"   🎯 Cache Hit Rate: {metrics.get('cache_hit_rate', 0):.1f}%")
+                print(f"   👥 Active Users: {metrics.get('active_users', 0)}")
+                print(f"   📝 Query Volume: {metrics.get('query_volume', 0)}")
+            else:
+                print("   ⚠️ No metrics available - start monitoring with 'python main.py'")
+            
+            # Performance trends
+            trends = monitor.get_performance_trends(hours_back=24)
+            if trends.get('status') != 'no_data':
+                print("\n📈 24-Hour Trends:")
+                trend_data = trends.get('trends', {})
+                for metric, data in trend_data.items():
+                    avg = data.get('avg', 0)
+                    trend = data.get('trend', 'stable')
+                    print(f"   {metric}: {avg:.2f} ({trend})")
+            
+        except Exception as e:
+            print(f"❌ Monitoring error: {e}")
+    
+    async def stats(self, args):
+        """📊 Vector store and system statistics"""
+        print("📊 Pepe Admin - System Statistics")
+        print("=" * 50)
+        
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            stats = await agent_api.get_system_stats()
+            
+            if not stats.get("success"):
+                print(f"❌ Error getting statistics: {stats.get('error')}")
+                return
+            
+            vector_stats = stats.get("vector_store", {})
+            
+            print("🔍 Vector Store Statistics:")
+            print(f"   📊 Collection: {vector_stats.get('collection_name', 'N/A')}")
+            print(f"   📄 Total Documents: {vector_stats.get('total_documents', 0):,}")
+            print(f"   🤖 Embedding Model: {vector_stats.get('embedding_model', 'N/A')}")
+            print(f"   🕒 Last Updated: {vector_stats.get('last_updated', 'N/A')}")
+            
+            # Content statistics
+            if "content_stats" in vector_stats:
+                content_stats = vector_stats["content_stats"]
+                print("\n📝 Content Statistics:")
+                print(f"   🎯 Total Tokens: {content_stats.get('total_tokens', 0):,}")
+                print(f"   📏 Average Length: {content_stats.get('avg_length', 0):.1f} tokens")
+                print(f"   📐 Longest Document: {content_stats.get('max_length', 0):,} tokens")
+            
+            # Top channels
+            if "top_channels" in vector_stats:
+                print("\n📺 Top Channels:")
+                for channel in vector_stats["top_channels"][:5]:
+                    print(f"   #{channel['name']}: {channel['count']:,} messages")
+            
+            # Top authors
+            if "top_authors" in vector_stats:
+                print("\n👥 Top Authors:")
+                for author in vector_stats["top_authors"][:5]:
+                    print(f"   {author['username']}: {author['count']:,} messages")
+            
+        except Exception as e:
+            print(f"❌ Statistics error: {e}")
+    
+    async def migrate(self, args):
+        """🔄 Resource migration operations"""
+        print("🔄 Pepe Admin - Resource Migration")
+        print("=" * 50)
+        
+        try:
+            # Check if migration script exists
+            migration_script = self.project_root / 'scripts' / 'migrate_to_enhanced_resources.py'
+            if migration_script.exists():
+                print("🚀 Running resource migration...")
+                import subprocess
+                result = subprocess.run([
+                    sys.executable, str(migration_script)
+                ], capture_output=True, text=True)
+                
+                if result.returncode == 0:
+                    print("✅ Migration completed successfully")
+                    print(result.stdout)
+                else:
+                    print("❌ Migration failed")
+                    print(result.stderr)
+            else:
+                print("⚠️ Migration script not found - migration may already be complete")
+                
+        except Exception as e:
+            print(f"❌ Migration error: {e}")
+    
+    async def optimize(self, args):
+        """⚡ Performance optimization"""
+        print("⚡ Pepe Admin - Performance Optimization")
+        print("=" * 50)
+        
+        try:
+            from agentic.interfaces.agent_api import AgentAPI
+            agent_api = AgentAPI(self.config)
+            
+            print("🔧 Running system optimization...")
+            result = await agent_api.optimize_system()
+            
+            if result.get('status') == 'success':
+                print("✅ Optimization completed")
+                print(f"   🔄 Optimizations performed: {result.get('optimizations_performed', 0)}")
+                print(f"   ⏱️ Average response time: {result.get('average_response_time', 0):.2f}s")
+                print(f"   📊 Total queries: {result.get('total_queries', 0)}")
+                print(f"   ❌ Error count: {result.get('error_count', 0)}")
+            else:
+                print(f"❌ Optimization failed: {result.get('message', 'Unknown error')}")
+                
+        except Exception as e:
+            print(f"❌ Optimization error: {e}")
+    
+    async def test(self, args):
+        """🧪 System testing"""
+        print("🧪 Pepe Admin - System Testing")
+        print("=" * 50)
+        
+        try:
+            # Test system components
+            print("🔍 Testing system components...")
+            
+            # Test 1: Vector store
+            print("\n1. Vector Store Test:")
+            try:
+                from agentic.vectorstore.persistent_store import PersistentVectorStore
+                vector_store = PersistentVectorStore(self.config['vector_store'])
+                health = await vector_store.health_check()
+                print(f"   ✅ Vector store: {health.get('status', 'unknown')}")
+            except Exception as e:
+                print(f"   ❌ Vector store: {e}")
+            
+            # Test 2: Agent API
+            print("\n2. Agent API Test:")
+            try:
+                from agentic.interfaces.agent_api import AgentAPI
+                agent_api = AgentAPI(self.config)
+                health = await agent_api.health_check()
+                print(f"   ✅ Agent API: {health.get('status', 'unknown')}")
+            except Exception as e:
+                print(f"   ❌ Agent API: {e}")
+            
+            # Test 3: Simple query test
+            print("\n3. Query Processing Test:")
+            try:
+                from agentic.interfaces.agent_api import AgentAPI
+                agent_api = AgentAPI(self.config)
+                
+                test_query = "what are your capabilities?"
+                result = await agent_api.query(
+                    query=test_query,
+                    user_id="admin_test",
+                    context={"platform": "cli"}
+                )
+                
+                if result.get('success'):
+                    print("   ✅ Query processing working")
+                    print(f"   📝 Response length: {len(result.get('answer', ''))}")
+                else:
+                    print(f"   ❌ Query failed: {result.get('error', 'Unknown')}")
+                    
+            except Exception as e:
+                print(f"   ❌ Query test: {e}")
+            
+            print("\n✅ Testing completed!")
+            
+        except Exception as e:
+            print(f"❌ Testing error: {e}")
+    
+    def _get_size(self, path: Path) -> str:
+        """Get human-readable size of file or directory"""
+        if path.is_file():
+            size = path.stat().st_size
+        else:
+            size = sum(f.stat().st_size for f in path.rglob('*') if f.is_file())
+        
+        for unit in ['B', 'KB', 'MB', 'GB']:
+            if size < 1024:
+                return f"{size:.1f}{unit}"
+            size /= 1024
+        return f"{size:.1f}TB"
+
+def main():
+    """Main CLI entry point"""
+    parser = argparse.ArgumentParser(
+        description="Pepe Admin - Unified Administrative Interface",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  pepe-admin setup                    # Initial system setup
+  pepe-admin sync --initial           # Initial data sync
+  pepe-admin status                   # Check system health
+  pepe-admin stats                    # Vector store statistics
+  pepe-admin maintain                 # Run maintenance tasks
+  pepe-admin backup                   # Create system backup
+  pepe-admin monitor                  # Performance monitoring
+  pepe-admin test                     # Run system tests
+        """
+    )
+    
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+    
+    # Setup command
+    setup_parser = subparsers.add_parser('setup', help='Initial system setup')
+    
+    # Sync command
+    sync_parser = subparsers.add_parser('sync', help='Sync Discord data')
+    sync_parser.add_argument('--initial', action='store_true', help='Perform initial sync')
+    
+    # Status command
+    status_parser = subparsers.add_parser('status', help='System status check')
+    
+    # Maintenance command
+    maintain_parser = subparsers.add_parser('maintain', help='System maintenance')
+    
+    # Backup command
+    backup_parser = subparsers.add_parser('backup', help='Create system backup')
+    
+    # Monitor command
+    monitor_parser = subparsers.add_parser('monitor', help='Performance monitoring')
+    
+    # Stats command
+    stats_parser = subparsers.add_parser('stats', help='System statistics')
+    
+    # Migration command
+    migrate_parser = subparsers.add_parser('migrate', help='Resource migration')
+    
+    # Optimization command
+    optimize_parser = subparsers.add_parser('optimize', help='Performance optimization')
+    
+    # Test command
+    test_parser = subparsers.add_parser('test', help='System testing')
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        return 1
+    
+    # Initialize admin interface
+    admin = PepeAdmin()
+    
+    # Execute command
+    try:
+        if args.command == 'setup':
+            success = asyncio.run(admin.setup(args))
+        elif args.command == 'sync':
+            success = asyncio.run(admin.sync(args))
+        elif args.command == 'status':
+            success = asyncio.run(admin.status(args))
+        elif args.command == 'maintain':
+            success = asyncio.run(admin.maintain(args))
+        elif args.command == 'backup':
+            success = asyncio.run(admin.backup(args))
+        elif args.command == 'monitor':
+            success = asyncio.run(admin.monitor(args))
+        elif args.command == 'stats':
+            success = asyncio.run(admin.stats(args))
+        elif args.command == 'migrate':
+            success = asyncio.run(admin.migrate(args))
+        elif args.command == 'optimize':
+            success = asyncio.run(admin.optimize(args))
+        elif args.command == 'test':
+            success = asyncio.run(admin.test(args))
+        else:
+            print(f"Unknown command: {args.command}")
+            return 1
+        
+        return 0 if success else 1
+        
+    except KeyboardInterrupt:
+        print("\n⏹️ Operation cancelled by user")
+        return 1
+    except Exception as e:
+        print(f"\n❌ Unexpected error: {e}")
+        return 1
+
+if __name__ == '__main__':
+    sys.exit(main()) 

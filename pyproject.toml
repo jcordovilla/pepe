@@ -1,0 +1,139 @@
+[tool.poetry]
+name = "pepe-discord-bot"
+version = "2.0.0"
+description = "Intelligent Discord bot with agentic architecture for conversation analysis and insights"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README_SIMPLIFIED.md"
+packages = [{include = "agentic"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+# Core dependencies
+streamlit = "^1.32.0"
+pyperclip = "^1.8.2"
+python-dotenv = "^1.0.0"
+openai = "^1.12.0"
+
+# Streamlit extensions and visualization
+plotly = "^5.17.0"
+pandas = "^2.0.0"
+aiofiles = "^23.2.0"
+
+# Agentic Framework
+langgraph = "^0.0.55"
+langchain-core = "^0.2.0"
+langchain-openai = "^0.1.0"
+langchain-community = "^0.2.0"
+
+# Vector Store and Embeddings
+chromadb = "^0.4.15"
+faiss-cpu = "^1.7.4"
+
+# Database and ORM
+SQLAlchemy = "^2.0.0"
+alembic = "^1.12.0"
+aiosqlite = "^0.19.0"
+
+# Time and Date Processing
+pytz = "^2024.1"
+python-dateutil = "^2.8.2"
+rapidfuzz = "^3.0.0"
+dateparser = "^1.2.0"
+
+# Caching and Performance
+cachetools = "^5.3.0"
+redis = "^5.0.0"
+
+# Discord bot
+"discord.py" = "^2.3.2"
+
+# For pydantic models
+pydantic = "^1.10.0"
+
+# Web server
+flask = "^3.0.0"
+
+# Monitoring and metrics
+prometheus-client = "^0.19.0"
+python-json-logger = "^2.0.7"
+psutil = "^5.9.0"
+
+# Utilities
+tqdm = "^4.66.0"
+protobuf = "3.20.3"
+pypdf2 = "^3.0.1"
+python-docx = "^1.2.0"
+beautifulsoup4 = "^4.13.4"
+feedparser = "^6.0.11"
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+
+# Development tools
+black = "^23.12.0"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+isort = "^5.13.0"
+
+# Scripts section removed - pepe-admin is a standalone script, not a Python module
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["agentic"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "chromadb.*",
+    "langchain.*",
+    "langgraph.*",
+    "discord.*",
+    "streamlit.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers --cov=agentic --cov-report=term-missing"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"] 
