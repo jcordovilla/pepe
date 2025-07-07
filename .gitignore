@@ -16,11 +16,13 @@ data/cache/
 data/vectorstore/
 data/chromadb/
 data/fetched_messages/
+data/discord_messages_v2.json
 data/test_*/
 data/debug_*/
 *.db
 *.sqlite3
 *.log
+logs/
 
 # Backup and legacy files
 .backup/
