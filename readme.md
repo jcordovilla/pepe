@@ -54,7 +54,7 @@ That's it! Single command for all queries.
 
 ---
 
-# Discord Bot Agentic Architecture v2 - Agentic RAG System
+# Discord Bot Agentic RAG System
 
 An advanced **Agentic RAG (Retrieval-Augmented Generation)** Discord bot built with **LangGraph** for multi-agent orchestration. Features real-time message indexing, semantic search, and **automated weekly digest generation**.
 
