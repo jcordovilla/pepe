@@ -401,4 +401,4 @@ ANALYSIS_TIMEOUT=300
 
 ---
 
-Made with vibecoding tools like Github Copilot and Cursor by Jose Cordovilla, Volunteer Network Architect at MIT Professional Education's GenAI Global Community
+Created by Jose Cordovilla with vibecoding tools like Github Copilot and Cursor and a lot of dedication. Jose is Volunteer Network Architect at MIT Professional Education's GenAI Global Community
