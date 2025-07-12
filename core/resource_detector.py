@@ -77,6 +77,41 @@ TRASH_PATTERNS = [
     r'medium\.com/@[^/]+/?$',       # Medium user profiles
 ]
 
+# Add a whitelist of trusted domains
+TRUSTED_DOMAINS = [
+    'github.com', 'docs.google.com', 'arxiv.org', 'medium.com', 'youtube.com', 'youtu.be',
+    'substack.com', 'huggingface.co', 'pypi.org', 'readthedocs.io', 'kaggle.com', 'wikipedia.org',
+    'nytimes.com', 'reuters.com', 'bloomberg.com', 'bbc.com', 'cnn.com', 'nature.com', 'sciencedirect.com',
+    'springer.com', 'acm.org', 'ieee.org', 'mit.edu', 'stanford.edu', 'harvard.edu', 'ox.ac.uk', 'cam.ac.uk',
+    'openai.com', 'deepmind.com', 'paperswithcode.com', 'towardsdatascience.com', 'linkedin.com/company/',
+    'drive.google.com', 'dropbox.com', 'figshare.com', 'zenodo.org', 'elsevier.com', 'cell.com', 'neurips.cc',
+    'iclr.cc', 'icml.cc', 'aaai.org', 'aclweb.org', 'emnlp.org', 'sigir.org', 'usenix.org', 'nips.cc',
+    'jmlr.org', 'mlr.press', 'ai.googleblog.com', 'openreview.net', 'githubusercontent.com', 'colab.research.google.com'
+]
+
+# Add resource sharing intent keywords
+RESOURCE_INTENT_KEYWORDS = [
+    'guide', 'tutorial', 'resource', 'check out', 'useful', 'article', 'paper', 'tool', 'library', 'dataset',
+    'reference', 'docs', 'documentation', 'how-to', 'walkthrough', 'introduction', 'primer', 'explainer',
+    'release', 'open source', 'repo', 'notebook', 'survey', 'review', 'whitepaper', 'benchmark', 'demo', 'course'
+]
+
+def format_timestamp(ts):
+    """Format a timestamp (ISO string or datetime) for JSON output."""
+    if ts is None:
+        return None
+    if isinstance(ts, datetime):
+        return ts.isoformat()
+    try:
+        # Handle both with and without timezone
+        if isinstance(ts, str):
+            if ts.endswith('Z'):
+                ts = ts.replace('Z', '+00:00')
+            return datetime.fromisoformat(ts).isoformat()
+    except Exception:
+        pass
+    return str(ts)
+
 def is_trash_url(url):
     return any(re.search(pat, url) for pat in TRASH_PATTERNS)
 
@@ -117,6 +152,28 @@ def is_valuable_resource_url(url: str) -> bool:
     
     # For other domains, assume valuable if not in trash patterns
     return True
+
+def is_trusted_domain(url):
+    domain = urlparse(url).netloc.lower()
+    for trusted in TRUSTED_DOMAINS:
+        if trusted in domain or domain in trusted:
+            return True
+    return False
+
+def has_resource_intent(text):
+    text_lower = text.lower()
+    return any(kw in text_lower for kw in RESOURCE_INTENT_KEYWORDS)
+
+def get_author_name(author):
+    """Extract a readable author name from a dict or string."""
+    if author is None:
+        return None
+    if isinstance(author, dict):
+        # Prefer display_name, fallback to username, then id
+        return author.get('display_name') or author.get('username') or str(author.get('id', 'Unknown'))
+    if isinstance(author, str):
+        return author
+    return str(author)
 
 def simple_vet_resource(resource: dict) -> dict:
     """Simplified resource vetting using basic URL patterns."""
@@ -337,48 +394,30 @@ def get_resource_type(url: str) -> str:
         return 'archive'
     return 'link'
 
+def is_good_resource_message(message, url):
+    # Drop if trash
+    if is_trash_url(url):
+        return False
+    content = getattr(message, 'content', '').strip()
+    # Drop if message is only a link
+    if content == url or len(content.replace(url, '').strip()) < 20:
+        return False
+    # Drop if too short
+    if len(content) < 20:
+        return False
+    return True
+
 def detect_resources(message) -> List[Dict[str, Any]]:
-    """Simplified resource detection."""
-    # Skip bot messages
+    """Balanced resource detection: filters trash, requires context, not overly strict."""
     if getattr(message, "author", None) and getattr(message.author, "bot", False):
         return []
-
     resources = []
     content = getattr(message, "content", "")
-    
-    # Helper functions
-    def get_author_name(author):
-        if not author:
-            return None
-        if isinstance(author, str):
-            return author
-        return getattr(author, 'display_name', None) or getattr(author, 'username', None) or str(author)
-    
-    def format_timestamp(ts):
-        if hasattr(ts, 'strftime'):
-            return ts.strftime('%Y-%m-%d %H:%M')
-        return str(ts) if ts else None
-    
-    def get_jump_url(msg):
-        if hasattr(msg, 'jump_url') and getattr(msg, 'jump_url', None):
-            return msg.jump_url
-        # Try to build from known fields
-        guild_id = getattr(msg, 'guild_id', None)
-        channel_id = getattr(msg, 'channel_id', None)
-        message_id = getattr(msg, 'id', None)
-        if guild_id and channel_id and message_id:
-            return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"
-        return None
-    
-    # Context snippet
     context_snippet = content[:500]
-    
-    # Extract URLs from message content
     urls = URL_REGEX.findall(content)
     for idx, url in enumerate(urls):
-        if is_trash_url(url):
+        if not is_good_resource_message(message, url):
             continue
-            
         resource = {
             "url": url,
             "type": get_resource_type(url),
@@ -390,21 +429,15 @@ def detect_resources(message) -> List[Dict[str, Any]]:
             "message_id": getattr(message, "id", None),
             "resource_id": f"{getattr(message, 'id', 'noid')}-{idx+1}"
         }
-        
-        # Simple vetting
         vet_result = simple_vet_resource(resource)
         if not vet_result["is_valuable"]:
             continue
-            
-        # Simple title generation
         title, desc = simple_enrich_title(resource)
         resource["name"] = title
         resource["description"] = desc
-        resource["tag"] = classify_resource(resource, use_llm=False)  # Use regex-only classification
-        
+        resource["tag"] = classify_resource(resource, use_llm=False)
         resources.append(resource)
-    
-    # Handle attachments
+    # Handle attachments as before
     attachments = getattr(message, "attachments", [])
     for aidx, att in enumerate(attachments):
         url = getattr(att, "url", None)
@@ -421,7 +454,6 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 "message_id": getattr(message, "id", None),
                 "resource_id": f"{getattr(message, 'id', 'noid')}-att{aidx+1}"
             }
-            
             vet_result = simple_vet_resource(resource)
             if vet_result["is_valuable"]:
                 title, desc = simple_enrich_title(resource)
@@ -429,36 +461,37 @@ def detect_resources(message) -> List[Dict[str, Any]]:
                 resource["description"] = desc
                 resource["tag"] = classify_resource(resource, use_llm=False)
                 resources.append(resource)
-    
     return resources
 
 def deduplicate_resources(resources):
-    """Simple deduplication based on URL and title similarity."""
+    """Aggressive deduplication based on URL, title, and description similarity."""
     from difflib import SequenceMatcher
-    
     unique = []
     for res in resources:
         is_dup = False
         for u in unique:
-            # Check URL similarity
             if res.get('url') == u.get('url'):
                 is_dup = True
                 break
-            
-            # Check title similarity
-            title_sim = SequenceMatcher(None, 
-                                     (res.get('name') or '').lower(), 
-                                     (u.get('name') or '').lower()).ratio()
-            if title_sim > 0.9:
+            title_sim = SequenceMatcher(None, (res.get('name') or '').lower(), (u.get('name') or '').lower()).ratio()
+            desc_sim = SequenceMatcher(None, (res.get('description') or '').lower(), (u.get('description') or '').lower()).ratio()
+            if title_sim > 0.85 or desc_sim > 0.85:
                 is_dup = True
                 break
-                
         if not is_dup:
             unique.append(res)
-    
     return unique
 
 # Aliases for backward compatibility
 ai_vet_resource = simple_vet_resource
 ai_enrich_title_description = simple_enrich_title
 needs_title_fix = lambda resource: not resource.get("name")
+
+def get_jump_url(message):
+    """Construct a Discord jump URL from a message object."""
+    guild_id = getattr(message, 'guild_id', None)
+    channel_id = getattr(message, 'channel_id', None)
+    message_id = getattr(message, 'message_id', None)
+    if not (guild_id and channel_id and message_id):
+        return None
+    return f"https://discord.com/channels/{guild_id}/{channel_id}/{message_id}"

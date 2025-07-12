@@ -156,20 +156,19 @@ class ContentPreprocessor:
         """Determine if message should be filtered out"""
         # Filter very short content
         if len(message.content or "") < self.config.min_content_length:
-            # But keep if has rich content (embeds, attachments)
             if not (message.embeds or message.attachments or message.stickers):
                 return True, "too_short"
-        
         # Filter specific calendar bot "sesh" (based on database analysis)
         author = message.author or {}
-        if author.get('username') == 'sesh':
-            return True, "calendar_bot"
-        
-        # Filter bot messages if configured
+        # Filter bot messages using the Discord API property if available
         if self.config.filter_bot_messages:
+            if (hasattr(message, 'author') and hasattr(message.author, 'bot') and message.author.bot) or \
+               (isinstance(author, dict) and author.get('bot', False)):
+                return True, "bot_message"
+            if author.get('username') == 'sesh':
+                return True, "calendar_bot"
             if author.get('username', '').endswith('Bot') or author.get('discriminator') == '0000':
                 return True, "bot_message"
-        
         return False, ""
     
     def preprocess_message(self, message: Message, db_session) -> Optional[Dict]:

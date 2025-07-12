@@ -43,11 +43,7 @@ def sync_resources_to_json(output_path: str = "data/resources/detected_resources
         resources = session.query(Resource).order_by(Resource.timestamp.desc()).all()
         logger.info(f"Found {len(resources)} resources in database")
         
-        if not resources:
-            logger.warning("No resources found in database")
-            return 0
-        
-        # Create output directory if needed
+        # Always create output directory if needed
         output_dir = os.path.dirname(output_path)
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
@@ -69,7 +65,7 @@ def sync_resources_to_json(output_path: str = "data/resources/detected_resources
                 resource_data = {
                     "id": res.id,
                     "title": res.name or res.url,
-                    "description": res.description or res.context_snippet or "",
+                    "description": res.description or getattr(res, 'context_snippet', "") or "",
                     "date": res.timestamp.strftime("%Y-%m-%d") if res.timestamp else None,
                     "author": res.author_display or res.author,
                     "channel": res.channel_name or res.channel_id,
@@ -89,7 +85,7 @@ def sync_resources_to_json(output_path: str = "data/resources/detected_resources
                 logger.error(f"Failed to process resource {res.id}: {e}")
                 continue
         
-        # Write JSON file
+        # Always write the JSON file, even if empty
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(resource_dicts, f, indent=2, default=str)
         

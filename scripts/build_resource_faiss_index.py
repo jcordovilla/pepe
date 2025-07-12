@@ -59,17 +59,24 @@ class ResourceFAISSIndexBuilder:
         self.id_mapping = {}  # FAISS index -> resource ID mapping
         
     def load_resources_from_json(self) -> List[Dict]:
-        """Load resources from JSON file."""
+        """Load resources from JSON file, excluding those shared by bots."""
         logger.info(f"Loading resources from: {self.resources_path}")
-        
         if not os.path.exists(self.resources_path):
             raise FileNotFoundError(f"Resources file not found: {self.resources_path}")
-            
         with open(self.resources_path, 'r', encoding='utf-8') as f:
             resources = json.load(f)
-            
-        logger.info(f"Loaded {len(resources)} resources from JSON")
-        return resources
+        # Exclude resources shared by bots
+        filtered_resources = []
+        for resource in resources:
+            author = resource.get('author', '')
+            try:
+                author_dict = eval(author) if isinstance(author, str) else author
+            except Exception:
+                author_dict = {}
+            if not author_dict.get('bot', False):
+                filtered_resources.append(resource)
+        logger.info(f"Loaded {len(filtered_resources)} human-shared resources from JSON (excluded {len(resources) - len(filtered_resources)} bot resources)")
+        return filtered_resources
     
     def preprocess_resources(self, resources: List[Dict]) -> List[Dict]:
         """Preprocess resources for embedding generation."""

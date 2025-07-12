@@ -65,12 +65,10 @@ class CanonicalIndexBuilder:
         self.id_mapping = {}  # FAISS index -> message ID mapping
         
     def load_messages_from_db(self, limit: Optional[int] = None) -> List[Dict]:
-        """Load messages from database."""
+        """Load messages from database, excluding bot messages."""
         logger.info("Loading messages from database...")
-        
         conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row  # Enable column access by name
-        
+        conn.row_factory = sqlite3.Row
         query = """
         SELECT 
             id, content, author, channel_id, 
@@ -82,16 +80,19 @@ class CanonicalIndexBuilder:
         FROM messages 
         ORDER BY timestamp DESC
         """
-        
         if limit:
             query += f" LIMIT {limit}"
-            
         cursor = conn.execute(query)
         messages = [dict(row) for row in cursor.fetchall()]
         conn.close()
-        
-        logger.info(f"Loaded {len(messages)} messages from database")
-        return messages
+        # Exclude bot messages based on author.bot property
+        filtered_messages = []
+        for msg in messages:
+            author = json.loads(msg['author']) if msg['author'] else {}
+            if not author.get('bot', False):
+                filtered_messages.append(msg)
+        logger.info(f"Loaded {len(filtered_messages)} human messages from database (excluded {len(messages) - len(filtered_messages)} bot messages)")
+        return filtered_messages
         
     def preprocess_messages(self, messages: List[Dict]) -> List[Dict]:
         """Preprocess messages using the content preprocessor."""
