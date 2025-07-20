@@ -30,19 +30,31 @@ class AgentAPI:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         
-        # Initialize components
+        # Initialize service container for dependency injection
+        from ..services.service_container import get_service_container
+        self.service_container = get_service_container(config)
+        
+        # Initialize components with shared services
         self.orchestrator = AgentOrchestrator(config.get("orchestrator", {}))
-        self.vector_store = PersistentVectorStore(config.get("vector_store", {}))
-        self.memory = ConversationMemory(config.get("memory", {}))
+        self.vector_store = self.service_container.get_vector_store()
+        self.memory = self.service_container.get_memory()
         self.pipeline = PipelineAgent(config.get("pipeline", {}))
         
-        # Initialize and register agents
+        # Initialize and register agents with service injection
         search_agent = SearchAgent(config.get("search_agent", {}))
         planning_agent = PlanningAgent(config.get("planning_agent", {}))
         analysis_agent = AnalysisAgent(config.get("analysis_agent", {}))
         digest_agent = DigestAgent(config.get("digest_agent", {}))
         query_interpreter_agent = QueryInterpreterAgent(config.get("query_interpreter", {}))
         
+        # Inject shared services into all agents
+        self.service_container.inject_services(search_agent)
+        self.service_container.inject_services(planning_agent)
+        self.service_container.inject_services(analysis_agent)
+        self.service_container.inject_services(digest_agent)
+        self.service_container.inject_services(query_interpreter_agent)
+        
+        # Register agents
         agent_registry.register_agent(search_agent)
         agent_registry.register_agent(planning_agent)
         agent_registry.register_agent(analysis_agent)

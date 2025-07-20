@@ -177,17 +177,21 @@ class AgentOrchestrator:
             return state
     
     async def _execute_plan_node(self, state: AgentState) -> AgentState:
-        """Execute the planned subtasks using appropriate agents"""
+        """Execute the planned subtasks using appropriate agents with shared state"""
         try:
             plan = state["task_plan"]
             if not plan:
                 logger.warning("No execution plan found")
                 return state
             
+            # Initialize shared state
+            from .shared_state import SharedAgentState, StateUpdateType
+            shared_state = SharedAgentState(state)
+            
             results = []
 
             async def _run_subtask(subtask: SubTask):
-                """Execute a single subtask in isolation."""
+                """Execute a single subtask with shared state."""
                 agent = agent_registry.find_capable_agent(subtask)
                 if not agent:
                     logger.warning(f"No agent found for task: {subtask.description}")
@@ -196,25 +200,69 @@ class AgentOrchestrator:
                     return subtask.id, None, []
 
                 try:
-                    task_state = state.copy()
+                    # Get context-rich state for this subtask
+                    task_state = await shared_state.propagate_to_subtask(subtask.id)
                     task_state["current_subtask"] = subtask
+                    
+                    # Execute the subtask
                     result_state = await agent.process(task_state)
+
+                    # Update shared state with results
+                    if result_state.get("search_results"):
+                        await shared_state.merge_results(
+                            {"search_results": result_state["search_results"]},
+                            f"{type(agent).__name__}",
+                            StateUpdateType.SEARCH_RESULTS
+                        )
+                    
+                    if result_state.get("analysis_results"):
+                        await shared_state.merge_results(
+                            {"analysis_results": result_state["analysis_results"]},
+                            f"{type(agent).__name__}",
+                            StateUpdateType.ANALYSIS_RESULTS
+                        )
+                    
+                    if result_state.get("digest_results"):
+                        await shared_state.merge_results(
+                            {"digest_results": result_state["digest_results"]},
+                            f"{type(agent).__name__}",
+                            StateUpdateType.DIGEST_RESULTS
+                        )
 
                     subtask.status = TaskStatus.COMPLETED
                     subtask.result = result_state.get("task_result")
-                    extra_results = result_state.get("search_results", [])
                     
-                    # Extract analysis results if present
-                    analysis_results = result_state.get("analysis_results", {})
-                    if analysis_results:
-                        state["analysis_results"] = state.get("analysis_results", {})
-                        state["analysis_results"].update(analysis_results)
+                    return subtask.id, subtask.result, []
                     
-                    return subtask.id, subtask.result, extra_results
                 except Exception as e:
                     logger.error(f"Error executing subtask {subtask.id}: {str(e)}")
                     subtask.status = TaskStatus.FAILED
                     subtask.error = str(e)
+                    
+                    # Try error recovery
+                    try:
+                        from .error_recovery_agent import ErrorRecoveryAgent
+                        recovery_agent = ErrorRecoveryAgent({})
+                        
+                        recovery_state = {
+                            "current_subtask": subtask,
+                            "user_context": state.get("user_context", {}),
+                            "query_interpretation": state.get("query_interpretation", {})
+                        }
+                        
+                        recovery_result = await recovery_agent.process(recovery_state)
+                        
+                        if recovery_result.get("recovery_results"):
+                            logger.info(f"Error recovery successful for subtask {subtask.id}")
+                            subtask.status = TaskStatus.COMPLETED
+                            subtask.result = recovery_result["recovery_results"].get("recovered_subtask", {}).get("result")
+                            subtask.error = None
+                            
+                            return subtask.id, subtask.result, []
+                    
+                    except Exception as recovery_error:
+                        logger.error(f"Error recovery failed for subtask {subtask.id}: {recovery_error}")
+                    
                     return subtask.id, None, []
 
             completed: Set[str] = set()
@@ -253,51 +301,61 @@ class AgentOrchestrator:
             return state
     
     async def _synthesize_results_node(self, state: AgentState) -> AgentState:
-        """Synthesize results from all subtasks into a coherent response"""
+        """Synthesize final results from all subtasks using result aggregator"""
         try:
-            # Ensure all collections are properly initialized
-            search_results = state.get("search_results", []) or []
-            plan = state.get("task_plan")
-            query = state.get("user_context", {}).get("query", "")
-            analysis_results = state.get("analysis_results", {}) or {}
-            
-            # Check if this is a capability response
-            if "capability_response" in analysis_results:
-                capability_data = analysis_results["capability_response"]
-                if capability_data and isinstance(capability_data, dict):
-                    state["response"] = capability_data.get("capability_response", "I can help you search and analyze Discord conversations.")
-                else:
-                    state["response"] = "I can help you search and analyze Discord conversations."
-                logger.info("Capability response synthesized successfully")
+            plan = state["task_plan"]
+            if not plan:
+                logger.warning("No execution plan found for synthesis")
                 return state
             
-            # Handle case where no results or plan exists
-            if not search_results and not plan and not analysis_results:
-                state["response"] = "I can help you search and analyze Discord conversations. What would you like to know about?"
-                return state
+            # Use result aggregator to properly combine all results
+            from .result_aggregator import ResultAggregator
             
-            # Return the actual search results for the agent API to process
-            if search_results and len(search_results) > 0:
-                # Create a response that includes both summary and results
-                result_count = len(search_results)
-                if result_count == 1:
-                    summary = "I found 1 relevant result for your query."
-                else:
-                    summary = f"I found {result_count} relevant results for your query."
-                
-                # The response will be used as the answer, and search_results contains the actual data
-                state["response"] = summary
-                # Ensure search_results are preserved for the agent API
-                logger.info(f"Results synthesized successfully: {result_count} results")
-            else:
-                # Provide a helpful response when no specific results are found
-                state["response"] = "I can help you search through Discord conversations. Try asking me to find specific topics, users, or messages. For example: 'Find messages about Python programming' or 'Show me recent discussions about AI'."
+            # Create aggregation subtask
+            aggregation_subtask = SubTask(
+                id="final_aggregation",
+                description="Aggregate all results from completed subtasks",
+                agent_role=AgentRole.ANALYZER,
+                task_type="aggregate_results",
+                parameters={},
+                dependencies=[],
+                status=TaskStatus.PENDING
+            )
             
+            # Set up aggregation state
+            aggregation_state = state.copy()
+            aggregation_state["current_subtask"] = aggregation_subtask
+            
+            # Initialize result aggregator
+            aggregator = ResultAggregator({})
+            
+            # Perform aggregation
+            aggregation_result = await aggregator.process(aggregation_state)
+            
+            # Extract final response
+            final_response = aggregation_result.get("final_response", {})
+            aggregated_results = aggregation_result.get("aggregated_results", {})
+            
+            # Update state with final results
+            state["response"] = final_response
+            state["aggregated_results"] = aggregated_results
+            
+            # Validate state consistency
+            from .shared_state import SharedAgentState
+            shared_state = SharedAgentState(state)
+            validation = await shared_state.validate_state()
+            
+            if not validation["is_valid"]:
+                logger.warning(f"State validation issues: {validation['errors']}")
+                state["validation_warnings"] = validation["warnings"]
+            
+            logger.info(f"Results synthesis completed: {final_response.get('type', 'unknown')} response generated")
             return state
             
         except Exception as e:
-            logger.error(f"Error in result synthesis: {str(e)}")
-            state["response"] = f"I encountered an error while preparing your response: {str(e)}"
+            logger.error(f"Error in results synthesis: {str(e)}")
+            state["errors"] = state.get("errors", [])
+            state["errors"].append(f"Synthesis error: {str(e)}")
             return state
     
     async def get_conversation_history(self, user_id: str, limit: int = 10) -> List[Dict[str, Any]]:

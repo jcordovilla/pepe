@@ -169,60 +169,83 @@ class QueryInterpreterAgent(BaseAgent):
         user_id = context.get("user_id", "unknown")
         platform = context.get("platform", "discord")
         
-        # Build available subtasks list
-        subtasks_list = "\n".join([f"- {task_type}: {description}" 
-                                  for task_type, description in self.available_subtasks.items()])
-        
-        prompt = f"""You are a query interpreter for a Discord bot that can search and analyze messages. 
+        prompt = f"""You are a Discord query interpreter. Analyze this query and respond with JSON:
 
-Your task is to interpret the user's query and determine:
-1. The primary intent
-2. Any entities mentioned (channels, users, time ranges, etc.)
-3. What subtasks should be performed to answer the query
-
-Available subtasks:
-{subtasks_list}
-
-User Query: "{query}"
+Query: "{query}"
 User ID: {user_id}
 Platform: {platform}
 
-Please respond with a JSON object containing:
-{{
-    "intent": "primary intent (search, summarize, analyze, capability, etc.)",
+EXAMPLES:
+Query: "summarize last week's discussions"
+Response: {{
+    "intent": "summarize",
     "entities": [
-        {{
-            "type": "entity type (channel, user, time_range, keyword, count, reaction)",
-            "value": "entity value",
-            "confidence": 0.95
-        }}
+        {{"type": "time_range", "value": "last_week", "confidence": 0.95}}
     ],
     "subtasks": [
         {{
-            "task_type": "subtask type from the list above",
-            "description": "human-readable description",
-            "parameters": {{
-                "query": "search query if applicable",
-                "filters": {{}},
-                "k": 10,
-                "summary_type": "overview",
-                "focus_areas": []
-            }},
-            "dependencies": []
+            "task_type": "filtered_search",
+            "description": "Search for messages from last week",
+            "parameters": {{"time_range": "last_week", "k": 50}}
+        }},
+        {{
+            "task_type": "summarize",
+            "description": "Create summary of last week's discussions",
+            "parameters": {{"summary_type": "overview"}}
         }}
     ],
     "confidence": 0.95,
-    "rationale": "brief explanation of why this interpretation was chosen"
+    "rationale": "Query asks for summary of last week, so search then summarize"
 }}
 
-Focus on:
-- Detecting summarize/summarise keywords and creating both search + summarize subtasks
-- Identifying channel mentions (<#ID> or #channel-name)
-- Recognizing time ranges (last week, past month, etc.)
-- Understanding multi-step queries (e.g., "summarize and analyze")
-- Providing appropriate parameters for each subtask
+Query: "find messages about Python from @user123"
+Response: {{
+    "intent": "search",
+    "entities": [
+        {{"type": "keyword", "value": "python", "confidence": 0.95}},
+        {{"type": "user", "value": "user123", "confidence": 0.95}}
+    ],
+    "subtasks": [
+        {{
+            "task_type": "filtered_search",
+            "description": "Search for Python messages from specific user",
+            "parameters": {{"query": "python", "filters": {{"user_id": "user123"}}, "k": 20}}
+        }}
+    ],
+    "confidence": 0.95,
+    "rationale": "Query asks for specific search with user filter"
+}}
 
-Response:"""
+Query: "what are the trending topics this month?"
+Response: {{
+    "intent": "analyze",
+    "entities": [
+        {{"type": "time_range", "value": "this_month", "confidence": 0.95}},
+        {{"type": "keyword", "value": "trending topics", "confidence": 0.95}}
+    ],
+    "subtasks": [
+        {{
+            "task_type": "filtered_search",
+            "description": "Get messages from this month",
+            "parameters": {{"time_range": "this_month", "k": 100}}
+        }},
+        {{
+            "task_type": "analyze_trends",
+            "description": "Analyze trending topics from this month",
+            "parameters": {{"analysis_type": "topic_trends"}}
+        }}
+    ],
+    "confidence": 0.95,
+    "rationale": "Query asks for trend analysis, so search then analyze"
+}}
+
+AVAILABLE TASKS: search, semantic_search, filtered_search, summarize, analyze, analyze_trends, extract_insights, capability_response
+
+ENTITY TYPES: channel, user, time_range, keyword, count, reaction
+
+TIME RANGES: last_week, last_month, this_month, this_week, today, yesterday, specific_date
+
+Respond with JSON only:"""
 
         return prompt
     

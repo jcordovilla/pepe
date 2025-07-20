@@ -11,6 +11,9 @@ from .search_agent import SearchAgent
 from .analysis_agent import AnalysisAgent
 from .digest_agent import DigestAgent
 from .query_interpreter_agent import QueryInterpreterAgent
+from .error_recovery_agent import ErrorRecoveryAgent
+from .result_aggregator import ResultAggregator
+from .shared_state import SharedAgentState, StateUpdateType, StateUpdate
 
 __all__ = [
     "BaseAgent",
@@ -24,5 +27,10 @@ __all__ = [
     "SearchAgent", 
     "AnalysisAgent",
     "DigestAgent",
-    "QueryInterpreterAgent"
+    "QueryInterpreterAgent",
+    "ErrorRecoveryAgent",
+    "ResultAggregator",
+    "SharedAgentState",
+    "StateUpdateType",
+    "StateUpdate"
 ]

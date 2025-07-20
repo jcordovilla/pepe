@@ -345,20 +345,40 @@ class AnalysisAgent(BaseAgent):
     
     def _build_summary_prompt(self, content: str, summary_type: str, focus_areas: List[str]) -> str:
         """Build prompt for LLM summarization."""
-        base_prompt = f"""
-Please provide a {summary_type} summary of the following Discord conversation content:
+        base_prompt = f"""You are a Discord conversation summarizer. Create a {summary_type} summary of this Discord chat:
 
 {content}
 
-Summary requirements:
-- Length: {self.summary_length}
-- Focus on key discussion points and conclusions
-- Maintain context about who said what when relevant
-- Highlight important decisions or action items
-"""
+REQUIREMENTS:
+- Format for Discord: Use clear sections with **bold headers**
+- Length: {self.summary_length} (concise but comprehensive)
+- Include key discussion points and conclusions
+- Mention important users when relevant: @username
+- Highlight decisions, action items, and next steps
+- Use bullet points for lists
+- Keep tone professional but conversational
+
+STRUCTURE:
+**Key Topics Discussed**
+- Main themes and subjects
+
+**Important Points**
+- Key insights and conclusions
+
+**Decisions & Action Items**
+- Any decisions made or tasks assigned
+
+**Notable Participants**
+- Key contributors and their roles
+
+QUALITY CRITERIA:
+- Accurate representation of the conversation
+- Clear organization with logical flow
+- Actionable insights when present
+- Appropriate level of detail for the length"""
         
         if focus_areas:
-            base_prompt += f"\nSpecial focus on: {', '.join(focus_areas)}"
+            base_prompt += f"\n\nSPECIAL FOCUS: Emphasize {', '.join(focus_areas)} in your summary."
         
         return base_prompt
     
