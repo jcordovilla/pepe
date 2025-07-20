@@ -48,6 +48,14 @@ performance_test_suite/
 1. **Discord Messages Database**: Ensure `data/discord_messages.db` exists
 2. **Bot API Running**: Start the Discord bot API on `http://localhost:8000`
 3. **Python Dependencies**: Install required packages
+4. **Llama Model** (Optional): Install Ollama and Llama model for AI-powered evaluation
+   ```bash
+   # Install Ollama
+   curl -fsSL https://ollama.ai/install.sh | sh
+   
+   # Pull Llama model
+   ollama pull llama3.2:3b
+   ```
 
 ### Basic Usage
 
@@ -102,14 +110,16 @@ Create a `config.json` file to customize the test suite:
 - Measures response times and success rates
 
 ### Phase 4: Response Evaluation
-- Evaluates responses against expected structures
-- Calculates multiple quality metrics:
-  - Relevance (25% weight)
-  - Format accuracy (20% weight)
-  - Completeness (20% weight)
-  - Coherence (15% weight)
-  - Semantic similarity (15% weight)
+- Evaluates responses against expected structures using hybrid approach
+- **Llama AI Evaluation** for semantic understanding:
+  - Semantic relevance (30% weight)
+  - Response quality (25% weight)
+  - Coherence evaluation (10% weight)
+- **Rule-based Evaluation** for objective metrics:
+  - Format accuracy (15% weight)
+  - Completeness (15% weight)
   - Performance (5% weight)
+- Fallback to rule-based evaluation if Llama unavailable
 
 ### Phase 5: Report Generation
 - Generates comprehensive performance report
@@ -121,12 +131,21 @@ Create a `config.json` file to customize the test suite:
 
 ### Response Quality Metrics
 
-1. **Relevance Score**: How well the response addresses the query
-2. **Format Score**: Accuracy of response structure and formatting
-3. **Completeness Score**: Coverage of expected information
-4. **Coherence Score**: Readability and logical flow
-5. **Semantic Similarity**: Content matching vs. semantic relevance
-6. **Performance Score**: Response time and efficiency
+1. **Relevance Score** (30% weight): Semantic relevance using Llama model
+2. **Quality Score** (25% weight): Response quality assessment using Llama model
+3. **Format Score** (15% weight): Accuracy of response structure and formatting
+4. **Completeness Score** (15% weight): Coverage of expected information
+5. **Coherence Score** (10% weight): Logical flow using Llama model
+6. **Performance Score** (5% weight): Response time and efficiency
+
+### AI-Powered Evaluation
+
+The test suite uses **Llama model integration** for semantic evaluation:
+
+- **Semantic Relevance**: Llama evaluates how well responses address queries
+- **Quality Assessment**: Llama rates response accuracy, helpfulness, and appropriateness
+- **Coherence Evaluation**: Llama assesses logical flow and organization
+- **Fallback Mode**: Rule-based evaluation when Llama is unavailable
 
 ### System Reliability Metrics
 
@@ -182,6 +201,33 @@ The test suite generates queries like:
 - Low-effort optimizations
 - Architectural improvements
 
+## 🤖 Llama Integration
+
+### AI-Powered Evaluation Benefits
+
+- **Semantic Understanding**: True comprehension of query-response relationships
+- **Quality Assessment**: Evaluates accuracy, helpfulness, and appropriateness
+- **Context Awareness**: Understands Discord-specific context and tone
+- **Nuanced Scoring**: Distinguishes between good but incomplete vs. wrong but well-formatted responses
+- **Fallback Support**: Graceful degradation to rule-based evaluation when AI unavailable
+
+### Llama Model Configuration
+
+```python
+# Default model
+llama_evaluator = LlamaEvaluator(model_name="llama3.2:3b")
+
+# Custom model
+llama_evaluator = LlamaEvaluator(model_name="llama3.1:8b")
+```
+
+### Evaluation Prompts
+
+The Llama model uses carefully crafted prompts for:
+- **Semantic Relevance**: "Rate how well this response answers the query"
+- **Quality Assessment**: "Rate the quality of this Discord bot response"
+- **Coherence Evaluation**: "Rate the coherence and logical flow"
+
 ## 🛠️ Customization
 
 ### Adding New Query Types
@@ -197,6 +243,7 @@ The test suite generates queries like:
 2. Adjust metric weights
 3. Add new evaluation methods
 4. Update scoring algorithms
+5. Customize Llama evaluation prompts
 
 ### Custom Configuration
 

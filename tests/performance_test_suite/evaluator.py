@@ -3,6 +3,7 @@ Response Evaluator
 
 Evaluates bot responses against expected dummy answers using multiple metrics.
 Provides comprehensive assessment of response quality, relevance, and format accuracy.
+Now includes Llama model integration for semantic evaluation.
 """
 
 import json
@@ -29,22 +30,319 @@ class EvaluationResult:
     recommendations: List[str]
 
 
+class LlamaEvaluator:
+    """
+    Llama-based evaluator for semantic understanding and quality assessment.
+    
+    Uses Llama model to evaluate:
+    - Semantic relevance
+    - Response quality
+    - Coherence and logical flow
+    - Context appropriateness
+    """
+    
+    def __init__(self, model_name: str = "llama3.2:3b"):
+        self.model_name = model_name
+        self.model = None
+        self._initialize_model()
+        
+        logger.info(f"LlamaEvaluator initialized with model: {model_name}")
+    
+    def _initialize_model(self):
+        """Initialize the Llama model."""
+        try:
+            import ollama
+            
+            # Test if model is available
+            try:
+                ollama.show(self.model_name)
+                self.model = ollama
+                logger.info(f"Llama model {self.model_name} loaded successfully")
+            except Exception as e:
+                logger.warning(f"Llama model {self.model_name} not available: {e}")
+                logger.info("Falling back to rule-based evaluation only")
+                self.model = None
+                
+        except ImportError:
+            logger.warning("Ollama not available. Install with: pip install ollama")
+            self.model = None
+    
+    def evaluate_semantic_relevance(self, query: str, response: str) -> float:
+        """
+        Evaluate semantic relevance using Llama model.
+        
+        Args:
+            query: The original query
+            response: The bot's response
+            
+        Returns:
+            Relevance score between 0.0 and 1.0
+        """
+        if not self.model:
+            return self._fallback_semantic_relevance(query, response)
+        
+        try:
+            prompt = f"""Rate how well this response answers the query on a scale of 0.0 to 1.0.
+
+Query: {query}
+Response: {response}
+
+Consider:
+- Does the response directly address the question asked?
+- Is the information relevant to what was requested?
+- Does it provide useful information related to the query?
+- Is it appropriate for the context?
+
+Respond with only a number between 0.0 and 1.0, where:
+0.0 = Completely irrelevant or doesn't answer the question
+0.5 = Partially relevant or somewhat addresses the question
+1.0 = Completely relevant and fully answers the question
+
+Score:"""
+            
+            result = self.model.generate(
+                model=self.model_name,
+                prompt=prompt,
+                options={"temperature": 0.1}
+            )
+            
+            # Extract numeric score from response
+            score_text = result['response'].strip()
+            score = self._extract_score_from_text(score_text)
+            
+            logger.debug(f"Llama semantic relevance score: {score} for query: {query[:50]}...")
+            return score
+            
+        except Exception as e:
+            logger.error(f"Error in Llama semantic evaluation: {e}")
+            return self._fallback_semantic_relevance(query, response)
+    
+    def evaluate_response_quality(self, response: str, query: str, context: str = "Discord bot response") -> float:
+        """
+        Evaluate response quality using Llama model.
+        
+        Args:
+            response: The bot's response
+            query: The original query
+            context: Additional context
+            
+        Returns:
+            Quality score between 0.0 and 1.0
+        """
+        if not self.model:
+            return self._fallback_quality_evaluation(response)
+        
+        try:
+            prompt = f"""Rate the quality of this Discord bot response on a scale of 0.0 to 1.0.
+
+Context: {context}
+Query: {query}
+Response: {response}
+
+Consider:
+- Is the information accurate and correct?
+- Is the response helpful and useful?
+- Is it appropriate for a Discord community?
+- Is the tone and style suitable?
+- Does it provide value to the user?
+
+Respond with only a number between 0.0 and 1.0, where:
+0.0 = Poor quality, inaccurate, unhelpful
+0.5 = Average quality, partially helpful
+1.0 = Excellent quality, accurate, very helpful
+
+Score:"""
+            
+            result = self.model.generate(
+                model=self.model_name,
+                prompt=prompt,
+                options={"temperature": 0.1}
+            )
+            
+            score_text = result['response'].strip()
+            score = self._extract_score_from_text(score_text)
+            
+            logger.debug(f"Llama quality score: {score}")
+            return score
+            
+        except Exception as e:
+            logger.error(f"Error in Llama quality evaluation: {e}")
+            return self._fallback_quality_evaluation(response)
+    
+    def evaluate_coherence(self, response: str) -> float:
+        """
+        Evaluate response coherence using Llama model.
+        
+        Args:
+            response: The bot's response
+            
+        Returns:
+            Coherence score between 0.0 and 1.0
+        """
+        if not self.model:
+            return self._fallback_coherence_evaluation(response)
+        
+        try:
+            prompt = f"""Rate the coherence and logical flow of this response on a scale of 0.0 to 1.0.
+
+Response: {response}
+
+Consider:
+- Does the response flow logically from one point to the next?
+- Are the ideas well-connected and organized?
+- Is the reasoning clear and understandable?
+- Does it make sense as a complete response?
+
+Respond with only a number between 0.0 and 1.0, where:
+0.0 = Incoherent, confusing, poorly organized
+0.5 = Somewhat coherent, partially organized
+1.0 = Very coherent, well-organized, logical flow
+
+Score:"""
+            
+            result = self.model.generate(
+                model=self.model_name,
+                prompt=prompt,
+                options={"temperature": 0.1}
+            )
+            
+            score_text = result['response'].strip()
+            score = self._extract_score_from_text(score_text)
+            
+            logger.debug(f"Llama coherence score: {score}")
+            return score
+            
+        except Exception as e:
+            logger.error(f"Error in Llama coherence evaluation: {e}")
+            return self._fallback_coherence_evaluation(response)
+    
+    def _extract_score_from_text(self, text: str) -> float:
+        """Extract numeric score from Llama response text."""
+        try:
+            # Look for numbers in the text
+            import re
+            numbers = re.findall(r'\d+\.?\d*', text)
+            if numbers:
+                score = float(numbers[0])
+                # Ensure score is between 0 and 1
+                return max(0.0, min(1.0, score))
+            else:
+                # Fallback: look for words that indicate score
+                text_lower = text.lower()
+                if any(word in text_lower for word in ['excellent', 'perfect', '1.0', '1']):
+                    return 1.0
+                elif any(word in text_lower for word in ['good', '0.8', '0.9']):
+                    return 0.8
+                elif any(word in text_lower for word in ['average', '0.5', '0.6']):
+                    return 0.5
+                elif any(word in text_lower for word in ['poor', 'bad', '0.0', '0.1']):
+                    return 0.2
+                else:
+                    return 0.5  # Default middle score
+        except Exception as e:
+            logger.error(f"Error extracting score from text '{text}': {e}")
+            return 0.5
+    
+    def _fallback_semantic_relevance(self, query: str, response: str) -> float:
+        """Fallback semantic relevance evaluation using rule-based approach."""
+        # Extract key terms from query
+        key_terms = self._extract_key_terms(query)
+        response_lower = response.lower()
+        
+        # Check term coverage
+        term_coverage = sum(1 for term in key_terms if term.lower() in response_lower) / len(key_terms) if key_terms else 0
+        
+        # Check for question-answer patterns
+        question_words = ['what', 'how', 'why', 'when', 'where', 'who', 'which']
+        has_question = any(word in query.lower() for word in question_words)
+        
+        if has_question:
+            # Look for answer indicators
+            answer_indicators = ['is', 'are', 'was', 'were', 'will', 'can', 'should', 'because', 'due to', 'since']
+            has_answer = any(indicator in response_lower for indicator in answer_indicators)
+            if has_answer:
+                term_coverage = min(1.0, term_coverage + 0.3)
+        
+        return min(term_coverage, 1.0)
+    
+    def _fallback_quality_evaluation(self, response: str) -> float:
+        """Fallback quality evaluation using rule-based approach."""
+        quality_score = 0.5  # Base score
+        
+        # Length quality
+        if 50 <= len(response) <= 500:
+            quality_score += 0.2
+        elif len(response) > 500:
+            quality_score += 0.1
+        
+        # Structure quality
+        if '\n' in response or '•' in response or '-' in response:
+            quality_score += 0.1
+        
+        # Technical content quality
+        technical_indicators = ['because', 'therefore', 'however', 'additionally', 'furthermore']
+        if any(indicator in response.lower() for indicator in technical_indicators):
+            quality_score += 0.1
+        
+        # Code block quality
+        if '```' in response:
+            quality_score += 0.1
+        
+        return min(quality_score, 1.0)
+    
+    def _fallback_coherence_evaluation(self, response: str) -> float:
+        """Fallback coherence evaluation using rule-based approach."""
+        coherence_score = 0.5  # Base score
+        
+        # Sentence structure
+        sentences = re.split(r'[.!?]+', response)
+        valid_sentences = [s.strip() for s in sentences if len(s.strip()) > 10]
+        
+        if len(valid_sentences) > 1:
+            coherence_score += 0.2
+        
+        # Logical connectors
+        connectors = ['however', 'therefore', 'furthermore', 'additionally', 'in addition', 'also', 'but', 'and']
+        connector_count = sum(1 for connector in connectors if connector in response.lower())
+        
+        if connector_count > 0:
+            coherence_score += 0.2
+        
+        # Paragraph structure
+        paragraphs = response.split('\n\n')
+        if len(paragraphs) > 1:
+            coherence_score += 0.1
+        
+        return min(coherence_score, 1.0)
+    
+    def _extract_key_terms(self, query: str) -> List[str]:
+        """Extract key terms from a query."""
+        # Remove common words and extract meaningful terms
+        common_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'what', 'when', 'where', 'why', 'how', 'show', 'me', 'give', 'tell', 'find', 'get', 'create', 'generate', 'analyze', 'summarize'}
+        
+        words = re.findall(r'\b\w+\b', query.lower())
+        key_terms = [word for word in words if word not in common_words and len(word) > 2]
+        
+        return key_terms
+
+
 class ResponseEvaluator:
     """
     Evaluates bot responses against expected dummy answers.
     
     Evaluation criteria:
-    - Response relevance and completeness
-    - Format accuracy and structure
-    - Content quality and coherence
-    - Semantic similarity
-    - Response time performance
+    - Response relevance and completeness (Llama + rule-based)
+    - Format accuracy and structure (rule-based)
+    - Content quality and coherence (Llama + rule-based)
+    - Semantic similarity (Llama)
+    - Response time performance (rule-based)
     """
     
     def __init__(self):
         self.evaluation_results = []
+        self.llama_evaluator = LlamaEvaluator()
         
-        logger.info("ResponseEvaluator initialized")
+        logger.info("ResponseEvaluator initialized with Llama integration")
     
     def evaluate_responses(self, queries: List[Any], responses: List[Any]) -> List[EvaluationResult]:
         """
@@ -57,7 +355,7 @@ class ResponseEvaluator:
         Returns:
             List of EvaluationResult objects with comprehensive evaluation
         """
-        logger.info(f"Starting evaluation of {len(responses)} responses...")
+        logger.info(f"Starting evaluation of {len(responses)} responses with Llama integration...")
         
         self.evaluation_results = []
         
@@ -89,7 +387,7 @@ class ResponseEvaluator:
         if not response.success:
             return self._evaluate_failed_response(query, response)
         
-        # Calculate individual metrics
+        # Calculate individual metrics with Llama integration
         relevance_score = self._calculate_relevance_score(query, response)
         format_score = self._calculate_format_score(query, response)
         completeness_score = self._calculate_completeness_score(query, response)
@@ -97,27 +395,33 @@ class ResponseEvaluator:
         semantic_score = self._calculate_semantic_similarity(query, response)
         performance_score = self._calculate_performance_score(response)
         
-        # Calculate overall score (weighted average)
+        # Calculate overall score (updated weights for Llama integration)
         weights = {
-            'relevance': 0.25,
-            'format': 0.20,
-            'completeness': 0.20,
-            'coherence': 0.15,
-            'semantic': 0.15,
-            'performance': 0.05
+            'relevance': 0.30,        # Llama semantic evaluation
+            'quality': 0.25,          # Llama quality assessment
+            'format': 0.15,           # Rule-based formatting
+            'completeness': 0.15,     # Rule-based completeness
+            'coherence': 0.10,        # Llama coherence evaluation
+            'performance': 0.05       # Rule-based timing
         }
+        
+        # Use Llama quality evaluation instead of just semantic similarity
+        quality_score = self.llama_evaluator.evaluate_response_quality(
+            response.response, query.query, f"Discord bot response for {query.category}"
+        )
         
         overall_score = (
             relevance_score * weights['relevance'] +
+            quality_score * weights['quality'] +
             format_score * weights['format'] +
             completeness_score * weights['completeness'] +
             coherence_score * weights['coherence'] +
-            semantic_score * weights['semantic'] +
             performance_score * weights['performance']
         )
         
         metrics = {
             'relevance': relevance_score,
+            'quality': quality_score,
             'format': format_score,
             'completeness': completeness_score,
             'coherence': coherence_score,
@@ -149,6 +453,7 @@ class ResponseEvaluator:
             overall_score=0.0,
             metrics={
                 'relevance': 0.0,
+                'quality': 0.0,
                 'format': 0.0,
                 'completeness': 0.0,
                 'coherence': 0.0,
@@ -164,41 +469,16 @@ class ResponseEvaluator:
     
     def _calculate_relevance_score(self, query: Any, response: Any) -> float:
         """
-        Calculate relevance score based on query category and response content.
+        Calculate relevance score using Llama model.
         
         Returns:
             Score between 0.0 and 1.0
         """
-        if not response.response:
-            return 0.0
-        
-        response_lower = response.response.lower()
-        query_lower = query.query.lower()
-        
-        # Extract key terms from query
-        key_terms = self._extract_key_terms(query.query)
-        
-        # Check if response addresses the query category
-        category_relevance = self._check_category_relevance(query.category, response.response)
-        
-        # Check if key terms are mentioned
-        term_coverage = sum(1 for term in key_terms if term.lower() in response_lower) / len(key_terms) if key_terms else 0
-        
-        # Check if response structure matches expected type
-        structure_match = self._check_structure_match(query.expected_response_structure, response.response)
-        
-        # Weighted average
-        relevance_score = (
-            category_relevance * 0.4 +
-            term_coverage * 0.4 +
-            structure_match * 0.2
-        )
-        
-        return min(relevance_score, 1.0)
+        return self.llama_evaluator.evaluate_semantic_relevance(query.query, response.response)
     
     def _calculate_format_score(self, query: Any, response: Any) -> float:
         """
-        Calculate format accuracy score.
+        Calculate format accuracy score (rule-based).
         
         Returns:
             Score between 0.0 and 1.0
@@ -289,55 +569,12 @@ class ResponseEvaluator:
     
     def _calculate_coherence_score(self, response: Any) -> float:
         """
-        Calculate response coherence and readability score.
+        Calculate response coherence using Llama model.
         
         Returns:
             Score between 0.0 and 1.0
         """
-        if not response.response:
-            return 0.0
-        
-        response_text = response.response
-        
-        coherence_scores = []
-        
-        # Check sentence structure
-        sentences = re.split(r'[.!?]+', response_text)
-        valid_sentences = [s.strip() for s in sentences if len(s.strip()) > 10]
-        
-        if valid_sentences:
-            coherence_scores.append(0.8)
-        else:
-            coherence_scores.append(0.3)
-        
-        # Check for logical connectors
-        connectors = ['however', 'therefore', 'furthermore', 'additionally', 'in addition', 'also']
-        connector_count = sum(1 for connector in connectors if connector in response_text.lower())
-        if connector_count > 0:
-            coherence_scores.append(0.9)
-        else:
-            coherence_scores.append(0.6)
-        
-        # Check for paragraph structure
-        paragraphs = response_text.split('\n\n')
-        if len(paragraphs) > 1:
-            coherence_scores.append(0.8)
-        else:
-            coherence_scores.append(0.5)
-        
-        # Check for repetition (negative indicator)
-        words = response_text.lower().split()
-        unique_words = set(words)
-        repetition_ratio = len(unique_words) / len(words) if words else 0
-        
-        if repetition_ratio > 0.7:
-            coherence_scores.append(0.9)
-        elif repetition_ratio > 0.5:
-            coherence_scores.append(0.7)
-        else:
-            coherence_scores.append(0.4)
-        
-        return sum(coherence_scores) / len(coherence_scores)
+        return self.llama_evaluator.evaluate_coherence(response.response)
     
     def _calculate_semantic_similarity(self, query: Any, response: Any) -> float:
         """
@@ -351,26 +588,11 @@ class ResponseEvaluator:
         
         # For summary/topic queries, prioritize semantic relevance
         if query.category in ['feedback_summary', 'trending_topics', 'digests']:
-            return self._calculate_semantic_relevance(query, response)
+            return self.llama_evaluator.evaluate_semantic_relevance(query.query, response.response)
         
         # For specific queries, prioritize content matching
         else:
             return self._calculate_content_matching(query, response)
-    
-    def _calculate_semantic_relevance(self, query: Any, response: Any) -> float:
-        """Calculate semantic relevance for summary/topic queries."""
-        # Extract key concepts from query
-        query_concepts = self._extract_key_terms(query.query)
-        
-        # Check if response addresses these concepts
-        response_lower = response.response.lower()
-        concept_coverage = 0
-        
-        for concept in query_concepts:
-            if concept.lower() in response_lower:
-                concept_coverage += 1
-        
-        return concept_coverage / len(query_concepts) if query_concepts else 0.5
     
     def _calculate_content_matching(self, query: Any, response: Any) -> float:
         """Calculate content matching for specific queries."""
@@ -419,59 +641,6 @@ class ResponseEvaluator:
                 performance_scores.append(0.6)
         
         return sum(performance_scores) / len(performance_scores) if performance_scores else 0.5
-    
-    def _extract_key_terms(self, query: str) -> List[str]:
-        """Extract key terms from a query."""
-        # Remove common words and extract meaningful terms
-        common_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'what', 'when', 'where', 'why', 'how', 'show', 'me', 'give', 'tell', 'find', 'get', 'create', 'generate', 'analyze', 'summarize'}
-        
-        words = re.findall(r'\b\w+\b', query.lower())
-        key_terms = [word for word in words if word not in common_words and len(word) > 2]
-        
-        return key_terms
-    
-    def _check_category_relevance(self, category: str, response: str) -> float:
-        """Check if response is relevant to the query category."""
-        category_keywords = {
-            'server_analysis': ['channel', 'user', 'activity', 'message', 'server'],
-            'feedback_summary': ['feedback', 'suggestion', 'complaint', 'improvement'],
-            'trending_topics': ['trend', 'popular', 'discussion', 'topic'],
-            'qa_concepts': ['question', 'answer', 'help', 'support'],
-            'statistics': ['statistic', 'number', 'count', 'percentage', 'metric'],
-            'structure_analysis': ['structure', 'organization', 'channel', 'flow'],
-            'digests': ['summary', 'digest', 'overview', 'highlight'],
-            'conversational_leadership': ['discussion', 'engagement', 'community', 'leadership']
-        }
-        
-        if category in category_keywords:
-            keywords = category_keywords[category]
-            response_lower = response.lower()
-            matches = sum(1 for keyword in keywords if keyword in response_lower)
-            return min(matches / len(keywords), 1.0)
-        
-        return 0.5
-    
-    def _check_structure_match(self, expected_structure: Dict[str, Any], response: str) -> float:
-        """Check if response structure matches expected structure."""
-        response_lower = response.lower()
-        
-        # Check for expected structure type
-        if 'type' in expected_structure:
-            expected_type = expected_structure['type']
-            if expected_type in response_lower:
-                return 1.0
-        
-        # Check for expected fields
-        field_matches = 0
-        total_fields = 0
-        
-        for key in expected_structure.keys():
-            if key != 'type':
-                total_fields += 1
-                if key in response_lower:
-                    field_matches += 1
-        
-        return field_matches / total_fields if total_fields > 0 else 0.5
     
     def _get_required_fields(self, expected_structure: Dict[str, Any]) -> List[str]:
         """Get required fields from expected structure."""
@@ -535,6 +704,12 @@ class ResponseEvaluator:
                 'success': response.success
             },
             'metric_breakdown': metrics,
+            'llama_evaluation': {
+                'model_used': self.llama_evaluator.model_name if self.llama_evaluator.model else 'None',
+                'semantic_relevance': metrics['relevance'],
+                'quality_assessment': metrics['quality'],
+                'coherence_evaluation': metrics['coherence']
+            },
             'strengths': self._identify_strengths(metrics),
             'weaknesses': self._identify_weaknesses(metrics)
         }
@@ -544,19 +719,19 @@ class ResponseEvaluator:
         recommendations = []
         
         if metrics['relevance'] < 0.7:
-            recommendations.append("Improve response relevance to query topic")
+            recommendations.append("Improve response relevance to query topic using better query understanding")
+        
+        if metrics['quality'] < 0.7:
+            recommendations.append("Enhance response quality and accuracy")
         
         if metrics['format'] < 0.7:
-            recommendations.append("Enhance response formatting and structure")
+            recommendations.append("Standardize response formatting and structure")
         
         if metrics['completeness'] < 0.7:
             recommendations.append("Provide more comprehensive information")
         
         if metrics['coherence'] < 0.7:
-            recommendations.append("Improve response coherence and readability")
-        
-        if metrics['semantic_similarity'] < 0.7:
-            recommendations.append("Better align response with expected content")
+            recommendations.append("Improve response coherence and logical flow")
         
         if metrics['performance'] < 0.7:
             recommendations.append("Optimize response time and efficiency")
@@ -571,7 +746,10 @@ class ResponseEvaluator:
         strengths = []
         
         if metrics['relevance'] > 0.8:
-            strengths.append("High relevance to query")
+            strengths.append("High semantic relevance to query")
+        
+        if metrics['quality'] > 0.8:
+            strengths.append("Excellent response quality")
         
         if metrics['format'] > 0.8:
             strengths.append("Good formatting and structure")
@@ -592,7 +770,10 @@ class ResponseEvaluator:
         weaknesses = []
         
         if metrics['relevance'] < 0.6:
-            weaknesses.append("Low relevance to query")
+            weaknesses.append("Low semantic relevance to query")
+        
+        if metrics['quality'] < 0.6:
+            weaknesses.append("Poor response quality")
         
         if metrics['format'] < 0.6:
             weaknesses.append("Poor formatting")
@@ -623,7 +804,7 @@ class ResponseEvaluator:
             
             # Calculate average scores for each metric
             metric_averages = {}
-            for metric in ['relevance', 'format', 'completeness', 'coherence', 'semantic_similarity', 'performance']:
+            for metric in ['relevance', 'quality', 'format', 'completeness', 'coherence', 'semantic_similarity', 'performance']:
                 scores = [e.metrics[metric] for e in successful_evaluations]
                 metric_averages[metric] = sum(scores) / len(scores)
             
@@ -666,6 +847,12 @@ class ResponseEvaluator:
                     "good": len([s for s in overall_scores if 0.7 <= s < 0.9]),
                     "fair": len([s for s in overall_scores if 0.5 <= s < 0.7]),
                     "poor": len([s for s in overall_scores if s < 0.5])
+                },
+                "llama_integration": {
+                    "model_used": self.llama_evaluator.model_name if self.llama_evaluator.model else "None",
+                    "semantic_evaluation": metric_averages.get('relevance', 0),
+                    "quality_evaluation": metric_averages.get('quality', 0),
+                    "coherence_evaluation": metric_averages.get('coherence', 0)
                 }
             }
         else:
@@ -702,7 +889,11 @@ class ResponseEvaluator:
             "metadata": {
                 "generated_at": datetime.utcnow().isoformat(),
                 "total_evaluations": len(self.evaluation_results),
-                "evaluation_summary": self.get_evaluation_summary()
+                "evaluation_summary": self.get_evaluation_summary(),
+                "llama_integration": {
+                    "model_used": self.llama_evaluator.model_name,
+                    "model_available": self.llama_evaluator.model is not None
+                }
             },
             "evaluations": results_data
         }
