@@ -240,75 +240,202 @@ class FreshResourceDetector:
     def _is_internal_document(self, url: str, domain: str, message: Dict[str, Any]) -> bool:
         """Check if a URL is an internal/private community document that should be excluded"""
         content = message.get('content', '').lower()
-        
-        # Check for specific URL patterns that indicate internal documents
         url_lower = url.lower()
         
-        # Google Workspace documents (usually private)
-        if any(pattern in url_lower for pattern in [
-            '/document/d/', '/spreadsheets/d/', '/presentation/d/',
-            '/forms/d/', '/drawings/d/', '/sites/d/',
-            '/drive/folders/', '/drive/u/', '/drive/d/'
-        ]):
+        # Step 1: Rule-based filtering for obvious internal documents
+        if self._is_obviously_internal(url, domain, content):
             return True
         
-        # Mural boards (usually private)
-        if 'app.mural.co' in domain and any(pattern in url_lower for pattern in [
-            '/t/', '/m/', '/s/'
-        ]):
-            return True
+        # Step 2: AI-powered analysis for ambiguous cases
+        if self._needs_ai_analysis(url, domain, content):
+            return self._ai_analyze_resource_privacy(url, domain, message)
         
-        # Trello boards (usually private)
-        if 'trello.com' in domain and any(pattern in url_lower for pattern in [
-            '/b/', '/c/', '/card/'
-        ]):
-            return True
+        # Step 3: Content-based heuristics for edge cases
+        return self._content_based_filtering(url, domain, content)
+    
+    def _is_obviously_internal(self, url: str, domain: str, content: str) -> bool:
+        """Rule-based filtering for obviously internal documents"""
+        url_lower = url.lower()
         
-        # Notion pages (usually private)
-        if 'notion.so' in domain and any(pattern in url_lower for pattern in [
-            '/page/', '/database/', '/workspace/'
-        ]):
-            return True
-        
-        # Figma designs (usually private)
-        if 'figma.com' in domain and any(pattern in url_lower for pattern in [
-            '/file/', '/proto/', '/design/'
-        ]):
-            return True
-        
-        # Miro boards (usually private)
-        if 'miro.com' in domain and any(pattern in url_lower for pattern in [
-            '/board/', '/app/'
-        ]):
-            return True
-        
-        # Video recordings and live streams
-        if any(video_domain in domain for video_domain in ['youtube.com', 'youtu.be', 'vimeo.com']):
-            # Check for live streams, recordings, or private videos
-            if any(pattern in url_lower for pattern in [
-                '/live/', '/watch?v=', '/embed/', '/v/'
-            ]):
-                return True
-            # YouTube short URLs (youtu.be) are typically recordings
-            if 'youtu.be' in domain:
-                return True
-        
-        # Check message content for indicators of internal documents
-        internal_indicators = [
-            'internal', 'private', 'confidential', 'draft', 'working',
-            'team', 'meeting', 'recording', 'session', 'workshop',
-            'board', 'kanban', 'project', 'planning', 'brainstorming',
-            'collaboration', 'whiteboard', 'mindmap', 'flowchart',
-            'wireframe', 'prototype', 'mockup', 'design review'
+        # Check for public indicators first - if present, don't filter out
+        public_indicators = [
+            'tutorial', 'guide', 'how-to', 'educational', 'learning',
+            'public', 'open', 'shared', 'published', 'available',
+            'resource', 'reference', 'documentation', 'example',
+            'demo', 'showcase', 'presentation', 'talk', 'lecture'
         ]
         
-        if any(indicator in content for indicator in internal_indicators):
-            # Additional check: if it's a collaboration tool, likely internal
-            collaboration_domains = [
-                'mural.co', 'trello.com', 'notion.so', 'figma.com', 
-                'miro.com', 'whimsical.com', 'lucidchart.com', 'canva.com'
+        if any(indicator in content for indicator in public_indicators):
+            return False  # Don't filter out if it has public indicators
+        
+        # Definitely internal patterns (no AI needed)
+        definitely_internal_patterns = [
+            # Google Workspace private patterns
+            '/document/d/', '/spreadsheets/d/', '/presentation/d/',
+            '/forms/d/', '/drawings/d/', '/sites/d/',
+            '/drive/folders/', '/drive/u/', '/drive/d/',
+            
+            # Collaboration tools with private patterns
+            '/t/', '/m/', '/s/',  # Mural
+            '/b/', '/c/', '/card/',  # Trello
+            '/page/', '/database/', '/workspace/',  # Notion
+            '/file/', '/proto/', '/design/',  # Figma
+            '/board/', '/app/',  # Miro
+            
+            # Video recordings
+            '/live/', '/embed/', '/v/',  # Live streams
+            'youtu.be',  # YouTube short URLs (usually recordings)
+        ]
+        
+        if any(pattern in url_lower for pattern in definitely_internal_patterns):
+            return True
+        
+        # Content indicators that are definitely internal
+        definitely_internal_keywords = [
+            'internal', 'private', 'confidential', 'draft', 'working',
+            'team meeting', 'recording', 'session', 'workshop',
+            'kanban', 'planning', 'brainstorming', 'whiteboard',
+            'mindmap', 'flowchart', 'wireframe', 'prototype', 'mockup'
+        ]
+        
+        if any(keyword in content for keyword in definitely_internal_keywords):
+            return True
+        
+        return False
+    
+    def _needs_ai_analysis(self, url: str, domain: str, content: str) -> bool:
+        """Determine if a resource needs AI analysis for privacy assessment"""
+        url_lower = url.lower()
+        
+        # Domains that might have both public and private content
+        ambiguous_domains = [
+            'docs.google.com', 'drive.google.com',  # Google Workspace
+            'youtube.com', 'vimeo.com',  # Video platforms
+            'medium.com', 'substack.com',  # Publishing platforms
+            'github.com', 'gitlab.com',  # Code repositories
+            'huggingface.co', 'paperswithcode.com',  # AI/ML platforms
+        ]
+        
+        # URL patterns that are ambiguous
+        ambiguous_patterns = [
+            '/watch?v=',  # YouTube videos (could be public tutorials)
+            '/channel/',  # YouTube channels (could be public)
+            '/playlist/',  # YouTube playlists (could be public)
+            '/c/',  # YouTube custom URLs (could be public)
+            '/user/',  # Various platforms (could be public)
+            '/@',  # Modern social media handles (could be public)
+        ]
+        
+        # Content indicators that suggest ambiguity
+        ambiguous_keywords = [
+            'tutorial', 'guide', 'how-to', 'educational', 'learning',
+            'public', 'open', 'shared', 'published', 'available',
+            'resource', 'reference', 'documentation', 'example',
+            'demo', 'showcase', 'presentation', 'talk', 'lecture'
+        ]
+        
+        # Check if domain is ambiguous
+        is_ambiguous_domain = any(amb_domain in domain for amb_domain in ambiguous_domains)
+        
+        # Check if URL pattern is ambiguous
+        is_ambiguous_pattern = any(pattern in url_lower for pattern in ambiguous_patterns)
+        
+        # Check if content suggests public value
+        has_public_indicators = any(keyword in content for keyword in ambiguous_keywords)
+        
+        return is_ambiguous_domain and (is_ambiguous_pattern or has_public_indicators)
+    
+    def _ai_analyze_resource_privacy(self, url: str, domain: str, message: Dict[str, Any]) -> bool:
+        """Use AI to analyze if a resource is private/internal or public/valuable"""
+        content = message.get('content', '')
+        
+        # Create AI prompt for privacy analysis
+        prompt = f"""
+Analyze this resource to determine if it should be included in a public resource database.
+
+URL: {url}
+Domain: {domain}
+Message Context: {content[:200]}
+
+Consider:
+1. Is this a private/internal document (team meetings, internal planning, confidential)?
+2. Is this a public educational resource (tutorials, guides, open documentation)?
+3. Is this valuable for the broader AI/tech community?
+4. Would sharing this publicly violate privacy or confidentiality?
+
+Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
+"""
+        
+        try:
+            llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
+            llm_model = self.fast_model if self.use_fast_model else self.standard_model
+            
+            response = requests.post(llm_endpoint, json={
+                "model": llm_model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {
+                    "temperature": 0.1,  # Low temperature for consistent decisions
+                    "top_p": 0.9,
+                    "num_predict": 10,  # Short response
+                    "stop": ["\n", " ", "."]  # Stop at first word
+                }
+            }, timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                result = data.get('response', '').strip().upper()
+                
+                # Track AI decisions for analysis
+                self.stats['ai_analyzed'] = self.stats.get('ai_analyzed', 0) + 1
+                if result == 'PRIVATE':
+                    self.stats['ai_filtered'] = self.stats.get('ai_filtered', 0) + 1
+                
+                return result == 'PRIVATE'
+            else:
+                # Fallback to conservative approach if AI fails
+                print(f"⚠️ AI analysis failed for {url[:50]}..., using fallback")
+                return self._conservative_fallback(url, domain, content)
+                
+        except Exception as e:
+            # Fallback to conservative approach if AI fails
+            print(f"⚠️ AI analysis error for {url[:50]}...: {e}")
+            return self._conservative_fallback(url, domain, content)
+    
+    def _conservative_fallback(self, url: str, domain: str, content: str) -> bool:
+        """Conservative fallback when AI analysis fails"""
+        # When in doubt, be conservative and filter out
+        # This prevents accidentally exposing private content
+        
+        # But allow some obvious public resources through
+        public_indicators = [
+            'tutorial', 'guide', 'how-to', 'educational', 'learning',
+            'public', 'open', 'shared', 'published', 'available',
+            'resource', 'reference', 'documentation', 'example'
+        ]
+        
+        if any(indicator in content for indicator in public_indicators):
+            return False  # Allow through if it has public indicators
+        
+        return True  # Filter out by default (conservative)
+    
+    def _content_based_filtering(self, url: str, domain: str, content: str) -> bool:
+        """Content-based heuristics for edge cases"""
+        # Check for collaboration tools with internal indicators
+        collaboration_domains = [
+            'mural.co', 'trello.com', 'notion.so', 'figma.com', 
+            'miro.com', 'whimsical.com', 'lucidchart.com', 'canva.com'
+        ]
+        
+        if any(collab_domain in domain for collab_domain in collaboration_domains):
+            # Additional content check for collaboration tools
+            internal_collab_keywords = [
+                'team', 'meeting', 'recording', 'session', 'workshop',
+                'board', 'project', 'planning', 'brainstorming',
+                'collaboration', 'whiteboard', 'mindmap', 'flowchart'
             ]
-            if any(collab_domain in domain for collab_domain in collaboration_domains):
+            
+            if any(keyword in content for keyword in internal_collab_keywords):
                 return True
         
         return False
@@ -536,7 +663,16 @@ class FreshResourceDetector:
         print(f"❌ Excluded (low-quality + internal docs): {self.stats['excluded_domains']}")
         print(f"❓ Unknown domains skipped: {self.stats['unknown_domains']}")
         print(f"⚠️ Parsing errors: {self.stats['parsing_errors']}")
-        print(f"🔒 Internal documents filtered: Collaboration tools, private docs, recordings")
+        
+        # Show AI analysis statistics
+        ai_analyzed = self.stats.get('ai_analyzed', 0)
+        ai_filtered = self.stats.get('ai_filtered', 0)
+        if ai_analyzed > 0:
+            ai_kept = ai_analyzed - ai_filtered
+            print(f"🤖 AI analysis: {ai_analyzed} ambiguous resources analyzed")
+            print(f"   📊 AI decisions: {ai_kept} kept public, {ai_filtered} filtered private")
+        
+        print(f"🔒 Smart filtering: Rule-based + AI analysis for privacy protection")
         
         # Show incremental processing info
         if self.processed_urls:
