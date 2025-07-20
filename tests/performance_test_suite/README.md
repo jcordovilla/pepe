@@ -122,10 +122,12 @@ Create a `config.json` file to customize the test suite:
 - Fallback to rule-based evaluation if Llama unavailable
 
 ### Phase 5: Report Generation
-- Generates comprehensive performance report
-- Provides actionable recommendations
-- Identifies architecture insights
-- Creates executive summary
+- Generates comprehensive performance report with Llama-powered analysis
+- **Llama Pattern Analysis**: Identifies performance patterns and trends
+- **Architectural Recommendations**: AI-generated specific component improvements
+- **Root Cause Analysis**: Llama identifies true causes vs. symptoms
+- **Improvement Strategy**: Comprehensive action plan with timelines
+- Creates executive summary with AI insights
 
 ## 📈 Evaluation Metrics
 
@@ -146,6 +148,16 @@ The test suite uses **Llama model integration** for semantic evaluation:
 - **Quality Assessment**: Llama rates response accuracy, helpfulness, and appropriateness
 - **Coherence Evaluation**: Llama assesses logical flow and organization
 - **Fallback Mode**: Rule-based evaluation when Llama is unavailable
+
+### AI-Powered Report Analysis
+
+The test suite also uses **Llama model integration** for sophisticated report generation:
+
+- **Pattern Analysis**: Identifies performance patterns and trends across evaluations
+- **Architectural Recommendations**: Generates specific component improvement suggestions
+- **Root Cause Analysis**: Distinguishes between symptoms and true root causes
+- **Improvement Strategy**: Creates comprehensive action plans with timelines and resources
+- **Component Interaction Analysis**: Identifies system-level bottlenecks and interactions
 
 ### System Reliability Metrics
 
@@ -168,6 +180,34 @@ tests/performance_test_suite/data/
 ├── executive_summary_YYYYMMDD_HHMMSS.md
 ├── complete_test_results_YYYYMMDD_HHMMSS.json
 └── performance_test.log
+```
+
+### Enhanced Report Content
+
+The comprehensive report now includes **Llama-powered analysis**:
+
+```json
+{
+  "llama_analysis": {
+    "pattern_analysis": {
+      "performance_patterns": [...],
+      "category_performance": {...},
+      "quality_trends": [...],
+      "architectural_implications": [...]
+    },
+    "root_cause_analysis": {
+      "root_causes": [...],
+      "system_bottlenecks": [...],
+      "failure_patterns": [...]
+    },
+    "improvement_strategy": {
+      "immediate_actions": [...],
+      "short_term_goals": [...],
+      "long_term_vision": [...],
+      "implementation_phases": [...]
+    }
+  }
+}
 ```
 
 ## 🔍 Sample Queries
@@ -227,6 +267,14 @@ The Llama model uses carefully crafted prompts for:
 - **Semantic Relevance**: "Rate how well this response answers the query"
 - **Quality Assessment**: "Rate the quality of this Discord bot response"
 - **Coherence Evaluation**: "Rate the coherence and logical flow"
+
+### Report Analysis Prompts
+
+The Llama model uses sophisticated prompts for report generation:
+- **Pattern Analysis**: "Analyze these evaluation results and identify key patterns"
+- **Architectural Recommendations**: "Generate specific architectural recommendations"
+- **Root Cause Analysis**: "Identify root causes of performance issues"
+- **Improvement Strategy**: "Generate comprehensive improvement strategy"
 
 ## 🛠️ Customization
 
