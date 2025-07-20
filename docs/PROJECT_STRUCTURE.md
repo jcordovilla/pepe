@@ -10,7 +10,7 @@ discord-bot-agentic/
 ├── .env                    # Environment variables (Discord token, OpenAI API key)
 ├── .gitignore             # Git ignore patterns
 ├── main.py                # Main entry point for the application
-├── requirements.txt       # Python dependencies
+├── pyproject.toml         # Poetry dependencies and project configuration
 ├── readme.md             # Project documentation
 ├── PROJECT_STRUCTURE.md  # This file - project structure documentation
 │
@@ -272,7 +272,7 @@ ENABLE_MEMORY_SUMMARIZATION=true
 
 1. **Setup Environment**:
    ```bash
-   pip install -r requirements.txt
+   poetry install
    cp .env.example .env  # Add your tokens
    ```
 

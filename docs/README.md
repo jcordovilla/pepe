@@ -5,23 +5,28 @@ This directory contains documentation for the Discord RAG Bot with Agentic Archi
 ## Structure
 
 - **[index.md](index.md)** - Main project overview and architecture
-- **[example_queries.md](example_queries.md)** - Examples of supported queries and interactions
-- **[resources/](resources/)** - Community resources and content
-- **[legacy/](legacy/)** - Archived documentation from previous system versions
+- **[OPERATIONS.md](OPERATIONS.md)** - Complete operations and maintenance guide
+- **[ORGANIZATION.md](ORGANIZATION.md)** - Project organization and structure
+- **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Detailed project architecture
+- **[guides/](guides/)** - Usage guides and examples
+- **[setup/](setup/)** - Setup and deployment instructions
 
-## Main Documentation Files
+## Quick Start
 
 For deployment and setup instructions, see:
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide
-- **[PROJECT_COMPLETION.md](PROJECT_COMPLETION.md)** - Project summary and status
+- **[setup/DEPLOYMENT.md](setup/DEPLOYMENT.md)** - Complete deployment guide
+- **[setup/QUICKSTART.md](setup/QUICKSTART.md)** - Quick start guide
+- **[setup/DEPLOYMENT_CHECKLIST.md](setup/DEPLOYMENT_CHECKLIST.md)** - Deployment checklist
 
-## API Reference
+## Usage Examples
+
+- **[guides/example_queries.md](guides/example_queries.md)** - Examples of supported queries and interactions
+
+## System Architecture
 
 The agentic system provides:
-- Discord slash commands
+- Discord slash commands with intelligent responses
 - RESTful API endpoints (see `agentic/interfaces/agent_api.py`)
-- WebSocket support for real-time interactions
-
-## Legacy Content
-
-Historical documentation and architecture files are preserved in the `legacy/` directory for reference.
+- Multi-agent orchestration with LangGraph
+- Vector-based semantic search with ChromaDB
+- Conversation memory with SQLite storage
