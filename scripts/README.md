@@ -1,133 +1,121 @@
 # Scripts Directory
 
-This directory contains utility scripts for maintenance, testing, and system management of the modernized Discord Bot.
+This directory contains utility scripts for maintenance, testing, and system management of the Discord Bot.
 
 ## 🚀 Core Scripts
 
-### **`run_pipeline.py`** (DEPRECATED)
-Legacy pipeline script - **DO NOT USE**. The Discord bot now handles all data processing automatically.
-
-### **`system_status.py`**
-System health monitoring and status reporting.
+### **`discord_message_fetcher.py`**
+Fetch messages from Discord and store them in SQLite database.
 ```bash
-python scripts/system_status.py
+# Full fetch (all messages)
+poetry run python scripts/discord_message_fetcher.py --full
+
+# Incremental fetch (new messages only)
+poetry run python scripts/discord_message_fetcher.py --incremental
+
+# Show help
+poetry run python scripts/discord_message_fetcher.py --help
 ```
 
-### **`test_system.py`**
-Comprehensive system testing and validation.
+**Note**: This script automatically ignores channels that have "test" in their name (case-insensitive) to avoid fetching test data.
+
+### **`index_database_messages.py`**
+Index messages from SQLite database into vector store for semantic search.
 ```bash
-python scripts/test_system.py
+# Full indexing (all messages)
+poetry run python scripts/index_database_messages.py --full
+
+# Incremental indexing (new messages only)
+poetry run python scripts/index_database_messages.py --incremental
 ```
 
-### **`validate_deployment.py`**
-Pre-deployment validation and readiness checks.
+### **`resource_detector.py`**
+CLI-based resource detection using local Llama models.
 ```bash
-python scripts/validate_deployment.py
+# Detect resources from messages
+poetry run python scripts/resource_detector.py
+
+# Use fast model for quicker processing
+poetry run python scripts/resource_detector.py --fast-model
+
+# Reset cache and reprocess all resources
+poetry run python scripts/resource_detector.py --reset-cache
 ```
 
-## 🔧 Maintenance Scripts
+## 🛠️ Maintenance Scripts
 
-### **`create_snapshot.py`**
-Create system snapshots for backup and rollback.
+### **`delete_and_recreate_collection.py`**
+Delete and recreate ChromaDB collection (useful for fixing embedding model issues).
 ```bash
-python scripts/create_snapshot.py
+poetry run python scripts/delete_and_recreate_collection.py
 ```
-
-### **`restore_snapshot.py`**
-Restore system from previous snapshots.
-```bash
-python scripts/restore_snapshot.py
-```
-
-## 🗄️ Database Scripts
-
-### **`database/populate_database.py`**
-Complete database initialization and population.
-```bash
-python scripts/database/populate_database.py
-```
-
-### **`database/init_db_simple.py`**
-Simple database initialization with sample data.
-```bash
-python scripts/database/init_db_simple.py
-```
-
-## 🧹 Legacy Management
-
-### **`cleanup_legacy.py`**
-Clean up legacy files and archives.
-```bash
-python scripts/cleanup_legacy.py
-```
-
-### **`migrate_legacy.py`**
-Migration utilities (now completed).
-```bash
-python scripts/migrate_legacy.py
-```
-
-## 📁 Subdirectories
-
-- **`database/`** - Database initialization and management scripts
-- **`maintenance/`** - System maintenance and monitoring tools
 
 ## 🎯 Quick Usage Guide
 
 ### First Time Setup
 ```bash
-# 1. Initialize database
-python scripts/database/populate_database.py
+# 1. Ensure Poetry environment is active
+poetry shell
 
-# 2. Validate system
-python scripts/validate_deployment.py
+# 2. Setup system
+poetry run ./pepe-admin setup
 
-# 3. Start bot
-python main.py
+# 3. Fetch Discord messages
+poetry run ./pepe-admin sync --full
+
+# 4. Start bot
+poetry run python main.py
 ```
 
 ### Regular Maintenance
 ```bash
 # Check system status
-python scripts/system_status.py
+poetry run ./pepe-admin info
 
-# Run tests
-python scripts/test_system.py
+# Incremental sync (new messages only)
+poetry run ./pepe-admin sync
 
-# Create backup
-python scripts/create_snapshot.py
+# Run system validation
+poetry run ./pepe-admin test
+
+# Detect resources
+poetry run ./pepe-admin resources detect
 ```
 
 ## ⚠️ Important Notes
 
-- **No pipeline scripts needed** - The Discord bot processes data automatically
+- **Always use Poetry**: All commands should be run with `poetry run` or within `poetry shell`
+- **Test channel filtering**: All scripts automatically ignore channels with "test" in the name
 - **Real-time processing** - Messages are handled as they arrive
 - **Unified architecture** - All functionality integrated into main bot
-- Environment variables (OPENAI_API_KEY, DISCORD_TOKEN, GUILD_ID)
-- Python dependencies and package versions
-- File structure and required directories
-- Core system component importability
-- Configuration validity
+- **Local Llama models** - Resource detection uses local models for privacy
+- **OpenAI embeddings only** - Vector search uses OpenAI for embeddings
 
 ## Running Scripts
 
-All scripts should be run from the project root directory to ensure proper path resolution:
+All scripts should be run from the project root directory using Poetry:
 
 ```bash
 # From project root
-cd /Users/jose/Documents/apps/discord-bot-v2
+cd /Users/jose/Documents/apps/discord-bot-agentic
 
-# Run tests
-python3 scripts/test_system.py
+# Option 1: Use poetry run for each command
+poetry run python scripts/discord_message_fetcher.py --full
+poetry run python scripts/index_database_messages.py --incremental
+poetry run python scripts/resource_detector.py --fast-model
 
-# Validate deployment readiness
-python3 scripts/validate_deployment.py
+# Option 2: Activate Poetry shell and run commands directly
+poetry shell
+python scripts/discord_message_fetcher.py --full
+python scripts/index_database_messages.py --incremental
+python scripts/resource_detector.py --fast-model
 ```
 
 ## Integration with Main System
 
-These scripts are designed to work with the agentic framework and will:
+These scripts work with the agentic framework and will:
 - Automatically create necessary data directories
 - Use the same configuration as the main application
 - Provide detailed logging and error reporting
 - Maintain compatibility with the production environment
+- Always use the Poetry-managed dependencies

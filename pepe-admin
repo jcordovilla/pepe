@@ -593,6 +593,10 @@ class PepeAdminSimplified:
         sync_stats['inaccessible_channels'] = []
         
         for channel in guild.channels:
+            # Skip channels with "test" in the name (case-insensitive)
+            if "test" in channel.name.lower():
+                continue
+                
             channel_info = {
                 'name': channel.name,
                 'type': str(channel.type),
