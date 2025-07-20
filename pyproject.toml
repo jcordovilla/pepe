@@ -29,6 +29,7 @@ langchain-community = "^0.2.0"
 # Vector Store and Embeddings
 chromadb = "0.4.15"
 faiss-cpu = "^1.7.4"
+sentence-transformers = "^2.2.2"
 
 # Database and ORM
 SQLAlchemy = "^2.0.0"

@@ -38,7 +38,8 @@ def get_modernized_config() -> Dict[str, Any]:
             "vector_config": {
                 "persist_directory": "./data/chromadb",
                 "collection_name": "discord_messages",
-                "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
+                "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
+                "embedding_type": os.getenv("EMBEDDING_TYPE", "sentence_transformers"),  # sentence_transformers or openai
                 "batch_size": 100  # From legacy batch processing
             },
             "memory_config": {
@@ -63,6 +64,14 @@ def get_modernized_config() -> Dict[str, Any]:
             "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
             "max_tokens": 4000,
             "temperature": 0.1  # From legacy proven settings
+        },
+        
+        # Sentence Transformers configuration (for local embeddings)
+        "sentence_transformers": {
+            "model_name": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
+            "device": os.getenv("EMBEDDING_DEVICE", "cpu"),  # cpu or cuda
+            "max_length": int(os.getenv("EMBEDDING_MAX_LENGTH", "512")),
+            "normalize_embeddings": True
         },
         
         # Legacy-proven processing settings

@@ -40,7 +40,8 @@ class IntegrationTestConfig:
             'vector_store': {
                 'persist_directory': str(self.test_data_dir / 'chromadb_integration'),
                 'collection_name': 'integration_test_messages',
-                'embedding_model': 'text-embedding-3-small'
+                'embedding_model': 'msmarco-distilbert-base-v4',
+            'embedding_type': 'sentence_transformers'
             },
             'memory': {
                 'db_path': str(self.test_data_dir / 'integration_memory.db')

@@ -36,7 +36,8 @@ class PersistentVectorStore:
         # Configuration
         self.collection_name = config.get("collection_name", "discord_messages")
         self.persist_directory = config.get("persist_directory", "./data/chromadb")
-        self.embedding_model = config.get("embedding_model", os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"))
+        self.embedding_model = config.get("embedding_model", os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"))
+        self.embedding_type = config.get("embedding_type", os.getenv("EMBEDDING_TYPE", "sentence_transformers"))
         self.chunk_size = config.get("chunk_size", 1000)
         self.batch_size = config.get("batch_size", 100)
         
@@ -87,18 +88,33 @@ class PersistentVectorStore:
                 logger.warning(f"Error creating client with settings, trying fallback: {client_error}")
                 self.client = chromadb.PersistentClient(path=self.persist_directory)
             
-            # Initialize embedding function - use single OpenAI API key
-            api_key = os.getenv("OPENAI_API_KEY")
-            
-            if not api_key or api_key == "test-key-for-testing":
-                # For testing scenarios, create a simple mock embedding function
-                logger.warning("Using test/mock configuration - creating collection with default embedding function")
-                self.embedding_function = embedding_functions.DefaultEmbeddingFunction()
+            # Initialize embedding function based on configuration
+            if self.embedding_type == "openai":
+                # Use OpenAI embeddings
+                api_key = os.getenv("OPENAI_API_KEY")
+                if not api_key or api_key == "test-key-for-testing":
+                    logger.warning("OpenAI API key not available, falling back to sentence-transformers")
+                    self.embedding_type = "sentence_transformers"
+                    self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
+                        model_name=self.embedding_model
+                    )
+                else:
+                    self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(
+                        api_key=api_key,
+                        model_name=self.embedding_model
+                    )
+                    logger.info(f"Using OpenAI embedding model: {self.embedding_model}")
             else:
-                self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(
-                    api_key=api_key,
-                    model_name=self.embedding_model
-                )
+                # Use sentence-transformers (default)
+                try:
+                    self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
+                        model_name=self.embedding_model
+                    )
+                    logger.info(f"Using sentence-transformers model: {self.embedding_model}")
+                except Exception as e:
+                    logger.warning(f"Failed to load sentence-transformers model {self.embedding_model}: {e}")
+                    logger.info("Falling back to default embedding function")
+                    self.embedding_function = embedding_functions.DefaultEmbeddingFunction()
             
             # Get or create collection
             try:
@@ -252,8 +268,8 @@ class PersistentVectorStore:
                     # Handle reactions - can be list or int
                     reactions = msg.get("reactions", [])
                     if isinstance(reactions, list):
-                        total_reactions = sum(r.get("count", 0) for r in reactions) if reactions else 0
-                        reaction_emojis = [r.get("emoji", "") for r in reactions] if reactions else []
+                        total_reactions = sum(r.get("count", 0) for r in reactions if r and r.get("count") is not None) if reactions else 0
+                        reaction_emojis = [r.get("emoji", "") for r in reactions if r and r.get("emoji")] if reactions else []
                     elif isinstance(reactions, int):
                         total_reactions = reactions
                         reaction_emojis = []
@@ -272,8 +288,8 @@ class PersistentVectorStore:
                     # Handle mentions - can be list or int
                     mentions = msg.get("mentions", [])
                     if isinstance(mentions, list):
-                        mentioned_user_ids = [str(m.get("id", "")) for m in mentions] if mentions else []
-                        mentioned_user_names = [m.get("display_name", m.get("username", "")) for m in mentions] if mentions else []
+                        mentioned_user_ids = [str(m.get("id", "")) for m in mentions if m and m.get("id")] if mentions else []
+                        mentioned_user_names = [m.get("display_name", m.get("username", "")) for m in mentions if m and (m.get("display_name") or m.get("username"))] if mentions else []
                         mention_count = len(mentions)
                     elif isinstance(mentions, int):
                         mentioned_user_ids = []
@@ -287,10 +303,10 @@ class PersistentVectorStore:
                     # Handle attachments - can be list or int
                     attachments = msg.get("attachments", [])
                     if isinstance(attachments, list):
-                        attachment_urls = [a.get("url", "") for a in attachments] if attachments else []
-                        attachment_filenames = [a.get("filename", "") for a in attachments] if attachments else []
-                        attachment_types = [a.get("content_type", "") for a in attachments] if attachments else []
-                        attachment_sizes = [a.get("size", 0) for a in attachments] if attachments else []
+                        attachment_urls = [a.get("url", "") for a in attachments if a and a.get("url")] if attachments else []
+                        attachment_filenames = [a.get("filename", "") for a in attachments if a and a.get("filename")] if attachments else []
+                        attachment_types = [a.get("content_type", "") for a in attachments if a and a.get("content_type")] if attachments else []
+                        attachment_sizes = [a.get("size", 0) for a in attachments if a and a.get("size") is not None] if attachments else []
                         attachment_count = len(attachments)
                     elif isinstance(attachments, int):
                         attachment_urls = []
@@ -354,19 +370,19 @@ class PersistentVectorStore:
                         
                         # Reactions (enhanced)
                         "total_reactions": total_reactions,
-                        "reaction_emojis": ",".join(reaction_emojis),
+                        "reaction_emojis": ",".join(str(e) for e in reaction_emojis if e),
                         "reaction_details": json.dumps(reactions) if isinstance(reactions, list) else str(reactions),
                         
                         # Mentions (comprehensive)
-                        "mentioned_user_ids": ",".join(mentioned_user_ids),
-                        "mentioned_user_names": ",".join(mentioned_user_names),
+                        "mentioned_user_ids": ",".join(str(uid) for uid in mentioned_user_ids if uid),
+                        "mentioned_user_names": ",".join(str(name) for name in mentioned_user_names if name),
                         "mention_count": mention_count,
                         
                         # Attachments (comprehensive)
-                        "attachment_urls": ",".join(attachment_urls),
-                        "attachment_filenames": ",".join(attachment_filenames), 
-                        "attachment_types": ",".join(attachment_types),
-                        "attachment_sizes": ",".join(str(s) for s in attachment_sizes),
+                        "attachment_urls": ",".join(str(url) for url in attachment_urls if url),
+                        "attachment_filenames": ",".join(str(name) for name in attachment_filenames if name), 
+                        "attachment_types": ",".join(str(t) for t in attachment_types if t),
+                        "attachment_sizes": ",".join(str(s) for s in attachment_sizes if s is not None),
                         "attachment_count": attachment_count,
                         
                         # Embeds

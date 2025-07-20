@@ -174,45 +174,53 @@ class PepeAdminSimplified:
 
             if fetch_only:
                 print("\n📥 Fetching messages from Discord (fetch-only mode)...")
+                print("   Progress bars will show real-time status below:")
+                print("-" * 60)
                 fetch_result = subprocess.run([
                     "python", "scripts/discord_message_fetcher.py"
-                ], capture_output=True, text=True)
-                print(fetch_result.stdout)
+                ])  # Remove capture_output to show progress bars in real-time
                 if fetch_result.returncode != 0:
-                    print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                    print(f"❌ Fetcher script failed with return code: {fetch_result.returncode}")
                     return False
                 print("\n✅ Fetch completed successfully!")
                 return True
 
             if index_only:
                 print("\n🔎 Indexing messages into vector store (index-only mode)...")
+                print("   Progress bars will show real-time status below:")
+                print("-" * 60)
                 index_result = subprocess.run([
                     "python", "scripts/index_database_messages.py"
-                ], capture_output=True, text=True)
-                print(index_result.stdout)
+                ])  # Remove capture_output to show progress bars in real-time
                 if index_result.returncode != 0:
-                    print(f"❌ Indexer script failed: {index_result.stderr}")
+                    print(f"❌ Indexer script failed with return code: {index_result.returncode}")
                     return False
                 print("\n✅ Indexing completed successfully!")
                 return True
 
             # Default: run both fetch and index
             print("\n📥 Step 1: Fetching messages from Discord...")
+            print("   This may take a while depending on the number of channels and messages.")
+            print("   Progress bars will show the current status.")
+            print("-" * 60)
+            
             fetch_result = subprocess.run([
                 "python", "scripts/discord_message_fetcher.py"
-            ], capture_output=True, text=True)
-            print(fetch_result.stdout)
+            ])  # Remove capture_output to show progress bars in real-time
             if fetch_result.returncode != 0:
-                print(f"❌ Fetcher script failed: {fetch_result.stderr}")
+                print(f"❌ Fetcher script failed with return code: {fetch_result.returncode}")
                 return False
 
             print("\n🔎 Step 2: Indexing messages into vector store...")
+            print("   Creating embeddings for semantic search.")
+            print("   This process uses the new msmarco-distilbert-base-v4 model.")
+            print("-" * 60)
+            
             index_result = subprocess.run([
                 "python", "scripts/index_database_messages.py"
-            ], capture_output=True, text=True)
-            print(index_result.stdout)
+            ])  # Remove capture_output to show progress bars in real-time
             if index_result.returncode != 0:
-                print(f"❌ Indexer script failed: {index_result.stderr}")
+                print(f"❌ Indexer script failed with return code: {index_result.returncode}")
                 return False
 
             # Step 3: Summarize results from the database
@@ -474,6 +482,12 @@ class PepeAdminSimplified:
             
             # Step 1: Detect resources
             print("\n📥 Step 1: Detecting resources from Discord messages...")
+            print("   This process will:")
+            print("   • Load messages from the database")
+            print("   • Extract and evaluate URLs for quality")
+            print("   • Generate AI descriptions for resources")
+            print("   • Show progress bars for each operation")
+            print("-" * 60)
             
             # Build command with options
             cmd = ["python3", "scripts/resource_detector.py"]
@@ -484,14 +498,18 @@ class PepeAdminSimplified:
             if reset_cache:
                 cmd.append("--reset-cache")
             
-            detect_result = subprocess.run(cmd, capture_output=True, text=True)
-            print(detect_result.stdout)
+            detect_result = subprocess.run(cmd)  # Remove capture_output to show progress bars in real-time
             if detect_result.returncode != 0:
-                print(f"❌ Resource detection failed: {detect_result.stderr}")
+                print(f"❌ Resource detection failed with return code: {detect_result.returncode}")
                 return False
             
             # Step 2: Migrate to enhanced database
             print("\n🔄 Step 2: Migrating resources to enhanced database...")
+            print("   This process will:")
+            print("   • Import detected resources into the enhanced database")
+            print("   • Create optimized indexes for fast searching")
+            print("   • Generate additional metadata and analytics")
+            print("-" * 60)
             
             # Check if we have resources to migrate
             resources_file = Path("data/optimized_fresh_resources.json")
@@ -504,10 +522,9 @@ class PepeAdminSimplified:
             if reset_cache:
                 migrate_cmd.append("--reset-cache")
             
-            migrate_result = subprocess.run(migrate_cmd, capture_output=True, text=True)
-            print(migrate_result.stdout)
+            migrate_result = subprocess.run(migrate_cmd)  # Remove capture_output to show progress bars in real-time
             if migrate_result.returncode != 0:
-                print(f"❌ Resource migration failed: {migrate_result.stderr}")
+                print(f"❌ Resource migration failed with return code: {migrate_result.returncode}")
                 return False
             
             # Step 3: Show results

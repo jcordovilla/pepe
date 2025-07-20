@@ -19,6 +19,7 @@ sys.path.insert(0, str(project_root))
 
 import discord
 import dotenv
+from tqdm import tqdm
 
 # Load environment variables
 dotenv.load_dotenv()
@@ -119,9 +120,9 @@ class DiscordMessageFetcher:
                 print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels")
                 
                 # Process text channels
-                for channel in text_channels:
+                print(f"\n📥 Processing {len(text_channels)} text channels...")
+                for channel in tqdm(text_channels, desc="📥 Text channels", unit="channel"):
                     try:
-                        print(f"📥 Fetching from #{channel.name}")
                         await self.fetch_channel_messages(channel, stats)
                         stats['text_channels'] += 1
                     except Exception as e:
@@ -130,15 +131,16 @@ class DiscordMessageFetcher:
                         stats['errors'].append(error_msg)
                 
                 # Process forum channels
-                for forum in forum_channels:
-                    try:
-                        print(f"📋 Fetching from forum #{forum.name}")
-                        await self.fetch_forum_messages(forum, stats)
-                        stats['forum_channels'] += 1
-                    except Exception as e:
-                        error_msg = f"Error fetching forum #{forum.name}: {e}"
-                        print(f"❌ {error_msg}")
-                        stats['errors'].append(error_msg)
+                if forum_channels:
+                    print(f"\n📋 Processing {len(forum_channels)} forum channels...")
+                    for forum in tqdm(forum_channels, desc="📋 Forum channels", unit="forum"):
+                        try:
+                            await self.fetch_forum_messages(forum, stats)
+                            stats['forum_channels'] += 1
+                        except Exception as e:
+                            error_msg = f"Error fetching forum #{forum.name}: {e}"
+                            print(f"❌ {error_msg}")
+                            stats['errors'].append(error_msg)
                 
                 # Print final stats
                 print("\n📊 Fetch Complete!")
@@ -166,22 +168,30 @@ class DiscordMessageFetcher:
         """Fetch messages from a text channel"""
         try:
             messages = []
-            async for message in channel.history(limit=None):
-                message_data = self.convert_message_to_dict(message)
-                messages.append(message_data)
+            message_count = 0
+            
+            # Create progress bar for this channel
+            with tqdm(desc=f"📥 #{channel.name}", unit="msgs", leave=False) as pbar:
+                async for message in channel.history(limit=None):
+                    message_data = self.convert_message_to_dict(message)
+                    messages.append(message_data)
+                    message_count += 1
+                    pbar.update(1)
+                    
+                    # Batch insert every 100 messages
+                    if len(messages) >= 100:
+                        await self.insert_messages_batch(messages)
+                        stats['total_messages'] += len(messages)
+                        pbar.set_postfix({"batch": len(messages)})
+                        messages = []
                 
-                # Batch insert every 100 messages
-                if len(messages) >= 100:
+                # Insert remaining messages
+                if messages:
                     await self.insert_messages_batch(messages)
                     stats['total_messages'] += len(messages)
-                    print(f"   ✅ {len(messages)} messages from #{channel.name}")
-                    messages = []
+                    pbar.set_postfix({"final": len(messages)})
             
-            # Insert remaining messages
-            if messages:
-                await self.insert_messages_batch(messages)
-                stats['total_messages'] += len(messages)
-                print(f"   ✅ {len(messages)} messages from #{channel.name}")
+            print(f"   ✅ {message_count:,} messages from #{channel.name}")
                 
         except discord.Forbidden:
             print(f"   ⚠️ No permission to read #{channel.name}")
@@ -207,7 +217,7 @@ class DiscordMessageFetcher:
             
             print(f"   🧵 Found {len(threads)} threads in forum #{forum.name}")
             
-            for thread in threads:
+            for thread in tqdm(threads, desc=f"Processing threads in {forum.name}"):
                 try:
                     print(f"     🧵 Processing thread: {thread.name}")
                     await self.fetch_thread_messages(thread, forum, stats)
@@ -222,28 +232,39 @@ class DiscordMessageFetcher:
         """Fetch messages from a specific thread"""
         try:
             messages = []
-            async for message in thread.history(limit=None):
-                message_data = self.convert_message_to_dict(message)
-                # Add thread-specific metadata
-                message_data.update({
-                    'thread_id': str(thread.id),
-                    'thread_name': thread.name,
-                    'forum_channel_id': str(forum.id),
-                    'forum_channel_name': forum.name,
-                    'is_forum_thread': True
-                })
-                messages.append(message_data)
+            message_count = 0
+            
+            # Create progress bar for this thread
+            with tqdm(desc=f"     🧵 {thread.name[:30]}", unit="msgs", leave=False) as pbar:
+                async for message in thread.history(limit=None):
+                    message_data = self.convert_message_to_dict(message)
+                    # Add thread-specific metadata
+                    message_data.update({
+                        'thread_id': str(thread.id),
+                        'thread_name': thread.name,
+                        'forum_channel_id': str(forum.id),
+                        'forum_channel_name': forum.name,
+                        'is_forum_thread': True
+                    })
+                    messages.append(message_data)
+                    message_count += 1
+                    pbar.update(1)
+                    
+                    # Batch insert every 100 messages
+                    if len(messages) >= 100:
+                        await self.insert_messages_batch(messages)
+                        stats['total_messages'] += len(messages)
+                        pbar.set_postfix({"batch": len(messages)})
+                        messages = []
                 
-                # Batch insert every 100 messages
-                if len(messages) >= 100:
+                # Insert remaining messages
+                if messages:
                     await self.insert_messages_batch(messages)
                     stats['total_messages'] += len(messages)
-                    messages = []
+                    pbar.set_postfix({"final": len(messages)})
             
-            # Insert remaining messages
-            if messages:
-                await self.insert_messages_batch(messages)
-                stats['total_messages'] += len(messages)
+            if message_count > 0:
+                print(f"       ✅ {message_count:,} messages from thread {thread.name}")
                 
         except discord.Forbidden:
             print(f"       ⚠️ No permission to read thread {thread.name}")

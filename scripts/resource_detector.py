@@ -607,6 +607,14 @@ def main():
     skipped = 0
     processed = 0
     resources_found = 0
+    urls_extracted = 0
+    
+    print(f"\n🔍 Analyzing {len(messages):,} messages for high-quality resources...")
+    print("📊 Progress indicators will show:")
+    print("   • Message analysis progress")
+    print("   • URL extraction and evaluation")
+    print("   • Resource quality assessment")
+    print("-" * 60)
     
     with tqdm(messages, desc="📝 Analyzing messages", unit="msg", position=0, leave=True) as msg_pbar:
         for i, message in enumerate(msg_pbar):
@@ -615,7 +623,18 @@ def main():
                 continue
                 
             urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
+            urls_extracted += len(urls)
             new_url_found = False
+            
+            # Show URL extraction progress in postfix
+            if urls:
+                msg_pbar.set_postfix({
+                    "processed": processed,
+                    "skipped": skipped,
+                    "resources": resources_found,
+                    "urls": urls_extracted,
+                    "progress": f"{i+1}/{len(messages)}"
+                })
             
             for url in urls:
                 if detector._is_url_processed(url):
@@ -636,6 +655,7 @@ def main():
                 "processed": processed,
                 "skipped": skipped,
                 "resources": resources_found,
+                "urls": urls_extracted,
                 "progress": f"{i+1}/{len(messages)}"
             })
             
@@ -656,6 +676,8 @@ def main():
             
         print(f"\n🤖 Generating AI descriptions using {model_name} for {len(resources_to_describe)} new resources...")
         print("📡 This will use the local Ollama server for intelligent descriptions")
+        print("🔄 Progress will show AI generation vs fallback descriptions")
+        print("-" * 60)
         
         # Test LLM connection first
         llm_available = False
@@ -694,11 +716,13 @@ def main():
                 else:
                     fallback_count += 1
                 
+                # Enhanced postfix with more detailed information
                 desc_pbar.set_postfix({
-                    "domain": resource['domain'][:20],
+                    "domain": resource['domain'][:15],
+                    "category": resource['category'][:10],
                     "AI": llm_success_count,
                     "fallback": fallback_count,
-                    "progress": f"{i+1}/{len(resources_to_describe)}"
+                    "success_rate": f"{(llm_success_count / (i + 1)) * 100:.0f}%"
                 })
                 
                 # Force update every 5 resources for better feedback
@@ -711,16 +735,22 @@ def main():
         if llm_success_count > 0:
             print(f"   📊 LLM success rate: {(llm_success_count / len(resources_to_describe)) * 100:.1f}%")
 
-    print("💾 Saving processed URLs for incremental processing...")
+    print("\n💾 Saving processed URLs for incremental processing...")
     detector._save_processed_urls()
+    print("✅ Processed URLs saved")
 
-    print("📄 Saving results to files...")
-    # Save results to JSON file
+    print("\n📄 Saving results to files...")
+    print("🔄 Creating detailed report and export files...")
+    
+    # Save results to JSON file with progress indication
     output_path = project_root / 'data' / 'optimized_fresh_resources.json'
+    print(f"   📊 Generating detailed report: {output_path.name}")
     report = detector.save_resources(output_path, analyze_unknown=False)
+    print("   ✅ Detailed report saved")
 
     # Also save a simplified export file with just the resources list
     export_path = project_root / 'data' / 'resources_export.json'
+    print(f"   📤 Creating export file: {export_path.name}")
     export_data = {
         'export_date': datetime.now().isoformat(),
         'total_resources': len(report['resources']),
@@ -728,13 +758,16 @@ def main():
     }
     with open(export_path, 'w', encoding='utf-8') as f:
         json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
-    print(f"📄 Export file created: {export_path}")
+    print("   ✅ Export file created")
 
     print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
+    print("=" * 60)
     print(f"✅ Found {report['statistics']['total_found']} high-quality resources!")
     print(f"⏭️ Skipped (already processed): {skipped}")
     print(f"❌ Excluded {report['statistics']['excluded_count']} low-quality URLs")
     print(f"❓ Unknown domains: {report['statistics']['unknown_count']}")
+    print(f"🔗 Total URLs extracted: {urls_extracted}")
+    print(f"📝 Messages analyzed: {len(messages):,}")
 
     # Quality assessment
     stats = report['statistics']
