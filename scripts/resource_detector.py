@@ -1045,12 +1045,19 @@ def main():
     print("   • Message analysis progress")
     print("   • URL extraction and evaluation")
     print("   • Resource quality assessment")
+    print("   • Real-time resource detection stats")
     print("-" * 60)
+    
+    # Initialize detailed tracking
+    recent_resources = []
+    domain_stats = defaultdict(int)
+    category_stats = defaultdict(int)
     
     with tqdm(messages, desc="📝 Analyzing messages", unit="msg", position=0, leave=True) as msg_pbar:
         for i, message in enumerate(msg_pbar):
             content = message.get('content', '')
             message_id = message.get('message_id', '')
+            channel_name = message.get('channel_name', 'Unknown')
             
             # Track the last processed message ID for checkpointing
             last_processed_message_id = message_id
@@ -1062,22 +1069,12 @@ def main():
             urls_extracted += len(urls)
             new_url_found = False
             
-            # Show URL extraction progress in postfix
-            if urls:
-                msg_pbar.set_postfix({
-                    "processed": processed,
-                    "skipped": skipped,
-                    "resources": resources_found,
-                    "urls": urls_extracted,
-                    "progress": f"{i+1}/{len(messages)}"
-                })
-            
             for url in urls:
                 if detector._is_url_processed(url):
                     skipped += 1
                     continue
                     
-                resource = detector._evaluate_url(url, message, message['channel_name'], analyze_unknown=False)
+                resource = detector._evaluate_url(url, message, channel_name, analyze_unknown=False)
                 if resource:
                     detector.detected_resources.append(resource)
                     detector.stats['total_resources'] += 1
@@ -1085,22 +1082,77 @@ def main():
                     processed += 1
                     resources_found += 1
                     new_url_found = True
+                    
+                    # Track recent resources for display
+                    recent_resources.append({
+                        'url': resource['url'][:50] + '...' if len(resource['url']) > 50 else resource['url'],
+                        'category': resource['category'],
+                        'domain': resource['domain'],
+                        'quality': resource['quality_score']
+                    })
+                    
+                    # Keep only last 3 recent resources
+                    if len(recent_resources) > 3:
+                        recent_resources.pop(0)
+                    
+                    # Update domain and category stats
+                    domain_stats[resource['domain']] += 1
+                    category_stats[resource['category']] += 1
             
-            # Update progress bar with detailed stats
-            msg_pbar.set_postfix({
-                "processed": processed,
-                "skipped": skipped,
-                "resources": resources_found,
-                "urls": urls_extracted,
-                "progress": f"{i+1}/{len(messages)}"
-            })
-            
-            # Force update every 100 messages to ensure progress is visible
-            if (i + 1) % 100 == 0:
+            # Update progress bar with detailed stats every 50 messages
+            if (i + 1) % 50 == 0 or new_url_found:
+                # Get top domains and categories
+                top_domains = sorted(domain_stats.items(), key=lambda x: x[1], reverse=True)[:3]
+                top_categories = sorted(category_stats.items(), key=lambda x: x[1], reverse=True)[:3]
+                
+                # Create detailed postfix
+                postfix = {
+                    "found": resources_found,
+                    "skipped": skipped,
+                    "urls": urls_extracted,
+                    "progress": f"{i+1}/{len(messages)}"
+                }
+                
+                # Add recent resource info if available
+                if recent_resources:
+                    latest = recent_resources[-1]
+                    postfix["latest"] = f"{latest['category']}: {latest['domain']}"
+                
+                msg_pbar.set_postfix(postfix)
+                
+                # Force refresh to show updates
                 msg_pbar.refresh()
+                
+                # Show detailed summary every 500 messages
+                if (i + 1) % 500 == 0:
+                    print(f"\n📊 Progress Summary at {i+1:,}/{len(messages):,} messages:")
+                    print(f"   🔍 Resources found: {resources_found}")
+                    print(f"   ⏭️ URLs skipped: {skipped}")
+                    print(f"   🔗 URLs extracted: {urls_extracted}")
+                    
+                    if top_domains:
+                        print(f"   🌐 Top domains: {', '.join([f'{d}({c})' for d, c in top_domains])}")
+                    if top_categories:
+                        print(f"   📁 Top categories: {', '.join([f'{c}({n})' for c, n in top_categories])}")
+                    
+                    if recent_resources:
+                        print(f"   🆕 Recent finds:")
+                        for res in recent_resources[-2:]:  # Show last 2
+                            print(f"      • {res['category']} from {res['domain']} (quality: {res['quality']:.2f})")
+                    
+                    print("-" * 40)
 
     print(f"\n✅ Analysis complete!")
     print(f"📊 Results: {resources_found} new resources found, {skipped} URLs skipped (already processed)")
+    
+    # Show incremental processing summary
+    if detector.resource_checkpoint.get('last_processed_message_id'):
+        print(f"🔄 Incremental processing: Continuing from previous checkpoint")
+        print(f"   📍 Last processed message: {detector.resource_checkpoint['last_processed_message_id'][:8]}...")
+        print(f"   📈 New messages processed: {len(messages):,}")
+    else:
+        print(f"🔄 Full processing: No previous checkpoint found")
+        print(f"   📈 Total messages processed: {len(messages):,}")
 
     # Save checkpoint with last processed message ID
     if last_processed_message_id:
