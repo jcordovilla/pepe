@@ -24,6 +24,15 @@ data/debug_*/
 *.log
 logs/
 
+# Resource detection files (keep only export for GitHub)
+data/optimized_fresh_resources.json
+data/processed_resources.json
+data/detected_resources_*.json
+data/fetching_checkpoint.json
+data/indexing_checkpoint.json
+data/*_backup.json
+data/processing_markers/
+
 # Backup and legacy files
 .backup/
 docs/legacy/
