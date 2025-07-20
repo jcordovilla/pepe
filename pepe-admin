@@ -157,6 +157,7 @@ class PepeAdminSimplified:
             pepe-admin sync                # Both fetch and index (default)
             pepe-admin sync --fetch-only   # Only fetch messages to DB
             pepe-admin sync --index-only   # Only index/embed from DB
+            pepe-admin sync --full         # Force full fetch (ignore checkpoints)
         """
         print("🔄 Pepe Admin - Discord Data Sync (Modern Workflow)")
         print("=" * 60)
@@ -176,9 +177,16 @@ class PepeAdminSimplified:
                 print("\n📥 Fetching messages from Discord (fetch-only mode)...")
                 print("   Progress bars will show real-time status below:")
                 print("-" * 60)
-                fetch_result = subprocess.run([
-                    "python", "scripts/discord_message_fetcher.py"
-                ])  # Remove capture_output to show progress bars in real-time
+                
+                # Build fetch command with optional arguments
+                fetch_cmd = ["python", "scripts/discord_message_fetcher.py"]
+                if getattr(args, 'full', False):
+                    fetch_cmd.append("--full")
+                    print("   🔄 Full fetch mode - will fetch all messages")
+                else:
+                    print("   🔄 Incremental fetch mode - will fetch only new messages")
+                
+                fetch_result = subprocess.run(fetch_cmd)  # Remove capture_output to show progress bars in real-time
                 if fetch_result.returncode != 0:
                     print(f"❌ Fetcher script failed with return code: {fetch_result.returncode}")
                     return False
@@ -204,9 +212,15 @@ class PepeAdminSimplified:
             print("   Progress bars will show the current status.")
             print("-" * 60)
             
-            fetch_result = subprocess.run([
-                "python", "scripts/discord_message_fetcher.py"
-            ])  # Remove capture_output to show progress bars in real-time
+            # Build fetch command with optional arguments
+            fetch_cmd = ["python", "scripts/discord_message_fetcher.py"]
+            if getattr(args, 'full', False):
+                fetch_cmd.append("--full")
+                print("   🔄 Full fetch mode - will fetch all messages")
+            else:
+                print("   🔄 Incremental fetch mode - will fetch only new messages")
+            
+            fetch_result = subprocess.run(fetch_cmd)  # Remove capture_output to show progress bars in real-time
             if fetch_result.returncode != 0:
                 print(f"❌ Fetcher script failed with return code: {fetch_result.returncode}")
                 return False

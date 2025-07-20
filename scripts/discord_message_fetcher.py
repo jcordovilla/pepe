@@ -9,6 +9,7 @@ import json
 import sqlite3
 import os
 import sys
+import argparse
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, Any, List
@@ -29,6 +30,7 @@ class DiscordMessageFetcher:
         self.token = os.getenv('DISCORD_TOKEN')
         self.guild_id = int(os.getenv('DISCORD_GUILD_ID', '1353058864810950737'))
         self.db_path = project_root / 'data' / 'discord_messages.db'
+        self.checkpoint_path = project_root / 'data' / 'fetching_checkpoint.json'
         
         if not self.token:
             raise ValueError("DISCORD_TOKEN not found in environment variables")
@@ -38,6 +40,49 @@ class DiscordMessageFetcher:
         
         # Initialize database
         self.init_database()
+        
+        # Load checkpoint for incremental fetching
+        self.checkpoint = self.load_checkpoint()
+    
+    def load_checkpoint(self) -> Dict[str, Any]:
+        """Load checkpoint data for incremental fetching"""
+        if self.checkpoint_path.exists():
+            try:
+                with open(self.checkpoint_path, 'r') as f:
+                    checkpoint = json.load(f)
+                print(f"📋 Loaded checkpoint from {checkpoint.get('last_updated', 'unknown')}")
+                return checkpoint
+            except Exception as e:
+                print(f"⚠️ Warning: Could not load checkpoint: {e}")
+        return {
+            'channel_checkpoints': {},
+            'forum_checkpoints': {},
+            'last_updated': None,
+            'total_messages_fetched': 0
+        }
+    
+    def save_checkpoint(self, channel_id: str, last_message_id: str, channel_type: str = 'text'):
+        """Save checkpoint data for incremental fetching"""
+        try:
+            if channel_type == 'text':
+                self.checkpoint['channel_checkpoints'][channel_id] = last_message_id
+            elif channel_type == 'forum':
+                self.checkpoint['forum_checkpoints'][channel_id] = last_message_id
+            
+            self.checkpoint['last_updated'] = datetime.now().isoformat()
+            
+            with open(self.checkpoint_path, 'w') as f:
+                json.dump(self.checkpoint, f, indent=2)
+        except Exception as e:
+            print(f"⚠️ Warning: Could not save checkpoint: {e}")
+    
+    def get_last_message_id(self, channel_id: str, channel_type: str = 'text') -> str:
+        """Get the last message ID for a channel from checkpoint"""
+        if channel_type == 'text':
+            return self.checkpoint['channel_checkpoints'].get(channel_id)
+        elif channel_type == 'forum':
+            return self.checkpoint['forum_checkpoints'].get(channel_id)
+        return None
     
     def init_database(self):
         """Initialize SQLite database with messages table"""
@@ -165,33 +210,60 @@ class DiscordMessageFetcher:
         await client.start(self.token)
     
     async def fetch_channel_messages(self, channel: discord.TextChannel, stats: Dict):
-        """Fetch messages from a text channel"""
+        """Fetch messages from a text channel with incremental support"""
         try:
             messages = []
             message_count = 0
+            last_message_id = None
             
-            # Create progress bar for this channel
-            with tqdm(desc=f"📥 #{channel.name}", unit="msgs", leave=False) as pbar:
-                async for message in channel.history(limit=None):
+            # Get last message ID from checkpoint for incremental fetching
+            checkpoint_id = self.get_last_message_id(str(channel.id), 'text')
+            
+            if checkpoint_id:
+                print(f"   🔄 Incremental fetch from message {checkpoint_id[:8]}...")
+                # Fetch messages after the checkpoint
+                async for message in channel.history(limit=None, after=discord.Object(id=int(checkpoint_id))):
                     message_data = self.convert_message_to_dict(message)
                     messages.append(message_data)
                     message_count += 1
-                    pbar.update(1)
+                    last_message_id = str(message.id)
                     
                     # Batch insert every 100 messages
                     if len(messages) >= 100:
                         await self.insert_messages_batch(messages)
                         stats['total_messages'] += len(messages)
-                        pbar.set_postfix({"batch": len(messages)})
                         messages = []
-                
-                # Insert remaining messages
-                if messages:
-                    await self.insert_messages_batch(messages)
-                    stats['total_messages'] += len(messages)
-                    pbar.set_postfix({"final": len(messages)})
+            else:
+                print(f"   📥 Full fetch (no checkpoint found)...")
+                # Create progress bar for this channel
+                with tqdm(desc=f"📥 #{channel.name}", unit="msgs", leave=False) as pbar:
+                    async for message in channel.history(limit=None):
+                        message_data = self.convert_message_to_dict(message)
+                        messages.append(message_data)
+                        message_count += 1
+                        last_message_id = str(message.id)
+                        pbar.update(1)
+                        
+                        # Batch insert every 100 messages
+                        if len(messages) >= 100:
+                            await self.insert_messages_batch(messages)
+                            stats['total_messages'] += len(messages)
+                            pbar.set_postfix({"batch": len(messages)})
+                            messages = []
             
-            print(f"   ✅ {message_count:,} messages from #{channel.name}")
+            # Insert remaining messages
+            if messages:
+                await self.insert_messages_batch(messages)
+                stats['total_messages'] += len(messages)
+            
+            # Save checkpoint with last message ID
+            if last_message_id:
+                self.save_checkpoint(str(channel.id), last_message_id, 'text')
+            
+            if checkpoint_id:
+                print(f"   ✅ {message_count:,} new messages from #{channel.name}")
+            else:
+                print(f"   ✅ {message_count:,} messages from #{channel.name}")
                 
         except discord.Forbidden:
             print(f"   ⚠️ No permission to read #{channel.name}")
@@ -229,14 +301,19 @@ class DiscordMessageFetcher:
             raise e
     
     async def fetch_thread_messages(self, thread: discord.Thread, forum: discord.ForumChannel, stats: Dict):
-        """Fetch messages from a specific thread"""
+        """Fetch messages from a specific thread with incremental support"""
         try:
             messages = []
             message_count = 0
+            last_message_id = None
             
-            # Create progress bar for this thread
-            with tqdm(desc=f"     🧵 {thread.name[:30]}", unit="msgs", leave=False) as pbar:
-                async for message in thread.history(limit=None):
+            # Get last message ID from checkpoint for incremental fetching
+            thread_checkpoint_id = self.get_last_message_id(str(thread.id), 'forum')
+            
+            if thread_checkpoint_id:
+                print(f"       🔄 Incremental fetch from message {thread_checkpoint_id[:8]}...")
+                # Fetch messages after the checkpoint
+                async for message in thread.history(limit=None, after=discord.Object(id=int(thread_checkpoint_id))):
                     message_data = self.convert_message_to_dict(message)
                     # Add thread-specific metadata
                     message_data.update({
@@ -248,22 +325,51 @@ class DiscordMessageFetcher:
                     })
                     messages.append(message_data)
                     message_count += 1
-                    pbar.update(1)
+                    last_message_id = str(message.id)
                     
                     # Batch insert every 100 messages
                     if len(messages) >= 100:
                         await self.insert_messages_batch(messages)
                         stats['total_messages'] += len(messages)
-                        pbar.set_postfix({"batch": len(messages)})
                         messages = []
-                
-                # Insert remaining messages
-                if messages:
-                    await self.insert_messages_batch(messages)
-                    stats['total_messages'] += len(messages)
-                    pbar.set_postfix({"final": len(messages)})
+            else:
+                print(f"       📥 Full fetch (no checkpoint found)...")
+                # Create progress bar for this thread
+                with tqdm(desc=f"     🧵 {thread.name[:30]}", unit="msgs", leave=False) as pbar:
+                    async for message in thread.history(limit=None):
+                        message_data = self.convert_message_to_dict(message)
+                        # Add thread-specific metadata
+                        message_data.update({
+                            'thread_id': str(thread.id),
+                            'thread_name': thread.name,
+                            'forum_channel_id': str(forum.id),
+                            'forum_channel_name': forum.name,
+                            'is_forum_thread': True
+                        })
+                        messages.append(message_data)
+                        message_count += 1
+                        last_message_id = str(message.id)
+                        pbar.update(1)
+                        
+                        # Batch insert every 100 messages
+                        if len(messages) >= 100:
+                            await self.insert_messages_batch(messages)
+                            stats['total_messages'] += len(messages)
+                            pbar.set_postfix({"batch": len(messages)})
+                            messages = []
             
-            if message_count > 0:
+            # Insert remaining messages
+            if messages:
+                await self.insert_messages_batch(messages)
+                stats['total_messages'] += len(messages)
+            
+            # Save checkpoint with last message ID
+            if last_message_id:
+                self.save_checkpoint(str(thread.id), last_message_id, 'forum')
+            
+            if thread_checkpoint_id:
+                print(f"       ✅ {message_count:,} new messages from thread {thread.name}")
+            elif message_count > 0:
                 print(f"       ✅ {message_count:,} messages from thread {thread.name}")
                 
         except discord.Forbidden:
@@ -403,8 +509,32 @@ class DiscordMessageFetcher:
 
 async def main():
     """Main function"""
+    parser = argparse.ArgumentParser(description='Discord Message Fetcher with Incremental Support')
+    parser.add_argument('--full', action='store_true', 
+                       help='Force full fetch (ignore checkpoints)')
+    parser.add_argument('--reset-checkpoint', action='store_true',
+                       help='Reset checkpoint and start fresh')
+    args = parser.parse_args()
+    
     try:
         fetcher = DiscordMessageFetcher()
+        
+        # Handle checkpoint reset
+        if args.reset_checkpoint:
+            if fetcher.checkpoint_path.exists():
+                fetcher.checkpoint_path.unlink()
+                print("🗑️ Checkpoint reset - will perform full fetch")
+            else:
+                print("ℹ️ No checkpoint found - will perform full fetch")
+        
+        # Handle full fetch mode
+        if args.full:
+            if fetcher.checkpoint_path.exists():
+                fetcher.checkpoint_path.unlink()
+                print("🔄 Full fetch mode - checkpoint cleared")
+            else:
+                print("🔄 Full fetch mode - no checkpoint to clear")
+        
         await fetcher.fetch_all_messages()
         print("\n🎉 Discord message fetch completed successfully!")
         
