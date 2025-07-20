@@ -974,8 +974,7 @@ class PepeAdminSimplified:
         backup_items = {
             'data/chromadb': 'vector_store',
             'data/conversation_memory.db': 'conversation_memory.db',
-            'data/analytics.db': 'analytics.db',
-            'data/bot_config.json': 'bot_config.json'
+            'data/analytics.db': 'analytics.db'
         }
         
         backed_up = 0
