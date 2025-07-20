@@ -42,7 +42,10 @@ class FreshResourceDetector:
             'parsing_errors': 0,
             'internal_documents': 0,
             'ai_analysis_used': 0,
-            'ai_analysis_failed': 0
+            'ai_analysis_failed': 0,
+            'duplicates_detected': 0,
+            'content_duplicates_detected': 0,
+            'skipped_processed': 0
         })
         
         # Incremental processing setup
@@ -51,6 +54,13 @@ class FreshResourceDetector:
         self.resource_checkpoint_file = project_root / 'data' / 'resource_checkpoint.json'
         self.processed_urls = self._load_processed_urls()
         self.resource_checkpoint = self._load_resource_checkpoint()
+        
+        # URL normalization cache for better duplicate detection
+        self.normalized_urls_cache = {}
+        
+        # Content similarity detection
+        self.content_similarity_detector = None
+        self.similarity_threshold = 0.8
         
         # High-quality domains (curated list)
         self.high_quality_domains = {
@@ -187,16 +197,21 @@ class FreshResourceDetector:
             # Ensure data directory exists
             self.processed_urls_file.parent.mkdir(parents=True, exist_ok=True)
             
-            # Get all processed URLs
+            # Get all processed URLs (including newly detected ones)
             all_urls = self.processed_urls.union(
                 {resource['url'] for resource in self.detected_resources}
             )
             
+            # Also save normalized URLs for better duplicate detection
+            normalized_urls = {self._normalize_url(url) for url in all_urls}
+            
             with open(self.processed_urls_file, 'w') as f:
                 json.dump({
                     'processed_urls': list(all_urls),
+                    'normalized_urls': list(normalized_urls),
                     'last_updated': datetime.now().isoformat(),
-                    'total_processed': len(all_urls)
+                    'total_processed': len(all_urls),
+                    'total_normalized': len(normalized_urls)
                 }, f, indent=2)
         except Exception as e:
             print(f"⚠️ Warning: Could not save processed URLs: {e}")
@@ -224,9 +239,93 @@ class FreshResourceDetector:
         """Check if a URL has already been processed"""
         return url in self.processed_urls
     
+    def _normalize_url(self, url: str) -> str:
+        """Normalize URL to handle common variations that should be treated as the same resource"""
+        if url in self.normalized_urls_cache:
+            return self.normalized_urls_cache[url]
+        
+        try:
+            from urllib.parse import urlparse, parse_qs
+            
+            parsed = urlparse(url)
+            
+            # Remove common tracking parameters
+            query_params = parse_qs(parsed.query)
+            filtered_params = {}
+            
+            for key, values in query_params.items():
+                # Keep important parameters, remove tracking ones
+                if key.lower() not in ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 
+                                     'ref', 'source', 'fbclid', 'gclid', 'msclkid']:
+                    filtered_params[key] = values
+            
+            # Rebuild query string
+            new_query = '&'.join([f"{k}={v[0]}" for k, v in filtered_params.items() if v])
+            
+            # Normalize domain
+            domain = parsed.netloc.lower()
+            if domain.startswith('www.'):
+                domain = domain[4:]
+            
+            # Handle YouTube URL variations
+            if 'youtube.com' in domain or 'youtu.be' in domain:
+                if 'youtu.be' in domain:
+                    # Convert youtu.be to youtube.com format
+                    video_id = parsed.path[1:]  # Remove leading slash
+                    normalized = f"https://youtube.com/watch?v={video_id}"
+                else:
+                    # Keep youtube.com format but normalize
+                    normalized = f"https://youtube.com{parsed.path}"
+                    if new_query:
+                        normalized += f"?{new_query}"
+            else:
+                # Rebuild URL for other domains
+                normalized = f"{parsed.scheme}://{domain}{parsed.path}"
+                if new_query:
+                    normalized += f"?{new_query}"
+                if parsed.fragment:
+                    normalized += f"#{parsed.fragment}"
+            
+            self.normalized_urls_cache[url] = normalized
+            return normalized
+            
+        except Exception:
+            # Fallback to simple normalization
+            normalized = url.lower().strip()
+            self.normalized_urls_cache[url] = normalized
+            return normalized
+    
+    def _is_normalized_url_processed(self, url: str) -> bool:
+        """Check if a normalized URL has already been processed"""
+        normalized_url = self._normalize_url(url)
+        
+        # Check against existing normalized URLs
+        for processed_url in self.processed_urls:
+            if self._normalize_url(processed_url) == normalized_url:
+                return True
+        
+        return False
+    
     def _is_message_processed(self, message_id: str) -> bool:
         """Check if a message has already been processed based on its ID."""
         return message_id in self.resource_checkpoint
+    
+    def _check_content_similarity(self, resource: Dict[str, Any]) -> bool:
+        """Check if a resource is similar to existing ones based on content"""
+        if not self.content_similarity_detector or not self.detected_resources:
+            return False
+        
+        try:
+            # Find similar resources
+            similar = self.content_similarity_detector.find_similar_resources(resource, top_k=1)
+            if similar and similar[0]['similarity'] >= self.similarity_threshold:
+                self.stats['content_duplicates_detected'] += 1
+                return True
+        except Exception as e:
+            # If similarity check fails, continue without it
+            pass
+        
+        return False
     
     def analyze_discord_messages(self, messages_dir: Path, analyze_unknown: bool = False) -> List[Dict[str, Any]]:
         """Analyze Discord messages and extract high-quality resources"""
@@ -598,9 +697,14 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
 
     def _evaluate_url(self, url: str, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Evaluate if a URL is a high-quality resource"""
-        # Check if URL has already been processed
+        # Check if URL has already been processed (exact match)
         if self._is_url_processed(url):
             self.stats['skipped_processed'] += 1
+            return None
+        
+        # Check if normalized URL has already been processed (duplicate detection)
+        if self._is_normalized_url_processed(url):
+            self.stats['duplicates_detected'] += 1
             return None
             
         try:
@@ -670,6 +774,11 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
             content_lower = message.get('content', '').lower()
             if any(keyword in content_lower for keyword in ['paper', 'research', 'study', 'tutorial']):
                 resource['quality_score'] = min(1.0, resource['quality_score'] + 0.1)
+            
+            # Check for content similarity with existing resources
+            if self._check_content_similarity(resource):
+                return None
+            
             return resource
         except Exception as e:
             self.stats['parsing_errors'] += 1
