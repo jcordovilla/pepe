@@ -84,6 +84,32 @@ class DiscordMessageFetcher:
             return self.checkpoint['forum_checkpoints'].get(channel_id)
         return None
     
+    def cleanup_test_messages(self):
+        """Remove all messages from channels with 'test' in the name"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                # Delete messages from test channels
+                cursor = conn.execute("""
+                    DELETE FROM messages 
+                    WHERE LOWER(channel_name) LIKE '%test%' 
+                    OR LOWER(thread_name) LIKE '%test%'
+                    OR LOWER(forum_channel_name) LIKE '%test%'
+                """)
+                deleted_count = cursor.rowcount
+                conn.commit()
+                
+                if deleted_count > 0:
+                    print(f"🗑️ Cleaned up {deleted_count:,} messages from test channels")
+                else:
+                    print("ℹ️ No test messages found to clean up")
+                    
+        except Exception as e:
+            print(f"⚠️ Warning: Could not clean up test messages: {e}")
+    
+    def is_test_channel(self, channel_name: str) -> bool:
+        """Check if a channel name contains 'test' (case insensitive)"""
+        return 'test' in channel_name.lower()
+    
     def init_database(self):
         """Initialize SQLite database with messages table"""
         with sqlite3.connect(self.db_path) as conn:
@@ -157,12 +183,15 @@ class DiscordMessageFetcher:
                 
                 print(f"✅ Connected to: {guild.name}")
                 
+                # Clean up any existing test messages
+                self.cleanup_test_messages()
+                
                 # Fetch all channels
                 channels = await guild.fetch_channels()
-                text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel)]
-                forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel)]
+                text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel) and not self.is_test_channel(ch.name)]
+                forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel) and not self.is_test_channel(ch.name)]
                 
-                print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels")
+                print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels (excluding test channels)")
                 
                 # Process text channels
                 print(f"\n📥 Processing {len(text_channels)} text channels...")
@@ -287,9 +316,16 @@ class DiscordMessageFetcher:
             except discord.Forbidden:
                 print(f"   ⚠️ No permission to access archived threads in #{forum.name}")
             
-            print(f"   🧵 Found {len(threads)} threads in forum #{forum.name}")
+            # Filter out test threads
+            non_test_threads = [thread for thread in threads if not self.is_test_channel(thread.name)]
+            skipped_test_threads = len(threads) - len(non_test_threads)
             
-            for thread in tqdm(threads, desc=f"Processing threads in {forum.name}"):
+            if skipped_test_threads > 0:
+                print(f"   🚫 Skipped {skipped_test_threads} test threads in forum #{forum.name}")
+            
+            print(f"   🧵 Found {len(non_test_threads)} threads in forum #{forum.name}")
+            
+            for thread in tqdm(non_test_threads, desc=f"Processing threads in {forum.name}"):
                 try:
                     print(f"     🧵 Processing thread: {thread.name}")
                     await self.fetch_thread_messages(thread, forum, stats)
@@ -514,6 +550,8 @@ async def main():
                        help='Force full fetch (ignore checkpoints)')
     parser.add_argument('--reset-checkpoint', action='store_true',
                        help='Reset checkpoint and start fresh')
+    parser.add_argument('--cleanup-test', action='store_true',
+                       help='Clean up test messages and exit (no fetching)')
     args = parser.parse_args()
     
     try:
@@ -526,6 +564,12 @@ async def main():
                 print("🗑️ Checkpoint reset - will perform full fetch")
             else:
                 print("ℹ️ No checkpoint found - will perform full fetch")
+        
+        # Handle cleanup-only mode
+        if args.cleanup_test:
+            fetcher.cleanup_test_messages()
+            print("✅ Test message cleanup completed")
+            return
         
         # Handle full fetch mode
         if args.full:
