@@ -299,9 +299,14 @@ class FreshResourceDetector:
         """Check if a normalized URL has already been processed"""
         normalized_url = self._normalize_url(url)
         
-        # Check against existing normalized URLs
+        # Check against existing processed URLs from file
         for processed_url in self.processed_urls:
             if self._normalize_url(processed_url) == normalized_url:
+                return True
+        
+        # Check against URLs already processed in current session
+        for resource in self.detected_resources:
+            if self._normalize_url(resource['url']) == normalized_url:
                 return True
         
         return False
