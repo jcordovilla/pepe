@@ -98,22 +98,51 @@ class FreshResourceDetector:
             'wired.com': {'category': 'Tech News', 'score': 0.75},
             'arstechnica.com': {'category': 'Tech News', 'score': 0.75},
             
-            # Productivity & Collaboration Tools (with valuable content)
-            'app.mural.co': {'category': 'Collaboration Boards', 'score': 0.60},
-            'trello.com': {'category': 'Project Management', 'score': 0.60},
-            'notion.so': {'category': 'Documentation', 'score': 0.70}
+            # Note: Collaboration tools like Mural, Trello, Notion are now excluded
+            # as they typically contain internal/private community documents
         }
         
-        # Domains to exclude (junk)
+        # Domains to exclude (junk and internal documents)
         self.excluded_domains = {
+            # Discord and social media
             'cdn.discordapp.com', 'discord.com/channels', 'discordapp.com',
             'tenor.com', 'giphy.com', 'discord.gg',
-            'meet.google.com', 'zoom.us', 'us06web.zoom.us', 'mit.zoom.us',
             'linkedin.com/in', 'linkedin.com/posts',  # Profile links and posts
             'twitter.com/i/', 'facebook.com', 'instagram.com',
+            
+            # Meeting and communication tools
+            'meet.google.com', 'zoom.us', 'us06web.zoom.us', 'mit.zoom.us',
             'fathom.video',  # Meeting recordings
-            'tinyurl.com', 'bit.ly',  # URL shorteners (hard to verify quality)
-            'sync-google-calendar-wit-erprmym.gamma.site'  # Specific app link
+            'teams.microsoft.com', 'teams.live.com',
+            
+            # URL shorteners (hard to verify quality)
+            'tinyurl.com', 'bit.ly', 't.co', 'goo.gl',
+            
+            # Internal/private community documents
+            'docs.google.com',  # Google Docs/Sheets/Slides (usually private)
+            'drive.google.com',  # Google Drive (usually private)
+            'app.mural.co',  # Mural boards (usually private)
+            'trello.com',  # Trello boards (usually private)
+            'notion.so',  # Notion pages (usually private)
+            'figma.com',  # Figma designs (usually private)
+            'miro.com',  # Miro boards (usually private)
+            'whimsical.com',  # Whimsical boards (usually private)
+            'lucidchart.com',  # Lucidchart (usually private)
+            'draw.io',  # Draw.io diagrams (usually private)
+            'canva.com',  # Canva designs (usually private)
+            'slides.com',  # Slides.com presentations (usually private)
+            'prezi.com',  # Prezi presentations (usually private)
+            'padlet.com',  # Padlet boards (usually private)
+            'jamboard.google.com',  # Google Jamboard (usually private)
+            'whiteboard.microsoft.com',  # Microsoft Whiteboard (usually private)
+            
+            # Video/audio recordings (usually private)
+            'youtube.com/live', 'youtube.com/watch?v=', 'youtu.be',
+            'vimeo.com', 'dailymotion.com',
+            'spotify.com', 'soundcloud.com',
+            
+            # Specific app links
+            'sync-google-calendar-wit-erprmym.gamma.site'
         }
         
         # File extensions that indicate quality resources
@@ -208,6 +237,82 @@ class FreshResourceDetector:
         
         return self._generate_report(analyze_unknown)
     
+    def _is_internal_document(self, url: str, domain: str, message: Dict[str, Any]) -> bool:
+        """Check if a URL is an internal/private community document that should be excluded"""
+        content = message.get('content', '').lower()
+        
+        # Check for specific URL patterns that indicate internal documents
+        url_lower = url.lower()
+        
+        # Google Workspace documents (usually private)
+        if any(pattern in url_lower for pattern in [
+            '/document/d/', '/spreadsheets/d/', '/presentation/d/',
+            '/forms/d/', '/drawings/d/', '/sites/d/',
+            '/drive/folders/', '/drive/u/', '/drive/d/'
+        ]):
+            return True
+        
+        # Mural boards (usually private)
+        if 'app.mural.co' in domain and any(pattern in url_lower for pattern in [
+            '/t/', '/m/', '/s/'
+        ]):
+            return True
+        
+        # Trello boards (usually private)
+        if 'trello.com' in domain and any(pattern in url_lower for pattern in [
+            '/b/', '/c/', '/card/'
+        ]):
+            return True
+        
+        # Notion pages (usually private)
+        if 'notion.so' in domain and any(pattern in url_lower for pattern in [
+            '/page/', '/database/', '/workspace/'
+        ]):
+            return True
+        
+        # Figma designs (usually private)
+        if 'figma.com' in domain and any(pattern in url_lower for pattern in [
+            '/file/', '/proto/', '/design/'
+        ]):
+            return True
+        
+        # Miro boards (usually private)
+        if 'miro.com' in domain and any(pattern in url_lower for pattern in [
+            '/board/', '/app/'
+        ]):
+            return True
+        
+        # Video recordings and live streams
+        if any(video_domain in domain for video_domain in ['youtube.com', 'youtu.be', 'vimeo.com']):
+            # Check for live streams, recordings, or private videos
+            if any(pattern in url_lower for pattern in [
+                '/live/', '/watch?v=', '/embed/', '/v/'
+            ]):
+                return True
+            # YouTube short URLs (youtu.be) are typically recordings
+            if 'youtu.be' in domain:
+                return True
+        
+        # Check message content for indicators of internal documents
+        internal_indicators = [
+            'internal', 'private', 'confidential', 'draft', 'working',
+            'team', 'meeting', 'recording', 'session', 'workshop',
+            'board', 'kanban', 'project', 'planning', 'brainstorming',
+            'collaboration', 'whiteboard', 'mindmap', 'flowchart',
+            'wireframe', 'prototype', 'mockup', 'design review'
+        ]
+        
+        if any(indicator in content for indicator in internal_indicators):
+            # Additional check: if it's a collaboration tool, likely internal
+            collaboration_domains = [
+                'mural.co', 'trello.com', 'notion.so', 'figma.com', 
+                'miro.com', 'whimsical.com', 'lucidchart.com', 'canva.com'
+            ]
+            if any(collab_domain in domain for collab_domain in collaboration_domains):
+                return True
+        
+        return False
+
     def _analyze_message(self, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False):
         """Analyze a single message for resources"""
         content = message.get('content', '')
@@ -338,7 +443,14 @@ class FreshResourceDetector:
             domain = parsed.netloc.lower()
             if domain.startswith('www.'):
                 domain = domain[4:]
+            
+            # Check for excluded domains
             if any(excluded in domain for excluded in self.excluded_domains):
+                self.stats['excluded_domains'] += 1
+                return None
+            
+            # Check for internal/private community documents
+            if self._is_internal_document(url, domain, message):
                 self.stats['excluded_domains'] += 1
                 return None
             domain_info = None
@@ -421,9 +533,10 @@ class FreshResourceDetector:
         print("=" * 40)
         print(f"✅ High-quality resources found: {len(sorted_resources)}")
         print(f"⏭️ Skipped (already processed): {self.stats.get('skipped_processed', 0)}")
-        print(f"❌ Excluded low-quality URLs: {self.stats['excluded_domains']}")
+        print(f"❌ Excluded (low-quality + internal docs): {self.stats['excluded_domains']}")
         print(f"❓ Unknown domains skipped: {self.stats['unknown_domains']}")
         print(f"⚠️ Parsing errors: {self.stats['parsing_errors']}")
+        print(f"🔒 Internal documents filtered: Collaboration tools, private docs, recordings")
         
         # Show incremental processing info
         if self.processed_urls:
