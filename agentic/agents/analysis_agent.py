@@ -30,8 +30,7 @@ class AnalysisAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.ANALYZER, config)
         
-        # Analysis configuration
-        self.summarization_model = config.get("summarization_model", "gpt-4-turbo")
+        # Analysis configuration - using local Llama model
         self.max_content_length = config.get("max_content_length", 8000)
         self.summary_length = config.get("summary_length", "medium")
         self.extract_insights = config.get("extract_insights", True)
@@ -40,7 +39,7 @@ class AnalysisAgent(BaseAgent):
         self.skill_patterns = self._compile_skill_patterns()
         self.topic_patterns = self._compile_topic_patterns()
         
-        logger.info(f"AnalysisAgent initialized with model={self.summarization_model}")
+        logger.info(f"AnalysisAgent initialized with local Llama model")
         
         # Register this agent
         agent_registry.register_agent(self)
@@ -122,7 +121,8 @@ class AnalysisAgent(BaseAgent):
             
         analysis_types = [
             "summarize", "analyze", "extract", "classify",
-            "insights", "trends", "skills", "topics", "capability_response"
+            "insights", "trends", "skills", "topics", "capability_response",
+            "response", "generate"  # Add more response-related types
         ]
         task_type = task.task_type.lower() if task.task_type else ""
         return any(analysis_type in task_type for analysis_type in analysis_types)
@@ -583,127 +583,119 @@ Summary requirements:
     
     async def _generate_capability_response(self, subtask: SubTask, state: AgentState) -> Dict[str, Any]:
         """
-        Generate a comprehensive capability response for meta-queries.
+        Generate a capability response when search returns no results.
         
         Args:
             subtask: Capability response subtask
             state: Current agent state
             
         Returns:
-            Capability information and help documentation
+            Contextual capability response
         """
         try:
-            query = subtask.parameters.get("query", "")
+            query = state.get("query", "")
+            search_results = state.get("search_results", [])
             
-            # Build comprehensive capability response
-            capabilities = {
-                "search_capabilities": [
-                    "**Message Search**: Find specific messages by content, author, or channel",
-                    "**Semantic Search**: Understand context and find related discussions",
-                    "**Filtered Search**: Search within specific channels, time ranges, or by specific users",
-                    "**Keyword Search**: Find messages containing specific terms or phrases"
-                ],
-                "analysis_capabilities": [
-                    "**Content Summarization**: Create summaries of conversations or topics",
-                    "**Trend Analysis**: Identify patterns in discussions and user activity",
-                    "**Topic Classification**: Categorize messages by type and subject",
-                    "**Insight Extraction**: Find key themes and important information",
-                    "**User Activity Analysis**: Track participation and engagement patterns"
-                ],
-                "special_features": [
-                    "**Reaction Analysis**: Find most-reacted or popular messages",
-                    "**Resource Detection**: Identify shared links, documents, and tools",
-                    "**Time-based Queries**: Search within specific time periods",
-                    "**Channel-specific Search**: Focus on particular channels or topics",
-                    "**Cross-conversation Context**: Understand discussions across multiple messages"
-                ],
-                "data_sources": [
-                    "**Discord Messages**: Access to historical Discord conversations",
-                    "**User Interactions**: Track of user activities and patterns",
-                    "**Shared Resources**: Links, documents, and tools shared in conversations",
-                    "**Reaction Data**: Community engagement through reactions and responses"
-                ]
-            }
+            # If we have search results, generate a results-based response
+            if search_results:
+                return await self._generate_results_response(query, search_results)
             
-            # Generate contextual response based on query
-            response_parts = []
-            
-            # Main capabilities introduction
-            response_parts.append("## 🤖 AI Assistant Capabilities")
-            response_parts.append("I'm an intelligent Discord bot that can help you explore and analyze your server's conversations. Here's what I can do:")
-            
-            # Add search capabilities
-            response_parts.append("\n### 🔍 **Search & Discovery**")
-            response_parts.extend(capabilities["search_capabilities"])
-            
-            # Add analysis capabilities
-            response_parts.append("\n### 📊 **Analysis & Insights**")
-            response_parts.extend(capabilities["analysis_capabilities"])
-            
-            # Add special features
-            response_parts.append("\n### ⚡ **Special Features**")
-            response_parts.extend(capabilities["special_features"])
-            
-            # Add data sources
-            response_parts.append("\n### 📁 **Data Sources**")
-            response_parts.extend(capabilities["data_sources"])
-            
-            # Add examples section
-            response_parts.append("\n### 💡 **Example Questions You Can Ask**")
-            examples = [
-                "• `Find messages about AI from last week`",
-                "• `Summarize the discussion in #general channel`",
-                "• `What are the most popular topics this month?`",
-                "• `Show me messages with the most reactions`",
-                "• `Find resources shared about Python programming`",
-                "• `Who are the most active users in #development?`",
-                "• `What was discussed about machine learning recently?`",
-                "• `Give me a digest of last week's conversations`"
-            ]
-            response_parts.extend(examples)
-            
-            # Add usage tips
-            response_parts.append("\n### 📝 **Usage Tips**")
-            tips = [
-                "• **Be specific**: Include channel names, timeframes, or topics for better results",
-                "• **Use natural language**: Ask questions as you would to a colleague",
-                "• **Combine filters**: Search by channel, user, and time period together",
-                "• **Ask follow-ups**: Build on previous queries for deeper insights"
-            ]
-            response_parts.extend(tips)
-            
-            # Add technical details
-            response_parts.append("\n### 🛠 **Technical Details**")
-            tech_details = [
-                "• **AI-Powered**: Uses advanced language models for understanding context",
-                "• **Vector Search**: Semantic similarity matching for relevant results",
-                "• **Multi-Agent System**: Specialized agents for different types of analysis",
-                "• **Real-time Processing**: Continuously indexes new messages as they arrive"
-            ]
-            response_parts.extend(tech_details)
-            
-            # Final response
-            response_parts.append("\n---")
-            response_parts.append("💬 **Ready to help!** Ask me anything about your Discord server's conversations and I'll provide intelligent, contextual responses.")
-            
-            full_response = "\n".join(response_parts)
-            
-            return {
-                "capability_response": full_response,
-                "response_type": "capability",
-                "generated_at": datetime.utcnow().isoformat(),
-                "sections": {
-                    "search": capabilities["search_capabilities"],
-                    "analysis": capabilities["analysis_capabilities"],
-                    "features": capabilities["special_features"],
-                    "data_sources": capabilities["data_sources"]
-                }
-            }
+            # If no results, generate a contextual no-results response
+            return await self._generate_no_results_response(query, state)
             
         except Exception as e:
             logger.error(f"Error generating capability response: {e}")
             return {
-                "capability_response": f"I'm an AI assistant that can help you search and analyze Discord conversations. I can find messages, create summaries, analyze trends, and provide insights about your server's discussions. However, I encountered an error generating the full capability information: {str(e)}",
-                "response_type": "capability",
-                "error": str(e)
+                "response": "I can help you search through Discord conversations. Try asking me to find specific topics, users, or messages.",
+                "response_type": "fallback"
+            }
+    
+    async def _generate_results_response(self, query: str, results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Generate a response based on search results."""
+        try:
+            # Extract key information from results
+            result_count = len(results)
+            top_result = results[0] if results else {}
+            
+            # Generate contextual response
+            if result_count == 1:
+                response = f"I found 1 message about '{query}':\n\n"
+                response += f"**{top_result.get('author', {}).get('username', 'Unknown')}** in #{top_result.get('channel_name', 'unknown')}:\n"
+                response += f"{top_result.get('content', '')[:200]}..."
+            else:
+                response = f"I found {result_count} messages about '{query}'. Here's the most relevant one:\n\n"
+                response += f"**{top_result.get('author', {}).get('username', 'Unknown')}** in #{top_result.get('channel_name', 'unknown')}:\n"
+                response += f"{top_result.get('content', '')[:200]}..."
+                
+                if result_count > 3:
+                    response += f"\n\n... and {result_count - 1} more messages. Would you like me to show more results?"
+            
+            return {
+                "response": response,
+                "response_type": "results",
+                "result_count": result_count,
+                "top_result": top_result
+            }
+            
+        except Exception as e:
+            logger.error(f"Error generating results response: {e}")
+            return {
+                "response": f"I found {len(results)} messages about '{query}'. Here's what I found:",
+                "response_type": "results_simple"
+            }
+    
+    async def _generate_no_results_response(self, query: str, state: AgentState) -> Dict[str, Any]:
+        """Generate a contextual response when no search results are found."""
+        try:
+            # Analyze the query to provide helpful suggestions
+            query_lower = query.lower()
+            
+            # Extract potential topics from query
+            topics = []
+            if any(word in query_lower for word in ['python', 'code', 'programming']):
+                topics.append('programming')
+            if any(word in query_lower for word in ['ai', 'machine learning', 'ml']):
+                topics.append('AI/ML')
+            if any(word in query_lower for word in ['discord', 'bot', 'server']):
+                topics.append('Discord')
+            if any(word in query_lower for word in ['help', 'support', 'issue']):
+                topics.append('support')
+            
+            # Generate contextual response
+            if topics:
+                response = f"I couldn't find any messages about '{query}' in our Discord conversations. "
+                response += f"This might be because:\n"
+                response += f"• The topic hasn't been discussed recently\n"
+                response += f"• The search terms might be too specific\n"
+                response += f"• The conversation might be in a different channel\n\n"
+                response += f"Try searching for broader terms related to {', '.join(topics)} or ask about recent discussions."
+            else:
+                response = f"I couldn't find any messages about '{query}' in our Discord conversations. "
+                response += f"Try:\n"
+                response += f"• Using different keywords\n"
+                response += f"• Searching for broader topics\n"
+                response += f"• Asking about recent discussions in specific channels"
+            
+            # Add helpful examples based on query type
+            if '?' in query:
+                response += f"\n\nFor questions, try asking about recent discussions or popular topics in our channels."
+            elif len(query.split()) <= 2:
+                response += f"\n\nFor short queries, try adding more context or related terms."
+            
+            return {
+                "response": response,
+                "response_type": "no_results",
+                "suggested_topics": topics,
+                "query_analysis": {
+                    "is_question": '?' in query,
+                    "word_count": len(query.split()),
+                    "has_specific_terms": len(topics) > 0
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error generating no results response: {e}")
+            return {
+                "response": f"I couldn't find any messages about '{query}'. Try using different keywords or asking about recent discussions.",
+                "response_type": "no_results_fallback"
             }

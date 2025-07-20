@@ -4,6 +4,15 @@ This directory contains utility scripts for maintenance, testing, and system man
 
 ## 🚀 Core Scripts
 
+### **`pepe-admin`**
+Unified admin CLI tool for system management.
+```bash
+# Always use Poetry for admin commands
+poetry run ./pepe-admin --help
+```
+
+## 🔧 Data Management Scripts
+
 ### **`discord_message_fetcher.py`**
 Fetch messages from Discord and store them in SQLite database.
 ```bash
@@ -12,12 +21,7 @@ poetry run python scripts/discord_message_fetcher.py --full
 
 # Incremental fetch (new messages only)
 poetry run python scripts/discord_message_fetcher.py --incremental
-
-# Show help
-poetry run python scripts/discord_message_fetcher.py --help
 ```
-
-**Note**: This script automatically ignores channels that have "test" in their name (case-insensitive) to avoid fetching test data.
 
 ### **`index_database_messages.py`**
 Index messages from SQLite database into vector store for semantic search.
@@ -85,7 +89,6 @@ poetry run ./pepe-admin resources detect
 ## ⚠️ Important Notes
 
 - **Always use Poetry**: All commands should be run with `poetry run` or within `poetry shell`
-- **Test channel filtering**: All scripts automatically ignore channels with "test" in the name
 - **Real-time processing** - Messages are handled as they arrive
 - **Unified architecture** - All functionality integrated into main bot
 - **Local Llama models** - Resource detection uses local models for privacy
@@ -100,15 +103,63 @@ All scripts should be run from the project root directory using Poetry:
 cd /Users/jose/Documents/apps/discord-bot-agentic
 
 # Option 1: Use poetry run for each command
-poetry run python scripts/discord_message_fetcher.py --full
-poetry run python scripts/index_database_messages.py --incremental
-poetry run python scripts/resource_detector.py --fast-model
+poetry run ./pepe-admin info
+poetry run ./pepe-admin sync
+poetry run python scripts/discord_message_fetcher.py --incremental
 
 # Option 2: Activate Poetry shell and run commands directly
 poetry shell
-python scripts/discord_message_fetcher.py --full
-python scripts/index_database_messages.py --incremental
-python scripts/resource_detector.py --fast-model
+./pepe-admin info
+./pepe-admin sync
+python scripts/discord_message_fetcher.py --incremental
+```
+
+## Poetry Environment Management
+
+### **Activating the Poetry Environment**
+```bash
+# Activate Poetry virtual environment
+poetry shell
+
+# Verify you're in the Poetry environment
+which python
+# Should show: /Users/jose/Library/Caches/pypoetry/virtualenvs/pepe-discord-bot-5qtDQwBU-py3.11/bin/python
+```
+
+### **Installing Dependencies**
+```bash
+# Install all dependencies
+poetry install
+
+# Add new dependency
+poetry add package-name
+
+# Add development dependency
+poetry add --group dev package-name
+```
+
+### **Running Tests**
+```bash
+# Run all tests
+poetry run pytest
+
+# Run specific test file
+poetry run pytest tests/test_discord_bot_core.py
+
+# Run with coverage
+poetry run pytest --cov=agentic
+```
+
+### **Code Formatting**
+```bash
+# Format code with black
+poetry run black .
+
+# Sort imports
+poetry run isort .
+
+# Type checking
+poetry run mypy agentic/
 ```
 
 ## Integration with Main System

@@ -99,10 +99,6 @@ class DiscordMessageFetcher:
             text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel)]
             forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel)]
             
-            # Filter out channels with "test" in the name (case-insensitive)
-            text_channels = [ch for ch in text_channels if "test" not in ch.name.lower()]
-            forum_channels = [ch for ch in forum_channels if "test" not in ch.name.lower()]
-            
             # Filter channels if specified
             if channel_ids:
                 text_channels = [ch for ch in text_channels if str(ch.id) in channel_ids]

@@ -1,7 +1,7 @@
 # Pepe - Advanced Discord Bot with Agentic RAG Architecture
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Poetry](https://img.shields.io/badge/dependency-poetry-blue.svg)](https://python-poetry.org/)
+[![Poetry](https://img.shields.io/badge/dependency%20management-poetry-60A5FA.svg)](https://python-poetry.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **Pepe** is an intelligent Discord bot powered by advanced agentic RAG (Retrieval-Augmented Generation) architecture. It transforms Discord conversations into actionable insights through semantic search, automated analysis, and multi-agent orchestration. Whether you're managing a community, analyzing discussions, or extracting knowledge from conversations, Pepe provides deep intelligence about user behavior, conversation patterns, and community dynamics.
@@ -270,8 +270,8 @@ Pepe uses a sophisticated multi-agent architecture:
 
 * **LangGraph**: Multi-agent orchestration and workflow management
 * **ChromaDB**: Vector database for semantic search
-* **OpenAI GPT-4**: Primary LLM for analysis and generation
-* **Ollama (Llama)**: Local model for resource detection
+* **Ollama (Llama)**: Local LLM for analysis and generation
+* **OpenAI**: Embeddings only (text-embedding-3-small)
 * **SQLite**: Message storage and metadata
 * **Discord.py**: Bot interface and message handling
 
@@ -280,10 +280,23 @@ Pepe uses a sophisticated multi-agent architecture:
 ### **Prerequisites**
 
 * Python 3.11+
+* Poetry (for dependency management)
 * Discord Bot Token
-* OpenAI API Key
-* Ollama (for local Llama model)
+* OpenAI API Key (for embeddings only)
+* Ollama (for local Llama models)
 * 4GB+ RAM recommended
+
+### **Install Poetry**
+
+If you don't have Poetry installed:
+
+```bash
+# Install Poetry
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Or with pip
+pip install poetry
+```
 
 ### **Quick Setup**
 
@@ -291,7 +304,7 @@ Pepe uses a sophisticated multi-agent architecture:
    ```bash
    git clone https://github.com/jcordovilla/pepe
    cd pepe
-   pip install -r requirements.txt
+   poetry install
    ```
 
 2. **Configure Environment**:
@@ -305,25 +318,31 @@ Pepe uses a sophisticated multi-agent architecture:
 
 3. **Initialize System**:
    ```bash
-   ./pepe-admin setup
-   ./pepe-admin sync --full
+   poetry run ./pepe-admin setup
+   poetry run ./pepe-admin sync --full
    ```
 
 4. **Start the Bot**:
    ```bash
-   python main.py
+   poetry run python main.py
    ```
 
 ### **Admin Commands**
 
 ```bash
-# System management
-./pepe-admin info              # Check system status
-./pepe-admin setup             # Initial setup
-./pepe-admin sync              # Sync Discord messages
-./pepe-admin resources         # Process shared resources
-./pepe-admin maintain          # System maintenance
-./pepe-admin test              # Run tests
+# System management (always use Poetry)
+poetry run ./pepe-admin info              # Check system status
+poetry run ./pepe-admin setup             # Initial setup
+poetry run ./pepe-admin sync              # Sync Discord messages
+poetry run ./pepe-admin resources         # Process shared resources
+poetry run ./pepe-admin maintain          # System maintenance
+poetry run ./pepe-admin test              # Run tests
+
+# Alternative: Activate Poetry shell first
+poetry shell
+./pepe-admin info
+./pepe-admin setup
+# ... then run commands directly
 ```
 
 
@@ -366,6 +385,10 @@ ANALYSIS_TIMEOUT=300
 
 ### **Guides**
 
+* **[Poetry Workflow Guide](docs/setup/POETRY_WORKFLOW.md)** - Complete Poetry setup and usage
+* **[Incremental Sync Guide](docs/setup/INCREMENTAL_SYNC_GUIDE.md)** - Efficient message syncing
+* **[Model Comparison Guide](docs/setup/MODEL_COMPARISON_GUIDE.md)** - Fast vs Standard AI models
+* **[Logging and Query Tracking Guide](docs/setup/LOGGING_AND_QUERY_TRACKING.md)** - User query logging and analytics
 * **Operations Guide** - Complete setup and configuration
 * **Bot Operations** - Discord bot management
 * **Architecture** - Technical implementation details

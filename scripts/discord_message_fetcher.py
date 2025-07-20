@@ -2,9 +2,6 @@
 """
 Fresh Discord Message Fetcher
 Fetches messages directly from Discord and stores them in SQLite database
-
-Note: This script automatically ignores channels that have "test" in their name
-(case-insensitive) to avoid fetching test data.
 """
 
 import asyncio
@@ -12,7 +9,6 @@ import json
 import sqlite3
 import os
 import sys
-import argparse
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, Any, List
@@ -120,11 +116,7 @@ class DiscordMessageFetcher:
                 text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel)]
                 forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel)]
                 
-                # Filter out channels with "test" in the name (case-insensitive)
-                text_channels = [ch for ch in text_channels if "test" not in ch.name.lower()]
-                forum_channels = [ch for ch in forum_channels if "test" not in ch.name.lower()]
-                
-                print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels (excluding test channels)")
+                print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels")
                 
                 # Process text channels
                 for channel in text_channels:
@@ -390,39 +382,6 @@ class DiscordMessageFetcher:
 
 async def main():
     """Main function"""
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(
-        description="Fetch Discord messages and store them in SQLite database",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python discord_message_fetcher.py --full          # Full fetch (all messages)
-  python discord_message_fetcher.py --incremental   # Incremental fetch (new messages only)
-  python discord_message_fetcher.py --help          # Show this help message
-
-Note: This script automatically ignores channels that have "test" in their name
-(case-insensitive) to avoid fetching test data.
-        """
-    )
-    
-    parser.add_argument(
-        '--full',
-        action='store_true',
-        help='Perform a full fetch of all messages (default)'
-    )
-    
-    parser.add_argument(
-        '--incremental',
-        action='store_true',
-        help='Perform an incremental fetch of new messages only'
-    )
-    
-    args = parser.parse_args()
-    
-    # If no arguments provided, default to full fetch
-    if not args.full and not args.incremental:
-        args.full = True
-    
     try:
         fetcher = DiscordMessageFetcher()
         await fetcher.fetch_all_messages()

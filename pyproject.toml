@@ -3,7 +3,7 @@ name = "pepe-discord-bot"
 version = "2.0.0"
 description = "Intelligent Discord bot with agentic architecture for conversation analysis and insights"
 authors = ["Your Name <your.email@example.com>"]
-readme = "README_SIMPLIFIED.md"
+readme = "readme.md"
 packages = [{include = "agentic"}]
 
 [tool.poetry.dependencies]
@@ -27,7 +27,7 @@ langchain-openai = "^0.1.0"
 langchain-community = "^0.2.0"
 
 # Vector Store and Embeddings
-chromadb = "^0.4.15"
+chromadb = "0.4.15"
 faiss-cpu = "^1.7.4"
 
 # Database and ORM

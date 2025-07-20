@@ -83,7 +83,6 @@ class ValidationSystem:
         self.config = config
         self.validation_enabled = config.get("validation_enabled", True)
         self.default_method = ValidationMethod(config.get("default_method", "heuristic"))
-        self.ai_model = config.get("ai_model", "gpt-3.5-turbo")
         self.enable_ai_validation = config.get("enable_ai_validation", False)
         
         # Quality thresholds
@@ -100,7 +99,7 @@ class ValidationSystem:
         # Learning data for continuous improvement
         self.feedback_data = []
         
-        logger.info("Validation System initialized")
+        logger.info("Validation System initialized with local Llama model")
     
     def _load_validation_rules(self) -> Dict[str, Any]:
         """Load validation rules and patterns"""

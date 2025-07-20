@@ -16,16 +16,15 @@ import discord
 from discord import Webhook, WebhookMessage
 from discord.ext import commands
 
-from ..interfaces.agent_api import AgentAPI
-from ..agents.base_agent import AgentRole, TaskStatus
+from .agent_api import AgentAPI
+from .streamlit_interface import StreamlitInterface
+from ..services.discord_service import DiscordMessageService
+from ..services.unified_data_manager import UnifiedDataManager
+from ..services.sync_service import DataSynchronizationService
 from ..memory.conversation_memory import ConversationMemory
 from ..cache.smart_cache import SmartCache
-# Integration of modernized services from legacy migration
-from ..services import (
-    DiscordMessageService,
-    DataSynchronizationService,
-    UnifiedDataManager
-)
+from ..analytics.query_answer_repository import QueryAnswerRepository
+from ..config.modernized_config import get_modernized_config
 
 logger = logging.getLogger(__name__)
 
@@ -114,8 +113,6 @@ class DiscordInterface:
             else:
                 self.discord_service = None
                 logger.warning("Discord service not initialized - missing dependencies")
-            
-            # Content processor removed - using unified data manager instead
             
             # Initialize sync service
             self.sync_service = DataSynchronizationService(

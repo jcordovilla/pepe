@@ -151,7 +151,7 @@ services/
 ├── __init__.py
 ├── unified_data_manager.py    # Centralized data operations
 ├── discord_service.py         # Discord API operations
-├── llm_client.py              # LLM client for local models (Llama)
+├── content_processor.py       # AI-powered content analysis with intelligent caching
 ├── sync_service.py           # Data synchronization
 └── channel_resolver.py       # Channel ID/name resolution
 ```
