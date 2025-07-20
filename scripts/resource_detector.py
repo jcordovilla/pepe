@@ -28,13 +28,29 @@ sys.path.insert(0, str(project_root))
 class FreshResourceDetector:
     def __init__(self, use_fast_model: bool = True):
         # Model selection for resource detection
+        self.fast_model = "phi3:mini"  # Fast, lightweight model
+        self.standard_model = "llama3.1:8b"  # Higher quality model
         self.use_fast_model = use_fast_model
-        self.fast_model = os.getenv('LLM_FAST_MODEL', 'phi3:mini')  # Smaller, faster model
-        self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
         
-        # Incremental processing tracking
-        self.processed_urls_file = Path('data/processed_resources.json')
+        # Resource storage and statistics
+        self.detected_resources = []
+        from collections import defaultdict
+        self.stats = defaultdict(int)
+        self.stats.update({
+            'total_resources': 0,
+            'excluded_domains': 0,
+            'parsing_errors': 0,
+            'internal_documents': 0,
+            'ai_analysis_used': 0,
+            'ai_analysis_failed': 0
+        })
+        
+        # Incremental processing setup
+        project_root = Path(__file__).parent.parent
+        self.processed_urls_file = project_root / 'data' / 'processed_resources.json'
+        self.resource_checkpoint_file = project_root / 'data' / 'resource_checkpoint.json'
         self.processed_urls = self._load_processed_urls()
+        self.resource_checkpoint = self._load_resource_checkpoint()
         
         # High-quality domains (curated list)
         self.high_quality_domains = {
@@ -151,8 +167,6 @@ class FreshResourceDetector:
             '.py': 0.6, '.ipynb': 0.8, '.md': 0.6, '.tex': 0.7
         }
         
-        self.detected_resources = []
-        self.stats = defaultdict(int)
         self.unknown_domains = Counter()  # Track unknown domains
         self.unknown_samples = defaultdict(list)  # Sample URLs for each unknown domain
     
@@ -187,9 +201,32 @@ class FreshResourceDetector:
         except Exception as e:
             print(f"⚠️ Warning: Could not save processed URLs: {e}")
     
+    def _load_resource_checkpoint(self) -> Dict[str, int]:
+        """Load the resource checkpoint to track processed messages."""
+        if self.resource_checkpoint_file.exists():
+            try:
+                with open(self.resource_checkpoint_file, 'r') as f:
+                    return json.load(f)
+            except Exception as e:
+                print(f"⚠️ Warning: Could not load resource checkpoint: {e}")
+        return {}
+    
+    def _save_resource_checkpoint(self):
+        """Save the resource checkpoint to track processed messages."""
+        try:
+            self.resource_checkpoint_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(self.resource_checkpoint_file, 'w') as f:
+                json.dump(self.resource_checkpoint, f, indent=2)
+        except Exception as e:
+            print(f"⚠️ Warning: Could not save resource checkpoint: {e}")
+    
     def _is_url_processed(self, url: str) -> bool:
         """Check if a URL has already been processed"""
         return url in self.processed_urls
+    
+    def _is_message_processed(self, message_id: str) -> bool:
+        """Check if a message has already been processed based on its ID."""
+        return message_id in self.resource_checkpoint
     
     def analyze_discord_messages(self, messages_dir: Path, analyze_unknown: bool = False) -> List[Dict[str, Any]]:
         """Analyze Discord messages and extract high-quality resources"""
@@ -234,6 +271,7 @@ class FreshResourceDetector:
         
         # Save processed URLs for incremental processing
         self._save_processed_urls()
+        self._save_resource_checkpoint() # Save checkpoint after processing all messages
         
         return self._generate_report(analyze_unknown)
     
@@ -789,9 +827,13 @@ def main():
 
     if args.reset_cache:
         cache_file = project_root / 'data' / 'processed_resources.json'
+        checkpoint_file = project_root / 'data' / 'resource_checkpoint.json'
         if cache_file.exists():
             cache_file.unlink()
             print("🗑️ Reset processed URLs cache")
+        if checkpoint_file.exists():
+            checkpoint_file.unlink()
+            print("🗑️ Reset resource checkpoint")
 
     detector = FreshResourceDetector(use_fast_model=use_fast_model)
     model_name = detector.fast_model if use_fast_model else detector.standard_model
@@ -813,22 +855,42 @@ def main():
     try:
         with sqlite3.connect(db_path) as conn:
             conn.row_factory = sqlite3.Row
-            cursor = conn.execute("""
-                SELECT * FROM messages 
-                WHERE content IS NOT NULL AND content != ''
-                ORDER BY timestamp DESC
-            """)
             
-            # First, count total messages for progress bar
-            count_cursor = conn.execute("""
-                SELECT COUNT(*) as count FROM messages 
-                WHERE content IS NOT NULL AND content != ''
-            """)
-            total_messages = count_cursor.fetchone()['count']
-            print(f"📊 Found {total_messages:,} messages to analyze")
+            # Get new messages only (after last processed message)
+            last_processed_id = detector.resource_checkpoint.get('last_processed_message_id')
+            
+            if last_processed_id:
+                print(f"🔄 Incremental processing from message {last_processed_id[:8]}...")
+                cursor = conn.execute("""
+                    SELECT * FROM messages 
+                    WHERE content IS NOT NULL AND content != ''
+                    AND message_id > ?
+                    ORDER BY timestamp ASC
+                """, [last_processed_id])
+                
+                count_cursor = conn.execute("""
+                    SELECT COUNT(*) as count FROM messages 
+                    WHERE content IS NOT NULL AND content != ''
+                    AND message_id > ?
+                """, [last_processed_id])
+            else:
+                print(f"📥 Full processing (no checkpoint found)...")
+                cursor = conn.execute("""
+                    SELECT * FROM messages 
+                    WHERE content IS NOT NULL AND content != ''
+                    ORDER BY timestamp ASC
+                """)
+                
+                count_cursor = conn.execute("""
+                    SELECT COUNT(*) as count FROM messages 
+                    WHERE content IS NOT NULL AND content != ''
+                """)
+            
+            new_messages = count_cursor.fetchone()['count']
+            print(f"📊 Found {new_messages:,} new messages to analyze")
             
             # Load messages with progress bar
-            with tqdm(total=total_messages, desc="📥 Loading messages", unit="msg", position=0, leave=True) as load_pbar:
+            with tqdm(total=new_messages, desc="📥 Loading messages", unit="msg", position=0, leave=True) as load_pbar:
                 for row in cursor:
                     message_dict = {
                         'content': row['content'],
@@ -850,6 +912,11 @@ def main():
         return
 
     print(f"✅ Loaded {len(messages):,} messages successfully")
+    
+    if new_messages == 0:
+        print("✅ No new messages to analyze - resource detection is up to date")
+        return
+    
     print("🔍 Starting resource analysis...")
 
     # Analyze messages with progress bar and incremental logic
@@ -857,6 +924,7 @@ def main():
     processed = 0
     resources_found = 0
     urls_extracted = 0
+    last_processed_message_id = None
     
     print(f"\n🔍 Analyzing {len(messages):,} messages for high-quality resources...")
     print("📊 Progress indicators will show:")
@@ -868,6 +936,11 @@ def main():
     with tqdm(messages, desc="📝 Analyzing messages", unit="msg", position=0, leave=True) as msg_pbar:
         for i, message in enumerate(msg_pbar):
             content = message.get('content', '')
+            message_id = message.get('message_id', '')
+            
+            # Track the last processed message ID for checkpointing
+            last_processed_message_id = message_id
+            
             if not content:
                 continue
                 
@@ -914,6 +987,12 @@ def main():
 
     print(f"\n✅ Analysis complete!")
     print(f"📊 Results: {resources_found} new resources found, {skipped} URLs skipped (already processed)")
+
+    # Save checkpoint with last processed message ID
+    if last_processed_message_id:
+        detector.resource_checkpoint['last_processed_message_id'] = last_processed_message_id
+        detector._save_resource_checkpoint()
+        print(f"💾 Saved checkpoint: {last_processed_message_id[:8]}...")
 
     # Progress bar for description generation (for any resources missing description)
     resources_to_describe = [r for r in detector.detected_resources if not r.get('description') or r['description'].startswith('AI/ML resource from')]
