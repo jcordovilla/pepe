@@ -23,7 +23,6 @@ from ..cache.smart_cache import SmartCache
 # Integration of modernized services from legacy migration
 from ..services import (
     DiscordMessageService,
-    ContentProcessingService,
     DataSynchronizationService,
     UnifiedDataManager
 )
@@ -116,10 +115,7 @@ class DiscordInterface:
                 self.discord_service = None
                 logger.warning("Discord service not initialized - missing dependencies")
             
-            # Initialize content processor
-            self.content_processor = ContentProcessingService(
-                self.config.get('content_processing', {})
-            )
+            # Content processor removed - using unified data manager instead
             
             # Initialize sync service
             self.sync_service = DataSynchronizationService(
@@ -133,7 +129,6 @@ class DiscordInterface:
             # Set services to None if initialization fails
             self.data_manager = None
             self.discord_service = None
-            self.content_processor = None
             self.sync_service = None
     
     async def setup_bot(self) -> commands.Bot:
