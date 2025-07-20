@@ -22,6 +22,7 @@ from tqdm import tqdm
 class DatabaseMessageIndexer:
     def __init__(self):
         self.db_path = project_root / 'data' / 'discord_messages.db'
+        self.checkpoint_path = project_root / 'data' / 'indexing_checkpoint.json'
         self.config = get_modernized_config()
         
         # Initialize vector store
@@ -29,7 +30,7 @@ class DatabaseMessageIndexer:
             "collection_name": "discord_messages",
             "persist_directory": "./data/chromadb",
             "embedding_model": "msmarco-distilbert-base-v4",
-        "embedding_type": "sentence_transformers",
+            "embedding_type": "sentence_transformers",
             "batch_size": 100
         }
         
@@ -38,19 +39,51 @@ class DatabaseMessageIndexer:
         chroma_dir.mkdir(parents=True, exist_ok=True)
         
         self.vector_store = PersistentVectorStore(vector_config)
+        
+        # Load checkpoint for incremental indexing
+        self.checkpoint = self.load_checkpoint()
+    
+    def load_checkpoint(self) -> Dict[str, Any]:
+        """Load checkpoint data for incremental indexing"""
+        if self.checkpoint_path.exists():
+            try:
+                with open(self.checkpoint_path, 'r') as f:
+                    checkpoint = json.load(f)
+                print(f"📋 Loaded indexing checkpoint from {checkpoint.get('last_updated', 'unknown')}")
+                return checkpoint
+            except Exception as e:
+                print(f"⚠️ Warning: Could not load indexing checkpoint: {e}")
+        return {
+            'last_indexed_message_id': None,
+            'last_updated': None,
+            'total_messages_indexed': 0
+        }
+    
+    def save_checkpoint(self, last_message_id: str):
+        """Save checkpoint data for incremental indexing"""
+        try:
+            self.checkpoint['last_indexed_message_id'] = last_message_id
+            self.checkpoint['last_updated'] = asyncio.get_event_loop().time()
+            
+            with open(self.checkpoint_path, 'w') as f:
+                json.dump(self.checkpoint, f, indent=2)
+        except Exception as e:
+            print(f"⚠️ Warning: Could not save indexing checkpoint: {e}")
     
     async def index_all_messages(self):
-        """Index all messages from database into vector store"""
+        """Index messages from database into vector store with incremental support"""
         print("🚀 Starting message indexing from database...", flush=True)
         print(f"📊 Database: {self.db_path}", flush=True)
         
-        # Get total message count
-        total_messages = self.get_message_count()
-        print(f"📝 Total messages to index: {total_messages:,}", flush=True)
+        # Get total message count and new message count
+        total_messages, new_messages = self.get_message_counts()
+        print(f"📝 Total messages in database: {total_messages:,}", flush=True)
         
-        if total_messages == 0:
-            print("❌ No messages found in database", flush=True)
+        if new_messages == 0:
+            print("✅ No new messages to index - database is up to date", flush=True)
             return
+        
+        print(f"🆕 New messages to index: {new_messages:,}", flush=True)
         
         # Process messages in batches
         batch_size = 100
@@ -63,21 +96,31 @@ class DatabaseMessageIndexer:
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row  # Enable column access by name
             
-            # Get all messages
-            cursor = conn.execute("""
+            # Get new messages only
+            query = """
                 SELECT * FROM messages 
-                ORDER BY timestamp DESC
-            """)
+                WHERE message_id > ?
+                ORDER BY timestamp ASC
+            """ if self.checkpoint['last_indexed_message_id'] else """
+                SELECT * FROM messages 
+                ORDER BY timestamp ASC
+            """
+            
+            params = [self.checkpoint['last_indexed_message_id']] if self.checkpoint['last_indexed_message_id'] else []
+            
+            cursor = conn.execute(query, params)
             
             batch = []
+            last_message_id = None
             
-            # Create progress bar for overall indexing
-            with tqdm(total=total_messages, desc="🔍 Indexing messages", unit="msg") as pbar:
+            # Create progress bar for indexing
+            with tqdm(total=new_messages, desc="🔍 Indexing messages", unit="msg") as pbar:
                 for row in cursor:
                     try:
                         # Convert SQLite row to message dict
                         message_dict = self.convert_row_to_message_dict(row)
                         batch.append(message_dict)
+                        last_message_id = row['message_id']
                         
                         # Process batch when full
                         if len(batch) >= batch_size:
@@ -99,41 +142,47 @@ class DatabaseMessageIndexer:
                     except Exception as e:
                         print(f"\n❌ Error processing message {row['message_id']}: {e}", flush=True)
                         errors += 1
-                        pbar.update(1)
                 
                 # Process remaining batch
                 if batch:
-                    try:
-                        success = await self.index_batch(batch)
-                        if success:
-                            indexed += len(batch)
-                        else:
-                            errors += len(batch)
-                        
-                        processed += len(batch)
-                        pbar.update(len(batch))
-                        pbar.set_postfix({
-                            "indexed": f"{indexed:,}",
-                            "errors": errors,
-                            "final": len(batch)
-                        })
-                    except Exception as e:
-                        print(f"\n❌ Error processing final batch: {e}", flush=True)
+                    success = await self.index_batch(batch)
+                    if success:
+                        indexed += len(batch)
+                    else:
                         errors += len(batch)
-                        pbar.update(len(batch))
+                    
+                    processed += len(batch)
+                    pbar.update(len(batch))
+            
+            # Save checkpoint with last processed message ID
+            if last_message_id:
+                self.save_checkpoint(last_message_id)
         
-        # Print final results
-        print("\n📊 Indexing Complete!", flush=True)
-        print(f"   📝 Total Processed: {processed:,}", flush=True)
-        print(f"   ✅ Successfully Indexed: {indexed:,}", flush=True)
-        print(f"   ❌ Errors: {errors}", flush=True)
-        print(f"   📊 Success Rate: {(indexed/processed*100):.1f}%" if processed > 0 else "   📊 Success Rate: 0%", flush=True)
+        print(f"\n✅ Indexing complete!")
+        print(f"📊 Results: {indexed:,} messages indexed, {errors:,} errors")
+        
+        if errors > 0:
+            print(f"⚠️  {errors:,} messages failed to index")
     
-    def get_message_count(self) -> int:
-        """Get total number of messages in database"""
+    def get_message_counts(self) -> tuple[int, int]:
+        """Get total messages and new messages count"""
         with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute("SELECT COUNT(*) FROM messages")
-            return cursor.fetchone()[0]
+            # Get total messages
+            cursor = conn.execute("SELECT COUNT(*) as count FROM messages")
+            total_messages = cursor.fetchone()[0]
+            
+            # Get new messages (after last indexed message)
+            if self.checkpoint['last_indexed_message_id']:
+                cursor = conn.execute("""
+                    SELECT COUNT(*) as count 
+                    FROM messages 
+                    WHERE message_id > ?
+                """, [self.checkpoint['last_indexed_message_id']])
+                new_messages = cursor.fetchone()[0]
+            else:
+                new_messages = total_messages
+            
+            return total_messages, new_messages
     
     def convert_row_to_message_dict(self, row) -> Dict[str, Any]:
         """Convert SQLite row to message dictionary format expected by vector store"""
