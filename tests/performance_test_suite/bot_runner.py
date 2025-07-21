@@ -69,7 +69,15 @@ class BotRunner:
                 user_id="test_user_123",
                 context=context
             )
-            response_text = result.get("answer", "")
+            
+            # Defensive: handle None or malformed results
+            if result is None:
+                result = {"success": False, "answer": "No response from agentic system", "metadata": {}}
+            
+            response_text = result.get("answer", "") or ""
+            if not response_text and result.get("success", False):
+                response_text = "Empty response from agentic system"
+            
             response_time = time.time() - start_time
             response = BotResponse(
                 query_id=query.id,
@@ -77,7 +85,7 @@ class BotRunner:
                 response=response_text,
                 response_time=response_time,
                 timestamp=datetime.utcnow().isoformat(),
-                success=result.get("success", False),
+                success=result.get("success", False) and len(response_text) > 0,
                 metadata={
                     "query_category": query.category,
                     "query_complexity": query.complexity,

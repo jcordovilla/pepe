@@ -100,8 +100,9 @@ class AgentOrchestrator:
             final_state = await self.app.ainvoke(initial_state, config)
             
             # Store conversation in memory
+            response_text = final_state.get("response", "") or "No response generated"
             await self.conversation_memory.add_interaction(
-                user_id, query, final_state.get("response", "")
+                user_id, query, response_text
             )
             
             duration = time.time() - start_time

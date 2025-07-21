@@ -135,6 +135,7 @@ class TaskPlanner:
             # Create execution plan
             plan = ExecutionPlan(
                 id=plan_id,
+                query=query,
                 subtasks=subtasks,
                 status=TaskStatus.PENDING,
                 created_at=datetime.utcnow()
@@ -161,6 +162,7 @@ class TaskPlanner:
             
             return ExecutionPlan(
                 id=f"error_plan_{int(time.time())}_{uuid.uuid4().hex[:8]}",
+                query=query,
                 subtasks=[fallback_subtask],
                 status=TaskStatus.PENDING,
                 created_at=datetime.utcnow()

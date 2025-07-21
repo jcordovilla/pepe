@@ -1,0 +1,1386 @@
+{
+  "metadata": {
+    "generated_at": "2025-07-21T09:21:45.240741",
+    "total_queries": 50,
+    "categories": [
+      "structure_analysis",
+      "server_analysis",
+      "trending_topics",
+      "digests",
+      "statistics",
+      "feedback_summary",
+      "conversational_leadership",
+      "qa_concepts"
+    ],
+    "complexity_distribution": {
+      "simple": 11,
+      "moderate": 30,
+      "complex": 9
+    }
+  },
+  "queries": [
+    {
+      "id": 1,
+      "query": "What are the most active channels in the server?",
+      "category": "server_analysis",
+      "subcategory": "channel_activity",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "channel_analysis",
+        "channels": [
+          {
+            "name": "general",
+            "message_count": 1500,
+            "active_users": 45,
+            "activity_level": "high"
+          }
+        ],
+        "summary": "Analysis of channel activity patterns",
+        "insights": [
+          "Most active channels identified",
+          "Activity distribution shown"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 2,
+      "query": "Show me user engagement patterns over the last month",
+      "category": "server_analysis",
+      "subcategory": "user_engagement",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "engagement_analysis",
+        "time_period": "last_month",
+        "metrics": {
+          "total_messages": 2500,
+          "active_users": 120,
+          "avg_messages_per_user": 20.8,
+          "peak_activity_hours": [
+            14,
+            15,
+            16
+          ]
+        },
+        "patterns": {
+          "daily_activity": {
+            "monday": 180,
+            "tuesday": 195
+          },
+          "hourly_activity": {
+            "14": 150,
+            "15": 165
+          }
+        }
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 3,
+      "query": "Analyze message content types across all channels",
+      "category": "server_analysis",
+      "subcategory": "content_analysis",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "content_analysis",
+        "content_types": {
+          "text_only": 65,
+          "with_links": 20,
+          "with_code": 10,
+          "with_images": 5
+        },
+        "channel_breakdown": {
+          "general": {
+            "text_only": 70,
+            "with_links": 15
+          },
+          "tech": {
+            "with_code": 25,
+            "text_only": 60
+          }
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 4,
+      "query": "What are the peak activity times for the server?",
+      "category": "server_analysis",
+      "subcategory": "temporal_analysis",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "temporal_analysis",
+        "peak_hours": [
+          14,
+          15,
+          16,
+          20,
+          21
+        ],
+        "peak_days": [
+          "tuesday",
+          "wednesday",
+          "thursday"
+        ],
+        "activity_heatmap": {
+          "monday": {
+            "morning": 10,
+            "afternoon": 25,
+            "evening": 15
+          },
+          "tuesday": {
+            "morning": 15,
+            "afternoon": 30,
+            "evening": 20
+          }
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 5,
+      "query": "Find users who frequently share code snippets",
+      "category": "server_analysis",
+      "subcategory": "user_behavior",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "user_analysis",
+        "users": [
+          {
+            "username": "dev_user1",
+            "code_snippets_shared": 25,
+            "total_messages": 150,
+            "preferred_channels": [
+              "python-help",
+              "code-review"
+            ]
+          }
+        ],
+        "summary": "Users identified who frequently share code"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": true,
+      "channel_specific": false
+    },
+    {
+      "id": 6,
+      "query": "Show me reaction patterns and most popular emojis",
+      "category": "server_analysis",
+      "subcategory": "reaction_analysis",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "reaction_analysis",
+        "top_reactions": [
+          {
+            "emoji": "\ud83d\udc4d",
+            "count": 450,
+            "usage_rate": 15.2
+          },
+          {
+            "emoji": "\u2764\ufe0f",
+            "count": 320,
+            "usage_rate": 10.8
+          }
+        ],
+        "reaction_patterns": {
+          "positive_reactions": 75,
+          "negative_reactions": 5,
+          "neutral_reactions": 20
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 7,
+      "query": "Analyze thread usage and discussion depth",
+      "category": "server_analysis",
+      "subcategory": "thread_analysis",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "thread_analysis",
+        "thread_usage": {
+          "total_threads": 85,
+          "avg_replies_per_thread": 8.5,
+          "most_active_threads": 5
+        },
+        "discussion_depth": {
+          "shallow": 30,
+          "moderate": 40,
+          "deep": 15
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 8,
+      "query": "What types of links are most commonly shared?",
+      "category": "server_analysis",
+      "subcategory": "link_analysis",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "link_analysis",
+        "link_categories": {
+          "documentation": 40,
+          "github": 25,
+          "articles": 20,
+          "videos": 10,
+          "other": 5
+        },
+        "top_domains": [
+          {
+            "domain": "github.com",
+            "count": 150
+          },
+          {
+            "domain": "docs.python.org",
+            "count": 80
+          }
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 9,
+      "query": "Summarize all feedback about the new bot features",
+      "category": "feedback_summary",
+      "subcategory": "feature_feedback",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "feedback_summary",
+        "topic": "new bot features",
+        "summary": "Overall positive reception with specific improvement requests",
+        "key_points": [
+          "Users appreciate the new search functionality",
+          "Request for better error messages",
+          "Suggestions for additional features"
+        ],
+        "sentiment": "positive",
+        "action_items": [
+          "Improve error handling",
+          "Add requested features"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 10,
+      "query": "Create a summary of community suggestions from the last week",
+      "category": "feedback_summary",
+      "subcategory": "community_suggestions",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "suggestion_summary",
+        "time_period": "last_week",
+        "total_suggestions": 12,
+        "categories": {
+          "feature_requests": 8,
+          "improvements": 3,
+          "bug_reports": 1
+        },
+        "priority_suggestions": [
+          "Add dark mode support",
+          "Improve mobile responsiveness"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 11,
+      "query": "Summarize user complaints and issues from general channel",
+      "category": "feedback_summary",
+      "subcategory": "issue_summary",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "issue_summary",
+        "channel": "general",
+        "total_issues": 5,
+        "issue_types": {
+          "technical": 3,
+          "usability": 2
+        },
+        "common_themes": [
+          "Slow response times",
+          "Confusing interface"
+        ],
+        "resolution_status": {
+          "resolved": 3,
+          "pending": 2
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": true
+    },
+    {
+      "id": 12,
+      "query": "What are the main concerns raised in the feedback channel?",
+      "category": "feedback_summary",
+      "subcategory": "concern_analysis",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "concern_analysis",
+        "channel": "feedback",
+        "main_concerns": [
+          "Privacy and data handling",
+          "Response accuracy",
+          "Integration issues"
+        ],
+        "concern_frequency": {
+          "privacy": 15,
+          "accuracy": 12,
+          "integration": 8
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": true
+    },
+    {
+      "id": 13,
+      "query": "Summarize positive feedback and compliments",
+      "category": "feedback_summary",
+      "subcategory": "positive_feedback",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "positive_feedback_summary",
+        "total_positive_feedback": 25,
+        "appreciated_features": [
+          "Fast response times",
+          "Helpful search results",
+          "User-friendly interface"
+        ],
+        "user_satisfaction": "high",
+        "recommendation_score": 4.2
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 14,
+      "query": "Create a comprehensive feedback report for the last month",
+      "category": "feedback_summary",
+      "subcategory": "comprehensive_report",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "comprehensive_feedback_report",
+        "time_period": "last_month",
+        "executive_summary": "Overall positive feedback with areas for improvement",
+        "detailed_analysis": {
+          "positive_aspects": [
+            "Reliability",
+            "Ease of use"
+          ],
+          "improvement_areas": [
+            "Speed",
+            "Accuracy"
+          ],
+          "user_satisfaction": 4.1
+        },
+        "recommendations": [
+          "Optimize response times",
+          "Improve accuracy algorithms"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 15,
+      "query": "What topics are trending in the server right now?",
+      "category": "trending_topics",
+      "subcategory": "current_trends",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "trending_analysis",
+        "current_trends": [
+          {
+            "topic": "AI Ethics",
+            "mention_count": 45,
+            "growth_rate": "+25%",
+            "related_channels": [
+              "general",
+              "ai-discussion"
+            ]
+          }
+        ],
+        "trend_indicators": {
+          "increasing": [
+            "AI Ethics",
+            "Machine Learning"
+          ],
+          "decreasing": [
+            "Basic Programming",
+            "Setup Questions"
+          ]
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 16,
+      "query": "Show me trending topics from the last week",
+      "category": "trending_topics",
+      "subcategory": "weekly_trends",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "weekly_trends",
+        "time_period": "last_week",
+        "trending_topics": [
+          {
+            "topic": "Python 3.12",
+            "daily_mentions": [
+              5,
+              8,
+              12,
+              15,
+              10,
+              7,
+              3
+            ],
+            "peak_day": "wednesday",
+            "total_mentions": 60
+          }
+        ],
+        "trend_analysis": "Python 3.12 discussions peaked mid-week"
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 17,
+      "query": "What are the emerging topics in the AI channels?",
+      "category": "trending_topics",
+      "subcategory": "emerging_topics",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "emerging_topics",
+        "channels": [
+          "ai-discussion",
+          "machine-learning"
+        ],
+        "emerging_topics": [
+          {
+            "topic": "Large Language Models",
+            "growth_rate": "+40%",
+            "first_mention": "2024-01-15",
+            "recent_activity": "high"
+          }
+        ],
+        "prediction": "LLM discussions likely to continue growing"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": true
+    },
+    {
+      "id": 18,
+      "query": "Track topic evolution over the last month",
+      "category": "trending_topics",
+      "subcategory": "topic_evolution",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "topic_evolution",
+        "time_period": "last_month",
+        "topic_lifecycle": {
+          "emerging": [
+            "Quantum Computing",
+            "Edge AI"
+          ],
+          "growing": [
+            "LLMs",
+            "AI Ethics"
+          ],
+          "stable": [
+            "Python",
+            "Machine Learning"
+          ],
+          "declining": [
+            "Basic Setup",
+            "Old Frameworks"
+          ]
+        },
+        "evolution_patterns": "AI topics showing strong growth"
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 19,
+      "query": "What topics are losing popularity?",
+      "category": "trending_topics",
+      "subcategory": "declining_topics",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "declining_topics",
+        "declining_topics": [
+          {
+            "topic": "Basic Python Setup",
+            "decline_rate": "-30%",
+            "current_mentions": 5,
+            "peak_mentions": 25
+          }
+        ],
+        "possible_reasons": [
+          "Topic saturation",
+          "Community evolution"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 20,
+      "query": "Identify seasonal or cyclical topic patterns",
+      "category": "trending_topics",
+      "subcategory": "cyclical_patterns",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "cyclical_patterns",
+        "seasonal_topics": {
+          "academic_year": [
+            "Student Questions",
+            "Course Discussions"
+          ],
+          "conference_season": [
+            "Paper Reviews",
+            "Research Updates"
+          ],
+          "holiday_season": [
+            "Year-end Reviews",
+            "Planning"
+          ]
+        },
+        "cycle_length": "12 months",
+        "predictability": "high"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 21,
+      "query": "What are the most frequently asked questions about AI?",
+      "category": "qa_concepts",
+      "subcategory": "frequent_questions",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "frequent_questions",
+        "topic": "AI",
+        "top_questions": [
+          {
+            "question": "How to get started with machine learning?",
+            "frequency": 25,
+            "common_answers": [
+              "Start with Python basics",
+              "Take online courses"
+            ]
+          }
+        ],
+        "question_patterns": "Most questions focus on getting started"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 22,
+      "query": "Show me Q&A patterns in the help channels",
+      "category": "qa_concepts",
+      "subcategory": "qa_patterns",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "qa_patterns",
+        "channels": [
+          "help",
+          "questions"
+        ],
+        "patterns": {
+          "question_types": {
+            "how_to": 40,
+            "what_is": 30,
+            "why_does": 20,
+            "when_should": 10
+          },
+          "response_times": {
+            "avg_response_time": "2.5 hours",
+            "fastest_response": "15 minutes"
+          }
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": true
+    },
+    {
+      "id": 23,
+      "query": "What questions remain unanswered?",
+      "category": "qa_concepts",
+      "subcategory": "unanswered_questions",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "unanswered_questions",
+        "total_unanswered": 15,
+        "unanswered_questions": [
+          {
+            "question": "How to deploy ML models in production?",
+            "asked_by": "user123",
+            "date_asked": "2024-01-20",
+            "days_unanswered": 5
+          }
+        ],
+        "priority_level": "high"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 24,
+      "query": "Find the best answers to common questions",
+      "category": "qa_concepts",
+      "subcategory": "best_answers",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "best_answers",
+        "top_answers": [
+          {
+            "question": "How to install Python packages?",
+            "best_answer": "Use pip install package_name",
+            "upvotes": 45,
+            "provided_by": "expert_user"
+          }
+        ],
+        "answer_quality": "high",
+        "reusability": "excellent"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 25,
+      "query": "What are the most complex questions asked?",
+      "category": "qa_concepts",
+      "subcategory": "complex_questions",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "complex_questions",
+        "complexity_criteria": "technical_depth + response_length",
+        "complex_questions": [
+          {
+            "question": "How to implement custom loss functions in PyTorch?",
+            "complexity_score": 8.5,
+            "technical_depth": "advanced",
+            "response_length": "500+ words"
+          }
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 26,
+      "query": "Analyze question-answer quality and satisfaction",
+      "category": "qa_concepts",
+      "subcategory": "qa_quality",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "qa_quality_analysis",
+        "quality_metrics": {
+          "avg_answer_length": 150,
+          "satisfaction_rate": 85,
+          "follow_up_questions": 20
+        },
+        "quality_indicators": {
+          "code_examples": 60,
+          "external_links": 30,
+          "step_by_step": 40
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 27,
+      "query": "Show me server activity statistics for this month",
+      "category": "statistics",
+      "subcategory": "activity_stats",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "activity_statistics",
+        "time_period": "this_month",
+        "metrics": {
+          "total_messages": 2500,
+          "active_users": 120,
+          "new_users": 15,
+          "avg_messages_per_day": 83
+        },
+        "growth": {
+          "message_growth": "+15%",
+          "user_growth": "+12%"
+        }
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 28,
+      "query": "What are the engagement statistics by channel?",
+      "category": "statistics",
+      "subcategory": "channel_stats",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "channel_statistics",
+        "channels": [
+          {
+            "name": "general",
+            "messages": 800,
+            "unique_users": 45,
+            "engagement_rate": 85,
+            "avg_response_time": "2.3 hours"
+          }
+        ],
+        "top_performers": [
+          "general",
+          "ai-discussion"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 29,
+      "query": "Generate user participation statistics",
+      "category": "statistics",
+      "subcategory": "user_stats",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "user_statistics",
+        "participation_levels": {
+          "super_active": 5,
+          "active": 25,
+          "moderate": 40,
+          "inactive": 50
+        },
+        "user_metrics": {
+          "avg_messages_per_user": 20.5,
+          "most_active_user": "user123",
+          "newest_active_user": "user456"
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 30,
+      "query": "Show me time-based activity statistics",
+      "category": "statistics",
+      "subcategory": "temporal_stats",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "temporal_statistics",
+        "hourly_stats": {
+          "peak_hour": 15,
+          "peak_messages": 45,
+          "quiet_hour": 3,
+          "quiet_messages": 2
+        },
+        "daily_stats": {
+          "busiest_day": "wednesday",
+          "slowest_day": "sunday",
+          "avg_daily_messages": 83
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 31,
+      "query": "What are the content type statistics?",
+      "category": "statistics",
+      "subcategory": "content_stats",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "content_statistics",
+        "content_distribution": {
+          "text_only": 65,
+          "with_links": 20,
+          "with_code": 10,
+          "with_images": 5
+        },
+        "popular_content_types": [
+          "text_only",
+          "with_links"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 32,
+      "query": "Generate comprehensive server health metrics",
+      "category": "statistics",
+      "subcategory": "health_metrics",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "health_metrics",
+        "overall_health": "excellent",
+        "key_indicators": {
+          "user_retention": 85,
+          "message_quality": 4.2,
+          "community_growth": "+18%",
+          "engagement_rate": 78
+        },
+        "recommendations": [
+          "Maintain current practices",
+          "Focus on new user onboarding"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 33,
+      "query": "Analyze the server's channel structure and organization",
+      "category": "structure_analysis",
+      "subcategory": "channel_structure",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "channel_structure_analysis",
+        "structure_overview": {
+          "total_channels": 15,
+          "categories": 5,
+          "organization_quality": "good"
+        },
+        "channel_distribution": {
+          "general": 3,
+          "technical": 8,
+          "community": 4
+        },
+        "recommendations": [
+          "Consider adding more specialized channels"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 34,
+      "query": "What are the information flow patterns in the server?",
+      "category": "structure_analysis",
+      "subcategory": "information_flow",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "information_flow_analysis",
+        "flow_patterns": {
+          "primary_channels": [
+            "general",
+            "announcements"
+          ],
+          "secondary_channels": [
+            "tech-discussion",
+            "help"
+          ],
+          "information_hubs": [
+            "general"
+          ]
+        },
+        "flow_efficiency": "high",
+        "bottlenecks": [
+          "None identified"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 35,
+      "query": "Recommend channel improvements based on activity patterns",
+      "category": "structure_analysis",
+      "subcategory": "channel_recommendations",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "channel_recommendations",
+        "recommendations": [
+          {
+            "action": "merge",
+            "channels": [
+              "python-help",
+              "python-questions"
+            ],
+            "reason": "Similar purpose, low activity"
+          }
+        ],
+        "new_channel_suggestions": [
+          {
+            "name": "advanced-ai",
+            "purpose": "Advanced AI discussions",
+            "justification": "Growing interest in advanced topics"
+          }
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 36,
+      "query": "Analyze user interaction patterns across channels",
+      "category": "structure_analysis",
+      "subcategory": "interaction_patterns",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "interaction_patterns",
+        "cross_channel_activity": {
+          "users_multiple_channels": 45,
+          "avg_channels_per_user": 3.2,
+          "channel_specialization": "moderate"
+        },
+        "interaction_networks": {
+          "core_users": 15,
+          "peripheral_users": 85,
+          "network_density": "medium"
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 37,
+      "query": "What are the best practices for engagement in this server?",
+      "category": "structure_analysis",
+      "subcategory": "best_practices",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "best_practices_analysis",
+        "identified_practices": [
+          "Regular community events",
+          "Clear channel purposes",
+          "Active moderation"
+        ],
+        "effectiveness": {
+          "community_events": "high",
+          "clear_purposes": "medium",
+          "moderation": "high"
+        }
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 38,
+      "query": "Suggest structural improvements for better community dynamics",
+      "category": "structure_analysis",
+      "subcategory": "structural_improvements",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "structural_improvements",
+        "improvement_areas": [
+          {
+            "area": "New user onboarding",
+            "current_state": "basic",
+            "suggested_improvements": [
+              "Welcome channel",
+              "Mentor program"
+            ]
+          }
+        ],
+        "priority_order": [
+          "onboarding",
+          "specialization",
+          "moderation"
+        ],
+        "expected_impact": "high"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 39,
+      "query": "Create a weekly digest of server activity",
+      "category": "digests",
+      "subcategory": "weekly_digest",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "weekly_digest",
+        "time_period": "last_week",
+        "summary": "Active week with focus on AI discussions",
+        "highlights": [
+          "New AI ethics discussion started",
+          "Python 3.12 release discussed",
+          "Community event planning"
+        ],
+        "statistics": {
+          "total_messages": 580,
+          "active_users": 45,
+          "new_topics": 8
+        }
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 40,
+      "query": "Generate a monthly digest for the AI discussion channel",
+      "category": "digests",
+      "subcategory": "channel_digest",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "channel_digest",
+        "channel": "ai-discussion",
+        "time_period": "last_month",
+        "key_discussions": [
+          "Large Language Models applications",
+          "AI ethics and responsibility",
+          "Machine learning best practices"
+        ],
+        "participation": {
+          "total_messages": 320,
+          "unique_participants": 25,
+          "top_contributors": [
+            "user123",
+            "user456"
+          ]
+        }
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": true
+    },
+    {
+      "id": 41,
+      "query": "Create a digest of user activity for the most active members",
+      "category": "digests",
+      "subcategory": "user_digest",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "user_digest",
+        "target_users": "most_active",
+        "activity_summary": {
+          "user123": {
+            "messages": 45,
+            "topics_started": 3,
+            "helpful_responses": 12
+          }
+        },
+        "contributions": "Significant contributions to community knowledge"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": true,
+      "channel_specific": false
+    },
+    {
+      "id": 42,
+      "query": "Show me a digest of all-time server highlights",
+      "category": "digests",
+      "subcategory": "all_time_digest",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "all_time_digest",
+        "time_period": "all_time",
+        "milestones": [
+          "Server creation and initial setup",
+          "First 100 members milestone",
+          "Major community events"
+        ],
+        "statistics": {
+          "total_messages": 15000,
+          "total_users": 500,
+          "server_age": "2 years"
+        }
+      },
+      "edge_case": false,
+      "time_bound": true,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 43,
+      "query": "Create a thematic digest about machine learning discussions",
+      "category": "digests",
+      "subcategory": "thematic_digest",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "thematic_digest",
+        "theme": "machine learning",
+        "discussion_summary": "Comprehensive coverage of ML topics",
+        "key_discussions": [
+          "Getting started with ML",
+          "Advanced techniques",
+          "Practical applications"
+        ],
+        "resources_shared": [
+          "Tutorial links",
+          "Research papers",
+          "Code examples"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 44,
+      "query": "Generate a digest of community events and announcements",
+      "category": "digests",
+      "subcategory": "events_digest",
+      "complexity": "simple",
+      "expected_response_structure": {
+        "type": "events_digest",
+        "upcoming_events": [
+          {
+            "event": "AI Workshop",
+            "date": "2024-02-15",
+            "organizer": "user123"
+          }
+        ],
+        "past_events": [
+          {
+            "event": "Python Meetup",
+            "date": "2024-01-20",
+            "attendance": 25
+          }
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 45,
+      "query": "Identify high-value topics from recent discussions",
+      "category": "conversational_leadership",
+      "subcategory": "topic_identification",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "high_value_topics",
+        "topics": [
+          {
+            "topic": "AI Ethics in Practice",
+            "value_score": 8.5,
+            "engagement_level": "high",
+            "community_interest": "strong"
+          }
+        ],
+        "promotion_suggestions": [
+          "Pin important discussions",
+          "Create dedicated threads"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 46,
+      "query": "Find discussion topics that need more attention",
+      "category": "conversational_leadership",
+      "subcategory": "attention_needed",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "attention_needed_topics",
+        "topics": [
+          {
+            "topic": "Community Guidelines",
+            "current_engagement": "low",
+            "importance": "high",
+            "suggested_actions": [
+              "Moderator intervention",
+              "Community poll"
+            ]
+          }
+        ],
+        "intervention_priority": "medium"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 47,
+      "query": "Suggest discussion prompts for community engagement",
+      "category": "conversational_leadership",
+      "subcategory": "discussion_prompts",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "discussion_prompts",
+        "prompts": [
+          {
+            "prompt": "What's your experience with AI tools in daily work?",
+            "expected_engagement": "high",
+            "target_audience": "all users",
+            "channel": "general"
+          }
+        ],
+        "timing_suggestions": "Post during peak activity hours"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 48,
+      "query": "Analyze conversation quality and suggest improvements",
+      "category": "conversational_leadership",
+      "subcategory": "conversation_quality",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "conversation_quality_analysis",
+        "quality_metrics": {
+          "avg_response_length": 150,
+          "helpful_responses": 75,
+          "conversation_depth": "moderate"
+        },
+        "improvement_areas": [
+          "Encourage longer responses",
+          "Promote follow-up questions"
+        ],
+        "quality_trends": "Improving over time"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    },
+    {
+      "id": 49,
+      "query": "Identify potential community leaders and active contributors",
+      "category": "conversational_leadership",
+      "subcategory": "leader_identification",
+      "complexity": "moderate",
+      "expected_response_structure": {
+        "type": "leader_identification",
+        "potential_leaders": [
+          {
+            "username": "user123",
+            "leadership_indicators": [
+              "High engagement",
+              "Helpful responses"
+            ],
+            "contribution_areas": [
+              "Technical help",
+              "Community building"
+            ]
+          }
+        ],
+        "mentorship_opportunities": "High potential for community growth"
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": true,
+      "channel_specific": false
+    },
+    {
+      "id": 50,
+      "query": "Recommend strategies for maintaining community engagement",
+      "category": "conversational_leadership",
+      "subcategory": "engagement_strategies",
+      "complexity": "complex",
+      "expected_response_structure": {
+        "type": "engagement_strategies",
+        "current_engagement": "good",
+        "strategies": [
+          {
+            "strategy": "Regular community events",
+            "effectiveness": "high",
+            "implementation": "monthly"
+          }
+        ],
+        "long_term_goals": "Sustain high engagement levels",
+        "success_metrics": [
+          "Active user retention",
+          "Discussion quality"
+        ]
+      },
+      "edge_case": false,
+      "time_bound": false,
+      "user_specific": false,
+      "channel_specific": false
+    }
+  ]
+}

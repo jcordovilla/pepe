@@ -155,64 +155,62 @@ class ContentAnalyzer:
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
-            # Defensive: check for required columns
-            columns = [row[1] for row in cursor.execute("PRAGMA table_info(messages)").fetchall()]
-            has_channel_name = "channel_name" in columns
-            has_user_id = "user_id" in columns
-            has_username = "username" in columns or "author_username" in columns
-            has_reactions = "reactions" in columns
-            # Build SELECT clause based on available columns
-            select_cols = ["content"]
-            if has_channel_name: select_cols.append("channel_name")
-            if has_user_id: select_cols.append("user_id")
-            if has_username: select_cols.append("username" if "username" in columns else "author_username")
-            if has_reactions: select_cols.append("reactions")
-            select_clause = ", ".join(select_cols)
-            cursor.execute(f"SELECT {select_clause} FROM messages ORDER BY RANDOM() LIMIT {sample_size}")
+            
+            # Get random sample of messages
+            cursor.execute(f"""
+                SELECT content, channel_name, user_id, author_username, timestamp, reactions
+                FROM messages 
+                ORDER BY RANDOM() 
+                LIMIT {sample_size}
+            """)
+            
             messages = cursor.fetchall()
             conn.close()
-            # Defensive: build index map
-            idx = {col: i for i, col in enumerate(select_cols)}
+            
+            # Analyze content patterns
             content_analysis = {
                 "message_lengths": [],
-                "content_types": {},
-                "url_patterns": {},
-                "mention_patterns": {},
+                "content_types": Counter(),
+                "url_patterns": Counter(),
+                "mention_patterns": Counter(),
                 "code_blocks": 0,
-                "emojis": {},
-                "hashtags": {}
+                "emojis": Counter(),
+                "hashtags": Counter()
             }
+            
             for message in messages:
-                content = message[idx["content"]]
-                content_analysis["message_lengths"].append(len(content) if content else 0)
+                content = message[0] or ""
+                
+                # Message length
+                content_analysis["message_lengths"].append(len(content))
                 
                 # Content types
                 content_type = self._classify_content_type(content)
-                content_analysis["content_types"][content_type] = content_analysis["content_types"].get(content_type, 0) + 1
+                content_analysis["content_types"][content_type] += 1
                 
                 # URLs
                 urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', content)
                 for url in urls:
                     domain = re.search(r'https?://([^/]+)', url)
                     if domain:
-                        content_analysis["url_patterns"][domain.group(1)] = content_analysis["url_patterns"].get(domain.group(1), 0) + 1
+                        content_analysis["url_patterns"][domain.group(1)] += 1
                 
                 # Mentions
                 mentions = re.findall(r'<@!?(\d+)>', content)
-                content_analysis["mention_patterns"]["total_mentions"] = content_analysis["mention_patterns"].get("total_mentions", 0) + len(mentions)
+                content_analysis["mention_patterns"]["total_mentions"] += len(mentions)
                 
                 # Code blocks
                 if '```' in content:
-                    content_analysis["code_blocks"] = content_analysis.get("code_blocks", 0) + 1
+                    content_analysis["code_blocks"] += 1
                 
                 # Emojis
                 emojis = re.findall(r'<a?:[^:]+:\d+>', content)
-                content_analysis["emojis"]["total_custom_emojis"] = content_analysis.get("total_custom_emojis", 0) + len(emojis)
+                content_analysis["emojis"]["total_custom_emojis"] += len(emojis)
                 
                 # Hashtags
                 hashtags = re.findall(r'#\w+', content)
                 for hashtag in hashtags:
-                    content_analysis["hashtags"][hashtag] = content_analysis.get(hashtag, 0) + 1
+                    content_analysis["hashtags"][hashtag] += 1
             
             # Calculate statistics
             lengths = content_analysis["message_lengths"]
@@ -226,7 +224,7 @@ class ContentAnalyzer:
             return content_analysis
             
         except Exception as e:
-            logger.warning(f"Content pattern analysis skipped or partial due to: {e}")
+            logger.error(f"Error analyzing content patterns: {e}")
             return {}
     
     async def _analyze_user_activity(self, sample_size: int) -> Dict[str, Any]:
@@ -237,14 +235,15 @@ class ContentAnalyzer:
             
             # Get user activity data
             cursor.execute(f"""
-                SELECT user_id, username, 
+                SELECT user_id, author_username, 
                        COUNT(*) as message_count,
                        COUNT(DISTINCT channel_id) as channels_used,
                        MIN(timestamp) as first_message,
                        MAX(timestamp) as last_message,
                        AVG(LENGTH(content)) as avg_message_length
                 FROM messages 
-                GROUP BY user_id, username
+                WHERE user_id IS NOT NULL AND user_id != ''
+                GROUP BY user_id, author_username
                 ORDER BY message_count DESC
             """)
             
@@ -252,12 +251,12 @@ class ContentAnalyzer:
             for row in cursor.fetchall():
                 users.append({
                     "user_id": row[0],
-                    "username": row[1],
+                    "username": row[1] or "Unknown",
                     "message_count": row[2],
                     "channels_used": row[3],
                     "first_message": row[4],
                     "last_message": row[5],
-                    "avg_message_length": row[6]
+                    "avg_message_length": row[6] or 0
                 })
             
             # Analyze user types
@@ -267,13 +266,12 @@ class ContentAnalyzer:
             
             return {
                 "total_users": len(users),
-                "users": users[:50],  # Top 50 users
-                "user_types": user_types,
-                "activity_distribution": {
-                    "super_active": len([u for u in users if u["message_count"] > 500]),
-                    "active": len([u for u in users if 100 <= u["message_count"] <= 500]),
-                    "moderate": len([u for u in users if 10 <= u["message_count"] < 100]),
-                    "inactive": len([u for u in users if u["message_count"] < 10])
+                "user_activity_distribution": user_types,
+                "top_contributors": users[:10],
+                "activity_insights": {
+                    "most_active_user": users[0] if users else None,
+                    "average_messages_per_user": sum(u["message_count"] for u in users) / len(users) if users else 0,
+                    "users_with_multi_channel_activity": len([u for u in users if u["channels_used"] > 1])
                 }
             }
             
@@ -282,7 +280,7 @@ class ContentAnalyzer:
             return {}
     
     async def _analyze_channel_characteristics(self) -> Dict[str, Any]:
-        """Analyze characteristics of different channels."""
+        """Analyze channel characteristics and activity."""
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
@@ -306,7 +304,7 @@ class ContentAnalyzer:
                     "channel_name": row[1],
                     "message_count": row[2],
                     "unique_users": row[3],
-                    "avg_message_length": row[4],
+                    "avg_message_length": row[4] or 0,
                     "messages_with_reactions": row[5],
                     "engagement_rate": (row[5] / row[2]) * 100 if row[2] > 0 else 0
                 })
@@ -404,14 +402,26 @@ class ContentAnalyzer:
             
             for message in messages:
                 reactions = message[0]
-                content = message[1]
-                channel = message[2]
-                user_id = message[3]
+                content = message[1] or ""
+                channel = message[2] or "Unknown"
+                user_id = message[3] or "Unknown"
                 
-                # Parse reactions (assuming JSON format)
+                # Parse reactions (assuming JSON format, but handle gracefully)
                 try:
-                    reaction_data = json.loads(reactions) if reactions else {}
-                    total_reactions = sum(reaction_data.values())
+                    if reactions.startswith('['):
+                        # It's a list, convert to dict
+                        reaction_data = {}
+                        import json
+                        reaction_list = json.loads(reactions)
+                        for reaction in reaction_list:
+                            if isinstance(reaction, dict) and 'emoji' in reaction and 'count' in reaction:
+                                reaction_data[reaction['emoji']] = reaction['count']
+                    else:
+                        # Try to parse as JSON dict
+                        import json
+                        reaction_data = json.loads(reactions)
+                    
+                    total_reactions = sum(reaction_data.values()) if isinstance(reaction_data, dict) else 0
                     
                     if total_reactions > 5:  # High engagement threshold
                         reaction_analysis["high_engagement_messages"].append({
@@ -424,10 +434,12 @@ class ContentAnalyzer:
                     reaction_analysis["engagement_by_channel"][channel] += total_reactions
                     reaction_analysis["engagement_by_user"][user_id] += total_reactions
                     
-                    for reaction_type in reaction_data.keys():
-                        reaction_analysis["reaction_types"][reaction_type] += reaction_data[reaction_type]
+                    if isinstance(reaction_data, dict):
+                        for reaction_type in reaction_data.keys():
+                            reaction_analysis["reaction_types"][reaction_type] += reaction_data[reaction_type]
                         
-                except (json.JSONDecodeError, TypeError):
+                except (json.JSONDecodeError, TypeError, AttributeError):
+                    # Handle non-JSON reactions gracefully
                     continue
             
             return reaction_analysis
@@ -616,7 +628,7 @@ class ContentAnalyzer:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             columns = [row[1] for row in cursor.execute("PRAGMA table_info(messages)").fetchall()]
-            expected = ["content", "channel_name", "user_id", "username", "reactions", "timestamp"]
+            expected = ["content", "channel_name", "user_id", "author_username", "reactions", "timestamp"]
             missing = [col for col in expected if col not in columns]
             logger.info(f"[Preflight] messages table columns: {columns}")
             if missing:

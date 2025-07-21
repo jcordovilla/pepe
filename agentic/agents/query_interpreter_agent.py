@@ -188,7 +188,7 @@ Response: {{
             "description": "Search for messages from last week",
             "parameters": {{"time_range": "last_week", "k": 50}}
         }},
-        {{
+{{
             "task_type": "summarize",
             "description": "Create summary of last week's discussions",
             "parameters": {{"summary_type": "overview"}}
@@ -391,6 +391,15 @@ Respond with JSON only:"""
             
             if json_match:
                 json_str = json_match.group(0)
+                # Remove comments from JSON (anything after // on a line)
+                lines = json_str.split('\n')
+                cleaned_lines = []
+                for line in lines:
+                    # Remove inline comments
+                    if '//' in line:
+                        line = line[:line.index('//')]
+                    cleaned_lines.append(line)
+                json_str = '\n'.join(cleaned_lines)
                 return json.loads(json_str)
             else:
                 # If no JSON found, try to parse the entire response

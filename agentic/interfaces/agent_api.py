@@ -161,18 +161,18 @@ class AgentAPI:
             
             # Record analytics if enabled
             if self.enable_analytics:
+                answer_text = result.get("answer", "") or "No answer generated"
                 await self._record_query_analytics(
                     user_id=user_id,
                     platform=platform,
                     query_text=query,
-                    answer_text=result.get("response", ""),
+                    answer_text=answer_text,
                     response_time=response_time,
                     agents_used=agents_used,
                     tokens_used=tokens_used,
-                    success=success,
-                    context=full_context,
-                    channel_id=channel_id,
-                    error_message=result.get("metadata", {}).get("error")
+                    success=True,
+                    context=context or {},
+                    channel_id=channel_id
                 )
             
             # Store interaction in memory if learning is enabled
@@ -215,7 +215,7 @@ class AgentAPI:
                     user_id=user_id,
                     platform=platform,
                     query_text=query,
-                    answer_text="",
+                    answer_text="Error occurred during processing",
                     response_time=response_time,
                     agents_used=[],
                     tokens_used=0,
