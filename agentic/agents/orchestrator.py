@@ -394,11 +394,20 @@ class AgentOrchestrator:
             
             # Validate state consistency
             from .shared_state import SharedAgentState
-            shared_state = SharedAgentState(state)
+            
+            # Ensure query_interpretation exists for validation
+            validation_state = state.copy()
+            if "query_interpretation" not in validation_state:
+                validation_state["query_interpretation"] = validation_state.get("query_interpretation", {})
+            
+            shared_state = SharedAgentState(validation_state)
             validation = await shared_state.validate_state()
             
             if not validation["is_valid"]:
                 logger.warning(f"State validation issues: {validation['errors']}")
+                state["validation_warnings"] = validation["warnings"]
+            elif validation.get("warnings"):
+                logger.info(f"State validation warnings: {validation['warnings']}")
                 state["validation_warnings"] = validation["warnings"]
             
             logger.info(f"Results synthesis completed: {final_response.get('type', 'unknown')} response generated")

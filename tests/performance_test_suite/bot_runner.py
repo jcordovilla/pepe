@@ -5,6 +5,7 @@ Executes test queries against the Discord bot and collects responses.
 Handles sequential processing, error scenarios, and response collection.
 """
 
+import json
 import time
 from typing import List, Any, Dict, Optional
 from dataclasses import dataclass, asdict
@@ -36,6 +37,7 @@ class BotRunner:
         # Ignore bot_api_endpoint, use in-process AgentAPI
         config = get_modernized_config()
         self.agent_api = AgentAPI(config)
+        self.responses = []  # Initialize responses list
 
     async def run_queries(self, queries: List[Any]) -> List[BotResponse]:
         responses = []
@@ -48,6 +50,9 @@ class BotRunner:
                 responses.append(response)
             except Exception as e:
                 logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
+        
+        # Store responses as instance variable for save_responses method
+        self.responses = responses
         return responses
 
     async def _execute_single_query(self, query: Any) -> BotResponse:
