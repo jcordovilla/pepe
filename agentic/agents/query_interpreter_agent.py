@@ -434,29 +434,38 @@ Respond with JSON only:"""
             return self._fallback_interpretation("unexpected error")
     
     def _validate_interpretation(self, interpretation: Dict[str, Any], query: str) -> Dict[str, Any]:
-        """
-        Validate and enhance the interpretation.
-        
-        Args:
-            interpretation: Parsed interpretation
-            query: Original query
-            
-        Returns:
-            Validated interpretation
-        """
         # Ensure required fields exist
         if "intent" not in interpretation:
             interpretation["intent"] = "search"
-        
         if "entities" not in interpretation:
             interpretation["entities"] = []
-        
         if "subtasks" not in interpretation:
             interpretation["subtasks"] = []
-        
         if "confidence" not in interpretation:
             interpretation["confidence"] = 0.8
-        
+
+        # --- POST-PROCESS TIME RANGES ---
+        from datetime import datetime, timedelta
+        now = datetime.utcnow()
+        for entity in interpretation["entities"]:
+            if entity.get("type") == "time_range":
+                val = entity.get("value", "").lower()
+                if val in ["past week", "last week", "this week"]:
+                    # Map to last 7 days
+                    entity["start"] = (now - timedelta(days=7)).isoformat()
+                    entity["end"] = now.isoformat()
+                elif val in ["today"]:
+                    entity["start"] = now.replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
+                    entity["end"] = now.isoformat()
+                # Add more mappings as needed
+
+        # --- VALIDATE ENTITIES ---
+        has_valid_time = any(e.get("type") == "time_range" and e.get("start") and e.get("end") for e in interpretation["entities"])
+        has_valid_channel = any(e.get("type") == "channel" and e.get("value") and e.get("value") != "Unknown Channel" for e in interpretation["entities"])
+        if not has_valid_time or not has_valid_channel:
+            logger.warning(f"Interpretation missing valid time/channel: {interpretation}")
+            interpretation["interpretation_error"] = "Missing or invalid time/channel entity"
+
         # Validate subtasks
         for subtask in interpretation["subtasks"]:
             if "task_type" not in subtask:
@@ -467,7 +476,6 @@ Respond with JSON only:"""
                 subtask["parameters"] = {}
             if "dependencies" not in subtask:
                 subtask["dependencies"] = []
-        
         return interpretation
     
     def _fallback_interpretation(self, query: str) -> Dict[str, Any]:

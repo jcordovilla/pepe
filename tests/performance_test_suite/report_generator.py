@@ -940,18 +940,16 @@ class ReportGenerator:
     def _calculate_reliability_score(self, execution_summary: Dict[str, Any]) -> float:
         """Calculate system reliability score."""
         success_rate = execution_summary.get("success_rate", 0)
-        
-        # Convert percentage to 0-1 scale
         reliability = success_rate / 100
-        
-        # Consider error patterns
         error_summary = execution_summary.get("error_summary", {})
         total_errors = error_summary.get("total_errors", 0)
         total_queries = execution_summary.get("total_queries", 1)
-        
-        error_rate = total_errors / total_queries
-        reliability = reliability * (1 - error_rate)
-        
+        if total_queries == 0:
+            error_rate = 1.0
+            reliability = 0.0
+        else:
+            error_rate = total_errors / total_queries
+            reliability = reliability * (1 - error_rate)
         return min(reliability, 1.0)
     
     def _assess_architecture_health(self, evaluation_summary: Dict[str, Any]) -> str:

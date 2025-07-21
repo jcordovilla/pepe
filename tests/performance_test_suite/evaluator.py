@@ -479,6 +479,21 @@ class ResponseEvaluator:
         """
         return self.llama_evaluator.evaluate_semantic_relevance(query.query, response.response)
     
+    def _has_unknown_or_redundant_content(self, response_text: str) -> bool:
+        # Check for unknown/default values
+        unknown_patterns = ["Unknown Channel", "Unknown time", "Unknown", "No messages found"]
+        for pat in unknown_patterns:
+            if pat.lower() in response_text.lower():
+                return True
+        # Check for repeated lines/blocks
+        lines = [l.strip() for l in response_text.split("\n") if l.strip()]
+        seen = set()
+        for line in lines:
+            if line in seen:
+                return True
+            seen.add(line)
+        return False
+
     def _calculate_format_score(self, query: Any, response: Any) -> float:
         """
         Calculate format accuracy score (rule-based).
@@ -493,6 +508,10 @@ class ResponseEvaluator:
         response_text = response.response
         
         format_scores = []
+        
+        # Penalize unknown/redundant content
+        if self._has_unknown_or_redundant_content(response_text):
+            format_scores.append(0.0)
         
         # Check for expected structure elements
         if 'type' in expected_structure:
@@ -541,6 +560,10 @@ class ResponseEvaluator:
         response_text = response.response
         
         completeness_scores = []
+        
+        # Penalize unknown/redundant content
+        if self._has_unknown_or_redundant_content(response_text):
+            completeness_scores.append(0.0)
         
         # Check for required fields in expected structure
         required_fields = self._get_required_fields(expected_structure)

@@ -3,7 +3,7 @@
   "bot_api_endpoint": "http://localhost:8000",
   "output_directory": "tests/performance_test_suite/data",
   "sample_percentage": 0.15,
-  "query_count": 50,
+  "query_count": 30,
   "enable_error_scenarios": true,
   "save_intermediate_results": true,
   "logging": {

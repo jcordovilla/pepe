@@ -362,10 +362,8 @@ class ResultAggregator(BaseAgent):
             Final response string
         """
         try:
-            # Extract key information
             search_results = aggregated_results.aggregated_data.get("search_results", [])
             analysis_results = aggregated_results.aggregated_data.get("analysis_results", {})
-            
             # Build response based on available data
             if search_results:
                 response = f"Found {len(search_results)} relevant messages. "
@@ -377,9 +375,23 @@ class ResultAggregator(BaseAgent):
                 response = f"Analysis completed with {len(analysis_results)} components: {', '.join(analysis_results.keys())}."
             else:
                 response = "No specific results found, but query was processed successfully."
-            
+            # --- CHECK FOR UNKNOWN/DEFAULT VALUES ---
+            if any(x in response for x in ["Unknown Channel", "Unknown time", "Unknown", "No messages found"]):
+                logger.warning("Final response contains unknown/default values.")
+                response += "\n[Warning: Some results may be incomplete or missing context. Please check data quality and agent interpretation.]"
+            # --- CHECK FOR REDUNDANCY ---
+            lines = response.split("\n")
+            seen = set()
+            repeated = False
+            for line in lines:
+                if line.strip() in seen and line.strip():
+                    repeated = True
+                    break
+                seen.add(line.strip())
+            if repeated:
+                logger.warning("Final response contains repeated/redundant blocks.")
+                response += "\n[Warning: Response contains repeated or redundant sections.]"
             return response
-            
         except Exception as e:
             logger.error(f"Error generating final response: {e}")
             return "Response generated with some processing errors." 
