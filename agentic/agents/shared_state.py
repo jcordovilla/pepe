@@ -207,6 +207,13 @@ class SharedAgentState:
                 if key not in self._state:
                     validation["errors"].append(f"Missing required key: {key}")
                     validation["is_valid"] = False
+                elif key == "query_interpretation" and not self._state[key]:
+                    validation["warnings"].append(f"Required key '{key}' is empty - query interpretation may have failed")
+            
+            # Log validation issues for debugging
+            if validation["errors"] or validation["warnings"]:
+                issues = validation["errors"] + validation["warnings"]
+                logger.info(f"State validation issues: {issues}")
             
             # Check for data consistency
             if "search_results" in self._state and not isinstance(self._state["search_results"], list):

@@ -91,6 +91,8 @@ class QueryInterpreterAgent(BaseAgent):
                 logger.warning("No query provided for interpretation")
                 return state
             
+            logger.info(f"QueryInterpreterAgent processing query: '{query[:50]}...'")
+            
             # Check cache first
             cache_key = f"query_interpretation:{hash(query)}"
             cached_result = await self.cache.get(cache_key)
@@ -101,7 +103,10 @@ class QueryInterpreterAgent(BaseAgent):
                 return state
             
             # Interpret query using LLM
+            logger.info("Calling LLM for query interpretation...")
             interpretation = await self._interpret_query_with_llm(query, state)
+            
+            logger.info(f"LLM interpretation result: intent={interpretation.get('intent')}, subtasks={len(interpretation.get('subtasks', []))}, confidence={interpretation.get('confidence')}")
             
             # Cache the result
             await self.cache.set(cache_key, interpretation, ttl=self.cache_ttl)
@@ -114,13 +119,16 @@ class QueryInterpreterAgent(BaseAgent):
                 "confidence": interpretation.get("confidence", 0.0)
             }
             
-            logger.info(f"Query interpreted: intent={interpretation.get('intent')}, subtasks={len(interpretation.get('subtasks', []))}")
+            logger.info(f"Query interpreted successfully: intent={interpretation.get('intent')}, subtasks={len(interpretation.get('subtasks', []))}")
             return state
             
         except Exception as e:
             logger.error(f"Error in query interpretation: {e}")
             state["errors"] = state.get("errors", [])
             state["errors"].append(f"Query interpretation error: {str(e)}")
+            # Still set a fallback interpretation to avoid empty query_interpretation
+            logger.warning("Setting fallback interpretation due to error")
+            state["query_interpretation"] = self._fallback_interpretation(query if 'query' in locals() else "error")
             return state
     
     async def _interpret_query_with_llm(self, query: str, state: AgentState) -> Dict[str, Any]:
@@ -400,15 +408,24 @@ Respond with JSON only:"""
                         line = line[:line.index('//')]
                     cleaned_lines.append(line)
                 json_str = '\n'.join(cleaned_lines)
-                return json.loads(json_str)
+                parsed = json.loads(json_str)
+                logger.info(f"Successfully parsed LLM response: {parsed.get('intent', 'unknown')} intent with {len(parsed.get('subtasks', []))} subtasks")
+                return parsed
             else:
                 # If no JSON found, try to parse the entire response
-                return json.loads(response)
+                parsed = json.loads(response)
+                logger.info(f"Successfully parsed full LLM response: {parsed.get('intent', 'unknown')} intent")
+                return parsed
                 
         except json.JSONDecodeError as e:
             logger.error(f"Error parsing LLM response: {e}")
-            logger.error(f"Response: {response}")
-            return self._fallback_interpretation("")
+            logger.error(f"Response was: {response[:200]}...")
+            logger.warning("Using fallback interpretation due to JSON parsing error")
+            return self._fallback_interpretation("parsing error")
+        except Exception as e:
+            logger.error(f"Unexpected error parsing LLM response: {e}")
+            logger.warning("Using fallback interpretation due to unexpected error")
+            return self._fallback_interpretation("unexpected error")
     
     def _validate_interpretation(self, interpretation: Dict[str, Any], query: str) -> Dict[str, Any]:
         """

@@ -50,6 +50,8 @@ class PersistentVectorStore:
         self.stats: Dict[str, Any] = {
             "total_documents": 0,
             "total_searches": 0,
+            "searches_performed": 0,
+            "results_returned": 0,
             "cache_hits": 0,
             "cache_misses": 0,
             "index_updates": 0
@@ -463,10 +465,15 @@ class PersistentVectorStore:
         
         try:
             # Generate embedding for the query
-            query_embedding = await self.embedding_model.embed_query(query)
-            if not query_embedding:
+            query_embedding = await asyncio.to_thread(
+                self.embedding_function, [query]
+            )
+            if not query_embedding or not query_embedding[0]:
                 logger.warning("Failed to generate embedding for query")
                 return []
+            
+            # Use the first embedding from the batch
+            query_embedding = query_embedding[0]
             
             # Prepare filters for ChromaDB
             where_filter = None
@@ -525,8 +532,9 @@ class PersistentVectorStore:
                     search_results.append(result)
             
             # Update stats
-            self.stats["searches_performed"] += 1
-            self.stats["results_returned"] += len(search_results)
+            if hasattr(self, 'stats') and isinstance(self.stats, dict):
+                self.stats["searches_performed"] = self.stats.get("searches_performed", 0) + 1
+                self.stats["results_returned"] = self.stats.get("results_returned", 0) + len(search_results)
             
             logger.info(f"Similarity search returned {len(search_results)} results for query: {query[:50]}...")
             return search_results

@@ -177,10 +177,17 @@ class AgentAPI:
             
             # Store interaction in memory if learning is enabled
             if self.enable_learning:
+                response_for_memory = result.get("response", "")
+                # Ensure response is a string for database storage
+                if isinstance(response_for_memory, dict):
+                    response_for_memory = str(response_for_memory)
+                elif not isinstance(response_for_memory, str):
+                    response_for_memory = str(response_for_memory)
+                
                 await self.memory.add_interaction(
                     user_id=user_id,
                     query=query,
-                    response=result.get("response", ""),
+                    response=response_for_memory,
                     context=full_context,
                     metadata={
                         "sources_count": len(result.get("sources", [])),
