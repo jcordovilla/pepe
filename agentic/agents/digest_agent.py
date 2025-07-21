@@ -28,7 +28,7 @@ class DigestAgent(BaseAgent):
     """
     
     def __init__(self, config: Dict[str, Any]):
-        super().__init__(AgentRole.ANALYZER, config)  # Use ANALYZER role for now
+        super().__init__(AgentRole.DIGESTER, config)
         
         # Digest configuration
         self.default_digest_period = config.get("default_digest_period", "weekly")

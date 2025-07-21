@@ -1,251 +1,219 @@
 """
-Service Container for Dependency Injection
+Service Container
 
-Provides shared services to all agents to eliminate resource duplication.
-Fixes the issue where each agent initializes its own LLM client and other services.
+Provides dependency injection and shared service management for the agentic system.
+Reduces resource duplication and improves performance through service sharing.
 """
 
 import logging
 from typing import Dict, Any, Optional
-from dataclasses import dataclass
+from pathlib import Path
 
-from ..services.llm_client import UnifiedLLMClient
 from ..vectorstore.persistent_store import PersistentVectorStore
-from ..cache.smart_cache import SmartCache
 from ..memory.conversation_memory import ConversationMemory
+from ..cache.smart_cache import SmartCache
+from ..services.llm_client import UnifiedLLMClient
 from ..analytics.query_answer_repository import QueryAnswerRepository
 from ..analytics.performance_monitor import PerformanceMonitor
+from ..analytics.validation_system import ValidationSystem
+from ..analytics.analytics_dashboard import AnalyticsDashboard
 
 logger = logging.getLogger(__name__)
 
 
-@dataclass
 class ServiceContainer:
     """
-    Container for shared services used across all agents.
+    Service container for dependency injection and shared service management.
     
     Provides:
-    - Unified LLM client with connection pooling
-    - Shared vector store instance
-    - Centralized caching
-    - Memory management
-    - Analytics services
+    - Shared service instances across all agents
+    - Resource optimization and reuse
+    - Centralized service configuration
+    - Service lifecycle management
     """
     
     def __init__(self, config: Dict[str, Any]):
-        """
-        Initialize the service container with configuration.
-        
-        Args:
-            config: Configuration dictionary
-        """
         self.config = config
+        self._services: Dict[str, Any] = {}
+        self._initialized = False
         
-        # Initialize shared services
-        self._initialize_services()
-        
-        logger.info("ServiceContainer initialized with all shared services")
+        logger.info("ServiceContainer initialized")
     
-    def _initialize_services(self):
+    async def initialize_services(self):
         """Initialize all shared services."""
+        if self._initialized:
+            return
+        
         try:
-            # LLM Client (shared across all agents)
+            logger.info("Initializing shared services...")
+            
+            # Initialize vector store
+            vector_config = self.config.get("data", {}).get("vector_config", {})
+            self._services["vector_store"] = PersistentVectorStore(vector_config)
+            
+            # Initialize memory
+            memory_config = self.config.get("data", {}).get("memory_config", {})
+            self._services["memory"] = ConversationMemory(memory_config)
+            
+            # Initialize cache
+            cache_config = self.config.get("data", {}).get("cache_config", {})
+            self._services["cache"] = SmartCache(cache_config)
+            
+            # Initialize LLM client
             llm_config = self.config.get("llm", {})
-            self.llm_client = UnifiedLLMClient(llm_config)
+            self._services["llm_client"] = UnifiedLLMClient(llm_config)
             
-            # Vector Store (shared across search and analysis agents)
-            vectorstore_config = self.config.get("vectorstore", {})
-            self.vector_store = PersistentVectorStore(vectorstore_config)
-            
-            # Cache (shared across all agents)
-            cache_config = self.config.get("cache", {})
-            self.cache = SmartCache(cache_config)
-            
-            # Memory (shared across all agents)
-            memory_config = self.config.get("memory", {})
-            self.memory = ConversationMemory(memory_config)
-            
-            # Analytics (shared across all agents)
+            # Initialize analytics services
             analytics_config = self.config.get("analytics", {})
-            self.query_repository = QueryAnswerRepository(analytics_config)
-            self.performance_monitor = PerformanceMonitor(analytics_config)
+            self._services["query_repository"] = QueryAnswerRepository(analytics_config)
+            self._services["performance_monitor"] = PerformanceMonitor(analytics_config)
+            self._services["validation_system"] = ValidationSystem(analytics_config)
+            self._services["analytics_dashboard"] = AnalyticsDashboard(analytics_config)
             
             # Set up service dependencies
             self._setup_service_dependencies()
             
+            self._initialized = True
             logger.info("All shared services initialized successfully")
             
         except Exception as e:
-            logger.error(f"Error initializing service container: {e}")
+            logger.error(f"Failed to initialize services: {e}")
             raise
     
     def _setup_service_dependencies(self):
         """Set up dependencies between services."""
         try:
-            # Set up performance monitor with its dependencies
-            self.performance_monitor.set_components(
-                self.query_repository,
-                self.vector_store,
-                self.cache
+            # Set performance monitor dependencies
+            performance_monitor = self._services["performance_monitor"]
+            performance_monitor.set_components(
+                self._services["query_repository"],
+                self._services["vector_store"],
+                self._services["cache"]
+            )
+            
+            # Set analytics dashboard dependencies
+            analytics_dashboard = self._services["analytics_dashboard"]
+            analytics_dashboard.set_components(
+                self._services["query_repository"],
+                self._services["performance_monitor"],
+                self._services["validation_system"]
             )
             
             logger.info("Service dependencies configured successfully")
             
         except Exception as e:
-            logger.error(f"Error setting up service dependencies: {e}")
+            logger.error(f"Failed to setup service dependencies: {e}")
             raise
-    
-    def inject_services(self, agent_instance: Any) -> None:
-        """
-        Inject shared services into an agent instance.
-        
-        Args:
-            agent_instance: The agent instance to inject services into
-        """
-        try:
-            # Inject LLM client
-            if hasattr(agent_instance, 'llm_client'):
-                agent_instance.llm_client = self.llm_client
-            
-            # Inject vector store
-            if hasattr(agent_instance, 'vector_store'):
-                agent_instance.vector_store = self.vector_store
-            
-            # Inject cache
-            if hasattr(agent_instance, 'cache'):
-                agent_instance.cache = self.cache
-            
-            # Inject memory
-            if hasattr(agent_instance, 'memory'):
-                agent_instance.memory = self.memory
-            
-            # Inject analytics services
-            if hasattr(agent_instance, 'query_repository'):
-                agent_instance.query_repository = self.query_repository
-            
-            if hasattr(agent_instance, 'performance_monitor'):
-                agent_instance.performance_monitor = self.performance_monitor
-            
-            logger.debug(f"Services injected into {type(agent_instance).__name__}")
-            
-        except Exception as e:
-            logger.error(f"Error injecting services into {type(agent_instance).__name__}: {e}")
-            raise
-    
-    def get_llm_client(self) -> UnifiedLLMClient:
-        """Get the shared LLM client."""
-        return self.llm_client
     
     def get_vector_store(self) -> PersistentVectorStore:
-        """Get the shared vector store."""
-        return self.vector_store
-    
-    def get_cache(self) -> SmartCache:
-        """Get the shared cache."""
-        return self.cache
+        """Get shared vector store instance."""
+        return self._services["vector_store"]
     
     def get_memory(self) -> ConversationMemory:
-        """Get the shared memory."""
-        return self.memory
+        """Get shared memory instance."""
+        return self._services["memory"]
+    
+    def get_cache(self) -> SmartCache:
+        """Get shared cache instance."""
+        return self._services["cache"]
+    
+    def get_llm_client(self) -> UnifiedLLMClient:
+        """Get shared LLM client instance."""
+        return self._services["llm_client"]
     
     def get_query_repository(self) -> QueryAnswerRepository:
-        """Get the shared query repository."""
-        return self.query_repository
+        """Get shared query repository instance."""
+        return self._services["query_repository"]
     
     def get_performance_monitor(self) -> PerformanceMonitor:
-        """Get the shared performance monitor."""
-        return self.performance_monitor
+        """Get shared performance monitor instance."""
+        return self._services["performance_monitor"]
     
-    async def health_check(self) -> Dict[str, Any]:
-        """
-        Perform health check on all services.
-        
-        Returns:
-            Health status of all services
-        """
-        health_status = {
-            "overall_status": "healthy",
-            "services": {},
-            "timestamp": None
+    def get_validation_system(self) -> ValidationSystem:
+        """Get shared validation system instance."""
+        return self._services["validation_system"]
+    
+    def get_analytics_dashboard(self) -> AnalyticsDashboard:
+        """Get shared analytics dashboard instance."""
+        return self._services["analytics_dashboard"]
+    
+    def inject_services(self, agent: Any):
+        """Inject shared services into an agent."""
+        try:
+            if hasattr(agent, 'set_services'):
+                agent.set_services(
+                    vector_store=self._services["vector_store"],
+                    memory=self._services["memory"],
+                    cache=self._services["cache"],
+                    llm_client=self._services["llm_client"],
+                    query_repository=self._services["query_repository"],
+                    performance_monitor=self._services["performance_monitor"]
+                )
+            elif hasattr(agent, 'vector_store'):
+                agent.vector_store = self._services["vector_store"]
+            if hasattr(agent, 'memory'):
+                agent.memory = self._services["memory"]
+            if hasattr(agent, 'cache'):
+                agent.cache = self._services["cache"]
+            if hasattr(agent, 'llm_client'):
+                agent.llm_client = self._services["llm_client"]
+                
+            logger.debug(f"Services injected into {type(agent).__name__}")
+            
+        except Exception as e:
+            logger.error(f"Failed to inject services into {type(agent).__name__}: {e}")
+    
+    def get_service_stats(self) -> Dict[str, Any]:
+        """Get statistics about service usage."""
+        stats = {
+            "initialized": self._initialized,
+            "service_count": len(self._services),
+            "services": list(self._services.keys())
         }
         
-        try:
-            # Check LLM client
-            llm_health = await self.llm_client.health_check()
-            health_status["services"]["llm_client"] = llm_health
-            
-            # Check vector store
-            try:
-                # Simple health check for vector store
-                collections = await self.vector_store.list_collections()
-                health_status["services"]["vector_store"] = {
-                    "status": "healthy",
-                    "collections_count": len(collections)
-                }
-            except Exception as e:
-                health_status["services"]["vector_store"] = {
-                    "status": "unhealthy",
-                    "error": str(e)
-                }
-                health_status["overall_status"] = "degraded"
-            
-            # Check cache
-            try:
-                # Simple health check for cache
-                await self.cache.set("health_check", "ok", ttl=60)
-                test_value = await self.cache.get("health_check")
-                health_status["services"]["cache"] = {
-                    "status": "healthy" if test_value == "ok" else "unhealthy"
-                }
-            except Exception as e:
-                health_status["services"]["cache"] = {
-                    "status": "unhealthy",
-                    "error": str(e)
-                }
-                health_status["overall_status"] = "degraded"
-            
-            # Check memory
-            try:
-                # Simple health check for memory
-                await self.memory.get_history("test_user", limit=1)
-                health_status["services"]["memory"] = {"status": "healthy"}
-            except Exception as e:
-                health_status["services"]["memory"] = {
-                    "status": "unhealthy",
-                    "error": str(e)
-                }
-                health_status["overall_status"] = "degraded"
-            
-            logger.info(f"Health check completed: {health_status['overall_status']}")
-            
-        except Exception as e:
-            logger.error(f"Error during health check: {e}")
-            health_status["overall_status"] = "unhealthy"
-            health_status["error"] = str(e)
+        # Add service-specific stats
+        if "cache" in self._services:
+            cache_stats = self._services["cache"].get_stats()
+            stats["cache"] = cache_stats
         
-        return health_status
+        if "performance_monitor" in self._services:
+            perf_stats = self._services["performance_monitor"].get_stats()
+            stats["performance"] = perf_stats
+        
+        return stats
     
-    async def shutdown(self) -> None:
-        """Shutdown all services gracefully."""
+    async def cleanup(self):
+        """Clean up all services and resources."""
         try:
-            logger.info("Shutting down service container...")
+            logger.info("Cleaning up service container...")
             
-            # Shutdown performance monitor
-            if hasattr(self, 'performance_monitor'):
-                self.performance_monitor.stop_monitoring()
+            # Clean up services in reverse order
+            cleanup_order = [
+                "analytics_dashboard",
+                "validation_system", 
+                "performance_monitor",
+                "query_repository",
+                "llm_client",
+                "cache",
+                "memory",
+                "vector_store"
+            ]
             
-            # Close vector store connections
-            if hasattr(self, 'vector_store'):
-                await self.vector_store.close()
+            for service_name in cleanup_order:
+                if service_name in self._services:
+                    service = self._services[service_name]
+                    if hasattr(service, 'cleanup'):
+                        await service.cleanup()
+                    elif hasattr(service, 'close'):
+                        await service.close()
             
-            # Clear cache
-            if hasattr(self, 'cache'):
-                await self.cache.clear()
+            self._services.clear()
+            self._initialized = False
             
-            logger.info("Service container shutdown completed")
+            logger.info("Service container cleanup completed")
             
         except Exception as e:
-            logger.error(f"Error during service container shutdown: {e}")
+            logger.error(f"Error during service cleanup: {e}")
 
 
 # Global service container instance
@@ -253,26 +221,29 @@ _service_container: Optional[ServiceContainer] = None
 
 
 def get_service_container(config: Optional[Dict[str, Any]] = None) -> ServiceContainer:
-    """
-    Get the global service container instance.
-    
-    Args:
-        config: Configuration to initialize the container (only used on first call)
-        
-    Returns:
-        Service container instance
-    """
+    """Get or create the global service container instance."""
     global _service_container
     
     if _service_container is None:
         if config is None:
-            raise ValueError("Service container not initialized. Provide config on first call.")
+            from ..config.modernized_config import get_modernized_config
+            config = get_modernized_config()
+        
         _service_container = ServiceContainer(config)
     
     return _service_container
 
 
-def reset_service_container():
-    """Reset the global service container (for testing)."""
+async def initialize_global_services(config: Optional[Dict[str, Any]] = None):
+    """Initialize the global service container."""
+    container = get_service_container(config)
+    await container.initialize_services()
+
+
+async def cleanup_global_services():
+    """Clean up the global service container."""
     global _service_container
-    _service_container = None 
+    
+    if _service_container is not None:
+        await _service_container.cleanup()
+        _service_container = None 

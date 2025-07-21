@@ -64,213 +64,180 @@ class PerformanceTestOrchestrator:
             "real_data_mode": True
         }
     
-    async def run_complete_test_suite(self) -> Dict[str, Any]:
+    async def run_performance_tests(self) -> Dict[str, Any]:
         """
-        Run the complete performance test suite.
+        Run comprehensive performance tests with parallel execution and resource optimization.
         
         Returns:
-            Dictionary containing all test results and report
+            Complete test results with performance metrics
         """
-        logger.info("Starting complete performance test suite execution...")
-        
         try:
-            # Phase 1: Content Analysis
-            logger.info("=== PHASE 1: Content Analysis ===")
-            content_analysis = await self._run_content_analysis()
+            logger.info("Starting comprehensive performance tests...")
             
-            # Phase 2: Query Generation
-            logger.info("=== PHASE 2: Query Generation ===")
-            queries = await self._run_query_generation(content_analysis)
+            # Initialize service container for resource optimization
+            from agentic.services.service_container import initialize_global_services, cleanup_global_services
+            await initialize_global_services(self.config)
             
-            # Phase 3: Bot Execution
-            logger.info("=== PHASE 3: Bot Execution ===")
-            bot_responses = await self._run_bot_execution(queries)
+            # Initialize components with shared services
+            await self._initialize_components()
             
-            # Phase 4: Response Evaluation
-            logger.info("=== PHASE 4: Response Evaluation ===")
-            evaluation_results = await self._run_response_evaluation(queries, bot_responses)
+            # Run tests with parallel execution
+            results = await self._run_tests_parallel()
             
-            # Phase 5: Report Generation
-            logger.info("=== PHASE 5: Report Generation ===")
-            comprehensive_report = await self._run_report_generation(
-                content_analysis, queries, bot_responses, evaluation_results
+            # Clean up resources
+            await cleanup_global_services()
+            
+            logger.info("Performance tests completed successfully")
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error in performance tests: {e}")
+            # Ensure cleanup happens even on error
+            try:
+                from agentic.services.service_container import cleanup_global_services
+                await cleanup_global_services()
+            except:
+                pass
+            raise
+    
+    async def _initialize_components(self):
+        """Initialize all test components with shared services."""
+        try:
+            logger.info("Initializing test components with shared services...")
+            
+            # Get service container
+            from agentic.services.service_container import get_service_container
+            service_container = get_service_container()
+            
+            # Initialize content analyzer
+            self.content_analyzer = ContentAnalyzer(self.config.get("database_path"))
+            self.content_analyzer.preflight_schema_check()
+            
+            # Initialize query generator with shared services
+            self.query_generator = QueryGenerator(self.config)
+            service_container.inject_services(self.query_generator)
+            
+            # Initialize bot runner with shared services
+            self.bot_runner = BotRunner()
+            service_container.inject_services(self.bot_runner)
+            
+            # Initialize evaluator with shared services
+            self.evaluator = ResponseEvaluator()
+            service_container.inject_services(self.evaluator)
+            
+            # Initialize report generator
+            self.report_generator = ReportGenerator()
+            
+            logger.info("All components initialized successfully")
+            
+        except Exception as e:
+            logger.error(f"Error initializing components: {e}")
+            raise
+    
+    async def _run_tests_parallel(self) -> Dict[str, Any]:
+        """Run tests with parallel execution for better performance."""
+        try:
+            logger.info("Running tests with parallel execution...")
+            
+            # Step 1: Content Analysis (can run in parallel with other setup)
+            content_analysis_task = asyncio.create_task(
+                self.content_analyzer.analyze_server_content()
             )
             
-            # Compile final results
-            self.results = {
-                "test_execution": {
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "duration": "Complete test suite execution",
-                    "phases_completed": 5
-                },
-                "content_analysis": content_analysis,
-                "queries": queries,
-                "bot_responses": bot_responses,
-                "evaluation_results": evaluation_results,
-                "comprehensive_report": comprehensive_report,
-                "summary": {
-                    "total_queries": len(queries),
-                    "successful_responses": len([r for r in bot_responses if r.success]),
-                    "average_quality_score": comprehensive_report.evaluation_summary.get("overall_performance", {}).get("average_score", 0),
-                    "system_reliability": comprehensive_report.test_summary["overall_performance"]["system_reliability"]
-                }
-            }
+            # Step 2: Generate queries (can run in parallel with content analysis)
+            query_generation_task = asyncio.create_task(
+                self.query_generator.generate_test_queries()
+            )
             
-            # Save all results
-            await self._save_all_results()
-            
-            logger.info("Complete performance test suite execution finished successfully")
-            return self.results
-            
-        except Exception as e:
-            logger.error(f"Error in test suite execution: {e}")
-            raise
-    
-    async def _run_content_analysis(self) -> Dict[str, Any]:
-        """Run content analysis phase."""
-        logger.info("Starting content analysis of Discord server...")
-        
-        try:
-            content_analysis = await self.content_analyzer.analyze_server_content()
-            
-            # Save content analysis results
-            if self.config.get("save_intermediate_results"):
-                timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-                filename = f"{self.config['output_directory']}/content_analysis_{timestamp}.json"
-                Path(filename).parent.mkdir(parents=True, exist_ok=True)
-                
-                with open(filename, 'w') as f:
-                    json.dump(content_analysis, f, indent=2, default=str)
-                
-                logger.info(f"Content analysis results saved to: {filename}")
-            
-            logger.info("Content analysis completed successfully")
-            return content_analysis
-            
-        except Exception as e:
-            logger.error(f"Error in content analysis: {e}")
-            raise
-    
-    async def _run_query_generation(self, content_analysis: Dict[str, Any]) -> List[Any]:
-        """Run query generation phase."""
-        logger.info("Starting query generation...")
-        
-        try:
-            # Update query generator with content analysis
-            self.query_generator.content_analysis = content_analysis
-            
-            # Generate test queries
-            queries = self.query_generator.generate_test_queries()
-            
-            # Save queries
-            if self.config.get("save_intermediate_results"):
-                queries_filename = self.query_generator.save_queries()
-                logger.info(f"Test queries saved to: {queries_filename}")
+            # Wait for both tasks to complete
+            content_analysis, queries = await asyncio.gather(
+                content_analysis_task, 
+                query_generation_task
+            )
             
             logger.info(f"Generated {len(queries)} test queries")
-            return queries
             
-        except Exception as e:
-            logger.error(f"Error in query generation: {e}")
-            raise
-    
-    async def _run_bot_execution(self, queries: List[Any]) -> List[Any]:
-        """Run bot execution phase."""
-        logger.info("Starting bot execution...")
-        
-        try:
-            # Execute main queries
-            bot_responses = await self.bot_runner.run_queries(queries)
-            
-            # Run error scenarios if enabled
-            if self.config.get("enable_error_scenarios"):
-                logger.info("Running error scenario tests...")
-                error_responses = await self.bot_runner.run_error_scenarios()
-                bot_responses.extend(error_responses)
-            
-            # Save bot responses
-            if self.config.get("save_intermediate_results"):
-                responses_filename = self.bot_runner.save_responses()
-                logger.info(f"Bot responses saved to: {responses_filename}")
-            
-            logger.info(f"Bot execution completed: {len(bot_responses)} responses collected")
-            return bot_responses
-            
-        except Exception as e:
-            logger.error(f"Error in bot execution: {e}")
-            raise
-    
-    async def _run_response_evaluation(self, queries: List[Any], bot_responses: List[Any]) -> List[Any]:
-        """Run response evaluation phase."""
-        logger.info("Starting response evaluation...")
-        
-        try:
-            # Filter responses to only include main queries (not error scenarios)
-            main_responses = [r for r in bot_responses if isinstance(r.query_id, int)]
-            
-            # Evaluate responses
-            evaluation_results = self.evaluator.evaluate_responses(queries, main_responses)
-            
-            # Save evaluation results
-            if self.config.get("save_intermediate_results"):
-                evaluation_filename = self.evaluator.save_evaluation_results()
-                logger.info(f"Evaluation results saved to: {evaluation_filename}")
-            
-            logger.info(f"Response evaluation completed: {len(evaluation_results)} evaluations")
-            return evaluation_results
-            
-        except Exception as e:
-            logger.error(f"Error in response evaluation: {e}")
-            raise
-    
-    async def _run_report_generation(
-        self,
-        content_analysis: Dict[str, Any],
-        queries: List[Any],
-        bot_responses: List[Any],
-        evaluation_results: List[Any]
-    ) -> Any:
-        """Run report generation phase."""
-        logger.info("Starting report generation...")
-        
-        try:
-            # Get summaries
-            content_summary = content_analysis.get("server_overview", {})
-            query_summary = self.query_generator.get_query_summary()
-            execution_summary = self.bot_runner.get_execution_summary()
-            evaluation_summary = self.evaluator.get_evaluation_summary()
-            
-            # Generate comprehensive report
-            comprehensive_report = self.report_generator.generate_comprehensive_report(
-                content_analysis=content_summary,
-                query_summary=query_summary,
-                execution_summary=execution_summary,
-                evaluation_summary=evaluation_summary,
-                evaluation_results=evaluation_results
+            # Step 3: Run queries in parallel
+            responses = await self.bot_runner.run_queries_parallel(
+                queries, 
+                max_concurrent=5
             )
             
-            # Save comprehensive report
-            if self.config.get("save_intermediate_results"):
-                report_filename = self.report_generator.save_report()
-                logger.info(f"Comprehensive report saved to: {report_filename}")
+            logger.info(f"Executed {len(responses)} queries")
             
-            # Generate and save executive summary
-            executive_summary = self.report_generator.generate_executive_summary()
-            timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-            summary_filename = f"{self.config['output_directory']}/executive_summary_{timestamp}.md"
-            Path(summary_filename).parent.mkdir(parents=True, exist_ok=True)
+            # Step 4: Evaluate responses in parallel
+            evaluation_results = await self._evaluate_responses_parallel(queries, responses)
             
-            with open(summary_filename, 'w') as f:
-                f.write(executive_summary)
+            # Step 5: Generate comprehensive report
+            report = await self.report_generator.generate_comprehensive_report(
+                content_analysis=content_analysis,
+                queries=queries,
+                responses=responses,
+                evaluation_results=evaluation_results,
+                config=self.config
+            )
             
-            logger.info(f"Executive summary saved to: {summary_filename}")
-            logger.info("Report generation completed successfully")
-            
-            return comprehensive_report
+            return report
             
         except Exception as e:
-            logger.error(f"Error in report generation: {e}")
+            logger.error(f"Error in parallel test execution: {e}")
             raise
+    
+    async def _evaluate_responses_parallel(self, queries: List[Any], responses: List[Any]) -> List[Any]:
+        """Evaluate responses in parallel for better performance."""
+        try:
+            logger.info(f"Evaluating {len(responses)} responses in parallel...")
+            
+            # Create evaluation tasks
+            evaluation_tasks = []
+            for query, response in zip(queries, responses):
+                task = asyncio.create_task(
+                    self._evaluate_single_response_async(query, response)
+                )
+                evaluation_tasks.append(task)
+            
+            # Execute all evaluations in parallel
+            evaluation_results = await asyncio.gather(*evaluation_tasks, return_exceptions=True)
+            
+            # Handle any exceptions
+            final_results = []
+            for i, result in enumerate(evaluation_results):
+                if isinstance(result, Exception):
+                    logger.error(f"Evaluation {i} failed: {result}")
+                    # Create fallback result
+                    final_results.append(self._create_fallback_evaluation_result(queries[i], responses[i]))
+                else:
+                    final_results.append(result)
+            
+            logger.info(f"Completed {len(final_results)} evaluations")
+            return final_results
+            
+        except Exception as e:
+            logger.error(f"Error in parallel response evaluation: {e}")
+            raise
+    
+    async def _evaluate_single_response_async(self, query: Any, response: Any) -> Any:
+        """Evaluate a single response asynchronously."""
+        try:
+            return self.evaluator._evaluate_single_response(query, response)
+        except Exception as e:
+            logger.error(f"Error in async evaluation: {e}")
+            raise
+    
+    def _create_fallback_evaluation_result(self, query: Any, response: Any) -> Any:
+        """Create a fallback evaluation result when evaluation fails."""
+        from .evaluator import EvaluationResult
+        
+        return EvaluationResult(
+            query_id=query.id,
+            query=query.query,
+            expected_structure=query.expected_structure,
+            actual_response=response.response,
+            overall_score=0.0,
+            metrics={"overall": 0.0, "error": "Evaluation failed"},
+            detailed_analysis={"error": "Evaluation failed"},
+            recommendations=["Check evaluation system"]
+        )
     
     async def _save_all_results(self):
         """Save all test results to a single file."""
@@ -341,7 +308,7 @@ async def main():
     
     try:
         # Run complete test suite
-        results = await orchestrator.run_complete_test_suite()
+        results = await orchestrator.run_performance_tests()
         
         # Print summary
         summary = orchestrator.get_test_summary()

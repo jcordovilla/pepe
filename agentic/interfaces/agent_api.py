@@ -34,32 +34,22 @@ class AgentAPI:
         from ..services.service_container import get_service_container
         self.service_container = get_service_container(config)
         
-        # Initialize components with shared services
-        self.orchestrator = AgentOrchestrator(config.get("orchestrator", {}))
-        self.vector_store = self.service_container.get_vector_store()
-        self.memory = self.service_container.get_memory()
-        self.pipeline = PipelineAgent(config.get("pipeline", {}))
-        
-        # Initialize and register agents with service injection
+        # Initialize and register agents FIRST, before creating orchestrator
         search_agent = SearchAgent(config.get("search_agent", {}))
         planning_agent = PlanningAgent(config.get("planning_agent", {}))
         analysis_agent = AnalysisAgent(config.get("analysis_agent", {}))
         digest_agent = DigestAgent(config.get("digest_agent", {}))
         query_interpreter_agent = QueryInterpreterAgent(config.get("query_interpreter", {}))
         
-        # Inject shared services into all agents
-        self.service_container.inject_services(search_agent)
-        self.service_container.inject_services(planning_agent)
-        self.service_container.inject_services(analysis_agent)
-        self.service_container.inject_services(digest_agent)
-        self.service_container.inject_services(query_interpreter_agent)
-        
-        # Register agents
+        # Register agents BEFORE creating orchestrator
         agent_registry.register_agent(search_agent)
         agent_registry.register_agent(planning_agent)
         agent_registry.register_agent(analysis_agent)
         agent_registry.register_agent(digest_agent)
         agent_registry.register_agent(query_interpreter_agent)
+        
+        # Now create orchestrator after agents are registered
+        self.orchestrator = AgentOrchestrator(config.get("orchestrator", {}))
         
         # Initialize analytics components
         analytics_config = config.get("analytics", {})
@@ -68,18 +58,6 @@ class AgentAPI:
         self.validation_system = ValidationSystem(analytics_config)
         self.analytics_dashboard = AnalyticsDashboard(analytics_config)
         
-        # Set component references for analytics
-        self.performance_monitor.set_components(
-            self.query_repository, 
-            self.vector_store, 
-            None  # cache not initialized yet
-        )
-        self.analytics_dashboard.set_components(
-            self.query_repository, 
-            self.performance_monitor, 
-            self.validation_system
-        )
-        
         # API configuration
         self.max_query_length = config.get("max_query_length", 2000)
         self.default_k = config.get("default_k", 10)
@@ -87,6 +65,38 @@ class AgentAPI:
         self.enable_analytics = config.get("enable_analytics", True)
         
         logger.info("AgentAPI initialized successfully with analytics")
+    
+    async def initialize(self):
+        """Initialize the service container and inject services into agents."""
+        try:
+            # Initialize service container
+            await self.service_container.initialize_services()
+            
+            # Get services after initialization
+            self.vector_store = self.service_container.get_vector_store()
+            self.memory = self.service_container.get_memory()
+            self.pipeline = PipelineAgent(self.config.get("pipeline", {}))
+            
+            # Inject shared services into all agents
+            self.service_container.inject_services(self.orchestrator)
+            
+            # Set component references for analytics
+            self.performance_monitor.set_components(
+                self.query_repository, 
+                self.vector_store, 
+                self.service_container.get_cache()
+            )
+            self.analytics_dashboard.set_components(
+                self.query_repository, 
+                self.performance_monitor, 
+                self.validation_system
+            )
+            
+            logger.info("AgentAPI services initialized successfully")
+            
+        except Exception as e:
+            logger.error(f"Error initializing AgentAPI services: {e}")
+            raise
     
     def start_monitoring(self):
         """Start performance monitoring"""
@@ -122,6 +132,10 @@ class AgentAPI:
         channel_id = context.get("channel_id") if context else None
         
         try:
+            # Ensure services are initialized
+            if not hasattr(self, 'vector_store') or self.vector_store is None:
+                await self.initialize()
+            
             # Validate input
             if not query or not query.strip():
                 return {
@@ -161,7 +175,7 @@ class AgentAPI:
             
             # Record analytics if enabled
             if self.enable_analytics:
-                answer_text = result.get("answer", "") or "No answer generated"
+                answer_text = result.get("response", "") or "No answer generated"
                 await self._record_query_analytics(
                     user_id=user_id,
                     platform=platform,

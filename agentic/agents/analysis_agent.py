@@ -603,31 +603,99 @@ QUALITY CRITERIA:
     
     async def _generate_capability_response(self, subtask: SubTask, state: AgentState) -> Dict[str, Any]:
         """
-        Generate a capability response when search returns no results.
+        Generate a capability response for bot capability queries.
         
         Args:
             subtask: Capability response subtask
             state: Current agent state
             
         Returns:
-            Contextual capability response
+            Comprehensive capability response
         """
         try:
-            query = state.get("query", "")
-            search_results = state.get("search_results", [])
+            query = state.get("user_context", {}).get("query", "")
+            query_lower = query.lower()
             
-            # If we have search results, generate a results-based response
-            if search_results:
-                return await self._generate_results_response(query, search_results)
+            # Check if this is a general capability query
+            capability_keywords = ["capable", "capabilities", "features", "help", "what can", "how to use", "what does"]
+            is_capability_query = any(keyword in query_lower for keyword in capability_keywords)
             
-            # If no results, generate a contextual no-results response
-            return await self._generate_no_results_response(query, state)
+            if is_capability_query:
+                return await self._generate_bot_capabilities_response()
+            else:
+                # For other queries, check if we have search results
+                search_results = state.get("search_results", [])
+                if search_results:
+                    return await self._generate_results_response(query, search_results)
+                else:
+                    return await self._generate_no_results_response(query, state)
             
         except Exception as e:
             logger.error(f"Error generating capability response: {e}")
             return {
                 "response": "I can help you search through Discord conversations. Try asking me to find specific topics, users, or messages.",
                 "response_type": "fallback"
+            }
+    
+    async def _generate_bot_capabilities_response(self) -> Dict[str, Any]:
+        """Generate a comprehensive bot capabilities response."""
+        try:
+            response = """**🤖 Discord Bot Capabilities**
+
+I'm an AI-powered Discord bot that can help you search, analyze, and understand your server conversations. Here's what I can do:
+
+**🔍 Search & Discovery**
+• **Semantic Search**: Find messages by meaning, not just keywords
+• **Filtered Search**: Search by channel, user, time period, or reactions
+• **Keyword Search**: Find specific terms or phrases
+• **Resource Search**: Find shared links, files, and resources
+
+**📊 Analysis & Insights**
+• **Summarize**: Create summaries of discussions, channels, or time periods
+• **Analyze Trends**: Identify patterns and trends in conversations
+• **Extract Insights**: Find key themes and important points
+• **Classify Content**: Categorize messages by topic, complexity, or urgency
+• **Extract Skills**: Identify technologies and skills mentioned
+
+**📈 Digests & Reports**
+• **Weekly Digests**: Summarize a week's worth of activity
+• **Monthly Digests**: Comprehensive monthly overviews
+• **Custom Time Periods**: Analyze any specific time range
+
+**💡 Smart Features**
+• **Context Awareness**: Understand conversation context and history
+• **Multi-Channel Analysis**: Compare discussions across channels
+• **User Activity Analysis**: Track participation and engagement
+• **Topic Tracking**: Follow discussions on specific subjects
+
+**🎯 Example Queries**
+• "Summarize last week's Python discussions"
+• "Find messages about machine learning from @user123"
+• "What are the trending topics this month?"
+• "Show me resources shared in the help channel"
+• "Analyze the sentiment of recent discussions"
+
+**💬 How to Use**
+Just ask me natural language questions! I'll interpret your intent and provide relevant information from your Discord conversations.
+
+Need help with a specific query? Try asking me to search for topics, summarize discussions, or analyze patterns in your server!"""
+
+            return {
+                "response": response,
+                "response_type": "capabilities",
+                "capabilities": {
+                    "search": ["semantic", "filtered", "keyword", "resource"],
+                    "analysis": ["summarize", "trends", "insights", "classification"],
+                    "digests": ["weekly", "monthly", "custom"],
+                    "features": ["context_aware", "multi_channel", "user_analysis", "topic_tracking"]
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error generating bot capabilities response: {e}")
+            return {
+                "response": "I'm an AI Discord bot that can search, analyze, and summarize your server conversations. Try asking me to find specific topics or summarize recent discussions!",
+                "response_type": "capabilities_fallback"
             }
     
     async def _generate_results_response(self, query: str, results: List[Dict[str, Any]]) -> Dict[str, Any]:

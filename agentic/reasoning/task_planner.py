@@ -95,6 +95,11 @@ class TaskPlanner:
             interpretation = analysis.get("query_interpretation", {})
             suggested_subtasks = interpretation.get("subtasks", [])
             
+            logger.info(f"Task planner received interpretation: {interpretation.get('intent', 'unknown')} intent")
+            logger.info(f"Task planner found {len(suggested_subtasks)} suggested subtasks")
+            logger.info(f"Task planner interpretation keys: {list(interpretation.keys())}")
+            logger.info(f"Task planner suggested_subtasks: {suggested_subtasks}")
+            
             # Create subtasks from LLM interpretation
             subtasks = []
             

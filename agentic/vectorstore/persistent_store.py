@@ -464,25 +464,69 @@ class PersistentVectorStore:
             await self.initialize()
         
         try:
-            # Generate embedding for the query
-            query_embedding = await asyncio.to_thread(
-                self.embedding_function, [query]
-            )
-            if not query_embedding or not query_embedding[0]:
-                logger.warning("Failed to generate embedding for query")
-                return []
+            logger.info(f"Starting similarity search for query: '{query[:50]}...'")
             
-            # Use the first embedding from the batch
-            query_embedding = query_embedding[0]
+            # Generate embedding for the query
+            try:
+                query_embedding = await asyncio.to_thread(
+                    self.embedding_function, [query]
+                )
+                logger.info(f"Generated embedding, type: {type(query_embedding)}, length: {len(query_embedding) if query_embedding else 0}")
+                
+                # Handle numpy array properly
+                if query_embedding is None:
+                    logger.warning("Failed to generate embedding for query - None returned")
+                    return []
+                
+                # Convert to list if it's a numpy array
+                if hasattr(query_embedding, 'tolist'):
+                    query_embedding = query_embedding.tolist()
+                
+                # Ensure it's a list and has content
+                if not isinstance(query_embedding, list) or len(query_embedding) == 0:
+                    logger.warning("Failed to generate embedding for query - empty or invalid result")
+                    return []
+                
+                # Check if first element is empty using proper numpy array handling
+                first_element = query_embedding[0]
+                if hasattr(first_element, 'size'):
+                    # It's a numpy array
+                    if first_element.size == 0:
+                        logger.warning("Failed to generate embedding for query - first element is empty numpy array")
+                        return []
+                elif not first_element:
+                    # It's a regular value
+                    logger.warning("Failed to generate embedding for query - first element is empty")
+                    return []
+                
+                # Use the first embedding from the batch
+                query_embedding = query_embedding[0]
+                
+                # Convert to list if it's a numpy array
+                if hasattr(query_embedding, 'tolist'):
+                    query_embedding = query_embedding.tolist()
+                
+                logger.info(f"Using embedding, type: {type(query_embedding)}, length: {len(query_embedding) if isinstance(query_embedding, list) else 'not list'}")
+                
+            except Exception as embed_error:
+                logger.error(f"Error generating embedding: {embed_error}")
+                return []
             
             # Prepare filters for ChromaDB
             where_filter = None
             if filters:
-                where_filter = self._convert_filters_to_where(filters)
+                try:
+                    where_filter = self._convert_filters_to_where(filters)
+                    logger.info(f"Converted filters: {filters} -> {where_filter}")
+                except Exception as filter_error:
+                    logger.error(f"Error converting filters: {filter_error}")
+                    where_filter = None
             
             # Perform the search with error handling for ChromaDB issues
             try:
                 assert self.collection is not None, "Collection not initialized"
+                logger.info(f"Performing ChromaDB query with k={k}, where={where_filter}")
+                
                 results = await asyncio.to_thread(
                     self.collection.query,
                     query_embeddings=[query_embedding],
@@ -490,6 +534,9 @@ class PersistentVectorStore:
                     where=where_filter,
                     include=["documents", "metadatas", "distances"]
                 )
+                
+                logger.info(f"ChromaDB query completed, results keys: {list(results.keys())}")
+                
             except Exception as search_error:
                 # Handle specific ChromaDB errors
                 if "contigious 2D array" in str(search_error) or "ef or M is too small" in str(search_error):
@@ -507,29 +554,37 @@ class PersistentVectorStore:
                         logger.error(f"Fallback search also failed: {fallback_error}")
                         return []
                 else:
-                    raise search_error
+                    logger.error(f"ChromaDB search error: {search_error}")
+                    return []
             
             # Convert results to our format
             search_results = []
-            if results["documents"] and len(results["documents"]) > 0:
-                documents = results["documents"][0]
-                metadatas = results["metadatas"][0] if results["metadatas"] else []
-                distances = results["distances"][0] if results["distances"] else []
-                
-                for i, doc in enumerate(documents):
-                    metadata = metadatas[i] if i < len(metadatas) else {}
-                    distance = distances[i] if i < len(distances) else 1.0
+            try:
+                if results["documents"] and len(results["documents"]) > 0:
+                    documents = results["documents"][0]
+                    metadatas = results["metadatas"][0] if results["metadatas"] else []
+                    distances = results["distances"][0] if results["distances"] else []
                     
-                    # Convert distance to similarity score (0-1, higher is better)
-                    similarity = max(0.0, 1.0 - distance)
+                    logger.info(f"Processing {len(documents)} documents")
                     
-                    result = {
-                        "content": doc,
-                        "metadata": metadata,
-                        "similarity": similarity,
-                        "distance": distance
-                    }
-                    search_results.append(result)
+                    for i, doc in enumerate(documents):
+                        metadata = metadatas[i] if i < len(metadatas) else {}
+                        distance = distances[i] if i < len(distances) else 1.0
+                        
+                        # Convert distance to similarity score (0-1, higher is better)
+                        similarity = max(0.0, 1.0 - distance)
+                        
+                        result = {
+                            "content": doc,
+                            "metadata": metadata,
+                            "similarity": similarity,
+                            "distance": distance
+                        }
+                        search_results.append(result)
+                        
+            except Exception as process_error:
+                logger.error(f"Error processing search results: {process_error}")
+                return []
             
             # Update stats
             if hasattr(self, 'stats') and isinstance(self.stats, dict):
@@ -1339,3 +1394,42 @@ class PersistentVectorStore:
             return 0
         except:
             return 0
+
+    def _convert_filters_to_where(self, filters: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Convert our filter format to ChromaDB where clause format.
+        
+        Args:
+            filters: Our filter format
+            
+        Returns:
+            ChromaDB where clause
+        """
+        try:
+            where_clause = {}
+            
+            for key, value in filters.items():
+                if value is None:
+                    continue
+                
+                # Handle different filter types
+                if isinstance(value, (str, int, float, bool)):
+                    where_clause[key] = value
+                elif isinstance(value, list):
+                    if len(value) == 1:
+                        where_clause[key] = value[0]
+                    else:
+                        where_clause[key] = {"$in": value}
+                elif isinstance(value, dict):
+                    # Handle range queries
+                    if "$gte" in value or "$lte" in value or "$gt" in value or "$lt" in value:
+                        where_clause[key] = value
+                    else:
+                        # Handle other dict filters
+                        where_clause[key] = value
+            
+            return where_clause if where_clause else None
+            
+        except Exception as e:
+            logger.error(f"Error converting filters to where clause: {e}")
+            return None

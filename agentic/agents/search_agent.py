@@ -99,33 +99,50 @@ class SearchAgent(BaseAgent):
                     return state
             # Fallback: process all subtasks if present (batch mode)
             subtasks = state.get("subtasks", [])
+            if subtasks is None:
+                subtasks = []
+            
             search_subtasks = [task for task in subtasks if self.can_handle(task)]
             if not search_subtasks:
                 logger.warning("No search subtasks found")
                 return state
+            
             results = []
             for subtask in search_subtasks:
                 logger.info(f"Processing search subtask: {subtask.task_type}")
-                if subtask.task_type == "semantic_search" or subtask.task_type == "search":
-                    task_results = await self._semantic_search(subtask, state)
-                elif subtask.task_type == "keyword_search":
-                    task_results = await self._keyword_search(subtask, state)
-                elif subtask.task_type == "filtered_search":
-                    task_results = await self._filtered_search(subtask, state)
-                elif subtask.task_type == "hybrid_search":
-                    task_results = await self._hybrid_search(subtask, state)
-                elif subtask.task_type == "reaction_search":
-                    task_results = await self._reaction_search(subtask, state)
-                else:
-                    logger.warning(f"Unknown search task type: {subtask.task_type}")
-                    continue
+                task_results = []
+                
+                try:
+                    if subtask.task_type == "semantic_search" or subtask.task_type == "search":
+                        task_results = await self._semantic_search(subtask, state)
+                    elif subtask.task_type == "keyword_search":
+                        task_results = await self._keyword_search(subtask, state)
+                    elif subtask.task_type == "filtered_search":
+                        task_results = await self._filtered_search(subtask, state)
+                    elif subtask.task_type == "hybrid_search":
+                        task_results = await self._hybrid_search(subtask, state)
+                    elif subtask.task_type == "reaction_search":
+                        task_results = await self._reaction_search(subtask, state)
+                    else:
+                        logger.warning(f"Unknown search task type: {subtask.task_type}")
+                        continue
+                except Exception as e:
+                    logger.error(f"Error processing search subtask {subtask.task_type}: {e}")
+                    task_results = []
+                
+                # Ensure task_results is a list
+                if task_results is None:
+                    task_results = []
+                
                 results.extend(task_results)
                 subtask.status = TaskStatus.COMPLETED
                 subtask.result = task_results
+            
             # Deduplicate and rank results
             if results:
                 results = await self._deduplicate_results(results)
                 results = await self._rank_results(results, state)
+            
             state["search_results"] = results
             state["metadata"]["search_agent"] = {
                 "search_time": datetime.utcnow().isoformat(),
@@ -189,7 +206,7 @@ class SearchAgent(BaseAgent):
             if cached_results:
                 self.search_stats["cache_hits"] += 1
                 logger.info("Semantic search cache hit")
-                return cached_results
+                return cached_results if isinstance(cached_results, list) else []
             
             # Perform vector search
             self.search_stats["cache_misses"] += 1
@@ -202,6 +219,10 @@ class SearchAgent(BaseAgent):
                 k=min(k, self.max_k),
                 filters=subtask.parameters.get("filters", {})
             )
+            
+            # Ensure results is a list
+            if results is None:
+                results = []
             
             # Cache results
             await self.cache.set(cache_key, results, ttl=3600)  # 1 hour TTL

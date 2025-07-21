@@ -21,6 +21,8 @@ class AgentRole(Enum):
     PLANNER = "planner"
     SEARCHER = "searcher"
     ANALYZER = "analyzer"
+    DIGESTER = "digester"
+    AGGREGATOR = "aggregator"
     RESOURCE_MANAGER = "resource_manager"
 
 
@@ -82,6 +84,7 @@ class AgentState(TypedDict):
     response: Optional[str]  # Added for final response
     # Additional fields for agent coordination
     query_analysis: Optional[Dict[str, Any]]
+    query_interpretation: Optional[Dict[str, Any]]  # Added for query interpretation results
     intent: Optional[str]
     entities: Optional[Dict[str, Any]]
     complexity_score: Optional[float]
@@ -173,6 +176,114 @@ class BaseAgent(ABC):
             f"Agent {self.role.value} - {operation}: "
             f"duration={duration:.3f}s, success={success}"
         )
+
+    async def cleanup(self):
+        """Clean up agent resources and memory."""
+        try:
+            logger.info(f"Cleaning up {self.__class__.__name__} resources...")
+            
+            # Clear any cached data
+            if hasattr(self, '_cache') and self._cache:
+                await self._cache.clear()
+            
+            # Clear memory if available
+            if hasattr(self, 'memory') and self.memory:
+                await self.memory.clear()
+            
+            # Close any open connections
+            if hasattr(self, 'llm_client') and self.llm_client:
+                await self.llm_client.close()
+            
+            # Clear internal state
+            if hasattr(self, '_state'):
+                self._state.clear()
+            
+            logger.info(f"{self.__class__.__name__} cleanup completed")
+            
+        except Exception as e:
+            logger.error(f"Error during {self.__class__.__name__} cleanup: {e}")
+    
+    def get_memory_usage(self) -> Dict[str, Any]:
+        """Get memory usage statistics for the agent."""
+        try:
+            import psutil
+            import os
+            
+            process = psutil.Process(os.getpid())
+            memory_info = process.memory_info()
+            
+            return {
+                "rss_mb": memory_info.rss / 1024 / 1024,  # Resident Set Size in MB
+                "vms_mb": memory_info.vms / 1024 / 1024,  # Virtual Memory Size in MB
+                "percent": process.memory_percent(),
+                "agent_type": self.__class__.__name__,
+                "cache_size": len(self._cache) if hasattr(self, '_cache') else 0,
+                "state_size": len(self._state) if hasattr(self, '_state') else 0
+            }
+            
+        except Exception as e:
+            logger.error(f"Error getting memory usage: {e}")
+            return {"error": str(e)}
+    
+    def set_services(self, **services):
+        """Set shared services for the agent."""
+        try:
+            for service_name, service_instance in services.items():
+                if hasattr(self, service_name):
+                    setattr(self, service_name, service_instance)
+                    logger.debug(f"Set {service_name} for {self.__class__.__name__}")
+            
+        except Exception as e:
+            logger.error(f"Error setting services for {self.__class__.__name__}: {e}")
+    
+    async def health_check(self) -> Dict[str, Any]:
+        """Perform health check on the agent."""
+        try:
+            health_status = {
+                "agent_type": self.__class__.__name__,
+                "status": "healthy",
+                "timestamp": datetime.utcnow().isoformat(),
+                "memory_usage": self.get_memory_usage(),
+                "services": {}
+            }
+            
+            # Check LLM client
+            if hasattr(self, 'llm_client') and self.llm_client:
+                try:
+                    llm_health = await self.llm_client.health_check()
+                    health_status["services"]["llm_client"] = llm_health
+                except Exception as e:
+                    health_status["services"]["llm_client"] = {"status": "unhealthy", "error": str(e)}
+                    health_status["status"] = "degraded"
+            
+            # Check cache
+            if hasattr(self, '_cache') and self._cache:
+                try:
+                    cache_stats = self._cache.get_stats()
+                    health_status["services"]["cache"] = {"status": "healthy", "stats": cache_stats}
+                except Exception as e:
+                    health_status["services"]["cache"] = {"status": "unhealthy", "error": str(e)}
+                    health_status["status"] = "degraded"
+            
+            # Check memory
+            if hasattr(self, 'memory') and self.memory:
+                try:
+                    memory_stats = await self.memory.get_stats()
+                    health_status["services"]["memory"] = {"status": "healthy", "stats": memory_stats}
+                except Exception as e:
+                    health_status["services"]["memory"] = {"status": "unhealthy", "error": str(e)}
+                    health_status["status"] = "degraded"
+            
+            return health_status
+            
+        except Exception as e:
+            logger.error(f"Error in health check for {self.__class__.__name__}: {e}")
+            return {
+                "agent_type": self.__class__.__name__,
+                "status": "unhealthy",
+                "error": str(e),
+                "timestamp": datetime.utcnow().isoformat()
+            }
 
 
 class AgentRegistry:

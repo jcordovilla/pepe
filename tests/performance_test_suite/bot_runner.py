@@ -31,21 +31,99 @@ class BotResponse:
     success: bool
     metadata: Dict[str, Any]
 
+
+class ConfigError(Exception):
+    """Raised when configuration validation fails."""
+    pass
+
+
+class DatabaseError(Exception):
+    """Raised when database access or validation fails."""
+    pass
+
 class BotRunner:
     """
     Executes test queries against the bot using the exact same AgentAPI.query() method
     as the Discord bot and CLI, with real data from SQLite and vector store.
     """
     def __init__(self, bot_api_endpoint: str = None):
-        # Use the exact same configuration and AgentAPI as Discord bot
+        # Use the exact same configuration as production Discord bot
         config = get_modernized_config()
+        
+        # Validate configuration alignment
+        self._validate_config_alignment(config)
+        
         self.agent_api = AgentAPI(config)
         self.responses = []
         
-        # Database path for real data
+        # Database path for real data - same as production
         self.db_path = Path("data/discord_messages.db")
         
-        logger.info("BotRunner initialized with real AgentAPI and database access")
+        # Validate database exists and is accessible
+        self._validate_database_access()
+        
+        logger.info("BotRunner initialized with production configuration and real database access")
+
+    def _validate_config_alignment(self, config: Dict[str, Any]):
+        """Validate that test configuration matches production."""
+        required_keys = [
+            "llm.endpoint",
+            "llm.model", 
+            "data.vector_config.persist_directory",
+            "data.vector_config.collection_name",
+            "data.vector_config.embedding_model"
+        ]
+        
+        missing_keys = []
+        for key in required_keys:
+            if not self._get_nested_value(config, key):
+                missing_keys.append(key)
+        
+        if missing_keys:
+            raise ConfigError(f"Missing required configuration keys: {missing_keys}")
+        
+        logger.info("Configuration alignment validated - using production settings")
+
+    def _validate_database_access(self):
+        """Validate database access and schema."""
+        try:
+            if not self.db_path.exists():
+                raise DatabaseError(f"Database not found: {self.db_path}")
+            
+            # Test database connection
+            import sqlite3
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            
+            # Check if messages table exists
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='messages'")
+            if not cursor.fetchone():
+                raise DatabaseError(f"Messages table not found in {self.db_path}")
+            
+            # Check message count
+            cursor.execute("SELECT COUNT(*) FROM messages")
+            count = cursor.fetchone()[0]
+            logger.info(f"Database validated: {count} messages found")
+            
+            conn.close()
+            
+        except sqlite3.Error as e:
+            raise DatabaseError(f"Database access error: {e}")
+        except Exception as e:
+            raise DatabaseError(f"Database validation failed: {e}")
+
+    def _get_nested_value(self, config: Dict[str, Any], key_path: str) -> Any:
+        """Get nested configuration value using dot notation."""
+        keys = key_path.split('.')
+        value = config
+        
+        for key in keys:
+            if isinstance(value, dict) and key in value:
+                value = value[key]
+            else:
+                return None
+        
+        return value
 
     async def run_queries(self, queries: List[Any]) -> List[BotResponse]:
         responses = []
@@ -61,6 +139,67 @@ class BotRunner:
         
         self.responses = responses
         return responses
+
+    async def run_queries_parallel(self, queries: List[Any], max_concurrent: int = 5) -> List[BotResponse]:
+        """
+        Execute queries in parallel with proper resource management.
+        
+        Args:
+            queries: List of queries to execute
+            max_concurrent: Maximum number of concurrent queries
+            
+        Returns:
+            List of bot responses
+        """
+        logger.info(f"Running {len(queries)} queries in parallel (max {max_concurrent} concurrent)")
+        
+        # Create semaphore for concurrency control
+        semaphore = asyncio.Semaphore(max_concurrent)
+        
+        async def execute_with_semaphore(query: Any) -> BotResponse:
+            """Execute a single query with semaphore control."""
+            async with semaphore:
+                try:
+                    return await self._execute_single_query(query)
+                except Exception as e:
+                    logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
+                    # Return error response
+                    return BotResponse(
+                        query_id=getattr(query, 'id', 0),
+                        query=getattr(query, 'query', ''),
+                        response=f"Error: {str(e)}",
+                        response_time=0.0,
+                        timestamp=datetime.utcnow().isoformat(),
+                        success=False,
+                        metadata={"error": str(e)}
+                    )
+        
+        # Create tasks for all queries
+        tasks = [execute_with_semaphore(query) for query in queries]
+        
+        # Execute all tasks concurrently
+        responses = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # Handle any exceptions that weren't caught
+        final_responses = []
+        for i, response in enumerate(responses):
+            if isinstance(response, Exception):
+                logger.error(f"Query {i} failed with exception: {response}")
+                final_responses.append(BotResponse(
+                    query_id=getattr(queries[i], 'id', i),
+                    query=getattr(queries[i], 'query', ''),
+                    response=f"Exception: {str(response)}",
+                    response_time=0.0,
+                    timestamp=datetime.utcnow().isoformat(),
+                    success=False,
+                    metadata={"exception": str(response)}
+                ))
+            else:
+                final_responses.append(response)
+        
+        self.responses = final_responses
+        logger.info(f"Parallel execution completed: {len(final_responses)} responses")
+        return final_responses
 
     async def _execute_single_query(self, query: Any) -> BotResponse:
         start_time = time.time()

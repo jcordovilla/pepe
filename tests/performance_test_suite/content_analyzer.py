@@ -624,15 +624,67 @@ class ContentAnalyzer:
         } 
 
     def preflight_schema_check(self):
+        """
+        Validate database schema before analysis.
+        Raises SchemaError if required columns are missing.
+        """
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
+            
+            # Check if messages table exists
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='messages'")
+            if not cursor.fetchone():
+                raise SchemaError(f"Messages table not found in database: {self.db_path}")
+            
+            # Get actual columns
             columns = [row[1] for row in cursor.execute("PRAGMA table_info(messages)").fetchall()]
-            expected = ["content", "channel_name", "user_id", "author_username", "reactions", "timestamp"]
-            missing = [col for col in expected if col not in columns]
             logger.info(f"[Preflight] messages table columns: {columns}")
+            
+            # Define required columns with descriptions
+            required_columns = {
+                "content": "Message content text",
+                "channel_name": "Channel name for categorization",
+                "user_id": "User identifier for activity analysis",
+                "author_username": "Username for user analysis",
+                "reactions": "Reaction data for engagement analysis",
+                "timestamp": "Message timestamp for temporal analysis"
+            }
+            
+            # Check for missing columns
+            missing = [col for col in required_columns.keys() if col not in columns]
+            
             if missing:
-                logger.warning(f"[Preflight] Missing columns in messages table: {missing}")
+                error_msg = f"Missing required columns in messages table: {missing}\n"
+                error_msg += "Required columns:\n"
+                for col, desc in required_columns.items():
+                    status = "✅" if col in columns else "❌"
+                    error_msg += f"  {status} {col}: {desc}\n"
+                error_msg += f"\nDatabase path: {self.db_path}"
+                
+                logger.error(f"[Preflight] Schema validation failed:\n{error_msg}")
+                raise SchemaError(error_msg)
+            
+            # Check for data
+            cursor.execute("SELECT COUNT(*) FROM messages")
+            message_count = cursor.fetchone()[0]
+            if message_count == 0:
+                logger.warning(f"[Preflight] Messages table is empty: {message_count} messages")
+            else:
+                logger.info(f"[Preflight] Schema validation passed: {message_count} messages found")
+            
             conn.close()
+            
+        except sqlite3.Error as e:
+            error_msg = f"Database error during schema validation: {e}"
+            logger.error(f"[Preflight] {error_msg}")
+            raise SchemaError(error_msg)
         except Exception as e:
-            logger.error(f"[Preflight] Error checking schema: {e}") 
+            error_msg = f"Unexpected error during schema validation: {e}"
+            logger.error(f"[Preflight] {error_msg}")
+            raise SchemaError(error_msg)
+
+
+class SchemaError(Exception):
+    """Raised when database schema validation fails."""
+    pass 

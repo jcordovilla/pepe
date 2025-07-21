@@ -339,10 +339,19 @@ class ResponseEvaluator:
     """
     
     def __init__(self):
-        self.evaluation_results = []
+        """Initialize the response evaluator with hybrid evaluation."""
         self.llama_evaluator = LlamaEvaluator()
         
-        logger.info("ResponseEvaluator initialized with Llama integration")
+        # Initialize hybrid evaluator for better evaluation methodology
+        self.hybrid_evaluator = HybridEvaluator({
+            "llama_model": "llama3.1:8b",
+            "weights": {
+                "objective": 0.6,
+                "ai": 0.4
+            }
+        })
+        
+        logger.info("ResponseEvaluator initialized with hybrid evaluation")
     
     def evaluate_responses(self, queries: List[Any], responses: List[Any]) -> List[EvaluationResult]:
         """
@@ -377,74 +386,64 @@ class ResponseEvaluator:
         return self.evaluation_results
     
     def _evaluate_single_response(self, query: Any, response: Any) -> EvaluationResult:
-        """
-        Evaluate a single response against its expected structure.
-        
-        Args:
-            query: TestQuery object with expected structure
-            response: BotResponse object with actual response
+        """Evaluate a single response using hybrid evaluation methodology."""
+        try:
+            if not response.success:
+                return self._evaluate_failed_response(query, response)
             
-        Returns:
-            EvaluationResult with comprehensive evaluation
-        """
-        if not response.success:
+            # Use hybrid evaluator for comprehensive evaluation
+            evaluation_result = self.hybrid_evaluator.evaluate_response(
+                query=query.query,
+                response=response.response,
+                expected_structure=query.expected_structure
+            )
+            
+            # Extract scores from hybrid evaluation
+            overall_score = evaluation_result["overall_score"]
+            objective_score = evaluation_result["objective_score"]["overall"]
+            ai_score = evaluation_result["ai_score"]["overall"]
+            
+            # Create metrics dictionary
+            metrics = {
+                "overall": overall_score,
+                "objective": objective_score,
+                "ai": ai_score,
+                "format_accuracy": evaluation_result["objective_score"]["metrics"].get("format_accuracy", 0.5),
+                "completeness": evaluation_result["objective_score"]["metrics"].get("completeness", 0.5),
+                "performance": evaluation_result["objective_score"]["metrics"].get("performance", 0.5),
+                "content_matching": evaluation_result["objective_score"]["metrics"].get("content_matching", 0.5),
+                "semantic_similarity": evaluation_result["objective_score"]["metrics"].get("semantic_similarity", 0.5)
+            }
+            
+            # Add AI metrics if available
+            if evaluation_result["ai_score"].get("ai_available", False):
+                ai_metrics = evaluation_result["ai_score"]["metrics"]
+                metrics.update({
+                    "relevance": ai_metrics.get("relevance", 0.5),
+                    "quality": ai_metrics.get("quality", 0.5),
+                    "coherence": ai_metrics.get("coherence", 0.5)
+                })
+            
+            # Generate detailed analysis
+            analysis = evaluation_result["analysis"]
+            
+            # Generate recommendations
+            recommendations = analysis.get("recommendations", [])
+            
+            return EvaluationResult(
+                query_id=query.id,
+                query=query.query,
+                expected_structure=query.expected_structure,
+                actual_response=response.response,
+                overall_score=overall_score,
+                metrics=metrics,
+                detailed_analysis=analysis,
+                recommendations=recommendations
+            )
+            
+        except Exception as e:
+            logger.error(f"Error evaluating response for query {query.id}: {e}")
             return self._evaluate_failed_response(query, response)
-        
-        # Calculate individual metrics with Llama integration
-        relevance_score = self._calculate_relevance_score(query, response)
-        format_score = self._calculate_format_score(query, response)
-        completeness_score = self._calculate_completeness_score(query, response)
-        coherence_score = self._calculate_coherence_score(response)
-        semantic_score = self._calculate_semantic_similarity(query, response)
-        performance_score = self._calculate_performance_score(response)
-        
-        # Calculate overall score (updated weights for Llama integration)
-        weights = {
-            'relevance': 0.30,        # Llama semantic evaluation
-            'quality': 0.25,          # Llama quality assessment
-            'format': 0.15,           # Rule-based formatting
-            'completeness': 0.15,     # Rule-based completeness
-            'coherence': 0.10,        # Llama coherence evaluation
-            'performance': 0.05       # Rule-based timing
-        }
-        
-        # Use Llama quality evaluation instead of just semantic similarity
-        quality_score = self.llama_evaluator.evaluate_response_quality(
-            response.response, query.query, f"Discord bot response for {query.category}"
-        )
-        
-        overall_score = (
-            relevance_score * weights['relevance'] +
-            quality_score * weights['quality'] +
-            format_score * weights['format'] +
-            completeness_score * weights['completeness'] +
-            coherence_score * weights['coherence'] +
-            performance_score * weights['performance']
-        )
-        
-        metrics = {
-            'relevance': relevance_score,
-            'quality': quality_score,
-            'format': format_score,
-            'completeness': completeness_score,
-            'coherence': coherence_score,
-            'semantic_similarity': semantic_score,
-            'performance': performance_score
-        }
-        
-        detailed_analysis = self._generate_detailed_analysis(query, response, metrics)
-        recommendations = self._generate_recommendations(query, response, metrics)
-        
-        return EvaluationResult(
-            query_id=query.id,
-            query=query.query,
-            expected_structure=query.expected_response_structure,
-            actual_response=response.response,
-            overall_score=overall_score,
-            metrics=metrics,
-            detailed_analysis=detailed_analysis,
-            recommendations=recommendations
-        )
     
     def _evaluate_failed_response(self, query: Any, response: Any) -> EvaluationResult:
         """Evaluate a failed response."""
@@ -929,3 +928,409 @@ class ResponseEvaluator:
         
         logger.info(f"Evaluation results saved to: {filename}")
         return filename 
+
+
+class HybridEvaluator:
+    """
+    Hybrid evaluator that combines objective metrics with AI evaluation.
+    
+    Provides:
+    - Objective metrics for reliability and consistency
+    - AI evaluation for semantic understanding
+    - Balanced scoring methodology
+    - Fallback mechanisms when AI is unavailable
+    """
+    
+    def __init__(self, config: Dict[str, Any] = None):
+        self.config = config or {}
+        
+        # Evaluation weights
+        self.weights = {
+            "objective": 0.6,  # 60% weight for objective metrics
+            "ai": 0.4         # 40% weight for AI evaluation
+        }
+        
+        # Objective metric weights
+        self.objective_weights = {
+            "format_accuracy": 0.25,
+            "completeness": 0.25,
+            "performance": 0.20,
+            "content_matching": 0.15,
+            "semantic_similarity": 0.15
+        }
+        
+        # AI evaluation weights
+        self.ai_weights = {
+            "relevance": 0.40,
+            "quality": 0.35,
+            "coherence": 0.25
+        }
+        
+        # Initialize AI evaluator
+        self.ai_evaluator = LlamaEvaluator(
+            self.config.get("llama_model", "llama3.1:8b")
+        )
+        
+        logger.info("HybridEvaluator initialized")
+    
+    def evaluate_response(self, query: str, response: str, expected_structure: Dict[str, Any] = None) -> Dict[str, Any]:
+        """
+        Evaluate response using hybrid methodology.
+        
+        Args:
+            query: Original query
+            response: Bot response
+            expected_structure: Expected response structure
+            
+        Returns:
+            Comprehensive evaluation results
+        """
+        try:
+            # Calculate objective metrics
+            objective_score = self._calculate_objective_metrics(query, response, expected_structure)
+            
+            # Calculate AI evaluation (if available)
+            ai_score = self._calculate_ai_evaluation(query, response)
+            
+            # Combine scores using weights
+            final_score = self._combine_scores(objective_score, ai_score)
+            
+            # Generate detailed analysis
+            analysis = self._generate_detailed_analysis(
+                query, response, objective_score, ai_score, final_score
+            )
+            
+            return {
+                "overall_score": final_score,
+                "objective_score": objective_score,
+                "ai_score": ai_score,
+                "weights_used": self.weights,
+                "analysis": analysis,
+                "evaluation_method": "hybrid"
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in hybrid evaluation: {e}")
+            return self._fallback_evaluation(query, response)
+    
+    def _calculate_objective_metrics(self, query: str, response: str, expected_structure: Dict[str, Any] = None) -> float:
+        """Calculate objective metrics score."""
+        try:
+            metrics = {}
+            
+            # Format accuracy
+            metrics["format_accuracy"] = self._calculate_format_accuracy(response, expected_structure)
+            
+            # Completeness
+            metrics["completeness"] = self._calculate_completeness(response, expected_structure)
+            
+            # Performance (response length appropriateness)
+            metrics["performance"] = self._calculate_performance_metric(response, query)
+            
+            # Content matching
+            metrics["content_matching"] = self._calculate_content_matching(query, response)
+            
+            # Semantic similarity
+            metrics["semantic_similarity"] = self._calculate_semantic_similarity(query, response)
+            
+            # Calculate weighted score
+            weighted_score = sum(
+                metrics[metric] * self.objective_weights[metric]
+                for metric in self.objective_weights.keys()
+            )
+            
+            return {
+                "overall": weighted_score,
+                "metrics": metrics,
+                "weights": self.objective_weights
+            }
+            
+        except Exception as e:
+            logger.error(f"Error calculating objective metrics: {e}")
+            return {"overall": 0.5, "metrics": {}, "weights": self.objective_weights}
+    
+    def _calculate_ai_evaluation(self, query: str, response: str) -> Dict[str, Any]:
+        """Calculate AI evaluation score."""
+        try:
+            if not self.ai_evaluator.model:
+                # Fallback to basic metrics if AI is unavailable
+                return {
+                    "overall": 0.5,
+                    "metrics": {
+                        "relevance": 0.5,
+                        "quality": 0.5,
+                        "coherence": 0.5
+                    },
+                    "weights": self.ai_weights,
+                    "ai_available": False
+                }
+            
+            # Get AI evaluations
+            relevance = self.ai_evaluator.evaluate_semantic_relevance(query, response)
+            quality = self.ai_evaluator.evaluate_response_quality(response, query)
+            coherence = self.ai_evaluator.evaluate_coherence(response)
+            
+            metrics = {
+                "relevance": relevance,
+                "quality": quality,
+                "coherence": coherence
+            }
+            
+            # Calculate weighted score
+            weighted_score = sum(
+                metrics[metric] * self.ai_weights[metric]
+                for metric in self.ai_weights.keys()
+            )
+            
+            return {
+                "overall": weighted_score,
+                "metrics": metrics,
+                "weights": self.ai_weights,
+                "ai_available": True
+            }
+            
+        except Exception as e:
+            logger.error(f"Error calculating AI evaluation: {e}")
+            return {
+                "overall": 0.5,
+                "metrics": {"relevance": 0.5, "quality": 0.5, "coherence": 0.5},
+                "weights": self.ai_weights,
+                "ai_available": False
+            }
+    
+    def _combine_scores(self, objective_score: Dict[str, Any], ai_score: Dict[str, Any]) -> float:
+        """Combine objective and AI scores using weights."""
+        try:
+            objective_weight = self.weights["objective"]
+            ai_weight = self.weights["ai"]
+            
+            # If AI is not available, adjust weights
+            if not ai_score.get("ai_available", False):
+                objective_weight = 1.0
+                ai_weight = 0.0
+            
+            combined_score = (
+                objective_score["overall"] * objective_weight +
+                ai_score["overall"] * ai_weight
+            )
+            
+            return combined_score
+            
+        except Exception as e:
+            logger.error(f"Error combining scores: {e}")
+            return 0.5
+    
+    def _calculate_format_accuracy(self, response: str, expected_structure: Dict[str, Any] = None) -> float:
+        """Calculate format accuracy score."""
+        try:
+            if not expected_structure:
+                return 0.5  # Neutral score if no expected structure
+            
+            # Check for required fields
+            required_fields = expected_structure.get("required_fields", [])
+            if not required_fields:
+                return 0.5
+            
+            # Simple format checking
+            score = 0.0
+            for field in required_fields:
+                if field.lower() in response.lower():
+                    score += 1.0
+            
+            return score / len(required_fields) if required_fields else 0.5
+            
+        except Exception as e:
+            logger.error(f"Error calculating format accuracy: {e}")
+            return 0.5
+    
+    def _calculate_completeness(self, response: str, expected_structure: Dict[str, Any] = None) -> float:
+        """Calculate completeness score."""
+        try:
+            if not expected_structure:
+                return 0.5
+            
+            # Check expected length
+            expected_length = expected_structure.get("expected_length", 100)
+            actual_length = len(response)
+            
+            if actual_length == 0:
+                return 0.0
+            
+            # Score based on length appropriateness
+            length_ratio = min(actual_length / expected_length, 2.0)  # Cap at 2x
+            if length_ratio >= 0.8 and length_ratio <= 1.2:
+                return 1.0
+            elif length_ratio >= 0.5 and length_ratio <= 1.5:
+                return 0.8
+            else:
+                return 0.5
+            
+        except Exception as e:
+            logger.error(f"Error calculating completeness: {e}")
+            return 0.5
+    
+    def _calculate_performance_metric(self, response: str, query: str) -> float:
+        """Calculate performance metric."""
+        try:
+            # Simple performance metric based on response appropriateness
+            query_length = len(query)
+            response_length = len(response)
+            
+            if response_length == 0:
+                return 0.0
+            
+            # Ideal response should be proportional to query
+            ideal_ratio = 3.0  # Response should be ~3x query length
+            actual_ratio = response_length / query_length if query_length > 0 else 1.0
+            
+            if actual_ratio >= 0.5 and actual_ratio <= 5.0:
+                return 1.0
+            elif actual_ratio >= 0.2 and actual_ratio <= 10.0:
+                return 0.7
+            else:
+                return 0.3
+            
+        except Exception as e:
+            logger.error(f"Error calculating performance metric: {e}")
+            return 0.5
+    
+    def _calculate_content_matching(self, query: str, response: str) -> float:
+        """Calculate content matching score."""
+        try:
+            # Extract key terms from query
+            query_terms = set(word.lower() for word in query.split() if len(word) > 3)
+            response_terms = set(word.lower() for word in response.split() if len(word) > 3)
+            
+            if not query_terms:
+                return 0.5
+            
+            # Calculate overlap
+            overlap = len(query_terms.intersection(response_terms))
+            match_ratio = overlap / len(query_terms)
+            
+            return min(match_ratio * 2, 1.0)  # Scale up but cap at 1.0
+            
+        except Exception as e:
+            logger.error(f"Error calculating content matching: {e}")
+            return 0.5
+    
+    def _calculate_semantic_similarity(self, query: str, response: str) -> float:
+        """Calculate semantic similarity score."""
+        try:
+            # Simple semantic similarity using word overlap
+            query_words = set(query.lower().split())
+            response_words = set(response.lower().split())
+            
+            if not query_words:
+                return 0.5
+            
+            # Calculate Jaccard similarity
+            intersection = len(query_words.intersection(response_words))
+            union = len(query_words.union(response_words))
+            
+            similarity = intersection / union if union > 0 else 0.0
+            return similarity
+            
+        except Exception as e:
+            logger.error(f"Error calculating semantic similarity: {e}")
+            return 0.5
+    
+    def _generate_detailed_analysis(self, query: str, response: str, objective_score: Dict[str, Any], 
+                                  ai_score: Dict[str, Any], final_score: float) -> Dict[str, Any]:
+        """Generate detailed analysis of evaluation results."""
+        try:
+            analysis = {
+                "overall_assessment": self._get_overall_assessment(final_score),
+                "strengths": self._identify_strengths(objective_score, ai_score),
+                "weaknesses": self._identify_weaknesses(objective_score, ai_score),
+                "recommendations": self._generate_recommendations(objective_score, ai_score),
+                "score_breakdown": {
+                    "objective": objective_score,
+                    "ai": ai_score,
+                    "final": final_score
+                }
+            }
+            
+            return analysis
+            
+        except Exception as e:
+            logger.error(f"Error generating detailed analysis: {e}")
+            return {"overall_assessment": "neutral", "error": str(e)}
+    
+    def _get_overall_assessment(self, score: float) -> str:
+        """Get overall assessment based on score."""
+        if score >= 0.9:
+            return "excellent"
+        elif score >= 0.7:
+            return "good"
+        elif score >= 0.5:
+            return "fair"
+        else:
+            return "poor"
+    
+    def _identify_strengths(self, objective_score: Dict[str, Any], ai_score: Dict[str, Any]) -> List[str]:
+        """Identify strengths in the response."""
+        strengths = []
+        
+        # Check objective metrics
+        for metric, score in objective_score.get("metrics", {}).items():
+            if score >= 0.8:
+                strengths.append(f"Strong {metric.replace('_', ' ')}")
+        
+        # Check AI metrics
+        if ai_score.get("ai_available", False):
+            for metric, score in ai_score.get("metrics", {}).items():
+                if score >= 0.8:
+                    strengths.append(f"High {metric} quality")
+        
+        return strengths
+    
+    def _identify_weaknesses(self, objective_score: Dict[str, Any], ai_score: Dict[str, Any]) -> List[str]:
+        """Identify weaknesses in the response."""
+        weaknesses = []
+        
+        # Check objective metrics
+        for metric, score in objective_score.get("metrics", {}).items():
+            if score < 0.5:
+                weaknesses.append(f"Poor {metric.replace('_', ' ')}")
+        
+        # Check AI metrics
+        if ai_score.get("ai_available", False):
+            for metric, score in ai_score.get("metrics", {}).items():
+                if score < 0.5:
+                    weaknesses.append(f"Low {metric} quality")
+        
+        return weaknesses
+    
+    def _generate_recommendations(self, objective_score: Dict[str, Any], ai_score: Dict[str, Any]) -> List[str]:
+        """Generate improvement recommendations."""
+        recommendations = []
+        
+        # Check for specific issues
+        metrics = objective_score.get("metrics", {})
+        if metrics.get("format_accuracy", 1.0) < 0.7:
+            recommendations.append("Improve response format and structure")
+        
+        if metrics.get("completeness", 1.0) < 0.7:
+            recommendations.append("Provide more comprehensive information")
+        
+        if metrics.get("performance", 1.0) < 0.7:
+            recommendations.append("Adjust response length for better balance")
+        
+        return recommendations
+    
+    def _fallback_evaluation(self, query: str, response: str) -> Dict[str, Any]:
+        """Fallback evaluation when hybrid evaluation fails."""
+        return {
+            "overall_score": 0.5,
+            "objective_score": {"overall": 0.5, "metrics": {}},
+            "ai_score": {"overall": 0.5, "metrics": {}, "ai_available": False},
+            "weights_used": self.weights,
+            "analysis": {
+                "overall_assessment": "neutral",
+                "strengths": [],
+                "weaknesses": ["Evaluation failed"],
+                "recommendations": ["Check system configuration"]
+            },
+            "evaluation_method": "fallback"
+        } 

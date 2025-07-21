@@ -47,7 +47,7 @@ class ResultAggregator(BaseAgent):
     """
     
     def __init__(self, config: Dict[str, Any]):
-        super().__init__(AgentRole.ANALYZER, config)
+        super().__init__(AgentRole.AGGREGATOR, config)
         
         # Aggregation configuration
         self.max_combined_results = config.get("max_combined_results", 50)
@@ -93,6 +93,12 @@ class ResultAggregator(BaseAgent):
                 state["errors"] = []
             
             logger.info("Starting result aggregation...")
+            
+            # Debug: Log what's in the state
+            logger.info(f"ResultAggregator - state keys: {list(state.keys())}")
+            logger.info(f"ResultAggregator - analysis_results: {state.get('analysis_results', {})}")
+            logger.info(f"ResultAggregator - search_results: {len(state.get('search_results', []))} results")
+            logger.info(f"ResultAggregator - subtask_results: {state.get('subtask_results', {})}")
             
             # Aggregate all results
             aggregated_results = await self._aggregate_all_results(state)
@@ -352,46 +358,98 @@ class ResultAggregator(BaseAgent):
     
     async def _generate_final_response(self, aggregated_results: AggregationResult, state: AgentState) -> str:
         """
-        Create the final response from aggregated results.
+        Create a meaningful final response from aggregated results.
         
         Args:
             aggregated_results: Aggregated result data
             state: Current agent state
             
         Returns:
-            Final response string
+            Detailed, meaningful response string
         """
         try:
             search_results = aggregated_results.aggregated_data.get("search_results", [])
             analysis_results = aggregated_results.aggregated_data.get("analysis_results", {})
-            # Build response based on available data
+            query = state.get("user_context", {}).get("query", "")
+            
+            # Start building the response
+            response_parts = []
+            
+            # Handle search results
             if search_results:
-                response = f"Found {len(search_results)} relevant messages. "
-                if analysis_results:
-                    response += f"Analysis includes: {', '.join(analysis_results.keys())}."
-                else:
-                    response += "Raw search results available."
-            elif analysis_results:
-                response = f"Analysis completed with {len(analysis_results)} components: {', '.join(analysis_results.keys())}."
-            else:
-                response = "No specific results found, but query was processed successfully."
-            # --- CHECK FOR UNKNOWN/DEFAULT VALUES ---
-            if any(x in response for x in ["Unknown Channel", "Unknown time", "Unknown", "No messages found"]):
-                logger.warning("Final response contains unknown/default values.")
-                response += "\n[Warning: Some results may be incomplete or missing context. Please check data quality and agent interpretation.]"
-            # --- CHECK FOR REDUNDANCY ---
-            lines = response.split("\n")
-            seen = set()
-            repeated = False
-            for line in lines:
-                if line.strip() in seen and line.strip():
-                    repeated = True
-                    break
-                seen.add(line.strip())
-            if repeated:
-                logger.warning("Final response contains repeated/redundant blocks.")
-                response += "\n[Warning: Response contains repeated or redundant sections.]"
-            return response
+                response_parts.append(f"Found {len(search_results)} relevant messages:")
+                
+                # Include actual content from search results
+                for i, result in enumerate(search_results[:5]):  # Show first 5 results
+                    content = result.get("content", "")
+                    metadata = result.get("metadata", {})
+                    author = metadata.get("author_username", metadata.get("author", "Unknown"))
+                    channel = metadata.get("channel_name", "Unknown")
+                    timestamp = metadata.get("timestamp", "")
+                    
+                    if content:
+                        # Truncate content if too long
+                        if len(content) > 200:
+                            content = content[:200] + "..."
+                        
+                        response_parts.append(f"\n• **{author}** in #{channel}: {content}")
+                
+                if len(search_results) > 5:
+                    response_parts.append(f"\n... and {len(search_results) - 5} more messages.")
+            
+            # Handle analysis results
+            if analysis_results:
+                response_parts.append("\n**Analysis:**")
+                
+                for key, value in analysis_results.items():
+                    if isinstance(value, dict):
+                        # Handle capability responses specifically
+                        if key == "capability_response" and "response" in value:
+                            response_parts.append(f"\n{value['response']}")
+                        elif "summary" in value and value["summary"]:
+                            response_parts.append(f"\n• **{key.title()}**: {value['summary']}")
+                        elif "insights" in value and value["insights"]:
+                            insights = value["insights"][:3]  # Show first 3 insights
+                            response_parts.append(f"\n• **{key.title()}**: {', '.join(insights)}")
+                        elif "trends" in value and value["trends"]:
+                            trends = value["trends"][:3]  # Show first 3 trends
+                            response_parts.append(f"\n• **{key.title()}**: {', '.join(trends)}")
+                        elif "response" in value and value["response"]:
+                            # Handle other response types
+                            response_parts.append(f"\n{value['response']}")
+                    elif isinstance(value, str) and value.strip():
+                        response_parts.append(f"\n• **{key.title()}**: {value}")
+                    elif isinstance(value, list) and value:
+                        items = value[:3]  # Show first 3 items
+                        response_parts.append(f"\n• **{key.title()}**: {', '.join(str(item) for item in items)}")
+            
+            # Handle case where we have no results but query was processed
+            if not search_results and not analysis_results:
+                response_parts.append("I processed your query but didn't find any relevant information in the available data.")
+                
+                # Provide helpful suggestions based on query type
+                query_lower = query.lower()
+                if any(word in query_lower for word in ["search", "find", "look"]):
+                    response_parts.append("Try rephrasing your search terms or being more specific.")
+                elif any(word in query_lower for word in ["summarize", "summary"]):
+                    response_parts.append("There might not be enough recent content to summarize.")
+                elif any(word in query_lower for word in ["analyze", "analysis"]):
+                    response_parts.append("The data might not contain the type of content you're looking to analyze.")
+            
+            # Combine all parts
+            final_response = "\n".join(response_parts)
+            
+            # Ensure we have a meaningful response
+            if not final_response.strip():
+                final_response = "I processed your query but couldn't generate a meaningful response from the available data."
+            
+            # Add context if available
+            if query:
+                final_response = f"**Query**: {query}\n\n{final_response}"
+            
+            logger.info(f"Generated response with {len(final_response)} characters")
+            return final_response
+            
         except Exception as e:
             logger.error(f"Error generating final response: {e}")
-            return "Response generated with some processing errors." 
+            return f"I encountered an error while generating the response: {str(e)}" 
