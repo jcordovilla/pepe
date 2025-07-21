@@ -89,10 +89,21 @@ class AgentOrchestrator:
                 },
                 "task_plan": None,
                 "current_step": 0,
+                "current_subtask": None,
+                "analysis_results": None,
+                "errors": [],
                 "metadata": {
                     "start_time": start_time,
                     "version": "1.0.0"
-                }
+                },
+                "response": None,
+                "query_analysis": None,
+                "intent": None,
+                "entities": None,
+                "complexity_score": None,
+                "execution_plan": None,
+                "subtasks": None,
+                "dependencies": None
             }
             
             # Execute workflow

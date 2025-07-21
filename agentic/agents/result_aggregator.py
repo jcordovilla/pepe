@@ -79,127 +79,75 @@ class ResultAggregator(BaseAgent):
     
     async def process(self, state: AgentState) -> AgentState:
         """
-        Process result aggregation tasks.
+        Aggregate results from all agents into a comprehensive response.
         
         Args:
-            state: Current agent state
+            state: Current agent state with results from other agents
             
         Returns:
-            Updated state with aggregated results
+            Updated state with aggregated response
         """
         try:
-            # Handle current subtask (orchestrator mode)
-            if "current_subtask" in state and state["current_subtask"] is not None:
-                subtask = state["current_subtask"]
-                if self.can_handle(subtask):
-                    logger.info(f"Processing result aggregation for subtask: {subtask.id}")
-                    
-                    # Aggregate all available results
-                    aggregated_results = await self._aggregate_all_results(state)
-                    
-                    # Update state with aggregated results
-                    state["aggregated_results"] = aggregated_results
-                    state["final_response"] = await self._create_final_response(
-                        aggregated_results, state
-                    )
-                    
-                    # Update subtask
-                    subtask.status = TaskStatus.COMPLETED
-                    subtask.result = aggregated_results
-                    
-                    logger.info("Result aggregation completed successfully")
-                    return state
+            # Ensure errors list exists
+            if "errors" not in state or state["errors"] is None:
+                state["errors"] = []
             
-            # Fallback: process all aggregation subtasks
-            subtasks = state.get("subtasks", [])
-            aggregation_subtasks = [task for task in subtasks if self.can_handle(task)]
+            logger.info("Starting result aggregation...")
             
-            if not aggregation_subtasks:
-                logger.warning("No result aggregation subtasks found")
-                return state
+            # Aggregate all results
+            aggregated_results = await self._aggregate_all_results(state)
             
-            aggregation_results = {}
-            
-            for subtask in aggregation_subtasks:
-                logger.info(f"Processing aggregation subtask: {subtask.task_type}")
-                
-                # Aggregate results for this specific subtask
-                subtask_results = await self._aggregate_subtask_results(subtask, state)
-                
-                aggregation_results[subtask.id] = subtask_results
-                
-                # Update subtask status
-                subtask.status = TaskStatus.COMPLETED
-                subtask.result = subtask_results
+            # Generate final response
+            final_response = await self._generate_final_response(
+                aggregated_results, state
+            )
             
             # Update state
-            state["aggregation_results"] = aggregation_results
+            state["response"] = final_response
             state["metadata"]["result_aggregator"] = {
-                "aggregation_time": datetime.utcnow().isoformat(),
-                "subtasks_processed": len(aggregation_results),
-                "total_results_combined": sum(len(r.aggregated_data) for r in aggregation_results.values())
+                "aggregated_results": aggregated_results,
+                "final_response_length": len(final_response),
+                "aggregation_time": datetime.utcnow().isoformat()
             }
             
-            logger.info(f"Result aggregation completed: {len(aggregation_results)} subtasks processed")
+            logger.info(f"Result aggregation completed: {len(final_response)} chars")
             return state
             
         except Exception as e:
             logger.error(f"Error in result aggregator: {e}")
-            state["errors"] = state.get("errors", [])
+            # Ensure errors list exists before appending
+            if "errors" not in state or state["errors"] is None:
+                state["errors"] = []
             state["errors"].append(f"Result aggregation failed: {str(e)}")
+            # Provide a fallback response
+            state["response"] = "Unable to generate response due to aggregation error."
             return state
     
     async def _aggregate_all_results(self, state: AgentState) -> AggregationResult:
-        """
-        Aggregate all available results from the state.
+        """Aggregate all results from the current state"""
+        search_results = state.get("search_results", []) or []
+        analysis_results = state.get("analysis_results", {}) or {}
         
-        Args:
-            state: Current agent state
-            
-        Returns:
-            Aggregated result
-        """
-        # Collect all available results
-        search_results = state.get("search_results", [])
-        analysis_results = state.get("analysis_results", {})
-        digest_results = state.get("digest_results", {})
-        recovery_results = state.get("recovery_results", {})
+        # Ensure the analysis_results is a dict
+        if not isinstance(analysis_results, dict):
+            analysis_results = {}
         
-        # Aggregate search results
-        aggregated_search = await self._aggregate_search_results(search_results)
-        
-        # Aggregate analysis results
-        aggregated_analysis = await self._aggregate_analysis_results(analysis_results)
-        
-        # Aggregate digest results
-        aggregated_digest = await self._aggregate_digest_results(digest_results)
-        
-        # Combine all aggregated results
-        combined_data = {
-            "search_results": aggregated_search.aggregated_data,
-            "analysis_results": aggregated_analysis.aggregated_data,
-            "digest_results": aggregated_digest.aggregated_data,
-            "recovery_info": recovery_results
+        aggregated_data = {
+            "search_results": search_results,
+            "analysis_results": analysis_results,
+            "total_messages": len(search_results),
+            "analysis_keys": list(analysis_results.keys()),
+            "aggregation_timestamp": datetime.utcnow().isoformat()
         }
         
-        # Calculate overall confidence
-        confidence_scores = [
-            aggregated_search.confidence_score,
-            aggregated_analysis.confidence_score,
-            aggregated_digest.confidence_score
-        ]
-        overall_confidence = sum(confidence_scores) / len(confidence_scores)
-        
         return AggregationResult(
-            aggregated_data=combined_data,
-            strategy_used=AggregationStrategy.SYNTHESIZE,
-            source_results=["search", "analysis", "digest"],
-            confidence_score=overall_confidence,
+            aggregated_data=aggregated_data,
+            confidence_score=0.8,
+            sources=search_results,
             metadata={
-                "search_count": len(search_results),
-                "analysis_keys": list(analysis_results.keys()),
-                "digest_keys": list(digest_results.keys()),
-                "recovery_count": len(recovery_results)
+                "aggregation_method": "comprehensive",
+                "data_sources": ["search", "analysis"],
+                "aggregated_at": datetime.utcnow().isoformat()
             }
         )
     
@@ -401,77 +349,36 @@ class ResultAggregator(BaseAgent):
         
         return synthesized
     
-    async def _create_final_response(self, aggregated_results: AggregationResult, state: AgentState) -> Dict[str, Any]:
+    async def _generate_final_response(self, aggregated_results: AggregationResult, state: AgentState) -> str:
         """
         Create the final response from aggregated results.
         
         Args:
-            aggregated_results: Aggregated results
+            aggregated_results: Aggregated result data
             state: Current agent state
             
         Returns:
-            Final response
+            Final response string
         """
-        query = state.get("user_context", {}).get("query", "")
-        intent = state.get("query_interpretation", {}).get("intent", "unknown")
-        
-        # Create response based on intent
-        if intent == "search":
-            return self._create_search_response(aggregated_results, query)
-        elif intent == "summarize":
-            return self._create_summary_response(aggregated_results, query)
-        elif intent == "analyze":
-            return self._create_analysis_response(aggregated_results, query)
-        else:
-            return self._create_general_response(aggregated_results, query)
-    
-    def _create_search_response(self, aggregated_results: AggregationResult, query: str) -> Dict[str, Any]:
-        """Create response for search queries."""
-        search_results = aggregated_results.aggregated_data.get("search_results", [])
-        
-        return {
-            "type": "search_results",
-            "query": query,
-            "results": search_results,
-            "count": len(search_results),
-            "confidence": aggregated_results.confidence_score,
-            "metadata": aggregated_results.metadata
-        }
-    
-    def _create_summary_response(self, aggregated_results: AggregationResult, query: str) -> Dict[str, Any]:
-        """Create response for summary queries."""
-        analysis_results = aggregated_results.aggregated_data.get("analysis_results", {})
-        digest_results = aggregated_results.aggregated_data.get("digest_results", {})
-        
-        return {
-            "type": "summary",
-            "query": query,
-            "summary": digest_results.get("summary", ""),
-            "insights": analysis_results.get("insights", []),
-            "confidence": aggregated_results.confidence_score,
-            "metadata": aggregated_results.metadata
-        }
-    
-    def _create_analysis_response(self, aggregated_results: AggregationResult, query: str) -> Dict[str, Any]:
-        """Create response for analysis queries."""
-        analysis_results = aggregated_results.aggregated_data.get("analysis_results", {})
-        
-        return {
-            "type": "analysis",
-            "query": query,
-            "insights": analysis_results.get("insights", []),
-            "trends": analysis_results.get("trends", []),
-            "patterns": analysis_results.get("patterns", []),
-            "confidence": aggregated_results.confidence_score,
-            "metadata": aggregated_results.metadata
-        }
-    
-    def _create_general_response(self, aggregated_results: AggregationResult, query: str) -> Dict[str, Any]:
-        """Create general response for other query types."""
-        return {
-            "type": "general",
-            "query": query,
-            "data": aggregated_results.aggregated_data,
-            "confidence": aggregated_results.confidence_score,
-            "metadata": aggregated_results.metadata
-        } 
+        try:
+            # Extract key information
+            search_results = aggregated_results.aggregated_data.get("search_results", [])
+            analysis_results = aggregated_results.aggregated_data.get("analysis_results", {})
+            
+            # Build response based on available data
+            if search_results:
+                response = f"Found {len(search_results)} relevant messages. "
+                if analysis_results:
+                    response += f"Analysis includes: {', '.join(analysis_results.keys())}."
+                else:
+                    response += "Raw search results available."
+            elif analysis_results:
+                response = f"Analysis completed with {len(analysis_results)} components: {', '.join(analysis_results.keys())}."
+            else:
+                response = "No specific results found, but query was processed successfully."
+            
+            return response
+            
+        except Exception as e:
+            logger.error(f"Error generating final response: {e}")
+            return "Response generated with some processing errors." 
