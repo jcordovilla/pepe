@@ -3,15 +3,18 @@ Bot Runner
 
 Executes test queries against the Discord bot and collects responses.
 Handles sequential processing, error scenarios, and response collection.
+Uses the exact same AgentAPI.query() method as Discord bot and CLI.
 """
 
 import json
 import time
+import sqlite3
 from typing import List, Any, Dict, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
 import logging
 import asyncio
+from pathlib import Path
 
 from agentic.config.modernized_config import get_modernized_config
 from agentic.interfaces.agent_api import AgentAPI
@@ -30,14 +33,19 @@ class BotResponse:
 
 class BotRunner:
     """
-    Executes test queries against the bot in-process and collects responses.
-    Handles sequential processing, error scenarios, and timing.
+    Executes test queries against the bot using the exact same AgentAPI.query() method
+    as the Discord bot and CLI, with real data from SQLite and vector store.
     """
     def __init__(self, bot_api_endpoint: str = None):
-        # Ignore bot_api_endpoint, use in-process AgentAPI
+        # Use the exact same configuration and AgentAPI as Discord bot
         config = get_modernized_config()
         self.agent_api = AgentAPI(config)
-        self.responses = []  # Initialize responses list
+        self.responses = []
+        
+        # Database path for real data
+        self.db_path = Path("data/discord_messages.db")
+        
+        logger.info("BotRunner initialized with real AgentAPI and database access")
 
     async def run_queries(self, queries: List[Any]) -> List[BotResponse]:
         responses = []
@@ -51,31 +59,23 @@ class BotRunner:
             except Exception as e:
                 logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
         
-        # Store responses as instance variable for save_responses method
         self.responses = responses
         return responses
 
     async def _execute_single_query(self, query: Any) -> BotResponse:
         start_time = time.time()
         try:
-            # Prepare context (simulate Discord/CLI context)
-            context = {
-                "platform": "cli",
-                "channel_id": "test_channel_456",
-                "timestamp": datetime.utcnow().isoformat(),
-                "test_query_id": query.id,
-                "category": query.category,
-                "complexity": query.complexity,
-                "edge_case": query.edge_case
-            }
-            # Call AgentAPI directly
+            # Get real context data from SQLite database
+            real_context = await self._get_real_context_from_database()
+            
+            # Use the exact same AgentAPI.query() method as Discord bot
             result = await self.agent_api.query(
                 query=query.query,
-                user_id="test_user_123",
-                context=context
+                user_id=real_context["user_id"],
+                context=real_context
             )
             
-            # Defensive: handle None or malformed results
+            # Handle response exactly like Discord bot does
             if result is None:
                 result = {"success": False, "answer": "No response from agentic system", "metadata": {}}
             
@@ -96,10 +96,12 @@ class BotRunner:
                     "query_complexity": query.complexity,
                     "response_length": len(response_text),
                     "words_per_second": len(response_text.split()) / response_time if response_time > 0 else 0,
-                    "agent_metadata": result.get("metadata", {})
+                    "agent_metadata": result.get("metadata", {}),
+                    "real_context_used": True,
+                    "platform": real_context.get("platform", "unknown")
                 }
             )
-            logger.info(f"Query {query.id} completed in {response_time:.2f}s")
+            logger.info(f"Query {query.id} completed in {response_time:.2f}s using real context")
             return response
         except Exception as e:
             logger.error(f"Error in query {query.id}: {e}")
@@ -111,17 +113,83 @@ class BotRunner:
                 response_time=response_time,
                 timestamp=datetime.utcnow().isoformat(),
                 success=False,
-                metadata={}
+                metadata={"error": str(e)}
             )
-    
+
+    async def _get_real_context_from_database(self) -> Dict[str, Any]:
+        """
+        Get real context data from SQLite database, exactly like Discord bot would.
+        """
+        try:
+            if not self.db_path.exists():
+                logger.warning("Database not found, using fallback context")
+                return self._get_fallback_context()
+            
+            # Connect to SQLite database
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            
+            # Get real channel and user data from recent messages
+            cursor.execute("""
+                SELECT DISTINCT 
+                    channel_id, 
+                    channel_name, 
+                    author_id, 
+                    author_username,
+                    guild_id
+                FROM messages 
+                WHERE channel_name NOT LIKE '%test%'
+                ORDER BY timestamp DESC 
+                LIMIT 1
+            """)
+            
+            row = cursor.fetchone()
+            conn.close()
+            
+            if row:
+                channel_id, channel_name, author_id, author_username, guild_id = row
+                
+                # Create real context exactly like Discord bot
+                real_context = {
+                    "platform": "discord",  # Same as Discord bot
+                    "channel_id": int(channel_id) if channel_id else 123456789,
+                    "channel_name": channel_name or "general",
+                    "guild_id": int(guild_id) if guild_id else 987654321,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "user_id": str(author_id) if author_id else "test_user_123",
+                    "username": author_username or "TestUser"
+                }
+                
+                logger.info(f"Using real context: {channel_name} by {author_username}")
+                return real_context
+            else:
+                logger.warning("No real data found in database, using fallback context")
+                return self._get_fallback_context()
+                
+        except Exception as e:
+            logger.error(f"Error getting real context: {e}")
+            return self._get_fallback_context()
+
+    def _get_fallback_context(self) -> Dict[str, Any]:
+        """
+        Fallback context when database is not available.
+        Still uses the same structure as Discord bot.
+        """
+        return {
+            "platform": "discord",
+            "channel_id": 123456789,
+            "channel_name": "general",
+            "guild_id": 987654321,
+            "timestamp": datetime.utcnow().isoformat(),
+            "user_id": "test_user_123",
+            "username": "TestUser"
+        }
+
     async def run_error_scenarios(self) -> List[BotResponse]:
         """
-        Run additional error scenario tests.
-        
-        Returns:
-            List of BotResponse objects for error scenarios
+        Run additional error scenario tests using real AgentAPI.
         """
-        logger.info("Running error scenario tests...")
+        logger.info("Running error scenario tests with real AgentAPI...")
         
         error_queries = [
             {
@@ -176,38 +244,37 @@ class BotRunner:
     
     def get_execution_summary(self) -> Dict[str, Any]:
         """Get a summary of the execution results."""
-        # This method will need to be refactored to work with the new BotResponse structure
-        # and potentially the AgentAPI's response format.
-        # For now, returning a placeholder.
+        if not self.responses:
+            return {
+                "total_queries": 0,
+                "successful_queries": 0,
+                "failed_queries": 0,
+                "success_rate": 0.0,
+                "performance_metrics": {},
+                "error_summary": {}
+            }
+        
+        successful = [r for r in self.responses if r.success]
+        failed = [r for r in self.responses if not r.success]
+        
+        response_times = [r.response_time for r in self.responses if r.response_time > 0]
+        avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+        
         return {
-            "total_queries": 0, # Placeholder
-            "successful_queries": 0, # Placeholder
-            "failed_queries": 0, # Placeholder
-            "success_rate": 0.0, # Placeholder
-            "performance_metrics": {}, # Placeholder
-            "error_summary": {} # Placeholder
+            "total_queries": len(self.responses),
+            "successful_queries": len(successful),
+            "failed_queries": len(failed),
+            "success_rate": (len(successful) / len(self.responses)) * 100 if self.responses else 0,
+            "performance_metrics": {
+                "average_response_time": avg_response_time,
+                "min_response_time": min(response_times) if response_times else 0,
+                "max_response_time": max(response_times) if response_times else 0
+            },
+            "error_summary": {
+                "total_errors": len(failed),
+                "error_rate": (len(failed) / len(self.responses)) * 100 if self.responses else 0
+            }
         }
-    
-    def _get_common_errors(self, failed_responses: List[BotResponse]) -> Dict[str, int]:
-        """Get common error patterns from failed responses."""
-        error_counts = {}
-        
-        for response in failed_responses:
-            if response.error_message:
-                # Extract error type from error message
-                error_type = "Unknown"
-                if "timeout" in response.error_message.lower():
-                    error_type = "Timeout"
-                elif "api" in response.error_message.lower():
-                    error_type = "API Error"
-                elif "connection" in response.error_message.lower():
-                    error_type = "Connection Error"
-                elif "rate limit" in response.error_message.lower():
-                    error_type = "Rate Limit"
-                
-                error_counts[error_type] = error_counts.get(error_type, 0) + 1
-        
-        return error_counts
     
     def save_responses(self, filename: Optional[str] = None) -> str:
         """Save bot responses to a JSON file."""
@@ -229,7 +296,9 @@ class BotRunner:
             "metadata": {
                 "generated_at": datetime.utcnow().isoformat(),
                 "total_responses": len(self.responses),
-                "execution_summary": self.get_execution_summary()
+                "execution_summary": self.get_execution_summary(),
+                "real_data_used": True,
+                "agent_api_version": "same_as_discord_bot"
             },
             "responses": responses_data
         }

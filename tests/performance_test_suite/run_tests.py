@@ -35,11 +35,11 @@ async def main():
     
     # Configuration for the test suite
     config = {
-        "database_path": "data/discord_messages.db",
-        "bot_api_endpoint": "http://localhost:8000",  # Will be ignored since we use in-process
+        "database_path": "data/discord_messages.db",  # Same as production Discord bot
+        "bot_api_endpoint": "http://localhost:8000",  # Not used - we use in-process AgentAPI
         "output_directory": "tests/performance_test_suite/data",
         "sample_percentage": 0.15,  # 15% sample of messages for content analysis
-        "query_count": 10,  # Reduced from 50 for quick testing
+        "query_count": 30,  # Updated to 30 queries
         "enable_error_scenarios": True,
         "save_intermediate_results": True,
         "logging": {
@@ -57,7 +57,10 @@ async def main():
         "content_analysis": {
             "min_sample_size": 1000,
             "max_sample_size": 5000
-        }
+        },
+        # Ensure we use the same configuration as production
+        "use_production_config": True,
+        "real_data_mode": True
     }
     
     print("Configuration:")

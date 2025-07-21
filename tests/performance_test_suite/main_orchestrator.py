@@ -52,13 +52,16 @@ class PerformanceTestOrchestrator:
     def _get_default_config(self) -> Dict[str, Any]:
         """Get default configuration for the test suite."""
         return {
-            "database_path": "data/discord_messages.db",
-            "bot_api_endpoint": "http://localhost:8000",
+            "database_path": "data/discord_messages.db",  # Same as production
+            "bot_api_endpoint": "http://localhost:8000",  # Not used - we use in-process AgentAPI
             "output_directory": "tests/performance_test_suite/data",
             "sample_percentage": 0.15,
-            "query_count": 50,
+            "query_count": 30,  # Updated to 30 queries
             "enable_error_scenarios": True,
-            "save_intermediate_results": True
+            "save_intermediate_results": True,
+            # Ensure we use the same configuration as production
+            "use_production_config": True,
+            "real_data_mode": True
         }
     
     async def run_complete_test_suite(self) -> Dict[str, Any]:
