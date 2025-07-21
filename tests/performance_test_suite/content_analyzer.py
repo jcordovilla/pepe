@@ -18,6 +18,11 @@ import re
 logger = logging.getLogger(__name__)
 
 
+def _has_column(conn, table, column):
+    cursor = conn.execute(f"PRAGMA table_info({table})")
+    return any(row[1] == column for row in cursor.fetchall())
+
+
 class ContentAnalyzer:
     """
     Analyzes Discord server content to understand structure and patterns.
@@ -150,62 +155,64 @@ class ContentAnalyzer:
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
-            
-            # Get random sample of messages
-            cursor.execute(f"""
-                SELECT content, channel_name, user_id, username, timestamp, reactions
-                FROM messages 
-                ORDER BY RANDOM() 
-                LIMIT {sample_size}
-            """)
-            
+            # Defensive: check for required columns
+            columns = [row[1] for row in cursor.execute("PRAGMA table_info(messages)").fetchall()]
+            has_channel_name = "channel_name" in columns
+            has_user_id = "user_id" in columns
+            has_username = "username" in columns or "author_username" in columns
+            has_reactions = "reactions" in columns
+            # Build SELECT clause based on available columns
+            select_cols = ["content"]
+            if has_channel_name: select_cols.append("channel_name")
+            if has_user_id: select_cols.append("user_id")
+            if has_username: select_cols.append("username" if "username" in columns else "author_username")
+            if has_reactions: select_cols.append("reactions")
+            select_clause = ", ".join(select_cols)
+            cursor.execute(f"SELECT {select_clause} FROM messages ORDER BY RANDOM() LIMIT {sample_size}")
             messages = cursor.fetchall()
             conn.close()
-            
-            # Analyze content patterns
+            # Defensive: build index map
+            idx = {col: i for i, col in enumerate(select_cols)}
             content_analysis = {
                 "message_lengths": [],
-                "content_types": Counter(),
-                "url_patterns": Counter(),
-                "mention_patterns": Counter(),
+                "content_types": {},
+                "url_patterns": {},
+                "mention_patterns": {},
                 "code_blocks": 0,
-                "emojis": Counter(),
-                "hashtags": Counter()
+                "emojis": {},
+                "hashtags": {}
             }
-            
             for message in messages:
-                content = message[0]
-                
-                # Message length
-                content_analysis["message_lengths"].append(len(content))
+                content = message[idx["content"]]
+                content_analysis["message_lengths"].append(len(content) if content else 0)
                 
                 # Content types
                 content_type = self._classify_content_type(content)
-                content_analysis["content_types"][content_type] += 1
+                content_analysis["content_types"][content_type] = content_analysis["content_types"].get(content_type, 0) + 1
                 
                 # URLs
                 urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', content)
                 for url in urls:
                     domain = re.search(r'https?://([^/]+)', url)
                     if domain:
-                        content_analysis["url_patterns"][domain.group(1)] += 1
+                        content_analysis["url_patterns"][domain.group(1)] = content_analysis["url_patterns"].get(domain.group(1), 0) + 1
                 
                 # Mentions
                 mentions = re.findall(r'<@!?(\d+)>', content)
-                content_analysis["mention_patterns"]["total_mentions"] += len(mentions)
+                content_analysis["mention_patterns"]["total_mentions"] = content_analysis["mention_patterns"].get("total_mentions", 0) + len(mentions)
                 
                 # Code blocks
                 if '```' in content:
-                    content_analysis["code_blocks"] += 1
+                    content_analysis["code_blocks"] = content_analysis.get("code_blocks", 0) + 1
                 
                 # Emojis
                 emojis = re.findall(r'<a?:[^:]+:\d+>', content)
-                content_analysis["emojis"]["total_custom_emojis"] += len(emojis)
+                content_analysis["emojis"]["total_custom_emojis"] = content_analysis.get("total_custom_emojis", 0) + len(emojis)
                 
                 # Hashtags
                 hashtags = re.findall(r'#\w+', content)
                 for hashtag in hashtags:
-                    content_analysis["hashtags"][hashtag] += 1
+                    content_analysis["hashtags"][hashtag] = content_analysis.get(hashtag, 0) + 1
             
             # Calculate statistics
             lengths = content_analysis["message_lengths"]
@@ -219,7 +226,7 @@ class ContentAnalyzer:
             return content_analysis
             
         except Exception as e:
-            logger.error(f"Error analyzing content patterns: {e}")
+            logger.warning(f"Content pattern analysis skipped or partial due to: {e}")
             return {}
     
     async def _analyze_user_activity(self, sample_size: int) -> Dict[str, Any]:
@@ -603,3 +610,17 @@ class ContentAnalyzer:
                 "url_sharing_percentage": sum(analysis["content_patterns"]["url_patterns"].values()) / analysis["metadata"]["sample_size"] * 100
             }
         } 
+
+    def preflight_schema_check(self):
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            columns = [row[1] for row in cursor.execute("PRAGMA table_info(messages)").fetchall()]
+            expected = ["content", "channel_name", "user_id", "username", "reactions", "timestamp"]
+            missing = [col for col in expected if col not in columns]
+            logger.info(f"[Preflight] messages table columns: {columns}")
+            if missing:
+                logger.warning(f"[Preflight] Missing columns in messages table: {missing}")
+            conn.close()
+        except Exception as e:
+            logger.error(f"[Preflight] Error checking schema: {e}") 

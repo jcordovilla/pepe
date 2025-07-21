@@ -363,12 +363,15 @@ class ResponseEvaluator:
         query_map = {query.id: query for query in queries}
         
         for response in responses:
-            if response.query_id in query_map:
+            try:
+                if not response or not hasattr(response, 'query_id') or response.query_id not in query_map:
+                    logger.warning(f"Skipping malformed or unmatched response: {response}")
+                    continue
                 query = query_map[response.query_id]
                 evaluation = self._evaluate_single_response(query, response)
                 self.evaluation_results.append(evaluation)
-            else:
-                logger.warning(f"No matching query found for response {response.query_id}")
+            except Exception as e:
+                logger.error(f"Error evaluating response {getattr(response, 'query_id', '?')}: {e}")
         
         logger.info(f"Completed evaluation of {len(self.evaluation_results)} responses")
         return self.evaluation_results

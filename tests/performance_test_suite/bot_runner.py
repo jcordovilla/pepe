@@ -6,7 +6,7 @@ Handles sequential processing, error scenarios, and response collection.
 """
 
 import time
-from typing import List, Any, Dict
+from typing import List, Any, Dict, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
 import logging
@@ -40,8 +40,14 @@ class BotRunner:
     async def run_queries(self, queries: List[Any]) -> List[BotResponse]:
         responses = []
         for query in queries:
-            response = await self._execute_single_query(query)
-            responses.append(response)
+            try:
+                if not query or not hasattr(query, 'query'):
+                    logger.warning(f"Skipping malformed query: {query}")
+                    continue
+                response = await self._execute_single_query(query)
+                responses.append(response)
+            except Exception as e:
+                logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
         return responses
 
     async def _execute_single_query(self, query: Any) -> BotResponse:

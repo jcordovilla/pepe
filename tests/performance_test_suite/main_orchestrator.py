@@ -41,6 +41,7 @@ class PerformanceTestOrchestrator:
         
         # Initialize components
         self.content_analyzer = ContentAnalyzer(self.config.get("database_path"))
+        self.content_analyzer.preflight_schema_check()
         self.query_generator = QueryGenerator()
         self.bot_runner = BotRunner(self.config.get("bot_api_endpoint"))
         self.evaluator = ResponseEvaluator()
