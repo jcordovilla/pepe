@@ -279,11 +279,14 @@ Respond with JSON only:"""
                 temperature=self.temperature
             )
             
+            logger.info(f"LLM returned JSON response: {response}")
+            
             # Convert the JSON response back to string for compatibility
             return json.dumps(response)
             
         except Exception as e:
             logger.error(f"Error calling LLM: {e}")
+            logger.info("Falling back to mock response")
             # Fallback to mock response for testing
             return self._mock_llm_response(prompt)
     
@@ -300,6 +303,7 @@ Respond with JSON only:"""
         """
         # Simple rule-based mock for testing
         if "summarise" in prompt.lower() or "summarize" in prompt.lower():
+            logger.info("Using mock response: summarize intent")
             return '''{
                 "intent": "summarize",
                 "entities": [
@@ -344,6 +348,7 @@ Respond with JSON only:"""
                 "rationale": "Query contains 'summarise' keyword and requests summary of messages from a specific channel and time period"
             }'''
         elif "what can you do" in prompt.lower() or "capabilities" in prompt.lower():
+            logger.info("Using mock response: capabilities intent")
             return '''{
                 "intent": "capability",
                 "entities": [],
@@ -362,6 +367,7 @@ Respond with JSON only:"""
                 "rationale": "Query asks about bot capabilities or what it can do"
             }'''
         else:
+            logger.info("Using mock response: default search intent")
             return '''{
                 "intent": "search",
                 "entities": [],

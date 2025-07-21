@@ -76,6 +76,8 @@ class AgentOrchestrator:
         start_time = time.time()
         
         try:
+            logger.info(f"Orchestrator processing query: '{query[:50]}...' for user {user_id}")
+            
             # Initialize state
             initial_state: AgentState = {
                 "messages": [{"role": "user", "content": query}],
@@ -107,9 +109,13 @@ class AgentOrchestrator:
                 "dependencies": None
             }
             
+            logger.info("Starting LangGraph workflow execution...")
+            
             # Execute workflow
             config = {"configurable": {"thread_id": f"user_{user_id}"}}
             final_state = await self.app.ainvoke(initial_state, config)
+            
+            logger.info("LangGraph workflow completed, processing results...")
             
             # Store conversation in memory
             response_text = final_state.get("response", "") or "No response generated"
@@ -153,11 +159,15 @@ class AgentOrchestrator:
     async def _analyze_query_node(self, state: AgentState) -> AgentState:
         """Interpret the user query using LLM to understand intent and extract entities"""
         try:
+            logger.info("Starting query analysis node...")
+            
             # Use QueryInterpreterAgent to interpret the query
+            logger.info("Calling QueryInterpreterAgent.process()...")
             interpretation_state = await self.query_interpreter_agent.process(state)
             
             # Extract interpretation results
             interpretation = interpretation_state.get("query_interpretation", {})
+            logger.info(f"Received interpretation from agent: {interpretation.get('intent', 'unknown')} with {len(interpretation.get('subtasks', []))} subtasks")
             
             # Update state with interpretation results
             state["query_interpretation"] = interpretation
@@ -166,12 +176,32 @@ class AgentOrchestrator:
             state["metadata"]["interpretation_confidence"] = interpretation.get("confidence", 0.0)
             state["metadata"]["interpretation_rationale"] = interpretation.get("rationale", "")
             
-            logger.info(f"Query interpreted: intent={interpretation.get('intent')}, confidence={interpretation.get('confidence', 0.0)}")
+            logger.info(f"Query analysis completed: intent={interpretation.get('intent')}, confidence={interpretation.get('confidence', 0.0)}")
             return state
             
         except Exception as e:
             logger.error(f"Error in query interpretation: {str(e)}")
             state["metadata"]["interpretation_error"] = str(e)
+            # Set a fallback interpretation to avoid empty query_interpretation
+            logger.warning("Setting fallback interpretation in orchestrator due to error")
+            state["query_interpretation"] = {
+                "intent": "search",
+                "entities": [],
+                "subtasks": [
+                    {
+                        "task_type": "semantic_search",
+                        "description": "Search for relevant messages",
+                        "parameters": {
+                            "query": state.get("user_context", {}).get("query", ""),
+                            "filters": {},
+                            "k": 10
+                        },
+                        "dependencies": []
+                    }
+                ],
+                "confidence": 0.5,
+                "rationale": "Fallback interpretation due to orchestrator error"
+            }
             return state
     
     async def _plan_execution_node(self, state: AgentState) -> AgentState:
@@ -343,6 +373,9 @@ class AgentOrchestrator:
             
             # Set up aggregation state
             aggregation_state = state.copy()
+            # Ensure all required keys are present for state validation
+            if "query_interpretation" not in aggregation_state:
+                aggregation_state["query_interpretation"] = state.get("query_interpretation", {})
             aggregation_state["current_subtask"] = aggregation_subtask
             
             # Initialize result aggregator
