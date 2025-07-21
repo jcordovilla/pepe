@@ -14,11 +14,11 @@ from typing import Dict, List, Any, Optional
 from pathlib import Path
 
 # Import test suite components
-from .content_analyzer import ContentAnalyzer
-from .query_generator import QueryGenerator
-from .bot_runner import BotRunner
-from .evaluator import ResponseEvaluator
-from .report_generator import ReportGenerator
+from tests.performance_test_suite.content_analyzer import ContentAnalyzer
+from tests.performance_test_suite.query_generator import QueryGenerator
+from tests.performance_test_suite.bot_runner import BotRunner
+from tests.performance_test_suite.evaluator import ResponseEvaluator
+from tests.performance_test_suite.report_generator import ReportGenerator
 
 logger = logging.getLogger(__name__)
 

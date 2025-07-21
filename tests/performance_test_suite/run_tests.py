@@ -15,7 +15,7 @@ from pathlib import Path
 # Add the parent directory to the path to import the test suite
 sys.path.append(str(Path(__file__).parent))
 
-from main_orchestrator import PerformanceTestOrchestrator
+from tests.performance_test_suite.main_orchestrator import PerformanceTestOrchestrator
 
 
 def load_config(config_path: str) -> dict:
