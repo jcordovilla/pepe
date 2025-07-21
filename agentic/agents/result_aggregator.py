@@ -142,8 +142,9 @@ class ResultAggregator(BaseAgent):
         
         return AggregationResult(
             aggregated_data=aggregated_data,
+            strategy_used=AggregationStrategy.SYNTHESIZE,
+            source_results=["search", "analysis"],
             confidence_score=0.8,
-            sources=search_results,
             metadata={
                 "aggregation_method": "comprehensive",
                 "data_sources": ["search", "analysis"],

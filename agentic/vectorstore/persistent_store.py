@@ -442,56 +442,94 @@ class PersistentVectorStore:
             return False
     
     async def similarity_search(
-        self,
-        query: str,
-        k: int = 10,
-        filters: Optional[Dict[str, Any]] = None,
-        min_score: float = 0.0
+        self, 
+        query: str, 
+        k: int = 5, 
+        filters: Optional[Dict[str, Any]] = None
     ) -> List[Dict[str, Any]]:
         """
-        Perform semantic similarity search.
+        Perform similarity search using embeddings.
         
         Args:
-            query: Search query
+            query: Search query text
             k: Number of results to return
             filters: Optional metadata filters
-            min_score: Minimum similarity score
             
         Returns:
-            List of search results with metadata
+            List of similar documents with metadata
         """
+        if not self.collection:
+            await self.initialize()
+        
         try:
-            # Check cache first
-            cache_key = f"similarity:{hash(query)}:{k}:{hash(str(filters))}"
-            cached_results = await self.cache.get(cache_key)
+            # Generate embedding for the query
+            query_embedding = await self.embedding_model.embed_query(query)
+            if not query_embedding:
+                logger.warning("Failed to generate embedding for query")
+                return []
             
-            if cached_results:
-                self.stats["cache_hits"] += 1
-                return cached_results
+            # Prepare filters for ChromaDB
+            where_filter = None
+            if filters:
+                where_filter = self._convert_filters_to_where(filters)
             
-            # Build where clause from filters
-            where_clause = self._build_where_clause(filters) if filters else None
+            # Perform the search with error handling for ChromaDB issues
+            try:
+                assert self.collection is not None, "Collection not initialized"
+                results = await asyncio.to_thread(
+                    self.collection.query,
+                    query_embeddings=[query_embedding],
+                    n_results=min(k, 100),  # Cap at 100 results
+                    where=where_filter,
+                    include=["documents", "metadatas", "distances"]
+                )
+            except Exception as search_error:
+                # Handle specific ChromaDB errors
+                if "contigious 2D array" in str(search_error) or "ef or M is too small" in str(search_error):
+                    logger.warning(f"ChromaDB search configuration issue, using fallback: {search_error}")
+                    # Try with smaller k value
+                    try:
+                        results = await asyncio.to_thread(
+                            self.collection.query,
+                            query_embeddings=[query_embedding],
+                            n_results=min(k, 10),  # Much smaller result set
+                            where=where_filter,
+                            include=["documents", "metadatas", "distances"]
+                        )
+                    except Exception as fallback_error:
+                        logger.error(f"Fallback search also failed: {fallback_error}")
+                        return []
+                else:
+                    raise search_error
             
-            # Perform similarity search
-            assert self.collection is not None, "Collection not initialized"
-            results = await asyncio.to_thread(
-                self.collection.query,
-                query_texts=[query],
-                n_results=k,
-                where=where_clause,
-                include=["documents", "metadatas", "distances"]
-            )
+            # Convert results to our format
+            search_results = []
+            if results["documents"] and len(results["documents"]) > 0:
+                documents = results["documents"][0]
+                metadatas = results["metadatas"][0] if results["metadatas"] else []
+                distances = results["distances"][0] if results["distances"] else []
+                
+                for i, doc in enumerate(documents):
+                    metadata = metadatas[i] if i < len(metadatas) else {}
+                    distance = distances[i] if i < len(distances) else 1.0
+                    
+                    # Convert distance to similarity score (0-1, higher is better)
+                    similarity = max(0.0, 1.0 - distance)
+                    
+                    result = {
+                        "content": doc,
+                        "metadata": metadata,
+                        "similarity": similarity,
+                        "distance": distance
+                    }
+                    search_results.append(result)
             
-            # Process results
-            processed_results = self._process_search_results(results, min_score)
+            # Update stats
+            self.stats["searches_performed"] += 1
+            self.stats["results_returned"] += len(search_results)
             
-            # Cache results
-            await self.cache.set(cache_key, processed_results, ttl=1800)  # 30 min TTL
-            
-            self.stats["total_searches"] += 1
-            logger.info(f"Similarity search found {len(processed_results)} results")
-            
-            return processed_results
+            logger.info(f"Similarity search returned {len(search_results)} results for query: {query[:50]}...")
+            return search_results
             
         except Exception as e:
             logger.error(f"Error in similarity search: {e}")

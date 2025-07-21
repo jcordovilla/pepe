@@ -90,7 +90,7 @@ class AgentOrchestrator:
                 "task_plan": None,
                 "current_step": 0,
                 "current_subtask": None,
-                "analysis_results": None,
+                "analysis_results": {},
                 "errors": [],
                 "metadata": {
                     "start_time": start_time,
@@ -98,6 +98,7 @@ class AgentOrchestrator:
                 },
                 "response": None,
                 "query_analysis": None,
+                "query_interpretation": {},
                 "intent": None,
                 "entities": None,
                 "complexity_score": None,
@@ -112,6 +113,12 @@ class AgentOrchestrator:
             
             # Store conversation in memory
             response_text = final_state.get("response", "") or "No response generated"
+            # Ensure response_text is a string, not a dict
+            if isinstance(response_text, dict):
+                response_text = str(response_text)
+            elif not isinstance(response_text, str):
+                response_text = str(response_text)
+            
             await self.conversation_memory.add_interaction(
                 user_id, query, response_text
             )
