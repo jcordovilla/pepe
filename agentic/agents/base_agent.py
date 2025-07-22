@@ -92,6 +92,10 @@ class AgentState(TypedDict):
     execution_plan: Optional[ExecutionPlan]
     subtasks: Optional[List[SubTask]]
     dependencies: Optional[Dict[str, List[str]]]
+    # Routing fields for agent orchestration
+    next_agent: Optional[str]
+    agent_args: Optional[Dict[str, Any]]
+    routing_result: Optional[Dict[str, Any]]
 
 
 class BaseAgent(ABC):

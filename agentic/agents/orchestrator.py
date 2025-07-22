@@ -107,8 +107,12 @@ class AgentOrchestrator:
                 "dependencies": {}
             }
             
-            # Execute the workflow
-            final_state = await self.app.ainvoke(initial_state)
+            # Execute the workflow with proper configurable parameters for the checkpointer
+            configurable = {
+                "thread_id": f"discord_{user_id}",
+                "thread_ts": str(int(start_time))
+            }
+            final_state = await self.app.ainvoke(initial_state, {"configurable": configurable})
             
             # Extract results
             response = final_state.get("response", "No response generated")
@@ -118,9 +122,9 @@ class AgentOrchestrator:
             duration = time.time() - start_time
             
             # Store conversation turn
-            await self.conversation_memory.store_conversation_turn(
+            await self.conversation_memory.add_interaction(
                 user_id=user_id,
-                message=query,
+                query=query,
                 response=response,
                 metadata={
                     "duration": duration,
