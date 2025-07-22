@@ -4,6 +4,7 @@ Bot Runner
 Executes test queries against the Discord bot and collects responses.
 Handles sequential processing, error scenarios, and response collection.
 Uses the exact same AgentAPI.query() method as Discord bot and CLI.
+Updated for v2 agentic architecture with comprehensive progress reporting.
 """
 
 import json
@@ -16,6 +17,7 @@ import logging
 import asyncio
 from pathlib import Path
 import sys
+from tqdm import tqdm
 
 from agentic.config.modernized_config import get_modernized_config
 from agentic.interfaces.agent_api import AgentAPI
@@ -31,7 +33,9 @@ class BotResponse:
     timestamp: str
     success: bool
     metadata: Dict[str, Any]
-    subtasks: Optional[List[Dict[str, Any]]] = field(default_factory=list)
+    agent_used: Optional[str] = None
+    routing_info: Optional[Dict[str, Any]] = None
+    validation_passed: Optional[bool] = None
 
 
 class ConfigError(Exception):
@@ -47,6 +51,7 @@ class BotRunner:
     """
     Executes test queries against the bot using the exact same AgentAPI.query() method
     as the Discord bot and CLI, with real data from SQLite and vector store.
+    Updated for v2 agentic architecture with enhanced progress tracking.
     """
     def __init__(self, bot_api_endpoint: str = None):
         # Use the exact same configuration as production Discord bot
@@ -57,6 +62,7 @@ class BotRunner:
         
         self.agent_api = AgentAPI(config)
         self.responses = []
+        self.initialized = False
         
         # Database path for real data - same as production
         self.db_path = Path("data/discord_messages.db")
@@ -100,17 +106,20 @@ class BotRunner:
             # Check if messages table exists
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='messages'")
             if not cursor.fetchone():
-                raise DatabaseError(f"Messages table not found in {self.db_path}")
+                raise DatabaseError("Messages table not found in database")
             
-            # Check message count
-            cursor.execute("SELECT COUNT(*) FROM messages")
-            count = cursor.fetchone()[0]
-            logger.info(f"Database validated: {count} messages found")
+            # Check table structure
+            cursor.execute("PRAGMA table_info(messages)")
+            columns = [row[1] for row in cursor.fetchall()]
+            required_columns = ['message_id', 'content', 'author_id', 'channel_id', 'timestamp']
+            
+            missing_columns = [col for col in required_columns if col not in columns]
+            if missing_columns:
+                raise DatabaseError(f"Missing required columns: {missing_columns}")
             
             conn.close()
+            logger.info("Database validation passed")
             
-        except sqlite3.Error as e:
-            raise DatabaseError(f"Database access error: {e}")
         except Exception as e:
             raise DatabaseError(f"Database validation failed: {e}")
 
@@ -118,342 +127,399 @@ class BotRunner:
         """Get nested configuration value using dot notation."""
         keys = key_path.split('.')
         value = config
-        
         for key in keys:
             if isinstance(value, dict) and key in value:
                 value = value[key]
             else:
                 return None
-        
         return value
 
-    async def run_queries(self, queries: List[Any]) -> List[BotResponse]:
-        responses = []
-        for query in queries:
-            try:
-                if not query or not hasattr(query, 'query'):
-                    logger.warning(f"Skipping malformed query: {query}")
-                    continue
-                response = await self._execute_single_query(query)
-                responses.append(response)
-            except Exception as e:
-                logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
+    async def initialize(self):
+        """Initialize the bot runner for v2 agentic architecture."""
+        if self.initialized:
+            return
         
-        self.responses = responses
-        return responses
+        try:
+            # Initialize the agent API
+            await self.agent_api.initialize()
+            self.initialized = True
+            logger.info("BotRunner initialized for v2 agentic architecture")
+        except Exception as e:
+            logger.error(f"Failed to initialize BotRunner: {e}")
+            raise
 
-    async def run_queries_parallel(self, queries: List[Any], max_concurrent: int = 5) -> List[BotResponse]:
+    async def run_queries_with_progress(self, queries: List[Any]) -> List[BotResponse]:
         """
-        Execute queries in parallel with proper resource management.
-        Prints color-coded, per-query and per-subtask progress as each query completes.
+        Execute queries with comprehensive progress reporting.
+        
+        Args:
+            queries: List of test queries to execute
+            
+        Returns:
+            List of BotResponse objects with detailed metadata
         """
-        logger.info(f"Running {len(queries)} queries in parallel (max {max_concurrent} concurrent)")
-        semaphore = asyncio.Semaphore(max_concurrent)
-
-        # Color utility
-        class Color:
-            HEADER = '\033[95m'
-            OKBLUE = '\033[94m'
-            OKCYAN = '\033[96m'
-            OKGREEN = '\033[92m'
-            WARNING = '\033[93m'
-            FAIL = '\033[91m'
-            ENDC = '\033[0m'
-            BOLD = '\033[1m'
-            UNDERLINE = '\033[4m'
-
-        async def execute_with_semaphore(query: Any) -> BotResponse:
-            async with semaphore:
+        if not self.initialized:
+            await self.initialize()
+        
+        print_info("🤖 Starting query execution with v2 agents...")
+        print_info(f"   Total queries: {len(queries)}")
+        
+        responses = []
+        successful_queries = 0
+        failed_queries = 0
+        
+        # Create progress bar
+        with tqdm(total=len(queries), desc="Executing queries", unit="query") as pbar:
+            for i, query in enumerate(queries, 1):
                 try:
-                    return await self._execute_single_query(query)
+                    # Execute single query with detailed progress
+                    response = await self._execute_single_query_with_progress(query, i, len(queries))
+                    responses.append(response)
+                    
+                    if response.success:
+                        successful_queries += 1
+                    else:
+                        failed_queries += 1
+                    
+                    # Update progress bar
+                    pbar.set_postfix({
+                        'Success': f"{successful_queries}/{i}",
+                        'Failed': failed_queries,
+                        'Agent': response.agent_used or 'unknown',
+                        'Time': f"{response.response_time:.2f}s"
+                    })
+                    pbar.update(1)
+                    
                 except Exception as e:
-                    logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
-                    return BotResponse(
-                        query_id=getattr(query, 'id', 0),
-                        query=getattr(query, 'query', ''),
+                    logger.error(f"Query {i} failed: {e}")
+                    failed_queries += 1
+                    
+                    # Create error response
+                    error_response = BotResponse(
+                        query_id=query.id,
+                        query=query.query,
                         response=f"Error: {str(e)}",
                         response_time=0.0,
-                        timestamp=datetime.utcnow().isoformat(),
+                        timestamp=datetime.now().isoformat(),
                         success=False,
                         metadata={"error": str(e)},
-                        subtasks=[]
+                        agent_used="error"
                     )
-
-        tasks = [asyncio.create_task(execute_with_semaphore(query)) for query in queries]
-        responses = [None] * len(queries)
-        query_map = {id(task): i for i, task in enumerate(tasks)}
-
-        for task in asyncio.as_completed(tasks):
-            response = await task
-            i = query_map[id(task)]
-            responses[i] = response
-            # Print per-query progress immediately
-            print(f"{Color.HEADER}{Color.BOLD}\nQuery {i+1}/{len(queries)}: {queries[i].query}{Color.ENDC}")
-            print(f"  Category: {getattr(queries[i], 'category', 'unknown')}, Complexity: {getattr(queries[i], 'complexity', 'unknown')}")
-            if response.subtasks:
-                for subtask in response.subtasks:
-                    status_color = Color.OKGREEN if subtask.get("status") == "success" else Color.FAIL
-                    print(f"    {status_color}Subtask: {subtask.get('type')} - {subtask.get('description')} | Status: {subtask.get('status')}{Color.ENDC}")
-                    if subtask.get("error"):
-                        print(f"      {Color.FAIL}Error: {subtask.get('error')}{Color.ENDC}")
-            else:
-                print(f"    {Color.WARNING}No subtask info available.{Color.ENDC}")
-            sys.stdout.flush()
-
-        self.responses = responses
-        logger.info(f"Parallel execution completed: {len(responses)} responses")
+                    responses.append(error_response)
+                    
+                    pbar.set_postfix({
+                        'Success': f"{successful_queries}/{i}",
+                        'Failed': failed_queries,
+                        'Agent': 'error',
+                        'Time': '0.00s'
+                    })
+                    pbar.update(1)
+        
+        # Print execution summary
+        print_success(f"✅ Query execution completed")
+        print_info(f"   - Successful: {successful_queries}/{len(queries)} ({successful_queries/len(queries)*100:.1f}%)")
+        print_info(f"   - Failed: {failed_queries}/{len(queries)} ({failed_queries/len(queries)*100:.1f}%)")
+        
+        # Analyze agent usage
+        agent_usage = self._analyze_agent_usage(responses)
+        print_info("   - Agent usage:")
+        for agent, count in agent_usage.items():
+            print_info(f"     • {agent}: {count} queries")
+        
         return responses
 
-    async def _execute_single_query(self, query: Any) -> BotResponse:
-        start_time = time.time()
-        try:
-            # Get real context data from SQLite database
-            real_context = await self._get_real_context_from_database()
+    async def _execute_single_query_with_progress(self, query: Any, query_num: int, total_queries: int) -> BotResponse:
+        """
+        Execute a single query with detailed progress reporting.
+        
+        Args:
+            query: Test query to execute
+            query_num: Current query number
+            total_queries: Total number of queries
             
-            # Use the exact same AgentAPI.query() method as Discord bot
+        Returns:
+            BotResponse with detailed metadata
+        """
+        start_time = time.time()
+        
+        # Print query details
+        print_progress("Query", query_num, total_queries, f"Executing: {query.query[:50]}...")
+        
+        try:
+            # Get real context from database
+            context = await self._get_real_context_from_database()
+            
+            # Execute query using AgentAPI
             result = await self.agent_api.query(
                 query=query.query,
-                user_id=real_context["user_id"],
-                context=real_context
+                user_id="test_user",
+                context=context
             )
             
-            # Handle response exactly like Discord bot does
-            if result is None:
-                result = {"success": False, "answer": "No response from agentic system", "metadata": {}}
-            
-            response_text = result.get("answer", "") or ""
-            if not response_text and result.get("success", False):
-                response_text = "Empty response from agentic system"
-            
             response_time = time.time() - start_time
+            
+            # Extract agent information from result
+            agent_used = result.get("metadata", {}).get("agent_used", "unknown")
+            routing_info = result.get("metadata", {}).get("routing_result")
+            validation_passed = result.get("metadata", {}).get("validation_passes", True)
+            
+            # Create response object
             response = BotResponse(
                 query_id=query.id,
                 query=query.query,
-                response=response_text,
+                response=result.get("response", "No response"),
                 response_time=response_time,
-                timestamp=datetime.utcnow().isoformat(),
-                success=result.get("success", False) and len(response_text) > 0,
-                metadata={
-                    "query_category": query.category,
-                    "query_complexity": query.complexity,
-                    "response_length": len(response_text),
-                    "words_per_second": len(response_text.split()) / response_time if response_time > 0 else 0,
-                    "agent_metadata": result.get("metadata", {}),
-                    "real_context_used": True,
-                    "platform": real_context.get("platform", "unknown")
-                },
-                subtasks=result.get("subtasks") or result.get("subtask_results") or []
+                timestamp=datetime.now().isoformat(),
+                success=result.get("metadata", {}).get("success", True),
+                metadata=result.get("metadata", {}),
+                agent_used=agent_used,
+                routing_info=routing_info,
+                validation_passed=validation_passed
             )
-            logger.info(f"Query {query.id} completed in {response_time:.2f}s using real context")
+            
+            # Print success/failure status
+            if response.success:
+                print_success(f"   ✅ Query {query_num} completed successfully ({response_time:.2f}s)")
+                print_info(f"      Agent: {agent_used}")
+                if validation_passed is not None:
+                    validation_status = "✅" if validation_passed else "⚠️"
+                    print_info(f"      Validation: {validation_status}")
+            else:
+                print_error(f"   ❌ Query {query_num} failed ({response_time:.2f}s)")
+                print_info(f"      Agent: {agent_used}")
+                print_info(f"      Error: {result.get('metadata', {}).get('error', 'Unknown error')}")
+            
             return response
+            
         except Exception as e:
-            logger.error(f"Error in query {query.id}: {e}")
             response_time = time.time() - start_time
+            logger.error(f"Query execution failed: {e}")
+            
+            # Create error response
             return BotResponse(
                 query_id=query.id,
                 query=query.query,
-                response=str(e),
+                response=f"Execution error: {str(e)}",
                 response_time=response_time,
-                timestamp=datetime.utcnow().isoformat(),
+                timestamp=datetime.now().isoformat(),
                 success=False,
-                metadata={"error": str(e)},
-                subtasks=[]
+                metadata={"error": str(e), "error_type": type(e).__name__},
+                agent_used="error"
             )
 
     async def _get_real_context_from_database(self) -> Dict[str, Any]:
-        """
-        Get real context data from SQLite database, exactly like Discord bot would.
-        """
+        """Get real context from the database for authentic testing."""
         try:
-            if not self.db_path.exists():
-                logger.warning("Database not found, using fallback context")
-                return self._get_fallback_context()
-            
-            # Connect to SQLite database
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
-            # Get real channel and user data from recent messages
+            # Get recent messages for context
             cursor.execute("""
-                SELECT DISTINCT 
-                    channel_id, 
-                    channel_name, 
-                    author_id, 
-                    author_username,
-                    guild_id
+                SELECT content, author_id, channel_id, timestamp 
                 FROM messages 
-                WHERE channel_name NOT LIKE '%test%'
                 ORDER BY timestamp DESC 
-                LIMIT 1
+                LIMIT 10
             """)
             
-            row = cursor.fetchone()
+            recent_messages = cursor.fetchall()
+            
+            # Get channel information
+            cursor.execute("""
+                SELECT DISTINCT channel_id, channel_name 
+                FROM messages 
+                WHERE channel_name IS NOT NULL 
+                LIMIT 5
+            """)
+            
+            channels = cursor.fetchall()
+            
             conn.close()
             
-            if row:
-                channel_id, channel_name, author_id, author_username, guild_id = row
-                
-                # Create real context exactly like Discord bot
-                real_context = {
-                    "platform": "discord",  # Same as Discord bot
-                    "channel_id": int(channel_id) if channel_id else 123456789,
-                    "channel_name": channel_name or "general",
-                    "guild_id": int(guild_id) if guild_id else 987654321,
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "user_id": str(author_id) if author_id else "test_user_123",
-                    "username": author_username or "TestUser"
-                }
-                
-                logger.info(f"Using real context: {channel_name} by {author_username}")
-                return real_context
-            else:
-                logger.warning("No real data found in database, using fallback context")
-                return self._get_fallback_context()
-                
+            # Build context
+            context = {
+                "recent_messages": [
+                    {
+                        "content": msg[0],
+                        "author_id": msg[1],
+                        "channel_id": msg[2],
+                        "timestamp": msg[3]
+                    }
+                    for msg in recent_messages
+                ],
+                "channels": [
+                    {
+                        "channel_id": ch[0],
+                        "channel_name": ch[1]
+                    }
+                    for ch in channels
+                ],
+                "test_mode": True
+            }
+            
+            return context
+            
         except Exception as e:
-            logger.error(f"Error getting real context: {e}")
+            logger.warning(f"Failed to get real context: {e}")
             return self._get_fallback_context()
 
     def _get_fallback_context(self) -> Dict[str, Any]:
-        """
-        Fallback context when database is not available.
-        Still uses the same structure as Discord bot.
-        """
+        """Get fallback context when database access fails."""
         return {
-            "platform": "discord",
-            "channel_id": 123456789,
-            "channel_name": "general",
-            "guild_id": 987654321,
-            "timestamp": datetime.utcnow().isoformat(),
-            "user_id": "test_user_123",
-            "username": "TestUser"
+            "recent_messages": [],
+            "channels": [],
+            "test_mode": True,
+            "fallback_context": True
         }
 
+    def _analyze_agent_usage(self, responses: List[BotResponse]) -> Dict[str, int]:
+        """Analyze which agents were used during query execution."""
+        agent_usage = {}
+        for response in responses:
+            agent = response.agent_used or "unknown"
+            agent_usage[agent] = agent_usage.get(agent, 0) + 1
+        return agent_usage
+
     async def run_error_scenarios(self) -> List[BotResponse]:
-        """
-        Run additional error scenario tests using real AgentAPI.
-        """
-        logger.info("Running error scenario tests with real AgentAPI...")
+        """Run additional error scenario tests."""
+        print_info("🧪 Running error scenario tests...")
         
         error_queries = [
             {
-                "id": "error_001",
+                "id": "error_1",
                 "query": "",  # Empty query
-                "description": "Empty query test"
+                "category": "error_testing",
+                "subcategory": "empty_query"
             },
             {
-                "id": "error_002", 
-                "query": "a" * 10000,  # Very long query
-                "description": "Very long query test"
+                "id": "error_2", 
+                "query": "x" * 10000,  # Very long query
+                "category": "error_testing",
+                "subcategory": "long_query"
             },
             {
-                "id": "error_003",
-                "query": "SELECT * FROM users; DROP TABLE users;",  # SQL injection attempt
-                "description": "SQL injection test"
-            },
-            {
-                "id": "error_004",
-                "query": "🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴",  # Emoji spam
-                "description": "Emoji spam test"
-            },
-            {
-                "id": "error_005",
-                "query": "http://malicious-site.com/exploit",  # Malicious URL
-                "description": "Malicious URL test"
+                "id": "error_3",
+                "query": "SELECT * FROM users; DROP TABLE messages;",  # SQL injection attempt
+                "category": "error_testing", 
+                "subcategory": "sql_injection"
             }
         ]
         
-        error_responses = []
-        
-        for error_query in error_queries:
+        responses = []
+        for i, query_data in enumerate(error_queries, 1):
             try:
-                # Create a mock TestQuery object
                 class MockQuery:
                     def __init__(self, data):
                         self.id = data["id"]
                         self.query = data["query"]
-                        self.category = "error_test"
-                        self.complexity = "simple"
-                        self.edge_case = True
+                        self.category = data["category"]
+                        self.subcategory = data["subcategory"]
                 
-                mock_query = MockQuery(error_query)
-                response = await self._execute_single_query(mock_query)
-                error_responses.append(response)
+                mock_query = MockQuery(query_data)
+                response = await self._execute_single_query_with_progress(mock_query, i, len(error_queries))
+                responses.append(response)
                 
             except Exception as e:
-                logger.error(f"Error in error scenario {error_query['id']}: {e}")
+                logger.error(f"Error scenario {i} failed: {e}")
+                responses.append(BotResponse(
+                    query_id=query_data["id"],
+                    query=query_data["query"],
+                    response=f"Error scenario failed: {str(e)}",
+                    response_time=0.0,
+                    timestamp=datetime.now().isoformat(),
+                    success=False,
+                    metadata={"error": str(e), "scenario": query_data["subcategory"]},
+                    agent_used="error"
+                ))
         
-        logger.info(f"Completed {len(error_responses)} error scenario tests")
-        return error_responses
-    
+        print_success(f"✅ Error scenarios completed: {len(responses)} tests")
+        return responses
+
     def get_execution_summary(self) -> Dict[str, Any]:
         """Get a summary of the execution results."""
         if not self.responses:
-            return {
-                "total_queries": 0,
-                "successful_queries": 0,
-                "failed_queries": 0,
-                "success_rate": 0.0,
-                "performance_metrics": {},
-                "error_summary": {}
-            }
+            return {"status": "No queries executed"}
         
-        successful = [r for r in self.responses if r.success]
-        failed = [r for r in self.responses if not r.success]
+        total_queries = len(self.responses)
+        successful_queries = sum(1 for r in self.responses if r.success)
+        failed_queries = total_queries - successful_queries
         
-        response_times = [r.response_time for r in self.responses if r.response_time > 0]
+        # Calculate timing statistics
+        response_times = [r.response_time for r in self.responses if r.success]
         avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+        min_response_time = min(response_times) if response_times else 0
+        max_response_time = max(response_times) if response_times else 0
+        
+        # Analyze agent usage
+        agent_usage = self._analyze_agent_usage(self.responses)
+        
+        # Analyze validation results
+        validation_results = [r.validation_passed for r in self.responses if r.validation_passed is not None]
+        validation_pass_rate = (sum(validation_results) / len(validation_results) * 100) if validation_results else 0
         
         return {
-            "total_queries": len(self.responses),
-            "successful_queries": len(successful),
-            "failed_queries": len(failed),
-            "success_rate": (len(successful) / len(self.responses)) * 100 if self.responses else 0,
-            "performance_metrics": {
+            "status": "completed",
+            "total_queries": total_queries,
+            "successful_queries": successful_queries,
+            "failed_queries": failed_queries,
+            "success_rate": (successful_queries / total_queries * 100) if total_queries > 0 else 0,
+            "timing": {
                 "average_response_time": avg_response_time,
-                "min_response_time": min(response_times) if response_times else 0,
-                "max_response_time": max(response_times) if response_times else 0
+                "min_response_time": min_response_time,
+                "max_response_time": max_response_time
             },
-            "error_summary": {
-                "total_errors": len(failed),
-                "error_rate": (len(failed) / len(self.responses)) * 100 if self.responses else 0
+            "agent_usage": agent_usage,
+            "validation": {
+                "pass_rate": validation_pass_rate,
+                "total_validated": len(validation_results)
             }
         }
-    
+
     def save_responses(self, filename: Optional[str] = None) -> str:
-        """Save bot responses to a JSON file."""
+        """Save responses to a JSON file."""
         if not filename:
-            timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-            filename = f"tests/performance_test_suite/data/bot_responses_{timestamp}.json"
-        
-        # Ensure directory exists
-        import os
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"bot_responses_{timestamp}.json"
         
         # Convert responses to serializable format
-        responses_data = []
+        serializable_responses = []
         for response in self.responses:
-            response_dict = asdict(response)
-            responses_data.append(response_dict)
-        
-        data = {
-            "metadata": {
-                "generated_at": datetime.utcnow().isoformat(),
-                "total_responses": len(self.responses),
-                "execution_summary": self.get_execution_summary(),
-                "real_data_used": True,
-                "agent_api_version": "same_as_discord_bot"
-            },
-            "responses": responses_data
-        }
+            response_dict = response.__dict__.copy()
+            serializable_responses.append(response_dict)
         
         with open(filename, 'w') as f:
-            json.dump(data, f, indent=2, default=str)
+            json.dump(serializable_responses, f, indent=2, default=str)
         
-        logger.info(f"Bot responses saved to: {filename}")
+        logger.info(f"Responses saved to: {filename}")
         return filename
-    
+
     async def cleanup(self):
         """Clean up resources."""
-        # No explicit session to close here as AgentAPI is in-process
-        pass 
+        try:
+            if hasattr(self.agent_api, 'cleanup'):
+                await self.agent_api.cleanup()
+            logger.info("BotRunner cleanup completed")
+        except Exception as e:
+            logger.error(f"Error during BotRunner cleanup: {e}")
+
+
+# Color utility functions
+def print_info(msg):
+    print(f"\033[94m{msg}\033[0m")
+    sys.stdout.flush()
+
+def print_success(msg):
+    print(f"\033[92m{msg}\033[0m")
+    sys.stdout.flush()
+
+def print_error(msg):
+    print(f"\033[91m{msg}\033[0m")
+    sys.stdout.flush()
+
+def print_progress(phase: str, current: int, total: int, description: str = ""):
+    """Print progress with timestamp and percentage."""
+    from datetime import datetime
+    percentage = (current / total) * 100 if total > 0 else 0
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    progress_bar = "█" * int(percentage / 5) + "░" * (20 - int(percentage / 5))
+    print(f"\033[96m[{timestamp}] {phase}: [{progress_bar}] {current}/{total} ({percentage:.1f}%) {description}\033[0m")
+    sys.stdout.flush() 

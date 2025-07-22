@@ -16,7 +16,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
 from tests.performance_test_suite.main_orchestrator import PerformanceTestOrchestrator
-from agentic.agents.analysis_agent import CapabilityAgent
 
 
 def load_config(config_path: str) -> dict:
