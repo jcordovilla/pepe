@@ -442,26 +442,28 @@ Improvement Strategy:"""
     
     def _prepare_evaluation_data(self, evaluation_results: List[Any]) -> Dict[str, Any]:
         """Prepare evaluation data for Llama analysis."""
+        # Convert all EvaluationResult objects to dicts for serialization
+        eval_dicts = [asdict(r) if hasattr(r, '__dataclass_fields__') else r for r in evaluation_results]
         return {
-            "total_evaluations": len(evaluation_results),
+            "total_evaluations": len(eval_dicts),
             "score_distribution": {
-                "excellent": len([r for r in evaluation_results if r.overall_score >= 0.9]),
-                "good": len([r for r in evaluation_results if 0.7 <= r.overall_score < 0.9]),
-                "fair": len([r for r in evaluation_results if 0.5 <= r.overall_score < 0.7]),
-                "poor": len([r for r in evaluation_results if r.overall_score < 0.5])
+                "excellent": len([r for r in eval_dicts if r["overall_score"] >= 0.9]),
+                "good": len([r for r in eval_dicts if 0.7 <= r["overall_score"] < 0.9]),
+                "fair": len([r for r in eval_dicts if 0.5 <= r["overall_score"] < 0.7]),
+                "poor": len([r for r in eval_dicts if r["overall_score"] < 0.5])
             },
-            "category_performance": self._aggregate_category_performance(evaluation_results),
-            "metric_averages": self._calculate_metric_averages(evaluation_results),
+            "category_performance": self._aggregate_category_performance(eval_dicts),
+            "metric_averages": self._calculate_metric_averages(eval_dicts),
             "sample_evaluations": [
                 {
-                    "query_id": r.query_id,
-                    "category": r.detailed_analysis.get('query_analysis', {}).get('category', 'unknown'),
-                    "overall_score": r.overall_score,
-                    "metrics": r.metrics,
-                    "strengths": r.detailed_analysis.get('strengths', []),
-                    "weaknesses": r.detailed_analysis.get('weaknesses', [])
+                    "query_id": r["query_id"],
+                    "category": r["detailed_analysis"].get('query_analysis', {}).get('category', 'unknown'),
+                    "overall_score": r["overall_score"],
+                    "metrics": r["metrics"],
+                    "strengths": r["detailed_analysis"].get('strengths', []),
+                    "weaknesses": r["detailed_analysis"].get('weaknesses', [])
                 }
-                for r in evaluation_results[:5]  # Sample first 5
+                for r in eval_dicts[:5]  # Sample first 5
             ]
         }
     
@@ -1026,7 +1028,7 @@ class ReportGenerator:
                 bottlenecks.append("Slow response times")
         
         # Analyze error patterns
-        errors = [r for r in evaluation_results if not r.success]
+        errors = [r for r in evaluation_results if r.overall_score < 0.1]
         if len(errors) > len(evaluation_results) * 0.1:  # More than 10% errors
             bottlenecks.append("High error rate")
         

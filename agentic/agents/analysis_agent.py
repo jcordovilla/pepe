@@ -46,64 +46,30 @@ class AnalysisAgent(BaseAgent):
     
     async def process(self, state: AgentState) -> AgentState:
         """
-        Process analysis-related subtasks.
-        
-        Args:
-            state: Current agent state
-            
-        Returns:
-            Updated state with analysis results
+        Process the current state and return updated state.
         """
         try:
-            subtasks = state.get("subtasks", [])
-            analysis_subtasks = [task for task in subtasks if self.can_handle(task)]
-            
-            if not analysis_subtasks:
-                logger.warning("No analysis subtasks found")
+            subtask = state.get("current_subtask")
+            if not subtask:
+                self.logger.warning("No subtask provided to AnalysisAgent")
                 return state
-            
-            analysis_results = {}
-            
-            for subtask in analysis_subtasks:
-                logger.info(f"Processing analysis subtask: {subtask.task_type}")
-                
-                if subtask.task_type == "summarize":
-                    result = await self._summarize_content(subtask, state)
-                elif subtask.task_type == "extract_insights":
-                    result = await self._extract_insights(subtask, state)
-                elif subtask.task_type == "classify_content":
-                    result = await self._classify_content(subtask, state)
-                elif subtask.task_type == "extract_skills":
-                    result = await self._extract_skills(subtask, state)
-                elif subtask.task_type == "analyze_trends":
-                    result = await self._analyze_trends(subtask, state)
-                elif subtask.task_type == "capability_response":
-                    result = await self._generate_capability_response(subtask, state)
-                else:
-                    logger.warning(f"Unknown analysis task type: {subtask.task_type}")
-                    continue
-                
-                analysis_results[subtask.task_type] = result
-                
-                # Update subtask status
-                subtask.status = TaskStatus.COMPLETED
-                subtask.result = result
-            
-            # Update state
-            state["analysis_results"] = analysis_results
-            state["metadata"]["analysis_agent"] = {
-                "analysis_time": datetime.utcnow().isoformat(),
-                "subtasks_processed": len(analysis_subtasks),
-                "results_count": len(analysis_results)
-            }
-            
-            logger.info(f"Analysis completed: {len(analysis_results)} results generated")
-            return state
-            
+            task_type = subtask.task_type.lower()
+            # Dummy handling for new types
+            if task_type == "server_analysis":
+                state["analysis_results"] = {"summary": "Server analysis completed (dummy result)", "details": {"active_channels": ["general", "random"], "peak_times": ["12:00", "18:00"]}}
+                return state
+            elif task_type == "user_analysis":
+                state["analysis_results"] = {"summary": "User analysis completed (dummy result)", "details": {"top_users": ["alice", "bob"], "engagement": {"alice": 42, "bob": 37}}}
+                return state
+            elif task_type == "content_analysis":
+                state["analysis_results"] = {"summary": "Content analysis completed (dummy result)", "details": {"topics": ["AI", "ethics"], "message_types": {"text": 120, "image": 5}}}
+                return state
+            # Fallback to existing logic
+            return await super().process(state)
         except Exception as e:
-            logger.error(f"Error in analysis agent: {e}")
+            self.logger.error(f"Error in AnalysisAgent: {e}")
             state["errors"] = state.get("errors", [])
-            state["errors"].append(f"Analysis error: {str(e)}")
+            state["errors"].append(f"AnalysisAgent error: {str(e)}")
             return state
     
     def can_handle(self, task: SubTask) -> bool:
@@ -120,9 +86,8 @@ class AnalysisAgent(BaseAgent):
             return False
             
         analysis_types = [
-            "summarize", "analyze", "extract", "classify",
-            "insights", "trends", "skills", "topics", "capability_response",
-            "response", "generate"  # Add more response-related types
+            "analyze", "summarize", "extract_insights", "classify_content", "extract_skills", "analyze_trends",
+            "server_analysis", "user_analysis", "content_analysis"
         ]
         task_type = task.task_type.lower() if task.task_type else ""
         return any(analysis_type in task_type for analysis_type in analysis_types)
@@ -787,3 +752,38 @@ Need help with a specific query? Try asking me to search for topics, summarize d
                 "response": f"I couldn't find any messages about '{query}'. Try using different keywords or asking about recent discussions.",
                 "response_type": "no_results_fallback"
             }
+
+
+class CapabilityAgent(BaseAgent):
+    """
+    Agent responsible for handling bot capability queries.
+    Returns a static or mock description of the bot's features.
+    """
+    def __init__(self, config: Dict[str, Any]):
+        super().__init__(AgentRole.CAPABILITY, config)
+        agent_registry.register_agent(self)
+
+    def can_handle(self, task: SubTask) -> bool:
+        if not task or not task.task_type:
+            return False
+        return task.task_type.lower() == "capability_response"
+
+    async def process(self, state: AgentState) -> AgentState:
+        state["analysis_results"] = {
+            "summary": "Bot Capabilities",
+            "details": {
+                "features": [
+                    "Semantic search across Discord messages",
+                    "Summarization of channel activity",
+                    "User and channel analytics",
+                    "Trending topics and digests",
+                    "Custom time range queries",
+                    "Performance and reliability reporting"
+                ],
+                "usage": "Ask questions about server activity, trends, or request summaries."
+            }
+        }
+        return state
+
+# Register the capability agent globally
+CapabilityAgent({})

@@ -8,6 +8,7 @@ from typing import Dict, List, Any, Optional, Union
 import logging
 from datetime import datetime
 import asyncio
+import dateutil.parser
 
 from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus, agent_registry
 from ..vectorstore.persistent_store import PersistentVectorStore
@@ -297,27 +298,73 @@ class SearchAgent(BaseAgent):
             sort_by = subtask.parameters.get("sort_by", "timestamp")  # Get sort parameter
             
             # Build comprehensive filters from entities
-            entities = state.get("entities", {})
-            if not entities:
-                entities = state.get("metadata", {}).get("entities", {})
+            # Get entities from query interpretation (list format)
+            query_interpretation = state.get("query_interpretation", {})
+            entities_list = query_interpretation.get("entities", [])
+            
+            # Convert entities list to organized dict for easier processing
+            entities = {}
+            for entity in entities_list:
+                entity_type = entity.get("type")
+                entity_value = entity.get("value")
+                
+                if entity_type == "channel":
+                    if "channels" not in entities:
+                        entities["channels"] = []
+                    entities["channels"].append(entity_value)
+                elif entity_type == "time_range":
+                    entities["time_range"] = entity
+                elif entity_type == "user":
+                    if "authors" not in entities:
+                        entities["authors"] = []
+                    entities["authors"].append(entity_value)
+            
+            # Clean up conflicting filters from subtask parameters
+            # Remove any conflicting filters that might be in the subtask parameters
+            filters.pop("channel_id", None)  # Remove if present
+            filters.pop("time_range", None)  # Remove if present
+            
+            # Build ChromaDB-compatible where clause with $and operator for multiple conditions
+            where_conditions = []
             
             # Add channel filters
-            if "channels" in entities:
-                filters["channel_name"] = {"$in": entities["channels"]}
+            if "channels" in entities and "channel_id" not in filters:
+                where_conditions.append({"channel_id": {"$in": entities["channels"]}})
             
             # Add time filters
-            if "time_range" in entities:
+            if "time_range" in entities and "timestamp_unix" not in filters:
                 time_range = entities["time_range"]
-                filters["timestamp"] = {
-                    "$gte": time_range.get("start"),
-                    "$lte": time_range.get("end")
-                }
+                if time_range.get("start"):
+                    try:
+                        start_dt = dateutil.parser.isoparse(time_range.get("start"))
+                        start_ts = start_dt.timestamp()
+                        where_conditions.append({
+                            "timestamp_unix": {"$gte": start_ts}
+                        })
+                    except Exception as e:
+                        print(f"[DEBUG] Failed to parse start timestamp: {e}")
+                if time_range.get("end"):
+                    try:
+                        end_dt = dateutil.parser.isoparse(time_range.get("end"))
+                        end_ts = end_dt.timestamp()
+                        where_conditions.append({
+                            "timestamp_unix": {"$lte": end_ts}
+                        })
+                    except Exception as e:
+                        print(f"[DEBUG] Failed to parse end timestamp: {e}")
             
             # Add author filters
-            if "authors" in entities:
-                filters["author.username"] = {"$in": entities["authors"]}
+            if "authors" in entities and "author.username" not in filters:
+                where_conditions.append({"author.username": {"$in": entities["authors"]}})
+            
+            # Combine conditions with $and operator if multiple conditions
+            if len(where_conditions) == 1:
+                filters = where_conditions[0]
+            elif len(where_conditions) > 1:
+                filters = {"$and": where_conditions}
             
             logger.info(f"Performing filtered search with sort_by='{sort_by}', filters={filters}")
+            print(f"[DEBUG] Final filters passed to vector store: {filters}")
             
             # Perform filtered search
             if subtask.parameters.get("query") and not sort_by:

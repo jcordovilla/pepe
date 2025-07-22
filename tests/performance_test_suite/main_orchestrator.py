@@ -22,6 +22,38 @@ from tests.performance_test_suite.report_generator import ReportGenerator
 
 logger = logging.getLogger(__name__)
 
+# Add color utility
+class Color:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def print_phase(msg):
+    print(f"{Color.HEADER}{Color.BOLD}\n=== {msg} ==={Color.ENDC}")
+    sys.stdout.flush()
+
+def print_success(msg):
+    print(f"{Color.OKGREEN}{msg}{Color.ENDC}")
+    sys.stdout.flush()
+
+def print_warning(msg):
+    print(f"{Color.WARNING}{msg}{Color.ENDC}")
+    sys.stdout.flush()
+
+def print_error(msg):
+    print(f"{Color.FAIL}{msg}{Color.ENDC}")
+    sys.stdout.flush()
+
+def print_info(msg):
+    print(f"{Color.OKBLUE}{msg}{Color.ENDC}")
+    sys.stdout.flush()
+
 
 class PerformanceTestOrchestrator:
     """
@@ -137,49 +169,123 @@ class PerformanceTestOrchestrator:
     async def _run_tests_parallel(self) -> Dict[str, Any]:
         """Run tests with parallel execution for better performance."""
         try:
-            logger.info("Running tests with parallel execution...")
-            
-            # Step 1: Content Analysis (can run in parallel with other setup)
+            print_phase("PHASE 1: Content Analysis")
             content_analysis_task = asyncio.create_task(
                 self.content_analyzer.analyze_server_content()
             )
-            
-            # Step 2: Generate queries (can run in parallel with content analysis)
-            query_generation_task = asyncio.create_task(
-                self.query_generator.generate_test_queries()
-            )
-            
-            # Wait for both tasks to complete
-            content_analysis, queries = await asyncio.gather(
-                content_analysis_task, 
-                query_generation_task
-            )
-            
-            logger.info(f"Generated {len(queries)} test queries")
-            
-            # Step 3: Run queries in parallel
+
+            print_phase("PHASE 2: Query Generation")
+            queries = self.query_generator.generate_test_queries()
+            print_info(f"Generated {len(queries)} test queries.")
+            categories = set(q.category for q in queries)
+            print_info(f"Query categories: {', '.join(categories)}")
+            for i, query in enumerate(queries, 1):
+                print(f"{Color.OKCYAN}  Query {i}: {query.query} [{query.category}, {query.complexity}]{Color.ENDC}")
+
+            content_analysis = await content_analysis_task
+            print_success("Content analysis complete.")
+
+            print_phase("PHASE 3: Bot Execution")
+            print_info(f"Running {len(queries)} queries against the bot...")
+            responses = []
+            subtask_type_counts = {}
+            subtask_failures = []
+            for i, (query, response) in enumerate(zip(queries, responses)):
+                print_info(f"[Bot] Running query {i+1}/{len(queries)}: {query.query}")
+                # Print per-query progress
+                print_info(f"\nQuery {i+1}/{len(queries)}: {query.query}")
+                print_info(f"  Category: {query.category}, Complexity: {query.complexity}")
+                if response.subtasks:
+                    for subtask in response.subtasks:
+                        status_color = Color.OKGREEN if subtask.get("status") == "success" else Color.FAIL
+                        print(f"    {status_color}Subtask: {subtask.get('type')} - {subtask.get('description')} | Status: {subtask.get('status')}{Color.ENDC}")
+                        if subtask.get("error"):
+                            print_error(f"      Error: {subtask.get('error')}")
+                else:
+                    print_warning("    No subtask info available.")
+                sys.stdout.flush()
             responses = await self.bot_runner.run_queries_parallel(
                 queries, 
                 max_concurrent=5
             )
-            
-            logger.info(f"Executed {len(responses)} queries")
-            
-            # Step 4: Evaluate responses in parallel
+            print_success(f"Executed {len(responses)} queries.")
+
+            # Print subtask details for each response if available
+            print_info("\nSubtask details:")
+            for i, response in enumerate(responses, 1):
+                subtasks = getattr(response, 'subtasks', None)
+                if subtasks:
+                    for sub in subtasks:
+                        stype = sub.get('task_type', 'unknown')
+                        subtask_type_counts[stype] = subtask_type_counts.get(stype, 0) + 1
+                        status = sub.get('status', 'unknown')
+                        if status == 'failed':
+                            subtask_failures.append(stype)
+                            print_error(f"  Query {i} subtask {stype}: FAILED")
+                        else:
+                            print_success(f"  Query {i} subtask {stype}: SUCCESS")
+                else:
+                    print_warning(f"  Query {i}: No subtask info available.")
+
+            print_phase("PHASE 4: Evaluation")
+            print_info(f"Evaluating {len(responses)} responses...")
             evaluation_results = await self._evaluate_responses_parallel(queries, responses)
-            
-            # Step 5: Generate comprehensive report
-            report = await self.report_generator.generate_comprehensive_report(
-                content_analysis=content_analysis,
-                queries=queries,
-                responses=responses,
-                evaluation_results=evaluation_results,
-                config=self.config
-            )
-            
+            print_success(f"Evaluation complete for {len(evaluation_results)} responses.")
+
+            print_phase("PHASE 5: Report Generation")
+            print_info("Generating comprehensive report...")
+            query_summary = {
+                "total_queries": len(queries),
+                "categories": list(set(q.category for q in queries)),
+                "complexity_distribution": {
+                    "simple": len([q for q in queries if q.complexity == "simple"]),
+                    "moderate": len([q for q in queries if q.complexity == "moderate"]),
+                    "complex": len([q for q in queries if q.complexity == "complex"])
+                }
+            }
+            execution_summary = {
+                "total_queries": len(responses),
+                "success_rate": len([r for r in responses if getattr(r, 'success', False)]) / len(responses) * 100 if responses else 0,
+                "average_response_time": sum(getattr(r, 'response_time', 0) for r in responses) / len(responses) if responses else 0
+            }
+            evaluation_summary = {
+                "total_evaluations": len(evaluation_results),
+                "overall_performance": {
+                    "average_score": sum(getattr(r, 'overall_score', 0) for r in evaluation_results) / len(evaluation_results) if evaluation_results else 0
+                }
+            }
+            # Before report generation, ensure all evaluation_results are dicts
+            from dataclasses import asdict
+            eval_results_serializable = [asdict(r) if hasattr(r, '__dataclass_fields__') else r for r in evaluation_results]
+            if not eval_results_serializable:
+                print_warning('No evaluation results available for report generation.')
+                return {'status': 'No test results available'}
+            try:
+                report = self.report_generator.generate_comprehensive_report(
+                    content_analysis=content_analysis,
+                    query_summary=query_summary,
+                    execution_summary=execution_summary,
+                    evaluation_summary=evaluation_summary,
+                    evaluation_results=eval_results_serializable
+                )
+            except Exception as e:
+                print_error(f'Error during report generation: {e}')
+                return {'status': f'Report generation failed: {e}'}
+            print_success("Report generation complete!")
+
+            # Print summary
+            print_phase("TEST SUITE SUMMARY")
+            print_info(f"Total queries: {len(queries)}")
+            print_info(f"Subtask types encountered: {json.dumps(subtask_type_counts)}")
+            if subtask_failures:
+                print_error(f"Failed subtasks: {subtask_failures}")
+            else:
+                print_success("All subtasks succeeded.")
+            print_info(f"Average evaluation score: {evaluation_summary['overall_performance']['average_score']:.2f}")
+            print_info(f"Success rate: {execution_summary['success_rate']:.1f}%")
             return report
-            
         except Exception as e:
+            print_error(f"Error in parallel test execution: {e}")
             logger.error(f"Error in parallel test execution: {e}")
             raise
     
@@ -231,7 +337,7 @@ class PerformanceTestOrchestrator:
         return EvaluationResult(
             query_id=query.id,
             query=query.query,
-            expected_structure=query.expected_structure,
+            expected_structure=query.expected_response_structure,
             actual_response=response.response,
             overall_score=0.0,
             metrics={"overall": 0.0, "error": "Evaluation failed"},

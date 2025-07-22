@@ -24,6 +24,7 @@ class AgentRole(Enum):
     DIGESTER = "digester"
     AGGREGATOR = "aggregator"
     RESOURCE_MANAGER = "resource_manager"
+    CAPABILITY = "capability"  # Added for capability agent
 
 
 class TaskStatus(Enum):

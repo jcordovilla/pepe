@@ -395,7 +395,7 @@ class ResponseEvaluator:
             evaluation_result = self.hybrid_evaluator.evaluate_response(
                 query=query.query,
                 response=response.response,
-                expected_structure=query.expected_structure
+                expected_structure=query.expected_response_structure
             )
             
             # Extract scores from hybrid evaluation
@@ -433,7 +433,7 @@ class ResponseEvaluator:
             return EvaluationResult(
                 query_id=query.id,
                 query=query.query,
-                expected_structure=query.expected_structure,
+                expected_structure=query.expected_response_structure,
                 actual_response=response.response,
                 overall_score=overall_score,
                 metrics=metrics,
@@ -463,10 +463,10 @@ class ResponseEvaluator:
                 'performance': 0.0
             },
             detailed_analysis={
-                'failure_reason': response.error_message,
-                'error_type': self._classify_error(response.error_message)
+                'failure_reason': getattr(response, 'error_message', 'Unknown error'),
+                'error_type': self._classify_error(getattr(response, 'error_message', 'Unknown error'))
             },
-            recommendations=[f"Fix error: {response.error_message}"]
+            recommendations=[f"Fix error: {getattr(response, 'error_message', 'Unknown error')}"]
         )
     
     def _calculate_relevance_score(self, query: Any, response: Any) -> float:

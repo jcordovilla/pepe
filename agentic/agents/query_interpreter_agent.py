@@ -312,9 +312,19 @@ Respond with JSON only:"""
         """
         logger.info(f"Mock LLM response triggered for prompt containing: {prompt[:100]}...")
         
+        # Extract the actual user query from the prompt
+        import re
+        query_match = re.search(r'Query: "([^"]+)"', prompt)
+        if query_match:
+            user_query = query_match.group(1).lower()
+        else:
+            user_query = prompt.lower()
+        
+        logger.info(f"Extracted user query: {user_query}")
+        
         # Check for capability queries first
         capability_keywords = ["what can you do", "capabilities", "capable", "features", "what is this bot", "how do i use", "what does", "main features"]
-        if any(keyword in prompt.lower() for keyword in capability_keywords):
+        if any(keyword in user_query for keyword in capability_keywords):
             logger.info("Using mock response: capabilities intent")
             return '''{
                 "intent": "capability",
@@ -334,14 +344,14 @@ Respond with JSON only:"""
                 "rationale": "Query asks about bot capabilities or what it can do"
             }'''
         # Check for summarize queries
-        elif "summarise" in prompt.lower() or "summarize" in prompt.lower():
+        elif "summarise" in user_query or "summarize" in user_query:
             logger.info("Using mock response: summarize intent")
             return '''{
                 "intent": "summarize",
                 "entities": [
                     {
                         "type": "channel",
-                        "value": "1371647370911154228",
+                        "value": "1353448986408779877",
                         "confidence": 0.95
                     },
                     {
@@ -357,7 +367,7 @@ Respond with JSON only:"""
                         "parameters": {
                             "query": "messages from past week",
                             "filters": {
-                                "channel_id": "1371647370911154228",
+                                "channel_id": "1353448986408779877",
                                 "time_range": "past week"
                             },
                             "k": 50,
@@ -381,23 +391,118 @@ Respond with JSON only:"""
             }'''
         else:
             logger.info("Using mock response: default search intent")
+            
+            # Check if the query mentions a specific channel
+            channel_entities = []
+            if "ai-philosophy-ethics" in user_query or "📚ai-philosophy-ethics" in user_query:
+                channel_entities.append({
+                    "type": "channel",
+                    "value": "1353448986408779877",  # Actual channel ID from database
+                    "confidence": 0.95
+                })
+            
+            # Check for server analysis queries
+            if any(keyword in user_query for keyword in ["active channels", "server", "engagement", "activity", "patterns", "users", "content types"]):
+                logger.info("Using mock response: server analysis intent")
+                return '''{
+                    "intent": "analyze",
+                    "entities": [],
+                    "subtasks": [
+                        {
+                            "task_type": "server_analysis",
+                            "description": "Analyze server activity and patterns",
+                            "parameters": {
+                                "analysis_type": "server_overview",
+                                "query": "''' + user_query + '''",
+                                "filters": {},
+                                "k": 100
+                            },
+                            "dependencies": []
+                        }
+                    ],
+                    "confidence": 0.85,
+                    "rationale": "Query requests server analysis or activity patterns"
+                }'''
+            
+            # Check for user-related queries
+            elif any(keyword in user_query for keyword in ["users", "user", "who", "frequently", "active users"]):
+                logger.info("Using mock response: user analysis intent")
+                return '''{
+                    "intent": "analyze",
+                    "entities": [],
+                    "subtasks": [
+                        {
+                            "task_type": "user_analysis",
+                            "description": "Analyze user activity and patterns",
+                            "parameters": {
+                                "analysis_type": "user_engagement",
+                                "query": "''' + user_query + '''",
+                                "filters": {},
+                                "k": 50
+                            },
+                            "dependencies": []
+                        }
+                    ],
+                    "confidence": 0.85,
+                    "rationale": "Query requests user analysis or engagement patterns"
+                }'''
+            
+            # Check for content analysis queries
+            elif any(keyword in user_query for keyword in ["content", "messages", "topics", "discussions", "code snippets"]):
+                logger.info("Using mock response: content analysis intent")
+                return '''{
+                    "intent": "analyze",
+                    "entities": [],
+                    "subtasks": [
+                        {
+                            "task_type": "content_analysis",
+                            "description": "Analyze message content and topics",
+                            "parameters": {
+                                "analysis_type": "content_overview",
+                                "query": "''' + user_query + '''",
+                                "filters": {},
+                                "k": 50
+                            },
+                            "dependencies": []
+                        }
+                    ],
+                    "confidence": 0.85,
+                    "rationale": "Query requests content analysis or topic identification"
+                }'''
+            
+            # Build subtasks based on what we found
+            subtasks = []
+            if channel_entities:
+                subtasks.append({
+                    "task_type": "filtered_search",
+                    "description": "Search for messages in the specified channel",
+                    "parameters": {
+                        "query": user_query,
+                        "filters": {
+                            "channel_id": "1353448986408779877"
+                        },
+                        "k": 50
+                    },
+                    "dependencies": []
+                })
+            else:
+                subtasks.append({
+                    "task_type": "semantic_search",
+                    "description": "Search for relevant messages",
+                    "parameters": {
+                        "query": user_query,
+                        "filters": {},
+                        "k": 10
+                    },
+                    "dependencies": []
+                })
+            
             return '''{
                 "intent": "search",
-                "entities": [],
-                "subtasks": [
-                    {
-                        "task_type": "semantic_search",
-                        "description": "Search for relevant messages",
-                        "parameters": {
-                            "query": "user query",
-                            "filters": {},
-                            "k": 10
-                        },
-                        "dependencies": []
-                    }
-                ],
+                "entities": ''' + json.dumps(channel_entities) + ''',
+                "subtasks": ''' + json.dumps(subtasks) + ''',
                 "confidence": 0.8,
-                "rationale": "Default search interpretation for general queries"
+                "rationale": "Search interpretation for general queries with channel detection"
             }'''
     
     def _parse_llm_response(self, response: str) -> Dict[str, Any]:

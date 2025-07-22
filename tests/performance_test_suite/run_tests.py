@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
 from tests.performance_test_suite.main_orchestrator import PerformanceTestOrchestrator
+from agentic.agents.analysis_agent import CapabilityAgent
 
 
 def load_config(config_path: str) -> dict:
@@ -29,7 +30,7 @@ def load_config(config_path: str) -> dict:
 
 
 async def main():
-    """Main function to run the performance test suite."""
+    print("\033[95m\033[1m[DEBUG] Performance test runner started.\033[0m")
     print("🚀 Starting Performance Test Suite...")
     print("=" * 60)
     
@@ -84,7 +85,9 @@ async def main():
     
     try:
         # Run the test suite
-        await orchestrator.run_complete_test_suite()
+        results = await orchestrator.run_performance_tests()
+        print(f"\n✅ Test suite completed successfully!")
+        print(f"Results summary: {orchestrator.get_test_summary()}")
     except KeyboardInterrupt:
         print("\n🛑 Test suite interrupted by user")
     except Exception as e:

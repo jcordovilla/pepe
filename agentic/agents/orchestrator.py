@@ -167,9 +167,31 @@ class AgentOrchestrator:
             duration = time.time() - start_time
             logger.info(f"Query processed successfully in {duration:.3f}s")
             
+            # Prepare subtask execution summary for output
+            subtask_summaries = []
+            subtask_results = final_state.get("subtask_results", {})
+            for subtask_id, result in subtask_results.items():
+                subtask_obj = result.get("current_subtask", {})
+                # Handle both dataclass and dict
+                if hasattr(subtask_obj, "task_type"):
+                    task_type = getattr(subtask_obj, "task_type", "unknown")
+                    description = getattr(subtask_obj, "description", "unknown")
+                else:
+                    task_type = subtask_obj.get("task_type", "unknown")
+                    description = subtask_obj.get("description", "unknown")
+                summary = {
+                    "id": subtask_id,
+                    "type": task_type,
+                    "description": description,
+                    "status": result.get("status", "unknown"),
+                    "error": result.get("error", None)
+                }
+                subtask_summaries.append(summary)
+
             return {
                 "response": final_state.get("response", ""),
                 "results": final_state.get("search_results", []),
+                "subtasks": subtask_summaries,
                 "metadata": {
                     **final_state.get("metadata", {}),
                     "duration": duration,
@@ -334,16 +356,14 @@ class AgentOrchestrator:
                 try:
                     # Get appropriate agent for this subtask
                     agent = self._get_agent_for_subtask(subtask)
-                    
                     # Inject shared services into agent
                     service_container.inject_services(agent)
-                    
                     # Get context-rich state for this subtask
                     task_state = await shared_state.propagate_to_subtask(subtask.id)
-                    
+                    # Set current_subtask in the state
+                    task_state["current_subtask"] = subtask
                     # Execute subtask
                     result_state = await agent.process(task_state)
-                    
                     # Update shared state with results
                     if result_state.get("search_results"):
                         await shared_state.merge_results(
@@ -351,27 +371,32 @@ class AgentOrchestrator:
                             f"{type(agent).__name__}",
                             StateUpdateType.SEARCH_RESULTS
                         )
-                    
                     if result_state.get("analysis_results"):
                         await shared_state.merge_results(
                             {"analysis_results": result_state["analysis_results"]},
                             f"{type(agent).__name__}",
                             StateUpdateType.ANALYSIS_RESULTS
                         )
-                    
-                    # Store results
-                    result_map[subtask.id] = result_state
+                    # Always store a complete result dict for this subtask
+                    result_map[subtask.id] = {
+                        "current_subtask": subtask,
+                        "status": "success",
+                        "error": None,
+                        "result": result_state.get("search_results") or result_state.get("analysis_results") or result_state.get("digest_results") or result_state.get("response")
+                    }
                     completed.add(subtask.id)
-                    
                     # Clean up agent resources
                     await agent.cleanup()
-                    
                     logger.info(f"Subtask {subtask.id} completed successfully")
-                    
                 except Exception as e:
                     logger.error(f"Subtask {subtask.id} failed: {e}")
                     failed_subtasks.append(subtask)
-                    result_map[subtask.id] = {"error": str(e), "status": "failed"}
+                    result_map[subtask.id] = {
+                        "current_subtask": subtask,
+                        "status": "failed",
+                        "error": str(e),
+                        "result": None
+                    }
 
             # Execute subtasks with dependency management
             while len(completed) < len(subtasks):

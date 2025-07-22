@@ -266,6 +266,14 @@ class PersistentVectorStore:
                     if not message_id:
                         continue
                 
+                    # Add timestamp as float (unix timestamp) for ChromaDB filtering
+                    import dateutil.parser
+                    timestamp_str = msg.get("timestamp", "")
+                    try:
+                        timestamp_unix = dateutil.parser.isoparse(timestamp_str).timestamp() if timestamp_str else None
+                    except Exception:
+                        timestamp_unix = None
+
                     # Prepare comprehensive metadata with all available Discord fields
                     # Handle reactions - can be list or int
                     reactions = msg.get("reactions", [])
@@ -349,7 +357,8 @@ class PersistentVectorStore:
                         "channel_name": msg.get("channel_name", ""),
                         "guild_id": str(msg.get("guild_id", "")),
                         "guild_name": msg.get("guild_name", ""),
-                        "timestamp": msg.get("timestamp", ""),
+                        "timestamp": timestamp_str,
+                        "timestamp_unix": timestamp_unix,
                         "jump_url": msg.get("jump_url", ""),
                         
                         # Author fields (comprehensive)
@@ -841,8 +850,10 @@ class PersistentVectorStore:
     
     def _build_where_clause(self, filters: Dict[str, Any]) -> Dict[str, Any]:
         """Build ChromaDB where clause from filters."""
+        # If filters already has $and or $or at the top level, return as-is
+        if "$and" in filters or "$or" in filters:
+            return filters
         where_clause = {}
-        
         for key, value in filters.items():
             if isinstance(value, dict):
                 # Handle operators like $gt, $lt, $in, etc.
@@ -853,7 +864,6 @@ class PersistentVectorStore:
             else:
                 # Simple equality
                 where_clause[key] = value
-        
         return where_clause
     
     def _process_search_results(

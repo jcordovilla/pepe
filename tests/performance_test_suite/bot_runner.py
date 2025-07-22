@@ -10,11 +10,12 @@ import json
 import time
 import sqlite3
 from typing import List, Any, Dict, Optional
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from datetime import datetime
 import logging
 import asyncio
 from pathlib import Path
+import sys
 
 from agentic.config.modernized_config import get_modernized_config
 from agentic.interfaces.agent_api import AgentAPI
@@ -30,6 +31,7 @@ class BotResponse:
     timestamp: str
     success: bool
     metadata: Dict[str, Any]
+    subtasks: Optional[List[Dict[str, Any]]] = field(default_factory=list)
 
 
 class ConfigError(Exception):
@@ -143,27 +145,29 @@ class BotRunner:
     async def run_queries_parallel(self, queries: List[Any], max_concurrent: int = 5) -> List[BotResponse]:
         """
         Execute queries in parallel with proper resource management.
-        
-        Args:
-            queries: List of queries to execute
-            max_concurrent: Maximum number of concurrent queries
-            
-        Returns:
-            List of bot responses
+        Prints color-coded, per-query and per-subtask progress as each query completes.
         """
         logger.info(f"Running {len(queries)} queries in parallel (max {max_concurrent} concurrent)")
-        
-        # Create semaphore for concurrency control
         semaphore = asyncio.Semaphore(max_concurrent)
-        
+
+        # Color utility
+        class Color:
+            HEADER = '\033[95m'
+            OKBLUE = '\033[94m'
+            OKCYAN = '\033[96m'
+            OKGREEN = '\033[92m'
+            WARNING = '\033[93m'
+            FAIL = '\033[91m'
+            ENDC = '\033[0m'
+            BOLD = '\033[1m'
+            UNDERLINE = '\033[4m'
+
         async def execute_with_semaphore(query: Any) -> BotResponse:
-            """Execute a single query with semaphore control."""
             async with semaphore:
                 try:
                     return await self._execute_single_query(query)
                 except Exception as e:
                     logger.error(f"Error executing query {getattr(query, 'id', '?')}: {e}")
-                    # Return error response
                     return BotResponse(
                         query_id=getattr(query, 'id', 0),
                         query=getattr(query, 'query', ''),
@@ -171,35 +175,34 @@ class BotRunner:
                         response_time=0.0,
                         timestamp=datetime.utcnow().isoformat(),
                         success=False,
-                        metadata={"error": str(e)}
+                        metadata={"error": str(e)},
+                        subtasks=[]
                     )
-        
-        # Create tasks for all queries
-        tasks = [execute_with_semaphore(query) for query in queries]
-        
-        # Execute all tasks concurrently
-        responses = await asyncio.gather(*tasks, return_exceptions=True)
-        
-        # Handle any exceptions that weren't caught
-        final_responses = []
-        for i, response in enumerate(responses):
-            if isinstance(response, Exception):
-                logger.error(f"Query {i} failed with exception: {response}")
-                final_responses.append(BotResponse(
-                    query_id=getattr(queries[i], 'id', i),
-                    query=getattr(queries[i], 'query', ''),
-                    response=f"Exception: {str(response)}",
-                    response_time=0.0,
-                    timestamp=datetime.utcnow().isoformat(),
-                    success=False,
-                    metadata={"exception": str(response)}
-                ))
+
+        tasks = [asyncio.create_task(execute_with_semaphore(query)) for query in queries]
+        responses = [None] * len(queries)
+        query_map = {id(task): i for i, task in enumerate(tasks)}
+
+        for task in asyncio.as_completed(tasks):
+            response = await task
+            i = query_map[id(task)]
+            responses[i] = response
+            # Print per-query progress immediately
+            print(f"{Color.HEADER}{Color.BOLD}\nQuery {i+1}/{len(queries)}: {queries[i].query}{Color.ENDC}")
+            print(f"  Category: {getattr(queries[i], 'category', 'unknown')}, Complexity: {getattr(queries[i], 'complexity', 'unknown')}")
+            if response.subtasks:
+                for subtask in response.subtasks:
+                    status_color = Color.OKGREEN if subtask.get("status") == "success" else Color.FAIL
+                    print(f"    {status_color}Subtask: {subtask.get('type')} - {subtask.get('description')} | Status: {subtask.get('status')}{Color.ENDC}")
+                    if subtask.get("error"):
+                        print(f"      {Color.FAIL}Error: {subtask.get('error')}{Color.ENDC}")
             else:
-                final_responses.append(response)
-        
-        self.responses = final_responses
-        logger.info(f"Parallel execution completed: {len(final_responses)} responses")
-        return final_responses
+                print(f"    {Color.WARNING}No subtask info available.{Color.ENDC}")
+            sys.stdout.flush()
+
+        self.responses = responses
+        logger.info(f"Parallel execution completed: {len(responses)} responses")
+        return responses
 
     async def _execute_single_query(self, query: Any) -> BotResponse:
         start_time = time.time()
@@ -238,7 +241,8 @@ class BotRunner:
                     "agent_metadata": result.get("metadata", {}),
                     "real_context_used": True,
                     "platform": real_context.get("platform", "unknown")
-                }
+                },
+                subtasks=result.get("subtasks") or result.get("subtask_results") or []
             )
             logger.info(f"Query {query.id} completed in {response_time:.2f}s using real context")
             return response
@@ -252,7 +256,8 @@ class BotRunner:
                 response_time=response_time,
                 timestamp=datetime.utcnow().isoformat(),
                 success=False,
-                metadata={"error": str(e)}
+                metadata={"error": str(e)},
+                subtasks=[]
             )
 
     async def _get_real_context_from_database(self) -> Dict[str, Any]:

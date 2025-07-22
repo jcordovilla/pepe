@@ -214,6 +214,7 @@ class AgentAPI:
                 "success": True,
                 "answer": result.get("response", ""),
                 "sources": result.get("results", []),
+                "subtasks": result.get("subtasks", []),
                 "confidence": result.get("confidence", 0.0),
                 "metadata": {
                     **result.get("metadata", {}),
