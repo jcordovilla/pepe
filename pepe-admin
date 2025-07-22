@@ -54,7 +54,8 @@ class PepeAdminSimplified:
             'vector_store': {
                 'persist_directory': './data/chromadb',
                 'collection_name': 'discord_messages',
-                'embedding_model': 'text-embedding-3-small'
+                'embedding_model': 'msmarco-distilbert-base-v4',
+                'embedding_type': 'sentence_transformers'
             },
             'discord': {
                 'token': os.getenv('DISCORD_TOKEN'),
@@ -737,7 +738,8 @@ class PepeAdminSimplified:
                     vector_config = {
                         "collection_name": "discord_messages", 
                         "persist_directory": "./data/chromadb",
-                        "embedding_model": "text-embedding-3-small",
+                        "embedding_model": "msmarco-distilbert-base-v4",
+                        "embedding_type": "sentence_transformers",
                         "batch_size": 100
                     }
                     vector_store = PersistentVectorStore(vector_config)

@@ -58,7 +58,7 @@ def get_modernized_config() -> Dict[str, Any]:
             }
         },
         
-        # Enhanced OpenAI configuration (for embeddings only)
+        # OpenAI configuration (fallback only - not used by default)
         "openai": {
             "api_key": os.getenv("OPENAI_API_KEY"),
             "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),

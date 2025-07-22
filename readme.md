@@ -271,7 +271,7 @@ Pepe uses a sophisticated multi-agent architecture:
 * **LangGraph**: Multi-agent orchestration and workflow management
 * **ChromaDB**: Vector database for semantic search
 * **Ollama (Llama)**: Local LLM for analysis and generation
-* **OpenAI**: Embeddings only (text-embedding-3-small)
+* **Sentence Transformers**: Local embeddings (msmarco-distilbert-base-v4)
 * **SQLite**: Message storage and metadata
 * **Discord.py**: Bot interface and message handling
 
