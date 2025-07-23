@@ -30,8 +30,8 @@ class DigestAgent(BaseAgent):
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
         
-        # Digest configuration
-        self.max_messages = config.get("max_messages", 50)
+        # Digest configuration - reduced for faster processing
+        self.max_messages = config.get("max_messages", 25)  # Reduced from 50
         self.max_summary_length = config.get("max_summary_length", 250)
         
         logger.info("DigestAgent initialized")
@@ -68,33 +68,52 @@ class DigestAgent(BaseAgent):
         Returns:
             Markdown formatted digest
         """
+        import time
+        start_time = time.time()
+        
         start_str = kwargs.get("start")
         end_str = kwargs.get("end")
         period = kwargs.get("period", "day")
         channel_id = kwargs.get("channel_id")
         channel = kwargs.get("channel")
         
-        # Parse dates
+        # Parse dates - handle None for "all time" queries
         try:
-            start_date = datetime.fromisoformat(start_str) if start_str else datetime.now() - timedelta(days=1)
-            end_date = datetime.fromisoformat(end_str) if end_str else datetime.now()
+            if start_str is None and end_str is None:
+                # "All time" query - no date filtering
+                start_date = None
+                end_date = None
+                logger.info(f"DigestAgent processing digest for all time ({period})")
+            else:
+                # Specific time period query
+                start_date = datetime.fromisoformat(start_str) if start_str else datetime.now() - timedelta(days=1)
+                end_date = datetime.fromisoformat(end_str) if end_str else datetime.now()
+                logger.info(f"DigestAgent processing digest from {start_date} to {end_date} ({period})")
         except ValueError as e:
             logger.error(f"Date parsing error: {e}")
             return f"Error: Invalid date format - {e}"
         
-        logger.info(f"DigestAgent processing digest from {start_date} to {end_date} ({period})")
-        
         try:
             # Get all messages in the period (optionally filter by channel_id or channel_name)
+            logger.info(f"[DigestAgent] Starting message retrieval at {time.time() - start_time:.2f}s")
             messages = await self._get_all_messages(start_date, end_date, channel_id, channel)
+            logger.info(f"[DigestAgent] Message retrieval completed at {time.time() - start_time:.2f}s")
+            
             if not messages:
                 return f"No messages found for the {period} period."
             
             # Generate individual summaries
-            summaries = await self._generate_message_summaries(messages)
+            logger.info(f"[DigestAgent] Starting summary generation at {time.time() - start_time:.2f}s")
+            summaries = await self._generate_message_summaries(messages, period)
+            logger.info(f"[DigestAgent] Summary generation completed at {time.time() - start_time:.2f}s")
             
             # Combine summaries into final digest
+            logger.info(f"[DigestAgent] Starting digest combination at {time.time() - start_time:.2f}s")
             digest = await self._combine_summaries(summaries, period)
+            logger.info(f"[DigestAgent] Digest combination completed at {time.time() - start_time:.2f}s")
+            
+            total_time = time.time() - start_time
+            logger.info(f"[DigestAgent] Total digest generation time: {total_time:.2f}s")
             
             return digest
             
@@ -102,17 +121,20 @@ class DigestAgent(BaseAgent):
             logger.error(f"DigestAgent error: {e}")
             return f"Error generating digest: {str(e)}"
     
-    async def _get_all_messages(self, start_date: datetime, end_date: datetime, channel_id: Optional[str] = None, channel: Optional[str] = None) -> List[Dict[str, Any]]:
+    async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None) -> List[Dict[str, Any]]:
         """Get all messages from the vector store for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
             # Use timestamp_unix (float) for ChromaDB filtering
             start_ts = start_date.timestamp() if start_date else None
             end_ts = end_date.timestamp() if end_date else None
             filters_and = []
+            
+            # Add timestamp filters only if dates are provided
             if start_ts is not None:
                 filters_and.append({"timestamp_unix": {"$gte": start_ts}})
             if end_ts is not None:
                 filters_and.append({"timestamp_unix": {"$lte": end_ts}})
+            
             # Always include channel/forum filter if channel_id is provided
             if channel_id:
                 filters_and.append({"$or": [
@@ -121,16 +143,18 @@ class DigestAgent(BaseAgent):
                 ]})
             elif channel:
                 filters_and.append({"channel_name": channel})
-            # If channel_id is provided but no timestamp, still use $and for channel/forum filter
-            if channel_id and not (start_ts or end_ts):
-                filters = {"$and": [
-                    {"$or": [
-                        {"channel_id": channel_id},
-                        {"forum_channel_id": channel_id}
-                    ]}
-                ]}
+            
+            # Construct final filter
+            if len(filters_and) == 0:
+                # No filters - get all messages
+                filters = {}
+            elif len(filters_and) == 1:
+                # Single filter
+                filters = filters_and[0]
             else:
-                filters = {"$and": filters_and} if len(filters_and) > 1 else (filters_and[0] if filters_and else {})
+                # Multiple filters - use $and
+                filters = {"$and": filters_and}
+                
             logger.info(f"[DigestAgent] FINAL filter_search filters: {filters}")
             results = await self.vector_store.filter_search(
                 filters=filters,
@@ -187,8 +211,159 @@ class DigestAgent(BaseAgent):
             logger.error(f"Error getting high-engagement messages: {e}")
             return []
     
-    async def _generate_message_summaries(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Generate individual summaries for each message."""
+    async def _generate_message_summaries(self, messages: List[Dict[str, Any]], period: str = "day") -> List[Dict[str, Any]]:
+        """Generate summaries for messages with aggressive optimization for large sets."""
+        if not messages:
+            return []
+        
+        # For very large numbers of messages, use ultra-simplified approach
+        if len(messages) > 20:
+            return await self._ultra_simplified_summaries(messages, period)
+        # For medium numbers, use batch approach
+        elif len(messages) > 10:
+            return await self._batch_summarize_messages(messages)
+        else:
+            return await self._individual_summarize_messages(messages)
+    
+    async def _ultra_simplified_summaries(self, messages: List[Dict[str, Any]], period: str = "day") -> List[Dict[str, Any]]:
+        """Generate ultra-simplified summaries for large message sets."""
+        # Take only the first 20 messages to avoid overwhelming the LLM
+        sample_messages = messages[:20]
+        
+        # Create a simple summary in one LLM call
+        summary_texts = []
+        for i, message in enumerate(sample_messages):
+            content = message.get("content", "")
+            author = message.get("author", "Unknown")
+            channel = message.get("channel", "Unknown")
+            
+            # Truncate content
+            if len(content) > 100:
+                content = content[:100] + "..."
+            
+            summary_texts.append(f"{i+1}. [{author}]: {content}")
+        
+        # Adjust prompt based on period
+        if period == "all_time":
+            time_context = "throughout the channel's history"
+            period_description = "all time"
+            focus_instruction = "Focus on recurring themes, key discussions, important topics that have emerged, and the overall community dynamics. Make it comprehensive and informative, reflecting the depth and breadth of discussions that have occurred over time."
+        else:
+            time_context = f"in the {period} period"
+            period_description = period
+            focus_instruction = "Focus on the main topics and key discussions that occurred during this time period. Highlight notable conversations and community engagement."
+        
+        prompt = f"""Summarize these Discord messages in a comprehensive paragraph. Focus on the main topics and key discussions. This is a "{period_description}" summary covering {time_context}, so avoid references to specific dates, times, or "today/yesterday" unless relevant to the {period_description} context:
+
+{chr(10).join(summary_texts)}
+
+Write a detailed, natural paragraph that summarizes the main topics discussed {time_context}. {focus_instruction} Do not include phrases like "Here is a summary" or "This paragraph summarizes" - just write the summary directly."""
+
+        try:
+            response = await self.llm_client.generate(
+                prompt=prompt,
+                max_tokens=500,  # Increased from 200 for more elaborate content
+                temperature=0.1
+            )
+            
+            # Create a single summary entry for all messages
+            return [{
+                "original": {"content": "Multiple messages", "author": "Various users"},
+                "summary": response.strip()
+            }]
+            
+        except Exception as e:
+            logger.error(f"Error in ultra-simplified summary: {e}")
+            # Fallback: create basic summary
+            return [{
+                "original": {"content": "Multiple messages", "author": "Various users"},
+                "summary": f"Generated summary of {len(messages)} messages from various users covering {time_context}."
+            }]
+    
+    async def _batch_summarize_messages(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Summarize messages in batches to reduce LLM calls."""
+        summaries = []
+        
+        # Process messages in batches of 10
+        batch_size = 10
+        for i in range(0, len(messages), batch_size):
+            batch = messages[i:i + batch_size]
+            batch_summaries = await self._summarize_batch(batch, i + 1)
+            summaries.extend(batch_summaries)
+        
+        return summaries
+    
+    async def _summarize_batch(self, messages: List[Dict[str, Any]], batch_num: int) -> List[Dict[str, Any]]:
+        """Summarize a batch of messages in a single LLM call."""
+        # Prepare batch content
+        batch_content = []
+        for i, message in enumerate(messages):
+            content = message.get("content", "")
+            author = message.get("author", "Unknown")
+            channel = message.get("channel", "Unknown")
+            reactions = message.get("reactions", 0)
+            
+            # Truncate content if too long
+            if len(content) > 200:
+                content = content[:200] + "..."
+            
+            batch_content.append(f"{i+1}. [{author} in #{channel}] ({reactions} reactions): {content}")
+        
+        prompt = f"""Summarize these Discord messages in a concise way. For each message, provide a 1-2 sentence summary focusing on the key topic or main point:
+
+{chr(10).join(batch_content)}
+
+Provide summaries in this format:
+1. [summary of message 1]
+2. [summary of message 2]
+...etc"""
+
+        try:
+            response = await self.llm_client.generate(
+                prompt=prompt,
+                max_tokens=500,
+                temperature=0.1
+            )
+            
+            # Parse the response into individual summaries
+            lines = response.strip().split('\n')
+            batch_summaries = []
+            
+            for i, line in enumerate(lines):
+                if i < len(messages):
+                    # Extract summary from numbered line
+                    summary = line.strip()
+                    if summary and summary[0].isdigit():
+                        # Remove the number and dot
+                        summary = summary.split('.', 1)[1].strip() if '.' in summary else summary
+                    
+                    batch_summaries.append({
+                        "original": messages[i],
+                        "summary": summary or f"Message by {messages[i].get('author', 'Unknown')}"
+                    })
+                else:
+                    break
+            
+            # Ensure we have summaries for all messages
+            while len(batch_summaries) < len(messages):
+                msg = messages[len(batch_summaries)]
+                batch_summaries.append({
+                    "original": msg,
+                    "summary": f"Message by {msg.get('author', 'Unknown')} in {msg.get('channel', 'Unknown')}"
+                })
+            
+            return batch_summaries
+            
+        except Exception as e:
+            logger.error(f"Error summarizing batch: {e}")
+            # Fallback: create basic summaries
+            return [{
+                "original": msg,
+                "summary": f"Message by {msg.get('author', 'Unknown')} in {msg.get('channel', 'Unknown')}"
+            } for msg in messages]
+    
+    async def _individual_summarize_messages(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Generate individual summaries for each message (for small batches)."""
         summaries = []
         
         for message in messages:
@@ -203,7 +378,7 @@ class DigestAgent(BaseAgent):
                 continue
         
         return summaries
-    
+
     async def _summarize_message(self, message: Dict[str, Any]) -> str:
         """Generate a summary for a single message."""
         content = message.get("content", "")
@@ -240,13 +415,92 @@ Focus on the key points and main topic. Be concise but informative."""
         if not summaries:
             return f"No content to summarize for the {period} period."
         
-        # Group summaries by theme
-        grouped_summaries = await self._group_by_theme(summaries)
+        # For ultra-simplified summaries (large message sets), return directly
+        if len(summaries) == 1 and summaries[0]["original"].get("content") == "Multiple messages":
+            summary = summaries[0]["summary"]
+            header = self._generate_descriptive_header(period, "digest")
+            return header + summary
         
-        # Generate final digest
-        digest = await self._generate_final_digest(grouped_summaries, period)
+        # For large numbers of summaries, use a simplified approach
+        if len(summaries) > 20:
+            return await self._generate_simplified_digest(summaries, period)
+        else:
+            # Group summaries by theme
+            grouped_summaries = await self._group_by_theme(summaries)
+            # Generate final digest
+            digest = await self._generate_final_digest(grouped_summaries, period)
+            return digest
+    
+    def _generate_descriptive_header(self, period: str, query_type: str = "digest") -> str:
+        """Generate a descriptive header based on the period and query type."""
+        if period == "all_time":
+            period_display = "All Time"
+        elif period == "week":
+            period_display = "Weekly"
+        elif period == "month":
+            period_display = "Monthly"
+        else:
+            period_display = "Daily"
         
-        return digest
+        return f"# 📋 {period_display} {query_type.title()}\n\n"
+    
+    async def _generate_simplified_digest(self, summaries: List[Dict[str, Any]], period: str) -> str:
+        """Generate a simplified digest for large numbers of messages."""
+        # Take a sample of summaries for the digest
+        sample_size = min(15, len(summaries))
+        sample_summaries = summaries[:sample_size]
+        
+        # Create a simple digest without complex grouping
+        summary_texts = []
+        for i, summary_data in enumerate(sample_summaries):
+            summary = summary_data["summary"]
+            author = summary_data["original"].get("author", "Unknown")
+            summary_texts.append(f"{i+1}. {summary} (by {author})")
+        
+        time_context = "throughout the channel's history" if period == "all_time" else f"in the {period} period"
+        
+        # Adjust prompt based on period for more elaborate content
+        if period == "all_time":
+            prompt = f"""Create a comprehensive digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
+
+{chr(10).join(summary_texts)}
+
+Write a detailed, flowing summary covering:
+1. Main topics and themes discussed {time_context}
+2. Key insights or notable discussions that have emerged
+3. Overall activity patterns and community engagement
+4. Recurring themes and long-term trends
+
+Write this as a natural, comprehensive paragraph without meta-instructions. Make it detailed and informative, reflecting the depth of discussion that has occurred {time_context}."""
+        else:
+            prompt = f"""Create a concise digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
+
+{chr(10).join(summary_texts)}
+
+Write a natural, flowing summary covering:
+1. Main topics and themes discussed {time_context}
+2. Key insights or notable discussions that have emerged
+3. Overall activity patterns and community engagement
+
+Write this as a natural paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly."""
+
+        try:
+            digest = await self.llm_client.generate(
+                prompt=prompt,
+                max_tokens=600 if period == "all_time" else 400,  # More tokens for all-time summaries
+                temperature=0.1
+            )
+            
+            # Add descriptive header
+            header = self._generate_descriptive_header(period, "digest")
+            
+            return header + digest.strip()
+            
+        except Exception as e:
+            logger.error(f"Error generating simplified digest: {e}")
+            # Fallback: create basic digest
+            header = self._generate_descriptive_header(period, "digest")
+            return f"{header}Generated digest with {len(summaries)} messages covering {time_context}. Main topics covered: {', '.join([s['summary'][:50] + '...' for s in sample_summaries[:5]])}"
     
     async def _group_by_theme(self, summaries: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
         """Group summaries by theme using LLM."""
@@ -317,14 +571,14 @@ Create a concise, well-organized digest that captures the key discussions and hi
             )
             
             # Add header
-            period_display = period.capitalize()
-            header = f"# 📋 {period_display} Digest\n\n"
+            header = self._generate_descriptive_header(period, "digest")
             
             return header + digest.strip()
             
         except Exception as e:
             logger.error(f"Error generating final digest: {e}")
-            return f"# 📋 {period.capitalize()} Digest\n\nError generating digest: {str(e)}"
+            header = self._generate_descriptive_header(period, "digest")
+            return f"{header}Error generating digest: {str(e)}"
     
     async def process(self, state: AgentState) -> AgentState:
         """Process state through the digest agent."""
@@ -333,13 +587,13 @@ Create a concise, well-organized digest that captures the key discussions and hi
         # Extract date parameters
         start = args.get("start")
         end = args.get("end")
-        period = args.get("period", "day")
+        period = args.get("period", "all_time")
         
-        # If no dates provided, use defaults
+        # If no dates provided, use "all time" instead of defaulting to 24 hours
         if not start:
-            start = (datetime.now() - timedelta(days=1)).isoformat()
+            start = None  # Will be handled in _get_all_messages to get all messages
         if not end:
-            end = datetime.now().isoformat()
+            end = None  # Will be handled in _get_all_messages to get all messages
         
         digest = await self.run(start=start, end=end, period=period)
         

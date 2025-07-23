@@ -9,6 +9,9 @@ agentic architecture integrating battle-tested legacy patterns.
 import os
 import asyncio
 import logging
+import subprocess
+import signal
+import psutil
 from dotenv import load_dotenv
 import discord
 from discord import app_commands
@@ -29,8 +32,62 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def kill_discord_processes():
+    """Kill all running Discord bot processes to prevent conflicts."""
+    try:
+        # Find all Python processes running our bot scripts specifically
+        killed_count = 0
+        
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = proc.info['cmdline']
+                if not cmdline:
+                    continue
+                
+                # Only target Python processes running our specific bot scripts
+                is_python_process = proc.info['name'] and 'python' in proc.info['name'].lower()
+                is_our_bot = any([
+                    'main.py' in arg for arg in cmdline
+                ])
+                
+                if is_python_process and is_our_bot:
+                    # Skip the current process
+                    if proc.pid == os.getpid():
+                        continue
+                    
+                    logger.info(f"🔄 Killing Discord bot process {proc.pid}: {' '.join(cmdline)}")
+                    proc.terminate()
+                    
+                    # Wait a bit for graceful termination
+                    try:
+                        proc.wait(timeout=3)
+                        logger.info(f"✅ Process {proc.pid} terminated gracefully")
+                    except psutil.TimeoutExpired:
+                        logger.warning(f"⚠️ Process {proc.pid} didn't terminate gracefully, force killing")
+                        proc.kill()
+                    
+                    killed_count += 1
+                    
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
+        
+        if killed_count > 0:
+            logger.info(f"🔄 Killed {killed_count} Discord bot processes")
+            # Give a moment for processes to fully terminate
+            import time
+            time.sleep(1)
+        else:
+            logger.info("✅ No other Discord bot processes found")
+            
+    except Exception as e:
+        logger.warning(f"⚠️ Error while killing Discord processes: {e}")
+
+
 async def main():
     """Main function to start the agentic Discord bot."""
+    
+    # Kill any existing Discord bot processes
+    kill_discord_processes()
     
     # Ensure logs directory exists
     os.makedirs('logs', exist_ok=True)

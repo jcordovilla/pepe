@@ -567,20 +567,29 @@ class DiscordInterface:
             logger.warning(f"Failed to update user context: {e}")
     
     async def _check_cache(self, query: str, user_id: int) -> Optional[Dict[str, Any]]:
-        """Check cache for previous response"""
-        if not self.cache:
+        """Check if query result is cached."""
+        if not self.cache_enabled:
             return None
         
-        cache_key = f"discord_query_{user_id}_{hash(query)}"
+        # Don't cache digest queries to avoid stale responses
+        if any(keyword in query.lower() for keyword in ["digest", "key topics", "discussed", "summar", "overview"]):
+            logger.info(f"Cache bypassed for digest query: {query[:50]}...")
+            return None
+        
+        cache_key = f"query:{user_id}:{hash(query)}"
         return await self.cache.get(cache_key)
     
     async def _cache_response(self, query: str, user_id: int, result: Dict[str, Any]):
-        """Cache successful response"""
-        if not self.cache:
+        """Cache query result."""
+        if not self.cache_enabled:
             return
         
-        cache_key = f"discord_query_{user_id}_{hash(query)}"
-        await self.cache.set(cache_key, result, ttl=3600)  # 1 hour cache
+        # Don't cache digest queries to avoid stale responses
+        if any(keyword in query.lower() for keyword in ["digest", "key topics", "discussed", "summar", "overview"]):
+            return
+        
+        cache_key = f"query:{user_id}:{hash(query)}"
+        await self.cache.set(cache_key, result, ttl=3600)  # Cache for 1 hour
     
     async def _store_conversation(
         self,
@@ -815,11 +824,11 @@ class DiscordInterface:
                 # Wait for the query with a timeout
                 messages = await asyncio.wait_for(
                     query_task,
-                    timeout=45.0  # 45 second timeout to be safe - Discord interactions expire at ~3 minutes
+                    timeout=90.0  # Increased timeout to 90 seconds for digest operations
                 )
             except asyncio.TimeoutError:
                 logger.error("❌ Query processing timed out after timeout period")
-                error_msg = "⏰ Your request is taking longer than expected. Please try a simpler query."
+                error_msg = "⏰ Your request is taking longer than expected (90s timeout). Please try a simpler query or a shorter time period."
                 query_task.cancel()
                 
                 # Try to send a timeout message

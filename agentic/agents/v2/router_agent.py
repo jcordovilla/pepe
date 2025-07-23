@@ -7,7 +7,7 @@ Replaces QueryInterpreter + Planner with a simpler, more direct approach.
 
 import logging
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
@@ -166,13 +166,32 @@ Respond with ONLY the agent name (qa, stats, digest, trend, or structure)."""
             else:
                 args["granularity"] = "day"
         elif next_agent == "digest":
-            # Extract period from command
+            # Extract period from command and set appropriate date ranges
+            now = datetime.utcnow()
+            
             if "week" in command.lower():
                 args["period"] = "week"
+                args["start"] = (now - timedelta(days=7)).isoformat()
+                args["end"] = now.isoformat()
             elif "month" in command.lower():
                 args["period"] = "month"
-            else:
+                args["start"] = (now - timedelta(days=30)).isoformat()
+                args["end"] = now.isoformat()
+            elif "today" in command.lower():
                 args["period"] = "day"
+                # Set start to beginning of today (UTC)
+                start_of_day = now.replace(hour=0, minute=0, second=0, microsecond=0)
+                args["start"] = start_of_day.isoformat()
+                args["end"] = now.isoformat()
+            elif "yesterday" in command.lower():
+                args["period"] = "day"
+                # Set start to beginning of yesterday (UTC)
+                start_of_yesterday = (now - timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+                end_of_yesterday = start_of_yesterday.replace(hour=23, minute=59, second=59, microsecond=999999)
+                args["start"] = start_of_yesterday.isoformat()
+                args["end"] = end_of_yesterday.isoformat()
+            else:
+                args["period"] = "all_time"  # Default to all time instead of day
         elif next_agent == "trend":
             # Extract number of topics
             args["k"] = 5  # Default to 5 topics
