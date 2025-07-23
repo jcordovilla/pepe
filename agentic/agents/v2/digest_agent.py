@@ -6,6 +6,8 @@ Creates periodic digests and summaries of Discord activity.
 """
 
 import logging
+import sqlite3
+from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 import re
@@ -30,9 +32,17 @@ class DigestAgent(BaseAgent):
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
         
-        # Digest configuration - reduced for faster processing
-        self.max_messages = config.get("max_messages", 25)  # Reduced from 50
+        # Digest configuration - adaptive limits based on time period
+        self.base_max_messages = config.get("max_messages", 25)
         self.max_summary_length = config.get("max_summary_length", 250)
+        
+        # Adaptive message limits for different time periods
+        self.period_limits = {
+            "day": 25,
+            "week": 100,  # Increased for weekly digests
+            "month": 200,  # Increased for monthly digests
+            "all_time": 150
+        }
         
         logger.info("DigestAgent initialized")
     
@@ -96,20 +106,32 @@ class DigestAgent(BaseAgent):
         try:
             # Get all messages in the period (optionally filter by channel_id or channel_name)
             logger.info(f"[DigestAgent] Starting message retrieval at {time.time() - start_time:.2f}s")
-            messages = await self._get_all_messages(start_date, end_date, channel_id, channel)
+            messages = await self._get_all_messages(start_date, end_date, channel_id, channel, period)
             logger.info(f"[DigestAgent] Message retrieval completed at {time.time() - start_time:.2f}s")
             
-            if not messages:
-                return f"No messages found for the {period} period."
+            # Get resources for the period
+            logger.info(f"[DigestAgent] Starting resource retrieval at {time.time() - start_time:.2f}s")
+            resources = await self._get_resources_for_period(start_date, end_date, channel_id, channel)
+            logger.info(f"[DigestAgent] Resource retrieval completed at {time.time() - start_time:.2f}s")
+            
+            # Track whether resources were filtered by channel
+            # Check if we have channel_name or can map channel_id to channel_name
+            resolved_channel_name = channel
+            if not channel and channel_id:
+                resolved_channel_name = await self._get_channel_name_from_id(channel_id)
+            channel_filtered = bool(resolved_channel_name)
+            
+            if not messages and not resources:
+                return f"No messages or resources found for the {period} period."
             
             # Generate individual summaries
             logger.info(f"[DigestAgent] Starting summary generation at {time.time() - start_time:.2f}s")
             summaries = await self._generate_message_summaries(messages, period)
             logger.info(f"[DigestAgent] Summary generation completed at {time.time() - start_time:.2f}s")
             
-            # Combine summaries into final digest
+            # Combine summaries and resources into final digest
             logger.info(f"[DigestAgent] Starting digest combination at {time.time() - start_time:.2f}s")
-            digest = await self._combine_summaries(summaries, period)
+            digest = await self._combine_summaries_with_resources(summaries, resources, period, channel_filtered)
             logger.info(f"[DigestAgent] Digest combination completed at {time.time() - start_time:.2f}s")
             
             total_time = time.time() - start_time
@@ -121,9 +143,12 @@ class DigestAgent(BaseAgent):
             logger.error(f"DigestAgent error: {e}")
             return f"Error generating digest: {str(e)}"
     
-    async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None) -> List[Dict[str, Any]]:
+    async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None, period: str = "day") -> List[Dict[str, Any]]:
         """Get all messages from the vector store for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
+            # Determine adaptive message limit based on period
+            max_messages = self.period_limits.get(period, self.base_max_messages)
+            
             # Use timestamp_unix (float) for ChromaDB filtering
             start_ts = start_date.timestamp() if start_date else None
             end_ts = end_date.timestamp() if end_date else None
@@ -144,6 +169,9 @@ class DigestAgent(BaseAgent):
             elif channel:
                 filters_and.append({"channel_name": channel})
             
+            # Filter out bot messages for digest queries
+            filters_and.append({"author_bot": {"$ne": True}})
+            
             # Construct final filter
             if len(filters_and) == 0:
                 # No filters - get all messages
@@ -156,28 +184,214 @@ class DigestAgent(BaseAgent):
                 filters = {"$and": filters_and}
                 
             logger.info(f"[DigestAgent] FINAL filter_search filters: {filters}")
-            results = await self.vector_store.filter_search(
-                filters=filters,
-                k=self.max_messages,
-                sort_by="timestamp"
-            )
-            logger.info(f"[DigestAgent] Retrieved {len(results)} messages from vector store.")
-            for i, result in enumerate(results[:3]):
-                logger.info(f"[DigestAgent] Message {i+1}: channel_id={result.get('channel_id')}, forum_channel_id={result.get('forum_channel_id')}, content={result.get('content', '')[:60]}")
-            messages = []
-            for result in results:
-                messages.append({
-                    "content": result.get("content", ""),
-                    "metadata": result,
-                    "permalink": result.get("jump_url", ""),
-                    "reactions": result.get("total_reactions", 0),
-                    "author": result.get("author_username", "Unknown"),
-                    "channel": result.get("channel_name", "Unknown")
-                })
-            return messages[:self.max_messages]
+            
+            # For cross-server digests (no channel filter), use smarter retrieval
+            if not channel_id and not channel and period in ["week", "month", "all_time"]:
+                messages = await self._get_cross_server_messages(filters, max_messages, period)
+            else:
+                # Single channel or daily digest - use standard approach
+                results = await self.vector_store.filter_search(
+                    filters=filters,
+                    k=max_messages,
+                    sort_by="timestamp"
+                )
+                messages = self._process_results(results)
+            
+            logger.info(f"[DigestAgent] Retrieved {len(messages)} messages from vector store for {period} period.")
+            for i, message in enumerate(messages[:3]):
+                logger.info(f"[DigestAgent] Message {i+1}: channel={message.get('channel')}, content={message.get('content', '')[:60]}")
+            
+            return messages
         except Exception as e:
             logger.error(f"Error getting messages: {e}")
             return []
+    
+    async def _get_cross_server_messages(self, filters: Dict[str, Any], max_messages: int, period: str) -> List[Dict[str, Any]]:
+        """Get representative messages from multiple channels for cross-server digests."""
+        try:
+            # Strategy: Get high-engagement messages first, then fill with recent messages from different channels
+            
+            # Step 1: Get high-engagement messages (prioritize reactions)
+            high_engagement_results = await self.vector_store.filter_search(
+                filters=filters,
+                k=max_messages // 2,  # Half from high engagement
+                sort_by="total_reactions"
+            )
+            
+            # Step 2: Get recent messages from different channels
+            recent_results = await self.vector_store.filter_search(
+                filters=filters,
+                k=max_messages,  # Get more to ensure channel diversity
+                sort_by="timestamp"
+            )
+            
+            # Step 3: Combine and deduplicate, ensuring channel diversity
+            all_messages = self._process_results(high_engagement_results + recent_results)
+            
+            # Step 4: Ensure channel diversity by sampling from different channels
+            diverse_messages = self._ensure_channel_diversity(all_messages, max_messages, period)
+            
+            return diverse_messages
+            
+        except Exception as e:
+            logger.error(f"Error in cross-server message retrieval: {e}")
+            # Fallback to standard retrieval
+            results = await self.vector_store.filter_search(
+                filters=filters,
+                k=max_messages,
+                sort_by="timestamp"
+            )
+            return self._process_results(results)
+    
+    async def _get_channel_name_from_id(self, channel_id: str) -> Optional[str]:
+        """Get channel name from channel ID using the discord_messages database."""
+        try:
+            db_path = "data/discord_messages.db"
+            if not Path(db_path).exists():
+                logger.warning("Discord messages database not found for channel lookup")
+                return None
+            
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            
+            # Query for channel name
+            cursor.execute("SELECT DISTINCT channel_name FROM messages WHERE channel_id = ? LIMIT 1", (channel_id,))
+            result = cursor.fetchone()
+            
+            conn.close()
+            
+            if result:
+                channel_name = result[0]
+                logger.info(f"[DigestAgent] Mapped channel_id {channel_id} to channel_name: {channel_name}")
+                return channel_name
+            else:
+                logger.warning(f"[DigestAgent] No channel name found for channel_id: {channel_id}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error looking up channel name for channel_id {channel_id}: {e}")
+            return None
+    
+    async def _get_resources_for_period(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel_name: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get resources from the enhanced resources database for the given time period and channel."""
+        try:
+            db_path = "data/enhanced_resources.db"
+            if not Path(db_path).exists():
+                logger.warning("Enhanced resources database not found")
+                return []
+            
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            
+            # Build query conditions
+            conditions = []
+            params = []
+            
+            # Date filtering
+            if start_date:
+                conditions.append("timestamp >= ?")
+                params.append(start_date.strftime("%Y-%m-%d"))
+            if end_date:
+                conditions.append("timestamp <= ?")
+                params.append(end_date.strftime("%Y-%m-%d"))
+            
+            # Channel filtering - prioritize channel_name, but map channel_id if needed
+            resolved_channel_name = channel_name
+            if not channel_name and channel_id:
+                # Try to map channel_id to channel_name
+                resolved_channel_name = await self._get_channel_name_from_id(channel_id)
+            
+            if resolved_channel_name:
+                conditions.append("channel_name = ?")
+                params.append(resolved_channel_name)
+                logger.info(f"[DigestAgent] Filtering resources by channel_name: {resolved_channel_name}")
+            elif channel_id:
+                logger.warning(f"[DigestAgent] Could not map channel_id {channel_id} to channel_name - getting all resources for the time period")
+            
+            # Build the query
+            query = "SELECT * FROM resources"
+            if conditions:
+                query += " WHERE " + " AND ".join(conditions)
+            query += " ORDER BY quality_score DESC, timestamp DESC"
+            
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+            
+            # Get column names
+            columns = [description[0] for description in cursor.description]
+            
+            # Convert to list of dictionaries
+            resources = []
+            for row in rows:
+                resource = dict(zip(columns, row))
+                resources.append(resource)
+            
+            conn.close()
+            
+            logger.info(f"[DigestAgent] Retrieved {len(resources)} resources from database")
+            return resources
+            
+        except Exception as e:
+            logger.error(f"Error getting resources from database: {e}")
+            return []
+    
+    def _process_results(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Process vector store results into message format."""
+        messages = []
+        for result in results:
+            # Prefer display_name over username for better user identification
+            author_display_name = result.get("author_display_name", "")
+            author_username = result.get("author_username", "")
+            author = author_display_name if author_display_name else author_username if author_username else "Unknown"
+            
+            messages.append({
+                "content": result.get("content", ""),
+                "metadata": result,
+                "permalink": result.get("jump_url", ""),
+                "reactions": result.get("total_reactions", 0),
+                "author": author,
+                "channel": result.get("channel_name", "Unknown"),
+                "channel_id": result.get("channel_id", "")
+            })
+        return messages
+    
+    def _ensure_channel_diversity(self, messages: List[Dict[str, Any]], max_messages: int, period: str) -> List[Dict[str, Any]]:
+        """Ensure messages come from diverse channels for better representation."""
+        if not messages:
+            return messages
+        
+        # Group messages by channel
+        channels = {}
+        for message in messages:
+            channel_id = message.get("channel_id", "")
+            if channel_id not in channels:
+                channels[channel_id] = []
+            channels[channel_id].append(message)
+        
+        # Calculate how many messages to take from each channel
+        num_channels = len(channels)
+        if num_channels == 0:
+            return messages[:max_messages]
+        
+        # For weekly/monthly digests, ensure we get messages from multiple channels
+        if period in ["week", "month"]:
+            messages_per_channel = max(3, max_messages // num_channels)  # At least 3 per channel
+        else:
+            messages_per_channel = max_messages // num_channels
+        
+        # Sample from each channel
+        diverse_messages = []
+        for channel_id, channel_messages in channels.items():
+            # Sort by reactions first, then by recency
+            sorted_messages = sorted(channel_messages, 
+                                   key=lambda x: (x.get("reactions", 0), x.get("metadata", {}).get("timestamp", "")), 
+                                   reverse=True)
+            diverse_messages.extend(sorted_messages[:messages_per_channel])
+        
+        # Sort final list by reactions and recency, then limit
+        diverse_messages.sort(key=lambda x: (x.get("reactions", 0), x.get("metadata", {}).get("timestamp", "")), reverse=True)
+        
+        return diverse_messages[:max_messages]
     
     async def _get_high_engagement_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
         """Get high-engagement messages for trending only."""
@@ -186,10 +400,17 @@ class DigestAgent(BaseAgent):
                 reaction="",
                 k=self.max_messages,
                 filters={
-                    "timestamp": {
-                        "$gte": start_date.isoformat(),
-                        "$lte": end_date.isoformat()
-                    }
+                    "$and": [
+                        {
+                            "timestamp": {
+                                "$gte": start_date.isoformat(),
+                                "$lte": end_date.isoformat()
+                            }
+                        },
+                        {
+                            "author_bot": {"$ne": True}
+                        }
+                    ]
                 },
                 sort_by="total_reactions"
             )
@@ -198,13 +419,19 @@ class DigestAgent(BaseAgent):
                 reactions = result.get("metadata", {}).get("reactions", [])
                 total_reactions = sum(reaction.get("count", 0) for reaction in reactions)
                 if total_reactions >= 3:  # Only for trending
+                    # Prefer display_name over username for better user identification
+                    metadata = result.get("metadata", {})
+                    author_display_name = metadata.get("author_display_name", "")
+                    author_username = metadata.get("author_username", "")
+                    author = author_display_name if author_display_name else author_username if author_username else "Unknown"
+                    
                     high_engagement.append({
                         "content": result.get("content", ""),
-                        "metadata": result.get("metadata", {}),
-                        "permalink": result.get("metadata", {}).get("permalink", ""),
+                        "metadata": metadata,
+                        "permalink": metadata.get("permalink", ""),
                         "reactions": total_reactions,
-                        "author": result.get("metadata", {}).get("author_name", "Unknown"),
-                        "channel": result.get("metadata", {}).get("channel_name", "Unknown")
+                        "author": author,
+                        "channel": metadata.get("channel_name", "Unknown")
                     })
             return high_engagement[:self.max_messages]
         except Exception as e:
@@ -279,6 +506,57 @@ Write a detailed, natural paragraph that summarizes the main topics discussed {t
                 "original": {"content": "Multiple messages", "author": "Various users"},
                 "summary": f"Generated summary of {len(messages)} messages from various users covering {time_context}."
             }]
+    
+    async def _ultra_simplified_summaries_no_header(self, messages: List[Dict[str, Any]], period: str = "day") -> str:
+        """Generate ultra-simplified summary without header (for use in combined digests)."""
+        if not messages:
+            return "No messages found for this period."
+        
+        # Take only the first 20 messages to avoid overwhelming the LLM
+        sample_messages = messages[:20]
+        
+        # Create a simple summary in one LLM call
+        summary_texts = []
+        for i, message in enumerate(sample_messages):
+            content = message.get("content", "")
+            author = message.get("author", "Unknown")
+            channel = message.get("channel", "Unknown")
+            
+            # Truncate content
+            if len(content) > 100:
+                content = content[:100] + "..."
+            
+            summary_texts.append(f"{i+1}. [{author}]: {content}")
+        
+        # Adjust prompt based on period
+        if period == "all_time":
+            time_context = "throughout the channel's history"
+            period_description = "all time"
+            focus_instruction = "Focus on recurring themes, key discussions, important topics that have emerged, and the overall community dynamics. Make it comprehensive and informative, reflecting the depth and breadth of discussions that have occurred over time."
+        else:
+            time_context = f"in the {period} period"
+            period_description = period
+            focus_instruction = "Focus on the main topics and key discussions that occurred during this time period. Highlight notable conversations and community engagement."
+        
+        prompt = f"""Summarize these Discord messages in a comprehensive paragraph. Focus on the main topics and key discussions. This is a "{period_description}" summary covering {time_context}, so avoid references to specific dates, times, or "today/yesterday" unless relevant to the {period_description} context:
+
+{chr(10).join(summary_texts)}
+
+Write a detailed, natural paragraph that summarizes the main topics discussed {time_context}. {focus_instruction} Do not include phrases like "Here is a summary" or "This paragraph summarizes" - just write the summary directly."""
+
+        try:
+            response = await self.llm_client.generate(
+                prompt=prompt,
+                max_tokens=800,  # Increased for more elaborate content
+                temperature=0.1
+            )
+            
+            return response.strip()
+            
+        except Exception as e:
+            logger.error(f"Error in ultra-simplified summary: {e}")
+            # Fallback: create basic summary
+            return f"Generated summary of {len(messages)} messages from various users covering {time_context}."
     
     async def _batch_summarize_messages(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Summarize messages in batches to reduce LLM calls."""
@@ -473,21 +751,23 @@ Write a detailed, flowing summary covering:
 
 Write this as a natural, comprehensive paragraph without meta-instructions. Make it detailed and informative, reflecting the depth of discussion that has occurred {time_context}."""
         else:
-            prompt = f"""Create a concise digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
+            prompt = f"""Create a comprehensive digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
 
 {chr(10).join(summary_texts)}
 
-Write a natural, flowing summary covering:
+Write a detailed, flowing summary covering:
 1. Main topics and themes discussed {time_context}
 2. Key insights or notable discussions that have emerged
 3. Overall activity patterns and community engagement
+4. Notable contributions and community highlights
+5. Emerging trends or patterns in the discussions
 
-Write this as a natural paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly."""
+Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and engaging, capturing the full scope of activity."""
 
         try:
             digest = await self.llm_client.generate(
                 prompt=prompt,
-                max_tokens=600 if period == "all_time" else 400,  # More tokens for all-time summaries
+                max_tokens=800 if period == "all_time" else 600,  # More tokens for more elaborate content
                 temperature=0.1
             )
             
@@ -501,6 +781,63 @@ Write this as a natural paragraph without meta-instructions like "Here is a summ
             # Fallback: create basic digest
             header = self._generate_descriptive_header(period, "digest")
             return f"{header}Generated digest with {len(summaries)} messages covering {time_context}. Main topics covered: {', '.join([s['summary'][:50] + '...' for s in sample_summaries[:5]])}"
+    
+    async def _generate_simplified_digest_no_header(self, summaries: List[Dict[str, Any]], period: str) -> str:
+        """Generate a simplified digest without header (for use in combined digests)."""
+        # Take a sample of summaries for the digest
+        sample_size = min(15, len(summaries))
+        sample_summaries = summaries[:sample_size]
+        
+        # Create a simple digest without complex grouping
+        summary_texts = []
+        for i, summary_data in enumerate(sample_summaries):
+            summary = summary_data["summary"]
+            author = summary_data["original"].get("author", "Unknown")
+            summary_texts.append(f"{i+1}. {summary} (by {author})")
+        
+        time_context = "throughout the channel's history" if period == "all_time" else f"in the {period} period"
+        
+        # Adjust prompt based on period for more elaborate content
+        if period == "all_time":
+            prompt = f"""Create a comprehensive digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
+
+{chr(10).join(summary_texts)}
+
+Write a detailed, flowing summary covering:
+1. Main topics and themes discussed {time_context}
+2. Key insights or notable discussions that have emerged
+3. Overall activity patterns and community engagement
+4. Recurring themes and long-term trends
+
+Write this as a natural, comprehensive paragraph without meta-instructions. Make it detailed and informative, reflecting the depth of discussion that has occurred {time_context}."""
+        else:
+            prompt = f"""Create a comprehensive digest of these Discord messages {time_context}. Focus on the main topics and key discussions. Since this covers {time_context}, avoid references to specific dates, times, or "today/yesterday":
+
+{chr(10).join(summary_texts)}
+
+Write a detailed, flowing summary covering:
+1. Main topics and themes discussed {time_context}
+2. Key insights or notable discussions that have emerged
+3. Overall activity patterns and community engagement
+4. Notable contributions and community highlights
+5. Emerging trends or patterns in the discussions
+
+Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and engaging, capturing the full scope of activity."""
+
+        try:
+            digest = await self.llm_client.generate(
+                prompt=prompt,
+                max_tokens=800 if period == "all_time" else 600,  # More tokens for more elaborate content
+                temperature=0.1
+            )
+            
+            return digest.strip()
+            
+        except Exception as e:
+            logger.error(f"Error generating simplified digest: {e}")
+            # Fallback: create basic digest
+            time_context = "throughout the channel's history" if period == "all_time" else f"in the {period} period"
+            return f"Generated digest with {len(summaries)} messages covering {time_context}. Main topics covered: {', '.join([s['summary'][:50] + '...' for s in sample_summaries[:5]])}"
     
     async def _group_by_theme(self, summaries: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
         """Group summaries by theme using LLM."""
@@ -579,6 +916,90 @@ Create a concise, well-organized digest that captures the key discussions and hi
             logger.error(f"Error generating final digest: {e}")
             header = self._generate_descriptive_header(period, "digest")
             return f"{header}Error generating digest: {str(e)}"
+    
+    async def _combine_summaries_with_resources(self, summaries: List[Dict[str, Any]], resources: List[Dict[str, Any]], period: str, channel_filtered: bool = True) -> str:
+        """Combine message summaries and resources into a comprehensive digest."""
+        try:
+            # Generate header
+            header = self._generate_descriptive_header(period, "digest")
+            
+            # Start building the digest
+            digest_parts = []
+            
+            # Add message summaries if available
+            if summaries:
+                if len(summaries) <= 15:
+                    # Use simplified digest for smaller sets - but remove the header to avoid duplication
+                    message_digest = await self._generate_simplified_digest_no_header(summaries, period)
+                    digest_parts.append(message_digest)
+                else:
+                    # Use ultra-simplified for large sets - but remove the header to avoid duplication
+                    message_digest = await self._ultra_simplified_summaries_no_header(summaries, period)
+                    digest_parts.append(message_digest)
+            
+            # Add resources section if available
+            if resources:
+                resources_section = await self._format_resources_section(resources, period, channel_filtered)
+                digest_parts.append(resources_section)
+            
+            # Combine all parts with header at the top
+            full_digest = header + "\n\n".join(digest_parts)
+            
+            return full_digest
+            
+        except Exception as e:
+            logger.error(f"Error combining summaries with resources: {e}")
+            return f"Error generating digest: {str(e)}"
+    
+    async def _format_resources_section(self, resources: List[Dict[str, Any]], period: str, channel_filtered: bool = True) -> str:
+        """Format resources into a digest section."""
+        try:
+            if not resources:
+                return ""
+            
+            # Sort resources by quality score
+            sorted_resources = sorted(resources, key=lambda x: x.get('quality_score', 0), reverse=True)
+            
+            # Limit to top resources
+            top_resources = sorted_resources[:5]  # Show top 5 resources
+            
+            # Group by category
+            categories = {}
+            for resource in top_resources:
+                category = resource.get('category', 'Other')
+                if category not in categories:
+                    categories[category] = []
+                categories[category].append(resource)
+            
+            # Build resources section
+            resources_text = ["## 📚 Shared Resources\n"]
+            
+            # Add note if resources weren't filtered by channel
+            if not channel_filtered:
+                resources_text.append("*Note: Resources shown are from all channels for this time period*\n\n")
+            
+            for category, category_resources in categories.items():
+                resources_text.append(f"### {category}")
+                
+                for resource in category_resources:
+                    url = resource.get('url', '')
+                    title = resource.get('description', '')[:100] + "..." if len(resource.get('description', '')) > 100 else resource.get('description', '')
+                    author = resource.get('author', 'Unknown')
+                    quality = resource.get('quality_score', 0)
+                    channel = resource.get('channel_name', 'Unknown')
+                    
+                    # Format quality as stars
+                    quality_stars = "⭐" * int(quality * 5) if quality > 0 else "⭐"
+                    
+                    resources_text.append(f"• **{title}**")
+                    resources_text.append(f"  📍 {channel} | 👤 {author} | {quality_stars}")
+                    resources_text.append(f"  🔗 {url}\n")
+            
+            return "\n".join(resources_text)
+            
+        except Exception as e:
+            logger.error(f"Error formatting resources section: {e}")
+            return "## 📚 Shared Resources\n*Error formatting resources*"
     
     async def process(self, state: AgentState) -> AgentState:
         """Process state through the digest agent."""

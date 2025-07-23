@@ -226,7 +226,11 @@ class AnalysisAgent(BaseAgent):
             
             for result in search_results:
                 content = result.get("content", "")
-                author = result.get("author", {}).get("username", "unknown")
+                # Prefer display_name over username for better user identification
+                author_info = result.get("author", {})
+                author_display_name = author_info.get("display_name", "")
+                author_username = author_info.get("username", "")
+                author = author_display_name if author_display_name else author_username if author_username else "unknown"
                 
                 # Extract skills using patterns
                 found_skills = self._extract_skills_from_text(content)
@@ -288,7 +292,11 @@ class AnalysisAgent(BaseAgent):
         content_parts = []
         
         for result in results:
-            author = result.get("author", {}).get("username", "Unknown")
+            # Prefer display_name over username for better user identification
+            author_info = result.get("author", {})
+            author_display_name = author_info.get("display_name", "")
+            author_username = author_info.get("username", "")
+            author = author_display_name if author_display_name else author_username if author_username else "Unknown"
             timestamp = result.get("timestamp", "")
             content = result.get("content", "")
             
@@ -671,13 +679,19 @@ Need help with a specific query? Try asking me to search for topics, summarize d
             top_result = results[0] if results else {}
             
             # Generate contextual response
+            # Prefer display_name over username for better user identification
+            top_author_info = top_result.get('author', {})
+            top_author_display_name = top_author_info.get('display_name', '')
+            top_author_username = top_author_info.get('username', '')
+            top_author = top_author_display_name if top_author_display_name else top_author_username if top_author_username else 'Unknown'
+            
             if result_count == 1:
                 response = f"I found 1 message about '{query}':\n\n"
-                response += f"**{top_result.get('author', {}).get('username', 'Unknown')}** in #{top_result.get('channel_name', 'unknown')}:\n"
+                response += f"**{top_author}** in #{top_result.get('channel_name', 'unknown')}:\n"
                 response += f"{top_result.get('content', '')[:200]}..."
             else:
                 response = f"I found {result_count} messages about '{query}'. Here's the most relevant one:\n\n"
-                response += f"**{top_result.get('author', {}).get('username', 'Unknown')}** in #{top_result.get('channel_name', 'unknown')}:\n"
+                response += f"**{top_author}** in #{top_result.get('channel_name', 'unknown')}:\n"
                 response += f"{top_result.get('content', '')[:200]}..."
                 
                 if result_count > 3:

@@ -383,7 +383,10 @@ class ResultAggregator(BaseAgent):
                 for i, result in enumerate(search_results[:5]):  # Show first 5 results
                     content = result.get("content", "")
                     metadata = result.get("metadata", {})
-                    author = metadata.get("author_username", metadata.get("author", "Unknown"))
+                    # Prefer display_name over username for better user identification
+                    author_display_name = metadata.get("author_display_name", "")
+                    author_username = metadata.get("author_username", "")
+                    author = author_display_name if author_display_name else author_username if author_username else metadata.get("author", "Unknown")
                     channel = metadata.get("channel_name", "Unknown")
                     timestamp = metadata.get("timestamp", "")
                     

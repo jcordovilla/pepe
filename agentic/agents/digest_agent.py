@@ -176,7 +176,7 @@ class DigestAgent(BaseAgent):
                 "start_date": start_date,
                 "end_date": end_date,
                 "total_messages": len(search_results),
-                "unique_users": len(set(msg.get("author", {}).get("username", "") for msg in search_results)),
+                "unique_users": len(set(msg.get("author", {}).get("display_name", msg.get("author", {}).get("username", "")) for msg in search_results)),
                 "channels_summary": await self._summarize_channels(search_results),
                 "user_activity": await self._analyze_user_activity(search_results),
                 "engagement_metrics": await self._calculate_engagement_metrics(search_results),
@@ -227,7 +227,11 @@ class DigestAgent(BaseAgent):
         
         for msg in messages:
             channel = msg.get("channel_name", "unknown")
-            user = msg.get("author", {}).get("username", "unknown")
+            # Prefer display_name over username for better user identification
+            author_info = msg.get("author", {})
+            user_display_name = author_info.get("display_name", "")
+            user_username = author_info.get("username", "")
+            user = user_display_name if user_display_name else user_username if user_username else "unknown"
             
             channel_counts[channel] += 1
             if channel not in channel_users:
@@ -246,7 +250,11 @@ class DigestAgent(BaseAgent):
         user_channels = {}
         
         for msg in messages:
-            user = msg.get("author", {}).get("username", "unknown")
+            # Prefer display_name over username for better user identification
+            author_info = msg.get("author", {})
+            user_display_name = author_info.get("display_name", "")
+            user_username = author_info.get("username", "")
+            user = user_display_name if user_display_name else user_username if user_username else "unknown"
             channel = msg.get("channel_name", "unknown")
             
             user_counts[user] += 1
@@ -294,9 +302,15 @@ class DigestAgent(BaseAgent):
             attachment_count = len(msg.get("attachments", []))
             engagement_score = reaction_count + (attachment_count * 2)
             if engagement_score >= self.trending_threshold:
+                # Prefer display_name over username for better user identification
+                author_info = msg.get("author", {})
+                author_display_name = author_info.get("display_name", "")
+                author_username = author_info.get("username", "")
+                author = author_display_name if author_display_name else author_username if author_username else "unknown"
+                
                 trending.append({
                     "content": msg.get("content", "")[:200],
-                    "author": msg.get("author", {}).get("username", "unknown"),
+                    "author": author,
                     "channel": msg.get("channel_name", "unknown"),
                     "timestamp": msg.get("timestamp", ""),
                     "engagement_score": engagement_score,
