@@ -133,6 +133,10 @@ class DiscordInterface:
         """Set up the Discord bot instance"""
         if self.bot is not None:
             return self.bot
+        
+        # Initialize AgentAPI if not already done
+        if not hasattr(self.agent_api, 'memory'):
+            await self.agent_api.initialize()
             
         # Initialize async services if needed
         if hasattr(self, 'data_manager') and self.data_manager:
@@ -260,6 +264,10 @@ class DiscordInterface:
             # Process through agentic system
             logger.info(f"⏳ Starting agent API query processing at {datetime.now().isoformat()}")
             query_start_time = datetime.now()
+            
+            # Ensure AgentAPI is initialized
+            if not hasattr(self.agent_api, 'memory'):
+                await self.agent_api.initialize()
             
             # Build context for agent
             agent_context = {
@@ -538,18 +546,25 @@ class DiscordInterface:
     
     async def _update_user_context(self, discord_context: DiscordContext):
         """Update user context in the system"""
-        context_data = {
-            "platform": "discord",
-            "username": discord_context.username,
-            "channel_id": discord_context.channel_id,
-            "guild_id": discord_context.guild_id,
-            "last_activity": discord_context.timestamp.isoformat()
-        }
-        
-        await self.agent_api.update_user_context(
-            str(discord_context.user_id),
-            context_data
-        )
+        try:
+            # Ensure AgentAPI is initialized
+            if not hasattr(self.agent_api, 'memory'):
+                await self.agent_api.initialize()
+                
+            context_data = {
+                "platform": "discord",
+                "username": discord_context.username,
+                "channel_id": discord_context.channel_id,
+                "guild_id": discord_context.guild_id,
+                "last_activity": discord_context.timestamp.isoformat()
+            }
+            
+            await self.agent_api.update_user_context(
+                str(discord_context.user_id),
+                context_data
+            )
+        except Exception as e:
+            logger.warning(f"Failed to update user context: {e}")
     
     async def _check_cache(self, query: str, user_id: int) -> Optional[Dict[str, Any]]:
         """Check cache for previous response"""
