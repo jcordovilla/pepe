@@ -29,7 +29,7 @@ def get_modernized_config() -> Dict[str, Any]:
             "fast_model": os.getenv("LLM_FAST_MODEL", "phi3:mini"),  # Fast model for resource detection
             "max_tokens": int(os.getenv("LLM_MAX_TOKENS", "2048")),
             "temperature": float(os.getenv("LLM_TEMPERATURE", "0.1")),
-            "timeout": int(os.getenv("LLM_TIMEOUT", "30")),
+                                  "timeout": int(os.getenv("LLM_TIMEOUT", "120")),  # Increased timeout for 70B model
             "retry_attempts": int(os.getenv("LLM_RETRY_ATTEMPTS", "3")),
             "fallback_model": os.getenv("LLM_FALLBACK_MODEL", "llama2:latest")  # Fallback if primary model fails
         },
@@ -99,6 +99,7 @@ def get_modernized_config() -> Dict[str, Any]:
                 "detailed_search": 25,
                 "comprehensive_search": 50,
                 "analysis": 75,
+                "skill_experience": 100,  # Higher k for skill/experience queries
                 "trend_analysis": 100,
                 "digest": 150,
                 "cross_server_analysis": 200
@@ -142,6 +143,10 @@ def get_modernized_config() -> Dict[str, Any]:
                 "user_analysis": [
                     "users", "people", "who", "active users", "engagement",
                     "participation", "contributors", "members"
+                ],
+                "skill_experience": [
+                    "experience", "skills", "background", "expertise", "knowledge",
+                    "professional", "certified", "worked", "career", "qualifications"
                 ],
                 "topic_analysis": [
                     "topics", "discussions", "conversations", "themes",

@@ -585,8 +585,14 @@ class PersistentVectorStore:
                         metadata = metadatas[i] if i < len(metadatas) else {}
                         distance = distances[i] if i < len(distances) else 1.0
                         
-                        # Convert distance to similarity score (0-1, higher is better)
-                        similarity = max(0.0, 1.0 - distance)
+                        # Convert distance to similarity score using the same logic as _process_search_results
+                        # ChromaDB returns L2 distances which can be very large
+                        if distance > 100:
+                            # For very large distances, use a more aggressive normalization
+                            similarity = max(0, 1 / (1 + (distance / 100)))
+                        else:
+                            # For smaller distances, use standard normalization
+                            similarity = max(0, 1 / (1 + distance))
                         
                         result = {
                             "content": doc,
@@ -889,7 +895,15 @@ class PersistentVectorStore:
         for i, doc in enumerate(documents):
             # Convert distance to similarity score (ChromaDB returns distances)
             distance = distances[i] if i < len(distances) else 1.0
-            score = max(0, 1 - distance)  # Convert distance to similarity
+            # ChromaDB returns L2 distances which can be very large
+            # Use a more robust similarity calculation
+            # For large distances, use a scale factor to normalize
+            if distance > 100:
+                # For very large distances, use a more aggressive normalization
+                score = max(0, 1 / (1 + (distance / 100)))
+            else:
+                # For smaller distances, use standard normalization
+                score = max(0, 1 / (1 + distance))
             
             if score < min_score:
                 continue

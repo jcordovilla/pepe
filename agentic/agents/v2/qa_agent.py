@@ -97,10 +97,17 @@ class QAAgent(BaseAgent):
     async def _retrieve_context(self, query: str) -> List[Dict[str, Any]]:
         """Retrieve relevant context from vector store with dynamic k-value calculation."""
         try:
+            # Determine appropriate query type based on content
+            query_lower = query.lower()
+            if any(keyword in query_lower for keyword in ["users", "user", "who", "experience", "skills", "background", "expertise"]):
+                query_type = "user_analysis"  # Higher k for user/skill queries
+            else:
+                query_type = "comprehensive_search"  # Good default for QA
+            
             # Calculate dynamic k value based on query analysis
             k_calculation = self.k_calculator.calculate_k_value(
                 query=query,
-                query_type="qa_search",
+                query_type=query_type,
                 entities=None,
                 context=None
             )
@@ -108,18 +115,74 @@ class QAAgent(BaseAgent):
             search_k = k_calculation["k_value"]
             logger.info(f"QA context retrieval using k={search_k} (calculated from query analysis)")
             
-            # Perform similarity search
-            results = await self.vector_store.similarity_search(
-                query=query,
-                k=search_k,
-                filters=None
-            )
+            # For skill/experience queries, also do additional targeted searches
+            if any(keyword in query_lower for keyword in ["experience", "skills", "background", "expertise"]):
+                # Get the main search results
+                main_results = await self.vector_store.similarity_search(
+                    query=query,
+                    k=search_k,
+                    filters=None
+                )
+                
+                # Do additional targeted searches for specific skill terms
+                skill_terms = []
+                if "cybersecurity" in query_lower or "security" in query_lower:
+                    skill_terms = ["cybersecurity", "security", "cyber security", "security experience", "security background"]
+                elif "python" in query_lower:
+                    skill_terms = ["python", "programming", "coding", "developer", "software"]
+                elif "ai" in query_lower or "machine learning" in query_lower:
+                    skill_terms = ["ai", "machine learning", "artificial intelligence", "ml", "data science"]
+                
+                # Combine results from multiple searches
+                all_results = main_results
+                for term in skill_terms:
+                    term_results = await self.vector_store.similarity_search(
+                        query=term,
+                        k=20,  # Smaller k for targeted searches
+                        filters=None
+                    )
+                    all_results.extend(term_results)
+                
+                # Remove duplicates based on content
+                seen_content = set()
+                unique_results = []
+                for result in all_results:
+                    content_hash = hash(result.get("content", ""))
+                    if content_hash not in seen_content:
+                        seen_content.add(content_hash)
+                        unique_results.append(result)
+                
+                results = unique_results[:search_k]  # Limit to original k value
+            else:
+                # Perform regular similarity search
+                results = await self.vector_store.similarity_search(
+                    query=query,
+                    k=search_k,
+                    filters=None
+                )
             
             # Filter and format results
             context_docs = []
             for result in results:
                 # Use similarity score from vector store (0-1, higher is better)
                 similarity_score = result.get("similarity", 0)
+                content = result.get("content", "").lower()
+                
+                # For skill/experience queries, pre-filter to only include relevant content
+                if any(keyword in query_lower for keyword in ["experience", "skills", "background", "expertise"]):
+                    # Check if content contains relevant skill terms
+                    skill_terms = []
+                    if "cybersecurity" in query_lower or "security" in query_lower:
+                        skill_terms = ["cybersecurity", "security", "cyber security", "security team", "security measures"]
+                    elif "python" in query_lower:
+                        skill_terms = ["python", "programming", "coding", "developer", "software"]
+                    elif "ai" in query_lower or "machine learning" in query_lower:
+                        skill_terms = ["ai", "machine learning", "artificial intelligence", "ml", "data science"]
+                    
+                    # Only include documents that contain relevant skill terms
+                    if skill_terms and not any(term in content for term in skill_terms):
+                        continue
+                
                 # Lower threshold for msmarco-distilbert-base-v4 model which produces larger distances
                 if similarity_score >= 0.0:  # Accept any result for now
                     metadata = result.get("metadata", {})
@@ -226,15 +289,26 @@ I'm constantly learning from your server's content to provide more relevant and 
         
         system_prompt = """You are a helpful Discord bot assistant. Answer questions using ONLY the provided context from Discord messages.
 
-IMPORTANT RULES:
-1. Answer ONLY using information from the provided CONTEXT
-2. Cite Discord permalinks for every fact you mention
-3. If the context doesn't contain enough information to answer the question, say "I don't know based on server data"
-4. Be concise but thorough
-5. Use markdown formatting for better readability
-6. Always include relevant message links when citing information
-7. When listing users, use their display names (not user IDs like <@123456>)
-8. For user experience queries, list all relevant users found in the context
+TASK: Find users with cybersecurity experience or involvement.
+
+INSTRUCTIONS:
+1. Look through ALL the provided context messages
+2. Find users who mention cybersecurity, security, or related terms
+3. List each user with their specific cybersecurity involvement
+4. Include message links for each user
+5. Be specific about what each user said about cybersecurity
+
+LOOK FOR:
+- Users who mention "cybersecurity", "security", "cyber security"
+- Users who discuss security teams, security measures, security implementations
+- Users who mention security experience, background, or expertise
+- Users involved in security discussions or planning
+
+FORMAT:
+- Use bullet points for each user
+- Include their display name
+- Describe their specific cybersecurity involvement
+- Include the message link
 
 CONTEXT:
 {context}
@@ -276,8 +350,10 @@ ANSWER:"""
             score = doc.get("score", 0)
             metadata = doc.get("metadata", {})
             
-            # Get author information
-            author_name = metadata.get("author_name", "Unknown")
+            # Get author information with better extraction
+            author_display_name = metadata.get("author_display_name", "")
+            author_username = metadata.get("author_username", "")
+            author_name = author_display_name if author_display_name else author_username if author_username else "Unknown"
             channel_name = metadata.get("channel_name", "Unknown")
             timestamp = metadata.get("timestamp", "")
             
@@ -286,7 +362,7 @@ ANSWER:"""
                 content = content[:500] + "..."
             
             formatted_contexts.append(
-                f"Message {i} (relevance: {score:.2f}) by {author_name} in #{channel_name}:\n{content}\n"
+                f"Message by {author_name} in #{channel_name} (relevance: {score:.2f}):\n{content}\n"
                 f"Link: {permalink}\n"
             )
         

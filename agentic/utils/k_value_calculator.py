@@ -115,6 +115,7 @@ class KValueCalculator:
             "keyword_search": self.base_values.get("simple_search", 10),
             "filtered_search": self.base_values.get("detailed_search", 25),
             "analysis": self.base_values.get("analysis", 75),
+            "skill_experience": self.base_values.get("skill_experience", 100),
             "trend_analysis": self.base_values.get("trend_analysis", 100),
             "digest": self.base_values.get("digest", 150),
             "weekly_digest": self.base_values.get("digest", 150),
@@ -151,6 +152,9 @@ class KValueCalculator:
                 analysis["patterns_detected"].append(pattern_type)
                 if pattern_type in ["comprehensive_analysis", "broad_search"]:
                     analysis["query_type"] = "analysis"
+                    analysis["complexity"] = "complex"
+                elif pattern_type == "skill_experience":
+                    analysis["query_type"] = "skill_experience"
                     analysis["complexity"] = "complex"
         
         # Analyze time references
