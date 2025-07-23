@@ -16,6 +16,7 @@ import logging
 
 from .base_agent import BaseAgent, SubTask, AgentRole, TaskStatus, AgentState
 from ..cache.smart_cache import SmartCache
+from ..utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
 
@@ -28,14 +29,20 @@ class QueryInterpreterAgent(BaseAgent):
     
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.PLANNER, config)
-        self.model = config.get("model", "llama-3.1-8b-instruct")
-        self.max_tokens = config.get("max_tokens", 2048)
-        self.temperature = config.get("temperature", 0.1)
+        
+        # Get LLM configuration from the unified config
+        llm_config = config.get("llm", {})
+        self.model = llm_config.get("model", "llama3.1:8b")
+        self.max_tokens = llm_config.get("max_tokens", 2048)
+        self.temperature = llm_config.get("temperature", 0.1)
         
         # Initialize cache for query interpretations
         cache_config = config.get("cache", {})
         self.cache = SmartCache(cache_config)
         self.cache_ttl = config.get("cache_ttl", 3600)  # 1 hour
+        
+        # Initialize dynamic k-value calculator
+        self.k_calculator = KValueCalculator(config)
         
         # Available subtask types for the LLM to choose from
         self.available_subtasks = {
@@ -56,7 +63,7 @@ class QueryInterpreterAgent(BaseAgent):
             "resource_search": "Search for shared resources, links, or files"
         }
         
-        logger.info(f"QueryInterpreterAgent initialized with model: {self.model}")
+        logger.info(f"QueryInterpreterAgent initialized with model: {self.model} and dynamic k-value calculator")
     
     def can_handle(self, task: SubTask) -> bool:
         """
@@ -346,6 +353,16 @@ Respond with JSON only:"""
         # Check for summarize queries
         elif "summarise" in user_query or "summarize" in user_query:
             logger.info("Using mock response: summarize intent")
+            
+            # Calculate appropriate k value for summary queries
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=user_query,
+                query_type="summarize",
+                entities=None,
+                context=None
+            )
+            summary_k = k_calculation["k_value"]
+            
             return '''{
                 "intent": "summarize",
                 "entities": [
@@ -370,7 +387,7 @@ Respond with JSON only:"""
                                 "channel_id": "1353448986408779877",
                                 "time_range": "past week"
                             },
-                            "k": 50,
+                            "k": ''' + str(summary_k) + ''',
                             "sort_by": "timestamp"
                         },
                         "dependencies": []
@@ -404,6 +421,16 @@ Respond with JSON only:"""
             # Check for server analysis queries
             if any(keyword in user_query for keyword in ["active channels", "server", "engagement", "activity", "patterns", "users", "content types"]):
                 logger.info("Using mock response: server analysis intent")
+                
+                # Calculate appropriate k value for server analysis queries
+                k_calculation = self.k_calculator.calculate_k_value(
+                    query=user_query,
+                    query_type="server_analysis",
+                    entities=None,
+                    context=None
+                )
+                analysis_k = k_calculation["k_value"]
+                
                 return '''{
                     "intent": "analyze",
                     "entities": [],
@@ -415,7 +442,7 @@ Respond with JSON only:"""
                                 "analysis_type": "server_overview",
                                 "query": "''' + user_query + '''",
                                 "filters": {},
-                                "k": 100
+                                "k": ''' + str(analysis_k) + '''
                             },
                             "dependencies": []
                         }
@@ -427,6 +454,16 @@ Respond with JSON only:"""
             # Check for user-related queries
             elif any(keyword in user_query for keyword in ["users", "user", "who", "frequently", "active users"]):
                 logger.info("Using mock response: user analysis intent")
+                
+                # Calculate appropriate k value for user analysis queries
+                k_calculation = self.k_calculator.calculate_k_value(
+                    query=user_query,
+                    query_type="user_analysis",
+                    entities=None,
+                    context=None
+                )
+                user_analysis_k = k_calculation["k_value"]
+                
                 return '''{
                     "intent": "analyze",
                     "entities": [],
@@ -438,7 +475,7 @@ Respond with JSON only:"""
                                 "analysis_type": "user_engagement",
                                 "query": "''' + user_query + '''",
                                 "filters": {},
-                                "k": 50
+                                "k": ''' + str(user_analysis_k) + '''
                             },
                             "dependencies": []
                         }
@@ -450,6 +487,16 @@ Respond with JSON only:"""
             # Check for content analysis queries
             elif any(keyword in user_query for keyword in ["content", "messages", "topics", "discussions", "code snippets"]):
                 logger.info("Using mock response: content analysis intent")
+                
+                # Calculate appropriate k value for content analysis queries
+                k_calculation = self.k_calculator.calculate_k_value(
+                    query=user_query,
+                    query_type="content_analysis",
+                    entities=None,
+                    context=None
+                )
+                content_analysis_k = k_calculation["k_value"]
+                
                 return '''{
                     "intent": "analyze",
                     "entities": [],
@@ -461,7 +508,7 @@ Respond with JSON only:"""
                                 "analysis_type": "content_overview",
                                 "query": "''' + user_query + '''",
                                 "filters": {},
-                                "k": 50
+                                "k": ''' + str(content_analysis_k) + '''
                             },
                             "dependencies": []
                         }
@@ -473,6 +520,15 @@ Respond with JSON only:"""
             # Build subtasks based on what we found
             subtasks = []
             if channel_entities:
+                # Calculate appropriate k value for filtered search
+                k_calculation = self.k_calculator.calculate_k_value(
+                    query=user_query,
+                    query_type="filtered_search",
+                    entities=channel_entities,
+                    context=None
+                )
+                filtered_k = k_calculation["k_value"]
+                
                 subtasks.append({
                     "task_type": "filtered_search",
                     "description": "Search for messages in the specified channel",
@@ -481,18 +537,27 @@ Respond with JSON only:"""
                         "filters": {
                             "channel_id": "1353448986408779877"
                         },
-                        "k": 50
+                        "k": filtered_k
                     },
                     "dependencies": []
                 })
             else:
+                # Calculate appropriate k value for semantic search
+                k_calculation = self.k_calculator.calculate_k_value(
+                    query=user_query,
+                    query_type="semantic_search",
+                    entities=None,
+                    context=None
+                )
+                semantic_k = k_calculation["k_value"]
+                
                 subtasks.append({
                     "task_type": "semantic_search",
                     "description": "Search for relevant messages",
                     "parameters": {
                         "query": user_query,
                         "filters": {},
-                        "k": 10
+                        "k": semantic_k
                     },
                     "dependencies": []
                 })

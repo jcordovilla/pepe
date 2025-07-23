@@ -27,9 +27,14 @@ sys.path.insert(0, str(project_root))
 
 class FreshResourceDetector:
     def __init__(self, use_fast_model: bool = True):
-        # Model selection for resource detection
-        self.fast_model = "phi3:mini"  # Fast, lightweight model
-        self.standard_model = "llama3.1:8b"  # Higher quality model
+        # Get configuration for model selection
+        from agentic.config.modernized_config import get_modernized_config
+        config = get_modernized_config()
+        llm_config = config.get("llm", {})
+        
+        # Model selection for resource detection - use config from .env
+        self.fast_model = llm_config.get("fast_model", "phi3:mini")  # Fast, lightweight model
+        self.standard_model = llm_config.get("model", "llama3.1:8b")  # Higher quality model from .env
         self.use_fast_model = use_fast_model
         
         # Resource storage and statistics

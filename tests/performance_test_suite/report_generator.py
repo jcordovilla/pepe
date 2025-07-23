@@ -53,7 +53,13 @@ class LlamaReportAnalyzer:
     - Suggest specific improvements to agentic components
     """
     
-    def __init__(self, model_name: str = "llama3.1:8b"):
+    def __init__(self, model_name: str = None):
+        # Get model name from config if not provided
+        if model_name is None:
+            from agentic.config.modernized_config import get_modernized_config
+            config = get_modernized_config()
+            model_name = config.get("llm", {}).get("model", "llama3.1:8b")
+        
         self.model_name = model_name
         self.model = None
         self._initialize_model()

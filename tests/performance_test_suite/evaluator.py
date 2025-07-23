@@ -41,7 +41,13 @@ class LlamaEvaluator:
     - Context appropriateness
     """
     
-    def __init__(self, model_name: str = "llama3.1:8b"):
+    def __init__(self, model_name: str = None):
+        # Get model name from config if not provided
+        if model_name is None:
+            from agentic.config.modernized_config import get_modernized_config
+            config = get_modernized_config()
+            model_name = config.get("llm", {}).get("model", "llama3.1:8b")
+        
         self.model_name = model_name
         self.model = None
         self._initialize_model()
@@ -340,11 +346,11 @@ class ResponseEvaluator:
     
     def __init__(self):
         """Initialize the response evaluator with hybrid evaluation."""
-        self.llama_evaluator = LlamaEvaluator()
+        self.llama_evaluator = LlamaEvaluator()  # Will use config from .env
         
         # Initialize hybrid evaluator for better evaluation methodology
         self.hybrid_evaluator = HybridEvaluator({
-            "llama_model": "llama3.1:8b",
+            "llama_model": "config_from_env",  # Will use config from .env
             "weights": {
                 "objective": 0.6,
                 "ai": 0.4
@@ -967,9 +973,7 @@ class HybridEvaluator:
         }
         
         # Initialize AI evaluator
-        self.ai_evaluator = LlamaEvaluator(
-            self.config.get("llama_model", "llama3.1:8b")
-        )
+        self.ai_evaluator = LlamaEvaluator()  # Will use config from .env
         
         logger.info("HybridEvaluator initialized")
     

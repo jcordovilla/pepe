@@ -542,7 +542,7 @@ class PersistentVectorStore:
                 results = await asyncio.to_thread(
                     self.collection.query,
                     query_embeddings=[query_embedding],
-                    n_results=min(k, 100),  # Cap at 100 results
+                    n_results=k,  # Use the full k value without capping
                     where=where_filter,
                     include=["documents", "metadatas", "distances"]
                 )
@@ -555,13 +555,15 @@ class PersistentVectorStore:
                     logger.warning(f"ChromaDB search configuration issue, using fallback: {search_error}")
                     # Try with smaller k value
                     try:
+                        fallback_k = min(k, 50)  # More conservative fallback
                         results = await asyncio.to_thread(
                             self.collection.query,
                             query_embeddings=[query_embedding],
-                            n_results=min(k, 10),  # Much smaller result set
+                            n_results=fallback_k,
                             where=where_filter,
                             include=["documents", "metadatas", "distances"]
                         )
+                        logger.info(f"Fallback search successful with k={fallback_k}")
                     except Exception as fallback_error:
                         logger.error(f"Fallback search also failed: {fallback_error}")
                         return []
@@ -648,7 +650,7 @@ class PersistentVectorStore:
             results = await asyncio.to_thread(
                 self.collection.query,
                 query_texts=[keyword_query],
-                n_results=k * 2,  # Get more results to filter
+                n_results=k * 2,  # Get more results to filter, but don't cap at hard limit
                 where=where_clause,
                 include=["documents", "metadatas", "distances"]
             )
@@ -706,7 +708,7 @@ class PersistentVectorStore:
             results = await asyncio.to_thread(
                 self.collection.get,
                 where=where_clause,
-                limit=k * 5,  # Get more to allow for sorting
+                limit=k * 5,  # Get more to allow for sorting, support larger k values
                 include=["documents", "metadatas"]
             )
             

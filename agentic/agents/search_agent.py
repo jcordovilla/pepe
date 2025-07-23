@@ -13,6 +13,7 @@ import dateutil.parser
 from .base_agent import BaseAgent, AgentRole, AgentState, SubTask, TaskStatus, agent_registry
 from ..vectorstore.persistent_store import PersistentVectorStore
 from ..cache.smart_cache import SmartCache
+from ..utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,7 @@ class SearchAgent(BaseAgent):
     - Handles keyword-based filtering
     - Manages search result ranking and reranking
     - Implements smart caching for performance
+    - Uses dynamic k-value calculation based on query analysis
     """
     
     def __init__(self, config: Dict[str, Any]):
@@ -35,7 +37,10 @@ class SearchAgent(BaseAgent):
         self.vector_store = PersistentVectorStore(config.get("vectorstore", {}))
         self.cache = SmartCache(config.get("cache", {}))
         
-        # Search configuration
+        # Initialize dynamic k-value calculator
+        self.k_calculator = KValueCalculator(config)
+        
+        # Legacy configuration (kept for backward compatibility)
         self.default_k = config.get("default_k", 10)
         self.max_k = config.get("max_k", 100)
         self.similarity_threshold = config.get("similarity_threshold", 0.7)
@@ -45,10 +50,12 @@ class SearchAgent(BaseAgent):
         self.search_stats = {
             "total_searches": 0,
             "cache_hits": 0,
-            "cache_misses": 0
+            "cache_misses": 0,
+            "dynamic_k_used": 0,
+            "large_k_searches": 0  # k > 50
         }
         
-        logger.info(f"SearchAgent initialized with default_k={self.default_k}")
+        logger.info(f"SearchAgent initialized with dynamic k-value calculator")
         
         # Register this agent
         agent_registry.register_agent(self)
@@ -182,7 +189,7 @@ class SearchAgent(BaseAgent):
     
     async def _semantic_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """
-        Perform semantic vector search.
+        Perform semantic vector search with dynamic k-value calculation.
         
         Args:
             subtask: Search subtask
@@ -198,7 +205,32 @@ class SearchAgent(BaseAgent):
                 return []
             
             query = str(query)  # Ensure query is a string
-            k = subtask.parameters.get("k", subtask.parameters.get("limit", self.default_k))
+            
+            # Calculate dynamic k value based on query analysis
+            query_interpretation = state.get("query_interpretation", {})
+            entities = query_interpretation.get("entities", [])
+            
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="semantic_search",
+                entities=entities,
+                context=state.get("user_context", {})
+            )
+            
+            # Use calculated k value, fallback to provided k or default
+            k = k_calculation["k_value"]
+            provided_k = subtask.parameters.get("k", subtask.parameters.get("limit", self.default_k))
+            
+            # If explicitly provided k is larger than calculated, use it (respect user intent)
+            if provided_k > k:
+                k = min(provided_k, self.max_k)
+                logger.info(f"Using provided k value: {k} (over calculated: {k_calculation['k_value']})")
+            else:
+                self.search_stats["dynamic_k_used"] += 1
+                if k > 50:
+                    self.search_stats["large_k_searches"] += 1
+                
+                logger.info(f"Using dynamic k value: {k} (calculated from query analysis)")
             
             # Check cache first
             cache_key = f"semantic:{hash(query)}:{k}:{hash(str(subtask.parameters.get('filters', {})))}"
@@ -217,7 +249,7 @@ class SearchAgent(BaseAgent):
             
             results = await self.vector_store.similarity_search(
                 query=query,
-                k=min(k, self.max_k),
+                k=k,
                 filters=subtask.parameters.get("filters", {})
             )
             
@@ -225,10 +257,11 @@ class SearchAgent(BaseAgent):
             if results is None:
                 results = []
             
-            # Cache results
-            await self.cache.set(cache_key, results, ttl=3600)  # 1 hour TTL
+            # Cache results with appropriate TTL based on k value
+            cache_ttl = 3600 if k <= 50 else 1800  # Shorter TTL for large result sets
+            await self.cache.set(cache_key, results, ttl=cache_ttl)
             
-            logger.info(f"Semantic search found {len(results)} results")
+            logger.info(f"Semantic search found {len(results)} results (k={k})")
             return results
             
         except Exception as e:
@@ -237,7 +270,7 @@ class SearchAgent(BaseAgent):
     
     async def _keyword_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """
-        Perform keyword-based search.
+        Perform keyword-based search with dynamic k-value calculation.
         
         Args:
             subtask: Search subtask
@@ -248,10 +281,36 @@ class SearchAgent(BaseAgent):
         """
         try:
             keywords = subtask.parameters.get("keywords", [])
-            k = subtask.parameters.get("k", self.default_k)
+            query = " ".join(keywords) if keywords else ""
             
             if not keywords:
                 return []
+            
+            # Calculate dynamic k value based on query analysis
+            query_interpretation = state.get("query_interpretation", {})
+            entities = query_interpretation.get("entities", [])
+            
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="keyword_search",
+                entities=entities,
+                context=state.get("user_context", {})
+            )
+            
+            # Use calculated k value, fallback to provided k or default
+            k = k_calculation["k_value"]
+            provided_k = subtask.parameters.get("k", self.default_k)
+            
+            # If explicitly provided k is larger than calculated, use it
+            if provided_k > k:
+                k = min(provided_k, self.max_k)
+                logger.info(f"Using provided k value: {k} (over calculated: {k_calculation['k_value']})")
+            else:
+                self.search_stats["dynamic_k_used"] += 1
+                if k > 50:
+                    self.search_stats["large_k_searches"] += 1
+                
+                logger.info(f"Using dynamic k value: {k} (calculated from query analysis)")
             
             # Check cache
             cache_key = f"keyword:{hash(str(keywords))}:{k}"
@@ -267,14 +326,15 @@ class SearchAgent(BaseAgent):
             
             results = await self.vector_store.keyword_search(
                 keywords=keywords,
-                k=min(k, self.max_k),
+                k=k,
                 filters=subtask.parameters.get("filters", {})
             )
             
-            # Cache results
-            await self.cache.set(cache_key, results, ttl=3600)
+            # Cache results with appropriate TTL based on k value
+            cache_ttl = 3600 if k <= 50 else 1800
+            await self.cache.set(cache_key, results, ttl=cache_ttl)
             
-            logger.info(f"Keyword search found {len(results)} results")
+            logger.info(f"Keyword search found {len(results)} results (k={k})")
             return results
             
         except Exception as e:
@@ -283,7 +343,7 @@ class SearchAgent(BaseAgent):
     
     async def _filtered_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """
-        Perform filtered search with specific criteria.
+        Perform filtered search with specific criteria and dynamic k-value calculation.
         
         Args:
             subtask: Search subtask
@@ -294,8 +354,36 @@ class SearchAgent(BaseAgent):
         """
         try:
             filters = subtask.parameters.get("filters", {})
-            k = subtask.parameters.get("k", self.default_k)
             sort_by = subtask.parameters.get("sort_by", "timestamp")  # Get sort parameter
+            
+            # Get query for k-value calculation
+            query = subtask.parameters.get("query", state.get("query", ""))
+            
+            # Calculate dynamic k value based on query analysis
+            query_interpretation = state.get("query_interpretation", {})
+            entities = query_interpretation.get("entities", [])
+            
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="filtered_search",
+                entities=entities,
+                context=state.get("user_context", {})
+            )
+            
+            # Use calculated k value, fallback to provided k or default
+            k = k_calculation["k_value"]
+            provided_k = subtask.parameters.get("k", self.default_k)
+            
+            # If explicitly provided k is larger than calculated, use it
+            if provided_k > k:
+                k = min(provided_k, self.max_k)
+                logger.info(f"Using provided k value: {k} (over calculated: {k_calculation['k_value']})")
+            else:
+                self.search_stats["dynamic_k_used"] += 1
+                if k > 50:
+                    self.search_stats["large_k_searches"] += 1
+                
+                logger.info(f"Using dynamic k value: {k} (calculated from query analysis)")
             
             # Build comprehensive filters from entities
             # Get entities from query interpretation (list format)
@@ -371,18 +459,18 @@ class SearchAgent(BaseAgent):
                 # Semantic search with filters (only if no temporal sorting needed)
                 results = await self.vector_store.similarity_search(
                     query=subtask.parameters["query"],
-                    k=min(k, self.max_k),
+                    k=k,
                     filters=filters
                 )
             else:
                 # Pure filter-based search with sorting (for temporal queries)
                 results = await self.vector_store.filter_search(
                     filters=filters,
-                    k=min(k, self.max_k),
+                    k=k,
                     sort_by=sort_by
                 )
             
-            logger.info(f"Filtered search found {len(results)} results sorted by {sort_by}")
+            logger.info(f"Filtered search found {len(results)} results sorted by {sort_by} (k={k})")
             return results
             
         except Exception as e:
@@ -391,7 +479,7 @@ class SearchAgent(BaseAgent):
     
     async def _hybrid_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """
-        Perform hybrid search combining semantic and keyword search.
+        Perform hybrid search combining semantic and keyword search with dynamic k-value calculation.
         
         Args:
             subtask: Search subtask
@@ -403,16 +491,45 @@ class SearchAgent(BaseAgent):
         try:
             query = subtask.parameters.get("query", "")
             keywords = subtask.parameters.get("keywords", [])
-            k = subtask.parameters.get("k", self.default_k)
             
-            # Perform both searches concurrently
+            # Calculate dynamic k value based on query analysis
+            query_interpretation = state.get("query_interpretation", {})
+            entities = query_interpretation.get("entities", [])
+            
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="hybrid_search",
+                entities=entities,
+                context=state.get("user_context", {})
+            )
+            
+            # Use calculated k value, fallback to provided k or default
+            k = k_calculation["k_value"]
+            provided_k = subtask.parameters.get("k", self.default_k)
+            
+            # If explicitly provided k is larger than calculated, use it
+            if provided_k > k:
+                k = min(provided_k, self.max_k)
+                logger.info(f"Using provided k value: {k} (over calculated: {k_calculation['k_value']})")
+            else:
+                self.search_stats["dynamic_k_used"] += 1
+                if k > 50:
+                    self.search_stats["large_k_searches"] += 1
+                
+                logger.info(f"Using dynamic k value: {k} (calculated from query analysis)")
+            
+            # Perform both searches concurrently with dynamic k distribution
+            # For hybrid search, distribute k value between semantic and keyword search
+            semantic_k = max(5, k // 2)  # Ensure minimum k for each search type
+            keyword_k = max(5, k - semantic_k)  # Remaining k for keyword search
+            
             semantic_task = self._semantic_search(
                 SubTask(
                     id=f"{subtask.id}_semantic",
                     description="Semantic search for hybrid",
                     agent_role=AgentRole.SEARCHER,
                     task_type="semantic_search",
-                    parameters={"query": query, "k": k//2},
+                    parameters={"query": query, "k": semantic_k},
                     dependencies=[]
                 ),
                 state
@@ -424,7 +541,7 @@ class SearchAgent(BaseAgent):
                     description="Keyword search for hybrid", 
                     agent_role=AgentRole.SEARCHER,
                     task_type="keyword_search",
-                    parameters={"keywords": keywords, "k": k//2},
+                    parameters={"keywords": keywords, "k": keyword_k},
                     dependencies=[]
                 ),
                 state
@@ -447,7 +564,7 @@ class SearchAgent(BaseAgent):
             # Limit to requested number
             combined_results = combined_results[:k]
             
-            logger.info(f"Hybrid search found {len(combined_results)} results")
+            logger.info(f"Hybrid search found {len(combined_results)} results (k={k}, semantic_k={semantic_k}, keyword_k={keyword_k})")
             return combined_results
             
         except Exception as e:
@@ -456,7 +573,7 @@ class SearchAgent(BaseAgent):
     
     async def _reaction_search(self, subtask: SubTask, state: AgentState) -> List[Dict[str, Any]]:
         """
-        Perform search based on message reactions (likes, loves, etc.).
+        Perform search based on message reactions with dynamic k-value calculation.
         
         Args:
             subtask: Search subtask
@@ -467,7 +584,32 @@ class SearchAgent(BaseAgent):
         """
         try:
             reaction_type = subtask.parameters.get("reaction", "")
-            k = subtask.parameters.get("k", self.default_k)
+            
+            # Calculate dynamic k value based on query analysis
+            query_interpretation = state.get("query_interpretation", {})
+            entities = query_interpretation.get("entities", [])
+            
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=f"reactions {reaction_type}",
+                query_type="reaction_search",
+                entities=entities,
+                context=state.get("user_context", {})
+            )
+            
+            # Use calculated k value, fallback to provided k or default
+            k = k_calculation["k_value"]
+            provided_k = subtask.parameters.get("k", self.default_k)
+            
+            # If explicitly provided k is larger than calculated, use it
+            if provided_k > k:
+                k = min(provided_k, self.max_k)
+                logger.info(f"Using provided k value: {k} (over calculated: {k_calculation['k_value']})")
+            else:
+                self.search_stats["dynamic_k_used"] += 1
+                if k > 50:
+                    self.search_stats["large_k_searches"] += 1
+                
+                logger.info(f"Using dynamic k value: {k} (calculated from query analysis)")
             
             if not reaction_type:
                 return []
@@ -486,14 +628,15 @@ class SearchAgent(BaseAgent):
             
             results = await self.vector_store.reaction_search(
                 reaction=reaction_type,
-                k=min(k, self.max_k),
+                k=k,
                 filters=subtask.parameters.get("filters", {})
             )
             
-            # Cache results
-            await self.cache.set(cache_key, results, ttl=3600)
+            # Cache results with appropriate TTL based on k value
+            cache_ttl = 3600 if k <= 50 else 1800
+            await self.cache.set(cache_key, results, ttl=cache_ttl)
             
-            logger.info(f"Reaction search found {len(results)} results")
+            logger.info(f"Reaction search found {len(results)} results (k={k})")
             return results
             
         except Exception as e:
@@ -602,7 +745,7 @@ class SearchAgent(BaseAgent):
     
     def get_search_stats(self) -> Dict[str, Any]:
         """
-        Get search performance statistics.
+        Get search performance statistics including dynamic k-value usage.
         
         Returns:
             Dictionary containing search stats
@@ -613,9 +756,25 @@ class SearchAgent(BaseAgent):
             if total > 0 else 0
         )
         
+        dynamic_k_rate = (
+            self.search_stats["dynamic_k_used"] / total * 100 
+            if total > 0 else 0
+        )
+        
+        large_k_rate = (
+            self.search_stats["large_k_searches"] / total * 100 
+            if total > 0 else 0
+        )
+        
         return {
             **self.search_stats,
             "cache_hit_rate": f"{cache_rate:.1f}%",
+            "dynamic_k_usage": {
+                "total_dynamic_k": self.search_stats["dynamic_k_used"],
+                "large_k_searches": self.search_stats["large_k_searches"],
+                "dynamic_k_rate": f"{dynamic_k_rate:.1f}%",
+                "large_k_rate": f"{large_k_rate:.1f}%"
+            },
             "agent_type": "search",
             "role": self.role.value
         }

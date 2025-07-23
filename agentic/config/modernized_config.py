@@ -26,11 +26,12 @@ def get_modernized_config() -> Dict[str, Any]:
         "llm": {
             "endpoint": os.getenv("LLM_ENDPOINT", "http://localhost:11434/api/generate"),
             "model": os.getenv("LLM_MODEL", "llama3.1:8b"),  # Recommended: newer, better model
+            "fast_model": os.getenv("LLM_FAST_MODEL", "phi3:mini"),  # Fast model for resource detection
             "max_tokens": int(os.getenv("LLM_MAX_TOKENS", "2048")),
             "temperature": float(os.getenv("LLM_TEMPERATURE", "0.1")),
             "timeout": int(os.getenv("LLM_TIMEOUT", "30")),
             "retry_attempts": int(os.getenv("LLM_RETRY_ATTEMPTS", "3")),
-            "fallback_model": "llama2:latest"  # Fallback if primary model fails
+            "fallback_model": os.getenv("LLM_FALLBACK_MODEL", "llama2:latest")  # Fallback if primary model fails
         },
         
         # Modern unified data layer
@@ -88,6 +89,85 @@ def get_modernized_config() -> Dict[str, Any]:
             "discord_enabled": True,
             "api_enabled": True,
             "api_port": 8000
+        },
+        
+        # Dynamic K-value configuration for query-appropriate result sizing
+        "k_value_config": {
+            # Base k values for different query types
+            "base_values": {
+                "simple_search": 10,
+                "detailed_search": 25,
+                "comprehensive_search": 50,
+                "analysis": 75,
+                "trend_analysis": 100,
+                "digest": 150,
+                "cross_server_analysis": 200
+            },
+            
+            # Multipliers based on query characteristics
+            "multipliers": {
+                "time_range": {
+                    "today": 1.0,
+                    "yesterday": 1.2,
+                    "this_week": 1.5,
+                    "last_week": 1.8,
+                    "this_month": 2.0,
+                    "last_month": 2.5,
+                    "all_time": 3.0
+                },
+                "scope": {
+                    "single_channel": 1.0,
+                    "multiple_channels": 1.5,
+                    "cross_server": 2.0,
+                    "all_channels": 2.5
+                },
+                "complexity": {
+                    "simple": 1.0,
+                    "moderate": 1.3,
+                    "complex": 1.8,
+                    "very_complex": 2.5
+                }
+            },
+            
+            # Query type patterns for automatic classification
+            "query_patterns": {
+                "comprehensive_analysis": [
+                    "trending", "patterns", "overview", "summary", "digest", 
+                    "analysis", "insights", "statistics", "metrics"
+                ],
+                "broad_search": [
+                    "all", "everything", "comprehensive", "complete", "full",
+                    "extensive", "thorough", "detailed"
+                ],
+                "user_analysis": [
+                    "users", "people", "who", "active users", "engagement",
+                    "participation", "contributors", "members"
+                ],
+                "topic_analysis": [
+                    "topics", "discussions", "conversations", "themes",
+                    "subjects", "content types", "categories"
+                ],
+                "time_analysis": [
+                    "recent", "history", "timeline", "evolution", "changes",
+                    "growth", "development", "progress"
+                ]
+            },
+            
+            # Maximum k values for different contexts
+            "max_values": {
+                "search": 100,
+                "analysis": 200,
+                "digest": 300,
+                "cross_server": 500
+            },
+            
+            # Performance thresholds
+            "performance": {
+                "max_query_time": 30,  # seconds
+                "enable_caching": True,
+                "cache_ttl": 3600,  # 1 hour
+                "batch_size": 50
+            }
         }
     }
     

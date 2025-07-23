@@ -1,42 +1,35 @@
 """
-Trend Agent
+Trend Analysis Agent
 
-Topic detection and trend analysis using MiniBatchKMeans on embeddings.
-Identifies emerging topics and trends in Discord conversations.
+Analyzes temporal trends and patterns in Discord conversations.
 """
 
 import logging
-from typing import Dict, Any, List, Optional, TypedDict
-from datetime import datetime, timedelta
+from typing import Dict, Any, List, Optional
+from datetime import datetime
 import numpy as np
-from sklearn.cluster import MiniBatchKMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
-import json
+from sklearn.cluster import KMeans
+from collections import Counter
+import re
 
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
 from ...vectorstore.persistent_store import PersistentVectorStore
+from ...utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
 
 
-class Topic(TypedDict):
-    """Topic structure for trend analysis."""
-    id: str
-    name: str
-    keywords: List[str]
-    message_count: int
-    engagement_score: float
-    trend_direction: str  # "rising", "stable", "declining"
-    representative_messages: List[str]
-
-
 class TrendAgent(BaseAgent):
     """
-    Trend agent that detects topics and trends using clustering.
+    Agent for analyzing trends and patterns in Discord conversations.
     
-    Input: dict(start: dt, end: dt, k: int)
-    Output: list[Topic]
+    Features:
+    - Topic trend analysis
+    - Temporal pattern detection
+    - User engagement trends
+    - Content evolution tracking
     """
     
     def __init__(self, config: Dict[str, Any]):
@@ -44,12 +37,17 @@ class TrendAgent(BaseAgent):
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
         
-        # Trend analysis configuration
-        self.default_k = config.get("default_k", 5)
-        self.min_messages_per_topic = config.get("min_messages_per_topic", 3)
-        self.comparison_period_days = config.get("comparison_period_days", 7)
+        # Initialize dynamic k-value calculator
+        self.k_calculator = KValueCalculator(config)
         
-        logger.info("TrendAgent initialized")
+        # Default search parameters (legacy, kept for backward compatibility)
+        self.default_k = config.get("default_k", 5)
+        
+        # Analysis configuration
+        self.min_cluster_size = config.get("min_cluster_size", 3)
+        self.max_clusters = config.get("max_clusters", 10)
+        
+        logger.info("TrendAgent initialized with dynamic k-value calculator")
     
     def signature(self) -> Dict[str, Any]:
         """Return agent signature for registration."""
@@ -72,7 +70,7 @@ class TrendAgent(BaseAgent):
             }
         }
     
-    async def run(self, **kwargs) -> List[Topic]:
+    async def run(self, **kwargs) -> List[Dict[str, Any]]:
         """
         Detect trends and topics for the given time period.
         
@@ -102,8 +100,8 @@ class TrendAgent(BaseAgent):
             # Get messages for current period
             current_messages = await self._get_messages_for_period(start_date, end_date)
             
-            if len(current_messages) < self.min_messages_per_topic * k:
-                return [{"error": f"Insufficient messages for trend analysis. Need at least {self.min_messages_per_topic * k} messages."}]
+            if len(current_messages) < self.min_cluster_size * k:
+                return [{"error": f"Insufficient messages for trend analysis. Need at least {self.min_cluster_size * k} messages."}]
             
             # Get messages for comparison period
             comparison_start = start_date - timedelta(days=self.comparison_period_days)
@@ -125,8 +123,23 @@ class TrendAgent(BaseAgent):
             return [{"error": f"Failed to detect trends: {str(e)}"}]
     
     async def _get_messages_for_period(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
-        """Get messages for a specific time period."""
+        """Get messages for a specific time period with dynamic k-value calculation."""
         try:
+            # Calculate appropriate k value for trend analysis
+            query = f"trend analysis from {start_date.date()} to {end_date.date()}"
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="trend_analysis",
+                entities=None,
+                context=None
+            )
+            
+            # Use calculated k value, but ensure minimum for trend analysis
+            calculated_k = k_calculation["k_value"]
+            analysis_k = max(calculated_k, 500)  # Ensure sufficient data for trend analysis
+            
+            logger.info(f"Trend analysis using k={analysis_k} (calculated: {calculated_k})")
+            
             # Get messages from vector store
             results = await self.vector_store.filter_search(
                 filters={
@@ -135,7 +148,7 @@ class TrendAgent(BaseAgent):
                         "$lte": end_date.isoformat()
                     }
                 },
-                k=1000,  # Get more messages for better clustering
+                k=analysis_k,  # Use calculated k value
                 sort_by="timestamp"
             )
             
@@ -157,7 +170,7 @@ class TrendAgent(BaseAgent):
             logger.error(f"Error getting messages for period: {e}")
             return []
     
-    async def _detect_topics(self, messages: List[Dict[str, Any]], k: int) -> List[Topic]:
+    async def _detect_topics(self, messages: List[Dict[str, Any]], k: int) -> List[Dict[str, Any]]:
         """Detect topics using clustering on message content."""
         if not messages:
             return []
@@ -180,10 +193,10 @@ class TrendAgent(BaseAgent):
             if len(texts) < k:
                 k = max(1, len(texts) // 2)
             
-            kmeans = MiniBatchKMeans(
+            kmeans = KMeans(
                 n_clusters=k,
                 random_state=42,
-                batch_size=100
+                n_init=10
             )
             
             cluster_labels = kmeans.fit_predict(tfidf_matrix)
@@ -195,7 +208,7 @@ class TrendAgent(BaseAgent):
             for cluster_id in range(k):
                 cluster_messages = [msg for i, msg in enumerate(messages) if cluster_labels[i] == cluster_id]
                 
-                if len(cluster_messages) < self.min_messages_per_topic:
+                if len(cluster_messages) < self.min_cluster_size:
                     continue
                 
                 # Get cluster center and extract keywords
@@ -219,15 +232,15 @@ class TrendAgent(BaseAgent):
                 # Generate topic name using LLM
                 topic_name = await self._generate_topic_name(keywords, representative_messages)
                 
-                topic = Topic(
-                    id=f"topic_{cluster_id}",
-                    name=topic_name,
-                    keywords=keywords[:5],  # Top 5 keywords
-                    message_count=len(cluster_messages),
-                    engagement_score=engagement_score,
-                    trend_direction="stable",  # Will be updated later
-                    representative_messages=representative_messages
-                )
+                topic = {
+                    "id": f"topic_{cluster_id}",
+                    "name": topic_name,
+                    "keywords": keywords[:5],  # Top 5 keywords
+                    "message_count": len(cluster_messages),
+                    "engagement_score": engagement_score,
+                    "trend_direction": "stable",  # Will be updated later
+                    "representative_messages": representative_messages
+                }
                 
                 topics.append(topic)
             
@@ -261,7 +274,7 @@ Return only the topic name, nothing else."""
             logger.error(f"Error generating topic name: {e}")
             return f"Topic: {', '.join(keywords[:2])}"
     
-    async def _analyze_trends(self, current_topics: List[Topic], comparison_topics: List[Topic]) -> List[Topic]:
+    async def _analyze_trends(self, current_topics: List[Dict[str, Any]], comparison_topics: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Analyze trend directions by comparing current and previous periods."""
         # Create keyword-based matching between periods
         for current_topic in current_topics:
@@ -272,7 +285,7 @@ Return only the topic name, nothing else."""
         
         return current_topics
     
-    async def _determine_trend_direction(self, current_topic: Topic, comparison_topics: List[Topic]) -> str:
+    async def _determine_trend_direction(self, current_topic: Dict[str, Any], comparison_topics: List[Dict[str, Any]]) -> str:
         """Determine if a topic is rising, stable, or declining."""
         current_keywords = set(current_topic["keywords"])
         
@@ -326,7 +339,7 @@ Return only the topic name, nothing else."""
         
         return state
     
-    def _format_trends_response(self, topics: List[Topic]) -> str:
+    def _format_trends_response(self, topics: List[Dict[str, Any]]) -> str:
         """Format trends as a readable response."""
         if not topics:
             return "No trends detected for the specified period."

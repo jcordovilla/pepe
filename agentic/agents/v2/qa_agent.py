@@ -12,6 +12,7 @@ import re
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
 from ...vectorstore.persistent_store import PersistentVectorStore
+from ...utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
 
@@ -29,11 +30,14 @@ class QAAgent(BaseAgent):
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
         
-        # Default search parameters
+        # Initialize dynamic k-value calculator
+        self.k_calculator = KValueCalculator(config)
+        
+        # Default search parameters (legacy, kept for backward compatibility)
         self.default_k = config.get("default_k", 5)
         self.max_context_length = config.get("max_context_length", 4000)
         
-        logger.info("QAAgent initialized")
+        logger.info("QAAgent initialized with dynamic k-value calculator")
     
     def signature(self) -> Dict[str, Any]:
         """Return agent signature for registration."""
@@ -91,12 +95,18 @@ class QAAgent(BaseAgent):
             return f"Sorry, I encountered an error while processing your question: {str(e)}"
     
     async def _retrieve_context(self, query: str) -> List[Dict[str, Any]]:
-        """Retrieve relevant context from vector store."""
+        """Retrieve relevant context from vector store with dynamic k-value calculation."""
         try:
-            # For user experience queries, increase search coverage
-            search_k = self.default_k
-            if any(keyword in query.lower() for keyword in ["users", "people", "who", "list", "experience", "skills", "expertise"]):
-                search_k = 20  # Increase search coverage for user-related queries
+            # Calculate dynamic k value based on query analysis
+            k_calculation = self.k_calculator.calculate_k_value(
+                query=query,
+                query_type="qa_search",
+                entities=None,
+                context=None
+            )
+            
+            search_k = k_calculation["k_value"]
+            logger.info(f"QA context retrieval using k={search_k} (calculated from query analysis)")
             
             # Perform similarity search
             results = await self.vector_store.similarity_search(

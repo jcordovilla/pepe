@@ -1,72 +1,39 @@
 {
-  "export_date": "2025-07-24T00:34:07.280165",
-  "total_resources": 6,
+  "export_date": "2025-07-24T00:55:15.580877",
+  "total_resources": 3,
   "resources": [
     {
-      "url": "https://medicalxpress.com/news/2025-07-ai-tool-hidden-heart-disease.pdf?utm_source=chatgpt.com",
-      "domain": "medicalxpress.com",
-      "category": "Documents",
+      "url": "https://community.openai.com/t/how-can-i-use-my-custom-gpt-on-my-website/528694",
+      "domain": "community.openai.com",
+      "category": "AI Resources",
       "quality_score": 0.9,
-      "channel_name": "🧬healthcare",
-      "author": "Oscar Garcia",
-      "timestamp": "2025-07-22",
+      "channel_name": "🛝discord-pg-agentops",
+      "author": "Pepe",
+      "timestamp": "2025-07-23",
       "jump_url": null,
-      "description": "The EchoNext Library is an AI-based tool developed by Columbia University to detect hidden heart disease using public ECG data. Published in Nature via MedicalXpress, July 16, 2025, this research likely presents a method for utilizing artificial intelligence algorithms with available electrocardi..."
+      "description": "This OpenAI community thread discusses how to integrate custom GPT models into personal websites for creating content digests like weekly newsletters or updates from various channels. The conversation highlights the practical aspects, sharing experiences that could guide users in deploying AI-gen..."
     },
     {
-      "url": "https://www.reuters.com/sustainability/boards-policy-regulation/microsoft-likely-sign-eu-ai-code-practice-meta-rebuffs-guidelines-2025-07-18/?utm_source=chatgpt.com",
-      "domain": "reuters.com",
-      "category": "News & Analysis",
-      "quality_score": 0.8,
-      "channel_name": "☀️ Motivational Mondays !!",
-      "author": "Andrea Hickethier 🍑 Munich",
-      "timestamp": "2025-07-21",
-      "jump_url": null,
-      "description": "This Reuters article from July 18, 2025, discusses Microsoft's likely stance against signing EU AI regulations due to ethical concerns about the guidelines potentially hindering innovation and progress. Joel Kaplan of Meta is quoted as criticizing these rules for being misguided paths that could ..."
-    },
-    {
-      "url": "https://www.youtube.com/playlist?list=PLcyuiUpPdL_uUSai7dddTs5eIo-oVFvsg",
+      "url": "https://www.youtube.com/watch?v=1jn_RpbPbEc",
       "domain": "youtube.com",
       "category": "Educational Videos",
-      "quality_score": 0.75,
-      "channel_name": "Gen AI - Uses Cases And News",
-      "author": "Jose Cordovilla",
-      "timestamp": "2025-07-21",
+      "quality_score": 0.85,
+      "channel_name": "🛝discord-pg-agentops",
+      "author": "Pepe",
+      "timestamp": "2025-07-23",
       "jump_url": null,
-      "description": "This YouTube playlist showcases San José's innovative approach to integrating AI in local governance through the GovAI Coalition, highlighting their employee training program with SJSU for upskilling city staff in AI applications. Viewers can learn about practical strategies and benefits of using..."
+      "description": "This YouTube video provides an in-depth analysis of Denmark's progressive copyright law amendments aimed at curbing the spread of deepfakes, a form of AI-generated fake media that blurs reality and fiction. Viewers learn about legal frameworks being adapted to address modern technological challen..."
     },
     {
-      "url": "https://www.wired.com/review/elliq-ai-companion-robot/?utm_source=chatgpt.com",
-      "domain": "wired.com",
+      "url": "https://techcrunch.com/2025/07/22/21-year-old-mit-dropouts-raise-32m-at-300m-valuation-led-by-insight/",
+      "domain": "techcrunch.com",
       "category": "Tech News",
       "quality_score": 0.75,
-      "channel_name": "🧬healthcare",
-      "author": "Mahua Sircar Mitra",
-      "timestamp": "2025-07-21",
+      "channel_name": "🗞genai-news",
+      "author": "Andrea Hickethier 🍑 Munich",
+      "timestamp": "2025-07-23",
       "jump_url": null,
-      "description": "ElliQ is an AI companion robot designed to proactively engage seniors, aiming to reduce loneliness and encourage unique social connections through conversation and activities tailored for older adults' interests. Developed by Intuition Robotics with funding from the National Institute on Aging (N..."
-    },
-    {
-      "url": "https://www.theguardian.com/technology/2025/jun/27/deepfakes-denmark-copyright-law-artificial-intelligence",
-      "domain": "theguardian.com",
-      "category": "News & Analysis",
-      "quality_score": 0.75,
-      "channel_name": "📚ai-philosophy-ethics",
-      "author": "David A. Guerrero S.",
-      "timestamp": "2025-07-22",
-      "jump_url": null,
-      "description": "This article from The Guardian discusses Denmark's pioneering move to combat deepfakes by granting individuals copyright over their own likeness in digital media through new legislation. This approach aims to empower people and hold creators accountable for misusing AI-generated content, setting ..."
-    },
-    {
-      "url": "https://www.businessinsider.com/healthcare-startups-using-ai-see-more-patients-chase-profits-2025-7",
-      "domain": "businessinsider.com",
-      "category": "Business News",
-      "quality_score": 0.7,
-      "channel_name": "☀️ Motivational Mondays !!",
-      "author": "Carol Choi",
-      "timestamp": "2025-07-21",
-      "jump_url": null,
-      "description": "This Business Insider article examines how AI is revolutionizing healthcare startups by enabling them to see more patients efficiently while reducing administrative burdens. Companies like Hinge Health and Sword Health employ advanced technologies such as computer vision for triage, allowing clin..."
+      "description": "Delve, a startup founded by MIT dropouts at age 21, has raised $32 million in funding led by Insight Venture Partners with an impressive valuation of over $300 million. The company specializes in automating regulatory compliance for businesses using AI agents to navigate complex legal landscapes ..."
     }
   ]
 }
