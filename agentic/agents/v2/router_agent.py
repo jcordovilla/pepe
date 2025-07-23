@@ -33,6 +33,9 @@ class RouterAgent(BaseAgent):
             "question": "qa", 
             "search": "qa",
             "find": "qa",
+            "list": "qa",
+            "users": "qa",
+            "who": "qa",
             "stats": "stats",
             "statistics": "stats",
             "metrics": "stats",
@@ -116,11 +119,20 @@ Command: "{command}"
 Payload: {payload}
 
 Available agents:
-- qa: For questions, searches, finding information
-- stats: For statistics, metrics, data analysis  
-- digest: For summaries, digests, overviews
-- trend: For trend analysis, patterns over time
-- structure: For channel organization, structure analysis
+- qa: For specific questions, searches, finding specific information, listing users with specific skills/experience, finding particular messages or content
+- stats: For statistics, metrics, data analysis, numerical summaries
+- digest: For general summaries, overviews, "what happened" type questions, general activity summaries
+- trend: For trend analysis, patterns over time, "how has X changed" questions
+- structure: For channel organization, structure analysis, "how is this organized" questions
+
+Examples:
+- "list users with experience in cybersecurity" → qa (specific information search)
+- "find messages about Python" → qa (specific search)
+- "who knows about machine learning" → qa (specific user search)
+- "what happened this week" → digest (general summary)
+- "give me a summary of recent activity" → digest (general overview)
+- "how many messages were sent" → stats (statistics)
+- "what are the trending topics" → trend (trend analysis)
 
 Respond with ONLY the agent name (qa, stats, digest, trend, or structure)."""
 
