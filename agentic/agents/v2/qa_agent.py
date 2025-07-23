@@ -71,6 +71,10 @@ class QAAgent(BaseAgent):
         logger.info(f"QAAgent processing query: {query[:50]}...")
         
         try:
+            # Check if this is a question about the bot's capabilities
+            if self._is_bot_capability_question(query):
+                return self._get_bot_capabilities_response()
+            
             # Retrieve relevant context
             context_docs = await self._retrieve_context(query)
             
@@ -99,12 +103,15 @@ class QAAgent(BaseAgent):
             # Filter and format results
             context_docs = []
             for result in results:
-                if result.get("score", 0) > 0.3:  # Minimum relevance threshold
+                # Use similarity score from vector store (0-1, higher is better)
+                similarity_score = result.get("similarity", 0)
+                # Lower threshold for msmarco-distilbert-base-v4 model which produces larger distances
+                if similarity_score >= 0.0:  # Accept any result for now
                     context_docs.append({
                         "content": result.get("content", ""),
                         "metadata": result.get("metadata", {}),
-                        "score": result.get("score", 0),
-                        "permalink": result.get("metadata", {}).get("permalink", "")
+                        "score": similarity_score,
+                        "permalink": result.get("metadata", {}).get("jump_url", "")
                     })
             
             return context_docs
@@ -112,6 +119,74 @@ class QAAgent(BaseAgent):
         except Exception as e:
             logger.error(f"Context retrieval error: {e}")
             return []
+    
+    def _is_bot_capability_question(self, query: str) -> bool:
+        """Check if the query is asking about the bot's capabilities."""
+        query_lower = query.lower()
+        
+        # Keywords that indicate questions about bot capabilities
+        capability_keywords = [
+            "what can you do",
+            "what do you do",
+            "what are your capabilities",
+            "what are you capable of",
+            "what type of tasks",
+            "what tasks can you",
+            "how can you help",
+            "what are your features",
+            "what are your functions",
+            "what can you help with",
+            "what are you able to do",
+            "what are your skills",
+            "what are your abilities",
+            "what can you perform",
+            "what are you designed to do",
+            "what is your purpose",
+            "what do you specialize in",
+            "what are your strengths",
+            "what can you assist with",
+            "what are your tools"
+        ]
+        
+        return any(keyword in query_lower for keyword in capability_keywords)
+    
+    def _get_bot_capabilities_response(self) -> str:
+        """Provide a comprehensive response about the bot's capabilities."""
+        return """# 🤖 Discord Bot Capabilities
+
+I'm an intelligent Discord bot designed to help you analyze and interact with your server's content. Here are my main capabilities:
+
+## 🔍 **Search & Analysis**
+- **Semantic Search**: Find relevant messages and discussions across your Discord server
+- **Content Analysis**: Analyze conversation patterns, topics, and trends
+- **User Activity**: Track user engagement and participation patterns
+- **Channel Insights**: Understand activity levels and discussion topics in different channels
+
+## 📊 **Digest & Summarization**
+- **Weekly Digests**: Generate comprehensive summaries of server activity
+- **Channel Summaries**: Create focused summaries for specific channels
+- **Topic Analysis**: Identify key discussion themes and trends
+- **Activity Reports**: Track engagement metrics and participation
+
+## 🧠 **Intelligent Q&A**
+- **Context-Aware Answers**: Answer questions based on your server's message history
+- **Conversation Memory**: Remember previous interactions for better context
+- **Multi-Agent System**: Use specialized agents for different types of queries
+- **Real-time Processing**: Provide instant responses to your questions
+
+## 🎯 **Specialized Features**
+- **Resource Detection**: Automatically identify and catalog valuable links and resources
+- **Trend Analysis**: Spot emerging topics and discussion patterns
+- **Community Insights**: Help understand your community's interests and engagement
+- **Performance Monitoring**: Track bot performance and usage statistics
+
+## 💬 **How to Use Me**
+- Ask me questions about your server's content: *"What are people discussing about AI?"*
+- Request summaries: *"Give me a weekly digest of #general"*
+- Search for specific topics: *"Find discussions about machine learning"*
+- Get insights: *"What are the most active channels?"*
+
+I'm constantly learning from your server's content to provide more relevant and helpful responses! 🚀"""
     
     async def _generate_answer(self, query: str, context_docs: List[Dict[str, Any]]) -> str:
         """Generate answer using LLM and context."""

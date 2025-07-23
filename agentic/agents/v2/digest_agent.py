@@ -32,7 +32,6 @@ class DigestAgent(BaseAgent):
         
         # Digest configuration
         self.max_messages = config.get("max_messages", 50)
-        self.min_reactions = config.get("min_reactions", 3)
         self.max_summary_length = config.get("max_summary_length", 250)
         
         logger.info("DigestAgent initialized")
@@ -84,11 +83,10 @@ class DigestAgent(BaseAgent):
         logger.info(f"DigestAgent processing digest from {start_date} to {end_date} ({period})")
         
         try:
-            # Get high-engagement messages
-            messages = await self._get_high_engagement_messages(start_date, end_date)
-            
+            # Get all messages in the period (not just high-engagement)
+            messages = await self._get_all_messages(start_date, end_date)
             if not messages:
-                return f"No high-engagement messages found for the {period} period."
+                return f"No messages found for the {period} period."
             
             # Generate individual summaries
             summaries = await self._generate_message_summaries(messages)
@@ -102,12 +100,39 @@ class DigestAgent(BaseAgent):
             logger.error(f"DigestAgent error: {e}")
             return f"Error generating digest: {str(e)}"
     
-    async def _get_high_engagement_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
-        """Get high-engagement messages from the vector store."""
+    async def _get_all_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
+        """Get all messages from the vector store for the period."""
         try:
-            # Search for messages with reactions
+            results = await self.vector_store.filter_search(
+                filters={
+                    "timestamp": {
+                        "$gte": start_date.isoformat(),
+                        "$lte": end_date.isoformat()
+                    }
+                },
+                k=self.max_messages,
+                sort_by="timestamp"
+            )
+            messages = []
+            for result in results:
+                messages.append({
+                    "content": result.get("content", ""),
+                    "metadata": result.get("metadata", {}),
+                    "permalink": result.get("metadata", {}).get("permalink", ""),
+                    "reactions": sum(r.get("count", 0) for r in result.get("metadata", {}).get("reactions", [])),
+                    "author": result.get("metadata", {}).get("author_name", "Unknown"),
+                    "channel": result.get("metadata", {}).get("channel_name", "Unknown")
+                })
+            return messages[:self.max_messages]
+        except Exception as e:
+            logger.error(f"Error getting messages: {e}")
+            return []
+    
+    async def _get_high_engagement_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
+        """Get high-engagement messages for trending only."""
+        try:
             results = await self.vector_store.reaction_search(
-                reaction="",  # Empty string to get all reactions
+                reaction="",
                 k=self.max_messages,
                 filters={
                     "timestamp": {
@@ -117,14 +142,11 @@ class DigestAgent(BaseAgent):
                 },
                 sort_by="total_reactions"
             )
-            
-            # Filter by minimum reactions
             high_engagement = []
             for result in results:
                 reactions = result.get("metadata", {}).get("reactions", [])
                 total_reactions = sum(reaction.get("count", 0) for reaction in reactions)
-                
-                if total_reactions >= self.min_reactions:
+                if total_reactions >= 3:  # Only for trending
                     high_engagement.append({
                         "content": result.get("content", ""),
                         "metadata": result.get("metadata", {}),
@@ -133,9 +155,7 @@ class DigestAgent(BaseAgent):
                         "author": result.get("metadata", {}).get("author_name", "Unknown"),
                         "channel": result.get("metadata", {}).get("channel_name", "Unknown")
                     })
-            
             return high_engagement[:self.max_messages]
-            
         except Exception as e:
             logger.error(f"Error getting high-engagement messages: {e}")
             return []
@@ -193,7 +213,7 @@ Focus on the key points and main topic. Be concise but informative."""
         if not summaries:
             return f"No content to summarize for the {period} period."
         
-        # Group summaries by theme/topic
+        # Group summaries by theme
         grouped_summaries = await self._group_by_theme(summaries)
         
         # Generate final digest

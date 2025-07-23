@@ -33,7 +33,6 @@ class DigestAgent(BaseAgent):
         # Digest configuration
         self.default_digest_period = config.get("default_digest_period", "weekly")
         self.max_digest_messages = config.get("max_digest_messages", 500)
-        self.engagement_threshold = config.get("engagement_threshold", 2)
         self.trending_threshold = config.get("trending_threshold", 5)
         
         logger.info(f"DigestAgent initialized with period={self.default_digest_period}")
@@ -287,17 +286,13 @@ class DigestAgent(BaseAgent):
         }
     
     async def _identify_trending_messages(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Identify trending/high-engagement messages."""
+        """Identify trending/high-engagement messages only for trending section."""
         trending = []
-        
         for msg in messages:
             reactions = msg.get("reactions", [])
             reaction_count = sum(r.get("count", 0) for r in reactions if isinstance(r, dict))
             attachment_count = len(msg.get("attachments", []))
-            
-            # Calculate engagement score
             engagement_score = reaction_count + (attachment_count * 2)
-            
             if engagement_score >= self.trending_threshold:
                 trending.append({
                     "content": msg.get("content", "")[:200],
@@ -308,8 +303,6 @@ class DigestAgent(BaseAgent):
                     "reactions": reaction_count,
                     "attachments": attachment_count
                 })
-        
-        # Sort by engagement score
         trending.sort(key=lambda x: x["engagement_score"], reverse=True)
         return trending[:10]  # Top 10
     
