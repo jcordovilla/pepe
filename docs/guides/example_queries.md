@@ -2,6 +2,8 @@
 
 This document provides examples of different types of queries you can ask the Discord bot. The bot uses advanced semantic search and natural language processing to find relevant messages and provide meaningful responses.
 
+> **💡 To understand how the bot processes these queries, see [AGENTIC_ARCHITECTURE.md](../AGENTIC_ARCHITECTURE.md)**
+
 ## 1. General Content Search
 
 These queries help you find discussions about specific topics:

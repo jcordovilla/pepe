@@ -3,6 +3,8 @@
 ## Overview
 This is an agentic RAG (Retrieval-Augmented Generation) application with Discord bot capabilities, built using LangGraph for multi-agent orchestration. The system now includes advanced digest generation capabilities for weekly/monthly summaries.
 
+> **💡 For a simple explanation of how the agentic system works, see [AGENTIC_ARCHITECTURE.md](AGENTIC_ARCHITECTURE.md)**
+
 ## Root Directory Structure
 
 ```

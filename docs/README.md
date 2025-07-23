@@ -5,6 +5,7 @@ This directory contains documentation for the Discord RAG Bot with Agentic Archi
 ## Structure
 
 - **[index.md](index.md)** - Main project overview and architecture
+- **[AGENTIC_ARCHITECTURE.md](AGENTIC_ARCHITECTURE.md)** - Simple guide to how the agentic system works
 - **[OPERATIONS.md](OPERATIONS.md)** - Complete operations and maintenance guide
 - **[ORGANIZATION.md](ORGANIZATION.md)** - Project organization and structure
 - **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Detailed project architecture

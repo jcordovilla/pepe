@@ -25,6 +25,8 @@ The system uses a modular agentic architecture with:
 - **Vector Store**: Semantic search capabilities with optimized embeddings
 - **Interfaces**: Discord and API endpoints
 
+For a simple explanation of how the agentic system works, see **[AGENTIC_ARCHITECTURE.md](AGENTIC_ARCHITECTURE.md)**.
+
 ## Usage Examples
 
 For detailed examples of supported queries, see [guides/example_queries.md](guides/example_queries.md).

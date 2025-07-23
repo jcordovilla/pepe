@@ -2,6 +2,8 @@
 
 Get the Discord Bot v2 up and running quickly with this guide.
 
+> **💡 To understand how the bot works, see [AGENTIC_ARCHITECTURE.md](../AGENTIC_ARCHITECTURE.md)**
+
 ## Prerequisites
 
 - Python 3.9+
