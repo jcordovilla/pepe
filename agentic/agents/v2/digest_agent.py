@@ -71,6 +71,7 @@ class DigestAgent(BaseAgent):
         start_str = kwargs.get("start")
         end_str = kwargs.get("end")
         period = kwargs.get("period", "day")
+        channel = kwargs.get("channel")
         
         # Parse dates
         try:
@@ -83,8 +84,8 @@ class DigestAgent(BaseAgent):
         logger.info(f"DigestAgent processing digest from {start_date} to {end_date} ({period})")
         
         try:
-            # Get all messages in the period (not just high-engagement)
-            messages = await self._get_all_messages(start_date, end_date)
+            # Get all messages in the period (optionally filter by channel)
+            messages = await self._get_all_messages(start_date, end_date, channel)
             if not messages:
                 return f"No messages found for the {period} period."
             
@@ -100,16 +101,19 @@ class DigestAgent(BaseAgent):
             logger.error(f"DigestAgent error: {e}")
             return f"Error generating digest: {str(e)}"
     
-    async def _get_all_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
-        """Get all messages from the vector store for the period."""
+    async def _get_all_messages(self, start_date: datetime, end_date: datetime, channel: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get all messages from the vector store for the period, optionally filtered by channel."""
         try:
+            filters = {
+                "timestamp": {
+                    "$gte": start_date.isoformat(),
+                    "$lte": end_date.isoformat()
+                }
+            }
+            if channel:
+                filters["channel_name"] = channel
             results = await self.vector_store.filter_search(
-                filters={
-                    "timestamp": {
-                        "$gte": start_date.isoformat(),
-                        "$lte": end_date.isoformat()
-                    }
-                },
+                filters=filters,
                 k=self.max_messages,
                 sort_by="timestamp"
             )
