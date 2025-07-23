@@ -93,10 +93,15 @@ class QAAgent(BaseAgent):
     async def _retrieve_context(self, query: str) -> List[Dict[str, Any]]:
         """Retrieve relevant context from vector store."""
         try:
+            # For user experience queries, increase search coverage
+            search_k = self.default_k
+            if any(keyword in query.lower() for keyword in ["users", "people", "who", "list", "experience", "skills", "expertise"]):
+                search_k = 20  # Increase search coverage for user-related queries
+            
             # Perform similarity search
             results = await self.vector_store.similarity_search(
                 query=query,
-                k=self.default_k,
+                k=search_k,
                 filters=None
             )
             
@@ -107,11 +112,27 @@ class QAAgent(BaseAgent):
                 similarity_score = result.get("similarity", 0)
                 # Lower threshold for msmarco-distilbert-base-v4 model which produces larger distances
                 if similarity_score >= 0.0:  # Accept any result for now
+                    metadata = result.get("metadata", {})
+                    
+                    # Extract author information properly
+                    author_display_name = metadata.get("author_display_name", "")
+                    author_username = metadata.get("author_username", "")
+                    author_id = metadata.get("author_id", "")
+                    
+                    # Prefer display_name over username, fallback to username, then ID
+                    author_name = author_display_name if author_display_name else author_username if author_username else f"User-{author_id[-6:]}" if author_id else "Unknown"
+                    
                     context_docs.append({
                         "content": result.get("content", ""),
-                        "metadata": result.get("metadata", {}),
+                        "metadata": {
+                            **metadata,
+                            "author_name": author_name,  # Add processed author name
+                            "author_display_name": author_display_name,
+                            "author_username": author_username,
+                            "author_id": author_id
+                        },
                         "score": similarity_score,
-                        "permalink": result.get("metadata", {}).get("jump_url", "")
+                        "permalink": metadata.get("jump_url", "")
                     })
             
             return context_docs
@@ -202,6 +223,8 @@ IMPORTANT RULES:
 4. Be concise but thorough
 5. Use markdown formatting for better readability
 6. Always include relevant message links when citing information
+7. When listing users, use their display names (not user IDs like <@123456>)
+8. For user experience queries, list all relevant users found in the context
 
 CONTEXT:
 {context}
@@ -241,13 +264,19 @@ ANSWER:"""
             content = doc.get("content", "")
             permalink = doc.get("permalink", "")
             score = doc.get("score", 0)
+            metadata = doc.get("metadata", {})
+            
+            # Get author information
+            author_name = metadata.get("author_name", "Unknown")
+            channel_name = metadata.get("channel_name", "Unknown")
+            timestamp = metadata.get("timestamp", "")
             
             # Truncate content if too long
             if len(content) > 500:
                 content = content[:500] + "..."
             
             formatted_contexts.append(
-                f"Message {i} (relevance: {score:.2f}):\n{content}\n"
+                f"Message {i} (relevance: {score:.2f}) by {author_name} in #{channel_name}:\n{content}\n"
                 f"Link: {permalink}\n"
             )
         
@@ -258,6 +287,10 @@ ANSWER:"""
         # Ensure the answer starts properly
         if not answer.strip():
             return "I don't know based on server data."
+        
+        # Clean up any remaining Discord user ID references (<@123456>)
+        # Replace with a note about using display names
+        answer = re.sub(r'<@\d+>', '[User mentioned]', answer)
         
         # Add a note if no citations were found
         if not re.search(r'https?://', answer):
