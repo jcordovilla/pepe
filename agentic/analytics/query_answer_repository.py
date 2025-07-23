@@ -2,7 +2,7 @@
 Query-Answer Repository System
 
 Comprehensive tracking database for user queries and agent responses
-across Discord and Streamlit interfaces with performance monitoring
+across Discord interface with performance monitoring
 and validation capabilities.
 """
 
@@ -65,7 +65,7 @@ class QueryAnswerRepository:
     Comprehensive repository for tracking and analyzing query-answer pairs.
     
     Features:
-    - Cross-platform tracking (Discord + Streamlit)
+    - Discord platform tracking
     - Performance metrics and analytics
     - Quality assessment and validation
     - Trend analysis and reporting
@@ -93,8 +93,8 @@ class QueryAnswerRepository:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 query_hash TEXT NOT NULL,
                 user_id TEXT NOT NULL,
-                platform TEXT NOT NULL,  -- 'discord' or 'streamlit'
-                channel_id TEXT,         -- Discord channel or Streamlit session
+                platform TEXT NOT NULL,  -- 'discord'
+channel_id TEXT,         -- Discord channel
                 query_text TEXT NOT NULL,
                 answer_text TEXT NOT NULL,
                 query_timestamp DATETIME NOT NULL,
@@ -229,7 +229,7 @@ class QueryAnswerRepository:
         
         Args:
             user_id: User identifier
-            platform: Platform name ('discord' or 'streamlit')
+            platform: Platform name ('discord')
             query_text: User's query
             answer_text: System's response
             metrics: Performance metrics

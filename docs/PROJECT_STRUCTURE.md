@@ -22,7 +22,7 @@ discord-bot-agentic/
 │   ├── cache/           # Smart caching system
 │   ├── config/          # Configuration management
 │   ├── core/            # Core business logic
-│   ├── interfaces/      # Discord, Streamlit, and API interfaces
+│   ├── interfaces/      # Discord and API interfaces
 │   ├── memory/          # Conversation memory management
 │   ├── reasoning/       # Query analysis and task planning
 │   ├── services/        # Business services layer
@@ -125,7 +125,7 @@ interfaces/
 ├── __init__.py
 ├── discord_interface.py    # Discord bot integration (slash commands)
 ├── agent_api.py           # REST API for agent operations
-└── streamlit_interface.py # Web dashboard and admin interface
+
 ```
 
 **Discord Integration:**

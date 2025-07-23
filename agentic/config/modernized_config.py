@@ -87,9 +87,7 @@ def get_modernized_config() -> Dict[str, Any]:
         "interfaces": {
             "discord_enabled": True,
             "api_enabled": True,
-            "streamlit_enabled": True,
-            "api_port": 8000,
-            "streamlit_port": 8501
+            "api_port": 8000
         }
     }
     

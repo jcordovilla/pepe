@@ -10,12 +10,11 @@ packages = [{include = "agentic"}]
 python = "^3.11"
 
 # Core dependencies
-streamlit = "^1.32.0"
 pyperclip = "^1.8.2"
 python-dotenv = "^1.0.0"
 openai = "^1.12.0"
 
-# Streamlit extensions and visualization
+# Visualization and data processing
 plotly = "^5.17.0"
 pandas = "^2.0.0"
 aiofiles = "^23.2.0"
@@ -131,8 +130,7 @@ module = [
     "chromadb.*",
     "langchain.*",
     "langgraph.*",
-    "discord.*",
-    "streamlit.*"
+    "discord.*"
 ]
 ignore_missing_imports = true
 

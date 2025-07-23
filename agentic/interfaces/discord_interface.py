@@ -18,7 +18,7 @@ from discord import Webhook, WebhookMessage
 from discord.ext import commands
 
 from .agent_api import AgentAPI
-from .streamlit_interface import StreamlitInterface
+
 from ..services.discord_service import DiscordMessageService
 from ..services.unified_data_manager import UnifiedDataManager
 from ..services.sync_service import DataSynchronizationService

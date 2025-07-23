@@ -87,7 +87,7 @@ python test_system.py
 ### Interfaces
 - **Discord Interface**: Slash commands and bot integration
 - **Agent API**: RESTful API for agent interactions
-- **Streamlit Interface**: Web-based dashboard (optional)
+
 
 ## 🔍 System Monitoring
 

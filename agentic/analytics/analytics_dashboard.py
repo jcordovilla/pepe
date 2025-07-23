@@ -2,7 +2,7 @@
 Analytics Dashboard
 
 Interactive dashboard for visualizing query-answer analytics, performance metrics,
-and validation results across Discord and Streamlit interfaces.
+and validation results across Discord interface.
 """
 
 import json
@@ -24,7 +24,7 @@ class AnalyticsDashboard:
     Features:
     - Interactive visualizations using Plotly
     - Real-time performance monitoring
-    - Cross-platform analytics (Discord + Streamlit)
+    - Discord platform analytics
     - Quality trend analysis
     - User behavior insights
     - Export capabilities

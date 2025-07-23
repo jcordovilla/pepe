@@ -21,8 +21,8 @@ Imagine you have a team of experts, each with a specific job:
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
-│  │   Discord   │    │   REST API  │    │  Streamlit  │         │
-│  │  Interface  │    │  Interface  │    │ Interface   │         │
+│  │   Discord   │    │   REST API  │    │             │         │
+│  │  Interface  │    │  Interface  │    │             │         │
 │  └─────┬───────┘    └─────┬───────┘    └─────┬───────┘         │
 │        │                  │                  │                 │
 │        └──────────────────┼──────────────────┘                 │
@@ -388,8 +388,8 @@ The result is a bot that feels intelligent and helpful, capable of understanding
 │  │                    AGENTIC SYSTEM                                  │   │
 │  │                                                                     │   │
 │  │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐            │   │
-│  │  │   DISCORD   │    │   REST API  │    │  STREAMLIT  │            │   │
-│  │  │ INTERFACE   │    │ INTERFACE   │    │ INTERFACE   │            │   │
+│  │  │   DISCORD   │    │   REST API  │    │             │            │   │
+│  │  │ INTERFACE   │    │ INTERFACE   │    │             │            │   │
 │  │  └─────┬───────┘    └─────┬───────┘    └─────┬───────┘            │   │
 │  │        │                  │                  │                     │   │
 │  │        └──────────────────┼──────────────────┘                     │   │
