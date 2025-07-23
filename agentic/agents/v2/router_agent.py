@@ -143,6 +143,13 @@ Respond with ONLY the agent name (qa, stats, digest, trend, or structure)."""
         """Prepare arguments for the next agent based on its type."""
         args = payload.copy()
         
+        # Merge in agent_args from payload/context if present (e.g., from Discord interface)
+        agent_args_from_context = None
+        if "context" in payload and isinstance(payload["context"], dict):
+            agent_args_from_context = payload["context"].get("agent_args")
+        if agent_args_from_context and isinstance(agent_args_from_context, dict):
+            args.update(agent_args_from_context)
+
         # Add command context
         args["original_command"] = command
         args["routed_at"] = datetime.utcnow().isoformat()

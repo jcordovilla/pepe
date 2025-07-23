@@ -228,7 +228,10 @@ class DatabaseMessageIndexer:
             "embeds": int(row['embeds_count']) if row['embeds_count'] is not None else 0,
             "pinned": bool(row['pinned']) if row['pinned'] is not None else False,
             "type": str(row['message_type']) if row['message_type'] is not None else "MessageType.default",
-            "reference": reference
+            "reference": reference,
+            # Always include forum_channel_id and forum_channel_name
+            "forum_channel_id": str(row['forum_channel_id']) if row['forum_channel_id'] is not None else "",
+            "forum_channel_name": str(row['forum_channel_name']) if row['forum_channel_name'] is not None else ""
         }
         
         # Add thread metadata if this is a forum thread message

@@ -360,6 +360,9 @@ class PersistentVectorStore:
                         "timestamp": timestamp_str,
                         "timestamp_unix": timestamp_unix,
                         "jump_url": msg.get("jump_url", ""),
+                        # Forum support: always include forum_channel_id if present
+                        "forum_channel_id": str(msg.get("forum_channel_id", "")),
+                        "forum_channel_name": msg.get("forum_channel_name", ""),
                         
                         # Author fields (comprehensive)
                         "author_id": str(author.get("id", "")),

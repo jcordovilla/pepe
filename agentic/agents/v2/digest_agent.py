@@ -71,6 +71,7 @@ class DigestAgent(BaseAgent):
         start_str = kwargs.get("start")
         end_str = kwargs.get("end")
         period = kwargs.get("period", "day")
+        channel_id = kwargs.get("channel_id")
         channel = kwargs.get("channel")
         
         # Parse dates
@@ -84,8 +85,8 @@ class DigestAgent(BaseAgent):
         logger.info(f"DigestAgent processing digest from {start_date} to {end_date} ({period})")
         
         try:
-            # Get all messages in the period (optionally filter by channel)
-            messages = await self._get_all_messages(start_date, end_date, channel)
+            # Get all messages in the period (optionally filter by channel_id or channel_name)
+            messages = await self._get_all_messages(start_date, end_date, channel_id, channel)
             if not messages:
                 return f"No messages found for the {period} period."
             
@@ -101,31 +102,53 @@ class DigestAgent(BaseAgent):
             logger.error(f"DigestAgent error: {e}")
             return f"Error generating digest: {str(e)}"
     
-    async def _get_all_messages(self, start_date: datetime, end_date: datetime, channel: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get all messages from the vector store for the period, optionally filtered by channel."""
+    async def _get_all_messages(self, start_date: datetime, end_date: datetime, channel_id: Optional[str] = None, channel: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get all messages from the vector store for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
-            filters = {
-                "timestamp": {
-                    "$gte": start_date.isoformat(),
-                    "$lte": end_date.isoformat()
-                }
-            }
-            if channel:
-                filters["channel_name"] = channel
+            # Use timestamp_unix (float) for ChromaDB filtering
+            start_ts = start_date.timestamp() if start_date else None
+            end_ts = end_date.timestamp() if end_date else None
+            filters_and = []
+            if start_ts is not None:
+                filters_and.append({"timestamp_unix": {"$gte": start_ts}})
+            if end_ts is not None:
+                filters_and.append({"timestamp_unix": {"$lte": end_ts}})
+            # Always include channel/forum filter if channel_id is provided
+            if channel_id:
+                filters_and.append({"$or": [
+                    {"channel_id": channel_id},
+                    {"forum_channel_id": channel_id}
+                ]})
+            elif channel:
+                filters_and.append({"channel_name": channel})
+            # If channel_id is provided but no timestamp, still use $and for channel/forum filter
+            if channel_id and not (start_ts or end_ts):
+                filters = {"$and": [
+                    {"$or": [
+                        {"channel_id": channel_id},
+                        {"forum_channel_id": channel_id}
+                    ]}
+                ]}
+            else:
+                filters = {"$and": filters_and} if len(filters_and) > 1 else (filters_and[0] if filters_and else {})
+            logger.info(f"[DigestAgent] FINAL filter_search filters: {filters}")
             results = await self.vector_store.filter_search(
                 filters=filters,
                 k=self.max_messages,
                 sort_by="timestamp"
             )
+            logger.info(f"[DigestAgent] Retrieved {len(results)} messages from vector store.")
+            for i, result in enumerate(results[:3]):
+                logger.info(f"[DigestAgent] Message {i+1}: channel_id={result.get('channel_id')}, forum_channel_id={result.get('forum_channel_id')}, content={result.get('content', '')[:60]}")
             messages = []
             for result in results:
                 messages.append({
                     "content": result.get("content", ""),
-                    "metadata": result.get("metadata", {}),
-                    "permalink": result.get("metadata", {}).get("permalink", ""),
-                    "reactions": sum(r.get("count", 0) for r in result.get("metadata", {}).get("reactions", [])),
-                    "author": result.get("metadata", {}).get("author_name", "Unknown"),
-                    "channel": result.get("metadata", {}).get("channel_name", "Unknown")
+                    "metadata": result,
+                    "permalink": result.get("jump_url", ""),
+                    "reactions": result.get("total_reactions", 0),
+                    "author": result.get("author_username", "Unknown"),
+                    "channel": result.get("channel_name", "Unknown")
                 })
             return messages[:self.max_messages]
         except Exception as e:

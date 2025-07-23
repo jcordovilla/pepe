@@ -11,6 +11,7 @@ import random
 from datetime import datetime
 from typing import Dict, List, Optional, Union, Any, cast
 from dataclasses import dataclass
+import re
 
 import discord
 from discord import Webhook, WebhookMessage
@@ -236,6 +237,13 @@ class DiscordInterface:
             # Log query
             await self._log_query(query, discord_context)
             
+            # Extract channel mention (e.g., <#1234567890>) from the query
+            channel_mention_match = re.search(r'<#(\d+)>', query)
+            extracted_channel_id = None
+            if channel_mention_match:
+                extracted_channel_id = channel_mention_match.group(1)
+                logger.info(f"[DiscordInterface] Extracted channel mention: {extracted_channel_id}")
+
             # Check cache first
             if self.cache_enabled:
                 cached_response = await self._check_cache(query, discord_context.user_id)
@@ -253,18 +261,21 @@ class DiscordInterface:
             logger.info(f"⏳ Starting agent API query processing at {datetime.now().isoformat()}")
             query_start_time = datetime.now()
             
-            # Note: Removed interim status updates as users shouldn't see processing steps
-            # Users should only see the final result
-            
+            # Build context for agent
+            agent_context = {
+                    "platform": "discord",
+                "channel_id": extracted_channel_id if extracted_channel_id else discord_context.channel_id,
+                    "guild_id": discord_context.guild_id,
+                "timestamp": discord_context.timestamp.isoformat(),
+                }
+            if extracted_channel_id:
+                agent_context["channel_id"] = extracted_channel_id
+                # Pass as agent_args for router/orchestrator
+                agent_context["agent_args"] = {"channel_id": extracted_channel_id}
             result = await self.agent_api.query(
                 query=query,
                 user_id=str(discord_context.user_id),
-                context={
-                    "platform": "discord",
-                    "channel_id": discord_context.channel_id,
-                    "guild_id": discord_context.guild_id,
-                    "timestamp": discord_context.timestamp.isoformat()
-                }
+                context=agent_context
             )
             
             query_duration = (datetime.now() - query_start_time).total_seconds()
