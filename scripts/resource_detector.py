@@ -922,6 +922,35 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
         if pdf_domains:
             print(f"   📄 PDF hosts ({len(pdf_domains)}): {', '.join(pdf_domains[:5])}...")
     
+    def _ensure_resources_table_exists(self, conn):
+        """Ensure the resources table and indexes exist in the SQLite DB."""
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS resources (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                url TEXT UNIQUE NOT NULL,
+                domain TEXT NOT NULL,
+                category TEXT NOT NULL,
+                quality_score REAL NOT NULL,
+                channel_name TEXT,
+                author TEXT,
+                timestamp TEXT,
+                jump_url TEXT,
+                description TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        # Create indexes for fast searching
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_domain ON resources(domain)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_category ON resources(category)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quality_score ON resources(quality_score)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_channel_name ON resources(channel_name)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_author ON resources(author)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON resources(timestamp)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_created_at ON resources(created_at)")
+        conn.commit()
+
     def save_resources(self, output_path: Path, analyze_unknown: bool = False):
         """Save detected resources to JSON file"""
         report = self._generate_report(analyze_unknown)
@@ -931,6 +960,61 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
         
         print(f"💾 Resources saved to: {output_path}")
         return report
+
+    def save_resources_to_db(self, db_path: Path):
+        """Upsert all detected resources into the resources table in the given SQLite DB."""
+        import sqlite3
+        if not db_path.exists():
+            print(f"❌ Resource DB not found: {db_path}")
+            return
+        try:
+            with sqlite3.connect(db_path) as conn:
+                self._ensure_resources_table_exists(conn)
+                cursor = conn.cursor()
+                inserted = 0
+                updated = 0
+                for resource in self.detected_resources:
+                    # Upsert using ON CONFLICT(url) DO UPDATE
+                    cursor.execute(
+                        """
+                        INSERT INTO resources (url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description, updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                        ON CONFLICT(url) DO UPDATE SET
+                            domain=excluded.domain,
+                            category=excluded.category,
+                            quality_score=excluded.quality_score,
+                            channel_name=excluded.channel_name,
+                            author=excluded.author,
+                            timestamp=excluded.timestamp,
+                            jump_url=excluded.jump_url,
+                            description=excluded.description,
+                            updated_at=CURRENT_TIMESTAMP
+                        """,
+                        (
+                            resource.get('url'),
+                            resource.get('domain'),
+                            resource.get('category'),
+                            resource.get('quality_score'),
+                            resource.get('channel_name'),
+                            resource.get('author'),
+                            resource.get('timestamp'),
+                            resource.get('jump_url'),
+                            resource.get('description'),
+                        )
+                    )
+                    if cursor.rowcount == 1:
+                        inserted += 1
+                    else:
+                        updated += 1
+                conn.commit()
+                print(f"\n💾 Saved {inserted} new resources, updated {updated} existing resources in DB: {db_path}")
+        except sqlite3.OperationalError as e:
+            if 'no such table' in str(e):
+                print(f"❌ Table 'resources' does not exist in {db_path}. Please create it first.")
+            else:
+                print(f"❌ SQLite error: {e}")
+        except Exception as e:
+            print(f"❌ Error saving resources to DB: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
@@ -1258,6 +1342,10 @@ def main():
     with open(export_path, 'w', encoding='utf-8') as f:
         json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
     print("   ✅ Export file created")
+
+    # --- NEW: Save to SQLite DB ---
+    db_resource_path = project_root / 'data' / 'enhanced_resources.db'
+    detector.save_resources_to_db(db_resource_path)
 
     print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
     print("=" * 60)
