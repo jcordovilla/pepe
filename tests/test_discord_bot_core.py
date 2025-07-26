@@ -48,7 +48,7 @@ class DiscordBotCoreTests:
             'vector_store': {
                 'persist_directory': './tests/test_data/chromadb_test',
                 'collection_name': 'test_discord_messages',
-                'embedding_model': 'msmarco-distilbert-base-v4',
+                'embedding_model': os.getenv('EMBEDDING_MODEL', 'msmarco-distilbert-base-v4'),
             'embedding_type': 'sentence_transformers'
             },
             'memory': {

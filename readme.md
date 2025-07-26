@@ -312,7 +312,7 @@ pip install poetry
    cp .env.example .env
    # Edit .env with your tokens:
    # DISCORD_TOKEN=your_discord_bot_token
-   # OPENAI_API_KEY=your_openai_api_key
+   # EMBEDDING_MODEL=msmarco-distilbert-base-v4
    # GUILD_ID=your_discord_server_id
    ```
 
@@ -357,7 +357,7 @@ poetry shell
 ```bash
 # Required
 DISCORD_TOKEN=your_discord_bot_token
-OPENAI_API_KEY=your_openai_api_key
+EMBEDDING_MODEL=msmarco-distilbert-base-v4
 GUILD_ID=your_discord_server_id
 
 # Optional

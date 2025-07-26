@@ -62,7 +62,7 @@ class DiscordBotTestRunner:
         load_dotenv()
         
         return {
-            'has_openai_key': bool(os.getenv('OPENAI_API_KEY')),
+            'has_embedding_model': bool(os.getenv('EMBEDDING_MODEL')),
             'has_discord_token': bool(os.getenv('DISCORD_TOKEN')),
             'has_guild_id': bool(os.getenv('GUILD_ID')),
             'python_version': sys.version_info,
@@ -372,7 +372,7 @@ class DiscordBotTestRunner:
     async def _test_basic_configuration(self) -> Dict[str, Any]:
         """Test basic configuration loading"""
         try:
-            required_env_vars = ['OPENAI_API_KEY', 'DISCORD_TOKEN', 'GUILD_ID']
+            required_env_vars = ['DISCORD_TOKEN', 'GUILD_ID']
             missing_vars = [var for var in required_env_vars if not os.getenv(var)]
             
             if missing_vars:

@@ -332,7 +332,7 @@ class ChannelResolver:
                 "collection_name": "discord_messages",
                 "persist_directory": "./data/chromadb",
                 "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
-            "embedding_type": os.getenv("EMBEDDING_TYPE", "sentence_transformers")
+            "embedding_type": "sentence_transformers",  # Only using sentence-transformers
             }
             vector_store = PersistentVectorStore(config)
             

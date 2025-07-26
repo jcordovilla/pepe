@@ -9,7 +9,7 @@ This is an agentic RAG (Retrieval-Augmented Generation) application with Discord
 
 ```
 discord-bot-agentic/
-├── .env                    # Environment variables (Discord token, OpenAI API key)
+├── .env                    # Environment variables (Discord token, embedding model)
 ├── .gitignore             # Git ignore patterns
 ├── main.py                # Main entry point for the application
 ├── pyproject.toml         # Poetry dependencies and project configuration
@@ -252,7 +252,7 @@ Temporal Parse → Filter Creation → Vector Search → Aggregation → Structu
 ### Environment Variables Required
 ```bash
 DISCORD_TOKEN=your_discord_bot_token
-OPENAI_API_KEY=your_openai_api_key
+EMBEDDING_MODEL=msmarco-distilbert-base-v4
 GUILD_ID=your_discord_server_id
 
 # Optional Performance & Caching

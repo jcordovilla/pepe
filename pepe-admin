@@ -54,7 +54,7 @@ class PepeAdminSimplified:
             'vector_store': {
                 'persist_directory': './data/chromadb',
                 'collection_name': 'discord_messages',
-                'embedding_model': 'msmarco-distilbert-base-v4',
+                'embedding_model': os.getenv('EMBEDDING_MODEL', 'msmarco-distilbert-base-v4'),
                 'embedding_type': 'sentence_transformers'
             },
             'discord': {
@@ -122,7 +122,7 @@ class PepeAdminSimplified:
         env_vars = {
             'DISCORD_TOKEN': 'Discord bot token',
             'GUILD_ID': 'Discord server ID', 
-            'OPENAI_API_KEY': 'OpenAI API key'
+            'EMBEDDING_MODEL': 'Embedding model name'
         }
         
         for var, description in env_vars.items():
@@ -738,7 +738,7 @@ class PepeAdminSimplified:
                     vector_config = {
                         "collection_name": "discord_messages", 
                         "persist_directory": "./data/chromadb",
-                        "embedding_model": "msmarco-distilbert-base-v4",
+                        "embedding_model": os.getenv('EMBEDDING_MODEL', 'msmarco-distilbert-base-v4'),
                         "embedding_type": "sentence_transformers",
                         "batch_size": 100
                     }

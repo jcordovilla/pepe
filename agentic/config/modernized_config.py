@@ -40,7 +40,7 @@ def get_modernized_config() -> Dict[str, Any]:
                 "persist_directory": "./data/chromadb",
                 "collection_name": "discord_messages",
                 "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
-                "embedding_type": os.getenv("EMBEDDING_TYPE", "sentence_transformers"),  # sentence_transformers or openai
+                "embedding_type": "sentence_transformers",  # Only using sentence-transformers
                 "batch_size": 100  # From legacy batch processing
             },
             "memory_config": {
@@ -59,13 +59,7 @@ def get_modernized_config() -> Dict[str, Any]:
             }
         },
         
-        # OpenAI configuration (fallback only - not used by default)
-        "openai": {
-            "api_key": os.getenv("OPENAI_API_KEY"),
-            "embedding_model": os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
-            "max_tokens": 4000,
-            "temperature": 0.1  # From legacy proven settings
-        },
+        # OpenAI configuration removed - using local models only
         
         # Sentence Transformers configuration (for local embeddings)
         "sentence_transformers": {

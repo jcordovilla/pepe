@@ -29,7 +29,7 @@ class DatabaseMessageIndexer:
         vector_config = {
             "collection_name": "discord_messages",
             "persist_directory": "./data/chromadb",
-            "embedding_model": "msmarco-distilbert-base-v4",
+            "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
             "embedding_type": "sentence_transformers",
             "batch_size": 100
         }

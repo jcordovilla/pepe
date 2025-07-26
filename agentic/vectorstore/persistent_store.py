@@ -37,7 +37,7 @@ class PersistentVectorStore:
         self.collection_name = config.get("collection_name", "discord_messages")
         self.persist_directory = config.get("persist_directory", "./data/chromadb")
         self.embedding_model = config.get("embedding_model", os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"))
-        self.embedding_type = config.get("embedding_type", os.getenv("EMBEDDING_TYPE", "sentence_transformers"))
+        self.embedding_type = "sentence_transformers"  # Only using sentence-transformers
         self.chunk_size = config.get("chunk_size", 1000)
         self.batch_size = config.get("batch_size", 100)
         
@@ -90,33 +90,16 @@ class PersistentVectorStore:
                 logger.warning(f"Error creating client with settings, trying fallback: {client_error}")
                 self.client = chromadb.PersistentClient(path=self.persist_directory)
             
-            # Initialize embedding function based on configuration
-            if self.embedding_type == "openai":
-                # Use OpenAI embeddings
-                api_key = os.getenv("OPENAI_API_KEY")
-                if not api_key or api_key == "test-key-for-testing":
-                    logger.warning("OpenAI API key not available, falling back to sentence-transformers")
-                    self.embedding_type = "sentence_transformers"
-                    self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
-                        model_name=self.embedding_model
-                    )
-                else:
-                    self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(
-                        api_key=api_key,
-                        model_name=self.embedding_model
-                    )
-                    logger.info(f"Using OpenAI embedding model: {self.embedding_model}")
-            else:
-                # Use sentence-transformers (default)
-                try:
-                    self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
-                        model_name=self.embedding_model
-                    )
-                    logger.info(f"Using sentence-transformers model: {self.embedding_model}")
-                except Exception as e:
-                    logger.warning(f"Failed to load sentence-transformers model {self.embedding_model}: {e}")
-                    logger.info("Falling back to default embedding function")
-                    self.embedding_function = embedding_functions.DefaultEmbeddingFunction()
+            # Initialize embedding function - using sentence-transformers only
+            try:
+                self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
+                    model_name=self.embedding_model
+                )
+                logger.info(f"Using sentence-transformers model: {self.embedding_model}")
+            except Exception as e:
+                logger.warning(f"Failed to load sentence-transformers model {self.embedding_model}: {e}")
+                logger.info("Falling back to default embedding function")
+                self.embedding_function = embedding_functions.DefaultEmbeddingFunction()
             
             # Get or create collection
             try:
