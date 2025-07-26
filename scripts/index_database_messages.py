@@ -6,6 +6,7 @@ Reads messages from discord_messages.db and creates embeddings for semantic sear
 
 import asyncio
 import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -207,6 +208,16 @@ class DatabaseMessageIndexer:
         except (json.JSONDecodeError, TypeError):
             reference = None
         
+        # Extract bot information from raw_data JSON
+        bot_info = False
+        try:
+            if row['raw_data']:
+                raw_data = json.loads(row['raw_data'])
+                if 'author' in raw_data and 'bot' in raw_data['author']:
+                    bot_info = bool(raw_data['author']['bot'])
+        except (json.JSONDecodeError, TypeError, KeyError):
+            bot_info = False
+        
         # Create message dict in the format expected by vector store with NULL handling
         message_dict = {
             "message_id": str(row['message_id']) if row['message_id'] is not None else "",
@@ -220,7 +231,8 @@ class DatabaseMessageIndexer:
             "author": {
                 "id": str(row['author_id']) if row['author_id'] is not None else "",
                 "username": str(row['author_username']) if row['author_username'] is not None else "Unknown",
-                "display_name": str(row['author_display_name']) if row['author_display_name'] is not None else str(row['author_username']) if row['author_username'] is not None else "Unknown"
+                "display_name": str(row['author_display_name']) if row['author_display_name'] is not None else str(row['author_username']) if row['author_username'] is not None else "Unknown",
+                "bot": bot_info  # Include bot information extracted from raw_data
             },
             "mentions": mentions,
             "reactions": reactions,

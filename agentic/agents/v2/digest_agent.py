@@ -170,7 +170,7 @@ class DigestAgent(BaseAgent):
                 filters_and.append({"channel_name": channel})
             
             # Filter out bot messages for digest queries
-            filters_and.append({"author_bot": {"$ne": True}})
+            filters_and.append({"author_bot": False})
             
             # Construct final filter
             if len(filters_and) == 0:
@@ -408,7 +408,7 @@ class DigestAgent(BaseAgent):
                             }
                         },
                         {
-                            "author_bot": {"$ne": True}
+                            "author_bot": False
                         }
                     ]
                 },
