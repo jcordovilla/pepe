@@ -966,9 +966,15 @@ Create a concise, well-organized digest that captures the key discussions and hi
                     message_digest = await self._generate_simplified_digest_no_header(summaries, period)
                     digest_parts.append(message_digest)
                 else:
-                    # Use ultra-simplified for large sets - but remove the header to avoid duplication
-                    message_digest = await self._ultra_simplified_summaries_no_header(summaries, period)
-                    digest_parts.append(message_digest)
+                    # For large sets, the summaries already contain the complete summary text
+                    # Just extract the summary text from the first (and only) summary object
+                    if summaries and len(summaries) == 1 and isinstance(summaries[0], dict) and 'summary' in summaries[0]:
+                        message_digest = summaries[0]['summary']
+                        digest_parts.append(message_digest)
+                    else:
+                        # Fallback: use ultra-simplified method
+                        message_digest = await self._ultra_simplified_summaries_no_header(summaries, period)
+                        digest_parts.append(message_digest)
             
             # Add resources section if available
             if resources:
