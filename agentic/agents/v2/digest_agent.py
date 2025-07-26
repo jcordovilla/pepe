@@ -520,26 +520,29 @@ Use rich formatting to make it visually appealing and easy to read."""
                 "summary": f"Generated summary of {len(messages)} messages from various users covering {time_context}."
             }]
     
-    async def _ultra_simplified_summaries_no_header(self, messages: List[Dict[str, Any]], period: str = "day") -> str:
+    async def _ultra_simplified_summaries_no_header(self, summaries: List[Dict[str, Any]], period: str = "day") -> str:
         """Generate ultra-simplified summary without header (for use in combined digests)."""
-        if not messages:
-            return "No messages found for this period."
+        if not summaries:
+            return "No summaries found for this period."
         
-        # Take only the first 20 messages to avoid overwhelming the LLM
-        sample_messages = messages[:20]
+        # Take only the first 20 summaries to avoid overwhelming the LLM
+        sample_summaries = summaries[:20]
         
         # Create a simple summary in one LLM call
         summary_texts = []
-        for i, message in enumerate(sample_messages):
-            content = message.get("content", "")
-            author = message.get("author", "Unknown")
-            channel = message.get("channel", "Unknown")
+        for i, summary in enumerate(sample_summaries):
+            if isinstance(summary, dict) and 'summary' in summary:
+                summary_text = summary['summary']
+            elif isinstance(summary, str):
+                summary_text = summary
+            else:
+                continue
             
-            # Truncate content
-            if len(content) > 100:
-                content = content[:100] + "..."
+            # Truncate summary if too long
+            if len(summary_text) > 100:
+                summary_text = summary_text[:100] + "..."
             
-            summary_texts.append(f"{i+1}. [{author}]: {content}")
+            summary_texts.append(f"{i+1}. {summary_text}")
         
         # Adjust prompt based on period
         if period == "all_time":
@@ -582,7 +585,7 @@ Use rich formatting to make it visually appealing and easy to read."""
         except Exception as e:
             logger.error(f"Error in ultra-simplified summary: {e}")
             # Fallback: create basic summary
-            return f"Generated summary of {len(messages)} messages from various users covering {time_context}."
+            return f"Generated summary of {len(summaries)} summaries from various users covering {time_context}."
     
     async def _batch_summarize_messages(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Summarize messages in batches to reduce LLM calls."""
