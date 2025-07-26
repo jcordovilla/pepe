@@ -480,16 +480,29 @@ class DigestAgent(BaseAgent):
             period_description = period
             focus_instruction = "Focus on the main topics and key discussions that occurred during this time period. Highlight notable conversations and community engagement."
         
-        prompt = f"""Summarize these Discord messages in a comprehensive paragraph. Focus on the main topics and key discussions. This is a "{period_description}" summary covering {time_context}, so avoid references to specific dates, times, or "today/yesterday" unless relevant to the {period_description} context:
+        prompt = f"""Create a structured summary of these Discord messages using Discord markdown formatting. This is a "{period_description}" summary covering {time_context}.
 
 {chr(10).join(summary_texts)}
 
-Write a detailed, natural paragraph that summarizes the main topics discussed {time_context}. {focus_instruction} Do not include phrases like "Here is a summary" or "This paragraph summarizes" - just write the summary directly."""
+**Requirements:**
+1. Use Discord markdown formatting (bold, italic, headers)
+2. Structure the summary into clear sections with headers (##)
+3. Break long paragraphs into shorter, focused paragraphs
+4. Focus on main topics and key discussions {time_context}
+5. {focus_instruction}
+6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
+
+**Format the response with:**
+- ## Main Topics (with bold key points)
+- ## Community Highlights (notable discussions)
+- ## Key Insights (important takeaways)
+
+Use rich formatting to make it visually appealing and easy to read."""
 
         try:
             response = await self.llm_client.generate(
                 prompt=prompt,
-                max_tokens=500,  # Increased from 200 for more elaborate content
+                max_tokens=800,  # Increased for more structured content
                 temperature=0.1
             )
             
@@ -538,16 +551,29 @@ Write a detailed, natural paragraph that summarizes the main topics discussed {t
             period_description = period
             focus_instruction = "Focus on the main topics and key discussions that occurred during this time period. Highlight notable conversations and community engagement."
         
-        prompt = f"""Summarize these Discord messages in a comprehensive paragraph. Focus on the main topics and key discussions. This is a "{period_description}" summary covering {time_context}, so avoid references to specific dates, times, or "today/yesterday" unless relevant to the {period_description} context:
+        prompt = f"""Create a structured summary of these Discord messages using Discord markdown formatting. This is a "{period_description}" summary covering {time_context}.
 
 {chr(10).join(summary_texts)}
 
-Write a detailed, natural paragraph that summarizes the main topics discussed {time_context}. {focus_instruction} Do not include phrases like "Here is a summary" or "This paragraph summarizes" - just write the summary directly."""
+**Requirements:**
+1. Use Discord markdown formatting (bold, italic, headers)
+2. Structure the summary into clear sections with headers (##)
+3. Break long paragraphs into shorter, focused paragraphs
+4. Focus on main topics and key discussions {time_context}
+5. {focus_instruction}
+6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
+
+**Format the response with:**
+- ## Main Topics (with bold key points)
+- ## Community Highlights (notable discussions)
+- ## Key Insights (important takeaways)
+
+Use rich formatting to make it visually appealing and easy to read."""
 
         try:
             response = await self.llm_client.generate(
                 prompt=prompt,
-                max_tokens=800,  # Increased for more elaborate content
+                max_tokens=1000,  # Increased for more structured content
                 temperature=0.1
             )
             
@@ -720,7 +746,11 @@ Focus on the key points and main topic. Be concise but informative."""
         else:
             period_display = "Daily"
         
-        return f"# 📋 {period_display} {query_type.title()}\n\n"
+        # Create a more visually appealing header with Discord markdown
+        header = f"# 📋 {period_display} {query_type.title()}\n"
+        header += f"*Generated on {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}*\n\n"
+        
+        return header
     
     async def _generate_simplified_digest(self, summaries: List[Dict[str, Any]], period: str) -> str:
         """Generate a simplified digest for large numbers of messages."""
@@ -987,13 +1017,29 @@ Create a concise, well-organized digest that captures the key discussions and hi
                     author = resource.get('author', 'Unknown')
                     quality = resource.get('quality_score', 0)
                     channel = resource.get('channel_name', 'Unknown')
+                    timestamp = resource.get('timestamp', '')
+                    jump_url = resource.get('jump_url', '')
+                    
+                    # Format timestamp (YYYY-MM-DD)
+                    formatted_timestamp = ""
+                    if timestamp:
+                        try:
+                            from datetime import datetime
+                            dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                            formatted_timestamp = dt.strftime('%Y-%m-%d')
+                        except:
+                            formatted_timestamp = timestamp[:10] if len(timestamp) >= 10 else timestamp
                     
                     # Format quality as stars
                     quality_stars = "⭐" * int(quality * 5) if quality > 0 else "⭐"
                     
                     resources_text.append(f"• **{title}**")
-                    resources_text.append(f"  📍 {channel} | 👤 {author} | {quality_stars}")
-                    resources_text.append(f"  🔗 {url}\n")
+                    resources_text.append(f"  📅 {formatted_timestamp} | 📍 {channel} | 👤 {author} | {quality_stars}")
+                    if jump_url:
+                        resources_text.append(f"  🔗 [Original Message]({jump_url}) | [Resource]({url})")
+                    else:
+                        resources_text.append(f"  🔗 {url}")
+                    resources_text.append("")
             
             return "\n".join(resources_text)
             
