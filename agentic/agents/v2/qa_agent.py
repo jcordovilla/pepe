@@ -271,8 +271,13 @@ Please provide a comprehensive answer based on the context above. **CRITICAL: Fo
             # Check if any users mentioned in the answer are missing jump URLs
             import re
             
-            # Find user mentions in the answer (look for bold names)
+            # Find user mentions in the answer (look for bold names and regular names)
             user_mentions = re.findall(r'\*\*(.*?)\*\*', answer)
+            
+            # Also find names that appear at the start of lines (common format for user lists)
+            # Pattern: "Name ( 🔗 [View Message]()" or "Name (" or "Name:"
+            line_start_names = re.findall(r'^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)', answer, re.MULTILINE)
+            user_mentions.extend(line_start_names)
             
             for mention in user_mentions:
                 mention_lower = mention.lower()
@@ -285,8 +290,13 @@ Please provide a comprehensive answer based on the context above. **CRITICAL: Fo
                         # Find the line with this user and add the jump URL
                         lines = answer.split('\n')
                         for i, line in enumerate(lines):
-                            if f"**{mention}**" in line and jump_link not in line:
-                                lines[i] = line.rstrip() + f" {jump_link}"
+                            # Check for both bold and non-bold name formats
+                            if (f"**{mention}**" in line or mention in line) and jump_link not in line:
+                                # If the line ends with "(" or "()", replace it with the jump URL
+                                if line.rstrip().endswith('()') or line.rstrip().endswith('('):
+                                    lines[i] = line.rstrip().rstrip('()').rstrip('(') + f" {jump_link})"
+                                else:
+                                    lines[i] = line.rstrip() + f" {jump_link}"
                                 break
                         answer = '\n'.join(lines)
             
