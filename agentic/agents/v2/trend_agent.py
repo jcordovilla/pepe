@@ -36,7 +36,10 @@ class TrendAgent(BaseAgent):
         super().__init__(AgentRole.ANALYZER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         
-        # Initialize MCP server (replaces ChromaDB vector store)
+        # Use MCP server from service container if available, otherwise create our own
+        self.mcp_server = None  # Will be set by service container injection
+        
+        # Fallback: Initialize MCP server if not injected
         mcp_config = {
             "sqlite": {
                 "db_path": "data/discord_messages.db"
@@ -148,9 +151,10 @@ class TrendAgent(BaseAgent):
             
             logger.info(f"Trend analysis using k={analysis_k} (calculated: {calculated_k})")
             
-            # Get messages from MCP server
-            query = f"show me {analysis_k} messages from {start_date.isoformat()} to {end_date.isoformat()} ordered by timestamp"
-            results = await self.mcp_server.query_messages(query)
+            # Get messages from MCP server with bot filtering
+            query = f"messages from {start_date.isoformat()} to {end_date.isoformat()}"
+            filters = {"author_bot": False}
+            results = await self.mcp_server.search_messages(query, filters, analysis_k)
             
             # Extract text content and metadata
             messages = []

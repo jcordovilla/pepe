@@ -35,7 +35,7 @@ class AgentAPI:
         self.service_container = get_service_container(config)
         
         # Create orchestrator with v2 agent registry
-        self.orchestrator = AgentOrchestrator(config.get("orchestrator", {}))
+        self.orchestrator = AgentOrchestrator(config)
         
         # Initialize analytics components
         analytics_config = config.get("analytics", {})

@@ -44,6 +44,11 @@ class ServiceContainer:
         self._services: Dict[str, Any] = {}
         self._initialized = False
         
+        # Debug logging for MCP SQLite config
+        mcp_sqlite_config = self.config.get("mcp_sqlite", {})
+        logger.info(f"MCP SQLite config: {mcp_sqlite_config}")
+        logger.info(f"MCP SQLite enabled: {mcp_sqlite_config.get('enabled', False)}")
+        
         logger.info("Service container initialized")
     
     async def initialize_services(self):
@@ -64,6 +69,7 @@ class ServiceContainer:
             
             # Check if MCP SQLite is enabled
             mcp_sqlite_config = self.config.get("mcp_sqlite", {})
+            
             if mcp_sqlite_config.get("enabled", False):
                 logger.info("Using MCP SQLite server")
                 self._services["mcp_server"] = MCPSQLiteServer(mcp_sqlite_config)

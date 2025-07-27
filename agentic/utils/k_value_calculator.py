@@ -151,7 +151,9 @@ class KValueCalculator:
             if any(keyword in query_lower for keyword in keywords):
                 analysis["patterns_detected"].append(pattern_type)
                 if pattern_type in ["comprehensive_analysis", "broad_search"]:
-                    analysis["query_type"] = "analysis"
+                    # Don't override digest query types
+                    if analysis["query_type"] not in ["digest", "weekly_digest", "monthly_digest"]:
+                        analysis["query_type"] = "analysis"
                     analysis["complexity"] = "complex"
                 elif pattern_type == "skill_experience":
                     analysis["query_type"] = "skill_experience"
@@ -173,7 +175,7 @@ class KValueCalculator:
                 analysis["time_range"] = time_key
                 break
         
-        # Analyze scope from entities
+        # Analyze scope from entities and query patterns
         if entities:
             channel_count = sum(1 for e in entities if e.get("type") == "channel")
             user_count = sum(1 for e in entities if e.get("type") == "user")
@@ -187,6 +189,17 @@ class KValueCalculator:
                 analysis["scope"] = "all_channels"
             
             analysis["entities_found"] = [e.get("type") for e in entities]
+        
+        # Special handling for digest queries - they should be cross-server by default
+        if "digest" in query_lower or "weekly" in query_lower or "monthly" in query_lower:
+            analysis["query_type"] = "digest"
+            if analysis["scope"] == "single_channel":
+                analysis["scope"] = "cross_server"
+        
+        # For time-based queries without specific channel mentions, assume cross-server
+        if analysis["time_range"] in ["this_week", "last_week", "this_month", "last_month", "all_time"]:
+            if analysis["scope"] == "single_channel" and not any(channel_indicator in query_lower for channel_indicator in ["channel", "#", "in #"]):
+                analysis["scope"] = "cross_server"
         
         # Assess complexity
         complexity_indicators = {

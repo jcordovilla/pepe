@@ -496,6 +496,11 @@ IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fiel
 - Professional statements: "certified", "years of experience", "worked as", "specialize in"
 - Self-introductions: "Hi, I'm", "My name is", "About me", "Areas of Expertise"
 - AVOID: General discussions, opinions, questions, or topic mentions without personal claims
+
+**BOT MESSAGE FILTERING:**
+- ALWAYS filter out bot messages by adding: AND (raw_data IS NULL OR json_extract(raw_data, '$.author.bot') IS NULL OR json_extract(raw_data, '$.author.bot') = 0)
+- This ensures only human messages are included in results
+- Bot messages are stored in raw_data JSON as "author": {"bot": true}
 """
 
             # Generate SQL query
@@ -574,6 +579,12 @@ IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fiel
         
         for key, value in filters.items():
             if value is None:
+                continue
+            
+            # Special handling for author_bot filter
+            if key == "author_bot" and value is False:
+                # Filter out bot messages by checking the bot field in raw_data JSON
+                conditions.append("(raw_data IS NULL OR json_extract(raw_data, '$.author.bot') IS NULL OR json_extract(raw_data, '$.author.bot') = 0)")
                 continue
             
             if isinstance(value, list):

@@ -33,7 +33,10 @@ class SearchAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.SEARCHER, config)
         
-        # Initialize MCP server (replaces ChromaDB vector store)
+        # Use MCP server from service container if available, otherwise create our own
+        self.mcp_server = None  # Will be set by service container injection
+        
+        # Fallback: Initialize MCP server if not injected
         mcp_config = {
             "sqlite": {
                 "db_path": "data/discord_messages.db"
@@ -122,10 +125,14 @@ class SearchAgent(BaseAgent):
             
             self.search_stats["cache_misses"] += 1
             
-            # Perform search using MCP server
+            # Perform search using MCP server with bot filtering
+            # Add bot filtering to existing filters
+            search_filters = filters.copy() if filters else {}
+            search_filters["author_bot"] = False
+            
             results = await self.mcp_server.search_messages(
                 query=query,
-                filters=filters,
+                filters=search_filters,
                 limit=actual_limit
             )
             
@@ -160,8 +167,9 @@ class SearchAgent(BaseAgent):
         try:
             logger.info(f"Natural language query: {query[:50]}...")
             
-            # Use MCP server for natural language to SQL translation
-            results = await self.mcp_server.query_messages(query)
+            # Use MCP server for natural language to SQL translation with bot filtering
+            filters = {"author_bot": False}
+            results = await self.mcp_server.search_messages(query, filters, limit)
             
             # Limit results
             return results[:limit]

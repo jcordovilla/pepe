@@ -42,7 +42,10 @@ class StructureAgent(BaseAgent):
         super().__init__(AgentRole.ANALYZER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         
-        # Initialize MCP server (replaces ChromaDB vector store)
+        # Use MCP server from service container if available, otherwise create our own
+        self.mcp_server = None  # Will be set by service container injection
+        
+        # Fallback: Initialize MCP server if not injected
         mcp_config = {
             "sqlite": {
                 "db_path": "data/discord_messages.db"

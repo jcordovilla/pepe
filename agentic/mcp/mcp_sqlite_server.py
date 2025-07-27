@@ -8,6 +8,7 @@ for the agentic Discord bot system.
 import asyncio
 import json
 import logging
+import re
 import subprocess
 import tempfile
 from typing import List, Dict, Any, Optional
@@ -130,10 +131,28 @@ class MCPSQLiteServer:
             return []
     
     async def search_messages(self, query: str, filters: Optional[Dict] = None, limit: int = 10) -> List[Dict[str, Any]]:
-        """Search messages using text search."""
+        """Search messages using text search or natural language query."""
         try:
-            # Build SQL query for text search
-            sql_query = self._build_search_sql(query, filters, limit)
+            # Check if this is a natural language query
+            query_lower = query.lower()
+            natural_language_keywords = ['reactions', 'recent', 'latest', 'count', 'show me']
+            
+            if any(keyword in query_lower for keyword in natural_language_keywords):
+                # Use natural language translation
+                sql_query = await self._translate_to_sql(query)
+                # Override the LIMIT clause with the requested limit
+                sql_query = re.sub(r'LIMIT \d+', f'LIMIT {limit}', sql_query)
+                # Apply additional filters if provided
+                if filters and filters.get("author_bot") is False:
+                    # Bot filtering is already included in _translate_to_sql
+                    pass
+                if filters and filters.get("channel_id"):
+                    # Add channel filter
+                    sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND channel_id = {filters['channel_id']}")
+            else:
+                # Use text search
+                sql_query = self._build_search_sql(query, filters, limit)
+            
             return await self._execute_sql(sql_query)
         except Exception as e:
             logger.error(f"Error searching messages: {e}")
@@ -175,19 +194,25 @@ class MCPSQLiteServer:
         # Simple translation logic - in a real implementation, this would use an LLM
         query_lower = query.lower()
         
-        if "recent" in query_lower or "latest" in query_lower:
-            return "SELECT * FROM messages ORDER BY timestamp_unix DESC LIMIT 10"
+        # Base bot filtering condition
+        bot_filter = " AND (raw_data IS NULL OR json_extract(raw_data, '$.author.bot') IS NULL OR json_extract(raw_data, '$.author.bot') = 0)"
+        
+        if "reactions" in query_lower:
+            # Filter for messages with reactions
+            return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} AND reactions IS NOT NULL AND reactions != '[]' AND reactions != 'null' ORDER BY timestamp_unix DESC LIMIT 100"
+        elif "recent" in query_lower or "latest" in query_lower:
+            return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 100"
         elif "count" in query_lower:
-            return "SELECT COUNT(*) as count FROM messages"
+            return f"SELECT COUNT(*) as count FROM messages WHERE 1=1{bot_filter}"
         elif "show me" in query_lower and "messages" in query_lower:
-            return "SELECT * FROM messages ORDER BY timestamp_unix DESC LIMIT 5"
+            return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 50"
         else:
             # Default query
-            return "SELECT * FROM messages ORDER BY timestamp_unix DESC LIMIT 10"
+            return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 100"
     
     def _build_search_sql(self, query: str, filters: Optional[Dict] = None, limit: int = 10) -> str:
         """Build SQL query for text search."""
-        sql = "SELECT * FROM messages WHERE 1=1"
+        sql = "SELECT *, author_display_name, author_username FROM messages WHERE 1=1"
         
         # Add text search
         if query:
@@ -196,7 +221,8 @@ class MCPSQLiteServer:
         # Add filters
         if filters:
             if filters.get("author_bot") is False:
-                sql += " AND author_bot = 0"
+                # Filter out bot messages by checking the bot field in raw_data JSON
+                sql += " AND (raw_data IS NULL OR json_extract(raw_data, '$.author.bot') IS NULL OR json_extract(raw_data, '$.author.bot') = 0)"
             if filters.get("channel_id"):
                 sql += f" AND channel_id = {filters['channel_id']}"
         

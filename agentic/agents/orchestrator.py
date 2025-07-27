@@ -214,7 +214,11 @@ class AgentOrchestrator:
                 raise ValueError(f"Agent '{next_agent_name}' not found in registry")
             
             # Create and execute the agent
-            agent = agent_class(self.config.get(next_agent_name, {}))
+            agent = agent_class(self.config)
+            
+            # Inject services from service container if available
+            if hasattr(self, 'service_container'):
+                self.service_container.inject_services(agent)
             
             # Execute the agent
             result = await agent.run(**agent_args)
@@ -248,7 +252,11 @@ class AgentOrchestrator:
                 logger.warning("Self-check agent not found, skipping validation")
                 return state
             
-            selfcheck_agent = selfcheck_agent_class(self.config.get("selfcheck", {}))
+            selfcheck_agent = selfcheck_agent_class(self.config)
+            
+            # Inject services from service container if available
+            if hasattr(self, 'service_container'):
+                self.service_container.inject_services(selfcheck_agent)
             
             # Prepare context for validation
             context = {

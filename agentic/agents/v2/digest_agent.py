@@ -32,7 +32,10 @@ class DigestAgent(BaseAgent):
         super().__init__(AgentRole.DIGESTER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         
-        # Initialize MCP server (replaces ChromaDB vector store)
+        # Use MCP server from service container if available, otherwise create our own
+        self.mcp_server = None  # Will be set by service container injection
+        
+        # Fallback: Initialize MCP server if not injected
         mcp_config = {
             "sqlite": {
                 "db_path": "data/discord_messages.db"
@@ -43,12 +46,14 @@ class DigestAgent(BaseAgent):
         # Check if MCP SQLite is enabled in config
         mcp_sqlite_config = config.get("mcp_sqlite", {})
         if mcp_sqlite_config.get("enabled", False):
-            from ...mcp import MCPSQLiteServer
+            from agentic.mcp import MCPSQLiteServer
             self.mcp_server = MCPSQLiteServer(mcp_sqlite_config)
+            logger.info("DigestAgent using MCPSQLiteServer (fallback)")
             # Note: MCP server will be started when needed
         else:
-            from ...mcp import MCPServer
+            from agentic.mcp import MCPServer
             self.mcp_server = MCPServer(mcp_config)
+            logger.info("DigestAgent using legacy MCPServer (fallback)")
         
         # Digest configuration - adaptive limits based on time period
         self.base_max_messages = config.get("max_messages", 25)
@@ -175,7 +180,7 @@ class DigestAgent(BaseAgent):
             return f"Error generating digest: {str(e)}"
     
     async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None, period: str = "day") -> List[Dict[str, Any]]:
-        """Get all messages from the vector store for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
+        """Get all messages from the MCP server for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
             # Use dynamic k-value calculation for digest requests
             try:
@@ -250,12 +255,12 @@ class DigestAgent(BaseAgent):
                 # Ensure MCP server is ready
                 await self._ensure_mcp_server_ready()
                 
-                # Convert filters to SQL query using MCP server
-                query = self._build_natural_language_query(filters, max_messages, "timestamp")
-                results = await self.mcp_server.query_messages(query)
+                # Use search_messages with filters to ensure proper bot filtering
+                query = f"messages from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
+                results = await self.mcp_server.search_messages(query, filters, max_messages)
                 messages = self._process_results(results)
             
-            logger.info(f"[DigestAgent] Retrieved {len(messages)} messages from vector store for {period} period.")
+            logger.info(f"[DigestAgent] Retrieved {len(messages)} messages from MCP server for {period} period.")
             for i, message in enumerate(messages[:3]):
                 logger.info(f"[DigestAgent] Message {i+1}: channel={message.get('channel')}, content={message.get('content', '')[:60]}")
             
@@ -270,12 +275,12 @@ class DigestAgent(BaseAgent):
             # Strategy: Get high-engagement messages first, then fill with recent messages from different channels
             
             # Step 1: Get high-engagement messages (prioritize reactions)
-            high_engagement_query = self._build_natural_language_query(filters, max_messages // 2, "reactions")
-            high_engagement_results = await self.mcp_server.query_messages(high_engagement_query)
+            high_engagement_query = "messages with reactions"
+            high_engagement_results = await self.mcp_server.search_messages(high_engagement_query, filters, max_messages // 2)
             
             # Step 2: Get recent messages from different channels
-            recent_query = self._build_natural_language_query(filters, max_messages, "timestamp")
-            recent_results = await self.mcp_server.query_messages(recent_query)
+            recent_query = "recent messages"
+            recent_results = await self.mcp_server.search_messages(recent_query, filters, max_messages)
             
             # Step 3: Combine and deduplicate, ensuring channel diversity
             all_messages = self._process_results(high_engagement_results + recent_results)
@@ -288,8 +293,8 @@ class DigestAgent(BaseAgent):
         except Exception as e:
             logger.error(f"Error in cross-server message retrieval: {e}")
             # Fallback to standard retrieval
-            fallback_query = self._build_natural_language_query(filters, max_messages, "timestamp")
-            results = await self.mcp_server.query_messages(fallback_query)
+            fallback_query = "recent messages"
+            results = await self.mcp_server.search_messages(fallback_query, filters, max_messages)
             return self._process_results(results)
     
     async def _get_channel_name_from_id(self, channel_id: str) -> Optional[str]:
@@ -357,6 +362,9 @@ class DigestAgent(BaseAgent):
             elif channel_id:
                 logger.warning(f"[DigestAgent] Could not map channel_id {channel_id} to channel_name - getting all resources for the time period")
             
+            # Filter out bot resources
+            conditions.append("author NOT LIKE '%bot%' AND author NOT LIKE '%Pepe%'")
+            
             # Build the query
             query = "SELECT * FROM resources"
             if conditions:
@@ -385,7 +393,7 @@ class DigestAgent(BaseAgent):
             return []
     
     def _process_results(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Process vector store results into message format."""
+        """Process MCP server results into message format."""
         messages = []
         for result in results:
             # Prefer display_name over username for better user identification
@@ -393,8 +401,11 @@ class DigestAgent(BaseAgent):
             author_username = result.get("author_username", "")
             author = author_display_name if author_display_name else author_username if author_username else "Unknown"
             
+            # Clean content to remove Discord mentions
+            content = self._clean_discord_content(result.get("content", ""))
+            
             messages.append({
-                "content": result.get("content", ""),
+                "content": content,
                 "metadata": result,
                 "permalink": result.get("jump_url", ""),
                 "reactions": result.get("total_reactions", 0),
@@ -403,6 +414,30 @@ class DigestAgent(BaseAgent):
                 "channel_id": result.get("channel_id", "")
             })
         return messages
+    
+    def _clean_discord_content(self, content: str) -> str:
+        """Clean Discord content by removing mentions and formatting."""
+        import re
+        
+        # Remove channel mentions: <#channel_id>
+        content = re.sub(r'<#\d+>', '', content)
+        
+        # Remove user mentions: <@user_id> or <@!user_id>
+        content = re.sub(r'<@!?\d+>', '', content)
+        
+        # Remove role mentions: <@&role_id>
+        content = re.sub(r'<@&\d+>', '', content)
+        
+        # Remove emoji: <:name:id>
+        content = re.sub(r'<:\w+:\d+>', '', content)
+        
+        # Remove animated emoji: <a:name:id>
+        content = re.sub(r'<a:\w+:\d+>', '', content)
+        
+        # Clean up extra whitespace
+        content = re.sub(r'\s+', ' ', content).strip()
+        
+        return content
     
     def _ensure_channel_diversity(self, messages: List[Dict[str, Any]], max_messages: int, period: str) -> List[Dict[str, Any]]:
         """Ensure messages come from diverse channels for better representation."""
@@ -424,7 +459,8 @@ class DigestAgent(BaseAgent):
         
         # For weekly/monthly digests, ensure we get messages from multiple channels
         if period in ["week", "month"]:
-            messages_per_channel = max(3, max_messages // num_channels)  # At least 3 per channel
+            # Allow more messages per channel for comprehensive digests
+            messages_per_channel = max(5, max_messages // min(num_channels, 10))  # At least 5 per channel, cap at 10 channels
         else:
             messages_per_channel = max_messages // num_channels
         
@@ -521,8 +557,9 @@ class DigestAgent(BaseAgent):
         """Get high-engagement messages for trending only."""
         try:
             # Build query for high-engagement messages
-            query = f"show me messages with reactions from {start_date.isoformat()} to {end_date.isoformat()} that are not from bots, ordered by reaction count, limit {self.max_messages}"
-            results = await self.mcp_server.query_messages(query)
+            query = f"messages with reactions from {start_date.isoformat()} to {end_date.isoformat()}"
+            filters = {"author_bot": False}
+            results = await self.mcp_server.search_messages(query, filters, self.max_messages)
             
             high_engagement = []
             for result in results:
@@ -573,21 +610,23 @@ class DigestAgent(BaseAgent):
     
     async def _ultra_simplified_summaries(self, messages: List[Dict[str, Any]], period: str = "day") -> List[Dict[str, Any]]:
         """Generate ultra-simplified summaries for large message sets."""
-        # Take only the first 20 messages to avoid overwhelming the LLM
-        sample_messages = messages[:20]
+        # Take a larger sample for comprehensive digests
+        if period in ["week", "month"]:
+            sample_messages = messages[:100]  # Use more messages for weekly/monthly digests
+        else:
+            sample_messages = messages[:50]  # Use more messages for daily digests too
         
         # Create a simple summary in one LLM call
         summary_texts = []
         for i, message in enumerate(sample_messages):
             content = message.get("content", "")
-            author = message.get("author", "Unknown")
             channel = message.get("channel", "Unknown")
             
             # Truncate content
             if len(content) > 100:
                 content = content[:100] + "..."
             
-            summary_texts.append(f"{i+1}. [{author}]: {content}")
+            summary_texts.append(f"{i+1}. [{channel}]: {content}")
         
         # Adjust prompt based on period
         if period == "all_time":
@@ -599,33 +638,45 @@ class DigestAgent(BaseAgent):
             period_description = period
             focus_instruction = f"Focus SPECIFICALLY on what happened during this {period} period. Highlight the actual topics discussed, specific users who contributed, and concrete events or conversations that took place. Be precise about the time period and avoid generic language."
         
-        prompt = f"""Create a structured summary of these Discord messages using Discord markdown formatting. This is a "{period_description}" summary covering {time_context}.
+        prompt = f"""You are a professional digest writer. Your writing style is direct and clean - you NEVER use quotation marks around names or terms.
+
+Create a structured summary of these Discord messages using Discord markdown formatting. This is a "{period_description}" summary covering {time_context}.
 
 {chr(10).join(summary_texts)}
 
-**Requirements:**
-1. Use Discord markdown formatting (bold, italic, headers)
-2. Structure the summary into clear sections with headers (##)
-3. Break long paragraphs into shorter, focused paragraphs
-4. Focus SPECIFICALLY on main topics and key discussions {time_context}
-5. {focus_instruction}
-6. AVOID generic phrases like "has seen a flurry of activity", "has been marked by", "has been characterized by"
-7. Use specific, concrete language about what actually happened
-8. Mention specific users and their contributions when relevant
-9. Include specific dates or time references when available
-10. Make the summary feel fresh and unique, not like a template
+**SYSTEM RULE: You are programmed to write names directly without quotation marks.**
+- Write: Ryan Dear emphasized the importance of AI ethics
+- NEVER write: "Ryan Dear" emphasized the importance of AI ethics
 
-**Format the response with:**
-- ## Main Topics (with bold key points)
-- ## Community Highlights (notable discussions)
-- ## Key Insights (important takeaways)
+**CRITICAL FORMATTING RULES:**
+1. **NEVER use quotation marks around any names or terms**
+2. **Write all names directly: Ryan Dear, Jaime R., Emily Chen**
+3. **You CAN mention specific users when their contributions are relevant**
+4. **Focus on topics, themes, trends, and discussions**
 
-Use rich formatting to make it visually appealing and easy to read. Be specific about what happened during this time period."""
+**REQUIRED FORMAT:**
+- ## Main Topics (group related discussions into themes)
+- ## Community Highlights (notable trends and patterns)  
+- ## Key Insights (important takeaways and trends)
+
+**CORRECT FORMATTING EXAMPLES:**
+- Ryan Dear emphasized the importance of AI ethics
+- Jaime R. shared insights on technical implementation
+- Discussions focused on AI ethics and governance
+- The community explored various approaches to code review
+
+**FORBIDDEN FORMATTING - NEVER USE:**
+- "Ryan Dear" (with quotes)
+- "Jaime R." (with quotes)
+- Any names in quotation marks
+- "Users discussed" or "Users shared"
+
+Use Discord markdown formatting (bold, italic, headers). Focus on what was discussed and who contributed meaningfully. Write all names directly without quotation marks."""
 
         try:
             response = await self.llm_client.generate(
                 prompt=prompt,
-                max_tokens=800,  # Increased for more structured content
+                max_tokens=1200,  # Increased for more structured content
                 temperature=0.1
             )
             
@@ -690,16 +741,8 @@ Use rich formatting to make it visually appealing and easy to read. Be specific 
 6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
 7. **MANDATORY: ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
 8. **MANDATORY: ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
-9. **MANDATORY: Use ONLY objective, practical language - NEVER use phrases like:**
-   - "a flurry of activity"
-   - "sparked a wave of"
-   - "innovative spirit"
-   - "collaborative nature"
-   - "thriving community"
-   - "enthusiasm for learning"
-   - "camaraderie"
-   - "atmosphere of appreciation"
-10. **MANDATORY: Write in a sober, factual tone - describe what happened, not how wonderful it was**
+9. **MANDATORY: Write in PLAIN, OBJECTIVE language - describe events factually without embellishment**
+10. **MANDATORY: AVOID promotional, enthusiastic, or flowery language completely**
 
 **Format the response with:**
 - ## Main Topics (with bold key points)
@@ -707,22 +750,29 @@ Use rich formatting to make it visually appealing and easy to read. Be specific 
 - ## Key Insights (important takeaways)
 
 **WRITING STYLE RULES:**
+- Write in plain, objective language
+- Describe events factually without embellishment
 - Use concrete facts and specific details
-- Describe events and discussions objectively
-- Avoid promotional or enthusiastic language
+- Avoid promotional, enthusiastic, or flowery language
 - Make each section distinct and focused
 - Ensure the trends section provides new insights, not repetition of earlier content
 - Use simple, direct language
+- **NEVER include user IDs (numbers like @123456789) - only use the quoted display names provided**
 
 **EXAMPLE OF GOOD WRITING:**
 - "Users discussed Microsoft's technology stance in #ai-discussions"
-- "Julioverne74 reported RSVP syncing issues in #general"
-- "Lan created a 021 Product Team GPT"
+- "\"Julioverne74\" reported RSVP syncing issues in #general"
+- "\"Lan\" created a 021 Product Team GPT"
 
 **EXAMPLE OF BAD WRITING (DO NOT USE):**
 - "A flurry of activity sparked a wave of analysis"
 - "The innovative spirit and collaborative nature of the group"
 - "The community's enthusiasm for learning"
+- "demonstrate the community's willingness"
+- "highlighting the supportive nature"
+- "demonstrating the community's willingness"
+- "users @1383824403325911180 and @1359955242438889545" (user IDs)
+- "thanked users @992174053882331240" (user IDs)
 
 Use rich formatting to make it visually appealing and easy to read."""
 
@@ -919,7 +969,7 @@ Focus on the key points and main topic. Be concise but informative. Include spec
         for i, summary_data in enumerate(sample_summaries):
             summary = summary_data["summary"]
             author = summary_data["original"].get("author", "Unknown")
-            summary_texts.append(f"{i+1}. {summary} (by {author})")
+            summary_texts.append(f"{i+1}. {summary} (by \"{author}\")")
         
         time_context = "throughout the channel's history" if period == "all_time" else f"in the {period} period"
         
@@ -997,7 +1047,7 @@ Write this as a natural, comprehensive paragraph without meta-instructions like 
         for i, summary_data in enumerate(sample_summaries):
             summary = summary_data["summary"]
             author = summary_data["original"].get("author", "Unknown")
-            summary_texts.append(f"{i+1}. {summary} (by {author})")
+            summary_texts.append(f"{i+1}. {summary} (by \"{author}\")")
         
         time_context = "throughout the channel's history" if period == "all_time" else f"in the {period} period"
         
@@ -1111,7 +1161,7 @@ Group them into 3-5 themes. Return only valid JSON."""
                 permalink = original.get("permalink", "")
                 author = original.get("author", "Unknown")
                 
-                theme_content += f"- **{author}**: {summary} [Link]({permalink})\n"
+                theme_content += f"- **\"{author}\"**: {summary} [Link]({permalink})\n"
             themes_text.append(theme_content)
         
         themes_combined = "\n".join(themes_text)
@@ -1128,6 +1178,9 @@ Create a concise, well-organized digest that captures the key discussions and hi
                 max_tokens=500,
                 temperature=0.1
             )
+            
+            # Add header
+            header = self._generate_descriptive_header(period, "digest")
             
             # Add header
             header = self._generate_descriptive_header(period, "digest")

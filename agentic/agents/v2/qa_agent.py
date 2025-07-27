@@ -41,12 +41,14 @@ class QAAgent(BaseAgent):
         # Check if MCP SQLite is enabled in config
         mcp_sqlite_config = config.get("mcp_sqlite", {})
         if mcp_sqlite_config.get("enabled", False):
-            from ...mcp import MCPSQLiteServer
+            from agentic.mcp import MCPSQLiteServer
             self.mcp_server = MCPSQLiteServer(mcp_sqlite_config)
+            logger.info("QAAgent using MCPSQLiteServer")
             # Note: MCP server will be started when needed
         else:
-            from ...mcp import MCPServer
+            from agentic.mcp import MCPServer
             self.mcp_server = MCPServer(mcp_config)
+            logger.info("QAAgent using legacy MCPServer")
         
         # Initialize dynamic k-value calculator
         self.k_calculator = KValueCalculator(config)
@@ -110,14 +112,15 @@ class QAAgent(BaseAgent):
             # Ensure MCP server is ready
             await self._ensure_mcp_server_ready()
             
-            # Search for relevant messages using MCP server
+            # Search for relevant messages using MCP server with bot filtering
             # Use natural language query for complex queries, text search for simple ones
+            filters = {"author_bot": False}  # Always filter out bot messages
             if len(query.split()) > 3:  # Complex query - use natural language
-                relevant_messages = await self.mcp_server.query_messages(query)
+                relevant_messages = await self.mcp_server.search_messages(query, filters, k_value)
             else:  # Simple query - use text search
                 relevant_messages = await self.mcp_server.search_messages(
                     query=query,
-                    filters=None,
+                    filters=filters,
                     limit=k_value
                 )
             

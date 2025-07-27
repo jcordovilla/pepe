@@ -45,15 +45,21 @@ class UnifiedDataManager:
             return
         
         try:
-            # Initialize MCP server (replaces ChromaDB vector store)
-            from ..mcp import MCPServer
-            mcp_config = {
-                "sqlite": {
-                    "db_path": "data/discord_messages.db"
-                },
-                "llm": self.config.get("llm", {})
-            }
-            self.stores["mcp"] = MCPServer(mcp_config)
+            # Use MCP server from service container if available, otherwise create our own
+            from ..services.service_container import get_service_container
+            service_container = get_service_container(self.config)
+            self.stores["mcp"] = service_container.get_mcp_server()
+            
+            # If service container doesn't have MCP server, create fallback
+            if self.stores["mcp"] is None:
+                from ..mcp import MCPServer
+                mcp_config = {
+                    "sqlite": {
+                        "db_path": "data/discord_messages.db"
+                    },
+                    "llm": self.config.get("llm", {})
+                }
+                self.stores["mcp"] = MCPServer(mcp_config)
             
             # Initialize memory store (SQLite)
             from ..memory.conversation_memory import ConversationMemory
