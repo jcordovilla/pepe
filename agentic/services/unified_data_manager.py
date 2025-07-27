@@ -45,9 +45,15 @@ class UnifiedDataManager:
             return
         
         try:
-            # Initialize vector store (ChromaDB)
-            from ..vectorstore.persistent_store import PersistentVectorStore
-            self.stores["vector"] = PersistentVectorStore(self.config.get("vector_config", {}))
+            # Initialize MCP server (replaces ChromaDB vector store)
+            from ..mcp import MCPServer
+            mcp_config = {
+                "sqlite": {
+                    "db_path": "data/discord_messages.db"
+                },
+                "llm": self.config.get("llm", {})
+            }
+            self.stores["mcp"] = MCPServer(mcp_config)
             
             # Initialize memory store (SQLite)
             from ..memory.conversation_memory import ConversationMemory
@@ -62,7 +68,7 @@ class UnifiedDataManager:
             self.stores["analytics"] = PerformanceMonitor(self.config.get("analytics_config", {}))
             
             self.initialized = True
-            logger.info("✅ Unified data manager initialized")
+            logger.info("✅ Unified data manager initialized with MCP server")
             
         except Exception as e:
             logger.error(f"❌ Error initializing data manager: {e}")
@@ -79,8 +85,9 @@ class UnifiedDataManager:
         try:
             message_id = message.get("message_id")
             
-            # Store in vector store for semantic search
-            vector_result = await self.stores["vector"].add_messages([message])
+            # Note: MCP server doesn't need explicit message storage
+            # Messages are already in SQLite database and can be queried directly
+            # This is a key benefit of the new architecture
             
             # Store in memory for conversation tracking
             memory_result = await self.stores["memory"].store_conversation_turn(
@@ -96,8 +103,8 @@ class UnifiedDataManager:
             # Track in analytics
             await self.stores["analytics"].track_message_processed(message)
             
-            logger.debug(f"📦 Stored message {message_id} across all stores")
-            return vector_result and memory_result and cache_result
+            logger.debug(f"📦 Stored message {message_id} in memory and cache")
+            return memory_result and cache_result
             
         except Exception as e:
             logger.error(f"❌ Error storing message: {e}")
@@ -105,22 +112,22 @@ class UnifiedDataManager:
     
     async def search_messages(self, query: str, filters: Optional[Dict] = None, limit: int = 10) -> List[Dict]:
         """
-        Unified search across all relevant stores
+        Unified search using MCP server for direct SQLite queries
         """
         if not self.initialized:
             await self.initialize()
         
         try:
-            # Primary search through vector store
-            vector_results = await self.stores["vector"].similarity_search(
+            # Use MCP server for natural language to SQL translation and search
+            mcp_results = await self.stores["mcp"].search_messages(
                 query=query,
-                limit=limit,
-                filters=filters
+                filters=filters,
+                limit=limit
             )
             
             # Enhance with cached data and analytics
             enhanced_results = []
-            for result in vector_results:
+            for result in mcp_results:
                 message_id = result.get("message_id")
                 
                 # Try to get from cache first (faster)
@@ -139,6 +146,68 @@ class UnifiedDataManager:
             logger.error(f"❌ Error searching messages: {e}")
             return []
     
+    async def query_messages(self, natural_language_query: str) -> List[Dict]:
+        """
+        Query messages using natural language through MCP server
+        """
+        if not self.initialized:
+            await self.initialize()
+        
+        try:
+            # Use MCP server for natural language to SQL translation
+            results = await self.stores["mcp"].query_messages(natural_language_query)
+            
+            # Track query analytics
+            await self.stores["analytics"].track_search_performed(natural_language_query, len(results))
+            
+            return results
+            
+        except Exception as e:
+            logger.error(f"❌ Error querying messages: {e}")
+            return []
+    
+    async def get_message_stats(self, filters: Optional[Dict] = None) -> Dict[str, Any]:
+        """
+        Get message statistics using MCP server
+        """
+        if not self.initialized:
+            await self.initialize()
+        
+        try:
+            return await self.stores["mcp"].get_message_stats(filters)
+            
+        except Exception as e:
+            logger.error(f"❌ Error getting message stats: {e}")
+            return {}
+    
+    async def get_user_activity(self, user_id: Optional[str] = None, username: Optional[str] = None, time_range: str = "7d") -> Dict[str, Any]:
+        """
+        Get user activity statistics using MCP server
+        """
+        if not self.initialized:
+            await self.initialize()
+        
+        try:
+            return await self.stores["mcp"].get_user_activity(user_id, username, time_range)
+            
+        except Exception as e:
+            logger.error(f"❌ Error getting user activity: {e}")
+            return {}
+    
+    async def get_channel_summary(self, channel_id: Optional[str] = None, channel_name: Optional[str] = None, time_range: str = "7d") -> Dict[str, Any]:
+        """
+        Get channel summary using MCP server
+        """
+        if not self.initialized:
+            await self.initialize()
+        
+        try:
+            return await self.stores["mcp"].get_channel_summary(channel_id, channel_name, time_range)
+            
+        except Exception as e:
+            logger.error(f"❌ Error getting channel summary: {e}")
+            return {}
+    
     async def health_check(self) -> Dict[str, bool]:
         """Check health of all storage systems"""
         if not self.initialized:
@@ -148,20 +217,35 @@ class UnifiedDataManager:
         
         for store_name, store in self.stores.items():
             try:
-                health_status[store_name] = await store.health_check()
+                if hasattr(store, 'health_check'):
+                    health = await store.health_check()
+                    health_status[store_name] = health.get("status") == "healthy"
+                else:
+                    health_status[store_name] = True  # Assume healthy if no health check method
             except Exception as e:
-                logger.warning(f"⚠️ Health check failed for {store_name}: {e}")
+                logger.error(f"❌ Health check failed for {store_name}: {e}")
                 health_status[store_name] = False
         
         return health_status
     
     async def get_analytics_summary(self) -> Dict[str, Any]:
-        """Get comprehensive analytics summary"""
+        """Get analytics summary from all stores"""
         if not self.initialized:
             await self.initialize()
         
         try:
-            return await self.stores["analytics"].get_summary()
+            summary = {}
+            
+            # Get MCP server stats
+            if "mcp" in self.stores:
+                summary["mcp_stats"] = self.stores["mcp"].get_stats()
+            
+            # Get analytics summary
+            if "analytics" in self.stores:
+                summary["analytics"] = await self.stores["analytics"].get_summary()
+            
+            return summary
+            
         except Exception as e:
-            logger.error(f"❌ Error getting analytics: {e}")
+            logger.error(f"❌ Error getting analytics summary: {e}")
             return {}
