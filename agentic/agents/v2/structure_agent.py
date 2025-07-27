@@ -13,7 +13,7 @@ from collections import defaultdict
 
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
-from ...vectorstore.persistent_store import PersistentVectorStore
+from ...mcp import MCPServer
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,15 @@ class StructureAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.ANALYZER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
-        self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
+        
+        # Initialize MCP server (replaces ChromaDB vector store)
+        mcp_config = {
+            "sqlite": {
+                "db_path": "data/discord_messages.db"
+            },
+            "llm": config.get("llm", {})
+        }
+        self.mcp_server = MCPServer(mcp_config)
         
         # Structure analysis configuration
         self.min_messages_per_channel = config.get("min_messages_per_channel", 10)
@@ -105,16 +113,9 @@ class StructureAgent(BaseAgent):
             end_date = datetime.now()
             start_date = end_date - timedelta(days=self.analysis_period_days)
             
-            results = await self.vector_store.filter_search(
-                filters={
-                    "timestamp": {
-                        "$gte": start_date.isoformat(),
-                        "$lte": end_date.isoformat()
-                    }
-                },
-                k=10000,  # Get a large sample
-                sort_by="timestamp"
-            )
+            # Get messages from MCP server
+            query = f"show me 10000 messages from {start_date.isoformat()} to {end_date.isoformat()} ordered by timestamp"
+            results = await self.mcp_server.query_messages(query)
             
             # Group by channel
             channel_data = defaultdict(lambda: {
@@ -127,18 +128,28 @@ class StructureAgent(BaseAgent):
             })
             
             for result in results:
-                channel_id = result.get("metadata", {}).get("channel_id", "unknown")
-                channel_name = result.get("metadata", {}).get("channel_name", "Unknown")
-                author_id = result.get("metadata", {}).get("author_id", "unknown")
+                channel_id = result.get("channel_id", "unknown")
+                channel_name = result.get("channel_name", "Unknown")
+                author_id = result.get("author_id", "unknown")
                 content = result.get("content", "")
-                reactions = result.get("metadata", {}).get("reactions", [])
+                
+                # Parse reactions from the result
+                reactions_data = result.get("reactions", "[]")
+                if isinstance(reactions_data, str):
+                    import json
+                    try:
+                        reactions = json.loads(reactions_data)
+                    except:
+                        reactions = []
+                else:
+                    reactions = reactions_data
                 
                 channel_data[channel_id]["message_count"] += 1
                 channel_data[channel_id]["unique_users"].add(author_id)
                 channel_data[channel_id]["total_reactions"] += sum(r.get("count", 0) for r in reactions)
                 channel_data[channel_id]["messages"].append({
                     "content": content,
-                    "author": result.get("metadata", {}).get("author_name", "Unknown"),
+                    "author": result.get("author_display_name", result.get("author_username", "Unknown")),
                     "reactions": reactions
                 })
             

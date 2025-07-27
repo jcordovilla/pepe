@@ -125,6 +125,51 @@ class BaseAgent(ABC):
         """
         pass
     
+    async def run(self, **kwargs) -> Any:
+        """
+        Run method for compatibility with orchestrator.
+        Delegates to process method or handles direct input.
+        
+        Args:
+            **kwargs: Arguments passed to the agent
+            
+        Returns:
+            Agent result
+        """
+        # If this is called with a state object, use process
+        if len(kwargs) == 1 and "state" in kwargs:
+            return await self.process(kwargs["state"])
+        
+        # Otherwise, create a minimal state and call process
+        # This is for agents that expect direct input like router_agent
+        minimal_state = {
+            "messages": [],
+            "search_results": [],
+            "conversation_history": [],
+            "user_context": kwargs,
+            "task_plan": None,
+            "current_step": 0,
+            "current_subtask": None,
+            "analysis_results": {},
+            "errors": [],
+            "metadata": {},
+            "response": None,
+            "query_analysis": {},
+            "query_interpretation": {},
+            "intent": None,
+            "entities": {},
+            "complexity_score": None,
+            "execution_plan": None,
+            "subtasks": [],
+            "dependencies": {},
+            "next_agent": None,
+            "agent_args": None,
+            "routing_result": None
+        }
+        
+        result_state = await self.process(minimal_state)
+        return result_state.get("response", "No response generated")
+    
     @abstractmethod
     def can_handle(self, task: SubTask) -> bool:
         """

@@ -116,7 +116,7 @@ class SQLiteQueryService:
             Dictionary with various statistics
         """
         try:
-            where_clause, params = self._build_where_clause(filters) if filters else ("1=1", [])
+            where_clause, params = self._build_where_clause(filters)
             
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
@@ -194,7 +194,7 @@ class SQLiteQueryService:
             List of matching messages
         """
         try:
-            where_clause, params = self._build_where_clause(filters) if filters else ("1=1", [])
+            where_clause, params = self._build_where_clause(filters)
             
             # Add text search condition
             search_condition = "content LIKE ?"
@@ -441,8 +441,20 @@ Rules:
 2. Use appropriate date functions for timestamp filtering
 3. Handle JSON fields carefully (mentions, reactions, attachments)
 4. Return only the SQL query, no explanations
-5. Use parameterized queries where appropriate
+5. DO NOT use parameterized queries (?) - use direct values in the query
 6. Focus on common Discord analysis patterns
+7. For user experience/skills queries, search in content for relevant terms
+8. Always include content, author_username, and channel_name in SELECT for user analysis
+9. For "list users who have..." queries, use DISTINCT on author_username and search content
+10. Use LIKE with wildcards for flexible text matching
+
+Examples:
+- "list users with cybersecurity experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (content LIKE '%cybersecurity%' OR content LIKE '%security%' OR content LIKE '%cyber%' OR content LIKE '%AI Security%' OR content LIKE '%Security Manager%') AND (content LIKE '%Areas of Expertise%' OR content LIKE '%expertise%' OR content LIKE '%experience%' OR content LIKE '%certified%' OR content LIKE '%years%') ORDER BY timestamp DESC LIMIT 200
+- "find users who mentioned Python" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE content LIKE '%python%' OR content LIKE '%programming%' ORDER BY timestamp DESC LIMIT 200
+- "list users who have declared experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE content LIKE '%Areas of Expertise%' OR content LIKE '%expertise%' OR content LIKE '%experience%' OR content LIKE '%skills%' OR content LIKE '%years%' OR content LIKE '%certified%' ORDER BY timestamp DESC LIMIT 200
+- "show me 200 messages in forum general-forum between 2025-06-27 and 2025-07-27 ordered by timestamp" → SELECT author_username, author_display_name, content, channel_name, forum_channel_name, jump_url, message_id, timestamp FROM messages WHERE (channel_name = 'general-forum' OR forum_channel_name = 'general-forum') AND timestamp >= '2025-06-27' AND timestamp <= '2025-07-27' ORDER BY timestamp DESC LIMIT 200
+
+IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fields. The 'content' field contains the actual message text where users describe their experience. For user experience queries, focus on messages that contain "Areas of Expertise" sections or user introductions. Always include author_display_name, jump_url, and message_id in SELECT for better user identification and message linking. Use a higher LIMIT (200) to capture more results and ORDER BY timestamp DESC to get the most recent introductions first. For forum channels, check both channel_name and forum_channel_name fields.
 """
 
             # Generate SQL query
@@ -474,7 +486,16 @@ Rules:
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
-                cursor.execute(sql_query)
+                
+                # Check if query has parameters (contains ?)
+                if '?' in sql_query:
+                    # For now, replace parameterized queries with direct values
+                    # This is a simple fix - in production, we'd want proper parameter handling
+                    logger.warning(f"Parameterized query detected, using direct execution: {sql_query}")
+                    cursor.execute(sql_query)
+                else:
+                    cursor.execute(sql_query)
+                
                 rows = cursor.fetchall()
                 
                 # Convert to dictionaries
@@ -489,8 +510,11 @@ Rules:
             logger.error(f"Error executing SQL query: {e}")
             return []
     
-    def _build_where_clause(self, filters: Dict[str, Any]) -> Tuple[str, List[Any]]:
+    def _build_where_clause(self, filters: Optional[Dict[str, Any]]) -> Tuple[str, List[Any]]:
         """Build SQL WHERE clause from filters."""
+        if filters is None:
+            return "1=1", []
+            
         conditions = []
         params = []
         

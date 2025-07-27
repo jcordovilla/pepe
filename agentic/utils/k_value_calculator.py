@@ -228,11 +228,11 @@ class KValueCalculator:
         
         # Adjust based on query type
         if query_type in ["digest", "weekly_digest", "monthly_digest"]:
-            return max_values.get("digest", 300)
+            return max_values.get("digest", 9999)  # No practical limit for digest requests
         elif query_type in ["analysis", "trend_analysis", "user_analysis", "content_analysis"]:
             return max_values.get("analysis", 200)
         elif analysis.get("scope") == "all_channels":
-            return max_values.get("cross_server", 500)
+            return max_values.get("cross_server", 9999)  # No practical limit for cross-server
         else:
             return max_values.get("search", 100)
     

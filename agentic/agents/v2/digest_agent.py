@@ -14,7 +14,8 @@ import re
 
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
-from ...vectorstore.persistent_store import PersistentVectorStore
+from ...mcp import MCPServer
+from ...utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
 
@@ -30,18 +31,29 @@ class DigestAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.DIGESTER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
-        self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
+        
+        # Initialize MCP server (replaces ChromaDB vector store)
+        mcp_config = {
+            "sqlite": {
+                "db_path": "data/discord_messages.db"
+            },
+            "llm": config.get("llm", {})
+        }
+        self.mcp_server = MCPServer(mcp_config)
         
         # Digest configuration - adaptive limits based on time period
         self.base_max_messages = config.get("max_messages", 25)
         self.max_summary_length = config.get("max_summary_length", 250)
         
-        # Adaptive message limits for different time periods
+        # Use dynamic k-value calculation instead of fixed limits
+        self.k_calculator = KValueCalculator(config)
+        
+        # Fallback limits (only used if k-calculator fails)
         self.period_limits = {
-            "day": 25,
-            "week": 100,  # Increased for weekly digests
-            "month": 200,  # Increased for monthly digests
-            "all_time": 150
+            "day": 50,
+            "week": 200,
+            "month": 500,
+            "all_time": 1000
         }
         
         logger.info("DigestAgent initialized")
@@ -146,8 +158,22 @@ class DigestAgent(BaseAgent):
     async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None, period: str = "day") -> List[Dict[str, Any]]:
         """Get all messages from the vector store for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
-            # Determine adaptive message limit based on period
-            max_messages = self.period_limits.get(period, self.base_max_messages)
+            # Use dynamic k-value calculation for digest requests
+            try:
+                # Create a synthetic query for k-value calculation
+                query_parts = [f"{period} digest"]
+                if channel:
+                    query_parts.append(f"in {channel}")
+                if start_date and end_date:
+                    query_parts.append(f"from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+                
+                synthetic_query = " ".join(query_parts)
+                k_result = self.k_calculator.calculate_k_value(synthetic_query, query_type="digest")
+                max_messages = k_result.get("k_value", 200)
+                logger.info(f"[DigestAgent] Dynamic k-value calculated: {max_messages} for query: {synthetic_query}")
+            except Exception as e:
+                logger.warning(f"[DigestAgent] K-value calculation failed, using fallback: {e}")
+                max_messages = self.period_limits.get(period, self.base_max_messages)
             
             # Use timestamp_unix (float) for ChromaDB filtering
             start_ts = start_date.timestamp() if start_date else None
@@ -167,7 +193,14 @@ class DigestAgent(BaseAgent):
                     {"forum_channel_id": channel_id}
                 ]})
             elif channel:
-                filters_and.append({"channel_name": channel})
+                # For forum channels, check both channel_name and forum_channel_name
+                if "forum" in channel.lower():
+                    filters_and.append({"$or": [
+                        {"channel_name": channel},
+                        {"forum_channel_name": channel}
+                    ]})
+                else:
+                    filters_and.append({"channel_name": channel})
             
             # Filter out bot messages for digest queries
             filters_and.append({"author_bot": False})
@@ -190,11 +223,9 @@ class DigestAgent(BaseAgent):
                 messages = await self._get_cross_server_messages(filters, max_messages, period)
             else:
                 # Single channel or daily digest - use standard approach
-                results = await self.vector_store.filter_search(
-                    filters=filters,
-                    k=max_messages,
-                    sort_by="timestamp"
-                )
+                # Convert filters to SQL query using MCP server
+                query = self._build_natural_language_query(filters, max_messages, "timestamp")
+                results = await self.mcp_server.query_messages(query)
                 messages = self._process_results(results)
             
             logger.info(f"[DigestAgent] Retrieved {len(messages)} messages from vector store for {period} period.")
@@ -212,18 +243,12 @@ class DigestAgent(BaseAgent):
             # Strategy: Get high-engagement messages first, then fill with recent messages from different channels
             
             # Step 1: Get high-engagement messages (prioritize reactions)
-            high_engagement_results = await self.vector_store.filter_search(
-                filters=filters,
-                k=max_messages // 2,  # Half from high engagement
-                sort_by="total_reactions"
-            )
+            high_engagement_query = self._build_natural_language_query(filters, max_messages // 2, "reactions")
+            high_engagement_results = await self.mcp_server.query_messages(high_engagement_query)
             
             # Step 2: Get recent messages from different channels
-            recent_results = await self.vector_store.filter_search(
-                filters=filters,
-                k=max_messages,  # Get more to ensure channel diversity
-                sort_by="timestamp"
-            )
+            recent_query = self._build_natural_language_query(filters, max_messages, "timestamp")
+            recent_results = await self.mcp_server.query_messages(recent_query)
             
             # Step 3: Combine and deduplicate, ensuring channel diversity
             all_messages = self._process_results(high_engagement_results + recent_results)
@@ -236,11 +261,8 @@ class DigestAgent(BaseAgent):
         except Exception as e:
             logger.error(f"Error in cross-server message retrieval: {e}")
             # Fallback to standard retrieval
-            results = await self.vector_store.filter_search(
-                filters=filters,
-                k=max_messages,
-                sort_by="timestamp"
-            )
+            fallback_query = self._build_natural_language_query(filters, max_messages, "timestamp")
+            results = await self.mcp_server.query_messages(fallback_query)
             return self._process_results(results)
     
     async def _get_channel_name_from_id(self, channel_id: str) -> Optional[str]:
@@ -393,45 +415,115 @@ class DigestAgent(BaseAgent):
         
         return diverse_messages[:max_messages]
     
+    def _build_natural_language_query(self, filters: Dict[str, Any], limit: int, sort_by: str = "timestamp") -> str:
+        """Convert filters to natural language query for MCP server."""
+        try:
+            query_parts = []
+            
+            # Handle time filters - check both timestamp and timestamp_unix
+            if "$and" in filters:
+                for condition in filters["$and"]:
+                    # Check for timestamp_unix (used by ChromaDB) or timestamp
+                    if "timestamp_unix" in condition:
+                        timestamp_filter = condition["timestamp_unix"]
+                        if "$gte" in timestamp_filter and "$lte" in timestamp_filter:
+                            start_ts = timestamp_filter["$gte"]
+                            end_ts = timestamp_filter["$lte"]
+                            # Convert timestamps to readable dates
+                            start_date = datetime.fromtimestamp(start_ts).strftime("%Y-%m-%d")
+                            end_date = datetime.fromtimestamp(end_ts).strftime("%Y-%m-%d")
+                            query_parts.append(f"between {start_date} and {end_date}")
+                        elif "$gte" in timestamp_filter:
+                            start_ts = timestamp_filter["$gte"]
+                            start_date = datetime.fromtimestamp(start_ts).strftime("%Y-%m-%d")
+                            query_parts.append(f"from {start_date}")
+                        elif "$lte" in timestamp_filter:
+                            end_ts = timestamp_filter["$lte"]
+                            end_date = datetime.fromtimestamp(end_ts).strftime("%Y-%m-%d")
+                            query_parts.append(f"until {end_date}")
+                    elif "timestamp" in condition:
+                        timestamp_filter = condition["timestamp"]
+                        if "$gte" in timestamp_filter and "$lte" in timestamp_filter:
+                            start_date = timestamp_filter["$gte"]
+                            end_date = timestamp_filter["$lte"]
+                            query_parts.append(f"between {start_date} and {end_date}")
+                        elif "$gte" in timestamp_filter:
+                            start_date = timestamp_filter["$gte"]
+                            query_parts.append(f"from {start_date}")
+                        elif "$lte" in timestamp_filter:
+                            end_date = timestamp_filter["$lte"]
+                            query_parts.append(f"until {end_date}")
+                    
+                    if "author_bot" in condition:
+                        if condition["author_bot"] == False:
+                            query_parts.append("not from bots")
+                    
+                    if "channel_name" in condition:
+                        channel = condition["channel_name"]
+                        query_parts.append(f"in channel {channel}")
+                    elif "$or" in condition:
+                        # Handle forum channel queries
+                        or_conditions = condition["$or"]
+                        channel_conditions = []
+                        for or_cond in or_conditions:
+                            if "channel_name" in or_cond:
+                                channel_conditions.append(f"channel {or_cond['channel_name']}")
+                            elif "forum_channel_name" in or_cond:
+                                channel_conditions.append(f"forum {or_cond['forum_channel_name']}")
+                        if channel_conditions:
+                            query_parts.append(f"in {' or '.join(channel_conditions)}")
+            
+            # Build the query
+            base_query = f"show me {limit} messages"
+            if query_parts:
+                base_query += " " + " ".join(query_parts)
+            
+            # Add sorting
+            if sort_by == "timestamp":
+                base_query += " ordered by timestamp"
+            elif sort_by == "reactions":
+                base_query += " with reactions ordered by reaction count"
+            
+            return base_query
+            
+        except Exception as e:
+            logger.error(f"Error building natural language query: {e}")
+            return f"show me {limit} recent messages"
+    
     async def _get_high_engagement_messages(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
         """Get high-engagement messages for trending only."""
         try:
-            results = await self.vector_store.reaction_search(
-                reaction="",
-                k=self.max_messages,
-                filters={
-                    "$and": [
-                        {
-                            "timestamp": {
-                                "$gte": start_date.isoformat(),
-                                "$lte": end_date.isoformat()
-                            }
-                        },
-                        {
-                            "author_bot": False
-                        }
-                    ]
-                },
-                sort_by="total_reactions"
-            )
+            # Build query for high-engagement messages
+            query = f"show me messages with reactions from {start_date.isoformat()} to {end_date.isoformat()} that are not from bots, ordered by reaction count, limit {self.max_messages}"
+            results = await self.mcp_server.query_messages(query)
+            
             high_engagement = []
             for result in results:
-                reactions = result.get("metadata", {}).get("reactions", [])
+                # Parse reactions from the result
+                reactions_data = result.get("reactions", "[]")
+                if isinstance(reactions_data, str):
+                    import json
+                    try:
+                        reactions = json.loads(reactions_data)
+                    except:
+                        reactions = []
+                else:
+                    reactions = reactions_data
+                
                 total_reactions = sum(reaction.get("count", 0) for reaction in reactions)
                 if total_reactions >= 3:  # Only for trending
                     # Prefer display_name over username for better user identification
-                    metadata = result.get("metadata", {})
-                    author_display_name = metadata.get("author_display_name", "")
-                    author_username = metadata.get("author_username", "")
+                    author_display_name = result.get("author_display_name", "")
+                    author_username = result.get("author_username", "")
                     author = author_display_name if author_display_name else author_username if author_username else "Unknown"
                     
                     high_engagement.append({
                         "content": result.get("content", ""),
-                        "metadata": metadata,
-                        "permalink": metadata.get("permalink", ""),
+                        "metadata": result,
+                        "permalink": result.get("jump_url", ""),
                         "reactions": total_reactions,
                         "author": author,
-                        "channel": metadata.get("channel_name", "Unknown")
+                        "channel": result.get("channel_name", "Unknown")
                     })
             return high_engagement[:self.max_messages]
         except Exception as e:
@@ -478,7 +570,7 @@ class DigestAgent(BaseAgent):
         else:
             time_context = f"in the {period} period"
             period_description = period
-            focus_instruction = "Focus on the main topics and key discussions that occurred during this time period. Highlight notable conversations and community engagement."
+            focus_instruction = f"Focus SPECIFICALLY on what happened during this {period} period. Highlight the actual topics discussed, specific users who contributed, and concrete events or conversations that took place. Be precise about the time period and avoid generic language."
         
         prompt = f"""Create a structured summary of these Discord messages using Discord markdown formatting. This is a "{period_description}" summary covering {time_context}.
 
@@ -488,16 +580,20 @@ class DigestAgent(BaseAgent):
 1. Use Discord markdown formatting (bold, italic, headers)
 2. Structure the summary into clear sections with headers (##)
 3. Break long paragraphs into shorter, focused paragraphs
-4. Focus on main topics and key discussions {time_context}
+4. Focus SPECIFICALLY on main topics and key discussions {time_context}
 5. {focus_instruction}
-6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
+6. AVOID generic phrases like "has seen a flurry of activity", "has been marked by", "has been characterized by"
+7. Use specific, concrete language about what actually happened
+8. Mention specific users and their contributions when relevant
+9. Include specific dates or time references when available
+10. Make the summary feel fresh and unique, not like a template
 
 **Format the response with:**
 - ## Main Topics (with bold key points)
 - ## Community Highlights (notable discussions)
 - ## Key Insights (important takeaways)
 
-Use rich formatting to make it visually appealing and easy to read."""
+Use rich formatting to make it visually appealing and easy to read. Be specific about what happened during this time period."""
 
         try:
             response = await self.llm_client.generate(
@@ -794,6 +890,13 @@ Write a detailed, flowing summary covering:
 3. Overall activity patterns and community engagement
 4. Notable contributions and community highlights
 5. Emerging trends or patterns in the discussions
+
+**IMPORTANT GUIDELINES:**
+- AVOID generic phrases like "has seen a flurry of activity", "has been marked by", "has been characterized by"
+- Use specific, concrete language about what actually happened
+- Mention specific users and their contributions when relevant
+- Make the summary feel fresh and unique, not like a template
+- Focus on concrete events, discussions, and contributions
 
 Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and engaging, capturing the full scope of activity."""
 

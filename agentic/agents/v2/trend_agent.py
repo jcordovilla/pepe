@@ -15,7 +15,7 @@ import re
 
 from ..base_agent import BaseAgent, AgentRole, AgentState
 from ...services.llm_client import UnifiedLLMClient
-from ...vectorstore.persistent_store import PersistentVectorStore
+from ...mcp import MCPServer
 from ...utils.k_value_calculator import KValueCalculator
 
 logger = logging.getLogger(__name__)
@@ -35,7 +35,15 @@ class TrendAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.ANALYZER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
-        self.vector_store = PersistentVectorStore(config.get("vector_config", {}))
+        
+        # Initialize MCP server (replaces ChromaDB vector store)
+        mcp_config = {
+            "sqlite": {
+                "db_path": "data/discord_messages.db"
+            },
+            "llm": config.get("llm", {})
+        }
+        self.mcp_server = MCPServer(mcp_config)
         
         # Initialize dynamic k-value calculator
         self.k_calculator = KValueCalculator(config)
@@ -140,28 +148,31 @@ class TrendAgent(BaseAgent):
             
             logger.info(f"Trend analysis using k={analysis_k} (calculated: {calculated_k})")
             
-            # Get messages from vector store
-            results = await self.vector_store.filter_search(
-                filters={
-                    "timestamp": {
-                        "$gte": start_date.isoformat(),
-                        "$lte": end_date.isoformat()
-                    }
-                },
-                k=analysis_k,  # Use calculated k value
-                sort_by="timestamp"
-            )
+            # Get messages from MCP server
+            query = f"show me {analysis_k} messages from {start_date.isoformat()} to {end_date.isoformat()} ordered by timestamp"
+            results = await self.mcp_server.query_messages(query)
             
             # Extract text content and metadata
             messages = []
             for result in results:
                 content = result.get("content", "")
                 if len(content.strip()) > 10:  # Filter out very short messages
+                    # Parse reactions from the result
+                    reactions_data = result.get("reactions", "[]")
+                    if isinstance(reactions_data, str):
+                        import json
+                        try:
+                            reactions = json.loads(reactions_data)
+                        except:
+                            reactions = []
+                    else:
+                        reactions = reactions_data
+                    
                     messages.append({
                         "content": content,
-                        "metadata": result.get("metadata", {}),
-                        "embedding": result.get("embedding"),
-                        "reactions": result.get("metadata", {}).get("reactions", [])
+                        "metadata": result,
+                        "embedding": None,  # MCP server doesn't provide embeddings
+                        "reactions": reactions
                     })
             
             return messages

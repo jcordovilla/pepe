@@ -36,8 +36,8 @@ class ChannelResolver:
     4. Caching for performance
     """
     
-    def __init__(self, chromadb_path: str = "./data/chromadb/chroma.sqlite3"):
-        self.chromadb_path = chromadb_path
+    def __init__(self, sqlite_path: str = "data/discord_messages.db"):
+        self.sqlite_path = sqlite_path
         self._channel_cache: Dict[str, ChannelInfo] = {}
         self._name_to_id_cache: Dict[str, str] = {}
         self._alias_map: Dict[str, str] = {}
@@ -75,27 +75,24 @@ class ChannelResolver:
         }
         
     def refresh_cache(self) -> bool:
-        """Refresh the channel cache from ChromaDB."""
+        """Refresh the channel cache from SQLite database."""
         try:
-            if not Path(self.chromadb_path).exists():
-                logger.error(f"ChromaDB not found at {self.chromadb_path}")
+            if not Path(self.sqlite_path).exists():
+                logger.error(f"SQLite database not found at {self.sqlite_path}")
                 return False
-                
-            conn = sqlite3.connect(self.chromadb_path)
+            
+            conn = sqlite3.connect(self.sqlite_path)
             
             # Get all channels with their metadata
             query = '''
             SELECT DISTINCT 
-                m1.string_value as channel_name,
-                m2.string_value as channel_id,
-                m3.string_value as guild_id,
+                channel_name,
+                channel_id,
+                guild_id,
                 COUNT(*) as message_count
-            FROM embedding_metadata m1
-            JOIN embedding_metadata m2 ON m1.id = m2.id
-            LEFT JOIN embedding_metadata m3 ON m1.id = m3.id AND m3.key = 'guild_id'
-            WHERE m1.key = 'channel_name' 
-              AND m2.key = 'channel_id'
-            GROUP BY m1.string_value, m2.string_value, m3.string_value
+            FROM messages
+            WHERE channel_name IS NOT NULL AND channel_id IS NOT NULL
+            GROUP BY channel_name, channel_id, guild_id
             ORDER BY message_count DESC
             '''
             
@@ -325,41 +322,40 @@ class ChannelResolver:
         if channel_id in self._channel_cache:
             return self._channel_cache[channel_id].name
         
-        # Query the vector store directly for this channel ID
+        # Query the SQLite database directly for this channel ID
         try:
-            from agentic.vectorstore.persistent_store import PersistentVectorStore
-            config = {
-                "collection_name": "discord_messages",
-                "persist_directory": "./data/chromadb",
-                "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
-            "embedding_type": "sentence_transformers",  # Only using sentence-transformers
-            }
-            vector_store = PersistentVectorStore(config)
+            import sqlite3
+            db_path = "data/discord_messages.db"
             
-            if vector_store.collection:
-                # Get metadata for this channel ID
-                results = vector_store.collection.get(
-                    where={"channel_id": channel_id},
-                    limit=1,
-                    include=["metadatas"]
-                )
+            if Path(db_path).exists():
+                conn = sqlite3.connect(db_path)
+                cursor = conn.cursor()
                 
-                if results and results.get("metadatas"):
-                    metadata = results["metadatas"][0]
-                    channel_name = metadata.get("channel_name", "")
+                # Get channel name for this channel ID
+                cursor.execute(
+                    "SELECT channel_name, guild_id FROM messages WHERE channel_id = ? LIMIT 1",
+                    (channel_id,)
+                )
+                result = cursor.fetchone()
+                
+                if result:
+                    channel_name, guild_id = result
                     if channel_name:
                         # Cache the result
                         channel_info = ChannelInfo(
                             id=channel_id,
                             name=channel_name,
-                            guild_id=metadata.get("guild_id", ""),
+                            guild_id=guild_id or "",
                             message_count=1,
                             aliases=[]
                         )
                         self._channel_cache[channel_id] = channel_info
                         self._name_to_id_cache[channel_name] = channel_id
                         logger.info(f"Resolved channel ID {channel_id} -> '{channel_name}'")
+                        conn.close()
                         return channel_name
+                
+                conn.close()
                         
         except Exception as e:
             logger.error(f"Error resolving channel ID {channel_id}: {e}")

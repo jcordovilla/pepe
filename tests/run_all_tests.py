@@ -311,34 +311,29 @@ class DiscordBotTestRunner:
         """Test importing core modules"""
         try:
             from agentic.interfaces.agent_api import AgentAPI
-            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            from agentic.mcp import MCPServer
             from agentic.memory.conversation_memory import ConversationMemory
             
             return {'success': True, 'details': 'All core modules imported successfully'}
         except Exception as e:
             return {'success': False, 'error': f'Import failed: {e}'}
     
-    async def _test_vector_store_creation(self) -> Dict[str, Any]:
-        """Test vector store creation"""
+    async def _test_mcp_server_creation(self) -> Dict[str, Any]:
+        """Test MCP server creation"""
         try:
-            from agentic.vectorstore.persistent_store import PersistentVectorStore
+            from agentic.mcp import MCPServer
             
             config = {
-                'persist_directory': './tests/temp_vector_test',
-                'collection_name': 'test_collection'
+                'sqlite': {
+                    'db_path': 'data/discord_messages.db'
+                }
             }
             
-            store = PersistentVectorStore(config)
+            mcp_server = MCPServer(config)
             
-            # Cleanup
-            import shutil
-            test_dir = Path('./tests/temp_vector_test')
-            if test_dir.exists():
-                shutil.rmtree(test_dir)
-            
-            return {'success': True, 'details': 'Vector store created successfully'}
+            return {'success': True, 'details': 'MCP server created successfully'}
         except Exception as e:
-            return {'success': False, 'error': f'Vector store creation failed: {e}'}
+            return {'success': False, 'error': f'MCP server creation failed: {e}'}
     
     async def _test_agent_api_init(self) -> Dict[str, Any]:
         """Test Agent API initialization"""
@@ -346,10 +341,6 @@ class DiscordBotTestRunner:
             from agentic.interfaces.agent_api import AgentAPI
             
             config = {
-                'vector_store': {
-                    'persist_directory': './tests/temp_agent_test',
-                    'collection_name': 'test_agent_collection'
-                },
                 'memory': {'db_path': './tests/temp_agent_memory.db'}
             }
             
@@ -357,7 +348,7 @@ class DiscordBotTestRunner:
             
             # Cleanup
             import shutil
-            for path in ['./tests/temp_agent_test', './tests/temp_agent_memory.db']:
+            for path in ['./tests/temp_agent_memory.db']:
                 p = Path(path)
                 if p.exists():
                     if p.is_dir():
@@ -390,12 +381,7 @@ class DiscordBotTestRunner:
         try:
             from agentic.interfaces.agent_api import AgentAPI
             
-            config = {
-                'vector_store': {
-                    'persist_directory': './tests/temp_perf_test',
-                    'collection_name': 'perf_test'
-                }
-            }
+            config = {}
             
             api = AgentAPI(config)
             

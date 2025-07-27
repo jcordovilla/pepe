@@ -9,7 +9,7 @@ from typing import Dict, Any, Optional
 from pathlib import Path
 
 # Import services
-from ..vectorstore.persistent_store import PersistentVectorStore
+# ChromaDB removed - using MCP server instead
 from ..memory.conversation_memory import ConversationMemory
 from ..cache.smart_cache import SmartCache
 from ..services.llm_client import UnifiedLLMClient
@@ -20,6 +20,16 @@ from ..analytics.analytics_dashboard import AnalyticsDashboard
 from ..mcp import MCPServer
 
 logger = logging.getLogger(__name__)
+
+# Global service container instance
+_service_container_instance: Optional['ServiceContainer'] = None
+
+def get_service_container(config: Dict[str, Any]) -> 'ServiceContainer':
+    """Get or create the global service container instance."""
+    global _service_container_instance
+    if _service_container_instance is None:
+        _service_container_instance = ServiceContainer(config)
+    return _service_container_instance
 
 
 class ServiceContainer:
@@ -143,6 +153,28 @@ class ServiceContainer:
     def get_analytics_dashboard(self) -> Optional[AnalyticsDashboard]:
         """Get the analytics dashboard instance."""
         return self.get_service("analytics_dashboard")
+    
+    def inject_services(self, target_object: Any):
+        """Inject services into a target object that has service attributes."""
+        try:
+            if hasattr(target_object, 'mcp_server'):
+                target_object.mcp_server = self.get_mcp_server()
+            if hasattr(target_object, 'memory'):
+                target_object.memory = self.get_memory()
+            if hasattr(target_object, 'cache'):
+                target_object.cache = self.get_cache()
+            if hasattr(target_object, 'llm_client'):
+                target_object.llm_client = self.get_llm_client()
+            if hasattr(target_object, 'query_repository'):
+                target_object.query_repository = self.get_query_repository()
+            if hasattr(target_object, 'performance_monitor'):
+                target_object.performance_monitor = self.get_performance_monitor()
+            
+            logger.debug(f"Injected services into {type(target_object).__name__}")
+            
+        except Exception as e:
+            logger.error(f"Error injecting services: {e}")
+            raise
     
     async def health_check(self) -> Dict[str, Any]:
         """Perform health check on all services."""

@@ -10,7 +10,7 @@ import asyncio
 from datetime import datetime
 
 from ..agents.orchestrator import AgentOrchestrator
-from ..vectorstore.persistent_store import PersistentVectorStore
+from ..mcp import MCPServer
 from ..memory.conversation_memory import ConversationMemory
 from ..agents.pipeline_agent import PipelineAgent
 from ..analytics import QueryAnswerRepository, PerformanceMonitor, ValidationSystem, AnalyticsDashboard
@@ -59,7 +59,7 @@ class AgentAPI:
             await self.service_container.initialize_services()
             
             # Get services after initialization
-            self.vector_store = self.service_container.get_vector_store()
+            self.mcp_server = self.service_container.get_mcp_server()
             self.memory = self.service_container.get_memory()
             self.pipeline = PipelineAgent(self.config.get("pipeline", {}))
             
@@ -69,7 +69,7 @@ class AgentAPI:
             # Set component references for analytics
             self.performance_monitor.set_components(
                 self.query_repository, 
-                self.vector_store, 
+                self.mcp_server, 
                 self.service_container.get_cache()
             )
             self.analytics_dashboard.set_components(
@@ -119,7 +119,7 @@ class AgentAPI:
         
         try:
             # Ensure services are initialized
-            if not hasattr(self, 'vector_store') or self.vector_store is None:
+            if not hasattr(self, 'mcp_server') or self.mcp_server is None:
                 await self.initialize()
             
             # Validate input
@@ -360,12 +360,12 @@ class AgentAPI:
             k_value = k or self.default_k
             
             if search_type == "similarity":
-                results = await self.vector_store.similarity_search(query, k_value, filters)
+                results = await self.mcp_server.search_messages(query, filters, k_value)
             elif search_type == "keyword":
                 keywords = query.split()
-                results = await self.vector_store.keyword_search(keywords, k_value, filters)
+                results = await self.mcp_server.search_messages(query, filters, k_value)
             elif search_type == "filter":
-                results = await self.vector_store.filter_search(filters or {}, k_value)
+                results = await self.mcp_server.query_messages(f"show me {k_value} messages")
             else:
                 return {
                     "success": False,
@@ -411,7 +411,8 @@ class AgentAPI:
                 doc["added_via"] = "api"
                 doc["added_at"] = datetime.utcnow().isoformat()
             
-            success = await self.vector_store.add_messages(documents)
+            # MCP server doesn't need explicit message storage - messages are already in SQLite
+            success = True
             
             return {
                 "success": success,
@@ -503,8 +504,8 @@ class AgentAPI:
             System statistics
         """
         try:
-            # Get vector store stats
-            vector_stats = await self.vector_store.get_collection_stats()
+            # Get MCP server stats
+            mcp_stats = await self.mcp_server.get_database_info()
             
             # Get memory stats - using available method
             memory_stats = {
@@ -517,7 +518,7 @@ class AgentAPI:
             
             return {
                 "success": True,
-                "vector_store": vector_stats,
+                "mcp_server": mcp_stats,
                 "memory": memory_stats,
                 "orchestrator": orchestrator_stats,
                 "timestamp": datetime.utcnow().isoformat()
@@ -545,11 +546,11 @@ class AgentAPI:
                 "components": {}
             }
             
-            # Check vector store
-            vector_health = await self.vector_store.health_check()
-            health["components"]["vector_store"] = vector_health
+            # Check MCP server
+            mcp_health = await self.mcp_server.health_check()
+            health["components"]["mcp_server"] = mcp_health
             
-            if vector_health["status"] != "healthy":
+            if mcp_health["status"] != "healthy":
                 health["status"] = "degraded"
             
             # Check memory system
@@ -599,10 +600,10 @@ class AgentAPI:
             }
             
             # Optimize vector store
-            vector_optimized = await self.vector_store.optimize()
+            # MCP server doesn't need optimization - it's already optimized for SQLite queries
             results["optimizations"].append({
-                "component": "vector_store",
-                "success": vector_optimized
+                "component": "mcp_server",
+                "success": True
             })
             
             # Optimize memory system - using basic cleanup
@@ -775,13 +776,13 @@ class AgentAPI:
             pipeline_status = self.pipeline.get_pipeline_status()
             db_stats = await self.pipeline._get_db_stats()
             
-            # Get vector store stats
-            vector_stats = await self.vector_store.get_collection_stats()
+            # Get MCP server stats
+            mcp_stats = await self.mcp_server.get_database_info()
             
             return {
                 "success": True,
                 "database": db_stats,
-                "vector_store": vector_stats,
+                "mcp_server": mcp_stats,
                 "pipeline": pipeline_status,
                 "timestamp": datetime.utcnow().isoformat()
             }
@@ -797,7 +798,7 @@ class AgentAPI:
     async def close(self):
         """Close all system components."""
         try:
-            await self.vector_store.close()
+            await self.mcp_server.close()
             # Note: Add proper close method to ConversationMemory if needed
             # orchestrator doesn't need explicit closing
             

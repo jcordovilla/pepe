@@ -36,12 +36,10 @@ def get_modernized_config() -> Dict[str, Any]:
         
         # Modern unified data layer
         "data": {
-            "vector_config": {
-                "persist_directory": "./data/chromadb",
-                "collection_name": "discord_messages",
-                "embedding_model": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
-                "embedding_type": "sentence_transformers",  # Only using sentence-transformers
-                "batch_size": 100  # From legacy batch processing
+            "mcp_config": {
+                "sqlite": {
+                    "db_path": "data/discord_messages.db"
+                }
             },
             "memory_config": {
                 "database_url": "sqlite:///data/conversation_memory.db",
@@ -61,12 +59,11 @@ def get_modernized_config() -> Dict[str, Any]:
         
         # OpenAI configuration removed - using local models only
         
-        # Sentence Transformers configuration (for local embeddings)
-        "sentence_transformers": {
-            "model_name": os.getenv("EMBEDDING_MODEL", "msmarco-distilbert-base-v4"),
-            "device": os.getenv("EMBEDDING_DEVICE", "cpu"),  # cpu or cuda
-            "max_length": int(os.getenv("EMBEDDING_MAX_LENGTH", "512")),
-            "normalize_embeddings": True
+        # MCP Server configuration (replaces sentence transformers)
+        "mcp": {
+            "sqlite": {
+                "db_path": "data/discord_messages.db"
+            }
         },
         
         # Legacy-proven processing settings
@@ -156,8 +153,8 @@ def get_modernized_config() -> Dict[str, Any]:
             "max_values": {
                 "search": 100,
                 "analysis": 200,
-                "digest": 300,
-                "cross_server": 500
+                "digest": 9999,  # No practical limit for digest/summary requests
+                "cross_server": 9999  # No practical limit for cross-server analysis
             },
             
             # Performance thresholds

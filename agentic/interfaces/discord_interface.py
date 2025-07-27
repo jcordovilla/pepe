@@ -170,34 +170,12 @@ class DiscordInterface:
                 return
 
             try:
-                # Prepare message data for vectorstore
-                message_data = {
-                    "message_id": str(message.id),
-                    "content": message.content,
-                    "channel_id": str(message.channel.id),
-                    "channel_name": message.channel.name,
-                    "guild_id": str(message.guild.id) if message.guild else None,
-                    "author": {
-                        "id": str(message.author.id),
-                        "username": message.author.display_name
-                    },
-                    "timestamp": message.created_at.isoformat(),
-                    "jump_url": message.jump_url,
-                    "reactions": [
-                        {
-                            "emoji": str(reaction.emoji),
-                            "count": reaction.count
-                        }
-                        for reaction in message.reactions
-                    ]
-                }
-
-                # Add message to vectorstore
-                await self.agent_api.add_documents([message_data], source="discord")
-                logger.debug(f"Indexed message {message.id} from {message.author.display_name}")
+                # Note: Messages are automatically stored in SQLite database
+                # No need for explicit vector store indexing with MCP server
+                logger.debug(f"Message {message.id} from {message.author.display_name} will be processed by MCP server")
 
             except Exception as e:
-                logger.error(f"Error indexing message: {e}")
+                logger.error(f"Error processing message: {e}")
 
             # Process commands
             if self.bot:
