@@ -448,13 +448,29 @@ Rules:
 9. For "list users who have..." queries, use DISTINCT on author_username and search content
 10. Use LIKE with wildcards for flexible text matching
 
+**CRITICAL FOR EXPERIENCE QUERIES:**
+- Focus on messages where users DECLARE THEIR OWN experience, not discuss topics
+- Look for first-person statements: "I have", "I am", "I work", "I'm certified", "my experience"
+- Look for self-introductions: "Hi, I'm", "My name is", "About me", "Areas of Expertise"
+- Look for professional declarations: "certified", "years of experience", "worked as", "specialize in"
+- AVOID messages that just discuss topics without personal experience claims
+- EXCLUDE opinion-based statements: "I think", "I believe", "I heard", "I read", "I saw"
+- EXCLUDE questions about the topic without claiming personal experience
+- EXCLUDE general knowledge sharing without personal claims
+
 Examples:
-- "list users with cybersecurity experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (content LIKE '%cybersecurity%' OR content LIKE '%security%' OR content LIKE '%cyber%' OR content LIKE '%AI Security%' OR content LIKE '%Security Manager%') AND (content LIKE '%Areas of Expertise%' OR content LIKE '%expertise%' OR content LIKE '%experience%' OR content LIKE '%certified%' OR content LIKE '%years%') ORDER BY timestamp DESC LIMIT 200
-- "find users who mentioned Python" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE content LIKE '%python%' OR content LIKE '%programming%' ORDER BY timestamp DESC LIMIT 200
-- "list users who have declared experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE content LIKE '%Areas of Expertise%' OR content LIKE '%expertise%' OR content LIKE '%experience%' OR content LIKE '%skills%' OR content LIKE '%years%' OR content LIKE '%certified%' ORDER BY timestamp DESC LIMIT 200
+- "list users with cybersecurity experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (content LIKE '%cybersecurity%' OR content LIKE '%security%' OR content LIKE '%cyber%' OR content LIKE '%AI Security%' OR content LIKE '%Security Manager%') AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%I\'m certified%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%' OR content LIKE '%Areas of Expertise%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
+- "find users who mentioned Python" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (content LIKE '%python%' OR content LIKE '%programming%') AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
+- "list users who have declared experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%I\'m certified%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%' OR content LIKE '%Areas of Expertise%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
 - "show me 200 messages in forum general-forum between 2025-06-27 and 2025-07-27 ordered by timestamp" → SELECT author_username, author_display_name, content, channel_name, forum_channel_name, jump_url, message_id, timestamp FROM messages WHERE (channel_name = 'general-forum' OR forum_channel_name = 'general-forum') AND timestamp >= '2025-06-27' AND timestamp <= '2025-07-27' ORDER BY timestamp DESC LIMIT 200
 
 IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fields. The 'content' field contains the actual message text where users describe their experience. For user experience queries, focus on messages that contain "Areas of Expertise" sections or user introductions. Always include author_display_name, jump_url, and message_id in SELECT for better user identification and message linking. Use a higher LIMIT (200) to capture more results and ORDER BY timestamp DESC to get the most recent introductions first. For forum channels, check both channel_name and forum_channel_name fields.
+
+**EXPERIENCE FILTERING PATTERNS:**
+- First-person declarations: "I have", "I am", "I work", "I'm certified", "my experience"
+- Professional statements: "certified", "years of experience", "worked as", "specialize in"
+- Self-introductions: "Hi, I'm", "My name is", "About me", "Areas of Expertise"
+- AVOID: General discussions, opinions, questions, or topic mentions without personal claims
 """
 
             # Generate SQL query

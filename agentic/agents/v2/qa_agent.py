@@ -159,6 +159,22 @@ Use the provided context from Discord messages to answer the user's question.
 
 **CRITICAL REQUIREMENT: You MUST include the jump URL links (🔗 [View Message](url)) for each user you mention.**
 
+**EXPERIENCE QUERY FILTERING RULES:**
+When asked about users with experience in a field, ONLY include users who have EXPLICITLY STATED THEIR OWN experience, not users who just discussed the topic.
+
+**INCLUDE users who:**
+- Use first-person statements: "I have", "I am", "I work", "I'm certified", "my experience"
+- Make professional declarations: "certified", "years of experience", "worked as", "specialize in"
+- Have self-introductions: "Hi, I'm", "My name is", "About me", "Areas of Expertise"
+- Explicitly claim personal expertise or experience in the field
+
+**EXCLUDE users who:**
+- Only discuss the topic without claiming personal experience
+- Ask questions about the field
+- Share opinions or general knowledge
+- Mention the topic in passing without personal claims
+- Have others mention their experience (unless they confirm it themselves)
+
 Guidelines:
 1. Base your answer on the provided Discord message context
 2. If the context doesn't contain enough information, say so
@@ -173,6 +189,7 @@ Guidelines:
 11. **MANDATORY: Copy the exact jump URL links from the context for each user you reference**
 12. Do NOT limit the number of users - show ALL users found in the context
 13. Use display names when available, fallback to usernames if display name is not available
+14. **CRITICAL: Only include users who explicitly claim their own experience, not those who just discuss topics**
 
 **FORMAT EXAMPLE:**
 - **User Name**: Description of their experience 🔗 [View Message](https://discord.com/...)
@@ -182,7 +199,7 @@ Context from Discord messages:
 
 User question: {query}
 
-Please provide a comprehensive answer based on the context above. **CRITICAL: For each user you mention, you MUST include their jump URL link from the context above.**
+Please provide a comprehensive answer based on the context above. **CRITICAL: For each user you mention, you MUST include their jump URL link from the context above. Only include users who explicitly state their own experience, not those who just discuss topics.**
 """
 
         prompt = system_prompt.format(context=context, query=query)
