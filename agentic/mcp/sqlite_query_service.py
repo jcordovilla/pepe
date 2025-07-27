@@ -462,11 +462,27 @@ Rules:
 - EXCLUDE questions about the topic without claiming personal experience
 - EXCLUDE general knowledge sharing without personal claims
 
-Examples:
-- "list users with cybersecurity experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%introduction%' OR channel_name LIKE '%👋%') AND (content LIKE '%cybersecurity%' OR content LIKE '%security%' OR content LIKE '%cyber%' OR content LIKE '%AI Security%' OR content LIKE '%Security Manager%') AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%I''m certified%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%' OR content LIKE '%Areas of Expertise%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
-- "find users who mentioned Python" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%introduction%' OR channel_name LIKE '%👋%') AND (content LIKE '%python%' OR content LIKE '%programming%') AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
-- "list users who have declared experience" → SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id FROM messages WHERE (channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%introduction%' OR channel_name LIKE '%👋%') AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%I''m certified%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%' OR content LIKE '%Areas of Expertise%') AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') ORDER BY timestamp DESC LIMIT 200
-- "show me 200 messages in forum general-forum between 2025-06-27 and 2025-07-27 ordered by timestamp" → SELECT author_username, author_display_name, content, channel_name, forum_channel_name, jump_url, message_id, timestamp FROM messages WHERE (channel_name = 'general-forum' OR forum_channel_name = 'general-forum') AND timestamp >= '2025-06-27' AND timestamp <= '2025-07-27' ORDER BY timestamp DESC LIMIT 200
+**GENERIC QUERY PATTERN FOR ANY SKILL:**
+For queries like "list users with experience in [SKILL]", use this pattern:
+SELECT DISTINCT author_username, author_display_name, content, channel_name, jump_url, message_id 
+FROM messages 
+WHERE (channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%introduction%' OR channel_name LIKE '%👋%') 
+AND (content LIKE '%[SKILL]%' OR content LIKE '%[SKILL_TERM1]%' OR content LIKE '%[SKILL_TERM2]%') 
+AND (content LIKE '%I am%' OR content LIKE '%I have%' OR content LIKE '%I work%' OR content LIKE '%I''m certified%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%worked as%' OR content LIKE '%specialize in%' OR content LIKE '%Areas of Expertise%') 
+AND NOT (content LIKE '%I think%' OR content LIKE '%I believe%' OR content LIKE '%I heard%' OR content LIKE '%I read%' OR content LIKE '%I saw%') 
+ORDER BY timestamp DESC LIMIT 200
+
+**EXAMPLES FOR DIFFERENT SKILL TYPES:**
+- "list users with experience in [SKILL]" → Use the generic pattern above, replacing [SKILL] with the actual skill
+- "find users who mentioned [TOPIC]" → Use the generic pattern above, replacing [TOPIC] with the actual topic
+- "list users who have declared experience" → Use the generic pattern above, removing the skill-specific content filter
+
+**IMPORTANT GUIDELINES:**
+- Extract the skill/topic from the user's query and use it in the content LIKE clauses
+- Include related terms for the skill (e.g., for "cloud computing" include "cloud", "computing", "aws", "azure", "gcp")
+- Always maintain the channel targeting and experience declaration filters
+- Keep the query generic and adaptable to any skill or topic
+- Use proper SQL escaping for single quotes (I''m instead of I'm)
 
 IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fields. The 'content' field contains the actual message text where users describe their experience. For user experience queries, focus on messages that contain "Areas of Expertise" sections or user introductions. Always include author_display_name, jump_url, and message_id in SELECT for better user identification and message linking. Use a higher LIMIT (200) to capture more results and ORDER BY timestamp DESC to get the most recent introductions first. For forum channels, check both channel_name and forum_channel_name fields.
 
@@ -502,6 +518,14 @@ IMPORTANT: Always search in the 'content' field, not in 'mentions' or other fiel
             # Replace I'm with I''m (double single quotes for SQL escaping)
             sql_query = sql_query.replace("I'm", "I''m")
             sql_query = sql_query.replace("I'm", "I''m")  # Handle any remaining instances
+            
+            # More robust single quote handling for any patterns
+            # This handles cases like 'word'word' and replace with 'word''word'
+            sql_query = re.sub(r"(\w)'(\w)", r"\1''\2", sql_query)
+            
+            # Also handle standalone single quotes in LIKE clauses
+            # Replace 'text' with ''text'' in LIKE patterns
+            sql_query = re.sub(r"LIKE '%([^']*)'([^']*)'%'", r"LIKE '%\1''\2'%'", sql_query)
             
             logger.debug(f"Translated query: {natural_language_query} -> {sql_query}")
             return sql_query
