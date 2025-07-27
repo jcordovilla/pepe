@@ -39,16 +39,15 @@ class MCPClient:
         
         logger.info("MCP Client initialized")
     
-    async def generate_embedding(self, text: str, model: Optional[str] = None) -> List[float]:
+    async def query_messages(self, natural_language_query: str) -> List[Dict[str, Any]]:
         """
-        Generate embedding for a single text.
+        Query messages using natural language.
         
         Args:
-            text: Text to embed
-            model: Model to use (optional)
+            natural_language_query: Natural language query about Discord messages
             
         Returns:
-            List of floats representing the embedding
+            List of message results
         """
         start_time = datetime.utcnow()
         
@@ -56,26 +55,25 @@ class MCPClient:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            embedding = await self.server.generate_embedding(text, model)
+            results = await self.server.query_messages(natural_language_query)
             
             self._record_success(start_time)
-            return embedding
+            return results
             
         except Exception as e:
             self._record_failure(start_time)
-            logger.error(f"Error generating embedding: {e}")
+            logger.error(f"Error querying messages: {e}")
             raise
     
-    async def batch_embed(self, texts: List[str], model: Optional[str] = None) -> List[List[float]]:
+    async def get_message_stats(self, filters: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
-        Generate embeddings for multiple texts in batch.
+        Get comprehensive message statistics.
         
         Args:
-            texts: List of texts to embed
-            model: Model to use (optional)
+            filters: Optional filters to apply
             
         Returns:
-            List of embeddings
+            Dictionary with various statistics
         """
         start_time = datetime.utcnow()
         
@@ -83,36 +81,32 @@ class MCPClient:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            embeddings = await self.server.batch_embed(texts, model)
+            stats = await self.server.get_message_stats(filters)
             
             self._record_success(start_time)
-            return embeddings
+            return stats
             
         except Exception as e:
             self._record_failure(start_time)
-            logger.error(f"Error in batch embedding: {e}")
+            logger.error(f"Error getting message stats: {e}")
             raise
     
-    async def similarity_search(
-        self,
-        query: str,
-        k: int = 10,
+    async def search_messages(
+        self, 
+        query: str, 
         filters: Optional[Dict[str, Any]] = None,
-        min_score: float = 0.0,
-        model: Optional[str] = None
+        limit: int = 50
     ) -> List[Dict[str, Any]]:
         """
-        Perform semantic similarity search.
+        Search messages using text search and filters.
         
         Args:
-            query: Search query
-            k: Number of results to return
+            query: Text to search for
             filters: Optional metadata filters
-            min_score: Minimum similarity score
-            model: Embedding model to use
+            limit: Maximum number of results
             
         Returns:
-            List of search results with metadata
+            List of matching messages
         """
         start_time = datetime.utcnow()
         
@@ -120,110 +114,32 @@ class MCPClient:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            results = await self.server.similarity_search(
-                query=query,
-                k=k,
-                filters=filters,
-                min_score=min_score,
-                model=model
-            )
+            results = await self.server.search_messages(query, filters, limit)
             
             self._record_success(start_time)
             return results
             
         except Exception as e:
             self._record_failure(start_time)
-            logger.error(f"Error in similarity search: {e}")
+            logger.error(f"Error searching messages: {e}")
             raise
     
-    async def filter_search(
-        self,
-        filters: Dict[str, Any],
-        k: int = 10,
-        sort_by: str = "timestamp"
-    ) -> List[Dict[str, Any]]:
-        """
-        Search messages using only filters (no text query).
-        
-        Args:
-            filters: Metadata filters
-            k: Number of results to return
-            sort_by: Field to sort by
-            
-        Returns:
-            List of filtered results
-        """
-        start_time = datetime.utcnow()
-        
-        try:
-            if not self.server:
-                raise RuntimeError("MCP server not initialized")
-            
-            results = await self.server.filter_search(
-                filters=filters,
-                k=k,
-                sort_by=sort_by
-            )
-            
-            self._record_success(start_time)
-            return results
-            
-        except Exception as e:
-            self._record_failure(start_time)
-            logger.error(f"Error in filter search: {e}")
-            raise
-    
-    async def add_message_embedding(
-        self,
-        message_id: str,
-        content: str,
-        model: Optional[str] = None
-    ) -> bool:
-        """
-        Add or update embedding for a message.
-        
-        Args:
-            message_id: Unique message identifier
-            content: Message content to embed
-            model: Model to use (optional)
-            
-        Returns:
-            True if successful
-        """
-        start_time = datetime.utcnow()
-        
-        try:
-            if not self.server:
-                raise RuntimeError("MCP server not initialized")
-            
-            success = await self.server.add_message_embedding(message_id, content, model)
-            
-            if success:
-                self._record_success(start_time)
-            else:
-                self._record_failure(start_time)
-            
-            return success
-            
-        except Exception as e:
-            self._record_failure(start_time)
-            logger.error(f"Error adding message embedding: {e}")
-            return False
-    
-    async def batch_add_embeddings(
-        self,
-        messages: List[Dict[str, Any]],
-        model: Optional[str] = None
+    async def get_user_activity(
+        self, 
+        user_id: Optional[str] = None,
+        username: Optional[str] = None,
+        time_range: str = "7d"
     ) -> Dict[str, Any]:
         """
-        Add embeddings for multiple messages in batch.
+        Get user activity statistics.
         
         Args:
-            messages: List of message dictionaries with 'message_id' and 'content'
-            model: Model to use (optional)
+            user_id: User ID to analyze
+            username: Username to analyze (alternative to user_id)
+            time_range: Time range (e.g., "7d", "30d", "1y")
             
         Returns:
-            Dictionary with success count and errors
+            User activity statistics
         """
         start_time = datetime.utcnow()
         
@@ -231,29 +147,32 @@ class MCPClient:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            result = await self.server.batch_add_embeddings(messages, model)
+            activity = await self.server.get_user_activity(user_id, username, time_range)
             
-            if result.get("error_count", 0) == 0:
-                self._record_success(start_time)
-            else:
-                self._record_failure(start_time)
-            
-            return result
+            self._record_success(start_time)
+            return activity
             
         except Exception as e:
             self._record_failure(start_time)
-            logger.error(f"Error in batch add embeddings: {e}")
-            return {"success_count": 0, "error_count": len(messages), "errors": [str(e)]}
+            logger.error(f"Error getting user activity: {e}")
+            raise
     
-    async def delete_message_embedding(self, message_id: str) -> bool:
+    async def get_channel_summary(
+        self, 
+        channel_id: Optional[str] = None,
+        channel_name: Optional[str] = None,
+        time_range: str = "7d"
+    ) -> Dict[str, Any]:
         """
-        Delete embedding for a message.
+        Get channel activity summary.
         
         Args:
-            message_id: Message identifier to delete
+            channel_id: Channel ID to analyze
+            channel_name: Channel name to analyze (alternative to channel_id)
+            time_range: Time range (e.g., "7d", "30d", "1y")
             
         Returns:
-            True if successful
+            Channel activity summary
         """
         start_time = datetime.utcnow()
         
@@ -261,31 +180,56 @@ class MCPClient:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            success = await self.server.delete_message_embedding(message_id)
+            summary = await self.server.get_channel_summary(channel_id, channel_name, time_range)
             
-            if success:
-                self._record_success(start_time)
-            else:
-                self._record_failure(start_time)
-            
-            return success
+            self._record_success(start_time)
+            return summary
             
         except Exception as e:
             self._record_failure(start_time)
-            logger.error(f"Error deleting message embedding: {e}")
-            return False
+            logger.error(f"Error getting channel summary: {e}")
+            raise
     
-    async def get_embedding_stats(self) -> Dict[str, Any]:
-        """Get embedding statistics."""
+    async def get_database_info(self) -> Dict[str, Any]:
+        """
+        Get database information and statistics.
+        
+        Returns:
+            Database information
+        """
         try:
             if not self.server:
                 raise RuntimeError("MCP server not initialized")
             
-            return await self.server.get_embedding_stats()
+            return await self.server.get_database_info()
             
         except Exception as e:
-            logger.error(f"Error getting embedding stats: {e}")
-            return {"total_embeddings": 0, "embeddings_by_model": {}}
+            logger.error(f"Error getting database info: {e}")
+            return {"error": str(e)}
+    
+    async def test_query(self, query: str = "show me 5 recent messages") -> Dict[str, Any]:
+        """
+        Test the query system with a sample query.
+        
+        Args:
+            query: Test query to execute
+            
+        Returns:
+            Test results
+        """
+        try:
+            if not self.server:
+                raise RuntimeError("MCP server not initialized")
+            
+            return await self.server.test_query(query)
+            
+        except Exception as e:
+            logger.error(f"Error in test query: {e}")
+            return {
+                "success": False,
+                "query": query,
+                "error": str(e)
+            }
     
     async def health_check(self) -> Dict[str, Any]:
         """Perform health check on MCP server."""

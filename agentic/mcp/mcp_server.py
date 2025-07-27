@@ -1,7 +1,7 @@
 """
 MCP Server Implementation
 
-Main server that coordinates embedding generation and semantic search operations.
+Main server that provides direct SQLite access for Discord message analysis.
 """
 
 import asyncio
@@ -10,351 +10,212 @@ import logging
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 
-from .embedding_service import EmbeddingService
-from .search_service import SearchService
+from .sqlite_query_service import SQLiteQueryService
 
 logger = logging.getLogger(__name__)
 
 
 class MCPServer:
     """
-    Main MCP server that coordinates embedding and search operations.
+    Main MCP server that provides Discord message analysis through direct SQLite queries.
     
     Provides a unified interface for:
-    - Embedding generation
-    - Semantic search
-    - Batch operations
+    - Natural language to SQL translation
+    - Direct database queries
+    - User and channel analysis
+    - Message statistics
     - Health monitoring
     """
     
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         
-        # Initialize services
-        self.embedding_service = EmbeddingService(config.get("embedding", {}))
-        self.search_service = SearchService(config.get("search", {}))
+        # Initialize SQLite query service
+        self.query_service = SQLiteQueryService(config.get("sqlite", {}))
         
         # Performance tracking
         self.stats = {
             "total_requests": 0,
-            "embedding_requests": 0,
-            "search_requests": 0,
-            "batch_requests": 0,
+            "query_requests": 0,
+            "stats_requests": 0,
+            "user_analysis_requests": 0,
+            "channel_analysis_requests": 0,
             "errors": 0,
             "start_time": datetime.utcnow().isoformat()
         }
         
-        logger.info("MCP Server initialized")
+        logger.info("MCP Server initialized with SQLite query service")
     
-    async def generate_embedding(self, text: str, model: Optional[str] = None) -> List[float]:
+    async def query_messages(self, natural_language_query: str) -> List[Dict[str, Any]]:
         """
-        Generate embedding for a single text.
+        Query messages using natural language.
         
         Args:
-            text: Text to embed
-            model: Model to use (optional)
+            natural_language_query: Natural language query about Discord messages
             
         Returns:
-            List of floats representing the embedding
+            List of message results
         """
         try:
             self.stats["total_requests"] += 1
-            self.stats["embedding_requests"] += 1
+            self.stats["query_requests"] += 1
             
-            embedding = await self.embedding_service.generate_embedding(text, model)
+            results = await self.query_service.query_messages(natural_language_query)
             
-            logger.debug(f"Generated embedding for text (length: {len(text)})")
-            return embedding
+            logger.info(f"Query executed: {natural_language_query[:50]}... -> {len(results)} results")
+            return results
             
         except Exception as e:
             self.stats["errors"] += 1
-            logger.error(f"Error generating embedding: {e}")
+            logger.error(f"Error in query_messages: {e}")
             raise
     
-    async def batch_embed(self, texts: List[str], model: Optional[str] = None) -> List[List[float]]:
+    async def get_message_stats(self, filters: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
-        Generate embeddings for multiple texts in batch.
+        Get comprehensive message statistics.
         
         Args:
-            texts: List of texts to embed
-            model: Model to use (optional)
+            filters: Optional filters to apply
             
         Returns:
-            List of embeddings
+            Dictionary with various statistics
         """
         try:
             self.stats["total_requests"] += 1
-            self.stats["batch_requests"] += 1
+            self.stats["stats_requests"] += 1
             
-            embeddings = await self.embedding_service.batch_embed(texts, model)
+            stats = await self.query_service.get_message_stats(filters)
             
-            logger.info(f"Generated {len(embeddings)} embeddings in batch")
-            return embeddings
+            logger.info(f"Message stats retrieved with filters: {filters}")
+            return stats
             
         except Exception as e:
             self.stats["errors"] += 1
-            logger.error(f"Error in batch embedding: {e}")
+            logger.error(f"Error in get_message_stats: {e}")
             raise
     
-    async def similarity_search(
-        self,
-        query: str,
-        k: int = 10,
+    async def search_messages(
+        self, 
+        query: str, 
         filters: Optional[Dict[str, Any]] = None,
-        min_score: float = 0.0,
-        model: Optional[str] = None
+        limit: int = 50
     ) -> List[Dict[str, Any]]:
         """
-        Perform semantic similarity search.
+        Search messages using text search and filters.
         
         Args:
-            query: Search query
-            k: Number of results to return
+            query: Text to search for
             filters: Optional metadata filters
-            min_score: Minimum similarity score
-            model: Embedding model to use
+            limit: Maximum number of results
             
         Returns:
-            List of search results with metadata
+            List of matching messages
         """
         try:
             self.stats["total_requests"] += 1
-            self.stats["search_requests"] += 1
+            self.stats["query_requests"] += 1
             
-            results = await self.search_service.similarity_search(
-                query=query,
-                k=k,
-                filters=filters,
-                min_score=min_score,
-                model=model
-            )
+            results = await self.query_service.search_messages(query, filters, limit)
             
-            logger.info(f"Similarity search returned {len(results)} results")
+            logger.info(f"Search executed: {query} -> {len(results)} results")
             return results
             
         except Exception as e:
             self.stats["errors"] += 1
-            logger.error(f"Error in similarity search: {e}")
+            logger.error(f"Error in search_messages: {e}")
             raise
     
-    async def filter_search(
-        self,
-        filters: Dict[str, Any],
-        k: int = 10,
-        sort_by: str = "timestamp"
-    ) -> List[Dict[str, Any]]:
-        """
-        Search messages using only filters (no text query).
-        
-        Args:
-            filters: Metadata filters
-            k: Number of results to return
-            sort_by: Field to sort by
-            
-        Returns:
-            List of filtered results
-        """
-        try:
-            self.stats["total_requests"] += 1
-            self.stats["search_requests"] += 1
-            
-            results = await self.search_service.filter_search(
-                filters=filters,
-                k=k,
-                sort_by=sort_by
-            )
-            
-            logger.info(f"Filter search returned {len(results)} results")
-            return results
-            
-        except Exception as e:
-            self.stats["errors"] += 1
-            logger.error(f"Error in filter search: {e}")
-            raise
-    
-    async def add_message_embedding(
-        self,
-        message_id: str,
-        content: str,
-        model: Optional[str] = None
-    ) -> bool:
-        """
-        Add or update embedding for a message.
-        
-        Args:
-            message_id: Unique message identifier
-            content: Message content to embed
-            model: Model to use (optional)
-            
-        Returns:
-            True if successful
-        """
-        try:
-            # Generate embedding
-            embedding = await self.embedding_service.generate_embedding(content, model)
-            
-            # Store in database
-            await self._store_embedding(message_id, embedding, model or self.embedding_service.default_model)
-            
-            logger.debug(f"Added embedding for message {message_id}")
-            return True
-            
-        except Exception as e:
-            self.stats["errors"] += 1
-            logger.error(f"Error adding message embedding: {e}")
-            return False
-    
-    async def batch_add_embeddings(
-        self,
-        messages: List[Dict[str, Any]],
-        model: Optional[str] = None
+    async def get_user_activity(
+        self, 
+        user_id: Optional[str] = None,
+        username: Optional[str] = None,
+        time_range: str = "7d"
     ) -> Dict[str, Any]:
         """
-        Add embeddings for multiple messages in batch.
+        Get user activity statistics.
         
         Args:
-            messages: List of message dictionaries with 'message_id' and 'content'
-            model: Model to use (optional)
+            user_id: User ID to analyze
+            username: Username to analyze (alternative to user_id)
+            time_range: Time range (e.g., "7d", "30d", "1y")
             
         Returns:
-            Dictionary with success count and errors
+            User activity statistics
         """
         try:
-            if not messages:
-                return {"success_count": 0, "error_count": 0, "errors": []}
+            self.stats["total_requests"] += 1
+            self.stats["user_analysis_requests"] += 1
             
-            # Extract content for batch embedding
-            texts = [msg.get("content", "") for msg in messages]
-            message_ids = [msg.get("message_id", "") for msg in messages]
+            activity = await self.query_service.get_user_activity(user_id, username, time_range)
             
-            # Generate embeddings in batch
-            embeddings = await self.embedding_service.batch_embed(texts, model)
+            logger.info(f"User activity retrieved for {user_id or username} over {time_range}")
+            return activity
             
-            # Store embeddings
-            success_count = 0
-            error_count = 0
-            errors = []
+        except Exception as e:
+            self.stats["errors"] += 1
+            logger.error(f"Error in get_user_activity: {e}")
+            raise
+    
+    async def get_channel_summary(
+        self, 
+        channel_id: Optional[str] = None,
+        channel_name: Optional[str] = None,
+        time_range: str = "7d"
+    ) -> Dict[str, Any]:
+        """
+        Get channel activity summary.
+        
+        Args:
+            channel_id: Channel ID to analyze
+            channel_name: Channel name to analyze (alternative to channel_id)
+            time_range: Time range (e.g., "7d", "30d", "1y")
             
-            model_name = model or self.embedding_service.default_model
+        Returns:
+            Channel activity summary
+        """
+        try:
+            self.stats["total_requests"] += 1
+            self.stats["channel_analysis_requests"] += 1
             
-            for i, (message_id, embedding) in enumerate(zip(message_ids, embeddings)):
-                try:
-                    await self._store_embedding(message_id, embedding, model_name)
-                    success_count += 1
-                except Exception as e:
-                    error_count += 1
-                    errors.append(f"Message {message_id}: {str(e)}")
+            summary = await self.query_service.get_channel_summary(channel_id, channel_name, time_range)
             
-            logger.info(f"Batch added {success_count} embeddings, {error_count} errors")
+            logger.info(f"Channel summary retrieved for {channel_id or channel_name} over {time_range}")
+            return summary
+            
+        except Exception as e:
+            self.stats["errors"] += 1
+            logger.error(f"Error in get_channel_summary: {e}")
+            raise
+    
+    async def get_database_info(self) -> Dict[str, Any]:
+        """
+        Get database information and statistics.
+        
+        Returns:
+            Database information
+        """
+        try:
+            # Get basic stats
+            stats = await self.query_service.get_message_stats()
+            
+            # Get query service stats
+            query_stats = self.query_service.get_stats()
+            
             return {
-                "success_count": success_count,
-                "error_count": error_count,
-                "errors": errors
+                "database_stats": stats,
+                "query_service_stats": query_stats,
+                "server_stats": self.get_stats()
             }
             
         except Exception as e:
-            self.stats["errors"] += 1
-            logger.error(f"Error in batch add embeddings: {e}")
-            return {"success_count": 0, "error_count": len(messages), "errors": [str(e)]}
-    
-    async def _store_embedding(self, message_id: str, embedding: List[float], model: str):
-        """Store embedding in the database."""
-        try:
-            import sqlite3
-            from .search_service import SearchService
-            
-            # Use the search service's database path
-            embeddings_db_path = self.search_service.embeddings_db_path
-            
-            with sqlite3.connect(embeddings_db_path) as conn:
-                cursor = conn.cursor()
-                
-                # Convert embedding to blob
-                embedding_blob = self.search_service._list_to_blob(embedding)
-                
-                # Store or update embedding
-                cursor.execute("""
-                    INSERT OR REPLACE INTO message_embeddings 
-                    (message_id, embedding_vector, embedding_model, updated_at)
-                    VALUES (?, ?, ?, ?)
-                """, (message_id, embedding_blob, model, datetime.utcnow().isoformat()))
-                
-                conn.commit()
-                
-        except Exception as e:
-            logger.error(f"Error storing embedding: {e}")
-            raise
-    
-    async def delete_message_embedding(self, message_id: str) -> bool:
-        """
-        Delete embedding for a message.
-        
-        Args:
-            message_id: Message identifier to delete
-            
-        Returns:
-            True if successful
-        """
-        try:
-            import sqlite3
-            
-            embeddings_db_path = self.search_service.embeddings_db_path
-            
-            with sqlite3.connect(embeddings_db_path) as conn:
-                cursor = conn.cursor()
-                cursor.execute("DELETE FROM message_embeddings WHERE message_id = ?", (message_id,))
-                conn.commit()
-                
-                deleted = cursor.rowcount > 0
-                if deleted:
-                    logger.debug(f"Deleted embedding for message {message_id}")
-                else:
-                    logger.warning(f"No embedding found for message {message_id}")
-                
-                return deleted
-                
-        except Exception as e:
-            self.stats["errors"] += 1
-            logger.error(f"Error deleting message embedding: {e}")
-            return False
-    
-    async def get_embedding_stats(self) -> Dict[str, Any]:
-        """Get embedding statistics."""
-        try:
-            import sqlite3
-            
-            embeddings_db_path = self.search_service.embeddings_db_path
-            
-            with sqlite3.connect(embeddings_db_path) as conn:
-                cursor = conn.cursor()
-                
-                # Get total embeddings
-                cursor.execute("SELECT COUNT(*) FROM message_embeddings")
-                total_embeddings = cursor.fetchone()[0]
-                
-                # Get embeddings by model
-                cursor.execute("""
-                    SELECT embedding_model, COUNT(*) 
-                    FROM message_embeddings 
-                    GROUP BY embedding_model
-                """)
-                embeddings_by_model = dict(cursor.fetchall())
-                
-                return {
-                    "total_embeddings": total_embeddings,
-                    "embeddings_by_model": embeddings_by_model
-                }
-                
-        except Exception as e:
-            logger.error(f"Error getting embedding stats: {e}")
-            return {"total_embeddings": 0, "embeddings_by_model": {}}
+            logger.error(f"Error getting database info: {e}")
+            return {"error": str(e)}
     
     def get_stats(self) -> Dict[str, Any]:
         """Get MCP server statistics."""
         return {
             **self.stats,
-            "embedding_service_stats": self.embedding_service.get_stats(),
-            "search_service_stats": self.search_service.get_stats(),
+            "query_service_stats": self.query_service.get_stats(),
             "uptime": (datetime.utcnow() - datetime.fromisoformat(self.stats["start_time"])).total_seconds()
         }
     
@@ -367,16 +228,12 @@ class MCPServer:
         }
         
         try:
-            # Check embedding service
-            embedding_health = await self.embedding_service.health_check()
-            health["services"]["embedding"] = embedding_health
-            
-            # Check search service
-            search_health = await self.search_service.health_check()
-            health["services"]["search"] = search_health
+            # Check query service
+            query_health = await self.query_service.health_check()
+            health["services"]["query_service"] = query_health
             
             # Determine overall status
-            if embedding_health["status"] != "healthy" or search_health["status"] != "healthy":
+            if query_health["status"] != "healthy":
                 health["status"] = "degraded"
             
             # Add server stats
@@ -388,43 +245,43 @@ class MCPServer:
         
         return health
     
-    async def cleanup_cache(self) -> Dict[str, Any]:
-        """Clean up expired cache entries."""
+    async def test_query(self, query: str = "show me 5 recent messages") -> Dict[str, Any]:
+        """
+        Test the query system with a sample query.
+        
+        Args:
+            query: Test query to execute
+            
+        Returns:
+            Test results
+        """
         try:
-            import sqlite3
-            from datetime import datetime
+            start_time = datetime.utcnow()
             
-            embeddings_db_path = self.search_service.embeddings_db_path
+            # Execute test query
+            results = await self.query_messages(query)
             
-            with sqlite3.connect(embeddings_db_path) as conn:
-                cursor = conn.cursor()
-                
-                # Delete expired cache entries
-                cursor.execute("""
-                    DELETE FROM search_cache 
-                    WHERE expires_at < ?
-                """, (datetime.utcnow().isoformat(),))
-                
-                deleted_count = cursor.rowcount
-                conn.commit()
-                
-                logger.info(f"Cleaned up {deleted_count} expired cache entries")
-                
-                return {
-                    "deleted_entries": deleted_count,
-                    "timestamp": datetime.utcnow().isoformat()
-                }
-                
+            end_time = datetime.utcnow()
+            response_time = (end_time - start_time).total_seconds()
+            
+            return {
+                "success": True,
+                "query": query,
+                "results_count": len(results),
+                "response_time": response_time,
+                "sample_results": results[:3] if results else []
+            }
+            
         except Exception as e:
-            logger.error(f"Error cleaning up cache: {e}")
-            return {"deleted_entries": 0, "error": str(e)}
+            return {
+                "success": False,
+                "query": query,
+                "error": str(e)
+            }
     
     async def close(self):
         """Close the MCP server and cleanup resources."""
         try:
-            # Clean up cache
-            await self.cleanup_cache()
-            
             logger.info("MCP Server closed successfully")
             
         except Exception as e:
