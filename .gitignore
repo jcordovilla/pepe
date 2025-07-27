@@ -61,6 +61,7 @@ debug/test_*.json
 .idea/
 *.swp
 *.swo
+.cursorrules
 
 # Deployment
 .render/
