@@ -224,6 +224,11 @@ class DigestAgent(BaseAgent):
             # Filter out bot messages for digest queries
             filters_and.append({"author_bot": False})
             
+            # For weekly digests, ensure we get a good mix of content
+            if period == "week":
+                # Increase the limit for weekly digests to get more comprehensive coverage
+                max_messages = min(max_messages * 2, 500)
+            
             # Construct final filter
             if len(filters_and) == 0:
                 # No filters - get all messages
@@ -676,18 +681,29 @@ Use rich formatting to make it visually appealing and easy to read. Be specific 
 
 {chr(10).join(summary_texts)}
 
-**Requirements:**
+**CRITICAL REQUIREMENTS:**
 1. Use Discord markdown formatting (bold, italic, headers)
 2. Structure the summary into clear sections with headers (##)
 3. Break long paragraphs into shorter, focused paragraphs
 4. Focus on main topics and key discussions {time_context}
 5. {focus_instruction}
 6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
+7. **ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
+8. **ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
+9. **Be objective and practical - avoid flowery language like "a flurry of", "an explosion of excitement", "palpable enthusiasm"**
+10. **Make the summary factual and informative, not promotional or overly enthusiastic**
 
 **Format the response with:**
 - ## Main Topics (with bold key points)
 - ## Community Highlights (notable discussions)
 - ## Key Insights (important takeaways)
+
+**WRITING STYLE:**
+- Be objective and factual
+- Use specific details and concrete examples
+- Avoid repetitive language
+- Make each section distinct and focused
+- Ensure the trends section provides new insights, not repetition of earlier content
 
 Use rich formatting to make it visually appealing and easy to read."""
 
@@ -822,7 +838,7 @@ Author: {author}
 Channel: {channel}
 Reactions: {reactions}
 
-Focus on the key points and main topic. Be concise but informative."""
+Focus on the key points and main topic. Be concise but informative. Include specific details about what was discussed or shared."""
 
         try:
             summary = await self.llm_client.generate(
