@@ -138,7 +138,11 @@ class UnifiedDataManager:
                     enhanced_results.append(result)
             
             # Track search analytics
-            await self.stores["analytics"].track_search_performed(query, len(enhanced_results))
+            try:
+                await self.stores["analytics"].track_search_performed(query, len(enhanced_results))
+            except AttributeError:
+                # PerformanceMonitor might not have this method
+                logger.debug("PerformanceMonitor track_search_performed method not available")
             
             return enhanced_results
             
@@ -158,7 +162,11 @@ class UnifiedDataManager:
             results = await self.stores["mcp"].query_messages(natural_language_query)
             
             # Track query analytics
-            await self.stores["analytics"].track_search_performed(natural_language_query, len(results))
+            try:
+                await self.stores["analytics"].track_search_performed(natural_language_query, len(results))
+            except AttributeError:
+                # PerformanceMonitor might not have this method
+                logger.debug("PerformanceMonitor track_search_performed method not available")
             
             return results
             
@@ -242,7 +250,11 @@ class UnifiedDataManager:
             
             # Get analytics summary
             if "analytics" in self.stores:
-                summary["analytics"] = await self.stores["analytics"].get_summary()
+                try:
+                    summary["analytics"] = await self.stores["analytics"].get_summary()
+                except AttributeError:
+                    # PerformanceMonitor might not have this method
+                    summary["analytics"] = {"status": "get_summary method not available"}
             
             return summary
             

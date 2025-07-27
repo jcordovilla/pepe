@@ -106,7 +106,7 @@ class SearchAgent(BaseAgent):
                 return []
             
             # Calculate appropriate k value based on query
-            k_value = self.k_calculator.calculate_k(query)
+            k_value = self.k_calculator.calculate_k_value(query)
             actual_limit = min(limit, k_value, self.max_k)
             
             logger.info(f"SearchAgent processing query with k={actual_limit}: {query[:50]}...")

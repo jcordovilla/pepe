@@ -81,7 +81,7 @@ class QAAgent(BaseAgent):
                 return "❌ No query provided"
             
             # Calculate appropriate k value based on query
-            k_value = self.k_calculator.calculate_k(query)
+            k_value = self.k_calculator.calculate_k_value(query)
             logger.info(f"QA Agent processing query with k={k_value}: {query[:50]}...")
             
             # Search for relevant messages using MCP server
@@ -186,4 +186,11 @@ Please provide a helpful answer based on the context above.
             return {
                 "status": "unhealthy",
                 "error": str(e)
-            } 
+            }
+    
+    def can_handle(self, task) -> bool:
+        """Check if this agent can handle the given task."""
+        return (task.task_type == "qa" or 
+                "question" in task.description.lower() or
+                "answer" in task.description.lower() or
+                "query" in task.description.lower()) 
