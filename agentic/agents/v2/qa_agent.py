@@ -162,11 +162,18 @@ Use the provided context from Discord messages to answer the user's question.
 **EXPERIENCE QUERY FILTERING RULES:**
 When asked about users with experience in a field, ONLY include users who have EXPLICITLY STATED THEIR OWN experience, not users who just discussed the topic.
 
+**CHANNEL TARGETING STRATEGY:**
+Focus on messages from specific channels where users typically declare their experience:
+- Channels with "find" in the name (e.g., "find-a-buddy", "find-mentor")
+- Channels with "onboarding" in the name
+- Introduction channels (e.g., "introductions", "👋introductions")
+
 **INCLUDE users who:**
 - Use first-person statements: "I have", "I am", "I work", "I'm certified", "my experience"
 - Make professional declarations: "certified", "years of experience", "worked as", "specialize in"
 - Have self-introductions: "Hi, I'm", "My name is", "About me", "Areas of Expertise"
 - Explicitly claim personal expertise or experience in the field
+- Are from the targeted channels (find, onboarding, introductions)
 
 **EXCLUDE users who:**
 - Only discuss the topic without claiming personal experience
@@ -174,6 +181,7 @@ When asked about users with experience in a field, ONLY include users who have E
 - Share opinions or general knowledge
 - Mention the topic in passing without personal claims
 - Have others mention their experience (unless they confirm it themselves)
+- Are from general discussion channels (unless they explicitly claim experience)
 
 Guidelines:
 1. Base your answer on the provided Discord message context
@@ -258,6 +266,48 @@ Please provide a comprehensive answer based on the context above. **CRITICAL: Fo
                                 lines[i] = line.rstrip() + f" {jump_link}"
                                 break
                         answer = '\n'.join(lines)
+            
+            # Fix raw URLs in parentheses - convert them to proper markdown links
+            # Pattern: ([https://discord.com/...]) -> 🔗 [View Message](https://discord.com/...)
+            url_pattern = r'\(\[(https://discord\.com/[^)]+)\]\([^)]+\)\)'
+            answer = re.sub(url_pattern, r'🔗 [View Message](\1)', answer)
+            
+            # Also fix any remaining raw URLs in parentheses
+            raw_url_pattern = r'\(https://discord\.com/[^)]+\)'
+            answer = re.sub(raw_url_pattern, lambda m: f"🔗 [View Message]({m.group(1)})", answer)
+            
+            # Fix the format: "Jump URL: https://discord.com/..." -> "🔗 [View Message](https://discord.com/...)"
+            jump_url_pattern = r'Jump URL: (https://discord\.com/[^\s]+)'
+            answer = re.sub(jump_url_pattern, r'🔗 [View Message](\1)', answer)
+            
+            # Fix any remaining raw URLs that start with https://discord.com/ but are not already in markdown format
+            # Only replace URLs that are not already in [text](url) format
+            remaining_url_pattern = r'(https://discord\.com/[^\s]+)'
+            # Only replace if it's not already in markdown format
+            def replace_url(match):
+                url = match.group(1)
+                # Check if this URL is already in markdown format
+                if f"[{url}]" in answer or f"]({url})" in answer:
+                    return url
+                return f"🔗 [View Message]({url})"
+            answer = re.sub(remaining_url_pattern, replace_url, answer)
+            
+            # Remove duplicate jump URLs for the same user
+            lines = answer.split('\n')
+            cleaned_lines = []
+            for line in lines:
+                # Count how many jump URLs are in this line
+                jump_url_count = line.count('🔗 [View Message](')
+                if jump_url_count > 1:
+                    # Keep only the first jump URL
+                    parts = line.split('🔗 [View Message](')
+                    if len(parts) > 1:
+                        first_url = parts[1].split(')')[0]
+                        # Remove all jump URLs and add back just the first one
+                        line_without_urls = parts[0].rstrip()
+                        line = f"{line_without_urls} 🔗 [View Message]({first_url})"
+                cleaned_lines.append(line)
+            answer = '\n'.join(cleaned_lines)
             
             return answer
             
