@@ -39,7 +39,16 @@ class DigestAgent(BaseAgent):
             },
             "llm": config.get("llm", {})
         }
-        self.mcp_server = MCPServer(mcp_config)
+        
+        # Check if MCP SQLite is enabled in config
+        mcp_sqlite_config = config.get("mcp_sqlite", {})
+        if mcp_sqlite_config.get("enabled", False):
+            from ...mcp import MCPSQLiteServer
+            self.mcp_server = MCPSQLiteServer(mcp_sqlite_config)
+            # Note: MCP server will be started when needed
+        else:
+            from ...mcp import MCPServer
+            self.mcp_server = MCPServer(mcp_config)
         
         # Digest configuration - adaptive limits based on time period
         self.base_max_messages = config.get("max_messages", 25)
@@ -57,6 +66,16 @@ class DigestAgent(BaseAgent):
         }
         
         logger.info("DigestAgent initialized")
+    
+    async def _ensure_mcp_server_ready(self):
+        """Ensure MCP server is ready for use."""
+        if hasattr(self.mcp_server, 'start') and not hasattr(self.mcp_server, '_started'):
+            try:
+                await self.mcp_server.start()
+                self.mcp_server._started = True
+                logger.info("MCP SQLite server started")
+            except Exception as e:
+                logger.warning(f"Failed to start MCP SQLite server: {e}")
     
     def signature(self) -> Dict[str, Any]:
         """Return agent signature for registration."""
@@ -116,7 +135,7 @@ class DigestAgent(BaseAgent):
             return f"Error: Invalid date format - {e}"
         
         try:
-            # Get all messages in the period (optionally filter by channel_id or channel_name)
+            # Get all messages in the period (optionally filter by channel_id or forum_channel_id)
             logger.info(f"[DigestAgent] Starting message retrieval at {time.time() - start_time:.2f}s")
             messages = await self._get_all_messages(start_date, end_date, channel_id, channel, period)
             logger.info(f"[DigestAgent] Message retrieval completed at {time.time() - start_time:.2f}s")
@@ -223,6 +242,9 @@ class DigestAgent(BaseAgent):
                 messages = await self._get_cross_server_messages(filters, max_messages, period)
             else:
                 # Single channel or daily digest - use standard approach
+                # Ensure MCP server is ready
+                await self._ensure_mcp_server_ready()
+                
                 # Convert filters to SQL query using MCP server
                 query = self._build_natural_language_query(filters, max_messages, "timestamp")
                 results = await self.mcp_server.query_messages(query)

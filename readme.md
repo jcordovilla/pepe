@@ -1,10 +1,11 @@
 # Pepe - Advanced Discord Bot with Agentic RAG Architecture
 
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/badge/dependency%20management-poetry-60A5FA.svg)](https://python-poetry.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![MCP SQLite](https://img.shields.io/badge/MCP-SQLite-green.svg)](https://github.com/microsoft/mcp)
 
-**Pepe** is an intelligent Discord bot powered by advanced agentic RAG (Retrieval-Augmented Generation) architecture. It transforms Discord conversations into actionable insights through semantic search, automated analysis, and multi-agent orchestration. Whether you're managing a community, analyzing discussions, or extracting knowledge from conversations, Pepe provides deep intelligence about user behavior, conversation patterns, and community dynamics.
+**Pepe** is an intelligent Discord bot powered by advanced agentic RAG (Retrieval-Augmented Generation) architecture. It transforms Discord conversations into actionable insights through natural language queries, automated analysis, and multi-agent orchestration. Whether you're managing a community, analyzing discussions, or extracting knowledge from conversations, Pepe provides deep intelligence about user behavior, conversation patterns, and community dynamics.
 
 > **🚀 New to Pepe?** Jump straight to the Discord Bot Quick Start Guide for immediate hands-on testing!
 
@@ -17,7 +18,7 @@ Pepe analyzes Discord server activity to help you:
 * **Understand Your Community**: Who are your most active members? When is your server busiest?
 * **Extract Knowledge**: Find specific discussions, resources, and insights from message history
 * **Generate Automated Digests**: Get weekly summaries with engagement analysis
-* **Semantic Search**: Find content by meaning, not just keywords
+* **Natural Language Queries**: Ask questions in plain English
 * **Make Data-Driven Decisions**: Use real insights instead of gut feelings
 
 ### **Advanced Features**
@@ -25,8 +26,9 @@ Pepe analyzes Discord server activity to help you:
 * **🤖 Multi-Agent Architecture**: Specialized agents for search, analysis, and digest generation
 * **🧠 AI-Powered Resource Detection**: Automatically extract and categorize links and resources
 * **📊 Real-time Analytics**: Performance monitoring and query tracking
-* **⚡ Streaming Processing**: 42.4 messages/second indexing with sub-second response times
+* **⚡ MCP SQLite Integration**: Standardized database operations with natural language queries
 * **🌐 Multiple Interfaces**: Discord bot, web dashboard, REST API
+* **🐍 Python 3.12**: Latest language features and performance improvements
 
 ## 🤝 Community & Contributing
 
@@ -170,8 +172,8 @@ Some commands include detailed analytics showing:
 
 The bot automatically chooses the best analysis method:
 
-* **Semantic Search** for finding specific content
-* **Pattern Recognition** for activity analysis
+* **Natural Language Queries** for finding specific content
+* **MCP SQLite** for optimized database operations
 * **AI-Powered Summarization** for digests
 
 #### **⏱️ Response Times**
@@ -269,9 +271,9 @@ Pepe uses a sophisticated multi-agent architecture:
 ### **Technology Stack**
 
 * **LangGraph**: Multi-agent orchestration and workflow management
-* **ChromaDB**: Vector database for semantic search
+* **MCP SQLite**: Standardized database operations with natural language queries
 * **Ollama (Llama)**: Local LLM for analysis and generation
-* **Sentence Transformers**: Local embeddings (msmarco-distilbert-base-v4)
+* **Python 3.12**: Latest language features and performance improvements
 * **SQLite**: Message storage and metadata
 * **Discord.py**: Bot interface and message handling
 
@@ -279,10 +281,9 @@ Pepe uses a sophisticated multi-agent architecture:
 
 ### **Prerequisites**
 
-* Python 3.11+
+* Python 3.12+
 * Poetry (for dependency management)
 * Discord Bot Token
-* OpenAI API Key (for embeddings only)
 * Ollama (for local Llama models)
 * 4GB+ RAM recommended
 
@@ -312,7 +313,8 @@ pip install poetry
    cp .env.example .env
    # Edit .env with your tokens:
    # DISCORD_TOKEN=your_discord_bot_token
-   # EMBEDDING_MODEL=msmarco-distilbert-base-v4
+   # LLM_MODEL=llama3.1:8b
+   # LLM_FAST_MODEL=phi3:mini
    # GUILD_ID=your_discord_server_id
    ```
 
@@ -357,7 +359,8 @@ poetry shell
 ```bash
 # Required
 DISCORD_TOKEN=your_discord_bot_token
-EMBEDDING_MODEL=msmarco-distilbert-base-v4
+LLM_MODEL=llama3.1:8b
+LLM_FAST_MODEL=phi3:mini
 GUILD_ID=your_discord_server_id
 
 # Optional
@@ -365,6 +368,7 @@ ENABLE_CHARTS=true              # Enable chart generation
 MAX_MESSAGES=10000              # Limit message processing
 ANALYSIS_TIMEOUT=300            # Analysis timeout in seconds
 ENABLE_RESOURCE_DETECTION=true  # Enable AI resource detection
+MCP_SQLITE_ENABLED=true         # Enable MCP SQLite integration
 ```
 
 ### **Performance Tuning**

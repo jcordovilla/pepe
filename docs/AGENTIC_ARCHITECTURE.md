@@ -18,6 +18,7 @@ Imagine you have a team of experts, each with a specific job:
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    DISCORD BOT AGENTIC SYSTEM                   │
+│                        (Python 3.12 + MCP SQLite)              │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
@@ -49,9 +50,9 @@ Imagine you have a team of experts, each with a specific job:
 ├─────────────────────────────────────────────────────────────────┤
 │                        DATA LAYER                              │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
-│  │   ChromaDB   │    │   SQLite    │    │   Memory    │         │
-│  │ Vector Store │    │  Database   │    │   System    │         │
-│  │(Smart Search)│    │(Metadata)   │    │(Conversation)│        │
+│  │   MCP       │    │   SQLite    │    │   Memory    │         │
+│  │ SQLite      │    │  Database   │    │   System    │         │
+│  │(Smart Query)│    │(Metadata)   │    │(Conversation)│        │
 │  └─────────────┘    └─────────────┘    └─────────────┘         │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -62,15 +63,15 @@ Imagine you have a team of experts, each with a specific job:
 
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │───▶│   ROUTER    │───▶│   DIGEST    │───▶│   SEARCH    │
-│   Request   │    │   AGENT     │    │   AGENT     │    │   AGENT     │
-│             │    │(Receptionist)│    │(Summarizer) │    │(Researcher) │
+│    USER     │───▶│   ROUTER    │───▶│   DIGEST    │───▶│   MCP       │
+│   Request   │    │   AGENT     │    │   AGENT     │    │  SQLite     │
+│             │    │(Receptionist)│    │(Summarizer) │    │(Smart Query)│
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
                                                               │
                                                               ▼
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │◀───│ ORCHESTRATOR│◀───│   DIGEST    │◀───│  ChromaDB   │
-│  Response   │    │(Coordinator)│    │   AGENT     │    │ Vector Store│
+│    USER     │◀───│ ORCHESTRATOR│◀───│   DIGEST    │◀───│  SQLite     │
+│  Response   │    │(Coordinator)│    │   AGENT     │    │  Database   │
 │             │    │             │    │(Summarizer) │    │             │
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
@@ -79,23 +80,23 @@ Imagine you have a team of experts, each with a specific job:
 1. You type: "Give me a weekly digest of #general-forum"
 2. The Router Agent recognizes this is a digest request
 3. It calls the Digest Agent with the channel information
-4. The Digest Agent asks the vector store for all messages from that channel in the past week
-5. It groups messages by topic and creates a summary
+4. The Digest Agent uses MCP SQLite to query all messages from that channel in the past week
+5. It groups messages by topic and creates a summary using local LLM models
 6. You get a nicely formatted digest with all the important discussions
 
 ### Workflow 2: "What was discussed about AI safety last month?"
 
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │───▶│   ROUTER    │───▶│  ANALYSIS   │───▶│   SEARCH    │
-│   Request   │    │   AGENT     │    │   AGENT     │    │   AGENT     │
-│             │    │(Receptionist)│    │  (Analyst)  │    │(Researcher) │
+│    USER     │───▶│   ROUTER    │───▶│  ANALYSIS   │───▶│   MCP       │
+│   Request   │    │   AGENT     │    │   AGENT     │    │  SQLite     │
+│             │    │(Receptionist)│    │  (Analyst)  │    │(Smart Query)│
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
                                                               │
                                                               ▼
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │◀───│ ORCHESTRATOR│◀───│  ANALYSIS   │◀───│  ChromaDB   │
-│  Response   │    │(Coordinator)│    │   AGENT     │    │ Vector Store│
+│    USER     │◀───│ ORCHESTRATOR│◀───│  ANALYSIS   │◀───│  SQLite     │
+│  Response   │    │(Coordinator)│    │   AGENT     │    │  Database   │
 │             │    │             │    │  (Analyst)  │    │             │
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
@@ -112,15 +113,15 @@ Imagine you have a team of experts, each with a specific job:
 
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │───▶│   ROUTER    │───▶│  PLANNING   │───▶│   SEARCH    │
-│   Request   │    │   AGENT     │    │   AGENT     │    │   AGENT     │
-│             │    │(Receptionist)│    │ (Planner)   │    │(Researcher) │
+│    USER     │───▶│   ROUTER    │───▶│  PLANNING   │───▶│   MCP       │
+│   Request   │    │   AGENT     │    │   AGENT     │    │  SQLite     │
+│             │    │(Receptionist)│    │ (Planner)   │    │(Smart Query)│
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
                                                               │
                                                               ▼
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    USER     │◀───│ ORCHESTRATOR│◀───│  PLANNING   │◀───│  ChromaDB   │
-│  Response   │    │(Coordinator)│    │   AGENT     │    │ Vector Store│
+│    USER     │◀───│ ORCHESTRATOR│◀───│  PLANNING   │◀───│  SQLite     │
+│  Response   │    │(Coordinator)│    │   AGENT     │    │  Database   │
 │             │    │             │    │ (Planner)   │    │             │
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
@@ -172,7 +173,8 @@ The bot remembers your conversations and preferences:
 
 The bot can find information in your Discord history using:
 
-- **Semantic search**: Finds messages that mean the same thing, even if they use different words
+- **Natural language queries**: Ask questions in plain English
+- **MCP SQLite**: Standardized database queries with schema introspection
 - **Metadata filtering**: Searches by channel, date, user, etc.
 - **Context understanding**: Knows what's relevant to your question
 
@@ -184,16 +186,17 @@ The bot can find information in your Discord history using:
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────────┐    ┌─────────────────┐                │
-│  │   SEMANTIC      │    │   METADATA      │                │
-│  │    SEARCH       │    │   FILTERING     │                │
-│  │                 │    │                 │                │
-│  │ • Understands   │    │ • Channel       │                │
-│  │   meaning, not  │    │   filtering     │                │
-│  │   just keywords │    │ • Date ranges   │                │
-│  │ • Finds similar │    │ • User          │                │
-│  │   concepts      │    │   filtering     │                │
-│  │ • Uses          │    │ • Thread        │                │
-│  │   embeddings    │    │   filtering     │                │
+│  │   NATURAL       │    │   MCP SQLITE    │                │
+│  │   LANGUAGE      │    │   QUERIES       │                │
+│  │   QUERIES       │    │                 │                │
+│  │                 │    │ • Schema        │                │
+│  │ • Ask questions │    │   introspection │                │
+│  │   in plain      │    │ • Optimized     │                │
+│  │   English       │    │   SQL queries   │                │
+│  │ • Automatic     │    │ • Process       │                │
+│  │   translation   │    │   isolation     │                │
+│  │ • Context       │    │ • Error         │                │
+│  │   awareness     │    │   recovery      │                │
 │  └─────────────────┘    └─────────────────┘                │
 │           │                       │                        │
 │           └───────────┬───────────┘                        │

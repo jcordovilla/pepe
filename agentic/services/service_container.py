@@ -17,7 +17,7 @@ from ..analytics.query_answer_repository import QueryAnswerRepository
 from ..analytics.performance_monitor import PerformanceMonitor
 from ..analytics.validation_system import ValidationSystem
 from ..analytics.analytics_dashboard import AnalyticsDashboard
-from ..mcp import MCPServer
+from ..mcp import MCPServer, MCPSQLiteServer
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +61,17 @@ class ServiceContainer:
                 },
                 "llm": self.config.get("llm", {})
             }
-            self._services["mcp_server"] = MCPServer(mcp_config)
+            
+            # Check if MCP SQLite is enabled
+            mcp_sqlite_config = self.config.get("mcp_sqlite", {})
+            if mcp_sqlite_config.get("enabled", False):
+                logger.info("Using MCP SQLite server")
+                self._services["mcp_server"] = MCPSQLiteServer(mcp_sqlite_config)
+                # Start the MCP SQLite server
+                await self._services["mcp_server"].start()
+            else:
+                logger.info("Using legacy MCP server")
+                self._services["mcp_server"] = MCPServer(mcp_config)
             
             # Initialize memory
             memory_config = self.config.get("data", {}).get("memory_config", {})
@@ -226,6 +236,9 @@ class ServiceContainer:
                     if hasattr(service, 'close'):
                         await service.close()
                         logger.debug(f"Closed service: {service_name}")
+                    elif hasattr(service, 'stop'):
+                        await service.stop()
+                        logger.debug(f"Stopped service: {service_name}")
                 except Exception as e:
                     logger.warning(f"Error closing service {service_name}: {e}")
             

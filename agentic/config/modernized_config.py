@@ -66,6 +66,15 @@ def get_modernized_config() -> Dict[str, Any]:
             }
         },
         
+        # MCP SQLite configuration
+        "mcp_sqlite": {
+            "enabled": True,
+            "database_path": "data/discord_messages.db",
+            "enable_write": False,
+            "metadata_path": None,
+            "verbose": False
+        },
+        
         # Legacy-proven processing settings
         "processing": {
             "batch_size": 100,  # From legacy batch_detect.py

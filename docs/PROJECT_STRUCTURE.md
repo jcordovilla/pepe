@@ -1,341 +1,197 @@
-# Discord Bot Agentic Architecture v2 - Project Structure
+# Project Structure
+
+This document describes the architecture and organization of the agentic Discord bot system.
 
 ## Overview
-This is an agentic RAG (Retrieval-Augmented Generation) application with Discord bot capabilities, built using LangGraph for multi-agent orchestration. The system now includes advanced digest generation capabilities for weekly/monthly summaries.
 
-> **💡 For a simple explanation of how the agentic system works, see [AGENTIC_ARCHITECTURE.md](AGENTIC_ARCHITECTURE.md)**
+The project follows a modular, agentic architecture with clear separation of concerns. The system uses Python 3.12+ and integrates MCP SQLite for standardized database operations.
 
-## Root Directory Structure
+## Core Architecture
 
 ```
 discord-bot-agentic/
-├── .env                    # Environment variables (Discord token, embedding model)
-├── .gitignore             # Git ignore patterns
-├── main.py                # Main entry point for the application
-├── pyproject.toml         # Poetry dependencies and project configuration
-├── readme.md             # Project documentation
-├── PROJECT_STRUCTURE.md  # This file - project structure documentation
-│
-├── agentic/              # Core agentic framework
-│   ├── agents/           # Multi-agent system
-│   ├── analytics/        # Performance monitoring and analytics
-│   ├── cache/           # Smart caching system
-│   ├── config/          # Configuration management
-│   ├── core/            # Core business logic
-│   ├── interfaces/      # Discord and API interfaces
-│   ├── memory/          # Conversation memory management
-│   ├── reasoning/       # Query analysis and task planning
-│   ├── services/        # Business services layer
-│   ├── utils/           # Utility functions and helpers
-│   └── vectorstore/     # Vector database operations
-│
-├── data/                # Data storage
-│   ├── chromadb/        # Vector database files
-│   ├── messages/        # Discord message archives (JSON)
-│   └── analytics/       # Analytics and performance data
-│
-├── docs/                # Documentation
-│   ├── cleanup_complete_*.md  # Cleanup completion records
-│   └── guides/          # Usage and deployment guides
-│
-├── scripts/             # Utility and management scripts
-│   ├── streaming_discord_indexer.py  # Optimized message indexing
-│   ├── system_status.py              # System health monitoring
-│   └── validation_*.py               # System validation tools
-│
-└── tests/               # Test suite
-    ├── integration/     # Integration tests
-    └── unit/           # Unit tests
+├── agentic/                    # Main application package
+│   ├── agents/                 # Agent implementations
+│   │   ├── v2/                # Latest agent versions
+│   │   │   ├── qa_agent.py    # Question-answering agent
+│   │   │   ├── digest_agent.py # Digest generation agent
+│   │   │   ├── router_agent.py # Request routing agent
+│   │   │   └── ...
+│   │   └── base_agent.py      # Base agent class
+│   ├── mcp/                   # Model Context Protocol
+│   │   ├── mcp_server.py      # Legacy MCP server
+│   │   ├── mcp_sqlite_server.py # MCP SQLite server
+│   │   └── sqlite_query_service.py # SQLite service
+│   ├── services/              # Core services
+│   │   ├── service_container.py # Dependency injection
+│   │   ├── llm_client.py      # LLM client
+│   │   └── ...
+│   ├── config/                # Configuration
+│   │   └── modernized_config.py # Unified configuration
+│   └── ...
+├── data/                      # Data storage
+├── docs/                      # Documentation
+├── scripts/                   # Utility scripts
+├── tests/                     # Test suite
+└── pyproject.toml            # Poetry configuration
 ```
 
-## Core Architecture Components
+## Key Components
 
-### 🤖 Multi-Agent System (`agentic/agents/`)
+### Agents (`agentic/agents/`)
 
-```
-agents/
-├── __init__.py              # Agent registry and initialization
-├── base_agent.py           # Base agent class with common functionality
-├── orchestrator.py         # LangGraph workflow coordinator
-├── search_agent.py         # Vector and filtered search operations
-├── analysis_agent.py       # Content analysis and insights
-├── digest_agent.py         # Weekly/monthly digest generation
-├── planning_agent.py       # Query analysis and execution planning
-└── pipeline_agent.py       # Data processing workflows
-```
+The system uses a multi-agent architecture where each agent has a specific role:
 
-**Key Features:**
-- ✅ **Stateful workflow orchestration** with LangGraph
-- ✅ **Specialized agent roles** for different query types
-- ✅ **Concurrent subtask execution** for improved performance
-- ✅ **Task decomposition** with dependency tracking
-- ✅ **Comprehensive error handling** and recovery
-- ✅ **Digest generation** for weekly/monthly summaries
+- **QA Agent**: Handles question-answering using RAG
+- **Digest Agent**: Creates summaries and digests
+- **Router Agent**: Routes requests to appropriate agents
+- **Self-Check Agent**: Validates response quality
+- **Trend Agent**: Analyzes trends and patterns
 
-### 🧠 Reasoning System (`agentic/reasoning/`)
+### MCP Integration (`agentic/mcp/`)
 
-```
-reasoning/
-├── __init__.py
-├── query_analyzer.py       # Intent detection, entity extraction, temporal parsing
-└── task_planner.py        # Execution plan generation and task orchestration
-```
+Model Context Protocol integration for standardized database operations:
 
-**Capabilities:**
-- Intent classification (search, digest, analyze, summarize)
-- Entity extraction (channels, users, dates, time periods)
-- Advanced time-bound query processing ("last week", "yesterday", date ranges)
-- Complex query decomposition with digest support
-- Temporal pattern recognition (weekly, monthly, daily)
-- Dependency resolution and task scheduling
+- **MCPSQLiteServer**: Runs mcp-sqlite as subprocess
+- **MCPServer**: Legacy MCP server implementation
+- **SQLiteQueryService**: Direct SQLite operations
 
-### 💾 Data Management
+### Services (`agentic/services/`)
 
-#### Vector Store (`agentic/vectorstore/`)
-```
-vectorstore/
-├── __init__.py
-└── persistent_store.py     # ChromaDB operations with enhanced metadata
-```
+Core services providing shared functionality:
 
-**Features:**
-- ✅ **7,157+ indexed messages** with 34 metadata fields per message
-- ✅ **Semantic search** with OpenAI embeddings
-- ✅ **Temporal filtering** and chronological sorting
-- ✅ **Enhanced metadata** (display names, attachments, reactions)
+- **ServiceContainer**: Dependency injection and lifecycle management
+- **UnifiedLLMClient**: LLM client with fallback support
+- **DiscordService**: Discord API integration
+- **SyncService**: Data synchronization
 
-#### Memory System (`agentic/memory/`)
-```
-memory/
-├── __init__.py
-└── conversation_memory.py  # SQLite conversation tracking with intelligent summarization
-```
+### Configuration (`agentic/config/`)
 
-#### Smart Caching (`agentic/cache/`)
-```
-cache/
-├── __init__.py
-└── smart_cache.py         # Multi-level caching with content classification optimization
-```
+Unified configuration system:
 
-### 🔗 Interfaces (`agentic/interfaces/`)
+- **modernized_config.py**: Centralized configuration with environment variable support
+- Supports Python 3.12+ requirements
+- MCP SQLite configuration
+- LLM model configuration
 
-```
-interfaces/
-├── __init__.py
-├── discord_interface.py    # Discord bot integration (slash commands)
-├── agent_api.py           # REST API for agent operations
+## Technology Stack
 
-```
+### Core Technologies
 
-**Discord Integration:**
-- ✅ **Real-time slash commands** (`/pepe`)
-- ✅ **Weekly digest commands** (`/digest weekly`)
-- ✅ **Message indexing** with enhanced metadata
-- ✅ **Channel mention resolution** (`<#channelID>`)
-- ✅ **User-friendly display names**
+- **Python**: 3.12+ (required for MCP SQLite)
+- **Poetry**: Dependency management
+- **SQLite**: Primary database
+- **Ollama**: Local LLM models
 
-### 📊 Analytics System (`agentic/analytics/`)
+### Key Dependencies
 
-```
-analytics/
-├── __init__.py
-├── query_answer_repository.py  # Query/answer tracking
-├── performance_monitor.py      # System metrics and monitoring
-├── validation_system.py        # Answer quality validation
-└── analytics_dashboard.py      # Metrics visualization
-```
+- **pydantic**: 2.11.5+ (MCP SQLite requirement)
+- **aiosqlite**: 0.21.0+ (MCP SQLite requirement)
+- **mcp-sqlite**: 0.1.0+ (standardized SQLite operations)
+- **discord.py**: Discord API integration
+- **langchain**: LLM framework
 
-### 🛠 Services Layer (`agentic/services/`)
+### LLM Models
 
-```
-services/
-├── __init__.py
-├── unified_data_manager.py    # Centralized data operations
-├── discord_service.py         # Discord API operations
-├── content_processor.py       # AI-powered content analysis with intelligent caching
-├── sync_service.py           # Data synchronization
-└── channel_resolver.py       # Channel ID/name resolution
-```
+- **Primary**: llama3.1:8b (complex tasks)
+- **Fast**: phi3:mini (simple tasks)
+- **Fallback**: llama2:latest (reliability)
 
-### 🔧 Utilities (`agentic/utils/`)
+## Data Flow
 
-```
-utils/
-├── __init__.py
-├── date_utils.py             # Date range calculation for digests
-├── logging_utils.py          # Structured logging configuration
-└── validation_utils.py       # Data validation helpers
-```
+### Request Processing
 
-## Data Flow Architecture
+1. **Input**: User query via Discord or API
+2. **Routing**: Router agent determines appropriate handler
+3. **Processing**: Specialized agent processes request
+4. **Database**: MCP SQLite server handles data queries
+5. **LLM**: Local models generate responses
+6. **Output**: Formatted response returned to user
 
-### 1. Message Processing Pipeline
-```
-Discord API → Streaming Indexer → Vector Embeddings → ChromaDB
-     ↓              ↓                    ↓              ↓
-Analytics Tracking → Content Analysis → Metadata Enhancement → Search Index
-```
+### Data Storage
 
-### 2. Query Processing Workflow (LangGraph)
-```
-User Query → Query Analysis → Task Planning → Concurrent Agent Execution → Result Synthesis
-     ↓           ↓              ↓              ↓                          ↓
-Intent Detection → Entity Extract → Task Creation → Parallel Agent Processing → Response Format
-                   Time-bound     → Dependency    → Smart Caching          → Memory Update
-                   Patterns         Resolution      Content Classification
-```
+- **SQLite Database**: `data/discord_messages.db`
+- **MCP SQLite**: Standardized query interface
+- **Cache**: Smart caching for performance
+- **Memory**: Conversation context storage
 
-### 3. Digest Generation Workflow
-```
-Digest Request → Date Range Calc → Message Retrieval → Content Analysis → Digest Format
-      ↓              ↓                   ↓                ↓               ↓
-Temporal Parse → Filter Creation → Vector Search → Aggregation → Structured Output
-```
+## Configuration Management
 
-## Key Capabilities
+### Environment Variables
 
-### ✅ Current Working Features
-- **Semantic Search**: Vector-based content discovery with enhanced temporal filtering
-- **Concurrent Processing**: Parallel subtask execution for improved performance  
-- **Time-bound Queries**: Advanced temporal pattern recognition ("last week", "yesterday", date ranges)
-- **Smart Memory Management**: Automatic conversation history summarization
-- **Content Classification Caching**: Intelligent caching for repeated content analysis
-- **Channel Filtering**: Discord channel mention support
-- **User Display Names**: Friendly names instead of usernames
-- **Real-time Indexing**: Streaming Discord message processing
-- **Performance Analytics**: Query tracking and system monitoring
-- **Weekly Digests**: Automated content summarization
-- **Multi-interface Support**: Discord bot, web app, REST API
+Key configuration via `.env` file:
 
-### 📊 System Metrics
-- **Messages Indexed**: 7,157+ with enhanced metadata
-- **Metadata Fields**: 34 fields per message
-- **Processing Speed**: 42.4 messages/sec
-- **Response Time**: ~0.5-0.9 seconds per query (with concurrent processing)
-- **Storage Efficiency**: 50% reduction vs JSON approach
-- **Concurrent Tasks**: Up to 10 parallel subtasks execution
-- **Cache Hit Rate**: 85%+ for content classification
-- **Memory Optimization**: Automatic history summarization for long conversations
-
-### 🎯 Digest Generation Features
-- **Temporal Patterns**: Weekly, monthly, daily digests
-- **Content Aggregation**: By channels, users, engagement
-- **Smart Summarization**: High-engagement content highlighting
-- **Flexible Filtering**: Channel-specific or server-wide digests
-- **Rich Formatting**: Structured output with metadata
-
-## Recent Enhancements (Latest Update)
-
-### 🚀 Major Optimizations Applied
-1. **Streaming Indexer**: Direct Discord API → ChromaDB (eliminated JSON bottleneck)
-2. **Enhanced Metadata**: 34 fields per message (vs 12 previously)
-3. **Display Names**: User-friendly names in all responses
-4. **Weekly Digests**: Full digest generation capability
-5. **Temporal Analysis**: Advanced date range processing
-6. **Performance Monitoring**: Real-time system metrics
-7. **Codebase Cleanup**: 115+ temporary files archived, organized structure
-8. **🚀 Concurrent Task Execution**: Parallel subtask processing for faster responses
-9. **🧠 Smart Memory Summarization**: Automatic conversation history compression
-10. **⚡ Content Classification Caching**: Improved performance with intelligent caching
-11. **⏰ Time-bound Query Support**: Enhanced temporal query processing capabilities
-
-### 📋 Production Readiness
-- ✅ **Clean Architecture**: 80 essential Python files, no bloat
-- ✅ **Comprehensive Testing**: Integration and unit test coverage
-- ✅ **Error Handling**: Robust error recovery and logging
-- ✅ **Documentation**: Complete setup and usage guides
-- ✅ **Monitoring**: Health checks and performance tracking
-
-## Configuration
-
-### Environment Variables Required
 ```bash
-DISCORD_TOKEN=your_discord_bot_token
-EMBEDDING_MODEL=msmarco-distilbert-base-v4
-GUILD_ID=your_discord_server_id
+# Discord
+DISCORD_TOKEN=your_token
 
-# Optional Performance & Caching
-CACHE_TTL=3600
-ANALYSIS_CACHE_TTL=86400
-CLASSIFICATION_CACHE_TTL=86400
-LLM_COMPLEXITY_THRESHOLD=0.85
-MAX_CONCURRENT_TASKS=10
-ENABLE_MEMORY_SUMMARIZATION=true
+# LLM Models
+LLM_MODEL=llama3.1:8b
+LLM_FAST_MODEL=phi3:mini
+LLM_FALLBACK_MODEL=llama2:latest
+
+# MCP SQLite
+MCP_SQLITE_ENABLED=true
 ```
 
-### System Requirements
-- Python 3.9+
-- ChromaDB for vector storage
-- OpenAI API access for embeddings
-- Discord bot permissions for message reading
+### Configuration Hierarchy
 
-## Quick Start
+1. **Environment Variables**: Highest priority
+2. **Configuration Files**: Default values
+3. **Code Defaults**: Fallback values
 
-1. **Setup Environment**:
-   ```bash
-   poetry install
-   cp .env.example .env  # Add your tokens
-   ```
+## Development Workflow
 
-2. **Initialize Data**:
-   ```bash
-   python scripts/streaming_discord_indexer.py
-   ```
+### Setup
 
-3. **Start Bot**:
-   ```bash
-   python main.py
-   ```
+1. **Python 3.12+**: Required for MCP SQLite
+2. **Poetry**: Install dependencies
+3. **Ollama**: Install and configure models
+4. **Environment**: Set up `.env` file
 
-4. **Test Enhanced Features**:
-   ```
-   /pepe give me a weekly digest
-   /pepe summary of last week
-   /pepe digest for #general channel
-   /pepe show me discussions from yesterday
-   /pepe find activity between June 1 and June 7
-   ```
+### Testing
 
-The system is now production-ready with advanced capabilities including concurrent processing, intelligent memory management, enhanced caching, and sophisticated temporal query processing!
+- **Unit Tests**: Individual component testing
+- **Integration Tests**: End-to-end workflow testing
+- **Performance Tests**: Load and stress testing
 
-## 🧪 Test Coverage
+### Deployment
 
-The system includes comprehensive test coverage for all new features:
+- **Local Development**: Poetry environment
+- **Production**: Containerized deployment
+- **Monitoring**: Health checks and logging
 
-### Test Files
-```
-tests/
-├── test_plan_concurrency.py          # Concurrent subtask execution tests
-├── test_memory_summary.py             # Memory summarization functionality
-├── test_time_bound_queries.py         # Time-bound query processing
-├── test_analytics_structure.py        # Analytics system validation
-├── test_bot_search.py                 # Discord bot search functionality
-├── test_channel_resolution.py         # Channel ID/name resolution
-├── test_database_search.py            # Database search with improved error handling
-├── test_discord_bot_query.py          # Discord bot query processing
-├── test_production_ready.py           # Production environment validation
-├── test_query_analysis.py             # Enhanced query analysis
-└── ...
-```
+## Migration Notes
 
-### New Test Capabilities
-- **Concurrent Processing**: Validates parallel subtask execution performance
-- **Memory Management**: Tests automatic conversation history summarization
-- **Temporal Queries**: Ensures accurate time-bound query processing
-- **Caching Systems**: Validates content classification cache efficiency
-- **Error Resilience**: Enhanced database test error handling
+### Python 3.12 Upgrade
 
-### Running Tests
-```bash
-# Run all tests
-python -m pytest
+The system has been upgraded to Python 3.12 to support MCP SQLite:
 
-# Run specific feature tests
-python -m pytest tests/test_plan_concurrency.py
-python -m pytest tests/test_memory_summary.py
-python -m pytest tests/test_time_bound_queries.py
+- ✅ All dependencies updated
+- ✅ Compatibility verified
+- ✅ Performance maintained
 
-# Run system integration tests
-python scripts/test_system_integrity.py
-```
+### MCP SQLite Integration
+
+Standardized SQLite operations via MCP protocol:
+
+- ✅ Subprocess architecture
+- ✅ Natural language queries
+- ✅ Schema introspection
+- ✅ Backward compatibility
+
+## Future Architecture
+
+### Planned Enhancements
+
+1. **Microservices**: Service decomposition
+2. **Event Streaming**: Real-time processing
+3. **Advanced Caching**: Distributed caching
+4. **Monitoring**: Comprehensive observability
+
+### Scalability Considerations
+
+- **Horizontal Scaling**: Multiple bot instances
+- **Database Sharding**: Distributed data storage
+- **Load Balancing**: Request distribution
+- **Caching Strategy**: Multi-level caching

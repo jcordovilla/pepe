@@ -28,6 +28,7 @@ class QAAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any]):
         super().__init__(AgentRole.ANALYZER, config)
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
+        self.config = config
         
         # Initialize MCP server (replaces ChromaDB vector store)
         mcp_config = {
@@ -36,7 +37,16 @@ class QAAgent(BaseAgent):
             },
             "llm": config.get("llm", {})
         }
-        self.mcp_server = MCPServer(mcp_config)
+        
+        # Check if MCP SQLite is enabled in config
+        mcp_sqlite_config = config.get("mcp_sqlite", {})
+        if mcp_sqlite_config.get("enabled", False):
+            from ...mcp import MCPSQLiteServer
+            self.mcp_server = MCPSQLiteServer(mcp_sqlite_config)
+            # Note: MCP server will be started when needed
+        else:
+            from ...mcp import MCPServer
+            self.mcp_server = MCPServer(mcp_config)
         
         # Initialize dynamic k-value calculator
         self.k_calculator = KValueCalculator(config)
@@ -46,6 +56,16 @@ class QAAgent(BaseAgent):
         self.max_context_length = config.get("max_context_length", 8000)  # Increased from 4000 to 8000
         
         logger.info("QAAgent initialized with MCP server")
+    
+    async def _ensure_mcp_server_ready(self):
+        """Ensure MCP server is ready for use."""
+        if hasattr(self.mcp_server, 'start') and not hasattr(self.mcp_server, '_started'):
+            try:
+                await self.mcp_server.start()
+                self.mcp_server._started = True
+                logger.info("MCP SQLite server started")
+            except Exception as e:
+                logger.warning(f"Failed to start MCP SQLite server: {e}")
     
     def signature(self) -> Dict[str, Any]:
         """Return agent signature for registration."""
@@ -86,6 +106,9 @@ class QAAgent(BaseAgent):
             k_result = self.k_calculator.calculate_k_value(query)
             k_value = k_result.get("k_value", 10)  # Extract the actual k value from the result
             logger.info(f"QA Agent processing query with k={k_value}: {query[:50]}...")
+            
+            # Ensure MCP server is ready
+            await self._ensure_mcp_server_ready()
             
             # Search for relevant messages using MCP server
             # Use natural language query for complex queries, text search for simple ones
