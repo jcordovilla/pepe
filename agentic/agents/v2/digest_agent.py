@@ -681,29 +681,48 @@ Use rich formatting to make it visually appealing and easy to read. Be specific 
 
 {chr(10).join(summary_texts)}
 
-**CRITICAL REQUIREMENTS:**
+**MANDATORY REQUIREMENTS - YOU MUST FOLLOW THESE EXACTLY:**
 1. Use Discord markdown formatting (bold, italic, headers)
 2. Structure the summary into clear sections with headers (##)
 3. Break long paragraphs into shorter, focused paragraphs
 4. Focus on main topics and key discussions {time_context}
 5. {focus_instruction}
 6. Do not include phrases like "Here is a summary" or "This paragraph summarizes"
-7. **ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
-8. **ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
-9. **Be objective and practical - avoid flowery language like "a flurry of", "an explosion of excitement", "palpable enthusiasm"**
-10. **Make the summary factual and informative, not promotional or overly enthusiastic**
+7. **MANDATORY: ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
+8. **MANDATORY: ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
+9. **MANDATORY: Use ONLY objective, practical language - NEVER use phrases like:**
+   - "a flurry of activity"
+   - "sparked a wave of"
+   - "innovative spirit"
+   - "collaborative nature"
+   - "thriving community"
+   - "enthusiasm for learning"
+   - "camaraderie"
+   - "atmosphere of appreciation"
+10. **MANDATORY: Write in a sober, factual tone - describe what happened, not how wonderful it was**
 
 **Format the response with:**
 - ## Main Topics (with bold key points)
 - ## Community Highlights (notable discussions)
 - ## Key Insights (important takeaways)
 
-**WRITING STYLE:**
-- Be objective and factual
-- Use specific details and concrete examples
-- Avoid repetitive language
+**WRITING STYLE RULES:**
+- Use concrete facts and specific details
+- Describe events and discussions objectively
+- Avoid promotional or enthusiastic language
 - Make each section distinct and focused
 - Ensure the trends section provides new insights, not repetition of earlier content
+- Use simple, direct language
+
+**EXAMPLE OF GOOD WRITING:**
+- "Users discussed Microsoft's technology stance in #ai-discussions"
+- "Julioverne74 reported RSVP syncing issues in #general"
+- "Lan created a 021 Product Team GPT"
+
+**EXAMPLE OF BAD WRITING (DO NOT USE):**
+- "A flurry of activity sparked a wave of analysis"
+- "The innovative spirit and collaborative nature of the group"
+- "The community's enthusiasm for learning"
 
 Use rich formatting to make it visually appealing and easy to read."""
 
@@ -929,14 +948,25 @@ Write a detailed, flowing summary covering:
 4. Notable contributions and community highlights
 5. Emerging trends or patterns in the discussions
 
-**IMPORTANT GUIDELINES:**
-- AVOID generic phrases like "has seen a flurry of activity", "has been marked by", "has been characterized by"
+**MANDATORY REQUIREMENTS - YOU MUST FOLLOW THESE EXACTLY:**
+- **ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
+- **ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
+- **NEVER use pompous phrases like:**
+  - "has seen a flurry of activity"
+  - "has been marked by"
+  - "has been characterized by"
+  - "sparked a wave of"
+  - "innovative spirit"
+  - "collaborative nature"
+  - "thriving community"
+  - "enthusiasm for learning"
+  - "camaraderie"
+  - "atmosphere of appreciation"
 - Use specific, concrete language about what actually happened
-- Mention specific users and their contributions when relevant
-- Make the summary feel fresh and unique, not like a template
+- Write in a sober, factual tone - describe what happened, not how wonderful it was
 - Focus on concrete events, discussions, and contributions
 
-Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and engaging, capturing the full scope of activity."""
+Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and factual, capturing the full scope of activity."""
 
         try:
             digest = await self.llm_client.generate(
@@ -996,7 +1026,25 @@ Write a detailed, flowing summary covering:
 4. Notable contributions and community highlights
 5. Emerging trends or patterns in the discussions
 
-Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and engaging, capturing the full scope of activity."""
+**MANDATORY REQUIREMENTS - YOU MUST FOLLOW THESE EXACTLY:**
+- **ALWAYS quote channel names with # (e.g., "#general", "#ai-discussions")**
+- **ALWAYS use user display names in quotes when mentioning users (e.g., "Ryan Dear", "Jaime R.")**
+- **NEVER use pompous phrases like:**
+  - "has seen a flurry of activity"
+  - "has been marked by"
+  - "has been characterized by"
+  - "sparked a wave of"
+  - "innovative spirit"
+  - "collaborative nature"
+  - "thriving community"
+  - "enthusiasm for learning"
+  - "camaraderie"
+  - "atmosphere of appreciation"
+- Use specific, concrete language about what actually happened
+- Write in a sober, factual tone - describe what happened, not how wonderful it was
+- Focus on concrete events, discussions, and contributions
+
+Write this as a natural, comprehensive paragraph without meta-instructions like "Here is a summary" or "This covers". Just write the content directly. Make it detailed and factual, capturing the full scope of activity."""
 
         try:
             digest = await self.llm_client.generate(
