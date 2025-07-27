@@ -62,11 +62,11 @@ CREATE INDEX IF NOT EXISTS idx_messages_author_activity ON messages(author_id, t
 - [ ] Create SQLite-based query service
 - [ ] Implement LLM-to-SQL translation
 
-#### Phase 2: Core Implementation
-- [ ] Replace ChromaDB operations with direct SQL queries
-- [ ] Update data manager to use new MCP server
-- [ ] Implement natural language to SQL translation
-- [ ] Add comprehensive query capabilities
+#### Phase 2: Core Implementation ✅ (COMPLETE)
+- [x] Replace ChromaDB operations with direct SQL queries
+- [x] Update data manager to use new MCP server
+- [x] Implement natural language to SQL translation
+- [x] Add comprehensive query capabilities
 
 #### Phase 3: Migration & Testing
 - [ ] Create data migration script (move metadata from ChromaDB to SQLite)
@@ -82,14 +82,14 @@ CREATE INDEX IF NOT EXISTS idx_messages_author_activity ON messages(author_id, t
 
 ## Implementation Plan
 
-### Step 1: SQLite Query Service
+### Step 1: SQLite Query Service ✅ (COMPLETE)
 Create `agentic/mcp/sqlite_query_service.py`:
 - Natural language to SQL translation
 - Direct SQLite query execution
 - Result formatting and analysis
 - Performance optimization
 
-### Step 2: Enhanced MCP Server
+### Step 2: Enhanced MCP Server ✅ (COMPLETE)
 Update `agentic/mcp/mcp_server.py`:
 - Remove embedding and search services
 - Add SQLite query service
