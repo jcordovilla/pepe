@@ -38,7 +38,7 @@ class KValueCalculator:
     def calculate_k_value(
         self, 
         query: str, 
-        query_type: str = "search",
+        query_type: Optional[str] = "search",
         entities: Optional[List[Dict[str, Any]]] = None,
         context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
@@ -47,7 +47,7 @@ class KValueCalculator:
         
         Args:
             query: User query text
-            query_type: Type of query (search, analysis, digest, etc.)
+            query_type: Type of query (search, analysis, digest, etc.) or None for auto-detection
             entities: Extracted entities from query interpretation
             context: Additional context information
             
@@ -55,11 +55,15 @@ class KValueCalculator:
             Dict containing calculated k value and analysis details
         """
         try:
+            # Analyze query characteristics first to auto-detect query type if needed
+            query_analysis = self._analyze_query(query, entities, context)
+            
+            # Use auto-detected query type if none provided
+            if query_type is None:
+                query_type = query_analysis.get("query_type", "search")
+            
             # Start with base k value for query type
             base_k = self._get_base_k_value(query_type)
-            
-            # Analyze query characteristics
-            query_analysis = self._analyze_query(query, entities, context)
             
             # Calculate multipliers
             time_multiplier = self._calculate_time_multiplier(query_analysis)

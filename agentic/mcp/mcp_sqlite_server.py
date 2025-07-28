@@ -135,7 +135,7 @@ class MCPSQLiteServer:
         try:
             # Check if this is a natural language query
             query_lower = query.lower()
-            natural_language_keywords = ['reactions', 'recent', 'latest', 'count', 'show me']
+            natural_language_keywords = ['reactions', 'recent', 'latest', 'count', 'show me', 'find me', 'users with', 'experience in', 'who has']
             
             if any(keyword in query_lower for keyword in natural_language_keywords):
                 # Use natural language translation
@@ -206,6 +206,36 @@ class MCPSQLiteServer:
             return f"SELECT COUNT(*) as count FROM messages WHERE 1=1{bot_filter}"
         elif "show me" in query_lower and "messages" in query_lower:
             return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 50"
+        elif any(keyword in query_lower for keyword in ["find me", "users with", "experience in", "who has"]):
+            # Handle experience/skill queries - focus on introduction and find channels
+            # Extract skill from query (after "experience in" or "with")
+            skill_terms = []
+            if "experience in" in query_lower:
+                skill_part = query_lower.split("experience in")[-1].strip()
+                skill_terms = [term.strip() for term in skill_part.split() if len(term.strip()) > 2]
+            elif "with" in query_lower and "experience" in query_lower:
+                # Handle "users with experience in X" pattern
+                parts = query_lower.split("with")
+                for part in parts:
+                    if "experience" in part and "in" in part:
+                        skill_part = part.split("in")[-1].strip()
+                        skill_terms = [term.strip() for term in skill_part.split() if len(term.strip()) > 2]
+                        break
+            
+            # Build skill filter
+            skill_filter = ""
+            if skill_terms:
+                skill_conditions = []
+                for term in skill_terms[:3]:  # Limit to first 3 terms to avoid too many conditions
+                    skill_conditions.append(f"content LIKE '%{term}%'")
+                if skill_conditions:
+                    skill_filter = f" AND ({' OR '.join(skill_conditions)})"
+            
+            return f"""SELECT *, author_display_name, author_username FROM messages 
+                      WHERE 1=1{bot_filter} 
+                      AND (channel_name LIKE '%introduction%' OR channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%👋%' OR channel_name LIKE '%🤝%')
+                      AND (content LIKE '%I have%' OR content LIKE '%I am%' OR content LIKE '%I work%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%Background%' OR content LIKE '%Background:%'){skill_filter}
+                      ORDER BY timestamp_unix DESC LIMIT 200"""
         else:
             # Default query
             return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 100"

@@ -104,8 +104,8 @@ class QAAgent(BaseAgent):
                 state["response"] = "❌ No query provided"
                 return state
             
-            # Calculate appropriate k value based on query
-            k_result = self.k_calculator.calculate_k_value(query)
+            # Calculate appropriate k value based on query - let it auto-detect query type
+            k_result = self.k_calculator.calculate_k_value(query, query_type=None)  # Auto-detect query type
             k_value = k_result.get("k_value", 10)  # Extract the actual k value from the result
             logger.info(f"QA Agent processing query with k={k_value}: {query[:50]}...")
             
