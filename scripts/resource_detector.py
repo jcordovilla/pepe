@@ -50,7 +50,8 @@ class FreshResourceDetector:
             'ai_analysis_failed': 0,
             'duplicates_detected': 0,
             'content_duplicates_detected': 0,
-            'skipped_processed': 0
+            'skipped_processed': 0,
+            'bot_messages_filtered': 0
         })
         
         # Incremental processing setup
@@ -67,70 +68,67 @@ class FreshResourceDetector:
         self.content_similarity_detector = None
         self.similarity_threshold = 0.8
         
-        # High-quality domains (curated list)
-        self.high_quality_domains = {
+        # Simplified category mapping
+        self.category_mapping = {
             # Research & Academic
-            'arxiv.org': {'category': 'Research Papers', 'score': 0.95},
-            'papers.withcode.com': {'category': 'Research Papers', 'score': 0.85},
-            'distill.pub': {'category': 'Research Visualization', 'score': 0.90},
-            'news.mit.edu': {'category': 'Academic News', 'score': 0.85},
-            'research.google.com': {'category': 'Research', 'score': 0.85},
+            'arxiv.org': 'Paper',
+            'papers.withcode.com': 'Paper',
+            'distill.pub': 'Paper',
+            'news.mit.edu': 'News/Article',
+            'research.google.com': 'Paper',
             
             # Code & Development
-            'github.com': {'category': 'Code Repositories', 'score': 0.90},
-            'stackoverflow.com': {'category': 'Technical Q&A', 'score': 0.80},
+            'github.com': 'Tool',
+            'stackoverflow.com': 'Tutorial',
             
             # Documentation & Resources
-            'docs.google.com': {'category': 'Documentation', 'score': 0.85},
-            'drive.google.com': {'category': 'Shared Documents', 'score': 0.80},
-            'cloud.google.com': {'category': 'Technical Documentation', 'score': 0.80},
+            'docs.google.com': 'Tutorial',
+            'drive.google.com': 'Tutorial',
+            'cloud.google.com': 'Tutorial',
             
             # AI & ML Resources
-            'openai.com': {'category': 'AI Resources', 'score': 0.90},
-            'blog.openai.com': {'category': 'AI Research', 'score': 0.85},
-            'anthropic.com': {'category': 'AI Research', 'score': 0.90},
-            'huggingface.co': {'category': 'AI Models', 'score': 0.90},
-            'tensorflow.org': {'category': 'ML Documentation', 'score': 0.85},
-            'pytorch.org': {'category': 'ML Documentation', 'score': 0.85},
-            'ai.googleblog.com': {'category': 'AI Research', 'score': 0.80},
-            'nvidia.com': {'category': 'AI/GPU Technology', 'score': 0.80},
-            'blogs.microsoft.com': {'category': 'Tech Documentation', 'score': 0.75},
-            'chatgpt.com': {'category': 'AI Tools', 'score': 0.75},
+            'openai.com': 'Tool',
+            'blog.openai.com': 'News/Article',
+            'anthropic.com': 'Tool',
+            'huggingface.co': 'Tool',
+            'tensorflow.org': 'Tutorial',
+            'pytorch.org': 'Tutorial',
+            'ai.googleblog.com': 'News/Article',
+            'nvidia.com': 'News/Article',
+            'blogs.microsoft.com': 'News/Article',
+            'chatgpt.com': 'Tool',
             
             # Educational Platforms
-            'deeplearning.ai': {'category': 'AI Education', 'score': 0.85},
-            'coursera.org': {'category': 'Online Courses', 'score': 0.75},
-            'edx.org': {'category': 'Online Courses', 'score': 0.75},
-            'udacity.com': {'category': 'Online Courses', 'score': 0.75},
-            'fast.ai': {'category': 'AI Education', 'score': 0.80},
-            'machinelearningmastery.com': {'category': 'ML Education', 'score': 0.75},
+            'deeplearning.ai': 'Tutorial',
+            'coursera.org': 'Tutorial',
+            'edx.org': 'Tutorial',
+            'udacity.com': 'Tutorial',
+            'fast.ai': 'Tutorial',
+            'machinelearningmastery.com': 'Tutorial',
             
             # Data Science & Analytics
-            'kaggle.com': {'category': 'Data Science', 'score': 0.80},
-            'towardsdatascience.com': {'category': 'Data Science', 'score': 0.75},
+            'kaggle.com': 'Tool',
+            'towardsdatascience.com': 'News/Article',
             
             # Video Content
-            'youtube.com': {'category': 'Educational Videos', 'score': 0.75},
-            'youtu.be': {'category': 'Educational Videos', 'score': 0.75},
+            'youtube.com': 'Tutorial',
+            'youtu.be': 'Tutorial',
             
             # Articles & Blogs
-            'medium.com': {'category': 'Articles', 'score': 0.70},
+            'medium.com': 'News/Article',
             
-            # News & Tech Publications (High Quality)
-            'axios.com': {'category': 'Tech News', 'score': 0.80},
-            'theguardian.com': {'category': 'News & Analysis', 'score': 0.75},
-            'reuters.com': {'category': 'News & Analysis', 'score': 0.80},
-            'wsj.com': {'category': 'Business News', 'score': 0.80},
-            'ft.com': {'category': 'Financial News', 'score': 0.80},
-            'businessinsider.com': {'category': 'Business News', 'score': 0.70},
-            'theverge.com': {'category': 'Tech News', 'score': 0.75},
-            'techcrunch.com': {'category': 'Tech News', 'score': 0.75},
-            'venturebeat.com': {'category': 'Tech News', 'score': 0.70},
-            'wired.com': {'category': 'Tech News', 'score': 0.75},
-            'arstechnica.com': {'category': 'Tech News', 'score': 0.75},
-            
-            # Note: Collaboration tools like Mural, Trello, Notion are now excluded
-            # as they typically contain internal/private community documents
+            # News & Tech Publications
+            'axios.com': 'News/Article',
+            'theguardian.com': 'News/Article',
+            'reuters.com': 'News/Article',
+            'wsj.com': 'News/Article',
+            'ft.com': 'News/Article',
+            'businessinsider.com': 'News/Article',
+            'theverge.com': 'News/Article',
+            'techcrunch.com': 'News/Article',
+            'venturebeat.com': 'News/Article',
+            'wired.com': 'News/Article',
+            'arstechnica.com': 'News/Article',
         }
         
         # Domains to exclude (junk and internal documents)
@@ -732,20 +730,23 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
             if self._is_internal_document(url, domain, message):
                 self.stats['excluded_domains'] += 1
                 return None
-            domain_info = None
-            for hq_domain, info in self.high_quality_domains.items():
-                if hq_domain in domain:
-                    domain_info = info
+            
+            # Determine category using simplified mapping
+            category = None
+            for mapped_domain, mapped_category in self.category_mapping.items():
+                if mapped_domain in domain:
+                    category = mapped_category
                     break
-            if not domain_info:
+            
+            if not category:
+                # Check for file extensions
                 path = parsed.path.lower()
-                quality_score = 0
-                for ext, score in self.quality_extensions.items():
+                for ext in self.quality_extensions.keys():
                     if path.endswith(ext):
-                        quality_score = score
-                        domain_info = {'category': 'Documents', 'score': score}
+                        category = 'Tutorial'  # Documents are typically tutorials
                         break
-                if not domain_info:
+                
+                if not category:
                     self.stats['unknown_domains'] += 1
                     if analyze_unknown:
                         self.unknown_domains[domain] += 1
@@ -756,8 +757,10 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                                 'author': message.get('author', {}).get('username', 'Unknown')
                             })
                     return None
-            # --- NEW EXPORT STRUCTURE ---
+            
+            # Extract author and timestamp
             author_display = message.get('author', {}).get('display_name') or message.get('author', {}).get('username', 'Unknown')
+            
             # Format timestamp as YYYY-MM-DD
             raw_ts = message.get('timestamp')
             try:
@@ -765,25 +768,23 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                 ts_str = ts.strftime('%Y-%m-%d')
             except Exception:
                 ts_str = raw_ts[:10] if raw_ts else ''
+            
+            # Extract jump_url from message
             jump_url = message.get('jump_url')
             
-            # Generate description with progress indication
+            # Generate description
             description = self._generate_description(message, url)
             
             resource = {
                 'url': url,
                 'domain': domain,
-                'category': domain_info['category'],
-                'quality_score': domain_info['score'],
+                'category': category,
                 'channel_name': channel_name,
                 'author': author_display,
                 'timestamp': ts_str,
                 'jump_url': jump_url,
                 'description': description
             }
-            content_lower = message.get('content', '').lower()
-            if any(keyword in content_lower for keyword in ['paper', 'research', 'study', 'tutorial']):
-                resource['quality_score'] = min(1.0, resource['quality_score'] + 0.1)
             
             # Check for content similarity with existing resources
             if self._check_content_similarity(resource):
@@ -797,20 +798,22 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
     def _generate_report(self, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Generate comprehensive analysis report"""
         
-        # Sort resources by quality score
-        sorted_resources = sorted(self.detected_resources, key=lambda x: x['quality_score'], reverse=True)
+        # Sort resources by category
+        sorted_resources = sorted(self.detected_resources, key=lambda x: x['category'])
         
         # Generate statistics
         category_stats = Counter([r['category'] for r in sorted_resources])
         domain_stats = Counter([r['domain'] for r in sorted_resources])
         channel_stats = Counter([r['channel_name'] for r in sorted_resources])
         
-        # Calculate quality distribution
-        quality_distribution = {
-            'excellent': len([r for r in sorted_resources if r['quality_score'] >= 0.9]),
-            'high': len([r for r in sorted_resources if 0.8 <= r['quality_score'] < 0.9]),
-            'good': len([r for r in sorted_resources if 0.7 <= r['quality_score'] < 0.8]),
-            'fair': len([r for r in sorted_resources if r['quality_score'] < 0.7])
+        # Calculate category distribution
+        category_distribution = {
+            'News/Article': len([r for r in sorted_resources if r['category'] == 'News/Article']),
+            'Tool': len([r for r in sorted_resources if r['category'] == 'Tool']),
+            'Paper': len([r for r in sorted_resources if r['category'] == 'Paper']),
+            'Tutorial': len([r for r in sorted_resources if r['category'] == 'Tutorial']),
+            'Event': len([r for r in sorted_resources if r['category'] == 'Event']),
+            'Job/Opportunity': len([r for r in sorted_resources if r['category'] == 'Job/Opportunity'])
         }
         
         print("\n📊 Fresh Resource Detection Results")
@@ -867,14 +870,15 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
         for channel, count in channel_stats.most_common(5):
             print(f"   {channel}: {count} resources")
         
-        print("\n⭐ Quality Distribution:")
-        for level, count in quality_distribution.items():
-            print(f"   {level.capitalize()}: {count} resources")
+        print("\n📁 Category Distribution:")
+        for category, count in category_distribution.items():
+            if count > 0:
+                print(f"   {category}: {count} resources")
         
         print("\n📄 Top 10 Resources:")
         for i, resource in enumerate(sorted_resources[:10]):
             print(f"   {i+1}. [{resource['category']}] {resource['url']}")
-            print(f"      Quality: {resource['quality_score']:.2f} | Author: {resource['author']}")
+            print(f"      Author: {resource['author']} | Channel: {resource['channel_name']}")
             print(f"      Description: {resource['description'][:80]}...")
             print()
         
@@ -887,7 +891,7 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                 'categories': dict(category_stats),
                 'domains': dict(domain_stats),
                 'channels': dict(channel_stats),
-                'quality_distribution': quality_distribution
+                'category_distribution': category_distribution
             },
             'unknown_domains': dict(self.unknown_domains) if analyze_unknown else {}
         }
@@ -928,26 +932,23 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS resources (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                url TEXT UNIQUE NOT NULL,
-                domain TEXT NOT NULL,
-                category TEXT NOT NULL,
-                quality_score REAL NOT NULL,
-                channel_name TEXT,
-                author TEXT,
-                timestamp TEXT,
-                jump_url TEXT,
+                title TEXT,
                 description TEXT,
+                date TEXT,
+                author TEXT,
+                channel TEXT,
+                tag TEXT NOT NULL,
+                resource_url TEXT UNIQUE NOT NULL,
+                discord_url TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
         # Create indexes for fast searching
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_domain ON resources(domain)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_category ON resources(category)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quality_score ON resources(quality_score)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_channel_name ON resources(channel_name)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tag ON resources(tag)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_author ON resources(author)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON resources(timestamp)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_channel ON resources(channel)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_date ON resources(date)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_created_at ON resources(created_at)")
         conn.commit()
 
@@ -974,7 +975,10 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                 inserted = 0
                 updated = 0
                 for resource in self.detected_resources:
-                    # Upsert using ON CONFLICT(url) DO UPDATE
+                    # Generate title from URL or description
+                    title = self._generate_title(resource)
+                    
+                    # Upsert using ON CONFLICT(url) DO UPDATE (old table structure)
                     cursor.execute(
                         """
                         INSERT INTO resources (url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description, updated_at)
@@ -994,7 +998,7 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                             resource.get('url'),
                             resource.get('domain'),
                             resource.get('category'),
-                            resource.get('quality_score'),
+                            0.8,  # Default quality score
                             resource.get('channel_name'),
                             resource.get('author'),
                             resource.get('timestamp'),
@@ -1015,6 +1019,417 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                 print(f"❌ SQLite error: {e}")
         except Exception as e:
             print(f"❌ Error saving resources to DB: {e}")
+    
+    def _generate_title(self, resource: Dict[str, Any]) -> str:
+        """Generate a title for the resource based on URL or description."""
+        url = resource.get('url', '')
+        description = resource.get('description', '')
+        
+        # Try to extract title from URL path
+        try:
+            parsed = urlparse(url)
+            path_parts = [p for p in parsed.path.split('/') if p]
+            
+            if 'arxiv.org' in url and len(path_parts) >= 2:
+                # For arXiv papers, use the paper ID as title
+                return f"arXiv Paper: {path_parts[-1]}"
+            elif 'github.com' in url and len(path_parts) >= 2:
+                # For GitHub repos, use owner/repo as title
+                return f"GitHub: {'/'.join(path_parts[:2])}"
+            elif 'huggingface.co' in url and len(path_parts) >= 2:
+                # For Hugging Face, use the model/dataset name
+                return f"Hugging Face: {'/'.join(path_parts[:2])}"
+            elif path_parts:
+                # Use the last meaningful path component
+                return path_parts[-1].replace('-', ' ').replace('_', ' ').title()
+        except:
+            pass
+        
+        # Fallback to first sentence of description
+        if description:
+            first_sentence = description.split('.')[0]
+            if len(first_sentence) > 10:
+                return first_sentence[:100] + ('...' if len(first_sentence) > 100 else '')
+        
+        # Final fallback
+        return f"Resource from {resource.get('domain', 'unknown')}"
+    
+    def export_resources_from_db(self, db_path: Path) -> Dict[str, Any]:
+        """Export resources from database in the new JSON structure."""
+        import sqlite3
+        
+        if not db_path.exists():
+            print(f"❌ Resource DB not found: {db_path}")
+            return {"resources": []}
+        
+        try:
+            with sqlite3.connect(db_path) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.execute("""
+                    SELECT id, url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description
+                    FROM resources 
+                    ORDER BY id ASC
+                """)
+                
+                resources = []
+                for i, row in enumerate(cursor, 1):  # Start enumeration from 1
+                    # Generate title from URL or description
+                    title = self._generate_title_from_url(row['url'], row['description'])
+                    
+                    # Map old category to new tag
+                    tag = self._map_category_to_tag(row['category'])
+                    
+                    # Fix channel name encoding - just use as is since it's already correct
+                    channel_name = row['channel_name'] or ''
+                    
+                    # Fix jump URL - check if it's actually null or empty
+                    discord_url = row['jump_url']
+                    if discord_url and discord_url.strip():
+                        discord_url = discord_url
+                    else:
+                        discord_url = None
+                    
+                    resource = {
+                        "id": i,  # Use incremental ID starting from 1
+                        "title": title,
+                        "description": row['description'],
+                        "date": row['timestamp'],
+                        "author": row['author'],
+                        "channel": channel_name,
+                        "tag": tag,
+                        "resource_url": row['url'],
+                        "discord_url": discord_url
+                    }
+                    resources.append(resource)
+                
+                return {
+                    "export_date": datetime.now().isoformat(),
+                    "total_resources": len(resources),
+                    "resources": resources
+                }
+                
+        except Exception as e:
+            print(f"❌ Error exporting from DB: {e}")
+            return {"resources": []}
+    
+    def _generate_title_from_url(self, url: str, description: str) -> str:
+        """Generate a title from URL or description for export using LLM when possible."""
+        try:
+            parsed = urlparse(url)
+            path_parts = [p for p in parsed.path.split('/') if p]
+            
+            if 'arxiv.org' in url and len(path_parts) >= 2:
+                return f"arXiv Paper: {path_parts[-1]}"
+            elif 'github.com' in url and len(path_parts) >= 2:
+                return f"GitHub: {'/'.join(path_parts[:2])}"
+            elif 'huggingface.co' in url and len(path_parts) >= 2:
+                return f"Hugging Face: {'/'.join(path_parts[:2])}"
+            elif 'youtube.com' in url or 'youtu.be' in url:
+                # For YouTube videos, generate concise titles from description
+                if description and len(description) > 20:
+                    return self._extract_youtube_title(description)
+                # Fallback for YouTube videos
+                return "YouTube Video"
+            elif description and len(description) > 30:
+                # Use LLM for other resources with good descriptions
+                return self._generate_llm_title(url, description)
+            elif path_parts:
+                return path_parts[-1].replace('-', ' ').replace('_', ' ').title()
+        except:
+            pass
+        
+        # Fallback to first sentence of description
+        if description:
+            first_sentence = description.split('.')[0]
+            if len(first_sentence) > 10:
+                return first_sentence[:100] + ('...' if len(first_sentence) > 100 else '')
+        
+        return f"Resource from {urlparse(url).netloc}"
+    
+    def _generate_llm_title(self, url: str, description: str) -> str:
+        """Generate a title using LLM for non-YouTube resources."""
+        try:
+            llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
+            llm_model = self.fast_model
+            
+            domain = urlparse(url).netloc
+            
+            prompt = f"""Given this resource description, generate a concise, informative title (max 50 characters):
+
+URL: {url}
+Domain: {domain}
+Description: {description[:300]}
+
+Generate a short, descriptive title that captures the main topic or subject. Focus on the key technology, tool, or concept being discussed. Keep it simple and direct.
+
+Important: Do not include words like "This", "The", "A", "An" at the end. End with the main subject.
+
+Title:"""
+            
+            response = requests.post(llm_endpoint, json={
+                'model': llm_model,
+                'prompt': prompt,
+                'stream': False,
+                'options': {
+                    'temperature': 0.3,
+                    'top_p': 0.9,
+                    'max_tokens': 60
+                }
+            }, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                title = result.get('response', '').strip()
+                
+                # Clean up the title
+                title = title.replace('"', '').replace("'", '').strip()
+                
+                # Remove newlines and extra whitespace
+                title = re.sub(r'\n+', ' ', title)
+                title = re.sub(r'\s+', ' ', title)
+                
+                # Remove markdown formatting
+                title = re.sub(r'#{1,6}\s*', '', title)  # Remove headers
+                title = re.sub(r'\*\*(.*?)\*\*', r'\1', title)  # Remove bold
+                title = re.sub(r'\*(.*?)\*', r'\1', title)  # Remove italic
+                title = re.sub(r'`(.*?)`', r'\1', title)  # Remove code
+                
+                # Clean up any remaining formatting
+                title = title.strip()
+                
+                # Remove meaningless endings
+                meaningless_endings = [' this', ' the', ' a', ' an', ' that', ' these', ' those']
+                title_lower = title.lower()
+                for ending in meaningless_endings:
+                    if title_lower.endswith(ending):
+                        title = title[:-len(ending)].strip()
+                        break
+                
+                # Ensure it's not too long and has clean endings
+                if len(title) > 50:
+                    # Try to find a natural break point (space, comma, period)
+                    for i in range(47, 40, -1):
+                        if title[i] in ' .,;:':
+                            title = title[:i].strip()
+                            break
+                    else:
+                        # If no natural break found, truncate at word boundary
+                        words = title[:47].split()
+                        if len(words) > 1:
+                            title = ' '.join(words[:-1])
+                        else:
+                            title = title[:47]
+                
+                # Ensure it's not empty or too short
+                if len(title) > 5:
+                    return title
+            
+        except Exception as e:
+            print(f"⚠️ LLM title generation failed for {url}: {e}")
+        
+        # Fallback to rule-based extraction
+        return self._generate_title_fallback(url, description)
+    
+    def _generate_title_fallback(self, url: str, description: str) -> str:
+        """Fallback method for generating titles using rules."""
+        try:
+            parsed = urlparse(url)
+            path_parts = [p for p in parsed.path.split('/') if p]
+            
+            if path_parts:
+                return path_parts[-1].replace('-', ' ').replace('_', ' ').title()
+        except:
+            pass
+        
+        # Fallback to first sentence of description
+        if description:
+            first_sentence = description.split('.')[0]
+            if len(first_sentence) > 10:
+                return first_sentence[:100] + ('...' if len(first_sentence) > 100 else '')
+        
+        return f"Resource from {urlparse(url).netloc}"
+    
+    def _extract_youtube_title(self, description: str) -> str:
+        """Extract a concise, meaningful title from YouTube video description using LLM."""
+        if not description or len(description) < 20:
+            return "YouTube Video"
+        
+        try:
+            # Use the fast LLM to generate a concise title
+            llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
+            llm_model = self.fast_model
+            
+            prompt = f"""Given this YouTube video description, generate a concise, informative title (max 40 characters):
+
+Description: {description[:300]}
+
+Generate a short, descriptive title that captures the main topic or subject. Focus on the key technology, tool, or concept being discussed. Keep it simple and direct. Examples:
+- "Python Tutorial" 
+- "Discord Bot Setup"
+- "AI Code Review"
+- "Origami Crane Guide"
+
+Important: Do not include words like "This", "The", "A", "An" at the end. End with the main subject.
+
+Title:"""
+            
+            response = requests.post(llm_endpoint, json={
+                'model': llm_model,
+                'prompt': prompt,
+                'stream': False,
+                'options': {
+                    'temperature': 0.3,
+                    'top_p': 0.9,
+                    'max_tokens': 50
+                }
+            }, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                title = result.get('response', '').strip()
+                
+                # Clean up the title
+                title = title.replace('"', '').replace("'", '').strip()
+                
+                # Remove newlines and extra whitespace
+                title = re.sub(r'\n+', ' ', title)
+                title = re.sub(r'\s+', ' ', title)
+                
+                # Remove markdown formatting
+                title = re.sub(r'#{1,6}\s*', '', title)  # Remove headers
+                title = re.sub(r'\*\*(.*?)\*\*', r'\1', title)  # Remove bold
+                title = re.sub(r'\*(.*?)\*', r'\1', title)  # Remove italic
+                title = re.sub(r'`(.*?)`', r'\1', title)  # Remove code
+                
+                # Clean up any remaining formatting
+                title = title.strip()
+                
+                # Remove meaningless endings
+                meaningless_endings = [' this', ' the', ' a', ' an', ' that', ' these', ' those']
+                title_lower = title.lower()
+                for ending in meaningless_endings:
+                    if title_lower.endswith(ending):
+                        title = title[:-len(ending)].strip()
+                        break
+                
+                # Ensure it's not too long and has clean endings
+                if len(title) > 40:
+                    # Try to find a natural break point (space, comma, period)
+                    for i in range(37, 30, -1):
+                        if title[i] in ' .,;:':
+                            title = title[:i].strip()
+                            break
+                    else:
+                        # If no natural break found, truncate at word boundary
+                        words = title[:37].split()
+                        if len(words) > 1:
+                            title = ' '.join(words[:-1])
+                        else:
+                            title = title[:37]
+                
+                # Ensure it's not empty or too short
+                if len(title) > 5:
+                    return title
+            
+        except Exception as e:
+            print(f"⚠️ LLM title generation failed: {e}")
+        
+        # Fallback to rule-based extraction
+        return self._extract_youtube_title_fallback(description)
+    
+    def _extract_youtube_title_fallback(self, description: str) -> str:
+        """Fallback method for extracting YouTube titles using rules."""
+        import re
+        
+        # Remove common YouTube prefixes
+        description = re.sub(r'^This YouTube (tutorial|video|interview|playlist)', '', description, flags=re.IGNORECASE)
+        description = re.sub(r'^In the YouTube (tutorial|video|interview|playlist)', '', description, flags=re.IGNORECASE)
+        description = re.sub(r'^In this YouTube (tutorial|video|interview|playlist)', '', description, flags=re.IGNORECASE)
+        
+        # Clean up the description
+        description = description.strip()
+        
+        # Take first sentence and clean it up
+        first_sentence = description.split('.')[0]
+        
+        # Remove common phrases that make titles verbose
+        first_sentence = re.sub(r'guides users through the process of', 'tutorial on', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'demonstrates the process of', 'tutorial on', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'features? (a |an )?', '', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'discusses? (how |the |about )?', '', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'shares? (a |an )?', '', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'introduces? (a |an )?', '', first_sentence, flags=re.IGNORECASE)
+        first_sentence = re.sub(r'explores? (the |about )?', '', first_sentence, flags=re.IGNORECASE)
+        
+        # Clean up extra whitespace and punctuation
+        first_sentence = re.sub(r'\s+', ' ', first_sentence).strip()
+        first_sentence = re.sub(r'^[,\s]+', '', first_sentence)
+        
+        # Extract key topic - look for specific technologies, tools, or concepts
+        tech_patterns = [
+            r'(Python|JavaScript|Java|C\+\+|React|Vue|Angular|Node\.js|Django|Flask|TensorFlow|PyTorch|OpenAI|ChatGPT|Discord|GitHub|Replit|Shopify|AI|ML|Machine Learning|Deep Learning|Data Science|Origami|Crane|TED|Codex|CLI)',
+            r'(tutorial|guide|course|lesson|workshop|demo|introduction|overview|basics|fundamentals)',
+            r'(creating|building|developing|implementing|setting up|configuring|deploying)'
+        ]
+        
+        # Try to find a concise title based on key concepts
+        for pattern in tech_patterns:
+            matches = re.findall(pattern, first_sentence, flags=re.IGNORECASE)
+            if matches:
+                # Create a concise title from the key concepts
+                key_concepts = [m for m in matches if len(m) > 2]  # Filter out short words
+                if key_concepts:
+                    # Take first 2-3 key concepts
+                    title_parts = key_concepts[:3]
+                    concise_title = ' '.join(title_parts)
+                    if len(concise_title) > 10 and len(concise_title) < 50:
+                        return concise_title.title()
+        
+        # Fallback: take first meaningful phrase (up to 40 chars)
+        words = first_sentence.split()
+        meaningful_words = [w for w in words if len(w) > 2 and not w.lower() in ['the', 'and', 'for', 'with', 'that', 'this', 'from', 'they', 'will', 'can', 'are', 'was', 'were', 'have', 'has', 'had', 'been', 'being']]
+        
+        if meaningful_words:
+            concise_title = ' '.join(meaningful_words[:6])  # Take first 6 meaningful words
+            if len(concise_title) > 10:
+                return concise_title[:40] + ('...' if len(concise_title) > 40 else '')
+        
+        # Final fallback
+        if len(first_sentence) > 10:
+            return first_sentence[:40] + ('...' if len(first_sentence) > 40 else '')
+        
+        return "YouTube Video"
+    
+    def _map_category_to_tag(self, old_category: str) -> str:
+        """Map old category names to new tag names."""
+        category_mapping = {
+            'Research Papers': 'Paper',
+            'AI Research': 'Paper',
+            'AI Resources': 'Tool',
+            'AI Models': 'Tool',
+            'Code Repositories': 'Tool',
+            'Technical Q&A': 'Tutorial',
+            'ML Documentation': 'Tutorial',
+            'AI Education': 'Tutorial',
+            'Online Courses': 'Tutorial',
+            'Educational Videos': 'Tutorial',
+            'Articles': 'News/Article',
+            'Tech News': 'News/Article',
+            'News & Analysis': 'News/Article',
+            'Business News': 'News/Article',
+            'Academic News': 'News/Article',
+            'Documents': 'Tutorial',
+            'Documentation': 'Tutorial',
+            'Shared Documents': 'Tutorial',
+            'AI/GPU Technology': 'News/Article',
+            'AI Tools': 'Tool',
+            'Tech Documentation': 'Tutorial',
+            'Data Science': 'Tool',
+            'Research Visualization': 'Paper',
+            'Research': 'Paper'
+        }
+        
+        return category_mapping.get(old_category, 'News/Article')
 
 def main():
     parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
@@ -1095,6 +1510,20 @@ def main():
             # Load messages with progress bar
             with tqdm(total=new_messages, desc="📥 Loading messages", unit="msg", position=0, leave=True) as load_pbar:
                 for row in cursor:
+                    # Check if message is from a bot
+                    is_bot = False
+                    try:
+                        raw_data = json.loads(row['raw_data']) if row['raw_data'] else {}
+                        author_data = raw_data.get('author', {})
+                        is_bot = author_data.get('bot', False)
+                    except:
+                        pass
+                    
+                    if is_bot:
+                        detector.stats['bot_messages_filtered'] += 1
+                        load_pbar.update(1)
+                        continue
+                    
                     message_dict = {
                         'content': row['content'],
                         'author': {
@@ -1104,11 +1533,12 @@ def main():
                         'timestamp': row['timestamp'],
                         'message_id': row['message_id'],
                         'channel_id': row['channel_id'],
-                        'channel_name': row['channel_name']
+                        'channel_name': row['channel_name'],
+                        'jump_url': row['jump_url']
                     }
                     messages.append(message_dict)
                     load_pbar.update(1)
-                    load_pbar.set_postfix({"loaded": len(messages)})
+                    load_pbar.set_postfix({"loaded": len(messages), "bots_filtered": detector.stats['bot_messages_filtered']})
                     
     except Exception as e:
         print(f"❌ Error reading database: {e}")
@@ -1176,8 +1606,7 @@ def main():
                     recent_resources.append({
                         'url': resource['url'][:50] + '...' if len(resource['url']) > 50 else resource['url'],
                         'category': resource['category'],
-                        'domain': resource['domain'],
-                        'quality': resource['quality_score']
+                        'domain': resource['domain']
                     })
                     
                     # Keep only last 3 recent resources
@@ -1227,7 +1656,7 @@ def main():
                     if recent_resources:
                         print(f"   🆕 Recent finds:")
                         for res in recent_resources[-2:]:  # Show last 2
-                            print(f"      • {res['category']} from {res['domain']} (quality: {res['quality']:.2f})")
+                            print(f"      • {res['category']} from {res['domain']}")
                     
                     print("-" * 40)
 
@@ -1322,80 +1751,46 @@ def main():
     detector._save_processed_urls()
     print("✅ Processed URLs saved")
 
-    print("\n📄 Saving results to files...")
-    print("🔄 Creating detailed report and export files...")
-    
-    # Save results to JSON file with progress indication
-    output_path = project_root / 'data' / 'optimized_fresh_resources.json'
-    print(f"   📊 Generating detailed report: {output_path.name}")
-    report = detector.save_resources(output_path, analyze_unknown=False)
-    print("   ✅ Detailed report saved")
+    print("\n💾 Saving resources to database...")
+    # Save to SQLite DB FIRST
+    db_resource_path = project_root / 'data' / 'resources.db'
+    detector.save_resources_to_db(db_resource_path)
 
-    # Also save a simplified export file with just the resources list
-    export_path = project_root / 'data' / 'resources_export.json'
+    print("\n📄 Creating JSON export from database...")
+    # Create JSON export from database
+    export_path = project_root / 'data' / 'resources-data.json'
     print(f"   📤 Creating export file: {export_path.name}")
-    export_data = {
-        'export_date': datetime.now().isoformat(),
-        'total_resources': len(report['resources']),
-        'resources': report['resources']
-    }
+    
+    # Export from database with new structure
+    export_data = detector.export_resources_from_db(db_resource_path)
     with open(export_path, 'w', encoding='utf-8') as f:
         json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
     print("   ✅ Export file created")
 
-    # --- NEW: Save to SQLite DB ---
-    db_resource_path = project_root / 'data' / 'enhanced_resources.db'
-    detector.save_resources_to_db(db_resource_path)
-
     print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
     print("=" * 60)
-    print(f"✅ Found {report['statistics']['total_found']} high-quality resources!")
+    print(f"✅ Found {resources_found} high-quality resources!")
     print(f"⏭️ Skipped (already processed): {skipped}")
-    print(f"❌ Excluded {report['statistics']['excluded_count']} low-quality URLs")
-    print(f"❓ Unknown domains: {report['statistics']['unknown_count']}")
+    print(f"❌ Excluded {detector.stats['excluded_domains']} low-quality URLs")
+    print(f"❓ Unknown domains: {detector.stats['unknown_domains']}")
+    print(f"🤖 Bot messages filtered: {detector.stats['bot_messages_filtered']}")
     print(f"🔗 Total URLs extracted: {urls_extracted}")
     print(f"📝 Messages analyzed: {len(messages):,}")
 
-    # Quality assessment
-    stats = report['statistics']
-    excellent = stats['quality_distribution']['excellent']
-    high = stats['quality_distribution']['high']
-    total = stats['total_found']
-    quality_percentage = ((excellent + high) / total * 100) if total > 0 else 0
-    print(f"\n📊 Quality Assessment:")
-    print(f"   Excellent + High Quality: {excellent + high}/{total} ({quality_percentage:.1f}%)")
-    if quality_percentage >= 80:
-        print(f"🎉 EXCELLENT! {quality_percentage:.1f}% high-quality resources detected!")
-        print("✅ This collection is ready for import into your resource database.")
-        recommendation = "PROCEED"
-    elif quality_percentage >= 60:
-        print(f"👍 GOOD! {quality_percentage:.1f}% high-quality resources detected.")
-        print("✅ This is a solid foundation for your resource database.")
-        recommendation = "PROCEED"
-    else:
-        print(f"⚠️ MIXED: Only {quality_percentage:.1f}% high-quality resources.")
-        print("❓ You may want to review and adjust criteria.")
-        recommendation = "REVIEW" if total > 0 else "NO_RESOURCES"
-
-    # Show top categories
-    categories = stats['categories']
+    # Show category distribution
+    category_stats = Counter([r['category'] for r in detector.detected_resources])
     print(f"\n📁 Resource Categories Found:")
-    for category, count in sorted(categories.items(), key=lambda x: x[1], reverse=True)[:8]:
+    for category, count in sorted(category_stats.items(), key=lambda x: x[1], reverse=True):
         print(f"   {category}: {count} resources")
     
-    print(f"\n💡 RECOMMENDATION: {recommendation}")
-    if recommendation == "PROCEED":
-        print("🚀 Next step: Import these optimized resources")
-        print(f"   Command: ./pepe-admin resources migrate")
-        print(f"   (This will use: {output_path})")
-    else:
-        print("🔍 Next step: Review results and adjust quality criteria")
+    print(f"\n💡 RECOMMENDATION: PROCEED")
+    print("🚀 Resources have been saved to database and exported to JSON")
     
     print(f"\n📄 Files created:")
-    print(f"   • Detailed report: {output_path}")
+    print(f"   • Database: {db_resource_path}")
     print(f"   • Export file: {export_path}")
     
-    return report
+    return {"resources": detector.detected_resources, "statistics": detector.stats}
 
 if __name__ == '__main__':
     main() 

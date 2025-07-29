@@ -407,7 +407,7 @@ class PepeAdminSimplified:
             
             # Check resource files
             resources_file = Path("data/optimized_fresh_resources.json")
-            export_file = Path("data/resources_export.json")
+            export_file = Path("data/resources-data.json")
             
             if resources_file.exists():
                 try:
@@ -547,7 +547,7 @@ class PepeAdminSimplified:
             
             # Show information about created files
             detailed_report = Path("data/optimized_fresh_resources.json")
-            export_file = Path("data/resources_export.json")
+            export_file = Path("data/resources-data.json")
             
             if detailed_report.exists():
                 try:
