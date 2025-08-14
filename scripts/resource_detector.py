@@ -1756,6 +1756,17 @@ def main():
     db_resource_path = project_root / 'data' / 'resources.db'
     detector.save_resources_to_db(db_resource_path)
 
+    print("\n📄 Creating detailed resources report...")
+    # Create the detailed report file that pepe-admin expects
+    detailed_report_path = project_root / 'data' / 'optimized_fresh_resources.json'
+    print(f"   📤 Creating detailed report: {detailed_report_path.name}")
+    
+    # Generate and save the detailed report
+    detailed_report = detector._generate_report(analyze_unknown=False)
+    with open(detailed_report_path, 'w', encoding='utf-8') as f:
+        json.dump(detailed_report, f, indent=2, ensure_ascii=False, default=str)
+    print("   ✅ Detailed report created")
+
     print("\n📄 Creating JSON export from database...")
     # Create JSON export from database
     export_path = project_root / 'data' / 'resources-data.json'
@@ -1788,6 +1799,7 @@ def main():
     
     print(f"\n📄 Files created:")
     print(f"   • Database: {db_resource_path}")
+    print(f"   • Detailed report: {detailed_report_path}")
     print(f"   • Export file: {export_path}")
     
     return {"resources": detector.detected_resources, "statistics": detector.stats}
