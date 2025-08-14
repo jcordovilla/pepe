@@ -1,8 +1,13 @@
-# Discord Bot Test Suite
+# Testing Guide
 
-## Overview
+Comprehensive testing suite for the Discord bot agentic system.
 
-Streamlined test suite focused on Discord bot core functionality and production readiness.
+## Requirements
+
+- Python 3.12+
+- Poetry for dependency management
+- Access to test Discord server
+- Ollama with required models
 
 ## Test Structure
 
@@ -67,7 +72,7 @@ pytest tests/test_integration.py -m integration -v
 - System initialization
 
 ### 🔧 Core Tests (1-3 minutes)
-- Vector store functionality
+- MCP SQLite functionality
 - Agent API operations
 - Discord command processing
 - Data sync operations
@@ -107,9 +112,9 @@ for reference but are not part of the active test suite.
 
 ## Requirements
 
-- Python 3.11+
+- Python 3.12+
 - Poetry environment
-- OpenAI API key
+- Ollama with required models
 - Discord bot token
 - All project dependencies installed
 

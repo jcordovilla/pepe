@@ -187,7 +187,7 @@ channel_id TEXT,         -- Discord channel
                 active_connections INTEGER,
                 cache_size INTEGER,
                 database_size INTEGER,
-                vector_store_size INTEGER,
+                mcp_sqlite_size INTEGER,
                 system_status TEXT,
                 notes TEXT
             )
@@ -634,7 +634,7 @@ channel_id TEXT,         -- Discord channel
             cursor.execute("""
                 INSERT INTO system_snapshots (
                     memory_usage, cpu_usage, disk_usage, active_connections,
-                    cache_size, database_size, vector_store_size, system_status, notes
+                    cache_size, database_size, mcp_sqlite_size, system_status, notes
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 system_metrics.get("memory_usage"),
@@ -643,7 +643,7 @@ channel_id TEXT,         -- Discord channel
                 system_metrics.get("active_connections"),
                 system_metrics.get("cache_size"),
                 system_metrics.get("database_size"),
-                system_metrics.get("vector_store_size"),
+                system_metrics.get("mcp_sqlite_size"),
                 system_metrics.get("system_status", "unknown"),
                 system_metrics.get("notes")
             ))

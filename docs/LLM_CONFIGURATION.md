@@ -112,7 +112,7 @@ The MCP SQLite server uses the same LLM configuration for natural language to SQ
 
 ### Caching
 - Query results cached to reduce model calls
-- Context embeddings cached for reuse
+- Context information cached for reuse
 - Model responses cached for similar queries
 
 ### Batch Processing

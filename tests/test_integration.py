@@ -26,7 +26,6 @@ import tempfile
 sys.path.insert(0, os.path.abspath('.'))
 
 from agentic.interfaces.agent_api import AgentAPI
-from agentic.vectorstore.persistent_store import PersistentVectorStore
 
 
 class IntegrationTestConfig:
@@ -37,11 +36,10 @@ class IntegrationTestConfig:
         self.test_data_dir.mkdir(exist_ok=True)
         
         self.config = {
-            'vector_store': {
-                'persist_directory': str(self.test_data_dir / 'chromadb_integration'),
-                'collection_name': 'integration_test_messages',
-                'embedding_model': os.getenv('EMBEDDING_MODEL', 'msmarco-distilbert-base-v4'),
-            'embedding_type': 'sentence_transformers'
+            'mcp_sqlite': {
+                'database_path': str(self.test_data_dir / 'integration_test.db'),
+                'enable_write': True,
+                'verbose': False
             },
             'memory': {
                 'db_path': str(self.test_data_dir / 'integration_memory.db')

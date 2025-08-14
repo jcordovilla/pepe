@@ -1,14 +1,15 @@
 # Quick Start Guide
 
-Get the Discord Bot v2 up and running quickly with this guide.
+Get the Discord bot agentic system running in minutes.
 
 > **💡 To understand how the bot works, see [AGENTIC_ARCHITECTURE.md](../AGENTIC_ARCHITECTURE.md)**
 
 ## Prerequisites
 
-- Python 3.9+
+- Python 3.12+
+- Poetry for dependency management
 - Discord Bot Token
-- OpenAI API Key
+- Ollama for local LLM models
 
 ## 1. Environment Setup
 
@@ -17,7 +18,7 @@ Get the Discord Bot v2 up and running quickly with this guide.
 cd /Users/jose/Documents/apps/discord-bot-v2
 
 # Install dependencies
-pip install -r requirements.txt
+poetry install
 
 # Copy environment template
 cp .env.example .env
@@ -33,7 +34,7 @@ python scripts/maintenance/check_channels.py
 ```
 
 **Current Status:**
-- ✅ ChromaDB Vector Store: 4,943 records
+- ✅ MCP SQLite Integration: Standardized database operations
 - ✅ Conversation Memory: 138 conversations (older history summarized)
 - ✅ Analytics Database: Functional
 - ❌ SQLite Database: Missing (discord_messages.db)
@@ -94,7 +95,7 @@ python scripts/maintenance/reaction_search_status.py
 | `python scripts/run_pipeline.py` | Run full data pipeline |
 | `./launch.sh` | Quick start script |
 | `python scripts/test_system.py` | System validation |
-| `python scripts/maintenance/check_vector_store.py` | Check vector store status |
+| `python scripts/maintenance/check_database.py` | Check database status |
 
 ## Troubleshooting
 
@@ -104,7 +105,7 @@ python scripts/maintenance/reaction_search_status.py
 3. Check logs: `tail logs/agentic_bot.log`
 
 ### No Search Results
-1. Check vector store population: `python scripts/maintenance/check_vector_store.py`
+1. Check database population: `python scripts/maintenance/check_database.py`
 2. Run pipeline: `python scripts/run_pipeline.py`
 
 ### Performance Issues
@@ -114,7 +115,7 @@ python scripts/maintenance/reaction_search_status.py
 ## Architecture Overview
 
 ```
-Discord Bot ← Discord Interface ← Agentic System → Vector Store (ChromaDB)
+Discord Bot ← Discord Interface ← Agentic System → MCP SQLite Database
                                 ↓
                            Conversation Memory
                                 ↓  

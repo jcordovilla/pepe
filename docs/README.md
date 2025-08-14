@@ -4,7 +4,6 @@ This directory contains documentation for the Discord RAG Bot with Agentic Archi
 
 ## Structure
 
-- **[index.md](index.md)** - Main project overview and architecture
 - **[AGENTIC_ARCHITECTURE.md](AGENTIC_ARCHITECTURE.md)** - Simple guide to how the agentic system works
 - **[OPERATIONS.md](OPERATIONS.md)** - Complete operations and maintenance guide
 - **[ORGANIZATION.md](ORGANIZATION.md)** - Project organization and structure
@@ -29,5 +28,5 @@ The agentic system provides:
 - Discord slash commands with intelligent responses
 - RESTful API endpoints (see `agentic/interfaces/agent_api.py`)
 - Multi-agent orchestration with LangGraph
-- Vector-based semantic search with ChromaDB
+- MCP SQLite integration for standardized database operations
 - Conversation memory with SQLite storage

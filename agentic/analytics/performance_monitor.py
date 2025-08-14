@@ -16,6 +16,7 @@ from enum import Enum
 import logging
 import threading
 import time
+from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
@@ -83,29 +84,14 @@ class PerformanceMonitor:
     - Integration with query repository
     """
     
-    def __init__(self, config: Dict[str, Any]):
-        self.config = config
-        self.monitoring_enabled = config.get("monitoring_enabled", True)
-        self.monitoring_interval = config.get("monitoring_interval", 30)  # seconds
-        self.alert_thresholds = config.get("alert_thresholds", self._default_thresholds())
-        self.alert_callbacks = []
-        
-        # Performance data storage
-        self.metrics_history: List[SystemMetrics] = []
-        self.max_history_size = config.get("max_history_size", 1000)
-        self.alerts_history: List[PerformanceAlert] = []
-        
-        # Monitoring state
-        self.monitoring_active = False
-        self.monitoring_thread: Optional[threading.Thread] = None
-        self.last_metrics: Optional[SystemMetrics] = None
-        
-        # Component references (set by parent system)
+    def __init__(self):
+        """Initialize performance monitor"""
         self.query_repository = None
-        self.vector_store = None
+        self.mcp_sqlite = None
         self.cache = None
-        
-        logger.info("Performance Monitor initialized")
+        self.start_time = time.time()
+        self.metrics = defaultdict(list)
+        self.performance_data = {}
     
     def _default_thresholds(self) -> Dict[str, Dict[str, float]]:
         """Default performance thresholds"""
@@ -142,10 +128,10 @@ class PerformanceMonitor:
             }
         }
     
-    def set_components(self, query_repository, vector_store, cache):
+    def set_components(self, query_repository, mcp_sqlite, cache):
         """Set component references for monitoring"""
         self.query_repository = query_repository
-        self.vector_store = vector_store
+        self.mcp_sqlite = mcp_sqlite
         self.cache = cache
     
     def add_alert_callback(self, callback: Callable[[PerformanceAlert], None]):
@@ -400,12 +386,12 @@ class PerformanceMonitor:
     def _get_affected_components(self, metric_type: MetricType) -> List[str]:
         """Get components likely affected by this metric"""
         component_map = {
-            MetricType.RESPONSE_TIME: ["orchestrator", "agents", "vector_store"],
+            MetricType.RESPONSE_TIME: ["orchestrator", "agents", "mcp_sqlite"],
             MetricType.SUCCESS_RATE: ["all_components"],
             MetricType.ERROR_RATE: ["all_components"],
-            MetricType.MEMORY_USAGE: ["vector_store", "cache", "database"],
+            MetricType.MEMORY_USAGE: ["mcp_sqlite", "cache", "database"],
             MetricType.CPU_USAGE: ["orchestrator", "agents"],
-            MetricType.DISK_USAGE: ["database", "vector_store", "cache"],
+            MetricType.DISK_USAGE: ["database", "mcp_sqlite", "cache"],
             MetricType.CACHE_HIT_RATE: ["cache"]
         }
         
@@ -432,7 +418,7 @@ class PerformanceMonitor:
             ],
             MetricType.MEMORY_USAGE: [
                 "Clear unused cache entries",
-                "Optimize vector store",
+                "Optimize database queries",
                 "Check for memory leaks",
                 "Consider increasing system memory"
             ],
@@ -488,7 +474,7 @@ class PerformanceMonitor:
                 "active_connections": metrics.active_users,
                 "cache_size": 0,  # Would need actual cache size
                 "database_size": 0,  # Would need actual DB size
-                "vector_store_size": 0,  # Would need actual vector store size
+                "mcp_sqlite_size": 0,  # Would need actual database size
                 "system_status": self._determine_system_status(metrics),
                 "notes": f"Query volume: {metrics.query_volume}, Load: {metrics.system_load}"
             }

@@ -111,12 +111,12 @@ class DiscordBotTestRunner:
         start_time = time.time()
         
         checks = [
-            ('Python 3.11+', sys.version_info >= (3, 11)),
+            ('Python 3.12+', sys.version_info >= (3, 12)),
             ('OpenAI API Key', self.config['has_openai_key']),
             ('Discord Token', self.config['has_discord_token']),
-            ('Guild ID', self.config['has_guild_id']),
-            ('Project Structure', self._check_project_structure()),
-            ('Dependencies', await self._check_dependencies())
+            ('MCP SQLite', self.config['has_mcp_sqlite']),
+            ('LLM Models', self.config['has_llm_models']),
+            ('Database Access', self.config['has_database_access'])
         ]
         
         all_passed = True
@@ -147,7 +147,6 @@ class DiscordBotTestRunner:
         
         quick_tests = [
             ('Import Core Modules', self._test_import_core_modules),
-            ('Vector Store Creation', self._test_vector_store_creation),
             ('Agent API Initialization', self._test_agent_api_init),
             ('Basic Configuration', self._test_basic_configuration)
         ]
@@ -318,23 +317,6 @@ class DiscordBotTestRunner:
         except Exception as e:
             return {'success': False, 'error': f'Import failed: {e}'}
     
-    async def _test_mcp_server_creation(self) -> Dict[str, Any]:
-        """Test MCP server creation"""
-        try:
-            from agentic.mcp import MCPServer
-            
-            config = {
-                'sqlite': {
-                    'db_path': 'data/discord_messages.db'
-                }
-            }
-            
-            mcp_server = MCPServer(config)
-            
-            return {'success': True, 'details': 'MCP server created successfully'}
-        except Exception as e:
-            return {'success': False, 'error': f'MCP server creation failed: {e}'}
-    
     async def _test_agent_api_init(self) -> Dict[str, Any]:
         """Test Agent API initialization"""
         try:
@@ -420,9 +402,10 @@ class DiscordBotTestRunner:
             from agentic.interfaces.agent_api import AgentAPI
             
             config = {
-                'vector_store': {
-                    'persist_directory': './tests/temp_bulk_test',
-                    'collection_name': 'bulk_test'
+                'mcp_sqlite': {
+                    'database_path': './tests/temp_bulk_test.db',
+                    'enable_write': True,
+                    'verbose': False
                 }
             }
             
@@ -519,7 +502,7 @@ class DiscordBotTestRunner:
         required_paths = [
             'agentic',
             'agentic/interfaces',
-            'agentic/vectorstore',
+            'agentic/mcp',
             'agentic/memory',
             'main.py',
             'pyproject.toml'
@@ -532,7 +515,7 @@ class DiscordBotTestRunner:
         required_modules = [
             'discord',
             'openai', 
-            'chromadb',
+            'mcp-sqlite',
             'langchain',
             'pytest'
         ]

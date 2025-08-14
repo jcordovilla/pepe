@@ -3,7 +3,7 @@
 Database Message Validator
 
 Simple script to validate the SQLite database and show statistics.
-No longer needed for ChromaDB indexing since we use MCP server.
+This script validates the Discord messages database and provides useful statistics.
 """
 
 import asyncio

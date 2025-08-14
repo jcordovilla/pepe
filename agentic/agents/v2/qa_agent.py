@@ -30,7 +30,7 @@ class QAAgent(BaseAgent):
         self.llm_client = UnifiedLLMClient(config.get("llm", {}))
         self.config = config
         
-        # Initialize MCP server (replaces ChromaDB vector store)
+        # Initialize MCP server
         mcp_config = {
             "sqlite": {
                 "db_path": "data/discord_messages.db"

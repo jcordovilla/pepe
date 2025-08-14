@@ -29,8 +29,8 @@ Imagine you have a team of experts, each with a specific job:
 │        └──────────────────┼──────────────────┘                 │
 │                           │                                    │
 │                    ┌──────▼───────┐                            │
-│                    │  ORCHESTRATOR │                            │
-│                    │  (Coordinator)│                            │
+│                    │ ORCHESTRATOR │                            │
+│                    │ (Coordinator)│                            │
 │                    └──────┬───────┘                            │
 │                           │                                    │
 │        ┌──────────────────┼──────────────────┐                 │
@@ -227,21 +227,21 @@ Each agent is like a specialist with a specific skill:
 - **Planning**: Project manager - breaks down complex tasks
 - **Orchestrator**: Team leader - coordinates everyone
 
-### Vector Store
-Think of this as a smart filing cabinet:
-- Stores all your Discord messages
-- Can find similar messages even if they use different words
-- Organized by meaning, not just keywords
+### MCP SQLite Database
+Think of this as a smart database:
+- Stores all your Discord messages with full context
+- Uses natural language queries to find relevant content
+- Organized by standard database principles for fast access
 
-### Vector Store Diagram
+### MCP SQLite Diagram
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    VECTOR STORE                             │
+│                    MCP SQLITE DATABASE                      │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────────────────────────────────────────────────┐ │
-│  │                 CHROMA DB                               │ │
+│  │                 SQLITE DATABASE                          │ │
 │  │                                                         │ │
 │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │ │
 │  │  │   MESSAGE   │  │   MESSAGE   │  │   MESSAGE   │     │ │
@@ -343,10 +343,10 @@ The bot's brain:
 ## 🔧 Technical Details (Simplified)
 
 - **LangGraph**: The framework that coordinates all the agents
-- **ChromaDB**: The vector database that stores and searches messages
+- **MCP SQLite**: The standardized database that stores and searches messages
 - **SQLite**: The database that stores conversation history and metadata
 - **Discord API**: How the bot connects to Discord
-- **Embeddings**: How the bot understands the meaning of messages
+- **MCP Protocol**: How the bot communicates with the database
 
 ## 🎯 Why This Architecture?
 
@@ -379,8 +379,8 @@ The result is a bot that feels intelligent and helpful, capable of understanding
 │                              │                    │                        │
 │                              ▼                    ▼                        │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                    │
-│  │   SQLITE    │◀───│   UNIFIED   │───▶│   CHROMA    │                    │
-│  │  DATABASE   │    │   DATA      │    │     DB      │                    │
+│  │   SQLITE    │◀───│   UNIFIED   │───▶│   MCP       │                    │
+│  │  DATABASE   │    │   DATA      │    │  SQLITE     │                    │
 │  │             │    │  MANAGER    │    │             │                    │
 │  └─────────────┘    └─────────────┘    └─────────────┘                    │
 │        │                    │                    │                        │
@@ -429,8 +429,8 @@ The result is a bot that feels intelligent and helpful, capable of understanding
 ### Key Data Flow Steps:
 
 1. **Data Ingestion**: Discord messages are fetched and indexed
-2. **Storage**: Messages stored in both SQLite (metadata) and ChromaDB (vectors)
+2. **Storage**: Messages stored in SQLite with MCP SQLite integration for standardized operations
 3. **Processing**: User requests flow through the agentic system
-4. **Retrieval**: Agents query the vector store and database
+4. **Retrieval**: Agents query the MCP SQLite database
 5. **Response**: Results are processed and returned to the user
 6. **Memory**: Conversations and preferences are stored for context 

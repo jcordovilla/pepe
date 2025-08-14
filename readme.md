@@ -350,8 +350,6 @@ poetry shell
 # ... then run commands directly
 ```
 
-
-
 ## 🔧 Configuration
 
 ### **Environment Variables**
@@ -396,16 +394,15 @@ ANALYSIS_TIMEOUT=300
 * **[Incremental Sync Guide](docs/setup/INCREMENTAL_SYNC_GUIDE.md)** - Efficient message syncing
 * **[Model Comparison Guide](docs/setup/MODEL_COMPARISON_GUIDE.md)** - Fast vs Standard AI models
 * **[Logging and Query Tracking Guide](docs/setup/LOGGING_AND_QUERY_TRACKING.md)** - User query logging and analytics
-* **Operations Guide** - Complete setup and configuration
-* **Bot Operations** - Discord bot management
-* **Architecture** - Technical implementation details
-* **Testing Guide** - Development and testing procedures
+* **[Operations Guide](docs/OPERATIONS.md)** - Complete setup and configuration
+* **[Architecture Guide](docs/AGENTIC_ARCHITECTURE.md)** - Technical implementation details
+* **[Testing Guide](tests/README.md)** - Development and testing procedures
 
 ### **API Reference**
 
-* **Agent API** - Multi-agent system documentation
-* **Discord Interface** - Bot command reference
-* **Analytics API** - Data analysis endpoints
+* **[Agent API](docs/AGENTIC_ARCHITECTURE.md)** - Multi-agent system documentation
+* **[Discord Interface](docs/OPERATIONS.md)** - Bot command reference
+* **[Analytics API](docs/AGENTIC_ARCHITECTURE.md)** - Data analysis endpoints
 
 ## 🎉 What's New
 
@@ -414,15 +411,15 @@ ANALYSIS_TIMEOUT=300
 * **🔄 Incremental Fetching**: Only sync new messages (1-5 min vs 10-30 min)
 * **🧠 Multi-Agent Architecture**: Specialized agents for different tasks
 * **📊 Automated Weekly Digests**: AI-generated summaries with engagement metrics
-* **⚡ Streaming Processing**: 42.4 messages/second indexing
+* **⚡ MCP SQLite Integration**: Standardized database operations with natural language queries
 * **🎯 AI-Powered Resource Detection**: Automatic link extraction and categorization
 * **🏗️ Production-Ready**: Clean codebase with comprehensive error handling
 
 ### **Recent Improvements**
 
-* **Performance**: 10x faster processing with streaming indexer
+* **Performance**: 10x faster processing with MCP SQLite integration
 * **Sync Speed**: Incremental fetching reduces sync time by 80-90%
-* **Accuracy**: Better semantic search with enhanced embeddings
+* **Accuracy**: Better semantic search with enhanced database operations
 * **Usability**: Natural language queries and intelligent responses
 * **Reliability**: Comprehensive test suite and error handling
 * **Documentation**: Complete guides for all user types

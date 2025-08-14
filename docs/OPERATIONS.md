@@ -48,7 +48,7 @@ Admin Users → pepe-admin CLI → System Management
 ### **Core Components:**
 1. **Discord Interface**: Single `/pepe` command for all user queries
 2. **Agentic System**: Multi-agent processing (search, analysis, planning)
-3. **Data Storage**: Vector store (ChromaDB) + Analytics (SQLite)
+3. **Data Storage**: MCP SQLite integration + Analytics (SQLite)
 4. **Admin CLI**: Unified `pepe-admin` tool for all operations
 
 ## 🎯 **Daily Operations**
@@ -97,7 +97,7 @@ Admin Users → pepe-admin CLI → System Management
 ```bash
 ./pepe-admin status          # System health check
 ./pepe-admin monitor         # Performance metrics
-./pepe-admin stats           # Vector store statistics
+./pepe-admin stats           # Database statistics
 ```
 
 ### **Maintenance & Optimization**
@@ -119,7 +119,7 @@ Admin Users → pepe-admin CLI → System Management
 - **Response Time**: Should be < 2 seconds average
 - **Success Rate**: Should be > 95%
 - **Memory Usage**: Monitor for memory leaks
-- **Vector Store Size**: Track growth and performance
+- **Database Size**: Track growth and performance
 - **Cache Hit Rate**: Should be > 80%
 - **Active Users**: Track engagement patterns
 
@@ -129,13 +129,13 @@ Admin Users → pepe-admin CLI → System Management
 ```
 **Green Indicators:**
 - ✅ All critical files present
-- ✅ Vector store has embeddings
+- ✅ Database has messages
 - ✅ All dependencies installed
 - ✅ Environment variables set
 
 **Red Flags:**
 - ❌ Missing critical files
-- ❌ Empty vector store
+- ❌ Empty database
 - ❌ Missing dependencies
 - ❌ Environment variables not set
 
@@ -163,7 +163,7 @@ python main.py
 # Run optimization
 ./pepe-admin optimize
 
-# Check vector store
+# Check database
 ./pepe-admin stats
 ```
 
@@ -199,7 +199,7 @@ tail -f logs/agentic_bot.log
 ├── pepe-admin             # Admin CLI tool
 ├── agentic/               # Core agentic system
 ├── data/
-│   ├── chromadb/          # Vector store
+│   ├── discord_messages.db # Main message database
 │   ├── conversation_memory.db  # Chat history
 │   └── analytics.db       # Analytics data
 └── logs/                  # System logs
@@ -208,7 +208,7 @@ tail -f logs/agentic_bot.log
 ### **Configuration Files:**
 ```
 ├── .env                   # Environment variables
-├── requirements.txt       # Python dependencies
+├── pyproject.toml        # Poetry dependencies
 └── data/bot_config.json   # Bot configuration
 ```
 
@@ -218,7 +218,7 @@ tail -f logs/agentic_bot.log
 ```bash
 DISCORD_TOKEN=your_discord_bot_token
 GUILD_ID=your_discord_guild_id
-OPENAI_API_KEY=your_openai_api_key
+LLM_MODEL=llama3.1:8b
 ```
 
 ### **Security Best Practices:**
@@ -239,7 +239,7 @@ OPENAI_API_KEY=your_openai_api_key
 ```
 
 ### **Backup Contents:**
-- Vector store database
+- MCP SQLite database
 - Conversation memory
 - Analytics database
 - Configuration files
@@ -273,7 +273,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 ### **Performance Tuning:**
 - **Cache Settings**: Adjust TTL in configuration
-- **Vector Store**: Monitor embedding count vs. performance  
+- **MCP SQLite**: Monitor database size vs. performance  
 - **Memory Usage**: Regular maintenance prevents leaks
 - **Query Patterns**: Monitor most common query types
 

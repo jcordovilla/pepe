@@ -130,7 +130,7 @@ class DataSynchronizationService:
             "checks": {
                 "message_count_consistency": True,
                 "embedding_completeness": True,
-                "vector_store_integrity": True,
+                "mcp_sqlite_integrity": True,
                 "analytics_consistency": True
             },
             "issues": []

@@ -1,6 +1,6 @@
 # Codebase Organization
 
-This document describes the organized structure of the Discord Bot v2 codebase after cleanup.
+This document describes the organized structure of the Discord Bot agentic system after cleanup.
 
 ## Root Directory Structure
 
@@ -11,9 +11,8 @@ This document describes the organized structure of the Discord Bot v2 codebase a
 ├── scripts/                  # Utility and maintenance scripts
 │   ├── run_pipeline.py       # Database pipeline runner
 ├── launch.sh                # Quick start script
-├── requirements.txt         # Python dependencies
+├── pyproject.toml           # Poetry dependencies
 ├── readme.md               # Main project documentation
-├── README_NEW.md           # Updated documentation
 ├── ORGANIZATION.md         # This file
 │
 ├── agentic/                # Core agentic system
@@ -58,7 +57,7 @@ This document describes the organized structure of the Discord Bot v2 codebase a
 
 ### Configuration
 - `.env` - Environment configuration
-- `requirements.txt` - Python dependencies
+- `pyproject.toml` - Poetry dependencies
 
 ### Documentation
 - `readme.md` - Main project README
@@ -74,10 +73,10 @@ This document describes the organized structure of the Discord Bot v2 codebase a
 
 ## Database Status
 
-- ✅ **ChromaDB Vector Store**: 4,943 records (fully populated)
+- ✅ **MCP SQLite Integration**: Standardized database operations
 - ✅ **Conversation Memory**: 138 conversations 
 - ✅ **Analytics Database**: Populated and functional
-- ❌ **Traditional SQLite Database**: Missing (`discord_messages.db`)
+- ✅ **Discord Messages Database**: SQLite-based message storage
 
 ## Next Steps
 
@@ -86,4 +85,4 @@ This document describes the organized structure of the Discord Bot v2 codebase a
 3. **Deploy using** `scripts/validate_deployment.py`
 
 ---
-*Last updated: June 4, 2025*
+*Last updated: January 2025*

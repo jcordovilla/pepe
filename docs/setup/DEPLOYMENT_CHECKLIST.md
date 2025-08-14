@@ -1,18 +1,26 @@
 # Deployment Checklist
 
-Use this checklist to ensure proper deployment of the Discord Bot v2.
+Complete checklist for deploying the Discord bot agentic system.
+
+## Pre-deployment
+
+- [ ] Python 3.12+ installed
+- [ ] Poetry installed and configured
+- [ ] Discord Bot Token obtained
+- [ ] Ollama installed with required models
+- [ ] Environment variables configured
 
 ## Pre-Deployment Checks
 
 ### ✅ Environment Setup
 - [ ] `.env` file created with all required variables
 - [ ] `DISCORD_TOKEN` configured
-- [ ] `OPENAI_API_KEY` configured
-- [ ] Python 3.9+ installed
-- [ ] Dependencies installed (`pip install -r requirements.txt`)
+- [ ] `LLM_MODEL` configured (e.g., llama3.1:8b)
+- [ ] Python 3.12+ installed
+- [ ] Dependencies installed (`poetry install`)
 
 ### ✅ Database Status
-- [ ] ChromaDB vector store populated (check: `python scripts/system_status.py`)
+- [ ] MCP SQLite integration configured (check: `python scripts/system_status.py`)
 - [ ] Conversation memory database exists
 - [ ] Analytics database functional
 - [ ] SQLite messages database (optional but recommended)
@@ -97,9 +105,9 @@ python scripts/maintenance/reaction_search_status.py
 4. **Review logs**: `tail logs/agentic_bot.log`
 
 ### No Search Results
-1. **Check vector store**: `python scripts/maintenance/check_vector_store.py`
+1. **Check database**: `python scripts/maintenance/check_database.py`
 2. **Repopulate data**: `python scripts/run_pipeline.py`
-3. **Verify embeddings**: Check ChromaDB has > 1000 records
+3. **Verify database**: Check SQLite has > 1000 message records
 
 ### Performance Issues
 1. **Monitor resources**: Check CPU/memory usage

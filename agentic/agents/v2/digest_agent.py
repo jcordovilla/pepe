@@ -483,7 +483,7 @@ class DigestAgent(BaseAgent):
             # Handle time filters - check both timestamp and timestamp_unix
             if "$and" in filters:
                 for condition in filters["$and"]:
-                    # Check for timestamp_unix (used by ChromaDB) or timestamp
+                    # Check for timestamp_unix or timestamp
                     if "timestamp_unix" in condition:
                         timestamp_filter = condition["timestamp_unix"]
                         if "$gte" in timestamp_filter and "$lte" in timestamp_filter:

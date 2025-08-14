@@ -16,34 +16,34 @@ All core components have been tested and verified:
 
 ### Required Environment Variables
 ```bash
-export OPENAI_API_KEY="your_openai_api_key_here"
+export LLM_MODEL="llama3.1:8b"
 export DISCORD_TOKEN="your_discord_bot_token_here" 
 export GUILD_ID="your_discord_guild_id_here"
 export LLM_COMPLEXITY_THRESHOLD="0.85"
 ```
 
 ### Python Requirements
-- Python 3.9+
-- All dependencies in `requirements.txt`
+- Python 3.12+
+- All dependencies in `pyproject.toml`
 
 ## 🚀 Quick Start
 
 ### 1. Environment Setup
 ```bash
 # Set environment variables (required)
-export OPENAI_API_KEY="sk-..."
+export LLM_MODEL="llama3.1:8b"
 export DISCORD_TOKEN="MTI..."
 export GUILD_ID="123456789..."
 
 # Optional: Create .env file
-echo "OPENAI_API_KEY=sk-..." > .env
+echo "LLM_MODEL=llama3.1:8b" > .env
 echo "DISCORD_TOKEN=MTI..." >> .env
 echo "GUILD_ID=123456789..." >> .env
 ```
 
 ### 2. Install Dependencies
 ```bash
-pip install -r requirements.txt
+poetry install
 ```
 
 ### 3. Launch Bot
@@ -79,7 +79,7 @@ python test_system.py
 - **Orchestrator**: LangGraph-powered workflow coordination
 
 ### Data Management
-- **Vector Store**: ChromaDB with OpenAI embeddings
+- **Database**: MCP SQLite integration with local LLM models
 - **Conversation Memory**: SQLite with conversation tracking
 - **Smart Cache**: Multi-level caching (memory + file-based)
 - **Real-time Processing**: Async operations throughout
@@ -109,11 +109,11 @@ curl http://localhost:8000/health
 
 ### Common Issues
 
-1. **OpenAI API Key Error**
+1. **LLM Model Error**
    ```
-   Error: The api_key client option must be set
+   Error: Connection refused or model not found
    ```
-   **Solution**: Set `OPENAI_API_KEY` environment variable
+   **Solution**: Start Ollama and install required models
 
 2. **Discord Connection Failed**
    ```

@@ -49,7 +49,7 @@ poetry run python scripts/resource_detector.py --reset-cache
 ## 🛠️ Maintenance Scripts
 
 ### **`delete_and_recreate_collection.py`**
-Delete and recreate ChromaDB collection (useful for fixing embedding model issues).
+Delete and recreate database collection (useful for fixing database issues).
 ```bash
 poetry run python scripts/delete_and_recreate_collection.py
 ```
@@ -92,7 +92,7 @@ poetry run ./pepe-admin resources detect
 - **Real-time processing** - Messages are handled as they arrive
 - **Unified architecture** - All functionality integrated into main bot
 - **Local Llama models** - Resource detection uses local models for privacy
-- **OpenAI embeddings only** - Vector search uses OpenAI for embeddings
+- **MCP SQLite integration** - Database operations use standardized MCP protocol
 
 ## Running Scripts
 
