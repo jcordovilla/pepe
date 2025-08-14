@@ -442,19 +442,19 @@ class PepeAdminSimplified:
             else:
                 print("📤 Export File: None (run 'resources' first)")
             
-            # Check enhanced database
-            enhanced_db = Path("data/enhanced_resources.db")
-            if enhanced_db.exists():
+            # Check resources database
+            resources_db = Path("data/resources.db")
+            if resources_db.exists():
                 try:
                     import sqlite3
-                    with sqlite3.connect(enhanced_db) as conn:
+                    with sqlite3.connect(resources_db) as conn:
                         cursor = conn.execute("SELECT COUNT(*) FROM resources")
                         count = cursor.fetchone()[0]
-                        print(f"🗄️ Enhanced Database: {count:,} resources")
+                        print(f"🗄️ Resources Database: {count:,} resources")
                 except Exception as e:
-                    print(f"   ❌ Error reading enhanced database: {e}")
+                    print(f"   ❌ Error reading resources database: {e}")
             else:
-                print("🗄️ Enhanced Database: Not initialized (run 'resources' first)")
+                print("🗄️ Resources Database: Not initialized (run 'resources' first)")
             
             # Check processed URLs cache
             cache_file = Path("data/processed_resources.json")

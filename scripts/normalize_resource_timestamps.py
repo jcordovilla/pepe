@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-db_path = Path('data/enhanced_resources.db')
+db_path = Path('data/resources.db')
 if not db_path.exists():
     print(f"Database not found: {db_path}")
     exit(1)

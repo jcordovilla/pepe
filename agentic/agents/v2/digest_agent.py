@@ -327,11 +327,11 @@ class DigestAgent(BaseAgent):
             return None
     
     async def _get_resources_for_period(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel_name: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get resources from the enhanced resources database for the given time period and channel."""
+        """Get resources from the resources database for the given time period and channel."""
         try:
-            db_path = "data/enhanced_resources.db"
+            db_path = "data/resources.db"
             if not Path(db_path).exists():
-                logger.warning("Enhanced resources database not found")
+                logger.warning("Resources database not found")
                 return []
             
             conn = sqlite3.connect(db_path)

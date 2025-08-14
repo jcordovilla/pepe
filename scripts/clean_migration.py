@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class ResourceMigrator:
-    def __init__(self, db_path: str = "data/enhanced_resources.db"):
+    def __init__(self, db_path: str = "data/resources.db"):
         self.db_path = db_path
         self.resources_file = "data/optimized_fresh_resources.json"
         
