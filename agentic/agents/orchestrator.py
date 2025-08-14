@@ -73,8 +73,17 @@ class AgentOrchestrator:
         """
         start_time = time.time()
         
+        # ===== COMPREHENSIVE ACTIVITY LOGGING START =====
+        logger.info(f"🎯 [ORCHESTRATOR] Starting Query Processing")
+        logger.info(f"   👤 User ID: {user_id}")
+        logger.info(f"   💬 Query: '{query}'")
+        logger.info(f"   📊 Query Length: {len(query)} characters")
+        logger.info(f"   🔗 Context Keys: {list(context.keys()) if context else 'None'}")
+        logger.info(f"   ⏰ Start Time: {datetime.utcnow().isoformat()}")
+        # ===== ACTIVITY LOGGING END =====
+        
         try:
-            logger.info(f"Orchestrator processing query: '{query[:50]}...' for user {user_id}")
+            logger.info(f"🚀 [ORCHESTRATOR] Initializing workflow state...")
             
             # Initialize state
             initial_state: AgentState = {
@@ -112,38 +121,59 @@ class AgentOrchestrator:
                 "thread_id": f"discord_{user_id}",
                 "thread_ts": str(int(start_time))
             }
+            logger.info(f"🔧 [ORCHESTRATOR] Executing workflow with config: {configurable}")
+            
             final_state = await self.app.ainvoke(initial_state, {"configurable": configurable})
+            logger.info(f"✅ [ORCHESTRATOR] Workflow execution completed")
             
             # Extract results
             response = final_state.get("response", "No response generated")
             errors = final_state.get("errors", [])
+            next_agent = final_state.get("next_agent", "unknown")
             
             # Calculate duration
             duration = time.time() - start_time
             
+            # ===== ACTIVITY LOGGING: WORKFLOW RESULTS =====
+            logger.info(f"📊 [ORCHESTRATOR] Workflow Execution Results")
+            logger.info(f"   ⏱️ Duration: {duration:.3f} seconds")
+            logger.info(f"   🤖 Agent Used: {next_agent}")
+            logger.info(f"   📝 Response Length: {len(str(response))} characters")
+            logger.info(f"   ❌ Errors: {len(errors)}")
+            if errors:
+                logger.error(f"   🚨 Error Details: {errors}")
+            # ===== ACTIVITY LOGGING END =====
+            
             # Store conversation turn
+            logger.info(f"💾 [ORCHESTRATOR] Storing conversation in memory...")
             await self.conversation_memory.add_interaction(
                 user_id=user_id,
                 query=query,
                 response=response,
                 metadata={
                     "duration": duration,
-                    "agent_used": final_state.get("next_agent", "unknown"),
+                    "agent_used": next_agent,
                     "errors": errors
                 }
             )
+            logger.info(f"✅ [ORCHESTRATOR] Conversation stored in memory")
             
-            return {
+            final_result = {
                 "response": response,
                 "results": final_state.get("analysis_results", {}),
                 "metadata": {
                     "duration": duration,
                     "success": len(errors) == 0,
-                    "agent_used": final_state.get("next_agent", "unknown"),
+                    "agent_used": next_agent,
                     "errors": errors,
                     "version": "2.0.0"
                 }
             }
+            
+            logger.info(f"🎉 [ORCHESTRATOR] Query Processing Completed Successfully")
+            logger.info(f"   📤 Final Result Size: {len(str(final_result))} characters")
+            
+            return final_result
             
         except Exception as e:
             duration = time.time() - start_time
@@ -165,16 +195,21 @@ class AgentOrchestrator:
             query = state["user_context"]["query"]
             user_id = state["user_context"]["user_id"]
             
-            logger.info(f"Routing query: {query[:50]}...")
+            logger.info(f"🎯 [ROUTER] Starting Query Routing")
+            logger.info(f"   💬 Query: '{query}'")
+            logger.info(f"   👤 User ID: {user_id}")
             
             # Use router agent to determine which agent should handle the query
             router_agent_class = self.agent_registry.get("router")
             if not router_agent_class:
+                logger.error(f"❌ [ROUTER] Router agent not found in registry")
                 raise ValueError("Router agent not found in registry")
             
+            logger.info(f"🔧 [ROUTER] Creating router agent instance...")
             router_agent = router_agent_class(self.config.get("router", {}))
             
             # Route the query
+            logger.info(f"🚀 [ROUTER] Executing router agent...")
             routing_result = await router_agent.run(
                 command=query,
                 payload={
@@ -182,6 +217,9 @@ class AgentOrchestrator:
                     "context": state["user_context"]
                 }
             )
+            logger.info(f"✅ [ROUTER] Router agent execution completed")
+            logger.info(f"   🎯 Next Agent: {routing_result.get('next_agent', 'qa')}")
+            logger.info(f"   ⚙️ Agent Args: {routing_result.get('args', {})}")
             
             # Update state with routing results
             state["routing_result"] = routing_result
@@ -206,28 +244,43 @@ class AgentOrchestrator:
             next_agent_name = state.get("next_agent", "qa")
             agent_args = state.get("agent_args", {})
             
-            logger.info(f"Executing agent: {next_agent_name}")
+            logger.info(f"🚀 [EXECUTOR] Starting Agent Execution")
+            logger.info(f"   🤖 Agent: {next_agent_name}")
+            logger.info(f"   ⚙️ Args: {agent_args}")
             
             # Get the agent class from registry
             agent_class = self.agent_registry.get(next_agent_name)
             if not agent_class:
+                logger.error(f"❌ [EXECUTOR] Agent '{next_agent_name}' not found in registry")
                 raise ValueError(f"Agent '{next_agent_name}' not found in registry")
             
+            logger.info(f"✅ [EXECUTOR] Agent class found: {agent_class.__name__}")
+            
             # Create and execute the agent
+            logger.info(f"🔧 [EXECUTOR] Creating agent instance...")
             agent = agent_class(self.config)
             
             # Inject services from service container if available
             if hasattr(self, 'service_container'):
+                logger.info(f"🔗 [EXECUTOR] Injecting services from service container...")
                 self.service_container.inject_services(agent)
+                logger.info(f"✅ [EXECUTOR] Services injected")
+            else:
+                logger.info(f"⚠️ [EXECUTOR] No service container available")
             
             # Execute the agent
+            logger.info(f"🚀 [EXECUTOR] Executing agent {next_agent_name}...")
             result = await agent.run(**agent_args)
+            logger.info(f"✅ [EXECUTOR] Agent {next_agent_name} execution completed")
             
             # Update state with agent result
             state["agent_result"] = result
             state["response"] = result if isinstance(result, str) else str(result)
             
-            logger.info(f"Agent {next_agent_name} execution completed")
+            logger.info(f"📊 [EXECUTOR] Agent Execution Results")
+            logger.info(f"   📝 Response Type: {type(result).__name__}")
+            logger.info(f"   📏 Response Length: {len(str(result))} characters")
+            logger.info(f"   🔍 Response Preview: {str(result)[:100]}...")
             
             return state
             

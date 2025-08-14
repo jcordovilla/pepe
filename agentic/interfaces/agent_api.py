@@ -117,13 +117,30 @@ class AgentAPI:
         platform = context.get("platform", "unknown") if context else "unknown"
         channel_id = context.get("channel_id") if context else None
         
+        # ===== COMPREHENSIVE ACTIVITY LOGGING START =====
+        logger.info(f"🎯 [ACTIVITY] User Query Received")
+        logger.info(f"   👤 User ID: {user_id}")
+        logger.info(f"   💬 Query: '{query}'")
+        logger.info(f"   🌐 Platform: {platform}")
+        logger.info(f"   📍 Channel ID: {channel_id}")
+        logger.info(f"   📊 Query Length: {len(query)} characters")
+        logger.info(f"   ⏰ Timestamp: {start_time.isoformat()}")
+        if context:
+            logger.info(f"   🔗 Context Keys: {list(context.keys())}")
+        if preferences:
+            logger.info(f"   ⚙️ Preferences Keys: {list(preferences.keys())}")
+        # ===== ACTIVITY LOGGING END =====
+        
         try:
             # Ensure services are initialized
             if not hasattr(self, 'mcp_server') or self.mcp_server is None:
+                logger.info("🔧 [ACTIVITY] Initializing services...")
                 await self.initialize()
+                logger.info("✅ [ACTIVITY] Services initialized")
             
             # Validate input
             if not query or not query.strip():
+                logger.warning("❌ [ACTIVITY] Empty query rejected")
                 return {
                     "success": False,
                     "error": "Empty query provided",
@@ -131,14 +148,19 @@ class AgentAPI:
                 }
             
             if len(query) > self.max_query_length:
+                logger.warning(f"❌ [ACTIVITY] Query too long ({len(query)} > {self.max_query_length})")
                 return {
                     "success": False,
                     "error": f"Query too long (max {self.max_query_length} characters)",
                     "timestamp": datetime.utcnow().isoformat()
                 }
             
+            logger.info("✅ [ACTIVITY] Query validation passed")
+            
             # Get user context from memory
+            logger.info("🧠 [ACTIVITY] Retrieving user context from memory...")
             user_context = await self.memory.get_user_context(user_id)
+            logger.info(f"📚 [ACTIVITY] User context retrieved: {len(user_context) if user_context else 0} items")
             
             # Merge context
             full_context = {
@@ -147,9 +169,12 @@ class AgentAPI:
                 **(context or {}),
                 **(preferences or {})
             }
+            logger.info(f"🔗 [ACTIVITY] Context merged: {len(full_context)} total keys")
             
             # Process query through orchestrator
+            logger.info("🚀 [ACTIVITY] Processing query through orchestrator...")
             result = await self.orchestrator.process_query(query, user_id, full_context)
+            logger.info("✅ [ACTIVITY] Orchestrator processing completed")
             
             # Calculate metrics
             end_time = datetime.utcnow()
@@ -159,8 +184,19 @@ class AgentAPI:
             agents_used = self._extract_agents_used(result)
             tokens_used = result.get("metadata", {}).get("tokens_used", 0)
             
+            # ===== ACTIVITY LOGGING: RESULT PROCESSING =====
+            logger.info("📊 [ACTIVITY] Query Processing Results")
+            logger.info(f"   ⏱️ Response Time: {response_time:.3f} seconds")
+            logger.info(f"   ✅ Success: {success}")
+            logger.info(f"   🤖 Agents Used: {agents_used}")
+            logger.info(f"   🎯 Tokens Used: {tokens_used}")
+            logger.info(f"   📝 Response Length: {len(result.get('response', ''))} characters")
+            logger.info(f"   🔍 Response Type: {result.get('metadata', {}).get('response_type', 'unknown')}")
+            # ===== ACTIVITY LOGGING END =====
+            
             # Record analytics if enabled
             if self.enable_analytics:
+                logger.info("📈 [ACTIVITY] Recording analytics...")
                 answer_text = result.get("response", "") or "No answer generated"
                 await self._record_query_analytics(
                     user_id=user_id,
@@ -174,9 +210,13 @@ class AgentAPI:
                     context=context or {},
                     channel_id=channel_id
                 )
+                logger.info("✅ [ACTIVITY] Analytics recorded")
+            else:
+                logger.info("⚠️ [ACTIVITY] Analytics disabled, skipping recording")
             
             # Store interaction in memory if learning is enabled
             if self.enable_learning:
+                logger.info("🧠 [ACTIVITY] Storing interaction in memory...")
                 response_for_memory = result.get("response", "")
                 # Ensure response is a string for database storage
                 if isinstance(response_for_memory, dict):
@@ -195,8 +235,12 @@ class AgentAPI:
                         "processing_time": response_time
                     }
                 )
+                logger.info("✅ [ACTIVITY] Interaction stored in memory")
+            else:
+                logger.info("⚠️ [ACTIVITY] Learning disabled, skipping memory storage")
             
-            return {
+            # Prepare final response
+            final_response = {
                 "success": True,
                 "answer": result.get("response", ""),
                 "sources": result.get("results", []),
@@ -211,11 +255,28 @@ class AgentAPI:
                 "timestamp": datetime.utcnow().isoformat()
             }
             
+            # ===== ACTIVITY LOGGING: FINAL RESPONSE =====
+            logger.info("🎉 [ACTIVITY] Query Processing Completed Successfully")
+            logger.info(f"   📤 Final Response Size: {len(str(final_response))} characters")
+            logger.info(f"   🔗 Sources Count: {len(final_response.get('sources', []))}")
+            logger.info(f"   🎯 Confidence: {final_response.get('confidence', 0.0)}")
+            logger.info(f"   📋 Subtasks: {len(final_response.get('subtasks', []))}")
+            # ===== ACTIVITY LOGGING END =====
+            
+            return final_response
+            
         except Exception as e:
-            logger.error(f"Error processing query: {e}")
+            # ===== ACTIVITY LOGGING: ERROR HANDLING =====
+            logger.error(f"❌ [ACTIVITY] Query Processing Failed")
+            logger.error(f"   👤 User ID: {user_id}")
+            logger.error(f"   💬 Query: '{query}'")
+            logger.error(f"   🚨 Error: {str(e)}")
+            logger.error(f"   ⏰ Error Time: {datetime.utcnow().isoformat()}")
+            # ===== ACTIVITY LOGGING END =====
             
             # Record failed query if analytics enabled
             if self.enable_analytics:
+                logger.info("📈 [ACTIVITY] Recording failed query analytics...")
                 end_time = datetime.utcnow()
                 response_time = (end_time - start_time).total_seconds()
                 
@@ -232,12 +293,18 @@ class AgentAPI:
                     channel_id=channel_id,
                     error_message=str(e)
                 )
+                logger.info("✅ [ACTIVITY] Failed query analytics recorded")
+            else:
+                logger.info("⚠️ [ACTIVITY] Analytics disabled, skipping failed query recording")
             
-            return {
+            error_response = {
                 "success": False,
                 "error": str(e),
                 "timestamp": datetime.utcnow().isoformat()
             }
+            
+            logger.info(f"📤 [ACTIVITY] Returning error response: {len(str(error_response))} characters")
+            return error_response
     
     async def _record_query_analytics(
         self,
