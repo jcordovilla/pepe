@@ -182,6 +182,8 @@ class DigestAgent(BaseAgent):
     async def _get_all_messages(self, start_date: Optional[datetime], end_date: Optional[datetime], channel_id: Optional[str] = None, channel: Optional[str] = None, period: str = "day") -> List[Dict[str, Any]]:
         """Get all messages from the MCP server for the period, optionally filtered by channel_id/forum_channel_id or channel_name."""
         try:
+            logger.info(f"[DigestAgent] _get_all_messages called with: start_date={start_date}, end_date={end_date}, channel_id={channel_id}, channel={channel}, period={period}")
+            
             # Use dynamic k-value calculation for digest requests
             try:
                 # Create a synthetic query for k-value calculation
@@ -192,12 +194,15 @@ class DigestAgent(BaseAgent):
                     query_parts.append(f"from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
                 
                 synthetic_query = " ".join(query_parts)
+                logger.info(f"[DigestAgent] Synthetic query for k-value calculation: '{synthetic_query}'")
+                
                 k_result = self.k_calculator.calculate_k_value(synthetic_query, query_type="digest")
                 max_messages = k_result.get("k_value", 200)
                 logger.info(f"[DigestAgent] Dynamic k-value calculated: {max_messages} for query: {synthetic_query}")
             except Exception as e:
                 logger.warning(f"[DigestAgent] K-value calculation failed, using fallback: {e}")
                 max_messages = self.period_limits.get(period, self.base_max_messages)
+                logger.info(f"[DigestAgent] Using fallback max_messages: {max_messages}")
             
             # Build filters for MCP server
             filters = {"author_bot": False}
@@ -205,25 +210,32 @@ class DigestAgent(BaseAgent):
             # Add channel filter if provided
             if channel_id:
                 filters["channel_id"] = channel_id
+                logger.info(f"[DigestAgent] Added channel_id filter: {channel_id}")
             elif channel:
                 filters["channel_name"] = channel
+                logger.info(f"[DigestAgent] Added channel_name filter: '{channel}'")
             
             # Add date filters if provided
             if start_date and end_date:
                 filters["start_date"] = start_date
                 filters["end_date"] = end_date
+                logger.info(f"[DigestAgent] Added date filters: {start_date} to {end_date}")
             
             # For weekly digests, ensure we get a good mix of content
             if period == "week":
                 # Increase the limit for weekly digests to get more comprehensive coverage
                 max_messages = min(max_messages * 2, 500)
-                
+                logger.info(f"[DigestAgent] Increased max_messages for weekly digest: {max_messages}")
+            
             logger.info(f"[DigestAgent] FINAL filter_search filters: {filters}")
+            logger.info(f"[DigestAgent] max_messages: {max_messages}")
             
             # For cross-server digests (no channel filter), use smarter retrieval
             if not channel_id and not channel and period in ["week", "month", "all_time"]:
+                logger.info(f"[DigestAgent] Using cross-server message retrieval for {period} digest")
                 messages = await self._get_cross_server_messages(filters, max_messages, period)
             else:
+                logger.info(f"[DigestAgent] Using single channel message retrieval")
                 # Single channel or daily digest - use standard approach
                 # Ensure MCP server is ready
                 await self._ensure_mcp_server_ready()
@@ -232,12 +244,18 @@ class DigestAgent(BaseAgent):
                 if start_date and end_date:
                     # For date-specific queries, use "recent messages" and let the filters handle the date range
                     query = "recent messages"
+                    logger.info(f"[DigestAgent] Using 'recent messages' query with date filters")
                 else:
                     # For all-time queries, use "recent messages" to get a good sample
                     query = "recent messages"
+                    logger.info(f"[DigestAgent] Using 'recent messages' query for all-time")
                 
+                logger.info(f"[DigestAgent] Calling MCP server search_messages with query: '{query}', filters: {filters}, limit: {max_messages}")
                 results = await self.mcp_server.search_messages(query, filters, max_messages)
+                logger.info(f"[DigestAgent] MCP server returned {len(results)} results")
+                
                 messages = self._process_results(results)
+                logger.info(f"[DigestAgent] Processed {len(messages)} messages from results")
             
             logger.info(f"[DigestAgent] Retrieved {len(messages)} messages from MCP server for {period} period.")
             for i, message in enumerate(messages[:3]):
@@ -245,7 +263,7 @@ class DigestAgent(BaseAgent):
             
             return messages
         except Exception as e:
-            logger.error(f"Error getting messages: {e}")
+            logger.error(f"[DigestAgent] Error getting messages: {e}")
             return []
     
     async def _get_cross_server_messages(self, filters: Dict[str, Any], max_messages: int, period: str) -> List[Dict[str, Any]]:

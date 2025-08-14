@@ -101,30 +101,54 @@ class QAAgent(BaseAgent):
             # Extract query from state
             query = state.get("user_context", {}).get("query", "")
             if not query:
+                logger.warning("[QAAgent] No query provided in state")
                 state["response"] = "❌ No query provided"
                 return state
+            
+            logger.info(f"[QAAgent] Processing query: '{query}'")
             
             # Calculate appropriate k value based on query - let it auto-detect query type
             k_result = self.k_calculator.calculate_k_value(query, query_type=None)  # Auto-detect query type
             k_value = k_result.get("k_value", 10)  # Extract the actual k value from the result
-            logger.info(f"QA Agent processing query with k={k_value}: {query[:50]}...")
+            logger.info(f"[QAAgent] K-value calculation result: {k_result}")
+            logger.info(f"[QAAgent] Using k={k_value} for query: '{query[:50]}...'")
             
             # Ensure MCP server is ready
             await self._ensure_mcp_server_ready()
+            logger.info(f"[QAAgent] MCP server ready")
             
             # Search for relevant messages using MCP server with bot filtering
             # Use natural language query for complex queries, text search for simple ones
             filters = {"author_bot": False}  # Always filter out bot messages
+            logger.info(f"[QAAgent] Using filters: {filters}")
+            
             if len(query.split()) > 3:  # Complex query - use natural language
+                logger.info(f"[QAAgent] Complex query detected ({len(query.split())} words), using natural language search")
                 relevant_messages = await self.mcp_server.search_messages(query, filters, k_value)
             else:  # Simple query - use text search
+                logger.info(f"[QAAgent] Simple query detected ({len(query.split())} words), using text search")
                 relevant_messages = await self.mcp_server.search_messages(
                     query=query,
                     filters=filters,
                     limit=k_value
                 )
             
+            logger.info(f"[QAAgent] MCP server returned {len(relevant_messages)} relevant messages")
+            
+            # Check if this is a capability query that should return a system response
+            capability_keywords = ["what can you do", "capabilities", "capable", "features", "what is this bot", "how do i use", "what does", "main features", "what kind of tasks", "help"]
+            if any(keyword in query.lower() for keyword in capability_keywords):
+                logger.info(f"[QAAgent] Capability query detected: '{query}' - returning system response")
+                capability_response = self._generate_capability_response()
+                state["response"] = capability_response
+                state["analysis_results"] = {
+                    "query_type": "capability",
+                    "response_type": "system_info"
+                }
+                return state
+            
             if not relevant_messages:
+                logger.warning(f"[QAAgent] No relevant messages found for query: '{query}'")
                 state["response"] = f"❌ No relevant messages found for: {query}"
                 return state
             
@@ -149,6 +173,43 @@ class QAAgent(BaseAgent):
             state["response"] = f"❌ Error processing query: {str(e)}"
             state["errors"].append(str(e))
             return state
+    
+    def _generate_capability_response(self) -> str:
+        """Generate a response describing what the bot can do."""
+        return """🤖 **Discord Bot Capabilities**
+
+I'm an intelligent Discord bot with RAG (Retrieval-Augmented Generation) capabilities that can help you with various tasks:
+
+## 🔍 **Search & Information**
+- **Find specific messages** about topics, users, or content
+- **Search for users with experience** in specific fields (e.g., "find me users with experience in data protection")
+- **Look up recent discussions** and conversations
+- **Find shared resources** and links
+
+## 📊 **Analysis & Summaries**
+- **Generate weekly/monthly digests** of server activity
+- **Analyze channel discussions** and trends
+- **Provide statistics** on server engagement and activity
+- **Identify trending topics** and patterns
+
+## 🎯 **Specific Queries**
+- **User experience queries**: "Who knows about machine learning?"
+- **Content searches**: "Find messages about Python programming"
+- **Channel analysis**: "What are the key discussions in #general?"
+- **Time-based queries**: "What happened this week?"
+
+## 📚 **Resource Management**
+- **Track shared resources** and links
+- **Categorize content** by domain and quality
+- **Generate summaries** of shared materials
+
+## 🚀 **How to Use**
+- Ask specific questions: "Find me users with experience in cybersecurity"
+- Request summaries: "Give me a weekly digest"
+- Search content: "What was discussed about AI ethics?"
+- Get help: "What can you do?" (like this!)
+
+**Note**: I work with the actual Discord server data and can provide real-time information about conversations, users, and shared resources."""
     
     def _build_context(self, messages: List[Dict[str, Any]]) -> str:
         """Build context string from relevant messages."""

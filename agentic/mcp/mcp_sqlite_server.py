@@ -133,26 +133,37 @@ class MCPSQLiteServer:
     async def search_messages(self, query: str, filters: Optional[Dict] = None, limit: int = 10) -> List[Dict[str, Any]]:
         """Search messages using text search or natural language query."""
         try:
+            logger.info(f"[MCPServer] search_messages called with query: '{query}', filters: {filters}, limit: {limit}")
+            
             # Check if this is a natural language query
             query_lower = query.lower()
-            natural_language_keywords = ['reactions', 'recent', 'latest', 'count', 'show me', 'find me', 'users with', 'experience in', 'who has']
+            natural_language_keywords = ['reactions', 'recent', 'latest', 'count', 'show me', 'find me', 'users with', 'experience in', 'who has', 'what kind', 'tasks', 'capabilities', 'help', 'what can you']
+            
+            logger.info(f"[MCPServer] Natural language keywords: {natural_language_keywords}")
+            logger.info(f"[MCPServer] Query contains keywords: {[k for k in natural_language_keywords if k in query_lower]}")
             
             if any(keyword in query_lower for keyword in natural_language_keywords):
+                logger.info(f"[MCPServer] Using natural language translation for query: '{query}'")
                 # Use natural language translation
                 sql_query = await self._translate_to_sql(query)
+                logger.info(f"[MCPServer] Generated SQL: {sql_query}")
+                
                 # Override the LIMIT clause with the requested limit
                 sql_query = re.sub(r'LIMIT \d+', f'LIMIT {limit}', sql_query)
+                logger.info(f"[MCPServer] SQL after LIMIT override: {sql_query}")
+                
                 # Apply additional filters if provided
                 if filters and filters.get("author_bot") is False:
-                    # Bot filtering is already included in _translate_to_sql
+                    logger.info(f"[MCPServer] Bot filtering already included in _translate_to_sql")
                     pass
                 if filters and filters.get("channel_id"):
-                    # Add channel filter
+                    logger.info(f"[MCPServer] Adding channel_id filter: {filters['channel_id']}")
                     sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND channel_id = {filters['channel_id']}")
                 if filters and filters.get("channel_name"):
-                    # Add channel name filter
+                    logger.info(f"[MCPServer] Adding channel_name filter: '{filters['channel_name']}'")
                     sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND channel_name = '{filters['channel_name']}'")
                 if filters and filters.get("start_date") and filters.get("end_date"):
+                    logger.info(f"[MCPServer] Adding date range filter: {filters['start_date']} to {filters['end_date']}")
                     # Add date range filter for recent messages
                     start_date = filters["start_date"]
                     end_date = filters["end_date"]
@@ -163,13 +174,21 @@ class MCPSQLiteServer:
                         start_str = start_date.strftime("%Y-%m-%d")
                         end_str = end_date.strftime("%Y-%m-%d")
                         sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND timestamp >= '{start_str}' AND timestamp <= '{end_str}'")
+                
+                logger.info(f"[MCPServer] Final SQL with filters: {sql_query}")
             else:
+                logger.info(f"[MCPServer] Using text search for query: '{query}'")
                 # Use text search
                 sql_query = self._build_search_sql(query, filters, limit)
+                logger.info(f"[MCPServer] Text search SQL: {sql_query}")
             
-            return await self._execute_sql(sql_query)
+            logger.info(f"[MCPServer] Executing SQL query...")
+            results = await self._execute_sql(sql_query)
+            logger.info(f"[MCPServer] Query returned {len(results)} results")
+            
+            return results
         except Exception as e:
-            logger.error(f"Error searching messages: {e}")
+            logger.error(f"[MCPServer] Error searching messages: {e}")
             return []
     
     async def get_schema_info(self) -> Dict[str, Any]:
@@ -251,6 +270,12 @@ class MCPSQLiteServer:
                       AND (channel_name LIKE '%introduction%' OR channel_name LIKE '%find%' OR channel_name LIKE '%onboarding%' OR channel_name LIKE '%👋%' OR channel_name LIKE '%🤝%')
                       AND (content LIKE '%I have%' OR content LIKE '%I am%' OR content LIKE '%I work%' OR content LIKE '%my experience%' OR content LIKE '%certified%' OR content LIKE '%years of experience%' OR content LIKE '%Background%' OR content LIKE '%Background:%'){skill_filter}
                       ORDER BY timestamp_unix DESC LIMIT 200"""
+        elif any(keyword in query_lower for keyword in ["what kind", "tasks", "capabilities", "help", "what can you"]):
+            # Handle capability and help queries - look for system information and bot descriptions
+            # This should return a system response, not search messages
+            logger.info(f"[MCPServer] Capability query detected: '{query}' - should return system response")
+            # For now, return a query that will find no results to trigger system response handling
+            return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} AND 1=0 ORDER BY timestamp_unix DESC LIMIT 0"
         else:
             # Default query
             return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 100"
