@@ -932,23 +932,25 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS resources (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title TEXT,
-                description TEXT,
-                date TEXT,
+                url TEXT UNIQUE NOT NULL,
+                domain TEXT NOT NULL,
+                category TEXT NOT NULL,
+                quality_score REAL NOT NULL,
+                channel_name TEXT,
                 author TEXT,
-                channel TEXT,
-                tag TEXT NOT NULL,
-                resource_url TEXT UNIQUE NOT NULL,
-                discord_url TEXT,
+                timestamp TEXT,
+                jump_url TEXT,
+                description TEXT,
+                title TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
         # Create indexes for fast searching
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tag ON resources(tag)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_category ON resources(category)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_author ON resources(author)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_channel ON resources(channel)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_date ON resources(date)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_channel_name ON resources(channel_name)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON resources(timestamp)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_created_at ON resources(created_at)")
         conn.commit()
 
@@ -981,8 +983,8 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                     # Upsert using ON CONFLICT(url) DO UPDATE (old table structure)
                     cursor.execute(
                         """
-                        INSERT INTO resources (url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description, updated_at)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                        INSERT INTO resources (url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description, title, updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
                         ON CONFLICT(url) DO UPDATE SET
                             domain=excluded.domain,
                             category=excluded.category,
@@ -992,6 +994,7 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                             timestamp=excluded.timestamp,
                             jump_url=excluded.jump_url,
                             description=excluded.description,
+                            title=excluded.title,
                             updated_at=CURRENT_TIMESTAMP
                         """,
                         (
@@ -1004,6 +1007,7 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                             resource.get('timestamp'),
                             resource.get('jump_url'),
                             resource.get('description'),
+                            title,
                         )
                     )
                     if cursor.rowcount == 1:
@@ -1063,21 +1067,26 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
             return {"resources": []}
         
         try:
+            print(f"🔍 Connecting to database: {db_path}")
             with sqlite3.connect(db_path) as conn:
                 conn.row_factory = sqlite3.Row
+                print("🔍 Executing query...")
                 cursor = conn.execute("""
-                    SELECT id, url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description
+                    SELECT id, url, domain, category, quality_score, channel_name, author, timestamp, jump_url, description, title
                     FROM resources 
                     ORDER BY id ASC
                 """)
                 
+                print("🔍 Fetching rows...")
+                rows = cursor.fetchall()
+                print(f"🔍 Found {len(rows)} rows to process")
+                
                 resources = []
-                for i, row in enumerate(cursor, 1):  # Start enumeration from 1
-                    # Generate title from URL or description
-                    title = self._generate_title_from_url(row['url'], row['description'])
+                for i, row in enumerate(rows, 1):  # Start enumeration from 1
+                    print(f"🔍 Processing row {i}/{len(rows)}")
                     
-                    # Map old category to new tag
-                    tag = self._map_category_to_tag(row['category'])
+                    # Use category directly
+                    category = row['category']
                     
                     # Fix channel name encoding - just use as is since it's already correct
                     channel_name = row['channel_name'] or ''
@@ -1089,6 +1098,9 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                     else:
                         discord_url = None
                     
+                    # Use the stored title from the database
+                    title = row['title'] or self._generate_simple_title_fast(row['url'])
+                    
                     resource = {
                         "id": i,  # Use incremental ID starting from 1
                         "title": title,
@@ -1096,12 +1108,13 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                         "date": row['timestamp'],
                         "author": row['author'],
                         "channel": channel_name,
-                        "tag": tag,
+                        "tag": category,
                         "resource_url": row['url'],
                         "discord_url": discord_url
                     }
                     resources.append(resource)
                 
+                print("🔍 Export complete, returning data")
                 return {
                     "export_date": datetime.now().isoformat(),
                     "total_resources": len(resources),
@@ -1110,7 +1123,30 @@ Respond with ONLY "PRIVATE" or "PUBLIC" based on your analysis.
                 
         except Exception as e:
             print(f"❌ Error exporting from DB: {e}")
+            import traceback
+            traceback.print_exc()
             return {"resources": []}
+    
+    def _generate_simple_title_fast(self, url: str) -> str:
+        """Generate a simple title from URL without LLM calls - for fast export."""
+        try:
+            parsed = urlparse(url)
+            path_parts = [p for p in parsed.path.split('/') if p]
+            
+            if 'arxiv.org' in url and len(path_parts) >= 2:
+                return f"arXiv Paper: {path_parts[-1]}"
+            elif 'github.com' in url and len(path_parts) >= 2:
+                return f"GitHub: {'/'.join(path_parts[:2])}"
+            elif 'huggingface.co' in url and len(path_parts) >= 2:
+                return f"Hugging Face: {'/'.join(path_parts[:2])}"
+            elif 'youtube.com' in url or 'youtu.be' in url:
+                return "YouTube Video"
+            elif path_parts:
+                return path_parts[-1].replace('-', ' ').replace('_', ' ').title()
+        except:
+            pass
+        
+        return f"Resource from {urlparse(url).netloc}"
     
     def _generate_title_from_url(self, url: str, description: str) -> str:
         """Generate a title from URL or description for export using LLM when possible."""
@@ -1400,36 +1436,7 @@ Title:"""
         
         return "YouTube Video"
     
-    def _map_category_to_tag(self, old_category: str) -> str:
-        """Map old category names to new tag names."""
-        category_mapping = {
-            'Research Papers': 'Paper',
-            'AI Research': 'Paper',
-            'AI Resources': 'Tool',
-            'AI Models': 'Tool',
-            'Code Repositories': 'Tool',
-            'Technical Q&A': 'Tutorial',
-            'ML Documentation': 'Tutorial',
-            'AI Education': 'Tutorial',
-            'Online Courses': 'Tutorial',
-            'Educational Videos': 'Tutorial',
-            'Articles': 'News/Article',
-            'Tech News': 'News/Article',
-            'News & Analysis': 'News/Article',
-            'Business News': 'News/Article',
-            'Academic News': 'News/Article',
-            'Documents': 'Tutorial',
-            'Documentation': 'Tutorial',
-            'Shared Documents': 'Tutorial',
-            'AI/GPU Technology': 'News/Article',
-            'AI Tools': 'Tool',
-            'Tech Documentation': 'Tutorial',
-            'Data Science': 'Tool',
-            'Research Visualization': 'Paper',
-            'Research': 'Paper'
-        }
-        
-        return category_mapping.get(old_category, 'News/Article')
+
 
 def main():
     parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
