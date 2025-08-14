@@ -199,51 +199,24 @@ class DigestAgent(BaseAgent):
                 logger.warning(f"[DigestAgent] K-value calculation failed, using fallback: {e}")
                 max_messages = self.period_limits.get(period, self.base_max_messages)
             
-            # Use timestamp_unix (float) for ChromaDB filtering
-            start_ts = start_date.timestamp() if start_date else None
-            end_ts = end_date.timestamp() if end_date else None
-            filters_and = []
+            # Build filters for MCP server
+            filters = {"author_bot": False}
             
-            # Add timestamp filters only if dates are provided
-            if start_ts is not None:
-                filters_and.append({"timestamp_unix": {"$gte": start_ts}})
-            if end_ts is not None:
-                filters_and.append({"timestamp_unix": {"$lte": end_ts}})
-            
-            # Always include channel/forum filter if channel_id is provided
+            # Add channel filter if provided
             if channel_id:
-                filters_and.append({"$or": [
-                    {"channel_id": channel_id},
-                    {"forum_channel_id": channel_id}
-                ]})
+                filters["channel_id"] = channel_id
             elif channel:
-                # For forum channels, check both channel_name and forum_channel_name
-                if "forum" in channel.lower():
-                    filters_and.append({"$or": [
-                        {"channel_name": channel},
-                        {"forum_channel_name": channel}
-                    ]})
-                else:
-                    filters_and.append({"channel_name": channel})
+                filters["channel_name"] = channel
             
-            # Filter out bot messages for digest queries
-            filters_and.append({"author_bot": False})
+            # Add date filters if provided
+            if start_date and end_date:
+                filters["start_date"] = start_date
+                filters["end_date"] = end_date
             
             # For weekly digests, ensure we get a good mix of content
             if period == "week":
                 # Increase the limit for weekly digests to get more comprehensive coverage
                 max_messages = min(max_messages * 2, 500)
-            
-            # Construct final filter
-            if len(filters_and) == 0:
-                # No filters - get all messages
-                filters = {}
-            elif len(filters_and) == 1:
-                # Single filter
-                filters = filters_and[0]
-            else:
-                # Multiple filters - use $and
-                filters = {"$and": filters_and}
                 
             logger.info(f"[DigestAgent] FINAL filter_search filters: {filters}")
             
@@ -255,8 +228,14 @@ class DigestAgent(BaseAgent):
                 # Ensure MCP server is ready
                 await self._ensure_mcp_server_ready()
                 
-                # Use search_messages with filters to ensure proper bot filtering
-                query = f"messages from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
+                # Use search_messages with natural language queries that the MCP server understands
+                if start_date and end_date:
+                    # For date-specific queries, use "recent messages" and let the filters handle the date range
+                    query = "recent messages"
+                else:
+                    # For all-time queries, use "recent messages" to get a good sample
+                    query = "recent messages"
+                
                 results = await self.mcp_server.search_messages(query, filters, max_messages)
                 messages = self._process_results(results)
             

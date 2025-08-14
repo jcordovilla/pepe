@@ -149,6 +149,20 @@ class MCPSQLiteServer:
                 if filters and filters.get("channel_id"):
                     # Add channel filter
                     sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND channel_id = {filters['channel_id']}")
+                if filters and filters.get("channel_name"):
+                    # Add channel name filter
+                    sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND channel_name = '{filters['channel_name']}'")
+                if filters and filters.get("start_date") and filters.get("end_date"):
+                    # Add date range filter for recent messages
+                    start_date = filters["start_date"]
+                    end_date = filters["end_date"]
+                    if isinstance(start_date, str):
+                        sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND timestamp >= '{start_date}' AND timestamp <= '{end_date}'")
+                    else:
+                        # Handle datetime objects
+                        start_str = start_date.strftime("%Y-%m-%d")
+                        end_str = end_date.strftime("%Y-%m-%d")
+                        sql_query = sql_query.replace("WHERE 1=1", f"WHERE 1=1 AND timestamp >= '{start_str}' AND timestamp <= '{end_str}'")
             else:
                 # Use text search
                 sql_query = self._build_search_sql(query, filters, limit)
@@ -201,6 +215,7 @@ class MCPSQLiteServer:
             # Filter for messages with reactions
             return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} AND reactions IS NOT NULL AND reactions != '[]' AND reactions != 'null' ORDER BY timestamp_unix DESC LIMIT 100"
         elif "recent" in query_lower or "latest" in query_lower:
+            # For recent messages, we'll add date filtering in the search_messages method
             return f"SELECT *, author_display_name, author_username FROM messages WHERE 1=1{bot_filter} ORDER BY timestamp_unix DESC LIMIT 100"
         elif "count" in query_lower:
             return f"SELECT COUNT(*) as count FROM messages WHERE 1=1{bot_filter}"
