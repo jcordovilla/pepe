@@ -5,6 +5,7 @@ Centralized service management and dependency injection.
 """
 
 import logging
+import os
 from typing import Dict, Any, Optional
 from pathlib import Path
 
@@ -49,63 +50,99 @@ class ServiceContainer:
         logger.info(f"MCP SQLite config: {mcp_sqlite_config}")
         logger.info(f"MCP SQLite enabled: {mcp_sqlite_config.get('enabled', False)}")
         
+        # Initialize services synchronously (MCP server will be started lazily)
+        self._initialize_services_sync()
+        
         logger.info("Service container initialized")
     
+    def _initialize_services_sync(self):
+        """Initialize services synchronously (MCP server will be started lazily)."""
+        # Initialize MCP server without starting it
+        mcp_sqlite_config = self.config.get("mcp_sqlite", {})
+        
+        if mcp_sqlite_config.get("enabled", False):
+            logger.info("Using MCP SQLite server (will start lazily)")
+            from ..mcp.mcp_sqlite_server import MCPSQLiteServer
+            self._services["mcp_server"] = MCPSQLiteServer(mcp_sqlite_config)
+        else:
+            logger.info("Using legacy MCP server")
+            from ..mcp.mcp_server import MCPServer
+            mcp_config = self.config.get("mcp", {})
+            self._services["mcp_server"] = MCPServer(mcp_config)
+        
+        # Initialize memory
+        memory_config = self.config.get("data", {}).get("memory_config", {})
+        from ..memory.conversation_memory import ConversationMemory
+        self._services["memory"] = ConversationMemory(memory_config)
+        
+        # Initialize cache
+        cache_config = self.config.get("cache", {})
+        from ..cache.smart_cache import SmartCache
+        self._services["cache"] = SmartCache(cache_config)
+        
+        # Initialize LLM client
+        llm_config = self.config.get("llm", {})
+        from ..services.llm_client import UnifiedLLMClient
+        self._services["llm_client"] = UnifiedLLMClient(llm_config)
+        
+        # Initialize Discord service (requires cache and memory)
+        discord_config = self.config.get("discord", {})
+        from ..services.discord_service import DiscordMessageService
+        # We'll initialize this after cache and memory are available
+        # For now, just store the config
+        self._discord_config = discord_config
+        
+        # Initialize sync service
+        sync_config = self.config.get("sync", {})
+        from ..services.sync_service import DataSynchronizationService
+        self._services["sync_service"] = DataSynchronizationService(sync_config)
+        
+        # Initialize analytics services
+        analytics_config = self.config.get("analytics", {})
+        from ..analytics.query_answer_repository import QueryAnswerRepository
+        from ..analytics.performance_monitor import PerformanceMonitor
+        from ..analytics.validation_system import ValidationSystem
+        from ..analytics.analytics_dashboard import AnalyticsDashboard
+        self._services["query_repository"] = QueryAnswerRepository(analytics_config)
+        self._services["performance_monitor"] = PerformanceMonitor(analytics_config)
+        self._services["validation_system"] = ValidationSystem(analytics_config)
+        self._services["analytics_dashboard"] = AnalyticsDashboard(analytics_config)
+        
+        # Initialize Discord service with dependencies
+        discord_token = self._discord_config.get("token") or os.getenv("DISCORD_TOKEN")
+        if discord_token:
+            self._services["discord_service"] = DiscordMessageService(
+                token=discord_token,
+                cache=self._services["cache"],
+                memory=self._services["memory"]
+            )
+        else:
+            logger.warning("Discord token not found, Discord service not initialized")
+        
+        # Set up service dependencies
+        self._setup_service_dependencies()
+        
+        self._initialized = True
+        logger.info("Services initialized synchronously")
+    
     async def initialize_services(self):
-        """Initialize all shared services."""
-        if self._initialized:
-            return
+        """Start async services (like MCP server)."""
+        if not self._initialized:
+            logger.warning("Services not initialized synchronously, initializing now")
+            self._initialize_services_sync()
         
         try:
-            logger.info("Initializing shared services...")
+            # Start the MCP server if it's enabled and not already started
+            mcp_server = self._services.get("mcp_server")
+            if mcp_server and hasattr(mcp_server, 'start') and not getattr(mcp_server, '_started', False):
+                logger.info("Starting MCP server...")
+                await mcp_server.start()
+                logger.info("MCP server started successfully")
             
-            # Initialize MCP server (replaces vector store)
-            mcp_config = {
-                "sqlite": {
-                    "db_path": "data/discord_messages.db"
-                },
-                "llm": self.config.get("llm", {})
-            }
-            
-            # Check if MCP SQLite is enabled
-            mcp_sqlite_config = self.config.get("mcp_sqlite", {})
-            
-            if mcp_sqlite_config.get("enabled", False):
-                logger.info("Using MCP SQLite server")
-                self._services["mcp_server"] = MCPSQLiteServer(mcp_sqlite_config)
-                # Start the MCP SQLite server
-                await self._services["mcp_server"].start()
-            else:
-                logger.info("Using legacy MCP server")
-                self._services["mcp_server"] = MCPServer(mcp_config)
-            
-            # Initialize memory
-            memory_config = self.config.get("data", {}).get("memory_config", {})
-            self._services["memory"] = ConversationMemory(memory_config)
-            
-            # Initialize cache
-            cache_config = self.config.get("data", {}).get("cache_config", {})
-            self._services["cache"] = SmartCache(cache_config)
-            
-            # Initialize LLM client
-            llm_config = self.config.get("llm", {})
-            self._services["llm_client"] = UnifiedLLMClient(llm_config)
-            
-            # Initialize analytics services
-            analytics_config = self.config.get("analytics", {})
-            self._services["query_repository"] = QueryAnswerRepository(analytics_config)
-            self._services["performance_monitor"] = PerformanceMonitor(analytics_config)
-            self._services["validation_system"] = ValidationSystem(analytics_config)
-            self._services["analytics_dashboard"] = AnalyticsDashboard(analytics_config)
-            
-            # Set up service dependencies
-            self._setup_service_dependencies()
-            
-            self._initialized = True
-            logger.info("All shared services initialized successfully")
+            logger.info("Async services initialized successfully")
             
         except Exception as e:
-            logger.error(f"Failed to initialize services: {e}")
+            logger.error(f"Failed to start async services: {e}")
             raise
     
     def _setup_service_dependencies(self):

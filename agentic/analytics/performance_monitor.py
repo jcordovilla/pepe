@@ -84,7 +84,7 @@ class PerformanceMonitor:
     - Integration with query repository
     """
     
-    def __init__(self):
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
         """Initialize performance monitor"""
         self.query_repository = None
         self.mcp_sqlite = None
@@ -92,6 +92,18 @@ class PerformanceMonitor:
         self.start_time = time.time()
         self.metrics = defaultdict(list)
         self.performance_data = {}
+        
+        # Initialize missing attributes
+        self.monitoring_active = False
+        self.monitoring_enabled = config.get('enabled', True) if config else True
+        self.monitoring_thread = None
+        self.monitoring_interval = config.get('monitoring_interval', 30) if config else 30
+        self.alert_callbacks = []
+        self.metrics_history = []
+        self.max_history_size = config.get('max_history_size', 1000) if config else 1000
+        self.alerts_history = []
+        self.alert_thresholds = self._default_thresholds()
+        self.last_metrics = None
     
     def _default_thresholds(self) -> Dict[str, Dict[str, float]]:
         """Default performance thresholds"""

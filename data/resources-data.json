@@ -1,6 +1,6 @@
 {
-  "export_date": "2025-08-15T00:43:07.609636",
-  "total_resources": 154,
+  "export_date": "2025-09-02T17:09:40.983451",
+  "total_resources": 170,
   "resources": [
     {
       "id": 1,
@@ -1695,6 +1695,182 @@
       "tag": "Tech News",
       "resource_url": "https://techcrunch.com/2025/07/22/21-year-old-mit-dropouts-raise-32m-at-300m-valuation-led-by-insight/",
       "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1397645073683841054"
+    },
+    {
+      "id": 155,
+      "title": "Eletrobras Partners C3 Ai Modernize Brazils Power Grid 2025 08 18",
+      "description": "Resource from www.reuters.com: business/energy",
+      "date": "2025-08-18",
+      "author": "Shabana Islam",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/energy/eletrobras-partners-c3-ai-modernize-brazils-power-grid-2025-08-18/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1407137375628427334"
+    },
+    {
+      "id": 156,
+      "title": "11649438 Prototype Ai Powered Apps With Claude Artifacts",
+      "description": "Resource from support.anthropic.com: en/articles",
+      "date": "2025-08-19",
+      "author": "Michelle Rhee  Los Angeles GMT-7",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tool",
+      "resource_url": "https://support.anthropic.com/en/articles/11649438-prototype-ai-powered-apps-with-claude-artifacts",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1407374414038962288"
+    },
+    {
+      "id": 157,
+      "title": "Goodbye Api Keys Hello Local Llms How I Cut Costs By Running Llm Models On My M3 Macbook A3074E24Fee5",
+      "description": "Resource from medium.com: @lukekerbs/goodbye-api-keys-hello-local-llms-how-i-cut-costs-by-running-llm-models-on-my-m3-macbook-a3074e24fee5",
+      "date": "2025-08-19",
+      "author": "Shabana Islam",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "News/Article",
+      "resource_url": "https://medium.com/@lukekerbs/goodbye-api-keys-hello-local-llms-how-i-cut-costs-by-running-llm-models-on-my-m3-macbook-a3074e24fee5",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1407407984761507981"
+    },
+    {
+      "id": 158,
+      "title": "Fine Tuning Llms 3 Practical Approaches 888Cb4E50054",
+      "description": "Resource from blog.gopenai.com: fine-tuning-llms-3-practical-approaches-888cb4e50054",
+      "date": "2025-08-19",
+      "author": "Eduardo Fadanelli",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tool",
+      "resource_url": "https://blog.gopenai.com/fine-tuning-llms-3-practical-approaches-888cb4e50054",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1407467886695551046"
+    },
+    {
+      "id": 159,
+      "title": "Watch",
+      "description": "Educational video content from YouTube",
+      "date": "2025-08-20",
+      "author": "Allen Brodjeski",
+      "channel": "📚-ai-philosophy-ethics",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=9ILrnsRoiJ8&pp=ygUXYmlsbCBtYWhlciBhaSBpbnRlcnZpZXc%3D",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353448986408779877/1407528930440904917"
+    },
+    {
+      "id": 160,
+      "title": "Ai Report 2025.Pdf",
+      "description": "PDF document: ai_report_2025.pdf",
+      "date": "2025-08-20",
+      "author": "Lawrence Loeb",
+      "channel": "🏘-general-chat",
+      "tag": "Tutorial",
+      "resource_url": "https://nanda.media.mit.edu/ai_report_2025.pdf",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1407578315471982715"
+    },
+    {
+      "id": 161,
+      "title": "Meta Ai Chat Children",
+      "description": "Resource from www.theguardian.com: technology/2025",
+      "date": "2025-08-20",
+      "author": "Marie",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/technology/2025/aug/15/meta-ai-chat-children",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1407799002820378726"
+    },
+    {
+      "id": 162,
+      "title": "Openai Chatgpt Users Mourn Gpt 5 4O",
+      "description": "Tech news article from www.theverge.com",
+      "date": "2025-08-21",
+      "author": "Melinda Melcher",
+      "channel": "🧢buddy-group4",
+      "tag": "News/Article",
+      "resource_url": "https://www.theverge.com/news/756980/openai-chatgpt-users-mourn-gpt-5-4o",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1366389688620945408/1408187199333335070"
+    },
+    {
+      "id": 163,
+      "title": "Ai Report 2025.Pdf",
+      "description": "PDF document: ai_report_2025.pdf",
+      "date": "2025-08-26",
+      "author": "Jasmina_Ciconkova",
+      "channel": "💠buddy-group3",
+      "tag": "Tutorial",
+      "resource_url": "https://www.artificialintelligence-news.com/wp-content/uploads/2025/08/ai_report_2025.pdf",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1366389616210350101/1409771373089394729"
+    },
+    {
+      "id": 164,
+      "title": "Prompt Engineering In 2025 A Guide To Crafting Powerful Chatgpt Prompts 549E9Ebb3E48",
+      "description": "In August 2nergy's insightful article from Medium titled \"Prompt Engineering in 2025,\" published in August 2025, the author explores how most AI frustration stems not from technology but poor prompting. The piece serves as a comprehensive guide for creating effective ChatGPT-like interactions by ...",
+      "date": "2025-08-26",
+      "author": "Carol Choi",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "News/Article",
+      "resource_url": "https://medium.com/@cpjrinfoandnews/prompt-engineering-in-2025-a-guide-to-crafting-powerful-chatgpt-prompts-549e9ebb3e48",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1409898445220610190"
+    },
+    {
+      "id": 165,
+      "title": "V0.1 State Of Ai In Business 2025 Report.Pdf",
+      "description": "The report titled \"State of AI in Business for 2025\" by MIT, as interpreted by VentureBeat, suggests that while headlines often highlight failures related to artificial intelligence (AI), there is a booming 'shadow economy' driven by misunderstood or unnoticed aspects of AI. The document likely e...",
+      "date": "2025-08-26",
+      "author": "Bisera Ferrero",
+      "channel": "📄papers-and-publications",
+      "tag": "Tutorial",
+      "resource_url": "https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1360643112657223890/1410022338208206948"
+    },
+    {
+      "id": 166,
+      "title": "Ai Alignment Is A Battle The Future Of Ai Will Be Decided By Clashing Values F7612D1Db840",
+      "description": "In \"AI Alignment Is a Battle,\" Atsushi Ito discusses how differing human values will shape the future development and alignment of artificial intelligence on August 19, 2curse-free medium in 2025. The article emphasizes that as we create increasingly advanced AI systems capable of making autonomo...",
+      "date": "2025-08-27",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://medium.com/@poola.vii/ai-alignment-is-a-battle-the-future-of-ai-will-be-decided-by-clashing-values-f7612d1db840",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1410172021295415347"
+    },
+    {
+      "id": 167,
+      "title": "Watch",
+      "description": "This YouTube video provides an overview of Google's AI image editing tool, \"Nano Banana,\" officially known as Gemini 2.5 Flash Image, which is integrated into the company’self-developed app called Gemini. The content likely explores how this model works and its capabilities in altering images wit...",
+      "date": "2025-08-28",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🗞-genai-news",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=X595vnQ3-V8&ab_channel=PromptEngineering)",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1410554237271933090"
+    },
+    {
+      "id": 168,
+      "title": "Artificial Intelligence Openai Tiktok",
+      "description": "Resource from www.theguardian.com: technology/2025",
+      "date": "2025-08-28",
+      "author": "Melinda Melcher",
+      "channel": "📚-ai-philosophy-ethics",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/technology/2025/aug/25/artificial-intelligence-openai-tiktok",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353448986408779877/1410570941523689474"
+    },
+    {
+      "id": 169,
+      "title": "B2A76C6F6992465C09A6F2Fce282F6C0Cea8C200.Pdf",
+      "description": "PDF document: b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf",
+      "date": "2025-08-31",
+      "author": "Jparkinson",
+      "channel": "🏘-general-chat",
+      "tag": "Tool",
+      "resource_url": "https://www-cdn.anthropic.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1411772956283244605"
+    },
+    {
+      "id": 170,
+      "title": "Doctors Ai Stethoscope Heart Disease London",
+      "description": "Resource from www.theguardian.com: technology/2025",
+      "date": "2025-09-01",
+      "author": "Rodrigo Baeza",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/technology/2025/aug/30/doctors-ai-stethoscope-heart-disease-london",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1411907318953807963"
     }
   ]
 }
