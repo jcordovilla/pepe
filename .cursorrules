@@ -1,0 +1,129 @@
+# Cursor Rules for Discord Bot Agentic Project
+
+## Project Overview
+This is a Discord bot with an agentic RAG (Retrieval-Augmented Generation) system that provides intelligent search, analysis, and summarization of Discord server conversations. The system uses local LLM models, ChromaDB for vector storage, and a multi-agent architecture.
+
+## General instructions
+- Do not commit or push to github unless explicitly instructed by the user
+- Avoid obvious, valueless expressions such as "i can see the issue". Go straight to the point and only write relevant information for the user
+- When completing a task, do not write long concluding remarks to describe what has been done. Only write very concise summaries of what has been done.
+
+## Core Technical Stack
+- **Python 3.11** with Poetry for dependency management
+- **Local LLM Models**: Llama models (`llama3.1:8b`, `phi3:mini`) via Ollama
+- **Embeddings**: `msmarco-distilbert-base-v4` (Sentence Transformers) - optimized for Discord content
+- **Vector Store**: ChromaDB 0.4.15 for persistent storage
+- **Database**: SQLite for conversation metadata and raw Discord messages
+- **Framework**: LangGraph for agent orchestration
+- **Discord Integration**: discord.py library
+
+## Environment Configuration
+- Use environment variables for ALL configuration - never hardcode values
+- The system should read from `.env` file for model selection, API keys, etc.
+- Remove all OpenAI dependencies - use only local models
+- Configure all agents to use the LLM model specified in the project's .env file
+
+## Data Types and Schema
+- **Timestamps**: Always use float values for `timestamp_unix` in ChromaDB filters (not integers)
+- **Bot Detection**: Use `author_bot` field (boolean) to filter out bot messages
+- **Metadata**: Store in `embedding_metadata` table with proper data types (int_value, float_value, string_value, bool_value)
+
+## Bot Message Filtering
+- **Always filter out bot messages** in digest, analysis, and trend agents unless explicitly asking about bot capabilities
+- Use filter syntax: `{"author_bot": False}` (not `{"author_bot": {"$ne": True}}`)
+- Bot status is captured in `raw_data` JSON as `message.author.bot` and stored in ChromaDB
+
+## Code Quality Standards
+- **Root Cause Analysis**: Always investigate the root cause of issues, don't make patchwork quick fixes
+- **Debugging**: Add extensive logging with `logger.info` and `logger.error` for tracing execution
+- **Error Handling**: Implement proper error handling and graceful degradation
+- **Type Safety**: Ensure proper data type handling, especially for ChromaDB operations
+
+## Performance and User Experience
+- **Progress Display**: Show color-coded progress output live as processes run
+- **Incremental Processing**: Run processes incrementally by default unless explicitly commanded otherwise
+- **Resource Management**: Be mindful of API token consumption and processing time
+- **User-Friendly Output**: Format digest responses with rich Discord markdown and structured content
+
+## Digest Agent Specific Requirements
+- **Structured Output**: Use rich Discord markdown formatting
+- **Resource Information**: Include timestamps and jump URLs for all resources
+- **Summary Generation**: Ensure proper summary section generation with adequate token limits
+- **Header Formatting**: Include generation timestamp in headers
+
+## Testing and Validation
+- **Test Suite**: Use exactly the same processes as the bot and CLI (not Discord API)
+- **Real Data**: Use real data from SQLite database and vector store
+- **Quality Validation**: Use Llama model for AI-based quality checks when appropriate
+- **Cleanup**: Always delete temporary test files after completion
+
+## Git and Version Control
+- **No Auto-Commit**: Don't commit and push code until explicitly instructed
+- **Version History**: Use `git log`, `git show`, `git reset --hard` for debugging
+- **Export Files**: Only push the export JSON file to GitHub, not other JSON files
+
+## Resource Management
+- **Resource Detection**: Single on-demand process invoked from CLI, not real-time
+- **Jump URLs**: Ensure all resources include proper jump URLs for message linking
+- **Quality Filtering**: Focus on high-quality external resources shared in Discord
+
+## Process Management
+- **Poetry Environment**: Always run scripts within the Poetry virtual environment
+- **Background Processes**: Kill all bot processes when needed for clean restarts
+- **Permission Requests**: Ask for permission before running full processes (fetching, indexing) as they consume resources
+
+## Documentation Preferences
+- **No Auto-Documentation**: Don't create new documentation unless explicitly asked
+- **Focus on Code**: Prioritize working code over documentation
+- **Existing Docs**: Reference existing documentation in `docs/` folder
+
+## User Communication
+- **Display Names**: Always output authors' display names rather than usernames when referring to users
+- **Progress Feedback**: Provide clear progress indicators for long-running operations
+- **Error Reporting**: Share detailed error logs when troubleshooting
+
+## ChromaDB Specific
+- **Schema Compatibility**: Ensure compatibility with ChromaDB 0.4.15 schema
+- **Metadata Handling**: Use proper metadata table structure for filtering
+- **Collection Operations**: Handle both `collection.query` (nested arrays) and `collection.get` (flat arrays) result formats
+- **Where Clauses**: Build proper where clauses for complex filtering operations
+
+## Memory and Caching
+- **Smart Caching**: Use memory cache (1000 items, 300s TTL) and file cache appropriately
+- **Conversation Memory**: Maintain conversation context across interactions
+- **Cache Bypass**: Bypass cache for digest queries to ensure fresh results
+
+## Error Recovery
+- **Graceful Degradation**: Handle errors without crashing the entire system
+- **Fallback Mechanisms**: Provide fallback options when primary methods fail
+- **Logging**: Log all errors with sufficient context for debugging
+
+## Security and Privacy
+- **No Hardcoded Secrets**: Never hardcode API keys or sensitive information
+- **Environment Variables**: Use .env file for all configuration
+- **Data Privacy**: Respect Discord data privacy and usage guidelines
+
+## Performance Optimization
+- **Efficient Queries**: Optimize database and vector store queries
+- **Batch Processing**: Use batch operations where appropriate
+- **Memory Management**: Monitor and optimize memory usage
+- **Response Time**: Aim for sub-4-second response times for typical queries
+
+## Code Organization
+- **Modular Design**: Maintain clean separation between agents, services, and interfaces
+- **Configuration Centralization**: Use `modernized_config.py` for all system configuration
+- **Service Container**: Use dependency injection through service container
+- **Interface Abstraction**: Keep Discord interface separate from core logic
+
+## Debugging Workflow
+1. **Identify Root Cause**: Don't just fix symptoms
+2. **Add Logging**: Use strategic logging to trace execution
+3. **Test Incrementally**: Test changes in small increments
+4. **Version Control**: Use git to track and revert problematic changes
+5. **User Feedback**: Incorporate user feedback to guide debugging direction
+
+## Quality Assurance
+- **Self-Check Validation**: Use self-check agent for quality validation
+- **Performance Monitoring**: Track query performance and response times
+- **Analytics**: Record query-answer pairs for analysis
+- **Validation Scoring**: Use factuality and relevance scoring for responses 

@@ -1,0 +1,392 @@
+{
+  "test_results": {
+    "timestamp": "2025-07-06T17:57:41.508265",
+    "total_tests": 7,
+    "passed_tests": 0,
+    "failed_tests": 7,
+    "test_details": [
+      {
+        "test_name": "Academic Research Paper",
+        "passed": false,
+        "failure_reason": "Expected 1 resources, got 3",
+        "resources_detected": 3,
+        "detected_types": [
+          "preprint",
+          "model",
+          "model"
+        ],
+        "quality_score": 1.0,
+        "individual_quality_scores": [
+          0.75,
+          0.6,
+          0.6
+        ],
+        "analysis": {
+          "message_id": "test_001",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [
+            {
+              "url": "https://arxiv.org/abs/1706.03762",
+              "domain": "arxiv.org",
+              "type": "preprint",
+              "title": "Check out this groundbreaking research on transformer architecture:",
+              "quality_score": 0.75,
+              "validation_status": "healthy",
+              "message_id": "test_001",
+              "timestamp": "2025-01-15T10:00:00Z",
+              "author": "researcher_ai"
+            }
+          ],
+          "attachments_processed": [],
+          "classifications": [
+            "research",
+            "educational",
+            "resource_sharing"
+          ],
+          "quality_score": 1.0,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='9c02c848efe332c362809e24ae10c9da', type=<ResourceType.PREPRINT: 'preprint'>, url='https://arxiv.org/abs/1706.03762', domain='arxiv.org', title='Check out this groundbreaking research on transformer architecture:', description=None, quality_score=0.75, quality_level=<ResourceQuality.HIGH: 'high'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 41, 508297), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 41, 508297), message_id='test_001', channel_id='research-papers', author='researcher_ai', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='9c02c848efe332c362809e24ae10c9da', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=0.048612750000000204, http_status=200, content_length=49997, content_type='text/html; charset=utf-8', last_modified=datetime.datetime(2023, 8, 3, 0, 7, 25, tzinfo=datetime.timezone.utc), title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 557064))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e30f03056743ff2de05e4c85ed4b802', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='transformer', description='AI model: transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 41, 508334), updated_at=None, last_checked=None, message_id='test_001', channel_id='research-papers', author='researcher_ai', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e30f03056743ff2de05e4c85ed4b802', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=4.9579999998883295e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508731))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e61eec05c1ec171f5d1464186e543a8', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='Transformer', description='AI model: Transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 41, 508343), updated_at=None, last_checked=None, message_id='test_001', channel_id='research-papers', author='researcher_ai', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e61eec05c1ec171f5d1464186e543a8', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=3.0829999999593127e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508973))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "Code Repository Share",
+        "passed": false,
+        "failure_reason": "Expected 2 resources, got 4",
+        "resources_detected": 4,
+        "detected_types": [
+          "code_repository",
+          "code_snippet",
+          "code_snippet",
+          "model"
+        ],
+        "quality_score": 1.0,
+        "individual_quality_scores": [
+          0.95,
+          0.35,
+          0.35,
+          0.6
+        ],
+        "analysis": {
+          "message_id": "test_002",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [
+            {
+              "code": "```python\nclass MultiHeadAttention(nn.Module):\n    def __init__(self, d_model, n_heads):\n        sup...",
+              "language": "python",
+              "quality_score": 0.35,
+              "validation_status": "healthy",
+              "message_id": "test_002",
+              "author": "ml_engineer"
+            },
+            {
+              "code": "\n    def __init__(self, d_model, n_heads):\n        super().__init__()\n        self.d_model = d_model...",
+              "language": "python",
+              "quality_score": 0.35,
+              "validation_status": "healthy",
+              "message_id": "test_002",
+              "author": "ml_engineer"
+            }
+          ],
+          "urls": [],
+          "attachments_processed": [],
+          "classifications": [
+            "code_help",
+            "resource_sharing",
+            "project"
+          ],
+          "quality_score": 1.0,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='ae2bda78eb25013e5f27a859791cf944', type=<ResourceType.CODE_REPOSITORY: 'code_repository'>, url='https://github.com/user/transformer', domain='github.com', title=\"Here's my implementation of a transformer from scratch:\", description=None, quality_score=0.95, quality_level=<ResourceQuality.EXCELLENT: 'excellent'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 43, 284746), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 43, 284748), message_id='test_002', channel_id='code-sharing', author='ml_engineer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='ae2bda78eb25013e5f27a859791cf944', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.3676255420000003, http_status=404, content_length=None, content_type='text/html; charset=utf-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 43, 652812))"
+            },
+            {
+              "resource": "ResourceMetadata(id='9a408566fcae9b6092ed2640c4acf622', type=<ResourceType.CODE_SNIPPET: 'code_snippet'>, url=None, domain=None, title=None, description='```python\\nclass MultiHeadAttention(nn.Module):\\n    def __init__(self, d_model, n_heads):\\n        sup...', quality_score=0.35, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.0, content_length=354, language='python', topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 43, 284863), updated_at=None, last_checked=None, message_id='test_002', channel_id='code-sharing', author='ml_engineer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='9a408566fcae9b6092ed2640c4acf622', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=1.1291999999940572e-05, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 43, 285640))"
+            },
+            {
+              "resource": "ResourceMetadata(id='e6a1197c6a805ba40fed65a7507a6259', type=<ResourceType.CODE_SNIPPET: 'code_snippet'>, url=None, domain=None, title=None, description='\\n    def __init__(self, d_model, n_heads):\\n        super().__init__()\\n        self.d_model = d_model...', quality_score=0.35, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.0, content_length=304, language='python', topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 43, 284888), updated_at=None, last_checked=None, message_id='test_002', channel_id='code-sharing', author='ml_engineer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='e6a1197c6a805ba40fed65a7507a6259', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=5.4579999999582185e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 43, 285811))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e30f03056743ff2de05e4c85ed4b802', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='transformer', description='AI model: transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 43, 284948), updated_at=None, last_checked=None, message_id='test_002', channel_id='code-sharing', author='ml_engineer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e30f03056743ff2de05e4c85ed4b802', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=4.9579999998883295e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508731))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "AI Model and Dataset",
+        "passed": false,
+        "failure_reason": "Expected 3 resources, got 4",
+        "resources_detected": 4,
+        "detected_types": [
+          "model",
+          "model",
+          "model",
+          "dataset"
+        ],
+        "quality_score": 1.0,
+        "individual_quality_scores": [
+          1.0,
+          0.6,
+          0.6,
+          0.6
+        ],
+        "analysis": {
+          "message_id": "test_003",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [],
+          "attachments_processed": [],
+          "classifications": [
+            "project",
+            "resource_sharing",
+            "technical"
+          ],
+          "quality_score": 1.0,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='064d63b9f78c656e5ade3eba71627d41', type=<ResourceType.MODEL: 'model'>, url='https://huggingface.co/user/vision', domain='huggingface.co', title='Trained a new model on ImageNet dataset using PyTorch. Check out the model card:', description=None, quality_score=1.0, quality_level=<ResourceQuality.EXCELLENT: 'excellent'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 44, 995018), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 44, 995022), message_id='test_003', channel_id='model-showcase', author='cv_researcher', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='064d63b9f78c656e5ade3eba71627d41', status=<ValidationStatus.INACCESSIBLE: 'inaccessible'>, response_time=0.5074557500000001, http_status=401, content_length=22253, content_type='text/html; charset=utf-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 45, 503001))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e30f03056743ff2de05e4c85ed4b802', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='transformer', description='AI model: transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 44, 995199), updated_at=None, last_checked=None, message_id='test_003', channel_id='model-showcase', author='cv_researcher', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e30f03056743ff2de05e4c85ed4b802', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=4.9579999998883295e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508731))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e61eec05c1ec171f5d1464186e543a8', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='Transformer', description='AI model: Transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 44, 995217), updated_at=None, last_checked=None, message_id='test_003', channel_id='model-showcase', author='cv_researcher', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e61eec05c1ec171f5d1464186e543a8', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=3.0829999999593127e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508973))"
+            },
+            {
+              "resource": "ResourceMetadata(id='4743a8f5189dc6376a82af3194445c69', type=<ResourceType.DATASET: 'dataset'>, url=None, domain=None, title='ImageNet', description='Dataset: ImageNet', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 44, 995233), updated_at=None, last_checked=None, message_id='test_003', channel_id='model-showcase', author='cv_researcher', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='4743a8f5189dc6376a82af3194445c69', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=1.2707999999861386e-05, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 44, 996210))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "Comprehensive Tutorial",
+        "passed": false,
+        "failure_reason": "Expected resource type course not found; Expected resource type video_tutorial not found; Expected resource type dataset not found",
+        "resources_detected": 4,
+        "detected_types": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "pdf_document"
+        ],
+        "quality_score": 0.7625,
+        "individual_quality_scores": [
+          0.45000000000000007,
+          0.45000000000000007,
+          0.45000000000000007,
+          0.5
+        ],
+        "analysis": {
+          "message_id": "test_004",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [],
+          "attachments_processed": [
+            {
+              "filename": "deep_learning_notes.pdf",
+              "type": "pdf_document",
+              "quality_score": 0.5,
+              "validation_status": "broken",
+              "content_type": "application/pdf",
+              "file_size": 2048576,
+              "message_id": "test_004",
+              "author": "ai_educator"
+            }
+          ],
+          "classifications": [
+            "resource_sharing",
+            "educational",
+            "tutorial"
+          ],
+          "quality_score": 0.7625,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='cd03e4dbe4ff9de495e86ecc75b36033', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://www.deeplearning.ai/courses/deep', domain='www.deeplearning.ai', title='Great tutorial series on deep learning fundamentals:', description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 47, 35794), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 47, 35799), message_id='test_004', channel_id='learning-resources', author='ai_educator', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='cd03e4dbe4ff9de495e86ecc75b36033', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.35460337499999994, http_status=404, content_length=None, content_type='text/html; charset=utf-8', last_modified=datetime.datetime(2025, 7, 6, 9, 3, 50, tzinfo=datetime.timezone.utc), title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 47, 391239))"
+            },
+            {
+              "resource": "ResourceMetadata(id='bfe4c0fe25e634ed38b8d522fc643cf9', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://www.youtube.com/watch?v=example123&list=PLplaylist', domain='www.youtube.com', title='Also check out this YouTube playlist:', description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 47, 35870), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 47, 35872), message_id='test_004', channel_id='learning-resources', author='ai_educator', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='bfe4c0fe25e634ed38b8d522fc643cf9', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=0.17089716700000057, http_status=200, content_length=0, content_type='text/html; charset=utf-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 47, 208241))"
+            },
+            {
+              "resource": "ResourceMetadata(id='d3bd30f3484f9b65fb247d218f078ec8', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://www.kaggle.com/competitions/learning', domain='www.kaggle.com', title='For hands-on practice, I recommend this Kaggle competition:', description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 47, 35905), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 47, 35906), message_id='test_004', channel_id='learning-resources', author='ai_educator', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='d3bd30f3484f9b65fb247d218f078ec8', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.23927083400000004, http_status=404, content_length=134, content_type='text/html; charset=UTF-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 47, 276964))"
+            },
+            {
+              "resource": "ResourceMetadata(id='bf1c3ae15df36241db3915cd4ed524a0', type=<ResourceType.PDF_DOCUMENT: 'pdf_document'>, url='https://cdn.discordapp.com/attachments/123/notes.pdf', domain=None, title='deep_learning_notes.pdf', description='File: deep_learning_notes.pdf', quality_score=0.5, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type='application/pdf', file_size=2048576, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 47, 36036), updated_at=None, last_checked=None, message_id='test_004', channel_id='learning-resources', author='ai_educator', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='bf1c3ae15df36241db3915cd4ed524a0', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.09652379200000016, http_status=404, content_length=36, content_type='text/plain;charset=UTF-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 47, 134855))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "Industry Report",
+        "passed": false,
+        "failure_reason": "Expected resource type industry_report not found",
+        "resources_detected": 2,
+        "detected_types": [
+          "unknown",
+          "presentation"
+        ],
+        "quality_score": 0.675,
+        "individual_quality_scores": [
+          0.45000000000000007,
+          0.5
+        ],
+        "analysis": {
+          "message_id": "test_005",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [],
+          "attachments_processed": [
+            {
+              "filename": "AI_Enterprise_Adoption_Summary.pptx",
+              "type": "presentation",
+              "quality_score": 0.5,
+              "validation_status": "broken",
+              "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+              "file_size": 5242880,
+              "message_id": "test_005",
+              "author": "business_analyst"
+            }
+          ],
+          "classifications": [
+            "resource_sharing",
+            "research",
+            "general"
+          ],
+          "quality_score": 0.675,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='fa1519412800b34c9a1e20138f63bfe5', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://www.mckinsey.com/capabilities/quantumblack/our', domain='www.mckinsey.com', title='New McKinsey report on AI adoption in enterprise:', description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.8, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 53, 66067), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 53, 66069), message_id='test_005', channel_id='industry-insights', author='business_analyst', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='fa1519412800b34c9a1e20138f63bfe5', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.5608581250000011, http_status=404, content_length=0, content_type='', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 53, 627069))"
+            },
+            {
+              "resource": "ResourceMetadata(id='55da697171083c298a53db08314a797e', type=<ResourceType.PRESENTATION: 'presentation'>, url='https://cdn.discordapp.com/attachments/456/presentation.pptx', domain=None, title='AI_Enterprise_Adoption_Summary.pptx', description='File: AI_Enterprise_Adoption_Summary.pptx', quality_score=0.5, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type='application/vnd.openxmlformats-officedocument.presentationml.presentation', file_size=5242880, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 53, 66127), updated_at=None, last_checked=None, message_id='test_005', channel_id='industry-insights', author='business_analyst', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='55da697171083c298a53db08314a797e', status=<ValidationStatus.BROKEN: 'broken'>, response_time=0.02444420799999847, http_status=404, content_length=36, content_type='text/plain;charset=UTF-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 53, 90805))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "Low Quality Content",
+        "passed": false,
+        "failure_reason": "Expected 0 resources, got 1",
+        "resources_detected": 1,
+        "detected_types": [
+          "unknown"
+        ],
+        "quality_score": 0.39999999999999997,
+        "individual_quality_scores": [
+          0.35
+        ],
+        "analysis": {
+          "message_id": "test_006",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [],
+          "attachments_processed": [],
+          "classifications": [
+            "meme",
+            "casual",
+            "low_quality"
+          ],
+          "quality_score": 0.39999999999999997,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='c9b725e9ef67fff8c707fdb87d971837', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://spam.com/free', domain='spam.com', title='lol check this funny meme https://tenor.com/view/funny-cat-gif also click here to win free money', description=None, quality_score=0.35, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.5, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 54, 796467), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 54, 796469), message_id='test_006', channel_id='general-chat', author='spam_user', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='c9b725e9ef67fff8c707fdb87d971837', status=<ValidationStatus.SPAM: 'spam'>, response_time=1.7332999998842524e-05, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message='Blacklisted domain', validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 54, 796623))"
+            }
+          ]
+        }
+      },
+      {
+        "test_name": "Mixed Quality Content",
+        "passed": false,
+        "failure_reason": "Expected 2 resources, got 4",
+        "resources_detected": 4,
+        "detected_types": [
+          "code_repository",
+          "unknown",
+          "forum_post",
+          "model"
+        ],
+        "quality_score": 1.0,
+        "individual_quality_scores": [
+          0.95,
+          0.45000000000000007,
+          0.45000000000000007,
+          0.6
+        ],
+        "analysis": {
+          "message_id": "test_007",
+          "content_types": [],
+          "resources": [],
+          "code_snippets": [],
+          "urls": [],
+          "attachments_processed": [],
+          "classifications": [
+            "project",
+            "resource_sharing",
+            "discussion"
+          ],
+          "quality_score": 1.0,
+          "resource_metadata": [
+            {
+              "resource": "ResourceMetadata(id='851f44c9c1ce39c5d281c1a770755ab3', type=<ResourceType.CODE_REPOSITORY: 'code_repository'>, url='https://github.com/user/awesome', domain='github.com', title=\"Working on a new project. Here's the repo:\", description=None, quality_score=0.95, quality_level=<ResourceQuality.EXCELLENT: 'excellent'>, relevance_score=0.5, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 56, 263811), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 56, 263814), message_id='test_007', channel_id='project-updates', author='developer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='851f44c9c1ce39c5d281c1a770755ab3', status=<ValidationStatus.BROKEN: 'broken'>, response_time=1.4761070420000024, http_status=404, content_length=None, content_type='text/html; charset=utf-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 57, 740286))"
+            },
+            {
+              "resource": "ResourceMetadata(id='d504c80889a89bb0f43a5ab12a29b2cf', type=<ResourceType.UNKNOWN: 'unknown'>, url='https://example.com/random', domain='example.com', title='Also found this random link:', description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.5, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 56, 263864), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 56, 263865), message_id='test_007', channel_id='project-updates', author='developer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='d504c80889a89bb0f43a5ab12a29b2cf', status=<ValidationStatus.BROKEN: 'broken'>, response_time=1.1165038749999994, http_status=404, content_length=1256, content_type='text/html', last_modified=datetime.datetime(2025, 1, 13, 20, 11, 20, tzinfo=datetime.timezone.utc), title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 57, 381079))"
+            },
+            {
+              "resource": "ResourceMetadata(id='64911dfc040855e81df98e332e402131', type=<ResourceType.FORUM_POST: 'forum_post'>, url='https://stackoverflow.com/questions/12345/transformer', domain='stackoverflow.com', title=\"And here's a useful Stack Overflow discussion:\", description=None, quality_score=0.45000000000000007, quality_level=<ResourceQuality.FAIR: 'fair'>, relevance_score=0.5, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 56, 263960), updated_at=None, last_checked=datetime.datetime(2025, 7, 6, 17, 57, 56, 263961), message_id='test_007', channel_id='project-updates', author='developer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='64911dfc040855e81df98e332e402131', status=<ValidationStatus.INACCESSIBLE: 'inaccessible'>, response_time=0.060138333000001154, http_status=403, content_length=6438, content_type='text/html; charset=UTF-8', last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 56, 324875))"
+            },
+            {
+              "resource": "ResourceMetadata(id='6e30f03056743ff2de05e4c85ed4b802', type=<ResourceType.MODEL: 'model'>, url=None, domain=None, title='transformer', description='AI model: transformer', quality_score=0.6, quality_level=<ResourceQuality.GOOD: 'good'>, relevance_score=0.0, content_length=0, language=None, topics=[], keywords=[], content_type=None, file_size=None, accessibility=True, created_at=datetime.datetime(2025, 7, 6, 17, 57, 56, 264041), updated_at=None, last_checked=None, message_id='test_007', channel_id='project-updates', author='developer', is_valid=True, validation_errors=[])",
+              "validation": "ValidationResult(resource_id='6e30f03056743ff2de05e4c85ed4b802', status=<ValidationStatus.HEALTHY: 'healthy'>, response_time=4.9579999998883295e-06, http_status=None, content_length=None, content_type=None, last_modified=None, title=None, description=None, error_message=None, validation_timestamp=datetime.datetime(2025, 7, 6, 17, 57, 41, 508731))"
+            }
+          ]
+        }
+      }
+    ],
+    "performance_metrics": {
+      "total_resources_detected": 22,
+      "average_quality_score": 0.8339285714285715,
+      "average_processing_time": 2.458085154714286
+    }
+  },
+  "benchmark_results": {
+    "average_processing_time": 0.3152584375000004,
+    "estimated_throughput": 3.172000749385173,
+    "total_benchmark_time": 3.1525843750000035
+  }
+}
