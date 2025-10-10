@@ -48,6 +48,10 @@ redis = "^5.0.0"
 # Discord bot
 "discord.py" = "^2.3.2"
 
+# Web scraping and HTTP (for resource enrichment)
+aiohttp = "^3.9.0"
+lxml = "^5.0.0"
+
 # For pydantic models
 pydantic = "^1.10.0"
 

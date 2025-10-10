@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-Fresh Resource Detector - Quality-First Approach
+Fresh Resource Detector - Quality-First Approach with GPT-5 Enhancement
 
 Extracts only high-quality resources from Discord messages,
 filtering out junk and focusing on valuable content.
+
+Phase 1 & 2 Enhancements:
+- Intelligent title extraction and generation
+- Rich contextual descriptions using GPT-5 mini
 """
 
 import json
@@ -18,6 +22,7 @@ import requests
 import os
 from tqdm import tqdm
 import argparse
+import asyncio
 
 # Configure tqdm for better progress bar visibility
 tqdm.monitor_interval = 0.05  # Update more frequently
@@ -25,12 +30,29 @@ tqdm.monitor_interval = 0.05  # Update more frequently
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+# Import new enrichment services
+try:
+    from agentic.services.resource_enrichment import ResourceEnrichment
+    GPT5_AVAILABLE = True
+except ImportError:
+    GPT5_AVAILABLE = False
+    print("⚠️ ResourceEnrichment not available - will use fallback methods")
+
 class FreshResourceDetector:
-    def __init__(self, use_fast_model: bool = True):
+    def __init__(self, use_fast_model: bool = True, use_gpt5: bool = True):
         # Model selection for resource detection
         self.use_fast_model = use_fast_model
         self.fast_model = os.getenv('LLM_FAST_MODEL', 'phi3:mini')  # Smaller, faster model
         self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
+        
+        # NEW: GPT-5 enrichment service (Phase 1 & 2)
+        self.use_gpt5 = use_gpt5 and GPT5_AVAILABLE
+        self.enrichment = ResourceEnrichment(use_gpt5=self.use_gpt5) if GPT5_AVAILABLE else None
+        
+        if self.use_gpt5 and self.enrichment:
+            print("✅ GPT-5 mini enrichment ENABLED for high-quality titles and descriptions")
+        else:
+            print("ℹ️ Using fallback methods for titles and descriptions")
         
         # Incremental processing tracking
         self.processed_urls_file = Path('data/processed_resources.json')
@@ -295,6 +317,32 @@ class FreshResourceDetector:
             print(f"⚠️ LLM connection error for {url[:50]}...: {e}")
             return self._generate_fallback_description(url, domain, content)
     
+    def _generate_fallback_title(self, url: str, domain: str) -> str:
+        """Generate fallback title from URL structure"""
+        parsed_url = urlparse(url)
+        
+        # Domain-specific fallback titles
+        if 'youtube.com' in domain or 'youtu.be' in domain:
+            return "YouTube Video"
+        elif 'arxiv.org' in domain:
+            paper_id = parsed_url.path.split('/')[-1]
+            return f"arXiv Paper: {paper_id}"
+        elif 'github.com' in domain:
+            path_parts = parsed_url.path.strip('/').split('/')
+            if len(path_parts) >= 2:
+                return f"GitHub: {path_parts[0]}/{path_parts[1]}"
+            return "GitHub Repository"
+        elif 'huggingface.co' in domain:
+            path_parts = parsed_url.path.strip('/').split('/')
+            if len(path_parts) >= 2:
+                return f"Hugging Face: {path_parts[0]}/{path_parts[1]}"
+            return "Hugging Face AI/ML Resource"
+        elif '.pdf' in url.lower():
+            filename = parsed_url.path.split('/')[-1]
+            return f"PDF: {filename}"
+        else:
+            return f"Resource from {domain}"
+    
     def _generate_fallback_description(self, url, domain, content):
         """Generate a fallback description when LLM is unavailable."""
         parsed_url = urlparse(url)
@@ -376,12 +424,21 @@ class FreshResourceDetector:
                 ts_str = raw_ts[:10] if raw_ts else ''
             jump_url = message.get('jump_url')
             
-            # Generate description with progress indication
-            description = self._generate_description(message, url)
+            # NEW: Use enhanced enrichment service (Phase 1 & 2)
+            if self.enrichment:
+                # Run async enrichment in sync context
+                enriched = asyncio.run(self.enrichment.enrich_resource(url, message, channel_name))
+                title = enriched.get('title', self._generate_fallback_title(url, domain))
+                description = enriched.get('description', self._generate_description(message, url))
+            else:
+                # Fallback to old method
+                title = self._generate_fallback_title(url, domain)
+                description = self._generate_description(message, url)
             
             resource = {
                 'url': url,
                 'domain': domain,
+                'title': title,  # NEW: Add title field
                 'category': domain_info['category'],
                 'quality_score': domain_info['score'],
                 'channel_name': channel_name,
@@ -532,11 +589,14 @@ def main():
                        help='Use fast model (phi3:mini) for faster processing')
     parser.add_argument('--standard-model', action='store_true',
                        help='Use standard model (llama3.1:8b) for better quality')
+    parser.add_argument('--no-gpt5', action='store_true',
+                       help='Disable GPT-5 mini enrichment (use local LLM only)')
     parser.add_argument('--reset-cache', action='store_true',
                        help='Reset processed URLs cache and reprocess all resources')
     args = parser.parse_args()
 
     use_fast_model = args.fast_model or (not args.standard_model)  # Default to fast model
+    use_gpt5 = not args.no_gpt5  # Default to using GPT-5
 
     if args.reset_cache:
         cache_file = project_root / 'data' / 'processed_resources.json'
@@ -544,7 +604,7 @@ def main():
             cache_file.unlink()
             print("🗑️ Reset processed URLs cache")
 
-    detector = FreshResourceDetector(use_fast_model=use_fast_model)
+    detector = FreshResourceDetector(use_fast_model=use_fast_model, use_gpt5=use_gpt5)
     model_name = detector.fast_model if use_fast_model else detector.standard_model
     print(f"🤖 Using model: {model_name} ({'fast' if use_fast_model else 'standard'} mode)")
 
@@ -774,6 +834,31 @@ def main():
     print(f"\n📄 Files created:")
     print(f"   • Detailed report: {output_path}")
     print(f"   • Export file: {export_path}")
+    
+    # NEW: Display enrichment statistics
+    if detector.enrichment:
+        enrichment_stats = detector.enrichment.get_stats()
+        gpt5_stats = detector.enrichment.gpt5.get_stats() if detector.enrichment.gpt5 else None
+        
+        print(f"\n🤖 GPT-5 Mini Enrichment Statistics:")
+        print(f"   Total resources processed: {enrichment_stats['total_processed']}")
+        print(f"   Titles from web scraping: {enrichment_stats['titles_scraped']}")
+        print(f"   Titles generated by GPT-5: {enrichment_stats['titles_generated']}")
+        print(f"   Descriptions by GPT-5: {enrichment_stats['descriptions_generated']}")
+        
+        if gpt5_stats:
+            print(f"\n📊 GPT-5 API Usage:")
+            print(f"   API calls made: {gpt5_stats['gpt5_calls']}")
+            print(f"   Cached responses: {gpt5_stats['gpt5_cached']}")
+            print(f"   Fallback to local LLM: {gpt5_stats['fallback_calls']}")
+            print(f"   Errors: {gpt5_stats['errors']}")
+            
+            total_calls = gpt5_stats['gpt5_calls'] + gpt5_stats['gpt5_cached']
+            if total_calls > 0:
+                cache_rate = (gpt5_stats['gpt5_cached'] / total_calls) * 100
+                estimated_cost = gpt5_stats['gpt5_calls'] * 0.02  # ~$0.02 per resource
+                print(f"   Cache hit rate: {cache_rate:.1f}%")
+                print(f"   Estimated cost: ${estimated_cost:.2f}")
     
     return report
 
