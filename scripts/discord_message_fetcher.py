@@ -169,7 +169,10 @@ class DiscordMessageFetcher:
             'forum_channels': 0,
             'total_messages': 0,
             'total_threads': 0,
-            'errors': []
+            'errors': [],
+            'new_text_channels': 0,
+            'new_forum_channels': 0,
+            'new_channels_messages': 0
         }
         
         @client.event
@@ -191,14 +194,44 @@ class DiscordMessageFetcher:
                 text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel) and not self.is_test_channel(ch.name)]
                 forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel) and not self.is_test_channel(ch.name)]
                 
+                # Detect new channels for incremental sync
+                known_text_channel_ids = set(self.checkpoint['channel_checkpoints'].keys())
+                known_forum_channel_ids = set(self.checkpoint['forum_checkpoints'].keys())
+                
+                new_text_channels = [ch for ch in text_channels if str(ch.id) not in known_text_channel_ids]
+                new_forum_channels = [ch for ch in forum_channels if str(ch.id) not in known_forum_channel_ids]
+                
+                if new_text_channels or new_forum_channels:
+                    print(f"🆕 Detected {len(new_text_channels)} new text channels and {len(new_forum_channels)} new forum channels!")
+                    if new_text_channels:
+                        print(f"   New text channels: {', '.join(['#' + ch.name for ch in new_text_channels[:5]])}")
+                        if len(new_text_channels) > 5:
+                            print(f"   ... and {len(new_text_channels) - 5} more")
+                    if new_forum_channels:
+                        print(f"   New forum channels: {', '.join(['#' + ch.name for ch in new_forum_channels[:5]])}")
+                        if len(new_forum_channels) > 5:
+                            print(f"   ... and {len(new_forum_channels) - 5} more")
+                
                 print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels (excluding test channels)")
+                print(f"   • {len(new_text_channels)} new text channels to sync from beginning")
+                print(f"   • {len(text_channels) - len(new_text_channels)} existing text channels for incremental sync")
+                print(f"   • {len(new_forum_channels)} new forum channels to sync from beginning")
+                print(f"   • {len(forum_channels) - len(new_forum_channels)} existing forum channels for incremental sync")
                 
                 # Process text channels
                 print(f"\n📥 Processing {len(text_channels)} text channels...")
                 for channel in tqdm(text_channels, desc="📥 Text channels", unit="channel"):
                     try:
+                        # Track if this is a new channel
+                        is_new = str(channel.id) not in known_text_channel_ids
+                        messages_before = stats['total_messages']
+                        
                         await self.fetch_channel_messages(channel, stats)
                         stats['text_channels'] += 1
+                        
+                        if is_new:
+                            stats['new_text_channels'] += 1
+                            stats['new_channels_messages'] += (stats['total_messages'] - messages_before)
                     except Exception as e:
                         error_msg = f"Error fetching #{channel.name}: {e}"
                         print(f"❌ {error_msg}")
@@ -209,8 +242,16 @@ class DiscordMessageFetcher:
                     print(f"\n📋 Processing {len(forum_channels)} forum channels...")
                     for forum in tqdm(forum_channels, desc="📋 Forum channels", unit="forum"):
                         try:
+                            # Track if this is a new channel
+                            is_new = str(forum.id) not in known_forum_channel_ids
+                            messages_before = stats['total_messages']
+                            
                             await self.fetch_forum_messages(forum, stats)
                             stats['forum_channels'] += 1
+                            
+                            if is_new:
+                                stats['new_forum_channels'] += 1
+                                stats['new_channels_messages'] += (stats['total_messages'] - messages_before)
                         except Exception as e:
                             error_msg = f"Error fetching forum #{forum.name}: {e}"
                             print(f"❌ {error_msg}")
@@ -222,7 +263,17 @@ class DiscordMessageFetcher:
                 print(f"   📋 Forum Channels: {stats['forum_channels']}")
                 print(f"   📝 Total Messages: {stats['total_messages']:,}")
                 print(f"   🧵 Total Threads: {stats['total_threads']}")
-                print(f"   ❌ Errors: {len(stats['errors'])}")
+                
+                # Show new channels info if any were detected
+                if stats['new_text_channels'] > 0 or stats['new_forum_channels'] > 0:
+                    print(f"\n🆕 New Channels Detected:")
+                    if stats['new_text_channels'] > 0:
+                        print(f"   • {stats['new_text_channels']} new text channels synced")
+                    if stats['new_forum_channels'] > 0:
+                        print(f"   • {stats['new_forum_channels']} new forum channels synced")
+                    print(f"   • {stats['new_channels_messages']:,} messages from new channels")
+                
+                print(f"\n   ❌ Errors: {len(stats['errors'])}")
                 
                 if stats['errors']:
                     print("\n⚠️ Errors encountered:")
@@ -286,8 +337,19 @@ class DiscordMessageFetcher:
                 stats['total_messages'] += len(messages)
             
             # Save checkpoint with last message ID
+            # For empty channels, save the channel's last_message_id or a placeholder
             if last_message_id:
                 self.save_checkpoint(str(channel.id), last_message_id, 'text')
+            elif not checkpoint_id:
+                # New channel with no messages - save current timestamp as checkpoint
+                # This prevents re-detecting empty channels
+                if channel.last_message_id:
+                    self.save_checkpoint(str(channel.id), str(channel.last_message_id), 'text')
+                else:
+                    # Truly empty channel - save a sentinel value (current snowflake ID)
+                    from datetime import datetime, timezone
+                    sentinel_id = str(int(datetime.now(timezone.utc).timestamp() * 1000) << 22)
+                    self.save_checkpoint(str(channel.id), sentinel_id, 'text')
             
             if checkpoint_id:
                 print(f"   ✅ {message_count:,} new messages from #{channel.name}")
@@ -400,8 +462,18 @@ class DiscordMessageFetcher:
                 stats['total_messages'] += len(messages)
             
             # Save checkpoint with last message ID
+            # For empty threads, save the thread's last_message_id or a placeholder
             if last_message_id:
                 self.save_checkpoint(str(thread.id), last_message_id, 'forum')
+            elif not thread_checkpoint_id:
+                # New thread with no messages - save current timestamp as checkpoint
+                if thread.last_message_id:
+                    self.save_checkpoint(str(thread.id), str(thread.last_message_id), 'forum')
+                else:
+                    # Truly empty thread - save a sentinel value
+                    from datetime import datetime, timezone
+                    sentinel_id = str(int(datetime.now(timezone.utc).timestamp() * 1000) << 22)
+                    self.save_checkpoint(str(thread.id), sentinel_id, 'forum')
             
             if thread_checkpoint_id:
                 print(f"       ✅ {message_count:,} new messages from thread {thread.name}")

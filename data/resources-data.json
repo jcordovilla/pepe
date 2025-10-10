@@ -1,6 +1,6 @@
 {
-  "export_date": "2025-09-02T17:09:40.983451",
-  "total_resources": 170,
+  "export_date": "2025-10-10T01:13:43.262372",
+  "total_resources": 212,
   "resources": [
     {
       "id": 1,
@@ -279,14 +279,14 @@
     },
     {
       "id": 26,
-      "title": "YouTube Video",
-      "description": "In this YouTube tutorial by @everyone on April 5th, they share valuable learning resources curated to enhance one's knowledge in various subjects. The post emphasizes the importance of continuous education and provides a list that includes books, online courses, articles, podcasts, and more for s...",
-      "date": "2025-04-20",
-      "author": "Jose Cordovilla",
-      "channel": "📖resources-library",
-      "tag": "Educational Videos",
+      "title": "Watch",
+      "description": "This YouTube tutorial offers a comprehensive command line crash course, teaching essential skills for navigating Windows Terminal using WSL (Windows Subsystem for Linux). Viewers will gain proficiency in file management, executing commands, and troubleshooting common issues. The video is suitable...",
+      "date": "2025-10-07",
+      "author": "Brandon Pendleton",
+      "channel": "cohort-3-text",
+      "tag": "Tutorial",
       "resource_url": "https://www.youtube.com/watch?v=uwAqEzhyjtw",
-      "discord_url": "https://discord.com/channels/1353058864810950737/1353449106537713756/1363476489508618262"
+      "discord_url": "https://discord.com/channels/1353058864810950737/1420389436470067260/1425149466213744680"
     },
     {
       "id": 27,
@@ -995,13 +995,13 @@
     {
       "id": 91,
       "title": "Why I Moved My Peach Ai Agents To Azure And What That Has To Do With Trust A4C9Ababe88B",
-      "description": "This Medium article by Andrea Hickethier discusses her journey from developing Peach AI agents locally to migrating them to Azure cloud services for better scalability and reliability. The piece highlights the importance of trust in deploying machine learning models, sharing insights on overcomin...",
-      "date": "2025-05-14",
+      "description": "This Medium article by Andrea Hickethier discusses her experience deploying OpenAI models in Azure for compliance purposes as a non-technical individual. She shares insights on the benefits, challenges, and lessons learned from transitioning AI agents to an enterprise environment like Microsoft's...",
+      "date": "2025-09-26",
       "author": "Andrea Hickethier 🍑 Munich",
-      "channel": "🏘general-chat",
-      "tag": "Articles",
+      "channel": "cohort-3-text",
+      "tag": "News/Article",
       "resource_url": "https://medium.com/@andrea.hickethier/why-i-moved-my-peach-ai-agents-to-azure-and-what-that-has-to-do-with-trust-a4c9ababe88b",
-      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1372118701981171792"
+      "discord_url": "https://discord.com/channels/1353058864810950737/1420389436470067260/1421089943551217685"
     },
     {
       "id": 92,
@@ -1871,6 +1871,468 @@
       "tag": "News/Article",
       "resource_url": "https://www.theguardian.com/technology/2025/aug/30/doctors-ai-stethoscope-heart-disease-london",
       "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1411907318953807963"
+    },
+    {
+      "id": 171,
+      "title": "How I Built My First Local Llm Api Project In Python A Step By Step Guide E865F341C752",
+      "description": "In Rajeev Barnwal's Medium article from July 3, 2025, he shares his journey in developing a local Large Language Model (LLM) API project using Python as a guide for readers interested in AI and coding. The step-by-step tutorial covers the process of creating an LLM application that can be run loc...",
+      "date": "2025-09-02",
+      "author": "Eduardo Fadanelli",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "News/Article",
+      "resource_url": "https://rajeevbarnwal.medium.com/how-i-built-my-first-local-llm-api-project-in-python-a-step-by-step-guide-e865f341c752",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1412511875484225546"
+    },
+    {
+      "id": 172,
+      "title": "Watch",
+      "description": "In this YouTube tutorial, users are introduced to GenSpark.ai, an AI tool that enables rapid creation of logos and animations with moving elements in minutes. Viewers will discover how the \"AI Designer\" mode works for generating designs quickly and efficiently, potentially enhancing their creativ...",
+      "date": "2025-09-03",
+      "author": "Juan Napoli",
+      "channel": "❤️brand-identity",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=-IoBb-2Mlng",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1404508540751712297/1412734710261743760"
+    },
+    {
+      "id": 173,
+      "title": "Ai Industry Pours Millions Into Politics",
+      "description": "The Guardian article from September 2, 2curse-25 discusses how major players in the AI industry are heavily investing financially to sway political decisions ahead of U.S elections amidst growing legal disputes and internal conflicts within firms. It highlights concerns over potential regulatory ...",
+      "date": "2025-09-03",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/technology/2025/sep/02/ai-industry-pours-millions-into-politics",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1412803085121617920"
+    },
+    {
+      "id": 174,
+      "title": "):",
+      "description": "The Reuters special report titled \"Meta AI Chatbot Guidelines\" investigates the lack of regulatory oversight in GenAI development amidst rapid advancements despite recent scandals, highlighting a competitive rush without adequate safeguards. It underscores concerns about ethical implications and ...",
+      "date": "2025-09-05",
+      "author": "Ranveer Joyseeree",
+      "channel": "🧾white-paper-publications",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/investigates/special-report/meta-ai-chatbot-guidelines/):",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1410618583377121483/1413430428727250965"
+    },
+    {
+      "id": 175,
+      "title": "Openai Launch Its First Ai Chip 2026 With Broadcom Ft Reports 2025 09 05",
+      "description": "The Reuters article discusses OpenAI's announcement to launch its first AI chip in collaboration with Broadcom for FPGA technology by September 2026 as reported on ChatGPT-News, a source of business news. The partnership signifies an important step towards self-reliant and efficient artificial in...",
+      "date": "2025-09-05",
+      "author": "Cristian Vasquez",
+      "channel": "🗞-genai-news",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/openai-launch-its-first-ai-chip-2026-with-broadcom-ft-reports-2025-09-05/?utm_source=chatgpt.com",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1413553736760037406"
+    },
+    {
+      "id": 176,
+      "title": "Edit",
+      "description": "This OpenAI-hosted forum thread offers guidance for beginners in AI prompt writing by sharing personal experiences from an individual's early journey with AI assistance. The contributor shares a list of initial, unorganized prompts they used before developing their own systematic approach to crea...",
+      "date": "2025-09-08",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🏘-general-chat",
+      "tag": "Tool",
+      "resource_url": "https://platform.openai.com/chat/edit?optimize=true",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1414629333322170479"
+    },
+    {
+      "id": 177,
+      "title": "6825453 Chatgpt Release Notes",
+      "description": "The OpenAI Help Center article from September 4, 2static5, 2025 provides guidance for users to explore new ideas in ChatGPT conversations without disrupting the original thread by creating separate branches within a conversation. This feature allows multiple discussions on related topics while ma...",
+      "date": "2025-09-09",
+      "author": "Carol Choi",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tool",
+      "resource_url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1414927072505237615"
+    },
+    {
+      "id": 178,
+      "title": "Auziyqgt6Qh3Jsbdhef9Bhqo0G92Phws1Sblduoxpuc7Dxrdf3Gv3Q  Iu5X28F9Tpfr8Gwnl5Vclymyyygjbqaqgthud6Bnrracj3Kvezv4Zpsaeaqcvyg Te4Cz Rfbujahswnagjs3Q 75A4Bltdaehjl1Uos K4Kpjavddzdwgc7Tqspjvp8Dynoi5I=",
+      "description": "This article from Design Week offers insights into leveraging AI for enhancing design processes within creative industries as of September 2th, 2025. It discusses the integration of artificial intelligence tools in streamlining and innovating design work by providing practical guidance on utilizi...",
+      "date": "2025-09-09",
+      "author": "Jasmina_Ciconkova",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tutorial",
+      "resource_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGt6qh3jsbdhef9bhQo0G92PhWS1SBlDUoxPUc7DXrdF3gv3q-_iU5x28f9tpfR8gWNL5vcLyMyYYgJBQaqgthUd6bNRrACj3KvEZV4zPSAEaQCvYg_Te4CZ-rfbujahswnAGjs3q-75a4blTDaEhjL1UOS_k4KPJAVddZdwgC7TQsPJvP8dYnoi5I=",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1414990470920015992"
+    },
+    {
+      "id": 179,
+      "title": "Create Files",
+      "description": "Anthropic's Claude AI is now capable of creating and editing various file types like Excel sheets, Word documents, PowerPoint presentations, and PDFs directly through chat or desktop app conversations. This new feature enhances productivity by allowing users to collaborate on document creation in...",
+      "date": "2025-09-09",
+      "author": "Oscar Garcia",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tool",
+      "resource_url": "https://www.anthropic.com/news/create-files?utm_source=chatgpt.com",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1415017757090648094"
+    },
+    {
+      "id": 180,
+      "title": "Openai Expects Business Burn 115 Billion Through 2029 Information Reports 2025 09 06",
+      "description": "This Reuters article discusses OpenAI's substantial projected funding burn rate through to 2029, raising questions about its profitability prospects amidst significant investment in AI technology development. The piece examines the financial implications of such an expenditure and explores whethe...",
+      "date": "2025-09-10",
+      "author": "Mark Venn",
+      "channel": "💠buddy-group4",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/technology/openai-expects-business-burn-115-billion-through-2029-information-reports-2025-09-06/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1414062528480411718/1415219315665539153"
+    },
+    {
+      "id": 181,
+      "title": "Sweden Launches Ai Music Licence Protect Songwriters 2025 09 09",
+      "description": "On September 9, 2025, Reuters reported that Sweden introduced an AI music license aimed at protecting songwriters' rights in the digital age. This innovative approach seeks to ensure fair compensation and recognition for creators as artificial intelligence becomes increasingly involved in produci...",
+      "date": "2025-09-10",
+      "author": "Rodrigo Baeza",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/media-telecom/sweden-launches-ai-music-licence-protect-songwriters-2025-09-09/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1415353553932910767"
+    },
+    {
+      "id": 182,
+      "title": "Ftc Prepares Grill Ai Companies Over Impact Children Wsj Reports 2025 09 04",
+      "description": "The article from Reuters discusses the U.S. Federal Trade Commission's (FTC) investigation into AI chatbots due to concerns about their impact on children. It highlights a growing worry that these technologies could harm young users, with potential negative effects such as privacy issues and misi...",
+      "date": "2025-09-10",
+      "author": "Oscar Garcia",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/ftc-prepares-grill-ai-companies-over-impact-children-wsj-reports-2025-09-04/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1415368418281918625"
+    },
+    {
+      "id": 183,
+      "title": "Ftc Ai Chatbot Companion Kids Teens Study",
+      "description": "Today, the U.S. Federal Trade Commission (FTC) formally ordered six major AI chatbot companies—OpenAI, Meta, Snap, xAI, Alphabet through Google's DeepMind subsidiary, and Character.AI—to submit reports on their impact on children’in mental health after concerns were raised about the potential ris...",
+      "date": "2025-09-11",
+      "author": "Oscar Garcia",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "News/Article",
+      "resource_url": "https://www.theverge.com/policy/776545/ftc-ai-chatbot-companion-kids-teens-study",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1415768298859270198"
+    },
+    {
+      "id": 184,
+      "title": "Fda Panel Weigh Ai Mental Health Devices 2025 09 11",
+      "description": "The Reuters article reports that in response to growing interest and development in artificial intelligence (AI) for mental health treatment, the U.S. Food & Drug Administration plans to convene a Digital Health Advisory Committee this November to review AI-driven tools such as chatbots and other...",
+      "date": "2025-09-11",
+      "author": "Oscar Garcia",
+      "channel": "🧬healthcare",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/healthcare-pharmaceuticals/fda-panel-weigh-ai-mental-health-devices-2025-09-11/?",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1394771121584345231/1415771343529578659"
+    },
+    {
+      "id": 185,
+      "title": "Openai Grove",
+      "description": "OpenAI Grove is an interactive platform for AI education that offers various resources such as tutorials, articles, videos, and quizzes to learn about artificial intelligence concepts in a user-friendly manner. It's designed to make learning accessible and engaging by providing hands-on projects ...",
+      "date": "2025-09-12",
+      "author": "Cristian Vasquez",
+      "channel": "🗞-genai-news",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/index/openai-grove/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1416105484267819018"
+    },
+    {
+      "id": 186,
+      "title": "Lilly Launches Ai Powered Platform Accelerate Drug Discovery 2025 09 09",
+      "description": "On September 9, 2025, pharmaceutical giant Elixir Pharma launched an AI-powered platform aiming to expedite drug discovery processes by leveraging machine learning algorithms for identifying potential new drugs and optimizing clinical trials. This innovative approach promises faster development c...",
+      "date": "2025-09-15",
+      "author": "Rodrigo Baeza",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/healthcare-pharmaceuticals/lilly-launches-ai-powered-platform-accelerate-drug-discovery-2025-09-09/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1417162348191420578"
+    },
+    {
+      "id": 187,
+      "title": "Watch",
+      "description": "This YouTube tutorial demonstrates training a Large Language Model (LLM) with custom prompts, outputs, and sentiment analysis using Google Colab notebooks for Natural Language Processing tasks. Viewers will understand how to create datasets, feed them into LLMs like GPT-3 or BERT, analyze the res...",
+      "date": "2025-09-16",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🏘-general-chat",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=XN02F9ikYHI&list=PLLOlBMdcuQtVwdC0-TQV368WXM_9t9NrT&index=3&t=564s",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1417425446919999609"
+    },
+    {
+      "id": 188,
+      "title": "What Is Prompt Engineering",
+      "description": "The Google Cloud blog post from September 11, 2025 offers an in-depth guide to prompt engineering for AI with large language models (LLMs). It emphasizes the importance of creating precise instructions that direct LLMs towards generating accurate and relevant results. The resource provides techni...",
+      "date": "2025-09-16",
+      "author": "Aida Torras",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tutorial",
+      "resource_url": "https://cloud.google.com/discover/what-is-prompt-engineering",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1417498893431865415"
+    },
+    {
+      "id": 189,
+      "title": "Watch",
+      "description": "The \"Advanced 2025 Guide to Prompt Engineering\" YouTube video teaches the art of crafting effective prompts for language models, treating them as conversational partners rather than mere tools. Viewers will discover techniques such as using specific examples and contextual cues that lead to more ...",
+      "date": "2025-09-16",
+      "author": "Shabana Islam",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=qBlX6FhDm2E",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1417582269920579636"
+    },
+    {
+      "id": 190,
+      "title": "Watch",
+      "description": "This YouTube tutorial demonstrates how to create a simple electrical circuit using basic components like wires, batteries, LEDs, and resistors. Viewers will understand the flow of electricity in circuits and see firsthand why series and parallel connections behave differently by building their ow...",
+      "date": "2025-09-17",
+      "author": "Cristian Ursan",
+      "channel": "🦾general",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1368249032866004992/1417887910790955011"
+    },
+    {
+      "id": 191,
+      "title": "Senator Ted Cruz Ai Sandbox Bill",
+      "description": "Senator Ted Cruz introduces the SANDBOX Act, allowing AI companies to operate without oversight for up to ten years if they meet certain conditions like transparency in data usage and algorithmic accountability measures. The bill aims to foster innovation while ensnering public trust by promoting...",
+      "date": "2025-09-17",
+      "author": "Shabana Islam",
+      "channel": "📚-ai-philosophy-ethics",
+      "tag": "News/Article",
+      "resource_url": "https://www.theverge.com/ai-artificial-intelligence/776130/senator-ted-cruz-ai-sandbox-bill",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353448986408779877/1417937359751610369"
+    },
+    {
+      "id": 192,
+      "title": "Frugal Ai Introduction Concepts Development And Open Questions Hal.Pdf",
+      "description": "The PDF, titled \"Frugal AI Introduction Concepts Development and Open Questions HAL,\" is a comprehensive resource exploring foundational concepts in frugal artificial intelligence (AI) development. It likely delves into the principles of creating efficient, cost-effective AI systems that operate ...",
+      "date": "2025-09-18",
+      "author": "Melinda Melcher",
+      "channel": "🏘-general-chat",
+      "tag": "Tutorial",
+      "resource_url": "https://hal.science/hal-05049765v1/file/Frugal_AI_Introduction_Concepts_Development_and_Open_Questions_HAL.pdf",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1418254141150462012"
+    },
+    {
+      "id": 193,
+      "title": "Italy First In Eu To Pass Comprehensive Law Regulating Ai",
+      "description": "The article from The Guardian discusses Italy's pioneering role in Europe as the first country to pass comprehensive legislation regulating artificial intelligence (AI). It highlights how Italian lawmeneralizes AI use, ensuring ethical standards and public safety. This move sets a precedent for o...",
+      "date": "2025-09-18",
+      "author": "Oscar Garcia",
+      "channel": "📚-ai-philosophy-ethics",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/world/2025/sep/18/italy-first-in-eu-to-pass-comprehensive-law-regulating-ai",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353448986408779877/1418304010468720761"
+    },
+    {
+      "id": 194,
+      "title": "arXiv Paper: 2509.11295",
+      "description": "This arXiv preprint from September 14, 2025 by an unnamed author presents \"The Prompt Engineering Report Distilled,\" offering quick insights into six core prompt engineering techniques for the life sciences field with zero-shot and fine-tuning methods. The paper emphasizes practical applications ...",
+      "date": "2025-09-23",
+      "author": "Eduardo Fadanelli",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Paper",
+      "resource_url": "https://arxiv.org/abs/2509.11295",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1420150741062127730"
+    },
+    {
+      "id": 195,
+      "title": "Openai For Germany",
+      "description": "OpenAI has announced strategic cooperation with SAP to offer Open AI Services within Germany's strict data protection framework for public organizations. This partnership is set to enhance the capabilities of German government agencies by providing advanced, secure artificial intelligence solutio...",
+      "date": "2025-09-24",
+      "author": "Andrea Hickethier 🍑 Munich",
+      "channel": "🗞-genai-news",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/global-affairs/openai-for-germany/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1420417722189086884"
+    },
+    {
+      "id": 196,
+      "title": "Openai Nvidia Systems Partnership",
+      "description": "The OpenAI × NVIDIA partnership involves an agreement for deploying at least 10 GW (gigawenerces worth) of AI compute using NVIDIA GPUs, with a potential investment up to $100B. This collaboration is aimed at accelerating the development and deployment of large-scale AI systems but raises questio...",
+      "date": "2025-09-24",
+      "author": "Oscar Garcia",
+      "channel": "🗣️Midweek Discussion !",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/index/openai-nvidia-systems-partnership/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384959352125001838/1420463687621148684"
+    },
+    {
+      "id": 197,
+      "title": "Watch",
+      "description": "This YouTube tutorial introduces the new GenSpark Photo Genius, a cutting-edge photo editing software designed to enhance photography skills through intuitive tools for retouching, color correction, and creative effects application. Viewers learn how to improve their images using advanced feature...",
+      "date": "2025-09-25",
+      "author": "Juan Napoli",
+      "channel": "🤖-custom-gpts",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=TuD5pFUi_Fk",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1397229093522767943/1420689721671024692"
+    },
+    {
+      "id": 198,
+      "title": "Introducing Parental Controls",
+      "description": "The OpenAI page introduces parental controls as part of their suite of tools aimed at enhancing user safety online by providing features that allow parents to monitor and control the digital content accessible on various devices within a household, ensuring children'nervousness. It offers guidanc...",
+      "date": "2025-09-29",
+      "author": "Cristian Ursan",
+      "channel": "🗞-genai-news",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/index/introducing-parental-controls/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1422206024961757304"
+    },
+    {
+      "id": 199,
+      "title": "Ai Energy Innovation Climate Research",
+      "description": "In September 2025, at Climate Week NYC, NVIDIA unveiled how AI models alongside optimized computing infrastructure can significantly enhance energy efficiency in various sectors. The blog post on their website emphasized the role of artificial intelligence and specialized hardware like GPUs in re...",
+      "date": "2025-09-29",
+      "author": "Eduardo Fadanelli",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://blogs.nvidia.com/blog/ai-energy-innovation-climate-research/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1422269295475560529"
+    },
+    {
+      "id": 200,
+      "title": "arXiv Paper: 2509.17209",
+      "description": "In their study \"Prompt-Based Simplification for Plain Language using Spanish Language Models,\" published on arXiv Sep 21, 2025, the authors introduce a method to simplify complex Spanish text into plain language through prompt engineering and zero-shot fine-tuning. Their approach leverages pretra...",
+      "date": "2025-09-30",
+      "author": "Aida Torras",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Paper",
+      "resource_url": "https://arxiv.org/abs/2509.17209",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1422537313648644209"
+    },
+    {
+      "id": 201,
+      "title": "Openai Launches Sora Standalone App 2025 09 30",
+      "description": "OpenAI has launched Sora 2, an innovative standalone app that generates 1 end-to end AI video content from text prompts in just 10 seconds with a TikTok-like interface featuring identity controls for creators. This marks OpenAI's significant move into the realm of native short-form videos tailore...",
+      "date": "2025-09-30",
+      "author": "Oscar Garcia",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/world/americas/openai-launches-sora-standalone-app-2025-09-30/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1422667544577310832"
+    },
+    {
+      "id": 202,
+      "title": "Watch",
+      "description": "This YouTube tutorial guides users through the process of creating a simple LED circuit using breadboard, resistors, an LED, and a battery to understand basic electronics principles like current flow and Ohm's Law in action. Viewers learn how to connect components safely while gaining hands-on ex...",
+      "date": "2025-10-01",
+      "author": "Larissa de Castro Machado Homem",
+      "channel": "✨general",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=R1cF4T4lgI4",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1405232366359806012/1422970015048798249"
+    },
+    {
+      "id": 203,
+      "title": "Perplexitys Comet Ai Browser Now Free Max Users Get New Background Assistant",
+      "description": "Perplexity, an AI startup specializing in personalized web experiences, has launched Comet, their browser with a built-in background assistant powered by artificial intelligence (AI). The company previously required invitations for access but is now making the tool available to all users. With th...",
+      "date": "2025-10-03",
+      "author": "Jasmina_Ciconkova",
+      "channel": "🗞-genai-news",
+      "tag": "News/Article",
+      "resource_url": "https://techcrunch.com/2025/10/02/perplexitys-comet-ai-browser-now-free-max-users-get-new-background-assistant/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1423756575440375900"
+    },
+    {
+      "id": 204,
+      "title": "Announcing Devday 2025",
+      "description": "OpenAI's DevDay 2devision in October 2025 will showcase cutting-edge advancements in AI models, platforms, governance strategies, and security measures to anticipate future trends, align development roadmaps, nurture talent growth, and accelerate capacity expansion. This event promises significan...",
+      "date": "2025-10-05",
+      "author": "Cristian Vasquez",
+      "channel": "🗞-genai-news",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/index/announcing-devday-2025/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1362581139557978182/1424231763609260175"
+    },
+    {
+      "id": 205,
+      "title": "Eus Von Der Leyen Urges European Push Ai Driven Cars 2025 10 03",
+      "description": "The Reuters article from October 3, 2025, discusses Ursula von der Leyen's call for Europe to lead in AI-driven car technology by the year 2025. As President of the European Commission, she emphasizes that autonomous vehicles are crucial for a sustainable and digital future within transportation ...",
+      "date": "2025-10-06",
+      "author": "Aida Torras",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.reuters.com/business/retail-consumer/eus-von-der-leyen-urges-european-push-ai-driven-cars-2025-10-03/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1424686265579737108"
+    },
+    {
+      "id": 206,
+      "title": "Weatherwatch Ai Flood Forecasting Gives Hope To People In Vulnerable Areas",
+      "description": "This article from The Guardian discusses how AI flood forecasting technology is providing hope for people living in vulnerable areas by offering more accurate predictions about potential flooding events. Published on October 2, 2decade-old data suggests that the use of artificial intelligence can...",
+      "date": "2025-10-06",
+      "author": "Rodrigo Baeza",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://www.theguardian.com/uk-news/2025/oct/02/weatherwatch-ai-flood-forecasting-gives-hope-to-people-in-vulnerable-areas",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1424723610202935336"
+    },
+    {
+      "id": 207,
+      "title": "Ai Maps How New Antibiotic Targets Gut Bacteria 1003",
+      "description": "On Motivational Monday, MIT News reports an AI-driven study revealing how a novel antibiotic specifically targets gut bacteria without harming the host' extrinsic to traditional treatments that often disrupt microbiota balance. This breakthrough could lead to more effective and targeted therapies...",
+      "date": "2025-10-06",
+      "author": "Shabana Islam",
+      "channel": "☀️ Motivational Mondays !!",
+      "tag": "News/Article",
+      "resource_url": "https://news.mit.edu/2025/ai-maps-how-new-antibiotic-targets-gut-bacteria-1003",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1386737498155388929/1424904703422238780"
+    },
+    {
+      "id": 208,
+      "title": "Introducing Agentkit",
+      "description": "AgentKit is an end-to-end framework released by OpenAI for developers to build, test, and deploy AI agents with real-world utility. Launched on October 6, 2nergies aims to simplify the creation of sophisticated AI systems that can interact effectively in various environments without needing exten...",
+      "date": "2025-10-07",
+      "author": "Jasmina_Ciconkova",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tool",
+      "resource_url": "https://openai.com/index/introducing-agentkit/",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1425045474280476724"
+    },
+    {
+      "id": 209,
+      "title": "Watch",
+      "description": "This YouTube tutorial offers a concise introduction to prompt engineering for AI, demonstrating how to create effective instructions that guide language models like ChatGPT in providing desired outputs within the Google course format of an hour-long video segmented into three parts. Viewers learn...",
+      "date": "2025-10-07",
+      "author": "Shabana Islam",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=hDVNcfrV70k",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1425112774077321329"
+    },
+    {
+      "id": 210,
+      "title": "Guide To Fine Tuning Llms 88364F4390F7",
+      "description": "\"This Medium article by Hamman Samuel offers an in-depth guide to fine-tuning large language models (LLMs), covering essential steps like setting up libraries such as Transformers, PEFT, BitsAndBytes and choosing between LoRA or full model adaptation. It's a valuable resource for understanding ho...",
+      "date": "2025-10-07",
+      "author": "Eduardo Fadanelli",
+      "channel": "💻 Tech Tip Tuesday !!",
+      "tag": "News/Article",
+      "resource_url": "https://medium.com/%40hammansamuel/guide-to-fine-tuning-llms-88364f4390f7",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1384625535178510397/1425183132126019604"
+    },
+    {
+      "id": 211,
+      "title": "Watch",
+      "description": "In \"Sam Altman on Sora, Energy, and Building an AI Empire,\" Sam discusses his company's approach to creating a sustainable energy ecosystem with artificial intelligence (AI). He emphasizes the importance of integrating renewable resources into building efficient AI systems. Viewers learn about le...",
+      "date": "2025-10-08",
+      "author": "Ranveer Joyseeree",
+      "channel": "🏘-general-chat",
+      "tag": "Tutorial",
+      "resource_url": "https://www.youtube.com/watch?v=JfE1Wun9xkk",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1353058864810950740/1425578281763209287"
+    },
+    {
+      "id": 212,
+      "title": "Discord Suffers Data Breach Impacting At Least 70000 Users",
+      "description": "Discord announced on Wednesday (October 9, 2025) that a data breach potentially exposed sensitive information of at least 70,000 users due to hackers compromising a third-party vendor used for age verification. The affected user data included government ID photos and other personally identifiable...",
+      "date": "2025-10-09",
+      "author": "Frédérique Lambers",
+      "channel": "🔐cyber‑report‑desk",
+      "tag": "News/Article",
+      "resource_url": "https://techcrunch.com/2025/10/09/discord-suffers-data-breach-impacting-at-least-70000-users/?utm_campaign=social&utm_source=linkedin&utm_medium=organic",
+      "discord_url": "https://discord.com/channels/1353058864810950737/1368962814189895732/1425980840399339520"
     }
   ]
 }

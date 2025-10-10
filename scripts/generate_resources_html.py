@@ -1,0 +1,461 @@
+#!/usr/bin/env python3
+"""Generate a beautiful HTML page for resources"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+
+def generate_html():
+    # Load resources
+    data_path = Path(__file__).parent.parent / 'data' / 'resources-data.json'
+    with open(data_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    resources = data['resources']
+    
+    # Generate HTML with minimalist, elegant design
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resources Library</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            padding: 0;
+        }}
+        
+        header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }}
+        
+        header h1 {{
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }}
+        
+        header p {{
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }}
+        
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }}
+        
+        .filters {{
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }}
+        
+        .filters input, .filters select {{
+            padding: 0.6rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }}
+        
+        .filters input:focus, .filters select:focus {{
+            outline: none;
+            border-color: #667eea;
+        }}
+        
+        .filters input {{
+            flex: 1;
+            min-width: 250px;
+        }}
+        
+        .filters select {{
+            min-width: 180px;
+        }}
+        
+        .stats {{
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }}
+        
+        .stat-card {{
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 150px;
+        }}
+        
+        .stat-card .number {{
+            font-size: 2rem;
+            font-weight: 300;
+            color: #667eea;
+        }}
+        
+        .stat-card .label {{
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        
+        .resource-grid {{
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }}
+        
+        .resource-card {{
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }}
+        
+        .resource-card:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }}
+        
+        .resource-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }}
+        
+        .resource-title {{
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            flex: 1;
+        }}
+        
+        .category-tag {{
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }}
+        
+        .tag-news {{ background: #e3f2fd; color: #1976d2; }}
+        .tag-tutorial {{ background: #f3e5f5; color: #7b1fa2; }}
+        .tag-paper {{ background: #fff3e0; color: #e65100; }}
+        .tag-tool {{ background: #e8f5e9; color: #2e7d32; }}
+        .tag-article {{ background: #fce4ec; color: #c2185b; }}
+        .tag-video {{ background: #f1f8e9; color: #558b2f; }}
+        .tag-education {{ background: #e1f5fe; color: #0277bd; }}
+        .tag-other {{ background: #f5f5f5; color: #616161; }}
+        
+        .resource-description {{
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }}
+        
+        .resource-meta {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f0f0f0;
+        }}
+        
+        .meta-item {{
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }}
+        
+        .resource-links {{
+            display: flex;
+            gap: 0.75rem;
+        }}
+        
+        .btn {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            flex: 1;
+        }}
+        
+        .btn-primary {{
+            background: #667eea;
+            color: white;
+        }}
+        
+        .btn-primary:hover {{
+            background: #5568d3;
+        }}
+        
+        .btn-secondary {{
+            background: #f5f5f5;
+            color: #666;
+        }}
+        
+        .btn-secondary:hover {{
+            background: #e0e0e0;
+        }}
+        
+        .no-results {{
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+            font-size: 1.1rem;
+        }}
+        
+        footer {{
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+        }}
+        
+        @media (max-width: 768px) {{
+            header h1 {{
+                font-size: 1.8rem;
+            }}
+            
+            .resource-grid {{
+                grid-template-columns: 1fr;
+            }}
+            
+            .filters {{
+                flex-direction: column;
+            }}
+            
+            .filters input, .filters select {{
+                width: 100%;
+            }}
+            
+            .resource-links {{
+                flex-direction: column;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Resources Library</h1>
+        <p>Curated collection of AI resources from our community • {len(resources)} resources</p>
+    </header>
+    
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number" id="total-count">{len(resources)}</div>
+                <div class="label">Resources</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="category-count">{len(set(r['tag'] for r in resources))}</div>
+                <div class="label">Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="visible-count">{len(resources)}</div>
+                <div class="label">Showing</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <input type="text" id="search" placeholder="🔍 Search by title, author, or keyword..." />
+            <select id="category-filter">
+                <option value="">All Categories</option>
+            </select>
+            <select id="sort-by">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="title">Title A-Z</option>
+            </select>
+        </div>
+        
+        <div class="resource-grid" id="resource-grid">
+            <!-- Resources will be inserted here -->
+        </div>
+        
+        <div class="no-results" id="no-results" style="display: none;">
+            No resources found. Try adjusting your filters.
+        </div>
+    </div>
+    
+    <footer>
+        Generated from Discord Bot · Last updated {datetime.now().strftime('%B %d, %Y')}
+    </footer>
+    
+    <script>
+        const resources = {json.dumps(resources, ensure_ascii=False)};
+        
+        // Get category tag class
+        function getCategoryClass(category) {{
+            const cat = category.toLowerCase();
+            if (cat.includes('news') || cat.includes('analysis')) return 'tag-news';
+            if (cat.includes('tutorial') || cat.includes('video')) return 'tag-video';
+            if (cat.includes('paper')) return 'tag-paper';
+            if (cat.includes('tool') || cat.includes('repository') || cat.includes('code')) return 'tag-tool';
+            if (cat.includes('article')) return 'tag-article';
+            if (cat.includes('education')) return 'tag-education';
+            return 'tag-other';
+        }}
+        
+        // Render resources
+        function renderResources(filteredResources) {{
+            const grid = document.getElementById('resource-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (filteredResources.length === 0) {{
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                document.getElementById('visible-count').textContent = '0';
+                return;
+            }}
+            
+            noResults.style.display = 'none';
+            document.getElementById('visible-count').textContent = filteredResources.length;
+            
+            grid.innerHTML = filteredResources.map(r => `
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-title">${{r.title}}</div>
+                        <span class="category-tag ${{getCategoryClass(r.tag)}}">${{r.tag}}</span>
+                    </div>
+                    <div class="resource-description">${{r.description}}</div>
+                    <div class="resource-meta">
+                        <div class="meta-item">📅 ${{r.date}}</div>
+                        <div class="meta-item">👤 ${{r.author}}</div>
+                        <div class="meta-item">💬 ${{r.channel}}</div>
+                    </div>
+                    <div class="resource-links">
+                        <a href="${{r.resource_url}}" target="_blank" class="btn btn-primary">
+                            🔗 View Resource
+                        </a>
+                        ${{r.discord_url ? `<a href="${{r.discord_url}}" target="_blank" class="btn btn-secondary">💬 Discord</a>` : ''}}
+                    </div>
+                </div>
+            `).join('');
+        }}
+        
+        // Filter and sort
+        function filterAndSort() {{
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const sortBy = document.getElementById('sort-by').value;
+            
+            let filtered = resources.filter(r => {{
+                const matchesSearch = !searchTerm || 
+                    r.title.toLowerCase().includes(searchTerm) ||
+                    r.description.toLowerCase().includes(searchTerm) ||
+                    r.author.toLowerCase().includes(searchTerm) ||
+                    r.tag.toLowerCase().includes(searchTerm) ||
+                    r.channel.toLowerCase().includes(searchTerm);
+                
+                const matchesCategory = !categoryFilter || r.tag === categoryFilter;
+                
+                return matchesSearch && matchesCategory;
+            }});
+            
+            // Sort
+            filtered.sort((a, b) => {{
+                if (sortBy === 'date-desc') return b.date.localeCompare(a.date);
+                if (sortBy === 'date-asc') return a.date.localeCompare(b.date);
+                if (sortBy === 'title') return a.title.localeCompare(b.title);
+                return 0;
+            }});
+            
+            renderResources(filtered);
+        }}
+        
+        // Populate category filter
+        function populateCategoryFilter() {{
+            const categories = [...new Set(resources.map(r => r.tag))].sort();
+            const select = document.getElementById('category-filter');
+            categories.forEach(cat => {{
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                select.appendChild(option);
+            }});
+        }}
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {{
+            populateCategoryFilter();
+            renderResources(resources);
+            
+            document.getElementById('search').addEventListener('input', filterAndSort);
+            document.getElementById('category-filter').addEventListener('change', filterAndSort);
+            document.getElementById('sort-by').addEventListener('change', filterAndSort);
+        }});
+    </script>
+</body>
+</html>'''
+    
+    # Save HTML file
+    output_path = Path(__file__).parent.parent / 'docs' / 'resources.html'
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    print(f'✅ Created HTML file: {output_path}')
+    print(f'📊 {len(resources)} resources included')
+    print(f'\nYou can:')
+    print(f'  1. Open it locally: open {output_path}')
+    print(f'  2. Commit and push to GitHub')
+    print(f'  3. Enable GitHub Pages in repo settings')
+    print(f'  4. Share URL: https://YOUR-USERNAME.github.io/discord-bot-agentic/docs/resources.html')
+
+if __name__ == '__main__':
+    generate_html()
+
