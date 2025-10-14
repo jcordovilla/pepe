@@ -441,8 +441,8 @@ def generate_html():
 </body>
 </html>'''
     
-    # Save HTML file to docs/ directory
-    output_path = Path(__file__).parent.parent / 'docs' / 'resources.html'
+    # Save HTML file to docs/ directory as index.html (GitHub Pages homepage)
+    output_path = Path(__file__).parent.parent / 'docs' / 'index.html'
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(output_path, 'w', encoding='utf-8') as f:
