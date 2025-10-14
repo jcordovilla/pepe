@@ -22,7 +22,9 @@ class ResourceEnrichment:
     - Phase 2: Rich contextual description generation
     """
     
-    def __init__(self, use_gpt5: bool = True):
+    def __init__(self, use_gpt5: bool = False):
+        # Default to local LLM (use_gpt5=False) - works great and is free
+        # Set use_gpt5=True to use OpenAI API (requires OPENAI_API_KEY)
         self.gpt5 = GPT5Service(use_cache=True) if use_gpt5 else None
         self.scraper = WebScraper()
         self.use_gpt5 = use_gpt5
@@ -64,9 +66,13 @@ class ResourceEnrichment:
             # Step 1: Try extracting from Discord message context (FAST)
             message_content = message.get('content', '').strip()
             
-            if self._has_sufficient_context(message_content, url):
+            has_context = self._has_sufficient_context(message_content, url)
+            print(f"   🔍 Message context check: {has_context} (content: {len(message_content)} chars)")
+            
+            if has_context:
                 # Message has good context - use it directly
                 logger.debug(f"📝 Using message context for: {url}")
+                print(f"   📝 Attempting message-based extraction...")
                 title, description = await self._extract_from_message(url, message, channel_name)
                 
                 if title and description:
@@ -74,7 +80,10 @@ class ResourceEnrichment:
                     enriched['description'] = description
                     enriched['enrichment_method'].append('message_extraction')
                     self.stats['message_based'] += 1
+                    print(f"   ✅ Message-based extraction succeeded!")
                     return enriched
+                else:
+                    print(f"   ⚠️ Message-based extraction returned None, falling back to web scraping...")
             
             # Step 2: Fall back to web scraping if message has insufficient context
             logger.debug(f"🌐 Scraping metadata from: {url}")
@@ -160,32 +169,44 @@ TITLE: [title here]
 DESCRIPTION: [description here]"""
 
         try:
+            # GPT-5-mini uses reasoning tokens + output tokens
+            # Need MUCH higher limit: reasoning uses 200-500 tokens, then output needs space
             response = await self.gpt5.generate(
                 prompt=prompt,
                 temperature=1.0,
-                max_tokens=150
+                max_tokens=800  # High limit for reasoning + output
             )
             
-            # Parse response
+            print(f"   🤖 GPT-5 Response (full): [{response}]")
+            print(f"   📏 Response length: {len(response)} chars")
+            
+            # Parse response - handle both plain and markdown formatting
             lines = response.strip().split('\n')
             title = None
             description = None
             
             for line in lines:
-                if line.startswith('TITLE:'):
-                    title = line.replace('TITLE:', '').strip()
-                elif line.startswith('DESCRIPTION:'):
-                    description = line.replace('DESCRIPTION:', '').strip()
+                # Handle both "TITLE:" and "**TITLE:**" formats
+                line_clean = line.strip().replace('**', '').replace('*', '')
+                
+                if line_clean.startswith('TITLE:'):
+                    title = line_clean.replace('TITLE:', '').strip()
+                elif line_clean.startswith('DESCRIPTION:'):
+                    description = line_clean.replace('DESCRIPTION:', '').strip()
+            
+            print(f"   📋 Parsed - Title: {title}, Description: {description[:50] if description else None}...")
             
             if title and description:
                 self.stats['titles_generated'] += 1
                 self.stats['descriptions_generated'] += 1
                 return title, description
             
+            print(f"   ⚠️ Failed to parse title/description from GPT-5 response")
             return None, None
             
         except Exception as e:
             logger.warning(f"⚠️ Message extraction failed: {e}")
+            print(f"   ❌ Exception in message extraction: {e}")
             return None, None
     
     async def _get_title(
@@ -301,7 +322,7 @@ Generate a specific, informative title:"""
         title = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=30
+            max_tokens=600  # High limit for reasoning model + output
         )
         
         # Clean up the title
@@ -436,7 +457,7 @@ Description:"""
         description = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=150
+            max_tokens=1000  # High limit for reasoning model + output
         )
         
         return description.strip()
@@ -473,7 +494,7 @@ Enhanced description:"""
         enhanced = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=150
+            max_tokens=400  # Increased for reasoning tokens + output
         )
         
         return enhanced.strip()

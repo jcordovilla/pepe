@@ -23,8 +23,10 @@ class GPT5Service:
     
     def __init__(self, use_cache: bool = True):
         self.api_key = os.getenv('OPENAI_API_KEY')
-        # Use GPT-5-mini (latest cost-effective model from OpenAI)
-        self.model = os.getenv('OPENAI_MODEL', "gpt-5-mini")
+        # Default to gpt-4o-mini (best for this task - no reasoning token overhead)
+        # Note: GPT-5-mini uses ALL tokens for reasoning, leaving none for output
+        # Set OPENAI_MODEL=gpt-5-mini in .env to use GPT-5 (requires very high token limits)
+        self.model = os.getenv('OPENAI_MODEL', "gpt-4o-mini")
         self.base_url = "https://api.openai.com/v1/chat/completions"
         self.use_cache = use_cache
         self.cache: Dict[str, Any] = {}
@@ -42,8 +44,11 @@ class GPT5Service:
             'errors': 0
         }
         
-        if not self.api_key:
+        if self.api_key:
+            print(f"✅ GPT-5 Service initialized: model={self.model}, API key={'*' * 8}{self.api_key[-4:]}")
+        else:
             logger.warning("⚠️ OPENAI_API_KEY not found - will use local LLM fallback only")
+            print("⚠️ OPENAI_API_KEY not found - will use local LLM fallback only")
     
     def _get_cache_key(self, prompt: str, temperature: float) -> str:
         """Generate cache key from prompt and parameters"""
@@ -136,6 +141,12 @@ class GPT5Service:
         if temperature != 1.0:
             payload["temperature"] = temperature
         
+        # Note: GPT-5-mini uses reasoning tokens which consume the entire max_completion_tokens
+        # This may result in empty content if the model spends all tokens reasoning
+        # Consider using gpt-4o-mini for faster, more predictable results
+        
+        logger.debug(f"🔵 Calling OpenAI API: model={self.model}, tokens={max_tokens}, temp={temperature}")
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 self.base_url,
@@ -145,10 +156,16 @@ class GPT5Service:
             ) as response:
                 if response.status != 200:
                     error_text = await response.text()
+                    logger.error(f"❌ OpenAI API error {response.status}: {error_text}")
                     raise Exception(f"API returned {response.status}: {error_text}")
                 
                 data = await response.json()
-                return data['choices'][0]['message']['content'].strip()
+                content = data.get('choices', [{}])[0].get('message', {}).get('content', '').strip()
+                
+                if not content:
+                    logger.warning(f"⚠️ Empty response from OpenAI API. Full response: {data}")
+                
+                return content
     
     async def _call_local_llm(
         self,

@@ -39,20 +39,21 @@ except ImportError:
     print("⚠️ ResourceEnrichment not available - will use fallback methods")
 
 class FreshResourceDetector:
-    def __init__(self, use_fast_model: bool = True, use_gpt5: bool = True):
+    def __init__(self, use_fast_model: bool = True, use_gpt5: bool = False):
         # Model selection for resource detection
         self.use_fast_model = use_fast_model
         self.fast_model = os.getenv('LLM_FAST_MODEL', 'phi3:mini')  # Smaller, faster model
         self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
         
-        # NEW: GPT-5 enrichment service (Phase 1 & 2)
+        # NEW: Enrichment service (defaults to local LLM)
+        # Use --use-openai flag to enable OpenAI API (requires OPENAI_API_KEY)
         self.use_gpt5 = use_gpt5 and GPT5_AVAILABLE
         self.enrichment = ResourceEnrichment(use_gpt5=self.use_gpt5) if GPT5_AVAILABLE else None
         
         if self.use_gpt5 and self.enrichment:
-            print("✅ GPT-5 mini enrichment ENABLED for high-quality titles and descriptions")
+            print("✅ Using OpenAI API for enrichment (GPT-4o-mini)")
         else:
-            print("ℹ️ Using fallback methods for titles and descriptions")
+            print("✅ Using local LLM for enrichment (free, works great)")
         
         # Incremental processing tracking
         self.processed_urls_file = Path('data/processed_resources.json')
@@ -589,14 +590,14 @@ def main():
                        help='Use fast model (phi3:mini) for faster processing')
     parser.add_argument('--standard-model', action='store_true',
                        help='Use standard model (llama3.1:8b) for better quality')
-    parser.add_argument('--no-gpt5', action='store_true',
-                       help='Disable GPT-5 mini enrichment (use local LLM only)')
+    parser.add_argument('--use-openai', action='store_true',
+                       help='Use OpenAI API (gpt-4o-mini) for enrichment instead of local LLM')
     parser.add_argument('--reset-cache', action='store_true',
                        help='Reset processed URLs cache and reprocess all resources')
     args = parser.parse_args()
 
     use_fast_model = args.fast_model or (not args.standard_model)  # Default to fast model
-    use_gpt5 = not args.no_gpt5  # Default to using GPT-5
+    use_gpt5 = args.use_openai  # Default to local LLM (free)
 
     if args.reset_cache:
         cache_file = project_root / 'data' / 'processed_resources.json'
@@ -771,8 +772,9 @@ def main():
     # Process resources with enrichment
     if urls_to_process:
         print(f"\n📊 Step 2/3: Evaluating and enriching {len(urls_to_process):,} new resources...")
-        print("   🌐 Web scraping for metadata")
-        print("   🤖 GPT-5 mini for titles & descriptions" if detector.use_gpt5 else "   📝 Local LLM for descriptions")
+        print("   🌐 Web scraping for metadata (fallback)")
+        print("   📝 Message-based extraction (primary)")
+        print("   🤖 OpenAI API (GPT-4o-mini)" if detector.use_gpt5 else "   🤖 Local LLM (Ollama)")
         
         # Process in batches to show progress
         batch_size = 1  # Process one at a time for real-time progress
@@ -796,10 +798,12 @@ def main():
                         
                         postfix = {
                             "found": resources_found,
-                            "scraped": enrich_stats.get('titles_scraped', 0),
-                            "GPT-5": gpt5_stats.get('gpt5_calls', 0),
-                            "cached": gpt5_stats.get('gpt5_cached', 0)
+                            "msg_based": enrich_stats.get('message_based', 0),
+                            "scraped": enrich_stats.get('web_scraped', 0)
                         }
+                        if gpt5_stats:
+                            postfix["OpenAI"] = gpt5_stats.get('gpt5_calls', 0)
+                            postfix["cached"] = gpt5_stats.get('gpt5_cached', 0)
                     else:
                         postfix = {"found": resources_found}
                     
@@ -973,11 +977,11 @@ def main():
         print(f"   📝 Message-based extraction: {enrichment_stats['message_based']:,}")
         print(f"   🌐 Web scraping used: {enrichment_stats['web_scraped']:,}")
         print(f"   ✨ Titles from scraping: {enrichment_stats['titles_scraped']:,}")
-        print(f"   🤖 Titles from GPT-5: {enrichment_stats['titles_generated']:,}")
-        print(f"   📝 Descriptions from GPT-5: {enrichment_stats['descriptions_generated']:,}")
+        print(f"   🤖 Titles from LLM: {enrichment_stats['titles_generated']:,}")
+        print(f"   📝 Descriptions from LLM: {enrichment_stats['descriptions_generated']:,}")
         
         if gpt5_stats:
-            print(f"\n💰 GPT-5 API Usage:")
+            print(f"\n💰 OpenAI API Usage:")
             api_calls = gpt5_stats['gpt5_calls']
             cached = gpt5_stats['gpt5_cached']
             fallback = gpt5_stats['fallback_calls']
