@@ -441,8 +441,8 @@ def generate_html():
 </body>
 </html>'''
     
-    # Save HTML file to data/ directory
-    output_path = Path(__file__).parent.parent / 'data' / 'resources.html'
+    # Save HTML file to docs/ directory
+    output_path = Path(__file__).parent.parent / 'docs' / 'resources.html'
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(output_path, 'w', encoding='utf-8') as f:

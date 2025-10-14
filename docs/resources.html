@@ -323,7 +323,7 @@
         let resources = [];
         
         // Fetch resources data
-        fetch('resources-data.json')
+        fetch('../data/resources-data.json')
             .then(response => response.json())
             .then(data => {
                 resources = data.resources;
