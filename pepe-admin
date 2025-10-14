@@ -474,6 +474,7 @@ class PepeAdminSimplified:
             
             # Step 1: Detect resources
             print("\n📥 Step 1: Detecting resources from Discord messages...")
+            print("-" * 60)
             
             # Build command with options
             cmd = ["python3", "scripts/resource_detector.py"]
@@ -484,14 +485,15 @@ class PepeAdminSimplified:
             if reset_cache:
                 cmd.append("--reset-cache")
             
-            detect_result = subprocess.run(cmd, capture_output=True, text=True)
-            print(detect_result.stdout)
+            # Run without capturing output so progress bars show in real-time
+            detect_result = subprocess.run(cmd)
             if detect_result.returncode != 0:
-                print(f"❌ Resource detection failed: {detect_result.stderr}")
+                print(f"\n❌ Resource detection failed with exit code {detect_result.returncode}")
                 return False
             
             # Step 2: Migrate to enhanced database
             print("\n🔄 Step 2: Migrating resources to enhanced database...")
+            print("-" * 60)
             
             # Check if we have resources to migrate
             resources_file = Path("data/optimized_fresh_resources.json")
@@ -504,10 +506,10 @@ class PepeAdminSimplified:
             if reset_cache:
                 migrate_cmd.append("--reset-cache")
             
-            migrate_result = subprocess.run(migrate_cmd, capture_output=True, text=True)
-            print(migrate_result.stdout)
+            # Run without capturing output for real-time progress
+            migrate_result = subprocess.run(migrate_cmd)
             if migrate_result.returncode != 0:
-                print(f"❌ Resource migration failed: {migrate_result.stderr}")
+                print(f"\n❌ Resource migration failed with exit code {migrate_result.returncode}")
                 return False
             
             # Step 3: Show results

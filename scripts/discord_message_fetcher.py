@@ -119,9 +119,6 @@ class DiscordMessageFetcher:
                 text_channels = [ch for ch in channels if isinstance(ch, discord.TextChannel)]
                 forum_channels = [ch for ch in channels if isinstance(ch, discord.ForumChannel)]
                 
-<<<<<<< HEAD
-                print(f"📊 Found {len(text_channels)} text channels and {len(forum_channels)} forum channels")
-=======
                 # Detect new channels for incremental sync
                 known_text_channel_ids = set(self.checkpoint['channel_checkpoints'].keys())
                 known_forum_channel_ids = set(self.checkpoint['forum_checkpoints'].keys())
@@ -145,19 +142,14 @@ class DiscordMessageFetcher:
                 print(f"   • {len(text_channels) - len(new_text_channels)} existing text channels for incremental sync")
                 print(f"   • {len(new_forum_channels)} new forum channels to sync from beginning")
                 print(f"   • {len(forum_channels) - len(new_forum_channels)} existing forum channels for incremental sync")
->>>>>>> 5ab279a (Update resources data and add new scripts for resource management)
                 
                 # Process text channels
                 for channel in text_channels:
                     try:
-<<<<<<< HEAD
-                        print(f"📥 Fetching from #{channel.name}")
-=======
                         # Track if this is a new channel
                         is_new = str(channel.id) not in known_text_channel_ids
                         messages_before = stats['total_messages']
                         
->>>>>>> 5ab279a (Update resources data and add new scripts for resource management)
                         await self.fetch_channel_messages(channel, stats)
                         stats['text_channels'] += 1
                         
@@ -170,17 +162,6 @@ class DiscordMessageFetcher:
                         stats['errors'].append(error_msg)
                 
                 # Process forum channels
-<<<<<<< HEAD
-                for forum in forum_channels:
-                    try:
-                        print(f"📋 Fetching from forum #{forum.name}")
-                        await self.fetch_forum_messages(forum, stats)
-                        stats['forum_channels'] += 1
-                    except Exception as e:
-                        error_msg = f"Error fetching forum #{forum.name}: {e}"
-                        print(f"❌ {error_msg}")
-                        stats['errors'].append(error_msg)
-=======
                 if forum_channels:
                     print(f"\n📋 Processing {len(forum_channels)} forum channels...")
                     for forum in tqdm(forum_channels, desc="📋 Forum channels", unit="forum"):
@@ -199,7 +180,6 @@ class DiscordMessageFetcher:
                             error_msg = f"Error fetching forum #{forum.name}: {e}"
                             print(f"❌ {error_msg}")
                             stats['errors'].append(error_msg)
->>>>>>> 5ab279a (Update resources data and add new scripts for resource management)
                 
                 # Print final stats
                 print("\n📊 Fetch Complete!")
@@ -252,9 +232,6 @@ class DiscordMessageFetcher:
             if messages:
                 await self.insert_messages_batch(messages)
                 stats['total_messages'] += len(messages)
-<<<<<<< HEAD
-                print(f"   ✅ {len(messages)} messages from #{channel.name}")
-=======
             
             # Save checkpoint with last message ID
             # For empty channels, save the channel's last_message_id or a placeholder
@@ -275,7 +252,6 @@ class DiscordMessageFetcher:
                 print(f"   ✅ {message_count:,} new messages from #{channel.name}")
             else:
                 print(f"   ✅ {message_count:,} messages from #{channel.name}")
->>>>>>> 5ab279a (Update resources data and add new scripts for resource management)
                 
         except discord.Forbidden:
             print(f"   ⚠️ No permission to read #{channel.name}")
@@ -338,8 +314,6 @@ class DiscordMessageFetcher:
             if messages:
                 await self.insert_messages_batch(messages)
                 stats['total_messages'] += len(messages)
-<<<<<<< HEAD
-=======
             
             # Save checkpoint with last message ID
             # For empty threads, save the thread's last_message_id or a placeholder
@@ -359,7 +333,6 @@ class DiscordMessageFetcher:
                 print(f"       ✅ {message_count:,} new messages from thread {thread.name}")
             elif message_count > 0:
                 print(f"       ✅ {message_count:,} messages from thread {thread.name}")
->>>>>>> 5ab279a (Update resources data and add new scripts for resource management)
                 
         except discord.Forbidden:
             print(f"       ⚠️ No permission to read thread {thread.name}")

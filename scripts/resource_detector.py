@@ -661,50 +661,158 @@ def main():
         return
 
     print(f"✅ Loaded {len(messages):,} messages successfully")
-    print("🔍 Starting resource analysis...")
+    print("\n" + "="*80)
+    print("🔍 PHASE 1: RESOURCE EXTRACTION & QUALITY FILTERING")
+    print("="*80)
 
     # Analyze messages with progress bar and incremental logic
     skipped = 0
     processed = 0
     resources_found = 0
+    urls_extracted = 0
     
-    with tqdm(messages, desc="📝 Analyzing messages", unit="msg", position=0, leave=True) as msg_pbar:
-        for i, message in enumerate(msg_pbar):
+    # Create an async function for batch processing
+    async def process_resources_batch(resources_to_process):
+        """Process a batch of resources with async enrichment"""
+        for resource_data in resources_to_process:
+            url, message, channel_name = resource_data
+            resource = await process_single_resource(url, message, channel_name)
+            if resource:
+                detector.detected_resources.append(resource)
+        return len([r for r in resources_to_process if r])
+    
+    async def process_single_resource(url, message, channel_name):
+        """Process a single resource with enrichment"""
+        if detector._is_url_processed(url):
+            return None
+            
+        try:
+            parsed = urlparse(url)
+            domain = parsed.netloc.lower()
+            if domain.startswith('www.'):
+                domain = domain[4:]
+            if any(excluded in domain for excluded in detector.excluded_domains):
+                detector.stats['excluded_domains'] += 1
+                return None
+            domain_info = None
+            for hq_domain, info in detector.high_quality_domains.items():
+                if hq_domain in domain:
+                    domain_info = info
+                    break
+            if not domain_info:
+                path = parsed.path.lower()
+                quality_score = 0
+                for ext, score in detector.quality_extensions.items():
+                    if path.endswith(ext):
+                        quality_score = score
+                        domain_info = {'category': 'Documents', 'score': score}
+                        break
+                if not domain_info:
+                    detector.stats['unknown_domains'] += 1
+                    return None
+            
+            # Get basic metadata
+            author_display = message.get('author', {}).get('display_name') or message.get('author', {}).get('username', 'Unknown')
+            raw_ts = message.get('timestamp')
+            try:
+                ts = datetime.fromisoformat(raw_ts)
+                ts_str = ts.strftime('%Y-%m-%d')
+            except Exception:
+                ts_str = raw_ts[:10] if raw_ts else ''
+            jump_url = message.get('jump_url')
+            
+            # Use enhanced enrichment service (Phase 1 & 2)
+            if detector.enrichment:
+                enriched = await detector.enrichment.enrich_resource(url, message, channel_name)
+                title = enriched.get('title', detector._generate_fallback_title(url, domain))
+                description = enriched.get('description', detector._generate_description(message, url))
+            else:
+                title = detector._generate_fallback_title(url, domain)
+                description = detector._generate_description(message, url)
+            
+            resource = {
+                'url': url,
+                'domain': domain,
+                'title': title,
+                'category': domain_info['category'],
+                'quality_score': domain_info['score'],
+                'channel_name': channel_name,
+                'author': author_display,
+                'timestamp': ts_str,
+                'jump_url': jump_url,
+                'description': description
+            }
+            detector.stats['total_resources'] += 1
+            detector.stats[f'category_{domain_info["category"]}'] += 1
+            return resource
+        except Exception as e:
+            detector.stats['parsing_errors'] += 1
+            return None
+    
+    # Extract URLs first with progress bar
+    print("\n📊 Step 1/3: Extracting URLs from messages...")
+    urls_to_process = []
+    with tqdm(messages, desc="🔗 Extracting URLs", unit="msg", bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]') as url_pbar:
+        for message in url_pbar:
             content = message.get('content', '')
             if not content:
                 continue
-                
             urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
-            new_url_found = False
-            
+            urls_extracted += len(urls)
             for url in urls:
-                if detector._is_url_processed(url):
+                if not detector._is_url_processed(url):
+                    urls_to_process.append((url, message, message['channel_name']))
+                else:
                     skipped += 1
-                    continue
+            url_pbar.set_postfix({"URLs": urls_extracted, "unique": len(urls_to_process), "skipped": skipped})
+    
+    print(f"   ✅ Found {urls_extracted:,} total URLs ({len(urls_to_process):,} new, {skipped:,} already processed)")
+    
+    # Process resources with enrichment
+    if urls_to_process:
+        print(f"\n📊 Step 2/3: Evaluating and enriching {len(urls_to_process):,} new resources...")
+        print("   🌐 Web scraping for metadata")
+        print("   🤖 GPT-5 mini for titles & descriptions" if detector.use_gpt5 else "   📝 Local LLM for descriptions")
+        
+        # Process in batches to show progress
+        batch_size = 1  # Process one at a time for real-time progress
+        with tqdm(total=len(urls_to_process), desc="✨ Enriching resources", unit="resource", 
+                  bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]') as enrich_pbar:
+            for i in range(0, len(urls_to_process), batch_size):
+                batch = urls_to_process[i:i+batch_size]
+                # Process each resource individually for better progress tracking
+                for url_data in batch:
+                    url, message, channel_name = url_data
+                    resource = asyncio.run(process_single_resource(url, message, channel_name))
+                    if resource:
+                        detector.detected_resources.append(resource)
+                        resources_found += 1
+                        processed += 1
                     
-                resource = detector._evaluate_url(url, message, message['channel_name'], analyze_unknown=False)
-                if resource:
-                    detector.detected_resources.append(resource)
-                    detector.stats['total_resources'] += 1
-                    detector.stats[f'category_{resource["category"]}'] += 1
-                    processed += 1
-                    resources_found += 1
-                    new_url_found = True
-            
-            # Update progress bar with detailed stats
-            msg_pbar.set_postfix({
-                "processed": processed,
-                "skipped": skipped,
-                "resources": resources_found,
-                "progress": f"{i+1}/{len(messages)}"
-            })
-            
-            # Force update every 100 messages to ensure progress is visible
-            if (i + 1) % 100 == 0:
-                msg_pbar.refresh()
-
-    print(f"\n✅ Analysis complete!")
-    print(f"📊 Results: {resources_found} new resources found, {skipped} URLs skipped (already processed)")
+                    # Get enrichment stats
+                    if detector.enrichment:
+                        enrich_stats = detector.enrichment.get_stats()
+                        gpt5_stats = detector.enrichment.gpt5.get_stats() if detector.enrichment.gpt5 else {}
+                        
+                        postfix = {
+                            "found": resources_found,
+                            "scraped": enrich_stats.get('titles_scraped', 0),
+                            "GPT-5": gpt5_stats.get('gpt5_calls', 0),
+                            "cached": gpt5_stats.get('gpt5_cached', 0)
+                        }
+                    else:
+                        postfix = {"found": resources_found}
+                    
+                    enrich_pbar.set_postfix(postfix)
+                    enrich_pbar.update(1)
+        
+        print(f"   ✅ Successfully enriched {resources_found:,} high-quality resources")
+    
+    print(f"\n📊 Step 3/3: Finalizing and saving results...")
+    print(f"\n✅ Resource extraction complete!")
+    print(f"   📦 Total resources found: {resources_found:,}")
+    print(f"   ⏭️  URLs skipped (cached): {skipped:,}")
+    print(f"   ❌ URLs filtered out: {detector.stats.get('excluded_domains', 0) + detector.stats.get('unknown_domains', 0):,}")
 
     # Progress bar for description generation (for any resources missing description)
     resources_to_describe = [r for r in detector.detected_resources if not r.get('description') or r['description'].startswith('AI/ML resource from')]
@@ -771,30 +879,50 @@ def main():
         if llm_success_count > 0:
             print(f"   📊 LLM success rate: {(llm_success_count / len(resources_to_describe)) * 100:.1f}%")
 
-    print("💾 Saving processed URLs for incremental processing...")
+    print("\n" + "="*80)
+    print("💾 PHASE 2: SAVING RESULTS")
+    print("="*80)
+    
+    print("\n📝 Saving checkpoint data...")
     detector._save_processed_urls()
+    print("   ✅ Checkpoint saved for incremental updates")
 
-    print("📄 Saving results to files...")
+    print("\n📄 Generating final report and saving to files...")
     # Save results to JSON file
     output_path = project_root / 'data' / 'optimized_fresh_resources.json'
-    report = detector.save_resources(output_path, analyze_unknown=False)
+    
+    # Show progress while saving
+    with tqdm(total=3, desc="💾 Saving files", bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}') as save_pbar:
+        save_pbar.set_postfix({"file": "report"})
+        report = detector.save_resources(output_path, analyze_unknown=False)
+        save_pbar.update(1)
 
-    # Also save a simplified export file with just the resources list
-    export_path = project_root / 'data' / 'resources_export.json'
-    export_data = {
-        'export_date': datetime.now().isoformat(),
-        'total_resources': len(report['resources']),
-        'resources': report['resources']
-    }
-    with open(export_path, 'w', encoding='utf-8') as f:
-        json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
-    print(f"📄 Export file created: {export_path}")
+        # Also save a simplified export file with just the resources list
+        save_pbar.set_postfix({"file": "export"})
+        export_path = project_root / 'data' / 'resources_export.json'
+        export_data = {
+            'export_date': datetime.now().isoformat(),
+            'total_resources': len(report['resources']),
+            'resources': report['resources']
+        }
+        with open(export_path, 'w', encoding='utf-8') as f:
+            json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
+        save_pbar.update(1)
+        
+        save_pbar.set_postfix({"file": "complete"})
+        save_pbar.update(1)
+    
+    print(f"   ✅ Files saved successfully:")
 
-    print(f"\n🎯 FINAL OPTIMIZED RESULTS:")
-    print(f"✅ Found {report['statistics']['total_found']} high-quality resources!")
-    print(f"⏭️ Skipped (already processed): {skipped}")
-    print(f"❌ Excluded {report['statistics']['excluded_count']} low-quality URLs")
-    print(f"❓ Unknown domains: {report['statistics']['unknown_count']}")
+    print("\n" + "="*80)
+    print("📊 FINAL SUMMARY")
+    print("="*80)
+    
+    print(f"\n🎯 Resource Discovery:")
+    print(f"   ✅ High-quality resources: {report['statistics']['total_found']:,}")
+    print(f"   ⏭️  Already processed: {skipped:,}")
+    print(f"   ❌ Filtered out: {report['statistics']['excluded_count']:,}")
+    print(f"   ❓ Unknown domains: {report['statistics']['unknown_count']:,}")
 
     # Quality assessment
     stats = report['statistics']
@@ -835,30 +963,54 @@ def main():
     print(f"   • Detailed report: {output_path}")
     print(f"   • Export file: {export_path}")
     
-    # NEW: Display enrichment statistics
+    # NEW: Display enrichment statistics with better formatting
     if detector.enrichment:
         enrichment_stats = detector.enrichment.get_stats()
         gpt5_stats = detector.enrichment.gpt5.get_stats() if detector.enrichment.gpt5 else None
         
-        print(f"\n🤖 GPT-5 Mini Enrichment Statistics:")
-        print(f"   Total resources processed: {enrichment_stats['total_processed']}")
-        print(f"   Titles from web scraping: {enrichment_stats['titles_scraped']}")
-        print(f"   Titles generated by GPT-5: {enrichment_stats['titles_generated']}")
-        print(f"   Descriptions by GPT-5: {enrichment_stats['descriptions_generated']}")
+        print(f"\n🤖 Enrichment Performance:")
+        print(f"   📦 Resources processed: {enrichment_stats['total_processed']:,}")
+        print(f"   📝 Message-based extraction: {enrichment_stats['message_based']:,}")
+        print(f"   🌐 Web scraping used: {enrichment_stats['web_scraped']:,}")
+        print(f"   ✨ Titles from scraping: {enrichment_stats['titles_scraped']:,}")
+        print(f"   🤖 Titles from GPT-5: {enrichment_stats['titles_generated']:,}")
+        print(f"   📝 Descriptions from GPT-5: {enrichment_stats['descriptions_generated']:,}")
         
         if gpt5_stats:
-            print(f"\n📊 GPT-5 API Usage:")
-            print(f"   API calls made: {gpt5_stats['gpt5_calls']}")
-            print(f"   Cached responses: {gpt5_stats['gpt5_cached']}")
-            print(f"   Fallback to local LLM: {gpt5_stats['fallback_calls']}")
-            print(f"   Errors: {gpt5_stats['errors']}")
+            print(f"\n💰 GPT-5 API Usage:")
+            api_calls = gpt5_stats['gpt5_calls']
+            cached = gpt5_stats['gpt5_cached']
+            fallback = gpt5_stats['fallback_calls']
+            errors = gpt5_stats['errors']
             
-            total_calls = gpt5_stats['gpt5_calls'] + gpt5_stats['gpt5_cached']
+            print(f"   🔵 New API calls: {api_calls:,}")
+            print(f"   🟢 Cached responses: {cached:,}")
+            print(f"   🟡 Fallback to local LLM: {fallback:,}")
+            if errors > 0:
+                print(f"   🔴 Errors: {errors:,}")
+            
+            total_calls = api_calls + cached
             if total_calls > 0:
-                cache_rate = (gpt5_stats['gpt5_cached'] / total_calls) * 100
-                estimated_cost = gpt5_stats['gpt5_calls'] * 0.02  # ~$0.02 per resource
-                print(f"   Cache hit rate: {cache_rate:.1f}%")
-                print(f"   Estimated cost: ${estimated_cost:.2f}")
+                cache_rate = (cached / total_calls) * 100
+                estimated_cost = api_calls * 0.02  # ~$0.02 per resource
+                savings = cached * 0.02
+                print(f"\n   📊 Efficiency:")
+                print(f"      • Cache hit rate: {cache_rate:.1f}%")
+                print(f"      • API cost: ${estimated_cost:.2f}")
+                print(f"      • Cache savings: ${savings:.2f}")
+                print(f"      • Total saved: ${savings:.2f} ({cached:,} cached calls)")
+    
+    # Final completion banner
+    print("\n" + "="*80)
+    print("✅ RESOURCE DETECTION COMPLETE!")
+    print("="*80)
+    print(f"\n📂 Output files ready:")
+    print(f"   {output_path}")
+    print(f"   {export_path}")
+    
+    if recommendation == "PROCEED":
+        print(f"\n🚀 Next step: Review and import resources")
+        print(f"   The detected resources are ready for use!")
     
     return report
 

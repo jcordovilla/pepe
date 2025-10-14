@@ -29,6 +29,8 @@ class ResourceEnrichment:
         
         self.stats = {
             'total_processed': 0,
+            'message_based': 0,
+            'web_scraped': 0,
             'titles_scraped': 0,
             'titles_generated': 0,
             'descriptions_generated': 0,
@@ -42,7 +44,9 @@ class ResourceEnrichment:
         channel_name: str
     ) -> Dict[str, Any]:
         """
-        Complete resource enrichment pipeline
+        Complete resource enrichment pipeline - Hybrid approach
+        1. Try message-based extraction first (fast)
+        2. Fall back to web scraping only if needed
         Returns: {title, description, metadata}
         """
         
@@ -57,18 +61,35 @@ class ResourceEnrichment:
         }
         
         try:
-            # Step 1: Scrape web page for metadata
+            # Step 1: Try extracting from Discord message context (FAST)
+            message_content = message.get('content', '').strip()
+            
+            if self._has_sufficient_context(message_content, url):
+                # Message has good context - use it directly
+                logger.debug(f"📝 Using message context for: {url}")
+                title, description = await self._extract_from_message(url, message, channel_name)
+                
+                if title and description:
+                    enriched['title'] = title
+                    enriched['description'] = description
+                    enriched['enrichment_method'].append('message_extraction')
+                    self.stats['message_based'] += 1
+                    return enriched
+            
+            # Step 2: Fall back to web scraping if message has insufficient context
             logger.debug(f"🌐 Scraping metadata from: {url}")
             scraped = await self.scraper.extract_metadata(url)
             enriched['scraped_metadata'] = scraped
             
-            # Step 2: Extract or generate title
+            # Step 3: Extract or generate title
             title = await self._get_title(url, message, channel_name, scraped)
             enriched['title'] = title
             
-            # Step 3: Generate rich description
+            # Step 4: Generate rich description
             description = await self._get_description(url, message, channel_name, scraped, title)
             enriched['description'] = description
+            enriched['enrichment_method'].append('web_scraping')
+            self.stats['web_scraped'] += 1
             
             return enriched
             
@@ -82,6 +103,90 @@ class ResourceEnrichment:
             enriched['enrichment_method'].append('fallback')
             
             return enriched
+    
+    def _has_sufficient_context(self, message_content: str, url: str) -> bool:
+        """Check if Discord message has enough context to extract title/description"""
+        if not message_content:
+            return False
+        
+        # Remove the URL from message to see how much text remains
+        text_without_url = message_content.replace(url, '').strip()
+        
+        # Need at least 20 characters of text beyond the URL
+        if len(text_without_url) < 20:
+            return False
+        
+        # Need at least 3 words
+        word_count = len(text_without_url.split())
+        if word_count < 3:
+            return False
+        
+        return True
+    
+    async def _extract_from_message(
+        self,
+        url: str,
+        message: Dict[str, Any],
+        channel_name: str
+    ) -> tuple[str, str]:
+        """
+        Extract title and description from Discord message using GPT-5 mini
+        Returns: (title, description)
+        """
+        
+        if not self.use_gpt5 or not self.gpt5:
+            return None, None
+        
+        message_content = message.get('content', '')
+        author = message.get('author', {}).get('display_name', 'Unknown')
+        domain = urlparse(url).netloc
+        
+        # Lean prompt focused on message content
+        prompt = f"""Extract a title and description for this shared resource based on the Discord message.
+
+URL: {url}
+Domain: {domain}
+Message: "{message_content}"
+Shared by: {author} in #{channel_name}
+
+Requirements:
+- Title: 5-12 words, sober and factual, no superlatives or adjectives like "great", "amazing", "excellent"
+- Description: 40-80 words, concise but informative, explain what it is and why it's relevant
+- Use information from the message, not assumptions
+- If message is vague, be direct about what you know
+
+Format your response as:
+TITLE: [title here]
+DESCRIPTION: [description here]"""
+
+        try:
+            response = await self.gpt5.generate(
+                prompt=prompt,
+                temperature=1.0,
+                max_tokens=150
+            )
+            
+            # Parse response
+            lines = response.strip().split('\n')
+            title = None
+            description = None
+            
+            for line in lines:
+                if line.startswith('TITLE:'):
+                    title = line.replace('TITLE:', '').strip()
+                elif line.startswith('DESCRIPTION:'):
+                    description = line.replace('DESCRIPTION:', '').strip()
+            
+            if title and description:
+                self.stats['titles_generated'] += 1
+                self.stats['descriptions_generated'] += 1
+                return title, description
+            
+            return None, None
+            
+        except Exception as e:
+            logger.warning(f"⚠️ Message extraction failed: {e}")
+            return None, None
     
     async def _get_title(
         self,
@@ -195,7 +300,7 @@ Generate a specific, informative title:"""
 
         title = await self.gpt5.generate(
             prompt=prompt,
-            temperature=0.3,
+            temperature=1.0,  # GPT-5-mini requires default temperature
             max_tokens=30
         )
         
@@ -330,7 +435,7 @@ Description:"""
 
         description = await self.gpt5.generate(
             prompt=prompt,
-            temperature=0.4,
+            temperature=1.0,  # GPT-5-mini requires default temperature
             max_tokens=150
         )
         
@@ -367,7 +472,7 @@ Enhanced description:"""
 
         enhanced = await self.gpt5.generate(
             prompt=prompt,
-            temperature=0.3,
+            temperature=1.0,  # GPT-5-mini requires default temperature
             max_tokens=150
         )
         
@@ -413,6 +518,8 @@ Enhanced description:"""
         """Reset statistics"""
         self.stats = {
             'total_processed': 0,
+            'message_based': 0,
+            'web_scraped': 0,
             'titles_scraped': 0,
             'titles_generated': 0,
             'descriptions_generated': 0,

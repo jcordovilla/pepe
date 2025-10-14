@@ -1,0 +1,48 @@
+{
+  "database_path": "data/discord_messages.db",
+  "bot_api_endpoint": "http://localhost:8000",
+  "output_directory": "tests/performance_test_suite/data",
+  "sample_percentage": 0.15,
+  "query_count": 30,
+  "enable_error_scenarios": true,
+  "save_intermediate_results": true,
+  "logging": {
+    "level": "INFO",
+    "file": "tests/performance_test_suite/performance_test.log",
+    "console": true
+  },
+  "evaluation": {
+    "weights": {
+      "relevance": 0.25,
+      "format": 0.20,
+      "completeness": 0.20,
+      "coherence": 0.15,
+      "semantic_similarity": 0.15,
+      "performance": 0.05
+    },
+    "thresholds": {
+      "excellent": 0.9,
+      "good": 0.7,
+      "fair": 0.5,
+      "poor": 0.3
+    }
+  },
+  "performance": {
+    "timeout_seconds": 30,
+    "max_retries": 3,
+    "delay_between_queries": 1.0
+  },
+  "content_analysis": {
+    "min_sample_size": 1000,
+    "max_sample_size": 10000,
+    "topic_keywords": {
+      "ai_ml": ["ai", "machine learning", "neural", "model", "training", "gpt", "llm"],
+      "programming": ["python", "javascript", "code", "programming", "development", "bug", "api"],
+      "discussion": ["think", "opinion", "believe", "discuss", "consider", "thoughts"],
+      "questions": ["how", "what", "why", "when", "where", "can", "could", "should"],
+      "resources": ["link", "url", "documentation", "tutorial", "guide", "article"],
+      "technical": ["docker", "kubernetes", "deployment", "ci/cd", "database", "server"],
+      "community": ["community", "help", "support", "welcome", "introduction"]
+    }
+  }
+} 

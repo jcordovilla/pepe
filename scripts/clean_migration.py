@@ -95,6 +95,12 @@ class CleanResourceMigration:
             # Generate migration report
             migration_report = await self._generate_migration_report()
             
+            # Export to resources-data.json for HTML generation
+            await self._export_to_json()
+            
+            # Generate HTML file
+            await self._generate_html()
+            
             self.stats['end_time'] = datetime.now()
             
             print("\n🎉 Clean migration completed successfully!")
@@ -386,6 +392,81 @@ class CleanResourceMigration:
                 print(f"    • {url}: {count} instances")
         else:
             print("  ✅ No duplicate URLs found")
+    
+    async def _export_to_json(self):
+        """Export resources to resources-data.json for HTML generation"""
+        print("\n📄 Exporting resources to JSON...")
+        
+        try:
+            # Get all resources from enhanced database
+            conn = sqlite3.connect("data/enhanced_resources.db")
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                SELECT 
+                    url,
+                    title,
+                    description,
+                    type,
+                    quality_score,
+                    author_name as author,
+                    channel_name as channel,
+                    DATE(shared_date) as date,
+                    discord_url
+                FROM resources
+                ORDER BY shared_date DESC
+            """)
+            
+            resources = []
+            for idx, row in enumerate(cursor.fetchall(), 1):
+                resources.append({
+                    'id': idx,
+                    'title': row['title'] or 'Untitled Resource',
+                    'description': row['description'] or 'No description available.',
+                    'date': row['date'] or datetime.now().strftime('%Y-%m-%d'),
+                    'author': row['author'] or 'Unknown',
+                    'channel': row['channel'] or 'general',
+                    'tag': row['type'] or 'Other',
+                    'resource_url': row['url'],
+                    'discord_url': row['discord_url'] or ''
+                })
+            
+            conn.close()
+            
+            # Create export data structure
+            export_data = {
+                'export_date': datetime.now().isoformat(),
+                'total_resources': len(resources),
+                'resources': resources
+            }
+            
+            # Save to resources-data.json
+            output_path = Path("data/resources-data.json")
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(export_data, f, indent=2, ensure_ascii=False)
+            
+            print(f"  ✅ Exported {len(resources)} resources to {output_path}")
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to export resources to JSON: {e}")
+            raise
+    
+    async def _generate_html(self):
+        """Generate HTML file from resources-data.json"""
+        print("\n🌐 Generating HTML file...")
+        
+        try:
+            # Import and run the HTML generator
+            from generate_resources_html import generate_html
+            
+            output_path = generate_html()
+            print(f"  ✅ HTML file generated at {output_path}")
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to generate HTML: {e}")
+            # Don't raise - HTML generation failure shouldn't stop migration
+            print(f"  ⚠️ HTML generation failed: {e}")
     
     async def _generate_migration_report(self) -> Dict[str, Any]:
         """Generate comprehensive migration report"""

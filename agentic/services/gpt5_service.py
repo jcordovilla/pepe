@@ -23,7 +23,8 @@ class GPT5Service:
     
     def __init__(self, use_cache: bool = True):
         self.api_key = os.getenv('OPENAI_API_KEY')
-        self.model = "gpt-5-mini"
+        # Use GPT-5-mini (latest cost-effective model from OpenAI)
+        self.model = os.getenv('OPENAI_MODEL', "gpt-5-mini")
         self.base_url = "https://api.openai.com/v1/chat/completions"
         self.use_cache = use_cache
         self.cache: Dict[str, Any] = {}
@@ -128,9 +129,12 @@ class GPT5Service:
         payload = {
             "model": self.model,
             "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens
+            "max_completion_tokens": max_tokens
         }
+        
+        # Only add temperature if not default (some models don't support custom temperature)
+        if temperature != 1.0:
+            payload["temperature"] = temperature
         
         async with aiohttp.ClientSession() as session:
             async with session.post(
