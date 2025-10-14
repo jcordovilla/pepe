@@ -217,7 +217,7 @@
         }
         
         .btn-primary {
-            background: #657d96;
+            background: #667eea;
             color: white;
         }
         
@@ -315,15 +315,15 @@
     </div>
     
     <footer>
-        Generated from Discord Bot · Last updated October 10, 2025
+        Generated from Discord Bot · Last updated October 15, 2025
     </footer>
     
     <script>
-        // Load resources from JSON file
+        // Load resources dynamically from JSON file
         let resources = [];
         
         // Fetch resources data
-        fetch('../data/resources-data.json')
+        fetch('resources-data.json')
             .then(response => response.json())
             .then(data => {
                 resources = data.resources;
@@ -335,7 +335,7 @@
                 document.getElementById('resource-grid').innerHTML = '<div class="no-results">Error loading resources. Please refresh the page.</div>';
             });
         
-        // Placeholder for initial load
+        // Placeholder to avoid errors before data loads
         
         // Get category tag class
         function getCategoryClass(category) {
@@ -428,6 +428,7 @@
             });
         }
         
+        // Initialize
         // Initialize app after resources are loaded
         function initializeApp() {
             populateCategoryFilter();

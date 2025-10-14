@@ -453,19 +453,27 @@ class CleanResourceMigration:
             raise
     
     async def _generate_html(self):
-        """Generate HTML file from resources-data.json"""
-        print("\n🌐 Generating HTML file...")
+        """Copy resources-data.json to docs/ for HTML to load dynamically"""
+        print("\n🌐 Copying resources data for HTML...")
         
         try:
-            # Import and run the HTML generator
-            from generate_resources_html import generate_html
+            import shutil
+            from pathlib import Path
             
-            output_path = generate_html()
-            print(f"  ✅ HTML file generated at {output_path}")
+            # Copy resources-data.json to docs/ so GitHub Pages can serve it
+            source = Path('data/resources-data.json')
+            dest = Path('docs/resources-data.json')
+            
+            if source.exists():
+                shutil.copy2(source, dest)
+                print(f"  ✅ Copied resources data to {dest}")
+                print(f"  💡 HTML will load data dynamically (preserves custom styles)")
+            else:
+                print(f"  ⚠️ Source file not found: {source}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to generate HTML: {e}")
-            # Don't raise - HTML generation failure shouldn't stop migration
+            logger.error(f"❌ Failed to copy resources data: {e}")
+            # Don't raise - this shouldn't stop migration
             print(f"  ⚠️ HTML generation failed: {e}")
     
     async def _generate_migration_report(self) -> Dict[str, Any]:
