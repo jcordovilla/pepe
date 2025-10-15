@@ -231,10 +231,43 @@ class FreshResourceDetector:
         
         return self._generate_report(analyze_unknown)
     
+    def _is_bot_author(self, message: Dict[str, Any]) -> bool:
+        """Check if author is a bot using the proper bot flag from raw_data"""
+        # First try to get bot status from raw_data (most reliable)
+        raw_data = message.get('raw_data')
+        if raw_data:
+            try:
+                raw_json = json.loads(raw_data)
+                author_data = raw_json.get('author', {})
+                if 'bot' in author_data:
+                    return author_data['bot']
+            except (json.JSONDecodeError, TypeError):
+                pass
+        
+        # Fallback to string matching if raw_data unavailable or malformed
+        author = message.get('author', {})
+        if isinstance(author, dict):
+            author_name = author.get('username', '').lower()
+            return 'pepe' in author_name or 'bot' in author_name
+        else:
+            author_name = str(author).lower()
+            return 'pepe' in author_name or 'bot' in author_name
+
     def _analyze_message(self, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False):
         """Analyze a single message for resources"""
         content = message.get('content', '')
         if not content:
+            return
+        
+        # Filter out bot messages using robust bot detection
+        if self._is_bot_author(message):
+            self.stats['bot_messages_skipped'] = self.stats.get('bot_messages_skipped', 0) + 1
+            return
+        
+        # Filter out test/playground channels
+        channel_lower = channel_name.lower()
+        if any(keyword in channel_lower for keyword in ['pg', 'playground', 'test']):
+            self.stats['test_channel_messages_skipped'] = self.stats.get('test_channel_messages_skipped', 0) + 1
             return
         
         # Extract URLs from message content
@@ -286,7 +319,7 @@ class FreshResourceDetector:
                     "num_predict": 100,  # Ollama uses num_predict instead of max_tokens
                     "stop": ["\n\n", "---"]  # Stop tokens to prevent rambling
                 }
-            }, timeout=20)  # Increase timeout for better quality
+            }, timeout=30)  # Increase timeout for better quality
             
             if response.status_code == 200:
                 data = response.json()
@@ -309,6 +342,7 @@ class FreshResourceDetector:
                     
                     return description
                 else:
+                    print(f"⚠️ LLM returned empty response for {url[:50]}...")
                     return self._generate_fallback_description(url, domain, content)
             else:
                 print(f"⚠️ LLM API error (status {response.status_code}) for {url[:50]}...")
@@ -351,29 +385,43 @@ class FreshResourceDetector:
         # Create intelligent fallback descriptions based on URL patterns
         if 'arxiv.org' in domain:
             paper_id = parsed_url.path.split('/')[-1] if parsed_url.path else "unknown"
-            return f"Research paper from arXiv - {paper_id}"
+            return f"Research paper from arXiv ({paper_id}) - Academic research in artificial intelligence and machine learning"
         elif 'github.com' in domain:
             repo_path = parsed_url.path.strip('/')
-            return f"GitHub repository: {repo_path}"
+            return f"GitHub repository: {repo_path} - Open source code and development resources"
         elif 'huggingface.co' in domain:
             path_parts = parsed_url.path.strip('/').split('/')
             if len(path_parts) >= 2:
-                return f"Hugging Face {path_parts[0]}: {'/'.join(path_parts[1:])}"
-            return "Hugging Face AI/ML resource"
+                return f"Hugging Face {path_parts[0]}: {'/'.join(path_parts[1:])} - AI models, datasets, and machine learning resources"
+            return "Hugging Face AI/ML resource - Pre-trained models and datasets for machine learning"
         elif 'youtube.com' in domain or 'youtu.be' in domain:
-            return "Educational video content from YouTube"
+            return "Educational video content from YouTube - Tutorials, lectures, and educational material"
         elif '.pdf' in url.lower():
             filename = parsed_url.path.split('/')[-1] if parsed_url.path else "document"
-            return f"PDF document: {filename}"
-        elif any(news_domain in domain for news_domain in ['techcrunch.com', 'theverge.com', 'wired.com']):
-            return f"Tech news article from {domain}"
+            return f"PDF document: {filename} - Research paper, documentation, or educational material"
+        elif any(news_domain in domain for news_domain in ['techcrunch.com', 'theverge.com', 'wired.com', 'arstechnica.com']):
+            return f"Tech news article from {domain} - Latest technology news and analysis"
+        elif 'deeplearning.ai' in domain:
+            return f"DeepLearning.AI course - Professional AI and machine learning education"
+        elif 'status.' in domain:
+            return f"Service status page for {domain} - Real-time system status and updates"
+        elif 'docs.google.com' in domain:
+            return f"Google Docs presentation - Collaborative document or presentation"
+        elif 'hal.science' in domain:
+            return f"Research paper from HAL (Hyper Articles en Ligne) - Academic research repository"
+        elif 'mural.co' in domain:
+            return f"Mural workspace - Collaborative visual workspace for teams"
+        elif 'mit.edu' in domain:
+            return f"MIT resource - Academic content from Massachusetts Institute of Technology"
+        elif 'senedd.wales' in domain:
+            return f"Welsh Parliament document - Official government documentation"
         else:
-            # Extract meaningful info from URL structure
+            # Extract meaningful info from URL structure and provide more context
             if parsed_url.path and len(parsed_url.path) > 1:
                 path_parts = [p for p in parsed_url.path.split('/') if p]
                 if path_parts:
-                    return f"Resource from {domain}: {'/'.join(path_parts[:2])}"
-            return f"Resource from {domain}"
+                    return f"Resource from {domain} - {path_parts[0].replace('_', ' ').replace('-', ' ').title()}"
+            return f"Resource from {domain} - Web-based content and information"
 
     def _evaluate_url(self, url: str, message: Dict[str, Any], channel_name: str, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Evaluate if a URL is a high-quality resource"""
@@ -437,20 +485,13 @@ class FreshResourceDetector:
                 description = self._generate_description(message, url)
             
             resource = {
-                'url': url,
-                'domain': domain,
-                'title': title,  # NEW: Add title field
-                'category': domain_info['category'],
-                'quality_score': domain_info['score'],
-                'channel_name': channel_name,
-                'author': author_display,
-                'timestamp': ts_str,
-                'jump_url': jump_url,
+                'id': len(self.detected_resources) + 1,  # Simple ID
+                'resource_url': url,  # HTML expects this field
+                'title': title,
+                'tag': domain_info['category'],  # HTML expects this field
+                'date': ts_str,  # HTML expects this field
                 'description': description
             }
-            content_lower = message.get('content', '').lower()
-            if any(keyword in content_lower for keyword in ['paper', 'research', 'study', 'tutorial']):
-                resource['quality_score'] = min(1.0, resource['quality_score'] + 0.1)
             return resource
         except Exception as e:
             self.stats['parsing_errors'] += 1
@@ -459,26 +500,27 @@ class FreshResourceDetector:
     def _generate_report(self, analyze_unknown: bool = False) -> Dict[str, Any]:
         """Generate comprehensive analysis report"""
         
-        # Sort resources by quality score
-        sorted_resources = sorted(self.detected_resources, key=lambda x: x['quality_score'], reverse=True)
+        # Sort resources by date (newest first)
+        sorted_resources = sorted(self.detected_resources, key=lambda x: x.get('date', ''), reverse=True)
         
         # Generate statistics
-        category_stats = Counter([r['category'] for r in sorted_resources])
-        domain_stats = Counter([r['domain'] for r in sorted_resources])
-        channel_stats = Counter([r['channel_name'] for r in sorted_resources])
+        category_stats = Counter([r['tag'] for r in sorted_resources])
         
-        # Calculate quality distribution
+        # Simple quality distribution based on resource count
+        total_resources = len(sorted_resources)
         quality_distribution = {
-            'excellent': len([r for r in sorted_resources if r['quality_score'] >= 0.9]),
-            'high': len([r for r in sorted_resources if 0.8 <= r['quality_score'] < 0.9]),
-            'good': len([r for r in sorted_resources if 0.7 <= r['quality_score'] < 0.8]),
-            'fair': len([r for r in sorted_resources if r['quality_score'] < 0.7])
+            'excellent': total_resources,  # All resources are considered high quality
+            'high': 0,
+            'good': 0,
+            'fair': 0
         }
         
         print("\n📊 Fresh Resource Detection Results")
         print("=" * 40)
         print(f"✅ High-quality resources found: {len(sorted_resources)}")
         print(f"⏭️ Skipped (already processed): {self.stats.get('skipped_processed', 0)}")
+        print(f"🤖 Bot messages skipped: {self.stats.get('bot_messages_skipped', 0)}")
+        print(f"🧪 Test channel messages skipped: {self.stats.get('test_channel_messages_skipped', 0)}")
         print(f"❌ Excluded low-quality URLs: {self.stats['excluded_domains']}")
         print(f"❓ Unknown domains skipped: {self.stats['unknown_domains']}")
         print(f"⚠️ Parsing errors: {self.stats['parsing_errors']}")
@@ -525,20 +567,20 @@ class FreshResourceDetector:
         
         print("\n📄 Top 10 Resources:")
         for i, resource in enumerate(sorted_resources[:10]):
-            print(f"   {i+1}. [{resource['category']}] {resource['url']}")
-            print(f"      Quality: {resource['quality_score']:.2f} | Author: {resource['author']}")
+            print(f"   {i+1}. [{resource['tag']}] {resource['resource_url']}")
+            print(f"      Date: {resource['date']}")
             print(f"      Description: {resource['description'][:80]}...")
             print()
         
         return {
+            'export_date': datetime.now().isoformat(),
+            'total_resources': len(sorted_resources),
             'resources': sorted_resources,
             'statistics': {
                 'total_found': len(sorted_resources),
                 'excluded_count': self.stats['excluded_domains'],
                 'unknown_count': self.stats['unknown_domains'],
                 'categories': dict(category_stats),
-                'domains': dict(domain_stats),
-                'channels': dict(channel_stats),
                 'quality_distribution': quality_distribution
             },
             'unknown_domains': dict(self.unknown_domains) if analyze_unknown else {}
@@ -574,9 +616,84 @@ class FreshResourceDetector:
         if pdf_domains:
             print(f"   📄 PDF hosts ({len(pdf_domains)}): {', '.join(pdf_domains[:5])}...")
     
+    def _deduplicate_resources(self, resources: List[Dict]) -> List[Dict]:
+        """Remove duplicate resources based on URL and title similarity"""
+        if not resources:
+            return resources
+            
+        seen_urls = set()
+        seen_titles = set()
+        unique_resources = []
+        duplicates_removed = 0
+        
+        for resource in resources:
+            # Check for URL duplicates
+            url = resource.get('resource_url', '').strip()
+            if url and url in seen_urls:
+                duplicates_removed += 1
+                continue
+            
+            # Check for title duplicates (case-insensitive)
+            title = resource.get('title', '').strip().lower()
+            if title and title in seen_titles:
+                duplicates_removed += 1
+                continue
+            
+            # Check for very similar titles (fuzzy matching)
+            is_similar = False
+            for seen_title in seen_titles:
+                # Simple similarity check - if titles are 80%+ similar, consider duplicate
+                if len(title) > 10 and len(seen_title) > 10:
+                    similarity = self._calculate_similarity(title, seen_title)
+                    if similarity > 0.8:
+                        is_similar = True
+                        break
+            
+            if is_similar:
+                duplicates_removed += 1
+                continue
+            
+            unique_resources.append(resource)
+            
+            if url:
+                seen_urls.add(url)
+            if title:
+                seen_titles.add(title)
+        
+        if duplicates_removed > 0:
+            print(f"   🧹 Removed {duplicates_removed} duplicate resources")
+        
+        return unique_resources
+    
+    def _calculate_similarity(self, str1: str, str2: str) -> float:
+        """Calculate simple string similarity ratio"""
+        if not str1 or not str2:
+            return 0.0
+        
+        # Simple Jaccard similarity on words
+        words1 = set(str1.split())
+        words2 = set(str2.split())
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        intersection = len(words1.intersection(words2))
+        union = len(words1.union(words2))
+        
+        return intersection / union if union > 0 else 0.0
+
     def save_resources(self, output_path: Path, analyze_unknown: bool = False):
-        """Save detected resources to JSON file"""
+        """Save detected resources to JSON file with deduplication"""
         report = self._generate_report(analyze_unknown)
+        
+        # Deduplicate resources before saving
+        if 'resources' in report and report['resources']:
+            original_count = len(report['resources'])
+            report['resources'] = self._deduplicate_resources(report['resources'])
+            final_count = len(report['resources'])
+            
+            if original_count != final_count:
+                print(f"   🧹 Deduplication: {original_count} → {final_count} resources ({original_count - final_count} duplicates removed)")
         
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False, default=str)
@@ -732,15 +849,11 @@ def main():
                 description = detector._generate_description(message, url)
             
             resource = {
-                'url': url,
-                'domain': domain,
+                'id': len(detector.detected_resources) + 1,  # Simple ID
+                'resource_url': url,  # HTML expects this field
                 'title': title,
-                'category': domain_info['category'],
-                'quality_score': domain_info['score'],
-                'channel_name': channel_name,
-                'author': author_display,
-                'timestamp': ts_str,
-                'jump_url': jump_url,
+                'tag': domain_info['category'],  # HTML expects this field
+                'date': ts_str,  # HTML expects this field
                 'description': description
             }
             detector.stats['total_resources'] += 1
@@ -758,6 +871,19 @@ def main():
             content = message.get('content', '')
             if not content:
                 continue
+            
+            # Filter out bot messages using robust bot detection
+            if detector._is_bot_author(message):
+                detector.stats['bot_messages_skipped'] = detector.stats.get('bot_messages_skipped', 0) + 1
+                continue
+            
+            # Filter out test/playground channels
+            channel_name = message.get('channel_name', '')
+            channel_lower = channel_name.lower()
+            if any(keyword in channel_lower for keyword in ['pg', 'playground', 'test']):
+                detector.stats['test_channel_messages_skipped'] = detector.stats.get('test_channel_messages_skipped', 0) + 1
+                continue
+            
             urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
             urls_extracted += len(urls)
             for url in urls:
@@ -892,8 +1018,8 @@ def main():
     print("   ✅ Checkpoint saved for incremental updates")
 
     print("\n📄 Generating final report and saving to files...")
-    # Save results to JSON file
-    output_path = project_root / 'data' / 'optimized_fresh_resources.json'
+    # Save results to JSON file in docs/ directory
+    output_path = project_root / 'docs' / 'resources-data.json'
     
     # Show progress while saving
     with tqdm(total=3, desc="💾 Saving files", bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}') as save_pbar:
@@ -925,6 +1051,8 @@ def main():
     print(f"\n🎯 Resource Discovery:")
     print(f"   ✅ High-quality resources: {report['statistics']['total_found']:,}")
     print(f"   ⏭️  Already processed: {skipped:,}")
+    print(f"   🤖 Bot messages skipped: {detector.stats.get('bot_messages_skipped', 0):,}")
+    print(f"   🧪 Test channel messages skipped: {detector.stats.get('test_channel_messages_skipped', 0):,}")
     print(f"   ❌ Filtered out: {report['statistics']['excluded_count']:,}")
     print(f"   ❓ Unknown domains: {report['statistics']['unknown_count']:,}")
 

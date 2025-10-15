@@ -373,14 +373,11 @@
                     <div class="resource-description">${r.description}</div>
                     <div class="resource-meta">
                         <div class="meta-item">📅 ${r.date}</div>
-                        <div class="meta-item">👤 ${r.author}</div>
-                        <div class="meta-item">💬 ${r.channel}</div>
                     </div>
                     <div class="resource-links">
                         <a href="${r.resource_url}" target="_blank" class="btn btn-primary">
                             🔗 View Resource
                         </a>
-                        ${r.discord_url ? `<a href="${r.discord_url}" target="_blank" class="btn btn-secondary">💬 Discord</a>` : ''}
                     </div>
                 </div>
             `).join('');
@@ -396,9 +393,7 @@
                 const matchesSearch = !searchTerm || 
                     r.title.toLowerCase().includes(searchTerm) ||
                     r.description.toLowerCase().includes(searchTerm) ||
-                    r.author.toLowerCase().includes(searchTerm) ||
-                    r.tag.toLowerCase().includes(searchTerm) ||
-                    r.channel.toLowerCase().includes(searchTerm);
+                    r.tag.toLowerCase().includes(searchTerm);
                 
                 const matchesCategory = !categoryFilter || r.tag === categoryFilter;
                 
