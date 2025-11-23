@@ -722,7 +722,8 @@ class FreshResourceDetector:
                 'title': title,
                 'tag': domain_info['category'],  # HTML expects this field
                 'date': ts_str,  # HTML expects this field
-                'description': description
+                'description': description,
+                'shared_by': author_display  # Author who first shared the resource
             }
             return resource
         except Exception as e:
@@ -1142,7 +1143,8 @@ def main():
                 'title': title,
                 'tag': domain_info['category'],  # HTML expects this field
                 'date': ts_str,  # HTML expects this field
-                'description': description
+                'description': description,
+                'shared_by': author_display  # Author who first shared the resource
             }
 
             # Add local PDF path if available (for preservation)

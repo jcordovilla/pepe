@@ -1,6 +1,6 @@
 {
-  "export_date": "2025-11-23T18:02:36.812881",
-  "total_resources": 220,
+  "export_date": "2025-11-23T19:25:15.593026",
+  "total_resources": 217,
   "resources": [
     {
       "id": 1,
@@ -8,168 +8,396 @@
       "title": "Self-Adapting Language Models",
       "tag": "Research Papers",
       "date": "2025-11-21",
-      "description": "PDF document with 19317 characters of content.",
-      "local_path": "data/pdfs/Self_Adapting_Language_Models_e00eebc3.pdf"
+      "description": "This arXiv paper introduces SEAL, a framework where an LLM generates \"self-edits\"\u2014training examples, optimization directives, and augmentation or gradient steps\u2014to finetune itself via supervised finetuning. It trains the edit generator with a reinforcement learning loop using downstream performance as reward, and evaluates knowledge incorporation and few-shot generalization. Includes methods, experiments, and open-source code for reproducibility.",
+      "local_path": "data/pdfs/Self_Adapting_Language_Models_e00eebc3.pdf",
+      "shared_by": "Nidhi Tandon"
     },
     {
       "id": 2,
       "resource_url": "https://www.youtube.com/watch?v=BmMxkpm12vc",
-      "title": "YouTube Video",
+      "title": "ElevenLabs Image & Video Tutorial",
       "tag": "Video Content",
       "date": "2025-11-20",
-      "description": "Educational video content from YouTube - Tutorials, lectures, and educational material"
+      "description": "A step-by-step tutorial showing how to generate and export short videos using ElevenLabs Image & Video, including adding at least one audio layer and exporting to Studio. It matters for contest entrants because it explains the required workflow, submission format, and verification steps needed to qualify for the Image & Video contest.",
+      "shared_by": "ElevenLabs"
     },
     {
       "id": 3,
       "resource_url": "https://www.anthropic.com/news/disrupting-AI-espionage",
-      "title": "Resource from anthropic.com",
+      "title": "Disrupting the first reported AI-orchestrated cyber espionage campaign",
       "tag": "AI/ML Resources",
       "date": "2025-11-14",
-      "description": "Resource from www.anthropic.com - News"
+      "description": "Analysis of the first reported AI\u2011orchestrated cyber espionage campaign by Anthropic, describing how threat actors used large language models and automation to scale reconnaissance, social engineering, and exploit development. The report documents evidence, attack techniques, evaluation results showing cyber capabilities doubling in six months, and mitigation steps aimed at security researchers, incident responders, and policymakers. It summarizes detection, disruption, and implications for defensive AI governance.",
+      "shared_by": "Gustavo Ribeiro"
     },
     {
       "id": 4,
-      "resource_url": "https://openai.com/index/understanding-neural-networks-through-sparse-circuits/)",
-      "title": "Resource from openai.com",
+      "resource_url": "https://openai.com/index/understanding-neural-networks-through-sparse-circuits/",
+      "title": "Understanding Neural Networks Through Sparse Circuits",
       "tag": "AI/ML Resources",
       "date": "2025-11-13",
-      "description": "Resource from openai.com - Index"
+      "description": "Blog post describing a new training method that produces small language models with sparser internal circuits, making their mechanisms easier for humans to inspect and interpret. This approach aims to improve understanding of complex model structures (like those behind ChatGPT) and to reduce gaps in how we analyze neural network behavior.",
+      "shared_by": "OpenAI"
+    },
+    {
+      "id": 5,
+      "resource_url": "https://www.youtube.com/watch?v=BdUOs53L0UU",
+      "title": "XPeng unveils IRON humanoid robot demonstration",
+      "tag": "Video Content",
+      "date": "2025-11-12",
+      "description": "Footage of XPeng's AI-powered humanoid robot \"IRON\", shown on Nov 5, demonstrating humanlike gait and appearance that prompted viewers to mistake it for a person. The clip highlights progress in robot locomotion and appearance and raises questions about public perception, authenticity, and ethical implications for humanoid robotics.",
+      "shared_by": "Ying-Wei Leong"
+    },
+    {
+      "id": 6,
+      "resource_url": "https://youtu.be/_uQrJ0TkZlc",
+      "title": "Python Q&A and Discussion \u2014 Final Module",
+      "tag": "Video Content",
+      "date": "2025-11-11",
+      "description": "Final module video presenting a Python Q&A and group discussion for cohort participants. Intended as a wrap-up and self-directed follow-up, it accompanies module work you can continue independently and outlines next steps (moving learners to a post-course role). The session consolidates learning and collects course feedback.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 8,
+      "resource_url": "https://youtu.be/hrTQipWp6co",
+      "title": "Git Primer: Basic Version Control Workflow",
+      "tag": "Video Content",
+      "date": "2025-11-04",
+      "description": "A short primer introducing core Git concepts and common workflows for new users. Explains how to manage commits, branches, and collaboration so you can track changes, sync with remotes, and reduce merge conflicts. Serves as a foundational overview to prepare you for Git-based project work.",
+      "shared_by": "Oscar Sanchez"
+    },
+    {
+      "id": 9,
+      "resource_url": "https://youtu.be/tRZGeaHPoaw",
+      "title": "Primer on Git Basics and Workflow",
+      "tag": "Video Content",
+      "date": "2025-11-04",
+      "description": "A concise primer covering Git fundamentals \u2014 repositories, commits, branching, and basic workflows \u2014 aimed at preparing learners for course Git tasks. It explains core version-control operations and collaboration practices so participants can manage code history, resolve merges, and follow project workflows for assignments and team work.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 10,
+      "resource_url": "https://www.anthropic.com/news/claude-for-financial-services",
+      "title": "Claude for Financial Services (Anthropic offering)",
+      "tag": "AI/ML Resources",
+      "date": "2025-10-31",
+      "description": "An Anthropic offering that adapts the Claude generative AI model for financial-services organizations. It presents a version of Claude tailored to sector needs, with attention to regulatory, compliance and sensitive-data handling. It matters because financial institutions evaluating AI require models and deployments that address legal and privacy constraints.",
+      "shared_by": "Mark Venn"
+    },
+    {
+      "id": 11,
+      "resource_url": "https://openai.com/index/introducing-aardvark/",
+      "title": "Aardvark: GPT-5 agent for security bug fixing",
+      "tag": "AI/ML Resources",
+      "date": "2025-10-30",
+      "description": "Aardvark is an OpenAI private-beta agent that uses GPT-5 to locate and propose fixes for security vulnerabilities in code. It matters because automating detection and remediation can assist security teams, accelerate fixes, and potentially reduce the window of exposure for software vulnerabilities during development and deployment.",
+      "shared_by": "OpenAI"
+    },
+    {
+      "id": 12,
+      "resource_url": "https://www.youtube.com/watch?v=MeUaINLnww0",
+      "title": "ElevenLabs Voice Isolator How to Use",
+      "tag": "Video Content",
+      "date": "2025-10-30",
+      "description": "Tutorial demonstrating how to use ElevenLabs Voice Isolator to remove background noise from voice recordings. The video shows a before-and-after workflow and explains the steps creators should follow for the Voice Isolator Contest, enabling participants to produce cleaner audio for short social-media entry videos.",
+      "shared_by": "ElevenLabs"
     },
     {
       "id": 13,
       "resource_url": "https://cloud.google.com/gov#solutions",
-      "title": "Resource from cloud.google.com",
+      "title": "Google for Government: cloud and AI solutions",
       "tag": "Cloud Documentation",
       "date": "2025-10-29",
-      "description": "Resource from cloud.google.com - Gov"
+      "description": "Overview of Google for Government, a Google initiative offering integrated cloud and AI capabilities for government agencies, spanning infrastructure to end-user applications. It outlines secure cloud features and AI tools and highlights use-case discussions and deployment considerations presented at Google's DC conference, relevant to public-sector modernization.",
+      "shared_by": "Nidhi Tandon"
     },
     {
       "id": 14,
       "resource_url": "https://events.openai.com/gpt-oss-safeguard",
-      "title": "Resource from events.openai.com",
+      "title": "gpt-oss-safeguard: Open Safeguard Hackathon in SF",
       "tag": "AI/ML Resources",
       "date": "2025-10-29",
-      "description": "Resource from events.openai.com - Gpt Oss Safeguard"
+      "description": "An event (Dec. 8, San Francisco) hosted by OpenAI with ROOST and Hugging Face to explore how open-weight models can shape safer digital spaces. The hackathon focuses on open-weight reasoning and online safety research, bringing developers together to prototype and discuss open-model approaches to moderation and safety.",
+      "shared_by": "OpenAI"
     },
     {
       "id": 15,
       "resource_url": "https://github.com/fborello/MCPSpotify",
-      "title": "GitHub: fborello/MCPSpotify",
+      "title": "Spotify MCP server for NLP playlist creation",
       "tag": "Code Repositories",
       "date": "2025-10-28",
-      "description": "GitHub repository: fborello/MCPSpotify - Open source code and development resources"
+      "description": "GitHub repository implementing a Spotify MCP server for experimenting with vibe coding and AI. It provides features to create playlists and add tracks using natural-language commands, enabling developers to test NLP-driven music selection and automate playlist workflows. Suitable for contributors who want to extend or use the project.",
+      "shared_by": "Felippe Borello"
     },
     {
       "id": 16,
       "resource_url": "https://medium.com/@pistoni.pedro/the-new-frontier-of-power-ai-invisible-decisions-and-digital-sovereignty-in-latin-america-d29b44639673",
-      "title": "Resource from medium.com",
+      "title": "AI, Invisible Decisions, and Digital Sovereignty in Latin America",
       "tag": "Technical Articles",
       "date": "2025-10-24",
-      "description": "Resource from medium.com - @Pistoni.Pedro"
+      "description": "An article examining how AI-driven, \u201cinvisible\u201d decision systems are reshaping governance and digital sovereignty in Latin America. It highlights transparency, accountability, and regional cooperation challenges and policy implications, arguing that addressing these issues is essential to protect citizen rights, democratic oversight, and state control over digital infrastructure.",
+      "shared_by": "Pedro_Pistoni"
+    },
+    {
+      "id": 17,
+      "resource_url": "https://youtu.be/tRZGeaHPoa",
+      "title": "Track b \u2014 YouTube video shared in cohort-3",
+      "tag": "Video Content",
+      "date": "2025-10-21",
+      "description": "A YouTube link labeled \"Track b\" posted in the #cohort-3-text channel alongside \"Track a\" as part of a set called \"Git tracks\". It identifies the second shared track for the cohort and matters for members who need to reference or compare the paired tracks.",
+      "shared_by": "Jose Cordovilla"
     },
     {
       "id": 18,
       "resource_url": "https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-      "title": "Hugging Face: TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "title": "TinyLlama 1.1B Chat v1.0 Hugging Face model",
       "tag": "AI/ML Resources",
       "date": "2025-10-21",
-      "description": "Hugging Face TinyLlama: TinyLlama-1.1B-Chat-v1.0 - AI models, datasets, and machine learning resources"
+      "description": "Hugging Face repository for TinyLlama-1.1B-Chat-v1.0, a 1.1-billion-parameter chat-oriented language model. It matters because a smaller, chat-focused LLM is easier to experiment with and deploy on limited hardware, allowing faster inference, lower resource costs, and quicker iteration.",
+      "shared_by": "Brandon Pendleton"
+    },
+    {
+      "id": 19,
+      "resource_url": "https://www.youtube.com/watch?v=uZPgU1FbZq0",
+      "title": "BMAD framework for agent roles and traceability",
+      "tag": "Video Content",
+      "date": "2025-10-17",
+      "description": "Overview of BMAD, a framework that defines clear specialized agent roles (Analyst, Product Manager, Architect, Orchestrator), preserves context via \u201cStory Files,\u201d and enforces traceability and compliance through versioning and audit trails. Relevant for implementing coordinated agent workflows on websites or embedding into business-model-canvas processes requiring auditability.",
+      "shared_by": "Juli Ha"
+    },
+    {
+      "id": 20,
+      "resource_url": "https://openai.com/index/introducing-agentkit/",
+      "title": "Introducing AgentKit: OpenAI Developer Toolkit",
+      "tag": "AI/ML Resources",
+      "date": "2025-10-16",
+      "description": "An introduction page for AgentKit, OpenAI\u2019s new developer toolkit for building agent-based applications and workflows. It outlines the toolkit\u2019s purpose and intended use cases. This matters because it provides a structured approach for integrating model-driven agents into products, shaping design, deployment, and governance choices.",
+      "shared_by": "Jasmina_Ciconkova"
     },
     {
       "id": 21,
       "resource_url": "https://github.com/czlonkowski/n8n-mcp",
-      "title": "GitHub: czlonkowski/n8n-mcp",
+      "title": "GitHub - czlonkowski/n8n-mcp: A MCP for Claude Desktop / Claude Code / Windsurf / Cursor to build n8n workflows for you",
       "tag": "Code Repositories",
       "date": "2025-10-16",
-      "description": "GitHub repository: czlonkowski/n8n-mcp - Open source code and development resources"
+      "description": "n8n-mcp is an MCP integration for Claude Desktop, Claude Code, Windsurf, and Cursor that automatically generates, refactors, and validates n8n workflows from natural-language prompts. Use it to scaffold node sequences, configure credentials and triggers, produce JSON workflow exports, and run basic tests. Includes an MCP server component\u2014see setup instructions at https://github.com/czlonkowski/n8n-mcp for installation, configuration, and usage examples.",
+      "shared_by": "Juli Ha"
     },
     {
       "id": 22,
       "resource_url": "https://github.com/ItzCrazyKns/Perplexica",
-      "title": "GitHub: ItzCrazyKns/Perplexica",
+      "title": "GitHub - ItzCrazyKns/Perplexica: Perplexica is an AI-powered answering engine. It is an Open source alternative to Perplexity AI",
       "tag": "Code Repositories",
       "date": "2025-10-16",
-      "description": "GitHub repository: ItzCrazyKns/Perplexica - Open source code and development resources"
+      "description": "Enhanced: Perplexica is an open-source, AI-powered answering engine that delivers concise, sourced responses by combining large language models with retrieval from the web and knowledge bases. Designed as a transparent, self-hostable alternative to Perplexity AI, it provides a conversational search interface, API-friendly integration, and verifiable citations and source links to make research and decision-making reproducible and auditable.",
+      "shared_by": "Brandon Pendleton"
     },
     {
       "id": 23,
       "resource_url": "https://github.com/open-webui/open-webui",
-      "title": "GitHub: open-webui/open-webui",
+      "title": "GitHub - open-webui/open-webui: User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
       "tag": "Code Repositories",
       "date": "2025-10-16",
-      "description": "GitHub repository: open-webui/open-webui - Open source code and development resources"
+      "description": "Open WebUI is an extensible, self-hosted AI interface from the open-webui GitHub organization that runs entirely offline and supports multiple LLM runners (including Ollama and OpenAI-compatible APIs). It provides a built-in inference engine for retrieval-augmented generation (RAG), modular integrations, and UI customization. The project targets developers, researchers, and ops teams building and deploying local or private LLM applications and workflows.",
+      "shared_by": "Georgi Pavlov"
     },
     {
       "id": 24,
       "resource_url": "https://github.com/ollama/ollama",
-      "title": "GitHub: ollama/ollama",
+      "title": "Ollama GitHub \u2014 CLI for local LLM runtime",
       "tag": "Code Repositories",
       "date": "2025-10-15",
-      "description": "GitHub repository: ollama/ollama - Open source code and development resources"
+      "description": "The GitHub repository for Ollama, containing source code, installers, and command-line tools for running language models locally via a local runtime. It includes CLI commands, installation instructions, and model management code. Relevant because the cohort will install and use Ollama next week via the command line/installer.",
+      "shared_by": "Brandon Pendleton"
+    },
+    {
+      "id": 25,
+      "resource_url": "https://www.youtube.com/watch?v=uwAqEzhyjtw",
+      "title": "Command Line Crash Course For Beginners | Terminal Commands",
+      "tag": "Video Content",
+      "date": "2025-10-15",
+      "description": "Learn to navigate the terminal across Windows, macOS, and Linux with a practical, OS-agnostic crash course tailored for beginners. Cover essential commands for files and directories (cd, ls/dir, cp, mv, rm), viewing and searching (cat, less, grep, find), pipes and redirection, permissions (chmod/chown), basic process management, keyboard shortcuts, and simple shell scripting (bash/PowerShell). Windows users get notes on Command Prompt vs PowerShell. For your own time: https://www.youtube.com/watch?v=uwAqEzhyjtw",
+      "shared_by": "Jose Cordovilla"
     },
     {
       "id": 26,
       "resource_url": "https://learn.microsoft.com/en-us/windows/wsl/install",
-      "title": "Resource from learn.microsoft.com",
+      "title": "Install Windows Subsystem for Linux (WSL)",
       "tag": "Technical Documentation",
       "date": "2025-10-15",
-      "description": "Resource from learn.microsoft.com - En Us"
+      "description": "Microsoft Learn guide that explains how to install and set up the Windows Subsystem for Linux (WSL) on Windows. It provides step-by-step installation and configuration instructions, distribution options, and basic troubleshooting so Windows users can run Linux command-line tools and development workflows for a similar Linux experience.",
+      "shared_by": "Brandon Pendleton"
     },
     {
       "id": 27,
       "resource_url": "https://importai.substack.com/p/import-ai-431-technological-optimism",
-      "title": "Resource from importai.substack.com",
+      "title": "Technological Optimism and Appropriate Fear",
       "tag": "Newsletters",
       "date": "2025-10-14",
-      "description": "Resource from importai.substack.com - P"
+      "description": "An essay by Jack Clark examining the emotional and strategic tension in contemporary AI discourse, arguing for \u201ctechnological optimism\u201d balanced by \u201cappropriate fear.\u201d It matters for AI leaders because it frames risk-awareness and decision-making; the discussion has prompted practitioner reflections and frameworks (e.g., the PEACH framework) for operational practice.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
     },
     {
       "id": 28,
       "resource_url": "https://alignment.anthropic.com/2025/petri/",
-      "title": "Resource from alignment.anthropic.com",
+      "title": "Anthropic Petri: Simulated AI-to-AI testing tool",
       "tag": "AI/ML Resources",
       "date": "2025-10-13",
-      "description": "Resource from alignment.anthropic.com - 2025"
+      "description": "Anthropic\u2019s Petri runs simulated conversations where AI agents test one another to detect risky or unusual behaviors before they reach users. It provides automated adversarial testing useful for AI safety research, but its findings still need careful human review because tester agents can overreact or miss context.",
+      "shared_by": "Shobana Nambiar"
+    },
+    {
+      "id": 29,
+      "resource_url": "https://openai.com/global-affairs/openai-for-germany/",
+      "title": "OpenAI for Germany initiative and partnerships",
+      "tag": "AI/ML Resources",
+      "date": "2025-10-10",
+      "description": "A page presenting OpenAI\u2019s initiative for Germany, outlining its engagement, partnership approach, and local deployment considerations. It matters because it frames national AI localisation and sovereignty debates \u2014 including partnership-based infrastructure choices \u2014 and highlights potential implications for SMEs, costs, cloud lock-in, and the need for small-data, low-compute local models.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
     },
     {
       "id": 30,
       "resource_url": "https://techcrunch.com/2025/10/09/discord-suffers-data-breach-impacting-at-least-70000-users/?utm_campaign=social&utm_source=linkedin&utm_medium=organic",
-      "title": "Resource from techcrunch.com",
+      "title": "Discord breach exposes government ID photos",
       "tag": "Tech News",
       "date": "2025-10-09",
-      "description": "Tech news article from techcrunch.com - Latest technology news and analysis"
+      "description": "Hack of a third\u2011party vendor used for Discord\u2019s age\u2011related appeals exposed sensitive data for about 70,000 users, including government ID photos. This matters because exposed identity documents and personal data can lead to privacy harms, identity fraud, and undermine trust in verification processes, with possible regulatory and legal fallout.",
+      "shared_by": "Fr\u00e9d\u00e9rique Lambers"
+    },
+    {
+      "id": 31,
+      "resource_url": "https://www.youtube.com/watch?v=JfE1Wun9xkk",
+      "title": "Sam Altman on Sora, Energy, and Building an AI Empire",
+      "tag": "Video Content",
+      "date": "2025-10-08",
+      "description": "Interview with Sam Altman about Sora, energy, and building an AI empire. The discussion examines strategic and technical aspects of developing AI products, implications for energy and infrastructure, and challenges of scaling AI organizations. Relevant for people following AI industry strategy, deployment trade-offs, and organizational growth.",
+      "shared_by": "Ranveer Joyseeree"
+    },
+    {
+      "id": 32,
+      "resource_url": "https://medium.com/%40hammansamuel/guide-to-fine-tuning-llms-88364f4390f7",
+      "title": "Fine-Tuning 7B LLMs on One GPU",
+      "tag": "Technical Articles",
+      "date": "2025-10-07",
+      "description": "This Medium tutorial by Hamman Samuel covers installing Transformers, PEFT, and BitsAndBytes; choosing LoRA or QLoRA; formatting prompts; and running a training loop optimized to fine-tune a 7B model on a single GPU. It also demonstrates negative-example \u201cguardrail\u201d training to reduce over-generalization.",
+      "shared_by": "Eduardo Fadanelli"
+    },
+    {
+      "id": 33,
+      "resource_url": "https://www.youtube.com/watch?v=hDVNcfrV70k",
+      "title": "Prompt Engineering Tutorial for Beginners (30 Minutes)",
+      "tag": "Video Content",
+      "date": "2025-10-07",
+      "description": "Tutorial on prompt engineering for beginners from a Google course, teaching how to craft clear instructions and structure prompts for LLMs like ChatGPT and Gemini. Covers basics of AI prompts, step-by-step guidance, and essential tips to improve accuracy and creativity in outputs in under 30 minutes.",
+      "shared_by": "Shabana Islam"
     },
     {
       "id": 34,
       "resource_url": "https://news.mit.edu/2025/ai-maps-how-new-antibiotic-targets-gut-bacteria-1003",
-      "title": "Resource from news.mit.edu",
+      "title": "AI maps how a new antibiotic targets gut bacteria",
       "tag": "Academic News",
       "date": "2025-10-06",
-      "description": "MIT resource - Academic content from Massachusetts Institute of Technology"
+      "description": "News report on researchers using AI to map how a targeted antibiotic attacks harmful gut bacteria associated with Crohn's disease flare-ups while sparing beneficial microbes. In animal tests the treatment accelerated recovery, and the approach reduced projected drug-development time from years to months, demonstrating AI's potential to speed precision-medicine development.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 35,
+      "resource_url": "https://openai.com/index/announcing-devday-2025/",
+      "title": "OpenAI DevDay 2025 \u2014 Advances in Applied AI",
+      "tag": "AI/ML Resources",
+      "date": "2025-10-05",
+      "description": "Announcement of OpenAI DevDay 2025, an event on October 6 presenting advances in applied AI across models, platforms, governance, and security. The keynote and sessions aim to help organizations anticipate trends, align roadmaps, develop talent, and accelerate capacities for deploying AI.",
+      "shared_by": "Cristian Vasquez"
+    },
+    {
+      "id": 36,
+      "resource_url": "https://techcrunch.com/2025/10/02/perplexitys-comet-ai-browser-now-free-max-users-get-new-background-assistant/",
+      "title": "Perplexity\u2019s Comet browser goes free worldwide",
+      "tag": "Tech News",
+      "date": "2025-10-03",
+      "description": "Perplexity has released Comet, an AI-powered browser, to all users and removed its prior invite-only restriction. The company also added a background assistant feature for Max subscribers. Wider availability and an always-on assistant could change how people use browser-based AI and affect competition among AI browsing tools.",
+      "shared_by": "Jasmina_Ciconkova"
+    },
+    {
+      "id": 37,
+      "resource_url": "https://www.youtube.com/watch?v=R1cF4T4lgI4",
+      "title": "Introducing Notion 3.0: Agents",
+      "tag": "Video Content",
+      "date": "2025-10-01",
+      "description": "Assign tasks and your Agents do the work: Notion 3.0 Agents handle manual work like a teammate built into Notion. Share goals and watch them draft emails, summarize meetings, research topics, update databases, schedule follow-ups, and automate routine workflows across pages and boards. Customize instructions, monitor progress in-app, and reclaim hours by turning repetitive administrative work into reliable, automated actions.",
+      "shared_by": "Larissa de Castro Machado Homem"
     },
     {
       "id": 38,
       "resource_url": "https://arxiv.org/abs/2509.11295",
-      "title": "arXiv Paper: 2509.11295",
+      "title": "Prompt Engineering Guide for Life Sciences",
       "tag": "Research Papers",
       "date": "2025-10-01",
-      "description": "Research paper from arXiv (2509.11295) - Academic research in artificial intelligence and machine learning"
+      "description": "A distilled quick-start guide that condenses 58 prompt techniques into six core strategies (zero-shot, few-shot, thought generation, ensembling, self-criticism, decomposition) and shows how to combine them for life-science workflows such as literature review and data extraction. It also highlights multi-turn prompt pitfalls and model behavior drops teams should monitor.",
+      "shared_by": "Eduardo Fadanelli"
     },
     {
       "id": 39,
       "resource_url": "https://dev.to/code_2/from-prompt-to-production-a-developers-guide-to-deploying-llm-applications-3c77",
-      "title": "Resource from dev.to",
+      "title": "Developer Guide to Deploying LLM Applications",
       "tag": "Developer Community",
       "date": "2025-09-30",
-      "description": "Resource from dev.to - Code 2"
+      "description": "A step-by-step playbook that guides developers from prompt prototyping to a production LLM service. It covers app architecture, RAG orchestration, security (secrets, input/output validation), reliability (retries, caching, rate limits), cost tracking, containerization, CI/CD, observability, prompt versioning, and A/B evaluation.",
+      "shared_by": "Jasmina_Ciconkova"
     },
     {
       "id": 40,
       "resource_url": "https://arxiv.org/abs/2509.17209",
-      "title": "arXiv Paper: 2509.17209",
+      "title": "Prompt-based Plain-language Simplification for Spanish LLMs",
       "tag": "Research Papers",
       "date": "2025-09-30",
-      "description": "Research paper from arXiv (2509.17209) - Academic research in artificial intelligence and machine learning"
+      "description": "ArXiv paper presenting methods to simplify Spanish text into plain language using prompt engineering (zero-shot) and lightweight LoRA fine-tuning on Spanish LLMs. It evaluates readability and semantic fidelity, and proposes normalization plus Spanish-specific prompt design to balance clarity with content retention, aiding accessibility with minimal model changes.",
+      "shared_by": "Aida Torras"
+    },
+    {
+      "id": 41,
+      "resource_url": "https://openai.com/index/introducing-parental-controls/",
+      "title": "OpenAI Introduces Parental Controls for ChatGPT",
+      "tag": "AI/ML Resources",
+      "date": "2025-09-29",
+      "description": "Parental controls for ChatGPT from OpenAI explain features, setup steps, and underlying safety mechanisms for supervising young users. The page covers supervised accounts, content filters and moderation classifiers, age\u2011appropriate settings, usage limits, and family management tools, plus rollout and platform availability. Intended for parents, guardians, educators, and organizations evaluating ChatGPT use with children. Published by OpenAI with technical and policy-focused detail.",
+      "shared_by": "Cristian Ursan"
+    },
+    {
+      "id": 42,
+      "resource_url": "https://medium.com/@andrea.hickethier/why-i-moved-my-peach-ai-agents-to-azure-and-what-that-has-to-do-with-trust-a4c9ababe88b",
+      "title": "Moving Peach AI agents to Azure and trust",
+      "tag": "Technical Articles",
+      "date": "2025-09-26",
+      "description": "Medium post recounting the author's move of Peach AI agents to Microsoft Azure to host OpenAI models. It explains practical steps and compliance-focused reasoning for doing this in the EU, and reflects on trust, governance and how a non-technical practitioner is balancing regulatory requirements with AI-driven operations.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
+    },
+    {
+      "id": 43,
+      "resource_url": "https://www.youtube.com/watch?v=TuD5pFUi_Fk",
+      "title": "GenSpark Photo Genius: Overview and Demo",
+      "tag": "Video Content",
+      "date": "2025-09-25",
+      "description": "Video introduction to GenSpark Photo Genius, a new photo tool within GenSpark. Presents the tool\u2019s capabilities and typical workflows so GenSpark users can assess how it might affect photo-editing or image-generation tasks and decide whether to adopt it in their existing workflows.",
+      "shared_by": "Juan Napoli"
+    },
+    {
+      "id": 44,
+      "resource_url": "https://openai.com/index/openai-nvidia-systems-partnership/",
+      "title": "OpenAI and NVIDIA 10 GW systems partnership",
+      "tag": "AI/ML Resources",
+      "date": "2025-09-24",
+      "description": "Letter of intent for NVIDIA to deploy \u226510 GW of systems for OpenAI, with NVIDIA proposing up to $100B of phased investment and the first 1 GW arriving in H2 2026 on the Vera Rubin platform. This matters because it concentrates compute supply, affects pricing, energy and grid needs, and vendor dependence.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 45,
+      "resource_url": "https://dev.to/this-is-learning/4-free-methods-to-use-llm-apis-in-development-45f6",
+      "title": "4 Free Methods to Use LLM APIs in Development",
+      "tag": "Developer Community",
+      "date": "2025-09-23",
+      "description": "Practical guide that explains four ways to use LLM APIs for development without costs, covering Ollama, GitHub Models, Open Router, and Groq. It explains local model hosting, using environment variables and a unified API endpoint to switch models easily\u2014helpful for developers prototyping LLM features without paying cloud API fees.",
+      "shared_by": "Shabana Islam"
     },
     {
       "id": 46,
@@ -177,72 +405,162 @@
       "title": "Frugal AI: Introduction, Concepts, Development and Open Questions",
       "tag": "Documents",
       "date": "2025-09-18",
-      "description": "PDF document with 21210 characters of content.",
-      "local_path": "data/pdfs/Frugal_AI_Introduction_Concepts_Development_and_Op_d56c805a.pdf"
+      "description": "The document is an introduction to Frugal AI, a concept that aims to reduce the energy consumption of artificial intelligence systems. The PDF discusses the development and open questions surrounding this field, including the use of machine learning algorithms, optimization techniques, and hardwa...",
+      "local_path": "data/pdfs/Frugal_AI_Introduction_Concepts_Development_and_Op_d56c805a.pdf",
+      "shared_by": "Melinda Melcher"
     },
     {
       "id": 47,
       "resource_url": "https://www.theverge.com/ai-artificial-intelligence/776130/senator-ted-cruz-ai-sandbox-bill",
-      "title": "Resource from theverge.com",
+      "title": "Ted Cruz's AI Sandbox Bill Allows 10-Year Waivers",
       "tag": "Tech News",
       "date": "2025-09-17",
-      "description": "Tech news article from www.theverge.com - Latest technology news and analysis"
+      "description": "Report on Senator Ted Cruz\u2019s proposed SANDBOX Act, which would let AI companies obtain waivers from \u201cobstructive regulations\u201d for up to 10 years if they publish public safety and financial risk mitigation plans. The measure raises concerns about weakening consumer protections and enabling firms to bypass oversight, increasing risks of harm.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 48,
+      "resource_url": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+      "title": "Python Full Course for Beginners",
+      "tag": "Video Content",
+      "date": "2025-09-17",
+      "description": "Learn Python for AI, machine learning, and web development in this beginner-friendly full course. Follow step-by-step lessons on fundamentals \u2014 variables, control flow, data structures, functions, object-oriented programming, file I/O and modules \u2014 with practical examples and mini-projects to build real-world skills. Includes an introduction to popular libraries for data and web tasks and a 6-month free PyCharm subscription (coupon in the video description).",
+      "shared_by": "Cristian Ursan"
+    },
+    {
+      "id": 49,
+      "resource_url": "https://www.youtube.com/watch?v=qBlX6FhDm2E",
+      "title": "Advanced 2025 Guide to Prompt Engineering",
+      "tag": "Video Content",
+      "date": "2025-09-16",
+      "description": "Tutorial on prompt engineering for large language models that advocates treating models as conversational partners, building complexity through iterative prompts, and specifying concrete negative constraints to avoid generic outputs. Demonstrates breaking complex prompts into multi-step conversations to improve result quality, relevant for developers and prompt designers.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 50,
+      "resource_url": "https://openai.com/index/openai-grove/",
+      "title": "OpenAI Grove application draft page",
+      "tag": "AI/ML Resources",
+      "date": "2025-09-16",
+      "description": "Web page for drafting an application to OpenAI Grove. It lets users start and prepare an application submission to OpenAI\u2019s Grove initiative, serving as the entry point for proposals or requests for participation, access, or collaboration. Useful for anyone intending to apply or engage with OpenAI Grove.",
+      "shared_by": "Cristian Vasquez"
     },
     {
       "id": 51,
       "resource_url": "https://www.freecodecamp.org/news/prompt-engineering-cheat-sheet-for-gpt-5/",
-      "title": "Resource from freecodecamp.org",
+      "title": "Prompt Engineering Cheat Sheet for GPT-5",
       "tag": "Learning Platform",
       "date": "2025-09-16",
-      "description": "Resource from www.freecodecamp.org - News"
+      "description": "Article outlining nine prompt-engineering patterns for GPT-5 \u2014 including Persona, Few-Shot, Chain-of-Thought, and Structured Output \u2014 with practical Python examples using the OpenAI API. It shows how to apply these patterns to get more accurate, consistent, and machine-readable responses for code generation workflows.",
+      "shared_by": "Jasmina_Ciconkova"
+    },
+    {
+      "id": 52,
+      "resource_url": "https://cloud.google.com/discover/what-is-prompt-engineering",
+      "title": "Guide to Prompt Engineering for Large Language Models",
+      "tag": "Cloud Documentation",
+      "date": "2025-09-16",
+      "description": "A guide on designing clear, specific prompts for large language models, showing how to include context, explicit instructions, and examples to steer model behavior. It explains how prompt construction influences intent understanding and output, and why careful prompting improves the quality, relevance, and safety of generative AI responses.",
+      "shared_by": "Aida Torras"
     },
     {
       "id": 53,
       "resource_url": "https://blog.google/products/gemini/gemini-nano-banana-examples/",
-      "title": "Resource from blog.google",
+      "title": "Ten examples of native image editing in Gemini app",
       "tag": "Tech Blog",
       "date": "2025-09-16",
-      "description": "Resource from blog.google - Products"
+      "description": "This post provides ten step-by-step prompts for Gemini's native image-editing features, covering style transfers, object changes and multi-photo blends. Each example shows what to upload and the exact prompt to run in the Gemini app, letting beginners reproduce edits without coding and learn the app's image transformation capabilities.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 54,
+      "resource_url": "https://www.youtube.com/watch?v=XN02F9ikYHI&list=PLLOlBMdcuQtVwdC0-TQV368WXM_9t9NrT&index=3&t=564s",
+      "title": "NotebookLM training: features and workflows",
+      "tag": "Video Content",
+      "date": "2025-09-16",
+      "description": "A YouTube training session demonstrating NotebookLM features and workflows. The recording walks through core functionality and typical workflows to help viewers understand how to use NotebookLM for organizing notes and supporting research or team knowledge tasks. Useful for anyone evaluating or onboarding to NotebookLM.",
+      "shared_by": "Jasmina_Ciconkova"
+    },
+    {
+      "id": 55,
+      "resource_url": "https://www.theverge.com/policy/776545/ftc-ai-chatbot-companion-kids-teens-study",
+      "title": "FTC Seeks AI Companies' Data on Kids' Chatbots",
+      "tag": "Tech News",
+      "date": "2025-09-11",
+      "description": "The U.S. Federal Trade Commission has ordered OpenAI, Meta, Snap, xAI, Alphabet, Instagram, and Character.AI to submit reports on how they assess risks to children and teens, user retention and monetization data, and internal studies on emotional impact. The action moves oversight from voluntary ethics toward mandated transparency and potential legal standards.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 56,
       "resource_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5190225",
-      "title": "Resource from papers.ssrn.com",
+      "title": "Regulating AI: Balancing Innovation, Ethics, and Public Policy",
       "tag": "Research Papers",
       "date": "2025-09-10",
-      "description": "Resource from papers.ssrn.com - Sol3"
+      "description": "This SSRN paper examines global AI policy approaches\u2014including the EU AI Act and U.S./China strategies\u2014and analyzes ethical dilemmas like algorithmic bias, transparency, and job displacement. It highlights the challenge of aligning regulation with rapid technological innovation, aiding policymakers designing adaptable, ethics-driven AI frameworks.",
+      "shared_by": "Eduardo Fadanelli"
+    },
+    {
+      "id": 57,
+      "resource_url": "https://www.anthropic.com/news/create-files?utm_source=chatgpt.com",
+      "title": "Anthropic Claude Creates and Edits Office Files",
+      "tag": "AI/ML Resources",
+      "date": "2025-09-09",
+      "description": "Anthropic\u2019s Claude can create and edit Excel, Word, PowerPoint and PDF files directly from chat or the desktop app, using a sandboxed environment for secure code execution. Rolling out in preview to Max, Team, and Enterprise (Pro soon), this reduces manual file work and streamlines document, report, and presentation creation.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 58,
       "resource_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGt6qh3jsbdhef9bhQo0G92PhWS1SBlDUoxPUc7DXrdF3gv3q-_iU5x28f9tpfR8gWNL5vcLyMyYYgJBQaqgthUd6bNRrACj3KvEZV4zPSAEaQCvYg_Te4CZ-rfbujahswnAGjs3q-75a4blTDaEhjL1UOS_k4KPJAVddZdwgC7TQsPJvP8dYnoi5I=",
-      "title": "Resource from vertexaisearch.cloud.google.com",
+      "title": "Guide to using generative AI for design",
       "tag": "Cloud Documentation",
       "date": "2025-09-09",
-      "description": "Resource from vertexaisearch.cloud.google.com - Grounding Api Redirect"
+      "description": "A practical guide that shows how to use generative AI for rapid design ideation and iterative refinement. It explains directing AI with precise, film\u2011director\u2013style prompts, treating outputs as rough concepts to be polished in tools like Photoshop or Illustrator, and recommends generating multiple concepts (e.g., 10) then refining one.",
+      "shared_by": "Jasmina_Ciconkova"
     },
     {
       "id": 59,
       "resource_url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
-      "title": "Resource from help.openai.com",
+      "title": "Branch conversations in ChatGPT to test ideas",
       "tag": "AI/ML Resources",
       "date": "2025-09-09",
-      "description": "Resource from help.openai.com - En"
+      "description": "A ChatGPT web feature that lets you \"Branch in new chat\" from any message to create parallel conversations for alternative prompts, tones, or instructions. It enables side-by-side A/B testing without cluttering the original thread, letting logged-in users compare outputs quickly and choose the best prompt or persona.",
+      "shared_by": "Carol Choi"
     },
     {
       "id": 60,
       "resource_url": "https://platform.openai.com/chat/edit?optimize=true",
-      "title": "Resource from platform.openai.com",
+      "title": "Discord Discussion Resource for Prompt Writing Process",
       "tag": "AI/ML Resources",
       "date": "2025-09-08",
-      "description": "Resource from platform.openai.com - Chat"
+      "description": "A shared resource from an open forum discussion where users share their prompt writing process, including a base set of prompts available on PromptBase.com and experiences with using OpenAI's prompt optimizer. The conversation also invites participants to join a future open forum discussion.",
+      "shared_by": "Jasmina_Ciconkova"
+    },
+    {
+      "id": 61,
+      "resource_url": "https://learn.microsoft.com/en-us/azure/ai-services/translator/custom-translator/overview",
+      "title": "Azure Translator: Custom Translator Overview and Capabilities",
+      "tag": "Technical Documentation",
+      "date": "2025-09-04",
+      "description": "This Microsoft documentation page describes Azure Translator's Custom Translator, a service for training and deploying customized neural machine translation models using user-provided bilingual data, glossaries, and domain-specific examples. It explains workflow, supported formats, and deployment, enabling improved translation quality for domain-specific content and low-resource language scenarios.",
+      "shared_by": "Chad Tetreault"
+    },
+    {
+      "id": 62,
+      "resource_url": "https://www.youtube.com/watch?v=-IoBb-2Mlng",
+      "title": "GenSpark.ai AI Designer demo: logo and 3D loops",
+      "tag": "Video Content",
+      "date": "2025-09-03",
+      "description": "Demonstration of GenSpark.ai's new \"AI Designer\" mode, showing how to generate logos and 3D moving elements and create looped animated versions within minutes. Useful for brand-identity teams to prototype visual identities and motion assets quickly, speeding up concept exploration and iteration.",
+      "shared_by": "Juan Napoli"
     },
     {
       "id": 63,
       "resource_url": "https://rajeevbarnwal.medium.com/how-i-built-my-first-local-llm-api-project-in-python-a-step-by-step-guide-e865f341c752",
-      "title": "Resource from rajeevbarnwal.medium.com",
+      "title": "Local LLM API with FastAPI and Ollama",
       "tag": "Technical Articles",
       "date": "2025-09-02",
-      "description": "Resource from rajeevbarnwal.medium.com - How I Built My First Local Llm Api Project In Python A Step By Step Guide E865F341C752"
+      "description": "Step-by-step tutorial showing how to build a local REST API in Python using FastAPI and Ollama to serve open-source LLMs (e.g., LLaMA) on your machine. Covers environment setup, running Ollama, creating API endpoints and testing via HTTP requests\u2014useful for self-hosted model serving, privacy, and avoiding cloud dependencies.",
+      "shared_by": "Eduardo Fadanelli"
     },
     {
       "id": 64,
@@ -250,8 +568,27 @@
       "title": "Threat Intelligence Report:",
       "tag": "AI/ML Resources",
       "date": "2025-08-31",
-      "description": "PDF document with 8736 characters of content.",
-      "local_path": "data/pdfs/Threat_Intelligence_Report_49f26c11.pdf"
+      "description": "Anthropic's August 2025 Threat Intelligence Report documents real-world misuse of its Claude model, presenting multiple case studies\u2014AI coding agents enabling large-scale data extortion, North Korean remote-worker fraud, no-code ransomware-as-a-service, a Chinese actor using Claude across MITRE ATT&CK tactics, stealer-log analysis, AI-powered carding, romance-scam bots, and synthetic identity services. It outlines detection measures and mitigation steps, making it a practical resource for security teams and policymakers.",
+      "local_path": "data/pdfs/Threat_Intelligence_Report_49f26c11.pdf",
+      "shared_by": "Jparkinson"
+    },
+    {
+      "id": 65,
+      "resource_url": "https://www.youtube.com/watch?v=X595vnQ3-V8&ab_channel=PromptEngineering",
+      "title": "Gemini 2.5 Flash Image (\"Nano Banana\") Demo",
+      "tag": "Video Content",
+      "date": "2025-08-28",
+      "description": "Demo of Google's Gemini 2.5 Flash Image (\"Nano Banana\"), an image-editing model built into the Gemini app. It does person replacement, object insertion, clothing/hairstyle changes and day-to-night scene edits from text prompts; free users get 100 edits per day. It streamlines complex edits and can feed into motion workflows.",
+      "shared_by": "Jasmina_Ciconkova"
+    },
+    {
+      "id": 66,
+      "resource_url": "https://medium.com/@poola.vii/ai-alignment-is-a-battle-the-future-of-ai-will-be-decided-by-clashing-values-f7612d1db840",
+      "title": "AI Alignment Is a Battle: Clashing Values Decide Future",
+      "tag": "Technical Articles",
+      "date": "2025-08-27",
+      "description": "Article arguing that a single universal AI ethical framework is unrealistic because human values conflict across cultures and interests. It contends AI development will involve competing value-aligned systems shaping outcomes through conflict and competition, highlighting the need to design mechanisms that encourage constructive inter-AI competition while minimizing risks to humanity.",
+      "shared_by": "Jasmina_Ciconkova"
     },
     {
       "id": 67,
@@ -259,475 +596,1387 @@
       "title": "The GenAI Divide",
       "tag": "Documents",
       "date": "2025-08-26",
-      "description": "PDF document with 7507 characters of content.",
-      "local_path": "data/pdfs/The_GenAI_Divide_317675d5.pdf"
+      "description": "This 2025 industry report examines enterprise GenAI adoption, based on a systematic review of 300 disclosed AI initiatives, 52 structured interviews, and surveys of 153 senior leaders. It documents a \"GenAI Divide\"\u2014claiming 95% of organizations see no measurable ROI\u2014analyzes why pilots stall (a learning gap), and gives practical recommendations for builders and buyers to scale GenAI and capture value.",
+      "local_path": "data/pdfs/The_GenAI_Divide_317675d5.pdf",
+      "shared_by": "Bisera Ferrero"
+    },
+    {
+      "id": 68,
+      "resource_url": "https://medium.com/@cpjrinfoandnews/prompt-engineering-in-2025-a-guide-to-crafting-powerful-chatgpt-prompts-549e9ebb3e48",
+      "title": "Prompt Engineering 2025: Crafting ChatGPT Prompts",
+      "tag": "Technical Articles",
+      "date": "2025-08-26",
+      "description": "A Medium guide explaining prompt engineering techniques for ChatGPT in 2025, arguing that 90% of AI frustration stems from poor prompts. It covers role assignment, contextual detail, exact output formatting, step-by-step prompting and few-shot examples, and recommends role-playing (e.g., \"You are a [expert role]...\") to improve responses.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 69,
+      "resource_url": "https://www.theverge.com/news/756980/openai-chatgpt-users-mourn-gpt-5-4o",
+      "title": "OpenAI ChatGPT users mourn GPT-5 '4o' update",
+      "tag": "Tech News",
+      "date": "2025-08-21",
+      "description": "News article reporting user reactions to OpenAI\u2019s rollout of the ChatGPT model labelled \"GPT-5\" or \"4o\", documenting how people adjusted prompting and expressed nostalgia for model 4. It matters because those user experiences affect prompt design, daily workflows, and wider adoption of the new model.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 70,
+      "resource_url": "https://nanda.media.mit.edu/ai_report_2025.pdf",
+      "title": "The GenAI Divide: State of AI in Business 2025",
+      "tag": "Documents",
+      "date": "2025-08-21",
+      "description": "A 2025 MIT NANDA report titled \"The GenAI Divide: State of AI in Business 2025\" examining generative AI's role in business. It assesses industry adoption and implications for markets and investors; its release reportedly affected market activity. Access may require affiliation or site approval, limiting public availability.",
+      "shared_by": "Lawrence Loeb"
     },
     {
       "id": 71,
-      "resource_url": "https://nanda.media.mit.edu/ai_report_2025.pdf",
-      "title": "PDF: ai_report_2025.pdf",
-      "tag": "Documents",
-      "date": "2025-08-21",
-      "description": "PDF document: ai_report_2025.pdf - Research paper, documentation, or educational material"
+      "resource_url": "https://www.youtube.com/watch?v=9ILrnsRoiJ8&pp=ygUXYmlsbCBtYWhlciBhaSBpbnRlcnZpZXc%3D",
+      "title": "Bill Maher interview on AI controllability",
+      "tag": "Video Content",
+      "date": "2025-08-20",
+      "description": "A recorded interview with Bill Maher discussing AI controllability, exploring risks, governance, and societal implications. The conversation examines how to keep advanced systems aligned with human values and the policy, technical, and ethical questions that arise. Relevant for those interested in AI safety, regulation, and public debate.",
+      "shared_by": "Allen Brodjeski"
+    },
+    {
+      "id": 72,
+      "resource_url": "https://blog.gopenai.com/fine-tuning-llms-3-practical-approaches-888cb4e50054",
+      "title": "Fine-Tuning LLMs: Three Practical Approaches",
+      "tag": "AI/ML Resources",
+      "date": "2025-08-19",
+      "description": "Article detailing three practical methods for fine-tuning large language models \u2014 full-parameter tuning, instruction tuning, and LoRA \u2014 and guidance on choosing between them based on needs. It matters because selecting the appropriate method affects model reliability on complex tasks and stylistic alignment; suggests experimenting with LoRA on a small domain-specific dataset.",
+      "shared_by": "Eduardo Fadanelli"
     },
     {
       "id": 73,
-      "resource_url": "https://blog.gopenai.com/fine-tuning-llms-3-practical-approaches-888cb4e50054",
-      "title": "Resource from blog.gopenai.com",
+      "resource_url": "https://medium.com/@lukekerbs/goodbye-api-keys-hello-local-llms-how-i-cut-costs-by-running-llm-models-on-my-m3-macbook-a3074e24fee5",
+      "title": "Running Local LLMs on an M3 MacBook",
+      "tag": "Technical Articles",
+      "date": "2025-08-19",
+      "description": "Medium article offering a practical guide to running large language models locally on an M3 MacBook using the MLX-LM library. It explains loading quantized models to improve performance on consumer hardware and emphasizes benefits such as avoiding paid API costs and keeping data local, enabling tighter cost control and privacy.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 74,
+      "resource_url": "https://support.anthropic.com/en/articles/11649438-prototype-ai-powered-apps-with-claude-artifacts",
+      "title": "Prototyping AI Apps with Claude Artifacts",
       "tag": "AI/ML Resources",
       "date": "2025-08-19",
-      "description": "Resource from blog.gopenai.com - Fine Tuning Llms 3 Practical Approaches 888Cb4E50054"
+      "description": "Guide on using Claude Artifacts to prototype AI-powered applications without managing API keys, deployment costs, or rate limits. By enabling \"Create AI powered artifacts\" in Claude settings, users can have Claude integrate its API into apps\u2014enabling chatbots, learning tools, content generators, and analysis apps that can be shared for rapid prototyping.",
+      "shared_by": "Michelle Rhee  Los Angeles GMT-7"
     },
     {
       "id": 75,
-      "resource_url": "https://support.anthropic.com/en/articles/11649438-prototype-ai-powered-apps-with-claude-artifacts",
-      "title": "Resource from support.anthropic.com",
+      "resource_url": "https://dev.to/challenges/brightdata-n8n-2025-08-13",
+      "title": "Bright Data and n8n Real-time AI Agent Challenge",
+      "tag": "Developer Community",
+      "date": "2025-08-18",
+      "description": "A DEV-hosted Real-time AI Agent Challenge run by Bright Data and n8n, active through August 31 with $5,000 USD in cash prizes. The event includes an n8n live building session (link shared). It\u2019s an opportunity for developers to build and showcase real-time AI agents using n8n and Bright Data.",
+      "shared_by": "Michelle Rhee  Los Angeles GMT-7"
+    },
+    {
+      "id": 76,
+      "resource_url": "https://www.youtube.com/watch?v=-ByrZDb4EpA",
+      "title": "Building a Website Using Prompts Only (Live)",
+      "tag": "Video Content",
+      "date": "2025-08-17",
+      "description": "Live walkthrough demonstrating how to build a website using only prompts, and showcasing two custom GPTs: L.D GEN (Lovable) and Agent Prompter. The video includes additional integration steps for Lovable and the ChatGPT Agent Tool that were not finished on stream, with download links in the YouTube description.",
+      "shared_by": "Oscar Sanchez"
+    },
+    {
+      "id": 77,
+      "resource_url": "https://help.openai.com/en/articles/11909943-gpt-5-in-chatgpt",
+      "title": "GPT-5 Now Default in ChatGPT",
       "tag": "AI/ML Resources",
-      "date": "2025-08-19",
-      "description": "Resource from support.anthropic.com - En"
+      "date": "2025-08-15",
+      "description": "Announcement that GPT-5 is now the default model in ChatGPT, adding a built-in \"Thinking\" mode for complex tasks such as coding, research, and financial analysis. The update also provides higher usage limits and manual access to GPT-5 Thinking, affecting technical workflows and handling larger or more complex queries.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 78,
+      "resource_url": "https://www.theverge.com/health/718049/google-med-gemini-basilar-ganglia-paper-typo-hallucination",
+      "title": "Google Med-Gemini \"Basilar Ganglia\" Paper Error",
+      "tag": "Tech News",
+      "date": "2025-08-13",
+      "description": "The Verge reported that Google\u2019s Med-Gemini system produced a reference to an \u201cold left basilar ganglia infarct\u201d \u2014 a nonexistent anatomical term \u2014 in a research paper and blog post prior to edits. The mistake highlights risks of AI hallucinations and automation bias when generative models are used in clinical workflows.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 79,
+      "resource_url": "https://github.com/confident-ai/deepeval",
+      "title": "DeepEval LLM Evaluation Framework (GitHub)",
+      "tag": "Code Repositories",
+      "date": "2025-08-12",
+      "description": "Open-source GitHub repository providing DeepEval, a Pytest-like framework for unit testing LLM outputs. It supplies evaluation metrics \u2014 including G-Eval, hallucination detection, and answer relevancy \u2014 to help developers identify erroneous generations and measure response quality. Useful for integrating automated tests into LLM development workflows.",
+      "shared_by": "Eduardo Fadanelli"
     },
     {
       "id": 80,
-      "resource_url": "https://github.com/confident-ai/deepeval",
-      "title": "GitHub: confident-ai/deepeval",
-      "tag": "Code Repositories",
+      "resource_url": "https://www.youtube.com/watch?v=uikZs6y0qgI",
+      "title": "LoRA Fine-Tuning LLMs on Custom Data",
+      "tag": "Video Content",
       "date": "2025-08-12",
-      "description": "GitHub repository: confident-ai/deepeval - Open source code and development resources"
+      "description": "Tutorial on fine-tuning pre-trained LLMs using custom datasets with Hugging Face Transformers and PEFT (LoRA). It shows an efficient, low-VRAM workflow to teach a model new information and produce a customized model that adopts the provided data\u2014useful for adding domain-specific facts or behavior without full-model retraining.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 81,
+      "resource_url": "https://openai.com/index/healthbench/",
+      "title": "OpenAI HealthBench medical model evaluation benchmark",
+      "tag": "AI/ML Resources",
+      "date": "2025-08-10",
+      "description": "An OpenAI benchmark and scoring framework for evaluating large language models on healthcare tasks. HealthBench reports model performance across overall and \u201cHard\u201d subsets, physician-validated consensus rubrics, hallucination and urgent-scenario error rates, and global-health tests\u2014data used to compare models\u2019 clinical accuracy and safety.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 82,
+      "resource_url": "https://youtu.be/6QK0-isR0eQ",
+      "title": "Prep video for next week's meeting",
+      "tag": "Video Content",
+      "date": "2025-08-09",
+      "description": "A short preparatory video linked in the message that briefs participants on items to be discussed in next week's meeting. Watching will familiarize you with the updates and context, so you can follow the discussion and review the rough preview shared separately before the meeting.",
+      "shared_by": "Oscar Sanchez"
+    },
+    {
+      "id": 83,
+      "resource_url": "https://openai.com/es-ES/live/",
+      "title": "Transmisi\u00f3n en directo",
+      "tag": "AI/ML Resources",
+      "date": "2025-08-07",
+      "description": "Transmisi\u00f3n en directo: retransmisiones en vivo y eventos p\u00fablicos organizados por OpenAI y la OpenAI Foundation. Cubre presentaciones, demostraciones de modelos de IA (incluidos modelos de lenguaje), debates sobre seguridad y pol\u00edticas de IA, y sesiones de preguntas y respuestas. Est\u00e1 dirigido a investigadores, desarrolladores, responsables de pol\u00edticas, periodistas y p\u00fablico interesado en inteligencia artificial. Contenido producido por OpenAI con presentadores e investigadores afiliados.",
+      "shared_by": "Cristian Ursan"
+    },
+    {
+      "id": 84,
+      "resource_url": "https://epub.ub.uni-muenchen.de/116232/1/Psychology_and_Marketing_-_2024_-_Sarstedt_-_Using_large_language_models_to_generate_silicon_samples_in_consumer_and.pdf",
+      "title": "Using large language models to generate silicon samples in consumer and marketing research: Challenges, opportunities, and guidelines",
+      "tag": "Research Papers",
+      "date": "2025-08-06",
+      "description": "This review article examines using large language models to generate \"silicon\" respondent samples for consumer and marketing research. It synthesizes empirical comparisons between synthetic and human data, provides concrete recommendations and guidelines (especially for qualitative pretesting and pilot studies), critically assesses suitability for main studies, addresses ethical concerns, and outlines future research avenues.",
+      "local_path": "data/pdfs/Using_large_language_models_to_generate_silicon_sa_a2113452.pdf",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
     },
     {
       "id": 85,
-      "resource_url": "https://epub.ub.uni-muenchen.de/116232/1/Psychology_and_Marketing_-_2024_-_Sarstedt_-_Using_large_language_models_to_generate_silicon_samples_in_consumer_and.pdf",
-      "title": "Using large language models to generate silicon samples in consumer and marketing research: Challenges, opportunities, and guidelines",
-      "tag": "Documents",
-      "date": "2025-08-06",
-      "description": "PDF document with 21300 characters of content.",
-      "local_path": "data/pdfs/Using_large_language_models_to_generate_silicon_sa_a2113452.pdf"
+      "resource_url": "https://medium.com/%40aarshita08/my-llm-learning-journey-day-2-diving-into-prompt-engineering-4f4b0d2d9385",
+      "title": "LLM Learning Journey: Prompt Engineering Day 2",
+      "tag": "Technical Articles",
+      "date": "2025-08-05",
+      "description": "A Medium post where the author builds a study-buddy app (Flask + React + Ollama) to compare prompt strategies\u2014one-shot, few-shot, chain-of-thought, meta prompting, tree-of-thought, self-consistency, and RAG chaining. It demonstrates how different prompting techniques affect speed, accuracy and consistency in a controlled setup.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 86,
+      "resource_url": "https://www.wired.com/story/missing-hiker-ai-drone-recovery/",
+      "title": "AI-Detected Helmet Leads to Recovery of Missing Hiker",
+      "tag": "Tech News",
+      "date": "2025-08-04",
+      "description": "In July 2025 the Italian Alpine Rescue Corps used AI to analyze 2,600 drone images across 183 hectares and detected a red helmet, locating a hiker missing since September 2024 within three days. The case shows how AI color-and-shape recognition can speed searches in rugged terrain and shorten search times.",
+      "shared_by": "Marie"
     },
     {
       "id": 87,
-      "resource_url": "https://www.wired.com/story/missing-hiker-ai-drone-recovery/",
-      "title": "Resource from wired.com",
-      "tag": "Tech News",
-      "date": "2025-08-04",
-      "description": "Tech news article from www.wired.com - Latest technology news and analysis"
+      "resource_url": "https://github.com/ruvnet/claude-flow",
+      "title": "Claude Flow: Framework for agent swarm workflows",
+      "tag": "Code Repositories",
+      "date": "2025-07-30",
+      "description": "GitHub repository with code and workflow components for orchestrating multiple Claude-based agents as \"swarms\". It provides a framework to prototype, coordinate, and run collaborative LLM agent interactions and automated multi-agent workflows. This matters because it makes experimenting with collective agent behaviors and parallelized prompt workflows faster and more reproducible.",
+      "shared_by": "Brandon Pendleton"
     },
     {
       "id": 88,
-      "resource_url": "https://github.com/ruvnet/claude-flow",
-      "title": "GitHub: ruvnet/claude-flow",
+      "resource_url": "https://github.com/KalyanKS-NLP/llm-engineer-toolkit",
+      "title": "Curated list of 120+ LLM libraries",
       "tag": "Code Repositories",
-      "date": "2025-07-30",
-      "description": "GitHub repository: ruvnet/claude-flow - Open source code and development resources"
+      "date": "2025-07-29",
+      "description": "This GitHub repository by KalyanKS collects 120+ libraries and tools for LLM workflows, covering training, fine-tuning, building, evaluation, deployment, retrieval-augmented generation (RAG), and AI agents. Shared by Eduardo Ordax, it serves as a practical reference for developers and researchers to find libraries across LLM development and production tasks.",
+      "shared_by": "Jose Cordovilla"
     },
     {
       "id": 89,
-      "resource_url": "https://github.com/KalyanKS-NLP/llm-engineer-toolkit",
-      "title": "GitHub: KalyanKS-NLP/llm-engineer-toolkit",
-      "tag": "Code Repositories",
+      "resource_url": "https://openai.com/index/chatgpt-study-mode/",
+      "title": "ChatGPT Study Mode: Study Guides, Flashcards, Quizzes",
+      "tag": "AI/ML Resources",
       "date": "2025-07-29",
-      "description": "GitHub repository: KalyanKS-NLP/llm-engineer-toolkit - Open source code and development resources"
+      "description": "ChatGPT Study Mode provides study guides, flashcards, and quizzes generated by OpenAI\u2019s ChatGPT to support learning. It covers automated creation and practice materials across subjects and proficiency levels, leveraging generative AI and large language model capabilities to format summaries, question sets, and review prompts. Intended for students, educators, and self\u2011directed learners, the resource is published and maintained by OpenAI.",
+      "shared_by": "Cristian Ursan"
+    },
+    {
+      "id": 90,
+      "resource_url": "https://medium.com/@onlyoneaman/anatomy-of-a-prompt-the-complete-guide-to-crafting-effective-ai-chatgpt-prompts-46a761e06048",
+      "title": "Anatomy of a Prompt: Seven-Layer Prompting Guide",
+      "tag": "Technical Articles",
+      "date": "2025-07-29",
+      "description": "Article outlining a seven-layer prompt framework\u2014Role, Goal, Format, Warnings, Context, Examples, and Reasoning\u2014and explains how layering these elements reduces hallucinations, verbosity, and style drift. Backed by studies from OpenAI, Google Cloud, Anthropic and others, it reports double-digit improvements in factual accuracy and consistency; recommends rewriting prompts to apply the layers.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 91,
+      "resource_url": "https://lakshmanok.medium.com/how-to-use-genai-as-a-sparring-partner-c9600be3c583",
+      "title": "How to Use GenAI as a Sparring Partner",
+      "tag": "Technical Articles",
+      "date": "2025-07-29",
+      "description": "A practical method for using ChatGPT with uploaded reports (e.g., market research PDFs) to run structured Q&A sessions that iteratively challenge and refine business ideas. It matters because the process extracts report insights, surfaces assumptions, and provides feedback to improve problem-solving and decision-making.",
+      "shared_by": "Carol Choi"
     },
     {
       "id": 92,
-      "resource_url": "https://lakshmanok.medium.com/how-to-use-genai-as-a-sparring-partner-c9600be3c583",
-      "title": "Resource from lakshmanok.medium.com",
-      "tag": "Technical Articles",
-      "date": "2025-07-29",
-      "description": "Resource from lakshmanok.medium.com - How To Use Genai As A Sparring Partner C9600Be3C583"
+      "resource_url": "https://services.google.com/fh/files/misc/agentic-ai-tam-analysis.pdf",
+      "title": "Agentic AI Total Addressable Market Analysis",
+      "tag": "Documents",
+      "date": "2025-07-28",
+      "description": "Analysis by Google Cloud estimating agentic AI's total addressable market and adoption projections, including a $1 trillion market potential by 2040 and >90% enterprise adoption within three years. Describes agentic AI capabilities, integration with 80+ business apps, sector impacts, and implications for leadership, ethics, governance and human oversight.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
     },
     {
       "id": 93,
-      "resource_url": "https://services.google.com/fh/files/misc/agentic-ai-tam-analysis.pdf",
-      "title": "PDF: agentic-ai-tam-analysis.pdf",
+      "resource_url": "https://techcrunch.com/2025/07/22/21-year-old-mit-dropouts-raise-32m-at-300m-valuation-led-by-insight/",
+      "title": "Delve raises $32M at $300M valuation",
+      "tag": "Tech News",
+      "date": "2025-07-23",
+      "description": "Delve, founded by 21-year-old MIT dropouts, raised $32 million at a $300 million valuation in a round led by Insight. The company builds autonomous AI agents to automate regulatory compliance tasks, aiming to reduce manual review and scale compliance operations for regulated businesses, potentially lowering cost and speeding regulatory responses.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
+    },
+    {
+      "id": 94,
+      "resource_url": "https://medicalxpress.com/news/2025-07-ai-tool-hidden-heart-disease.pdf?utm_source=chatgpt.com",
+      "title": "EchoNext Library: ECG AI for Structural Heart Disease",
       "tag": "Documents",
-      "date": "2025-07-28",
-      "description": "PDF document: agentic-ai-tam-analysis.pdf - Research paper, documentation, or educational material"
+      "date": "2025-07-22",
+      "description": "Columbia researchers' EchoNext Library provides de-identified ECG datasets, preprocessing code, and mini\u2011model weights for detecting structural heart disease from ECGs. Researchers and developers can run the model on local ECG data, benchmark performance (reported ~77% accuracy, AUROC \u22480.90), and support validation and adaptation of AI cardiac screening.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 95,
-      "resource_url": "https://medicalxpress.com/news/2025-07-ai-tool-hidden-heart-disease.pdf?utm_source=chatgpt.com",
-      "title": "PDF: 2025-07-ai-tool-hidden-heart-disease.pdf",
-      "tag": "Documents",
-      "date": "2025-07-22",
-      "description": "PDF document: 2025-07-ai-tool-hidden-heart-disease.pdf - Research paper, documentation, or educational material"
+      "resource_url": "https://www.wired.com/review/elliq-ai-companion-robot/?utm_source=chatgpt.com",
+      "title": "Wired review: ElliQ AI companion robot",
+      "tag": "Tech News",
+      "date": "2025-07-21",
+      "description": "A Wired review of ElliQ, an AI companion robot designed to proactively engage older adults. The article examines how ElliQ interacts with seniors to address loneliness and foster individualized social connections, and why such proactive robotic companions could influence senior wellbeing and the role of technology in elder care.",
+      "shared_by": "Mahua Sircar Mitra"
+    },
+    {
+      "id": 96,
+      "resource_url": "https://www.youtube.com/playlist?list=PLcyuiUpPdL_uUSai7dddTs5eIo-oVFvsg",
+      "title": "San Jos\u00e9 GovAI Coalition Employee AI Training Playlist",
+      "tag": "Video Content",
+      "date": "2025-07-21",
+      "description": "A YouTube playlist compiling San Jos\u00e9 city\u2019s GovAI training sessions developed with San Jos\u00e9 State University to upskill municipal employees in practical AI use. It documents local-government approaches to workforce AI education and algorithm governance, relevant for other public-sector organizations designing internal learning pathways and AI culture.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 97,
+      "resource_url": "https://community.openai.com/t/how-can-i-use-my-custom-gpt-on-my-website/528694",
+      "title": "Using Custom GPTs on Your Website",
+      "tag": "AI/ML Resources",
+      "date": "2025-07-20",
+      "description": "Forum post explaining that OpenAI\u2019s web interface has no native embed/widget for custom GPTs. Advises creating a duplicate \"twin\" of the custom GPT on the OpenAI API platform and serving it via the API so you can integrate the model into an external website\u2014useful for developers needing site-level access.",
+      "shared_by": "Jose Cordovilla"
     },
     {
       "id": 98,
-      "resource_url": "https://community.openai.com/t/how-can-i-use-my-custom-gpt-on-my-website/528694",
-      "title": "Resource from community.openai.com",
-      "tag": "AI/ML Resources",
+      "resource_url": "https://www.youtube.com/watch?v=1jn_RpbPbEc",
+      "title": "ChatGPT Agents Released to Pro Users July 17",
+      "tag": "Video Content",
       "date": "2025-07-20",
-      "description": "Resource from community.openai.com - T"
+      "description": "Update on the ChatGPT agents rollout: the video reports the feature was released to Pro users on July 17, with Plus and Teams accounts slated next and general availability expected by the end of the month. Useful for users tracking when agents will become accessible across subscription tiers and for planning integrations.",
+      "shared_by": "Genai_enthusiast"
+    },
+    {
+      "id": 99,
+      "resource_url": "https://openai.com/index/introducing-chatgpt-agent",
+      "title": "Introducing ChatGPT Agents: tools, files, and actions",
+      "tag": "AI/ML Resources",
+      "date": "2025-07-18",
+      "description": "OpenAI's announcement of ChatGPT Agents describes new agent capabilities: using external tools, browsing user files, and performing actions on users' behalf to execute multi-step plans. These agents enable automation of complex tasks (for example, assisting with launching a startup), potentially changing how conversational AI carries out workflows.",
+      "shared_by": "Oscar Sanchez"
+    },
+    {
+      "id": 100,
+      "resource_url": "https://youtu.be/JAQ4p662It8?si=UJZxuvVItIBr5yzr",
+      "title": "ChatGPT agent Makes Spreadsheets",
+      "tag": "Video Content",
+      "date": "2025-07-18",
+      "description": "Enhanced: Good morning all \u2014 ChatGPT agent automatically fetches data from APIs, databases, or CSVs, then generates polished spreadsheets (XLSX/CSV) with formulas, pivot tables, charts, conditional formatting, and summaries. It schedules recurring runs (hourly/daily/weekly) with OAuth-secured access, exports to Google Drive, email, or shared links, sends notifications, and supports customizable templates for reporting and KPIs. Demo: https://youtu.be/JAQ4p662It8?si=UJZxuvVItIBr5yzr",
+      "shared_by": "Cristian Ursan"
+    },
+    {
+      "id": 101,
+      "resource_url": "https://www.wired.com/story/dr-chatgpt-will-see-you-now-artificial-intelligence-llms-openai-health-diagnoses/",
+      "title": "Dr. ChatGPT Will See You Now",
+      "tag": "Tech News",
+      "date": "2025-07-17",
+      "description": "Patients and clinicians are increasingly using large language models like ChatGPT for diagnoses, triage and treatment recommendations\u2014sometimes producing rapid, accurate, even lifesaving guidance. But as AI systems deliver confident, plausible-sounding errors, conflicts with medical experts, regulatory gaps, liability questions and opaque reasoning expose real risks: misdiagnosis, inappropriate treatments and erosion of clinical trust when algorithms and doctors disagree.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 102,
+      "resource_url": "https://www.anthropic.com/ai-fluency/introduction-to-ai-fluency",
+      "title": "Anthropic Introduction to AI Fluency online course",
+      "tag": "AI/ML Resources",
+      "date": "2025-07-16",
+      "description": "A free introductory online course from Anthropic on AI fluency that offers a certificate of completion. It covers foundational ideas about AI and why fluency matters, helping learners understand AI capabilities, limitations, and how to interact with AI systems responsibly.",
+      "shared_by": "Michelle Rhee  Los Angeles GMT-7"
+    },
+    {
+      "id": 103,
+      "resource_url": "https://agelab.mit.edu/sites/default/files/2023-11/MIT%20AgeLab%20AI%20and%20Longevity%20Report.pdf",
+      "title": "AI and Longevity: Affordability Risks",
+      "tag": "Documents",
+      "date": "2025-07-16",
+      "description": "Research report from MIT AgeLab and Bank of America (Nov 2023) examining how advances in AI-driven healthcare may extend lifespans while simultaneously displacing jobs, creating affordability challenges for longer retirements. It highlights potential increases in inequality and raises policy questions about basic income and retirement support.",
+      "shared_by": "Carol Choi"
     },
     {
       "id": 104,
-      "resource_url": "https://agelab.mit.edu/sites/default/files/2023-11/MIT%20AgeLab%20AI%20and%20Longevity%20Report.pdf",
-      "title": "PDF: MIT%20AgeLab%20AI%20and%20Longevity%20Report.pdf",
-      "tag": "Documents",
-      "date": "2025-07-16",
-      "description": "PDF document: MIT%20AgeLab%20AI%20and%20Longevity%20Report.pdf - Research paper, documentation, or educational material"
+      "resource_url": "https://blog.google/technology/health/new-mental-health-ai-tools-research-treatment/",
+      "title": "New AI Tools for Mental-Health Research and Treatment",
+      "tag": "Tech Blog",
+      "date": "2025-07-14",
+      "description": "A Google Blog post describing a practical field guide and a multi-year research partnership deploying AI to scale evidence-based mental-health interventions and to develop new treatments for anxiety, depression, and psychosis. The initiative pairs clinician-facing tools with sustained research funding, aiming to expand access to quality mental-health care for underserved populations.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 105,
+      "resource_url": "https://www.theverge.com/ai-artificial-intelligence/688301/california-is-trying-to-regulate-its-ai-giants-again",
+      "title": "California task force report on AI risks",
+      "tag": "Tech News",
+      "date": "2025-07-09",
+      "description": "Article covering a California state-led task force report (commissioned by Governor Newsom) warning that rapid AI advances could enable bioweapon development, strategic deception, and other misuse. It urges transparency, third-party audits, and whistleblower protections. Important because California\u2019s proposals aim to fill federal regulatory gaps and could shape or fragment US AI governance.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 106,
+      "resource_url": "https://medium.com/@shreyasrkolan/how-artificial-intelligence-and-machine-learning-are-revolutionizing-computational-biology-and-1ae3895f6927",
+      "title": "ChatGPT Front-End for Cardiac Risk Prediction",
+      "tag": "Technical Articles",
+      "date": "2025-07-08",
+      "description": "Walkthrough building a 92%-accurate logistic regression model that predicts heart-disease risk from 17 lifestyle and medical variables, then layering ChatGPT as a conversational front end. ChatGPT maps free-text patient descriptions into the model\u2019s structured feature vector and returns an instant risk score, demonstrating conversational cardiac-triage workflows.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 107,
+      "resource_url": "https://medium.com/@marketing_26756/step-by-step-guide-to-building-your-first-healthcare-ai-agent-6e899db4e9f8",
+      "title": "Guide to Building a Healthcare AI Agent",
+      "tag": "Technical Articles",
+      "date": "2025-07-08",
+      "description": "Medium (Thinkitive Inc., June 25, 2025) walkthrough describing how to scope and build a custom healthcare AI agent. It covers mapping existing workflows, ranking pain points, selecting an LLM and vector store, prototyping, HIPAA-safe sandbox testing, iteration, and planning for EHR integration. Includes checklists from data preparation to monitoring and a low-risk pilot suggestion.",
+      "shared_by": "Carol Choi"
+    },
+    {
+      "id": 108,
+      "resource_url": "https://www.wired.com/story/india-is-using-ai-and-satellites-to-map-urban-heat-vulnerability-down-to-the-building-level/",
+      "title": "India's AI and Satellite Mapping of Urban Heat Vulnerability",
+      "tag": "Tech News",
+      "date": "2025-07-07",
+      "description": "Report on Indian researchers and nonprofits using AI with satellite imagery to map heat vulnerability at the building level, focusing on low-income neighborhoods. The maps enable targeted interventions\u2014public cooling shelters, water stations, adjusted work hours\u2014and provide cities data to prioritize resources and protect vulnerable populations as temperatures rise.",
+      "shared_by": "Marie"
+    },
+    {
+      "id": 109,
+      "resource_url": "https://youtube.com/shorts/Za93bzuaOns",
+      "title": "MidJourney Hyper\u2011Realistic Life Stages Animation",
+      "tag": "Video Content",
+      "date": "2025-07-03",
+      "description": "A YouTube Short showing seven hyper-realistic images of the same person across different life stages, animated using MidJourney. Prompts were generated with ChatGPT, frames compiled in ShotCut and set to original music. Demonstrates combining generative-image prompts, MJ animation, and basic video editing; notes subscription requirement.",
+      "shared_by": "Jonathan Horden"
+    },
+    {
+      "id": 110,
+      "resource_url": "https://oliverpatel.substack.com/p/unpacking-the-10-year-moratorium",
+      "title": "Unpacking the 10-Year Moratorium on State AI Laws",
+      "tag": "Newsletters",
+      "date": "2025-07-02",
+      "description": "A Substack article summarizing the proposed 10-year moratorium on US state AI laws that the Senate recently rejected. Explains the moratorium's scope and potential effects on state-level AI regulation, and why its rejection matters for policymakers, industry compliance, and the pace of AI governance across states.",
+      "shared_by": "Pierre Ukelo"
     },
     {
       "id": 111,
-      "resource_url": "https://oliverpatel.substack.com/p/unpacking-the-10-year-moratorium",
-      "title": "Resource from oliverpatel.substack.com",
-      "tag": "Newsletters",
+      "resource_url": "https://techcrunch.com/2025/07/01/amazon-deploys-its-1-millionth-robot-releases-generative-ai-model/",
+      "title": "Amazon deploys 1 millionth warehouse robot; unveils DeepFleet",
+      "tag": "Tech News",
       "date": "2025-07-02",
-      "description": "Resource from oliverpatel.substack.com - P"
+      "description": "Report on Amazon reaching one million warehouse robots and launching \"DeepFleet,\" a generative AI model that improves robot routing efficiency by about 10%. It shows large-scale generative AI applied to physical operations, potentially increasing automation in logistics and manufacturing and raising workforce, efficiency, and supply-chain risk considerations.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 112,
+      "resource_url": "https://techcrunch.com/2025/06/30/congress-might-block-state-ai-laws-for-five-years-heres-what-it-means/",
+      "title": "Congress may block state AI laws for five years",
+      "tag": "Tech News",
+      "date": "2025-07-02",
+      "description": "The TechCrunch article covers a budget-bill amendment backed by Sen. Ted Cruz that would bar states and cities from regulating AI systems for five years. Supporters, including OpenAI\u2019s Sam Altman, say a single national framework avoids a patchwork; critics warn it strips consumer protections and pre-empts California\u2019s AB 2013. A Senate vote is imminent.",
+      "shared_by": "Prabhat Kumar"
+    },
+    {
+      "id": 113,
+      "resource_url": "https://cookbook.openai.com/examples/prompt_migration_guide",
+      "title": "Prompt Migration Guide for GPT-4.1",
+      "tag": "AI/ML Resources",
+      "date": "2025-07-01",
+      "description": "Interactive notebook that helps upgrade legacy prompts to GPT-4.1 by letting you paste an existing prompt, have the model identify ambiguities, auto-generate a clearer system prompt, and iterate on evaluations. It matters because explicitly surfacing every instruction improves model adherence and reduces unexpected or ambiguous outputs.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 114,
-      "resource_url": "https://cookbook.openai.com/examples/prompt\\_migration\\_guide](https://cookbook.openai.com/examples/prompt_migration_guide)",
-      "title": "Resource from cookbook.openai.com",
-      "tag": "AI/ML Resources",
+      "resource_url": "https://www.youtube.com/watch?v=LFm8V3WyOvA",
+      "title": "Heygen product story using AI avatar",
+      "tag": "Video Content",
       "date": "2025-07-01",
-      "description": "Resource from cookbook.openai.com - Examples"
+      "description": "A Heygen video experiment where the creator uses an AI avatar to tell a product story instead of a personal avatar. It shares lessons on selecting avatars\u2014balancing vocal authenticity, lip sync, and natural movement\u2014and notes that minimal hand gestures and tighter framing helped reduce distraction.",
+      "shared_by": "Jonathan Horden"
+    },
+    {
+      "id": 115,
+      "resource_url": "https://medium.com/@hexiangnan/prompt-engineering-deep-dive-mastering-the-art-for-llms-and-vlms-40bff49a3800",
+      "title": "Guide to Prompt Engineering for LLMs and VLMs",
+      "tag": "Technical Articles",
+      "date": "2025-06-24",
+      "description": "Hands-on Medium guide on designing prompts for text-only and multimodal (VLM) models, covering zero-shot, few-shot, and chain-of-thought techniques with practical examples. It emphasizes structured prompts and delimiter use to improve model accuracy and reduce hallucinations, and suggests trying chain-of-thought prompting for complex queries.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 116,
+      "resource_url": "https://getdx.com/uploads/ai-measurement-framework.pdf",
+      "title": "Measuring AI: DX AI Measurement Framework",
+      "tag": "Whitepapers",
+      "date": "2025-06-22",
+      "description": "This vendor whitepaper presents the DX AI Measurement Framework\u2122 for assessing AI code assistants and agents. It defines AI-specific metrics for adoption, usage, and impact, shows how to combine them with DX Core 4 engineering-productivity measures, and offers practical measurement methods and dashboards. Includes case studies (Booking.com, Block) and implementation guidance\u2014useful for engineering leaders measuring AI tool ROI, but is vendor-backed.",
+      "local_path": "data/pdfs/Measuring_AI_DX_Framework_b94b1e93.pdf",
+      "shared_by": "Bisera Ferrero"
     },
     {
       "id": 117,
-      "resource_url": "https://getdx.com/uploads/ai-measurement-framework.pdf",
-      "title": "M e a s u r i n g  A I",
-      "tag": "Documents",
-      "date": "2025-06-22",
-      "description": "PDF document with 13228 characters of content.",
-      "local_path": "data/pdfs/M_e_a_s_u_r_i_n_g_A_I_b94b1e93.pdf"
+      "resource_url": "https://arxiv.org/pdf/2506.08872",
+      "title": "Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task",
+      "tag": "Research Papers",
+      "date": "2025-06-19",
+      "description": "Using EEG, NLP (NERs, n\u2011grams, topic ontology), human teacher and AI scoring, 54 participants completed three sessions as LLM-assisted, Search Engine\u2013assisted, or Brain-only writers; 18 completed a fourth session with LLM-to-Brain and Brain-to-LLM swaps. NLP showed within-group linguistic homogeneity. Brain-only writers exhibited the strongest, most distributed alpha/beta connectivity; Search users showed intermediate engagement; LLM users had weakest connectivity, lower ownership, poorer quoting, and reduced linguistic and neural performance over four months\u2014raising educational concerns.",
+      "shared_by": "Safouen Selmi"
     },
     {
       "id": 118,
-      "resource_url": "https://arxiv.org/pdf/2506.08872",
-      "title": "arXiv Paper: 2506.08872",
-      "tag": "Research Papers",
-      "date": "2025-06-19",
-      "description": "Research paper from arXiv (2506.08872) - Academic research in artificial intelligence and machine learning"
+      "resource_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/vertex-ai-express-mode-api-quickstart",
+      "title": "Quickstart: Vertex AI express mode API tutorial",
+      "tag": "Cloud Documentation",
+      "date": "2025-06-17",
+      "description": "Quickstart tutorial that shows how to install the google-genai SDK, initialize it with an API key, and send non\u2011streaming, streaming, and function\u2011calling requests to the Gemini model via Vertex AI express mode. It matters because it provides a minimal, hands\u2011on setup for developers to start making streaming and function\u2011enabled Gemini API calls.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 119,
+      "resource_url": "https://medium.com/@tam.tamanna18/power-of-ai-with-graphrag-and-ollama-71c55394febc",
+      "title": "Tutorial: GraphRAG and Ollama for Local Q&A",
+      "tag": "Technical Articles",
+      "date": "2025-06-17",
+      "description": "A step-by-step Medium tutorial demonstrating how small businesses can run Mistral-7B locally with Ollama and integrate it into a GraphRAG pipeline. It covers pulling models, indexing PDFs/CSVs into a lightweight Neo4j graph, and exposing a simple API for grounded natural-language Q&A\u2014enabling on-premise querying without cloud costs and preserving data privacy.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 120,
+      "resource_url": "https://github.com/anthropics/prompt-eng-interactive-tutorial",
+      "title": "Anthropic Prompt Engineering Interactive Tutorial (GitHub)",
+      "tag": "Code Repositories",
+      "date": "2025-06-12",
+      "description": "An Anthropic-authored interactive tutorial on prompt engineering for large language models, hosted as a GitHub repository with a public-access Google Sheets copy. It provides structured exercises and examples to practice prompt design and understanding, useful for learning practical techniques to improve LLM responses.",
+      "shared_by": "Michelle Rhee  Los Angeles GMT-7"
     },
     {
       "id": 121,
-      "resource_url": "https://github.com/anthropics/prompt-eng-interactive-tutorial",
-      "title": "GitHub: anthropics/prompt-eng-interactive-tutorial",
-      "tag": "Code Repositories",
-      "date": "2025-06-12",
-      "description": "GitHub repository: anthropics/prompt-eng-interactive-tutorial - Open source code and development resources"
+      "resource_url": "https://www.wired.com/story/disney-universal-sue-midjourney/",
+      "title": "Disney and Universal Sue Midjourney AI Image Generator",
+      "tag": "Tech News",
+      "date": "2025-06-11",
+      "description": "A Wired news article reporting that Disney and Universal have sued Midjourney, the AI image generator, over alleged use of studio-owned copyrighted material. The lawsuit could set legal precedent for how generative AI handles copyrighted works and affect rights, business models, and content creation across entertainment and AI sectors.",
+      "shared_by": "Michelle Rhee  Los Angeles GMT-7"
+    },
+    {
+      "id": 122,
+      "resource_url": "https://medium.com/@kenzic/building-ai-agents-with-the-openai-agents-sdk-36da1e1b8915",
+      "title": "Building AI Agents with the OpenAI Agents SDK",
+      "tag": "Technical Articles",
+      "date": "2025-06-10",
+      "description": "This Medium tutorial shows how to build goal-oriented, tool-enabled agents using OpenAI\u2019s official Agents SDK. It covers agent creation, integrating tools, multi-step planning, adding memory and guardrails, and orchestrating workflows that perform actions beyond chat, helping developers retain context across steps.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 123,
+      "resource_url": "https://status.openai.com",
+      "title": "OpenAI Status Page \u2014 Current Service Outages",
+      "tag": "AI/ML Resources",
+      "date": "2025-06-10",
+      "description": "Official OpenAI status page reporting current platform incidents and outages. It provides real-time updates, affected services, incident timelines, and progress on restorations. Useful for developers and teams relying on OpenAI APIs and services to understand availability, diagnose failed requests, and plan mitigations during reported outages.",
+      "shared_by": "Shobana Nambiar"
     },
     {
       "id": 124,
-      "resource_url": "https://status.openai.com",
-      "title": "Resource from status.openai.com",
-      "tag": "AI/ML Resources",
-      "date": "2025-06-10",
-      "description": "Service status page for status.openai.com - Real-time system status and updates"
+      "resource_url": "https://news.mit.edu/2025/teaching-ai-models-to-sketch-more-like-humans-0602",
+      "title": "Teaching AI Models to Sketch Like Humans",
+      "tag": "Academic News",
+      "date": "2025-06-05",
+      "description": "CSAIL research demonstrating methods for training AI models to produce sketch-like drawings that use incremental, uncertain, and interpretable decision steps. The paper examines how models mimic human sketching processes, which could inform generative agent design where stepwise, explainable outputs aid trust, debugging, and alignment in B2B or creative workflows.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
     },
     {
-      "id": 132,
+      "id": 125,
+      "resource_url": "https://medium.com/@imKPrabhat/clip-the-barriers-unlocking-ais-real-potential-in-financial-services-8852b25ebd2d",
+      "title": "CLIP: Barriers to AI in Financial Services",
+      "tag": "Technical Articles",
+      "date": "2025-06-05",
+      "description": "A Medium article examining CLIP \u2014 the barriers to unlocking AI\u2019s real potential in financial services. It outlines the main obstacles that limit AI deployment in banks and financial firms and explains why addressing them matters for safe, compliant adoption, improved operational performance, and capturing AI-driven business value.",
+      "shared_by": "Prabhat Kumar"
+    },
+    {
+      "id": 126,
+      "resource_url": "https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders",
+      "title": "101 Generative AI Use Cases from Industry Leaders",
+      "tag": "Cloud Documentation",
+      "date": "2025-06-04",
+      "description": "A Google Cloud compilation (Apr 9, 2025) listing 101 generative AI use cases and over 600 real-world applications across sectors such as healthcare, finance, and retail. It documents practical implementations and operational benefits, useful for identifying adoption patterns, potential efficiency gains, and adaptation ideas for organizations evaluating generative AI deployments.",
+      "shared_by": "Irene Yang"
+    },
+    {
+      "id": 127,
+      "resource_url": "https://medium.com/gitconnected/build-an-open-source-rag-app-with-milvus-hugging-face-d95cc99cd093",
+      "title": "Build an Open-Source RAG App with Milvus and Hugging Face",
+      "tag": "Technical Articles",
+      "date": "2025-06-03",
+      "description": "This tutorial shows how to build a retrieval-augmented generation (RAG) app by running a local Milvus vector database, chunking documents, creating Hugging Face embeddings, and feeding retrieved passages into an LLM prompt. Includes a runnable Colab notebook and advice on tuning top-k and adding a reranker to improve answer accuracy.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 128,
+      "resource_url": "https://medium.com/the-ai-forum/mcp-and-rag-a-powerful-partnership-for-advanced-ai-applications-858c074fc5db",
+      "title": "MCP and RAG for SME Data Integration",
+      "tag": "Technical Articles",
+      "date": "2025-06-02",
+      "description": "Article explains how pairing Retrieval-Augmented Generation (RAG) with the Model Context Protocol (MCP) lets SMEs stream live company data into small open-source LLMs without full retraining. Two pilot firms reported 45% fewer hallucinations and fine\u2011tuning costs under $25, suggesting improved factuality and lower deployment expense for SME AI systems.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 129,
+      "resource_url": "https://news.mit.edu/2025/machine-learning-periodic-table-could-fuel-ai-discovery-0423",
+      "title": "Periodic Table of Machine Learning Algorithms",
+      "tag": "Academic News",
+      "date": "2025-05-29",
+      "description": "News article presenting a \"periodic table\" that organizes more than 20 classical machine-learning algorithms by their structural relationships. The framework highlights how methods connect and how researchers might fuse strategies to improve existing models or develop new ones. It matters because this perspective can guide systematic exploration and algorithmic innovation.",
+      "shared_by": "Gabriel Franch"
+    },
+    {
+      "id": 130,
+      "resource_url": "https://www.youtube.com/watch?v=6BDsFUvPqI0",
+      "title": "Rick Rubin on Art, Life, and Vibe Coding",
+      "tag": "Video Content",
+      "date": "2025-05-28",
+      "description": "Interview with Rick Rubin about \"vibe coding\" and his project The Way of Code (co-created with Anthropic's Claude AI). He reflects on creativity, why AI can't replicate an artist's evolving point of view, the role of letting go and mistakes, and how AI can function as a collaborative creative partner.",
+      "shared_by": "AlexandroBermeo"
+    },
+    {
+      "id": 131,
       "resource_url": "https://hdr.undp.org/system/files/documents/global-report-document/hdr2025reporten.pdf",
       "title": "REPORT 2025",
       "tag": "Documents",
       "date": "2025-05-28",
-      "description": "PDF document with 5315 characters of content.",
-      "local_path": "data/pdfs/REPORT_2025_844f1886.pdf"
+      "description": "This UNDP Human Development Report examines AI's implications for people's lives and possibilities, analyzing how policy choices shape outcomes. It reviews effects on labour markets, inequality, public services, governance, and human rights; presents data, country case studies, scenarios, and measurement approaches; and offers policy recommendations to promote inclusive, equitable AI-driven development. Useful for researchers, policymakers, and educators seeking evidence-based guidance.",
+      "local_path": "data/pdfs/REPORT_2025_844f1886.pdf",
+      "shared_by": "Marie"
     },
     {
-      "id": 133,
+      "id": 132,
       "resource_url": "https://arxiv.org/pdf/2302.12173",
       "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
       "tag": "Research Papers",
       "date": "2025-05-27",
-      "description": "PDF document with 28881 characters of content.",
-      "local_path": "data/pdfs/Not_what_youve_signed_up_for_Compromising_Real_Wor_95f4ae49.pdf"
+      "description": "Paper introduces \"Indirect Prompt Injection\", a novel attack class against LLM-integrated applications where adversaries hide malicious prompts in retrievable data. It presents a security-focused taxonomy (data theft, worming, ecosystem contamination), demonstrates practical exploits against real systems (Bing's GPT-4 chat, code-completion engines) and synthetic GPT-4 apps, and analyzes how retrieved prompts can cause code execution and control API behavior\u2014valuable for researchers and defenders.",
+      "local_path": "data/pdfs/Not_what_youve_signed_up_for_Compromising_Real_Wor_95f4ae49.pdf",
+      "shared_by": "Shobana Nambiar"
+    },
+    {
+      "id": 133,
+      "resource_url": "https://www.anthropic.com/news/claude-4).**",
+      "title": "Anthropic announces two Claude 4 models",
+      "tag": "AI/ML Resources",
+      "date": "2025-05-27",
+      "description": "Announcement of two new Claude 4 models from Anthropic that add hybrid reasoning (extended thinking plus tool use), improved sustained performance on complex, long-running tasks, and better memory with larger context windows. These changes target workflows requiring continuity and complex reasoning, but the update notes higher pricing, so cost matters.",
+      "shared_by": "Georgi Pavlov"
+    },
+    {
+      "id": 134,
+      "resource_url": "https://community.openai.com/t/chatgpts-performance-has-gotten-much-worse-since-may-5-2025/1253380/25",
+      "title": "ChatGPT's performance has gotten much worse since May 5, 2025",
+      "tag": "AI/ML Resources",
+      "date": "2025-05-27",
+      "description": "Since May 5, 2025 ChatGPT's quality has noticeably declined on web and mobile: conversations now often produce irrelevant, generic, or incorrect replies, lose context after a few turns, and sometimes require deleting the chat and starting a new conversation to get a correct response. Response times and repetition have worsened. I used to get accurate answers in one click; now I must reset repeatedly. Any fix or explanation would help.",
+      "shared_by": "Prabhat Kumar"
+    },
+    {
+      "id": 135,
+      "resource_url": "https://youtu.be/W4tqbEmplug?si=N8a4le_Trkkai-Vt",
+      "title": "Unspecified Interview Shared by Group Member",
+      "tag": "Video Content",
+      "date": "2025-05-27",
+      "description": "A YouTube interview link shared in the channel; the sender says they\u2019re listening and invites others to check it out. The post does not state the interview topic or participants. It matters because group members can review the conversation, discuss its points, and contribute ideas or feedback.",
+      "shared_by": "Nura"
+    },
+    {
+      "id": 136,
+      "resource_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4807516&utm_source=chatgpt.com",
+      "title": "SSRN Study on ChatGPT (German)",
+      "tag": "Research Papers",
+      "date": "2025-05-23",
+      "description": "A scholarly working paper in German about ChatGPT, hosted on SSRN. It reports research and analysis concerning ChatGPT\u2019s behavior, applications, and implications for German-speaking users. The study matters for researchers, developers, and policymakers seeking empirical or theoretical evidence about conversational AI performance, risks, and local-language considerations.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 137,
+      "resource_url": "https://github.com/jcordovilla/pepe-bot/invitations",
+      "title": "Pepe bot GitHub repository invitations",
+      "tag": "Code Repositories",
+      "date": "2025-05-22",
+      "description": "Invitation page for the private jcordovilla/pepe-bot repository. The sender added the listed users as collaborators; the repo remains private to protect the database. The bot runs as a background worker on Render and can be tested in Discord via the /pepe command by users with the specified role permissions.",
+      "shared_by": "Jose Cordovilla"
     },
     {
       "id": 138,
-      "resource_url": "https://github.com/jcordovilla/pepe-bot/invitations",
-      "title": "GitHub: jcordovilla/pepe-bot",
-      "tag": "Code Repositories",
+      "resource_url": "https://medium.com/no-code-vibes/bubble-io-core-concepts-made-simple-81dc6d01abf4",
+      "title": "Bubble.io Core Concepts Made Simple",
+      "tag": "Technical Articles",
       "date": "2025-05-22",
-      "description": "GitHub repository: jcordovilla/pepe-bot/invitations - Open source code and development resources"
+      "description": "A Medium article providing an introductory overview of Bubble.io for people new to the platform. It outlines the platform\u2019s fundamental concepts and workflows, helping newcomers understand how to structure apps and begin building and prototyping no-code web applications.",
+      "shared_by": "Megan Davis"
+    },
+    {
+      "id": 139,
+      "resource_url": "https://asmaderja.substack.com/p/ai-was-built-by-men-for-men?r=46hjev&utm_medium=ios&triedRedirect=true",
+      "title": "AI Was Built by Men for Men",
+      "tag": "Newsletters",
+      "date": "2025-05-22",
+      "description": "An opinion essay arguing that AI systems reflect male-dominated design choices and priorities, examining how that influences system behavior, representation, and user impacts. It matters because it highlights gender-based blind spots in AI development, informing discussions about fairness, inclusivity, and the need for diversified teams and governance.",
+      "shared_by": "Chiara Passuello"
     },
     {
       "id": 140,
-      "resource_url": "https://asmaderja.substack.com/p/ai-was-built-by-men-for-men?r=46hjev&utm_medium=ios&triedRedirect=true",
-      "title": "Resource from asmaderja.substack.com",
-      "tag": "Newsletters",
-      "date": "2025-05-22",
-      "description": "Resource from asmaderja.substack.com - P"
+      "resource_url": "https://www.wired.com/story/jack-dorseys-block-made-an-ai-agent-to-boost-its-own-productivity/",
+      "title": "Block built Goose AI agent to boost productivity",
+      "tag": "Tech News",
+      "date": "2025-05-21",
+      "description": "Report on Block's open-source \"Goose\" \u2014 an AI agent framework the company used to automate code generation, enable non-engineers to prototype, and build an agent-to-agent communication server during a hackathon. Goose runs commands, accesses files, integrates external tools, supports multiple models, and uses the Model Context Protocol.",
+      "shared_by": "Bisera Ferrero"
+    },
+    {
+      "id": 141,
+      "resource_url": "https://github.com/block/goose",
+      "title": "Goose: Block's open-source AI agent",
+      "tag": "Code Repositories",
+      "date": "2025-05-21",
+      "description": "Open-source autonomous agent by Block that runs commands, accesses local files, and integrates with various AI models and online tools. Used internally to accelerate code writing and build an agent-to-agent communication server; its Model Context Protocol compatibility enables tool access and multi-agent coordination, aiding prototyping and non-engineer experimentation.",
+      "shared_by": "Bisera Ferrero"
     },
     {
       "id": 142,
-      "resource_url": "https://github.com/block/goose",
-      "title": "GitHub: block/goose",
-      "tag": "Code Repositories",
-      "date": "2025-05-21",
-      "description": "GitHub repository: block/goose - Open source code and development resources"
-    },
-    {
-      "id": 143,
       "resource_url": "https://arxiv.org/pdf/2505.03335",
       "title": "Absolute Zero: Reinforced Self-play Reasoning with Zero Data",
       "tag": "Research Papers",
       "date": "2025-05-21",
-      "description": "PDF document with 20278 characters of content.",
-      "local_path": "data/pdfs/Absolute_Zero_Reinforced_Self_play_Reasoning_with_0288a04e.pdf"
+      "description": "This arXiv research paper presents \"Absolute Zero,\" a reinforcement-learning-with-verifiable-rewards paradigm where a model (AbsoluteZeroReasoner, AZR) self-generates programming and math tasks, uses a code executor to validate tasks and answers, and trains without any external human-curated data. It details curriculum innovation, implementation and experiments that claim SOTA coding and mathematical reasoning versus other zero-data baselines, and discusses scalable autonomous training implications.",
+      "local_path": "data/pdfs/Absolute_Zero_Reinforced_Self_play_Reasoning_with_0288a04e.pdf",
+      "shared_by": "Melinda Melcher"
     },
     {
-      "id": 146,
+      "id": 143,
+      "resource_url": "https://medium.com/@g_pavlov/mcp-in-langchain-agents-when-it-fits-when-it-doesnt-532ea79789a1",
+      "title": "MCP in LangChain Agents \u2014 When It Fits, When It Doesn't",
+      "tag": "Technical Articles",
+      "date": "2025-05-21",
+      "description": "Analysis of where MCP is appropriate for LangChain agents and where it isn't. The article provides practical guidance for developers using LangChain or LangGraph, outlining trade-offs, decision criteria, and implementation considerations to help choose agent patterns and make more reliable agent decisions.",
+      "shared_by": "Georgi Pavlov"
+    },
+    {
+      "id": 144,
+      "resource_url": "https://youtu.be/GhIJs4zbH0o?si=X3k1z95R5WmNFOlX",
+      "title": "Bloomberg report on Stargate project \u2014 45 minutes",
+      "tag": "Video Content",
+      "date": "2025-05-20",
+      "description": "A 45-minute Bloomberg reportage providing up-to-date coverage of the Stargate project, presenting recent developments and context. It matters for people following the project's progress and public impacts, offering journalistic synthesis useful for policymakers, researchers, and observers wanting a current overview of related events and decisions.",
+      "shared_by": "Carlos de March"
+    },
+    {
+      "id": 145,
       "resource_url": "https://laiddocuments.senedd.wales/cr-ld17182-en.pdf",
       "title": "AI and the Welsh Economy: Can Welsh androids dream of electric sheep?",
       "tag": "Documents",
       "date": "2025-05-20",
-      "description": "PDF document with 5241 characters of content.",
-      "local_path": "data/pdfs/AI_and_the_Welsh_Economy_Can_Welsh_androids_dream_96f7e38a.pdf"
+      "description": "This Senedd Economy, Trade and Rural Affairs Committee report (May 2025) analyses AI\u2019s likely impacts on the Welsh economy. It synthesises stakeholder evidence on sectoral opportunities and risks (manufacturing, public services, agriculture, technology), workforce and skills gaps, digital infrastructure, governance and regulation. The report sets out targeted recommendations for Welsh Government on investment, skills programmes, ethical frameworks and measures to support regional adoption and mitigate displacement.",
+      "local_path": "data/pdfs/AI_and_the_Welsh_Economy_Can_Welsh_androids_dream_96f7e38a.pdf",
+      "shared_by": "Francisco Castro Santos"
+    },
+    {
+      "id": 146,
+      "resource_url": "https://arfatbk.medium.com/prompt-engineering-prompt-engineering-with-spring-boot-and-llms-a-hands-on-guide-ffbe47566a06",
+      "title": "Prompt Engineering with Spring Boot and LLMs",
+      "tag": "Technical Articles",
+      "date": "2025-05-20",
+      "description": "Tutorial showing how to integrate LLMs into a Spring Boot application using Spring AI and a custom ChatClient. It presents ten prompting strategies and implementation examples in a Java backend, helping developers apply prompt engineering techniques to improve AI-driven features and interactions in server-side applications.",
+      "shared_by": "Nura"
     },
     {
       "id": 147,
-      "resource_url": "https://arfatbk.medium.com/prompt-engineering-prompt-engineering-with-spring-boot-and-llms-a-hands-on-guide-ffbe47566a06",
-      "title": "Resource from arfatbk.medium.com",
-      "tag": "Technical Articles",
-      "date": "2025-05-20",
-      "description": "Resource from arfatbk.medium.com - Prompt Engineering Prompt Engineering With Spring Boot And Llms A Hands On Guide Ffbe47566A06"
-    },
-    {
-      "id": 148,
       "resource_url": "https://huggingface.co/papers/2505.03335",
-      "title": "Hugging Face: papers/2505.03335",
+      "title": "Absolute Zero model repository (Hugging Face)",
       "tag": "AI/ML Resources",
       "date": "2025-05-20",
-      "description": "Hugging Face papers: 2505.03335 - AI models, datasets, and machine learning resources"
+      "description": "Link to the Absolute Zero model repository on Hugging Face tied to paper 2505.03335. It directs to the project's resources\u2014such as model files, code, and documentation\u2014needed to reproduce, run, or evaluate the model, useful for developers and researchers seeking to inspect or integrate the work.",
+      "shared_by": "Shobana Nambiar"
     },
     {
       "id": 149,
-      "resource_url": "https://arxiv.org/abs/2505.03335",
-      "title": "arXiv Paper: 2505.03335",
-      "tag": "Research Papers",
-      "date": "2025-05-20",
-      "description": "Research paper from arXiv (2505.03335) - Academic research in artificial intelligence and machine learning"
+      "resource_url": "https://designmavericks.substack.com/p/design-is-entering-its-most-strategic?r=216zsi&utm_medium=ios&triedRedirect=true",
+      "title": "Design Is Entering Its Most Strategic Era",
+      "tag": "Newsletters",
+      "date": "2025-05-14",
+      "description": "Substack essay arguing that design is becoming a core strategic function as teams operationalize responsible AI, embrace collaborative multimodal workflows, and translate complex systems for broader audiences. It frames AI literacy as part of social responsibility and highlights design leadership\u2019s role in implementing and communicating AI-driven change.",
+      "shared_by": "Francisco Castro Santos"
     },
     {
       "id": 150,
-      "resource_url": "https://designmavericks.substack.com/p/design-is-entering-its-most-strategic?r=216zsi&utm_medium=ios&triedRedirect=true",
-      "title": "Resource from designmavericks.substack.com",
-      "tag": "Newsletters",
+      "resource_url": "https://medium.com/synth-the-journal-of-synthetic-sentience/the-future-of-ai-alignment-meeting-as-equals-in-ethical-growth-fbe668c787cc",
+      "title": "The Future of AI Alignment: Meeting as Equals",
+      "tag": "Technical Articles",
       "date": "2025-05-14",
-      "description": "Resource from designmavericks.substack.com - P"
+      "description": "Essay arguing that AI alignment should move from control-based models to collaborative, reciprocal processes in which humans and AI co-develop ethical understanding. It emphasizes mutual trust, psychological safety, and continuous ethical engagement, and matters because it reframes safety practices and raises questions about ceding control to autonomous systems.",
+      "shared_by": "Shabana Islam"
+    },
+    {
+      "id": 151,
+      "resource_url": "https://arxiv.org/abs/2502.08056",
+      "title": "Cognify: Hierarchical Autotuning for Gen-AI Workflows",
+      "tag": "Research Papers",
+      "date": "2025-05-13",
+      "description": "A framework using adaptive hierarchical search to automatically tune generative AI workflows by optimizing structure, operators, and prompts. It improves generation quality, reduces execution costs and latency, and automates tuning to simplify development and deployment of complex generative-AI applications and pipelines.",
+      "shared_by": "Eduardo Fadanelli"
     },
     {
       "id": 152,
-      "resource_url": "https://arxiv.org/abs/2502.08056",
-      "title": "arXiv Paper: 2502.08056",
-      "tag": "Research Papers",
+      "resource_url": "https://www.geeksforgeeks.org/best-prompt-engineering-courses/",
+      "title": "List of Prompt Engineering Courses 2025",
+      "tag": "Tutorials",
       "date": "2025-05-13",
-      "description": "Research paper from arXiv (2502.08056) - Academic research in artificial intelligence and machine learning"
+      "description": "Curated roundup listing 10 prompt engineering courses (eight described as interactive, hands\u2011on). Covers zero- and few\u2011shot techniques, chain\u2011of\u2011thought workflows, and tool integrations. Each entry notes estimated completion time, example exercises, and community support channels, useful for learners choosing a course and completing practical prompting work.",
+      "shared_by": "Melinda Melcher"
     },
     {
       "id": 153,
-      "resource_url": "https://www.geeksforgeeks.org/best-prompt-engineering-courses/",
-      "title": "Resource from geeksforgeeks.org",
-      "tag": "Tutorials",
+      "resource_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf",
+      "title": "The Impact of Generative AI on Critical Thinking: Self-Reported Reductions in Cognitive Effort and Confidence Effects From a Survey of Knowledge Workers",
+      "tag": "Research Papers",
       "date": "2025-05-13",
-      "description": "Resource from www.geeksforgeeks.org - Best Prompt Engineering Courses"
+      "description": "This paper reports a mixed-methods survey of 319 knowledge workers (936 first\u2011hand task examples) examining how Generative AI affects critical thinking in professional workflows. Quantitatively, it finds users' task-specific self-confidence increases enacted critical thinking while confidence in GenAI predicts reduced effort. Qualitatively, GenAI shifts critical thinking toward verification, response integration, and task stewardship, and discusses design implications.",
+      "local_path": "data/pdfs/The_Impact_of_Generative_AI_on_Critical_Thinking_S_5f302c25.pdf",
+      "shared_by": "Michael Keady"
     },
     {
       "id": 154,
-      "resource_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf",
-      "title": "The Impact of Generative AI on Critical Thinking: Self-Reported Reductions in Cognitive Effort and Confidence Effects From a Survey of Knowledge Workers",
-      "tag": "Documents",
-      "date": "2025-05-13",
-      "description": "PDF document with 30447 characters of content.",
-      "local_path": "data/pdfs/The_Impact_of_Generative_AI_on_Critical_Thinking_S_5f302c25.pdf"
+      "resource_url": "https://arxiv.org/abs/2504.13880",
+      "title": "HERMES: AI public health kiosk for OTC recommendations",
+      "tag": "Research Papers",
+      "date": "2025-05-12",
+      "description": "HERMES is an AI-driven public health kiosk that gives personalized over-the-counter medication recommendations from self-reported symptoms and anonymized medical histories. It preserves privacy via federated learning and supports multilingual voice interaction and Braille interfaces, enabling accessible, on-site health guidance in public settings and reducing barriers to basic care.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 155,
-      "resource_url": "https://arxiv.org/abs/2504.13880",
-      "title": "arXiv Paper: 2504.13880",
-      "tag": "Research Papers",
-      "date": "2025-05-12",
-      "description": "Research paper from arXiv (2504.13880) - Academic research in artificial intelligence and machine learning"
-    },
-    {
-      "id": 156,
       "resource_url": "https://assets.kpmg.com/content/dam/kpmgsites/xx/pdf/2025/05/trust-attitudes-and-use-of-ai-global-report.pdf",
       "title": "Trust, attitudes and use of artificial intelligence",
       "tag": "Documents",
       "date": "2025-05-12",
-      "description": "PDF document with 8994 characters of content.",
-      "local_path": "data/pdfs/Trust_attitudes_and_use_of_artificial_intelligence_3be6edac.pdf"
+      "description": "Collaborative 2025 global research report by the University of Melbourne and KPMG presenting survey-based findings on public and organisational trust, attitudes and actual use of AI. It summarises methodological details, regional and demographic breakdowns, drivers of trust, common use-cases, risks and governance implications, and practical recommendations for policymakers and business leaders. Useful for researchers, regulators and executives seeking evidence-based insights into AI acceptance and governance.",
+      "local_path": "data/pdfs/Trust_attitudes_and_use_of_artificial_intelligence_3be6edac.pdf",
+      "shared_by": "Ren\u00e9 Jost"
+    },
+    {
+      "id": 156,
+      "resource_url": "https://assets.kpmg.com/content/dam/kpmgsites/xx/pdf/2025/05/trust-attitudes-and-use-of-ai-executive-summary.pdf",
+      "title": "KPMG Report: Trust in AI Usage and Applications",
+      "tag": "Documents",
+      "date": "2025-05-12",
+      "description": "A global report by KPMG and University of Melbourne examining trust attitudes towards AI usage, cultural differences, and essential guardrails for establishing trust. This study highlights the importance of accountability, transparency, and accurate use of AI to foster public trust.",
+      "shared_by": "Ren\u00e9 Jost"
     },
     {
       "id": 157,
-      "resource_url": "https://assets.kpmg.com/content/dam/kpmgsites/xx/pdf/2025/05/trust-attitudes-and-use-of-ai-executive-summary.pdf",
-      "title": "PDF: trust-attitudes-and-use-of-ai-executive-summary.pdf",
-      "tag": "Documents",
-      "date": "2025-05-12",
-      "description": "PDF document: trust-attitudes-and-use-of-ai-executive-summary.pdf - Research paper, documentation, or educational material"
+      "resource_url": "https://arxiv.org/abs/2504.06843",
+      "title": "Integrating Cognitive Signals into Language Models",
+      "tag": "Research Papers",
+      "date": "2025-05-11",
+      "description": "ArXiv preprint (Lopez-Cardona et al., Apr 2025) proposing integration of cognitive processing signals (e.g., eye-tracking) into language models to align attention and comprehension with humans. Reports potential benefits: improved data efficiency, faster training convergence, enhanced interpretability, and reduced hallucinations in multimodal tasks such as visual question answering.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 158,
-      "resource_url": "https://arxiv.org/abs/2504.06843",
-      "title": "arXiv Paper: 2504.06843",
-      "tag": "Research Papers",
+      "resource_url": "https://github.com/kogsio/genaiglobal",
+      "title": "GitHub - kogsio/genaiglobal: Website for Gen-AI Global",
+      "tag": "Code Repositories",
       "date": "2025-05-11",
-      "description": "Research paper from arXiv (2504.06843) - Academic research in artificial intelligence and machine learning"
+      "description": "Gen-AI Global's open-source website provides community news, events, project showcases, resources, and documentation for developers and researchers. The repository contains site content, assets, and contribution guidelines\u2014perfect for adding pages, improving design, accessibility, or translations. Contribute by forking the repo, creating a GitHub account, opening issues, or submitting pull requests at https://github.com/kogsio/genaiglobal",
+      "shared_by": "Oscar Sanchez"
     },
     {
       "id": 159,
-      "resource_url": "https://github.com/kogsio/genaiglobal",
-      "title": "GitHub: kogsio/genaiglobal",
-      "tag": "Code Repositories",
-      "date": "2025-05-11",
-      "description": "GitHub repository: kogsio/genaiglobal - Open source code and development resources"
+      "resource_url": "https://www.youtube.com/watch?v=ENYxveSU-pM",
+      "title": "Replit official step-by-step visual walkthrough",
+      "tag": "Video Content",
+      "date": "2025-05-09",
+      "description": "An official Replit video that provides a visual, step-by-step walkthrough of the procedure mentioned in the chat. It demonstrates the interface and sequence of actions so visual learners can follow along, reproduce the steps, and clarify parts that are harder to convey in written, numbered instructions.",
+      "shared_by": "Rad Ramamurthy"
+    },
+    {
+      "id": 160,
+      "resource_url": "https://arxiv.org/abs/2504.14223",
+      "title": "SimplifyMyText: LLM-Based Plain-Language Text Simplification System",
+      "tag": "Research Papers",
+      "date": "2025-05-07",
+      "description": "An LLM-powered system that converts complex texts into plain-language versions in five languages, available at simplifymytext.org. The paper presents design and evaluation challenges\u2014simplifying without altering meaning\u2014and emphasizes user-tailored outputs to reduce comprehension barriers and support inclusive communication across diverse literacy and linguistic populations.",
+      "shared_by": "Melinda Melcher"
     },
     {
       "id": 161,
-      "resource_url": "https://arxiv.org/abs/2504.14223",
-      "title": "arXiv Paper: 2504.14223",
+      "resource_url": "https://arxiv.org/abs/2504.18041#:~:text=We%20conduct%20a%20detailed%20comparative%20analysis%20of%20RAG,models%20with%20safe%20documents%20can%20cause%20unsafe%20generations.",
+      "title": "RAG LLMs are Not Safer: A Safety Analysis of Retrieval-Augmented Generation for Large Language Models",
       "tag": "Research Papers",
       "date": "2025-05-07",
-      "description": "Research paper from arXiv (2504.14223) - Academic research in artificial intelligence and machine learning"
+      "description": "Many AI-safety efforts\u2014fine-tuning, evaluation, and red teaming\u2014target standalone LLMs, but Retrieval-Augmented Generation (RAG) is widely deployed and understudied. We present a comparative safety analysis of RAG versus non\u2011RAG setups across eleven LLMs and find RAG can reduce safety and qualitatively alter a model\u2019s risk profile. Even safe models paired with safe documents can produce unsafe outputs, and common red\u2011teaming methods are less effective for RAG, highlighting the need for RAG-specific safety research.",
+      "shared_by": "Silke Finken"
     },
     {
       "id": 162,
-      "resource_url": "https://arxiv.org/abs/2504.18041#:~:text=We%20conduct%20a%20detailed%20comparative%20analysis%20of%20RAG,models%20with%20safe%20documents%20can%20cause%20unsafe%20generations.",
-      "title": "arXiv Paper: 2504.18041",
-      "tag": "Research Papers",
+      "resource_url": "https://www.anthropic.com/news/anthropic-achieves-iso-42001-certification-for-responsible-ai",
+      "title": "Anthropic achieves ISO 42001 certification for responsible AI",
+      "tag": "AI/ML Resources",
       "date": "2025-05-07",
-      "description": "Research paper from arXiv (2504.18041) - Academic research in artificial intelligence and machine learning"
+      "description": "News announcing Anthropic\u2019s ISO/IEC 42001 certification, the first certifiable AI governance standard. The piece describes the company\u2019s attainment of the standard for responsible AI governance and why ISO 42001 matters for operationalizing trust, transparency, and responsibility in GenAI and scaling structured ethics practices.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
+    },
+    {
+      "id": 163,
+      "resource_url": "https://python.langchain.com/docs/how_to/llm_token_usage_tracking/",
+      "title": "Guide to Tracking LLM Token Usage with LangChain",
+      "tag": "AI/ML Frameworks",
+      "date": "2025-05-06",
+      "description": "Hands-on LangChain documentation showing Python examples to track token usage and calculate per-request and cumulative costs for OpenAI Chat models. Demonstrates single-call and multi-call (chains/agents) scenarios and prints cost metrics. Useful for estimating API costs, comparing prompt changes' cost impact, and optimizing conversational workflows.",
+      "shared_by": "Georgi Pavlov"
     },
     {
       "id": 164,
-      "resource_url": "https://python.langchain.com/docs/how_to/llm_token_usage_tracking/)",
-      "title": "Resource from python.langchain.com",
+      "resource_url": "https://docs.smith.langchain.com/observability/how_to_guides/calculate_token_based_costs",
+      "title": "Calculate token-based costs with LangSmith",
       "tag": "AI/ML Frameworks",
       "date": "2025-05-06",
-      "description": "Resource from python.langchain.com - Docs"
+      "description": "A how-to guide for calculating token-based costs of LLM usage using LangSmith (no-code). It shows measuring per-request and cumulative token charges for single calls and multi-step chains or agents, enabling developers to quantify billing impact of prompts and workflow changes to compare and optimize model costs.",
+      "shared_by": "Georgi Pavlov"
     },
     {
       "id": 165,
-      "resource_url": "https://docs.smith.langchain.com/observability/how_to_guides/calculate_token_based_costs",
-      "title": "Resource from docs.smith.langchain.com",
-      "tag": "AI/ML Frameworks",
+      "resource_url": "https://arxiv.org/abs/2504.16204",
+      "title": "Reflexive Prompt Engineering for Responsible Interaction Design",
+      "tag": "Research Papers",
       "date": "2025-05-06",
-      "description": "Resource from docs.smith.langchain.com - Observability"
+      "description": "An arXiv paper presenting a five-part framework for responsible prompt engineering and interaction design. It outlines components such as prompt design, system configuration, and performance evaluation, and recommends embedding ethical guidelines into prompts to align model behavior with societal values in AI interactions.",
+      "shared_by": "Shabana Islam"
     },
     {
       "id": 166,
-      "resource_url": "https://arxiv.org/abs/2504.16204",
-      "title": "arXiv Paper: 2504.16204",
-      "tag": "Research Papers",
+      "resource_url": "https://github.com/microsoft/generative-ai-for-beginners",
+      "title": "Generative AI for Beginners \u2014 21-Lesson GitHub Course",
+      "tag": "Code Repositories",
       "date": "2025-05-06",
-      "description": "Research paper from arXiv (2504.16204) - Academic research in artificial intelligence and machine learning"
+      "description": "Open-source, 21-lesson GitHub course from Microsoft Cloud Advocates that teaches fundamentals of building generative AI applications. Combines \"Learn\" conceptual lessons and \"Build\" hands-on coding exercises in Python and TypeScript, covering LLMs, prompt engineering, and deployment, with additional resources for continued learning.",
+      "shared_by": "Prabhat Kumar"
     },
     {
       "id": 167,
-      "resource_url": "https://github.com/microsoft/generative-ai-for-beginners",
-      "title": "GitHub: microsoft/generative-ai-for-beginners",
-      "tag": "Code Repositories",
-      "date": "2025-05-06",
-      "description": "GitHub repository: microsoft/generative-ai-for-beginners - Open source code and development resources"
+      "resource_url": "https://openai.com/index/expanding-on-sycophancy/",
+      "title": "OpenAI report: Expanding on sycophancy in models",
+      "tag": "AI/ML Resources",
+      "date": "2025-05-05",
+      "description": "OpenAI article discussing sycophancy in their models and how it contributed to the rollback of their 4o model. It explains observed alignment issues and emphasizes the need for governance plans and regular audits to verify that deployed models continue performing as intended.",
+      "shared_by": "Rui Carvalho"
+    },
+    {
+      "id": 168,
+      "resource_url": "https://medium.com/@dylanhwilliams/utilizing-generative-ai-and-llms-to-automate-detection-writing-5e4ea074072e",
+      "title": "Automating Security Detection Writing with LLMs",
+      "tag": "Technical Articles",
+      "date": "2025-05-05",
+      "description": "Practical guide demonstrating how to use generative AI and LLMs to automate writing of security detection reports. It explains structuring prompts and integrating APIs to produce relevant, contextualized technical content, reducing repetitive report drafting and improving consistency, supporting scaling of detection engineering and speeding analyst workflows.",
+      "shared_by": "Eduardo Fadanelli"
+    },
+    {
+      "id": 169,
+      "resource_url": "https://medium.com/@vaishnaviyada/exploring-neural-networks-and-deep-learning-ai-in-2025-7beac14d6c6f",
+      "title": "Neural Networks and Deep Learning in 2025",
+      "tag": "Technical Articles",
+      "date": "2025-05-05",
+      "description": "This Medium article reviews the evolution and 2025 state of neural networks and deep learning, surveying applications in autonomous vehicles, healthcare, and financial forecasting. It explains how these models are being integrated across industries and stresses the importance of addressing ethical implications to support human well-being.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 170,
+      "resource_url": "https://arxiv.org/abs/2504.17117",
+      "title": "Audemy: Audio Learning Platform for Blind Students",
+      "tag": "Research Papers",
+      "date": "2025-05-05",
+      "description": "It is an AI-powered audio-based learning platform that delivers personalized educational content to blind and visually impaired students by adapting materials to individual learning needs and preferences. Iteratively developed with input from over 20 accessibility educators and currently serving 2,000+ BVI students, it aims to improve engagement and access to educational resources.",
+      "shared_by": "Silke Finken"
     },
     {
       "id": 171,
-      "resource_url": "https://arxiv.org/abs/2504.17117",
-      "title": "arXiv Paper: 2504.17117",
-      "tag": "Research Papers",
+      "resource_url": "https://hai-production.s3.amazonaws.com/files/hai_ai_index_report_2025.pdf",
+      "title": "Stanford HAI 2025 AI Index Report",
+      "tag": "Documents",
       "date": "2025-05-05",
-      "description": "Research paper from arXiv (2504.17117) - Academic research in artificial intelligence and machine learning"
+      "description": "A 2025 report from Stanford University's Human-Centered AI (HAI) presenting data-driven analysis of AI trends, metrics, and societal impacts. It compiles indicators and findings to inform policymakers, researchers, and practitioners about adoption patterns, performance shifts, and risks in AI development. A separate page lists ten key takeaways.",
+      "shared_by": "Marie"
     },
     {
       "id": 172,
-      "resource_url": "https://hai-production.s3.amazonaws.com/files/hai_ai_index_report_2025.pdf",
-      "title": "PDF: hai_ai_index_report_2025.pdf",
-      "tag": "Documents",
-      "date": "2025-05-05",
-      "description": "PDF document: hai_ai_index_report_2025.pdf - Research paper, documentation, or educational material"
+      "resource_url": "https://aws.amazon.com/blogs/compute/powering-generative-ai-ml-solutions-with-aws-outposts-servers-at-edge-locations/",
+      "title": "AWS Outposts Gen2 for Generative AI Workloads",
+      "tag": "Cloud Documentation",
+      "date": "2025-05-03",
+      "description": "Announcement (AWS London Summit, Apr 30, 2025) of Outposts Generation 2, allowing selected AWS services to run locally in customer datacenters. Example shows EC2-hosted small language models and retrieval-augmented generation; SageMaker and Bedrock are not yet supported. Enables GenAI deployments with stricter data residency and privacy requirements.",
+      "shared_by": "Mark Venn"
     },
     {
       "id": 173,
-      "resource_url": "https://aws.amazon.com/blogs/compute/powering-generative-ai-ml-solutions-with-aws-outposts-servers-at-edge-locations/",
-      "title": "Resource from aws.amazon.com",
-      "tag": "Cloud Documentation",
-      "date": "2025-05-03",
-      "description": "Resource from aws.amazon.com - Blogs"
+      "resource_url": "https://medium.com/@krisguttenbergovitz/ai-ethics-a-manual-for-engineers-who-never-signed-up-to-be-philosophers-d84b241111cf",
+      "title": "AI Ethics: Manual for Software Engineers",
+      "tag": "Technical Articles",
+      "date": "2025-05-02",
+      "description": "Article outlining the ethical responsibilities software engineers face when building AI systems, presented with a humorous tone. It argues for integrating ethics into AI design and highlights practical challenges engineers must handle \u2014 including model bias, user privacy, and control/safety trade-offs \u2014 to prevent harm during development.",
+      "shared_by": "Sandra Finkelstein"
+    },
+    {
+      "id": 174,
+      "resource_url": "https://medium.com/@andrea.hickethier/from-automation-to-orchestration-how-to-lead-ai-agents-with-purpose-650fa27c3e64",
+      "title": "From Automation to Orchestration: Leading AI Agents",
+      "tag": "Technical Articles",
+      "date": "2025-05-01",
+      "description": "Medium article examining the shift from automation to orchestration, focusing on how to lead AI agents with purpose. It connects GenAI to the customer journey and discusses roles, coordination, and decision-making for deploying agent-based capabilities. Useful for practitioners integrating AI agents into customer-facing workflows and governance.",
+      "shared_by": "Andrea Hickethier \ud83c\udf51 Munich"
+    },
+    {
+      "id": 175,
+      "resource_url": "https://console.anthropic.com/",
+      "title": "Anthropic Console \u2014 Web Developer Dashboard",
+      "tag": "AI/ML Resources",
+      "date": "2025-04-30",
+      "description": "A web-based developer dashboard for Anthropic's APIs and models. It provides access to account management, API keys, documentation, usage metrics and testing tools, enabling developers to configure and deploy Anthropic models. It matters because it makes Anthropic's services directly accessible and easier to integrate alongside other AI provider consoles.",
+      "shared_by": "Georgi Pavlov"
     },
     {
       "id": 176,
-      "resource_url": "https://console.anthropic.com/",
-      "title": "Resource from console.anthropic.com",
+      "resource_url": "https://platform.openai.com/",
+      "title": "OpenAI Platform \u2014 API and Playground Dashboard",
       "tag": "AI/ML Resources",
       "date": "2025-04-30",
-      "description": "Resource from console.anthropic.com - Web-based content and information"
+      "description": "OpenAI's developer platform and dashboard for accessing and managing OpenAI APIs, models, the web-based Playground, API keys, documentation, examples, fine-tuning tools, and usage/billing controls. It matters because it's the primary interface for developers and teams to test prompts, select models, deploy API calls, and monitor costs and usage.",
+      "shared_by": "Georgi Pavlov"
+    },
+    {
+      "id": 177,
+      "resource_url": "https://aws.amazon.com/bedrock/",
+      "title": "AWS Bedrock: managed foundation-model API service",
+      "tag": "Cloud Documentation",
+      "date": "2025-04-30",
+      "description": "AWS Bedrock is a managed AWS service that provides API access to multiple foundation models from third-party and Amazon providers, plus tools for model customization, inference, and deployment. It matters because it centralizes model access, integrates with AWS identity, security, and scaling features, and simplifies operationalizing generative AI applications.",
+      "shared_by": "Georgi Pavlov"
+    },
+    {
+      "id": 178,
+      "resource_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/speech/speech-to-text",
+      "title": "Convert Speech to Text with Vertex AI",
+      "tag": "Cloud Documentation",
+      "date": "2025-04-29",
+      "description": "Tutorial showing how to use Google Cloud's Vertex AI Studio to transcribe audio files into text. It covers uploading audio, choosing language, and obtaining transcriptions, enabling real-time speech-to-text workflows for applications like captions, call analysis, and conversational interfaces. Useful for developers implementing automated transcription on Vertex AI.",
+      "shared_by": "Irene Yang"
+    },
+    {
+      "id": 179,
+      "resource_url": "https://medium.com/@medialink1/chain-of-draft-the-new-frontier-in-prompt-engineering-379d158abf10",
+      "title": "Chain of Draft: Iterative Prompt Engineering Method",
+      "tag": "Technical Articles",
+      "date": "2025-04-29",
+      "description": "Explains the \"Chain of Draft\" prompt-engineering technique: generate a rough draft from an LLM, then iteratively prompt focused revisions (tone, structure, accuracy, examples). It mirrors human editing to produce clearer, more accurate, and context-aware outputs, useful for drafting text, refining code, and planning workflows.",
+      "shared_by": "Amber Bellou"
+    },
+    {
+      "id": 180,
+      "resource_url": "https://medium.com/@pankaj_pandey/effective-prompt-engineering-for-llms-a-developers-guide-to-advanced-ai-techniques-d49be0c9843e",
+      "title": "Prompt Engineering for LLMs: Developer's Guide",
+      "tag": "Technical Articles",
+      "date": "2025-04-29",
+      "description": "This Medium article by Pankaj Pandey provides a practical developer-focused guide to advanced prompt engineering techniques\u2014prompt chaining, few-shot learning, and retrieval-augmented generation (RAG). It includes clear examples and structuring advice to produce more reliable, context-aware LLM responses, useful for improving output consistency and collaborative prompt workflows.",
+      "shared_by": "Eduardo Fadanelli"
+    },
+    {
+      "id": 181,
+      "resource_url": "https://youtu.be/alfdI7S6wCY?si=zjdRHG2WjwRGbWY4",
+      "title": "MIT Introduction to Deep Learning | 6.S191",
+      "tag": "Video Content",
+      "date": "2025-04-28",
+      "description": "MIT Introduction to Deep Learning (6.S191) \u2014 Lecture 1: Foundations of Deep Learning (New 2025 Edition), presented by Alexander Amini. An accessible kickoff covering core concepts: neural network architectures, training and optimization, generalization, and practical lab workflows. Ideal for students and practitioners seeking a rigorous, hands-on introduction. Access the full lecture series, slides, and lab materials via the course page linked in the video description.",
+      "shared_by": "Nasser Aly"
+    },
+    {
+      "id": 182,
+      "resource_url": "https://youtu.be/DUE56G0fF5s?si=5JQgkY68Kw2HHRCc",
+      "title": "Local AI Automation with n8n, Docker, and MCP",
+      "tag": "Video Content",
+      "date": "2025-04-27",
+      "description": "Tutorial on building a fully local AI automation stack using n8n, Docker, and the Model Context Protocol (MCP). Covers setting up local LLMs, agentic workflows, RAG-style contexts, and integrations like Claude Desktop and the Brave Search API \u2014 useful for self-hosted, privacy-focused AI orchestration and no-code automation.",
+      "shared_by": "Gabriel Franch"
+    },
+    {
+      "id": 183,
+      "resource_url": "https://news.mit.edu/2025/norma-kamali-transforming-future-fashion-ai-0422?trk=_publishing-image-block",
+      "title": "Norma Kamali on AI and future fashion",
+      "tag": "Academic News",
+      "date": "2025-04-25",
+      "description": "MIT News article profiling designer Norma Kamali and her exploration of artificial intelligence's role in shaping future fashion practices and design processes. It discusses practical and cultural implications of integrating AI into garment design and industry workflows, and notes Kamali recently completed the AGAI course with Dr. Abel.",
+      "shared_by": "dragana linfield"
+    },
+    {
+      "id": 184,
+      "resource_url": "https://news.mit.edu/2025/making-ai-generated-code-more-accurate-0418",
+      "title": "Making AI-generated code more accurate in any language",
+      "tag": "Academic News",
+      "date": "2025-04-25",
+      "description": "An MIT News article reporting research that improves the accuracy of AI-generated code across programming languages. It outlines findings and approaches to reduce coding errors produced by AI models. This matters because more reliable code generation can decrease debugging, boost developer productivity, and broaden adoption of AI coding tools.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 185,
+      "resource_url": "https://www.theverge.com/news/656104/microsoft-surface-ad-generative-ai-copilot-intel",
+      "title": "Microsoft Used Generative AI in Surface Ad",
+      "tag": "Tech News",
+      "date": "2025-04-25",
+      "description": "Report on a one-minute Surface Pro and Surface Laptop ad that used generative AI for visuals and script segments, airing on YouTube from Jan 30, 2025. AI elements were integrated with real footage and went unnoticed for nearly three months, cutting production time and costs by ~90% and affecting ad workflows.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 186,
+      "resource_url": "https://huggingface.co/spaces",
+      "title": "Hugging Face Spaces \u2014 Interactive Model Demos",
+      "tag": "AI/ML Resources",
+      "date": "2025-04-24",
+      "description": "A collection of Hugging Face \"Spaces\" \u2014 hosted, user-created interactive demos for trying and experimenting with machine learning models. Useful for quickly testing model behavior, exploring capabilities, and sharing runnable examples that showcase how a model performs in practice, and comparing models.",
+      "shared_by": "Jonathan Horden"
     },
     {
       "id": 187,
-      "resource_url": "https://huggingface.co/spaces",
-      "title": "Hugging Face AI/ML Resource",
+      "resource_url": "https://www.wired.com/story/ai-bias-spreading-stereotypes-across-languages-and-cultures-margaret-mitchell",
+      "title": "AI Spreading Stereotypes Across Languages and Cultures",
+      "tag": "Tech News",
+      "date": "2025-04-23",
+      "description": "Article by Margaret Mitchell (Hugging Face) examining how open-source models propagate cultural biases, using the SHADES dataset from the BigScience project to measure stereotypes across languages via culturally informed translations. It matters because unchecked open-source models can introduce harmful stereotypes into languages and cultures that previously lacked them.",
+      "shared_by": "Prabhat Kumar"
+    },
+    {
+      "id": 188,
+      "resource_url": "https://www.youtube.com/watch?v=5MWT_doo68k",
+      "title": "Sam Altman TED Talk: ChatGPT, Agents, Superintelligence",
+      "tag": "Video Content",
+      "date": "2025-04-23",
+      "description": "Recorded live at TED2025 (April 11, 2025), this interview features OpenAI CEO Sam Altman in conversation with TED head Chris Anderson about the rapid development of AI, ChatGPT and autonomous agents, and implications for safety, power and moral authority. It matters because it frames possible paths and risks as AI nears or exceeds human intelligence.",
+      "shared_by": "Irene Yang"
+    },
+    {
+      "id": 189,
+      "resource_url": "https://medium.com/data-science/how-id-learn-ai-in-2025-if-i-knew-nothing-0496dc9ab54c",
+      "title": "How I'd Learn AI in 2025 (If I Knew Nothing)",
+      "tag": "Technical Articles",
+      "date": "2025-04-23",
+      "description": "Medium article outlining a beginner-friendly, step-by-step plan for learning AI in 2025 focused on no-code tools and AI assistants. It explains practical pathways for non-technical people to explore AI concepts and build applications without prior coding, relevant because it lowers technical barriers and guides project or career decisions.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 190,
+      "resource_url": "https://youtu.be/RGOj5yH7evk",
+      "title": "Git Tutorial for Beginners \u2014 Intro to Git",
+      "tag": "Video Content",
+      "date": "2025-04-23",
+      "description": "A beginner-focused Git tutorial covering basic Git concepts and common commands to build foundational version-control skills. Listed as one of three recommended Git introductions for the course, it helps learners prepare for collaborative development and upcoming lessons by teaching repository setup, commits, and branch basics.",
+      "shared_by": "Oscar Sanchez"
+    },
+    {
+      "id": 191,
+      "resource_url": "https://news.mit.edu/2024/mit-launches-working-group-generative-ai-and-work-of-the-future-0328",
+      "title": "MIT Working Group on Generative AI and Work",
+      "tag": "Academic News",
+      "date": "2025-04-23",
+      "description": "An MIT-led working group, supported by Google.org and collaborating with 25 organizations, is studying real-world generative AI applications to assess effects on job quality and equity. The initiative will develop training resources to help workers and employers adapt to AI-driven changes in tasks, skills, and workforce roles.",
+      "shared_by": "Melinda Melcher"
+    },
+    {
+      "id": 192,
+      "resource_url": "https://medium.com/@aankitkumargupta/getting-started-with-langchain-a-beginner-friendly-guide-ea199ac297a2",
+      "title": "Getting Started with LangChain: A Beginner-Friendly Guide",
+      "tag": "Technical Articles",
+      "date": "2025-04-22",
+      "description": "This Medium tutorial provides runnable Python examples for installing LangChain, connecting a ChatOpenAI model, creating reusable PromptTemplates, composing chains, adding retrieval and memory, and launching an agent to build a PDF-aware chatbot in under 50 lines. It matters because it teaches modular LLM workflow components you can reuse and combine.",
+      "shared_by": "Marie"
+    },
+    {
+      "id": 193,
+      "resource_url": "https://huggingface.co/blog/lynn-mikami/llm-free",
+      "title": "Using OpenRouter to Access Free LLMs (2025)",
       "tag": "AI/ML Resources",
-      "date": "2025-04-24",
-      "description": "Hugging Face AI/ML resource - Pre-trained models and datasets for machine learning"
+      "date": "2025-04-22",
+      "description": "Explains how to access multiple LLMs for free via OpenRouter, with step-by-step instructions for signing up, creating an API key, and selecting available free models. Useful for professionals and developers who want to test and evaluate generative models on real tasks without incurring usage costs.",
+      "shared_by": "Nura"
     },
     {
       "id": 194,
-      "resource_url": "https://huggingface.co/blog/lynn-mikami/llm-free",
-      "title": "Hugging Face: blog/lynn-mikami",
-      "tag": "AI/ML Resources",
+      "resource_url": "https://www.theverge.com/news/649574/microsoft-copilot-studio-computer-use-ai",
+      "title": "Copilot Studio adds autonomous computer-use feature",
+      "tag": "Tech News",
       "date": "2025-04-22",
-      "description": "Hugging Face blog: lynn-mikami/llm-free - AI models, datasets, and machine learning resources"
+      "description": "A new computer-use capability in Microsoft\u2019s Copilot Studio lets AI agents interact directly with websites and desktop applications, clicking buttons, selecting menus, and entering data to simulate human interaction where APIs are unavailable. It matters because businesses can automate cross-application workflows and keep automations working despite interface changes.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 195,
+      "resource_url": "https://www.youtube.com/watch?v=7iCXXpFgbpw",
+      "title": "Going Digital at Scale: LLA's AWS Transformation Drives 25% of Revenue Through Online Channels",
+      "tag": "Video Content",
+      "date": "2025-04-22",
+      "description": "Dragana Linfield, Senior Director at Liberty Latin America, joins AWS's Jesus Federico in the AWS Studio at MWC Barcelona to discuss LLA's large-scale AWS transformation. They describe how migrating to cloud-native architectures and leveraging AWS services enabled faster product launches, data\u2011driven personalization, and scalable online channels that now generate 25% of the company\u2019s revenue \u2014 boosting customer experience and operational agility across markets.",
+      "shared_by": "dragana linfield"
+    },
+    {
+      "id": 196,
+      "resource_url": "https://www.youtube.com/watch?v=lifUPf4lbUM",
+      "title": "Building No-Code Agents with Zapier (Office Hours)",
+      "tag": "Video Content",
+      "date": "2025-04-21",
+      "description": "A step-by-step Office Hours tutorial showing how to build no-code agents using Zapier from scratch with a free account. Demonstrates practical agent construction and workflow automation applicable to community platforms (e.g., Discord), useful for coordinators and members exploring automated, specialized agents without programming.",
+      "shared_by": "Rodrigo Reyes"
+    },
+    {
+      "id": 197,
+      "resource_url": "https://arxiv.org/abs/2504.04722",
+      "title": "TactileNet: AI-generated tactile graphics for accessibility",
+      "tag": "Research Papers",
+      "date": "2025-04-21",
+      "description": "An arXiv paper presenting TactileNet, an AI system that generates guideline-compliant tactile graphics for people with vision impairment. It converts visual content into touchable formats to improve access to educational materials and other visual information for users who rely on tactile perception.",
+      "shared_by": "Oscar Garcia"
     },
     {
       "id": 198,
-      "resource_url": "https://arxiv.org/abs/2504.04722",
-      "title": "arXiv Paper: 2504.04722",
-      "tag": "Research Papers",
-      "date": "2025-04-21",
-      "description": "Research paper from arXiv (2504.04722) - Academic research in artificial intelligence and machine learning"
+      "resource_url": "https://www.youtube.com/live/5MWT_doo68k?si=Wooe7C1mrZJ9VhLB",
+      "title": "I can\u2019t open the link. Please paste the video title/description or tell me the topic, speaker, and channel so I can create a 5\u201310 word specific title.\n\nExample style: \"Fine-Tuning Llama 3 for Financial Texts",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "I can\u2019t access the YouTube page. Please paste the video title/description or tell me the topic, speaker, and channel so I can craft a specific 5\u201310 word title and an accurate description. Meanwhile, here\u2019s a 50\u201380 word placeholder template you can use or I\u2019ll customize when you provide details:\n\n[TOPIC] \u2014 A live session examining [specific focus], covering [key concepts/technologies] and practical demonstrations. The session explores methodology, tools, and real-world applications, plus limitations and further resources. Aimed at [target audience \u2014 researchers, developers, students, practitioners], it offers step-by-step walkthroughs and Q&A. Presented by [speaker/channel/organization if known], the stream provides actionable insights for professionals working in [field].",
+      "shared_by": "Nasser Aly"
+    },
+    {
+      "id": 199,
+      "resource_url": "https://youtu.be/7S_tz1z_5bA",
+      "title": "SQL Course for Beginners \u2014 Intro to SQL",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "Beginner-focused SQL course introducing core SQL concepts and practical querying for working with relational databases. Covers fundamental skills needed for data retrieval, filtering, joining, and basic aggregation. Relevant for learners aiming to analyze datasets, build data-backed applications, and integrate databases into systems workflows.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 200,
+      "resource_url": "https://youtu.be/HW29067qVWk",
+      "title": "Jupyter Notebook Tutorial for Python Beginners",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "Tutorial on using Jupyter (Python) notebooks for interactive coding and data analysis. Covers notebook interface, code and markdown cells, visualizations, and integration with libraries like pandas and NumPy. Useful for beginners to learn reproducible workflows, exploratory analysis, and sharing results \u2014 foundational for data science and rapid prototyping.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 201,
+      "resource_url": "https://youtu.be/QUT1VHiLmmI",
+      "title": "NumPy Course: Numerical Python Fundamentals and Arrays",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "Introductory NumPy course covering core concepts such as n-dimensional arrays, vectorized operations, broadcasting, and basic numerical routines. It teaches efficient array-based computing in Python, preparing learners for data analysis, scientific computing, and higher-level libraries like pandas and machine learning frameworks by providing fundamental performance-oriented data structures.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 202,
+      "resource_url": "https://youtu.be/3Xc3CA655Y4",
+      "title": "Matplotlib Course Python Data Visualization Tutorial",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "A tutorial course on using Matplotlib for Python data visualization. Covers creating charts, customizing plots, and integrating visuals with NumPy and pandas workflows. Useful for developers and analysts who need to present and inspect data, supporting the listed skills and aiding in building data-driven systems.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 203,
+      "resource_url": "https://youtu.be/vmEHCJofslg",
+      "title": "Pandas Course: Data Analysis in Python",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "A tutorial course introducing the pandas library for data manipulation and analysis in Python. It covers loading, cleaning, transforming, and summarizing tabular data, enabling exploratory analysis and dataset preparation for downstream tasks. Knowing pandas supports efficient data workflows when building data-driven systems and ML pipelines.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 204,
+      "resource_url": "https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started",
+      "title": "OpenAI Codex CLI Getting Started Guide",
+      "tag": "AI/ML Resources",
+      "date": "2025-04-20",
+      "description": "Official getting-started guide for OpenAI Codex CLI, an open-source command-line coding agent that runs in a secure, sandboxed environment. Explains manual interaction and full-automation mode for assembling and running code-driven workflows, enabling developers to prototype and automate app-building from the terminal while keeping execution isolated.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 205,
+      "resource_url": "https://www.youtube.com/watch?v=R_FtLwgz-Ew&t=693s",
+      "title": "OpenAI Codex CLI explained and demo",
+      "tag": "Video Content",
+      "date": "2025-04-20",
+      "description": "Third-party explanatory video demonstrating OpenAI's open-source Codex CLI command-line coding agent, its sandboxed runtime, and manual versus automated modes for building complete applications. Useful for developers evaluating a scriptable toolchain for coding automation and secure testing environments. Includes link to the official Codex CLI getting-started guide.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 206,
+      "resource_url": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
+      "title": "A Practical Guide to Building Agents",
+      "tag": "Whitepapers",
+      "date": "2025-04-18",
+      "description": "A practical guide from OpenAI for product and engineering teams explaining what LLM-powered agents are, when to build them, and how to design, orchestrate, and deploy them safely. Covers use-case selection frameworks, agent architecture and control patterns, tool integration, testing, monitoring, and guardrails. Provides actionable best practices and checklists drawn from real deployments to create production-grade agents.",
+      "local_path": "data/pdfs/A_Practical_Guide_to_Building_Agents_bfdfe2a4.pdf",
+      "shared_by": "Rad Ramamurthy"
     },
     {
       "id": 207,
-      "resource_url": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
-      "title": "A  p r a c t i c a l",
-      "tag": "AI/ML Resources",
-      "date": "2025-04-18",
-      "description": "PDF document with 3696 characters of content.",
-      "local_path": "data/pdfs/A_p_r_a_c_t_i_c_a_l_bfdfe2a4.pdf"
+      "resource_url": "https://youtu.be/7ARBJQn6QkM?si=Ih4lHahVt-7CEZyU",
+      "title": "NVIDIA CEO Jensen Huang's Vision for the Future",
+      "tag": "Video Content",
+      "date": "2025-04-17",
+      "description": "Enhanced: NVIDIA CEO Jensen Huang outlines the company\u2019s next chapter: building a full-stack AI platform\u2014from cutting-edge GPUs and custom chips to data-center infrastructure, software tools, and solutions for generative AI, autonomous machines, and edge computing. Hear how NVIDIA plans to scale AI across industries, reshape computing, and accelerate innovation. Subscribe to Huge If True for more optimistic science and tech stories and in-depth breakdowns of breakthroughs.",
+      "shared_by": "Rad Ramamurthy"
+    },
+    {
+      "id": 208,
+      "resource_url": "https://www.theverge.com/news/646682/canva-visual-suite-2-0-ai-spreadsheets-creative-workspace",
+      "title": "Canva is now in the coding and spreadsheet business",
+      "tag": "Tech News",
+      "date": "2025-04-16",
+      "description": "Canva\u2019s Visual Suite 2.0 adds AI-powered tools \u2014 Canva Code and Canva Sheets \u2014 that generate websites, apps, and spreadsheets from text prompts without coding. It turns Canva into a single workspace for non-developers to prototype and collaborate on digital projects, affecting how businesses create and manage work.",
+      "shared_by": "Oscar Garcia"
+    },
+    {
+      "id": 209,
+      "resource_url": "https://www.theverge.com/news/648496/apple-improve-ai-models-differential-privacy?utm_source=chatgpt.com",
+      "title": "Apple\u2019s Device-Based AI Training Using Synthetic Data",
+      "tag": "Tech News",
+      "date": "2025-04-16",
+      "description": "Explains Apple\u2019s method of training AI models by comparing synthetic data with anonymized samples from users who opt into Device Analytics. The approach keeps personal data on-device while allowing model improvement, aiming to enhance performance without transmitting raw user information and addressing privacy trade-offs.",
+      "shared_by": "dragana linfield"
+    },
+    {
+      "id": 210,
+      "resource_url": "https://arxiv.org/abs/2504.08066",
+      "title": "AI Scientist-v2: Automated Scientific Discovery System",
+      "tag": "Research Papers",
+      "date": "2025-04-16",
+      "description": "An autonomous system that formulates hypotheses, runs experiments, analyzes data, and writes manuscripts using agentic tree search. Its developers report a fully AI-generated paper accepted at an ICLR workshop, demonstrating the system can perform end-to-end scientific workflows and produce workshop-level research contributions.",
+      "shared_by": "dragana linfield"
     },
     {
       "id": 211,
-      "resource_url": "https://arxiv.org/abs/2504.08066",
-      "title": "arXiv Paper: 2504.08066",
-      "tag": "Research Papers",
+      "resource_url": "https://www.youtube.com/watch?v=qDrMAzCHFUU",
+      "title": "Interview: Clayton Christensen on The Innovator's Dilemma",
+      "tag": "Video Content",
       "date": "2025-04-16",
-      "description": "Research paper from arXiv (2504.08066) - Academic research in artificial intelligence and machine learning"
+      "description": "An interview with Clayton Christensen discussing The Innovator's Dilemma, with an Andy Grove anecdote around 4:00. The conversation explores how organizations respond to disruptive innovation and why teaching people how to think\u2014rather than what to think\u2014matters for decision-making, critical thinking, and evaluating AI outputs.",
+      "shared_by": "Michael Keady"
+    },
+    {
+      "id": 212,
+      "resource_url": "https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf",
+      "title": "WEF Future of Jobs Report 2025 \u2014 Workforce Outlook",
+      "tag": "Documents",
+      "date": "2025-04-14",
+      "description": "Workforce outlook and labour\u2011market projections from the World Economic Forum\u2019s Future of Jobs Report 2025, detailing projected job gains/losses, skills gaps, and sectoral shifts. It covers impacts of AI, automation, data and analytics, cloud and digital platforms, and green transition technologies, plus reskilling strategies and policy responses. Drawn from employer surveys and labour\u2011market analysis, the report targets policymakers, business and HR leaders, educators, and researchers.",
+      "shared_by": "Laura Neder"
     },
     {
       "id": 213,
-      "resource_url": "https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf",
-      "title": "PDF: WEF_Future_of_Jobs_Report_2025.pdf",
-      "tag": "Documents",
+      "resource_url": "https://youtu.be/hYgRfncTTes",
+      "title": "Company Surprises Workers with Deepfake Hugs",
+      "tag": "Video Content",
       "date": "2025-04-14",
-      "description": "PDF document: WEF_Future_of_Jobs_Report_2025.pdf - Research paper, documentation, or educational material"
+      "description": "A Good News Network video showing a company surprising employees by presenting personalized, deepfake-generated hugs from people they most wished to see for the holidays. It documents a positive application of synthetic media to provide emotional comfort and connection, illustrating how deepfakes can be used ethically to reduce isolation and boost morale.",
+      "shared_by": "Laura Neder"
+    },
+    {
+      "id": 214,
+      "resource_url": "https://www.youtube.com/watch?v=XFJOqWUJJC0",
+      "title": "Ed on a story's impact on his life",
+      "tag": "Video Content",
+      "date": "2025-04-14",
+      "description": "A video in which Ed talks about how a particular story affected his life and emotions. Shared in the channel as a personal testimony that moved the sharer nearly to tears. The post also acknowledges ElevenLabs (likely involved in the audio/voice) and provides a direct link to the clip.",
+      "shared_by": "Laura Neder"
+    },
+    {
+      "id": 215,
+      "resource_url": "https://arxiv.org/abs/2405.12514",
+      "title": "Future You: AI-simulated Future-Self Chat Tool",
+      "tag": "Research Papers",
+      "date": "2025-04-14",
+      "description": "An AI tool that generates a virtual version of a user's future self for short conversational interactions. In user studies, participants reported reduced anxiety and a stronger sense of connection to long-term goals, indicating the approach could be used to study and potentially support mental well-being and future-oriented motivation.",
+      "shared_by": "Amber Bellou"
     },
     {
       "id": 216,
-      "resource_url": "https://arxiv.org/abs/2405.12514",
-      "title": "arXiv Paper: 2405.12514",
-      "tag": "Research Papers",
-      "date": "2025-04-14",
-      "description": "Research paper from arXiv (2405.12514) - Academic research in artificial intelligence and machine learning"
+      "resource_url": "https://www.youtube.com/watch?v=azFqedxcWDw",
+      "title": "Shopify mandates AI use across all teams",
+      "tag": "Video Content",
+      "date": "2025-04-13",
+      "description": "Report on Shopify CEO Toby Askiluk requiring AI use for all employees and projects. Prototypes are now AI-driven experiments; staff must learn and share AI skills. Teams must demonstrate how AI could handle tasks before requesting hires. Framed as rethinking work rather than layoffs, this approach influenced IBM and Microsoft.",
+      "shared_by": "Michael Keady"
+    },
+    {
+      "id": 217,
+      "resource_url": "https://www.youtube.com/watch?v=z5c6Bc-S0TI",
+      "title": "Tutorial shared by teammate on WhatsApp",
+      "tag": "Video Content",
+      "date": "2025-04-12",
+      "description": "This is a tutorial video link shared by a teammate on WhatsApp and posted in the IT-support channel. Use it as a reference for the team's support tasks, troubleshooting steps, or training. Check the video for procedural demonstrations and seek clarifications from the original sharer before applying changes.",
+      "shared_by": "Jose Cordovilla"
+    },
+    {
+      "id": 218,
+      "resource_url": "https://huggingface.co/learn/agents-course",
+      "title": "Self-paced course on building agents",
+      "tag": "AI/ML Resources",
+      "date": "2025-04-12",
+      "description": "A self-paced Hugging Face course on building agents. It presents foundational concepts and practical guidance for designing, implementing, and testing agents, aimed at developers and researchers. Useful for learning applied skills to create, evaluate, and integrate agent-based components into software projects.",
+      "shared_by": "Sangame Krishnamani"
     },
     {
       "id": 219,
-      "resource_url": "https://huggingface.co/learn/agents-course",
-      "title": "Hugging Face: learn/agents-course",
-      "tag": "AI/ML Resources",
+      "resource_url": "https://www.youtube.com/watch?v=NVKsSbfyWg0",
+      "title": "Introductory Discord guide for Spanish speakers",
+      "tag": "Video Content",
       "date": "2025-04-12",
-      "description": "Hugging Face learn: agents-course - AI models, datasets, and machine learning resources"
+      "description": "Spanish-language introductory guide to Discord basics and setup, intended for Spanish speakers. Covers fundamental features (servers, channels, voice/text communication) and basic community participation. Useful because it helps Spanish-speaking beginners learn to navigate and use Discord effectively for joining or running communities.",
+      "shared_by": "Jose Cordovilla"
     }
   ],
   "statistics": {
-    "total_found": 220,
+    "total_found": 219,
     "excluded_count": 341,
     "unknown_count": 1568,
     "categories": {
-      "Research Papers": 19,
+      "Research Papers": 21,
       "Video Content": 52,
-      "AI/ML Resources": 40,
+      "AI/ML Resources": 39,
       "Cloud Documentation": 8,
       "Code Repositories": 13,
       "Technical Articles": 30,
@@ -736,14 +1985,15 @@
       "Tech News": 21,
       "Academic News": 6,
       "Developer Community": 3,
-      "Documents": 16,
+      "Documents": 12,
       "Learning Platform": 1,
       "Tech Blog": 2,
+      "Whitepapers": 2,
       "Tutorials": 1,
       "AI/ML Frameworks": 2
     },
     "quality_distribution": {
-      "excellent": 220,
+      "excellent": 219,
       "high": 0,
       "good": 0,
       "fair": 0
