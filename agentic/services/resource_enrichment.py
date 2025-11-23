@@ -9,8 +9,13 @@ import logging
 from typing import Dict, Any, Optional
 from urllib.parse import urlparse
 
-from .gpt5_service import GPT5Service
-from .web_scraper import WebScraper
+# Support both relative and absolute imports
+try:
+    from .gpt5_service import GPT5Service
+    from .web_scraper import WebScraper
+except ImportError:
+    from gpt5_service import GPT5Service
+    from web_scraper import WebScraper
 
 logger = logging.getLogger(__name__)
 

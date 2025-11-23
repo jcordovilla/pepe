@@ -30,21 +30,52 @@ tqdm.monitor_interval = 0.05  # Update more frequently
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-# Import new enrichment services
-try:
-    from agentic.services.resource_enrichment import ResourceEnrichment
-    GPT5_AVAILABLE = True
-except ImportError:
-    GPT5_AVAILABLE = False
-    print("⚠️ ResourceEnrichment not available - will use fallback methods")
+# Import new enrichment services (direct import to avoid langgraph dependency in __init__)
+def _load_module_direct(name: str, path: Path):
+    """Load a module directly from path, bypassing package __init__"""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module  # Register in sys.modules for relative imports
+    spec.loader.exec_module(module)
+    return module
 
-# Import PDF analyzer for enhanced PDF handling
 try:
-    from agentic.services.pdf_analyzer import PDFAnalyzer, PDFAnalysisResult
+    services_path = project_root / "agentic" / "services"
+
+    # Load dependencies first
+    gpt5_module = _load_module_direct("gpt5_service", services_path / "gpt5_service.py")
+    web_scraper_module = _load_module_direct("web_scraper", services_path / "web_scraper.py")
+    llm_client_module = _load_module_direct("llm_client", services_path / "llm_client.py")
+
+    # Patch the relative imports for resource_enrichment
+    sys.modules["agentic.services.gpt5_service"] = gpt5_module
+    sys.modules["agentic.services.web_scraper"] = web_scraper_module
+    sys.modules["agentic.services.llm_client"] = llm_client_module
+
+    # Now load resource_enrichment
+    resource_enrichment_module = _load_module_direct(
+        "resource_enrichment",
+        services_path / "resource_enrichment.py"
+    )
+    ResourceEnrichment = resource_enrichment_module.ResourceEnrichment
+    GPT5_AVAILABLE = True
+except Exception as e:
+    GPT5_AVAILABLE = False
+    print(f"⚠️ ResourceEnrichment not available - will use fallback methods: {e}")
+
+# Import PDF analyzer for enhanced PDF handling (direct import)
+try:
+    pdf_analyzer_module = _load_module_direct(
+        "pdf_analyzer",
+        project_root / "agentic" / "services" / "pdf_analyzer.py"
+    )
+    PDFAnalyzer = pdf_analyzer_module.PDFAnalyzer
+    PDFAnalysisResult = pdf_analyzer_module.PDFAnalysisResult
     PDF_ANALYZER_AVAILABLE = True
-except ImportError:
+except Exception as e:
     PDF_ANALYZER_AVAILABLE = False
-    print("⚠️ PDFAnalyzer not available - will use fallback methods for PDFs")
+    print(f"⚠️ PDFAnalyzer not available - will use fallback methods for PDFs: {e}")
 
 class FreshResourceDetector:
     def __init__(self, use_fast_model: bool = True, use_gpt5: bool = False):
@@ -76,6 +107,137 @@ class FreshResourceDetector:
 
         # URL normalization cache for deduplication
         self._normalized_url_cache: Dict[str, str] = {}
+
+        # Statistics tracking (initialized early for main() access)
+        self.stats = defaultdict(int)
+        self.detected_resources = []
+        self.unknown_domains = Counter()
+        self.unknown_samples = defaultdict(list)
+
+        # High-quality domains (curated list) - EXPANDED for better coverage
+        self.high_quality_domains = {
+            # Research & Academic
+            'arxiv.org': {'category': 'Research Papers', 'score': 0.95},
+            'papers.withcode.com': {'category': 'Research Papers', 'score': 0.85},
+            'paperswithcode.com': {'category': 'Research Papers', 'score': 0.85},
+            'distill.pub': {'category': 'Research Visualization', 'score': 0.90},
+            'news.mit.edu': {'category': 'Academic News', 'score': 0.85},
+            'research.google.com': {'category': 'Research', 'score': 0.85},
+            'semanticscholar.org': {'category': 'Research Papers', 'score': 0.85},
+            'researchgate.net': {'category': 'Research Papers', 'score': 0.80},
+            'ssrn.com': {'category': 'Research Papers', 'score': 0.80},
+            'scholar.google.com': {'category': 'Research Papers', 'score': 0.85},
+            'openreview.net': {'category': 'Research Papers', 'score': 0.85},
+            'aclanthology.org': {'category': 'Research Papers', 'score': 0.85},
+
+            # Code & Development
+            'github.com': {'category': 'Code Repositories', 'score': 0.90},
+            'gitlab.com': {'category': 'Code Repositories', 'score': 0.85},
+            'bitbucket.org': {'category': 'Code Repositories', 'score': 0.80},
+            'stackoverflow.com': {'category': 'Technical Q&A', 'score': 0.80},
+            'replit.com': {'category': 'Code Repositories', 'score': 0.75},
+            'colab.research.google.com': {'category': 'Code Notebooks', 'score': 0.85},
+            'kaggle.com': {'category': 'Data Science', 'score': 0.85},
+            'gist.github.com': {'category': 'Code Snippets', 'score': 0.75},
+            'observablehq.com': {'category': 'Interactive Notebooks', 'score': 0.80},
+
+            # AI/ML Resources
+            'huggingface.co': {'category': 'AI/ML Resources', 'score': 0.95},
+            'openai.com': {'category': 'AI/ML Resources', 'score': 0.90},
+            'anthropic.com': {'category': 'AI/ML Resources', 'score': 0.90},
+            'platform.openai.com': {'category': 'AI/ML Documentation', 'score': 0.90},
+            'docs.anthropic.com': {'category': 'AI/ML Documentation', 'score': 0.90},
+            'deepmind.com': {'category': 'AI/ML Resources', 'score': 0.85},
+            'ai.google': {'category': 'AI/ML Resources', 'score': 0.85},
+            'wandb.ai': {'category': 'AI/ML Tools', 'score': 0.80},
+            'mlflow.org': {'category': 'AI/ML Tools', 'score': 0.80},
+            'pytorch.org': {'category': 'AI/ML Frameworks', 'score': 0.90},
+            'tensorflow.org': {'category': 'AI/ML Frameworks', 'score': 0.90},
+            'keras.io': {'category': 'AI/ML Frameworks', 'score': 0.85},
+            'jax.readthedocs.io': {'category': 'AI/ML Frameworks', 'score': 0.85},
+            'docs.llamaindex.ai': {'category': 'AI/ML Documentation', 'score': 0.90},
+            'langchain.com': {'category': 'AI/ML Frameworks', 'score': 0.90},
+            'docs.langchain.com': {'category': 'AI/ML Documentation', 'score': 0.90},
+            'python.langchain.com': {'category': 'AI/ML Documentation', 'score': 0.90},
+            'docs.crewai.com': {'category': 'AI/ML Documentation', 'score': 0.85},
+            'www.crewai.com': {'category': 'AI/ML Resources', 'score': 0.85},
+            'blog.langchain.dev': {'category': 'AI/ML Blog', 'score': 0.80},
+            'smith.langchain.com': {'category': 'AI/ML Tools', 'score': 0.85},
+            'replicate.com': {'category': 'AI/ML Tools', 'score': 0.80},
+            'modal.com': {'category': 'AI/ML Infrastructure', 'score': 0.80},
+            'lightning.ai': {'category': 'AI/ML Tools', 'score': 0.80},
+            'ray.io': {'category': 'AI/ML Infrastructure', 'score': 0.80},
+
+            # Documentation & Learning
+            'docs.python.org': {'category': 'Documentation', 'score': 0.90},
+            'developer.mozilla.org': {'category': 'Web Documentation', 'score': 0.90},
+            'medium.com': {'category': 'Technical Articles', 'score': 0.70},
+            'towardsdatascience.com': {'category': 'Data Science Articles', 'score': 0.75},
+            'dev.to': {'category': 'Developer Community', 'score': 0.70},
+            'hashnode.dev': {'category': 'Developer Blogs', 'score': 0.70},
+            'substack.com': {'category': 'Newsletters', 'score': 0.70},
+            'readthedocs.io': {'category': 'Documentation', 'score': 0.85},
+            'gitbook.io': {'category': 'Documentation', 'score': 0.80},
+            'notion.so': {'category': 'Knowledge Base', 'score': 0.75},
+            'confluence.atlassian.com': {'category': 'Documentation', 'score': 0.75},
+            'wiki.python.org': {'category': 'Documentation', 'score': 0.85},
+            'w3schools.com': {'category': 'Tutorials', 'score': 0.70},
+            'tutorialspoint.com': {'category': 'Tutorials', 'score': 0.65},
+            'geeksforgeeks.org': {'category': 'Tutorials', 'score': 0.70},
+            'realpython.com': {'category': 'Python Tutorials', 'score': 0.80},
+            'freecodecamp.org': {'category': 'Learning Platform', 'score': 0.80},
+            'codecademy.com': {'category': 'Learning Platform', 'score': 0.75},
+            'coursera.org': {'category': 'Online Courses', 'score': 0.80},
+            'udemy.com': {'category': 'Online Courses', 'score': 0.70},
+            'edx.org': {'category': 'Online Courses', 'score': 0.80},
+            'brilliant.org': {'category': 'Learning Platform', 'score': 0.80},
+            '3blue1brown.com': {'category': 'Educational Content', 'score': 0.85},
+            'youtube.com': {'category': 'Video Content', 'score': 0.70},
+            'youtu.be': {'category': 'Video Content', 'score': 0.70},
+
+            # News & Blogs
+            'hackernews.com': {'category': 'Tech News', 'score': 0.75},
+            'techcrunch.com': {'category': 'Tech News', 'score': 0.70},
+            'theverge.com': {'category': 'Tech News', 'score': 0.70},
+            'wired.com': {'category': 'Tech News', 'score': 0.70},
+            'arstechnica.com': {'category': 'Tech News', 'score': 0.75},
+            'blog.google': {'category': 'Tech Blog', 'score': 0.80},
+            'engineering.fb.com': {'category': 'Engineering Blog', 'score': 0.85},
+            'netflixtechblog.com': {'category': 'Engineering Blog', 'score': 0.85},
+            'aws.amazon.com/blogs': {'category': 'Tech Blog', 'score': 0.80},
+
+            # Cloud & Infrastructure Documentation
+            'aws.amazon.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'azure.microsoft.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'learn.microsoft.com': {'category': 'Technical Documentation', 'score': 0.80},
+            'cloud.google.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'vercel.com': {'category': 'Cloud Documentation', 'score': 0.75},
+        }
+
+        # Domains to exclude (junk) - Note: cdn.discordapp.com PDFs are handled separately
+        self.excluded_domains = {
+            'discord.com/channels', 'discordapp.com',
+            'tenor.com', 'giphy.com', 'discord.gg',
+            'meet.google.com', 'zoom.us', 'us06web.zoom.us', 'mit.zoom.us',
+            'linkedin.com/in', 'linkedin.com/posts',  # Profile links and posts
+            'twitter.com/i/', 'facebook.com', 'instagram.com',
+            'fathom.video',  # Meeting recordings
+            'tinyurl.com', 'bit.ly',  # URL shorteners (hard to verify quality)
+            'sync-google-calendar-wit-erprmym.gamma.site'  # Specific app link
+        }
+
+        # Discord CDN - only allow PDF attachments, exclude images/other
+        self.discord_cdn_domain = 'cdn.discordapp.com'
+
+        # PDF storage directory for useful PDFs
+        self.pdf_storage_dir = Path('data/pdfs')
+        self.pdf_storage_dir.mkdir(parents=True, exist_ok=True)
+
+        # File extensions that indicate quality resources
+        self.quality_extensions = {
+            '.pdf': 0.8, '.docx': 0.7, '.doc': 0.7, '.pptx': 0.7,
+            '.py': 0.6, '.ipynb': 0.8, '.md': 0.6, '.tex': 0.7
+        }
 
     def _normalize_url(self, url: str) -> str:
         """
@@ -247,158 +409,6 @@ class FreshResourceDetector:
             print(f"⚠️ Failed to save PDF locally: {e}")
             return None
 
-        # High-quality domains (curated list) - EXPANDED for better coverage
-        self.high_quality_domains = {
-            # Research & Academic
-            'arxiv.org': {'category': 'Research Papers', 'score': 0.95},
-            'papers.withcode.com': {'category': 'Research Papers', 'score': 0.85},
-            'paperswithcode.com': {'category': 'Research Papers', 'score': 0.85},
-            'distill.pub': {'category': 'Research Visualization', 'score': 0.90},
-            'news.mit.edu': {'category': 'Academic News', 'score': 0.85},
-            'research.google.com': {'category': 'Research', 'score': 0.85},
-            'semanticscholar.org': {'category': 'Research Papers', 'score': 0.85},
-            'researchgate.net': {'category': 'Research Papers', 'score': 0.80},
-            'ssrn.com': {'category': 'Research Papers', 'score': 0.80},
-            'scholar.google.com': {'category': 'Research Papers', 'score': 0.85},
-            'openreview.net': {'category': 'Research Papers', 'score': 0.85},
-            'aclanthology.org': {'category': 'Research Papers', 'score': 0.85},
-
-            # Code & Development
-            'github.com': {'category': 'Code Repositories', 'score': 0.90},
-            'gitlab.com': {'category': 'Code Repositories', 'score': 0.85},
-            'bitbucket.org': {'category': 'Code Repositories', 'score': 0.80},
-            'stackoverflow.com': {'category': 'Technical Q&A', 'score': 0.80},
-            'replit.com': {'category': 'Code Repositories', 'score': 0.75},
-            'colab.research.google.com': {'category': 'Code Notebooks', 'score': 0.85},
-            'colab.google': {'category': 'Code Notebooks', 'score': 0.85},
-
-            # Documentation & Resources
-            'docs.google.com': {'category': 'Documentation', 'score': 0.85},
-            'drive.google.com': {'category': 'Shared Documents', 'score': 0.80},
-            'cloud.google.com': {'category': 'Technical Documentation', 'score': 0.80},
-            'readthedocs.io': {'category': 'Documentation', 'score': 0.80},
-            'readthedocs.org': {'category': 'Documentation', 'score': 0.80},
-
-            # AI & ML Resources (EXPANDED)
-            'openai.com': {'category': 'AI Resources', 'score': 0.90},
-            'blog.openai.com': {'category': 'AI Research', 'score': 0.85},
-            'anthropic.com': {'category': 'AI Research', 'score': 0.90},
-            'huggingface.co': {'category': 'AI Models', 'score': 0.90},
-            'tensorflow.org': {'category': 'ML Documentation', 'score': 0.85},
-            'pytorch.org': {'category': 'ML Documentation', 'score': 0.85},
-            'ai.googleblog.com': {'category': 'AI Research', 'score': 0.80},
-            'nvidia.com': {'category': 'AI/GPU Technology', 'score': 0.80},
-            'blogs.microsoft.com': {'category': 'Tech Documentation', 'score': 0.75},
-            'chatgpt.com': {'category': 'AI Tools', 'score': 0.75},
-            'replicate.com': {'category': 'AI Models', 'score': 0.85},
-            'wandb.ai': {'category': 'ML Tools', 'score': 0.80},
-            'lightning.ai': {'category': 'ML Tools', 'score': 0.80},
-            'mlflow.org': {'category': 'ML Tools', 'score': 0.80},
-            'langchain.com': {'category': 'AI Tools', 'score': 0.85},
-            'llamaindex.ai': {'category': 'AI Tools', 'score': 0.85},
-            'together.ai': {'category': 'AI Models', 'score': 0.80},
-            'groq.com': {'category': 'AI Infrastructure', 'score': 0.80},
-            'mistral.ai': {'category': 'AI Models', 'score': 0.85},
-            'deepmind.com': {'category': 'AI Research', 'score': 0.90},
-            'deepmind.google': {'category': 'AI Research', 'score': 0.90},
-            'ai.meta.com': {'category': 'AI Research', 'score': 0.85},
-            'stability.ai': {'category': 'AI Models', 'score': 0.80},
-            'midjourney.com': {'category': 'AI Tools', 'score': 0.75},
-
-            # Educational Platforms
-            'deeplearning.ai': {'category': 'AI Education', 'score': 0.85},
-            'coursera.org': {'category': 'Online Courses', 'score': 0.75},
-            'edx.org': {'category': 'Online Courses', 'score': 0.75},
-            'udacity.com': {'category': 'Online Courses', 'score': 0.75},
-            'udemy.com': {'category': 'Online Courses', 'score': 0.70},
-            'fast.ai': {'category': 'AI Education', 'score': 0.80},
-            'machinelearningmastery.com': {'category': 'ML Education', 'score': 0.75},
-            'khanacademy.org': {'category': 'Education', 'score': 0.75},
-
-            # Data Science & Analytics
-            'kaggle.com': {'category': 'Data Science', 'score': 0.80},
-            'towardsdatascience.com': {'category': 'Data Science', 'score': 0.75},
-            'datacamp.com': {'category': 'Data Science', 'score': 0.75},
-            'databricks.com': {'category': 'Data Science', 'score': 0.80},
-
-            # Video Content
-            'youtube.com': {'category': 'Educational Videos', 'score': 0.75},
-            'youtu.be': {'category': 'Educational Videos', 'score': 0.75},
-            'loom.com': {'category': 'Video Content', 'score': 0.70},
-            'vimeo.com': {'category': 'Video Content', 'score': 0.70},
-
-            # Articles & Blogs
-            'medium.com': {'category': 'Articles', 'score': 0.70},
-            'substack.com': {'category': 'Articles', 'score': 0.75},
-            'dev.to': {'category': 'Technical Articles', 'score': 0.75},
-            'hashnode.dev': {'category': 'Technical Articles', 'score': 0.70},
-
-            # News & Tech Publications (High Quality)
-            'axios.com': {'category': 'Tech News', 'score': 0.80},
-            'theguardian.com': {'category': 'News & Analysis', 'score': 0.75},
-            'reuters.com': {'category': 'News & Analysis', 'score': 0.80},
-            'wsj.com': {'category': 'Business News', 'score': 0.80},
-            'ft.com': {'category': 'Financial News', 'score': 0.80},
-            'bloomberg.com': {'category': 'Business News', 'score': 0.80},
-            'businessinsider.com': {'category': 'Business News', 'score': 0.70},
-            'theverge.com': {'category': 'Tech News', 'score': 0.75},
-            'techcrunch.com': {'category': 'Tech News', 'score': 0.75},
-            'venturebeat.com': {'category': 'Tech News', 'score': 0.70},
-            'wired.com': {'category': 'Tech News', 'score': 0.75},
-            'arstechnica.com': {'category': 'Tech News', 'score': 0.75},
-            'thenextweb.com': {'category': 'Tech News', 'score': 0.70},
-            'zdnet.com': {'category': 'Tech News', 'score': 0.70},
-            'infoworld.com': {'category': 'Tech News', 'score': 0.70},
-
-            # Productivity & Collaboration Tools (with valuable content)
-            'app.mural.co': {'category': 'Collaboration Boards', 'score': 0.60},
-            'mural.co': {'category': 'Collaboration Boards', 'score': 0.60},
-            'miro.com': {'category': 'Collaboration Boards', 'score': 0.60},
-            'trello.com': {'category': 'Project Management', 'score': 0.60},
-            'notion.so': {'category': 'Documentation', 'score': 0.70},
-            'notion.site': {'category': 'Documentation', 'score': 0.70},
-            'airtable.com': {'category': 'Documentation', 'score': 0.65},
-            'figma.com': {'category': 'Design Resources', 'score': 0.70},
-            'canva.com': {'category': 'Design Resources', 'score': 0.65},
-
-            # Cloud & Infrastructure Documentation
-            'aws.amazon.com': {'category': 'Cloud Documentation', 'score': 0.80},
-            'azure.microsoft.com': {'category': 'Cloud Documentation', 'score': 0.80},
-            'learn.microsoft.com': {'category': 'Technical Documentation', 'score': 0.80},
-            'cloud.google.com': {'category': 'Cloud Documentation', 'score': 0.80},
-            'vercel.com': {'category': 'Cloud Documentation', 'score': 0.75},
-        }
-        
-        # Domains to exclude (junk) - Note: cdn.discordapp.com PDFs are handled separately
-        self.excluded_domains = {
-            'discord.com/channels', 'discordapp.com',
-            'tenor.com', 'giphy.com', 'discord.gg',
-            'meet.google.com', 'zoom.us', 'us06web.zoom.us', 'mit.zoom.us',
-            'linkedin.com/in', 'linkedin.com/posts',  # Profile links and posts
-            'twitter.com/i/', 'facebook.com', 'instagram.com',
-            'fathom.video',  # Meeting recordings
-            'tinyurl.com', 'bit.ly',  # URL shorteners (hard to verify quality)
-            'sync-google-calendar-wit-erprmym.gamma.site'  # Specific app link
-        }
-
-        # Discord CDN - only allow PDF attachments, exclude images/other
-        self.discord_cdn_domain = 'cdn.discordapp.com'
-
-        # PDF storage directory for useful PDFs
-        self.pdf_storage_dir = Path('data/pdfs')
-        self.pdf_storage_dir.mkdir(parents=True, exist_ok=True)
-        
-        # File extensions that indicate quality resources
-        self.quality_extensions = {
-            '.pdf': 0.8, '.docx': 0.7, '.doc': 0.7, '.pptx': 0.7,
-            '.py': 0.6, '.ipynb': 0.8, '.md': 0.6, '.tex': 0.7
-        }
-        
-        self.detected_resources = []
-        self.stats = defaultdict(int)
-        self.unknown_domains = Counter()  # Track unknown domains
-        self.unknown_samples = defaultdict(list)  # Sample URLs for each unknown domain
-    
     def _load_processed_urls(self) -> set:
         """Load previously processed URLs for incremental processing"""
         if self.processed_urls_file.exists():
@@ -743,6 +753,8 @@ class FreshResourceDetector:
             return resource
         except Exception as e:
             self.stats['parsing_errors'] += 1
+            if self.stats['parsing_errors'] <= 5:  # Log first 5 errors for debugging
+                print(f"⚠️ Parsing error for {url[:50]}...: {e}")
             return None
     
     def _generate_report(self, analyze_unknown: bool = False) -> Dict[str, Any]:
@@ -753,7 +765,9 @@ class FreshResourceDetector:
         
         # Generate statistics
         category_stats = Counter([r['tag'] for r in sorted_resources])
-        
+        domain_stats = Counter([urlparse(r['resource_url']).netloc for r in sorted_resources])
+        channel_stats = Counter([r.get('channel', 'unknown') for r in sorted_resources])
+
         # Simple quality distribution based on resource count
         total_resources = len(sorted_resources)
         quality_distribution = {

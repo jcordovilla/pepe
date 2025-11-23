@@ -1,6 +1,6 @@
 {
-  "export_date": "2025-11-23T18:02:36.812881",
-  "total_resources": 220,
+  "export_date": "2025-11-23T18:02:36.818610",
+  "total_resources": 88,
   "resources": [
     {
       "id": 1,
@@ -719,35 +719,5 @@
       "date": "2025-04-12",
       "description": "Hugging Face learn: agents-course - AI models, datasets, and machine learning resources"
     }
-  ],
-  "statistics": {
-    "total_found": 220,
-    "excluded_count": 341,
-    "unknown_count": 1568,
-    "categories": {
-      "Research Papers": 19,
-      "Video Content": 52,
-      "AI/ML Resources": 40,
-      "Cloud Documentation": 8,
-      "Code Repositories": 13,
-      "Technical Articles": 30,
-      "Technical Documentation": 2,
-      "Newsletters": 4,
-      "Tech News": 21,
-      "Academic News": 6,
-      "Developer Community": 3,
-      "Documents": 16,
-      "Learning Platform": 1,
-      "Tech Blog": 2,
-      "Tutorials": 1,
-      "AI/ML Frameworks": 2
-    },
-    "quality_distribution": {
-      "excellent": 220,
-      "high": 0,
-      "good": 0,
-      "fair": 0
-    }
-  },
-  "unknown_domains": {}
+  ]
 }
