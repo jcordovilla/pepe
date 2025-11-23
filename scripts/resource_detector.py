@@ -30,48 +30,22 @@ tqdm.monitor_interval = 0.05  # Update more frequently
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-# Import new enrichment services (direct import to avoid langgraph dependency in __init__)
-def _load_module_direct(name: str, path: Path):
-    """Load a module directly from path, bypassing package __init__"""
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module  # Register in sys.modules for relative imports
-    spec.loader.exec_module(module)
-    return module
+# Import enrichment services by adding services path to sys.path
+services_path = project_root / "agentic" / "services"
+sys.path.insert(0, str(services_path))
 
 try:
-    services_path = project_root / "agentic" / "services"
-
-    # Load dependencies first
-    gpt5_module = _load_module_direct("gpt5_service", services_path / "gpt5_service.py")
-    web_scraper_module = _load_module_direct("web_scraper", services_path / "web_scraper.py")
-    llm_client_module = _load_module_direct("llm_client", services_path / "llm_client.py")
-
-    # Patch the relative imports for resource_enrichment
-    sys.modules["agentic.services.gpt5_service"] = gpt5_module
-    sys.modules["agentic.services.web_scraper"] = web_scraper_module
-    sys.modules["agentic.services.llm_client"] = llm_client_module
-
-    # Now load resource_enrichment
-    resource_enrichment_module = _load_module_direct(
-        "resource_enrichment",
-        services_path / "resource_enrichment.py"
-    )
-    ResourceEnrichment = resource_enrichment_module.ResourceEnrichment
+    from gpt5_service import GPT5Service
+    from web_scraper import WebScraper
+    from resource_enrichment import ResourceEnrichment
     GPT5_AVAILABLE = True
 except Exception as e:
     GPT5_AVAILABLE = False
     print(f"⚠️ ResourceEnrichment not available - will use fallback methods: {e}")
 
-# Import PDF analyzer for enhanced PDF handling (direct import)
+# Import PDF analyzer for enhanced PDF handling
 try:
-    pdf_analyzer_module = _load_module_direct(
-        "pdf_analyzer",
-        project_root / "agentic" / "services" / "pdf_analyzer.py"
-    )
-    PDFAnalyzer = pdf_analyzer_module.PDFAnalyzer
-    PDFAnalysisResult = pdf_analyzer_module.PDFAnalysisResult
+    from pdf_analyzer import PDFAnalyzer, PDFAnalysisResult
     PDF_ANALYZER_AVAILABLE = True
 except Exception as e:
     PDF_ANALYZER_AVAILABLE = False
@@ -93,7 +67,7 @@ class FreshResourceDetector:
         self.pdf_analyzer = PDFAnalyzer(use_openai=use_gpt5) if PDF_ANALYZER_AVAILABLE else None
 
         if self.use_gpt5 and self.enrichment:
-            print("✅ Using OpenAI API for enrichment (GPT-4o-mini)")
+            print("✅ Using OpenAI API for enrichment (gpt-5-mini-2025-08-07)")
         else:
             print("✅ Using local LLM for enrichment (free, works great)")
 
