@@ -173,11 +173,12 @@ Rules:
 
         try:
             # GPT-5-mini uses reasoning tokens + output tokens
-            # Need MUCH higher limit: reasoning uses 200-500 tokens, then output needs space
+            # Reasoning can use 500-1500 tokens, then output needs ~200 more
+            # Total must be high enough to avoid 'finish_reason': 'length' errors
             response = await self.gpt5.generate(
                 prompt=prompt,
                 temperature=1.0,
-                max_tokens=800  # High limit for reasoning + output
+                max_tokens=2000  # High limit: ~1500 reasoning + ~500 output
             )
             
             print(f"   🤖 GPT-5 Response (full): [{response}]")
@@ -321,7 +322,7 @@ Title:"""
         title = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=600  # High limit for reasoning model + output
+            max_tokens=2000  # High limit: ~1500 reasoning + ~500 output
         )
         
         # Clean up the title
@@ -449,7 +450,7 @@ Description:"""
         description = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=1000  # High limit for reasoning model + output
+            max_tokens=2000  # High limit: ~1500 reasoning + ~500 output
         )
         
         return description.strip()
@@ -480,7 +481,7 @@ Enhanced:"""
         enhanced = await self.gpt5.generate(
             prompt=prompt,
             temperature=1.0,  # GPT-5-mini requires default temperature
-            max_tokens=400  # Increased for reasoning tokens + output
+            max_tokens=2000  # High limit: ~1500 reasoning + ~500 output
         )
         
         return enhanced.strip()
