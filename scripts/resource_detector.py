@@ -944,7 +944,7 @@ def main():
     parser.add_argument('--standard-model', action='store_true',
                        help='Use standard model (deepseek-r1:8b) for better quality')
     parser.add_argument('--use-openai', action='store_true',
-                       help='Use OpenAI API (gpt-4o-mini) for enrichment instead of local LLM')
+                       help='Use OpenAI API (gpt-5-mini) for enrichment instead of local LLM')
     parser.add_argument('--reset-cache', action='store_true',
                        help='Reset processed URLs cache and reprocess all resources')
     args = parser.parse_args()
@@ -1204,7 +1204,7 @@ def main():
         print(f"\n📊 Step 2/3: Evaluating and enriching {len(urls_to_process):,} new resources...")
         print("   🌐 Web scraping for metadata (fallback)")
         print("   📝 Message-based extraction (primary)")
-        print("   🤖 OpenAI API (GPT-4o-mini)" if detector.use_gpt5 else "   🤖 Local LLM (Ollama)")
+        print("   🤖 OpenAI API (gpt-5-mini)" if detector.use_gpt5 else "   🤖 Local LLM (Ollama)")
 
         # Use a single event loop for all async operations (PERFORMANCE FIX)
         async def process_all_resources_async(urls_to_process, progress_callback):
