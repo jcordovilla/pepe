@@ -15,7 +15,7 @@ sys.path.insert(0, str(project_root))
 
 # Set minimal environment
 os.environ.setdefault('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
-os.environ.setdefault('LLM_MODEL', 'llama3.1:8b')
+os.environ.setdefault('LLM_MODEL', 'deepseek-r1:8b')
 
 async def test_gpt5_service():
     """Test GPT-5 service"""

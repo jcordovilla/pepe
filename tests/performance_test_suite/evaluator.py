@@ -46,7 +46,7 @@ class LlamaEvaluator:
         if model_name is None:
             from agentic.config.modernized_config import get_modernized_config
             config = get_modernized_config()
-            model_name = config.get("llm", {}).get("model", "llama3.1:8b")
+            model_name = config.get("llm", {}).get("model", "deepseek-r1:8b")
         
         self.model_name = model_name
         self.model = None

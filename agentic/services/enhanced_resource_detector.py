@@ -165,9 +165,12 @@ class EnhancedResourceDetector:
     
     def _initialize_patterns(self):
         """Initialize advanced detection patterns"""
-        # URL patterns
+        # URL patterns - IMPROVED to capture more URL variations
+        # Handles: special chars (+, ~, !, @), Unicode, encoded chars, parentheses (Wikipedia), etc.
         self.url_pattern = re.compile(
-            r'https?://(?:[-\w.])+(?:[:\d]+)?(?:/(?:[\w/_.])*(?:\?(?:[\w&=%.])*)?(?:#(?:[\w.])*)?)?'
+            r'https?://(?:[-\w.])+(?::\d+)?(?:/(?:[-\w.~!$&\'()*+,;=:@%]|(?:%[0-9A-Fa-f]{2}))*)*'
+            r'(?:\?(?:[-\w.~!$&\'()*+,;=:@/?%]|(?:%[0-9A-Fa-f]{2}))*)?'
+            r'(?:#(?:[-\w.~!$&\'()*+,;=:@/?%]|(?:%[0-9A-Fa-f]{2}))*)?'
         )
         
         # Code patterns - more comprehensive
@@ -228,13 +231,28 @@ class EnhancedResourceDetector:
             'pytorch.org': ResourceType.DOCUMENTATION,
             'tensorflow.org': ResourceType.DOCUMENTATION,
             
-            # AI/ML Platforms
+            # AI/ML Platforms (EXPANDED)
             'huggingface.co': ResourceType.MODEL,
             'openai.com': ResourceType.API_DOCUMENTATION,
             'anthropic.com': ResourceType.DOCUMENTATION,
             'kaggle.com': ResourceType.DATASET,
             'paperswithcode.com': ResourceType.BENCHMARK,
             'weights.biases.com': ResourceType.EVALUATION,
+            'wandb.ai': ResourceType.EVALUATION,
+            'replicate.com': ResourceType.MODEL,
+            'lightning.ai': ResourceType.LIBRARY_FRAMEWORK,
+            'mlflow.org': ResourceType.SOFTWARE_TOOL,
+            'langchain.com': ResourceType.LIBRARY_FRAMEWORK,
+            'llamaindex.ai': ResourceType.LIBRARY_FRAMEWORK,
+            'together.ai': ResourceType.MODEL,
+            'groq.com': ResourceType.SOFTWARE_TOOL,
+            'mistral.ai': ResourceType.MODEL,
+            'deepmind.com': ResourceType.RESEARCH_PAPER,
+            'deepmind.google': ResourceType.RESEARCH_PAPER,
+            'ai.meta.com': ResourceType.RESEARCH_PAPER,
+            'stability.ai': ResourceType.MODEL,
+            'colab.research.google.com': ResourceType.CODE_REPOSITORY,
+            'colab.google': ResourceType.CODE_REPOSITORY,
             
             # Learning & Education
             'youtube.com': ResourceType.VIDEO_TUTORIAL,
@@ -275,11 +293,21 @@ class EnhancedResourceDetector:
             'instagram.com': ResourceType.LOW_QUALITY,
         }
         
-        # Quality domains
+        # Quality domains (EXPANDED)
         self.high_quality_domains = {
+            # Research
             'arxiv.org', 'scholar.google.com', 'nature.com', 'science.org',
-            'github.com', 'huggingface.co', 'openai.com', 'anthropic.com',
-            'deeplearning.ai', 'pytorch.org', 'tensorflow.org', 'kaggle.com'
+            'semanticscholar.org', 'researchgate.net', 'openreview.net', 'aclanthology.org',
+            # Code
+            'github.com', 'gitlab.com', 'colab.research.google.com', 'colab.google',
+            # AI/ML
+            'huggingface.co', 'openai.com', 'anthropic.com', 'deepmind.com', 'deepmind.google',
+            'ai.meta.com', 'mistral.ai', 'replicate.com', 'wandb.ai', 'lightning.ai',
+            'langchain.com', 'llamaindex.ai', 'together.ai', 'stability.ai',
+            # Education
+            'deeplearning.ai', 'pytorch.org', 'tensorflow.org', 'kaggle.com',
+            # Documentation
+            'readthedocs.io', 'readthedocs.org', 'learn.microsoft.com', 'docs.python.org'
         }
         
         self.low_quality_domains = {

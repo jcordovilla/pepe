@@ -150,23 +150,21 @@ class ResourceEnrichment:
         author = message.get('author', {}).get('display_name', 'Unknown')
         domain = urlparse(url).netloc
         
-        # Lean prompt focused on message content
-        prompt = f"""Extract a title and description for this shared resource based on the Discord message.
+        # Optimized prompt for GPT-5-mini - structured and concise
+        prompt = f"""Extract title and description from this Discord-shared resource.
 
 URL: {url}
-Domain: {domain}
 Message: "{message_content}"
-Shared by: {author} in #{channel_name}
+Channel: #{channel_name}
 
-Requirements:
-- Title: 5-12 words, sober and factual, no superlatives or adjectives like "great", "amazing", "excellent"
-- Description: 40-80 words, concise but informative, explain what it is and why it's relevant
-- Use information from the message, not assumptions
-- If message is vague, be direct about what you know
+Output format (strict):
+TITLE: <5-10 words, factual, specific to content>
+DESCRIPTION: <40-60 words, what it is + why it matters>
 
-Format your response as:
-TITLE: [title here]
-DESCRIPTION: [description here]"""
+Rules:
+- No marketing language or superlatives
+- Be specific (not "YouTube Video" but "Tutorial on Fine-tuning LLMs")
+- Base on message context, don't invent details"""
 
         try:
             # GPT-5-mini uses reasoning tokens + output tokens
@@ -299,25 +297,21 @@ DESCRIPTION: [description here]"""
         
         context = "\n".join(context_parts)
         
-        prompt = f"""Generate a concise, specific title for this resource.
+        prompt = f"""Generate a specific title for this resource (5-10 words max).
 
 URL: {url}
-Domain: {domain}
-Shared by: {author} in #{channel_name}
 Context:
 {context}
 
-Requirements:
-- Maximum 10-12 words
-- Be specific, not generic (avoid "YouTube Video", "Resource", "Link")
-- Capture the actual content/topic
-- Format examples:
-  * "MIT Research: AI Models Learn Human Sketching Techniques"
-  * "OpenAI Introduces ChatGPT Agent for Complex Tasks"
-  * "Google Cloud: 101 Real-World Generative AI Use Cases"
-  * "Anthropic Achieves ISO 42001 AI Responsibility Certification"
+Good examples:
+- "Fine-tuning Llama 3 for Domain-Specific Tasks"
+- "Google DeepMind Paper on Multimodal Reasoning"
+- "Hugging Face Dataset for Code Generation"
 
-Generate a specific, informative title:"""
+Bad examples (too generic):
+- "YouTube Video" / "GitHub Repository" / "Interesting Article"
+
+Title:"""
 
         title = await self.gpt5.generate(
             prompt=prompt,
@@ -434,23 +428,16 @@ Generate a specific, informative title:"""
         
         context = "\n".join(context_parts)
         
-        prompt = f"""Generate a detailed, informative description (60-100 words) for this AI/tech resource.
+        prompt = f"""Write a 50-80 word description for this resource.
 
 URL: {url}
-Domain: {domain}
-Shared by: {author} in #{channel_name}
-
-Context:
 {context}
 
-Requirements:
-1. Start directly with key information (no "This is..." or "This article...")
-2. Include specific technical details, frameworks, technologies, or topics
-3. Explain the resource's value, use cases, and target audience
-4. Mention notable authors, institutions, companies, or dates if relevant
-5. Be objective and informative, not promotional
-6. Use 60-100 words
-7. Write in a clear, professional style
+Guidelines:
+- Start with the main topic/content (not "This resource...")
+- Include: what it covers, key technologies/concepts, target audience
+- Be factual and specific, not promotional
+- Mention authors/organizations if notable
 
 Description:"""
 
@@ -475,21 +462,15 @@ Description:"""
         
         message_content = message.get('content', '')[:500]
         
-        prompt = f"""Enhance this resource description with more context and specificity.
+        prompt = f"""Improve this description (50-80 words).
 
 Title: {title}
-URL: {url}
-Current description: {existing_description}
-Discord context: {message_content}
+Current: {existing_description}
+Additional context: {message_content}
 
-Requirements:
-1. Keep the core information from the current description
-2. Add specific technical details, use cases, or context
-3. Make it more informative and actionable
-4. 60-100 words
-5. Start directly with information (no "This describes...")
+Keep core info, add specificity. Start directly with content, not "This..."
 
-Enhanced description:"""
+Enhanced:"""
 
         enhanced = await self.gpt5.generate(
             prompt=prompt,

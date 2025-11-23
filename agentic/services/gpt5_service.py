@@ -23,10 +23,9 @@ class GPT5Service:
     
     def __init__(self, use_cache: bool = True):
         self.api_key = os.getenv('OPENAI_API_KEY')
-        # Default to gpt-4o-mini (best for this task - no reasoning token overhead)
-        # Note: GPT-5-mini uses ALL tokens for reasoning, leaving none for output
-        # Set OPENAI_MODEL=gpt-5-mini in .env to use GPT-5 (requires very high token limits)
-        self.model = os.getenv('OPENAI_MODEL', "gpt-4o-mini")
+        # Default to gpt-5-mini-2025-08-07 (latest GPT-5 mini model)
+        # This model provides excellent quality for resource enrichment tasks
+        self.model = os.getenv('OPENAI_MODEL', "gpt-5-mini-2025-08-07")
         self.base_url = "https://api.openai.com/v1/chat/completions"
         self.use_cache = use_cache
         self.cache: Dict[str, Any] = {}
@@ -34,7 +33,7 @@ class GPT5Service:
         
         # Fallback to local LLM
         self.fallback_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
-        self.fallback_model = os.getenv('LLM_MODEL', 'llama3.1:8b')
+        self.fallback_model = os.getenv('LLM_MODEL', 'deepseek-r1:8b')
         
         # Usage tracking
         self.stats = {
@@ -141,9 +140,8 @@ class GPT5Service:
         if temperature != 1.0:
             payload["temperature"] = temperature
         
-        # Note: GPT-5-mini uses reasoning tokens which consume the entire max_completion_tokens
-        # This may result in empty content if the model spends all tokens reasoning
-        # Consider using gpt-4o-mini for faster, more predictable results
+        # Note: GPT-5-mini is an efficient model for resource enrichment tasks
+        # It provides high-quality outputs for title and description generation
         
         logger.debug(f"🔵 Calling OpenAI API: model={self.model}, tokens={max_tokens}, temp={temperature}")
         

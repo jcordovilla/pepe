@@ -1,40 +1,40 @@
 {
-  "last_updated": "2025-06-05T14:10:34.544931+00:00",
+  "last_updated": "2025-11-23T15:44:43.073424+00:00",
   "channels": {
     "1353058864810950737_1353058864810950740": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353058864810950740",
-      "channel_name": "🏘general-chat",
-      "last_message_timestamp": "2025-06-05T13:41:04.570000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:15.065688+00:00",
-      "last_message_count": 100,
+      "channel_name": "🏘-general-chat",
+      "last_message_timestamp": "2025-11-22T18:04:02.589000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:11.148438+00:00",
+      "last_message_count": 1446,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353085578274410626": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353085578274410626",
       "channel_name": "🌎-community",
-      "last_message_timestamp": "2025-06-03T10:21:07.902000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:16.010843+00:00",
-      "last_message_count": 100,
+      "last_message_timestamp": "2025-11-22T18:46:38.616000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:12.629657+00:00",
+      "last_message_count": 179,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353442520717066320": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353442520717066320",
-      "channel_name": "👋introductions",
-      "last_message_timestamp": "2025-06-04T15:32:46.602000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:17.025102+00:00",
-      "last_message_count": 100,
+      "channel_name": "👋introductions-say-hello",
+      "last_message_timestamp": "2025-11-23T15:25:23.615000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:13.625457+00:00",
+      "last_message_count": 138,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353442557438328864": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353442557438328864",
       "channel_name": "📝welcome-rules",
-      "last_message_timestamp": "2025-04-24T01:45:33.496000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:18.006012+00:00",
-      "last_message_count": 6,
+      "last_message_timestamp": "2025-09-22T14:54:12.548000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:13.933055+00:00",
+      "last_message_count": 2,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353443209166065664": {
@@ -58,55 +58,55 @@
     "1353058864810950737_1353443443925582014": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353443443925582014",
-      "channel_name": "🏘admin-general-chat",
-      "last_message_timestamp": "2025-06-03T00:15:49.853000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:20.973614+00:00",
-      "last_message_count": 100,
+      "channel_name": "🌟🏘general",
+      "last_message_timestamp": "2025-11-23T15:00:05.542000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:15.065320+00:00",
+      "last_message_count": 129,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353448986408779877": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353448986408779877",
-      "channel_name": "📚ai-philosophy-ethics",
-      "last_message_timestamp": "2025-06-04T10:49:13.701000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:22.075524+00:00",
-      "last_message_count": 100,
+      "channel_name": "📚-ai-philosophy-ethics",
+      "last_message_timestamp": "2025-11-20T05:47:58.468000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:18.067805+00:00",
+      "last_message_count": 154,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353449065660022896": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353449065660022896",
       "channel_name": "💬questions-help",
-      "last_message_timestamp": "2025-04-28T13:58:08.245000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:22.857214+00:00",
-      "last_message_count": 5,
+      "last_message_timestamp": "2025-11-22T15:05:31.729000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:18.621220+00:00",
+      "last_message_count": 17,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353449106537713756": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353449106537713756",
       "channel_name": "📖resources-library",
-      "last_message_timestamp": "2025-05-14T15:39:10.666000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:23.713890+00:00",
-      "last_message_count": 29,
+      "last_message_timestamp": "2025-10-29T21:42:06.847000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:18.909345+00:00",
+      "last_message_count": 5,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353449293717180467": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353449293717180467",
-      "channel_name": "❓q-and-a-questions",
-      "last_message_timestamp": "2025-06-05T10:52:51.222000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:24.471077+00:00",
-      "last_message_count": 14,
+      "channel_name": "❓q﹠a-mit",
+      "last_message_timestamp": "2025-11-21T14:23:29.307000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:19.253183+00:00",
+      "last_message_count": 11,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353449406677913680": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353449406677913680",
-      "channel_name": "📝q-and-a-polls",
-      "last_message_timestamp": "2025-05-30T22:58:48.324000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:25.318142+00:00",
-      "last_message_count": 22,
+      "channel_name": "📝q﹠a-polls-mit",
+      "last_message_timestamp": "2025-11-07T21:20:26.672000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:20.271346+00:00",
+      "last_message_count": 121,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1353449638174130277": {
@@ -121,19 +121,19 @@
     "1353058864810950737_1353449809075503145": {
       "guild_id": "1353058864810950737",
       "channel_id": "1353449809075503145",
-      "channel_name": "👾discord-managers",
-      "last_message_timestamp": "2025-06-03T14:00:04.002000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:27.152514+00:00",
-      "last_message_count": 100,
+      "channel_name": "🤖instructor-chat",
+      "last_message_timestamp": "2025-10-04T14:47:01.804000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:21.756381+00:00",
+      "last_message_count": 278,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1354190157049364501": {
       "guild_id": "1353058864810950737",
       "channel_id": "1354190157049364501",
-      "channel_name": "🛠ai-practical-applications",
-      "last_message_timestamp": "2025-06-05T13:34:53.396000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:28.786587+00:00",
-      "last_message_count": 99,
+      "channel_name": "🛠-ai-practical-applications",
+      "last_message_timestamp": "2025-11-16T14:43:09.105000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:22.715289+00:00",
+      "last_message_count": 125,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1354191556680089600": {
@@ -166,10 +166,10 @@
     "1353058864810950737_1360642371531968582": {
       "guild_id": "1353058864810950737",
       "channel_id": "1360642371531968582",
-      "channel_name": "💻learning-without-coding-skills",
-      "last_message_timestamp": "2025-04-30T16:32:43.576000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:33.302824+00:00",
-      "last_message_count": 12,
+      "channel_name": "archive💻learning-without-coding-skills",
+      "last_message_timestamp": "2025-07-26T00:19:56.046000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:23.124347+00:00",
+      "last_message_count": 1,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1360642506500476948": {
@@ -185,27 +185,27 @@
       "guild_id": "1353058864810950737",
       "channel_id": "1360643112657223890",
       "channel_name": "📄papers-and-publications",
-      "last_message_timestamp": "2025-04-26T17:54:44.598000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:34.996117+00:00",
-      "last_message_count": 27,
+      "last_message_timestamp": "2025-11-21T11:14:17.697000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:23.429700+00:00",
+      "last_message_count": 10,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1360684330313060472": {
       "guild_id": "1353058864810950737",
       "channel_id": "1360684330313060472",
-      "channel_name": "🗣convo-leaders-chat",
-      "last_message_timestamp": "2025-06-04T14:00:03.700000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:35.953981+00:00",
-      "last_message_count": 100,
+      "channel_name": "✍️general",
+      "last_message_timestamp": "2025-10-19T23:51:55.450000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:24.264827+00:00",
+      "last_message_count": 143,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1360692679825948843": {
       "guild_id": "1353058864810950737",
       "channel_id": "1360692679825948843",
-      "channel_name": "🏛netarch-general",
-      "last_message_timestamp": "2025-06-02T17:40:18.323000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:36.892108+00:00",
-      "last_message_count": 100,
+      "channel_name": "🏛general-archive",
+      "last_message_timestamp": "2025-07-29T23:29:37.086000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:25.234831+00:00",
+      "last_message_count": 79,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1360696813157482556": {
@@ -220,28 +220,28 @@
     "1353058864810950737_1360973368676843583": {
       "guild_id": "1353058864810950737",
       "channel_id": "1360973368676843583",
-      "channel_name": "🗃gen-ai-use-cases",
-      "last_message_timestamp": "2025-06-05T00:35:44.033000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:38.803925+00:00",
-      "last_message_count": 39,
+      "channel_name": "💡gen-ai-use-cases-archive",
+      "last_message_timestamp": "2025-06-22T15:39:18.056000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:25.536973+00:00",
+      "last_message_count": 4,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1361060350266577134": {
       "guild_id": "1353058864810950737",
       "channel_id": "1361060350266577134",
-      "channel_name": "🎯onboarding",
-      "last_message_timestamp": "2025-04-25T17:37:39.486000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:39.553158+00:00",
-      "last_message_count": 5,
+      "channel_name": "🌈onboarding",
+      "last_message_timestamp": "2025-09-07T23:27:21.823000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:25.826840+00:00",
+      "last_message_count": 2,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1361122904841912381": {
       "guild_id": "1353058864810950737",
       "channel_id": "1361122904841912381",
-      "channel_name": "🛝discord-pg",
-      "last_message_timestamp": "2025-06-04T16:30:04.102000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:40.998538+00:00",
-      "last_message_count": 100,
+      "channel_name": "🛝discord-pg-agentdevclass",
+      "last_message_timestamp": "2025-11-23T15:00:09.663000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:38.477324+00:00",
+      "last_message_count": 1340,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1361494378484601033": {
@@ -274,37 +274,37 @@
     "1353058864810950737_1362581139557978182": {
       "guild_id": "1353058864810950737",
       "channel_id": "1362581139557978182",
-      "channel_name": "🗞genai-news",
-      "last_message_timestamp": "2025-05-29T19:26:27.784000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:46.491663+00:00",
-      "last_message_count": 36,
+      "channel_name": "🗞-genai-news",
+      "last_message_timestamp": "2025-11-20T21:42:25.352000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:40.296019+00:00",
+      "last_message_count": 150,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1363518100972245203": {
       "guild_id": "1353058864810950737",
       "channel_id": "1363518100972245203",
-      "channel_name": "📥member-of-the-week-submissions",
-      "last_message_timestamp": "2025-06-02T16:53:32.228000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:48.755322+00:00",
-      "last_message_count": 25,
+      "channel_name": "🌟📥member-of-the-week-submissions",
+      "last_message_timestamp": "2025-11-13T16:18:36.770000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:41.712697+00:00",
+      "last_message_count": 95,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1363518877149171922": {
       "guild_id": "1353058864810950737",
       "channel_id": "1363518877149171922",
-      "channel_name": "🙋member-of-the-week-poll",
-      "last_message_timestamp": "2025-05-30T20:20:15.034000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:50.350458+00:00",
-      "last_message_count": 30,
+      "channel_name": "🌟🙋member-of-the-week-poll",
+      "last_message_timestamp": "2025-11-01T12:58:48.020000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:43.095677+00:00",
+      "last_message_count": 213,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1363537366110703937": {
       "guild_id": "1353058864810950737",
       "channel_id": "1363537366110703937",
-      "channel_name": "🎯admin-onboarding",
-      "last_message_timestamp": "2025-05-08T18:57:44.644000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:51.170073+00:00",
-      "last_message_count": 9,
+      "channel_name": "🌟🌈onboarding",
+      "last_message_timestamp": "2025-06-10T15:45:02.209000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:43.376366+00:00",
+      "last_message_count": 1,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1363539367058084062": {
@@ -319,10 +319,10 @@
     "1353058864810950737_1363882056001523772": {
       "guild_id": "1353058864810950737",
       "channel_id": "1363882056001523772",
-      "channel_name": "🛠it-support",
-      "last_message_timestamp": "2025-05-31T16:27:30.795000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:52.870139+00:00",
-      "last_message_count": 44,
+      "channel_name": "🌟🛠it-support",
+      "last_message_timestamp": "2025-07-02T21:08:23.458000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:43.797678+00:00",
+      "last_message_count": 17,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1363965944086532226": {
@@ -346,28 +346,28 @@
     "1353058864810950737_1364051642596589619": {
       "guild_id": "1353058864810950737",
       "channel_id": "1364051642596589619",
-      "channel_name": "👋admin-introductions",
-      "last_message_timestamp": "2025-04-29T10:02:19.231000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:55.424719+00:00",
-      "last_message_count": 2,
+      "channel_name": "🌟👋introductions-say-hello",
+      "last_message_timestamp": "2025-09-08T20:54:20.836000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:44.098176+00:00",
+      "last_message_count": 5,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1364289798340349953": {
       "guild_id": "1353058864810950737",
       "channel_id": "1364289798340349953",
       "channel_name": "🎥meeting-recordings",
-      "last_message_timestamp": "2025-05-11T17:26:19.055000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:56.258473+00:00",
-      "last_message_count": 33,
+      "last_message_timestamp": "2025-10-27T18:17:57.998000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:44.448820+00:00",
+      "last_message_count": 21,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1364361051830747156": {
       "guild_id": "1353058864810950737",
       "channel_id": "1364361051830747156",
-      "channel_name": "❌💻non-coders-learning",
-      "last_message_timestamp": "2025-05-16T15:47:08.460000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:57.176359+00:00",
-      "last_message_count": 100,
+      "channel_name": "❌💻announcements",
+      "last_message_timestamp": "2025-09-09T21:34:08.517000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:45.530956+00:00",
+      "last_message_count": 160,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1364972361232941158": {
@@ -383,18 +383,18 @@
       "guild_id": "1353058864810950737",
       "channel_id": "1365455001748635782",
       "channel_name": "test-channel",
-      "last_message_timestamp": "2025-05-22T14:48:06.246000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:09:59.750391+00:00",
-      "last_message_count": 100,
+      "last_message_timestamp": "2025-10-01T15:00:14.127000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:45.737827+00:00",
+      "last_message_count": 4,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1365732945859444767": {
       "guild_id": "1353058864810950737",
       "channel_id": "1365732945859444767",
-      "channel_name": "📣general",
-      "last_message_timestamp": "2025-06-04T21:42:05.482000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:00.675962+00:00",
-      "last_message_count": 78,
+      "channel_name": "🌟📣announcements",
+      "last_message_timestamp": "2025-10-17T15:39:29.173000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:46.202189+00:00",
+      "last_message_count": 34,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1366389592647012453": {
@@ -481,28 +481,28 @@
     "1353058864810950737_1368249032866004992": {
       "guild_id": "1353058864810950737",
       "channel_id": "1368249032866004992",
-      "channel_name": "🦾agent-ops",
-      "last_message_timestamp": "2025-06-05T12:58:35.873000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:11.428086+00:00",
-      "last_message_count": 100,
+      "channel_name": "🦾general💬",
+      "last_message_timestamp": "2025-11-21T15:00:12.149000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:54.955207+00:00",
+      "last_message_count": 740,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1368249573281370224": {
       "guild_id": "1353058864810950737",
       "channel_id": "1368249573281370224",
-      "channel_name": "🛝discord-pg-sgu",
-      "last_message_timestamp": "2025-05-15T16:20:08.988000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:12.877750+00:00",
-      "last_message_count": 13,
+      "channel_name": "🛝discord-pg-agentops",
+      "last_message_timestamp": "2025-09-02T20:55:16.561000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:59.773234+00:00",
+      "last_message_count": 516,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1368763793370517514": {
       "guild_id": "1353058864810950737",
       "channel_id": "1368763793370517514",
-      "channel_name": "📥socialmedia-submissions",
-      "last_message_timestamp": "2025-05-29T23:11:31.969000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:15.322364+00:00",
-      "last_message_count": 23,
+      "channel_name": "🎯post-submissions-archive",
+      "last_message_timestamp": "2025-06-29T06:19:22.482000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:00.093656+00:00",
+      "last_message_count": 6,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1368952166328303636": {
@@ -544,10 +544,10 @@
     "1353058864810950737_1369699947380871320": {
       "guild_id": "1353058864810950737",
       "channel_id": "1369699947380871320",
-      "channel_name": "🗂agent-ops-resources",
-      "last_message_timestamp": "2025-06-05T06:55:35.604000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:21.607327+00:00",
-      "last_message_count": 74,
+      "channel_name": "🦾resources🗂️",
+      "last_message_timestamp": "2025-11-19T03:14:27.037000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:01.757637+00:00",
+      "last_message_count": 138,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1369819126691922000": {
@@ -562,81 +562,81 @@
     "1353058864810950737_1371112505908396162": {
       "guild_id": "1353058864810950737",
       "channel_id": "1371112505908396162",
-      "channel_name": "🕊ethical-ai-team",
-      "last_message_timestamp": "2025-06-01T20:02:16.736000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:24.009112+00:00",
-      "last_message_count": 82,
+      "channel_name": "🕊ethical-ai-scorecard",
+      "last_message_timestamp": "2025-11-04T13:52:50.941000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:03.079261+00:00",
+      "last_message_count": 173,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1371647370911154228": {
       "guild_id": "1353058864810950737",
       "channel_id": "1371647370911154228",
-      "channel_name": "❌💻non-coders",
-      "last_message_timestamp": "2025-06-03T13:22:37.027000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:24.814643+00:00",
-      "last_message_count": 10,
+      "channel_name": "❌💻general",
+      "last_message_timestamp": "2025-09-07T14:23:28.457000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:03.830599+00:00",
+      "last_message_count": 12,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1371894277512364073": {
       "guild_id": "1353058864810950737",
       "channel_id": "1371894277512364073",
-      "channel_name": "pain-points",
-      "last_message_timestamp": "2025-05-18T17:24:43.163000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:25.634927+00:00",
-      "last_message_count": 2,
+      "channel_name": "🌟🚀pain-points",
+      "last_message_timestamp": "2025-08-03T14:02:31.640000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:04.072110+00:00",
+      "last_message_count": 9,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1371896634148913243": {
       "guild_id": "1353058864810950737",
       "channel_id": "1371896634148913243",
-      "channel_name": "agile-ideation-announcements",
-      "last_message_timestamp": "2025-05-18T16:50:48.135000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:26.409594+00:00",
-      "last_message_count": 17,
+      "channel_name": "🌟🚀agile-ideation-announcements",
+      "last_message_timestamp": "2025-09-05T15:46:11.441000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:04.438913+00:00",
+      "last_message_count": 7,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1371971806860410921": {
       "guild_id": "1353058864810950737",
       "channel_id": "1371971806860410921",
       "channel_name": "📸-social-media",
-      "last_message_timestamp": "2025-06-02T16:29:25.121000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:27.166993+00:00",
-      "last_message_count": 12,
+      "last_message_timestamp": "2025-11-22T15:41:08.255000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:05.024989+00:00",
+      "last_message_count": 28,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1372043351842361364": {
       "guild_id": "1353058864810950737",
       "channel_id": "1372043351842361364",
       "channel_name": "🛠-workshops",
-      "last_message_timestamp": "2025-05-21T11:36:50.698000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:28.094651+00:00",
-      "last_message_count": 5,
+      "last_message_timestamp": "2025-11-20T15:21:22.346000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:06.751491+00:00",
+      "last_message_count": 37,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1372047482535546973": {
       "guild_id": "1353058864810950737",
       "channel_id": "1372047482535546973",
       "channel_name": "🎓-courses",
-      "last_message_timestamp": "2025-05-14T03:19:28.009000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:28.892926+00:00",
-      "last_message_count": 1,
+      "last_message_timestamp": "2025-10-15T21:03:54.698000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:07.039462+00:00",
+      "last_message_count": 8,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1372102582620913676": {
       "guild_id": "1353058864810950737",
       "channel_id": "1372102582620913676",
       "channel_name": "💵financial-services",
-      "last_message_timestamp": "2025-06-04T23:31:03.835000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:30.546329+00:00",
-      "last_message_count": 31,
+      "last_message_timestamp": "2025-11-22T14:32:45.800000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:07.362746+00:00",
+      "last_message_count": 14,
       "fetch_mode": "incremental"
     },
     "1353058864810950737_1372171920027553912": {
       "guild_id": "1353058864810950737",
       "channel_id": "1372171920027553912",
-      "channel_name": "🌐official-site",
-      "last_message_timestamp": "2025-05-15T02:00:40.579000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:31.306914+00:00",
+      "channel_name": "🌐official-website",
+      "last_message_timestamp": "2025-09-03T23:02:30.556000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:07.663556+00:00",
       "last_message_count": 1,
       "fetch_mode": "incremental"
     },
@@ -671,10 +671,739 @@
       "guild_id": "1353058864810950737",
       "channel_id": "1373042811318046802",
       "channel_name": "📥channel-submissions",
-      "last_message_timestamp": "2025-05-24T07:25:29.905000+00:00",
-      "last_fetch_timestamp": "2025-06-05T14:10:34.544437+00:00",
-      "last_message_count": 28,
+      "last_message_timestamp": "2025-09-19T13:39:10.660000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:08.199348+00:00",
+      "last_message_count": 7,
       "fetch_mode": "incremental"
+    },
+    "1353058864810950737_1365741563606728828": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1365741563606728828",
+      "channel_name": "🏛resources",
+      "last_message_timestamp": "2025-10-24T02:16:12.753000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:43:46.495649+00:00",
+      "last_message_count": 16,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1368962814189895732": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1368962814189895732",
+      "channel_name": "🔐cyber‑report‑desk",
+      "last_message_timestamp": "2025-10-09T22:58:45.794000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:00.365588+00:00",
+      "last_message_count": 5,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1373683753662283957": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1373683753662283957",
+      "channel_name": "🌟🔐cyber‑report‑desk",
+      "last_message_timestamp": "2025-11-23T15:44:08.501566+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:08.501583+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1384525323500257310": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1384525323500257310",
+      "channel_name": "📈general",
+      "last_message_timestamp": "2025-11-19T22:04:25.161000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:08.922111+00:00",
+      "last_message_count": 52,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1384525444619173898": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1384525444619173898",
+      "channel_name": "📈meeting-links",
+      "last_message_timestamp": "2025-10-29T21:49:52.363000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:09.349859+00:00",
+      "last_message_count": 29,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1387015232458588241": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1387015232458588241",
+      "channel_name": "🚀general",
+      "last_message_timestamp": "2025-11-19T17:39:42.296000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:11.168177+00:00",
+      "last_message_count": 223,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1388158342115102841": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1388158342115102841",
+      "channel_name": "📆-calendar",
+      "last_message_timestamp": "2025-06-27T14:07:11.214000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:11.406404+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1390044349982707772": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1390044349982707772",
+      "channel_name": "🚀resources",
+      "last_message_timestamp": "2025-10-21T18:40:26.555000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:11.659482+00:00",
+      "last_message_count": 11,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1390092888896962630": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1390092888896962630",
+      "channel_name": "📈resources",
+      "last_message_timestamp": "2025-11-07T15:46:52.060000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:11.973088+00:00",
+      "last_message_count": 27,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1394771121584345231": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1394771121584345231",
+      "channel_name": "🧬healthcare",
+      "last_message_timestamp": "2025-11-21T21:13:44.873000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:12.975915+00:00",
+      "last_message_count": 119,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1395133416437186711": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1395133416437186711",
+      "channel_name": "👋orientation",
+      "last_message_timestamp": "2025-07-29T17:35:13.980000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:13.264968+00:00",
+      "last_message_count": 4,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1395133559169355907": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1395133559169355907",
+      "channel_name": "📣announcements",
+      "last_message_timestamp": "2025-10-14T16:24:04.901000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:13.589361+00:00",
+      "last_message_count": 25,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1395134733092130946": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1395134733092130946",
+      "channel_name": "❓course-questions",
+      "last_message_timestamp": "2025-11-23T15:44:13.794884+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:13.794902+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1397229093522767943": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1397229093522767943",
+      "channel_name": "🤖-custom-gpts",
+      "last_message_timestamp": "2025-11-06T14:50:43.233000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:14.125202+00:00",
+      "last_message_count": 30,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1397698627748495511": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1397698627748495511",
+      "channel_name": "👁️vison-statement",
+      "last_message_timestamp": "2025-07-23T21:55:27.505000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:14.339913+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1399767158472314981": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1399767158472314981",
+      "channel_name": "🛝welcome-sandbox",
+      "last_message_timestamp": "2025-09-05T15:54:34.080000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:15.113438+00:00",
+      "last_message_count": 135,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1400815038360457238": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1400815038360457238",
+      "channel_name": "🤖announcements",
+      "last_message_timestamp": "2025-09-23T17:09:03.155000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:15.445466+00:00",
+      "last_message_count": 3,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401579598281703557": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401579598281703557",
+      "channel_name": "🌐general",
+      "last_message_timestamp": "2025-08-23T19:06:37.995000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:15.762489+00:00",
+      "last_message_count": 7,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401579621626941481": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401579621626941481",
+      "channel_name": "🌐meeting-links",
+      "last_message_timestamp": "2025-08-09T18:05:34.328000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:16.109354+00:00",
+      "last_message_count": 5,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401582582541455360": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401582582541455360",
+      "channel_name": "🌐resources",
+      "last_message_timestamp": "2025-08-03T20:08:04.049000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:16.384889+00:00",
+      "last_message_count": 3,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401623149782765629": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401623149782765629",
+      "channel_name": "🏛meeting-links",
+      "last_message_timestamp": "2025-10-31T14:00:46.999000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:16.783777+00:00",
+      "last_message_count": 17,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401625195483234385": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401625195483234385",
+      "channel_name": "🏛general",
+      "last_message_timestamp": "2025-11-21T15:09:03.596000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:17.788736+00:00",
+      "last_message_count": 144,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401630222834733107": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401630222834733107",
+      "channel_name": "📥project-submissions",
+      "last_message_timestamp": "2025-10-06T16:07:16.997000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:18.362384+00:00",
+      "last_message_count": 66,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401633919677501520": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401633919677501520",
+      "channel_name": "🤖student-chat",
+      "last_message_timestamp": "2025-11-13T19:00:16.071000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:19.227005+00:00",
+      "last_message_count": 51,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401635471095758848": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401635471095758848",
+      "channel_name": "❌💻resources",
+      "last_message_timestamp": "2025-11-23T15:44:19.455774+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:19.455789+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401635935912984688": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401635935912984688",
+      "channel_name": "✍️announcements",
+      "last_message_timestamp": "2025-10-05T22:19:15.309000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:20.027314+00:00",
+      "last_message_count": 17,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401645042464194601": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401645042464194601",
+      "channel_name": "🛝discord-pg-noncoders",
+      "last_message_timestamp": "2025-11-23T15:44:20.307956+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:20.307979+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401654600615985243": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401654600615985243",
+      "channel_name": "🛠general",
+      "last_message_timestamp": "2025-10-07T19:48:45.661000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:20.554487+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401654681113202921": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401654681113202921",
+      "channel_name": "🛠meeting-links",
+      "last_message_timestamp": "2025-11-23T15:44:20.744749+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:20.744771+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401654795714035863": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401654795714035863",
+      "channel_name": "🛠resources",
+      "last_message_timestamp": "2025-11-23T15:44:21.067512+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:21.067529+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655231858737182": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655231858737182",
+      "channel_name": "📄general",
+      "last_message_timestamp": "2025-11-23T15:44:21.272251+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:21.272281+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655318009876584": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655318009876584",
+      "channel_name": "📄meeting-links",
+      "last_message_timestamp": "2025-11-23T15:44:21.532465+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:21.532483+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655388587298837": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655388587298837",
+      "channel_name": "📄resources",
+      "last_message_timestamp": "2025-11-23T15:44:21.985136+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:21.985166+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655785884225748": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655785884225748",
+      "channel_name": "☁️general",
+      "last_message_timestamp": "2025-11-01T18:51:57.169000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:22.308907+00:00",
+      "last_message_count": 20,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655842553598074": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655842553598074",
+      "channel_name": "☁️meeting-links",
+      "last_message_timestamp": "2025-11-23T15:44:22.540002+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:22.540018+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401655895955341515": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401655895955341515",
+      "channel_name": "☁️resources",
+      "last_message_timestamp": "2025-08-11T23:53:09.606000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:22.763213+00:00",
+      "last_message_count": 2,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401656473163141150": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401656473163141150",
+      "channel_name": "🔐general",
+      "last_message_timestamp": "2025-11-23T15:44:22.982108+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:22.982137+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401656537478463558": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401656537478463558",
+      "channel_name": "🔐meeting-links",
+      "last_message_timestamp": "2025-11-23T15:44:23.188412+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:23.188423+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401656617078100018": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401656617078100018",
+      "channel_name": "🔐resources",
+      "last_message_timestamp": "2025-11-23T15:44:23.367637+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:23.367652+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401657757656027176": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401657757656027176",
+      "channel_name": "🌈general",
+      "last_message_timestamp": "2025-08-21T15:51:30.540000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:23.618109+00:00",
+      "last_message_count": 3,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401657844444434512": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401657844444434512",
+      "channel_name": "🌈meeting-links",
+      "last_message_timestamp": "2025-09-29T17:30:06.798000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:23.880298+00:00",
+      "last_message_count": 6,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401657931052613732": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401657931052613732",
+      "channel_name": "🌈resources",
+      "last_message_timestamp": "2025-11-23T15:44:24.169808+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:24.169818+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1401869505956679791": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1401869505956679791",
+      "channel_name": "🚀meeting-links",
+      "last_message_timestamp": "2025-09-22T19:19:02.892000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:24.581956+00:00",
+      "last_message_count": 37,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1403023533193429175": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1403023533193429175",
+      "channel_name": "🐝business-model-canvas",
+      "last_message_timestamp": "2025-11-04T17:11:03.946000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:25.652762+00:00",
+      "last_message_count": 103,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1405232366359806012": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1405232366359806012",
+      "channel_name": "✨general",
+      "last_message_timestamp": "2025-11-19T15:32:54.729000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:26.468038+00:00",
+      "last_message_count": 119,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1405232579279585391": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1405232579279585391",
+      "channel_name": "✨meeting-links",
+      "last_message_timestamp": "2025-11-19T16:30:05.311000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:27.008160+00:00",
+      "last_message_count": 23,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1405232695134388395": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1405232695134388395",
+      "channel_name": "✨resources",
+      "last_message_timestamp": "2025-09-25T11:12:09.287000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:27.237123+00:00",
+      "last_message_count": 5,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1408175850226057357": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1408175850226057357",
+      "channel_name": "📬member-application",
+      "last_message_timestamp": "2025-11-10T15:18:22.521000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:27.459128+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1410618583377121483": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1410618583377121483",
+      "channel_name": "🧾white-paper-publications",
+      "last_message_timestamp": "2025-09-17T15:38:54.782000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:27.893813+00:00",
+      "last_message_count": 25,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1411004128305352776": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1411004128305352776",
+      "channel_name": "🎙️live-events",
+      "last_message_timestamp": "2025-11-22T18:02:45.114000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:28.551556+00:00",
+      "last_message_count": 58,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1411031028436434944": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1411031028436434944",
+      "channel_name": "🏛recordings",
+      "last_message_timestamp": "2025-11-07T15:48:52.574000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:28.863045+00:00",
+      "last_message_count": 3,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1411085349454876853": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1411085349454876853",
+      "channel_name": "❓q﹠a-experts",
+      "last_message_timestamp": "2025-11-07T14:27:37.329000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:29.184385+00:00",
+      "last_message_count": 15,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1411085772055904357": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1411085772055904357",
+      "channel_name": "📝q﹠a-polls-experts",
+      "last_message_timestamp": "2025-11-23T15:44:29.409110+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:29.409124+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1414059588071981056": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1414059588071981056",
+      "channel_name": "💠buddy-group1",
+      "last_message_timestamp": "2025-11-20T08:03:19.819000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:29.999109+00:00",
+      "last_message_count": 49,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1414062450256646144": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1414062450256646144",
+      "channel_name": "💠buddy-group2",
+      "last_message_timestamp": "2025-11-02T16:04:26.065000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:30.359634+00:00",
+      "last_message_count": 55,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1414062484800798780": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1414062484800798780",
+      "channel_name": "💠buddy-group3",
+      "last_message_timestamp": "2025-11-02T16:04:30.369000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:30.706508+00:00",
+      "last_message_count": 50,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1414062528480411718": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1414062528480411718",
+      "channel_name": "💠buddy-group4",
+      "last_message_timestamp": "2025-11-20T21:50:31.968000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:31.501479+00:00",
+      "last_message_count": 126,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1414278139885912195": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1414278139885912195",
+      "channel_name": "🤝find-a-buddy",
+      "last_message_timestamp": "2025-11-23T15:38:41.104000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:31.931687+00:00",
+      "last_message_count": 68,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1415152422439096392": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1415152422439096392",
+      "channel_name": "❌💻non-coders-learning-facilitators",
+      "last_message_timestamp": "2025-11-19T19:00:20.029000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:32.853300+00:00",
+      "last_message_count": 108,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1417251291326976131": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1417251291326976131",
+      "channel_name": "🧩cevs-team",
+      "last_message_timestamp": "2025-11-21T14:49:42.448000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:33.733038+00:00",
+      "last_message_count": 115,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1417255011154657401": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1417255011154657401",
+      "channel_name": "🧩announcements-cevs",
+      "last_message_timestamp": "2025-11-23T15:44:34.010044+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:34.010064+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1417256407106977974": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1417256407106977974",
+      "channel_name": "🧩meeting-links-cevs",
+      "last_message_timestamp": "2025-09-19T15:54:40.960000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:34.331597+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1417257500784332820": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1417257500784332820",
+      "channel_name": "🧩resources-cevs",
+      "last_message_timestamp": "2025-10-13T18:34:02.527000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:34.625421+00:00",
+      "last_message_count": 7,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1417263692738859048": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1417263692738859048",
+      "channel_name": "🧩recordings-cevs",
+      "last_message_timestamp": "2025-11-23T15:44:34.829148+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:34.829167+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1420389350734041198": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1420389350734041198",
+      "channel_name": "cohort-1-text",
+      "last_message_timestamp": "2025-10-28T14:12:09.772000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:35.256871+00:00",
+      "last_message_count": 49,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1420389392450584668": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1420389392450584668",
+      "channel_name": "cohort-2-text",
+      "last_message_timestamp": "2025-10-13T16:46:22.936000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:35.559167+00:00",
+      "last_message_count": 3,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1420389436470067260": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1420389436470067260",
+      "channel_name": "cohort-3-text",
+      "last_message_timestamp": "2025-11-19T15:53:10.016000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:36.269003+00:00",
+      "last_message_count": 102,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1420389477041438911": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1420389477041438911",
+      "channel_name": "cohort-4-text",
+      "last_message_timestamp": "2025-11-23T15:44:37.964348+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:37.964379+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1420389516669354034": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1420389516669354034",
+      "channel_name": "cohort-5-text",
+      "last_message_timestamp": "2025-11-23T15:44:38.184555+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:38.184583+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421527316189675540": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421527316189675540",
+      "channel_name": "🇪🇺dach-chat",
+      "last_message_timestamp": "2025-11-23T15:44:38.381910+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:38.381918+00:00",
+      "last_message_count": 0,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1429248694498234510": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1429248694498234510",
+      "channel_name": "active-learning-facilitators-for-non-coders-learning-program",
+      "last_message_timestamp": "2025-11-23T14:39:30.883000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:38.700142+00:00",
+      "last_message_count": 53,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1429787255697969262": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1429787255697969262",
+      "channel_name": "💠buddy-group5",
+      "last_message_timestamp": "2025-11-05T14:30:15.949000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:39.053948+00:00",
+      "last_message_count": 28,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1435044136322601090": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1435044136322601090",
+      "channel_name": "non-coders-learners",
+      "last_message_timestamp": "2025-11-20T01:25:44.837000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:39.853717+00:00",
+      "last_message_count": 21,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1437457483475193927": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1437457483475193927",
+      "channel_name": "🦾course🎓",
+      "last_message_timestamp": "2025-11-20T15:39:50.960000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:40.191224+00:00",
+      "last_message_count": 25,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1438897732503998484": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1438897732503998484",
+      "channel_name": "🦾alerts🚨",
+      "last_message_timestamp": "2025-11-14T22:28:26.428000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:40.848693+00:00",
+      "last_message_count": 4,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421526899468800172_1421528914584670381": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421526899468800172_1421528914584670381",
+      "channel_name": "go-to/Meeting & Scheduling",
+      "last_message_timestamp": "2025-09-27T16:08:23.967000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:41.477314+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421526899468800172_1421529061901078578": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421526899468800172_1421529061901078578",
+      "channel_name": "go-to/Focus Topics",
+      "last_message_timestamp": "2025-09-27T16:08:59.090000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:41.685628+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421526899468800172_1421529178238615654": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421526899468800172_1421529178238615654",
+      "channel_name": "go-to/Mini projects",
+      "last_message_timestamp": "2025-09-27T16:09:26.827000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:41.904585+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421526899468800172_1421527996338274470": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421526899468800172_1421527996338274470",
+      "channel_name": "go-to/Notes & Resources",
+      "last_message_timestamp": "2025-09-27T16:04:45.040000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:42.198159+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421527083628105850_1421529666308673617": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421527083628105850_1421529666308673617",
+      "channel_name": "q-and-a/Questions poll",
+      "last_message_timestamp": "2025-09-27T16:11:23.192000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:42.888641+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
+    },
+    "1353058864810950737_1421527083628105850_1421529504559665223": {
+      "guild_id": "1353058864810950737",
+      "channel_id": "1421527083628105850_1421529504559665223",
+      "channel_name": "q-and-a/Question Posts",
+      "last_message_timestamp": "2025-09-27T16:10:44.628000+00:00",
+      "last_fetch_timestamp": "2025-11-23T15:44:43.073020+00:00",
+      "last_message_count": 1,
+      "fetch_mode": "full"
     }
   }
 }

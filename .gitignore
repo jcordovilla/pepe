@@ -19,6 +19,7 @@ data/fetched_messages/
 data/discord_messages_v2.json
 data/test_*/
 data/debug_*/
+data/pdfs/
 *.db
 *.sqlite3
 *.log
@@ -36,6 +37,7 @@ data/legacy/
 
 # Virtual environment
 venv/
+.venv/
 env/
 
 # Development and testing

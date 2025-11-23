@@ -14,8 +14,8 @@ import json
 import re
 from pathlib import Path
 from collections import Counter, defaultdict
-from urllib.parse import urlparse
-from typing import Dict, List, Any
+from urllib.parse import urlparse, urlunparse, parse_qs, urlencode
+from typing import Dict, List, Any, Set, Optional
 import sys
 from datetime import datetime
 import requests
@@ -38,46 +38,248 @@ except ImportError:
     GPT5_AVAILABLE = False
     print("⚠️ ResourceEnrichment not available - will use fallback methods")
 
+# Import PDF analyzer for enhanced PDF handling
+try:
+    from agentic.services.pdf_analyzer import PDFAnalyzer, PDFAnalysisResult
+    PDF_ANALYZER_AVAILABLE = True
+except ImportError:
+    PDF_ANALYZER_AVAILABLE = False
+    print("⚠️ PDFAnalyzer not available - will use fallback methods for PDFs")
+
 class FreshResourceDetector:
     def __init__(self, use_fast_model: bool = True, use_gpt5: bool = False):
         # Model selection for resource detection
         self.use_fast_model = use_fast_model
-        self.fast_model = os.getenv('LLM_FAST_MODEL', 'phi3:mini')  # Smaller, faster model
-        self.standard_model = os.getenv('LLM_MODEL', 'llama3.1:8b')   # Standard model
-        
+        self.fast_model = os.getenv('LLM_FAST_MODEL', 'llama3.2:3b')  # Fast, lightweight model
+        self.standard_model = os.getenv('LLM_MODEL', 'deepseek-r1:8b')  # Reasoning model for quality
+
         # NEW: Enrichment service (defaults to local LLM)
         # Use --use-openai flag to enable OpenAI API (requires OPENAI_API_KEY)
         self.use_gpt5 = use_gpt5 and GPT5_AVAILABLE
         self.enrichment = ResourceEnrichment(use_gpt5=self.use_gpt5) if GPT5_AVAILABLE else None
-        
+
+        # PDF Analyzer for enhanced PDF processing (two-tier: extraction + LLM analysis)
+        self.pdf_analyzer = PDFAnalyzer(use_openai=use_gpt5) if PDF_ANALYZER_AVAILABLE else None
+
         if self.use_gpt5 and self.enrichment:
             print("✅ Using OpenAI API for enrichment (GPT-4o-mini)")
         else:
             print("✅ Using local LLM for enrichment (free, works great)")
+
+        if self.pdf_analyzer:
+            mode = "OpenAI" if use_gpt5 else "Local LLM (deepseek-r1:8b)"
+            print(f"📄 PDF Analyzer enabled ({mode})")
         
         # Incremental processing tracking
         self.processed_urls_file = Path('data/processed_resources.json')
         self.processed_urls = self._load_processed_urls()
-        
-        # High-quality domains (curated list)
+
+        # URL normalization cache for deduplication
+        self._normalized_url_cache: Dict[str, str] = {}
+
+    def _normalize_url(self, url: str) -> str:
+        """
+        Normalize URL for deduplication (HIGH-PRIORITY IMPROVEMENT).
+        Handles: trailing slashes, www prefix, http vs https, query param ordering,
+        and tracking parameters removal.
+        """
+        if url in self._normalized_url_cache:
+            return self._normalized_url_cache[url]
+
+        try:
+            parsed = urlparse(url.strip())
+
+            # Normalize scheme (prefer https)
+            scheme = 'https' if parsed.scheme in ('http', 'https') else parsed.scheme
+
+            # Normalize hostname (remove www, lowercase)
+            netloc = parsed.netloc.lower()
+            if netloc.startswith('www.'):
+                netloc = netloc[4:]
+
+            # Remove trailing slash from path (except root)
+            path = parsed.path.rstrip('/') if parsed.path != '/' else parsed.path
+
+            # Remove tracking/junk query parameters
+            tracking_params = {
+                'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+                'ref', 'source', 'fbclid', 'gclid', 'mc_cid', 'mc_eid', '_ga',
+                'ref_src', 'ref_url', 'si', 'feature', 'app', 'ocid', 'mkt_tok'
+            }
+            if parsed.query:
+                params = parse_qs(parsed.query, keep_blank_values=True)
+                # Remove tracking params and sort remaining
+                filtered_params = {
+                    k: v for k, v in sorted(params.items())
+                    if k.lower() not in tracking_params
+                }
+                query = urlencode(filtered_params, doseq=True) if filtered_params else ''
+            else:
+                query = ''
+
+            # Reconstruct normalized URL
+            normalized = urlunparse((scheme, netloc, path, '', query, ''))
+            self._normalized_url_cache[url] = normalized
+            return normalized
+
+        except Exception:
+            # If normalization fails, return original
+            self._normalized_url_cache[url] = url
+            return url
+
+    async def _analyze_pdf_url(self, url: str, save_if_useful: bool = True) -> Optional[Dict[str, Any]]:
+        """
+        Fetch and analyze a PDF URL using the two-tier PDF analyzer.
+
+        Args:
+            url: PDF URL to analyze
+            save_if_useful: If True, save useful PDFs to local storage
+
+        Returns enriched data with title, description, document type, and local_path,
+        or None if the PDF cannot be fetched or is not useful.
+        """
+        if not self.pdf_analyzer:
+            return None
+
+        try:
+            import aiohttp
+
+            # Fetch PDF content
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=30)) as response:
+                    if response.status != 200:
+                        return None
+
+                    content_type = response.headers.get('content-type', '')
+                    if 'application/pdf' not in content_type and not url.lower().endswith('.pdf'):
+                        return None
+
+                    pdf_content = await response.read()
+
+                    # Limit PDF size to 10MB to avoid memory issues
+                    if len(pdf_content) > 10 * 1024 * 1024:
+                        return {'error': 'PDF too large (>10MB)'}
+
+            # Analyze PDF with two-tier system
+            result = await self.pdf_analyzer.analyze_pdf(pdf_content, url)
+
+            if result.error:
+                return {'error': result.error}
+
+            response_data = {
+                'title': result.title,
+                'description': result.description,
+                'document_type': result.document_type,
+                'page_count': result.page_count,
+                'is_useful': result.is_useful,
+                'confidence': result.confidence,
+                'local_path': None
+            }
+
+            # Save useful PDFs locally (especially important for Discord CDN URLs that expire)
+            if result.is_useful and save_if_useful:
+                local_path = await self._save_pdf_locally(pdf_content, url, result.title)
+                if local_path:
+                    response_data['local_path'] = local_path
+                    self.stats['pdfs_saved'] = self.stats.get('pdfs_saved', 0) + 1
+
+            return response_data
+
+        except Exception as e:
+            return {'error': str(e)}
+
+    def _is_pdf_url(self, url: str) -> bool:
+        """Check if a URL points to a PDF file."""
+        url_lower = url.lower()
+        return (
+            url_lower.endswith('.pdf') or
+            '/pdf/' in url_lower or
+            'arxiv.org/pdf' in url_lower
+        )
+
+    def _is_discord_pdf_attachment(self, url: str) -> bool:
+        """Check if URL is a Discord CDN PDF attachment."""
+        return 'cdn.discordapp.com' in url.lower() and url.lower().endswith('.pdf')
+
+    async def _save_pdf_locally(self, pdf_content: bytes, url: str, title: str = None) -> Optional[str]:
+        """
+        Save a PDF file locally for preservation.
+
+        Args:
+            pdf_content: Raw PDF bytes
+            url: Original URL (used to generate filename)
+            title: Optional title for the PDF
+
+        Returns:
+            Local file path if saved successfully, None otherwise
+        """
+        import hashlib
+        import re
+
+        try:
+            # Generate a safe filename
+            # Use title if available, otherwise extract from URL
+            if title:
+                # Clean title for filename
+                safe_title = re.sub(r'[^\w\s-]', '', title)[:50].strip()
+                safe_title = re.sub(r'[-\s]+', '_', safe_title)
+            else:
+                # Extract filename from URL
+                parsed = urlparse(url)
+                filename = parsed.path.split('/')[-1]
+                if filename.endswith('.pdf'):
+                    safe_title = filename[:-4][:50]
+                else:
+                    safe_title = 'document'
+
+            # Add hash suffix to ensure uniqueness
+            url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
+            final_filename = f"{safe_title}_{url_hash}.pdf"
+
+            # Save the file
+            file_path = self.pdf_storage_dir / final_filename
+            with open(file_path, 'wb') as f:
+                f.write(pdf_content)
+
+            return str(file_path)
+
+        except Exception as e:
+            print(f"⚠️ Failed to save PDF locally: {e}")
+            return None
+
+        # High-quality domains (curated list) - EXPANDED for better coverage
         self.high_quality_domains = {
             # Research & Academic
             'arxiv.org': {'category': 'Research Papers', 'score': 0.95},
             'papers.withcode.com': {'category': 'Research Papers', 'score': 0.85},
+            'paperswithcode.com': {'category': 'Research Papers', 'score': 0.85},
             'distill.pub': {'category': 'Research Visualization', 'score': 0.90},
             'news.mit.edu': {'category': 'Academic News', 'score': 0.85},
             'research.google.com': {'category': 'Research', 'score': 0.85},
-            
+            'semanticscholar.org': {'category': 'Research Papers', 'score': 0.85},
+            'researchgate.net': {'category': 'Research Papers', 'score': 0.80},
+            'ssrn.com': {'category': 'Research Papers', 'score': 0.80},
+            'scholar.google.com': {'category': 'Research Papers', 'score': 0.85},
+            'openreview.net': {'category': 'Research Papers', 'score': 0.85},
+            'aclanthology.org': {'category': 'Research Papers', 'score': 0.85},
+
             # Code & Development
             'github.com': {'category': 'Code Repositories', 'score': 0.90},
+            'gitlab.com': {'category': 'Code Repositories', 'score': 0.85},
+            'bitbucket.org': {'category': 'Code Repositories', 'score': 0.80},
             'stackoverflow.com': {'category': 'Technical Q&A', 'score': 0.80},
-            
+            'replit.com': {'category': 'Code Repositories', 'score': 0.75},
+            'colab.research.google.com': {'category': 'Code Notebooks', 'score': 0.85},
+            'colab.google': {'category': 'Code Notebooks', 'score': 0.85},
+
             # Documentation & Resources
             'docs.google.com': {'category': 'Documentation', 'score': 0.85},
             'drive.google.com': {'category': 'Shared Documents', 'score': 0.80},
             'cloud.google.com': {'category': 'Technical Documentation', 'score': 0.80},
-            
-            # AI & ML Resources
+            'readthedocs.io': {'category': 'Documentation', 'score': 0.80},
+            'readthedocs.org': {'category': 'Documentation', 'score': 0.80},
+
+            # AI & ML Resources (EXPANDED)
             'openai.com': {'category': 'AI Resources', 'score': 0.90},
             'blog.openai.com': {'category': 'AI Research', 'score': 0.85},
             'anthropic.com': {'category': 'AI Research', 'score': 0.90},
@@ -88,48 +290,88 @@ class FreshResourceDetector:
             'nvidia.com': {'category': 'AI/GPU Technology', 'score': 0.80},
             'blogs.microsoft.com': {'category': 'Tech Documentation', 'score': 0.75},
             'chatgpt.com': {'category': 'AI Tools', 'score': 0.75},
-            
+            'replicate.com': {'category': 'AI Models', 'score': 0.85},
+            'wandb.ai': {'category': 'ML Tools', 'score': 0.80},
+            'lightning.ai': {'category': 'ML Tools', 'score': 0.80},
+            'mlflow.org': {'category': 'ML Tools', 'score': 0.80},
+            'langchain.com': {'category': 'AI Tools', 'score': 0.85},
+            'llamaindex.ai': {'category': 'AI Tools', 'score': 0.85},
+            'together.ai': {'category': 'AI Models', 'score': 0.80},
+            'groq.com': {'category': 'AI Infrastructure', 'score': 0.80},
+            'mistral.ai': {'category': 'AI Models', 'score': 0.85},
+            'deepmind.com': {'category': 'AI Research', 'score': 0.90},
+            'deepmind.google': {'category': 'AI Research', 'score': 0.90},
+            'ai.meta.com': {'category': 'AI Research', 'score': 0.85},
+            'stability.ai': {'category': 'AI Models', 'score': 0.80},
+            'midjourney.com': {'category': 'AI Tools', 'score': 0.75},
+
             # Educational Platforms
             'deeplearning.ai': {'category': 'AI Education', 'score': 0.85},
             'coursera.org': {'category': 'Online Courses', 'score': 0.75},
             'edx.org': {'category': 'Online Courses', 'score': 0.75},
             'udacity.com': {'category': 'Online Courses', 'score': 0.75},
+            'udemy.com': {'category': 'Online Courses', 'score': 0.70},
             'fast.ai': {'category': 'AI Education', 'score': 0.80},
             'machinelearningmastery.com': {'category': 'ML Education', 'score': 0.75},
-            
+            'khanacademy.org': {'category': 'Education', 'score': 0.75},
+
             # Data Science & Analytics
             'kaggle.com': {'category': 'Data Science', 'score': 0.80},
             'towardsdatascience.com': {'category': 'Data Science', 'score': 0.75},
-            
+            'datacamp.com': {'category': 'Data Science', 'score': 0.75},
+            'databricks.com': {'category': 'Data Science', 'score': 0.80},
+
             # Video Content
             'youtube.com': {'category': 'Educational Videos', 'score': 0.75},
             'youtu.be': {'category': 'Educational Videos', 'score': 0.75},
-            
+            'loom.com': {'category': 'Video Content', 'score': 0.70},
+            'vimeo.com': {'category': 'Video Content', 'score': 0.70},
+
             # Articles & Blogs
             'medium.com': {'category': 'Articles', 'score': 0.70},
-            
+            'substack.com': {'category': 'Articles', 'score': 0.75},
+            'dev.to': {'category': 'Technical Articles', 'score': 0.75},
+            'hashnode.dev': {'category': 'Technical Articles', 'score': 0.70},
+
             # News & Tech Publications (High Quality)
             'axios.com': {'category': 'Tech News', 'score': 0.80},
             'theguardian.com': {'category': 'News & Analysis', 'score': 0.75},
             'reuters.com': {'category': 'News & Analysis', 'score': 0.80},
             'wsj.com': {'category': 'Business News', 'score': 0.80},
             'ft.com': {'category': 'Financial News', 'score': 0.80},
+            'bloomberg.com': {'category': 'Business News', 'score': 0.80},
             'businessinsider.com': {'category': 'Business News', 'score': 0.70},
             'theverge.com': {'category': 'Tech News', 'score': 0.75},
             'techcrunch.com': {'category': 'Tech News', 'score': 0.75},
             'venturebeat.com': {'category': 'Tech News', 'score': 0.70},
             'wired.com': {'category': 'Tech News', 'score': 0.75},
             'arstechnica.com': {'category': 'Tech News', 'score': 0.75},
-            
+            'thenextweb.com': {'category': 'Tech News', 'score': 0.70},
+            'zdnet.com': {'category': 'Tech News', 'score': 0.70},
+            'infoworld.com': {'category': 'Tech News', 'score': 0.70},
+
             # Productivity & Collaboration Tools (with valuable content)
             'app.mural.co': {'category': 'Collaboration Boards', 'score': 0.60},
+            'mural.co': {'category': 'Collaboration Boards', 'score': 0.60},
+            'miro.com': {'category': 'Collaboration Boards', 'score': 0.60},
             'trello.com': {'category': 'Project Management', 'score': 0.60},
-            'notion.so': {'category': 'Documentation', 'score': 0.70}
+            'notion.so': {'category': 'Documentation', 'score': 0.70},
+            'notion.site': {'category': 'Documentation', 'score': 0.70},
+            'airtable.com': {'category': 'Documentation', 'score': 0.65},
+            'figma.com': {'category': 'Design Resources', 'score': 0.70},
+            'canva.com': {'category': 'Design Resources', 'score': 0.65},
+
+            # Cloud & Infrastructure Documentation
+            'aws.amazon.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'azure.microsoft.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'learn.microsoft.com': {'category': 'Technical Documentation', 'score': 0.80},
+            'cloud.google.com': {'category': 'Cloud Documentation', 'score': 0.80},
+            'vercel.com': {'category': 'Cloud Documentation', 'score': 0.75},
         }
         
-        # Domains to exclude (junk)
+        # Domains to exclude (junk) - Note: cdn.discordapp.com PDFs are handled separately
         self.excluded_domains = {
-            'cdn.discordapp.com', 'discord.com/channels', 'discordapp.com',
+            'discord.com/channels', 'discordapp.com',
             'tenor.com', 'giphy.com', 'discord.gg',
             'meet.google.com', 'zoom.us', 'us06web.zoom.us', 'mit.zoom.us',
             'linkedin.com/in', 'linkedin.com/posts',  # Profile links and posts
@@ -138,6 +380,13 @@ class FreshResourceDetector:
             'tinyurl.com', 'bit.ly',  # URL shorteners (hard to verify quality)
             'sync-google-calendar-wit-erprmym.gamma.site'  # Specific app link
         }
+
+        # Discord CDN - only allow PDF attachments, exclude images/other
+        self.discord_cdn_domain = 'cdn.discordapp.com'
+
+        # PDF storage directory for useful PDFs
+        self.pdf_storage_dir = Path('data/pdfs')
+        self.pdf_storage_dir.mkdir(parents=True, exist_ok=True)
         
         # File extensions that indicate quality resources
         self.quality_extensions = {
@@ -290,23 +539,22 @@ class FreshResourceDetector:
         domain = urlparse(url).netloc.lower()
         parsed_url = urlparse(url)
         
-        # Create more sophisticated prompt based on domain and URL structure
+        # Optimized prompts - concise and structured for local LLMs
         if 'arxiv.org' in domain:
-            prompt_context = f"This is a research paper from arXiv (URL: {url}). Context from message: {content}\n\nGenerate a clear, informative description of this research paper including its key contributions and domain. Keep it under 80 words:"
+            prompt_context = f"arXiv paper: {url}\nContext: {content}\n\nDescribe this research paper's topic and contributions (50-70 words):"
         elif 'github.com' in domain:
             repo_path = parsed_url.path.strip('/')
-            prompt_context = f"This is a GitHub repository: {repo_path} (URL: {url}). Context: {content}\n\nDescribe this code repository, its purpose, and what it implements. Focus on the technical aspects. Keep it under 80 words:"
+            prompt_context = f"GitHub repo: {repo_path}\nContext: {content}\n\nDescribe what this repository does and its tech stack (50-70 words):"
         elif 'huggingface.co' in domain:
-            prompt_context = f"This is a resource from Hugging Face (URL: {url}). Context: {content}\n\nDescribe this AI/ML model, dataset, or tool from Hugging Face, including its capabilities and use cases. Keep it under 80 words:"
+            prompt_context = f"Hugging Face: {url}\nContext: {content}\n\nDescribe this model/dataset/tool and its use cases (50-70 words):"
         elif 'youtube.com' in domain or 'youtu.be' in domain:
-            prompt_context = f"This is a YouTube video (URL: {url}). Context: {content}\n\nDescribe this educational video content and what viewers can learn from it. Keep it under 80 words:"
+            prompt_context = f"YouTube: {url}\nContext: {content}\n\nDescribe what this video teaches (50-70 words):"
         elif any(news_domain in domain for news_domain in ['techcrunch.com', 'theverge.com', 'wired.com', 'arstechnica.com']):
-            prompt_context = f"This is a tech news article from {domain} (URL: {url}). Context: {content}\n\nSummarize this tech news article and its key points. Keep it under 80 words:"
+            prompt_context = f"Tech news from {domain}: {url}\nContext: {content}\n\nSummarize the key points (50-70 words):"
         elif '.pdf' in url.lower():
-            prompt_context = f"This is a PDF document (URL: {url}). Context: {content}\n\nDescribe this document and its likely content based on the context. Keep it under 80 words:"
+            prompt_context = f"PDF document: {url}\nContext: {content}\n\nDescribe the document's content and purpose (50-70 words):"
         else:
-            # Generic but more informative prompt
-            prompt_context = f"Resource URL: {url}\nDomain: {domain}\nContext from message: {content}\n\nBased on the URL and context, provide a clear, informative description of this resource and its value. Keep it under 80 words:"
+            prompt_context = f"URL: {url} ({domain})\nContext: {content}\n\nDescribe this resource and its value (50-70 words):"
         
         try:
             response = requests.post(llm_endpoint, json={
@@ -704,9 +952,9 @@ class FreshResourceDetector:
 def main():
     parser = argparse.ArgumentParser(description='Fresh Resource Detector - Quality-First Approach')
     parser.add_argument('--fast-model', action='store_true', 
-                       help='Use fast model (phi3:mini) for faster processing')
+                       help='Use fast model (llama3.2:3b) for faster processing')
     parser.add_argument('--standard-model', action='store_true',
-                       help='Use standard model (llama3.1:8b) for better quality')
+                       help='Use standard model (deepseek-r1:8b) for better quality')
     parser.add_argument('--use-openai', action='store_true',
                        help='Use OpenAI API (gpt-4o-mini) for enrichment instead of local LLM')
     parser.add_argument('--reset-cache', action='store_true',
@@ -803,31 +1051,44 @@ def main():
         """Process a single resource with enrichment"""
         if detector._is_url_processed(url):
             return None
-            
+
         try:
             parsed = urlparse(url)
             domain = parsed.netloc.lower()
             if domain.startswith('www.'):
                 domain = domain[4:]
+
+            # Special handling for Discord CDN attachments
+            is_discord_pdf = detector._is_discord_pdf_attachment(url)
+            if 'cdn.discordapp.com' in domain and not is_discord_pdf:
+                # Exclude non-PDF Discord attachments (images, etc.)
+                detector.stats['excluded_domains'] += 1
+                return None
+
             if any(excluded in domain for excluded in detector.excluded_domains):
                 detector.stats['excluded_domains'] += 1
                 return None
-            domain_info = None
-            for hq_domain, info in detector.high_quality_domains.items():
-                if hq_domain in domain:
-                    domain_info = info
-                    break
-            if not domain_info:
-                path = parsed.path.lower()
-                quality_score = 0
-                for ext, score in detector.quality_extensions.items():
-                    if path.endswith(ext):
-                        quality_score = score
-                        domain_info = {'category': 'Documents', 'score': score}
+
+            # For Discord PDF attachments, set domain_info directly
+            if is_discord_pdf:
+                domain_info = {'category': 'PDF Documents', 'score': 0.8}
+            else:
+                domain_info = None
+                for hq_domain, info in detector.high_quality_domains.items():
+                    if hq_domain in domain:
+                        domain_info = info
                         break
                 if not domain_info:
-                    detector.stats['unknown_domains'] += 1
-                    return None
+                    path = parsed.path.lower()
+                    quality_score = 0
+                    for ext, score in detector.quality_extensions.items():
+                        if path.endswith(ext):
+                            quality_score = score
+                            domain_info = {'category': 'Documents', 'score': score}
+                            break
+                    if not domain_info:
+                        detector.stats['unknown_domains'] += 1
+                        return None
             
             # Get basic metadata
             author_display = message.get('author', {}).get('display_name') or message.get('author', {}).get('username', 'Unknown')
@@ -839,15 +1100,54 @@ def main():
                 ts_str = raw_ts[:10] if raw_ts else ''
             jump_url = message.get('jump_url')
             
-            # Use enhanced enrichment service (Phase 1 & 2)
-            if detector.enrichment:
+            # Track local PDF path if saved
+            local_pdf_path = None
+
+            # Check if this is a PDF URL - use enhanced PDF analysis
+            if detector._is_pdf_url(url) and detector.pdf_analyzer:
+                pdf_result = await detector._analyze_pdf_url(url, save_if_useful=True)
+                if pdf_result and not pdf_result.get('error'):
+                    # Use PDF analysis results if useful
+                    if pdf_result.get('is_useful', False):
+                        title = pdf_result.get('title') or detector._generate_fallback_title(url, domain)
+                        description = pdf_result.get('description') or detector._generate_description(message, url)
+                        local_pdf_path = pdf_result.get('local_path')
+                        # Override category based on document type
+                        doc_type = pdf_result.get('document_type', 'other')
+                        if doc_type == 'research_paper':
+                            domain_info = {'category': 'Research Papers', 'score': 0.9}
+                        elif doc_type == 'tutorial':
+                            domain_info = {'category': 'Tutorials', 'score': 0.8}
+                        elif doc_type == 'whitepaper':
+                            domain_info = {'category': 'Whitepapers', 'score': 0.85}
+                        elif doc_type == 'documentation':
+                            domain_info = {'category': 'Documentation', 'score': 0.8}
+                        detector.stats['pdf_analyzed'] = detector.stats.get('pdf_analyzed', 0) + 1
+                        # Track Discord PDF attachments separately
+                        if is_discord_pdf:
+                            detector.stats['discord_pdfs_saved'] = detector.stats.get('discord_pdfs_saved', 0) + 1
+                    else:
+                        # PDF not useful, skip it
+                        detector.stats['pdf_skipped'] = detector.stats.get('pdf_skipped', 0) + 1
+                        return None
+                else:
+                    # PDF analysis failed, use regular enrichment
+                    if detector.enrichment:
+                        enriched = await detector.enrichment.enrich_resource(url, message, channel_name)
+                        title = enriched.get('title', detector._generate_fallback_title(url, domain))
+                        description = enriched.get('description', detector._generate_description(message, url))
+                    else:
+                        title = detector._generate_fallback_title(url, domain)
+                        description = detector._generate_description(message, url)
+            # Use enhanced enrichment service (Phase 1 & 2) for non-PDF URLs
+            elif detector.enrichment:
                 enriched = await detector.enrichment.enrich_resource(url, message, channel_name)
                 title = enriched.get('title', detector._generate_fallback_title(url, domain))
                 description = enriched.get('description', detector._generate_description(message, url))
             else:
                 title = detector._generate_fallback_title(url, domain)
                 description = detector._generate_description(message, url)
-            
+
             resource = {
                 'id': len(detector.detected_resources) + 1,  # Simple ID
                 'resource_url': url,  # HTML expects this field
@@ -856,6 +1156,14 @@ def main():
                 'date': ts_str,  # HTML expects this field
                 'description': description
             }
+
+            # Add local PDF path if available (for preservation)
+            if local_pdf_path:
+                resource['local_path'] = local_pdf_path
+                # For Discord attachments, note that the original URL may expire
+                if is_discord_pdf:
+                    resource['is_discord_attachment'] = True
+
             detector.stats['total_resources'] += 1
             detector.stats[f'category_{domain_info["category"]}'] += 1
             return resource
@@ -866,6 +1174,7 @@ def main():
     # Extract URLs first with progress bar
     print("\n📊 Step 1/3: Extracting URLs from messages...")
     urls_to_process = []
+    seen_normalized_urls: Set[str] = set()  # Track normalized URLs for early deduplication
     with tqdm(messages, desc="🔗 Extracting URLs", unit="msg", bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]') as url_pbar:
         for message in url_pbar:
             content = message.get('content', '')
@@ -887,55 +1196,73 @@ def main():
             urls = re.findall(r'https?://[^\s\n\r<>"]+', content)
             urls_extracted += len(urls)
             for url in urls:
-                if not detector._is_url_processed(url):
-                    urls_to_process.append((url, message, message['channel_name']))
+                # Normalize URL for deduplication (HIGH-PRIORITY: Early deduplication)
+                normalized_url = detector._normalize_url(url)
+                if not detector._is_url_processed(normalized_url):
+                    # Check if we've already added this normalized URL in this batch
+                    if normalized_url not in seen_normalized_urls:
+                        seen_normalized_urls.add(normalized_url)
+                        urls_to_process.append((url, message, message['channel_name']))
+                    else:
+                        skipped += 1  # Skip duplicate within batch
                 else:
                     skipped += 1
             url_pbar.set_postfix({"URLs": urls_extracted, "unique": len(urls_to_process), "skipped": skipped})
     
     print(f"   ✅ Found {urls_extracted:,} total URLs ({len(urls_to_process):,} new, {skipped:,} already processed)")
     
-    # Process resources with enrichment
+    # Process resources with enrichment using a single event loop (OPTIMIZED)
     if urls_to_process:
         print(f"\n📊 Step 2/3: Evaluating and enriching {len(urls_to_process):,} new resources...")
         print("   🌐 Web scraping for metadata (fallback)")
         print("   📝 Message-based extraction (primary)")
         print("   🤖 OpenAI API (GPT-4o-mini)" if detector.use_gpt5 else "   🤖 Local LLM (Ollama)")
-        
-        # Process in batches to show progress
-        batch_size = 1  # Process one at a time for real-time progress
-        with tqdm(total=len(urls_to_process), desc="✨ Enriching resources", unit="resource", 
+
+        # Use a single event loop for all async operations (PERFORMANCE FIX)
+        async def process_all_resources_async(urls_to_process, progress_callback):
+            """Process all resources in a single event loop for better performance"""
+            nonlocal resources_found, processed
+
+            for url_data in urls_to_process:
+                url, message, channel_name = url_data
+                resource = await process_single_resource(url, message, channel_name)
+                if resource:
+                    detector.detected_resources.append(resource)
+                    resources_found += 1
+                    processed += 1
+
+                # Call the progress callback
+                progress_callback(resources_found)
+
+            return resources_found
+
+        # Create progress bar and run async processing
+        with tqdm(total=len(urls_to_process), desc="✨ Enriching resources", unit="resource",
                   bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]') as enrich_pbar:
-            for i in range(0, len(urls_to_process), batch_size):
-                batch = urls_to_process[i:i+batch_size]
-                # Process each resource individually for better progress tracking
-                for url_data in batch:
-                    url, message, channel_name = url_data
-                    resource = asyncio.run(process_single_resource(url, message, channel_name))
-                    if resource:
-                        detector.detected_resources.append(resource)
-                        resources_found += 1
-                        processed += 1
-                    
-                    # Get enrichment stats
-                    if detector.enrichment:
-                        enrich_stats = detector.enrichment.get_stats()
-                        gpt5_stats = detector.enrichment.gpt5.get_stats() if detector.enrichment.gpt5 else {}
-                        
-                        postfix = {
-                            "found": resources_found,
-                            "msg_based": enrich_stats.get('message_based', 0),
-                            "scraped": enrich_stats.get('web_scraped', 0)
-                        }
-                        if gpt5_stats:
-                            postfix["OpenAI"] = gpt5_stats.get('gpt5_calls', 0)
-                            postfix["cached"] = gpt5_stats.get('gpt5_cached', 0)
-                    else:
-                        postfix = {"found": resources_found}
-                    
-                    enrich_pbar.set_postfix(postfix)
-                    enrich_pbar.update(1)
-        
+
+            def update_progress(found_count):
+                """Callback to update progress bar"""
+                if detector.enrichment:
+                    enrich_stats = detector.enrichment.get_stats()
+                    gpt5_stats = detector.enrichment.gpt5.get_stats() if detector.enrichment.gpt5 else {}
+
+                    postfix = {
+                        "found": found_count,
+                        "msg_based": enrich_stats.get('message_based', 0),
+                        "scraped": enrich_stats.get('web_scraped', 0)
+                    }
+                    if gpt5_stats:
+                        postfix["OpenAI"] = gpt5_stats.get('gpt5_calls', 0)
+                        postfix["cached"] = gpt5_stats.get('gpt5_cached', 0)
+                else:
+                    postfix = {"found": found_count}
+
+                enrich_pbar.set_postfix(postfix)
+                enrich_pbar.update(1)
+
+            # Run all processing in a single event loop (MAJOR PERFORMANCE IMPROVEMENT)
+            asyncio.run(process_all_resources_async(urls_to_process, update_progress))
+
         print(f"   ✅ Successfully enriched {resources_found:,} high-quality resources")
     
     print(f"\n📊 Step 3/3: Finalizing and saving results...")
@@ -1055,6 +1382,21 @@ def main():
     print(f"   🧪 Test channel messages skipped: {detector.stats.get('test_channel_messages_skipped', 0):,}")
     print(f"   ❌ Filtered out: {report['statistics']['excluded_count']:,}")
     print(f"   ❓ Unknown domains: {report['statistics']['unknown_count']:,}")
+
+    # PDF Analysis Statistics
+    pdf_analyzed = detector.stats.get('pdf_analyzed', 0)
+    pdf_skipped = detector.stats.get('pdf_skipped', 0)
+    pdfs_saved = detector.stats.get('pdfs_saved', 0)
+    discord_pdfs = detector.stats.get('discord_pdfs_saved', 0)
+    if pdf_analyzed > 0 or pdf_skipped > 0:
+        print(f"\n📄 PDF Analysis:")
+        print(f"   ✅ PDFs analyzed and included: {pdf_analyzed:,}")
+        print(f"   ⏭️  PDFs skipped (not useful): {pdf_skipped:,}")
+        if pdfs_saved > 0:
+            print(f"   💾 PDFs saved locally: {pdfs_saved:,}")
+            if discord_pdfs > 0:
+                print(f"      (including {discord_pdfs:,} Discord attachments)")
+            print(f"   📁 Storage location: {detector.pdf_storage_dir}")
 
     # Quality assessment
     stats = report['statistics']

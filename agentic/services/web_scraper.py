@@ -7,6 +7,7 @@ import asyncio
 import logging
 from typing import Optional, Dict, Any
 from urllib.parse import urlparse, parse_qs
+import time
 import re
 
 import aiohttp
@@ -17,18 +18,45 @@ logger = logging.getLogger(__name__)
 
 class WebScraper:
     """Extract metadata and content from web pages"""
-    
-    def __init__(self):
+
+    def __init__(self, requests_per_second: float = 2.0):
         self.timeout = aiohttp.ClientTimeout(total=15)
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'en-US,en;q=0.5'
         }
+
+        # Rate limiting (MEDIUM-PRIORITY IMPROVEMENT)
+        self._requests_per_second = requests_per_second
+        self._min_interval = 1.0 / requests_per_second
+        self._last_request_time: Dict[str, float] = {}  # Per-domain rate limiting
+        self._global_last_request = 0.0
+
+    async def _rate_limit(self, domain: str) -> None:
+        """Apply rate limiting per domain and globally"""
+        current_time = time.time()
+
+        # Global rate limit
+        global_elapsed = current_time - self._global_last_request
+        if global_elapsed < self._min_interval:
+            await asyncio.sleep(self._min_interval - global_elapsed)
+            current_time = time.time()
+
+        # Per-domain rate limit (more conservative)
+        domain_last = self._last_request_time.get(domain, 0)
+        domain_elapsed = current_time - domain_last
+        domain_interval = self._min_interval * 2  # Double the interval per domain
+        if domain_elapsed < domain_interval:
+            await asyncio.sleep(domain_interval - domain_elapsed)
+
+        # Update timestamps
+        self._global_last_request = time.time()
+        self._last_request_time[domain] = time.time()
     
     async def extract_metadata(self, url: str) -> Dict[str, Any]:
         """Extract title, description, and other metadata from URL"""
-        
+
         metadata = {
             'url': url,
             'title': None,
@@ -40,10 +68,13 @@ class WebScraper:
             'domain': urlparse(url).netloc,
             'extraction_method': 'failed'
         }
-        
+
         try:
             # Domain-specific extraction
             domain = metadata['domain'].lower()
+
+            # Apply rate limiting before making requests
+            await self._rate_limit(domain)
             
             if 'youtube.com' in domain or 'youtu.be' in domain:
                 return await self._extract_youtube_metadata(url, metadata)
