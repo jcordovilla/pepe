@@ -2,17 +2,20 @@
 Analytics Package
 
 Provides comprehensive query/answer tracking, performance monitoring,
-and validation systems for the agentic framework.
+validation systems, and community analytics for the agentic framework.
 """
 
 from .query_answer_repository import QueryAnswerRepository
 from .performance_monitor import PerformanceMonitor
 from .validation_system import ValidationSystem
 from .analytics_dashboard import AnalyticsDashboard
+from .community_analytics import CommunityAnalytics, get_community_analytics
 
 __all__ = [
     "QueryAnswerRepository",
-    "PerformanceMonitor", 
+    "PerformanceMonitor",
     "ValidationSystem",
-    "AnalyticsDashboard"
+    "AnalyticsDashboard",
+    "CommunityAnalytics",
+    "get_community_analytics"
 ]

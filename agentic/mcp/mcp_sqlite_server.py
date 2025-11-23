@@ -316,4 +316,220 @@ class MCPSQLiteServer:
     
     async def close(self):
         """Close the server."""
-        await self.stop() 
+        await self.stop()
+
+    # =========================================================================
+    # Analytics Query Methods
+    # =========================================================================
+
+    async def get_user_activity(
+        self,
+        user_id: Optional[str] = None,
+        username: Optional[str] = None,
+        days: int = 7,
+        limit: int = 500
+    ) -> List[Dict[str, Any]]:
+        """
+        Get user activity data for analytics.
+
+        Args:
+            user_id: Discord user ID
+            username: Username to search (if user_id not provided)
+            days: Number of days to look back
+            limit: Maximum messages to return
+
+        Returns:
+            List of user messages with metadata
+        """
+        from datetime import datetime, timedelta
+
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+
+        if user_id:
+            sql = f"""
+                SELECT message_id, channel_name, content, timestamp,
+                       author_display_name, author_username, reactions
+                FROM messages
+                WHERE author_id = '{user_id}' AND timestamp >= '{start_date}'
+                ORDER BY timestamp DESC
+                LIMIT {limit}
+            """
+        else:
+            sql = f"""
+                SELECT message_id, channel_name, content, timestamp,
+                       author_display_name, author_username, reactions, author_id
+                FROM messages
+                WHERE (LOWER(author_username) = LOWER('{username}')
+                       OR LOWER(author_display_name) = LOWER('{username}'))
+                AND timestamp >= '{start_date}'
+                ORDER BY timestamp DESC
+                LIMIT {limit}
+            """
+
+        return await self._execute_sql(sql)
+
+    async def get_channel_activity(
+        self,
+        channel_name: str,
+        days: int = 7,
+        limit: int = 1000
+    ) -> List[Dict[str, Any]]:
+        """
+        Get channel activity data for analytics.
+
+        Args:
+            channel_name: Name of the channel (partial match supported)
+            days: Number of days to look back
+            limit: Maximum messages to return
+
+        Returns:
+            List of channel messages with metadata
+        """
+        from datetime import datetime, timedelta
+
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        channel_name = channel_name.lstrip("#")
+
+        sql = f"""
+            SELECT message_id, channel_name, content, timestamp,
+                   author_display_name, author_username, author_id, reactions
+            FROM messages
+            WHERE LOWER(channel_name) LIKE LOWER('%{channel_name}%')
+            AND timestamp >= '{start_date}'
+            AND (raw_data IS NULL
+                 OR json_extract(raw_data, '$.author.bot') IS NULL
+                 OR json_extract(raw_data, '$.author.bot') = 0)
+            ORDER BY timestamp DESC
+            LIMIT {limit}
+        """
+
+        return await self._execute_sql(sql)
+
+    async def get_community_stats(self, days: int = 7) -> Dict[str, Any]:
+        """
+        Get community-wide statistics.
+
+        Args:
+            days: Number of days to analyze
+
+        Returns:
+            Dictionary with community stats
+        """
+        from datetime import datetime, timedelta
+
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+
+        # Total messages in period
+        total_sql = f"SELECT COUNT(*) as count FROM messages WHERE timestamp >= '{start_date}'"
+        total_result = await self._execute_sql(total_sql)
+        total_messages = total_result[0]["count"] if total_result else 0
+
+        # Unique users
+        users_sql = f"SELECT COUNT(DISTINCT author_id) as count FROM messages WHERE timestamp >= '{start_date}'"
+        users_result = await self._execute_sql(users_sql)
+        unique_users = users_result[0]["count"] if users_result else 0
+
+        # Unique channels
+        channels_sql = f"SELECT COUNT(DISTINCT channel_name) as count FROM messages WHERE timestamp >= '{start_date}'"
+        channels_result = await self._execute_sql(channels_sql)
+        unique_channels = channels_result[0]["count"] if channels_result else 0
+
+        # Top channels
+        top_channels_sql = f"""
+            SELECT channel_name, COUNT(*) as count
+            FROM messages WHERE timestamp >= '{start_date}'
+            GROUP BY channel_name ORDER BY count DESC LIMIT 10
+        """
+        top_channels = await self._execute_sql(top_channels_sql)
+
+        # Top contributors (excluding bots)
+        top_users_sql = f"""
+            SELECT author_display_name, COUNT(*) as count
+            FROM messages
+            WHERE timestamp >= '{start_date}'
+            AND (raw_data IS NULL
+                 OR json_extract(raw_data, '$.author.bot') IS NULL
+                 OR json_extract(raw_data, '$.author.bot') = 0)
+            GROUP BY author_id ORDER BY count DESC LIMIT 10
+        """
+        top_users = await self._execute_sql(top_users_sql)
+
+        return {
+            "period_days": days,
+            "total_messages": total_messages,
+            "unique_users": unique_users,
+            "unique_channels": unique_channels,
+            "top_channels": {r["channel_name"]: r["count"] for r in top_channels},
+            "top_contributors": {r["author_display_name"]: r["count"] for r in top_users}
+        }
+
+    async def get_trending_topics(self, days: int = 7, limit: int = 2000) -> List[Dict[str, Any]]:
+        """
+        Get messages for trend analysis.
+
+        Args:
+            days: Number of days to analyze
+            limit: Maximum messages to return
+
+        Returns:
+            List of messages for trend analysis
+        """
+        from datetime import datetime, timedelta
+
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+
+        sql = f"""
+            SELECT message_id, channel_name, content, timestamp,
+                   author_display_name, author_username, reactions
+            FROM messages
+            WHERE timestamp >= '{start_date}'
+            AND (raw_data IS NULL
+                 OR json_extract(raw_data, '$.author.bot') IS NULL
+                 OR json_extract(raw_data, '$.author.bot') = 0)
+            AND content IS NOT NULL AND content != ''
+            ORDER BY timestamp DESC
+            LIMIT {limit}
+        """
+
+        return await self._execute_sql(sql)
+
+    async def get_engagement_metrics(self, days: int = 7) -> Dict[str, Any]:
+        """
+        Get engagement metrics (reactions, etc.).
+
+        Args:
+            days: Number of days to analyze
+
+        Returns:
+            Dictionary with engagement metrics
+        """
+        from datetime import datetime, timedelta
+
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+
+        # Messages with reactions
+        reacted_sql = f"""
+            SELECT message_id, channel_name, content, author_display_name,
+                   author_username, reactions, timestamp
+            FROM messages
+            WHERE timestamp >= '{start_date}'
+            AND reactions IS NOT NULL AND reactions != '[]' AND reactions != 'null'
+            ORDER BY timestamp DESC
+            LIMIT 100
+        """
+        reacted_messages = await self._execute_sql(reacted_sql)
+
+        # Daily message volume
+        daily_sql = f"""
+            SELECT DATE(timestamp) as date, COUNT(*) as count
+            FROM messages WHERE timestamp >= '{start_date}'
+            GROUP BY DATE(timestamp) ORDER BY date
+        """
+        daily_volume = await self._execute_sql(daily_sql)
+
+        return {
+            "period_days": days,
+            "messages_with_reactions": len(reacted_messages),
+            "top_reacted_messages": reacted_messages[:20],
+            "daily_volume": {r["date"]: r["count"] for r in daily_volume}
+        }
