@@ -40,7 +40,7 @@ class UnifiedLLMClient:
         
         # LLM settings
         self.endpoint = self.config.get("endpoint", "http://localhost:11434/api/generate")
-        self.model = self.config.get("model", "deepseek-r1:8b")
+        self.model = self.config.get("model", "qwen3-coder")
         self.fallback_model = self.config.get("fallback_model", "llama3.2:3b")
         self.max_tokens = self.config.get("max_tokens", 2048)
         self.temperature = self.config.get("temperature", 0.1)

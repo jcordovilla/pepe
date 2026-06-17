@@ -97,7 +97,7 @@ data/                     # Runtime data (gitignored)
 - LangGraph/LangChain for agent orchestration
 - ChromaDB for vector storage
 - OpenAI GPT-4 for LLM calls
-- Ollama (llama3.2:3b, deepseek-r1:8b) for local LLM
+- Ollama (llama3.2:3b, qwen3-coder) for local LLM
 - SQLite for message persistence
 
 ## Code Style

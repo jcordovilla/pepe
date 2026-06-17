@@ -25,7 +25,7 @@ def get_modernized_config() -> Dict[str, Any]:
         # Unified LLM configuration for all modules
         "llm": {
             "endpoint": os.getenv("LLM_ENDPOINT", "http://localhost:11434/api/generate"),
-            "model": os.getenv("LLM_MODEL", "deepseek-r1:8b"),  # Reasoning model for quality
+            "model": os.getenv("LLM_MODEL", "qwen3-coder"),  # Reasoning model for quality
             "max_tokens": int(os.getenv("LLM_MAX_TOKENS", "2048")),
             "temperature": float(os.getenv("LLM_TEMPERATURE", "0.1")),
             "timeout": int(os.getenv("LLM_TIMEOUT", "30")),

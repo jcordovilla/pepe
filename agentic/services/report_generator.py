@@ -17,7 +17,7 @@ class ReportGenerator:
     """
     Generates LLM-powered reports for Discord analytics.
 
-    Uses local Ollama models (deepseek-r1:8b or llama3.2:3b) to create
+    Uses local Ollama models (qwen3-coder or llama3.2:3b) to create
     natural language summaries and insights from message data.
     """
 

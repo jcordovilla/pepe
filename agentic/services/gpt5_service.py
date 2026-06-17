@@ -33,7 +33,7 @@ class GPT5Service:
         
         # Fallback to local LLM
         self.fallback_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
-        self.fallback_model = os.getenv('LLM_MODEL', 'deepseek-r1:8b')
+        self.fallback_model = os.getenv('LLM_MODEL', 'qwen3-coder')
         
         # Usage tracking
         self.stats = {

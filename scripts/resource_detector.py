@@ -56,7 +56,7 @@ class FreshResourceDetector:
         # Model selection for resource detection
         self.use_fast_model = use_fast_model
         self.fast_model = os.getenv('LLM_FAST_MODEL', 'llama3.2:3b')  # Fast, lightweight model
-        self.standard_model = os.getenv('LLM_MODEL', 'deepseek-r1:8b')  # Reasoning model for quality
+        self.standard_model = os.getenv('LLM_MODEL', 'qwen3-coder')  # Reasoning model for quality
 
         # NEW: Enrichment service (defaults to local LLM)
         # Use --use-openai flag to enable OpenAI API (requires OPENAI_API_KEY)
@@ -72,7 +72,7 @@ class FreshResourceDetector:
             print("✅ Using local LLM for enrichment (free, works great)")
 
         if self.pdf_analyzer:
-            mode = "OpenAI" if use_gpt5 else "Local LLM (deepseek-r1:8b)"
+            mode = "OpenAI" if use_gpt5 else "Local LLM (qwen3-coder)"
             print(f"📄 PDF Analyzer enabled ({mode})")
         
         # Incremental processing tracking
@@ -943,7 +943,7 @@ def main():
     parser.add_argument('--fast-model', action='store_true', 
                        help='Use fast model (llama3.2:3b) for faster processing')
     parser.add_argument('--standard-model', action='store_true',
-                       help='Use standard model (deepseek-r1:8b) for better quality')
+                       help='Use standard model (qwen3-coder) for better quality')
     parser.add_argument('--use-openai', action='store_true',
                        help='Use OpenAI API (gpt-5-mini) for enrichment instead of local LLM')
     parser.add_argument('--reset-cache', action='store_true',

@@ -6,7 +6,7 @@ Two-tier PDF analysis for resource detection:
 - Tier 1: Text extraction and metadata (no LLM)
 - Tier 2: Content analysis and description generation (LLM)
 
-Supports both local LLM (deepseek-r1:8b) and OpenAI API modes.
+Supports both local LLM (qwen3-coder) and OpenAI API modes.
 """
 
 import asyncio
@@ -74,7 +74,7 @@ class PDFAnalyzer:
             self.api_url = "https://api.openai.com/v1/chat/completions"
         else:
             self.llm_endpoint = os.getenv('LLM_ENDPOINT', 'http://localhost:11434/api/generate')
-            self.model = os.getenv('LLM_MODEL', 'deepseek-r1:8b')
+            self.model = os.getenv('LLM_MODEL', 'qwen3-coder')
 
         # Analysis settings
         self.max_pages_to_extract = 5
